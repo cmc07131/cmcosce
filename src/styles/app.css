@@ -1370,3 +1370,183 @@ button {
 .verdict[data-status='critical'] .verdict-tag {
   color: var(--color-rose);
 }
+
+/* ------------------------------------------------------------ bedside monitor */
+
+.monitor {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px;
+  padding: 4px;
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  background: #061008;
+}
+
+.monitor-trace {
+  display: block;
+  width: 100%;
+  height: 78px;
+}
+
+.monitor-nums {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 64px;
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  line-height: 1.1;
+  text-align: right;
+}
+
+.monitor-nums span {
+  display: flex;
+  flex-direction: column;
+}
+
+.monitor-nums i {
+  font-style: normal;
+  font-size: 5px;
+  opacity: 0.8;
+}
+
+.m-hr {
+  color: #58f080;
+}
+
+.m-spo2 {
+  color: #58d8f8;
+}
+
+.m-spo2[data-alarm] {
+  color: #ff6070;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+.m-bp {
+  color: #f0f0f0;
+  font-size: 9px;
+}
+
+.m-co2 {
+  color: #f8d858;
+}
+
+.io-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.io-choices .tap.io-mini {
+  flex: 1 1 140px;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------ defibrillator console */
+
+.defib {
+  margin-top: 8px;
+  padding: 8px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  background: linear-gradient(#e8d048, #d4b830);
+  box-shadow: inset 0 -4px 0 #a88c18;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+}
+
+.defib-modes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.defib-key {
+  min-height: 32px;
+  padding: 4px 6px;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--paper);
+  background: #383848;
+  border: 2px solid var(--ink);
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 0 #181820;
+  cursor: pointer;
+}
+
+.defib-key[data-on] {
+  background: #2f7a3e;
+}
+
+.defib-key:disabled {
+  opacity: 0.4;
+}
+
+.defib-shock {
+  background: #e07820;
+}
+
+.defib-wide {
+  grid-column: span 3;
+}
+
+.defib-grid {
+  display: grid;
+  grid-template-columns: 52px 1fr auto auto;
+  align-items: center;
+  gap: 6px 6px;
+  margin-top: 8px;
+}
+
+.defib-grid b {
+  font-weight: 400;
+  font-size: 9px;
+  min-width: 52px;
+  text-align: center;
+  padding: 4px;
+  color: #68f890;
+  background: #061008;
+  border-radius: 3px;
+}
+
+.defib-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.defib-row b {
+  font-weight: 400;
+}
+
+.defib-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.defib-label {
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.defib-row b {
+  flex: 1;
+  min-width: 0;
+  font-size: 9px;
+  text-align: center;
+  padding: 6px 4px;
+  color: #68f890;
+  background: #061008;
+  border-radius: 3px;
+}
+
+.defib-dial {
+  width: 100%;
+}

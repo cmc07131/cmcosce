@@ -2,6 +2,9 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { test } from 'node:test'
 import { keyToBtn } from '../game/input'
+import { cicoCaseFor, judgeIncision, neckFeelAt, NECK, type CicoCase } from '../game/cico/case'
+import { falseTract, freshCicoRun, scoreCico, type CicoRun } from '../game/cico/score'
+import { captureThreshold, freshPaceRun, scorePacing, type PaceCase, type PaceRun } from '../game/pacing/model'
 import { ANATOMY, caseFor, drillOutcome, judgeLandmark, mgIn, popDepth, rightNeedle, type IoCase } from '../game/io/case'
 import { freshRun, scoreRun, type Run } from '../game/io/score'
 import { spokenLine } from '../game/store'
@@ -312,4 +315,113 @@ test('keyboard maps to Game Boy buttons without stealing WASD', () => {
   assert.equal(keyToBtn('Escape'), 'b')
   assert.equal(keyToBtn('m'), 'start')
   assert.equal(keyToBtn('q'), null)
+})
+
+test('CICO neck: landmarks are felt in a slim neck and hidden in an obese one', () => {
+  const y = (NECK.membraneTop + NECK.membraneBottom) / 2
+  assert.equal(neckFeelAt(100, y, 'slim'), 'membrane')
+  assert.equal(neckFeelAt(100, y, 'obese'), 'deep')
+  assert.equal(neckFeelAt(100, 100, 'slim'), 'thyroid')
+  assert.equal(neckFeelAt(160, y, 'slim'), 'lateral')
+  assert.deepEqual(cicoCaseFor(7), cicoCaseFor(7))
+})
+
+test('CICO incision: DAS 2025 vertical midline, bottom to top, across the membrane', () => {
+  const up = [{ x: 100, y: 200 }, { x: 101, y: 150 }, { x: 100, y: 100 }]
+  assert.equal(judgeIncision(up).ok, true)
+  assert.equal(judgeIncision([...up].reverse()).upward, false)
+  assert.equal(judgeIncision([{ x: 70, y: 144 }, { x: 130, y: 144 }]).vertical, false)
+  assert.equal(judgeIncision([{ x: 125, y: 200 }, { x: 125, y: 100 }]).midline, false)
+})
+
+const SLIM: CicoCase = { habitus: 'slim', falseTractBase: false }
+
+function goodCico(): CicoRun {
+  return {
+    ...freshCicoRun(),
+    extended: true,
+    side: 'left',
+    handshake: true,
+    palpatedMembrane: true,
+    saidLandmarks: true,
+    incision: [{ x: 100, y: 200 }, { x: 100, y: 100 }],
+    dissected: true,
+    stabSite: 'membrane',
+    bladeTransverse: true,
+    edgeTowardYou: true,
+    stabDepth: 4,
+    stabbed: true,
+    rotated: true,
+    edgeCaudal: true,
+    opened: 'lateral',
+    bougieDepth: 12,
+    bougieDone: true,
+    tubeDepth: 4.5,
+    tubeHeldForBougie: true,
+    bougieOut: true,
+    cuff: 1,
+    circuit: true,
+    askedEtco2: true,
+    etco2Read: 'right',
+    holdUntilTied: true,
+    saidClose: true,
+    minSpo2: 60,
+  }
+}
+
+test('CICO bench: a clean run earns its marks with no faults', () => {
+  const scored = scoreCico(goodCico(), SLIM)
+  assert.deepEqual(scored.faults, [])
+  for (const id of ['MS-10', 'MS-11', 'MS-12', 'MS-13', 'MS-14', 'MS-15', 'MS-16', 'MS-17', 'MS-18', 'MS-19', 'MS-20', 'MS-22']) assert.ok(scored.marks.includes(id), id)
+})
+
+test('CICO bench: a poor hole makes a false passage, and forcing it is critical', () => {
+  assert.equal(falseTract({ ...goodCico(), stabSite: 'cricoid' }, SLIM), true)
+  assert.equal(falseTract({ ...goodCico(), stabSite: 'cricoid', secondPass: true }, SLIM), false)
+  const scored = scoreCico({ ...goodCico(), forcedHoldUp: true, arrested: true, minSpo2: 40 }, SLIM)
+  assert.ok(!scored.marks.includes('MS-18'))
+  assert.ok(scored.faults.some((f) => f.critical && /false passage/.test(f.text)))
+  assert.ok(scored.faults.some((f) => f.critical && /arrested/.test(f.text)))
+})
+
+const PACE: PaceCase = { threshold: 60, sweaty: true, hairy: false, hyperK: false }
+
+function goodPace(): PaceRun {
+  return {
+    ...freshPaceRun(),
+    dried: true,
+    leads: { ra: true, la: true, ll: true },
+    padsFront: ['apPad'],
+    padBack: 'leftScapula',
+    mode: 'pacer',
+    pacing: true,
+    output: 70,
+    biggestStep: 10,
+    captureCalled: true,
+    thresholdSeen: 60,
+    femoral: true,
+    femoralWithCapture: true,
+    analgesia: 'fentanyl',
+    saidClose: true,
+  }
+}
+
+test('pacing: contact, pad vector, and potassium set the capture threshold', () => {
+  assert.equal(captureThreshold(goodPace(), PACE), 60)
+  assert.equal(captureThreshold({ ...goodPace(), dried: false }, PACE), 100)
+  assert.equal(captureThreshold({ ...goodPace(), padsFront: ['alSternal', 'alApex'], padBack: null }, PACE), 70)
+  assert.equal(captureThreshold({ ...goodPace(), padBack: 'rightScapula' }, PACE), Infinity)
+  assert.equal(captureThreshold(goodPace(), { ...PACE, hyperK: true }), Infinity)
+  assert.equal(captureThreshold({ ...goodPace(), calcium: true }, { ...PACE, hyperK: true }), 60)
+})
+
+test('pacing bench: a clean run scores, a shock and a carotid-only check do not', () => {
+  const clean = scorePacing(goodPace(), PACE)
+  assert.deepEqual(clean.faults, [])
+  for (const id of ['MS-07', 'MS-08', 'MS-09', 'MS-10', 'MS-11', 'MS-12']) assert.ok(clean.marks.includes(id), id)
+  const bad = scorePacing({ ...goodPace(), shocked: true, femoral: false, femoralWithCapture: false, carotid: true, output: 100 }, PACE)
+  assert.ok(bad.faults.some((f) => f.critical && /shock/.test(f.text)))
+  assert.ok(bad.faults.some((f) => /carotid/.test(f.text)))
+  assert.ok(!bad.marks.includes('MS-10'))
+  assert.ok(!bad.marks.includes('MS-11'))
 })

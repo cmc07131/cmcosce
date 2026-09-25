@@ -11,37 +11,35 @@ export function useToolDrag(onDrop: (tool: string, target: string | null, at: { 
   const drop = useRef(onDrop)
   drop.current = onDrop
   const [drag, setDrag] = useState<{ tool: string; x: number; y: number } | null>(null)
-  const toolRef = useRef<string | null>(null)
+  const cleanup = useRef<(() => void) | null>(null)
 
-  useEffect(() => {
-    if (!drag) return
-    const move = (event: PointerEvent) => setDrag((cur) => (cur ? { ...cur, x: event.clientX, y: event.clientY } : cur))
-    const up = (event: PointerEvent) => {
-      const tool = toolRef.current
-      toolRef.current = null
+  useEffect(() => () => cleanup.current?.(), [])
+
+  function begin(tool: string, event: ReactPointerEvent) {
+    event.preventDefault()
+    cleanup.current?.()
+    sfx.cursor()
+    setDrag({ tool, x: event.clientX, y: event.clientY })
+    // Listen straight away: a quick flick can end before any effect would run.
+    const move = (e: PointerEvent) => setDrag((cur) => (cur ? { ...cur, x: e.clientX, y: e.clientY } : cur))
+    const up = (e: PointerEvent) => {
+      cleanup.current?.()
       setDrag(null)
-      if (!tool) return
       const hit = document
-        .elementsFromPoint(event.clientX, event.clientY)
+        .elementsFromPoint(e.clientX, e.clientY)
         .map((el) => (el as HTMLElement).closest?.('[data-drop]') as HTMLElement | null)
         .find(Boolean)
-      drop.current(tool, hit?.dataset.drop ?? null, { x: event.clientX, y: event.clientY })
+      drop.current(tool, hit?.dataset.drop ?? null, { x: e.clientX, y: e.clientY })
     }
     window.addEventListener('pointermove', move)
     window.addEventListener('pointerup', up)
     window.addEventListener('pointercancel', up)
-    return () => {
+    cleanup.current = () => {
       window.removeEventListener('pointermove', move)
       window.removeEventListener('pointerup', up)
       window.removeEventListener('pointercancel', up)
+      cleanup.current = null
     }
-  }, [drag !== null])
-
-  function begin(tool: string, event: ReactPointerEvent) {
-    event.preventDefault()
-    toolRef.current = tool
-    sfx.cursor()
-    setDrag({ tool, x: event.clientX, y: event.clientY })
   }
 
   return { drag, begin }
@@ -130,6 +128,13 @@ export function usePress(handlers: { down?: (e: ReactPointerEvent<HTMLDivElement
 
 /* ---------------------------------------------------------------- hold to act */
 
+/** Dev builds only: `window.__osceSpeed = 10` speeds up hold actions for testing. */
+function devSpeed() {
+  if (!import.meta.env.DEV || typeof window === 'undefined') return 1
+  const v = (window as unknown as { __osceSpeed?: number }).__osceSpeed
+  return typeof v === 'number' && v > 0 ? v : 1
+}
+
 /** Calls `onTick(seconds)` every frame while pressed. */
 export function HoldButton({
   children,
@@ -182,7 +187,7 @@ export function HoldButton({
         onStart?.()
         last.current = performance.now()
         const loop = (now: number) => {
-          tick.current(Math.min(0.1, (now - last.current) / 1000))
+          tick.current(Math.min(0.1, (now - last.current) / 1000) * devSpeed())
           last.current = now
           raf.current = requestAnimationFrame(loop)
         }

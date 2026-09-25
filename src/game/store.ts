@@ -31,7 +31,7 @@ export type PerformJob = {
   endStation: boolean
 }
 
-export type BenchResult = { marks: string[]; faults: { text: string; critical?: boolean }[]; summary: string }
+export type BenchResult = { marks: string[]; faults: { text: string; critical?: boolean }[]; summary: string; scene?: string }
 
 export type MsgTone = 'say' | 'trap' | 'warn' | 'info'
 /** The one line the text box shows. `speakerId` animates that actor's mouth while it types. */
@@ -125,12 +125,11 @@ export function fallbackPerformHint(kind: PerformKind) {
       return 'Drag the drape aside and look.'
     case 'release':
       return 'Drag your hand away. Do not push it back.'
-    case 'cut':
-      return 'Drag the blade across. Stop if it holds up.'
-    case 'pacer':
-      return 'Put the pads on, then set the pacer.'
     case 'io':
       return 'Brace the leg, landmark the flat tibia, and drill the IO to the pop.'
+    case 'cico':
+    case 'pacing':
+      return 'Do it as you would on a real patient. Nothing stops you making a mistake.'
   }
 }
 
@@ -402,6 +401,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       set({ faults })
       job.grantMarks = result.marks
       job.reply = result.summary
+      if (result.scene) job.scene = result.scene
     }
     const action = actionById(pack, job.actionId)
     if (!action) {

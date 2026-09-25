@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
-import { HandSprite, NeckFront, NeckSide } from './NeckModel'
+import { HandSprite } from './HandSprite'
+import { CicoProcedure } from './cico/CicoProcedure'
 import { IoProcedure } from './io/IoProcedure'
-import { PacerBench } from './PacerBench'
+import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
 import { sfx } from './sfx'
 import type { BenchResult, PerformJob } from './store'
@@ -27,10 +28,18 @@ export function PerformStage({
   const hold = useRef(0)
   const last = useRef<Pt | null>(null)
 
-  if (job.kind === 'pacer') {
+  if (job.kind === 'cico') {
     return (
       <BattleFrame job={job} onCancel={onCancel}>
-        <PacerBench pose={job.pose} onDone={onDone} />
+        <CicoProcedure seed={seed} coach onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'pacing') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <PacingProcedure seed={seed} coach onDone={onDone} />
       </BattleFrame>
     )
   }
@@ -70,12 +79,8 @@ export function PerformStage({
     if (job.kind === 'dress' && job.pose !== 'apron' && (near(next, { x: 28, y: 62 }, 14) || near(next, { x: 72, y: 62 }, 14))) succeed()
     if (job.kind === 'cannula' && near(next, { x: 74, y: 46 }, 14)) succeed()
     if (job.kind === 'pose' && job.pose === 'lateral' && next.x < 28) succeed()
-    if (job.kind === 'pose' && job.pose === 'extend' && next.y < 34) succeed()
-    if (job.kind === 'pose' && job.pose !== 'lateral' && job.pose !== 'extend' && next.y < 30) succeed()
-    if (job.kind === 'look' && job.pose === 'larynx' && travel > 14 && near(next, { x: 50, y: 48 }, 24)) succeed()
-    if (job.kind === 'look' && job.pose !== 'larynx' && travel > 28) succeed()
-    if (job.kind === 'cut' && job.pose === 'bougie' && next.y < 52 && next.y > 32 && next.x > 40 && next.x < 62) succeed()
-    if (job.kind === 'cut' && job.pose !== 'bougie' && travel > 18 && next.y > 42 && next.y < 68) succeed()
+    if (job.kind === 'pose' && job.pose !== 'lateral' && next.y < 30) succeed()
+    if (job.kind === 'look' && travel > 28) succeed()
     if (job.kind === 'listen' && next.x > 32 && next.x < 68 && next.y > 38 && next.y < 70) {
       hold.current += dt
       setHolding(Math.min(1, hold.current / 650))
@@ -148,11 +153,6 @@ function BattleFrame({ job, onCancel, children }: { job: PerformJob; onCancel: (
 
 function Scene({ kind, pose, pt, holding }: { kind: PerformJob['kind']; pose?: string; pt: Pt; holding: number }) {
   const lift = kind === 'lift' ? Math.max(0, Math.min(1, (78 - pt.y) / 42)) : 0
-  const larynx = kind === 'look' && pose === 'larynx'
-  const onNeck = kind === 'cut' || larynx
-  const extend = kind === 'pose' && pose === 'extend' ? Math.max(0, Math.min(1, (70 - pt.y) / 40)) : 0
-  const incision = kind === 'cut' && pose !== 'bougie' ? Math.max(0, Math.min(1, (Math.abs(pt.x - 50) + Math.abs(pt.y - 52)) / 30)) : 0
-  const bougie = kind === 'cut' && pose === 'bougie' ? Math.max(0, Math.min(1, (pt.y - 30) / 40)) : 0
   return (
     <div className="absolute inset-0">
       {(kind === 'lift' || kind === 'cover' || kind === 'release') && (
@@ -181,8 +181,7 @@ function Scene({ kind, pose, pt, holding }: { kind: PerformJob['kind']; pose?: s
           <div className="absolute top-[8%] left-1/2 h-2 w-24 -translate-x-1/2 bg-[#303848]" style={{ transform: `translateX(-50%) scaleX(${0.3 + holding})` }} />
         </>
       )}
-      {kind === 'pose' && pose === 'extend' && <NeckSide extend={extend} />}
-      {kind === 'pose' && pose !== 'extend' && (
+      {kind === 'pose' && (
         <div
           className="absolute h-16 w-28 border-2 border-[#303848] bg-[#f2c9d4]"
           style={{
@@ -194,11 +193,7 @@ function Scene({ kind, pose, pt, holding }: { kind: PerformJob['kind']; pose?: s
       {kind === 'cannula' && (
         <div className="absolute top-[28%] right-[10%] h-24 w-10 rounded-full border-2 border-[#303848] bg-[#f0d2b4]" />
       )}
-      {onNeck && <NeckFront rock={(pt.x - 50) * 0.45} incision={incision} bougie={bougie} />}
-      {kind === 'cut' && pose === 'bougie' && (
-        <div className="absolute top-[70%] left-1/2 -translate-x-1/2 font-body text-[18px] text-[#a33a32]">Hold-up</div>
-      )}
-      {kind === 'look' && pose !== 'larynx' && (
+      {kind === 'look' && (
         <div className="absolute inset-[12%] border-2 border-[#303848] bg-[#efe6c4]">
           <div className="absolute inset-x-0 top-0 h-[46%] bg-[#6ea0d8]" style={{ transform: `translateY(${-Math.min(dragOpen(pt), 80)}%)` }} />
           <p className="absolute right-2 bottom-2 left-2 text-center font-body text-[22px] text-[#28241c]">Look</p>
@@ -209,7 +204,7 @@ function Scene({ kind, pose, pt, holding }: { kind: PerformJob['kind']; pose?: s
         className="pointer-events-none absolute h-12 w-12 -translate-x-1/2 -translate-y-1/2"
         style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
       >
-        {kind === 'cut' && pose !== 'bougie' ? <Blade /> : <HandSprite />}
+        <HandSprite />
       </div>
     </div>
   )
@@ -219,11 +214,3 @@ function dragOpen(pt: Pt) {
   return Math.max(0, 70 - pt.y)
 }
 
-function Blade() {
-  return (
-    <svg viewBox="0 0 48 48" className="h-full w-full">
-      <rect x="20" y="18" width="8" height="22" rx="1" fill="#c8ccd4" stroke="#303848" />
-      <path d="M18 18 L24 4 L30 18 Z" fill="#f4f6f8" stroke="#303848" />
-    </svg>
-  )
-}

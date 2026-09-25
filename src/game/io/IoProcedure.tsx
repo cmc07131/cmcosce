@@ -38,7 +38,7 @@ import {
   WristbandArt,
   NEEDLE_HEX,
 } from './art'
-import { Dial, DragGhost, HoldButton, SayIt, Tool, capture, usePress, useSpin, useToolDrag, type SayOption } from './controls'
+import { Dial, DragGhost, HoldButton, SayIt, Tool, capture, usePress, useSpin, useToolDrag, type SayOption } from '../bench/controls'
 import { freshRun, leaks, scoreRun, type Run, type Scored } from './score'
 
 const STAGES = ['survey', 'kit', 'position', 'landmark', 'clean', 'insert', 'secure', 'finish'] as const
