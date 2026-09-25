@@ -1,0 +1,11 @@
+node_modules
+.output
+dist
+.tanstack
+.DS_Store
+*.local
+.nitro
+.vinxi
+
+# Private source notes (large, may contain copyrighted material)
+Source/

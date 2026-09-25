@@ -1,0 +1,386 @@
+{
+  "packId": "cv-em-02",
+  "title": "Transcutaneous pacing",
+  "meta": {
+    "timeLimitSec": 480,
+    "readTimeSec": 60,
+    "stationType": "resus",
+    "stem": "You are the AED doctor. A 72-year-old man had a blackout at home. He is on the trolley in Resus 2, sweaty and drowsy, BP 72/40, HR 32. The monitor shows complete heart block with a wide QRS. A nurse is with you. The defibrillator is on the bench. Manage this patient.",
+    "guidelineNotes": "Scoring truth is this CV-EM-02 script. AHA adult bradycardia: atropine 1 mg IV every 3–5 minutes, maximum 3 mg. ERC/RCUK uses 500 micrograms. Many HA drawers still stock 0.6 mg ampoules. Giving one 0.6 mg ampoule and saying you will repeat toward 3 mg scores. Planning 0.6 mg as the full AHA dose, or any dose under 0.5 mg, does not — under 0.5 mg can slow the rate further.\n\nOutput is current in mA, titrated until a spike is followed by a wide QRS, then run 5–10 mA above that threshold. This manikin captures at 60 mA, so the run current is 70 mA. “Voltage 50–100 IA” does not score.\n\nRate 70 sits inside the 60–80 range. Demand is the default so a returning beat does not land on a pacing spike. Anterior–posterior pads are preferred; anterior–lateral scores if you cannot roll him.\n\nWide-complex complete heart block is infranodal: do not wait for three doses of atropine. Pads go on now; 1 mg of atropine can run in parallel. Pulseless is CPR and ALS. TCP is not a substitute. Pacing does not fix hyperkalaemia — calcium first. Dopamine 5–20 micrograms/kg/min or adrenaline 2–10 micrograms/min if there is still no capture. Do not assume isoprenaline is in the AED cupboard. Keep the pads on until a transvenous wire captures."
+  },
+  "room": {
+    "template": "resus-bay",
+    "cols": 12,
+    "rows": 10,
+    "tileSize": 32,
+    "playerStart": { "x": 5, "y": 8 },
+    "props": [
+      { "id": "wall-n", "kind": "wall", "x": 0, "y": 0, "w": 12, "h": 1 },
+      { "id": "wall-w", "kind": "wall", "x": 0, "y": 1, "w": 1, "h": 8 },
+      { "id": "wall-e", "kind": "wall", "x": 11, "y": 1, "w": 1, "h": 8 },
+      { "id": "wall-s1", "kind": "wall", "x": 0, "y": 9, "w": 5, "h": 1 },
+      { "id": "wall-s2", "kind": "wall", "x": 6, "y": 9, "w": 6, "h": 1 },
+      {
+        "id": "monitor",
+        "kind": "monitor",
+        "x": 4,
+        "y": 2,
+        "w": 3,
+        "h": 1,
+        "readout": {
+          "idle": "HR 32  wide CHB  BP 72",
+          "when": [
+            { "scene": "pads", "text": "Pads on  HR 32  CHB" },
+            { "scene": "paced", "text": "Spike + wide QRS  70 mA" },
+            { "scene": "pulse", "text": "Pulse 70  BP rising" }
+          ]
+        }
+      },
+      { "id": "bed", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2 },
+      { "id": "stripe", "kind": "hazard", "x": 4, "y": 5, "w": 4, "h": 1 },
+      { "id": "defib-prop", "kind": "trolley", "x": 1, "y": 2 }
+    ],
+    "interactables": [
+      { "id": "door", "kind": "door", "x": 5, "y": 9, "label": "Door" },
+      { "id": "defib", "kind": "trolley", "x": 1, "y": 2, "label": "Defib" },
+      { "id": "phone", "kind": "phone", "x": 10, "y": 2, "label": "Phone" },
+      { "id": "bed-ix", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2, "label": "" }
+    ]
+  },
+  "cast": [
+    { "id": "patient", "role": "patient", "displayName": "Patient", "spawn": { "x": 5, "y": 4 }, "pixelKey": "patient" },
+    { "id": "nurse", "role": "nurse", "displayName": "Nurse", "spawn": { "x": 9, "y": 3 }, "pixelKey": "nurse" },
+    { "id": "examiner", "role": "examiner", "displayName": "Examiner", "spawn": { "x": 8, "y": 7 }, "pixelKey": "examiner" }
+  ],
+  "items": [],
+  "marks": [
+    { "id": "MS-01", "label": "Introduce yourself and warn that the chest will thump" },
+    { "id": "MS-02", "label": "Declare unstable complete heart block" },
+    { "id": "MS-03", "label": "Call the AED consultant and cardiology / CCU" },
+    { "id": "MS-04", "label": "Oxygen if shocked, monitor, IV, and glucose — a 12-lead does not delay the pads" },
+    { "id": "MS-05", "label": "Atropine 1 mg IV while you pace; a 0.6 mg ampoule is one dose toward 3 mg, never under 0.5 mg" },
+    { "id": "MS-06", "label": "Do not wait for atropine in wide-complex complete heart block" },
+    { "id": "MS-07", "label": "Anterior–posterior pads, or anterior–lateral if you cannot roll him" },
+    { "id": "MS-08", "label": "Pacer mode, demand, rate 70" },
+    { "id": "MS-09", "label": "Titrate output in 10 mA steps until a spike is followed by a wide QRS" },
+    { "id": "MS-10", "label": "Feel a femoral pulse — mechanical capture, not the chest-wall twitch" },
+    { "id": "MS-11", "label": "Run 5–10 mA above the capture threshold" },
+    { "id": "MS-12", "label": "Small fentanyl or ketamine if the blood pressure allows; do not switch the pacer off" },
+    { "id": "MS-13", "label": "Check potassium, a 12-lead, and the drug list; pacing does not fix hyperkalaemia" },
+    { "id": "MS-14", "label": "ISBAR to CCU for a transvenous wire; pads stay on until the wire captures" }
+  ],
+  "actions": [
+    {
+      "id": "intro",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Introduce yourself. Tell him the chest will thump.",
+      "prompt": "Speak to him",
+      "options": [
+        {
+          "id": "hello",
+          "label": "I am Dr Chan. Your heart is very slow. The chest will thump.",
+          "detail": "You: Hello, I am Dr Chan, the emergency doctor. Can I confirm your name and HKID? You have a very slow heart rate and a low blood pressure. We are going to treat that now. It may feel like a thump on the chest.",
+          "marksChecklistIds": ["MS-01"]
+        },
+        {
+          "id": "canto",
+          "label": "你心跳好慢、血壓低。胸口會大力抽一下。",
+          "detail": "You: 你心跳而家好慢、血壓低。我哋而家要用機幫你跳，胸口會大力抽一下。",
+          "marksChecklistIds": ["MS-01"]
+        }
+      ]
+    },
+    {
+      "id": "declare",
+      "kind": "talk",
+      "targetIds": ["nurse", "patient"],
+      "hint": "Say unstable complete heart block. This is not a shock.",
+      "prompt": "What is this?",
+      "options": [
+        {
+          "id": "unstable",
+          "label": "Unstable complete heart block. Pads and atropine. Do not shock.",
+          "detail": "You: This is unstable bradycardia — complete heart block. He still has a pulse. Do not start a shock cycle.",
+          "marksChecklistIds": ["MS-02"]
+        },
+        {
+          "id": "shock",
+          "label": "Synchronised shock for the block",
+          "detail": "He is conscious and in a slow block. A shock is the critical miss.",
+          "isTrap": true
+        },
+        {
+          "id": "pace-arrest",
+          "label": "If there is no pulse I will just pace and skip CPR",
+          "detail": "Pulseless is CPR and ALS. TCP is not a substitute for compressions.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "call-help",
+      "kind": "talk",
+      "targetIds": ["nurse", "phone"],
+      "hint": "Call the AED consultant and cardiology / CCU.",
+      "prompt": "Who do you call?",
+      "options": [
+        {
+          "id": "teams",
+          "label": "AED consultant, cardiology, and CCU now.",
+          "detail": "Nurse: AED consultant and CCU are being called.",
+          "marksChecklistIds": ["MS-03"]
+        },
+        {
+          "id": "psych",
+          "label": "Psychiatry first",
+          "detail": "This is a slow heart and a low blood pressure. Psychiatry is not the team.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "abc",
+      "kind": "talk",
+      "targetIds": ["nurse", "patient", "bed-ix"],
+      "hint": "Oxygen if he is shocked, a line, glucose. The 12-lead waits for the pads.",
+      "prompt": "While the pads go on",
+      "options": [
+        {
+          "id": "parallel",
+          "label": "Oxygen, monitor, IV, glucose. 12-lead does not delay pads.",
+          "detail": "You: High-flow oxygen. Cycle the blood pressure. IV if there is no line. Finger-stick glucose. A 12-lead as soon as the pads are on — do not delay pacing for a perfect ECG.",
+          "marksChecklistIds": ["MS-04"]
+        },
+        {
+          "id": "ecg-first",
+          "label": "A perfect 12-lead before any pads",
+          "detail": "BP is 72. The 12-lead comes after the first pads are on, not before.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "atropine",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Wide-complex block: do not wait. Atropine 1 mg while you pace.",
+      "prompt": "Atropine",
+      "options": [
+        {
+          "id": "one-mg",
+          "label": "I will not wait. Atropine 1 mg IV while I pace.",
+          "detail": "You: This is infranodal block. I will not wait for atropine to work. Atropine 1 mg IV can go in while I start pacing. If the drawer only has 0.6 mg ampoules I will give one now and repeat toward a total of 3 mg. I will not use a dose under 0.5 mg.",
+          "marksChecklistIds": ["MS-05", "MS-06"]
+        },
+        {
+          "id": "zero-six",
+          "label": "Atropine 0.6 mg is the full AHA dose",
+          "detail": "0.6 mg is one ampoule, not the AHA dose. A planned dose under 0.5 mg can slow him further.",
+          "isTrap": true
+        },
+        {
+          "id": "three-first",
+          "label": "Three atropines, then think about pads",
+          "detail": "Wide-complex complete heart block does not wait for three doses. Pads now.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "pads",
+      "kind": "talk",
+      "targetIds": ["defib", "patient", "bed-ix"],
+      "hint": "Stick the pads. Anterior–posterior if you can roll him.",
+      "prompt": "Pads",
+      "options": [
+        {
+          "id": "place",
+          "label": "Anterior–posterior pads. Anterior–lateral only if I cannot roll him.",
+          "detail": "Anterior pad over the left lower sternal edge. Posterior pad left of the spine, under the scapula. Skin dry. Not over a pacemaker can.",
+          "marksChecklistIds": ["MS-07"],
+          "scene": "pads",
+          "perform": "pacer",
+          "performPose": "pads",
+          "performHint": "Drag the anterior pad to the left lower sternal edge. Roll him and put the posterior pad left of the spine, under the scapula."
+        }
+      ]
+    },
+    {
+      "id": "set-pacer",
+      "kind": "talk",
+      "targetIds": ["defib"],
+      "hint": "PACER, not shock. Demand. Rate 70. Turn the milliamps up, then add 5–10.",
+      "prompt": "Set the defibrillator",
+      "options": [
+        {
+          "id": "setup",
+          "label": "PACER. Demand. Rate 70. Titrate mA, then 5–10 above threshold.",
+          "detail": "Electrical capture at 60 mA: a spike, then a wide QRS. You run at 70 mA so beats do not drop out. Rate stays 70.",
+          "marksChecklistIds": ["MS-08", "MS-09", "MS-11"],
+          "scene": "paced",
+          "perform": "pacer",
+          "performPose": "pacer:rate=70;thr=60;margin=10",
+          "performHint": "Leave DEFIB. Choose PACER, then DEMAND. Set the rate to 70 before the current. Raise output in 10 mA steps. When you see a spike and a wide QRS, add 10 mA."
+        },
+        {
+          "id": "voltage",
+          "label": "Set the voltage to 50–100 IA",
+          "detail": "The unit is milliamps, and you titrate it. A fixed “50–100 IA” does not score.",
+          "isTrap": true
+        },
+        {
+          "id": "shock-now",
+          "label": "Stay in defib and shock the block",
+          "detail": "He is awake. A shock is the critical miss. Turn the machine to PACER.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "pulse-check",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Feel the femoral pulse. The chest twitch is not a pulse.",
+      "prompt": "Mechanical capture",
+      "options": [
+        {
+          "id": "femoral",
+          "label": "Feel the femoral pulse. Ignore the chest twitch.",
+          "detail": "The femoral pulse matches the paced rate and the blood pressure is rising. That is mechanical capture.",
+          "marksChecklistIds": ["MS-10"],
+          "scene": "pulse",
+          "perform": "pacer",
+          "performPose": "pulse",
+          "performHint": "Hold your fingers on the femoral artery until the pulse matches the paced rate."
+        },
+        {
+          "id": "screen-only",
+          "label": "The screen shows QRS. I do not need a pulse.",
+          "detail": "A spike and a QRS are only electrical capture. No pulse means PEA — start compressions.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "sedation",
+      "kind": "talk",
+      "targetIds": ["patient", "nurse"],
+      "hint": "A small dose of fentanyl or ketamine if the pressure allows. Do not turn the pacer off.",
+      "prompt": "Make it tolerable",
+      "options": [
+        {
+          "id": "small",
+          "label": "Small fentanyl or ketamine if the BP allows. Machine stays on.",
+          "detail": "You: The thumping continues until a pacing wire is in. A small dose of fentanyl or ketamine if the blood pressure will stand it. Nurse, do not switch the machine off.",
+          "marksChecklistIds": ["MS-12"]
+        },
+        {
+          "id": "off",
+          "label": "Turn the pacer off so he can rest",
+          "detail": "The pads and the current stay until a wire captures. Switching it off drops the rate back to 32.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "cause",
+      "kind": "talk",
+      "targetIds": ["nurse", "examiner"],
+      "hint": "Potassium, a 12-lead, and the drug list. Calcium if this is hyperkalaemia.",
+      "prompt": "Why is he blocked?",
+      "options": [
+        {
+          "id": "hunt",
+          "label": "Potassium, 12-lead, drug list. No rate-slowing drug.",
+          "detail": "You want a venous gas and potassium, troponin, a 12-lead once he is paced, and the medication list. You will not give a beta-blocker.",
+          "marksChecklistIds": ["MS-13"]
+        },
+        {
+          "id": "calcium",
+          "label": "If the T waves are peaked: calcium now. Pacing will not fix it.",
+          "detail": "You: This may be hyperkalaemia. Calcium gluconate 10 millilitres of 10 percent IV now. Pacing fails until the membrane is stabilised.",
+          "marksChecklistIds": ["MS-13"]
+        },
+        {
+          "id": "pace-hyperk",
+          "label": "Pace the sine wave. Calcium can wait.",
+          "detail": "Pacing does not fix hyperkalaemia. Calcium first, or the pads will not capture.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "handover",
+      "kind": "handover",
+      "targetIds": ["examiner", "door", "phone"],
+      "hint": "ISBAR to CCU. Pads stay on until the wire captures.",
+      "prompt": "Handover",
+      "options": [
+        {
+          "id": "isbar",
+          "label": "CCU for a transvenous wire. Pads stay on.",
+          "detail": "You: I am Dr Chan from AED. Unstable complete heart block, now paced at 70, output 70 milliamps, femoral pulse present, blood pressure rising. 72-year-old, syncope, no pacemaker. Please take him for a transvenous wire. Pads stay on until that wire captures.",
+          "marksChecklistIds": ["MS-14"],
+          "endStation": true
+        },
+        {
+          "id": "peel",
+          "label": "Capture is in. Peel the pads off.",
+          "detail": "TCP is a bridge. The pads stay until the transvenous wire captures.",
+          "isTrap": true
+        },
+        {
+          "id": "max-fail",
+          "label": "If there is still no capture: new pad vector, adrenaline, wire now.",
+          "detail": "You: No capture at the top of the dial. Check contact and switch to anterior–posterior if I started lateral. Adrenaline 2 to 10 micrograms per minute. He needs a transvenous wire, not more button-pressing.",
+          "marksChecklistIds": ["MS-14"]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "talk",
+      "targetIds": ["examiner"],
+      "hint": "If asked: demand mode, why atropine fails here, and what to do with no pulse.",
+      "prompt": "Examiner asks",
+      "options": [
+        {
+          "id": "why-demand",
+          "label": "Why demand, and why atropine may fail?",
+          "detail": "Demand avoids a pacing spike on a returning T wave. The block is below the AV node, so atropine often never reaches the ventricle. If the pulse disappears, that is PEA: compressions, not a higher milliamp forever."
+        },
+        {
+          "id": "dopamine",
+          "label": "Still hypotensive after capture?",
+          "detail": "Rate 70 is enough for most. Add adrenaline 2–10 micrograms per minute or dopamine 5–20 micrograms per kilogram per minute, and look for a failing pump or an infarct."
+        }
+      ]
+    }
+  ],
+  "goldPath": ["intro", "declare", "call-help", "abc", "atropine", "pads", "set-pacer", "pulse-check", "sedation", "cause", "handover"],
+  "sequenceRules": [
+    {
+      "id": "pads-before-dials",
+      "earlierAny": ["pads"],
+      "laterAny": ["set-pacer"],
+      "require": "all-earlier-before-any-later",
+      "okNote": "Pads on the chest before the pacer dials.",
+      "failNote": "You set the current before the pads were on."
+    },
+    {
+      "id": "pulse-before-handover",
+      "earlierAny": ["pulse-check"],
+      "laterAny": ["handover"],
+      "require": "a-before-b",
+      "okNote": "You felt a pulse before calling CCU.",
+      "failNote": "Handover before a femoral pulse. The screen alone is not capture."
+    }
+  ],
+  "badge": {
+    "id": "cv-em-02",
+    "name": "TCP",
+    "emoji": "💓",
+    "flavor": "CV-EM-02 · Gym Leader. Pads, PACER, milliamps, then a pulse."
+  }
+}

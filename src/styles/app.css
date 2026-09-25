@@ -1,0 +1,123 @@
+@import '@fontsource/vt323/latin-400.css';
+@import '@fontsource/press-start-2p/latin-400.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-pixel: 'Press Start 2P', ui-monospace, monospace;
+  --font-body: 'VT323', ui-monospace, monospace;
+  --color-ink: #28241c;
+  --color-bay: #f8f8e0;
+  --color-floor: #efe6c8;
+  --color-floor-b: #e4d7b0;
+  --color-amber: #c88820;
+  --color-mint: #2f7a3e;
+  --color-rose: #a33a32;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  background: #8fbc5a;
+}
+
+body {
+  overflow-x: hidden;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  background: #8fbc5a;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.font-pixel {
+  font-family: var(--font-pixel);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.game-shell {
+  width: 100%;
+  max-width: 390px;
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: #f6f3df;
+  position: relative;
+  overflow: hidden;
+  color: #28241c;
+}
+
+.hud-chip {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  padding: 6px 8px;
+  border: 2px solid #303848;
+  background: #f8f8e0;
+  color: #28241c;
+  box-shadow: inset -2px -2px 0 #c8b878;
+}
+
+.tap {
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.1;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 3px solid #303848;
+  background: #fffbec;
+  color: #28241c;
+  box-shadow: inset -3px -3px 0 #e0d090;
+  text-align: left;
+  width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.tap:active {
+  transform: translateY(1px);
+}
+
+.tap[disabled] {
+  opacity: 0.45;
+}
+
+.tap.trap {
+  border-color: #a33a32;
+  background: #f8e4d8;
+}
+
+.poke-box {
+  border: 4px solid #303848;
+  background: #f8f8e0;
+  box-shadow: inset 0 0 0 3px #f8f8e0, inset 0 0 0 5px #e0c060;
+}
+
+.score-scroll {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  min-width: 0;
+  scrollbar-width: none;
+}
+
+.score-scroll::-webkit-scrollbar {
+  display: none;
+}

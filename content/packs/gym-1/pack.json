@@ -1,0 +1,746 @@
+{
+  "packId": "gym-1",
+  "title": "Umbilical cord prolapse",
+  "meta": {
+    "timeLimitSec": 480,
+    "readTimeSec": 60,
+    "stationType": "resus",
+    "stem": "You are the AED doctor. A 32-year-old woman, G2P1, 36+2 weeks, arrived by ambulance after a gush of fluid at home. The paramedic says “something is hanging out between her legs.” She is on the trolley in Resus 2. Nurse is with her. Manage this patient.",
+    "guidelineNotes": "Scoring truth is the OB-EM-01 exam script in this pack, not a rewritten guideline. Checked against RCOG Green-top Guideline No. 50 (2014; review extended December 2024) and the category-1 caesarean 30-minute decision-to-birth audit standard. Kept as written: do not replace the cord; minimal handling; loose warm saline gauze if the cord is outside; elevate the presenting part and keep the hand in; knee–chest in the bay; left lateral, head down, for transfer; bladder fill 500–750 mL only if birth will be delayed, then empty before caesarean; terbutaline 0.25 mg SC only if the fetal heart is still abnormal after elevation and birth will be delayed. RCOG also lists Trendelenburg beside knee–chest and left lateral. This mark scheme does not score Trendelenburg. RCOG does not recommend routine maternal oxygen. This script allows high-flow oxygen only if it does not delay, and it is not a scoring line. The source sheet is 100 marks, pass at least 70 with no critical hit. This gym ticks the observable lines from that sheet."
+  },
+  "room": {
+    "template": "resus-bay",
+    "cols": 12,
+    "rows": 10,
+    "tileSize": 32,
+    "playerStart": { "x": 5, "y": 8 },
+    "props": [
+      { "id": "wall-n", "kind": "wall", "x": 0, "y": 0, "w": 12, "h": 1 },
+      { "id": "wall-w", "kind": "wall", "x": 0, "y": 1, "w": 1, "h": 8 },
+      { "id": "wall-e", "kind": "wall", "x": 11, "y": 1, "w": 1, "h": 8 },
+      { "id": "wall-s1", "kind": "wall", "x": 0, "y": 9, "w": 5, "h": 1 },
+      { "id": "wall-s2", "kind": "wall", "x": 6, "y": 9, "w": 6, "h": 1 },
+      { "id": "monitor", "kind": "monitor", "x": 4, "y": 2, "w": 3, "h": 1 },
+      { "id": "bed", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2 },
+      { "id": "stripe", "kind": "hazard", "x": 4, "y": 5, "w": 4, "h": 1 },
+      { "id": "obs-prop", "kind": "trolley", "x": 1, "y": 2 },
+      { "id": "iv-prop", "kind": "trolley", "x": 1, "y": 5 },
+      { "id": "meds-prop", "kind": "shelf", "x": 1, "y": 7 }
+    ],
+    "interactables": [
+      { "id": "door", "kind": "door", "x": 5, "y": 9, "label": "Door" },
+      { "id": "obs-trolley", "kind": "trolley", "x": 1, "y": 2, "label": "Obs", "sourceFor": ["gloves", "apron", "warm-gauze", "doppler"] },
+      { "id": "iv-trolley", "kind": "trolley", "x": 1, "y": 5, "label": "IVs", "sourceFor": ["cannula", "gs-fbc"] },
+      { "id": "meds-shelf", "kind": "shelf", "x": 1, "y": 7, "label": "Meds", "sourceFor": ["terbutaline"] },
+      { "id": "phone", "kind": "phone", "x": 10, "y": 2, "label": "Phone" },
+      { "id": "bed-ix", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2, "label": "" }
+    ]
+  },
+  "cast": [
+    { "id": "patient", "role": "patient", "displayName": "Woman", "spawn": { "x": 5, "y": 4 }, "pixelKey": "patient" },
+    { "id": "nurse", "role": "nurse", "displayName": "Nurse Wong", "spawn": { "x": 9, "y": 3 }, "pixelKey": "nurse" },
+    { "id": "partner", "role": "relative", "displayName": "Partner", "spawn": { "x": 8, "y": 6 }, "pixelKey": "partner" },
+    { "id": "examiner", "role": "examiner", "displayName": "Examiner", "spawn": { "x": 8, "y": 7 }, "pixelKey": "examiner" }
+  ],
+  "items": [
+    { "id": "gloves", "label": "Gloves" },
+    { "id": "apron", "label": "Apron" },
+    { "id": "warm-gauze", "label": "Warm gauze" },
+    { "id": "doppler", "label": "Doppler" },
+    { "id": "cannula", "label": "IV cannula" },
+    { "id": "gs-fbc", "label": "G&S + FBC" },
+    { "id": "terbutaline", "label": "Terbutaline" }
+  ],
+  "marks": [
+    { "id": "MS-01", "label": "Introduce yourself, confirm name and HKID, and name the nurse" },
+    { "id": "MS-02", "label": "Privacy, chaperone, and ask the nurse to stay" },
+    { "id": "MS-03", "label": "Gloves and apron before you expose the perineum" },
+    { "id": "MS-04", "label": "Recognise overt cord prolapse aloud" },
+    { "id": "MS-05", "label": "Call for help immediately" },
+    { "id": "MS-06", "label": "Name the O&G on-call" },
+    { "id": "MS-07", "label": "Name labour ward and obstetric theatre" },
+    { "id": "MS-08", "label": "Name the anaesthetist" },
+    { "id": "MS-09", "label": "Name paediatrics and NICU" },
+    { "id": "MS-10", "label": "State category 1 caesarean and do not delay" },
+    { "id": "MS-11", "label": "Do not replace the cord" },
+    { "id": "MS-12", "label": "Minimal handling; loose warm saline gauze if the cord is outside" },
+    { "id": "MS-13", "label": "Manually elevate the presenting part" },
+    { "id": "MS-14", "label": "Keep that hand in until O&G takes over" },
+    { "id": "MS-15", "label": "Knee-chest position in the bay" },
+    { "id": "MS-16", "label": "Transfer left lateral, head down — not knee-chest on a trolley" },
+    { "id": "MS-17", "label": "Check the fetal heart and state the rate" },
+    { "id": "MS-18", "label": "Brief obstetric history that does not delay decompression" },
+    { "id": "MS-19", "label": "Maternal ABC without delaying decompression" },
+    { "id": "MS-20", "label": "Large-bore IV, group and save, and FBC without delaying decompression" },
+    { "id": "MS-21", "label": "Explain to the woman in plain language" },
+    { "id": "MS-22", "label": "Verbal consent for category 1 caesarean" },
+    { "id": "MS-23", "label": "Destination is labour-ward obstetric theatre" },
+    { "id": "MS-24", "label": "ISBAR handover including the times" },
+    { "id": "MS-25", "label": "Professional, concise, and speaking to the woman" }
+  ],
+  "actions": [
+    {
+      "id": "intro",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Walk to the woman. Introduce yourself, confirm who she is, and get privacy.",
+      "prompt": "Introduce yourself",
+      "options": [
+        {
+          "id": "id",
+          "label": "I am Dr Chan, the emergency doctor. Name and HKID? This is Nurse Wong.",
+          "detail": "You: Hello, my name is Dr Chan. I am the emergency doctor. Can I confirm your name and HKID? This is Nurse Wong. I need to look now — this can be an emergency for the baby.",
+          "marksChecklistIds": ["MS-01"]
+        },
+        {
+          "id": "privacy",
+          "label": "Privacy screen, chaperone, nurse stays",
+          "detail": "You pull the screen. Nurse Wong stays. You do not take a long history first.",
+          "marksChecklistIds": ["MS-02"]
+        },
+        {
+          "id": "history-first",
+          "label": "Sit down for a full antenatal history before looking",
+          "detail": "The cord is still compressed. A three-minute history is the common fail.",
+          "isTrap": true
+        },
+        {
+          "id": "waiting",
+          "label": "This is only a show — send her to the waiting hall",
+          "detail": "Tissue at the introitus is cord until you look. The waiting hall is the wrong destination.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "face-look",
+      "kind": "examine-face",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Look at her face.",
+      "prompt": "Look at her face",
+      "findings": [
+        { "id": "brow", "label": "Brow", "detail": "Distressed, contracting, sweating. She can talk.", "xPct": 38, "yPct": 42, "perform": "look", "performHint": "Drag the drape and look at her face." },
+        { "id": "mouth", "label": "Mouth", "detail": "Talking. No cyanosis. High-flow oxygen is optional and only if it does not delay.", "xPct": 62, "yPct": 62, "perform": "look", "performHint": "Drag the drape and look at her mouth." }
+      ]
+    },
+    {
+      "id": "look-cord",
+      "kind": "examine-body",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Walk to the woman and look at the perineum — cord, membranes, liquor.",
+      "prompt": "Expose only what you need and look",
+      "regions": [
+        { "id": "chest", "label": "Chest", "xPct": 28, "yPct": 22, "wPct": 44, "hPct": 16, "finding": "She is talking. You will count RR, SpO2, pulse and BP without taking the elevating hand away.", "perform": "look", "performHint": "Drag the drape and look at her chest." },
+        { "id": "abdomen", "label": "Abdomen", "xPct": 28, "yPct": 40, "wPct": 44, "hPct": 18, "finding": "Gravid abdomen, about 36 weeks. Do not stop to do a long examination.", "perform": "look", "performHint": "Drag the drape and look at the abdomen." },
+        { "id": "perineum", "label": "Perineum", "xPct": 30, "yPct": 62, "wPct": 40, "hPct": 14, "finding": "Loop of cord at the introitus. Membranes ruptured. Liquor clear. Cord looks pulsatile.", "marksChecklistIds": ["MS-04"], "perform": "look", "performHint": "Drag the drape aside and look." }
+      ]
+    },
+    {
+      "id": "say-cord",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Say what you see: overt cord prolapse.",
+      "prompt": "Say what you see",
+      "options": [
+        {
+          "id": "overt",
+          "label": "This is an overt cord prolapse",
+          "detail": "You: I can see the umbilical cord outside the vagina. This is an overt cord prolapse.",
+          "marksChecklistIds": ["MS-04"]
+        },
+        {
+          "id": "srom-only",
+          "label": "Membranes only — speculum later, no rush",
+          "detail": "You have not named cord prolapse. The fetal heart stays slow.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "call-now",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Tell Nurse Wong this is cord prolapse and to call for help now.",
+      "prompt": "Call for help",
+      "options": [
+        {
+          "id": "help",
+          "label": "Obstetric emergency — call for help now",
+          "detail": "Nurse Wong: Calling now. I will only call the teams you name.",
+          "marksChecklistIds": ["MS-05"]
+        },
+        {
+          "id": "bring",
+          "label": "Gloves on. Bring the obstetric trolley and a Doppler",
+          "detail": "You glove and apron. Nurse Wong brings the trolley, warm gauze, and a Doppler.",
+          "marksChecklistIds": ["MS-03"],
+          "grantsItems": ["gloves", "apron", "warm-gauze", "doppler"],
+          "perform": "dress",
+          "performPose": "gloves",
+          "performHint": "Drag the gloves onto your hands."
+        },
+        {
+          "id": "psych",
+          "label": "Call psychiatry",
+          "detail": "Psychiatry is not the team for cord prolapse.",
+          "isTrap": true
+        },
+        {
+          "id": "waiting",
+          "label": "Send her out for an ultrasound first",
+          "detail": "Ultrasound in the waiting hall delays delivery. Look and decompress here.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "name-teams",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Name O&G, labour-ward theatre, anaesthetics, and the baby doctor.",
+      "prompt": "Name the teams",
+      "options": [
+        { "id": "og", "label": "O&G on-call", "detail": "Nurse Wong: O&G on-call is being called.", "marksChecklistIds": ["MS-06"] },
+        { "id": "ot", "label": "Labour ward / obstetric OT", "detail": "Nurse Wong: Labour-ward theatre, not general ED theatre.", "marksChecklistIds": ["MS-07"] },
+        { "id": "anaes", "label": "Anaesthetist", "detail": "Nurse Wong: Anaesthetist is being called.", "marksChecklistIds": ["MS-08"] },
+        { "id": "paeds", "label": "Paediatrics / NICU", "detail": "Nurse Wong: The baby doctor is being called.", "marksChecklistIds": ["MS-09"] }
+      ]
+    },
+    {
+      "id": "state-cat1",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Say category 1 caesarean, 36 weeks, from AED. Do not delay.",
+      "prompt": "State the urgency",
+      "options": [
+        {
+          "id": "cat1",
+          "label": "Category 1 caesarean, 36 weeks, from AED — do not delay",
+          "detail": "You: Tell them category 1 caesarean for cord prolapse, 36 weeks, coming from AED.",
+          "marksChecklistIds": ["MS-10"]
+        },
+        {
+          "id": "cat3",
+          "label": "Category 3 — she can wait for a slot",
+          "detail": "Cord prolapse with a live fetus is category 1. Waiting is a delay.",
+          "isTrap": true
+        },
+        {
+          "id": "ed-ot",
+          "label": "Book general ED theatre",
+          "detail": "She needs labour-ward obstetric theatre, not general ED theatre.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "phone-menu",
+      "kind": "menu",
+      "targetIds": ["phone"],
+      "hint": "Use the phone if you have not already named the teams.",
+      "prompt": "Who are you calling?",
+      "confirmLabel": "Place these calls",
+      "marksChecklistIds": ["MS-05"],
+      "options": [
+        { "id": "og", "label": "O&G on-call", "needed": true, "marksChecklistIds": ["MS-06"] },
+        { "id": "ot", "label": "Labour ward / obstetric OT", "needed": true, "marksChecklistIds": ["MS-07"] },
+        { "id": "anaes", "label": "Anaesthetist", "needed": true, "marksChecklistIds": ["MS-08"] },
+        { "id": "paeds", "label": "Paediatrics / NICU", "needed": true, "marksChecklistIds": ["MS-09"] },
+        { "id": "cat1", "label": "Category 1 caesarean, 36 weeks, from AED", "needed": true, "marksChecklistIds": ["MS-10"] },
+        { "id": "psych", "label": "Psychiatry", "isTrap": true, "detail": "Psychiatry is not the team for cord prolapse." },
+        { "id": "waiting", "label": "Send her to the waiting hall for an ultrasound", "isTrap": true, "detail": "That delay leaves the head on the cord." },
+        { "id": "ed-ot", "label": "General ED theatre", "isTrap": true, "detail": "Destination is labour-ward obstetric theatre." }
+      ]
+    },
+    {
+      "id": "ppe-kit",
+      "kind": "kit",
+      "targetIds": ["obs-trolley"],
+      "hint": "Walk to the Obs trolley. Gloves and apron before you look. Take gauze and a Doppler.",
+      "prompt": "Obstetric emergency trolley",
+      "confirmLabel": "Take these",
+      "marksChecklistIds": ["MS-03"],
+      "options": [
+        { "id": "gloves", "label": "Gloves", "needed": true, "grantsItems": ["gloves"], "perform": "dress", "performPose": "gloves", "performHint": "Drag the gloves onto your hands." },
+        { "id": "apron", "label": "Apron", "needed": true, "grantsItems": ["apron"], "perform": "dress", "performPose": "apron", "performHint": "Drag the apron onto your front." },
+        { "id": "gauze", "label": "Warm saline gauze", "grantsItems": ["warm-gauze"] },
+        { "id": "doppler", "label": "Doppler", "grantsItems": ["doppler"] },
+        { "id": "speculum", "label": "Speculum, to confirm SROM before anything else", "isTrap": true, "detail": "A speculum does not lift the head off the cord. The fetal heart stays slow." }
+      ]
+    },
+    {
+      "id": "elevate",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "With gloves on, tell her, then lift the head off the cord and keep that hand in.",
+      "prompt": "Elevate the presenting part",
+      "requiresItems": ["gloves"],
+      "options": [
+        {
+          "id": "lift",
+          "label": "Lift the head off the cord. My hand stays in.",
+          "detail": "You: Madam, I am going to put my hand in to lift the baby's head off the cord. It will be uncomfortable. Please do not push. Breathe through your mouth. I am keeping my hand here until theatre.",
+          "marksChecklistIds": ["MS-13", "MS-14"],
+          "perform": "lift",
+          "performHint": "Drag your hand up. Lift the head off the cord and leave the hand there."
+        },
+        {
+          "id": "canto",
+          "label": "我而家要伸手入去托高BB個頭，唔好用力撑",
+          "detail": "You: 我而家要伸手入去托高BB個頭，唔好用力撑。用口呼吸。 The hand stays in.",
+          "marksChecklistIds": ["MS-13", "MS-14"],
+          "perform": "lift",
+          "performHint": "拖高隻手，托高BB個頭，隻手留低。"
+        },
+        {
+          "id": "replace",
+          "label": "Push the cord back into the uterus",
+          "detail": "The cord looks paler. The fetal heart falls further. Do not replace it.",
+          "isTrap": true
+        },
+        {
+          "id": "vaginal",
+          "label": "Instrumental birth here — cervix is only 4 cm",
+          "detail": "Cervix is about 4 cm. Vaginal birth in ED is for full dilatation with someone who can deliver now, not this case.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "cord-care",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Do not replace or squeeze the cord. Cover a loop outside with loose warm saline gauze.",
+      "prompt": "Care of the cord",
+      "options": [
+        {
+          "id": "leave",
+          "label": "Do not replace, poke, or squeeze the cord",
+          "detail": "You leave the cord alone. Replacing it risks vasospasm, and RCOG does not recommend it.",
+          "marksChecklistIds": ["MS-11"],
+          "perform": "release",
+          "performHint": "Drag your hand off the cord. Do not push it back in."
+        },
+        {
+          "id": "gauze",
+          "label": "Loose warm saline gauze on the loop outside",
+          "detail": "You cover the cord loosely. Not tight. Not iced.",
+          "requiresItems": ["warm-gauze"],
+          "marksChecklistIds": ["MS-12"],
+          "perform": "cover",
+          "performHint": "Drag the warm gauze onto the loop. Loose, not tight."
+        },
+        {
+          "id": "wrap",
+          "label": "Wrap it tight and pack it with ice",
+          "detail": "Tight wrapping and ice vasospasm the cord. Warm and loose, or leave it.",
+          "isTrap": true
+        },
+        {
+          "id": "poke",
+          "label": "Pinch the cord to see if it pulses",
+          "detail": "A glance is enough. Pinching and squeezing the cord is handling it.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "position",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Knee-chest in the bay. For any move: left side, head down — not all-fours on the trolley.",
+      "prompt": "Position her",
+      "options": [
+        {
+          "id": "knee",
+          "label": "All fours, knees and chest, bottom up — here in the bay",
+          "detail": "You: Please get onto all fours, knees and chest, bottom up. This takes the baby off the cord. She is still on the resus trolley, not moving.",
+          "marksChecklistIds": ["MS-15"],
+          "perform": "pose",
+          "performPose": "knee",
+          "performHint": "Drag her up onto her knees and chest, bottom up."
+        },
+        {
+          "id": "sims",
+          "label": "If we move: left side, head down, pillow under the left hip",
+          "detail": "You: If the trolley has to move, we turn you onto your left side, head down, pillow under the left hip. Not all-fours in the lift.",
+          "marksChecklistIds": ["MS-16"],
+          "perform": "pose",
+          "performPose": "lateral",
+          "performHint": "Drag her onto her left side, head down."
+        },
+        {
+          "id": "trolley",
+          "label": "Knee-chest on the trolley into the lift",
+          "detail": "All-fours on a moving trolley is unsafe. Exaggerated Sims for transfer.",
+          "isTrap": true
+        },
+        {
+          "id": "walk",
+          "label": "Ask her to walk to theatre",
+          "detail": "Walking drops the head back onto the cord.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "listen-fhr",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Put the Doppler on. State the rate. Do not send her away to find a heartbeat.",
+      "prompt": "Fetal heart",
+      "requiresItems": ["doppler"],
+      "options": [
+        {
+          "id": "eighty",
+          "label": "Doppler: fetal heart 80. Category 1. We go now.",
+          "detail": "Fetal heart 80, cord pulsatile. Once the head is lifted and help is coming, the rate climbs toward 110.",
+          "marksChecklistIds": ["MS-17"],
+          "perform": "listen",
+          "performHint": "Hold the Doppler on the abdomen until you have a rate."
+        },
+        {
+          "id": "none",
+          "label": "No heart after a proper search — O&G scans before crash section. Hand stays in.",
+          "detail": "You cannot hear a fetal heart. O&G confirms viability with ultrasound before any crash section. You still elevate until they scan. A confirmed IUD is not a crash section.",
+          "marksChecklistIds": ["MS-17"],
+          "perform": "listen",
+          "performHint": "Hold the Doppler on the abdomen and listen properly."
+        },
+        {
+          "id": "skip",
+          "label": "Skip the heart and send her to the waiting room",
+          "detail": "You have not checked the fetus is alive, and you have delayed transfer.",
+          "isTrap": true
+        },
+        {
+          "id": "iud",
+          "label": "No heartbeat — crash caesarean anyway",
+          "detail": "Do not crash-section a confirmed intrauterine death. O&G confirms with ultrasound first.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "One minute of facts while the hand stays in. Do not start with a long history.",
+      "prompt": "Brief history",
+      "options": [
+        {
+          "id": "brief",
+          "label": "Contractions, bleeding, singleton, praevia, meal, allergies, previous CS",
+          "detail": "Contracting 1 in 3. No heavy bleeding. Singleton, cephalic. No praevia, no previous caesarean. Last meal two hours ago. No allergies. Cervix about 4 cm — you do not stop elevation to re-examine.",
+          "marksChecklistIds": ["MS-18"]
+        },
+        {
+          "id": "long",
+          "label": "Full booking history before you touch her",
+          "detail": "Three minutes of history with the head still on the cord.",
+          "isTrap": true
+        },
+        {
+          "id": "nurse-only",
+          "label": "Ask the nurse, not the woman",
+          "detail": "She is distressed and she can talk. Speak to her.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "maternal-abc",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Quick maternal ABC. Do not lie her flat and do not drop the presenting part.",
+      "prompt": "Maternal ABC",
+      "options": [
+        {
+          "id": "abc",
+          "label": "Talking, RR, SpO2, pulse, BP. Left tilt if she is not knee-chest.",
+          "detail": "She talks in sentences. RR, SpO2, pulse and BP are stable. You do not move the elevating hand to do it. High-flow oxygen only if it does not delay — weak evidence, not a scoring line.",
+          "marksChecklistIds": ["MS-19"]
+        },
+        {
+          "id": "flat",
+          "label": "Lie her flat on her back for a full set of obs",
+          "detail": "Flat on her back puts the head back on the cord.",
+          "isTrap": true
+        },
+        {
+          "id": "delay",
+          "label": "Full maternal workup before calling anyone",
+          "detail": "ABC is a glance. It does not come before help or elevation.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "iv-kit",
+      "kind": "kit",
+      "targetIds": ["iv-trolley"],
+      "hint": "A second pair of hands can site a large-bore IV and send G&S and FBC. Do not drop the head to do it yourself.",
+      "prompt": "IV trolley — only if it does not delay",
+      "confirmLabel": "Ask the second pair to do this",
+      "marksChecklistIds": ["MS-20"],
+      "options": [
+        { "id": "cannula", "label": "Large-bore cannula, second pair of hands", "needed": true, "grantsItems": ["cannula"], "perform": "cannula", "performHint": "Drag the cannula to her arm. Do not take the elevating hand away." },
+        { "id": "bloods", "label": "Group and save, and FBC", "needed": true, "grantsItems": ["gs-fbc"] },
+        { "id": "wait", "label": "Wait for the blood results before leaving", "isTrap": true, "detail": "Do not delay transfer for bloods." },
+        { "id": "drop", "label": "Take my hand out and site the cannula myself", "isTrap": true, "detail": "The head drops back onto the cord. Someone else sites the drip." }
+      ]
+    },
+    {
+      "id": "meds-kit",
+      "kind": "kit",
+      "targetIds": ["meds-shelf"],
+      "hint": "Terbutaline only if the heart is still bad after elevation and theatre is delayed.",
+      "prompt": "Terbutaline shelf",
+      "confirmLabel": "Decide",
+      "options": [
+        {
+          "id": "hold",
+          "label": "0.25 mg SC only if the heart stays abnormal after elevation and there is a delay",
+          "needed": true,
+          "detail": "You keep the vial. You do not leave her to search for it, and you do not give it before the head is lifted.",
+          "grantsItems": ["terbutaline"]
+        },
+        { "id": "now", "label": "Give 0.25 mg now, before elevation", "isTrap": true, "detail": "Tocolysis is after mechanical elevation, and only if the heart is still abnormal and birth will be delayed." },
+        { "id": "search", "label": "Leave her and search the drug cupboard", "isTrap": true, "detail": "Do not leave the presenting part to look for a drug." },
+        { "id": "dose", "label": "Terbutaline 0.5 mg IV now", "isTrap": true, "detail": "The scripted dose is 0.25 mg subcutaneous, not 0.5 mg IV." }
+      ]
+    },
+    {
+      "id": "explain",
+      "kind": "talk",
+      "targetIds": ["patient", "bed-ix"],
+      "hint": "Explain in plain language and take verbal consent for the category 1 caesarean.",
+      "prompt": "Explain and consent",
+      "options": [
+        {
+          "id": "plain",
+          "label": "The cord is in front of the head. Emergency caesarean now. I come with my hand in.",
+          "detail": "You: The baby's cord has come down in front of the head after your waters broke. The head can squeeze the cord and the baby can lose oxygen. I am holding the head off the cord. You need an emergency caesarean in obstetric theatre now. I will come with my hand in place. The obstetric, anaesthetic and baby doctors are on the way. This is category 1 — we aim to deliver within 30 minutes.",
+          "marksChecklistIds": ["MS-21", "MS-25"]
+        },
+        {
+          "id": "canto",
+          "label": "BB嘅臍帶跌咗出嚟，要即刻剖腹",
+          "detail": "You: BB嘅臍帶跌咗出嚟，頭會压住條帶，BB會缺氧。我而家用手托住個頭。要即刻去手術室剖腹，目標三十分鐘內出世。",
+          "marksChecklistIds": ["MS-21"]
+        },
+        {
+          "id": "consent",
+          "label": "Verbal consent is enough. Any questions? Who should we call?",
+          "detail": "You: For a category 1 caesarean, verbal consent is enough. Do you understand? Any questions? Who should we call for you?",
+          "marksChecklistIds": ["MS-22"]
+        },
+        {
+          "id": "written",
+          "label": "Full written consent booklet before we move",
+          "detail": "Written consent delays a category 1 caesarean. Verbal consent is enough.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "partner-talk",
+      "kind": "talk",
+      "targetIds": ["partner"],
+      "hint": "The partner can come if she wants.",
+      "prompt": "Speak to the partner",
+      "options": [
+        {
+          "id": "come",
+          "label": "You can come to obstetric theatre if she wants",
+          "detail": "Partner: I'll come. You keep your hand in."
+        },
+        {
+          "id": "downstairs",
+          "label": "Wait downstairs, we will phone",
+          "detail": "She asked who to call. Sending the partner away without asking her is the colder version.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "destination",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Move as one unit to labour-ward theatre. Left lateral, head down, hand stays in.",
+      "prompt": "Where are we going?",
+      "options": [
+        {
+          "id": "lw",
+          "label": "Labour-ward OT as one unit. Left lateral, head down, hand stays in.",
+          "detail": "You: Nurse, we move as one unit to labour-ward OT, not general ED OT. Left lateral, head down, my hand stays in. Bring notes, Doppler, oxygen, and the partner if she wants.",
+          "marksChecklistIds": ["MS-23"]
+        },
+        {
+          "id": "ed",
+          "label": "General ED theatre",
+          "detail": "ED theatre is the wrong destination.",
+          "isTrap": true
+        },
+        {
+          "id": "allfours",
+          "label": "Roll her all-fours down the corridor",
+          "detail": "Knee-chest is for the bay. The corridor and the lift are left lateral, head down.",
+          "isTrap": true
+        },
+        {
+          "id": "hand-out",
+          "label": "Take my hand out for the lift",
+          "detail": "If the hand comes out, the head drops back onto the cord.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "handover",
+      "kind": "handover",
+      "targetIds": ["examiner", "door"],
+      "hint": "ISBAR, state the times, and do not take the hand out until O&G takes over.",
+      "prompt": "Handover",
+      "options": [
+        {
+          "id": "isbar",
+          "label": "ISBAR and the four times. Hand stays until O&G takes over.",
+          "detail": "You: I am Dr Chan from AED. Situation: overt cord prolapse. Background: 32-year-old, G2P1, 36+2, SROM at home, singleton, no previous CS, last meal two hours ago, no allergies. Assessment: cord visible, I have elevated the presenting part continuously, mother stable, fetal heart 80 and ongoing. Recommendation: category 1 caesarean under O&G now; paediatric team for neonatal resuscitation; paired cord gases after birth. Times: diagnosis, help called, elevation started, left AED. I will write the notes and an incident form. We debrief her after delivery, when she is ready. I do not remove my hand until O&G takes over.",
+          "marksChecklistIds": ["MS-24", "MS-25"],
+          "endStation": true
+        },
+        {
+          "id": "drop",
+          "label": "Take my hand out now that we have arrived",
+          "detail": "The head drops onto the cord. The hand stays until O&G takes over or the baby is out.",
+          "isTrap": true
+        },
+        {
+          "id": "essay",
+          "label": "Write a long note before anyone else touches her",
+          "detail": "Document the times, but do not delay the handover to write an essay.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "viva-core",
+      "kind": "talk",
+      "targetIds": ["examiner"],
+      "hint": "If the examiner asks, answer from the script.",
+      "prompt": "Examiner asks",
+      "options": [
+        {
+          "id": "why-not",
+          "label": "Why not replace the cord?",
+          "detail": "Vasospasm, and no good evidence. RCOG does not recommend replacing it."
+        },
+        {
+          "id": "why-pos",
+          "label": "Why knee-chest, then Sims?",
+          "detail": "Knee-chest lifts the presenting part most while you are still in the bay. Sims, left lateral and head down, is the safe position on a moving trolley."
+        },
+        {
+          "id": "when-vag",
+          "label": "When would birth be vaginal?",
+          "detail": "Full dilatation and birth immediately and safely, by someone who can do an instrumental delivery. Not by the ED at 4 cm."
+        },
+        {
+          "id": "bladder",
+          "label": "Bladder fill — how much, and when?",
+          "detail": "500–750 mL warm saline through a Foley, only if theatre is delayed. Empty the bladder immediately before caesarean."
+        }
+      ]
+    },
+    {
+      "id": "viva-drugs",
+      "kind": "talk",
+      "targetIds": ["examiner"],
+      "hint": "Tocolysis and the preterm branch, if asked.",
+      "prompt": "Examiner asks more",
+      "options": [
+        {
+          "id": "toco",
+          "label": "Terbutaline — dose and rule?",
+          "detail": "Terbutaline 0.25 mg subcutaneous if the fetal heart is still abnormal after elevation and there is a delay. Do not leave the patient to find it."
+        },
+        {
+          "id": "preterm",
+          "label": "What about 24–26 weeks?",
+          "detail": "Consultant O&G and neonatology counsel on survival versus expectant care. You still decompress while they decide."
+        },
+        {
+          "id": "replace",
+          "label": "Replacing the cord is safer",
+          "detail": "That is the opposite of the script. The cord looks paler when you push it back.",
+          "isTrap": true
+        },
+        {
+          "id": "twohundred",
+          "label": "Fill the bladder with 200 mL now, every time",
+          "detail": "500–750 mL, and only if there is a delay. Not 200 mL, and not before a ready theatre.",
+          "isTrap": true
+        }
+      ]
+    }
+  ],
+  "goldPath": [
+    "intro",
+    "ppe-kit",
+    "look-cord",
+    "call-now",
+    "name-teams",
+    "state-cat1",
+    "elevate",
+    "cord-care",
+    "position",
+    "listen-fhr",
+    "history",
+    "maternal-abc",
+    "iv-kit",
+    "explain",
+    "destination",
+    "handover"
+  ],
+  "sequenceRules": [
+    {
+      "id": "help-before-history",
+      "earlierAny": ["call-now", "phone-menu"],
+      "laterAny": ["history", "iv-kit"],
+      "require": "all-earlier-before-any-later",
+      "okNote": "Help called before the history and the drip — acceptable.",
+      "failNote": "History or IV before calling for help. The examiner expects the emergency call first."
+    },
+    {
+      "id": "elevate-before-secondary",
+      "earlierAny": ["elevate"],
+      "laterAny": ["history", "maternal-abc", "iv-kit"],
+      "require": "all-earlier-before-any-later",
+      "okNote": "Decompression before history and lines — acceptable.",
+      "failNote": "History, ABC, or a cannula before the presenting part was elevated."
+    },
+    {
+      "id": "elevate-before-handover",
+      "earlierAny": ["elevate"],
+      "laterAny": ["handover"],
+      "require": "a-before-b",
+      "okNote": "The hand was in before handover.",
+      "failNote": "Handover before manual elevation."
+    },
+    {
+      "id": "position-before-transfer",
+      "earlierAny": ["position"],
+      "laterAny": ["destination"],
+      "require": "a-before-b",
+      "okNote": "Knee-chest in the bay before the transfer plan.",
+      "failNote": "Transfer plan before positioning in the bay."
+    }
+  ],
+  "badge": {
+    "id": "ob-em-01",
+    "name": "Cord prolapse",
+    "emoji": "🛟",
+    "flavor": "OB-EM-01 · Gym Leader. Hand in, category 1, labour-ward theatre."
+  }
+}

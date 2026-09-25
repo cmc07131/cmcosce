@@ -1,0 +1,566 @@
+{
+  "packId": "aw-em-01",
+  "title": "CICO front-of-neck",
+  "meta": {
+    "timeLimitSec": 480,
+    "readTimeSec": 60,
+    "stationType": "resus",
+    "stem": "Failed RSI. Facial trauma. Videolaryngoscopy twice. i-gel not ventilating. SpO2 68%. Neck landmarks are palpable. You are the AED doctor. The manikin, the nurse, and the airway trolley are in the bay.",
+    "guidelineNotes": "Scoring truth is this AW-EM-01 script. The kit card is DAS 2015 scalpel-bougie-tube only: number 10 blade, bougie, cuffed 6.0 mm tube. ATLS surgical cricothyroidotomy is not a second kit card. ATLS is often taught with a tracheal hook and a vertical skin incision then a horizontal membrane incision, not the DAS stab-rotate-bougie sequence.\n\nIf the membrane is lost, this script scores a midline vertical skin incision up to eight centimetres, bottom to top. DAS 2015 prints 8–10 cm, caudad to cephalad. Eight centimetres stays the scoring line.\n\nRocuronium 1.2 mg/kg is the scripted dose if the patient is not fully relaxed. DAS says ensure neuromuscular blockade before front-of-neck access and does not print 1.2 mg/kg on the algorithm card. The dose is kept as written.\n\nThis station starts after a failed RSI. Etomidate and suxamethonium are not on the trolley and are not scored.\n\nThe monitor shows SpO2 68% and a blank ETCO2 until a square waveform is asked for. An early bougie hold-up is a false tract: ventilating it does not produce ETCO2. Needle-first is not the adult plan while a scalpel is on the trolley. A child is an ENT plus needle algorithm, not an adult 6.0 hole."
+  },
+  "room": {
+    "template": "resus-bay",
+    "cols": 12,
+    "rows": 10,
+    "tileSize": 32,
+    "playerStart": { "x": 5, "y": 8 },
+    "props": [
+      { "id": "wall-n", "kind": "wall", "x": 0, "y": 0, "w": 12, "h": 1 },
+      { "id": "wall-w", "kind": "wall", "x": 0, "y": 1, "w": 1, "h": 8 },
+      { "id": "wall-e", "kind": "wall", "x": 11, "y": 1, "w": 1, "h": 8 },
+      { "id": "wall-s1", "kind": "wall", "x": 0, "y": 9, "w": 5, "h": 1 },
+      { "id": "wall-s2", "kind": "wall", "x": 6, "y": 9, "w": 6, "h": 1 },
+      {
+        "id": "monitor",
+        "kind": "monitor",
+        "x": 4,
+        "y": 2,
+        "w": 3,
+        "h": 1,
+        "readout": {
+          "idle": "SpO2 68%  ETCO2 —",
+          "when": [
+            { "scene": "bougie", "text": "SpO2 68%  ETCO2 —  hold-up" },
+            { "scene": "etco2", "text": "SpO2 rising  square ETCO2" },
+            { "scene": "no-etco2", "text": "No ETCO2" }
+          ]
+        }
+      },
+      { "id": "bed", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2 },
+      { "id": "stripe", "kind": "hazard", "x": 4, "y": 5, "w": 4, "h": 1 },
+      { "id": "airway-prop", "kind": "trolley", "x": 1, "y": 2 }
+    ],
+    "interactables": [
+      { "id": "door", "kind": "door", "x": 5, "y": 9, "label": "Door" },
+      { "id": "airway-trolley", "kind": "trolley", "x": 1, "y": 2, "label": "Airway", "sourceFor": ["scalpel-10", "bougie", "tube-6"] },
+      { "id": "phone", "kind": "phone", "x": 10, "y": 2, "label": "Phone" },
+      { "id": "bed-ix", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2, "label": "" }
+    ]
+  },
+  "cast": [
+    { "id": "manikin", "role": "patient", "displayName": "Manikin", "spawn": { "x": 5, "y": 4 }, "pixelKey": "patient" },
+    { "id": "nurse", "role": "nurse", "displayName": "Nurse", "spawn": { "x": 9, "y": 3 }, "pixelKey": "nurse" },
+    { "id": "examiner", "role": "examiner", "displayName": "Examiner", "spawn": { "x": 8, "y": 7 }, "pixelKey": "examiner" }
+  ],
+  "items": [
+    { "id": "scalpel-10", "label": "No.10 scalpel" },
+    { "id": "bougie", "label": "Bougie" },
+    { "id": "tube-6", "label": "Cuffed 6.0" }
+  ],
+  "marks": [
+    { "id": "MS-01", "label": "Declare can't-intubate can't-oxygenate and start front-of-neck access" },
+    { "id": "MS-02", "label": "Call for help immediately" },
+    { "id": "MS-03", "label": "Name the AED consultant" },
+    { "id": "MS-04", "label": "Name anaesthetics" },
+    { "id": "MS-05", "label": "Name ENT" },
+    { "id": "MS-06", "label": "Name ICU and say a surgical airway is starting" },
+    { "id": "MS-07", "label": "Keep 100% oxygen on the i-gel or mask" },
+    { "id": "MS-08", "label": "Rocuronium 1.2 mg/kg now if not fully relaxed" },
+    { "id": "MS-09", "label": "Number-10 scalpel, bougie, and a lubricated cuffed 6.0" },
+    { "id": "MS-10", "label": "Maximum neck extension; stand on the patient's left if right-handed" },
+    { "id": "MS-11", "label": "Laryngeal handshake" },
+    { "id": "MS-12", "label": "Thyroid, cricothyroid membrane, cricoid — midline and palpable" },
+    { "id": "MS-13", "label": "If the membrane is lost: midline vertical incision up to 8 cm, bottom to top, then blunt dissection" },
+    { "id": "MS-14", "label": "Non-dominant hand never leaves the larynx" },
+    { "id": "MS-15", "label": "Transverse stab through the membrane, cutting edge toward you" },
+    { "id": "MS-16", "label": "Rotate the blade 90 degrees, sharp edge toward the feet" },
+    { "id": "MS-17", "label": "Swap hands and pull the blade laterally so the hole stays open" },
+    { "id": "MS-18", "label": "Coudé bougie 10–15 cm; early hold-up means a false tract" },
+    { "id": "MS-19", "label": "Railroad a 6.0, cuff just through the membrane, bougie out, cuff up, circuit on" },
+    { "id": "MS-20", "label": "Ask for a square ETCO2 waveform before calling it success" },
+    { "id": "MS-21", "label": "No ETCO2: tube out, still CICO, do not ventilate a false tract" },
+    { "id": "MS-22", "label": "Hold the tube until it is tied and a named person takes it; depth is short, not 22 cm" },
+    { "id": "MS-23", "label": "Chest X-ray; keep the patient paralysed and sedated" },
+    { "id": "MS-24", "label": "ISBAR to ENT and ICU; family after the cut; document the times" },
+    { "id": "MS-25", "label": "Viva: not needle-first in an adult; 6.0 fits the membrane; paralysis helps; a collar does not cancel the knife; a child is not an adult hole" }
+  ],
+  "actions": [
+    {
+      "id": "declare",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix", "nurse"],
+      "hint": "Say it out loud: this is CICO. Front-of-neck access now.",
+      "prompt": "Declare",
+      "options": [
+        {
+          "id": "cico",
+          "label": "This is CICO. Front-of-neck access now.",
+          "detail": "You: This is can't-intubate, can't-oxygenate. I am declaring CICO. Front-of-neck access now.",
+          "marksChecklistIds": ["MS-01"]
+        },
+        {
+          "id": "one-more-vl",
+          "label": "One more look with the videolaryngoscope",
+          "detail": "SpO2 is 68% and the i-gel is dead. Another videolaryngoscopy is not front-of-neck access.",
+          "isTrap": true
+        },
+        {
+          "id": "history",
+          "label": "A quick history before anyone cuts",
+          "detail": "There is no time for a history. Oxygen stays on and you declare CICO.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "call-now",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Tell the nurse to call for help. A surgical airway is starting.",
+      "prompt": "Call for help",
+      "options": [
+        {
+          "id": "help",
+          "label": "Call for help now. CICO, surgical airway starting.",
+          "detail": "Nurse: Calling. I will only call the people you name.",
+          "marksChecklistIds": ["MS-02"]
+        },
+        {
+          "id": "wait-ent",
+          "label": "Wait for ENT to arrive before any cut",
+          "detail": "You have declared CICO. Waiting for ENT before the scalpel is a delay.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "name-teams",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Name the AED consultant, anaesthetics, ENT, and ICU.",
+      "prompt": "Who do you want?",
+      "options": [
+        { "id": "consultant", "label": "AED consultant", "detail": "Nurse: AED consultant.", "marksChecklistIds": ["MS-03"] },
+        { "id": "anaes", "label": "Anaesthetics", "detail": "Nurse: Anaesthetics.", "marksChecklistIds": ["MS-04"] },
+        { "id": "ent", "label": "ENT", "detail": "Nurse: ENT.", "marksChecklistIds": ["MS-05"] },
+        { "id": "icu", "label": "ICU — tell them CICO, surgical airway starting", "detail": "Nurse: ICU knows a surgical airway is starting.", "marksChecklistIds": ["MS-06"] }
+      ]
+    },
+    {
+      "id": "phone-menu",
+      "kind": "menu",
+      "targetIds": ["phone"],
+      "hint": "Use the phone if you have not already named the teams.",
+      "prompt": "Who are you calling?",
+      "confirmLabel": "Place these calls",
+      "marksChecklistIds": ["MS-02"],
+      "options": [
+        { "id": "consultant", "label": "AED consultant", "needed": true, "marksChecklistIds": ["MS-03"] },
+        { "id": "anaes", "label": "Anaesthetics", "needed": true, "marksChecklistIds": ["MS-04"] },
+        { "id": "ent", "label": "ENT", "needed": true, "marksChecklistIds": ["MS-05"] },
+        { "id": "icu", "label": "ICU — CICO, surgical airway starting", "needed": true, "marksChecklistIds": ["MS-06"] },
+        { "id": "psych", "label": "Psychiatry", "isTrap": true, "detail": "Psychiatry is not the team for a surgical airway." },
+        { "id": "one-more-vl", "label": "Ask for another videolaryngoscope instead", "isTrap": true, "detail": "Another videolaryngoscope is the critical miss. You need a scalpel." }
+      ]
+    },
+    {
+      "id": "oxygen",
+      "kind": "talk",
+      "targetIds": ["nurse", "manikin", "bed-ix"],
+      "hint": "Leave 100% oxygen on the i-gel or the mask.",
+      "prompt": "Oxygen",
+      "options": [
+        {
+          "id": "keep",
+          "label": "100% oxygen stays on the i-gel. No history.",
+          "detail": "You: Keep 100% oxygen on the i-gel. Do not take a history.",
+          "marksChecklistIds": ["MS-07"]
+        },
+        {
+          "id": "pull",
+          "label": "Take the i-gel out and look again",
+          "detail": "You have lost the oxygen route and you still have not cut.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "relax",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "If the patient is not fully relaxed, give rocuronium 1.2 mg/kg now.",
+      "prompt": "Neuromuscular block",
+      "options": [
+        {
+          "id": "roc",
+          "label": "Fully relaxed? If not, rocuronium 1.2 mg/kg now.",
+          "detail": "You: Full relaxant in? If not, rocuronium 1.2 mg/kg now.",
+          "marksChecklistIds": ["MS-08"]
+        },
+        {
+          "id": "wear-off",
+          "label": "Let the paralysis wear off, then look",
+          "detail": "A moving larynx makes front-of-neck access harder. You need paralysis, then the scalpel.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "airway-kit",
+      "kind": "kit",
+      "targetIds": ["airway-trolley"],
+      "hint": "Walk to the airway trolley. Number-10 scalpel, bougie, lubricated cuffed 6.0.",
+      "prompt": "DAS kit — scalpel, bougie, 6.0",
+      "confirmLabel": "Take these",
+      "marksChecklistIds": ["MS-09"],
+      "options": [
+        { "id": "scalpel", "label": "Number-10 scalpel", "needed": true, "grantsItems": ["scalpel-10"] },
+        { "id": "bougie", "label": "Bougie", "needed": true, "grantsItems": ["bougie"] },
+        { "id": "tube", "label": "Lubricated cuffed 6.0", "needed": true, "grantsItems": ["tube-6"] },
+        { "id": "needle", "label": "Needle cricothyroidotomy set only", "isTrap": true, "detail": "A scalpel is on the trolley. Needle-only is not the adult plan." },
+        { "id": "vl", "label": "One more videolaryngoscope blade", "isTrap": true, "detail": "The third look is the critical miss." },
+        { "id": "hook", "label": "Tracheal hook, and leave the bougie", "isTrap": true, "detail": "This card is scalpel-bougie-tube. The hook is a different kit." }
+      ]
+    },
+    {
+      "id": "bring-kit",
+      "kind": "talk",
+      "targetIds": ["nurse"],
+      "hint": "Or tell the nurse to bring the number-10 scalpel, the bougie, and a 6.0.",
+      "prompt": "Ask the nurse for the kit",
+      "options": [
+        {
+          "id": "bring",
+          "label": "Number-10 scalpel, bougie, lubricated cuffed 6.0.",
+          "detail": "Nurse: Scalpel, bougie, and a 6.0 are in your hand.",
+          "marksChecklistIds": ["MS-09"],
+          "grantsItems": ["scalpel-10", "bougie", "tube-6"]
+        }
+      ]
+    },
+    {
+      "id": "extend",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix"],
+      "hint": "Extend the neck fully. Stand on the patient's left if you are right-handed.",
+      "prompt": "Position",
+      "options": [
+        {
+          "id": "extend",
+          "label": "Chin up, neck fully extended. I stand on the left.",
+          "detail": "The neck is extended. You are on the patient's left.",
+          "marksChecklistIds": ["MS-10"],
+          "perform": "pose",
+          "performPose": "extend",
+          "performHint": "Drag the chin up until the neck is fully extended."
+        },
+        {
+          "id": "collar",
+          "label": "The collar stays. I cannot cut.",
+          "detail": "A collar does not cancel the knife. Extend what you can and find the membrane.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "handshake",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix"],
+      "hint": "Laryngeal handshake, then name thyroid, membrane, and cricoid.",
+      "prompt": "Find the larynx",
+      "options": [
+        {
+          "id": "hand",
+          "label": "Laryngeal handshake",
+          "detail": "You grip the larynx and rock it. Your non-dominant hand stays.",
+          "marksChecklistIds": ["MS-11"],
+          "perform": "look",
+          "performPose": "larynx",
+          "performHint": "Grip the larynx and drag it from side to side. Thyroid on top, membrane, then cricoid."
+        },
+        {
+          "id": "name",
+          "label": "Thyroid, membrane, cricoid — midline, palpable.",
+          "detail": "You: Thyroid, membrane, cricoid — midline, palpable. If I lose it I go to a vertical cut-down.",
+          "marksChecklistIds": ["MS-12"]
+        },
+        {
+          "id": "vertical",
+          "label": "If I lose it: 8 cm vertical midline, bottom to top, blunt, then stab.",
+          "detail": "You: Default is a midline vertical skin incision up to eight centimetres, bottom to top, blunt dissection, then stab the membrane.",
+          "marksChecklistIds": ["MS-13"]
+        }
+      ]
+    },
+    {
+      "id": "hand-stays",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix"],
+      "hint": "The non-dominant hand does not leave the larynx.",
+      "prompt": "Which hand stays?",
+      "options": [
+        {
+          "id": "stay",
+          "label": "This hand never leaves the larynx.",
+          "detail": "Your non-dominant hand stays on the larynx for the stab, the turn, and the bougie.",
+          "marksChecklistIds": ["MS-14"]
+        },
+        {
+          "id": "both",
+          "label": "Let go and use both hands on the trolley",
+          "detail": "The larynx slides away. You have lost the midline.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "stab",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix"],
+      "hint": "Transverse stab through the membrane. Cutting edge toward you. Then rotate 90 degrees, sharp edge to the feet.",
+      "prompt": "Scalpel",
+      "requiresItems": ["scalpel-10"],
+      "options": [
+        {
+          "id": "stab",
+          "label": "Transverse stab, edge toward me. Rotate 90°, sharp edge to the feet.",
+          "detail": "Stab through the membrane. You rotate the blade so the sharp edge points to the feet.",
+          "marksChecklistIds": ["MS-15", "MS-16"],
+          "perform": "cut",
+          "performHint": "Drag the blade across the membrane, edge toward you, then think of the turn toward the feet."
+        },
+        {
+          "id": "never",
+          "label": "I am not going to cut",
+          "detail": "SpO2 is 68%. Never cutting is the critical miss.",
+          "isTrap": true
+        },
+        {
+          "id": "needle",
+          "label": "Needle only. The scalpel stays on the trolley.",
+          "detail": "The scalpel is on the trolley. Needle-only in this adult is the wrong plan.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "open-hole",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix"],
+      "hint": "Swap hands. Pull the blade laterally so the hole stays open.",
+      "prompt": "Open the hole",
+      "options": [
+        {
+          "id": "pull",
+          "label": "Swap hands. Pull the blade laterally. Hole stays open.",
+          "detail": "You swap hands and pull the blade toward you. The hole is open for the bougie.",
+          "marksChecklistIds": ["MS-17"]
+        }
+      ]
+    },
+    {
+      "id": "bougie-step",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix"],
+      "hint": "Slide the coudé bougie down the blade 10–15 cm. Stop if it holds up early.",
+      "prompt": "Bougie",
+      "requiresItems": ["bougie"],
+      "options": [
+        {
+          "id": "slide",
+          "label": "Bougie down the blade, 10–15 cm. Stop if it holds up.",
+          "detail": "Washboard clicks, then an early hold-up. That is a false tract if you force it. You stop.",
+          "marksChecklistIds": ["MS-18"],
+          "scene": "bougie",
+          "perform": "cut",
+          "performPose": "bougie",
+          "performHint": "Slide down the blade into the window. Stop at the hold-up. Do not force past it."
+        },
+        {
+          "id": "force",
+          "label": "Push past the hold-up and bag that tract",
+          "detail": "No ETCO2. You are ventilating a false tract. Tube out. Still CICO.",
+          "isTrap": true,
+          "scene": "no-etco2"
+        }
+      ]
+    },
+    {
+      "id": "railroad",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix"],
+      "hint": "Railroad the 6.0 so the cuff is just through the membrane. Bougie out, cuff up, circuit on.",
+      "prompt": "Tube",
+      "requiresItems": ["tube-6"],
+      "options": [
+        {
+          "id": "rail",
+          "label": "Railroad the 6.0. Cuff just through. Bougie out. Cuff up. Circuit.",
+          "detail": "The cuff sits just through the membrane. Bougie out, cuff up, circuit connected. The monitor still has no ETCO2 trace until you ask.",
+          "marksChecklistIds": ["MS-19"]
+        },
+        {
+          "id": "deep",
+          "label": "Advance the tube to 22 cm at the skin",
+          "detail": "A front-of-neck tube is short at the skin. 22 cm is an oral-tube depth.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "waveform",
+      "kind": "talk",
+      "targetIds": ["manikin", "bed-ix", "nurse"],
+      "hint": "Ask for a square ETCO2 waveform before you celebrate.",
+      "prompt": "Confirm the tube",
+      "options": [
+        {
+          "id": "ask",
+          "label": "I want a square waveform before I celebrate.",
+          "detail": "You asked. The monitor now shows a square ETCO2 wave and the chest rises. That is a tracheal tube.",
+          "marksChecklistIds": ["MS-20"],
+          "scene": "etco2"
+        },
+        {
+          "id": "bag-blind",
+          "label": "Bag it. I don't need a waveform.",
+          "detail": "No ETCO2. Do not celebrate, and do not keep ventilating a tract you have not confirmed.",
+          "isTrap": true,
+          "scene": "no-etco2"
+        },
+        {
+          "id": "no-wave-plan",
+          "label": "No wave: tube out, still CICO, finger then bougie. Do not bag a false tract.",
+          "detail": "You: No ETCO2 means the tube comes out. Still CICO. Vertical incision, finger in the hole, bougie under the finger. Do not pump a false tract.",
+          "marksChecklistIds": ["MS-21"]
+        }
+      ]
+    },
+    {
+      "id": "secure",
+      "kind": "talk",
+      "targetIds": ["nurse", "manikin", "bed-ix"],
+      "hint": "You hold the tube until it is tied and someone named takes it. Depth is short. Then a chest X-ray, and stay paralysed and sedated.",
+      "prompt": "Secure and aftercare",
+      "options": [
+        {
+          "id": "hold",
+          "label": "I hold it until it is tied. A named person takes over. Not 22 cm.",
+          "detail": "You keep hold of a short tube. It is tied. A named person takes it. It is not an oral-tube depth.",
+          "marksChecklistIds": ["MS-22"]
+        },
+        {
+          "id": "after",
+          "label": "Chest X-ray. Stay paralysed and sedated.",
+          "detail": "Chest X-ray is ordered. Paralysis and sedation continue.",
+          "marksChecklistIds": ["MS-23"]
+        },
+        {
+          "id": "let-go",
+          "label": "Let go, the tie can wait",
+          "detail": "A front-of-neck tube falls out. You hold it until it is secured.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "handover",
+      "kind": "handover",
+      "targetIds": ["examiner", "door"],
+      "hint": "ISBAR to ENT and ICU. Family after the cut, not before. Document the times.",
+      "prompt": "Handover",
+      "options": [
+        {
+          "id": "isbar",
+          "label": "ISBAR: CICO, surgical airway, ETCO2, convert when stable, ICU bed.",
+          "detail": "You: CICO after failed RSI, facial trauma, SpO2 was 68%. Scalpel-bougie-tube, square ETCO2, tube held and tied. Please convert when stable and take an ICU bed. Family are told after the cut, not before. Times are in the notes.",
+          "marksChecklistIds": ["MS-24"],
+          "endStation": true
+        },
+        {
+          "id": "family-first",
+          "label": "Phone the family before I cut",
+          "detail": "The family are told after the airway is in, not before the scalpel.",
+          "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "talk",
+      "targetIds": ["examiner"],
+      "hint": "If the examiner asks: needle, tube size, paralysis, collar, and the child.",
+      "prompt": "Examiner asks",
+      "options": [
+        {
+          "id": "why",
+          "label": "Why scalpel, not needle, in this adult?",
+          "detail": "Needle-first fails too often in adults. A scalpel is on the trolley, so the plan is scalpel-bougie-tube. A 6.0 fits the cricothyroid membrane. Paralysis makes the larynx still enough to cut. A collar does not cancel the knife. A child goes to ENT and a needle algorithm, not an adult 6.0 hole.",
+          "marksChecklistIds": ["MS-25"]
+        },
+        {
+          "id": "needle-adult",
+          "label": "Needle first. A scalpel is too much.",
+          "detail": "That is the adult critical miss when a scalpel is already on the trolley.",
+          "isTrap": true
+        },
+        {
+          "id": "toddler",
+          "label": "Same adult 6.0 hole in a 4-year-old",
+          "detail": "An adult surgical hole and a 6.0 is the wrong operation in a toddler. Call ENT and use the needle algorithm.",
+          "isTrap": true
+        }
+      ]
+    }
+  ],
+  "goldPath": [
+    "declare",
+    "call-now",
+    "name-teams",
+    "oxygen",
+    "relax",
+    "airway-kit",
+    "extend",
+    "handshake",
+    "hand-stays",
+    "stab",
+    "open-hole",
+    "bougie-step",
+    "railroad",
+    "waveform",
+    "secure",
+    "handover"
+  ],
+  "sequenceRules": [
+    {
+      "id": "declare-before-knife",
+      "earlierAny": ["declare"],
+      "laterAny": ["stab"],
+      "require": "all-earlier-before-any-later",
+      "okNote": "CICO declared before the scalpel.",
+      "failNote": "The scalpel came out before you declared CICO."
+    },
+    {
+      "id": "kit-before-knife",
+      "earlierAny": ["airway-kit", "bring-kit"],
+      "laterAny": ["stab"],
+      "require": "all-earlier-before-any-later",
+      "okNote": "Scalpel, bougie, and 6.0 were named before the cut.",
+      "failNote": "You cut before the DAS kit was in your hand."
+    },
+    {
+      "id": "waveform-before-secure",
+      "earlierAny": ["waveform"],
+      "laterAny": ["secure"],
+      "require": "a-before-b",
+      "okNote": "You asked for ETCO2 before calling the tube secure.",
+      "failNote": "The tube was treated as secure before a waveform was asked for."
+    }
+  ],
+  "badge": {
+    "id": "aw-em-01",
+    "name": "CICO",
+    "emoji": "🫁",
+    "flavor": "AW-EM-01 · Elite Four. Declare, scalpel-bougie-tube, square wave."
+  }
+}
