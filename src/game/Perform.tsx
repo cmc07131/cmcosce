@@ -1,7 +1,9 @@
-import { useRef, useState, type PointerEvent } from 'react'
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { HandSprite, NeckFront, NeckSide } from './NeckModel'
 import { IoBench } from './IoBench'
 import { PacerBench } from './PacerBench'
+import { useButtons } from './input'
+import { sfx } from './sfx'
 import type { PerformJob } from './store'
 
 type Pt = { x: number; y: number }
@@ -17,31 +19,17 @@ export function PerformStage({ job, onDone, onCancel }: { job: PerformJob; onDon
 
   if (job.kind === 'pacer') {
     return (
-      <div className="absolute inset-0 z-40 flex flex-col bg-[#f8f8e0]" data-testid="perform">
-        <div className="flex items-center justify-between px-3 pt-2">
-          <h2 className="font-body text-[28px] leading-none text-[#28241c]">{job.label}</h2>
-          <button type="button" className="font-body text-[28px] leading-none text-[#28241c]" aria-label="Close" data-testid="perform-close" onClick={onCancel}>
-            ×
-          </button>
-        </div>
-        <p className="px-3 pt-1 font-body text-[22px] leading-snug text-[#3a3428]">{job.hint}</p>
+      <BattleFrame job={job} onCancel={onCancel}>
         <PacerBench pose={job.pose} onDone={onDone} />
-      </div>
+      </BattleFrame>
     )
   }
 
   if (job.kind === 'io') {
     return (
-      <div className="absolute inset-0 z-40 flex flex-col bg-[#f8f8e0]" data-testid="perform">
-        <div className="flex items-center justify-between px-3 pt-2">
-          <h2 className="font-body text-[28px] leading-none text-[#28241c]">{job.label}</h2>
-          <button type="button" className="font-body text-[28px] leading-none text-[#28241c]" aria-label="Close" data-testid="perform-close" onClick={onCancel}>
-            ×
-          </button>
-        </div>
-        <p className="px-3 pt-1 font-body text-[20px] leading-snug text-[#3a3428]">{job.hint}</p>
+      <BattleFrame job={job} onCancel={onCancel}>
         <IoBench onDone={onDone} />
-      </div>
+      </BattleFrame>
     )
   }
 
@@ -89,17 +77,10 @@ export function PerformStage({ job, onDone, onCancel }: { job: PerformJob; onDon
   }
 
   return (
-    <div className="absolute inset-0 z-40 flex flex-col bg-[#f8f8e0]" data-testid="perform">
-      <div className="flex items-center justify-between px-3 pt-2">
-        <h2 className="font-body text-[28px] leading-none text-[#28241c]">{job.label}</h2>
-        <button type="button" className="font-body text-[28px] leading-none text-[#28241c]" aria-label="Close" data-testid="perform-close" onClick={onCancel}>
-          ×
-        </button>
-      </div>
-      <p className="px-3 pt-1 font-body text-[22px] leading-snug text-[#3a3428]">{job.hint}</p>
+    <BattleFrame job={job} onCancel={onCancel}>
       <div
         ref={stage}
-        className="relative mx-3 mt-2 min-h-[280px] flex-1 border-4 border-[#303848] bg-[#f3e6c0]"
+        className="relative mx-3 mt-2 mb-3 min-h-[260px] flex-1 border-4 border-[#181820] bg-[#f3e6c0]"
         style={{ touchAction: 'none' }}
         onPointerDown={(event) => {
           event.currentTarget.setPointerCapture(event.pointerId)
@@ -121,6 +102,36 @@ export function PerformStage({ job, onDone, onCancel }: { job: PerformJob; onDon
       >
         <Scene kind={job.kind} pose={job.pose} pt={pt} holding={holding} />
       </div>
+    </BattleFrame>
+  )
+}
+
+/** Procedure scenes open like a Gold battle: flash, wipe, then the bench with a title and a hint window. */
+function BattleFrame({ job, onCancel, children }: { job: PerformJob; onCancel: () => void; children: ReactNode }) {
+  const [intro, setIntro] = useState(true)
+  useEffect(() => {
+    sfx.battle()
+    const id = window.setTimeout(() => setIntro(false), 650)
+    return () => window.clearTimeout(id)
+  }, [])
+  useButtons(30, true, (btn) => {
+    if (btn === 'b') {
+      sfx.back()
+      onCancel()
+    }
+  })
+  return (
+    <div className="battle absolute inset-0 z-40 flex flex-col" data-testid="perform">
+      {intro && <div className="battle-intro" aria-hidden />}
+      <div className="win battle-head">
+        <span className="battle-tag">PROCEDURE</span>
+        <h2 className="win-title">{job.label}</h2>
+        <button type="button" className="win-close" aria-label="Close" data-testid="perform-close" onClick={onCancel}>
+          B✕
+        </button>
+      </div>
+      <p className="win battle-hint">{job.hint}</p>
+      <div className="battle-body flex min-h-0 flex-1 flex-col overflow-auto">{children}</div>
     </div>
   )
 }

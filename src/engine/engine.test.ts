@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { test } from 'node:test'
+import { keyToBtn } from '../game/input'
 import { classifyTibia, drillRelease, needleSeat } from '../game/ioRules'
+import { spokenLine } from '../game/store'
 import { buildSolids, keyToDir, planActivation, step, targetTilesFor, vectorToDir } from './grid'
 import { applyConfirm, applyTalkOption, examinerClause, hintFor, judgeSequence, marksOnAction } from './judge'
 import { packSchema, readoutText, type Action, type Pack } from './schema'
@@ -213,4 +215,28 @@ test('examiner toast keeps the first clause', () => {
   const long = 'Recognise overt cord prolapse aloud. Then a second sentence that the toast should not show.'
   assert.equal(examinerClause(long), 'Recognise overt cord prolapse aloud')
   assert.ok(examinerClause('x'.repeat(90)).length <= 70)
+})
+
+test('pack lines name their speaker; no prefix is narration', () => {
+  const pack = load('gym-1')
+  const nurse = pack.cast.find((npc) => npc.role === 'nurse')!
+  const you = spokenLine(pack, 'You: I am Dr Chan.')
+  assert.equal(you.speakerId, 'player')
+  assert.equal(you.text, 'I am Dr Chan.')
+  const said = spokenLine(pack, `${nurse.displayName}: Calling now.`)
+  assert.equal(said.speakerId, nurse.id)
+  assert.equal(said.text, 'Calling now.')
+  const told = spokenLine(pack, 'Doppler: fetal heart 80.')
+  assert.equal(told.speakerId, null)
+  assert.equal(told.text, 'Doppler: fetal heart 80.')
+})
+
+test('keyboard maps to Game Boy buttons without stealing WASD', () => {
+  assert.equal(keyToBtn('ArrowUp'), 'up')
+  assert.equal(keyToBtn('a'), 'left')
+  assert.equal(keyToBtn('z'), 'a')
+  assert.equal(keyToBtn('Enter'), 'a')
+  assert.equal(keyToBtn('Escape'), 'b')
+  assert.equal(keyToBtn('m'), 'start')
+  assert.equal(keyToBtn('q'), null)
 })

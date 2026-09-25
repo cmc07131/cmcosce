@@ -1,35 +1,76 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { useEffect, useRef, useState } from 'react'
 import { getPack } from '~/engine/loadPacks'
 import { readLastPackId } from '~/engine/session'
+import { useButtons } from '~/game/input'
+import { useSettings } from '~/game/settings'
+import { sfx } from '~/game/sfx'
+import { Sprite } from '~/game/Sprite'
+import { NavItem, Win, useCursor } from '~/game/ui'
 
 export const Route = createFileRoute('/')({
   component: TitlePage,
 })
 
 function TitlePage() {
+  const navigate = useNavigate()
   const [lastId, setLastId] = useState<string | null>(null)
+  const [started, setStarted] = useState(false)
+  const menu = useRef<HTMLDivElement>(null)
+  const sound = useSettings((s) => s.sound)
+  const toggleSound = useSettings((s) => s.toggleSound)
   useEffect(() => setLastId(readLastPackId()), [])
   const last = lastId ? getPack(lastId) : undefined
 
+  function start() {
+    sfx.select()
+    setStarted(true)
+  }
+
+  useButtons(5, !started, (btn) => {
+    if (btn === 'a' || btn === 'start') start()
+  })
+  useCursor(menu, { priority: 10, enabled: started, onBack: () => setStarted(false) })
+
   return (
-    <div className="game-shell justify-between px-4 py-8">
-      <div>
-        <p className="font-pixel text-[8px] text-[#ffb020]">HKCEM IEEM</p>
-        <h1 className="mt-3 font-body text-[72px] leading-none">OSCE GYM</h1>
-        <p className="mt-2 font-body text-[26px] text-[#3a3428]">IEEM OSCE revision</p>
+    <div className="page title-page" onClick={() => !started && start()}>
+      <div className="flex flex-1 flex-col items-center justify-center gap-2">
+        <p className="title-sub">HKCEM · IEEM PART 2</p>
+        <h1 className="title-logo">
+          OSCE
+          <br />
+          GYM
+        </h1>
+        <p className="title-sub">GOLD EDITION</p>
+        <div className="title-stage">
+          <Sprite role="nurse" facing="e" walk />
+          <Sprite role="doctor" facing="e" walk scale={4} />
+          <Sprite role="examiner" facing="w" />
+        </div>
       </div>
-      <div className="mb-6 flex flex-col gap-3">
-        <div className="h-16 w-full bg-[repeating-linear-gradient(135deg,#f5c542_0_6px,#1a1a1a_6px_12px)]" />
-        <Link to="/gym" className="tap block text-center" data-testid="enter-title">
-          Enter
-        </Link>
-        {last && (
-          <Link to="/play/$packId" params={{ packId: last.packId }} className="tap block text-center" data-testid="continue">
-            Continue · {last.title}
-          </Link>
-        )}
-      </div>
+      {!started ? (
+        <p className="press-start mb-10" data-testid="enter-title">
+          PRESS START
+        </p>
+      ) : (
+        <div ref={menu} className="mb-6">
+          <Win>
+            {last && (
+              <NavItem testId="continue" onClick={() => void navigate({ to: '/play/$packId', params: { packId: last.packId } })}>
+                CONTINUE
+                <span className="nav-need">{last.title}</span>
+              </NavItem>
+            )}
+            <NavItem testId="stations" onClick={() => void navigate({ to: '/gym' })}>
+              STATIONS
+            </NavItem>
+            <NavItem testId="title-sound" onClick={toggleSound}>
+              SOUND: {sound ? 'ON' : 'OFF'}
+            </NavItem>
+          </Win>
+        </div>
+      )}
+      <p className="title-foot">Fan-made revision tool · not affiliated with Nintendo, Game Freak or HKCEM</p>
     </div>
   )
 }

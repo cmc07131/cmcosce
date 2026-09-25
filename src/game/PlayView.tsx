@@ -1,12 +1,18 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { hintFor } from '~/engine/judge'
-import type { Pack } from '~/engine/schema'
-import { Joystick } from './Joystick'
-import { OverlaySheet } from './Overlay'
+import { readoutText, type Pack } from '~/engine/schema'
+import { Controller } from './Controller'
+import { press, useButtons } from './input'
+import { OverlaySheet, targetName } from './Overlay'
 import { PerformStage } from './Perform'
-import { Room, type RoomHandle } from './Room'
+import { Screen, type ScreenHandle } from './Screen'
+import { useSettings } from './settings'
+import { sfx } from './sfx'
+import { StartMenu } from './StartMenu'
 import { usePlay } from './store'
+import { TextBox, type TextBoxHandle } from './TextBox'
+import { NavItem, Win, useCursor } from './ui'
 
 function formatClock(seconds: number) {
   const safe = Math.max(0, seconds)
@@ -27,32 +33,22 @@ export function PlayView({ pack }: { pack: Pack }) {
   const earnedMarks = usePlay((s) => s.earnedMarks)
   const spent = usePlay((s) => s.spent)
   const overlay = usePlay((s) => s.overlay)
-  const caption = usePlay((s) => s.caption)
-  const trapLine = usePlay((s) => s.trapLine)
-  const findingNote = usePlay((s) => s.findingNote)
-  const enterRoom = usePlay((s) => s.enterRoom)
-  const tick = usePlay((s) => s.tick)
-  const setPosition = usePlay((s) => s.setPosition)
-  const openTarget = usePlay((s) => s.openTarget)
-  const openAction = usePlay((s) => s.openAction)
-  const closeOverlay = usePlay((s) => s.closeOverlay)
-  const showStem = usePlay((s) => s.showStem)
-  const pickOption = usePlay((s) => s.pickOption)
-  const confirmOptions = usePlay((s) => s.confirmOptions)
-  const pickFinding = usePlay((s) => s.pickFinding)
-  const pickRegion = usePlay((s) => s.pickRegion)
+  const msg = usePlay((s) => s.msg)
+  const toasts = usePlay((s) => s.toasts)
   const performing = usePlay((s) => s.performing)
-  const speech = usePlay((s) => s.speech)
   const scene = usePlay((s) => s.scene)
-  const finishPerform = usePlay((s) => s.finishPerform)
-  const cancelPerform = usePlay((s) => s.cancelPerform)
-  const leave = usePlay((s) => s.leave)
-  const rerun = usePlay((s) => s.rerun)
-  const room = useRef<RoomHandle>(null)
-  const [hint, setHint] = useState<string | null>(null)
-  const [talking, setTalking] = useState(false)
-  const [trapShown, setTrapShown] = useState<string | null>(null)
+  const store = usePlay.getState
+  const labels = useSettings((s) => s.labels)
+  const screen = useRef<ScreenHandle>(null)
+  const textBox = useRef<TextBoxHandle>(null)
+  const [menu, setMenu] = useState(false)
+  const [typing, setTyping] = useState(false)
+  const [facingId, setFacingId] = useState<string | null>(null)
   const bootEnded = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (import.meta.env.DEV) Object.assign(window, { __osce: { play: usePlay, press } })
+  }, [])
 
   useEffect(() => {
     boot(pack)
@@ -78,161 +74,192 @@ export function PlayView({ pack }: { pack: Pack }) {
 
   useEffect(() => {
     if (!hydrated || !entered || ended) return
-    const id = window.setInterval(() => tick(), 1000)
+    const id = window.setInterval(() => store().tick(), 1000)
     return () => window.clearInterval(id)
-  }, [hydrated, entered, ended, tick])
+  }, [hydrated, entered, ended, store])
 
+  const firstToast = toasts[0]
   useEffect(() => {
-    if (!speech) return
-    setTalking(true)
-    const id = window.setTimeout(() => setTalking(false), 1200)
+    if (!firstToast) return
+    sfx.mark()
+    const id = window.setTimeout(() => store().dismissToast(firstToast.token), 2600)
     return () => window.clearTimeout(id)
-  }, [speech])
+  }, [firstToast?.token, store])
 
-  useEffect(() => {
-    if (!trapLine) {
-      setTrapShown(null)
+  const paused = overlay !== null || performing !== null || menu
+
+  useButtons(0, hydrated && !ended && !paused, (btn) => {
+    if (btn === 'a') {
+      if (textBox.current?.advance() !== 'none') return
+      screen.current?.useFacing()
       return
     }
-    setTrapShown(trapLine)
-    const id = window.setTimeout(() => setTrapShown(null), 2600)
-    return () => window.clearTimeout(id)
-  }, [trapLine])
+    if (btn === 'b') {
+      textBox.current?.advance()
+      return
+    }
+    if (btn === 'start') {
+      sfx.select()
+      setMenu(true)
+      return
+    }
+    if (btn === 'select') {
+      sfx.cursor()
+      useSettings.getState().toggleLabels()
+    }
+  })
 
   if (!hydrated) {
     return (
-      <div className="game-shell items-center justify-center">
-        <p className="font-body text-[28px]">Opening the bay…</p>
+      <div className="device items-center justify-center">
+        <p className="font-pixel text-[10px] text-[#181820]">Opening the bay…</p>
       </div>
     )
   }
 
   if (ended === 'complete') {
-    return (
-      <div className="game-shell justify-center gap-3 px-4">
-        <h1 className="font-body text-[40px] leading-none">Handed over</h1>
-        <p className="font-body text-[22px]">This run is already on the debrief sheet.</p>
-        <button type="button" className="tap" onClick={() => void navigate({ to: '/debrief/$packId', params: { packId: pack.packId } })}>
-          Open debrief
-        </button>
-        <button type="button" className="tap" data-testid="run-again" onClick={() => rerun(pack)}>
-          Run again
-        </button>
-      </div>
-    )
+    return <EndedScreen pack={pack} onDebrief={() => void navigate({ to: '/debrief/$packId', params: { packId: pack.packId } })} onAgain={() => store().rerun(pack)} />
   }
 
-  const clockColor = !entered ? '#28241c' : secondsLeft > 60 ? '#28241c' : secondsLeft > 20 ? '#a86a08' : '#b42318'
-  const paused = overlay !== null || performing !== null
-  const statusLine = trapShown || speech?.text || '—'
-  const talkIds = talking && speech ? [speech.speakerId, 'player'] : []
+  const clockTone = !entered ? '' : secondsLeft > 60 ? '' : secondsLeft > 20 ? 'hud-warn' : 'hud-alarm'
+  const monitor = pack.room.props.find((prop) => prop.readout)
+  const readout = monitor ? readoutText(monitor.readout, scene ?? []) : null
+  const speakerName = msg?.speakerId ? (msg.speakerId === 'player' ? 'YOU' : targetName(pack, msg.speakerId)) : msg?.tone === 'trap' ? 'NO MARK' : null
+  const facingNpc = facingId ? pack.cast.some((npc) => npc.id === facingId) : false
+  const idle = !entered
+    ? 'Read the door note, then enter.'
+    : facingId
+      ? `A ▶ ${facingNpc ? 'Talk to' : 'Use'} ${targetName(pack, facingId)}`
+      : 'D-pad walks. Tap a spot to walk there. A uses what you face. START for the menu.'
 
   return (
-    <div className="game-shell">
-      <header className="z-40 shrink-0 border-b-4 border-[#303848] bg-[#f8f8e0] px-2 pt-2 pb-1">
-        <div
-          className={`mb-1 max-h-16 overflow-auto border-2 border-[#303848] px-2 py-1 font-body text-[18px] leading-snug ${trapShown ? 'bg-[#f8e0d4] text-[#6a2820]' : 'bg-[#fffbec] text-[#28241c]'}`}
-          data-testid="speech"
-        >
-          {statusLine}
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="hud-chip shrink-0" data-testid="hud-clock" style={{ color: clockColor }}>
-            {formatClock(secondsLeft)}
-          </div>
-          <div className="score-scroll flex-1" data-testid="hud-score">
-            {earnedMarks.map((id) => (
-              <span key={id} className="hud-chip shrink-0" title={pack.marks.find((mark) => mark.id === id)?.label}>
-                {id}
+    <div className="device" data-testid="play">
+      <div className="bezel">
+        <div className="screen">
+          <div className="relative flex min-h-0 flex-1 flex-col">
+            <Screen
+              ref={screen}
+              pack={pack}
+              position={position}
+              paused={paused || !entered}
+              talkingId={typing ? (msg?.speakerId ?? null) : null}
+              scene={scene ?? []}
+              labels={labels}
+              onMove={(pos) => {
+                const cur = store().position
+                store().setPosition(pos)
+                if ((cur.x !== pos.x || cur.y !== pos.y) && store().msg && !textBox.current?.typing()) store().clearMsg()
+              }}
+              onUse={(targetId) => {
+                sfx.select()
+                store().openTarget(pack, targetId)
+              }}
+              onEmpty={() => store().note('Nothing to use there.')}
+              onFacing={setFacingId}
+              onBump={() => sfx.bump()}
+            />
+            <div className="hud" data-testid="hud">
+              <span className={`hud-chip ${clockTone}`} data-testid="hud-clock">
+                ⏱{formatClock(secondsLeft)}
               </span>
-            ))}
+              {readout && (
+                <span className="hud-chip hud-readout" data-testid="hud-readout">
+                  ♥ {readout}
+                </span>
+              )}
+              <span className="hud-chip" data-testid="hud-count">
+                ★{earnedMarks.length}/{pack.marks.length}
+              </span>
+            </div>
+            {firstToast && (
+              <div className="toast" key={firstToast.token} data-testid="toast">
+                <span className="toast-tag">MARK! {firstToast.id}</span>
+                <span>{firstToast.text}</span>
+              </div>
+            )}
+            {overlay && (
+              <OverlaySheet
+                pack={pack}
+                overlay={overlay}
+                inventory={inventory}
+                spent={spent}
+                entered={entered}
+                onClose={() => store().closeOverlay()}
+                onEnter={() => {
+                  sfx.door()
+                  store().enterRoom()
+                }}
+                onAction={(actionId, targetId) => store().openAction(actionId, targetId)}
+                onOption={(actionId, optionId) => store().pickOption(pack, actionId, optionId)}
+                onConfirm={(actionId, optionIds) => store().confirmOptions(pack, actionId, optionIds)}
+                onFinding={(actionId, findingId) => store().pickFinding(pack, actionId, findingId)}
+                onRegion={(actionId, regionId) => store().pickRegion(pack, actionId, regionId)}
+              />
+            )}
+            {menu && (
+              <StartMenu
+                pack={pack}
+                inventory={inventory}
+                earnedMarks={earnedMarks}
+                onClose={() => setMenu(false)}
+                onNotes={() => {
+                  setMenu(false)
+                  store().showStem()
+                }}
+                onHint={() => {
+                  setMenu(false)
+                  store().note(`HINT: ${hintFor(pack, earnedMarks)}`)
+                }}
+                onLeave={() => {
+                  setMenu(false)
+                  store().leave()
+                }}
+              />
+            )}
           </div>
-          <div className="hud-chip shrink-0" data-testid="hud-count">
-            {earnedMarks.length}/{pack.marks.length}
-          </div>
-        </div>
-        <div className="score-scroll mt-1 min-h-[22px]" data-testid="hud-inventory">
-          {inventory.length === 0 && <span className="font-body text-[16px] text-[#6a6458]">Empty hands</span>}
-          {inventory.map((id) => (
-            <span key={id} className="shrink-0 font-body text-[16px] text-[#206038]">
-              {pack.items.find((item) => item.id === id)?.label ?? id}
-            </span>
-          ))}
-        </div>
-        <div className="mt-1 flex gap-1">
-          <button type="button" className="hud-chip" data-testid="hud-hint" onClick={() => setHint(hintFor(pack, earnedMarks))}>
-            HINT
-          </button>
-          <button type="button" className="hud-chip" data-testid="hud-stem" onClick={() => showStem()}>
-            STEM
-          </button>
-          <button type="button" className="hud-chip" data-testid="hud-leave" onClick={() => leave()}>
-            LEAVE
-          </button>
-        </div>
-        {hint && (
-          <button type="button" className="poke-box mt-1 w-full px-2 py-1 text-left font-body text-[20px] leading-snug whitespace-normal text-[#28241c]" data-testid="hint-text" onClick={() => setHint(null)}>
-            {hint}
-          </button>
-        )}
-      </header>
-
-      <div className="relative flex min-h-0 flex-1 flex-col">
-        {entered && (
-          <Room
-            ref={room}
-            pack={pack}
-            position={position}
-            paused={paused}
-            talkIds={talkIds}
-            scene={scene ?? []}
-            onMove={setPosition}
-            onUse={(targetId) => openTarget(pack, targetId)}
-            onEmpty={() => usePlay.setState({ caption: 'Nothing to use there.' })}
+          <TextBox
+            ref={textBox}
+            msg={msg}
+            speaker={speakerName}
+            idle={idle}
+            onClose={() => store().clearMsg()}
+            onTyping={setTyping}
           />
-        )}
-        {!entered && <div className="flex-1" />}
-        <p className="h-8 shrink-0 truncate px-2 font-body text-[18px] leading-8 text-[#4a453c]" data-testid="caption">
-          {caption}
+          {performing && (
+            <PerformStage
+              key={`${performing.actionId}-${performing.spendId}`}
+              job={performing}
+              onDone={() => store().finishPerform(pack)}
+              onCancel={() => store().cancelPerform()}
+            />
+          )}
+        </div>
+        <p className="bezel-label">
+          OSCE GYM <span>·</span> <b>{pack.title.toUpperCase()}</b>
         </p>
-        <div className="relative h-[132px] shrink-0">
-          <Joystick onDir={(dir) => room.current?.setJoy(dir)} />
-          <button
-            type="button"
-            data-testid="use"
-            className="absolute right-2 bottom-3 h-[76px] w-[76px] rounded-full border-4 border-[#303848] bg-[#e23a3a] font-body text-[28px] text-[#fff8e8]"
-            onClick={() => room.current?.useFacing()}
-          >
-            USE
-          </button>
-        </div>
-        {overlay && (
-          <OverlaySheet
-            pack={pack}
-            overlay={overlay}
-            inventory={inventory}
-            spent={spent}
-            findingNote={findingNote}
-            caption={caption}
-            entered={entered}
-            onClose={closeOverlay}
-            onEnter={enterRoom}
-            onAction={openAction}
-            onOption={(actionId, optionId) => pickOption(pack, actionId, optionId)}
-            onConfirm={(actionId, optionIds) => confirmOptions(pack, actionId, optionIds)}
-            onFinding={(actionId, findingId) => pickFinding(pack, actionId, findingId)}
-            onRegion={(actionId, regionId) => pickRegion(pack, actionId, regionId)}
-          />
-        )}
-        {performing && (
-          <PerformStage
-            key={`${performing.actionId}-${performing.spendId}`}
-            job={performing}
-            onDone={() => finishPerform(pack)}
-            onCancel={cancelPerform}
-          />
-        )}
       </div>
+      {!performing && <Controller />}
+      <p className="keys-help">Arrows/WASD move · Z/Enter = A · X/Esc = B · M = START · Shift = SELECT</p>
+    </div>
+  )
+}
+
+function EndedScreen({ pack, onDebrief, onAgain }: { pack: Pack; onDebrief: () => void; onAgain: () => void }) {
+  const root = useRef<HTMLDivElement>(null)
+  useCursor(root, { priority: 10 })
+  const earned = usePlay((s) => s.earnedMarks)
+  return (
+    <div className="page" ref={root}>
+      <Win title="HANDED OVER" className="w-full">
+        <p className="sheet-text">{pack.title}</p>
+        <p className="sheet-meta">
+          ★ {earned.length}/{pack.marks.length} marks on the sheet
+        </p>
+        <NavItem onClick={onDebrief}>Open debrief</NavItem>
+        <NavItem testId="run-again" onClick={onAgain}>
+          Run again
+        </NavItem>
+      </Win>
     </div>
   )
 }

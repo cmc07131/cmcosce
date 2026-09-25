@@ -31,18 +31,18 @@ export type PerformJob = {
   endStation: boolean
 }
 
-export type Speech = { text: string; speakerId: string; token: number }
+export type MsgTone = 'say' | 'trap' | 'warn' | 'info'
+/** The one line the text box shows. `speakerId` animates that actor's mouth while it types. */
+export type Msg = { text: string; speakerId: string | null; tone: MsgTone; token: number }
 
 type PlayState = Session & {
   hydrated: boolean
   overlay: Overlay | null
-  caption: string
-  trapLine: string | null
+  msg: Msg | null
   toasts: Toast[]
   findingNote: string | null
   performing: PerformJob | null
   performQueue: PerformJob[]
-  speech: Speech | null
   boot: (pack: Pack) => void
   rerun: (pack: Pack) => void
   enterRoom: () => void
@@ -60,6 +60,8 @@ type PlayState = Session & {
   cancelPerform: () => void
   leave: () => void
   dismissToast: (token: number) => void
+  note: (text: string, tone?: MsgTone, speakerId?: string | null) => void
+  clearMsg: () => void
 }
 
 let toastToken = 1
@@ -82,7 +84,23 @@ function persist(state: Session) {
   writeSession(session)
 }
 
-let speechToken = 1
+let msgToken = 1
+
+function message(text: string, tone: MsgTone, speakerId: string | null = null): Msg {
+  return { text, tone, speakerId, token: ++msgToken }
+}
+
+/** Pack lines open with "You:" or a cast name ("Nurse Wong: …"). No prefix is narration. */
+export function spokenLine(pack: Pack, text: string): Msg {
+  const m = text.match(/^([^:]{1,24}):\s*(.*)$/s)
+  if (m) {
+    const who = m[1].trim().toLowerCase()
+    if (who === 'you') return message(m[2], 'say', 'player')
+    const npc = pack.cast.find((row) => row.displayName.toLowerCase() === who || row.role.toLowerCase() === who)
+    if (npc) return message(m[2], 'say', npc.id)
+  }
+  return message(text, 'info')
+}
 
 export function fallbackPerformHint(kind: PerformKind) {
   switch (kind) {
@@ -141,13 +159,11 @@ export const usePlay = create<PlayState>((set, get) => ({
   ...emptySession,
   hydrated: false,
   overlay: null,
-  caption: '',
-  trapLine: null,
+  msg: null,
   toasts: [],
   findingNote: null,
   performing: null,
   performQueue: [],
-  speech: null,
 
   boot: (pack) => {
     const saved = readSession(pack.packId)
@@ -157,13 +173,11 @@ export const usePlay = create<PlayState>((set, get) => ({
       ...session,
       hydrated: true,
       overlay: session.entered ? null : { kind: 'stem' },
-      caption: '',
-      trapLine: null,
+      msg: null,
       toasts: [],
       findingNote: null,
       performing: null,
       performQueue: [],
-      speech: null,
     })
   },
 
@@ -175,13 +189,11 @@ export const usePlay = create<PlayState>((set, get) => ({
       ...session,
       hydrated: true,
       overlay: { kind: 'stem' },
-      caption: '',
-      trapLine: null,
+      msg: null,
       toasts: [],
       findingNote: null,
       performing: null,
       performQueue: [],
-      speech: null,
     })
   },
 
@@ -215,14 +227,14 @@ export const usePlay = create<PlayState>((set, get) => ({
   openTarget: (pack, targetId) => {
     const actions = pack.actions.filter((action) => action.targetIds.includes(targetId))
     if (!actions.length) {
-      set({ caption: 'Nothing to use here.', trapLine: null })
+      set({ msg: message('Nothing to use here.', 'info') })
       return
     }
     if (actions.length === 1) {
-      set({ overlay: { kind: 'action', actionId: actions[0].id, targetId }, findingNote: null, trapLine: null })
+      set({ overlay: { kind: 'action', actionId: actions[0].id, targetId }, findingNote: null })
       return
     }
-    set({ overlay: { kind: 'chooser', targetId }, findingNote: null, trapLine: null })
+    set({ overlay: { kind: 'chooser', targetId }, findingNote: null })
   },
 
   openAction: (actionId, targetId) => set({ overlay: { kind: 'action', actionId, targetId }, findingNote: null }),
@@ -239,14 +251,13 @@ export const usePlay = create<PlayState>((set, get) => ({
     if ((cur.spent[actionId] ?? []).includes(optionId)) return
     const applied = applyTalkOption(action, option, cur.inventory, (id) => itemLabel(pack, id))
     if (applied.lockedReason) {
-      set({ trapLine: applied.lockedReason })
+      set({ msg: message(applied.lockedReason, 'warn') })
       return
     }
     if (!option.isTrap && option.perform) {
       set({
         performing: jobFromOption(action, option, applied),
         performQueue: [],
-        trapLine: null,
       })
       return
     }
@@ -261,7 +272,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       close: false,
       sceneAdd: option.scene,
     })
-    if (applied.reply) say(set, applied.reply, cur.overlay?.kind === 'action' ? cur.overlay.targetId : 'player')
+    if (applied.reply && !option.isTrap) set({ msg: spokenLine(pack, applied.reply) })
   },
 
   confirmOptions: (pack, actionId, optionIds) => {
@@ -287,7 +298,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       close: applied.complete && jobs.length === 0,
     })
     if (jobs.length) {
-      set({ performing: jobs[0], performQueue: jobs.slice(1), trapLine: applied.trapLines[0] ?? null })
+      set({ performing: jobs[0], performQueue: jobs.slice(1), msg: applied.trapLines[0] ? message(applied.trapLines[0], 'trap') : get().msg })
     }
   },
 
@@ -298,7 +309,7 @@ export const usePlay = create<PlayState>((set, get) => ({
     const cur = get()
     const seen = (cur.spent[actionId] ?? []).includes(findingId)
     if (seen) {
-      set({ findingNote: finding.detail || finding.label, caption: finding.detail || finding.label })
+      set({ findingNote: finding.detail || finding.label, msg: message(finding.detail || finding.label, 'info') })
       return
     }
     if (finding.perform) {
@@ -320,7 +331,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       })
       return
     }
-    set({ findingNote: finding.detail || finding.label, caption: finding.detail || finding.label })
+    set({ findingNote: finding.detail || finding.label, msg: message(finding.detail || finding.label, 'info') })
     commit(set, get, pack, action, {
       grantMarks: finding.marksChecklistIds ?? [],
       grantItems: [],
@@ -340,7 +351,7 @@ export const usePlay = create<PlayState>((set, get) => ({
     const cur = get()
     const seen = (cur.spent[actionId] ?? []).includes(regionId)
     if (seen) {
-      set({ findingNote: region.finding, caption: region.finding })
+      set({ findingNote: region.finding, msg: message(region.finding, 'info') })
       return
     }
     if (region.perform) {
@@ -362,7 +373,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       })
       return
     }
-    set({ findingNote: region.finding, caption: region.finding })
+    set({ findingNote: region.finding, msg: message(region.finding, 'info') })
     commit(set, get, pack, action, {
       grantMarks: region.marksChecklistIds ?? [],
       grantItems: [],
@@ -397,12 +408,11 @@ export const usePlay = create<PlayState>((set, get) => ({
     })
     const queue = get().performQueue
     const next = queue[0] ?? null
-    const speaker = cur.overlay?.kind === 'action' || cur.overlay?.kind === 'chooser' ? cur.overlay.targetId : 'player'
     set({
       performing: next,
       performQueue: queue.slice(1),
       findingNote: job.reply,
-      speech: next ? null : { text: job.reply, speakerId: speaker, token: ++speechToken },
+      msg: next ? get().msg : spokenLine(pack, job.reply),
     })
   },
 
@@ -416,6 +426,10 @@ export const usePlay = create<PlayState>((set, get) => ({
   },
 
   dismissToast: (token) => set({ toasts: get().toasts.filter((toast) => toast.token !== token) }),
+
+  note: (text, tone = 'info', speakerId = null) => set({ msg: message(text, tone, speakerId) }),
+
+  clearMsg: () => set({ msg: null }),
 }))
 
 function slice(state: PlayState): Session {
@@ -433,15 +447,6 @@ function slice(state: PlayState): Session {
     ended: state.ended,
     scene: state.scene ?? [],
   }
-}
-
-function say(
-  set: (partial: Partial<PlayState>) => void,
-  text: string,
-  speakerId: string,
-) {
-  if (!text) return
-  set({ speech: { text, speakerId, token: ++speechToken } })
 }
 
 function jobFromOption(
@@ -526,8 +531,11 @@ function commit(
   set({
     ...next,
     toasts,
-    caption: result.reply,
-    trapLine: result.trapLines[0] ?? null,
+    msg: result.trapLines[0]
+      ? message(result.trapLines[0], 'trap')
+      : result.reply
+        ? spokenLine(pack, result.reply)
+        : cur.msg,
     overlay: result.close || !workLeft || result.endStation ? null : cur.overlay,
   })
 }
