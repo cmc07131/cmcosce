@@ -229,7 +229,8 @@ export function PlayView({ pack }: { pack: Pack }) {
             <PerformStage
               key={`${performing.actionId}-${performing.spendId}`}
               job={performing}
-              onDone={() => store().finishPerform(pack)}
+              seed={usePlay.getState().seed}
+              onDone={(result) => store().finishPerform(pack, result)}
               onCancel={() => store().cancelPerform()}
             />
           )}

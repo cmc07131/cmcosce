@@ -87,3 +87,42 @@ export const sfx = {
       { f: 1047, d: 0.5, at: 0.94 },
     ]),
 }
+
+/** Continuous drill whine. Pitch drops when the tip gives into marrow. */
+let drillOsc: OscillatorNode | null = null
+let drillGain: GainNode | null = null
+
+export const drill = {
+  start: () => {
+    const ac = audio()
+    if (!ac || drillOsc) return
+    drillOsc = ac.createOscillator()
+    drillGain = ac.createGain()
+    drillOsc.type = 'sawtooth'
+    drillOsc.frequency.setValueAtTime(220, ac.currentTime)
+    drillGain.gain.setValueAtTime(0.035, ac.currentTime)
+    drillOsc.connect(drillGain).connect(ac.destination)
+    drillOsc.start()
+  },
+  pitch: (hz: number) => {
+    if (drillOsc && ctx) drillOsc.frequency.setTargetAtTime(hz, ctx.currentTime, 0.03)
+  },
+  stop: () => {
+    try {
+      drillOsc?.stop()
+    } catch {
+      // already stopped
+    }
+    drillOsc = null
+    drillGain = null
+  },
+}
+
+/** Short phone vibration, where supported. Silent no-op elsewhere. */
+export function buzz(ms: number | number[]) {
+  try {
+    navigator.vibrate?.(ms)
+  } catch {
+    // no vibration API
+  }
+}

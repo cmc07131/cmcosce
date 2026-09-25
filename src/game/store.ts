@@ -31,6 +31,8 @@ export type PerformJob = {
   endStation: boolean
 }
 
+export type BenchResult = { marks: string[]; faults: { text: string; critical?: boolean }[]; summary: string }
+
 export type MsgTone = 'say' | 'trap' | 'warn' | 'info'
 /** The one line the text box shows. `speakerId` animates that actor's mouth while it types. */
 export type Msg = { text: string; speakerId: string | null; tone: MsgTone; token: number }
@@ -56,7 +58,8 @@ type PlayState = Session & {
   confirmOptions: (pack: Pack, actionId: string, optionIds: string[]) => void
   pickFinding: (pack: Pack, actionId: string, findingId: string) => void
   pickRegion: (pack: Pack, actionId: string, regionId: string) => void
-  finishPerform: (pack: Pack) => void
+  /** `result` comes from a bench that scores itself: only its marks are granted, and its faults are kept. */
+  finishPerform: (pack: Pack, result?: BenchResult) => void
   cancelPerform: () => void
   leave: () => void
   dismissToast: (token: number) => void
@@ -80,6 +83,8 @@ function persist(state: Session) {
     log: state.log,
     ended: state.ended,
     scene: state.scene ?? [],
+    seed: state.seed,
+    faults: state.faults ?? [],
   }
   writeSession(session)
 }
@@ -153,6 +158,8 @@ const emptySession: Session = {
   log: [],
   ended: null,
   scene: [],
+  seed: 1,
+  faults: [],
 }
 
 export const usePlay = create<PlayState>((set, get) => ({
@@ -386,10 +393,16 @@ export const usePlay = create<PlayState>((set, get) => ({
     })
   },
 
-  finishPerform: (pack) => {
+  finishPerform: (pack, result) => {
     const cur = get()
     const job = cur.performing
     if (!job) return
+    if (result) {
+      const faults = [...(cur.faults ?? []).filter((row) => row.actionId !== job.actionId), ...result.faults.map((row) => ({ ...row, actionId: job.actionId }))]
+      set({ faults })
+      job.grantMarks = result.marks
+      job.reply = result.summary
+    }
     const action = actionById(pack, job.actionId)
     if (!action) {
       set({ performing: null, performQueue: [] })
@@ -446,6 +459,8 @@ function slice(state: PlayState): Session {
     log: state.log,
     ended: state.ended,
     scene: state.scene ?? [],
+    seed: state.seed,
+    faults: state.faults ?? [],
   }
 }
 

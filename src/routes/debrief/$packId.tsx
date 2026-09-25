@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { judgeSequence } from '~/engine/judge'
 import { getPack } from '~/engine/loadPacks'
 import { readSession } from '~/engine/session'
-import type { LogEntry } from '~/engine/schema'
+import type { Fault, LogEntry } from '~/engine/schema'
 import { NavItem, Win, useCursor } from '~/game/ui'
 
 export const Route = createFileRoute('/debrief/$packId')({
@@ -17,12 +17,14 @@ function DebriefPage() {
   const root = useRef<HTMLDivElement>(null)
   const [checked, setChecked] = useState<string[] | null>(null)
   const [log, setLog] = useState<LogEntry[]>([])
+  const [faults, setFaults] = useState<Fault[]>([])
   useCursor(root, { priority: 10, onBack: () => void navigate({ to: '/gym' }) })
 
   useEffect(() => {
     const session = readSession(packId)
     setChecked(session?.earnedMarks ?? [])
     setLog(session?.log ?? [])
+    setFaults(session?.faults ?? [])
   }, [packId])
 
   if (!pack) {
@@ -67,6 +69,19 @@ function DebriefPage() {
             </NavItem>
           )
         })}
+        {faults.length > 0 && (
+          <>
+            <h2 className="win-title mt-4">PROCEDURE NOTES</h2>
+            {[...faults]
+              .sort((a, b) => Number(Boolean(b.critical)) - Number(Boolean(a.critical)))
+              .map((row, i) => (
+                <div key={i} className="verdict" data-status={row.critical ? 'critical' : 'caution'} data-testid="fault">
+                  <span className="verdict-tag">{row.critical ? 'CRITICAL' : 'FIX'}</span>
+                  <p className="menu-note">{row.text}</p>
+                </div>
+              ))}
+          </>
+        )}
         <h2 className="win-title mt-4">SEQUENCE</h2>
         {verdicts.length === 0 && <p className="menu-note">No sequence rules in this pack.</p>}
         {verdicts.map((verdict) => (

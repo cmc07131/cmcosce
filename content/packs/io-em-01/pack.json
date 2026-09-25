@@ -6,56 +6,205 @@
     "readTimeSec": 60,
     "stationType": "skills",
     "stem": "You are the AED doctor. A 68-year-old man is in Resus 2 with septic shock. BP 72/40, lactate 6. Two peripheral IV attempts have failed. He is drowsy but withdraws to pain. The EZ-IO kit is on the trolley. A nurse is with you. Obtain emergency vascular access and start resuscitation through it.",
-    "guidelineNotes": "Scoring truth is this EZ-IO script for a drowsy adult in septic shock after two failed IVs. Adult proximal tibia: flat anteromedial surface, about 2 cm medial to the tibial tuberosity, also described as about 3 cm below the inferior patellar pole and 2 cm medial. Aim 90 degrees to bone, away from the joint.\n\nAHA 2025 / ERC 2025: in adult arrest, try IV first. IO is reasonable if IV is not feasible or not obtained in about two attempts. This stem has already failed two IVs, so IO is the access. Do not teach IO-first as adult-arrest policy. A child in shock or arrest goes to IO immediately if a quick IV is not there.\n\nNeedle lengths are Teleflex EZ-IO, all 15 gauge: pink 15 mm (about 3–39 kg), blue 25 mm (usual adult tibia), yellow 45 mm (extra soft tissue and most adult humerus). With the tip on bone before drilling, at least one black 5 mm mark must show above the skin.\n\nAwake or withdrawing: 2% preservative-free, adrenaline-free lidocaine. Adult 40 mg slowly, dwell, rapid 10 mL saline flush, then 20 mg. These doses are the manufacturer sequence, not a published HA AED SOP. Arrest or GCS 3: flush first and give the drug. Do not delay adrenaline for lidocaine.\n\nThe IO is a bridge, up to 24 hours in this script. Some licences allow 48 hours if the patient is 12 or older and no IV exists. Plan a real IV or central line and remove it. Do not rock it out: a syringe on the hub, clockwise, straight pull.\n\nDo not drill a fractured bone, an infected or burned site, a bone used for IO within 48 hours, or through a prosthesis. Never put a hand behind the bone."
+    "guidelineNotes": "Scoring truth is this EZ-IO script for a drowsy adult in septic shock after two failed IVs. Adult proximal tibia: flat anteromedial surface, about 2 cm medial to the tibial tuberosity, also described as about 3 cm below the inferior patellar pole and 2 cm medial. Aim 90 degrees to bone, away from the joint.\n\nAHA 2025 / ERC 2025: in adult arrest, try IV first. IO is reasonable if IV is not feasible or not obtained in about two attempts. This stem has already failed two IVs, so IO is the access. Do not teach IO-first as adult-arrest policy. A child in shock or arrest goes to IO immediately if a quick IV is not there.\n\nNeedle lengths are Teleflex EZ-IO, all 15 gauge: pink 15 mm (about 3–39 kg), blue 25 mm (usual adult tibia), yellow 45 mm (extra soft tissue and most adult humerus). With the tip on bone before drilling, at least one black 5 mm mark must show above the skin.\n\nAwake or withdrawing: 2% preservative-free, adrenaline-free lidocaine. Adult 40 mg slowly, dwell, rapid 10 mL saline flush, then 20 mg. These doses are the manufacturer sequence, not a published HA AED SOP. Arrest or GCS 3: flush first and give the drug. Do not delay adrenaline for lidocaine.\n\nThe IO is a bridge, up to 24 hours in this script. Some licences allow 48 hours if the patient is 12 or older and no IV exists. Plan a real IV or central line and remove it. Do not rock it out: a syringe on the hub, clockwise, straight pull.\n\nDo not drill a fractured bone, an infected or burned site, a bone used for IO within 48 hours, or through a prosthesis. Never put a hand behind the bone.\n\nEach run randomises the case: one leg may be out (recent IO, cellulitis, or fracture), soft tissue may be thick enough to need the yellow 45 mm needle, marrow may or may not aspirate, and the calf may swell after the flush. The bench scores what you actually did, not what you picked from a menu."
   },
   "room": {
     "template": "resus-bay",
     "cols": 12,
     "rows": 10,
     "tileSize": 32,
-    "playerStart": { "x": 5, "y": 8 },
+    "playerStart": {
+      "x": 5,
+      "y": 8
+    },
     "props": [
-      { "id": "wall-n", "kind": "wall", "x": 0, "y": 0, "w": 12, "h": 1 },
-      { "id": "wall-w", "kind": "wall", "x": 0, "y": 1, "w": 1, "h": 8 },
-      { "id": "wall-e", "kind": "wall", "x": 11, "y": 1, "w": 1, "h": 8 },
-      { "id": "wall-s1", "kind": "wall", "x": 0, "y": 9, "w": 5, "h": 1 },
-      { "id": "wall-s2", "kind": "wall", "x": 6, "y": 9, "w": 6, "h": 1 },
-      { "id": "bed", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2 },
-      { "id": "stripe", "kind": "hazard", "x": 4, "y": 5, "w": 4, "h": 1 },
-      { "id": "kit-prop", "kind": "trolley", "x": 1, "y": 2 }
+      {
+        "id": "wall-n",
+        "kind": "wall",
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 1
+      },
+      {
+        "id": "wall-w",
+        "kind": "wall",
+        "x": 0,
+        "y": 1,
+        "w": 1,
+        "h": 8
+      },
+      {
+        "id": "wall-e",
+        "kind": "wall",
+        "x": 11,
+        "y": 1,
+        "w": 1,
+        "h": 8
+      },
+      {
+        "id": "wall-s1",
+        "kind": "wall",
+        "x": 0,
+        "y": 9,
+        "w": 5,
+        "h": 1
+      },
+      {
+        "id": "wall-s2",
+        "kind": "wall",
+        "x": 6,
+        "y": 9,
+        "w": 6,
+        "h": 1
+      },
+      {
+        "id": "bed",
+        "kind": "bed",
+        "x": 4,
+        "y": 3,
+        "w": 4,
+        "h": 2
+      },
+      {
+        "id": "stripe",
+        "kind": "hazard",
+        "x": 4,
+        "y": 5,
+        "w": 4,
+        "h": 1
+      },
+      {
+        "id": "kit-prop",
+        "kind": "trolley",
+        "x": 1,
+        "y": 2
+      }
     ],
     "interactables": [
-      { "id": "door", "kind": "door", "x": 5, "y": 9, "label": "Door" },
-      { "id": "ezio", "kind": "trolley", "x": 1, "y": 2, "label": "EZ-IO" },
-      { "id": "phone", "kind": "phone", "x": 10, "y": 2, "label": "Phone" },
-      { "id": "bed-ix", "kind": "bed", "x": 4, "y": 3, "w": 4, "h": 2, "label": "" }
+      {
+        "id": "door",
+        "kind": "door",
+        "x": 5,
+        "y": 9,
+        "label": "Door"
+      },
+      {
+        "id": "ezio",
+        "kind": "trolley",
+        "x": 1,
+        "y": 2,
+        "label": "EZ-IO"
+      },
+      {
+        "id": "phone",
+        "kind": "phone",
+        "x": 10,
+        "y": 2,
+        "label": "Phone"
+      },
+      {
+        "id": "bed-ix",
+        "kind": "bed",
+        "x": 4,
+        "y": 3,
+        "w": 4,
+        "h": 2,
+        "label": ""
+      }
     ]
   },
   "cast": [
-    { "id": "patient", "role": "patient", "displayName": "Patient", "spawn": { "x": 5, "y": 4 }, "pixelKey": "patient" },
-    { "id": "nurse", "role": "nurse", "displayName": "Nurse", "spawn": { "x": 9, "y": 3 }, "pixelKey": "nurse" },
-    { "id": "examiner", "role": "examiner", "displayName": "Examiner", "spawn": { "x": 8, "y": 7 }, "pixelKey": "examiner" }
+    {
+      "id": "patient",
+      "role": "patient",
+      "displayName": "Patient",
+      "spawn": {
+        "x": 5,
+        "y": 4
+      },
+      "pixelKey": "patient"
+    },
+    {
+      "id": "nurse",
+      "role": "nurse",
+      "displayName": "Nurse",
+      "spawn": {
+        "x": 9,
+        "y": 3
+      },
+      "pixelKey": "nurse"
+    },
+    {
+      "id": "examiner",
+      "role": "examiner",
+      "displayName": "Examiner",
+      "spawn": {
+        "x": 8,
+        "y": 7
+      },
+      "pixelKey": "examiner"
+    }
   ],
   "items": [],
   "marks": [
-    { "id": "MS-01", "label": "Introduce yourself and say why the needle is going into the bone" },
-    { "id": "MS-02", "label": "Call the AED consultant; ask for fluid, a pressure bag, antibiotics, and plain lidocaine" },
-    { "id": "MS-03", "label": "Emergency access after failed IV in shock — not IO-first for every adult arrest" },
-    { "id": "MS-04", "label": "Screen the bone: no fracture, infection, burn, prosthesis, or recent IO" },
-    { "id": "MS-05", "label": "Left proximal tibia: flat anteromedial cortex, 2 cm medial to the tuberosity" },
-    { "id": "MS-06", "label": "Blue 25 mm needle, and at least one black 5 mm mark visible on bone" },
-    { "id": "MS-07", "label": "Hands on the sides only — never behind the tibia" },
-    { "id": "MS-08", "label": "Unpowered to bone, drill to the pop, release the trigger, do not drill through" },
-    { "id": "MS-09", "label": "Stylet out, stabilizer on the hub before the extension" },
-    { "id": "MS-10", "label": "Plain lidocaine 40 mg then a rapid 10 mL flush, then 20 mg; calf stays soft" },
-    { "id": "MS-11", "label": "Pressure-bag crystalloid in divided boluses and give antibiotics through the IO" },
-    { "id": "MS-12", "label": "Bridge only, up to 24 hours; convert to IV or a central line; document the site" }
+    {
+      "id": "MS-01",
+      "label": "Introduce yourself and say why the needle is going into the bone"
+    },
+    {
+      "id": "MS-02",
+      "label": "Call the AED consultant; ask for fluid, a pressure bag, antibiotics, and plain lidocaine"
+    },
+    {
+      "id": "MS-03",
+      "label": "Emergency access after failed IV in shock — not IO-first for every adult arrest"
+    },
+    {
+      "id": "MS-04",
+      "label": "Screen the bone: no fracture, infection, burn, prosthesis, or recent IO"
+    },
+    {
+      "id": "MS-05",
+      "label": "Proximal tibia of a clean leg: flat anteromedial cortex, 2 cm medial to the tuberosity, said out loud"
+    },
+    {
+      "id": "MS-06",
+      "label": "Needle length for the tissue: at least one black 5 mm mark visible with the tip on bone"
+    },
+    {
+      "id": "MS-07",
+      "label": "Hands on the sides only — never behind the tibia"
+    },
+    {
+      "id": "MS-08",
+      "label": "Unpowered to bone at 90°, drill to the pop, release the trigger, do not drill through"
+    },
+    {
+      "id": "MS-09",
+      "label": "Stylet out, stabilizer on the hub before the extension"
+    },
+    {
+      "id": "MS-10",
+      "label": "Plain lidocaine 40 mg then a rapid 10 mL flush, then 20 mg; calf stays soft"
+    },
+    {
+      "id": "MS-11",
+      "label": "Pressure-bag crystalloid in divided boluses and give antibiotics through the IO"
+    },
+    {
+      "id": "MS-12",
+      "label": "Bridge only, up to 24 hours; convert to IV or a central line; document the site"
+    }
   ],
   "actions": [
     {
       "id": "intro",
       "kind": "talk",
-      "targetIds": ["patient", "bed-ix"],
+      "targetIds": [
+        "patient",
+        "bed-ix"
+      ],
       "hint": "Tell him you cannot get a drip, and that the needle goes into the bone below the knee.",
       "prompt": "Speak to him",
       "options": [
@@ -63,20 +212,26 @@
           "id": "hello",
           "label": "No drip in the arm. Needle into the bone below the knee. Pressure, then a push.",
           "detail": "You: Hello, I am Dr Chan, the emergency doctor. We cannot get a drip in your arm. I am going to put a needle into the bone below your knee so we can give fluid and antibiotics. You will feel pressure, then a push when the fluid starts.",
-          "marksChecklistIds": ["MS-01"]
+          "marksChecklistIds": [
+            "MS-01"
+          ]
         },
         {
           "id": "canto",
           "label": "手臂打唔到針。膝頭下面嘅骨入面插針。",
           "detail": "You: 手臂打唔到針。我哋而家要喺膝頭下面嘅骨入面插一支針送藥同補液，會有壓力同少少痛。",
-          "marksChecklistIds": ["MS-01"]
+          "marksChecklistIds": [
+            "MS-01"
+          ]
         }
       ]
     },
     {
       "id": "call-help",
       "kind": "talk",
-      "targetIds": ["nurse"],
+      "targetIds": [
+        "nurse"
+      ],
       "hint": "Call the AED consultant. Ask for fluid, a pressure bag, antibiotics, and plain lidocaine. Check the allergy.",
       "prompt": "Ask the nurse",
       "options": [
@@ -84,7 +239,9 @@
           "id": "kit",
           "label": "AED consultant. Fluid, pressure bag, antibiotics, plain 2% lidocaine. Any allergy?",
           "detail": "Nurse: Consultant is called. No lidocaine allergy. Hartmann's, a pressure bag, and plain lidocaine are here.",
-          "marksChecklistIds": ["MS-02"]
+          "marksChecklistIds": [
+            "MS-02"
+          ]
         },
         {
           "id": "adrenaline-lido",
@@ -97,7 +254,10 @@
     {
       "id": "indicate",
       "kind": "talk",
-      "targetIds": ["nurse", "examiner"],
+      "targetIds": [
+        "nurse",
+        "examiner"
+      ],
       "hint": "Say why this is an IO. Two drips have already failed.",
       "prompt": "Why IO?",
       "options": [
@@ -105,7 +265,9 @@
           "id": "failed-iv",
           "label": "Shock, two IVs failed. This is rescue access.",
           "detail": "You: Indication is emergency access after failed IV in shock. In adult arrest I would still try a vein first. He has already failed two.",
-          "marksChecklistIds": ["MS-03"]
+          "marksChecklistIds": [
+            "MS-03"
+          ]
         },
         {
           "id": "always",
@@ -118,15 +280,22 @@
     {
       "id": "screen",
       "kind": "talk",
-      "targetIds": ["patient", "bed-ix", "nurse"],
+      "targetIds": [
+        "patient",
+        "bed-ix",
+        "nurse"
+      ],
       "hint": "Look at both legs. Do not drill a broken, infected, or recently used bone.",
       "prompt": "Which bone?",
       "options": [
         {
           "id": "clean",
-          "label": "No fracture, no cellulitis, landmarks clear. Left proximal tibia.",
-          "detail": "You: No fracture, no burn, no prosthesis, no recent IO. Left proximal tibia — flat anteromedial cortex, 2 cm medial to the tuberosity, about 3 cm below the patella. Ninety degrees, away from the joint.",
-          "marksChecklistIds": ["MS-04", "MS-05"]
+          "label": "No fracture, no cellulitis, landmarks clear. Proximal tibia on the clean leg.",
+          "detail": "You: No fracture, no burn, no prosthesis, no recent IO. Proximal tibia on the clean leg — flat anteromedial cortex, 2 cm medial to the tuberosity, about 3 cm below the patella. Ninety degrees, away from the joint.",
+          "marksChecklistIds": [
+            "MS-04",
+            "MS-05"
+          ]
         },
         {
           "id": "fracture",
@@ -145,24 +314,38 @@
     {
       "id": "insert",
       "kind": "talk",
-      "targetIds": ["ezio", "patient", "bed-ix"],
+      "targetIds": [
+        "ezio",
+        "patient",
+        "bed-ix"
+      ],
       "hint": "Landmark, check the 5 mm line, drill to the pop, stabilizer before the tubing, then lidocaine and a hard flush.",
       "prompt": "Place the IO",
       "options": [
         {
           "id": "do-it",
-          "label": "Place the left proximal tibial EZ-IO.",
-          "detail": "Blue 25 mm needle. Pop on entry to marrow. Stabilizer on the hub, then the extension. Plain lidocaine 40 mg, rapid 10 mL flush, calf soft, then 20 mg.",
-          "marksChecklistIds": ["MS-06", "MS-07", "MS-08", "MS-09", "MS-10"],
+          "label": "Place the proximal tibial EZ-IO.",
+          "detail": "The IO is placed.",
+          "marksChecklistIds": [
+            "MS-04",
+            "MS-05",
+            "MS-06",
+            "MS-07",
+            "MS-08",
+            "MS-09",
+            "MS-10"
+          ],
           "perform": "io",
-          "performHint": "Gloves on. Hands on the sides, towel under the calf. Mark the flat tibia. Blue needle until a 5 mm line shows, then drill to the pop. Unscrew the stylet counter-clockwise. Stabilizer, then the extension. Lidocaine, dwell, hard flush, then 20 mg."
+          "performHint": "Do it as you would on a real patient: choose the bone, assemble, landmark, clean, drill, secure, confirm. Nothing stops you making a mistake. The debrief shows what to fix."
         }
       ]
     },
     {
       "id": "run",
       "kind": "talk",
-      "targetIds": ["nurse"],
+      "targetIds": [
+        "nurse"
+      ],
       "hint": "Pressure-bag the fluid in divided boluses. Antibiotics through the IO.",
       "prompt": "Start resuscitation",
       "options": [
@@ -170,7 +353,9 @@
           "id": "fluid",
           "label": "30 mL/kg in divided boluses. Antibiotics through the IO now.",
           "detail": "You: 30 mL/kg in divided boluses. Reassess the lungs and the blood pressure after each. Broad-spectrum antibiotics through the IO now. If I aspirated marrow I will label it IO and I will not put it through the blood-gas machine.",
-          "marksChecklistIds": ["MS-11"]
+          "marksChecklistIds": [
+            "MS-11"
+          ]
         },
         {
           "id": "blocked",
@@ -189,7 +374,10 @@
     {
       "id": "watch",
       "kind": "talk",
-      "targetIds": ["nurse", "patient"],
+      "targetIds": [
+        "nurse",
+        "patient"
+      ],
       "hint": "Watch the calf. This needle is a bridge, not the ward line.",
       "prompt": "After it is in",
       "options": [
@@ -197,7 +385,9 @@
           "id": "bridge",
           "label": "Watch the calf. 24 hours maximum. Convert to an IV or a central line.",
           "detail": "You: Tightness, pallor, or rising pain means extravasation or compartment syndrome — stop and pull it. This is a bridge, 24 hours maximum. I want a proper IV or an ultrasound-guided central line once the pressure is up. Document site, needle size, time, side, and who put it in.",
-          "marksChecklistIds": ["MS-12"]
+          "marksChecklistIds": [
+            "MS-12"
+          ]
         },
         {
           "id": "swelling",
@@ -216,15 +406,21 @@
     {
       "id": "handover",
       "kind": "handover",
-      "targetIds": ["examiner", "door", "phone"],
+      "targetIds": [
+        "examiner",
+        "door",
+        "phone"
+      ],
       "hint": "Tell ICU the IO is in and you are staying for the next blood pressure.",
       "prompt": "Close",
       "options": [
         {
           "id": "close",
-          "label": "Left proximal tibial IO, 25 mm, flushed, flowing. Call ICU. I will stay.",
-          "detail": "You: Access secured, left proximal tibial IO, 25 mm, flushed, flowing under pressure. First fluid and antibiotics are up. Please call ICU. I will stay for the next blood pressure.",
-          "marksChecklistIds": ["MS-12"],
+          "label": "Proximal tibial IO, side and needle size, flushed, flowing. Call ICU. I will stay.",
+          "detail": "You: Access secured, proximal tibial IO — I state the side and the needle size — flushed, flowing under pressure. First fluid and antibiotics are up. Please call ICU. I will stay for the next blood pressure.",
+          "marksChecklistIds": [
+            "MS-12"
+          ],
           "endStation": true
         }
       ]
@@ -232,7 +428,9 @@
     {
       "id": "viva",
       "kind": "talk",
-      "targetIds": ["examiner"],
+      "targetIds": [
+        "examiner"
+      ],
       "hint": "If asked: removal, the humerus, a child, and a swelling calf.",
       "prompt": "Examiner asks",
       "options": [
@@ -265,20 +463,37 @@
       ]
     }
   ],
-  "goldPath": ["intro", "call-help", "indicate", "screen", "insert", "run", "watch", "handover"],
+  "goldPath": [
+    "intro",
+    "call-help",
+    "indicate",
+    "screen",
+    "insert",
+    "run",
+    "watch",
+    "handover"
+  ],
   "sequenceRules": [
     {
       "id": "screen-before-drill",
-      "earlierAny": ["screen"],
-      "laterAny": ["insert"],
+      "earlierAny": [
+        "screen"
+      ],
+      "laterAny": [
+        "insert"
+      ],
       "require": "all-earlier-before-any-later",
       "okNote": "You checked the bone before the drill.",
       "failNote": "The drill went in before you had checked for a fracture or a recent IO."
     },
     {
       "id": "insert-before-infusion",
-      "earlierAny": ["insert"],
-      "laterAny": ["run"],
+      "earlierAny": [
+        "insert"
+      ],
+      "laterAny": [
+        "run"
+      ],
       "require": "a-before-b",
       "okNote": "The needle was in and flushed before the pressure bag.",
       "failNote": "Fluid was ordered before the IO was placed."

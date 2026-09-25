@@ -173,6 +173,9 @@ export type Pos = Tile & { facing: Dir }
 
 export type LogEntry = { actionId: string; atMs: number; markIds: string[] }
 
+/** A mistake recorded during a hands-on procedure, shown on the debrief. */
+export type Fault = { actionId: string; text: string; critical?: boolean }
+
 export type Session = {
   saveVersion: number
   packId: string
@@ -186,6 +189,9 @@ export type Session = {
   log: LogEntry[]
   ended: null | 'complete'
   scene: string[]
+  /** Fixes the randomised case (which leg is out, tissue depth…) for this run. */
+  seed: number
+  faults: Fault[]
 }
 
 export const SOLID_KINDS = new Set([

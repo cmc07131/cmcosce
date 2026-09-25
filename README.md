@@ -31,6 +31,12 @@ The bay is drawn on a canvas at 16 px per tile and scaled up in whole steps. All
 
 Pack lines that start with `You:` or a cast name (`Nurse Wong: …`) show that speaker in the text box. Lines with no prefix are narration.
 
+## Hands-on benches
+
+A `perform` option opens a bench. Simple benches (`lift`, `cover`, …) grant the option's marks when the gesture is done. The IO bench (`perform: "io"`, `src/game/io/`) scores itself: it never blocks a mistake, grants only the marks earned at the bench, and saves each mistake to the session. The debrief lists them under PROCEDURE NOTES.
+
+Each run gets a `seed`, so the randomised case (which leg is out, soft-tissue depth, marrow on aspiration, calf swelling) stays the same across reloads. The anatomy card and the leg are original drawings: `src/game/io/art.tsx`.
+
 ## Add a pack
 
 Copy `content/packs/gym-1` to `content/packs/gym-2`. Change `packId`, then fill `marks`, `actions`, `goldPath`, and `sequenceRules`. Reload `/gym`. No engine change unless a new non-clinical field is required.

@@ -20,6 +20,8 @@ export function freshSession(pack: Pack): Session {
     log: [],
     ended: null,
     scene: [],
+    seed: Math.floor(Math.random() * 2 ** 31),
+    faults: [],
   }
 }
 
@@ -32,6 +34,8 @@ export function readSession(packId: string): Session | null {
     if (data.saveVersion !== SAVE_VERSION || data.packId !== packId) return null
     if (!data.position || !Array.isArray(data.earnedMarks) || !Array.isArray(data.log)) return null
     if (!Array.isArray(data.scene)) data.scene = []
+    if (typeof data.seed !== 'number') data.seed = data.startedAt || 1
+    if (!Array.isArray(data.faults)) data.faults = []
     return data
   } catch {
     return null

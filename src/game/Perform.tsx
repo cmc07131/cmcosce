@@ -1,14 +1,24 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { HandSprite, NeckFront, NeckSide } from './NeckModel'
-import { IoBench } from './IoBench'
+import { IoProcedure } from './io/IoProcedure'
 import { PacerBench } from './PacerBench'
 import { useButtons } from './input'
 import { sfx } from './sfx'
-import type { PerformJob } from './store'
+import type { BenchResult, PerformJob } from './store'
 
 type Pt = { x: number; y: number }
 
-export function PerformStage({ job, onDone, onCancel }: { job: PerformJob; onDone: () => void; onCancel: () => void }) {
+export function PerformStage({
+  job,
+  seed,
+  onDone,
+  onCancel,
+}: {
+  job: PerformJob
+  seed: number
+  onDone: (result?: BenchResult) => void
+  onCancel: () => void
+}) {
   const stage = useRef<HTMLDivElement>(null)
   const [pt, setPt] = useState<Pt>({ x: 68, y: 78 })
   const [holding, setHolding] = useState(0)
@@ -28,7 +38,7 @@ export function PerformStage({ job, onDone, onCancel }: { job: PerformJob; onDon
   if (job.kind === 'io') {
     return (
       <BattleFrame job={job} onCancel={onCancel}>
-        <IoBench onDone={onDone} />
+        <IoProcedure seed={seed} coach onDone={onDone} />
       </BattleFrame>
     )
   }
