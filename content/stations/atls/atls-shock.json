@@ -1,0 +1,163 @@
+{
+  "id": "atls-shock",
+  "gym": "atls",
+  "title": "Haemorrhagic shock: trauma team leader",
+  "type": "resus",
+  "time": 480,
+  "stem": "Resus 1. A 17-year-old girl was the front-seat passenger in a car hit on her side at speed. She has a tender abdomen with a seatbelt mark. The ambulance reports HR 128, BP 88/50, RR 24, SpO2 97%, GCS 15. You are the trauma team leader; the nurse and a junior doctor are with you.",
+  "notes": "Checked against ATLS 11th edition (xABCDE, shock classes with base deficit), NICE NG39 (major trauma, 2016, reviewed), CRASH-2, and RCEM trauma team leader guidance.\n\nYour notes cover this scenario well. Differences:\n• Initial fluid: your notes say a 1–2 L crystalloid bolus. ATLS now limits crystalloid to 1 L at most and moves early to blood in a balanced ratio; NICE advises blood products, not crystalloid, in active bleeding.\n• Shock classes: ATLS 10th added base deficit (class II −2 to −6, class III −6 to −10, class IV below −10). Heart-rate cut-offs in your table are close enough.\n• TXA: 1 g over 10 minutes, then 1 g over 8 hours, within 3 hours — as in your notes.\n\nA seatbelt sign raises the risk of hollow viscus, mesenteric and lumbar spine (Chance) injuries. A positive FAST in an unstable patient means laparotomy; stable or responding patients can have CT. Ask for a pregnancy test in any female of reproductive age.\n\nTeam leader behaviours scored: pre-brief, roles, closed-loop communication, summarising aloud, and deciding on disposition.",
+  "cast": [
+    { "id": "patient", "name": "Wing", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Cheng", "role": "nurse" },
+    { "id": "junior", "name": "Dr Ng", "role": "junior" },
+    { "id": "medic", "name": "Paramedic", "role": "paramedic" }
+  ],
+  "vitals": {
+    "hr": 128,
+    "sbp": 88,
+    "dbp": 50,
+    "spo2": 97,
+    "rr": 24,
+    "gcs": 15,
+    "temp": 36.1,
+    "rhythm": "sinus-tachy",
+    "drift": { "sbp": -2, "hr": 2 },
+    "stop": ["blood"],
+    "effects": [
+      { "scene": "blood", "add": { "sbp": 14, "dbp": 8, "hr": -10 }, "overS": 90 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "brief",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Pre-brief the team",
+      "hint": "Trauma call, introductions, roles, PPE, blood and FAST ready, what you expect.",
+      "confirm": "Brief",
+      "opts": [
+        { "t": "Put out a trauma call", "need": true, "mark": "Activates the trauma team" },
+        { "t": "Introductions and experience; I lead", "need": true, "mark": "Introductions and confirms experience" },
+        { "t": "Roles: Dr Ng airway and C-spine, Nurse Cheng access and drugs, scribe times", "need": true, "mark": "Allocates roles" },
+        { "t": "PPE for everyone", "need": true, "mark": "Team PPE" },
+        { "t": "O-negative blood and ultrasound in the bay", "need": true, "mark": "Blood and ultrasound ready" },
+        { "t": "Expect abdominal bleeding from the seatbelt injury", "need": true, "mark": "Shares a mental model: likely abdominal haemorrhage" }
+      ]
+    },
+    {
+      "id": "handover",
+      "kind": "history",
+      "to": "medic",
+      "label": "Paramedic handover",
+      "hint": "Hands-off handover: age, time, mechanism, injuries, signs, treatment.",
+      "groups": {
+        "ATMIST": [
+          { "t": "Age and time of injury", "r": "17, 25 minutes ago.", "mark": "Takes age and time" },
+          { "t": "Mechanism", "r": "Side impact on her side at about 70 km/h, belted, airbags deployed. Car door intruded.", "mark": "Takes the mechanism" },
+          { "t": "Injuries", "r": "Seatbelt bruise across the lower abdomen, tender left upper quadrant. Left chest wall sore.", "mark": "Takes injuries found" },
+          { "t": "Signs", "r": "HR 110 → 128, BP 104/70 → 88/50.", "mark": "Takes the trend of signs" },
+          { "t": "Treatment", "r": "Oxygen, 18 G right arm, 250 mL saline, collar.", "mark": "Takes the treatment given" }
+        ]
+      }
+    },
+    {
+      "id": "survey",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Primary survey",
+      "hint": "xABCDE, findings called out to the scribe.",
+      "groups": {
+        "x A B": [
+          { "t": "External bleeding", "r": "None." },
+          { "t": "Airway and C-spine", "r": "Talking, patent. Collar on.", "mark": "Airway with spinal motion restriction" },
+          { "t": "Chest", "r": "Tender left lower ribs. Equal air entry. RR 24.", "mark": "Breathing assessed" }
+        ],
+        "C": [
+          { "t": "Pulse, pressure, capillary refill", "r": "HR 128, BP 88/50, cool, CRT 4 s. Anxious.", "mark": "Recognises class III shock" },
+          { "t": "Abdomen", "r": "Seatbelt sign. Tender and guarding in the left upper quadrant; left shoulder-tip pain.", "mark": "Abdominal signs: left upper quadrant tenderness, Kehr's sign" },
+          { "t": "Pelvis and long bones", "r": "Pelvis not tender to gentle pressure. Femurs normal." }
+        ],
+        "D E": [
+          { "t": "GCS, pupils, glucose", "r": "GCS 15, pupils normal, glucose 6.5." },
+          { "t": "Expose and warm", "r": "No other injuries. Temperature 36.1. Blankets on.", "mark": "Exposes and keeps warm" }
+        ]
+      }
+    },
+    {
+      "id": "resus",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Resuscitate",
+      "hint": "Access, bloods with crossmatch and pregnancy test, blood not saline, TXA, analgesia.",
+      "opts": [
+        { "t": "Second large-bore cannula; bloods, crossmatch, gas, lactate, and a pregnancy test", "mark": "Access and bloods including crossmatch and pregnancy test", "r": "Nurse Cheng: Done. Gas: pH 7.26, base deficit −8, lactate 4.6, Hb 96. hCG negative." },
+        { "t": "Start O-negative blood now; major haemorrhage protocol 1:1:1", "scene": "blood", "mark": "Starts blood early", "r": "Nurse Cheng: Blood running through the warmer." },
+        { "t": "Tranexamic acid 1 g IV now", "mark": "Gives tranexamic acid" },
+        { "t": "Titrated IV fentanyl for pain", "mark": "Analgesia" },
+        { "t": "2 L of saline wide open first, then decide on blood", "trap": true, "r": "Crystalloid dilutes clotting. Blood first in active bleeding." }
+      ]
+    },
+    {
+      "id": "fast",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Adjuncts",
+      "hint": "FAST, chest and pelvic films in the bay.",
+      "groups": {
+        "Bedside": [
+          { "t": "FAST", "r": "Free fluid in Morison's pouch and the splenorenal space. No pericardial fluid.", "img": "us:fast-ruq-pos", "mark": "FAST: free intraperitoneal fluid" },
+          { "t": "Chest X-ray", "r": "Left lower rib fractures, no pneumothorax.", "img": "xr:cxr-normal", "mark": "Chest X-ray" },
+          { "t": "Pelvic X-ray", "r": "Normal.", "img": "xr:pelvis-normal" }
+        ]
+      }
+    },
+    {
+      "id": "decide",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "Transient responder with a positive FAST: surgeon for laparotomy (or IR if she responds fully).",
+      "opts": [
+        { "t": "General surgeon: FAST positive, transient responder after 2 units — laparotomy", "mark": "Calls the surgeon for laparotomy", "r": "Surgeon: I'm coming down. Theatre is being prepared." },
+        { "t": "CT abdomen now to grade the spleen", "trap": "critical", "r": "She is only transiently responding. Unstable patients with a positive FAST go to theatre." },
+        { "t": "Admit to the ward for serial examination", "trap": "critical", "r": "She is bleeding now." }
+      ]
+    },
+    {
+      "id": "summary",
+      "kind": "handover",
+      "to": "examiner",
+      "label": "Summarise and hand over",
+      "hint": "Summarise aloud to the team, then hand over to the surgeon.",
+      "opts": [
+        { "t": "Summary: 17, side impact, class III shock, positive FAST, left rib fractures, transient responder after 2 units and TXA, for laparotomy", "mark": "Summarises aloud and hands over clearly", "end": true, "r": "The surgeon repeats it back and takes her to theatre." },
+        { "t": "Surgeons are here, she's theirs now", "trap": true, "r": "No summary means lost information." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Class III haemorrhage (ATLS) means blood loss of…", "a": "31–40%", "wrong": ["Up to 15%", "15–30%", "More than 40%"] },
+        { "q": "Base deficit in class III shock?", "a": "−6 to −10 mmol/L", "wrong": ["0 to −2", "−2 to −6", "Always normal"] },
+        { "q": "What does FAST not reliably detect?", "a": "Retroperitoneal and hollow viscus injury", "wrong": ["Pericardial fluid", "Free fluid in Morison's pouch", "Haemothorax (eFAST)"] },
+        { "q": "A seatbelt sign raises concern for…", "a": "Bowel, mesenteric and lumbar spine (Chance) injuries", "wrong": ["Only skin bruising", "Isolated pelvic fracture", "Head injury"] },
+        { "q": "Positive FAST in an unresponsive shocked patient: next?", "a": "Laparotomy", "wrong": ["CT abdomen", "Repeat FAST in an hour", "Diagnostic peritoneal lavage first"] }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "brief-first", "first": ["brief"], "then": ["survey"], "fail": "No pre-brief before she arrived: roles and expectations should be set first.", "ok": "Team briefed before arrival." }
+  ],
+  "badge": { "name": "Team Leader", "emoji": "📣", "flavor": "Brief, lead, summarise. Blood, not saline. FAST positive and unstable: theatre." },
+  "cards": [
+    { "q": "ATLS class II haemorrhage blood loss?", "options": ["15–30%", "Under 15%", "31–40%", "Over 40%"], "why": "Class II: tachycardia, normal systolic, narrowed pulse pressure, base deficit −2 to −6.", "source": "ATLS 10th–11th edition" },
+    { "q": "Which parameter did ATLS add to the shock classes?", "options": ["Base deficit", "Lactate", "Troponin", "Haemoglobin"], "why": "Base deficit correlates with blood loss and transfusion need.", "source": "ATLS 10th edition" },
+    { "q": "Kehr's sign is…", "options": ["Left shoulder-tip pain from splenic blood irritating the diaphragm", "Bruising round the umbilicus", "Flank bruising", "Pain on coughing"], "why": "Referred phrenic pain.", "source": "ATLS 11th edition" },
+    { "q": "Unstable trauma patient with a positive FAST: disposition?", "options": ["Laparotomy", "CT first", "Observation", "Diagnostic laparoscopy in the ED"], "why": "Unstable patients do not go to CT.", "source": "ATLS 11th edition; NICE NG39" },
+    { "q": "Which behaviour is NOT expected of a trauma team leader?", "options": ["Performing every procedure personally", "Allocating roles", "Summarising aloud", "Closed-loop communication"], "why": "The leader stays hands-off to keep oversight.", "source": "RCEM trauma team guidance" },
+    { "q": "Why test for pregnancy in every female trauma patient of reproductive age?", "options": ["It changes imaging, drugs and the need for obstetric input", "It predicts spleen injury", "It is required before FAST", "It excludes shock"], "why": "Pregnancy alters physiology and management.", "source": "ATLS 11th edition" }
+  ]
+}

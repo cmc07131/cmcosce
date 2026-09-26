@@ -1,0 +1,101 @@
+{
+  "id": "atls-cspine-teach",
+  "gym": "atls",
+  "title": "Teaching: collar and clearing the C-spine",
+  "type": "teaching",
+  "time": 420,
+  "stem": "Teaching room. A junior doctor asks you how to size and apply a cervical collar, and how to decide whether a patient's neck can be cleared without imaging. Teach them, then work through two quick cases with them.",
+  "notes": "Checked against the Canadian C-spine Rule (Stiell 2001, 2003), NEXUS (Hoffman 2000), NICE NG41 (Spinal injury: assessment and initial management, 2016) and NICE NG232 (head injury imaging), and the Faculty of Pre-Hospital Care consensus on spinal motion restriction (2018).\n\nCollar: measure from the angle of the jaw to the top of the trapezius with your fingers, set or choose the collar to that height (measured from the sizing post to the bottom of the rigid plastic), slide the back under the neck while someone holds manual in-line stabilisation, bring the front up under the chin, fasten, and check the fit. Blocks and tape complete immobilisation. Current consensus favours minimal handling and 'spinal motion restriction': collars can raise ICP, cause pressure sores and aspiration, and are no longer routine in every patient (for example, the self-extricating, ambulant patient). Your notes' indications and complications are correct; they present collars as universal, which current guidance does not.\n\nClearance: in an alert (GCS 15), stable, sober adult, apply the Canadian C-spine Rule. High risk (age 65 or over, dangerous mechanism, or paraesthesia in the limbs) → image. Otherwise, any low-risk factor (simple rear-end collision, sitting up in the ED, ambulatory at any time, delayed onset of neck pain, no midline tenderness) allows range-of-motion testing: can rotate 45° left and right → cleared. NEXUS is an alternative (no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury). CT is the first-line imaging in adults (NICE). Your notes match this.",
+  "cast": [
+    { "id": "junior", "name": "Dr Lau", "role": "junior" }
+  ],
+  "steps": [
+    {
+      "id": "open",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Talk to Dr Lau",
+      "hint": "Introduce, set objectives, find out what they know.",
+      "mood": 4,
+      "turns": [
+        {
+          "line": "Thanks for this. I get nervous about necks.",
+          "opts": [
+            { "t": "Today: fit a collar correctly, and use the Canadian C-spine Rule on two cases. What do you know so far?", "r": "I know NEXUS a bit. Never fitted a collar.", "mood": -2, "mark": "Sets objectives and assesses prior knowledge" },
+            { "t": "It's easy. Watch.", "r": "OK…", "mood": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collar",
+      "kind": "steps",
+      "to": "table-ix",
+      "label": "Fit the collar (on the manikin)",
+      "hint": "In-line stabilisation, measure, size, apply, check, blocks and tape.",
+      "opts": [
+        { "t": "Someone holds manual in-line stabilisation throughout", "n": 1, "mark": "Manual in-line stabilisation during fitting" },
+        { "t": "Remove earrings and necklaces", "n": 2, "mark": "Removes jewellery first" },
+        { "t": "Measure with fingers from the angle of the jaw to the top of the trapezius", "n": 3, "mark": "Measures the neck correctly" },
+        { "t": "Set the collar to that height: sizing post to the bottom of the rigid plastic", "n": 4, "mark": "Sizes the collar to the measurement" },
+        { "t": "Slide the back under the neck, bring the front up under the chin, fasten", "n": 5, "mark": "Applies and fastens" },
+        { "t": "Check the fit: chin in the chin piece, no gap, airway and pulses accessible", "n": 6, "mark": "Checks fit" },
+        { "t": "Add blocks and tape (head first, then chin)", "n": 7, "mark": "Blocks and tape" },
+        { "t": "Pull the collar on tight so it can't move", "trap": true, "r": "Too tight obstructs venous return (raises ICP) and the airway." }
+      ]
+    },
+    {
+      "id": "cases",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Two quick cases",
+      "hint": "Apply the Canadian C-spine Rule aloud with Dr Lau.",
+      "mood": 4,
+      "turns": [
+        {
+          "line": "Case 1: 35-year-old, rear-ended at a traffic light, walking at the scene, GCS 15, no midline tenderness, sitting up. Clear?",
+          "opts": [
+            { "t": "No high-risk factor, low-risk factors present, so test rotation: 45° both ways → cleared, no imaging", "r": "So the rotation test is the last step.", "mood": -2, "mark": "Applies the CCR correctly in a low-risk case" },
+            { "t": "CT for everyone in a car crash", "r": "Isn't that a lot of radiation?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "Case 2: 72-year-old, fell from standing, neck pain, GCS 15. Clear?",
+          "opts": [
+            { "t": "Age 65 or over is high risk → CT C-spine, no rotation test", "r": "Age alone is enough.", "mood": -2, "mark": "Recognises a high-risk factor mandating imaging" },
+            { "t": "Ask her to rotate her neck — if she can, clear", "r": "But she's over 65?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "So what do I remember?",
+          "opts": [
+            { "t": "You tell me the three CCR steps.", "r": "High risk → image; low risk → test rotation; can rotate → clear.", "mood": -2, "mark": "Checks understanding by teach-back" },
+            { "t": "Just follow the flowchart on the wall.", "r": "OK.", "mood": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Which is a Canadian C-spine Rule high-risk factor?", "a": "Paraesthesia in the extremities", "wrong": ["Simple rear-end collision", "Delayed onset of neck pain", "Sitting up in the ED"] },
+        { "q": "Which is NOT a NEXUS criterion?", "a": "Age over 65", "wrong": ["Midline tenderness", "Intoxication", "Focal neurological deficit"] },
+        { "q": "First-line C-spine imaging in an adult who needs it (NICE)?", "a": "CT", "wrong": ["Three-view plain films", "MRI", "Flexion–extension views"] },
+        { "q": "A dangerous mechanism in the CCR includes…", "a": "Fall from 1 m or 5 stairs", "wrong": ["Fall from standing", "Rear-end collision at 20 km/h", "Twisting the neck at the gym"] },
+        { "q": "A harm of a tight collar?", "a": "Raised intracranial pressure", "wrong": ["Hypoglycaemia", "Hyperkalaemia", "Bradycardia"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Neck Guard", "emoji": "🦒", "flavor": "High risk → image. Low risk → rotate 45°. Can do → clear." },
+  "cards": [
+    { "q": "Canadian C-spine Rule: which mandates imaging?", "options": ["Age 65 or older", "Rear-end collision", "Delayed neck pain", "Ambulatory at scene"], "why": "Age ≥65, dangerous mechanism, or limb paraesthesia.", "source": "Stiell 2001" },
+    { "q": "The CCR rotation test requires turning the head…", "options": ["45° left and right", "90° left and right", "Chin to chest", "Full extension"], "why": "Active rotation 45° each way.", "source": "Stiell 2001" },
+    { "q": "How is a collar sized?", "options": ["Angle of jaw to top of trapezius, in finger breadths", "Neck circumference", "Chin to sternal notch", "Patient's height"], "why": "Match that distance to the rigid part of the collar.", "source": "Manufacturer guidance" },
+    { "q": "First-line C-spine imaging in adults (NICE NG41)?", "options": ["CT", "Plain X-ray", "MRI", "Ultrasound"], "why": "CT is more sensitive and faster in adults.", "source": "NICE NG41" },
+    { "q": "NEXUS requires which to be absent?", "options": ["Posterior midline tenderness", "Any neck pain", "Age over 65", "Dangerous mechanism"], "why": "NEXUS: no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury.", "source": "Hoffman 2000" },
+    { "q": "Current consensus on spinal immobilisation?", "options": ["Spinal motion restriction with minimal handling; collars not routine for all", "Rigid collar and long board for every trauma patient", "No precautions ever", "Soft collar for all"], "why": "Collars have harms; the self-extricating, ambulant patient may not need one.", "source": "Faculty of Pre-Hospital Care consensus 2018" }
+  ]
+}

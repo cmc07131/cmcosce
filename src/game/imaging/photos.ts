@@ -327,3 +327,35 @@ export function fundus(kind: 'normal' | 'papilloedema' = 'normal') {
   p.ellipse(70, 50, 5, 5, '#a03020')
   return p
 }
+
+/* ------------------------------------------------------------------ posturing */
+
+/**
+ * A patient on a trolley seen from above, head at the top.
+ * Decorticate (abnormal flexion, GCS M3): elbows and wrists flexed onto the chest, legs extended, feet pointed.
+ * Decerebrate (extension, GCS M2): arms straight and internally rotated, wrists flexed, legs extended, feet pointed.
+ */
+export function posture(kind: 'decorticate' | 'decerebrate') {
+  const p = new Pixels(96, 128, '#c8d0d8')
+  const GOWN = '#a8c8e8'
+  p.rect(20, 4, 56, 120, '#f0f0f0')
+  p.ellipse(48, 16, 8, 9, SKIN)
+  p.rect(44, 6, 8, 3, '#403028')
+  p.rect(36, 26, 24, 40, GOWN)
+  // Legs extended with the feet pointed (plantarflexed) in both.
+  p.rect(38, 66, 9, 44, GOWN).rect(49, 66, 9, 44, GOWN)
+  p.rect(39, 110, 7, 10, SKIN).rect(50, 110, 7, 10, SKIN)
+  if (kind === 'decorticate') {
+    // Upper arms along the sides, forearms folded across the chest, fists curled.
+    p.rect(30, 28, 6, 18, GOWN).rect(60, 28, 6, 18, GOWN)
+    p.line(33, 46, 44, 36, SKIN, 5).line(63, 46, 52, 36, SKIN, 5)
+    p.ellipse(45, 34, 3, 3, SKIN_SH).ellipse(51, 34, 3, 3, SKIN_SH)
+  } else {
+    // Arms straight at the sides, turned in (pronated), wrists flexed outward; neck arched back.
+    p.rect(30, 28, 6, 36, GOWN).rect(60, 28, 6, 36, GOWN)
+    p.rect(30, 64, 6, 8, SKIN).rect(60, 64, 6, 8, SKIN)
+    p.line(33, 72, 27, 78, SKIN, 4).line(63, 72, 69, 78, SKIN, 4)
+    p.rect(44, 4, 8, 2, SKIN_SH)
+  }
+  return p
+}

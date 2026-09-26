@@ -1,7 +1,7 @@
 import { chest } from './chest'
 import { type Field, Pixels } from './field'
 import { head } from './head'
-import { burnChart, chestEschar, chickenpox, fightBite, fundus, purpura, scarletRash, scarletTongue, zoster, type BurnRegion } from './photos'
+import { burnChart, chestEschar, chickenpox, fightBite, fundus, posture, purpura, scarletRash, scarletTongue, zoster, type BurnRegion } from './photos'
 import { ankle, cspine, elbow, hip, pelvis, shoulder, wrist } from './skeleton'
 import { cardiac, earlyPregnancy, fastPelvis, fastRuq } from './ultrasound'
 
@@ -68,6 +68,7 @@ export const IMAGES: Record<string, Entry> = {
 
   'us:fast-ruq-pos': grey('FAST, right upper quadrant', () => fastRuq(true)),
   'us:fast-ruq-neg': grey('FAST, right upper quadrant', () => fastRuq(false)),
+  'us:efast-haemothorax-r': grey('eFAST, right upper quadrant', () => fastRuq(false, 1, true)),
   'us:fast-pelvis-pos': grey('FAST, pelvis', () => fastPelvis(true)),
   'us:fast-pelvis-neg': grey('FAST, pelvis', () => fastPelvis(false)),
   'us:cardiac-effusion': grey('FAST, subxiphoid', () => cardiac(true)),
@@ -84,6 +85,8 @@ export const IMAGES: Record<string, Entry> = {
   'photo:fundus-normal': rgb('Fundoscopy', () => fundus('normal')),
   'photo:fundus-papilloedema': rgb('Fundoscopy', () => fundus('papilloedema')),
   'photo:chest-eschar': rgb('Photograph: chest', chestEschar),
+  'photo:posture-decorticate': rgb('Photograph: response to a central stimulus', () => posture('decorticate')),
+  'photo:posture-decerebrate': rgb('Photograph: response to a central stimulus', () => posture('decerebrate')),
 }
 
 /** `photo:burns:chest-partial,r-arm-full`: a burns chart for any regions and depths. */

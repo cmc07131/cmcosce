@@ -1,0 +1,243 @@
+{
+  "id": "atls-haemothorax",
+  "gym": "atls",
+  "title": "Massive haemothorax",
+  "type": "resus",
+  "time": 480,
+  "stem": "Resus 1. A 34-year-old motorcyclist hit a lamp post at speed and struck the right side of his chest on the handlebars. The ambulance is two minutes out: HR 128, BP 84/52, RR 30, SpO2 90% on a non-rebreather, GCS 14. You lead the trauma team. The nurse, the paramedic and the examiner are in the bay.",
+  "notes": "Checked against ATLS 11th edition (2025; xABCDE, early blood), RCEM/NICE NG39 major trauma, CRASH-2 (tranexamic acid) and BTS/ATLS chest drain practice.\n\nMassive haemothorax: more than 1500 mL of blood on insertion of the drain, or more than one third of the patient's blood volume. Thoracotomy is indicated for 1500 mL immediately, 200 mL/h for 2 to 4 hours, or a continuing need for transfusion. The decision rests on the patient's physiology as much as the volume.\n\nATLS 10th recommended a 28 to 32 Fr drain for haemothorax. Smaller drains (14 Fr pigtail) work for stable, non-massive haemothorax in trials (Kulvatunyou 2021), but a large-bore drain remains standard for a massive, clotting bleed. The station scores a large-bore drain.\n\nFluids: ATLS now limits crystalloid (at most 1 L) and moves to blood early in a 1:1:1 ratio; permissive hypotension (systolic around 80 to 90) until bleeding is controlled, unless there is a brain injury. Your notes on haemorrhagic shock say a 1 to 2 L saline bolus first; current practice is blood first, so 2 L of saline is scored as a trap.\n\nTranexamic acid 1 g over 10 minutes, then 1 g over 8 hours, only within 3 hours of injury (CRASH-2).\n\nSafe triangle: anterior border of latissimus dorsi, lateral border of pectoralis major, a line level with the nipple (5th intercostal space), apex below the axilla. Go over the top of the rib to avoid the neurovascular bundle. Never use the trocar.",
+  "cast": [
+    { "id": "patient", "name": "Mr Ho", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Lam", "role": "nurse" },
+    { "id": "medic", "name": "Paramedic", "role": "paramedic" }
+  ],
+  "vitals": {
+    "hr": 128,
+    "sbp": 84,
+    "dbp": 52,
+    "spo2": 90,
+    "rr": 30,
+    "temp": 35.8,
+    "gcs": 14,
+    "rhythm": "sinus-tachy",
+    "drift": { "sbp": -2, "hr": 2, "spo2": -1 },
+    "stop": ["blood"],
+    "effects": [
+      { "scene": "o2", "add": { "spo2": 3 }, "overS": 20 },
+      { "scene": "blood", "add": { "sbp": 18, "dbp": 10, "hr": -14 }, "overS": 90 },
+      { "scene": "drain", "add": { "spo2": 5, "rr": -6 }, "overS": 60 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "prep",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Get the bay ready",
+      "hint": "Before he arrives: trauma call, PPE, blood to the bedside, rapid infuser and warmer, chest drain kit.",
+      "confirm": "Ask for these",
+      "opts": [
+        { "t": "Put out a trauma team call", "need": true, "mark": "Activates the trauma team before arrival", "r": "Nurse Lam: Trauma call is out." },
+        { "t": "Everyone in gloves, apron, eye protection", "need": true, "mark": "Team in PPE" },
+        { "t": "O-negative blood to the bedside; activate the massive haemorrhage protocol", "need": true, "mark": "Blood ready and massive haemorrhage protocol activated early" },
+        { "t": "Rapid infuser with a warmer, warm blankets", "need": true, "mark": "Prevents hypothermia: warmed products, blankets" },
+        { "t": "Open a chest drain tray and ultrasound at the bedside", "need": true, "mark": "Anticipates the chest: drain tray and ultrasound ready" },
+        { "t": "Book a CT scanner slot straight from the ambulance bay", "trap": true, "r": "He is shocked. CT is for patients who respond; he goes to resus first." },
+        { "t": "Hang 2 L of 0.9% saline on a pressure bag", "trap": true, "r": "Large crystalloid volumes dilute clotting factors and worsen acidosis. Blood first." }
+      ]
+    },
+    {
+      "id": "handover",
+      "kind": "history",
+      "to": "medic",
+      "label": "Paramedic handover",
+      "hint": "Take a structured handover: age, time, mechanism, injuries, signs, treatment.",
+      "groups": {
+        "Mechanism": [
+          { "t": "What happened, and when?", "r": "Motorcycle into a lamp post at about 60 km/h, 35 minutes ago. Right chest onto the handlebars.", "mark": "Asks the mechanism and time of injury" },
+          { "t": "Helmet? Thrown off?", "r": "Full-face helmet, thrown about 3 metres. Never unconscious according to bystanders." }
+        ],
+        "Injuries": [
+          { "t": "What injuries have you found?", "r": "Bruised right chest wall, painful right side. Abrasions to both forearms. Nothing else obvious.", "mark": "Asks the injuries found" }
+        ],
+        "Signs": [
+          { "t": "Vital signs and how they have changed?", "r": "First set: HR 110, BP 102/64. Now HR 128, BP 84/52. Getting worse.", "mark": "Asks the trend of the vital signs" }
+        ],
+        "Treatment": [
+          { "t": "What have you given?", "r": "Oxygen 15 L. One 18 G in the left arm. 250 mL saline. Morphine not given yet.", "mark": "Asks the treatment given" },
+          { "t": "Tranexamic acid given?", "r": "No TXA yet." }
+        ]
+      }
+    },
+    {
+      "id": "survey",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Primary survey",
+      "hint": "xABCDE: look, feel, percuss and listen to the chest; check circulation and pelvis without springing it.",
+      "groups": {
+        "x A": [
+          { "t": "Catastrophic external bleeding?", "r": "None. Abrasions only.", "mark": "Checks for exsanguinating external haemorrhage first" },
+          { "t": "Airway and C-spine", "r": "He answers in short sentences. Airway patent. Collar and blocks on; manual in-line stabilisation while you look.", "mark": "Airway patent; maintains spinal motion restriction" }
+        ],
+        "Breathing": [
+          { "t": "Look: chest wall and movement", "r": "Handlebar bruise over the right lower chest. Right side moves less. RR 30." },
+          { "t": "Feel: trachea and chest wall", "r": "Trachea central. Tender right 5th to 7th ribs, no crepitus, no surgical emphysema.", "mark": "Checks the trachea position" },
+          { "t": "Percuss both sides", "r": "Stony dull at the right base and mid zone. Resonant on the left.", "mark": "Finds dullness to percussion on the right" },
+          { "t": "Listen to both sides", "r": "Breath sounds much reduced on the right. Normal on the left.", "mark": "Finds reduced breath sounds on the right" }
+        ],
+        "Circulation": [
+          { "t": "Pulse, skin, capillary refill", "r": "Thready radial pulse 128. Cold, pale, clammy. Capillary refill 4 seconds." },
+          { "t": "Neck veins", "r": "Flat. (Against tamponade and tension; he is empty.)", "mark": "Neck veins flat: hypovolaemia, not tension or tamponade" },
+          { "t": "Abdomen", "r": "Soft, mildly tender right upper quadrant." },
+          { "t": "Pelvis: look and gentle compression once", "r": "No deformity, no pain on gentle pressure. You do not spring it again." },
+          { "t": "Spring the pelvis hard, twice", "trap": "critical", "r": "Springing the pelvis can dislodge clot. Look, and press gently once at most." }
+        ],
+        "D E": [
+          { "t": "GCS, pupils, glucose", "r": "GCS 14 (E3 V5 M6). Pupils equal and reactive. Glucose 7.2.", "mark": "Assesses GCS, pupils and glucose" },
+          { "t": "Expose, then cover to keep warm", "r": "No other injuries on the front. Warm blankets on. Temp 35.8.", "mark": "Exposes and prevents hypothermia" }
+        ]
+      }
+    },
+    {
+      "id": "access",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Talk to the nurse",
+      "hint": "Oxygen, two large-bore lines, bloods including crossmatch, and blood through the warmer.",
+      "opts": [
+        { "t": "High-flow oxygen 15 L via non-rebreather", "scene": "o2", "mark": "High-flow oxygen", "r": "Nurse Lam: 15 L on." },
+        { "t": "Two large-bore cannulae (14–16 G) in the antecubital fossae", "mark": "Two large-bore IV lines", "r": "Nurse Lam: Two 14 G in." },
+        { "t": "Bloods: crossmatch 6 units, FBC, clotting with fibrinogen, U&E, lactate, venous gas", "mark": "Sends crossmatch, clotting, gas and lactate", "r": "Nurse Lam: Sent, crossmatch flagged urgent. Gas: pH 7.24, lactate 5.1, Hb 102." },
+        { "t": "Start the O-negative blood now, then 1:1:1 red cells, plasma, platelets through the warmer", "scene": "blood", "mark": "Transfuses blood early in a balanced ratio", "r": "Nurse Lam: First unit running through the warmer. Plasma thawing." },
+        { "t": "Aim for a systolic of about 80–90 until the bleeding is controlled", "mark": "Permissive hypotension until haemorrhage control", "r": "Nurse Lam: Titrating to a systolic of 80 to 90." },
+        { "t": "Keep pushing saline until the pressure is normal", "trap": true, "r": "Chasing a normal pressure with crystalloid dilutes clotting and raises the bleeding pressure." }
+      ]
+    },
+    {
+      "id": "drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Tranexamic acid inside 3 hours, and titrated analgesia.",
+      "confirm": "Give these",
+      "opts": [
+        { "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours", "need": true, "mark": "Tranexamic acid 1 g within 3 hours of injury" },
+        { "t": "Fentanyl 25–50 microgram IV, titrated", "need": true, "mark": "Titrated IV analgesia" },
+        { "t": "Calcium chloride 10% 10 mL with the blood", "mark": "Replaces calcium during massive transfusion" },
+        { "t": "Adrenaline 1 mg IV", "trap": "critical", "r": "He is not in arrest. Vasopressors in bleeding shock worsen outcome." },
+        { "t": "Ketamine 2 mg/kg and suxamethonium to intubate now", "trap": true, "r": "He is talking and oxygenating. Induction in this degree of shock can cause arrest; fix the chest and the volume first." }
+      ]
+    },
+    {
+      "id": "images",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Bedside tests",
+      "hint": "eFAST and a supine chest film in the bay. Not CT while he is unstable.",
+      "groups": {
+        "Bedside": [
+          { "t": "eFAST: chest and abdomen", "r": "Anechoic fluid above the right hemidiaphragm. Lung sliding present on both sides. Morison's pouch dry. No pericardial fluid.", "img": "us:efast-haemothorax-r", "mark": "eFAST: right haemothorax, abdomen and pericardium clear" },
+          { "t": "Supine chest X-ray in the bay", "r": "Diffuse haze over the whole right hemithorax with vessels still visible. Trachea central.", "img": "xr:cxr-haemothorax-r-supine", "mark": "Supine CXR: right haemothorax (diffuse haze)" },
+          { "t": "Pelvic X-ray", "r": "No fracture." }
+        ],
+        "Scanner": [
+          { "t": "CT chest, abdomen and pelvis now", "trap": "critical", "r": "He is not responding to resuscitation. CT is the 'doughnut of death' for an unstable patient." }
+        ]
+      }
+    },
+    {
+      "id": "drain",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Right chest drain",
+      "hint": "Safe triangle, blunt dissection over the rib, finger sweep, large-bore tube, underwater seal, secure, film.",
+      "opts": [
+        { "t": "Arm up behind the head; confirm the side on the patient and the film", "n": 1, "mark": "Positions the arm up and confirms the side" },
+        { "t": "Mark the safe triangle: 5th intercostal space, just anterior to the mid-axillary line", "n": 2, "mark": "Identifies the safe triangle" },
+        { "t": "Clean, drape, infiltrate lidocaine down to the pleura", "n": 3, "mark": "Asepsis and local anaesthetic to the pleura" },
+        { "t": "3 cm incision along the upper border of the 6th rib", "n": 4, "mark": "Incises over the rib below the space" },
+        { "t": "Blunt dissection with forceps over the top of the rib into the pleura", "n": 5, "mark": "Blunt dissection over the top of the rib" },
+        { "t": "Finger sweep inside the pleura", "n": 6, "mark": "Finger sweep to exclude adhesions and organs" },
+        { "t": "Pass a large-bore tube (28–32 Fr) on a clamp, aimed posteriorly and up", "n": 7, "mark": "Large-bore tube for haemothorax, no trocar" },
+        { "t": "Connect to an underwater seal; watch it swing and drain", "n": 8, "scene": "drain", "mark": "Connects to underwater seal and checks swing", "r": "1600 mL of blood drains at once. It swings." },
+        { "t": "Suture and dress the drain; repeat chest X-ray", "n": 9, "img": "xr:cxr-drain-r", "mark": "Secures the drain and repeats the film" },
+        { "t": "Push the tube in on its sharp trocar", "trap": "critical", "r": "The trocar can puncture the lung, heart, liver or great vessels. Never use it." },
+        { "t": "Cut along the lower border of the rib", "trap": true, "r": "The intercostal vessels and nerve run under the lower border. Go over the top of the rib below." }
+      ]
+    },
+    {
+      "id": "escalate",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "1600 mL at once is a massive haemothorax: call cardiothoracics for theatre.",
+      "opts": [
+        { "t": "Cardiothoracic surgeon: 1600 mL on insertion, still shocked — thoracotomy", "mark": "Recognises the thoracotomy threshold and calls cardiothoracics", "r": "CTS registrar: Coming now. Theatre 2 is being opened." },
+        { "t": "Theatre and anaesthetics: emergency thoracotomy, massive transfusion running", "mark": "Alerts theatre and anaesthetics" },
+        { "t": "Clamp the drain to stop the bleeding", "trap": true, "r": "Clamping hides the bleeding and can cause tension. Leave it open and measure the output." },
+        { "t": "Admit to the surgical ward and repeat the film in the morning", "trap": "critical", "r": "He has lost a third of his blood volume into his chest. He needs theatre." }
+      ]
+    },
+    {
+      "id": "sbar",
+      "kind": "handover",
+      "to": "examiner",
+      "label": "Handover",
+      "hint": "Structured handover to the surgeon: situation, xABCDE findings, what you did, what he needs.",
+      "opts": [
+        { "t": "ATMIST: 34, 40 minutes ago, handlebar to right chest, right massive haemothorax, 1600 mL drained, shocked on 2 units and TXA, needs thoracotomy", "mark": "Structured handover with times, findings, treatment and plan", "end": true, "r": "You hand over in order. The surgeon repeats it back and takes him to theatre." },
+        { "t": "He's got a chest injury, over to you", "trap": true, "r": "No times, no volumes, no treatment given. The next team starts from zero." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        {
+          "q": "What makes a haemothorax 'massive'?",
+          "a": "More than 1500 mL at insertion, or a third of blood volume",
+          "wrong": ["More than 500 mL at insertion", "Any haemothorax with a rib fracture", "Any blood seen on eFAST"]
+        },
+        {
+          "q": "Which drain output means thoracotomy even after a smaller first drainage?",
+          "a": "200 mL/h for 2 to 4 hours",
+          "wrong": ["50 mL/h for 24 hours", "Any drainage after 1 hour", "500 mL over 24 hours"]
+        },
+        {
+          "q": "Why is this not a tension pneumothorax?",
+          "a": "Dull to percussion, trachea central, neck veins flat",
+          "why": "Tension is hyper-resonant with distended neck veins (unless hypovolaemic) and a trachea deviated away late.",
+          "wrong": ["Because SpO2 is above 85%", "Because he is talking", "Because the eFAST shows lung sliding on the left"]
+        },
+        {
+          "q": "Borders of the safe triangle?",
+          "a": "Latissimus dorsi, pectoralis major, 5th intercostal space; apex below the axilla",
+          "wrong": ["2nd intercostal space, mid-clavicular line", "Scapula, spine, 8th rib", "Sternum, nipple line, costal margin"]
+        },
+        {
+          "q": "Tranexamic acid: dose and time limit?",
+          "a": "1 g over 10 min then 1 g over 8 h, only within 3 hours",
+          "why": "CRASH-2: benefit falls with delay and giving it after 3 hours was associated with harm.",
+          "wrong": ["2 g bolus at any time", "1 g daily for 3 days", "10 mg/kg within 12 hours"]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "blood-before-drain", "first": ["access"], "then": ["drain"], "fail": "You drained the chest before starting blood. Releasing 1.5 L of tamponading blood into an empty patient can precipitate arrest; have blood running first.", "ok": "Blood was running before the drain went in." },
+    { "id": "survey-before-tests", "first": ["survey"], "then": ["images"], "fail": "Investigations came before the primary survey. Examine first; the eFAST and film are adjuncts to it.", "ok": "Primary survey before the adjuncts." }
+  ],
+  "badge": { "name": "Pleural Plumber", "emoji": "🫁", "flavor": "Dull, not hyper-resonant. Blood first, then the drain." },
+  "cards": [
+    { "q": "Massive haemothorax is defined as an initial drain output of more than…", "options": ["1500 mL", "500 mL", "1000 mL over 24 hours", "250 mL"], "why": "Over 1500 mL immediately (or a third of blood volume) usually needs thoracotomy.", "source": "ATLS 11th edition" },
+    { "q": "Ongoing drain output that indicates thoracotomy?", "options": ["200 mL/h for 2–4 h", "50 mL/h for 12 h", "100 mL total in 1 h", "Any bloody output at 24 h"], "why": "A persistent 200 mL/h means continuing bleeding that a drain will not stop.", "source": "ATLS 11th edition" },
+    { "q": "Percussion note over a massive haemothorax?", "options": ["Stony dull", "Hyper-resonant", "Normal", "Tympanic"], "why": "Fluid is dull; air (pneumothorax) is hyper-resonant.", "source": "ATLS 11th edition" },
+    { "q": "Where do the intercostal vessels run?", "options": ["Along the lower border of each rib", "Along the upper border of each rib", "Mid-way between ribs", "Only posteriorly"], "why": "So you go over the top of the rib below the space.", "source": "BTS pleural procedures guideline" },
+    { "q": "Tranexamic acid in trauma must start within…", "options": ["3 hours of injury", "12 hours of injury", "24 hours of injury", "30 minutes of arrival"], "why": "CRASH-2: late tranexamic acid was associated with harm.", "source": "CRASH-2, Lancet 2010/2011" },
+    { "q": "Preferred resuscitation fluid for a bleeding, shocked trauma patient?", "options": ["Blood products in a balanced ratio", "2 L of 0.9% saline", "Hydroxyethyl starch", "5% dextrose"], "why": "Crystalloid is limited; early blood (1:1:1) reduces coagulopathy.", "source": "ATLS 11th edition; NICE NG39" },
+    { "q": "Flat neck veins in a shocked chest-injured patient point to…", "options": ["Hypovolaemia", "Tension pneumothorax", "Cardiac tamponade", "Right heart failure"], "why": "Tension and tamponade raise venous pressure unless the patient is also empty.", "source": "ATLS 11th edition" }
+  ]
+}

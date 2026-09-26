@@ -27,7 +27,7 @@ function speckle(f: Field, amount: number, seed: number) {
  * FAST, right upper quadrant (hepatorenal view). Positive: an anechoic black stripe in Morison's pouch
  * between the liver capsule and the right kidney.
  */
-export function fastRuq(positive: boolean, seed = 1): Field {
+export function fastRuq(positive: boolean, seed = 1, haemothorax = false): Field {
   const f = new Field(128, 128, 0.1)
   // Liver: homogeneous mid-grey filling the near field.
   f.ellipse(52, 44, 60, 44, 0.42, 'set', 4)
@@ -46,6 +46,23 @@ export function fastRuq(positive: boolean, seed = 1): Field {
   speckle(f, 0.18, seed)
   // Fluid stays black after speckle.
   if (positive) f.curve([48, 70], [70, 62], [102, 72], 4, 0.02, 'set', 0.8)
+  if (haemothorax) {
+    // Fluid above the diaphragm, and the spine sign: vertebral shadows seen through it, above the diaphragm.
+    f.poly(
+      [
+        [0, 20],
+        [30, 14],
+        [44, 12],
+        [18, 30],
+        [8, 60],
+        [0, 70],
+      ],
+      0.02,
+      'set',
+      1,
+    )
+    for (let i = 0; i < 4; i++) f.ellipse(14 + i * 5, 58 - i * 11, 3, 2, 0.85, 'set', 0.6)
+  }
   return sector(f)
 }
 

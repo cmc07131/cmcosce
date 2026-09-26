@@ -1,0 +1,122 @@
+{
+  "id": "atls-crico-teach",
+  "gym": "atls",
+  "title": "Teaching: surgical cricothyroidotomy",
+  "type": "teaching",
+  "time": 420,
+  "stem": "Teaching room. A new junior doctor starts in your ED next week. Teach them how to perform an emergency surgical cricothyroidotomy on the part-task trainer, and briefly mention other techniques.",
+  "notes": "Checked against the Difficult Airway Society 2025 guideline (front-of-neck access) and the Peyton four-step approach to skills teaching.\n\nContent: indication is can't intubate, can't oxygenate (CICO). DAS scalpel–bougie–tube: a size 10 scalpel, a bougie with a coudé tip, and a lubricated cuffed 6.0 tube. DAS 2025 makes a vertical midline skin incision (up to 8 cm, bottom to top) and finger blunt dissection to the membrane the default in every adult, then a transverse stab through the membrane with the cutting edge toward you, rotate the blade 90° so the sharp edge points to the feet, pull the blade toward you, slide the bougie along it, railroad the tube, inflate the cuff, confirm with capnography.\n\nYour notes teach the older standard technique: a number 11 blade, a tracheal hook and a Trousseau dilator, and a 4–6 mm tube or tracheostomy tube. That is a recognised open technique but not the DAS emergency method; the station scores DAS and accepts the older method as 'other techniques'. Your notes give the paediatric cut-off as 12 years (sometimes 8–10); DAS and APA guidance use needle cricothyroidotomy (or ENT) for young children, and surgical access in older children and adults. Complications and the SHORT mnemonic in your notes are correct.\n\nTeaching method: set objectives, assess prior knowledge, then Peyton's four steps (demonstrate silently at real speed; demonstrate with explanation; learner talks you through; learner performs), feedback, check understanding, summary and plan.",
+  "cast": [
+    { "id": "junior", "name": "Dr Wan", "role": "junior" }
+  ],
+  "steps": [
+    {
+      "id": "open",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Talk to Dr Wan",
+      "hint": "Introduce, agree objectives, find out what they know.",
+      "mood": 4,
+      "turns": [
+        {
+          "line": "Hi, I'm Dr Wan. I've been told to learn the surgical airway?",
+          "opts": [
+            { "t": "Hi, I'm the ED registrar. In ten minutes, you'll be able to do a scalpel–bougie–tube on the trainer. Sound OK?", "r": "Great, yes.", "mood": -2, "mark": "Introduces self and sets a clear learning objective" },
+            { "t": "Right, let's just start cutting.", "r": "Um, OK…", "mood": 2 }
+          ]
+        },
+        {
+          "line": "I've only read about it.",
+          "opts": [
+            { "t": "What do you know already — when would you do one?", "r": "When you can't intubate and can't oxygenate?", "mood": -1, "mark": "Assesses prior knowledge" },
+            { "t": "Reading is useless. Watch me.", "r": "…", "mood": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peyton",
+      "kind": "steps",
+      "to": "table-ix",
+      "label": "Teach the skill",
+      "hint": "Peyton's four steps.",
+      "opts": [
+        { "t": "Demonstrate the whole procedure at real speed without talking", "n": 1, "mark": "Peyton step 1: silent demonstration at real speed" },
+        { "t": "Repeat it slowly, explaining each step", "n": 2, "mark": "Peyton step 2: deconstruction with explanation" },
+        { "t": "Dr Wan talks you through it while you do it", "n": 3, "mark": "Peyton step 3: learner narrates, you perform" },
+        { "t": "Dr Wan performs it, talking through each step", "n": 4, "mark": "Peyton step 4: learner performs" },
+        { "t": "Give a 20-minute lecture on airway anatomy first", "trap": true, "r": "It eats the whole session. Keep theory short and hands-on." }
+      ]
+    },
+    {
+      "id": "technique",
+      "kind": "steps",
+      "to": "table-ix",
+      "label": "The technique (what you show)",
+      "hint": "DAS scalpel–bougie–tube.",
+      "opts": [
+        { "t": "Kit: size 10 scalpel, bougie, lubricated cuffed 6.0 tube; neck extended; stand on the patient's left if right-handed", "n": 1, "mark": "Correct kit and positioning" },
+        { "t": "Laryngeal handshake: identify thyroid cartilage, membrane, cricoid", "n": 2, "mark": "Laryngeal handshake to find landmarks" },
+        { "t": "Vertical midline skin incision, bottom to top; blunt finger dissection to the membrane", "n": 3, "mark": "Vertical midline incision and finger dissection (DAS 2025)" },
+        { "t": "Transverse stab through the membrane, cutting edge toward you", "n": 4, "mark": "Transverse stab through the membrane" },
+        { "t": "Rotate the blade 90° so the sharp edge points to the feet; pull it toward you", "n": 5, "mark": "Rotates the blade and opens the hole" },
+        { "t": "Slide the bougie along the blade 10–15 cm into the trachea; remove the blade", "n": 6, "mark": "Bougie into the trachea" },
+        { "t": "Railroad the tube, inflate the cuff, confirm with capnography, secure", "n": 7, "mark": "Tube, cuff, capnography" },
+        { "t": "Incise the upper edge of the membrane close to the thyroid cartilage", "trap": true, "r": "Stay in the lower membrane: the cricothyroid arteries and the cords are above." }
+      ]
+    },
+    {
+      "id": "close",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Feedback and close",
+      "hint": "Ask how it went, give specific feedback, check understanding, summarise, plan.",
+      "mood": 3,
+      "turns": [
+        {
+          "line": "How did I do?",
+          "opts": [
+            { "t": "How do you think it went?", "r": "I hesitated with the bougie.", "mood": -1, "mark": "Invites self-assessment first" },
+            { "t": "Fine.", "r": "OK…", "mood": 1 }
+          ]
+        },
+        {
+          "line": "I hesitated with the bougie.",
+          "opts": [
+            { "t": "Your landmarks were excellent. Next time keep the blade in until the bougie is past it — it holds the hole open.", "r": "Got it.", "mood": -1, "mark": "Specific, balanced feedback" },
+            { "t": "That was bad.", "r": "…", "mood": 2 }
+          ]
+        },
+        {
+          "line": "What else should I know?",
+          "opts": [
+            { "t": "Tell me the three things you'll remember; other methods are needle cricothyroidotomy (children) and the older hook-and-dilator technique. Practise on the trainer weekly.", "r": "Handshake, vertical cut, blade stays until the bougie's in.", "mood": -1, "mark": "Checks understanding, mentions other techniques, and agrees a plan" },
+            { "t": "Nothing, you're done.", "r": "OK.", "mood": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Indication for emergency front-of-neck access?", "a": "Can't intubate, can't oxygenate (CICO)", "wrong": ["Failed intubation with good mask ventilation", "Any facial fracture", "Stridor in a conscious patient"] },
+        { "q": "DAS 2025 default skin incision?", "a": "Vertical midline", "wrong": ["Transverse over a palpable membrane only", "Collar incision above the sternal notch", "No skin incision; stab directly"] },
+        { "q": "Which is part of the SHORT mnemonic for difficult front-of-neck access?", "a": "Radiation", "why": "Surgery, Haematoma, Obesity, Radiation, Tumour.", "wrong": ["Rigid collar", "Rheumatoid arthritis", "Reflux"] },
+        { "q": "Surgical cricothyroidotomy in a 5-year-old?", "a": "No — needle cricothyroidotomy or ENT", "wrong": ["Yes, same technique with a 6.0 tube", "Yes, with a larger incision", "Only with a tracheal hook"] },
+        { "q": "What are Peyton's four steps?", "a": "Demonstrate, deconstruct, learner narrates, learner performs", "wrong": ["Read, watch, test, certify", "See one, do one, teach one, audit one", "Brief, perform, debrief, repeat"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Teacher: FONA", "emoji": "🔪", "flavor": "Handshake, vertical cut, stab, turn, bougie, tube." },
+  "cards": [
+    { "q": "DAS scalpel–bougie–tube kit uses which blade?", "options": ["Size 10", "Size 11", "Size 15", "Size 22"], "why": "A broad size 10 blade makes a hole wide enough and guides the bougie.", "source": "DAS 2025", "note": "Older notes: size 11 with hook and dilator." },
+    { "q": "Tube size in the DAS front-of-neck technique?", "options": ["Cuffed 6.0", "Uncuffed 8.0", "Cuffed 7.5", "3.0"], "why": "A 6.0 passes through the membrane opening over the bougie.", "source": "DAS 2025" },
+    { "q": "After the transverse stab, the blade is rotated so the sharp edge faces…", "options": ["The feet (caudally)", "The head", "The patient's left", "Upward"], "why": "Then pull it toward you to open the hole for the bougie.", "source": "DAS 2025" },
+    { "q": "Which vessels lie near the upper cricothyroid membrane?", "options": ["Cricothyroid arteries", "Carotid arteries", "Internal jugular veins", "Vertebral arteries"], "why": "Stay in the lower third of the membrane.", "source": "Anatomy" },
+    { "q": "Peyton step 3 is…", "options": ["The learner talks the teacher through the procedure", "The learner performs alone", "The teacher demonstrates silently", "The teacher lectures"], "why": "Step 3 forces active recall before the learner performs.", "source": "Peyton 1998" },
+    { "q": "Best first feedback question after a learner's attempt?", "options": ["How do you think it went?", "Why was that so slow?", "Shall we move on?", "Did you read the guideline?"], "why": "Self-assessment first (Pendleton / ask–tell–ask).", "source": "Medical education feedback models" }
+  ]
+}

@@ -306,6 +306,7 @@ export const usePlay = create<PlayState>((set, get) => ({
     )
     commit(set, get, pack, action, {
       ...applied,
+      sceneAdd: chosen.filter((row) => !row.isTrap && !row.perform && row.scene).map((row) => row.scene as string),
       faultsAdd: chosen.filter((row) => row.isTrap).flatMap((row) => faultsFor(action, row, [])),
       log: applied.grantMarks.length > 0 || applied.spendIds.some((id) => {
         const opt = action.options?.find((row) => row.id === id)
@@ -544,7 +545,7 @@ function commit(
     log: boolean
     endStation: boolean
     close: boolean
-    sceneAdd?: string
+    sceneAdd?: string | string[]
     faultsAdd?: Fault[]
   },
 ) {
@@ -566,9 +567,10 @@ function commit(
       if (!inventory.includes(id)) inventory.push(id)
     }
   }
-  const scene = unique([...(cur.scene ?? []), ...(result.sceneAdd ? [result.sceneAdd] : [])])
+  const adds = Array.isArray(result.sceneAdd) ? result.sceneAdd : result.sceneAdd ? [result.sceneAdd] : []
+  const scene = unique([...(cur.scene ?? []), ...adds])
   const sceneAt = { ...(cur.sceneAt ?? {}) }
-  if (result.sceneAdd && sceneAt[result.sceneAdd] === undefined) sceneAt[result.sceneAdd] = elapsedOf(pack, cur)
+  for (const flag of adds) if (sceneAt[flag] === undefined) sceneAt[flag] = elapsedOf(pack, cur)
   const faults = [...(cur.faults ?? []), ...(result.faultsAdd ?? [])]
   const atMs = cur.entered ? Date.now() - cur.startedAt : 0
   const log = result.log

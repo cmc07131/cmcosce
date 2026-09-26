@@ -127,6 +127,8 @@ export function StepsPanel({ action, title, spent, onClose, onOption }: PanelPro
 }
 
 const MOOD_WORDS = ['Settled', 'Settled', 'Calmer', 'Calmer', 'Uneasy', 'Upset', 'Upset', 'Angry', 'Angry', 'Shouting', 'Walking out']
+/** A learner's meter measures engagement, not anger. */
+const LEARNER_WORDS = ['Engaged', 'Engaged', 'Keen', 'Keen', 'Unsure', 'Lost', 'Lost', 'Frustrated', 'Frustrated', 'Switched off', 'Switched off']
 
 export function moodOf(action: Action, spent: string[]) {
   const picked = (action.options ?? []).filter((o) => spent.includes(o.id))
@@ -156,6 +158,8 @@ export function TurnPanel({ pack, action, title, spent, onClose, onOption }: Pan
     [action, current, seed],
   )
   const mood = action.kind === 'dialogue' ? moodOf(action, spent) : null
+  const learner = action.targetIds.some((id) => pack.cast.find((c) => c.id === id)?.role === 'junior')
+  const words = learner ? LEARNER_WORDS : MOOD_WORDS
   const saidFor = (turnId: string) => {
     for (const id of spent) {
       const o = (action.options ?? []).find((row) => row.id === id && row.group === turnId)
@@ -169,7 +173,7 @@ export function TurnPanel({ pack, action, title, spent, onClose, onOption }: Pan
     <Win title={title} onClose={onClose} className="sheet">
       {mood !== null && (
         <div className="mood" data-testid="mood" aria-label={`Mood ${mood} of 10`}>
-          <span className="mood-label">{MOOD_WORDS[mood]}</span>
+          <span className="mood-label">{words[mood]}</span>
           <span className="mood-bar">
             <span style={{ width: `${mood * 10}%` }} data-level={mood >= 7 ? 'hot' : mood >= 4 ? 'warm' : 'cool'} />
           </span>
@@ -178,7 +182,7 @@ export function TurnPanel({ pack, action, title, spent, onClose, onOption }: Pan
       <div className="sheet-scroll">
         {lastSaid && (
           <p className="turn-reply" data-trap={lastSaid.isTrap || undefined}>
-            {action.kind === 'viva' ? replyText(lastSaid) : lastSaid.detail}
+            {action.kind === 'viva' ? `${lastSaid.isTrap ? '✗' : '✓'} ${lastSaid.detail ?? ''}` : lastSaid.detail}
             {lastSaid.img && <FilmButton src={lastSaid.img} onOpen={setFilm} />}
           </p>
         )}

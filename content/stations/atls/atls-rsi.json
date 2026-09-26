@@ -1,0 +1,220 @@
+{
+  "id": "atls-rsi",
+  "gym": "atls",
+  "title": "Head injury: intubation (RSI)",
+  "type": "resus",
+  "time": 480,
+  "stem": "Resus 3. A 43-year-old roofer fell about 5 metres onto grass. He has facial injuries and blood coming from the left ear. HR 88, BP 136/74, RR 14, SpO2 93% on oxygen, GCS 9. The anaesthetist is 20 minutes away. You lead the team and will secure the airway.",
+  "notes": "Checked against NICE NG232 (Head injury, 2023), ATLS 11th edition, Brain Trauma Foundation 4th edition, and the Difficult Airway Society 2025 guideline and emergency airway checklists.\n\nIndications to intubate after head injury (NICE): GCS 8 or less, loss of airway reflexes, ventilatory failure (PaO2 < 13 kPa on oxygen or PaCO2 > 6 kPa), spontaneous hyperventilation (PaCO2 < 4 kPa), irregular breathing, seizures, bleeding into the mouth, or agitation that prevents safe transfer. GCS 9 with a bleeding face and a falling saturation meets these criteria.\n\nDrugs: ketamine 1–2 mg/kg (use less in shock) or etomidate; propofol at a reduced dose only if the pressure is good. Rocuronium 1.2 mg/kg, or suxamethonium 1.5 mg/kg. Fentanyl 1–3 microgram/kg blunts the pressor surge in a normotensive head injury. Your notes list lignocaine, atropine and a defasciculating dose of rocuronium as premedication; current emergency practice does not use them routinely, so they score nothing here.\n\nCricoid pressure: your script applies it routinely. DAS and many emergency services now make it optional and release it if it spoils the view. It is not scored either way.\n\nAfter intubation: head up 30 degrees, SpO2 94–98%, PaCO2 4.5–5.0 kPa, and a systolic of at least 110 mmHg for ages 15–49 and over 70 (at least 100 mmHg for 50–69; BTF). Your notes give systolic > 90; that is the older ATLS figure. Ongoing sedation with propofol 1–4 mg/kg/h plus fentanyl or morphine; your script's 50–200 microgram/kg/min (3–12 mg/kg/h) is above the usual range, and diazepam is not used. Tape rather than ties so neck veins are not compressed. No steroids (CRASH). Hypertonic saline or mannitol only for signs of herniation; brief hyperventilation only as a bridge to surgery.",
+  "cast": [
+    { "id": "patient", "name": "Mr Lee", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Yip", "role": "nurse" },
+    { "id": "medic", "name": "Paramedic", "role": "paramedic" }
+  ],
+  "vitals": {
+    "hr": 88,
+    "sbp": 136,
+    "dbp": 74,
+    "spo2": 93,
+    "rr": 14,
+    "gcs": 9,
+    "rhythm": "sinus",
+    "drift": { "spo2": -0.5 },
+    "stop": ["preox"],
+    "effects": [
+      { "scene": "preox", "add": { "spo2": 6 }, "overS": 90 },
+      { "scene": "intubated", "set": { "etco2": 5.4, "gcs": 3, "rr": 14 }, "add": { "hr": 8, "sbp": -10 }, "overS": 30 },
+      { "scene": "ventilated", "add": { "etco2": -0.7 }, "overS": 60 },
+      { "scene": "hypertonic", "add": { "sbp": 4 }, "overS": 60 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "prep",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Airway trolley",
+      "hint": "Prepare for a difficult airway: two suctions, videolaryngoscope, bougie, supraglottic airway, front-of-neck kit, capnography.",
+      "confirm": "Lay these out",
+      "opts": [
+        { "t": "Two working Yankauer suckers", "need": true, "mark": "Suction ready (blood in the airway)" },
+        { "t": "Videolaryngoscope and a direct laryngoscope, bougie", "need": true, "mark": "Laryngoscopes and bougie" },
+        { "t": "Size 7.0 and 8.0 tubes, cuffs checked, syringe", "need": true, "mark": "Tubes checked" },
+        { "t": "Second-generation supraglottic airway (plan B)", "need": true, "mark": "Supraglottic airway for plan B" },
+        { "t": "Scalpel–bougie–tube front-of-neck kit (plan D)", "need": true, "mark": "Front-of-neck kit for plan D" },
+        { "t": "Waveform capnography on the circuit", "need": true, "mark": "Waveform capnography ready" },
+        { "t": "Nasopharyngeal airway for his blocked nose", "trap": "critical", "r": "Blood from the ear and facial injuries: possible base of skull fracture. No nasal airways." }
+      ]
+    },
+    {
+      "id": "handover",
+      "kind": "history",
+      "to": "medic",
+      "label": "Paramedic handover",
+      "hint": "Mechanism, injuries, signs (including the first GCS), treatment.",
+      "groups": {
+        "Mechanism": [{ "t": "What happened and when?", "r": "Fell off a roof, about 5 m, onto grass, 40 minutes ago.", "mark": "Asks the mechanism and time" }],
+        "Injuries": [{ "t": "What have you found?", "r": "Facial swelling, blood from the left ear, a scalp laceration. Moving all limbs at scene.", "mark": "Asks the injuries" }],
+        "Signs": [
+          { "t": "GCS at scene and now?", "r": "GCS 13 at scene. Dropped to 9 in the ambulance. He vomited once.", "mark": "Asks the GCS trend (13 → 9)" },
+          { "t": "Pupils?", "r": "Left pupil looked bigger in the last few minutes." }
+        ],
+        "Treatment": [{ "t": "What have you given?", "r": "Oxygen, collar and blocks, one 18 G. No drugs.", "mark": "Asks the treatment given" }]
+      }
+    },
+    {
+      "id": "survey",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Primary survey",
+      "hint": "Airway first: blood in the mouth. Then B, C, and a full D.",
+      "groups": {
+        "Airway": [
+          { "t": "Look in the mouth; suction", "r": "Blood pooling in the pharynx. Gurgling clears with suction but returns.", "mark": "Suctions blood from the airway" },
+          { "t": "Manual in-line stabilisation", "r": "A second person holds the head; the collar front can open for laryngoscopy.", "mark": "Manual in-line stabilisation" }
+        ],
+        "B C": [
+          { "t": "Chest", "r": "Equal expansion and air entry, RR 14, no injuries." },
+          { "t": "Circulation", "r": "HR 88, BP 136/74, warm peripheries, abdomen soft, pelvis not tender." }
+        ],
+        "Disability": [
+          { "t": "GCS: eyes, voice, motor", "r": "Eyes open to pressure (E2), inappropriate words (V3), withdraws from pressure (M4): GCS 9.", "mark": "GCS scored by component: E2 V3 M4" },
+          { "t": "Pupils", "r": "Left 5 mm, sluggish. Right 3 mm, brisk.", "mark": "Finds an unequal pupil (left dilated)" },
+          { "t": "Glucose", "r": "6.8 mmol/L." }
+        ],
+        "Exposure": [
+          { "t": "Head and face", "r": "Bruising behind the left ear (Battle's sign). Blood-stained fluid from the left ear. Periorbital bruising.", "mark": "Recognises base of skull fracture signs" }
+        ]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Brief the team",
+      "hint": "Say why you are intubating, the plan A to D, roles, and read the checklist.",
+      "opts": [
+        { "t": "Indication: GCS 9 and falling, blood in the airway, needs CT and transfer", "mark": "States the indication to intubate" },
+        { "t": "Plan A videolaryngoscope with bougie, B supraglottic airway, C face mask, D scalpel–bougie–tube", "mark": "States plans A to D aloud" },
+        { "t": "Roles: I intubate, Nurse Yip drugs, colleague holds MILS, one watches the monitor", "mark": "Allocates roles" },
+        { "t": "Read the RSI checklist aloud", "mark": "Uses the RSI checklist" },
+        { "t": "Wait for the anaesthetist before doing anything", "trap": true, "r": "He is bleeding into his airway and his GCS is falling. Delaying twenty minutes is not safe." }
+      ]
+    },
+    {
+      "id": "drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Haemodynamically stable head injury: ketamine or etomidate, rocuronium or suxamethonium, fentanyl to blunt the surge.",
+      "confirm": "Draw these up",
+      "opts": [
+        { "t": "Ketamine 1.5 mg/kg IV", "need": true, "mark": "Appropriate induction agent and dose" },
+        { "t": "Rocuronium 1.2 mg/kg IV", "need": true, "mark": "Neuromuscular blocker at RSI dose" },
+        { "t": "Fentanyl 2 microgram/kg IV", "need": true, "mark": "Opioid to blunt the pressor response" },
+        { "t": "Vasopressor drawn up (metaraminol) for post-induction hypotension", "need": true, "mark": "Vasopressor ready for post-induction hypotension" },
+        { "t": "Lignocaine 1.5 mg/kg as premedication", "trap": true, "r": "No evidence it improves outcome; it is not part of current emergency RSI." },
+        { "t": "Dexamethasone 8 mg for brain swelling", "trap": "critical", "r": "Steroids increase mortality after head injury (CRASH trial)." },
+        { "t": "Propofol 2.5 mg/kg", "trap": true, "r": "A full propofol dose drops the pressure. Low pressure harms the injured brain." }
+      ]
+    },
+    {
+      "id": "tube",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Intubate",
+      "hint": "Pre-oxygenate with apnoeic oxygen, MILS, drugs, laryngoscope with bougie, confirm with waveform capnography, secure without ties.",
+      "opts": [
+        { "t": "Pre-oxygenate 3 minutes: non-rebreather plus nasal cannula at 15 L", "n": 1, "scene": "preox", "mark": "Pre-oxygenates with apnoeic oxygenation", "r": "SpO2 climbs to 99%." },
+        { "t": "Open the collar front; colleague holds in-line stabilisation", "n": 2, "mark": "Collar opened with MILS maintained" },
+        { "t": "Give induction agent, then the relaxant; wait 45–60 seconds", "n": 3, "mark": "Gives drugs in sequence and waits for relaxation" },
+        { "t": "Videolaryngoscope, suction, pass the bougie through the cords", "n": 4, "mark": "Suctions and uses a bougie" },
+        { "t": "Railroad a size 8 tube to 22 cm at the teeth; inflate the cuff", "n": 5, "mark": "Tube placed and cuff inflated" },
+        { "t": "Confirm with sustained waveform capnography", "n": 6, "scene": "intubated", "mark": "Confirms with waveform capnography", "r": "Square waves, ETCO2 5.4 kPa." },
+        { "t": "Secure with tape, not a tie round the neck", "n": 7, "mark": "Secures without compressing the neck veins" },
+        { "t": "Confirm the tube by listening to the chest alone", "trap": "critical", "r": "Auscultation misses oesophageal tubes. No trace, wrong place: use waveform capnography." }
+      ]
+    },
+    {
+      "id": "neuro",
+      "kind": "say",
+      "to": "nurse",
+      "label": "After the tube",
+      "hint": "Neuroprotection: head up, targets for oxygen, CO2 and pressure, sedation, and treat the dilated pupil.",
+      "opts": [
+        { "t": "Ventilate to PaCO2 4.5–5.0 kPa, SpO2 94–98%", "scene": "ventilated", "mark": "Targets normocapnia and normal oxygenation" },
+        { "t": "Head up 30 degrees, collar loosened or blocks and tape", "mark": "Head up 30 degrees, no venous obstruction" },
+        { "t": "Keep systolic at 110 or more (age 15–49)", "mark": "Age-appropriate systolic target" },
+        { "t": "Propofol and fentanyl infusions for sedation", "mark": "Continuous sedation and analgesia" },
+        { "t": "Hypertonic saline 3% (or mannitol) now for the dilated left pupil", "scene": "hypertonic", "mark": "Treats signs of herniation with hyperosmolar therapy" },
+        { "t": "Hyperventilate to an ETCO2 of 3 kPa for the next few hours", "trap": true, "r": "Prolonged hyperventilation causes cerebral vasoconstriction and ischaemia. Only briefly, as a bridge to theatre." }
+      ]
+    },
+    {
+      "id": "images",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Investigations",
+      "hint": "Tube position film, gas, then CT head and C-spine.",
+      "groups": {
+        "Bedside": [
+          { "t": "Chest X-ray for tube position", "r": "Tube tip about 5 cm above the carina.", "img": "xr:cxr-ett-good", "mark": "Checks tube position on a chest film" },
+          { "t": "Arterial gas after 10 minutes on the ventilator", "r": "pH 7.38, PaCO2 4.8, PaO2 22 kPa." }
+        ],
+        "CT": [
+          { "t": "CT head and cervical spine", "r": "Left biconvex hyperdense collection under a temporal fracture, midline shift about 6 mm.", "img": "ct:edh-l", "mark": "CT head and C-spine: left extradural haematoma with shift" }
+        ]
+      }
+    },
+    {
+      "id": "refer",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "Neurosurgery for evacuation; transfer with a doctor who can manage the airway.",
+      "opts": [
+        { "t": "Neurosurgeon: left EDH with shift and a dilated pupil — emergency evacuation", "mark": "Refers to neurosurgery for emergency evacuation", "r": "Neurosurgeon: Bring him straight to theatre. Keep the saline running." },
+        { "t": "Transfer with an airway-trained doctor, full monitoring, drugs and a checklist", "mark": "Safe transfer with an airway-competent escort" },
+        { "t": "Repeat CT in 6 hours to see if it grows", "trap": "critical", "r": "An extradural with shift and a blown pupil needs theatre now." }
+      ]
+    },
+    {
+      "id": "sbar",
+      "kind": "handover",
+      "to": "examiner",
+      "label": "Handover",
+      "hint": "SBAR to the neurosurgeon or ICU.",
+      "opts": [
+        { "t": "SBAR: 43, fall 5 m, GCS 13 → 9, left pupil blown, intubated at 10:52, left EDH with shift, 3% saline given, for theatre", "mark": "Structured handover with GCS trend, times and plan", "end": true, "r": "The neurosurgical registrar takes him to theatre." },
+        { "t": "Head injury, intubated, CT done", "trap": true, "r": "No GCS trend, no pupils, no times, no plan." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Which of these is a NICE indication to intubate after head injury?", "a": "Bleeding into the mouth", "why": "Also GCS 8 or less, loss of airway reflexes, ventilatory failure, hyperventilation, seizures, agitation preventing transfer.", "wrong": ["Any scalp laceration", "GCS 14 with vomiting once", "A single seizure before arrival with full recovery"] },
+        { "q": "Target PaCO2 after intubation for head injury?", "a": "4.5 to 5.0 kPa", "wrong": ["3.0 to 3.5 kPa", "6.0 to 7.0 kPa", "Any value, as long as SpO2 is normal"] },
+        { "q": "Cushing's response to raised ICP?", "a": "Hypertension, bradycardia, irregular breathing", "wrong": ["Hypotension, tachycardia, fever", "Tachypnoea and hypoxia", "Hypotension and bradycardia"] },
+        { "q": "Why avoid a nasal airway in this man?", "a": "Suspected base of skull fracture", "why": "Battle's sign and blood from the ear. A nasal tube or airway can pass into the cranial vault.", "wrong": ["He is intubated soon anyway", "Nasal airways cause hypoxia", "It raises intracranial pressure directly"] },
+        { "q": "Why tape rather than tie the tube?", "a": "Ties compress the jugular veins and raise ICP", "wrong": ["Tape is cheaper", "Ties damage the tube", "Tape allows a CT without artefact"] }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "plan-before-drugs", "first": ["prep", "plan"], "then": ["tube"], "fail": "You intubated before preparing the kit and briefing plans A to D.", "ok": "Kit and plans before the drugs." },
+    { "id": "airway-before-ct", "first": ["tube"], "then": ["images"], "fail": "CT before the airway was secured. A GCS 9 with blood in the mouth is intubated first.", "ok": "Airway secured before going to CT." }
+  ],
+  "badge": { "name": "Tube and Brain", "emoji": "🧠", "flavor": "No trace, wrong place. Head up, CO2 normal, pressure up." },
+  "cards": [
+    { "q": "After head injury, which PaCO2 range is the target?", "options": ["4.5–5.0 kPa", "3.0–3.5 kPa", "5.5–6.5 kPa", "Below 3 kPa"], "why": "Normocapnia. Hypocapnia causes cerebral ischaemia; hypercapnia raises ICP.", "source": "NICE NG232; BTF 4th edition" },
+    { "q": "Minimum systolic for a 30-year-old with severe TBI (BTF)?", "options": ["110 mmHg", "90 mmHg", "80 mmHg", "140 mmHg"], "why": "BTF 4th: ≥110 for ages 15–49 and over 70, ≥100 for 50–69.", "source": "Brain Trauma Foundation 4th edition", "note": "Older notes quote 90 mmHg." },
+    { "q": "Best confirmation of tracheal intubation?", "options": ["Sustained waveform capnography", "Auscultation of both axillae", "Misting in the tube", "Chest rise"], "why": "No trace, wrong place.", "source": "DAS; RCoA/NAP4" },
+    { "q": "Which drug worsens mortality after head injury?", "options": ["Corticosteroids", "Tranexamic acid", "Hypertonic saline", "Fentanyl"], "why": "The CRASH trial stopped steroids for head injury.", "source": "CRASH trial, Lancet 2004" },
+    { "q": "Battle's sign is…", "options": ["Bruising behind the ear", "Bruising around both eyes", "Blood behind the eardrum", "A boggy scalp swelling"], "why": "Mastoid bruising: a sign of base of skull fracture (with raccoon eyes, CSF leak, haemotympanum).", "source": "ATLS 11th edition" },
+    { "q": "Rocuronium dose for RSI?", "options": ["1.2 mg/kg", "0.1 mg/kg", "0.6 mg/kg", "3 mg/kg"], "why": "1.2 mg/kg gives intubating conditions in about 60 seconds.", "source": "DAS emergency airway practice" },
+    { "q": "GCS motor score for withdrawal from a painful stimulus?", "options": ["4", "3", "5", "2"], "why": "M6 obeys, M5 localises, M4 normal flexion/withdrawal, M3 abnormal flexion, M2 extension, M1 none.", "source": "Teasdale 2014; NICE NG232" }
+  ]
+}

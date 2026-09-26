@@ -1,0 +1,123 @@
+{
+  "id": "atls-drowning",
+  "gym": "atls",
+  "title": "Drowning",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 2. A 16-year-old boy was pulled from a public pool after an unknown time under water. The lifeguard started CPR. He arrives with CPR in progress; the monitor shows asystole. Temperature 35.0 °C.",
+  "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2021 and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, prevent fever (keep below 37.7 °C for 72 hours). Your notes say 'therapeutic hypothermia'; current ERC–ESICM guidance moved from cooling to 32–36 °C toward fever prevention.\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.",
+  "cast": [
+    { "id": "patient", "name": "Ka-ho", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Leung", "role": "nurse" },
+    { "id": "lifeguard", "name": "Lifeguard", "role": "man" }
+  ],
+  "vitals": {
+    "hr": 0,
+    "sbp": 0,
+    "dbp": 0,
+    "spo2": 0,
+    "rr": 0,
+    "temp": 35.0,
+    "rhythm": "asystole",
+    "effects": [
+      { "scene": "rosc", "set": { "hr": 118, "sbp": 94, "dbp": 52, "spo2": 82, "rr": 16, "etco2": 5.8 }, "rhythm": "sinus-tachy" },
+      { "scene": "peep", "add": { "spo2": 12 }, "overS": 60 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "lifeguard",
+      "label": "Lifeguard",
+      "hint": "How long under, diving?, what was done, when.",
+      "groups": {
+        "Event": [
+          { "t": "How long was he under?", "r": "Not sure — maybe 5 minutes. He was found at the bottom of the deep end.", "mark": "Asks the submersion time" },
+          { "t": "Did he dive in or hit anything?", "r": "No diving there. No marks on him.", "mark": "Asks about diving or trauma (spinal risk)" },
+          { "t": "What did you do and when?", "r": "Pulled him out, no breathing, gave rescue breaths and CPR at once. Water came up. About 15 minutes of CPR.", "mark": "Asks what CPR was done and for how long" }
+        ]
+      }
+    },
+    {
+      "id": "cpr",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Resuscitate",
+      "hint": "Airway and suction, 5 rescue breaths, 30:2, rhythm, adrenaline, intubate early.",
+      "opts": [
+        { "t": "Open the airway and suction the vomit", "n": 1, "mark": "Clears the airway with suction" },
+        { "t": "Five rescue breaths with bag-mask and oxygen", "n": 2, "mark": "Gives 5 initial rescue breaths (ERC)" },
+        { "t": "Compressions 30:2 at 100–120/min, 5–6 cm", "n": 3, "mark": "High-quality compressions" },
+        { "t": "Rhythm check: asystole — non-shockable", "n": 4, "mark": "Identifies a non-shockable rhythm" },
+        { "t": "IV or IO access; adrenaline 1 mg now, then every 3–5 min (temperature above 35)", "n": 5, "mark": "Adrenaline at the right interval for his temperature" },
+        { "t": "Intubate; waveform capnography; ventilate 10/min", "n": 6, "mark": "Early intubation with capnography" },
+        { "t": "Next rhythm check: organised rhythm with a pulse", "n": 7, "scene": "rosc", "mark": "Recognises ROSC", "r": "Sinus tachycardia 118 with a palpable femoral pulse." },
+        { "t": "Abdominal thrusts to empty the lungs first", "trap": "critical", "r": "Delays ventilation and causes vomiting and aspiration." },
+        { "t": "Put a rigid collar on before anything else", "trap": true, "r": "No diving or trauma history: a collar only obstructs the airway." }
+      ]
+    },
+    {
+      "id": "post",
+      "kind": "say",
+      "to": "nurse",
+      "label": "After ROSC",
+      "hint": "Oxygenate with PEEP, targets, temperature, stomach, investigations.",
+      "opts": [
+        { "t": "PEEP 8–10, SpO2 94–98%, normocapnia", "scene": "peep", "mark": "Lung-protective ventilation with PEEP" },
+        { "t": "Keep the temperature below 37.7 °C for 72 hours; rewarm gently to normal", "mark": "Post-arrest temperature control (prevent fever)" },
+        { "t": "Nasogastric tube to decompress the stomach", "mark": "Gastric decompression" },
+        { "t": "Keep him at 32 °C for 24 hours routinely", "trap": true, "r": "Current post-arrest guidance prevents fever rather than routinely cooling to 32–36." },
+        { "t": "Start IV antibiotics routinely for pool water", "trap": true, "r": "Only for grossly contaminated water or signs of infection." }
+      ]
+    },
+    {
+      "id": "tests",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Investigations",
+      "hint": "Chest film, gas, glucose, ECG.",
+      "groups": {
+        "Tests": [
+          { "t": "Chest X-ray", "r": "Tube in a good position. Bilateral patchy perihilar shadowing (aspiration and non-cardiogenic oedema).", "img": "xr:cxr-oedema", "mark": "Chest film: aspiration/oedema, tube position" },
+          { "t": "Arterial gas", "r": "pH 7.08, PaCO2 7.9, PaO2 8.2 on FiO2 1.0, lactate 9.", "mark": "Arterial gas" },
+          { "t": "12-lead ECG", "r": "Sinus tachycardia. QTc normal.", "img": "ecg:sinus-tachy", "mark": "12-lead ECG (arrhythmia, long QT as a cause)" },
+          { "t": "Glucose", "r": "11.2 mmol/L." }
+        ]
+      }
+    },
+    {
+      "id": "refer",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "Paediatric or adult ICU; talk to the family.",
+      "opts": [
+        { "t": "ICU: 16, drowning, 15 min CPR, ROSC, ventilated on PEEP 10, FiO2 1.0", "mark": "Refers to ICU with a clear summary", "r": "ICU: Coming down now." },
+        { "t": "Discharge after 6 hours if he wakes", "trap": "critical", "r": "He needed CPR and is ventilated. ICU." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "ERC: how many initial rescue breaths in drowning?", "a": "5", "wrong": ["2", "0 — compressions first", "10"] },
+        { "q": "Adrenaline below 30 °C core temperature?", "a": "Withhold it", "wrong": ["Double the dose", "Give every 1 minute", "Give as usual"] },
+        { "q": "Maximum shocks while below 30 °C?", "a": "3", "wrong": ["1", "6", "Unlimited"] },
+        { "q": "When are spinal precautions needed in drowning?", "a": "Diving, high-energy mechanism or signs of injury", "wrong": ["Always", "Never", "Only in the sea"] },
+        { "q": "Salt water versus fresh water drowning?", "a": "No difference in management", "wrong": ["Fresh water needs diuretics", "Salt water needs dialysis", "Fresh water needs hypertonic saline"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Lifeguard", "emoji": "🌊", "flavor": "Five breaths first. Hypoxia caused it; oxygen fixes it." },
+  "cards": [
+    { "q": "In drowning arrest, ERC recommends starting with…", "options": ["5 rescue breaths", "30 compressions", "Abdominal thrusts", "Defibrillation"], "why": "Drowning arrest is hypoxic.", "source": "ERC 2021 drowning", "note": "AHA: 2 initial breaths." },
+    { "q": "Abdominal thrusts to remove water in drowning are…", "options": ["Not recommended", "First-line", "Only for children", "Required before CPR"], "why": "They delay ventilation and cause aspiration.", "source": "ERC 2021" },
+    { "q": "Core temperature at which adrenaline is withheld in hypothermic arrest?", "options": ["Below 30 °C", "Below 35 °C", "Below 25 °C", "Below 32 °C"], "why": "Between 30 and 35 °C, double the dosing interval.", "source": "ERC 2021" },
+    { "q": "Post-arrest temperature target (ERC–ESICM 2021)?", "options": ["Prevent fever above 37.7 °C for 72 h", "Cool to 32 °C for 24 h in all", "Warm to 38.5 °C", "No temperature management"], "why": "Guidance moved to fever prevention.", "source": "ERC–ESICM 2021 post-resuscitation care" },
+    { "q": "Routine C-spine immobilisation after drowning is…", "options": ["Not indicated without diving or injury", "Always required", "Required in children only", "Required if the water was cold"], "why": "Spinal injury is rare without diving or trauma.", "source": "ERC 2021" },
+    { "q": "Typical chest X-ray after significant drowning?", "options": ["Patchy bilateral infiltrates (non-cardiogenic oedema)", "Tension pneumothorax", "Normal in all cases", "Lobar collapse only"], "why": "Aspiration and surfactant loss cause ARDS-like changes.", "source": "ERC 2021" }
+  ]
+}

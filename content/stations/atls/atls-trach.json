@@ -1,0 +1,108 @@
+{
+  "id": "atls-trach",
+  "gym": "atls",
+  "title": "Blocked tracheostomy",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 3. A 67-year-old man with a tracheostomy (inserted 3 weeks ago after a long ICU stay) has come from a rehabilitation ward. He is in respiratory distress. HR 124, BP 150/90, RR 34, SpO2 84% on oxygen via the tracheostomy mask. The bed-head sign says: 'Tracheostomy — patent upper airway. Cuffed tube with inner cannula.' Manage him.",
+  "notes": "Checked against the National Tracheostomy Safety Project (NTSP) emergency algorithms (UK, 2012 with later updates) and current HK hospital practice.\n\nFirst, is it a tracheostomy (upper airway still connects to the lungs) or a laryngectomy (a neck breather, no connection)? The bed-head sign tells you. With a tracheostomy you can oxygenate from both the face and the stoma, and intubate orally if needed; with a laryngectomy only the stoma works.\n\nNTSP sequence: call for help (airway expert); look, listen and feel at the mouth and the tracheostomy; high-flow oxygen to both the face and the stoma; waveform capnography on the tracheostomy. Is it patent? Remove the speaking valve or cap; remove the inner cannula; pass a suction catheter. If the catheter will not pass, deflate the cuff. If he is still not improving, remove the tracheostomy tube. Then: breathing? Oxygen to face and stoma. Not breathing? Start CPR and ventilate via the mouth (occlude the stoma) or via the stoma with a paediatric mask or supraglottic airway. Secondary: oral intubation with an uncut tube advanced beyond the stoma, or a small tube (6.0) or bougie via the stoma.\n\nYour tracheostomy notes follow this order; they add confirming placement with capnography, auscultation and fibreoptic view, which is correct. For bleeding (possible tracheo-innominate fistula), your notes are also correct: over-inflate the cuff, compress through the stoma against the sternum, and do not remove the tube until the airway is secured below the bleed.",
+  "cast": [
+    { "id": "patient", "name": "Mr Yuen", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Poon", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 124,
+    "sbp": 150,
+    "dbp": 90,
+    "spo2": 84,
+    "rr": 34,
+    "gcs": 14,
+    "rhythm": "sinus-tachy",
+    "drift": { "spo2": -1.5, "hr": 1 },
+    "stop": ["patent"],
+    "effects": [
+      { "scene": "patent", "add": { "spo2": 12, "hr": -18, "rr": -12 }, "overS": 45 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "Bed-head sign, look-listen-feel at the mouth and the stoma, capnography.",
+      "groups": {
+        "First": [
+          { "t": "Read the bed-head sign", "r": "Tracheostomy, patent upper airway, cuffed tube with an inner cannula.", "mark": "Checks the bed-head sign: tracheostomy, not laryngectomy" },
+          { "t": "Look, listen and feel at the mouth and the tracheostomy", "r": "Little airflow at the stoma; a faint whistle. Some air at the mouth. Chest heaving.", "mark": "Look, listen, feel at both mouth and stoma" },
+          { "t": "Waveform capnography on the tracheostomy", "r": "Weak, small trace.", "mark": "Uses capnography on the tracheostomy" }
+        ]
+      }
+    },
+    {
+      "id": "help",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Talk to the nurse",
+      "hint": "Call for help and give oxygen to both the face and the stoma.",
+      "opts": [
+        { "t": "Call the airway team (anaesthetist and ENT) now", "mark": "Calls for airway help early" },
+        { "t": "High-flow oxygen to the face and the stoma", "mark": "Oxygen to both face and stoma" },
+        { "t": "Oxygen only by face mask", "trap": true, "r": "He breathes mostly through the tracheostomy. Oxygen goes to both." }
+      ]
+    },
+    {
+      "id": "ntsp",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Is the tracheostomy patent?",
+      "hint": "Remove the speaking valve, remove the inner cannula, pass a suction catheter; if needed deflate the cuff; then remove the tube.",
+      "opts": [
+        { "t": "Remove any speaking valve or cap", "n": 1, "mark": "Removes speaking valve or cap" },
+        { "t": "Remove the inner cannula", "n": 2, "scene": "patent", "mark": "Removes the inner cannula", "r": "A thick plug of dried secretions comes out with it. Airflow returns at the stoma; ETCO2 trace grows." },
+        { "t": "Pass a suction catheter to check the tube is clear", "n": 3, "mark": "Passes a suction catheter to test patency" },
+        { "t": "Clean and replace the inner cannula; humidify the oxygen", "n": 4, "mark": "Replaces a clean inner cannula and humidifies" },
+        { "t": "Pull the whole tube out first", "trap": true, "r": "Remove the inner cannula and suction first; most blockages are in the inner cannula." },
+        { "t": "Bag hard through the blocked tube", "trap": "critical", "r": "Forcing air into a blocked or displaced tube causes surgical emphysema and no ventilation." }
+      ]
+    },
+    {
+      "id": "plan-b",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Examiner asks: if suction had failed?",
+      "hint": "Deflate the cuff; then remove the tube; oxygenate face and stoma; secondary airway options.",
+      "opts": [
+        { "t": "Deflate the cuff; if still no better, remove the tracheostomy tube", "mark": "Knows the next steps: deflate the cuff, then remove the tube" },
+        { "t": "If not breathing: CPR; ventilate by mouth (cover the stoma) or via the stoma with a small mask or LMA", "mark": "Knows the rescue ventilation routes" },
+        { "t": "Oral intubation with an uncut tube past the stoma, or a size 6.0 through the stoma", "mark": "Knows the secondary airway options" },
+        { "t": "Oxygen by mouth works just the same after a laryngectomy", "trap": "critical", "r": "A laryngectomy patient has no connection between mouth and lungs. Stoma only." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "How do you tell a tracheostomy from a laryngectomy at the bedside?", "a": "The bed-head sign and whether the upper airway connects", "wrong": ["By the tube colour", "By the patient's age", "By the size of the stoma alone"] },
+        { "q": "First manoeuvre to check tracheostomy patency?", "a": "Remove the inner cannula", "wrong": ["Remove the whole tube", "Inflate the cuff more", "Bag harder"] },
+        { "q": "A sentinel bleed from a 3-week-old tracheostomy suggests…", "a": "Tracheo-innominate fistula", "wrong": ["Granulation tissue only", "Normal healing", "Pneumothorax"] },
+        { "q": "First actions in massive tracheostomy bleeding?", "a": "Over-inflate the cuff and press through the stoma against the sternum", "wrong": ["Remove the tube immediately", "Suction deeply", "Deflate the cuff"] },
+        { "q": "Where does oxygen go in a laryngectomy patient?", "a": "The stoma only", "wrong": ["The mouth and nose", "Both mouth and stoma", "Nasal cannula"] }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "sign-first", "first": ["assess"], "then": ["ntsp"], "fail": "You worked on the tube without checking whether it is a tracheostomy or a laryngectomy.", "ok": "Bed-head sign checked first." }
+  ],
+  "badge": { "name": "Stoma Saver", "emoji": "🫧", "flavor": "Read the sign. Inner cannula out before the tube comes out." },
+  "cards": [
+    { "q": "In a tracheostomy emergency, oxygen goes to…", "options": ["Both the face and the stoma", "The face only", "The stoma only", "Neither until a new tube is in"], "why": "The upper airway is still patent in a tracheostomy.", "source": "NTSP" },
+    { "q": "In a laryngectomy patient, oxygen goes to…", "options": ["The stoma only", "The face only", "Both", "A nasal cannula"], "why": "No connection between the upper airway and the trachea.", "source": "NTSP" },
+    { "q": "First patency step in a blocked tracheostomy?", "options": ["Remove the speaking valve and inner cannula", "Remove the whole tube", "Give nebulised saline", "Increase the cuff pressure"], "why": "Most blockages are in the inner cannula.", "source": "NTSP" },
+    { "q": "If a suction catheter will not pass down the tracheostomy…", "options": ["Deflate the cuff, then consider removing the tube", "Push harder", "Bag vigorously", "Wait for ENT"], "why": "The tube may be displaced or blocked.", "source": "NTSP" },
+    { "q": "Massive bleeding from a tracheostomy weeks after insertion: first action?", "options": ["Hyper-inflate the cuff and apply pressure", "Remove the tube", "Pack the stoma with dry gauze and wait", "CT angiogram"], "why": "Tamponade the tracheo-innominate fistula while calling for surgery.", "source": "NTSP" },
+    { "q": "Tube for oral intubation in a tracheostomy patient?", "options": ["Uncut, advanced beyond the stoma", "Cut short at 18 cm", "Nasal tube", "Size 9.0 cuffless"], "why": "The cuff must sit below the stoma.", "source": "NTSP" }
+  ]
+}
