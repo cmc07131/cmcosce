@@ -1,0 +1,97 @@
+{
+  "id": "og-pelvic-exam",
+  "gym": "og",
+  "title": "Speculum and bimanual pelvic examination",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 4. A 26-year-old woman has lower abdominal pain and a vaginal discharge for 5 days. Her pregnancy test is negative. Perform a speculum and bimanual pelvic examination on the pelvic model, then present your findings.",
+  "notes": "Checked against the GMC guidance on intimate examinations and chaperones (2024), RCOG guidance on gynaecological examinations, and BASHH/NICE guidance on pelvic inflammatory disease (PID).\n\nIntimate examination: explain why, what it involves and that she can stop at any time; obtain and record consent; offer a chaperone (and record their name, or her refusal); privacy to undress with a cover; gloves; warm and lubricate the speculum. Speculum: inspect the vulva first, insert the closed speculum along the vaginal axis (downward and backward), rotate and open to see the cervix; take swabs (endocervical NAAT for chlamydia and gonorrhoea; high vaginal swab); close before withdrawing. Bimanual: two fingers in the vagina, other hand on the abdomen; cervical motion tenderness, uterine size, position and tenderness, adnexal masses or tenderness.\n\nPID (BASHH): treat on clinical suspicion (lower abdominal pain plus cervical motion or adnexal tenderness) without waiting for swabs: ceftriaxone 1 g IM once plus doxycycline 100 mg twice daily and metronidazole 400 mg twice daily for 14 days (outpatient regimen). Admit if severely unwell, pregnant, or tubo-ovarian abscess.\n\nYour notes list 'Bimanual pelvic exam' and 'PV exam' without detail; nothing conflicts.",
+  "cast": [
+    { "id": "patient", "name": "Ms Sin", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Chaperone", "role": "nurse" }
+  ],
+  "steps": [
+    {
+      "id": "consent",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Talk to Ms Sin",
+      "hint": "Introduce, explain, consent, chaperone, privacy.",
+      "mood": 6,
+      "turns": [
+        {
+          "line": "The nurse said you need to do an internal examination?",
+          "opts": [
+            { "t": "Yes — I'd like to look at the neck of the womb with a speculum and then feel with two fingers, to find the cause of the pain. It may be uncomfortable; you can ask me to stop at any time. Is that OK?", "r": "OK… yes, that's fine.", "mood": -2, "mark": "Explains the examination and obtains consent" },
+            { "t": "Just lie back, it'll be quick.", "r": "Wait, what are you going to do?", "mood": 3 }
+          ]
+        },
+        {
+          "line": "Does someone else have to be here?",
+          "opts": [
+            { "t": "I'd like a chaperone, Nurse Chaperone, to be present; I'll note her name. I'll leave while you undress and there's a sheet to cover you.", "r": "Thank you.", "mood": -2, "mark": "Offers a chaperone and ensures privacy" },
+            { "t": "No, we don't bother with that.", "r": "I'd feel better with someone here…", "mood": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Abdomen first, vulva, speculum and swabs, then bimanual.",
+      "groups": {
+        "Prepare": [
+          { "t": "Wash hands, gloves, warm and lubricate the speculum; position (knees bent, ankles together, knees apart)", "r": "Ready.", "mark": "Hand hygiene, gloves and positioning" },
+          { "t": "Palpate the abdomen first", "r": "Tender in both iliac fossae, no guarding.", "mark": "Examines the abdomen first" }
+        ],
+        "Speculum": [
+          { "t": "Inspect the vulva", "r": "Normal vulva, some yellow discharge at the introitus.", "mark": "Inspects the vulva" },
+          { "t": "Insert the closed speculum, rotate, open, visualise the cervix", "r": "Cervix inflamed, bleeds on contact, mucopurulent discharge from the os.", "mark": "Visualises the cervix correctly" },
+          { "t": "Swabs: endocervical NAAT (chlamydia/gonorrhoea) and high vaginal swab", "r": "Taken.", "mark": "Takes the appropriate swabs" },
+          { "t": "Withdraw the speculum", "r": "Closed as it comes out past the cervix.", "mark": "Closes the speculum before withdrawal" }
+        ],
+        "Bimanual": [
+          { "t": "Move the cervix gently side to side", "r": "Cervical motion tenderness.", "mark": "Tests for cervical motion tenderness" },
+          { "t": "Uterus: size, position, tenderness", "r": "Anteverted, normal size, mildly tender." },
+          { "t": "Both adnexa", "r": "Tender on both sides, no mass.", "mark": "Examines both adnexa" }
+        ]
+      }
+    },
+    {
+      "id": "present",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Present",
+      "hint": "Summarise findings, diagnosis, plan.",
+      "opts": [
+        { "t": "Mucopurulent cervicitis, cervical motion and bilateral adnexal tenderness, negative pregnancy test: pelvic inflammatory disease", "mark": "Presents findings and a working diagnosis of PID" },
+        { "t": "Start treatment now without waiting for swabs: ceftriaxone 1 g IM, doxycycline and metronidazole for 14 days; partner notification; review in 72 hours", "mark": "Treats empirically with BASHH regimen and arranges follow-up" },
+        { "t": "Wait for the swab results before any antibiotics", "trap": true, "r": "Delayed treatment increases the risk of infertility and ectopic pregnancy." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Minimum criteria to treat PID empirically?", "a": "Lower abdominal pain with cervical motion or adnexal tenderness", "wrong": ["Positive chlamydia test only", "Fever over 39 °C", "Ultrasound evidence"] },
+        { "q": "Long-term complications of PID?", "a": "Infertility, ectopic pregnancy, chronic pelvic pain", "wrong": ["Ovarian cancer", "Endometriosis", "Menopause"] },
+        { "q": "Which swab detects chlamydia best?", "a": "Endocervical or vulvovaginal NAAT", "wrong": ["High vaginal culture", "Blood culture", "Urine microscopy"] },
+        { "q": "When should a chaperone be offered?", "a": "For all intimate examinations, and the outcome recorded", "wrong": ["Only for male doctors", "Only if the patient asks", "Only under 16"] },
+        { "q": "Fitz-Hugh–Curtis syndrome is…", "a": "Perihepatitis causing right upper quadrant pain in PID", "wrong": ["Ovarian torsion", "Appendicitis in pregnancy", "A cervical polyp"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Sensitive Hands", "emoji": "🌸", "flavor": "Consent and a chaperone first. Motion tenderness: treat now." },
+  "cards": [
+    { "q": "First-line outpatient PID regimen (BASHH)?", "options": ["Ceftriaxone 1 g IM + doxycycline + metronidazole 14 days", "Amoxicillin 5 days", "Fluconazole once", "Nitrofurantoin 3 days"], "why": "Covers gonorrhoea, chlamydia and anaerobes.", "source": "BASHH PID guideline" },
+    { "q": "Cervical motion tenderness suggests…", "options": ["Pelvic inflammatory disease or ectopic pregnancy", "Normal findings", "Cystitis", "Constipation"], "why": "Peritoneal irritation in the pelvis.", "source": "BASHH" },
+    { "q": "Before an intimate examination you must…", "options": ["Explain, get consent and offer a chaperone", "Only ask the nurse to stay", "Examine first, explain later", "Get written consent"], "why": "Record the consent and the chaperone's name.", "source": "GMC 2024" },
+    { "q": "The speculum is inserted…", "options": ["Closed, along the vaginal axis downward and backward", "Open, straight up", "Sideways, open", "Only after bimanual"], "why": "Then rotated and opened to see the cervix.", "source": "Clinical skills" },
+    { "q": "PID treatment should start…", "options": ["On clinical suspicion, before results", "Only after a positive swab", "After ultrasound", "After partner testing"], "why": "Delay increases complications.", "source": "BASHH" },
+    { "q": "Admission criterion in PID?", "options": ["Tubo-ovarian abscess or pregnancy", "Mild pain", "Discharge only", "Age over 20"], "why": "Also severe illness or failure of oral therapy.", "source": "BASHH" }
+  ]
+}

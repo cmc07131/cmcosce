@@ -1,0 +1,82 @@
+{
+  "id": "og-delivery",
+  "gym": "og",
+  "title": "Emergency delivery and third stage",
+  "type": "skills",
+  "time": 420,
+  "stem": "ED delivery room. A woman at 39 weeks in her second pregnancy is pushing, with the head crowning. The obstetric team is 15 minutes away. Conduct the delivery and the third stage on the manikin.",
+  "notes": "Checked against NICE NG235 (Intrapartum care, 2023) and RCOG guidance.\n\nPrepare two teams (mother, baby), PPE, warm towels. Controlled delivery of the head: flex it with the palm and guard the perineum; ask her to pant rather than push as the head crowns. Feel for a nuchal cord (slip it over the head if loose; 'somersault' delivery if tight — clamping and cutting before delivery is a last resort). Wait for restitution; deliver the anterior shoulder with gentle downward traction with the next contraction, then the posterior shoulder upwards. Baby dried and placed skin to skin; delayed cord clamping for at least 60 seconds in a well baby (NICE). Routine suctioning is not recommended.\n\nThird stage (NICE): active management — oxytocin 10 IU IM after the birth of the anterior shoulder or after the baby, deferred cord clamping, then controlled cord traction after signs of separation (gush of blood, cord lengthening, fundus rises and becomes globular), guarding the uterus above the pubis to avoid inversion. Check the placenta and membranes are complete, check for tears, and estimate blood loss. Prolonged third stage (NICE NG235): not completed within 30 minutes with active management, or 60 minutes with physiological management. Your notes' 30 minutes is correct for active management.\n\nYour notes choose Syntometrine for routine use; NICE recommends oxytocin 10 IU IM (fewer side effects: vomiting, hypertension). Syntometrine is contraindicated in pre-eclampsia, as your notes say.",
+  "cast": [
+    { "id": "patient", "name": "Mrs Lai", "role": "patient" },
+    { "id": "midwife", "name": "Nurse Chiu", "role": "nurse" }
+  ],
+  "steps": [
+    {
+      "id": "prep",
+      "kind": "pick",
+      "to": "midwife",
+      "label": "Prepare",
+      "hint": "Teams, PPE, warm towels, cord clamps, oxytocin, resuscitaire.",
+      "confirm": "Ready",
+      "opts": [
+        { "t": "Call obstetrics and neonatology; one team for mother, one for baby", "need": true, "mark": "Calls for help and forms two teams" },
+        { "t": "PPE; sterile delivery pack with two clamps and scissors", "need": true, "mark": "Delivery pack and PPE" },
+        { "t": "Warm towels, hat, resuscitaire on", "need": true, "mark": "Warmth for the baby" },
+        { "t": "Oxytocin 10 IU drawn up for the third stage", "need": true, "mark": "Oxytocin ready for active third stage" }
+      ]
+    },
+    {
+      "id": "birth",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Deliver the baby",
+      "hint": "Flex and control the head, check for cord, wait for restitution, anterior then posterior shoulder.",
+      "opts": [
+        { "t": "Palm on the head to keep it flexed; other hand guarding the perineum", "n": 1, "mark": "Controls the head and guards the perineum" },
+        { "t": "Ask her to pant as the head crowns", "n": 2, "mark": "Slow controlled crowning" },
+        { "t": "Feel for a nuchal cord: loose — slip it over the head", "n": 3, "mark": "Checks for and manages nuchal cord" },
+        { "t": "Wait for restitution (the head turns to face a thigh)", "n": 4, "mark": "Waits for restitution" },
+        { "t": "With the next contraction: gentle downward traction for the anterior shoulder, then upward for the posterior", "n": 5, "mark": "Delivers shoulders with gentle axial traction" },
+        { "t": "Baby dried, skin to skin, crying; clamp the cord after at least 60 seconds", "n": 6, "mark": "Dries baby, skin-to-skin, delayed cord clamping" },
+        { "t": "Suction the baby's mouth and nose routinely", "trap": true, "r": "Not recommended routinely in a vigorous baby; it can cause bradycardia." }
+      ]
+    },
+    {
+      "id": "third",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Third stage",
+      "hint": "Oxytocin IM, wait for separation signs, controlled cord traction guarding the uterus, check placenta and tears.",
+      "opts": [
+        { "t": "Exclude a second twin (palpate the abdomen); oxytocin 10 IU IM", "n": 1, "mark": "Excludes a twin and gives oxytocin 10 IU IM" },
+        { "t": "Wait for signs of separation: gush of blood, cord lengthens, uterus firms and rises", "n": 2, "mark": "Recognises signs of placental separation" },
+        { "t": "Controlled cord traction with the other hand guarding the uterus above the pubis", "n": 3, "mark": "Controlled cord traction with uterine guarding" },
+        { "t": "Check placenta and membranes complete; three vessels in the cord", "n": 4, "mark": "Checks placenta, membranes and cord vessels" },
+        { "t": "Check the fundus is contracted; inspect for tears; estimate blood loss", "n": 5, "mark": "Checks tone, tears and blood loss" },
+        { "t": "Pull hard on the cord straight away", "trap": "critical", "r": "Traction before separation, without guarding the uterus, risks uterine inversion." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "NICE drug for active management of the third stage?", "a": "Oxytocin 10 IU IM", "wrong": ["Syntometrine for all", "Misoprostol 800 microgram", "Carboprost 250 microgram"] },
+        { "q": "Contraindication to Syntometrine?", "a": "Pre-eclampsia / hypertension", "wrong": ["Asthma", "Multiparity", "Diabetes"] },
+        { "q": "Signs of placental separation?", "a": "Gush of blood, cord lengthening, uterus rises and becomes globular", "wrong": ["Maternal fever", "Fetal crying", "Contractions stop completely"] },
+        { "q": "Prolonged third stage with active management (NICE)?", "a": "Not completed within 30 minutes", "wrong": ["Within 5 minutes", "Within 6 hours", "Within 24 hours"] },
+        { "q": "Delayed cord clamping in a well term baby?", "a": "At least 60 seconds", "wrong": ["Immediately", "After 10 minutes", "Only preterm babies"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Safe Hands", "emoji": "🍼", "flavor": "Flex, guard, restitute. Oxytocin, wait, guard the uterus." },
+  "cards": [
+    { "q": "Restitution means…", "options": ["The head rotates back in line with the shoulders after delivery", "The placenta separating", "The cord being cut", "The baby's first breath"], "why": "Wait for it before delivering the shoulders.", "source": "Obstetric mechanics" },
+    { "q": "Uterine inversion is prevented by…", "options": ["Guarding the uterus during controlled cord traction", "Fundal pressure", "Early cord traction", "Giving ergometrine"], "why": "Traction before separation, without counter-pressure, inverts the uterus.", "source": "NICE NG235" },
+    { "q": "Normal umbilical cord vessels?", "options": ["Two arteries, one vein", "One artery, two veins", "Two arteries, two veins", "One artery, one vein"], "why": "A single umbilical artery is associated with anomalies.", "source": "Anatomy" },
+    { "q": "NICE prolonged third stage with active management?", "options": ["Over 30 minutes", "Over 60 minutes", "Over 10 minutes", "Over 2 hours"], "why": "60 minutes with physiological management.", "source": "NICE NG235" },
+    { "q": "Tight nuchal cord that cannot be slipped over the head?", "options": ["Somersault manoeuvre, or clamp and cut as a last resort", "Pull the baby out quickly", "Push the head back in", "Wait for the next day"], "why": "Keep the baby's head close to the perineum as the body delivers.", "source": "RCOG / ALSO" },
+    { "q": "Why exclude a second twin before oxytocin?", "options": ["Oxytocin contracts the uterus on the second baby", "Twins need antibiotics", "To decide cord clamping", "To estimate weight"], "why": "Palpate before the third-stage drug.", "source": "Obstetric practice" }
+  ]
+}

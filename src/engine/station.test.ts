@@ -197,7 +197,10 @@ test('station scripts: each compiles, validates, and holds its own weight', () =
     assert.ok(st.notes.length >= 120, `${st.id}: guideline notes too thin`)
     assert.ok(st.steps.some((s) => s.kind === 'viva'), `${st.id}: no examiner questions`)
     assert.ok((st.cards ?? []).length >= 6, `${st.id}: needs at least 6 flashcards`)
-    for (const card of st.cards ?? []) assert.equal(new Set(card.options).size, 4, `${st.id}: repeated option in "${card.q}"`)
+    for (const card of st.cards ?? []) {
+      assert.equal(new Set(card.options).size, 4, `${st.id}: repeated option in "${card.q}"`)
+      assert.ok(card.why.trim().length > 0, `${st.id}: card "${card.q}" has no explanation`)
+    }
     const refs = [
       ...st.steps.flatMap((s) => [s.img, ...(s.opts ?? []).map((o) => o.img), ...Object.values(s.groups ?? {}).flat().map((o) => o.img), ...(s.qs ?? []).map((q) => q.img), ...(s.turns ?? []).flatMap((t) => t.opts.map((o) => o.img))]),
     ].filter((r): r is string => Boolean(r))

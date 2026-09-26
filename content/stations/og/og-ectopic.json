@@ -1,0 +1,112 @@
+{
+  "id": "og-ectopic",
+  "gym": "og",
+  "title": "PV bleeding in early pregnancy: ruptured ectopic",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 3. A 29-year-old woman has lower abdominal pain and light vaginal bleeding; her last period was 7 weeks ago. She fainted at home. HR 118, BP 86/50, RR 22, SpO2 98%, GCS 15. She says she might be pregnant.",
+  "notes": "Checked against NICE NG126 (Ectopic pregnancy and miscarriage, 2019, updated 2023), RCOG/AEPU guidance and ATLS principles for haemorrhage.\n\nAny woman of reproductive age with abdominal pain, bleeding or collapse needs a pregnancy test. Shock with a positive test is a ruptured ectopic until proven otherwise: resuscitate (two large-bore cannulae, crossmatch, blood early), call the gynaecology team for theatre (laparoscopy or laparotomy), and do not delay for formal ultrasound. A bedside ultrasound showing an empty uterus and free fluid supports the diagnosis. Anti-D is given to rhesus-negative women having surgery for an ectopic pregnancy (NICE). Shoulder-tip pain suggests haemoperitoneum.\n\nYour notes list the topic 'PVB early pregnancy' without detail; nothing conflicts. Stable women with a suspected ectopic go to the early pregnancy assessment unit for transvaginal ultrasound and serum hCG.",
+  "cast": [
+    { "id": "patient", "name": "Ms Leung", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Wai", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 118,
+    "sbp": 86,
+    "dbp": 50,
+    "spo2": 98,
+    "rr": 22,
+    "gcs": 15,
+    "rhythm": "sinus-tachy",
+    "drift": { "sbp": -2, "hr": 2 },
+    "stop": ["blood"],
+    "effects": [{ "scene": "blood", "add": { "sbp": 16, "dbp": 10, "hr": -12 }, "overS": 90 }]
+  },
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "Short and targeted: LMP, pain, bleeding, shoulder tip, risk factors.",
+      "groups": {
+        "Pregnancy": [
+          { "t": "When was your last period? Could you be pregnant?", "r": "Seven weeks ago. I did a test last week — positive.", "mark": "Establishes a positive pregnancy and gestation" },
+          { "t": "Any scan yet this pregnancy?", "r": "No, I haven't booked yet.", "mark": "Asks whether an intrauterine pregnancy has been confirmed" }
+        ],
+        "Symptoms": [
+          { "t": "Tell me about the pain", "r": "Sudden, sharp, left lower belly, 3 hours ago. Now all over.", "mark": "Characterises the pain" },
+          { "t": "Any pain in your shoulder?", "r": "Yes, my right shoulder tip hurts when I lie down.", "mark": "Asks about shoulder-tip pain" },
+          { "t": "How much bleeding?", "r": "Just spotting, dark." }
+        ],
+        "Risks": [
+          { "t": "Previous ectopic, pelvic infection, tubal surgery, coil, IVF?", "r": "I had chlamydia two years ago.", "mark": "Asks ectopic risk factors" },
+          { "t": "Blood group, if known", "r": "O negative, I think." }
+        ]
+      }
+    },
+    {
+      "id": "resus",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Resuscitate",
+      "hint": "Two cannulae, bloods and crossmatch, urine or serum hCG, blood early.",
+      "confirm": "Now",
+      "opts": [
+        { "t": "Two large-bore cannulae; FBC, crossmatch 4 units, clotting, group and antibodies", "need": true, "mark": "Access and crossmatch" },
+        { "t": "Urine pregnancy test now (and serum hCG)", "need": true, "mark": "Confirms pregnancy at the bedside" },
+        { "t": "O-negative blood; major haemorrhage protocol", "need": true, "scene": "blood", "mark": "Transfuses early" },
+        { "t": "Nil by mouth; analgesia", "need": true, "mark": "Prepares for theatre; analgesia" },
+        { "t": "Send her to the early pregnancy unit for a scan tomorrow", "trap": "critical", "r": "She is shocked. Theatre, not tomorrow's clinic." }
+      ]
+    },
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Abdomen; bedside ultrasound. No need for a speculum before theatre in shock.",
+      "groups": {
+        "Abdomen": [{ "t": "Palpate the abdomen", "r": "Distended, generalised tenderness and guarding, worst in the left iliac fossa.", "mark": "Finds peritonism" }],
+        "Bedside ultrasound": [
+          { "t": "Transabdominal ultrasound", "r": "Empty uterus; free fluid in the pouch of Douglas; a left adnexal mass.", "img": "us:early-ectopic", "mark": "Ultrasound: empty uterus, free fluid, adnexal mass" },
+          { "t": "FAST right upper quadrant", "r": "Free fluid in Morison's pouch.", "img": "us:fast-ruq-pos" }
+        ]
+      }
+    },
+    {
+      "id": "refer",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "Gynaecology registrar for theatre now; anti-D.",
+      "opts": [
+        { "t": "Gynaecology: suspected ruptured ectopic, shocked, haemoperitoneum — emergency laparoscopy/laparotomy", "mark": "Refers for emergency surgery", "r": "Gynae registrar: Theatre is ready, bring her up." },
+        { "t": "Anti-D immunoglobulin because she is rhesus negative", "mark": "Anti-D for a rhesus-negative woman having surgery" },
+        { "t": "Methotrexate and review in 4 days", "trap": "critical", "r": "Methotrexate is for stable, unruptured ectopics with low hCG. She has ruptured." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Which woman needs a pregnancy test?", "a": "Any woman of reproductive age with abdominal pain, bleeding or collapse", "wrong": ["Only if she says she is pregnant", "Only if her period is late", "Only before X-rays"] },
+        { "q": "Commonest site of ectopic pregnancy?", "a": "Ampulla of the fallopian tube", "wrong": ["Ovary", "Cervix", "Abdomen"] },
+        { "q": "Shoulder-tip pain in ectopic pregnancy is due to…", "a": "Blood irritating the diaphragm", "wrong": ["Muscle strain", "Pneumothorax", "Gallstones"] },
+        { "q": "Candidate for methotrexate?", "a": "Stable, unruptured, no heartbeat, hCG under 1500 IU/L", "wrong": ["Shocked with haemoperitoneum", "Any ectopic", "Heterotopic with a live IUP"] },
+        { "q": "Anti-D after ectopic surgery?", "a": "Yes, for rhesus-negative women", "wrong": ["Never", "Only for rhesus-positive women", "Only after 20 weeks"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Tube Watch", "emoji": "🧪", "flavor": "Positive test plus shock: theatre now." },
+  "cards": [
+    { "q": "Collapse, abdominal pain and a positive pregnancy test: think…", "options": ["Ruptured ectopic pregnancy", "Threatened miscarriage", "Hyperemesis", "UTI"], "why": "Resuscitate and call gynaecology.", "source": "NICE NG126" },
+    { "q": "Ultrasound supporting ectopic pregnancy?", "options": ["Empty uterus, free fluid, adnexal mass", "Intrauterine sac with yolk sac", "Twin pregnancy", "Normal ovaries only"], "why": "Pseudo-sac can mimic an intrauterine sac.", "source": "NICE NG126" },
+    { "q": "Anti-D in early pregnancy loss (NICE) is given for…", "options": ["Rhesus-negative women having surgical management of ectopic or miscarriage", "All women", "Rhesus-positive only", "Medical management of miscarriage only"], "why": "Not needed for medical management or threatened miscarriage.", "source": "NICE NG126 (2023)" },
+    { "q": "Risk factor for ectopic pregnancy?", "options": ["Previous pelvic inflammatory disease", "Multiparity alone", "Vegetarian diet", "Blood group O"], "why": "Tubal damage.", "source": "NICE NG126" },
+    { "q": "Methotrexate criteria include hCG below…", "options": ["1500 IU/L", "50,000 IU/L", "10 IU/L", "5000 IU/L only with a heartbeat"], "why": "No pain, no heartbeat, unruptured, able to follow up.", "source": "NICE NG126" },
+    { "q": "Where is ectopic free fluid first seen on ultrasound?", "options": ["Pouch of Douglas", "Morison's pouch", "Pericardium", "Splenorenal angle"], "why": "The most dependent part of the pelvis.", "source": "Ultrasound anatomy" }
+  ]
+}

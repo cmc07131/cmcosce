@@ -1,0 +1,77 @@
+{
+  "id": "og-shoulder",
+  "gym": "og",
+  "title": "Shoulder dystocia",
+  "type": "skills",
+  "time": 420,
+  "stem": "Delivery room in the ED. A woman at term is delivering on the trolley before the obstetric team arrives. The head has delivered but it has pulled back tight against the perineum, and the next push does not deliver the shoulders. A midwife and a nurse are with you. Manage the delivery on the manikin.",
+  "notes": "Checked against RCOG Green-top Guideline 42 (Shoulder dystocia, 2012, reviewed) and the ALSO (HELPERR) course.\n\nRecognise: the 'turtle sign' (the head retracts against the perineum) and failure of routine axial traction. State 'shoulder dystocia' aloud, call for help, note the time the head delivered. Avoid excessive or downward traction, fundal pressure and pulling on the neck.\n\nFirst: McRoberts (hyperflex the hips, thighs to the abdomen) with suprapubic pressure over the posterior aspect of the anterior shoulder (continuous, then rocking) — resolves most cases. Then internal manoeuvres or delivery of the posterior arm (RCOG gives no fixed order); rotational manoeuvres: Rubin II (behind the anterior shoulder), Woods' screw (in front of the posterior shoulder), reverse Woods'. All-fours (Gaskin) is an alternative, especially without an epidural. Third-line: deliberate clavicle fracture, Zavanelli (cephalic replacement), symphysiotomy.\n\nYour notes use HELPERR, which matches ALSO. Difference: episiotomy is not needed in every case; RCOG uses it only to make room for internal manoeuvres. Document times and manoeuvres; debrief; paediatric review for brachial plexus injury.",
+  "cast": [
+    { "id": "patient", "name": "Mrs Chui", "role": "patient" },
+    { "id": "midwife", "name": "Midwife Tong", "role": "nurse" }
+  ],
+  "steps": [
+    {
+      "id": "recognise",
+      "kind": "say",
+      "to": "midwife",
+      "label": "Talk to the midwife",
+      "hint": "Name it, call for help, note the time, stop pushing.",
+      "opts": [
+        { "t": "'This is a shoulder dystocia.' Call obstetrics, neonatology and anaesthetics; note the time of head delivery", "mark": "States shoulder dystocia, calls for help, notes the time" },
+        { "t": "Ask her to stop pushing for now", "mark": "Stops maternal pushing during manoeuvres" },
+        { "t": "Pull harder on the head", "trap": "critical", "r": "Excessive traction causes brachial plexus injury." },
+        { "t": "Push on the top of the uterus", "trap": "critical", "r": "Fundal pressure worsens impaction and risks uterine rupture." }
+      ]
+    },
+    {
+      "id": "manoeuvres",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Manoeuvres",
+      "hint": "McRoberts + suprapubic pressure; then posterior arm or rotation; then all-fours.",
+      "opts": [
+        { "t": "McRoberts: lie her flat, two helpers hyperflex her hips, thighs onto the abdomen", "n": 1, "mark": "McRoberts manoeuvre" },
+        { "t": "Suprapubic pressure from the side of the fetal back, over the anterior shoulder, continuous then rocking, with gentle axial traction", "n": 2, "mark": "Suprapubic pressure from the fetal back side" },
+        { "t": "Still stuck: hand in posteriorly; deliver the posterior arm by flexing the elbow and sweeping across the chest", "n": 3, "mark": "Delivers the posterior arm" },
+        { "t": "Or rotate: pressure behind the anterior shoulder (Rubin II) and in front of the posterior shoulder (Woods' screw)", "n": 4, "mark": "Internal rotational manoeuvres" },
+        { "t": "Shoulders deliver; baby to the resuscitaire; note the time", "n": 5, "mark": "Delivers and hands the baby for neonatal assessment", "r": "The baby is floppy at first, then cries after inflation breaths. Head-to-body interval 3 minutes." },
+        { "t": "Routine large episiotomy before anything else", "trap": true, "r": "Shoulder dystocia is a bony problem. Episiotomy only to make room for internal manoeuvres." }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "midwife",
+      "label": "After the birth",
+      "hint": "Watch for PPH and tears; document; baby review; debrief.",
+      "opts": [
+        { "t": "Anticipate PPH and perineal tears; active third stage", "mark": "Anticipates maternal complications" },
+        { "t": "Document times, manoeuvres, who was present, which shoulder was anterior", "mark": "Documents contemporaneously" },
+        { "t": "Paediatric review for brachial plexus injury and fractures; debrief the parents", "mark": "Neonatal review and parent debrief" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "What is the turtle sign?", "a": "The delivered head retracts against the perineum", "wrong": ["Maternal neck swelling", "Fetal bradycardia", "A slow second stage"] },
+        { "q": "First-line manoeuvres?", "a": "McRoberts and suprapubic pressure", "wrong": ["Zavanelli", "Fundal pressure", "Episiotomy alone"] },
+        { "q": "Where is suprapubic pressure applied?", "a": "Over the posterior aspect of the anterior shoulder, from the fetal back side", "wrong": ["On the fundus", "On the perineum", "On the maternal sacrum"] },
+        { "q": "Commonest fetal injury?", "a": "Brachial plexus injury (Erb's palsy)", "wrong": ["Skull fracture", "Spinal cord transection", "Cleft palate"] },
+        { "q": "Third-line options?", "a": "Clavicle fracture, Zavanelli, symphysiotomy", "wrong": ["Oxytocin infusion", "Forceps rotation", "Waiting for the next contraction"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Shoulder Shrug", "emoji": "🐢", "flavor": "Say it, call, McRoberts plus pressure. Never pull or push the fundus." },
+  "cards": [
+    { "q": "McRoberts manoeuvre is…", "options": ["Hyperflexion of the maternal hips", "Pressure on the fundus", "Rotation of the posterior shoulder", "Delivery on all fours"], "why": "Straightens the sacrum and rotates the symphysis.", "source": "RCOG GTG 42" },
+    { "q": "Contraindicated in shoulder dystocia?", "options": ["Fundal pressure", "Suprapubic pressure", "McRoberts", "All-fours position"], "why": "Worsens impaction.", "source": "RCOG GTG 42" },
+    { "q": "Is episiotomy mandatory in shoulder dystocia?", "options": ["No — only to allow internal manoeuvres", "Yes, always first", "Only in multiparous women", "Only after Zavanelli"], "why": "It is a bony obstruction.", "source": "RCOG GTG 42", "note": "HELPERR lists episiotomy as E." },
+    { "q": "Woods' screw applies pressure…", "options": ["To the anterior aspect of the posterior shoulder", "To the fetal head", "To the maternal abdomen", "To the anterior aspect of the anterior shoulder"], "why": "Rotates the shoulders through 180°.", "source": "RCOG GTG 42" },
+    { "q": "Risk factor for shoulder dystocia?", "options": ["Fetal macrosomia", "Preterm birth", "Breech", "Oligohydramnios"], "why": "Also maternal diabetes, obesity, previous dystocia.", "source": "RCOG GTG 42" },
+    { "q": "What must be recorded after shoulder dystocia?", "options": ["Head-to-body interval and manoeuvres", "Only the Apgar", "Only the birth weight", "Nothing if the baby is well"], "why": "Clinical and medicolegal importance.", "source": "RCOG GTG 42" }
+  ]
+}
