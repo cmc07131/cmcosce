@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { test } from 'node:test'
 import { keyToBtn } from '../game/input'
+import { ecgAt, pacedBeat } from '../game/bench/Monitor'
 import { cicoCaseFor, judgeIncision, neckFeelAt, NECK, type CicoCase } from '../game/cico/case'
 import { falseTract, freshCicoRun, scoreCico, type CicoRun } from '../game/cico/score'
 import { contracting, cordCaseFor, fhrTarget, freshCordRun, scoreCord, type CordCase, type CordRun } from '../game/cord/model'
@@ -475,4 +476,14 @@ test('cord bench: a delayed theatre needs a filled, clamped bladder; replacing t
   assert.ok(!replaced.marks.includes('MS-11'))
   const unneeded = scoreCord({ ...goodCord(), terbutaline: true }, CORD)
   assert.ok(unneeded.faults.some((f) => /Terbutaline is for a delayed birth/.test(f.text)))
+})
+
+test('monitor: a captured paced beat is spike, gap, broad QRS, then an opposite T wave', () => {
+  assert.ok(Math.abs(pacedBeat(0)) < 0.05, 'the spike stands alone before the QRS')
+  assert.ok(pacedBeat(0.13) > 0.9, 'tall QRS')
+  assert.ok(pacedBeat(0.2) > 0.2, 'still inside the QRS at 200 ms: it is wide')
+  assert.ok(pacedBeat(0.52) < -0.4, 'T wave points the other way')
+  const paced = { rhythm: 'paced' as const, hr: 32, paceRate: 70, spo2: 94, bp: null, etco2: 'off' as const }
+  assert.equal(ecgAt(paced, 0, 0.01).spike, true)
+  assert.equal(ecgAt(paced, 0.3, 0.01).spike, false)
 })

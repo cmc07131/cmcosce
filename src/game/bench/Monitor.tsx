@@ -19,7 +19,8 @@ export type Vitals = {
   etco2Kpa?: number
 }
 
-const WINDOW_S = 4
+/** Seconds of trace across the screen. Short enough that a wide QRS still looks wide on a phone. */
+const WINDOW_S = 3
 
 function bump(x: number, centre: number, width: number, height: number) {
   const d = (x - centre) / width
@@ -33,6 +34,15 @@ function narrowBeat(s: number) {
 
 function wideBeat(s: number, peakedT = false) {
   return bump(s, 0.06, 0.06, 0.75) - bump(s, 0.15, 0.05, 0.45) + (peakedT ? bump(s, 0.36, 0.05, 0.95) : -bump(s, 0.38, 0.1, 0.3))
+}
+
+/**
+ * A captured paced beat, measured from the spike: a broad, tall QRS (about 0.18 s)
+ * and a T wave pointing the opposite way, as the ventricles depolarise cell to cell from the pad.
+ */
+export function pacedBeat(s: number) {
+  // About 40 ms after the spike the QRS starts, so the spike stands on its own.
+  return bump(s, 0.13, 0.09, 1.0) - bump(s, 0.27, 0.06, 0.38) - bump(s, 0.52, 0.13, 0.5)
 }
 
 function pWave(s: number) {
@@ -51,7 +61,7 @@ export function ecgAt(v: Vitals, t: number, dt: number): { y: number; spike: boo
     case 'chb':
       return { y: wideBeat(within(beat)) + pWave(within(60 / 82)), spike: false }
     case 'paced':
-      return { y: wideBeat(within(pace) - 0.02), spike: spikeIn(pace) }
+      return { y: pacedBeat(within(pace)), spike: spikeIn(pace) }
     case 'spikes':
       return { y: wideBeat(within(beat)) + pWave(within(60 / 82)), spike: spikeIn(pace) }
     case 'hyperk':
@@ -101,17 +111,23 @@ export function Monitor({ vitals }: { vitals: Vitals }) {
         c.lineWidth = 1.4
         c.strokeStyle = '#58f080'
         c.beginPath()
+        const spikes: number[] = []
         for (let x = 0; x < w; x++) {
           const t = t0 + x * dt
           const { y, spike } = ecgAt(v, t, dt)
           const py = ecgMid - y * ecgAmp
           if (x === 0) c.moveTo(x, py)
           else c.lineTo(x, py)
-          if (spike) {
-            c.moveTo(x, ecgMid + ecgAmp * 0.3)
-            c.lineTo(x, ecgMid - ecgAmp * 1.25)
-            c.moveTo(x, py)
-          }
+          if (spike) spikes.push(x)
+        }
+        c.stroke()
+        // Pacing spikes: thin and white, like the pacer marker on a real monitor.
+        c.lineWidth = 1
+        c.strokeStyle = '#f0fff4'
+        c.beginPath()
+        for (const x of spikes) {
+          c.moveTo(x + 0.5, ecgMid + ecgAmp * 0.15)
+          c.lineTo(x + 0.5, ecgMid - ecgAmp * 1.1)
         }
         c.stroke()
 
