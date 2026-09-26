@@ -481,7 +481,8 @@ test('cord bench: a delayed theatre needs a filled, clamped bladder; replacing t
 test('monitor: a captured paced beat is spike, gap, broad QRS, then an opposite T wave', () => {
   assert.ok(Math.abs(pacedBeat(0)) < 0.05, 'the spike stands alone before the QRS')
   assert.ok(pacedBeat(0.13) > 0.9, 'tall QRS')
-  assert.ok(pacedBeat(0.2) > 0.2, 'still inside the QRS at 200 ms: it is wide')
+  assert.ok(pacedBeat(0.18) > 0.3, 'still upstroke at 180 ms')
+  assert.ok(pacedBeat(0.27) < -0.3, 'S wave at 270 ms: the QRS is wide')
   assert.ok(pacedBeat(0.52) < -0.4, 'T wave points the other way')
   const paced = { rhythm: 'paced' as const, hr: 32, paceRate: 70, spo2: 94, bp: null, etco2: 'off' as const }
   assert.equal(ecgAt(paced, 0, 0.01).spike, true)
