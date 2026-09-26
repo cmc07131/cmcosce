@@ -104,6 +104,8 @@ export type PaceRun = {
   orders: Order[]
   /** The potassium came back after pacing captured. */
   kResult: boolean
+  /** Seconds into the procedure when pacing first started. */
+  pacingStartedAtS: number | null
 
   saidClose: boolean | null
 }
@@ -136,6 +138,7 @@ export function freshPaceRun(): PaceRun {
     midazolam: false,
     orders: [],
     kResult: false,
+    pacingStartedAtS: null,
     saidClose: null,
   }
 }
@@ -159,7 +162,8 @@ export function captureThreshold(run: PaceRun, c: PaceCase) {
 
 export type Drug = 'atropine' | 'calcium' | 'fentanyl' | 'ketamine' | 'midazolam'
 
-export type Order = { drug: Drug; dose: string }
+/** `atS`: seconds into the procedure when the order was said. */
+export type Order = { drug: Drug; dose: string; atS?: number }
 
 /** What is on the drug cart, the doses you can say, and the one to say. */
 export const CART: Record<Drug, { name: string; doses: string[]; right: string[] }> = {
@@ -187,6 +191,9 @@ export function deliver(run: PaceRun, order: Order): Partial<PaceRun> {
   if (order.drug === 'midazolam') patch.midazolam = true
   return patch
 }
+
+/** Analgesia ordered within this many seconds of starting pacing still counts as "as you start". */
+export const ANALGESIA_GRACE_S = 30
 
 export function doseRight(order: Order) {
   return CART[order.drug].right.includes(order.dose)
@@ -255,9 +262,12 @@ export function scorePacing(run: PaceRun, c: PaceCase): Scored {
   }
   if (!c.hyperK && run.calcium) fault('K+ was 4.6. Calcium was not needed.')
   if (run.stoppedPacing) fault('The pacer was switched off. The rate falls straight back to 32.', true)
+  // Pain relief goes in before, or as, pacing starts: the first minutes of titrating current hurt most.
   const comfort = run.orders.find((o) => (o.drug === 'fentanyl' || o.drug === 'ketamine') && doseRight(o))
+  const intime = comfort && (run.pacingStartedAtS === null || (comfort.atS ?? 0) <= run.pacingStartedAtS + ANALGESIA_GRACE_S)
   if (!run.analgesia) fault('No analgesia. Pacing at this current hurts.')
-  if (comfort && !run.stoppedPacing && !run.midazolam) marks.push('MS-12')
+  else if (comfort && !intime) fault('Analgesia came after pacing had started hurting. Order it before, or as, you start pacing; do not delay the pads for it.')
+  if (comfort && intime && !run.stoppedPacing && !run.midazolam) marks.push('MS-12')
 
   if (c.hyperK && run.orders.some((o) => o.drug === 'calcium' && doseRight(o))) marks.push('MS-13')
   if (run.saidClose === false) fault('The handover line was wrong. Pads stay on until a transvenous wire captures.')

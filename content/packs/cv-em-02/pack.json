@@ -6,7 +6,7 @@
     "readTimeSec": 60,
     "stationType": "resus",
     "stem": "You are the AED doctor. A 72-year-old man had a blackout at home. He is on the trolley in Resus 2, sweaty and drowsy, BP 72/40, HR 32. The monitor shows complete heart block with a wide QRS. A nurse is with you. The defibrillator is on the bench. Manage this patient.",
-    "guidelineNotes": "Scoring truth is this CV-EM-02 script. AHA adult bradycardia: atropine 1 mg IV every 3–5 minutes, maximum 3 mg. ERC/RCUK uses 500 micrograms. Many HA drawers still stock 0.6 mg ampoules. Giving one 0.6 mg ampoule and saying you will repeat toward 3 mg scores. Planning 0.6 mg as the full AHA dose, or any dose under 0.5 mg, does not — under 0.5 mg can slow the rate further.\n\nOutput is current in mA, titrated until a spike is followed by a wide QRS, then run 5–10 mA above that threshold. This manikin captures at 60 mA, so the run current is 70 mA. “Voltage 50–100 IA” does not score.\n\nRate 70 sits inside the 60–80 range. Demand is the default so a returning beat does not land on a pacing spike. Anterior–posterior pads are preferred; anterior–lateral scores if you cannot roll him.\n\nWide-complex complete heart block is infranodal: do not wait for three doses of atropine. Pads go on now; 1 mg of atropine can run in parallel. Pulseless is CPR and ALS. TCP is not a substitute. Pacing does not fix hyperkalaemia — calcium first. Dopamine 5–20 micrograms/kg/min or adrenaline 2–10 micrograms/min if there is still no capture. Do not assume isoprenaline is in the AED cupboard. Keep the pads on until a transvenous wire captures.\n\nIn the bench each run randomises the capture threshold (50–90 mA), a sweaty or hairy chest (poor contact costs about 40 mA until you dry or clip), and about one run in five is hyperkalaemia: peaked T waves, and no capture at any current until calcium. Your own source notes put the back pad on the right scapula and check the carotid; both are wrong here. The back pad goes left of the spine under the left scapula, and mechanical capture is the femoral pulse because pad current makes the neck muscles jump."
+    "guidelineNotes": "Scoring truth is this CV-EM-02 script. AHA adult bradycardia: atropine 1 mg IV every 3–5 minutes, maximum 3 mg. ERC/RCUK uses 500 micrograms. Many HA drawers still stock 0.6 mg ampoules. Giving one 0.6 mg ampoule and saying you will repeat toward 3 mg scores. Planning 0.6 mg as the full AHA dose, or any dose under 0.5 mg, does not — under 0.5 mg can slow the rate further.\n\nOutput is current in mA, titrated until a spike is followed by a wide QRS, then run 5–10 mA above that threshold. This manikin captures at 60 mA, so the run current is 70 mA. “Voltage 50–100 IA” does not score.\n\nRate 70 sits inside the 60–80 range. Demand is the default so a returning beat does not land on a pacing spike. Anterior–posterior pads are preferred; anterior–lateral scores if you cannot roll him.\n\nWide-complex complete heart block is infranodal: do not wait for three doses of atropine. Pads go on now; 1 mg of atropine can run in parallel. Pulseless is CPR and ALS. TCP is not a substitute. Pacing does not fix hyperkalaemia — calcium first. Dopamine 5–20 micrograms/kg/min or adrenaline 2–10 micrograms/min if there is still no capture. Do not assume isoprenaline is in the AED cupboard. Keep the pads on until a transvenous wire captures.\n\nIn the bench each run randomises the capture threshold (50–90 mA), a sweaty or hairy chest (poor contact costs about 40 mA until you dry or clip), and about one run in five is hyperkalaemia: peaked T waves, and no capture at any current until calcium. Your own source notes put the back pad on the right scapula and check the carotid; both are wrong here. The back pad goes left of the spine under the left scapula, and mechanical capture is the femoral pulse because pad current makes the neck muscles jump.\n\nPain relief goes in before, or as, pacing starts in a conscious patient: the first minutes of titrating current hurt most. In this shocked patient, order a small BP-friendly dose (fentanyl 25–50 micrograms or ketamine about 20 mg) through the nurse and put the pads on while it is given; do not delay pacing for it. Analgesia ordered more than 30 seconds after pacing starts is marked late."
   },
   "room": {
     "template": "resus-bay",
@@ -232,7 +232,7 @@
     },
     {
       "id": "MS-12",
-      "label": "Small fentanyl or ketamine if the blood pressure allows; do not switch the pacer off"
+      "label": "Small fentanyl or ketamine before or as you start pacing, if the BP allows; do not delay the pads for it or switch the pacer off"
     },
     {
       "id": "MS-13",
@@ -397,7 +397,7 @@
         "patient",
         "bed-ix"
       ],
-      "hint": "Dry and clip, ECG leads on, anterior–posterior pads, PACER demand 70, titrate mA to capture, femoral pulse, 5–10 above threshold, analgesia.",
+      "hint": "Dry and clip, ECG leads on, anterior–posterior pads, order small analgesia, PACER demand 70, titrate mA to capture, femoral pulse, 5–10 above threshold.",
       "prompt": "Pace him",
       "options": [
         {
@@ -414,7 +414,7 @@
             "MS-13"
           ],
           "perform": "pacing",
-          "performHint": "Do it as you would on a real patient: prepare the chest, pads, pace, check capture, keep him comfortable. Nothing stops a mistake; the debrief shows what to fix."
+          "performHint": "Do it as you would on a real patient: prepare the chest, pads, pain relief, pace, check capture, hand over. Nothing stops a mistake; the debrief shows what to fix."
         },
         {
           "id": "voltage",

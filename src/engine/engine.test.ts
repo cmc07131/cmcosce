@@ -508,3 +508,13 @@ test('pacing drugs: ordered through the nurse, judged on the dose you said', () 
   assert.ok(lowAtropine.faults.some((f) => /under 0.5 mg/.test(f.text)))
   assert.ok(scorePacing({ ...goodPace(), calcium: true }, PACE).faults.some((f) => /not needed/.test(f.text)))
 })
+
+test('pacing: analgesia counts only before, or as, pacing starts', () => {
+  const early = scorePacing({ ...goodPace(), pacingStartedAtS: 60, orders: [{ drug: 'fentanyl', dose: '25 micrograms', atS: 40 }] }, PACE)
+  assert.ok(early.marks.includes('MS-12'))
+  const asStarting = scorePacing({ ...goodPace(), pacingStartedAtS: 60, orders: [{ drug: 'ketamine', dose: '20 mg', atS: 80 }] }, PACE)
+  assert.ok(asStarting.marks.includes('MS-12'))
+  const late = scorePacing({ ...goodPace(), pacingStartedAtS: 60, orders: [{ drug: 'fentanyl', dose: '25 micrograms', atS: 150 }] }, PACE)
+  assert.ok(!late.marks.includes('MS-12'))
+  assert.ok(late.faults.some((f) => /after pacing had started hurting/.test(f.text)))
+})

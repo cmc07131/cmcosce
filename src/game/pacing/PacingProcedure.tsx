@@ -28,7 +28,7 @@ import {
   type PaceRun,
 } from './model'
 
-const TITLES = ['Prepare the chest', 'Pads', 'Pace', 'Check capture', 'Comfort and handover']
+const TITLES = ['Prepare the chest', 'Pads', 'Pain relief', 'Pace', 'Check capture', 'Handover']
 
 type Stage = BenchApi<PaceRun> & {
   c: PaceCase
@@ -39,6 +39,7 @@ type Stage = BenchApi<PaceRun> & {
   setTab: (t: 'defib' | 'cart') => void
   pending: Order[]
   order: (o: Order) => void
+  elapsed: () => number
 }
 
 /** Seconds from telling the nurse to the drug being in. */
@@ -57,6 +58,8 @@ export function PacingProcedure({ seed, coach, onDone }: { seed: number; coach: 
   const [bp, setBp] = useState<[number, number]>([72, 40])
   const bpRef = useRef(bp)
   const [tab, setTab] = useState<'defib' | 'cart'>('defib')
+  const opened = useRef(performance.now())
+  const elapsed = () => (performance.now() - opened.current) / 1000
   const [pending, setPending] = useState<Order[]>([])
   const timers = useRef<number[]>([])
   const cap = captured(api.run, c)
@@ -75,7 +78,8 @@ export function PacingProcedure({ seed, coach, onDone }: { seed: number; coach: 
     return () => window.clearTimeout(id)
   }, [cap])
 
-  function order(o: Order) {
+  function order(spoken: Order) {
+    const o = { ...spoken, atS: elapsed() }
     const name = CART[o.drug].name
     api.feel(`Nurse: ${name} ${o.dose} IV. Drawing it up now.`)
     setPending((cur) => [...cur, o])
@@ -111,7 +115,7 @@ export function PacingProcedure({ seed, coach, onDone }: { seed: number; coach: 
     onDone({ ...scorePacing(run, c), scene: cap ? (run.femoralWithCapture ? 'pulse' : 'paced') : 'pads' })
   }
 
-  const stage: Stage = { ...api, c, next, padPos, setPadPos, tab, setTab, pending, order }
+  const stage: Stage = { ...api, c, next, padPos, setPadPos, tab, setTab, pending, order, elapsed }
   return (
     <div className="io-bench flex min-h-0 flex-1 flex-col" data-testid="pacing-bench">
       <div className="px-3 pt-1">
@@ -122,9 +126,10 @@ export function PacingProcedure({ seed, coach, onDone }: { seed: number; coach: 
       <div className="min-h-0 flex-1 overflow-auto px-3 pb-3">
         {index === 0 && <Prepare {...stage} />}
         {index === 1 && <Pads {...stage} />}
-        {index === 2 && <Pace {...stage} />}
-        {index === 3 && <Capture {...stage} />}
-        {index === 4 && <Comfort {...stage} />}
+        {index === 2 && <PainRelief {...stage} />}
+        {index === 3 && <Pace {...stage} />}
+        {index === 4 && <Capture {...stage} />}
+        {index === 5 && <Comfort {...stage} />}
         <NoteLine note={api.note} />
       </div>
     </div>
@@ -300,7 +305,7 @@ function Pads({ c, run, upd, feel, why, coach, next, padPos, setPadPos }: Stage)
 
 /* ================================================================ 3. pace */
 
-function Defib({ c, run, runRef, upd, feel, why, physical }: Stage) {
+function Defib({ c, run, runRef, upd, feel, why, physical, elapsed }: Stage) {
   const [charged, setCharged] = useState(false)
   const settle = useRef<{ from: number; t: number } | null>(null)
 
@@ -402,7 +407,7 @@ function Defib({ c, run, runRef, upd, feel, why, physical }: Stage) {
           data-testid="start-pacing"
           onClick={() => {
             const on = !run.pacing
-            upd({ pacing: on, stoppedPacing: run.stoppedPacing || (!on && run.captureCalled) })
+            upd({ pacing: on, stoppedPacing: run.stoppedPacing || (!on && run.captureCalled), pacingStartedAtS: run.pacingStartedAtS ?? (on ? elapsed() : null) })
             feel(on ? 'Pacing. A spike marks every paced beat on the screen.' : 'Pacing stopped.')
             if (!on && run.captureCalled) why('Stopping the pacer drops the rate straight back to 32.')
           }}
@@ -512,6 +517,36 @@ function DrugCart({ run, pending, order }: Stage) {
   )
 }
 
+const SAY_WARN: SayOption[] = [
+  { text: 'This will thump your chest with every beat. I am giving you something for the pain first.', ok: true },
+  { text: 'You will not feel anything.', ok: false },
+  { text: 'We will sort the pain out once your heart is going.', ok: false },
+]
+
+function PainRelief(stage: Stage) {
+  const { run, upd, why, next } = stage
+  const [said, setSaid] = useState<boolean | null>(null)
+  return (
+    <>
+      <p className="io-lede">He is drowsy but feels pain, and the pads will thump with every beat. Before you touch the dials: pain relief, small enough for a BP of 72.</p>
+      <SayIt
+        prompt="Tell him what is coming."
+        options={SAY_WARN}
+        picked={said}
+        onPick={(ok) => {
+          setSaid(ok)
+          if (!ok) why('Warn him the chest will thump, and give pain relief before or as you start.')
+        }}
+      />
+      <div className="mt-2">
+        <DrugCart {...stage} />
+      </div>
+      {run.orders.length === 0 && stage.pending.length === 0 && <p className="io-small mt-2">You can pace without waiting for it to be given, but order it now.</p>}
+      <NextButton onClick={next}>Set the pacer</NextButton>
+    </>
+  )
+}
+
 /** Two places at the bedside: the defibrillator, and the drug cart with the nurse. */
 function Stations(stage: Stage) {
   const { tab, setTab } = stage
@@ -610,7 +645,7 @@ function Comfort(stage: Stage) {
   const { run, upd, why, next } = stage
   return (
     <>
-      <p className="io-lede">Pacing hurts. Keep him comfortable without dropping his pressure, then hand over.</p>
+      <p className="io-lede">Keep him comfortable without dropping his pressure, then hand over.</p>
       <Stations {...stage} />
       <Choices
         options={[
