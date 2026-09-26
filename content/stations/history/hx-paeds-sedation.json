@@ -1,0 +1,90 @@
+{
+  "id": "hx-paeds-sedation",
+  "gym": "history",
+  "title": "Consent for a child's sedation for CT",
+  "type": "comms",
+  "time": 420,
+  "stem": "Paediatric area. Tsz-yan, 4 (16 kg), fell 1.5 m from a climbing frame. GCS 14, two vomits, a boggy swelling over the right temple. She needs a CT head but is too distressed to lie still. Explain to her father why she needs the scan and sedation, and obtain his consent.",
+  "notes": "Checked against NICE NG232 (Head injury, 2023), the PECARN rule, the Hong Kong Hospital Authority paediatric sedation guideline, and AAP/AAPD 2019 sedation guidance.\n\nCT head within 1 hour for a child with GCS under 15 at 2 hours, suspected skull fracture or tense fontanelle, signs of basal skull fracture, focal deficit, seizure; or, with two or more of: loss of consciousness over 5 minutes, abnormal drowsiness, three or more vomits, dangerous mechanism (NICE NG232 lowered some thresholds). A boggy temporal haematoma in a young child is a high-risk sign (PECARN).\n\nSedation: consider non-drug measures first (parent present, distraction, swaddling). HA guideline options for non-painful imaging: IV midazolam 0.05–0.1 mg/kg titrated (children 3 years and over), intranasal dexmedetomidine 2–3 microgram/kg, or chloral hydrate under 3 years. Risks: respiratory depression, airway obstruction, desaturation, hypotension, paradoxical agitation, vomiting. Monitoring: pulse oximetry, ECG, BP, capnography; a dedicated person watching the child; resuscitation equipment and reversal (flumazenil 0.01 mg/kg). Fasting is not required when the procedure is urgent. Recovery until back to baseline.\n\nYour notes match the HA guideline closely. The concern with sedation in head injury: a falling GCS may be masked, so the team watches closely and the CT is done promptly.",
+  "cast": [
+    { "id": "father", "name": "Mr Tsui", "role": "man" },
+    { "id": "patient", "name": "Tsz-yan", "role": "child", "inBed": true }
+  ],
+  "steps": [
+    {
+      "id": "check",
+      "kind": "history",
+      "to": "father",
+      "label": "Check before sedation",
+      "hint": "Weight, allergies, medical problems, snoring/airway, last meal, previous sedation.",
+      "groups": {
+        "Safety": [
+          { "t": "Allergies? Medical problems? Heart or lung disease?", "r": "None.", "mark": "Asks allergies and comorbidities" },
+          { "t": "Does she snore or have breathing problems at night?", "r": "No.", "mark": "Screens for airway risk (OSA)" },
+          { "t": "When did she last eat and drink?", "r": "Lunch at 12, a drink at 2. It's 4 now.", "mark": "Asks last oral intake" },
+          { "t": "Has she had sedation or an anaesthetic before?", "r": "Never." }
+        ]
+      }
+    },
+    {
+      "id": "consent",
+      "kind": "dialogue",
+      "to": "father",
+      "label": "Talk to Mr Tsui",
+      "hint": "Why the CT, why sedation, how, risks, monitoring, alternatives, consent.",
+      "mood": 7,
+      "turns": [
+        {
+          "line": "Why does she need a scan? Isn't that a lot of radiation?",
+          "opts": [
+            { "t": "I understand your worry. She's more drowsy than we'd expect, has vomited twice and has swelling over the temple, which can go with a skull fracture or bleeding. The scan uses a small radiation dose, and missing a bleed would be far more serious.", "r": "OK… but she won't lie still.", "mood": -3, "mark": "Explains the indication for CT and weighs radiation risk" },
+            { "t": "It's routine for everyone.", "r": "Then why does she need it?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "OK… but she won't lie still.",
+          "opts": [
+            { "t": "We'll try with you holding her hand first. If that doesn't work, a small dose of a sedative (midazolam) through the drip will make her sleepy for the scan.", "r": "Is that safe for a little girl?", "mood": -1, "mark": "Offers non-drug measures and explains the sedation" },
+            { "t": "We'll knock her out.", "r": "What?!", "mood": 3 }
+          ]
+        },
+        {
+          "line": "Is that safe for a little girl?",
+          "opts": [
+            { "t": "It's generally very safe. The main risk is that it can slow her breathing, which we watch for all the time with monitors and a nurse by her side; we have medicines to reverse it. She might be grumpy or vomit afterwards. Do you have any questions? Are you happy for us to go ahead?", "r": "Yes. Can I stay with her?", "mood": -2, "mark": "Explains risks, monitoring and reversal; obtains consent" },
+            { "t": "No risks at all.", "r": "Really?", "mood": 0 }
+          ]
+        },
+        {
+          "line": "Can I stay with her?",
+          "opts": [
+            { "t": "Yes, until she's asleep, and straight after. She'll stay with us until she's fully awake.", "r": "Thank you, doctor.", "mood": -2, "mark": "Involves the parent and explains recovery" },
+            { "t": "No, parents wait outside.", "r": "…", "mood": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "IV midazolam dose for procedural sedation in a 4-year-old?", "a": "0.05–0.1 mg/kg titrated", "wrong": ["0.5 mg/kg bolus", "1 mg/kg", "5 mg fixed"] },
+        { "q": "Intranasal dexmedetomidine dose?", "a": "2–3 microgram/kg", "wrong": ["20 microgram/kg", "0.2 microgram/kg", "2 mg/kg"] },
+        { "q": "Flumazenil dose in children?", "a": "0.01 mg/kg", "wrong": ["1 mg/kg", "0.1 mg fixed", "5 microgram/kg"] },
+        { "q": "Why is sedation a concern in head injury?", "a": "It can mask a falling conscious level", "wrong": ["It raises ICP directly", "It causes fractures", "It prevents CT"] },
+        { "q": "Essential monitoring during sedation?", "a": "SpO2, ECG, BP and capnography with a dedicated observer", "wrong": ["Temperature only", "None if the parent is present", "Blood glucose only"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Sweet Dreams", "emoji": "🧸", "flavor": "Why the scan, why the sedative, what can happen, who's watching." },
+  "cards": [
+    { "q": "PECARN high-risk feature in a child under 2?", "options": ["Non-frontal scalp haematoma", "Crying after the fall", "Fall from sitting", "Normal behaviour"], "why": "Also altered mental status and palpable skull fracture.", "source": "PECARN 2009" },
+    { "q": "Chloral hydrate is preferred for…", "options": ["Non-painful imaging in children under 3", "Painful procedures in teenagers", "Adults", "Status epilepticus"], "why": "Oral, slower onset.", "source": "HA paediatric sedation guideline" },
+    { "q": "Reversal agent for midazolam?", "options": ["Flumazenil", "Naloxone", "Neostigmine", "Glucagon"], "why": "0.01 mg/kg in children.", "source": "BNFc" },
+    { "q": "Capnography during sedation detects…", "options": ["Hypoventilation early", "Hypoglycaemia", "Seizures", "Fever"], "why": "Before desaturation.", "source": "AAP/AAPD 2019" },
+    { "q": "Fasting before urgent ED sedation is…", "options": ["Not mandatory; weigh urgency against risk", "Always 6 hours", "Always 12 hours", "Irrelevant"], "why": "Aspiration is rare.", "source": "ACEP / RCEM" },
+    { "q": "NICE CT within 1 hour in a child: which sign?", "options": ["Suspected open or depressed skull fracture", "Single vomit", "Crying", "Scalp laceration"], "why": "Also GCS <15 at 2 h, basal skull signs, seizure, focal deficit.", "source": "NICE NG232" }
+  ]
+}

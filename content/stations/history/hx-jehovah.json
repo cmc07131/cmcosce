@@ -1,0 +1,91 @@
+{
+  "id": "hx-jehovah",
+  "gym": "history",
+  "title": "Refusal of blood: Jehovah's Witness",
+  "type": "comms",
+  "time": 420,
+  "stem": "Resus 2. Mr Leung, 40, has a bleeding duodenal ulcer. Hb 58 g/L, HR 118, BP 96/60. He is alert and clear. He is a Jehovah's Witness and says he does not want a blood transfusion. Discuss this with him.",
+  "notes": "Checked against the Hong Kong Medical Council Code of Professional Conduct (consent), Hospital Authority guidance on patients who refuse blood, GMC guidance on consent (2020), and the Association of Anaesthetists guidance on Jehovah's Witnesses (2018).\n\nA competent adult may refuse any treatment, including life-saving blood, for any reason. Confirm capacity, give clear information about the risks (including death), explore which products he accepts (many Witnesses accept fractions such as albumin, clotting factors, cell salvage in continuity, EPO, tranexamic acid, IV iron — individual conscience), check for an advance directive / 'No Blood' card, offer a private conversation away from family or elders (to ensure the decision is voluntary), involve the Hospital Liaison Committee if he wishes, document, and maximise every blood-sparing measure: early endoscopy, tranexamic acid (in GI bleeding, HALT-IT showed no benefit, so not routine), PPI, IV iron, EPO, minimise sampling, early surgery or embolisation.\n\nChildren: parents cannot refuse life-saving treatment for a child; seek legal authority (in HK, via the court / Protection of Children and Juveniles Ordinance). Gillick competence (UK) — whether a young person under 16 can consent; refusal by a young person may still be overridden in their best interests. Your notes summarise Gillick and JW beliefs correctly.",
+  "cast": [
+    { "id": "patient", "name": "Mr Leung", "role": "patient", "inBed": true },
+    { "id": "nurse", "name": "Nurse Pang", "role": "nurse" }
+  ],
+  "vitals": { "hr": 118, "sbp": 96, "dbp": 60, "spo2": 97, "rr": 20, "gcs": 15, "rhythm": "sinus-tachy" },
+  "steps": [
+    {
+      "id": "talk",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Talk to Mr Leung",
+      "hint": "Explain, check capacity, explore what he accepts, privacy, respect.",
+      "mood": 6,
+      "turns": [
+        {
+          "line": "I know I'm bleeding. But I won't accept blood. It's against my faith.",
+          "opts": [
+            { "t": "Thank you for telling me — I'll respect your beliefs. Can I explain what's happening, so your decision is fully informed?", "r": "Yes, please.", "mood": -2, "mark": "Respects his beliefs and offers information" },
+            { "t": "That's ridiculous, you'll die.", "r": "Please don't mock my faith.", "mood": 3 }
+          ]
+        },
+        {
+          "line": "Yes, please.",
+          "opts": [
+            { "t": "Your blood count is very low, about half of normal. Without blood, if the bleeding continues you could have a heart attack, organ damage, or die. Can you tell me what you understand about the risk?", "r": "I understand I might die. I still refuse whole blood.", "mood": -1, "mark": "Explains the risk including death and checks understanding (capacity)" },
+            { "t": "You'll be fine without blood.", "r": "Really?", "mood": 0 }
+          ]
+        },
+        {
+          "line": "I understand I might die. I still refuse whole blood.",
+          "opts": [
+            { "t": "Are there things you would accept — for example clotting factors, albumin, or blood recycled during surgery? Do you carry an advance decision card?", "r": "I accept albumin and clotting factors. Here's my card.", "mood": -2, "mark": "Explores acceptable products and any advance directive" },
+            { "t": "OK, we'll do nothing then.", "r": "I didn't say do nothing.", "mood": 2 }
+          ]
+        },
+        {
+          "line": "The elders from my congregation are outside.",
+          "opts": [
+            { "t": "Would you like to talk with me alone for a minute first, so I know this is entirely your own decision?", "r": "…Yes. It is my own decision.", "mood": -1, "mark": "Ensures the decision is voluntary" },
+            { "t": "Let's get them in to decide.", "r": "It's my decision.", "mood": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Blood-sparing plan",
+      "hint": "Endoscopy urgently, PPI, IV iron, minimise sampling, early surgery/IR, document.",
+      "confirm": "Do these",
+      "opts": [
+        { "t": "Urgent endoscopy; surgeon and IR aware early", "need": true, "mark": "Early definitive haemorrhage control" },
+        { "t": "IV PPI after endoscopy; IV iron; consider erythropoietin", "need": true, "mark": "Blood-sparing treatments" },
+        { "t": "Paediatric blood tubes to minimise sampling", "need": true, "mark": "Minimises iatrogenic blood loss" },
+        { "t": "Document his refusal, capacity, what he accepts, and the card; inform the team", "need": true, "mark": "Documents clearly" },
+        { "t": "Transfuse him once he loses consciousness", "trap": "critical", "r": "A valid refusal made while capable remains binding when he loses capacity." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Can a competent adult refuse life-saving blood?", "a": "Yes", "wrong": ["No, doctors must transfuse", "Only with a court order", "Only if the family agrees"] },
+        { "q": "A Jehovah's Witness parent refuses blood for their bleeding child. You…", "a": "Seek legal authority and treat in the child's best interests", "wrong": ["Accept the refusal", "Transfuse secretly without documentation", "Discharge the child"] },
+        { "q": "Gillick competence concerns…", "a": "Whether a child under 16 can consent to treatment", "wrong": ["Adult capacity", "Mental Health Ordinance detention", "Organ donation"] },
+        { "q": "Why speak to him alone?", "a": "To check the refusal is voluntary", "wrong": ["To persuade him secretly", "It is required by the church", "To avoid documentation"] },
+        { "q": "A product many Jehovah's Witnesses accept?", "a": "Albumin (individual conscience)", "wrong": ["Packed red cells", "Whole blood", "Platelets"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Bloodless", "emoji": "🩹", "flavor": "Respect a capable refusal. Then fight the bleed every other way." },
+  "cards": [
+    { "q": "A capable adult's refusal of blood made in advance is…", "options": ["Binding if valid and applicable", "Void once unconscious", "Overridden by family", "Only advisory"], "why": "Respect a valid advance refusal.", "source": "HK Medical Council / GMC" },
+    { "q": "Primary components Jehovah's Witnesses usually refuse?", "options": ["Red cells, white cells, platelets, plasma", "Albumin", "Clotting factors", "IV iron"], "why": "Fractions are individual conscience.", "source": "AAGBI 2018" },
+    { "q": "Gillick competence applies to…", "options": ["Under-16s consenting to treatment", "Adults with dementia", "Detention of adults", "Organ donation"], "why": "Sufficient understanding and intelligence.", "source": "Gillick v West Norfolk 1985" },
+    { "q": "Parents refuse life-saving blood for a child: the doctor…", "options": ["Seeks legal authority; in an emergency treats in best interests", "Always accepts the refusal", "Calls the church", "Waits"], "why": "The child's welfare comes first.", "source": "HK / UK practice" },
+    { "q": "Blood-sparing measure in GI bleeding?", "options": ["Early endoscopy and haemostasis", "Routine TXA (HALT-IT)", "Frequent large blood samples", "Delay endoscopy"], "why": "HALT-IT showed no benefit from TXA in GI bleeding.", "source": "HALT-IT 2020" },
+    { "q": "What must be documented?", "options": ["Capacity, information given, what is refused and accepted", "Only the refusal", "Nothing", "Family opinion only"], "why": "Clear records protect patient and team.", "source": "HA guidance" }
+  ]
+}

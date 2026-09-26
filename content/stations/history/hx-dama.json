@@ -1,0 +1,89 @@
+{
+  "id": "hx-dama",
+  "gym": "history",
+  "title": "Discharge against medical advice",
+  "type": "comms",
+  "time": 420,
+  "stem": "Cubicle 7. Mr Chan, 45, came in with 3 hours of central chest pain. His first troponin is mildly raised and the ECG shows new T-wave inversion in V1–V4. He wants to leave to go back to work. Talk to him.",
+  "notes": "Checked against the GMC and Hong Kong Medical Council guidance on consent and capacity, the Hospital Authority DAMA policy, and ESC 2023 ACS guidelines.\n\nCapacity is decision-specific and presumed in adults. A person has capacity if they can understand, retain, use and weigh the relevant information, and communicate a decision. An unwise decision is not proof of incapacity. If capacitous, a patient may refuse treatment; the doctor's job is to explore the reasons (fear, money, childcare, work), negotiate alternatives, explain risks clearly, document, and leave the door open (safety-net, medication, follow-up, a written summary). The DAMA form documents the discussion; refusing to sign it does not stop him leaving and must not delay care.\n\nIf he lacked capacity (for example from hypoxia, intoxication or delirium), treatment in his best interests (and common-law necessity) applies. Hong Kong's Mental Health Ordinance is for mental disorder, not for chest pain.\n\nNSTEMI with dynamic ECG changes needs admission, antiplatelets, anticoagulation and early angiography (within 24 hours for high risk).\n\nYour notes list DAMA as a topic without detail.",
+  "cast": [
+    { "id": "patient", "name": "Mr Chan", "role": "man" },
+    { "id": "nurse", "name": "Nurse Hui", "role": "nurse" }
+  ],
+  "steps": [
+    {
+      "id": "explore",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Talk to Mr Chan",
+      "hint": "Explore why; explain risk; assess capacity; negotiate.",
+      "mood": 7,
+      "turns": [
+        {
+          "line": "I'm fine now, doc. I've got a big contract to sign tonight. I'm going.",
+          "opts": [
+            { "t": "I can see this contract matters a lot. Can you tell me more about what's worrying you about staying?", "r": "If I miss it, I lose the business. My family depends on it.", "mood": -2, "mark": "Explores the reasons for leaving" },
+            { "t": "You can't leave. Sit down.", "r": "You can't keep me here!", "mood": 3 }
+          ]
+        },
+        {
+          "line": "If I miss it, I lose the business. My family depends on it.",
+          "opts": [
+            { "t": "Your blood test and ECG show strain on the heart muscle — a type of heart attack. The risk is that it could get worse suddenly in the next few days, including a dangerous heart rhythm or death. Treatment in hospital lowers that risk a lot.", "r": "A heart attack? But the pain's gone…", "mood": -1, "mark": "Explains the diagnosis and specific risks in plain language" },
+            { "t": "Your troponin is up and there's TWI in the anterior leads.", "r": "I don't know what that means. I'm going.", "mood": 2 }
+          ]
+        },
+        {
+          "line": "A heart attack? But the pain's gone…",
+          "opts": [
+            { "t": "Can you tell me in your own words what could happen if you go home?", "r": "It could get worse… I could have a bigger heart attack or even die.", "mood": -1, "mark": "Checks understanding and ability to weigh information (capacity)" },
+            { "t": "Just trust me.", "r": "Hmm.", "mood": 1 }
+          ]
+        },
+        {
+          "line": "Isn't there another way? Can my partner sign for me?",
+          "opts": [
+            { "t": "Could your partner or lawyer sign tonight, or could we arrange a video call from the ward? Our social worker can help with the letter to your client.", "r": "…I suppose my partner could go. OK, I'll stay.", "mood": -3, "mark": "Negotiates practical alternatives" },
+            { "t": "No. Your choice: stay or go.", "r": "Then I'm going.", "mood": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ifleaves",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Examiner: if he still insisted on leaving?",
+      "hint": "Capacitous refusal: respect it, reduce harm, document, open door.",
+      "opts": [
+        { "t": "He has capacity: respect his decision, but keep trying to persuade", "mark": "Respects a capacitous refusal" },
+        { "t": "Harm reduction: aspirin, GTN spray, written summary, cardiology clinic, return immediately with pain", "mark": "Offers harm reduction and safety-netting" },
+        { "t": "Document capacity, the risks explained, alternatives offered, and his words; DAMA form (not required to sign)", "mark": "Documents thoroughly" },
+        { "t": "Tell him he can never come back if he leaves", "trap": true, "r": "Always leave the door open." },
+        { "t": "Detain him under the Mental Health Ordinance", "trap": "critical", "r": "He has no mental disorder and has capacity. Detention would be unlawful." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Components of capacity?", "a": "Understand, retain, use/weigh, communicate", "wrong": ["Age, education, IQ, income", "Agreement with the doctor", "Orientation to time and place only"] },
+        { "q": "Is an unwise decision evidence of incapacity?", "a": "No", "wrong": ["Yes", "Only if dangerous", "Only if the family disagrees"] },
+        { "q": "Refusing to sign the DAMA form means…", "a": "He can still leave; document the refusal", "wrong": ["He must stay", "Police are called", "Treatment stops immediately"] },
+        { "q": "Management of NSTEMI with dynamic ECG changes?", "a": "Admission, antithrombotics, early angiography", "wrong": ["Discharge with GP follow-up", "Treadmill test next month", "Thrombolysis"] },
+        { "q": "When can you treat without consent?", "a": "When the patient lacks capacity and treatment is in their best interests", "wrong": ["When they disagree with you", "When the family consents for a capacitous adult", "Never"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Door Open", "emoji": "🚪", "flavor": "Ask why, explain risk, test capacity, negotiate, document." },
+  "cards": [
+    { "q": "Adults are presumed to have capacity until…", "options": ["Shown otherwise for the specific decision", "They disagree with the doctor", "They turn 65", "A psychiatrist examines them"], "why": "Capacity is decision-specific.", "source": "GMC / HK Medical Council" },
+    { "q": "Which is part of assessing capacity?", "options": ["Can they weigh the information?", "Do they agree?", "Are they educated?", "Are they employed?"], "why": "Understand, retain, weigh, communicate.", "source": "Capacity principles" },
+    { "q": "A capacitous patient wants to leave with an NSTEMI. You…", "options": ["Explain risks, negotiate, harm-reduce, document, keep the door open", "Restrain him", "Call police", "Discharge without advice"], "why": "Autonomy with safety-netting.", "source": "HA DAMA policy" },
+    { "q": "Early invasive angiography for high-risk NSTEMI (ESC 2023)?", "options": ["Within 24 hours", "Within 2 weeks", "Only if pain recurs", "Within 1 year"], "why": "Immediate (<2 h) if very high risk.", "source": "ESC 2023 ACS" },
+    { "q": "Best first response to 'I'm leaving'?", "options": ["Explore the reason", "Threaten discharge paperwork", "Call security", "Ignore it"], "why": "Understanding the barrier opens alternatives.", "source": "Communication skills" },
+    { "q": "The Mental Health Ordinance can be used to detain…", "options": ["People with a mental disorder meeting its criteria", "Anyone refusing treatment", "Any patient with chest pain", "Intoxicated people only"], "why": "Not for physical illness in a capacitous adult.", "source": "HK Cap 136" }
+  ]
+}

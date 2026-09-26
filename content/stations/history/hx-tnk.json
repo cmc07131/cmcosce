@@ -1,0 +1,114 @@
+{
+  "id": "hx-tnk",
+  "gym": "history",
+  "title": "STEMI: thrombolysis consent",
+  "type": "comms",
+  "time": 420,
+  "stem": "Resus 2 in a hospital without on-site PCI; the nearest PCI centre is 2½ hours away by road. Mr Siu, 53, has had crushing central chest pain for 2 hours. BP 150/80, HR 78, SpO2 98% in air. Take a focused history, interpret the ECG, and discuss treatment with him.",
+  "notes": "Checked against the ESC 2023 guidelines for acute coronary syndromes and the Hong Kong Hospital Authority STEMI pathway.\n\nReperfusion: primary PCI if it can be done within 120 minutes of diagnosis; otherwise fibrinolysis within 10 minutes of diagnosis (tenecteplase weight-based, half dose if 75 years or over), then transfer to a PCI centre: rescue PCI if it fails (less than 50% ST resolution at 60–90 minutes), angiography within 2–24 hours if it works (pharmaco-invasive strategy, outcomes similar to primary PCI in STREAM). Adjuncts: aspirin 150–300 mg, clopidogrel 300 mg (75 mg if 75 or older), enoxaparin or unfractionated heparin. Oxygen only if SpO2 is under 90%. Absolute contraindications include previous ICH or stroke of unknown origin, ischaemic stroke in 6 months, CNS lesion, recent major trauma/surgery/head injury (1 month), GI bleeding in 1 month, known bleeding disorder, aortic dissection, non-compressible punctures in 24 hours.\n\nYour notes (based on a 2018 NTWC tutorial) give aspirin 160 mg and oxygen if SpO2 under 94%; ESC 2023 uses 150–300 mg and under 90%. The rest (history, contraindications, and the argument that delaying for PCI transfer is worse) matches.",
+  "cast": [
+    { "id": "patient", "name": "Mr Siu", "role": "patient", "inBed": true },
+    { "id": "nurse", "name": "Nurse Kam", "role": "nurse" }
+  ],
+  "vitals": { "hr": 78, "sbp": 150, "dbp": 80, "spo2": 98, "rr": 18, "rhythm": "stemi-anterior" },
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "Focused history",
+      "hint": "SOCRATES briefly, risk factors, and contraindications to fibrinolysis.",
+      "groups": {
+        "Pain": [
+          { "t": "Tell me about the pain", "r": "Crushing in the middle of my chest, to my left arm, started 2 hours ago walking up a hill. Sweating, feel sick.", "mark": "Characterises the pain and onset time" }
+        ],
+        "Risks": [{ "t": "Smoking, diabetes, BP, cholesterol, family history", "r": "Smoker, 30 a day. High cholesterol. Father had a heart attack at 55.", "mark": "Asks cardiovascular risk factors" }],
+        "Contraindications": [
+          { "t": "Any previous stroke, brain bleed or brain tumour?", "r": "No.", "mark": "Screens for intracranial contraindications" },
+          { "t": "Any recent bleeding, stomach ulcer, surgery or head injury?", "r": "No.", "mark": "Screens for bleeding, surgery and trauma" },
+          { "t": "Tearing pain through to the back?", "r": "No, it's in the front.", "mark": "Considers aortic dissection" },
+          { "t": "Blood thinners, Viagra, allergies?", "r": "None.", "mark": "Asks drugs and allergies" }
+        ]
+      }
+    },
+    {
+      "id": "ecg",
+      "kind": "order",
+      "to": "trolley",
+      "label": "ECG and tests",
+      "hint": "12-lead within 10 minutes; bloods; chest film if it doesn't delay.",
+      "groups": {
+        "ECG": [{ "t": "12-lead ECG", "r": "ST elevation V1–V4 with reciprocal inferior depression: acute anterior STEMI.", "img": "ecg:stemi-anterior", "mark": "Diagnoses anterior STEMI" }],
+        "Bloods": [{ "t": "FBC, clotting, U&E, troponin, glucose, lipids", "r": "Sent.", "mark": "Baseline bloods without delaying reperfusion" }]
+      }
+    },
+    {
+      "id": "drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Aspirin, clopidogrel, anticoagulant, analgesia; no oxygen unless hypoxic.",
+      "confirm": "Give",
+      "opts": [
+        { "t": "Aspirin 300 mg chewed", "need": true, "mark": "Aspirin loading" },
+        { "t": "Clopidogrel 300 mg", "need": true, "mark": "Clopidogrel with fibrinolysis" },
+        { "t": "Enoxaparin (weight-based)", "need": true, "mark": "Anticoagulant with fibrinolysis" },
+        { "t": "GTN and IV morphine for pain", "need": true, "mark": "Analgesia" },
+        { "t": "High-flow oxygen for everyone with chest pain", "trap": true, "r": "Oxygen only if SpO2 is below 90% (ESC 2023)." }
+      ]
+    },
+    {
+      "id": "consent",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Discuss treatment",
+      "hint": "Explain STEMI, the clot-buster, benefit and risk, why not wait for transfer.",
+      "mood": 5,
+      "turns": [
+        {
+          "line": "What's going on, doctor?",
+          "opts": [
+            { "t": "You're having a heart attack: an artery to the heart is blocked by a clot. We need to open it quickly to save heart muscle.", "r": "How?", "mood": -1, "mark": "Explains STEMI simply" },
+            { "t": "Anterior STEMI.", "r": "Eh?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "How?",
+          "opts": [
+            { "t": "The fastest way here is an injection that dissolves the clot. It works in most people. The main risk is bleeding — serious bleeding in about 1 in 20, and bleeding in the brain in about 1 in 100.", "r": "I'd rather go to the big hospital for the balloon.", "mood": 0, "mark": "Explains fibrinolysis benefits and risks with numbers" },
+            { "t": "Trust me, it's fine.", "r": "What are the risks?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "I'd rather go to the big hospital for the balloon.",
+          "opts": [
+            { "t": "The balloon is best only if it can be done within 2 hours; the journey alone is 2½. Every minute counts — 'time is muscle'. We'll give the injection now and then transfer you for an angiogram within 24 hours anyway.", "r": "OK, go ahead.", "mood": -3, "mark": "Explains the pharmaco-invasive strategy and time dependence" },
+            { "t": "Fine, we'll send you.", "r": "OK.", "mood": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "When is fibrinolysis preferred to primary PCI (ESC 2023)?", "a": "When PCI cannot be done within 120 minutes of diagnosis", "wrong": ["Always", "When the patient is over 75", "Only for inferior STEMI"] },
+        { "q": "Sign of failed fibrinolysis?", "a": "Less than 50% ST resolution at 60–90 minutes", "wrong": ["Chest pain relief", "Reperfusion arrhythmia", "Troponin rise"] },
+        { "q": "After successful fibrinolysis, angiography is…", "a": "Within 2–24 hours", "wrong": ["Never", "After 6 weeks", "Only if symptoms recur"] },
+        { "q": "Absolute contraindication to fibrinolysis?", "a": "Previous intracranial haemorrhage", "wrong": ["Age 60", "Diabetes", "Smoking"] },
+        { "q": "Tenecteplase dose adjustment at 75 or older?", "a": "Half dose", "wrong": ["Double dose", "No change", "Contraindicated"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Time Is Muscle", "emoji": "❤️‍🩹", "flavor": "No PCI in 120 minutes? Lyse now, transfer after." },
+  "cards": [
+    { "q": "Fibrinolysis should start within how long of STEMI diagnosis?", "options": ["10 minutes", "2 hours", "12 hours", "24 hours"], "why": "Door-to-needle target.", "source": "ESC 2023" },
+    { "q": "Pharmaco-invasive strategy means…", "options": ["Fibrinolysis then routine angiography within 2–24 h", "PCI then fibrinolysis", "Medical treatment only", "Fibrinolysis and no follow-up"], "why": "STREAM trial.", "source": "ESC 2023" },
+    { "q": "Oxygen in suspected ACS (ESC 2023)?", "options": ["Only if SpO2 < 90%", "For all", "Only if SpO2 < 98%", "Never"], "why": "Hyperoxia may be harmful.", "source": "ESC 2023", "note": "Older notes: < 94%." },
+    { "q": "Clopidogrel loading with fibrinolysis in a 60-year-old?", "options": ["300 mg", "600 mg", "75 mg", "None"], "why": "75 mg only if 75 or older.", "source": "ESC 2023" },
+    { "q": "Rescue PCI is indicated when…", "options": ["Fibrinolysis fails", "Always after lysis", "Never", "Only after 48 hours"], "why": "Less than 50% ST resolution or ongoing ischaemia.", "source": "ESC 2023" },
+    { "q": "ST elevation V1–V4 indicates which territory?", "options": ["Anterior (LAD)", "Inferior (RCA)", "Lateral (circumflex)", "Posterior"], "why": "Left anterior descending artery.", "source": "ECG basics" }
+  ]
+}

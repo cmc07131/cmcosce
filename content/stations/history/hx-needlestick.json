@@ -1,0 +1,107 @@
+{
+  "id": "hx-needlestick",
+  "gym": "history",
+  "title": "Needlestick injury",
+  "type": "history",
+  "time": 420,
+  "stem": "Cubicle 2, 03:00. Nurse Ho, 32, was stuck 40 minutes ago by a hollow needle after taking blood from a ward patient. She is upset. Take a history, assess the risk and counsel her.",
+  "notes": "Checked against the Hong Kong Scientific Committee on AIDS and STI / Centre for Health Protection recommendations on management of occupational exposure to HBV, HCV and HIV, the UK BHIVA/BASHH PEP guideline (2021), and UKHSA guidance.\n\nImmediate: encourage bleeding, wash with soap and running water; do not scrub or suck; irrigate mucosa.\n\nRisk per percutaneous exposure to a positive source: HBV about 6–30% (if non-immune; depends on HBeAg), HCV about 1.8% (lower in recent series, ~0.2–0.5%), HIV about 0.3%. Higher with hollow-bore needles, deep injury, visible blood, a needle from a vein or artery, and high source viral load.\n\nHBV: check the recipient's vaccination and anti-HBs; known responder (≥10 mIU/mL) needs nothing; non-responder or unknown with a positive source needs HBIG plus vaccine. HCV: no PEP; baseline and follow-up testing (HCV RNA at 6 weeks, antibody at 12–24 weeks). HIV PEP: start as soon as possible, ideally within hours, not after 72 hours, for 28 days. UK BHIVA/BASHH 2021 advise against PEP if the source is on ART with a confirmed undetectable viral load; HK guidance takes a similar risk-based approach — discuss with the on-call infectious disease physician.\n\nYour notes: 'PEP for 28 weeks' should be 28 days; your second scenario recommends PEP when the source is HIV-positive with an undetectable viral load, which current UK guidance does not; HBIG 0.06 mL/kg is the US dose (UK uses 500 IU). The rest matches.\n\nThis station: source is known HCV-positive, HIV and HBV unknown; the source consents to testing.",
+  "cast": [
+    { "id": "patient", "name": "Nurse Ho", "role": "nurse", "inBed": false },
+    { "id": "colleague", "name": "Sister Yu", "role": "woman" }
+  ],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "Event, first aid, recipient status, source status.",
+      "groups": {
+        "Event": [
+          { "t": "What happened, and when?", "r": "Forty minutes ago. I was recapping — I know, I shouldn't — and it went into my left index finger.", "mark": "Asks what happened and when" },
+          { "t": "What kind of needle? Was there blood in it?", "r": "A hollow blood-taking needle, just used in a vein. There was blood in it.", "mark": "Asks needle type and visible blood (hollow-bore, from a vein)" },
+          { "t": "How deep? Were you wearing gloves?", "r": "Quite deep, it bled. Gloves on.", "mark": "Asks depth and gloves" },
+          { "t": "What did you do straight after?", "r": "I squeezed it and washed it with alcohol swabs.", "mark": "Asks about first aid" }
+        ],
+        "You": [
+          { "t": "Hepatitis B vaccination and antibody level?", "r": "Three doses in nursing school. My antibody was checked once — 150.", "mark": "Asks HBV vaccination and antibody response" },
+          { "t": "Any illness, medicines, pregnancy or breastfeeding?", "r": "Healthy. Not pregnant. On the pill." , "mark": "Asks pregnancy and medical history (affects PEP)" }
+        ],
+        "Source": [
+          { "t": "What do we know about the patient?", "r": "A 50-year-old man with hepatitis C. Past drug use. HIV status unknown.", "mark": "Asks what is known about the source" }
+        ]
+      }
+    },
+    {
+      "id": "manage",
+      "kind": "pick",
+      "to": "patient",
+      "label": "Management",
+      "hint": "Wash now; bloods; source testing with consent; HBV immune; HIV risk assessment; follow-up; incident report.",
+      "confirm": "Do these",
+      "opts": [
+        { "t": "Wash again with soap and running water; no scrubbing or antiseptic", "need": true, "mark": "Correct first aid" },
+        { "t": "Baseline bloods from her: HBsAg, anti-HBs, anti-HCV, HIV, with consent; store serum", "need": true, "mark": "Baseline recipient testing with consent" },
+        { "t": "Ask the ward to consent and test the source for HIV, HBV, HCV RNA urgently", "need": true, "mark": "Source testing with the source's consent" },
+        { "t": "Discuss HIV PEP now with the ID physician while the source result is awaited", "need": true, "mark": "Considers HIV PEP promptly, pending source results" },
+        { "t": "Occupational health follow-up; incident report; off shift tonight", "need": true, "mark": "Occupational health, incident report, off duty" },
+        { "t": "HBV immunoglobulin now", "trap": true, "r": "She is a known responder (anti-HBs 150): no HBV prophylaxis needed." },
+        { "t": "Start treatment for hepatitis C immediately as PEP", "trap": true, "r": "There is no HCV PEP; test and follow up, treat early if she seroconverts." }
+      ]
+    },
+    {
+      "id": "counsel",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Counsel Nurse Ho",
+      "hint": "Risks in numbers, plan, precautions, support.",
+      "mood": 7,
+      "turns": [
+        {
+          "line": "Am I going to get hepatitis C? Or HIV?",
+          "opts": [
+            { "t": "The risk is low. For hepatitis C it's about 1 in 50 or less; for HIV, if he had it, about 1 in 300. You're protected against hepatitis B. We'll test him and you, and we have treatments if anything shows up.", "r": "OK… that helps a bit.", "mood": -3, "mark": "Explains transmission risks with numbers" },
+            { "t": "Probably, it was deep.", "r": "Oh no…", "mood": 3 }
+          ]
+        },
+        {
+          "line": "What do I do until the results come back?",
+          "opts": [
+            { "t": "Use condoms, don't donate blood, organs or breast milk until follow-up is clear, and come to occupational health tomorrow. The tests are at 6 weeks and 3–6 months.", "r": "And can I tell my husband?", "mood": -2, "mark": "Advises precautions and follow-up schedule" },
+            { "t": "Nothing, carry on as normal.", "r": "Are you sure?", "mood": 1 }
+          ]
+        },
+        {
+          "line": "I feel so stupid for recapping.",
+          "opts": [
+            { "t": "These injuries happen to many of us. The important thing is you came straight away. Sister Yu will cover the rest of your shift.", "r": "Thank you.", "mood": -2, "mark": "Supports without blame and arranges cover" },
+            { "t": "Yes, that was careless.", "r": "[Cries]", "mood": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "HIV transmission risk after a percutaneous injury from an HIV-positive source?", "a": "About 0.3%", "wrong": ["About 30%", "About 3%", "Zero"] },
+        { "q": "HIV PEP duration?", "a": "28 days", "wrong": ["28 weeks", "7 days", "One dose"] },
+        { "q": "Latest time to start HIV PEP?", "a": "72 hours", "wrong": ["7 days", "24 hours only", "Any time"] },
+        { "q": "PEP when the source is on ART with an undetectable viral load (BHIVA/BASHH 2021)?", "a": "Not recommended", "wrong": ["Always recommended", "Double dose", "Only for mucosal exposures"] },
+        { "q": "HCV post-exposure prophylaxis?", "a": "None; test and follow up", "wrong": ["Interferon for 4 weeks", "Immunoglobulin", "Ribavirin for 28 days"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Sharp Mind", "emoji": "🪡", "flavor": "Wash, test both sides, PEP by risk, follow up, never recap." },
+  "cards": [
+    { "q": "First aid after a needlestick?", "options": ["Encourage bleeding and wash with soap and water", "Suck the wound", "Scrub with alcohol and bleach", "Apply a tourniquet"], "why": "Avoid scrubbing and antiseptics that damage skin.", "source": "CHP / UKHSA" },
+    { "q": "HCV transmission after a positive-source needlestick is about…", "options": ["1.8% or less", "30%", "0.003%", "50%"], "why": "No PEP exists; follow-up testing.", "source": "CHP; UKHSA" },
+    { "q": "Known HBV vaccine responder after a needlestick: HBV prophylaxis?", "options": ["None needed", "HBIG and full vaccine course", "Antivirals", "Booster only if source negative"], "why": "Anti-HBs ≥10 mIU/mL confirms protection.", "source": "CHP / UKHSA Green Book" },
+    { "q": "HIV PEP should begin…", "options": ["As soon as possible, within 72 hours", "After 1 week", "Only after source HIV confirmed", "At 6 weeks"], "why": "Efficacy falls with time.", "source": "BHIVA/BASHH 2021" },
+    { "q": "Which increases HIV risk in a needlestick?", "options": ["Hollow-bore needle with visible blood", "Solid suture needle", "Glove worn", "Superficial scratch"], "why": "Also deep injury and high source viral load.", "source": "CDC / BHIVA" },
+    { "q": "HIV PEP course length?", "options": ["28 days", "28 weeks", "3 days", "6 months"], "why": "Your notes say 28 weeks — a typo.", "source": "BHIVA/BASHH 2021" }
+  ]
+}

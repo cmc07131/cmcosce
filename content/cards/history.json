@@ -1,0 +1,49 @@
+{
+  "deck": "history",
+  "name": "Counsel/History",
+  "creatures": [
+    {
+      "id": "talkatoo",
+      "name": "TALKATOO",
+      "body": "bird",
+      "main": "#f0a848",
+      "accent": "#fff0c8"
+    },
+    {
+      "id": "consentaur",
+      "name": "CONSENTAUR",
+      "body": "beast",
+      "main": "#6878c8",
+      "accent": "#e0e4f8"
+    },
+    {
+      "id": "histoblob",
+      "name": "HISTOBLOB",
+      "body": "blob",
+      "main": "#58b0a0",
+      "accent": "#d8f4ee"
+    },
+    {
+      "id": "rumourpent",
+      "name": "RUMOURPENT",
+      "body": "snake",
+      "main": "#b85888",
+      "accent": "#f8d8e8"
+    }
+  ],
+  "cards": [
+    {
+      "id": "hx-capacity",
+      "q": "Which is NOT part of assessing capacity?",
+      "options": [
+        "Agreeing with the doctor",
+        "Understanding the information",
+        "Retaining it",
+        "Weighing it and communicating a decision"
+      ],
+      "answer": 0,
+      "why": "An unwise decision is not proof of incapacity.",
+      "source": "GMC / HK Medical Council"
+    }
+  ]
+}

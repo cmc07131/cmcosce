@@ -76,14 +76,16 @@ const gymSpots = {
 }
 for (const [id, [x, y]] of Object.entries(gymSpots)) building(id, x, y)
 
-// Tall grass. Letters pick the question deck: a = ATLS, c = ACLS/PALS, o = O&G, x = mixed.
+// Tall grass. Letters pick the question deck: a = ATLS, c = ACLS/PALS, o = O&G, h = Counsel/History,
+// p = Psychi, x = mixed.
 rect(8, 8, 9, 3, 'a')
 rect(18, 8, 4, 3, 'c')
 rect(26, 8, 5, 3, 'c')
 rect(32, 8, 8, 3, 'o')
 rect(44, 3, 2, 3, 'o')
-rect(8, 25, 12, 4, 'x')
-rect(27, 26, 3, 5, 'x')
+rect(8, 25, 6, 4, 'h')
+rect(14, 25, 6, 4, 'x')
+rect(27, 26, 3, 5, 'p')
 
 // Pond, trees, flowers for texture.
 rect(32, 25, 6, 4, '~')
@@ -122,8 +124,8 @@ const gyms = [
   { id: 'medical', name: 'MEDICAL GYM', badge: 'Physician Badge', packs: [], deck: null, topics: ['DKA', 'Addison disease', 'Anaemia', 'Chest pain', 'Dizziness', 'Cranial nerves', 'Cerebellar and Hallpike', 'Polyarthritis'] },
   { id: 'surgical', name: 'SURGICAL GYM', badge: 'Scalpel Badge', packs: [], deck: null, topics: ['Massive GI bleed', 'Renal stone', 'Epididymo-orchitis', 'Hepatosplenomegaly', 'Suturing', 'Digital nerve block', 'Venous cut-down'] },
   { id: 'paedi', name: 'PAEDI GYM', badge: 'Growth Badge', packs: [], deck: null, topics: ['Epiglottitis', 'Scarlet fever', 'Fever and rash', 'Paediatric vomiting', 'Paediatric seizure', 'Milestones', 'Limping child', 'NAI'] },
-  { id: 'history', name: 'COUNSEL/HISTORY GYM', badge: 'Listener Badge', packs: [], deck: null, topics: ['Breaking bad news', 'Advance directive', 'Procedural sedation consent', 'DAMA', 'Needlestick injury', 'Returning traveller', 'Malaria'] },
-  { id: 'psychi', name: 'PSYCHI GYM', badge: 'Mind Badge', packs: [], deck: null, topics: ['Mental state exam', 'Self-harm and SAD PERSONS', 'Manic patient', 'Psychosis history', 'Depression', 'Schizophrenia', 'Violent patient and restraint'] },
+  { id: 'history', name: 'COUNSEL/HISTORY GYM', badge: 'Listener Badge', packs: [], deck: 'history', topics: ['Breaking bad news', 'Advance directive', 'Procedural sedation consent', 'DAMA', 'Needlestick injury', 'Returning traveller', 'Malaria'] },
+  { id: 'psychi', name: 'PSYCHI GYM', badge: 'Mind Badge', packs: [], deck: 'psychi', topics: ['Mental state exam', 'Self-harm and SAD PERSONS', 'Manic patient', 'Psychosis history', 'Depression', 'Schizophrenia', 'Violent patient and restraint'] },
   { id: 'disaster', name: 'DISASTER/TRIAGE GYM', badge: 'Command Badge', packs: [], deck: null, topics: ['Field triage (START)', 'Triage of fire victims', 'Chlorine gas incident', 'Transfer', 'Planning and training', 'Crush syndrome'] },
 ]
 
@@ -146,6 +148,8 @@ const world = {
     a: 'tall grass (ATLS deck)',
     c: 'tall grass (ACLS/PALS deck)',
     o: 'tall grass (O&G deck)',
+    h: 'tall grass (Counsel/History deck)',
+    p: 'tall grass (Psychi deck)',
     x: 'tall grass (mixed deck)',
   },
   grid: rows,

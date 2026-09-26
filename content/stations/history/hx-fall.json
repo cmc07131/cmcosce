@@ -1,0 +1,92 @@
+{
+  "id": "hx-fall",
+  "gym": "history",
+  "title": "Elderly fall",
+  "type": "history",
+  "time": 420,
+  "stem": "Cubicle 9. Mr Stephens, 83, was found on his kitchen floor this morning by his son. He has left hip pain and feels sick. Take a history, then discuss investigations and your plan.",
+  "notes": "Checked against NICE CG161 (Falls in older people, 2013; new NG249 falls guideline 2025 draft/publication noted), the World Falls Guidelines (Age and Ageing 2022), and NICE CG124 (hip fracture).\n\nA fall is a symptom: find why he fell (syncope, arrhythmia, postural hypotension, stroke, infection, hypoglycaemia, medicines, alcohol, trip), what he injured (hip fracture, head injury — anticoagulants lower the CT threshold), and what the long lie caused (rhabdomyolysis, pressure injury, hypothermia, dehydration, AKI). Then a multifactorial risk assessment: previous falls, gait and mobility, medication review (sedatives, antihypertensives), vision, cognition, continence, home hazards, fear of falling, bone health.\n\nYour template and marking scheme match this well. The World Falls Guidelines add frailty assessment and prefer 'opportunistic case-finding' and risk stratification over single scores.",
+  "cast": [{ "id": "patient", "name": "Mr Stephens", "role": "elderly", "inBed": true }],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "Before, during and after the fall; injuries; long lie; PMH, drugs, social, function.",
+      "groups": {
+        "Start": [{ "t": "Are you in pain? Can I get you something?", "r": "My left hip is killing me. Yes please.", "mark": "Offers analgesia" }],
+        "Before": [
+          { "t": "What were you doing when you fell?", "r": "Getting up from the toilet at night to go to the kitchen for water.", "mark": "Asks the activity at the time" },
+          { "t": "Any warning — dizziness, palpitations, chest pain?", "r": "I felt light-headed when I stood up, then I was on the floor.", "mark": "Asks prodromal symptoms" }
+        ],
+        "During": [
+          { "t": "Did you black out? Did you hit your head?", "r": "I don't think so. I didn't hit my head.", "mark": "Asks about loss of consciousness and head injury" },
+          { "t": "Any tongue biting, wet yourself, jerking?", "r": "No." }
+        ],
+        "After": [
+          { "t": "Could you get up? How long were you on the floor?", "r": "Couldn't get up. About 6 hours until my son came.", "mark": "Asks about the long lie" },
+          { "t": "Any other pain, weakness, confusion since?", "r": "Just the hip. And I feel sick." }
+        ],
+        "Background": [
+          { "t": "Previous falls?", "r": "Twice this year.", "mark": "Asks about previous falls" },
+          { "t": "Medical conditions and medicines", "r": "High blood pressure, prostate. Amlodipine, doxazosin, a water tablet, and sleeping tablets.", "mark": "Takes a medication history (falls risk drugs)" },
+          { "t": "Blood thinners?", "r": "No.", "mark": "Asks about anticoagulants" },
+          { "t": "Who do you live with? How do you get around? Help at home?", "r": "Alone since my wife died. Walk with a stick. Son visits daily.", "mark": "Asks social situation and mobility" },
+          { "t": "Eyesight, memory, alcohol", "r": "Cataract in my left eye. Memory OK. A glass of whisky at night." }
+        ]
+      }
+    },
+    {
+      "id": "exam",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Findings and tests",
+      "hint": "Lying and standing BP, ECG, glucose, CK, bloods, hip film.",
+      "groups": {
+        "Bedside": [
+          { "t": "Lying and standing blood pressure", "r": "154/80 lying, 118/66 standing with dizziness.", "mark": "Checks for postural hypotension" },
+          { "t": "12-lead ECG", "r": "Sinus rhythm, first-degree block.", "img": "ecg:avb1", "mark": "ECG for arrhythmia" },
+          { "t": "Capillary glucose, temperature", "r": "6.4; 35.9 °C.", "mark": "Glucose and temperature" }
+        ],
+        "Bloods": [{ "t": "FBC, U&E, CK, bone profile", "r": "Creatinine 140 (baseline 90), CK 3100.", "mark": "CK and renal function after a long lie" }],
+        "X-ray": [{ "t": "Left hip X-ray", "r": "Displaced intracapsular neck of femur fracture.", "img": "xr:hip-nof", "mark": "Hip X-ray: neck of femur fracture" }]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Plan",
+      "hint": "Treat the injury, the cause and the consequences; multifactorial falls assessment.",
+      "opts": [
+        { "t": "Fascia iliaca block and paracetamol; orthopaedics for surgery within 36 hours", "mark": "Analgesia (nerve block) and hip fracture pathway" },
+        { "t": "IV fluids for AKI and rhabdomyolysis; monitor urine output", "mark": "Treats the consequences of the long lie" },
+        { "t": "Postural hypotension: review doxazosin, diuretic, sleeping tablets", "mark": "Medication review for falls risk" },
+        { "t": "Geriatric and therapy assessment: falls, bone health, home safety, alarm", "mark": "Multifactorial falls assessment and bone health" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Postural hypotension is a systolic fall of at least…", "a": "20 mmHg within 3 minutes of standing", "wrong": ["5 mmHg", "50 mmHg", "Any fall"] },
+        { "q": "Complication of a long lie?", "a": "Rhabdomyolysis", "wrong": ["Pneumothorax", "Appendicitis", "Gout"] },
+        { "q": "Target time to hip fracture surgery (NICE)?", "a": "Day of or day after admission (within 36 h)", "wrong": ["Within 1 week", "Within 1 hour", "Only if stable at 2 weeks"] },
+        { "q": "Which drug class increases falls risk?", "a": "Alpha-blockers and sedatives", "wrong": ["Statins", "Proton pump inhibitors", "Vitamin D"] },
+        { "q": "Nerve block for a hip fracture in ED?", "a": "Fascia iliaca block", "wrong": ["Interscalene", "Digital block", "Femoral nerve block is contraindicated"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Why He Fell", "emoji": "🧓", "flavor": "The cause, the injury, the long lie, then the risks." },
+  "cards": [
+    { "q": "Three questions in any fall?", "options": ["Why, what was injured, what did the lie cause", "Where, who, how much", "When, what time, which floor", "Pain score only"], "why": "Cause, injury, consequences.", "source": "NICE CG161 / World Falls Guidelines" },
+    { "q": "Lying and standing BP is measured after standing for…", "options": ["1 and 3 minutes", "10 seconds", "30 minutes", "It doesn't matter"], "why": "A fall of ≥20 systolic or ≥10 diastolic.", "source": "RCP guidance" },
+    { "q": "CK is raised after a long lie because of…", "options": ["Rhabdomyolysis", "Myocardial infarction always", "Liver injury", "Anaemia"], "why": "Risk of AKI.", "source": "Clinical practice" },
+    { "q": "Hip fracture analgesia in ED?", "options": ["Nerve block plus paracetamol", "NSAIDs only", "Nothing until theatre", "IM morphine only"], "why": "Fascia iliaca or femoral nerve block.", "source": "NICE CG124" },
+    { "q": "Falls-risk medicine to review?", "options": ["Benzodiazepine hypnotics", "Paracetamol", "Vitamin D", "Omeprazole"], "why": "Also antihypertensives, antipsychotics, opioids.", "source": "STOPPFall" },
+    { "q": "After a fall with fracture, what else is assessed?", "options": ["Bone health (osteoporosis)", "Hearing only", "Dental health", "Nothing"], "why": "Secondary fracture prevention.", "source": "NICE" }
+  ]
+}

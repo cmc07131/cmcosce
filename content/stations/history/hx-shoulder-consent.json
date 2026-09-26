@@ -1,0 +1,87 @@
+{
+  "id": "hx-shoulder-consent",
+  "gym": "history",
+  "title": "Consent for sedation and shoulder reduction",
+  "type": "comms",
+  "time": 420,
+  "stem": "Cubicle 11. Mr Yip, 19, fell on his outstretched, raised arm playing basketball. His right shoulder is deformed; he is neurovascularly intact. His X-ray is available. Explain the diagnosis and obtain consent for reduction under procedural sedation, and explain the follow-up.",
+  "notes": "Checked against the RCEM/RCoA guideline on safe sedation of adults in the ED (2012; RCEM 2019 update), ASA 2018 moderate sedation guideline, the Montgomery ruling (2015) on consent, and BESS/BOA guidance on first-time anterior shoulder dislocation.\n\nConsent must cover the diagnosis, the proposed procedure and why, material risks (what a reasonable person would want to know, and what this patient would want to know), alternatives (including no treatment and other reduction methods — some can be reduced without sedation, e.g. Cunningham or external rotation; intra-articular lidocaine), and what happens next. Sedation risks: respiratory depression, airway obstruction, hypotension, vomiting and aspiration, allergy, rare cardiac arrest; the sedationist is separate from the person reducing; full monitoring and capnography; fasting is not required for ED sedation when urgent. Reduction risks: failure (needing GA), fracture (especially greater tuberosity or humeral neck), axillary nerve or vessel injury, recurrence.\n\nAged 18 or over, he consents for himself; you do not need to 'inform parents' as your notes suggest (that applies to under-18s in HK). Follow-up: post-reduction X-ray and neurovascular check, a sling for comfort (1–3 weeks), early physiotherapy; young, active patients have a high recurrence risk (up to 80–90% under 20) and should be referred to a shoulder surgeon early. Your notes suggest 3–6 weeks in an immobiliser and avoiding abduction and external rotation; current practice favours shorter immobilisation with early physio.",
+  "cast": [{ "id": "patient", "name": "Mr Yip", "role": "man", "inBed": true }],
+  "steps": [
+    {
+      "id": "explain",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Look at the X-ray",
+      "hint": "Describe it before explaining.",
+      "groups": { "X-ray": [{ "t": "Right shoulder AP", "r": "The humeral head lies medial and inferior to the glenoid, below the coracoid: anterior (subcoracoid) dislocation. No fracture seen.", "img": "xr:shoulder-anterior", "mark": "Describes anterior subcoracoid dislocation, no fracture" }] }
+    },
+    {
+      "id": "consent",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Talk to Mr Yip",
+      "hint": "Diagnosis, the plan, sedation risks, reduction risks, alternatives, understanding, agreement.",
+      "mood": 6,
+      "turns": [
+        {
+          "line": "What's wrong with it? It's agony.",
+          "opts": [
+            { "t": "The ball of your shoulder has come out of the socket, to the front. We need to put it back. First, let's get you some pain relief.", "r": "Thanks. How do you put it back?", "mood": -2, "mark": "Explains the diagnosis simply and offers analgesia" },
+            { "t": "Anterior glenohumeral dislocation.", "r": "Eh?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "How do you put it back?",
+          "opts": [
+            { "t": "We give you a sedative through a drip so you're very sleepy and relaxed, then gently manoeuvre the arm back in. One doctor looks after the sedation and your breathing, another does the shoulder. Some shoulders go back without sedation using gentle techniques — we can try that first if you prefer.", "r": "Is the sedation dangerous?", "mood": -1, "mark": "Explains the procedure and alternatives" },
+            { "t": "We pull hard until it clunks.", "r": "That sounds awful.", "mood": 2 }
+          ]
+        },
+        {
+          "line": "Is the sedation dangerous?",
+          "opts": [
+            { "t": "It's generally very safe. It can slow your breathing, drop your blood pressure or make you vomit; we monitor you closely and can support your breathing if needed. Serious harm is very rare.", "r": "And the shoulder itself?", "mood": -1, "mark": "Explains sedation risks" },
+            { "t": "Totally safe, no risks.", "r": "Great.", "mood": 0 }
+          ]
+        },
+        {
+          "line": "And the shoulder itself?",
+          "opts": [
+            { "t": "It may not go back (then we'd do it in theatre), there's a small chance of a fracture or nerve injury, and it can dislocate again. Can you tell me back what we've discussed? Are you happy to go ahead?", "r": "It might not work, might break, might happen again. Yes, go ahead.", "mood": -2, "mark": "Explains reduction risks, checks understanding and obtains consent" },
+            { "t": "Sign here please.", "r": "What am I signing?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "Afterwards, what happens?",
+          "opts": [
+            { "t": "An X-ray to check it's back, a check of the nerves, a sling for comfort for a week or two, and early physiotherapy. Because you're young and play sport, the chance of it happening again is high, so I'll refer you to the shoulder surgeons.", "r": "Makes sense.", "mood": -2, "mark": "Explains follow-up, recurrence risk and referral" },
+            { "t": "Nothing, just go home.", "r": "OK…", "mood": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Which nerve is most at risk in anterior shoulder dislocation?", "a": "Axillary nerve", "wrong": ["Radial nerve", "Median nerve", "Long thoracic nerve"] },
+        { "q": "Montgomery (2015) requires disclosure of…", "a": "Material risks that this patient would want to know", "wrong": ["Only risks over 1%", "Only what most doctors would mention", "Nothing if the patient signs"] },
+        { "q": "How to test the axillary nerve?", "a": "Sensation over the regimental badge area", "wrong": ["Thumb abduction", "Wrist extension", "Little finger sensation"] },
+        { "q": "Recurrence risk after a first dislocation under 20 years?", "a": "Very high (up to 80–90%)", "wrong": ["Under 5%", "About 20%", "Zero with a sling"] },
+        { "q": "Who can consent for a 19-year-old in HK?", "a": "The patient himself", "wrong": ["His parents", "The examiner", "A social worker"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Ball in Socket", "emoji": "🏀", "flavor": "Diagnosis, procedure, risks, alternatives, teach-back, yes." },
+  "cards": [
+    { "q": "Commonest type of shoulder dislocation?", "options": ["Anterior", "Posterior", "Inferior (luxatio erecta)", "Superior"], "why": "About 95%.", "source": "BOA" },
+    { "q": "Posterior dislocation is associated with…", "options": ["Seizures and electric shock", "Basketball", "Falls on the elbow only", "Pregnancy"], "why": "'Light bulb' sign on AP.", "source": "BOA" },
+    { "q": "Material risk (Montgomery) means…", "options": ["A risk a reasonable person, or this patient, would find significant", "Any risk over 10%", "Only fatal risks", "Risks the doctor thinks matter"], "why": "Patient-centred standard.", "source": "Montgomery v Lanarkshire 2015" },
+    { "q": "Procedural sedation requires…", "options": ["A dedicated sedationist and monitoring including capnography", "Only the proceduralist", "No monitoring", "General anaesthesia"], "why": "Separate roles.", "source": "RCEM/RCoA" },
+    { "q": "Post-reduction checks include…", "options": ["X-ray and neurovascular examination", "CT always", "MRI before discharge", "Blood tests"], "why": "Confirm reduction and exclude fracture/nerve injury.", "source": "BOA" },
+    { "q": "Young athlete after first dislocation should be…", "options": ["Referred early to a shoulder surgeon", "Immobilised 12 weeks", "Discharged without follow-up", "Given steroids"], "why": "High recurrence.", "source": "BESS/BOA" }
+  ]
+}

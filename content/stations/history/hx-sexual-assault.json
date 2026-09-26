@@ -1,0 +1,97 @@
+{
+  "id": "hx-sexual-assault",
+  "gym": "history",
+  "title": "Sexual assault: care and counselling",
+  "type": "comms",
+  "time": 420,
+  "stem": "Private room. Ms Kwan, 25, says she was sexually assaulted by an acquaintance 4 hours ago (vaginal penetration without a condom). She is physically stable. A female nurse is with her. Take the history you need and counsel her about her care.",
+  "notes": "Checked against the Hong Kong Hospital Authority protocol for management of sexual violence (with CEASE Crisis Centre and RainLily), the Faculty of Sexual and Reproductive Healthcare (FSRH) emergency contraception guideline (2017, updated 2023), BASHH/BHIVA PEPSE guidance (2021) and UKHSA HBV guidance.\n\nPrinciples: safety, privacy, a same-gender coordinator where possible, consent for each step, minimise repeated interviews; offer (not force) police reporting and forensic examination (which should come before washing where possible); offer social work support (CEASE 24-hour line, RainLily hotline 2375 5322).\n\nEmergency contraception: a copper IUD is most effective (up to 5 days after unprotected sex or ovulation); ulipristal acetate 30 mg up to 120 hours; levonorgestrel 1.5 mg up to 72 hours (effective to 96 h; double dose if BMI over 26 or enzyme inducers). Your notes give levonorgestrel within 5 days; its licensed window is 72 hours — ulipristal or a copper IUD are the options beyond that.\n\nSTI: test at 2 weeks, or offer presumptive treatment (ceftriaxone and doxycycline ± metronidazole). HBV: accelerated vaccination if not immune. HIV PEP: risk-assessed, within 72 hours, 28 days. HPV vaccination if eligible. Follow-up for STI and HIV testing and psychological support. Your notes match on the rest.",
+  "cast": [
+    { "id": "patient", "name": "Ms Kwan", "role": "woman", "inBed": false },
+    { "id": "nurse", "name": "Nurse Tse", "role": "nurse" }
+  ],
+  "steps": [
+    {
+      "id": "open",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Talk to Ms Kwan",
+      "hint": "Safety, believe her, explain her choices, consent.",
+      "mood": 7,
+      "turns": [
+        {
+          "line": "I don't know why I came. I just want to go home and shower.",
+          "opts": [
+            { "t": "I'm really glad you came. You're safe here, and nothing will happen without your agreement. Can I explain what we can offer, and you decide?", "r": "…OK.", "mood": -3, "mark": "Reassures, affirms and puts her in control" },
+            { "t": "Did you lead him on at all?", "r": "[Starts crying] I knew nobody would believe me.", "mood": 3 }
+          ]
+        },
+        {
+          "line": "Do I have to go to the police?",
+          "opts": [
+            { "t": "It's your choice. If you might want to report, a forensic doctor can collect evidence now — it's best before showering — and we can help you contact the police. You can decide about reporting later.", "r": "I think I want the evidence taken, just in case.", "mood": -2, "mark": "Explains police and forensic options without pressure" },
+            { "t": "Yes, we have to report it.", "r": "No! I just want to leave.", "mood": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "Medical history",
+      "hint": "Only what's needed for care: time, type of contact, condom, ejaculation, injuries, LMP, contraception, HBV vaccination, known risks of the assailant.",
+      "groups": {
+        "Assault": [
+          { "t": "When did it happen?", "r": "About 11 last night — 4 hours ago.", "mark": "Asks the time (for PEP and EC windows)" },
+          { "t": "What kind of contact — vaginal, anal, oral? Condom? Ejaculation?", "r": "Vaginal only. No condom. I think he ejaculated.", "mark": "Asks type of contact, condom and ejaculation" },
+          { "t": "Are you hurt anywhere?", "r": "Sore, and bruises on my wrists.", "mark": "Asks about injuries" },
+          { "t": "Were you given drinks or drugs? Can you remember everything?", "r": "I had two drinks. I remember it.", "mark": "Asks about drugs or alcohol" }
+        ],
+        "Health": [
+          { "t": "When was your last period? Any contraception?", "r": "Two weeks ago. No contraception.", "mark": "Asks LMP and contraception" },
+          { "t": "Hepatitis B vaccination? HPV vaccine?", "r": "I had hep B as a baby. No HPV vaccine.", "mark": "Asks HBV and HPV vaccination" },
+          { "t": "Do you know anything about his health — drug injection, HIV?", "r": "He's from overseas, I don't know.", "mark": "Assesses HIV risk from the assailant" }
+        ]
+      }
+    },
+    {
+      "id": "care",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Offer care",
+      "hint": "Emergency contraception, STI, HBV, HIV PEP discussion, HPV, support, follow-up.",
+      "confirm": "Offer",
+      "opts": [
+        { "t": "Pregnancy test; emergency contraception — copper IUD is most effective, or ulipristal 30 mg / levonorgestrel 1.5 mg", "need": true, "mark": "Offers emergency contraception with options" },
+        { "t": "STI testing at 2 weeks or presumptive antibiotics", "need": true, "mark": "Addresses STI prevention" },
+        { "t": "HBV booster (vaccinated) per HBV status; HIV PEP discussion (within 72 h)", "need": true, "mark": "HBV and HIV PEP assessed" },
+        { "t": "HPV vaccination offered", "need": true, "mark": "Offers HPV vaccination" },
+        { "t": "CEASE Crisis Centre or RainLily support; follow-up clinic", "need": true, "mark": "Psychological support and follow-up" },
+        { "t": "Full speculum examination by us before the forensic doctor comes", "trap": true, "r": "Minimise repeated intimate examinations; coordinate with the forensic doctor." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Most effective emergency contraception?", "a": "Copper IUD", "wrong": ["Levonorgestrel", "Ulipristal", "Combined pill"] },
+        { "q": "Licensed window for levonorgestrel 1.5 mg?", "a": "72 hours", "wrong": ["120 hours", "24 hours", "7 days"] },
+        { "q": "Ulipristal acetate window?", "a": "120 hours", "wrong": ["72 hours", "24 hours", "10 days"] },
+        { "q": "HIV PEP after sexual assault must start within…", "a": "72 hours", "wrong": ["7 days", "1 month", "24 hours only"] },
+        { "q": "Should she be made to report to the police?", "a": "No — it is her choice (unless a child or vulnerable adult)", "wrong": ["Yes, always", "Only if injured", "Only if the assailant is known"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Safe Space", "emoji": "🕊", "flavor": "Believe, offer, let her choose. EC, STI, HBV, HIV, support." },
+  "cards": [
+    { "q": "Levonorgestrel emergency contraception is licensed up to…", "options": ["72 hours", "120 hours", "7 days", "12 hours"], "why": "Ulipristal to 120 h; copper IUD to 5 days.", "source": "FSRH 2017 (2023)", "note": "Older notes: within 5 days." },
+    { "q": "Why collect forensic evidence before washing?", "options": ["Washing destroys evidence", "It is required by law", "To test for HIV", "It is faster"], "why": "Offer it; the choice is hers.", "source": "HA sexual violence protocol" },
+    { "q": "24-hour sexual violence crisis support in HK?", "options": ["CEASE Crisis Centre", "Samaritans only", "Police only", "Social Welfare Department only"], "why": "Also RainLily.", "source": "HA protocol" },
+    { "q": "HBV prophylaxis after sexual assault in a vaccinated person?", "options": ["Booster dose per status", "Nothing ever", "HBIG always", "Antivirals"], "why": "Accelerated course if unvaccinated.", "source": "UKHSA Green Book" },
+    { "q": "HIV PEP duration?", "options": ["28 days", "3 days", "3 months", "1 dose"], "why": "Started within 72 hours.", "source": "BASHH/BHIVA 2021" },
+    { "q": "The first priority in the consultation?", "options": ["Safety and her sense of control", "Detailed questioning about the assault", "Police statement", "Blood tests"], "why": "Trauma-informed care.", "source": "WHO / HA protocol" }
+  ]
+}

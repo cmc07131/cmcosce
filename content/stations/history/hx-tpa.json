@@ -1,0 +1,109 @@
+{
+  "id": "hx-tpa",
+  "gym": "history",
+  "title": "Consent for stroke thrombolysis",
+  "type": "comms",
+  "time": 420,
+  "stem": "Resus 4. Mrs Au, 65, developed left arm and leg weakness and slurred speech while having breakfast, 80 minutes ago. BP 196/112, glucose 7.0. NIHSS 9. Non-contrast CT brain shows no bleed. She is alert. Discuss thrombolysis with her and check for contraindications.",
+  "notes": "Checked against the European Stroke Organisation guidelines (ESO 2021 on IV thrombolysis; ESO 2023 expedited recommendation on tenecteplase), AHA/ASA 2019 acute ischaemic stroke guideline (with 2026 update where relevant), NICE NG128 (updated 2022/2023), and Hong Kong Hospital Authority stroke thrombolysis practice.\n\nIV thrombolysis for disabling ischaemic stroke within 4.5 hours of onset (or last known well): alteplase 0.9 mg/kg (max 90 mg, 10% bolus, rest over 1 hour) or tenecteplase 0.25 mg/kg single bolus (max 25 mg), now an equal or preferred option in ESO and NICE. Beyond 4.5 hours or wake-up stroke: selected patients with imaging mismatch. Large vessel occlusion (CT angiogram): mechanical thrombectomy up to 6 hours, and up to 24 hours with imaging selection. BP must be under 185/110 before and 180/105 for 24 hours after.\n\nBenefit: about 10 more patients per 100 treated within 3 hours have little or no disability, fewer at 3–4.5 hours; symptomatic ICH about 6% versus 1% (NINDS-era figures; lower in modern registries).\n\nYour notes use a 3-hour window and the NINDS numbers; the window is now 4.5 hours, tenecteplase is an accepted alternative, and CT angiography for thrombectomy should be part of the plan. Your contraindication lists (older ECASS-III warnings after 3 hours: age over 80, diabetes with prior stroke, NIHSS over 25) are no longer absolute in AHA 2019.",
+  "cast": [
+    { "id": "patient", "name": "Mrs Au", "role": "patient", "inBed": true },
+    { "id": "nurse", "name": "Nurse Fan", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 88,
+    "sbp": 196,
+    "dbp": 112,
+    "spo2": 97,
+    "rr": 16,
+    "gcs": 15,
+    "glucose": 7.0,
+    "rhythm": "af",
+    "effects": [{ "scene": "bp", "add": { "sbp": -24, "dbp": -14 }, "overS": 120 }]
+  },
+  "steps": [
+    {
+      "id": "checks",
+      "kind": "history",
+      "to": "patient",
+      "label": "Check eligibility",
+      "hint": "Exact onset, anticoagulants, bleeding, surgery, previous stroke or bleed, pregnancy.",
+      "groups": {
+        "Onset": [{ "t": "When exactly did this start? When were you last normal?", "r": "At 07:40, at breakfast. I was fine a second before.", "mark": "Establishes the exact onset time" }],
+        "Bleeding risk": [
+          { "t": "Do you take blood thinners?", "r": "No. Just blood pressure tablets — I sometimes forget them.", "mark": "Asks about anticoagulants" },
+          { "t": "Any recent bleeding, surgery, head injury or stroke?", "r": "No.", "mark": "Asks about recent bleeding, surgery, trauma and stroke" },
+          { "t": "Ever had a brain bleed, aneurysm or brain tumour?", "r": "No.", "mark": "Asks about previous ICH or intracranial lesion" },
+          { "t": "Sudden severe headache before this?", "r": "No headache." }
+        ],
+        "Other": [{ "t": "Allergies? Function before today?", "r": "No allergies. Fully independent, still working.", "mark": "Allergies and premorbid function" }]
+      }
+    },
+    {
+      "id": "bp",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Talk to the nurse",
+      "hint": "Lower BP below 185/110 before thrombolysis; CT angiogram; weight.",
+      "opts": [
+        { "t": "Labetalol 10 mg IV now to get the BP below 185/110", "scene": "bp", "mark": "Lowers BP below 185/110 before thrombolysis" },
+        { "t": "CT angiogram now for a large vessel occlusion; call the stroke team", "mark": "CT angiography for thrombectomy and stroke team activation" },
+        { "t": "Weigh her for the dose", "mark": "Weight-based dosing" },
+        { "t": "Aspirin 300 mg now", "trap": true, "r": "No antiplatelets for 24 hours after thrombolysis." }
+      ]
+    },
+    {
+      "id": "consent",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Discuss with Mrs Au",
+      "hint": "Diagnosis, the drug, benefit, risk, time-critical, questions.",
+      "mood": 6,
+      "turns": [
+        {
+          "line": "What's happened to me?",
+          "opts": [
+            { "t": "You've had a stroke — a clot blocking blood flow to part of the brain. The scan shows no bleeding.", "r": "Can you fix it?", "mood": -1, "mark": "Explains the diagnosis in plain language" },
+            { "t": "Right MCA infarct.", "r": "What?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "Can you fix it?",
+          "opts": [
+            { "t": "There's a clot-dissolving drug. Given within 4½ hours, about 1 extra person in every 10 treated recovers with little or no disability. The main risk is bleeding in the brain — about 6 in 100 — which can be serious or fatal.", "r": "That's a big risk…", "mood": 0, "mark": "Explains benefits and risks with numbers" },
+            { "t": "It's a magic drug with no side effects.", "r": "Really?", "mood": 1 }
+          ]
+        },
+        {
+          "line": "That's a big risk… can I think about it tomorrow?",
+          "opts": [
+            { "t": "I understand. The benefit falls every minute, and after 4½ hours it isn't given. Overall, many more people are helped than harmed. What would you like to do?", "r": "OK. Let's do it.", "mood": -2, "mark": "Explains time dependence and supports her decision" },
+            { "t": "Sure, tomorrow is fine.", "r": "OK.", "mood": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Time window for IV thrombolysis from onset?", "a": "4.5 hours", "wrong": ["3 hours only", "24 hours", "12 hours"] },
+        { "q": "Tenecteplase dose for stroke?", "a": "0.25 mg/kg single bolus (max 25 mg)", "wrong": ["0.9 mg/kg over 1 hour", "0.5 mg/kg", "50 mg fixed"] },
+        { "q": "BP before thrombolysis must be below…", "a": "185/110 mmHg", "wrong": ["140/90", "220/120", "160/100"] },
+        { "q": "Thrombectomy window with imaging selection?", "a": "Up to 24 hours", "wrong": ["1 hour", "4.5 hours only", "7 days"] },
+        { "q": "Antiplatelets after thrombolysis?", "a": "Avoid for 24 hours", "wrong": ["Give immediately", "Give before", "Double dose"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Time Is Brain", "emoji": "⏱", "flavor": "4½ hours, BP under 185/110, CTA for the big clot." },
+  "cards": [
+    { "q": "IV thrombolysis window for acute ischaemic stroke?", "options": ["4.5 hours from onset", "3 hours", "6 hours", "24 hours"], "why": "Longer only with imaging selection.", "source": "ESO 2021; NICE NG128", "note": "Older notes: 3 hours." },
+    { "q": "Alteplase dose for stroke?", "options": ["0.9 mg/kg, max 90 mg, 10% bolus", "1.5 mg/kg", "0.25 mg/kg bolus", "100 mg fixed"], "why": "Remainder over 60 minutes.", "source": "AHA/ASA 2019" },
+    { "q": "Tenecteplase in stroke is…", "options": ["An accepted alternative to alteplase (0.25 mg/kg)", "Contraindicated", "Only for STEMI", "Given as an infusion over 24 h"], "why": "Single bolus is practical.", "source": "ESO 2023; NICE 2024" },
+    { "q": "Mechanical thrombectomy is for…", "options": ["Large vessel occlusion", "Lacunar stroke", "ICH", "TIA"], "why": "Up to 24 h with imaging selection.", "source": "ESO/ESMINT; AHA" },
+    { "q": "Symptomatic ICH risk with thrombolysis (NINDS)?", "options": ["About 6%", "About 50%", "About 0.1%", "About 20%"], "why": "About 0.6% without.", "source": "NINDS 1995" },
+    { "q": "Which is a contraindication to thrombolysis?", "options": ["Previous intracranial haemorrhage", "Age 81", "Diabetes", "NIHSS 9"], "why": "Age and diabetes are no longer absolute exclusions.", "source": "AHA/ASA 2019" }
+  ]
+}

@@ -557,7 +557,22 @@ test('flashcards: four distinct options, a valid answer, a source, and unique id
   const ids = new Set<string>()
   for (const f of readdirSync(new URL('../../content/cards/', import.meta.url))) {
     const deck = deckSchema.parse(readJson(`../../content/cards/${f}`))
-    assert.ok(deck.cards.length >= 10, `${deck.deck} has at least 10 cards`)
+    // Station scripts add their own cards to their gym's deck at runtime.
+    let stationCards = 0
+    try {
+      for (const sf of readdirSync(new URL(`../../content/stations/${deck.deck}/`, import.meta.url))) {
+        const st = readJson(`../../content/stations/${deck.deck}/${sf}`) as { id: string; cards?: unknown[] }
+        stationCards += st.cards?.length ?? 0
+        for (let i = 1; i <= (st.cards?.length ?? 0); i++) {
+          const cid = `${st.id}-c${i}`
+          assert.equal(ids.has(cid), false, `${cid}: duplicate id`)
+          ids.add(cid)
+        }
+      }
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err
+    }
+    assert.ok(deck.cards.length + stationCards >= 10, `${deck.deck} has at least 10 cards`)
     for (const card of deck.cards) {
       assert.equal(new Set(card.options).size, 4, `${card.id}: options repeat`)
       assert.ok(card.source.length > 3, `${card.id}: source`)

@@ -1,0 +1,92 @@
+{
+  "id": "hx-malaria",
+  "gym": "history",
+  "title": "Returning traveller with fever",
+  "type": "history",
+  "time": 420,
+  "stem": "Cubicle 5. Mr Tam, 30, has had 5 days of fever, rigors, headache and aching joints. HR 106, BP 118/70, temperature 38.9 °C, RR 18, SpO2 98%. Take a history, then discuss your differential diagnosis and investigations with the examiner.",
+  "notes": "Checked against UKHSA guidelines for malaria prevention and treatment (UK malaria treatment guidelines, 2016 with updates), WHO Guidelines for malaria (2023–2025), the CHP (Hong Kong) guidance, and the RCEM/BIA approach to the febrile returning traveller.\n\nMalaria must be excluded in any fever within 1 year of travel to an endemic area (most falciparum within 3 months). Tests: thick and thin films (three sets over 48–72 hours if negative) plus a rapid antigen test; parasitaemia; FBC (thrombocytopenia), U&E, LFT, glucose, lactate, gas. Severe falciparum malaria: impaired consciousness or seizures, respiratory distress/acidosis, shock, AKI, hypoglycaemia, jaundice, severe anaemia, bleeding, parasitaemia 2% or more (UK threshold; WHO uses 10% in high-transmission settings): treat with IV artesunate. Uncomplicated falciparum: artemether–lumefantrine (or atovaquone–proguanil). Non-falciparum: chloroquine (or artemisinin combination), then primaquine for vivax/ovale after G6PD testing.\n\nYour notes list quinine, doxycycline and chloroquine as the anti-malarial drugs; current first-line for severe falciparum is IV artesunate (quinine is a second-line alternative) and for uncomplicated falciparum an artemisinin combination. The rest of your history and investigation list matches.\n\nThis case: backpacking in rural Sierra Leone, no prophylaxis, thrombocytopenia and a 3% falciparum parasitaemia — severe malaria.",
+  "cast": [
+    { "id": "patient", "name": "Mr Tam", "role": "man", "inBed": false }
+  ],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "Take a history",
+      "hint": "Fever story, systems review, detailed travel history (where, when, doing what), prophylaxis, vaccines, TOCC, PMH.",
+      "groups": {
+        "Fever": [
+          { "t": "Tell me about the fever", "r": "Started 5 days ago. Comes in waves with shaking chills and sweats, every day now.", "mark": "Characterises the fever" },
+          { "t": "Other symptoms: cough, diarrhoea, urine, rash, confusion?", "r": "Headache, joint aches, some nausea. No cough, no rash, no diarrhoea. My urine is darker.", "mark": "Takes a systems review" }
+        ],
+        "Travel": [
+          { "t": "Have you travelled recently? Where exactly and when?", "r": "Backpacking in Sierra Leone, three weeks, rural villages. Came back 10 days ago.", "mark": "Asks where, when and how long" },
+          { "t": "Did you take malaria tablets? Mosquito nets?", "r": "I didn't take any tablets. Lots of mosquito bites.", "mark": "Asks about malaria prophylaxis and bite prevention" },
+          { "t": "Vaccines before travel?", "r": "Yellow fever and typhoid injections.", "mark": "Asks pre-travel vaccinations" },
+          { "t": "Fresh water swimming, animal contact, sexual contact, sick contacts?", "r": "Swam in a river once. No sexual contacts. No one else ill that I know.", "mark": "Asks exposures (water, animals, sexual, contacts)" },
+          { "t": "Did you visit anywhere with Ebola or Lassa outbreaks, or care for sick people?", "r": "No healthcare work, no funerals, no sick people.", "mark": "Screens for viral haemorrhagic fever risk" }
+        ],
+        "Background": [
+          { "t": "Past medical history, medicines, allergies", "r": "Healthy. No medicines. No allergies.", "mark": "Past history, drugs and allergies" },
+          { "t": "Occupation, cluster, contacts at home", "r": "Office worker. Lives with his girlfriend, who is well." }
+        ]
+      }
+    },
+    {
+      "id": "tests",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Examination findings and tests",
+      "hint": "Ask for the key signs, then films, antigen test, bloods.",
+      "groups": {
+        "Signs": [
+          { "t": "Jaundice, pallor, rash, lymph nodes, liver and spleen", "r": "Mildly icteric. Spleen tip palpable. No rash.", "mark": "Asks for jaundice and splenomegaly" },
+          { "t": "Conscious level", "r": "GCS 15, orientated." }
+        ],
+        "Bloods": [
+          { "t": "Thick and thin blood films and a malaria rapid antigen test", "r": "P. falciparum, parasitaemia 3%.", "mark": "Requests thick and thin films and antigen test" },
+          { "t": "FBC, U&E, LFT, glucose, lactate, gas", "r": "Platelets 54, Hb 112, creatinine 110, bilirubin 58, glucose 4.2, lactate 2.8.", "mark": "Requests bloods for severity" },
+          { "t": "Blood cultures, dengue serology/NS1, HIV test", "r": "Sent.", "mark": "Considers other diagnoses: typhoid, dengue, HIV" }
+        ]
+      }
+    },
+    {
+      "id": "ddx",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Discuss with the examiner",
+      "hint": "Differential, severity, treatment, notification.",
+      "opts": [
+        { "t": "Differential: falciparum malaria, dengue, typhoid, rickettsial infection, leptospirosis, HIV seroconversion; common infections too", "mark": "Gives a structured differential" },
+        { "t": "Severe malaria: parasitaemia 2% or more (UK) with jaundice → admit, IV artesunate", "mark": "Recognises severe malaria and treats with IV artesunate" },
+        { "t": "Infectious diseases consultant; notify the Centre for Health Protection", "mark": "Refers and notifies" },
+        { "t": "Oral chloroquine and discharge", "trap": "critical", "r": "West African falciparum is chloroquine-resistant, and he has severe disease." },
+        { "t": "Wait for three negative films over 3 days before thinking of malaria", "trap": true, "r": "The first film is already positive; treat now." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "First-line treatment for severe falciparum malaria?", "a": "IV artesunate", "wrong": ["Oral chloroquine", "IV quinine only", "Oral doxycycline"] },
+        { "q": "UK parasitaemia threshold for severe malaria?", "a": "2% or more", "wrong": ["0.1%", "10% only", "Any parasites"] },
+        { "q": "Films in suspected malaria if the first is negative?", "a": "Repeat to three sets over 48–72 hours", "wrong": ["No repeat needed", "Repeat once a week", "Only if the patient is unwell"] },
+        { "q": "Why test G6PD before primaquine?", "a": "Primaquine causes haemolysis in G6PD deficiency", "wrong": ["It interacts with artesunate", "It affects liver enzymes", "Only for children"] },
+        { "q": "Most falciparum malaria presents within…", "a": "3 months of return", "wrong": ["24 hours", "5 years", "Only while abroad"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Mosquito Hunter", "emoji": "🦟", "flavor": "Fever after the tropics is malaria until three films say no." },
+  "cards": [
+    { "q": "Treatment of uncomplicated falciparum malaria (UK)?", "options": ["Artemether–lumefantrine", "Chloroquine", "Primaquine alone", "Doxycycline alone"], "why": "Or atovaquone–proguanil.", "source": "UK malaria treatment guidelines" },
+    { "q": "Severe malaria feature?", "options": ["Impaired consciousness", "Fever 38 °C", "Headache", "Myalgia"], "why": "Also acidosis, shock, AKI, hypoglycaemia, anaemia, parasitaemia ≥2%.", "source": "UKHSA / WHO" },
+    { "q": "Which parasite relapses from liver hypnozoites?", "options": ["P. vivax and P. ovale", "P. falciparum", "P. knowlesi", "P. malariae only"], "why": "Needs primaquine or tafenoquine after G6PD testing.", "source": "WHO" },
+    { "q": "Thrombocytopenia with fever after Africa suggests…", "options": ["Malaria (or dengue)", "Influenza only", "UTI", "Appendicitis"], "why": "Common in both; films needed.", "source": "Travel medicine" },
+    { "q": "Travel history must include…", "options": ["Where, when, activities and prophylaxis", "Only the country", "Only the airline", "Only return date"], "why": "Incubation periods and exposures guide the differential.", "source": "RCEM / BIA" },
+    { "q": "Quinine for malaria is now…", "options": ["A second-line alternative to IV artesunate", "First-line for all", "Banned", "For prophylaxis"], "why": "Artesunate reduces mortality compared with quinine.", "source": "WHO; SEAQUAMAT/AQUAMAT", "note": "Older notes list quinine first." }
+  ]
+}

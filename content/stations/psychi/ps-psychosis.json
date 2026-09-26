@@ -1,0 +1,88 @@
+{
+  "id": "ps-psychosis",
+  "gym": "psychi",
+  "title": "First-episode psychosis: history",
+  "type": "psych",
+  "time": 420,
+  "stem": "Cubicle 12. Kelvin, 20, a university student, was brought by his sister. For two months he has stopped attending classes, stays in his room, and says his neighbours are spying on him through the walls. Take a history to assess for psychosis and risk.",
+  "notes": "Checked against NICE CG178 (Psychosis and schizophrenia in adults, 2014) and CG155 (children and young people), and the Hong Kong EASY (Early Assessment Service for Young people with early psychosis) programme.\n\nHistory: positive symptoms (delusions, hallucinations, thought interference — insertion, withdrawal, broadcasting — passivity), negative symptoms (withdrawal, apathy, poverty of speech, blunting), disorganisation, duration, triggers, substance use (cannabis, stimulants), mood symptoms (to separate schizoaffective and psychotic mood disorders), medical causes, family history, risk (to self, others, self-neglect, vulnerability), insight. Investigations exclude organic causes (drugs, thyroid, glucose, infection; neuroimaging if atypical). Refer urgently to early intervention in psychosis (EASY in HK) — shorter duration of untreated psychosis improves outcome.\n\nYour notes list psychosis history as a topic and have MSE descriptions (auditory hallucinations → schizophrenia; tangential, blocking); nothing conflicts.",
+  "cast": [
+    { "id": "patient", "name": "Kelvin", "role": "man" },
+    { "id": "sister", "name": "Sister", "role": "woman" }
+  ],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "Talk to Kelvin",
+      "hint": "Rapport, beliefs, voices, thought interference, mood, substances, risk, insight.",
+      "groups": {
+        "Beliefs": [
+          { "t": "How have things been at home lately?", "r": "Not safe. The neighbours drill holes and listen. They know my thoughts.", "mark": "Opens neutrally and elicits persecutory beliefs" },
+          { "t": "How do you know they're watching you?", "r": "The red car outside means they've reported me. It's obvious.", "mark": "Explores the basis of the belief (delusional perception)" },
+          { "t": "Do thoughts ever get put into your head or taken out, or broadcast to others?", "r": "They broadcast my thoughts. Everyone on the MTR hears them.", "mark": "Asks about thought interference" }
+        ],
+        "Perception": [
+          { "t": "Do you hear voices when no one is around?", "r": "Two men talk about me: 'he's useless, he's a spy'.", "mark": "Asks about third-person auditory hallucinations" }
+        ],
+        "Mood and substances": [
+          { "t": "How is your mood? Sleep?", "r": "Scared, not sad. I sleep in the day.", "mark": "Screens mood (mania or depression)" },
+          { "t": "Cannabis, ice, alcohol?", "r": "Cannabis most weekends last year.", "mark": "Asks about substance use" }
+        ],
+        "Risk": [
+          { "t": "Have you thought about hurting yourself, or the neighbours?", "r": "Sometimes I think of ending it so they can't get me. I bought a knife for protection.", "mark": "Assesses risk to self and others including weapons" },
+          { "t": "Do you think this could be an illness?", "r": "No. It's real.", "mark": "Assesses insight" }
+        ]
+      }
+    },
+    {
+      "id": "collateral",
+      "kind": "history",
+      "to": "sister",
+      "label": "Talk to his sister",
+      "hint": "Change from his usual self, duration, family history, function.",
+      "groups": {
+        "Collateral": [
+          { "t": "How is he different from usual?", "r": "He was a top student. Now doesn't wash, barely speaks, covers the windows with foil.", "mark": "Collateral on functional decline and negative symptoms" },
+          { "t": "Any family history of mental illness?", "r": "Our uncle has schizophrenia.", "mark": "Asks family history" }
+        ]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Summarise",
+      "hint": "Likely diagnosis, differentials, risk, investigations, referral.",
+      "opts": [
+        { "t": "First-episode psychosis, likely schizophrenia: persecutory delusions, thought broadcasting, third-person voices, negative symptoms for 2 months", "mark": "Summarises and gives the likely diagnosis" },
+        { "t": "Differentials: substance-induced psychosis, mood disorder with psychosis, organic causes", "mark": "Gives differentials" },
+        { "t": "Risk: suicidal thoughts and a knife — urgent psychiatric assessment today; remove the weapon; admission likely", "mark": "Identifies high risk and plans urgent assessment" },
+        { "t": "Bloods, urine drug screen, TFT; early intervention service (EASY)", "mark": "Organic screen and early intervention referral" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "A first-rank symptom of schizophrenia?", "a": "Thought broadcasting", "wrong": ["Low mood", "Visual hallucinations of insects", "Obsessions"] },
+        { "q": "Negative symptoms include…", "a": "Apathy, poverty of speech, blunted affect, social withdrawal", "wrong": ["Delusions", "Hallucinations", "Pressured speech"] },
+        { "q": "Why refer early to EASY?", "a": "A shorter duration of untreated psychosis improves outcomes", "wrong": ["It is a legal requirement", "To avoid medication", "Only for over-40s"] },
+        { "q": "Drug that increases psychosis risk in youth?", "a": "Cannabis", "wrong": ["Caffeine", "Paracetamol", "Vitamin C"] },
+        { "q": "Delusional perception is…", "a": "A normal perception given a sudden delusional meaning", "wrong": ["A hallucination", "An illusion", "A dream"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Reality Check", "emoji": "🔮", "flavor": "Positive, negative, substances, mood, risk, early intervention." },
+  "cards": [
+    { "q": "Third-person auditory hallucinations suggest…", "options": ["Schizophrenia", "Depression", "Delirium", "Anxiety"], "why": "Voices discussing the patient.", "source": "Schneider's first-rank symptoms" },
+    { "q": "Hong Kong's early psychosis service?", "options": ["EASY", "CEASE", "RainLily", "FCPSU"], "why": "Early Assessment Service for Young people with early psychosis.", "source": "HA" },
+    { "q": "Organic screen in first-episode psychosis includes…", "options": ["Urine drugs, TFT, glucose", "Only a chest X-ray", "Stool culture", "Spirometry"], "why": "Neuroimaging if atypical features.", "source": "NICE CG178" },
+    { "q": "Negative symptom?", "options": ["Alogia", "Delusion", "Hallucination", "Thought insertion"], "why": "Poverty of speech.", "source": "Psychiatry texts" },
+    { "q": "Most important risk question when psychotic and fearful?", "options": ["Weapons and intent to harm self or others", "Favourite food", "Job title", "Height"], "why": "Protective violence toward perceived persecutors.", "source": "NICE CG178" },
+    { "q": "Delusion definition?", "options": ["A fixed false belief not shared by culture", "Any strange idea", "A hallucination", "A strong opinion"], "why": "Held despite evidence.", "source": "Psychiatry texts" }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "hx-fight-bite",
+  "gym": "history",
+  "title": "Fight bite",
+  "type": "history",
+  "time": 420,
+  "stem": "Cubicle 8. Mr Pang, 25, punched someone in the mouth in a bar fight 6 hours ago. He has a small cut over a knuckle of his right hand. Take a history, look at the wound, and counsel him.",
+  "notes": "Checked against NICE NG184 (Human and animal bites: antimicrobial prescribing, 2020), BSSH hand surgery guidance, and CHP / UKHSA guidance on blood-borne virus exposure.\n\nA laceration over a metacarpophalangeal joint after a punch is a human bite until proven otherwise. Teeth penetrate the extensor tendon and joint capsule with the fist clenched; when the hand opens, the tendon slides and hides the tract. Oral flora (streptococci, Staphylococcus aureus, Eikenella corrodens, anaerobes) cause septic arthritis, tenosynovitis and osteomyelitis.\n\nManage: X-ray (tooth fragment, fracture of the metacarpal head, air in the joint); irrigate; do not close primarily; co-amoxiclav prophylaxis (NICE: for human bites that break the skin and draw blood) — doxycycline plus metronidazole if penicillin-allergic; tetanus; blood-borne virus risk assessment (HBV vaccination, HCV and HIV testing; PEP rarely indicated unless the source is known high risk with blood in saliva). Refer to hand surgeons for exploration and washout if the joint or tendon may be involved (most fight bites over the MCP joint), or if presenting late or infected.\n\nYour notes match this; they could add the X-ray and early hand surgery referral for exploration.",
+  "cast": [{ "id": "patient", "name": "Mr Pang", "role": "man", "inBed": false }],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "Mechanism, time, hand dominance, occupation, symptoms, tetanus, BBV risk, PMH.",
+      "groups": {
+        "Injury": [
+          { "t": "How exactly did you hurt your hand?", "r": "Punched a guy in the mouth. Hit his teeth.", "mark": "Establishes a closed-fist injury against teeth" },
+          { "t": "When?", "r": "About 6 hours ago.", "mark": "Asks the time of injury" },
+          { "t": "Pain, swelling, redness, fever, can you move your fingers?", "r": "Throbbing, bit swollen. Hurts to straighten my middle finger.", "mark": "Asks symptoms of infection and tendon/joint involvement" }
+        ],
+        "Background": [
+          { "t": "Which is your writing hand? What do you do for work?", "r": "Right-handed. I'm a chef.", "mark": "Asks hand dominance and occupation" },
+          { "t": "Tetanus vaccination?", "r": "No idea — over 10 years ago.", "mark": "Asks tetanus status" },
+          { "t": "Allergies, diabetes, immune problems?", "r": "Penicillin gives me a rash. Otherwise healthy.", "mark": "Asks allergies and immunosuppression" }
+        ],
+        "Blood-borne viruses": [
+          { "t": "Was the other man bleeding from the mouth? Do you know anything about him?", "r": "His lip was bleeding. Don't know him.", "mark": "Assesses BBV exposure risk" },
+          { "t": "Hepatitis B vaccination?", "r": "Yes, as a kid." }
+        ]
+      }
+    },
+    {
+      "id": "exam",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Examine and investigate",
+      "hint": "Look with the fist clenched; tendon function; X-ray.",
+      "groups": {
+        "Exam": [
+          { "t": "Look at the wound with the fist clenched and open", "r": "A 6 mm laceration over the 3rd MCP joint; with the fist clenched it lines up with a hole in the extensor hood.", "img": "photo:fight-bite", "mark": "Examines the wound with the fist clenched" },
+          { "t": "Test extensor tendon and joint", "r": "Pain on extension against resistance; pain on passive movement of the MCP joint.", "mark": "Tests tendon and joint involvement" }
+        ],
+        "Imaging": [{ "t": "Hand X-ray", "r": "No fracture, no foreign body. A small bubble of air in the 3rd MCP joint.", "mark": "X-ray for fracture, tooth fragment and joint air" }]
+      }
+    },
+    {
+      "id": "counsel",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Counsel",
+      "hint": "Explain the risk, antibiotics, no stitches, hand surgeons, BBV, red flags.",
+      "mood": 5,
+      "turns": [
+        {
+          "line": "It's just a small cut. Can you stitch it and let me go?",
+          "opts": [
+            { "t": "It looks small, but teeth have gone into the knuckle joint. Mouth bacteria cause serious infection that can destroy the joint. We won't stitch it; you need antibiotics and the hand surgeons to wash out the joint.", "r": "An operation? For this?", "mood": 0, "mark": "Explains the risk of joint infection and the plan" },
+            { "t": "Sure, three stitches.", "r": "Great.", "mood": -1 }
+          ]
+        },
+        {
+          "line": "An operation? For this?",
+          "opts": [
+            { "t": "As a chef your hand is your living. A washout now avoids a stiff, infected finger later. Because you're allergic to penicillin, we'll use doxycycline and metronidazole, and give a tetanus booster.", "r": "OK… makes sense.", "mood": -2, "mark": "Appropriate antibiotics for penicillin allergy and tetanus" },
+            { "t": "Your choice.", "r": "Then no.", "mood": 1 }
+          ]
+        },
+        {
+          "line": "Can I catch anything from his blood?",
+          "opts": [
+            { "t": "There's a small risk of hepatitis and HIV from blood in saliva. You're protected against hepatitis B; we'll take baseline blood tests today and repeat them later. HIV medicines aren't usually needed for this type of exposure.", "r": "Thanks for explaining.", "mood": -2, "mark": "Counsels on blood-borne virus risk and testing" },
+            { "t": "No risk at all.", "r": "OK.", "mood": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Organism typical of human bites?", "a": "Eikenella corrodens", "wrong": ["Pasteurella multocida", "Pseudomonas", "Clostridium tetani"] },
+        { "q": "Why examine with the fist clenched?", "a": "The tendon tract lines up with the wound in that position", "wrong": ["It is less painful", "To test grip", "To see the nails"] },
+        { "q": "First-line antibiotic for a human bite (NICE)?", "a": "Co-amoxiclav", "wrong": ["Flucloxacillin alone", "Ciprofloxacin", "No antibiotics"] },
+        { "q": "Should a fight bite be sutured?", "a": "No", "wrong": ["Yes, always", "Only with nylon", "Yes, if under 1 cm"] },
+        { "q": "Indication for hand surgery referral?", "a": "Possible joint or tendon penetration", "wrong": ["Any bruise", "Pain only", "Patient request only"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Knuckle Sandwich", "emoji": "✊", "flavor": "Small cut over a knuckle after a punch: it's in the joint until proved otherwise." },
+  "cards": [
+    { "q": "A laceration over the MCP joint after a punch should be treated as…", "options": ["A human bite with possible joint penetration", "A simple laceration", "A burn", "A sprain"], "why": "High risk of septic arthritis.", "source": "BSSH" },
+    { "q": "Antibiotic for a human bite with penicillin allergy (NICE)?", "options": ["Doxycycline plus metronidazole", "Flucloxacillin", "Amoxicillin", "Nitrofurantoin"], "why": "Covers oral flora including anaerobes.", "source": "NICE NG184" },
+    { "q": "X-ray in a fight bite looks for…", "options": ["Fracture, tooth fragment, air in the joint", "Pneumonia", "Gallstones", "Nothing useful"], "why": "Changes management.", "source": "BSSH" },
+    { "q": "Primary closure of a fight bite?", "options": ["Contraindicated", "Recommended", "Only with steri-strips", "Only in children"], "why": "Traps bacteria.", "source": "BSSH" },
+    { "q": "Eikenella corrodens is sensitive to…", "options": ["Penicillins", "Clindamycin alone", "Metronidazole alone", "Flucloxacillin alone"], "why": "Resistant to clindamycin; co-amoxiclav covers it.", "source": "Microbiology" },
+    { "q": "Tetanus for a bite in someone last vaccinated >10 years ago?", "options": ["Booster", "Nothing", "Immunoglobulin only", "Antibiotics instead"], "why": "Tetanus-prone wound.", "source": "UKHSA Green Book" }
+  ]
+}

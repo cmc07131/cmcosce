@@ -245,7 +245,8 @@ function teachingRoom(): Template {
 }
 
 function templateFor(station: Station): Template {
-  if (station.type === 'resus') return resusBay()
+  // A patient on a monitor is in resus, whatever the station type.
+  if (station.type === 'resus' || station.vitals) return resusBay()
   if (station.type === 'teaching') return teachingRoom()
   const patient = station.cast.find((c) => c.id === 'patient')
   const lying = station.type === 'exam' || station.type === 'skills' || Boolean(patient?.inBed)
@@ -289,7 +290,7 @@ export function compileStation(station: Station): Pack {
   for (const who of station.cast) {
     let spawn: Spot
     if (who.id === 'patient') {
-      const lying = tpl.room.interactables.some((i) => i.id === 'bed-ix') && (station.type === 'resus' || station.type === 'exam' || station.type === 'skills' || who.inBed)
+      const lying = tpl.room.interactables.some((i) => i.id === 'bed-ix') && (station.type === 'resus' || Boolean(station.vitals) || station.type === 'exam' || station.type === 'skills' || who.inBed)
       spawn = lying && who.inBed !== false ? tpl.bed : tpl.standing
     } else {
       spawn = tpl.roles[who.id] ?? tpl.roles[who.role] ?? free.shift() ?? { x: 2, y: 2 }

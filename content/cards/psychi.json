@@ -1,0 +1,49 @@
+{
+  "deck": "psychi",
+  "name": "Psychi",
+  "creatures": [
+    {
+      "id": "moodswing",
+      "name": "MOODSWING",
+      "body": "bird",
+      "main": "#8868c8",
+      "accent": "#e8e0f8"
+    },
+    {
+      "id": "delirimp",
+      "name": "DELIRIMP",
+      "body": "blob",
+      "main": "#d8a038",
+      "accent": "#f8ecc8"
+    },
+    {
+      "id": "paranowl",
+      "name": "PARANOWL",
+      "body": "bird",
+      "main": "#586878",
+      "accent": "#d0dce8"
+    },
+    {
+      "id": "manicat",
+      "name": "MANICAT",
+      "body": "beast",
+      "main": "#e85868",
+      "accent": "#f8d0d8"
+    }
+  ],
+  "cards": [
+    {
+      "id": "ps-aseptic",
+      "q": "In the MSE, mood versus affect:",
+      "options": [
+        "Mood is the patient's report; affect is what you observe",
+        "They are the same",
+        "Affect is the patient's report",
+        "Mood is only assessed in mania"
+      ],
+      "answer": 0,
+      "why": "Note congruence between them.",
+      "source": "MSE teaching"
+    }
+  ]
+}

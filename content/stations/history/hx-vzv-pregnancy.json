@@ -1,0 +1,93 @@
+{
+  "id": "hx-vzv-pregnancy",
+  "gym": "history",
+  "title": "Chickenpox contact in pregnancy",
+  "type": "comms",
+  "time": 420,
+  "stem": "Cubicle 4. Mrs Chow is 16 weeks pregnant. Four days ago she spent the afternoon with her nephew, who now has chickenpox. She has never had chickenpox as far as she knows. She is worried. Assess her and advise her.",
+  "notes": "Checked against RCOG Green-top Guideline 13 (Chickenpox in pregnancy, 2015), the UKHSA Green Book chapter 34 and UKHSA guidance on post-exposure prophylaxis (updated 2019 onward), and the Hong Kong Centre for Health Protection guidance.\n\nSignificant exposure: household contact, face-to-face for 5 minutes, or 15 minutes in the same room with chickenpox or exposed shingles. Check immunity: a clear history of chickenpox is usually enough; if uncertain, urgent VZV IgG.\n\nPost-exposure prophylaxis for non-immune pregnant women: UKHSA (since 2019) recommends oral aciclovir 800 mg four times daily from day 7 to day 14 after exposure as first line, with VZIG reserved for those who cannot take aciclovir; HK practice may still use VZIG within 10 days — follow local guidance. She is infectious from 8 to 28 days after exposure (to 21 days without VZIG) and should avoid other pregnant women and neonates.\n\nIf chickenpox develops: oral aciclovir within 24 hours of the rash if 20 weeks or more (consider before 20 weeks); urgent review for chest symptoms, neurological symptoms, haemorrhagic rash or dense rash (pneumonia risk about 10%). Fetal varicella syndrome risk is about 1–2% before 20 weeks; neonatal varicella if maternal infection is within about 5 days before to 2 days after delivery.\n\nYour notes use VZIG 125 units per 10 kg (US dosing, max 625) as PEP; UK guidance now uses aciclovir first. The rest of your notes (exposure definition, risks, measles PEP with immunoglobulin within 6 days) matches.",
+  "cast": [{ "id": "patient", "name": "Mrs Chow", "role": "woman", "inBed": false }],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "Nature and date of the exposure, immunity, symptoms, pregnancy details.",
+      "groups": {
+        "Exposure": [
+          { "t": "When did you see your nephew, and for how long?", "r": "Saturday, 4 days ago, the whole afternoon playing indoors. His spots came out the next morning.", "mark": "Establishes significant exposure and its date" },
+          { "t": "Has he got chickenpox or shingles?", "r": "Chickenpox — spots everywhere." }
+        ],
+        "Immunity": [
+          { "t": "Have you ever had chickenpox or the vaccine?", "r": "My mother isn't sure. I don't think so.", "mark": "Asks about previous chickenpox or vaccination" }
+        ],
+        "Now": [
+          { "t": "Any rash, fever, cough or breathlessness?", "r": "No, I feel fine.", "mark": "Asks about symptoms of infection" },
+          { "t": "How is the pregnancy going? Any other health problems, smoking?", "r": "All normal so far. I don't smoke.", "mark": "Pregnancy details and risk factors (smoking raises pneumonia risk)" }
+        ]
+      }
+    },
+    {
+      "id": "tests",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Tests",
+      "hint": "Urgent VZV IgG.",
+      "groups": { "Bloods": [{ "t": "Urgent VZV IgG", "r": "VZV IgG negative: not immune.", "mark": "Checks VZV immunity urgently" }] }
+    },
+    {
+      "id": "advise",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Advise",
+      "hint": "Explain, PEP, infectious period, what to watch for, follow-up.",
+      "mood": 7,
+      "turns": [
+        {
+          "line": "Will my baby be damaged?",
+          "opts": [
+            { "t": "Most babies are fine. If you did catch chickenpox before 20 weeks, the chance of the baby being affected is about 1 to 2 in 100. We can reduce your chance of catching it.", "r": "How?", "mood": -3, "mark": "Explains fetal risk honestly with numbers" },
+            { "t": "Yes, probably.", "r": "[Cries]", "mood": 3 }
+          ]
+        },
+        {
+          "line": "How?",
+          "opts": [
+            { "t": "Antiviral tablets (aciclovir) from day 7 to day 14 after the contact, which lower the chance of chickenpox. Some hospitals use an antibody injection instead; we'll follow the obstetric team's advice.", "r": "OK.", "mood": -2, "mark": "Offers post-exposure prophylaxis per current guidance" },
+            { "t": "There's nothing we can do.", "r": "Nothing at all?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "Should I stay away from anyone?",
+          "opts": [
+            { "t": "You could be infectious from 8 to 28 days after the contact, so avoid other pregnant women and newborn babies then. If you get a rash, call us at once — not the waiting room — so we can start treatment within 24 hours. Come immediately with any cough, breathlessness or headache.", "r": "Thank you, that's clear.", "mood": -2, "mark": "Advises on infectious period and safety-nets" },
+            { "t": "No need.", "r": "OK.", "mood": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "UK first-line PEP for a non-immune pregnant woman after chickenpox exposure?", "a": "Oral aciclovir days 7–14", "wrong": ["MMR vaccine", "Varicella vaccine", "Nothing"] },
+        { "q": "Risk of fetal varicella syndrome before 20 weeks?", "a": "About 1–2%", "wrong": ["About 50%", "About 0.01%", "About 20%"] },
+        { "q": "Maternal complication of chickenpox in pregnancy?", "a": "Varicella pneumonia", "wrong": ["Pre-eclampsia", "Gestational diabetes", "Placenta praevia"] },
+        { "q": "Varicella vaccine in pregnancy?", "a": "Contraindicated (live vaccine)", "wrong": ["Recommended", "Given at 28 weeks", "Given with PEP"] },
+        { "q": "Measles exposure in a non-immune pregnant woman?", "a": "Human normal immunoglobulin within 6 days", "wrong": ["MMR vaccine", "Aciclovir", "Nothing"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Spot Check", "emoji": "🔴", "flavor": "Exposure, immunity, PEP, infectious window, rash → call." },
+  "cards": [
+    { "q": "Significant VZV exposure includes…", "options": ["Face-to-face contact for 5 minutes", "Passing in a corridor", "A phone call", "Sharing a car park"], "why": "Or 15 minutes in the same room, or household contact.", "source": "UKHSA Green Book" },
+    { "q": "Chickenpox in a pregnant woman over 20 weeks presenting within 24 h of rash:", "options": ["Oral aciclovir", "No treatment", "Steroids", "Induction of labour"], "why": "Reduces duration and complications.", "source": "RCOG GTG 13" },
+    { "q": "Non-immune pregnant contact is potentially infectious…", "options": ["8–28 days after exposure", "1–3 days", "Only if rash appears", "For 6 months"], "why": "Avoid other pregnant women and neonates.", "source": "RCOG GTG 13" },
+    { "q": "Neonatal varicella risk is highest if maternal rash appears…", "options": ["5 days before to 2 days after delivery", "In the first trimester", "Before conception", "After 1 month postpartum"], "why": "No maternal antibody transferred yet.", "source": "RCOG GTG 13" },
+    { "q": "UK PEP for VZV in pregnancy changed (2019) to…", "options": ["Aciclovir first line, VZIG if unsuitable", "VZIG for all", "Vaccination", "Nothing"], "why": "VZIG supply and efficacy issues.", "source": "UKHSA", "note": "Your notes use VZIG (US dosing)." },
+    { "q": "Measles PEP in pregnancy?", "options": ["Human normal immunoglobulin within 6 days", "MMR", "Aciclovir", "Oseltamivir"], "why": "MMR is contraindicated in pregnancy.", "source": "UKHSA" }
+  ]
+}
