@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import { getPack } from '~/engine/loadPacks'
 import { sfx } from '~/game/sfx'
+import { useProgress } from '~/world/progress'
 import { NavItem, Win, useCursor } from '~/game/ui'
 
 export const Route = createFileRoute('/badge/$packId')({
@@ -13,9 +14,13 @@ function BadgePage() {
   const navigate = useNavigate()
   const pack = getPack(packId)
   const root = useRef<HTMLDivElement>(null)
-  useCursor(root, { priority: 10, onBack: () => void navigate({ to: '/gym' }) })
+  useCursor(root, { priority: 10, onBack: () => void navigate({ to: '/world' }) })
   useEffect(() => {
-    if (pack) sfx.fanfare()
+    if (!pack) return
+    sfx.fanfare()
+    const progress = useProgress.getState()
+    progress.load()
+    progress.clearStation(pack.packId)
   }, [pack])
 
   if (!pack) {
@@ -34,8 +39,11 @@ function BadgePage() {
         <p className="menu-note">{pack.badge.flavor}</p>
       </Win>
       <Win>
+        <NavItem testId="back-world" onClick={() => void navigate({ to: '/world' })}>
+          BACK TO THE MAP
+        </NavItem>
         <NavItem testId="back-gyms" onClick={() => void navigate({ to: '/gym' })}>
-          BACK TO STATIONS
+          STATION LIST
         </NavItem>
       </Win>
     </div>

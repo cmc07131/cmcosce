@@ -1646,3 +1646,202 @@ button {
 .lab-card[data-high] span:first-of-type {
   color: var(--color-rose);
 }
+
+/* ------------------------------------------------------------ overworld */
+
+.world-tag {
+  font-size: 12px;
+  color: var(--paper);
+  background: rgb(24 24 32 / 0.8);
+  border-color: var(--ink);
+}
+
+.world-tag[data-closed] {
+  color: #f8c830;
+}
+
+.hud-coins {
+  color: #b07010;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0;
+}
+
+.badge-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: #e8e8f0;
+}
+
+.badge-dot[data-earned] {
+  color: var(--ink);
+  background: radial-gradient(circle at 35% 30%, #fff0a0, var(--shell) 60%, var(--shell-dark));
+}
+
+.badge-dot[data-closed] {
+  opacity: 0.4;
+}
+
+/* ------------------------------------------------------------ wild battle */
+
+.battle-scene {
+  background: #f8f8f0;
+  font-family: var(--font-pixel);
+}
+
+.battle-field {
+  position: relative;
+  flex: 1;
+  min-height: 190px;
+  background: #f8f8f0;
+}
+
+/* Each sprite stands on its own grass platform. */
+.battle-foe-sprite::after,
+.battle-me::after {
+  content: '';
+  position: absolute;
+  left: -30%;
+  right: -30%;
+  bottom: -10%;
+  height: 26%;
+  z-index: -1;
+  border-radius: 50%;
+  background: #b8d898;
+  box-shadow: inset 0 -3px 0 #98b878;
+}
+
+.battle-foe {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  font-size: 9px;
+}
+
+.battle-foe span {
+  font-size: 6px;
+  color: #686878;
+}
+
+.battle-foe-sprite {
+  position: absolute;
+  top: 12%;
+  right: 12%;
+  width: 34%;
+  max-width: 128px;
+  aspect-ratio: 1;
+  z-index: 0;
+  transition: transform 0.4s steps(4), opacity 0.4s steps(4);
+}
+
+.battle-foe-sprite[data-fainted] {
+  transform: translateY(40%);
+  opacity: 0;
+}
+
+.battle-foe-sprite[data-fled] {
+  transform: translateX(120%);
+  opacity: 0;
+}
+
+.battle-me {
+  position: absolute;
+  bottom: 8%;
+  left: 14%;
+  z-index: 0;
+}
+
+.battle-purse {
+  position: absolute;
+  right: 8px;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  font-size: 9px;
+}
+
+.battle-purse b {
+  font-weight: 400;
+  color: #b07010;
+}
+
+.battle-purse span {
+  font-size: 6px;
+}
+
+.battle-text {
+  margin: 0 6px;
+  max-height: 40%;
+  overflow: auto;
+  font-size: 9px;
+  line-height: 1.8;
+}
+
+.battle-text p {
+  margin: 0 0 4px;
+}
+
+.battle-result[data-tone='right'] {
+  color: #2f7a3e;
+}
+
+.battle-result[data-tone='wrong'] {
+  color: var(--color-rose);
+}
+
+.battle-why {
+  color: var(--ink);
+}
+
+.battle-source {
+  font-size: 7px;
+  color: #686878;
+}
+
+.battle-moves {
+  margin: 6px;
+  max-height: 46%;
+  overflow: auto;
+}
+
+.battle-moves .nav-item {
+  font-size: 9px;
+  min-height: 34px;
+}
+
+.battle-run {
+  color: var(--color-rose);
+}
+
+.tap.battle-continue {
+  margin: 6px;
+  width: auto;
+  background: #e0f0d8;
+}
+
+.coin {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  vertical-align: -1px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff4b0, #f0c030 60%, #b08010);
+}

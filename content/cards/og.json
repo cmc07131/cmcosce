@@ -1,0 +1,109 @@
+{
+  "deck": "og",
+  "name": "O&G",
+  "creatures": [
+    { "id": "cordra", "name": "CORDRA", "body": "snake", "main": "#9aa4e8", "accent": "#f0f0ff" },
+    { "id": "placentoad", "name": "PLACENTOAD", "body": "blob", "main": "#d86878", "accent": "#f8c8d0" },
+    { "id": "clampsy", "name": "CLAMPSY", "body": "bird", "main": "#c858a8", "accent": "#f8d8f0" },
+    { "id": "dystocrab", "name": "DYSTOCRAB", "body": "beast", "main": "#e87848", "accent": "#f8d0b0" }
+  ],
+  "cards": [
+    {
+      "id": "og-cord-handling",
+      "q": "A loop of cord lies outside the introitus. What do you do with it?",
+      "options": ["Minimal handling; loose warm saline-soaked gauze", "Push it back into the vagina", "Wrap it tightly and pack with ice", "Squeeze it to check the pulse"],
+      "answer": 0,
+      "why": "Handling and cold cause cord spasm. Do not replace it.",
+      "source": "RCOG Green-top Guideline 50",
+      "note": "Some notes suggest replacing the cord into the vagina; RCOG advises against handling or replacing it."
+    },
+    {
+      "id": "og-cord-elevate",
+      "q": "Cord prolapse in the ED. First hands-on action?",
+      "options": ["Manually elevate the presenting part off the cord and keep the hand in", "Speculum examination", "Start oxytocin", "Ask her to push"],
+      "answer": 0,
+      "why": "Lifting the presenting part relieves compression until delivery or until bladder filling takes over.",
+      "source": "RCOG Green-top Guideline 50"
+    },
+    {
+      "id": "og-cord-position",
+      "q": "Cord prolapse. Position while you wait in the bay?",
+      "options": ["Knee–chest", "Supine", "Sitting upright", "Standing"],
+      "answer": 0,
+      "why": "Knee–chest takes the most weight off the cord in the bay. For transfer: left lateral, head down, pillow under the left hip.",
+      "source": "RCOG Green-top Guideline 50"
+    },
+    {
+      "id": "og-cord-bladder",
+      "q": "Cord prolapse and theatre is 20 minutes away. Bladder filling volume?",
+      "options": ["500–750 mL via a Foley, then clamp", "100 mL", "2 litres", "No filling: it delays theatre"],
+      "answer": 0,
+      "why": "A full bladder lifts the presenting part. Empty it again before the caesarean.",
+      "source": "RCOG Green-top Guideline 50"
+    },
+    {
+      "id": "og-cord-tocolysis",
+      "q": "Cord prolapse, delivery delayed, the fetal heart stays abnormal after elevation. Tocolysis?",
+      "options": ["Terbutaline 0.25 mg subcutaneously", "Oxytocin 10 units IM", "Magnesium 4 g as a tocolytic", "Misoprostol"],
+      "answer": 0,
+      "why": "Terbutaline reduces contractions that keep compressing the cord.",
+      "source": "RCOG Green-top Guideline 50"
+    },
+    {
+      "id": "og-cat1",
+      "q": "Category 1 caesarean for cord prolapse. Decision-to-delivery standard?",
+      "options": ["Within 30 minutes", "Within 75 minutes", "Within 4 hours", "Next elective list"],
+      "answer": 0,
+      "why": "Category 1 is an immediate threat to life of mother or fetus; the audit standard is 30 minutes.",
+      "source": "RCOG / NICE caesarean birth guidance"
+    },
+    {
+      "id": "og-pph-cause",
+      "q": "Commonest cause of primary postpartum haemorrhage?",
+      "options": ["Uterine atony (tone)", "Retained placenta (tissue)", "Genital tract trauma", "Coagulopathy (thrombin)"],
+      "answer": 0,
+      "why": "The four Ts: tone, trauma, tissue, thrombin. Atony accounts for most.",
+      "source": "RCOG Green-top Guideline 52"
+    },
+    {
+      "id": "og-pph-oxytocin",
+      "q": "Primary PPH from atony. First-line uterotonic?",
+      "options": ["Oxytocin 5 IU by slow IV injection", "Carboprost first", "Misoprostol first", "Tranexamic acid alone"],
+      "answer": 0,
+      "why": "Oxytocin (or ergometrine if no hypertension) first, with uterine massage; then an infusion and second-line agents.",
+      "source": "RCOG Green-top Guideline 52"
+    },
+    {
+      "id": "og-pph-txa",
+      "q": "PPH: tranexamic acid dose and timing?",
+      "options": ["1 g IV as soon as possible, within 3 hours of birth", "1 g only after 6 hours", "10 g IV bolus", "Oral only"],
+      "answer": 0,
+      "why": "WOMAN trial: 1 g IV early reduces death from bleeding; a second 1 g if bleeding continues.",
+      "source": "WOMAN trial (Lancet 2017); WHO 2017"
+    },
+    {
+      "id": "og-eclampsia-mg",
+      "q": "Eclamptic seizure. Magnesium sulfate regimen?",
+      "options": ["4 g IV over 5–15 min, then 1 g/h for 24 h", "1 g IV once", "10 g IM stat only", "Diazepam alone"],
+      "answer": 0,
+      "why": "Magnesium is the anticonvulsant of choice; a further 2–4 g if seizures recur.",
+      "source": "NICE NG133 (2019)"
+    },
+    {
+      "id": "og-mg-toxicity",
+      "q": "Magnesium toxicity: loss of reflexes and slow breathing. Antidote?",
+      "options": ["Calcium gluconate 10% 10 mL IV", "Naloxone", "Flumazenil", "Sodium bicarbonate"],
+      "answer": 0,
+      "why": "Stop the infusion and give calcium gluconate.",
+      "source": "NICE NG133 (2019)"
+    },
+    {
+      "id": "og-shoulder-dystocia",
+      "q": "Shoulder dystocia. First manoeuvres?",
+      "options": ["McRoberts position and suprapubic pressure", "Fundal pressure", "Strong traction on the head", "Immediate Zavanelli"],
+      "answer": 0,
+      "why": "McRoberts with suprapubic pressure resolves many cases. Fundal pressure is contraindicated.",
+      "source": "RCOG Green-top Guideline 42"
+    }
+  ]
+}

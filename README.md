@@ -31,6 +31,19 @@ The bay is drawn on a canvas at 16 px per tile and scaled up in whole steps. All
 
 Pack lines that start with `You:` or a cast name (`Nurse Wong: …`) show that speaker in the text box. Lines with no prefix are narration.
 
+## The world map
+
+`/world` is the overworld. The title screen's PLAY · CMC goes there.
+
+- **CMC** is the starting town. CMC Hall is the gym board: badges earned, stations not done, and a teleport to any gym. The Shop is closed for now; coins are saved for it.
+- **Gyms** follow the source document's framework: ATLS, ACLS/PALS, O&T, Medical, Surgical, O&G, Paedi, Counsel/History, Psychi, Disaster/Triage. A gym with no stations shows as under construction and lists the topics that will go there. Walk through a gym door to pick a station. Clearing every station in a gym earns its badge (a station clears when you claim its badge after the debrief).
+- **Tall grass** starts a wild encounter on about one step in eight. A creature asks one single-best-answer flashcard. Right: coins (10, plus 5 per answer already in your streak, up to 30). Wrong: the answer, why, and the source. RUN always works. No hearts.
+- **Saving** is in this browser's localStorage: coins, streak, cards seen, creatures beaten, stations cleared, where you stood.
+
+The map is `content/world/world.json`, a text grid with a legend (`scripts/make-world.mjs` generated it; edit either). Tall-grass letters pick the deck: `a` ATLS, `c` ACLS/PALS, `o` O&G, `x` mixed. Decks are `content/cards/<deck>.json`: creatures, and cards with four options, the right one's index, why, and a source. Options are shuffled every time a card is shown. Cards you got wrong come back more often.
+
+To add a station to a gym, put its packId in that gym's `packs` in world.json.
+
 ## Hands-on benches
 
 A `perform` option opens a bench. Simple benches (`lift`, `cover`, …) grant the option's marks when the gesture is done. The IO bench (`perform: "io"`, `src/game/io/`) scores itself: it never blocks a mistake, grants only the marks earned at the bench, and saves each mistake to the session. The debrief lists them under PROCEDURE NOTES.

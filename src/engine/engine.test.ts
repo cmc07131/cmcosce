@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { test } from 'node:test'
 import { keyToBtn } from '../game/input'
+import { coinsFor, pickCard, shuffled } from '../world/encounter'
+import { GRASS_DECK, charAt, deckSchema, tileKind, worldSchema, worldSolids } from '../world/model'
 import { ecgAt, pacedBeat } from '../game/bench/Monitor'
 import { cicoCaseFor, judgeIncision, neckFeelAt, NECK, type CicoCase } from '../game/cico/case'
 import { falseTract, freshCicoRun, scoreCico, type CicoRun } from '../game/cico/score'
@@ -10,7 +12,7 @@ import { captureThreshold, deliver, freshPaceRun, scorePacing, type PaceCase, ty
 import { ANATOMY, caseFor, drillOutcome, judgeLandmark, mgIn, popDepth, rightNeedle, type IoCase } from '../game/io/case'
 import { freshRun, scoreRun, type Run } from '../game/io/score'
 import { spokenLine } from '../game/store'
-import { buildSolids, keyToDir, planActivation, step, targetTilesFor, vectorToDir } from './grid'
+import { buildSolids, findPath, keyToDir, planActivation, step, targetTilesFor, vectorToDir } from './grid'
 import { applyConfirm, applyTalkOption, examinerClause, hintFor, judgeSequence, marksOnAction } from './judge'
 import { packSchema, readoutText, type Action, type Pack } from './schema'
 
@@ -517,4 +519,69 @@ test('pacing: analgesia counts only before, or as, pacing starts', () => {
   const late = scorePacing({ ...goodPace(), pacingStartedAtS: 60, orders: [{ drug: 'fentanyl', dose: '25 micrograms', atS: 150 }] }, PACE)
   assert.ok(!late.marks.includes('MS-12'))
   assert.ok(late.faults.some((f) => /after pacing had started hurting/.test(f.text)))
+})
+
+/* ---------------------------------------------------------------- the world map and flashcards */
+
+function readJson(path: string) {
+  return JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))
+}
+
+test('world: every row fits, CMC is walkable, and every door can be reached from CMC', () => {
+  const world = worldSchema.parse(readJson('../../content/world/world.json'))
+  assert.equal(world.grid.length, world.rows)
+  for (const row of world.grid) assert.equal(row.length, world.cols)
+  const solids = worldSolids(world)
+  assert.equal(solids.has(`${world.start.x},${world.start.y}`), false)
+  const doors = [...world.gyms.map((g) => ({ id: g.id, door: g.door })), ...world.places.map((p) => ({ id: p.id, door: p.door }))]
+  for (const { id, door } of doors) {
+    assert.equal(tileKind(charAt(world, door.x, door.y)), 'door', `${id}: door tile`)
+    assert.ok(findPath(world.start, door, solids, world.cols, world.rows), `${id}: unreachable from CMC`)
+    assert.equal(solids.has(`${door.x},${door.y + 1}`), false, `${id}: nothing to stand on outside`)
+  }
+})
+
+test('world: every station sits in exactly one gym, and every active gym has a deck', () => {
+  const world = worldSchema.parse(readJson('../../content/world/world.json'))
+  const packs = readdirSync(new URL('../../content/packs/', import.meta.url))
+  for (const name of packs) {
+    const id = load(name).packId
+    assert.equal(world.gyms.filter((g) => g.packs.includes(id)).length, 1, `${id} is in one gym`)
+  }
+  const decks = readdirSync(new URL('../../content/cards/', import.meta.url)).map((f) => deckSchema.parse(readJson(`../../content/cards/${f}`)).deck)
+  for (const g of world.gyms) if (g.packs.length) assert.ok(g.deck && decks.includes(g.deck), `${g.id} has a deck`)
+  for (const key of Object.values(GRASS_DECK)) assert.ok(key === 'mixed' || decks.includes(key), `grass deck ${key}`)
+})
+
+test('flashcards: four distinct options, a valid answer, a source, and unique ids', () => {
+  const ids = new Set<string>()
+  for (const f of readdirSync(new URL('../../content/cards/', import.meta.url))) {
+    const deck = deckSchema.parse(readJson(`../../content/cards/${f}`))
+    assert.ok(deck.cards.length >= 10, `${deck.deck} has at least 10 cards`)
+    for (const card of deck.cards) {
+      assert.equal(new Set(card.options).size, 4, `${card.id}: options repeat`)
+      assert.ok(card.source.length > 3, `${card.id}: source`)
+      assert.equal(ids.has(card.id), false, `${card.id}: duplicate id`)
+      ids.add(card.id)
+    }
+  }
+})
+
+test('encounters: coins grow with the streak, wrong cards come back, shuffling keeps the answer', () => {
+  assert.equal(coinsFor(0), 10)
+  assert.equal(coinsFor(1), 15)
+  assert.equal(coinsFor(10), 30)
+  const deck = deckSchema.parse(readJson('../../content/cards/acls.json'))
+  const card = deck.cards[0]
+  for (let i = 0; i < 20; i++) {
+    const s = shuffled(card, Math.random)
+    assert.equal(s.options[s.correct], card.options[card.answer])
+  }
+  const wrongId = deck.cards[3].id
+  const seen = Object.fromEntries(deck.cards.map((c) => [c.id, c.id === wrongId ? { r: 0, w: 2 } : { r: 3, w: 0 }]))
+  let hits = 0
+  let seed = 1
+  const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
+  for (let i = 0; i < 400; i++) if (pickCard(deck.cards, seen, rand).id === wrongId) hits++
+  assert.ok(hits > 400 / deck.cards.length, `a card you got wrong comes back more often (${hits}/400)`)
 })

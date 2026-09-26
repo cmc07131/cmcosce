@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GymRouteImport } from './routes/gym'
+import { Route as WorldRouteImport } from './routes/world'
 import { Route as BadgePackIdRouteImport } from './routes/badge/$packId'
 import { Route as DebriefPackIdRouteImport } from './routes/debrief/$packId'
 import { Route as PlayPackIdRouteImport } from './routes/play/$packId'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const GymRoute = GymRouteImport.update({
   id: '/gym',
   path: '/gym',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorldRoute = WorldRouteImport.update({
+  id: '/world',
+  path: '/world',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BadgePackIdRoute = BadgePackIdRouteImport.update({
@@ -44,6 +50,7 @@ const PlayPackIdRoute = PlayPackIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/gym': typeof GymRoute
+  '/world': typeof WorldRoute
   '/badge/$packId': typeof BadgePackIdRoute
   '/debrief/$packId': typeof DebriefPackIdRoute
   '/play/$packId': typeof PlayPackIdRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/gym': typeof GymRoute
+  '/world': typeof WorldRoute
   '/badge/$packId': typeof BadgePackIdRoute
   '/debrief/$packId': typeof DebriefPackIdRoute
   '/play/$packId': typeof PlayPackIdRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/gym': typeof GymRoute
+  '/world': typeof WorldRoute
   '/badge/$packId': typeof BadgePackIdRoute
   '/debrief/$packId': typeof DebriefPackIdRoute
   '/play/$packId': typeof PlayPackIdRoute
@@ -66,13 +75,25 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/gym' | '/badge/$packId' | '/debrief/$packId' | '/play/$packId'
+    | '/'
+    | '/gym'
+    | '/world'
+    | '/badge/$packId'
+    | '/debrief/$packId'
+    | '/play/$packId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/gym' | '/badge/$packId' | '/debrief/$packId' | '/play/$packId'
+  to:
+    | '/'
+    | '/gym'
+    | '/world'
+    | '/badge/$packId'
+    | '/debrief/$packId'
+    | '/play/$packId'
   id:
     | '__root__'
     | '/'
     | '/gym'
+    | '/world'
     | '/badge/$packId'
     | '/debrief/$packId'
     | '/play/$packId'
@@ -81,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GymRoute: typeof GymRoute
+  WorldRoute: typeof WorldRoute
   BadgePackIdRoute: typeof BadgePackIdRoute
   DebriefPackIdRoute: typeof DebriefPackIdRoute
   PlayPackIdRoute: typeof PlayPackIdRoute
@@ -100,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/gym'
       fullPath: '/gym'
       preLoaderRoute: typeof GymRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/world': {
+      id: '/world'
+      path: '/world'
+      fullPath: '/world'
+      preLoaderRoute: typeof WorldRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/badge/$packId': {
@@ -129,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GymRoute: GymRoute,
+  WorldRoute: WorldRoute,
   BadgePackIdRoute: BadgePackIdRoute,
   DebriefPackIdRoute: DebriefPackIdRoute,
   PlayPackIdRoute: PlayPackIdRoute,

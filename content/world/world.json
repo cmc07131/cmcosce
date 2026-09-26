@@ -1,0 +1,428 @@
+{
+  "cols": 48,
+  "rows": 36,
+  "start": {
+    "x": 23,
+    "y": 20
+  },
+  "legend": {
+    ".": "grass",
+    ",": "path",
+    "T": "tree",
+    "F": "fence",
+    "*": "flowers",
+    "~": "water",
+    "R": "roof",
+    "#": "wall",
+    "D": "door",
+    "a": "tall grass (ATLS deck)",
+    "c": "tall grass (ACLS/PALS deck)",
+    "o": "tall grass (O&G deck)",
+    "x": "tall grass (mixed deck)"
+  },
+  "grid": [
+    "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+    "T..............................................T",
+    "T....RRRRRR..........RRRRRR..........RRRRRR....T",
+    "T..T.RRRRRR..T.......RRRRRR......T...RRRRRR.oo.T",
+    "T....######..........######..........######.oo.T",
+    "T....##D###..........##D###..........##D###.oo.T",
+    "T.....,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,......T",
+    "T.....,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,......T",
+    "T.......aaaaaaaaa.cccc.,,.ccccc.oooooooo.......T",
+    "T.......aaaaaaaaa.cccc.,,.ccccc.oooooooo.......T",
+    "T.......aaaaaaaaa.cccc.,,.ccccc.oooooooo.......T",
+    "T.RRRRRR...............,,...............RRRRRR.T",
+    "T.RRRRRR........FFFFFFF,,FFFFFFF........RRRRRR.T",
+    "T.######***..T..F,,,RRRRRRRR,,,F...T....######.T",
+    "T.##D###***...T.F,,,RRRRRRRR,,,F....T...##D###.T",
+    "T...,,..........F,,,########,,,F..........,,...T",
+    "T...,,....T.....F,,,###D####,,,F.....T....,,...T",
+    "T...,,..........F,,,,,,,,,,,,,,F..........,,...T",
+    "T...,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,...T",
+    "T...,,,,,,,,,,,,,,,,,,,,,,RRRRR,,,,,,,,,,,,,...T",
+    "T.RRRRRR........F,,,,,,,,,RRRRRF........RRRRRR.T",
+    "T.RRRRRR........F,***,,,,,#####F....***.RRRRRR.T",
+    "T.######....T...F,***,,,,,##D##F...T....######.T",
+    "T.##D###........F,,,,,,,,,,,,,,F........##D###.T",
+    "T...,,..........FFFFFFF,,FFFFFFF..........,,...T",
+    "T...,,..xxxxxxxxxxxx...,,.......~~~~~~....,,...T",
+    "T.......xxxxxxxxxxxx...,,..xxx..~~~~~~.........T",
+    "T.......xxxxxxxxxxxx...,,..xxx..~~~~~~.........T",
+    "T.......xxxxxxxxxxxx...,,..xxx..~~~~~~.........T",
+    "T....RRRRRR..........RRRRRRxxx.......RRRRRR....T",
+    "T....RRRRRR.......T..RRRRRRxTx.......RRRRRR.T..T",
+    "T....######..........######..........######....T",
+    "T....##D###..........##D###..........##D###....T",
+    "T.....,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,......T",
+    "T..............................................T",
+    "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+  ],
+  "buildings": [
+    {
+      "id": "cmc-hall",
+      "x": 20,
+      "y": 13,
+      "w": 8,
+      "h": 4,
+      "door": {
+        "x": 23,
+        "y": 16
+      }
+    },
+    {
+      "id": "shop",
+      "x": 26,
+      "y": 19,
+      "w": 5,
+      "h": 4,
+      "door": {
+        "x": 28,
+        "y": 22
+      }
+    },
+    {
+      "id": "atls",
+      "x": 5,
+      "y": 2,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 7,
+        "y": 5
+      }
+    },
+    {
+      "id": "acls",
+      "x": 21,
+      "y": 2,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 23,
+        "y": 5
+      }
+    },
+    {
+      "id": "og",
+      "x": 37,
+      "y": 2,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 39,
+        "y": 5
+      }
+    },
+    {
+      "id": "ot",
+      "x": 2,
+      "y": 11,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 4,
+        "y": 14
+      }
+    },
+    {
+      "id": "medical",
+      "x": 2,
+      "y": 20,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 4,
+        "y": 23
+      }
+    },
+    {
+      "id": "surgical",
+      "x": 40,
+      "y": 11,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 42,
+        "y": 14
+      }
+    },
+    {
+      "id": "paedi",
+      "x": 40,
+      "y": 20,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "id": "history",
+      "x": 5,
+      "y": 29,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 7,
+        "y": 32
+      }
+    },
+    {
+      "id": "psychi",
+      "x": 21,
+      "y": 29,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 23,
+        "y": 32
+      }
+    },
+    {
+      "id": "disaster",
+      "x": 37,
+      "y": 29,
+      "w": 6,
+      "h": 4,
+      "door": {
+        "x": 39,
+        "y": 32
+      }
+    }
+  ],
+  "gyms": [
+    {
+      "id": "atls",
+      "name": "ATLS GYM",
+      "badge": "Primary Survey Badge",
+      "packs": [
+        "aw-em-01"
+      ],
+      "deck": "atls",
+      "topics": [
+        "Massive haemothorax",
+        "Pelvic fracture and binder",
+        "Clearing the C-spine",
+        "Intubation / RSI",
+        "Difficult airway, LMA",
+        "Thoracotomy",
+        "Burns and escharotomy",
+        "GCS, decerebrate and decorticate"
+      ],
+      "door": {
+        "x": 7,
+        "y": 5
+      }
+    },
+    {
+      "id": "acls",
+      "name": "ACLS/PALS GYM",
+      "badge": "Rhythm Badge",
+      "packs": [
+        "cv-em-02",
+        "io-em-01"
+      ],
+      "deck": "acls",
+      "topics": [
+        "VF and STEMI",
+        "VT and cocaine",
+        "Bradycardia and CHB",
+        "ROSC management",
+        "Paediatric septic shock",
+        "Paediatric wheeze",
+        "SVT",
+        "Neonatal resuscitation"
+      ],
+      "door": {
+        "x": 23,
+        "y": 5
+      }
+    },
+    {
+      "id": "og",
+      "name": "O&G GYM",
+      "badge": "Delivery Badge",
+      "packs": [
+        "gym-1"
+      ],
+      "deck": "og",
+      "topics": [
+        "PPH and placenta delivery",
+        "PV bleeding in early pregnancy",
+        "Eclampsia",
+        "Shoulder dystocia",
+        "Breech",
+        "Obstetric arrest",
+        "Bimanual pelvic exam"
+      ],
+      "door": {
+        "x": 39,
+        "y": 5
+      }
+    },
+    {
+      "id": "ot",
+      "name": "O&T GYM",
+      "badge": "Joint Badge",
+      "packs": [],
+      "deck": null,
+      "topics": [
+        "Knee exam",
+        "Hip exam",
+        "Shoulder dislocation",
+        "Shoulder impingement",
+        "Ankle and Ottawa rules",
+        "Hand, FDP/FDS",
+        "Colles",
+        "LS spine"
+      ],
+      "door": {
+        "x": 4,
+        "y": 14
+      }
+    },
+    {
+      "id": "medical",
+      "name": "MEDICAL GYM",
+      "badge": "Physician Badge",
+      "packs": [],
+      "deck": null,
+      "topics": [
+        "DKA",
+        "Addison disease",
+        "Anaemia",
+        "Chest pain",
+        "Dizziness",
+        "Cranial nerves",
+        "Cerebellar and Hallpike",
+        "Polyarthritis"
+      ],
+      "door": {
+        "x": 4,
+        "y": 23
+      }
+    },
+    {
+      "id": "surgical",
+      "name": "SURGICAL GYM",
+      "badge": "Scalpel Badge",
+      "packs": [],
+      "deck": null,
+      "topics": [
+        "Massive GI bleed",
+        "Renal stone",
+        "Epididymo-orchitis",
+        "Hepatosplenomegaly",
+        "Suturing",
+        "Digital nerve block",
+        "Venous cut-down"
+      ],
+      "door": {
+        "x": 42,
+        "y": 14
+      }
+    },
+    {
+      "id": "paedi",
+      "name": "PAEDI GYM",
+      "badge": "Growth Badge",
+      "packs": [],
+      "deck": null,
+      "topics": [
+        "Epiglottitis",
+        "Scarlet fever",
+        "Fever and rash",
+        "Paediatric vomiting",
+        "Paediatric seizure",
+        "Milestones",
+        "Limping child",
+        "NAI"
+      ],
+      "door": {
+        "x": 42,
+        "y": 23
+      }
+    },
+    {
+      "id": "history",
+      "name": "COUNSEL/HISTORY GYM",
+      "badge": "Listener Badge",
+      "packs": [],
+      "deck": null,
+      "topics": [
+        "Breaking bad news",
+        "Advance directive",
+        "Procedural sedation consent",
+        "DAMA",
+        "Needlestick injury",
+        "Returning traveller",
+        "Malaria"
+      ],
+      "door": {
+        "x": 7,
+        "y": 32
+      }
+    },
+    {
+      "id": "psychi",
+      "name": "PSYCHI GYM",
+      "badge": "Mind Badge",
+      "packs": [],
+      "deck": null,
+      "topics": [
+        "Mental state exam",
+        "Self-harm and SAD PERSONS",
+        "Manic patient",
+        "Psychosis history",
+        "Depression",
+        "Schizophrenia",
+        "Violent patient and restraint"
+      ],
+      "door": {
+        "x": 23,
+        "y": 32
+      }
+    },
+    {
+      "id": "disaster",
+      "name": "DISASTER/TRIAGE GYM",
+      "badge": "Command Badge",
+      "packs": [],
+      "deck": null,
+      "topics": [
+        "Field triage (START)",
+        "Triage of fire victims",
+        "Chlorine gas incident",
+        "Transfer",
+        "Planning and training",
+        "Crush syndrome"
+      ],
+      "door": {
+        "x": 39,
+        "y": 32
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "cmc-hall",
+      "name": "CMC HALL",
+      "kind": "board",
+      "door": {
+        "x": 23,
+        "y": 16
+      }
+    },
+    {
+      "id": "shop",
+      "name": "SHOP",
+      "kind": "shop",
+      "door": {
+        "x": 28,
+        "y": 22
+      }
+    }
+  ]
+}

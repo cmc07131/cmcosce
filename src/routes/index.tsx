@@ -61,8 +61,11 @@ function TitlePage() {
                 <span className="nav-need">{last.title}</span>
               </NavItem>
             )}
+            <NavItem testId="play-world" onClick={() => void navigate({ to: '/world' })}>
+              PLAY · CMC
+            </NavItem>
             <NavItem testId="stations" onClick={() => void navigate({ to: '/gym' })}>
-              STATIONS
+              STATION LIST
             </NavItem>
             <NavItem testId="title-sound" onClick={toggleSound}>
               SOUND: {sound ? 'ON' : 'OFF'}

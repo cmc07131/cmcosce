@@ -1,0 +1,109 @@
+{
+  "deck": "atls",
+  "name": "ATLS",
+  "creatures": [
+    { "id": "pneumothrax", "name": "PNEUMOTHRAX", "body": "bird", "main": "#78b8f0", "accent": "#f8f8f8" },
+    { "id": "pelvisaur", "name": "PELVISAUR", "body": "beast", "main": "#e89048", "accent": "#f8e0a8" },
+    { "id": "burnbat", "name": "BURNBAT", "body": "bird", "main": "#e05038", "accent": "#f8c048" },
+    { "id": "clotling", "name": "CLOTLING", "body": "blob", "main": "#a02838", "accent": "#f08890" }
+  ],
+  "cards": [
+    {
+      "id": "atls-efona-technique",
+      "q": "Adult CICO after failed intubation. Which front-of-neck technique does DAS 2025 recommend?",
+      "options": ["Scalpel–bougie–tube through a vertical midline skin incision", "Needle cricothyroidotomy with jet ventilation", "A fourth videolaryngoscopy attempt", "Percutaneous tracheostomy"],
+      "answer": 0,
+      "why": "DAS 2025 keeps scalpel–bougie–tube for Plan D and makes a vertical midline skin incision the default for every patient.",
+      "source": "DAS 2025, Br J Anaesth 2025; 136: 283–307"
+    },
+    {
+      "id": "atls-efona-tube",
+      "q": "Which tube is railroaded over the bougie in adult scalpel cricothyroidotomy?",
+      "options": ["Cuffed 6.0 mm tracheal tube", "Uncuffed 4.0 mm tube", "Cuffed 8.0 mm tube", "A size 4 i-gel"],
+      "answer": 0,
+      "why": "A lubricated cuffed 6.0 mm tube fits the cricothyroid membrane and allows ventilation with a seal.",
+      "source": "DAS 2015/2025 scalpel–bougie–tube"
+    },
+    {
+      "id": "atls-efona-confirm",
+      "q": "How do you confirm a front-of-neck tube is in the trachea?",
+      "options": ["A sustained square ETCO2 waveform", "The chest rises when you bag", "Misting in the tube", "SpO2 starts to rise"],
+      "answer": 0,
+      "why": "Only waveform capnography confirms tracheal placement. A false passage can still move the chest.",
+      "source": "DAS 2025"
+    },
+    {
+      "id": "atls-massive-haemothorax",
+      "q": "Chest drain for haemothorax. Which immediate output suggests the need for thoracotomy?",
+      "options": ["1500 mL of blood", "300 mL of blood", "700 mL of blood", "Any blood at all"],
+      "answer": 0,
+      "why": "Massive haemothorax: 1500 mL immediately, or ongoing 200 mL/h for 2–4 hours, needs surgical exploration.",
+      "source": "ATLS 10th edition"
+    },
+    {
+      "id": "atls-needle-decompression",
+      "q": "Adult tension pneumothorax. Where does ATLS 10th edition place needle decompression?",
+      "options": ["4th/5th intercostal space, just anterior to the midaxillary line", "6th intercostal space, posterior axillary line", "Directly over the sternum", "Below the costal margin"],
+      "answer": 0,
+      "why": "ATLS 10th moved the adult site to the 4th/5th ICS just anterior to the midaxillary line; the 2nd ICS midclavicular site stays for children.",
+      "source": "ATLS 10th edition"
+    },
+    {
+      "id": "atls-pelvic-binder",
+      "q": "Where should a pelvic binder be centred?",
+      "options": ["Over the greater trochanters", "Over the iliac crests", "Over the umbilicus", "Around the mid-thighs"],
+      "answer": 0,
+      "why": "A binder over the greater trochanters closes the pelvic ring. Placed on the iliac crests it can open it.",
+      "source": "ATLS 10th edition"
+    },
+    {
+      "id": "atls-permissive",
+      "q": "Penetrating torso trauma, no head injury, bleeding before surgical control. Typical systolic BP target?",
+      "options": ["About 80–90 mmHg", "At least 140 mmHg", "At least 120 mmHg", "No target: give 3 L crystalloid first"],
+      "answer": 0,
+      "why": "Balanced (permissive) resuscitation accepts a lower systolic until the bleeding is controlled. Not with a head injury.",
+      "source": "ATLS 10th edition"
+    },
+    {
+      "id": "atls-txa",
+      "q": "Tranexamic acid in bleeding trauma. When should it be given?",
+      "options": ["Within 3 hours of injury: 1 g over 10 min, then 1 g over 8 h", "Only after 3 hours from injury", "Only once the INR is back", "Only for head injury"],
+      "answer": 0,
+      "why": "CRASH-2: benefit when given within 3 hours; after 3 hours it may harm.",
+      "source": "CRASH-2 (Lancet 2010/2011); ATLS 10th edition"
+    },
+    {
+      "id": "atls-burns-fluid",
+      "q": "Adult thermal burn over 20% TBSA. ATLS 10th starting fluid formula?",
+      "options": ["2 mL/kg/%TBSA crystalloid over 24 h, half in the first 8 h", "4 mL/kg/%TBSA, all in the first 8 h", "1 mL/kg/%TBSA over 48 h", "Colloid only"],
+      "answer": 0,
+      "why": "ATLS 10th starts adults at 2 mL/kg/%TBSA (3 mL for children, 4 mL for electrical burns), then titrates to urine output. Older teaching (Parkland) uses 4 mL.",
+      "source": "ATLS 10th edition",
+      "note": "Parkland is 4 mL/kg/%TBSA; ATLS 10th changed the adult starting rate to 2 mL/kg/%TBSA."
+    },
+    {
+      "id": "atls-burns-urine",
+      "q": "Adult burn resuscitation. What urine output are you aiming for?",
+      "options": ["0.5 mL/kg/h", "0.1 mL/kg/h", "2 mL/kg/h", "5 mL/kg/h"],
+      "answer": 0,
+      "why": "Adults 0.5 mL/kg/h; children under 30 kg 1 mL/kg/h; electrical injury 1–1.5 mL/kg/h.",
+      "source": "ATLS 10th edition"
+    },
+    {
+      "id": "atls-canadian-cspine",
+      "q": "Canadian C-spine rule. Which of these is a high-risk factor that mandates imaging?",
+      "options": ["Age 65 or over", "Age 45", "Neck pain that came on later", "Walking at the scene"],
+      "answer": 0,
+      "why": "High-risk factors: age 65 or over, a dangerous mechanism, or paraesthesia in the limbs.",
+      "source": "Stiell, JAMA 2001 (Canadian C-spine rule)"
+    },
+    {
+      "id": "atls-gcs-decorticate",
+      "q": "Abnormal flexion (decorticate posturing) to pain scores what on the GCS motor scale?",
+      "options": ["3", "2", "4", "5"],
+      "answer": 0,
+      "why": "Motor: 6 obeys, 5 localises, 4 normal flexion/withdrawal, 3 abnormal flexion, 2 extension, 1 none.",
+      "source": "Glasgow Coma Scale"
+    }
+  ]
+}

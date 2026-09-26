@@ -18,7 +18,7 @@ function DebriefPage() {
   const [checked, setChecked] = useState<string[] | null>(null)
   const [log, setLog] = useState<LogEntry[]>([])
   const [faults, setFaults] = useState<Fault[]>([])
-  useCursor(root, { priority: 10, onBack: () => void navigate({ to: '/gym' }) })
+  useCursor(root, { priority: 10, onBack: () => void navigate({ to: '/world' }) })
 
   useEffect(() => {
     const session = readSession(packId)
@@ -101,7 +101,7 @@ function DebriefPage() {
         <NavItem testId="claim-badge" onClick={() => void navigate({ to: '/badge/$packId', params: { packId } })}>
           CLAIM BADGE
         </NavItem>
-        <NavItem onClick={() => void navigate({ to: '/gym' })}>STATIONS</NavItem>
+        <NavItem onClick={() => void navigate({ to: '/world' })}>BACK TO THE MAP</NavItem>
       </Win>
     </div>
   )

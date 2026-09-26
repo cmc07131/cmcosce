@@ -1,0 +1,108 @@
+{
+  "deck": "acls",
+  "name": "ACLS/PALS",
+  "creatures": [
+    { "id": "bradysnail", "name": "BRADYSNAIL", "body": "blob", "main": "#58a868", "accent": "#e8f0a0" },
+    { "id": "tachycat", "name": "TACHYCAT", "body": "beast", "main": "#e8c030", "accent": "#f8f0c8" },
+    { "id": "kalemon", "name": "KALEMON", "body": "blob", "main": "#9058c8", "accent": "#e0c8f8" },
+    { "id": "fibrilloon", "name": "FIBRILLOON", "body": "bird", "main": "#38b8c8", "accent": "#e8f8f8" }
+  ],
+  "cards": [
+    {
+      "id": "acls-atropine",
+      "q": "Symptomatic bradycardia in an adult. First-line atropine dosing (AHA)?",
+      "options": ["1 mg IV every 3–5 min, maximum 3 mg", "0.3 mg IV once", "3 mg IV once, then stop", "10 micrograms/kg IV"],
+      "answer": 0,
+      "why": "AHA: atropine 1 mg IV every 3–5 minutes up to 3 mg. Under 0.5 mg can slow the rate further.",
+      "source": "AHA adult bradycardia algorithm (2020, retained 2025)"
+    },
+    {
+      "id": "acls-mechanical-capture",
+      "q": "Transcutaneous pacing. How do you confirm mechanical capture?",
+      "options": ["A femoral pulse that matches the paced rate", "A carotid pulse", "A spike on the monitor", "The chest wall twitching"],
+      "answer": 0,
+      "why": "Pad current makes the neck muscles jump and can mimic a carotid pulse. Feel the femoral.",
+      "source": "AHA ACLS; Resuscitation Council UK"
+    },
+    {
+      "id": "acls-pacing-margin",
+      "q": "Pacing captures at 60 mA. What output do you run?",
+      "options": ["About 65–70 mA: 5–10 mA above threshold", "Exactly 60 mA", "The maximum on the dial", "Down to 40 mA to reduce pain"],
+      "answer": 0,
+      "why": "A small safety margin above threshold stops beats dropping out without adding needless pain.",
+      "source": "AHA ACLS"
+    },
+    {
+      "id": "acls-hyperk-calcium",
+      "q": "K+ 7.4 with peaked T waves and a wide QRS. First drug?",
+      "options": ["IV calcium: gluconate 10% 30 mL or chloride 10% 10 mL", "Insulin–dextrose first", "Oral calcium resonium", "Furosemide"],
+      "answer": 0,
+      "why": "Calcium stabilises the myocardial membrane within minutes. Insulin–dextrose and salbutamol then shift potassium into cells.",
+      "source": "UK Kidney Association hyperkalaemia guideline (2023)"
+    },
+    {
+      "id": "acls-adenosine",
+      "q": "Stable regular narrow-complex tachycardia; vagal manoeuvres failed. Adenosine dosing (AHA)?",
+      "options": ["6 mg rapid IV push with a flush, then 12 mg if needed", "12 mg slow IV over 5 minutes", "3 mg IM", "1 mg/kg IV"],
+      "answer": 0,
+      "why": "AHA: 6 mg rapid push then 12 mg. ERC continues to 18 mg for a third dose.",
+      "source": "AHA adult tachycardia algorithm (2020); ERC 2021"
+    },
+    {
+      "id": "acls-unstable-tachy",
+      "q": "Tachycardia with a pulse, BP 70/40 and chest pain. Treatment?",
+      "options": ["Synchronised DC cardioversion", "Unsynchronised shock at 360 J", "Adenosine and wait", "Oral beta-blocker"],
+      "answer": 0,
+      "why": "An unstable tachyarrhythmia with a pulse gets synchronised cardioversion, with sedation if conscious.",
+      "source": "AHA / ERC tachycardia algorithms"
+    },
+    {
+      "id": "acls-amiodarone",
+      "q": "Adult shockable arrest. When is amiodarone 300 mg given?",
+      "options": ["After the third shock", "Before the first shock", "Only after ROSC", "After every shock"],
+      "answer": 0,
+      "why": "Amiodarone 300 mg IV/IO after the third shock; a further 150 mg after the fifth.",
+      "source": "ERC 2021; AHA 2020"
+    },
+    {
+      "id": "acls-adrenaline-adult",
+      "q": "Adult cardiac arrest. Adrenaline dose and interval?",
+      "options": ["1 mg IV/IO every 3–5 minutes", "0.5 mg IM once", "10 mg IV once", "1 mg every 30 seconds"],
+      "answer": 0,
+      "why": "1 mg every 3–5 min: as soon as possible in non-shockable rhythms, after the third shock in shockable ones (ERC).",
+      "source": "ERC 2021; AHA 2020"
+    },
+    {
+      "id": "pals-adrenaline",
+      "q": "Paediatric cardiac arrest. Adrenaline dose?",
+      "options": ["0.01 mg/kg IV/IO (0.1 mL/kg of 1:10,000)", "0.1 mg/kg IV", "1 mg regardless of weight", "0.5 mg/kg IM"],
+      "answer": 0,
+      "why": "10 micrograms/kg, maximum 1 mg, every 3–5 minutes.",
+      "source": "AHA PALS 2020; ERC 2021 paediatric life support"
+    },
+    {
+      "id": "io-landmark",
+      "q": "Adult proximal tibial IO. Where do you go in?",
+      "options": ["Flat anteromedial tibia, about 2 cm medial to the tuberosity", "Directly on the tibial tuberosity", "Lateral to the tibial crest", "Just above the patella"],
+      "answer": 0,
+      "why": "The flat anteromedial surface has thin cortex and marrow beneath; stay away from the joint and the tendon insertion.",
+      "source": "Teleflex EZ-IO technique"
+    },
+    {
+      "id": "io-5mm",
+      "q": "EZ-IO: tip resting on bone, before drilling. What tells you the needle is long enough?",
+      "options": ["At least one black 5 mm mark visible above the skin", "The hub touching the skin", "The needle is blue", "It feels firm"],
+      "answer": 0,
+      "why": "If no black line shows with the tip on bone, the needle may not reach the marrow: take a longer one.",
+      "source": "Teleflex EZ-IO technique"
+    },
+    {
+      "id": "io-lidocaine",
+      "q": "Awake adult with an IO in place. Before the pressure flush, give:",
+      "options": ["2% preservative-free lidocaine 40 mg slowly through the IO", "1% lidocaine with adrenaline through the IO", "Nothing: the flush is painless", "Midazolam 10 mg"],
+      "answer": 0,
+      "why": "Infusion into marrow hurts more than insertion. 40 mg over about 2 min, dwell, flush, then 20 mg.",
+      "source": "Teleflex EZ-IO guidance"
+    }
+  ]
+}
