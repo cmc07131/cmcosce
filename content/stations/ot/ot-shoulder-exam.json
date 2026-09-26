@@ -1,0 +1,71 @@
+{
+  "id": "ot-shoulder-exam",
+  "gym": "ot",
+  "title": "Shoulder examination: impingement",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 17. Miss Ali, 28, a netball player, has had right shoulder pain since a match yesterday, worse lifting her arm overhead. Examine her shoulder and explain your findings and management.",
+  "notes": "Checked against BESS/BOA guidance on subacromial shoulder pain (2021) and standard examination technique.\n\nLook (front, side, back: asymmetry, wasting of supraspinatus/infraspinatus, winging, swelling), feel (SC joint, clavicle, AC joint, coracoid, acromion, greater tuberosity, bicipital groove, spine of scapula), move (active then passive: flexion, extension, abduction with painful arc 60–120° in subacromial pain; external rotation — loss of passive external rotation suggests frozen shoulder or OA; internal rotation), special tests: supraspinatus (empty can/Jobe), infraspinatus/teres minor (resisted external rotation), subscapularis (lift-off, belly press), impingement (Neer, Hawkins–Kennedy), biceps (Speed's), AC joint (scarf test), instability (apprehension/relocation, sulcus). Examine the neck and neurovascular status (axillary nerve).\n\nSubacromial pain is managed with analgesia, activity modification and physiotherapy; injections for persisting symptoms; imaging if trauma, weakness (cuff tear) or no improvement. An acute traumatic cuff tear with weakness needs early (within weeks) orthopaedic referral. Your shoulder notes are thorough and match this.",
+  "cast": [{ "id": "patient", "name": "Miss Ali", "role": "woman", "inBed": false }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine the shoulder",
+      "hint": "Introduce and expose; look, feel, move, special tests, neck, neurovascular.",
+      "groups": {
+        "Start": [{ "t": "Introduce, consent, offer analgesia, expose both shoulders", "r": "Ready, sitting upright, both shoulders exposed.", "mark": "Introduces, consents and exposes both shoulders" }],
+        "Look": [{ "t": "Inspect front, side and back; wall push for winging", "r": "Symmetrical, no wasting, no winging.", "mark": "Inspects from all sides including winging" }],
+        "Feel": [{ "t": "SC joint, clavicle, AC joint, acromion, greater tuberosity, bicipital groove", "r": "Tender just below the anterolateral acromion. AC joint not tender.", "mark": "Palpates bony landmarks systematically" }],
+        "Move": [
+          { "t": "Active abduction", "r": "Pain between 70° and 120° of abduction, eases above that.", "mark": "Identifies a painful arc" },
+          { "t": "Passive external rotation", "r": "Full and painless — not frozen shoulder.", "mark": "Checks passive external rotation" }
+        ],
+        "Special tests": [
+          { "t": "Empty can (Jobe) test", "r": "Painful but strength preserved.", "mark": "Tests supraspinatus" },
+          { "t": "Resisted external rotation; lift-off test", "r": "Strong and painless.", "mark": "Tests infraspinatus and subscapularis" },
+          { "t": "Neer and Hawkins–Kennedy tests", "r": "Both reproduce her pain.", "mark": "Performs impingement tests" },
+          { "t": "Apprehension test", "r": "No apprehension.", "mark": "Tests instability" }
+        ],
+        "Complete": [
+          { "t": "Neck movements; sensation over the badge area; pulses", "r": "Neck normal; sensation normal.", "mark": "Examines the neck and neurovascular status" }
+        ]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Present and plan",
+      "hint": "Subacromial pain (impingement/cuff tendinopathy), cuff strength intact; conservative plan.",
+      "opts": [
+        { "t": "Subacromial pain / rotator cuff tendinopathy: painful arc, positive Neer and Hawkins, strength intact", "mark": "Gives the diagnosis supported by findings" },
+        { "t": "X-ray not needed without trauma or red flags; analgesia, relative rest from overhead activity, physiotherapy; review if not improving", "mark": "Conservative management and follow-up" },
+        { "t": "Urgent MRI and orthopaedic surgery tonight", "trap": true, "r": "Strength is intact; conservative management first." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "The empty can test assesses…", "a": "Supraspinatus", "wrong": ["Subscapularis", "Infraspinatus", "Biceps"] },
+        { "q": "Loss of passive external rotation suggests…", "a": "Frozen shoulder or glenohumeral OA", "wrong": ["Impingement", "AC joint sprain", "Biceps tendinopathy"] },
+        { "q": "Painful arc of subacromial pain is…", "a": "60–120° of abduction", "wrong": ["0–30°", "150–180° only", "Any movement"] },
+        { "q": "The lift-off test assesses…", "a": "Subscapularis", "wrong": ["Supraspinatus", "Teres minor", "Deltoid"] },
+        { "q": "Nerve at risk after shoulder dislocation and how to test it?", "a": "Axillary nerve — badge area sensation and deltoid", "wrong": ["Radial — wrist drop", "Ulnar — finger abduction", "Median — thumb opposition"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Rotator", "emoji": "💪", "flavor": "Painful arc, Neer and Hawkins, strength intact: physio first." },
+  "cards": [
+    { "q": "Rotator cuff muscles?", "options": ["Supraspinatus, infraspinatus, teres minor, subscapularis", "Deltoid, biceps, triceps, pectoralis", "Trapezius, rhomboids, levator scapulae, serratus", "Teres major, latissimus, pectoralis, deltoid"], "why": "SITS.", "source": "Anatomy" },
+    { "q": "Neer's test is…", "options": ["Passive forward flexion with the arm internally rotated", "Resisted external rotation", "Hand behind the back lift-off", "Arm across the chest"], "why": "Impingement test.", "source": "Clinical examination" },
+    { "q": "Scarf test (cross-body adduction) tests…", "options": ["AC joint", "Subscapularis", "Long head of biceps", "Glenoid labrum"], "why": "Pain over the AC joint.", "source": "Clinical examination" },
+    { "q": "Winging of the scapula suggests…", "options": ["Long thoracic nerve palsy", "Axillary nerve palsy", "Radial nerve palsy", "Rotator cuff tear"], "why": "Serratus anterior weakness.", "source": "Anatomy" },
+    { "q": "Acute traumatic cuff tear with weakness in a young patient needs…", "options": ["Early orthopaedic referral", "Physio only for 1 year", "Steroid injection immediately", "No follow-up"], "why": "Repair outcomes are better early.", "source": "BESS/BOA" },
+    { "q": "Speed's test assesses…", "options": ["Biceps tendon", "Supraspinatus", "AC joint", "Deltoid"], "why": "Resisted forward flexion with a supinated arm.", "source": "Clinical examination" }
+  ]
+}

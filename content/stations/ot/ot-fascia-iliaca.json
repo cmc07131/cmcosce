@@ -1,0 +1,65 @@
+{
+  "id": "ot-fascia-iliaca",
+  "gym": "ot",
+  "title": "Fascia iliaca / femoral nerve block",
+  "type": "skills",
+  "time": 420,
+  "stem": "Cubicle 21. Mrs Ma, 84 (50 kg), has a fractured neck of femur. She is in severe pain despite paracetamol. Perform an ultrasound-guided fascia iliaca block on the model.",
+  "notes": "Checked against NICE CG124 (Hip fracture, updated 2023), the Association of Anaesthetists / RCEM safety guideline for fascia iliaca blocks in the ED (2021), and the AAGBI guideline for local anaesthetic systemic toxicity (LAST, 2010).\n\nNICE recommends nerve blocks (fascia iliaca or femoral) for hip fracture pain in the ED, alongside paracetamol and cautious opioids. The ultrasound-guided fascia iliaca compartment block deposits a large volume of dilute local anaesthetic under the fascia iliaca, lateral to the femoral nerve, spreading to the femoral and lateral femoral cutaneous nerves (and sometimes obturator). Safety: consent, check allergies and anticoagulation, weight-based dose (e.g. levobupivacaine 0.25% up to 2 mg/kg, or 30–40 mL of a dilute solution staying within the maximum dose), monitoring, IV access, aspirate before injecting in 5 mL increments, lipid emulsion available, document, and a sign on the patient (time and drug) to avoid repeat dosing.\n\nYour notes describe a femoral nerve block with 20–30 mL ropivacaine 0.5% or bupivacaine 0.25–0.5%; check the total dose against weight (0.5% × 30 mL = 150 mg — over 2 mg/kg in a 50 kg woman). The rest (NAVEL, in-plane, hydrodissection, aspiration, LAST readiness) matches.",
+  "cast": [{ "id": "patient", "name": "Mrs Ma", "role": "elderly", "inBed": true }, { "id": "nurse", "name": "Nurse Kwong", "role": "nurse" }],
+  "vitals": { "hr": 98, "sbp": 146, "dbp": 82, "spo2": 96, "rr": 18, "rhythm": "sinus", "effects": [{ "scene": "block", "add": { "hr": -12, "sbp": -10 }, "overS": 600 }] },
+  "steps": [
+    {
+      "id": "safety",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Safety checks",
+      "hint": "Consent, allergy, anticoagulants, weight and maximum dose, monitoring, IV, lipid emulsion.",
+      "confirm": "Checked",
+      "opts": [
+        { "t": "Consent; allergy to local anaesthetic; anticoagulants", "need": true, "mark": "Consent and pre-procedure checks" },
+        { "t": "Weigh her: 50 kg; maximum levobupivacaine 2 mg/kg = 100 mg", "need": true, "mark": "Calculates the maximum safe dose" },
+        { "t": "Monitoring and IV access; 20% lipid emulsion on the trolley", "need": true, "mark": "Monitoring, IV access and lipid emulsion available" },
+        { "t": "Check she hasn't had a block from the ambulance crew", "need": true, "mark": "Avoids repeat dosing" }
+      ]
+    },
+    {
+      "id": "block",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Ultrasound-guided block",
+      "hint": "Probe below the inguinal ligament, identify artery, nerve, fascia iliaca, iliopsoas; in-plane lateral to medial; aspirate; inject in increments.",
+      "opts": [
+        { "t": "Clean the groin; sterile probe cover", "n": 1, "mark": "Asepsis" },
+        { "t": "Linear probe transverse below the inguinal ligament: femoral artery, nerve lateral to it, fascia iliaca over iliopsoas", "n": 2, "mark": "Identifies sonoanatomy (NAVEL, fascia iliaca)" },
+        { "t": "Needle in-plane from lateral to medial, tip under the fascia iliaca lateral to the nerve", "n": 3, "mark": "In-plane approach with the tip under the fascia" },
+        { "t": "Aspirate; inject 2 mL and watch the fascia lift (hydrodissection)", "n": 4, "mark": "Aspirates and confirms spread" },
+        { "t": "Inject 40 mL of 0.25% levobupivacaine (100 mg) in 5 mL aliquots, aspirating between", "n": 5, "scene": "block", "mark": "Incremental injection within the maximum dose" },
+        { "t": "Document; label the time and drug on her wrist; observe for LAST", "n": 6, "mark": "Documentation and observation" },
+        { "t": "Inject quickly without seeing the needle tip", "trap": "critical", "r": "Risk of intravascular or intraneural injection. Always see the tip." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Early signs of LAST?", "a": "Perioral tingling, tinnitus, agitation, then seizures and arrhythmias", "wrong": ["Rash only", "Hypoglycaemia", "Bradycardia only"] },
+        { "q": "Treatment of LAST?", "a": "Stop injecting, airway, treat seizures, 20% lipid emulsion 1.5 mL/kg", "wrong": ["Naloxone", "Flumazenil", "Adrenaline 1 mg immediately in all"] },
+        { "q": "Order of structures lateral to medial in the groin?", "a": "Nerve, artery, vein (NAVEL)", "wrong": ["Vein, artery, nerve", "Artery, nerve, vein", "Nerve, vein, artery"] },
+        { "q": "Nerves covered by a fascia iliaca block?", "a": "Femoral and lateral femoral cutaneous", "wrong": ["Sciatic and tibial", "Obturator only", "Pudendal"] },
+        { "q": "Why a sign on the patient's wrist after the block?", "a": "To prevent a repeat dose exceeding the maximum", "wrong": ["For billing", "For the family", "It is not necessary"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Iliac Relief", "emoji": "🧊", "flavor": "Dose by weight, see the tip, aspirate, increments, lipid nearby." },
+  "cards": [
+    { "q": "Hip fracture analgesia recommended by NICE in the ED?", "options": ["Nerve block plus paracetamol", "NSAIDs routinely", "IM morphine only", "Nothing until theatre"], "why": "Fascia iliaca or femoral block.", "source": "NICE CG124" },
+    { "q": "Lipid emulsion bolus for LAST?", "options": ["20% 1.5 mL/kg over 1 minute", "10 mL fixed", "5% 10 mL/kg", "Oral"], "why": "Then infusion 15 mL/kg/h.", "source": "AAGBI LAST guideline" },
+    { "q": "Maximum dose of bupivacaine/levobupivacaine (plain)?", "options": ["2 mg/kg", "10 mg/kg", "0.5 mg/kg", "20 mg/kg"], "why": "Check volume × concentration.", "source": "BNF" },
+    { "q": "The femoral nerve lies relative to the femoral artery…", "options": ["Lateral", "Medial", "Posterior only", "Anterior"], "why": "NAVEL.", "source": "Anatomy" },
+    { "q": "30 mL of 0.5% bupivacaine contains…", "options": ["150 mg", "15 mg", "1.5 g", "50 mg"], "why": "0.5% = 5 mg/mL.", "source": "Pharmacology" },
+    { "q": "Complication of femoral block to warn about?", "options": ["Quadriceps weakness and falls", "Hearing loss", "Urinary retention always", "Bradycardia"], "why": "No unsupervised walking.", "source": "RCEM" }
+  ]
+}

@@ -77,7 +77,7 @@ const gymSpots = {
 for (const [id, [x, y]] of Object.entries(gymSpots)) building(id, x, y)
 
 // Tall grass. Letters pick the question deck: a = ATLS, c = ACLS/PALS, o = O&G, h = Counsel/History,
-// p = Psychi, x = mixed.
+// p = Psychi, t = O&T, x = mixed.
 rect(8, 8, 9, 3, 'a')
 rect(18, 8, 4, 3, 'c')
 rect(26, 8, 5, 3, 'c')
@@ -86,6 +86,7 @@ rect(44, 3, 2, 3, 'o')
 rect(8, 25, 6, 4, 'h')
 rect(14, 25, 6, 4, 'x')
 rect(27, 26, 3, 5, 'p')
+rect(7, 15, 3, 3, 't')
 
 // Pond, trees, flowers for texture.
 rect(32, 25, 6, 4, '~')
@@ -120,7 +121,7 @@ const gyms = [
     deck: 'og',
     topics: ['PPH and placenta delivery', 'PV bleeding in early pregnancy', 'Eclampsia', 'Shoulder dystocia', 'Breech', 'Obstetric arrest', 'Bimanual pelvic exam'],
   },
-  { id: 'ot', name: 'O&T GYM', badge: 'Joint Badge', packs: [], deck: null, topics: ['Knee exam', 'Hip exam', 'Shoulder dislocation', 'Shoulder impingement', 'Ankle and Ottawa rules', 'Hand, FDP/FDS', 'Colles', 'LS spine'] },
+  { id: 'ot', name: 'O&T GYM', badge: 'Joint Badge', packs: [], deck: 'ot', topics: ['Knee exam', 'Hip exam', 'Shoulder dislocation', 'Shoulder impingement', 'Ankle and Ottawa rules', 'Hand, FDP/FDS', 'Colles', 'LS spine'] },
   { id: 'medical', name: 'MEDICAL GYM', badge: 'Physician Badge', packs: [], deck: null, topics: ['DKA', 'Addison disease', 'Anaemia', 'Chest pain', 'Dizziness', 'Cranial nerves', 'Cerebellar and Hallpike', 'Polyarthritis'] },
   { id: 'surgical', name: 'SURGICAL GYM', badge: 'Scalpel Badge', packs: [], deck: null, topics: ['Massive GI bleed', 'Renal stone', 'Epididymo-orchitis', 'Hepatosplenomegaly', 'Suturing', 'Digital nerve block', 'Venous cut-down'] },
   { id: 'paedi', name: 'PAEDI GYM', badge: 'Growth Badge', packs: [], deck: null, topics: ['Epiglottitis', 'Scarlet fever', 'Fever and rash', 'Paediatric vomiting', 'Paediatric seizure', 'Milestones', 'Limping child', 'NAI'] },
@@ -150,6 +151,7 @@ const world = {
     o: 'tall grass (O&G deck)',
     h: 'tall grass (Counsel/History deck)',
     p: 'tall grass (Psychi deck)',
+    t: 'tall grass (O&T deck)',
     x: 'tall grass (mixed deck)',
   },
   grid: rows,

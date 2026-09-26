@@ -1,0 +1,97 @@
+{
+  "id": "ot-shoulder-reduction",
+  "gym": "ot",
+  "title": "Shoulder reduction under procedural sedation",
+  "type": "resus",
+  "time": 480,
+  "stem": "Resus 4. Mr Lui, 17, dislocated his left shoulder falling while skateboarding. The X-ray confirms an anterior dislocation without fracture. Consent has been obtained. Demonstrate how you would reduce it under procedural sedation.",
+  "notes": "Checked against RCEM/RCoA 'Safe sedation of adults in the ED' (2012, RCEM 2019 update), and evidence on reduction techniques (Cunningham, external rotation, FARES, Spaso, Milch, Kocher).\n\nSafety: resus bay, two clinicians (a sedationist separate from the person reducing), monitoring (SpO2, ECG, NIBP, capnography), oxygen, suction, airway kit, reversal agents. Neurovascular check before (axillary nerve badge sensation and deltoid; radial, median, ulnar motor; radial pulse) and after. Sedation: titrate, e.g. midazolam 0.02–0.1 mg/kg with fentanyl 0.5–1 microgram/kg, or propofol, or ketamine 1–2 mg/kg; aim for deep enough relaxation (your notes use the modified Ramsay score 4–5). Many dislocations reduce without sedation (Cunningham, external rotation), which avoids sedation risk.\n\nKocher's method carries a higher risk of fracture and nerve injury (your notes say so). After reduction: X-ray, sling, recovery observation until the discharge criteria are met, written advice. Your notes on doses, techniques and signs of reduction match this.",
+  "cast": [
+    { "id": "patient", "name": "Mr Lui", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Yeung", "role": "nurse" },
+    { "id": "junior", "name": "Dr Kwan (sedationist)", "role": "junior" }
+  ],
+  "vitals": {
+    "hr": 96,
+    "sbp": 132,
+    "dbp": 78,
+    "spo2": 98,
+    "rr": 16,
+    "etco2": 4.8,
+    "rhythm": "sinus",
+    "effects": [
+      { "scene": "sedated", "add": { "hr": -14, "rr": -6, "spo2": -3, "etco2": 0.6, "sbp": -12 }, "overS": 60 },
+      { "scene": "awake", "add": { "hr": 6, "rr": 5, "spo2": 3, "etco2": -0.5, "sbp": 8 }, "overS": 120 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "prep",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Set up",
+      "hint": "Monitoring with capnography, oxygen, suction, airway kit, reversal agents, IV access, separate sedationist.",
+      "confirm": "Ready",
+      "opts": [
+        { "t": "SpO2, ECG, NIBP and capnography on", "need": true, "mark": "Full monitoring including capnography" },
+        { "t": "Oxygen, suction, bag-valve-mask and airway adjuncts at the bedside", "need": true, "mark": "Airway equipment ready" },
+        { "t": "Naloxone and flumazenil drawn up nearby", "need": true, "mark": "Reversal agents available" },
+        { "t": "IV cannula in the other arm", "need": true, "mark": "IV access" },
+        { "t": "Dr Kwan runs the sedation; I do the reduction", "need": true, "mark": "Separate sedationist and operator" }
+      ]
+    },
+    {
+      "id": "nv",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Neurovascular check",
+      "hint": "Axillary, radial, median, ulnar, radial pulse.",
+      "groups": {
+        "Before": [
+          { "t": "Sensation over the regimental badge area", "r": "Normal.", "mark": "Checks the axillary nerve before reduction" },
+          { "t": "Wrist extension, finger flexion, finger abduction", "r": "Normal.", "mark": "Checks radial, median and ulnar motor function" },
+          { "t": "Radial pulse and capillary refill", "r": "Normal.", "mark": "Checks circulation" }
+        ]
+      }
+    },
+    {
+      "id": "reduce",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Sedate and reduce",
+      "hint": "Titrate sedation, one gentle technique, feel for the clunk, re-examine.",
+      "opts": [
+        { "t": "Fentanyl 1 microgram/kg, then midazolam titrated in small doses", "n": 1, "scene": "sedated", "mark": "Titrated sedation and analgesia" },
+        { "t": "Wait for adequate sedation (drowsy, relaxed, responds to a firm tap)", "n": 2, "mark": "Assesses sedation depth" },
+        { "t": "External rotation technique: elbow at 90° by the side, slowly externally rotate", "n": 3, "mark": "Uses a gentle, evidence-based technique" },
+        { "t": "Feel the clunk; the contour of the shoulder returns", "n": 4, "mark": "Recognises successful reduction", "r": "A soft clunk. The shoulder is round again." },
+        { "t": "Re-check nerves and pulse; sling; post-reduction X-ray", "n": 5, "mark": "Post-reduction neurovascular check, sling and X-ray" },
+        { "t": "Observe until awake and discharge criteria met", "n": 6, "scene": "awake", "mark": "Recovery observation" },
+        { "t": "Kocher's method with forceful levering", "trap": true, "r": "Higher fracture and nerve injury rates; use gentler techniques first." },
+        { "t": "The sedationist leaves to help reduce", "trap": "critical", "r": "The sedationist must watch the airway throughout." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Why capnography during sedation?", "a": "Detects hypoventilation before desaturation", "wrong": ["Measures sedation depth", "Detects fractures", "Required for billing"] },
+        { "q": "Which nerve to check before and after?", "a": "Axillary", "wrong": ["Musculocutaneous only", "Sciatic", "Phrenic"] },
+        { "q": "Technique with higher fracture risk?", "a": "Kocher's", "wrong": ["External rotation", "Cunningham", "FARES"] },
+        { "q": "Midazolam dose range for sedation?", "a": "0.02–0.1 mg/kg titrated", "wrong": ["1 mg/kg bolus", "10 mg fixed", "0.5 mg/kg"] },
+        { "q": "A technique that often works without sedation?", "a": "Cunningham (massage and positioning)", "wrong": ["Kocher", "Hippocratic", "Traction with foot in axilla"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Clunk", "emoji": "🛹", "flavor": "Two doctors, capnography, gentle rotation, nerves checked twice." },
+  "cards": [
+    { "q": "Minimum staff for ED procedural sedation?", "options": ["A sedationist plus a separate operator", "One doctor alone", "A nurse alone", "Three consultants"], "why": "The sedationist focuses on the airway.", "source": "RCEM/RCoA" },
+    { "q": "Reversal for fentanyl?", "options": ["Naloxone", "Flumazenil", "Sugammadex", "Atropine"], "why": "Flumazenil reverses benzodiazepines.", "source": "BNF" },
+    { "q": "FARES technique involves…", "options": ["Traction with vertical oscillation while abducting", "Foot in the axilla", "Forceful levering", "Hanging weights for 30 minutes"], "why": "Fast, reliable and safe.", "source": "Sayegh 2009" },
+    { "q": "Ketamine sedation dose (IV)?", "options": ["1–2 mg/kg", "10 mg/kg", "0.1 mg/kg", "5 mg/kg"], "why": "Maintains airway reflexes.", "source": "RCEM" },
+    { "q": "After reduction, the X-ray looks for…", "options": ["Congruent joint and fractures (Hill-Sachs, Bankart, greater tuberosity)", "Lung pathology", "Nothing", "Cervical spine injury"], "why": "Confirms reduction.", "source": "BOA" },
+    { "q": "Modified Ramsay score 4 means…", "options": ["Asleep, rouses to a loud voice or shoulder tap", "Fully awake", "Unresponsive", "Agitated"], "why": "Target for reduction per your notes.", "source": "Ramsay scale" }
+  ]
+}

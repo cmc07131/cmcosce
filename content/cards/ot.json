@@ -1,0 +1,49 @@
+{
+  "deck": "ot",
+  "name": "O&T",
+  "creatures": [
+    {
+      "id": "fracturtle",
+      "name": "FRACTURTLE",
+      "body": "beast",
+      "main": "#8a9aa8",
+      "accent": "#e8eef4"
+    },
+    {
+      "id": "kneebat",
+      "name": "KNEEBAT",
+      "body": "bird",
+      "main": "#c07840",
+      "accent": "#f8e0c8"
+    },
+    {
+      "id": "tendonake",
+      "name": "TENDONAKE",
+      "body": "snake",
+      "main": "#d0a060",
+      "accent": "#f8f0d8"
+    },
+    {
+      "id": "castblob",
+      "name": "CASTBLOB",
+      "body": "blob",
+      "main": "#e8e8f0",
+      "accent": "#9098b0"
+    }
+  ],
+  "cards": [
+    {
+      "id": "ot-nv",
+      "q": "Before and after any reduction you must document…",
+      "options": [
+        "Neurovascular status",
+        "Blood glucose",
+        "Temperature",
+        "Weight"
+      ],
+      "answer": 0,
+      "why": "Nerve or vessel injury can occur with the injury or the manoeuvre.",
+      "source": "BOA / BOAST"
+    }
+  ]
+}

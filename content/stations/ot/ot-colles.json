@@ -1,0 +1,102 @@
+{
+  "id": "ot-colles",
+  "gym": "ot",
+  "title": "Colles fracture: block, reduction and cast",
+  "type": "skills",
+  "time": 480,
+  "stem": "Plaster room. Mrs Wu, 65, fell on her outstretched right hand. Consent has been obtained for closed reduction. You have one assistant and a medical student. Interpret the X-ray, then demonstrate a haematoma block, reduction and cast on the model while teaching the student.",
+  "notes": "Checked against BOAST 'Management of distal radial fractures' (2017), AAOS 2020 guideline, and NICE NG38 (non-complex fractures).\n\nColles: extra-articular distal radius fracture with dorsal angulation, dorsal displacement, radial shortening ('dinner fork'). Check median nerve and EPL (thumb extension) before and after. Anaesthesia: haematoma block (1% lidocaine up to 10 mL, into the fracture haematoma from the dorsum, confirmed by aspirating blood) or Bier's block (IV regional; prilocaine, needs trained staff and a double cuff) or sedation. Reduction: traction with counter-traction to disimpact, then the distal fragment pushed volarly and into ulnar deviation. Below-elbow moulded backslab (three-point moulding); elevate. Repeat X-ray. Acceptable alignment (AAOS/BOAST): radial shortening 3 mm or less, dorsal tilt 10° or less, intra-articular step 2 mm or less; the older patient's function matters more than the film.\n\nYour notes: acceptable radial shortening '5 mm or less' and dorsal angulation '<5°' (in one place) or '<10° dorsally' (in another); current thresholds are 3 mm and 10°. Your notes also suggest a long-arm cast first; a moulded below-elbow backslab is standard in UK/HK ED practice for Colles. The block and sedation steps match.",
+  "cast": [
+    { "id": "patient", "name": "Mrs Wu", "role": "elderly", "inBed": true },
+    { "id": "student", "name": "Student", "role": "junior" }
+  ],
+  "steps": [
+    {
+      "id": "xray",
+      "kind": "order",
+      "to": "trolley",
+      "label": "X-ray",
+      "hint": "Describe the fracture.",
+      "groups": { "X-ray": [{ "t": "Right wrist PA and lateral", "r": "Extra-articular distal radius fracture 2 cm from the joint with dorsal angulation and displacement, radial shortening; ulnar styloid fracture.", "img": "xr:wrist-colles", "mark": "Describes a displaced extra-articular (Colles) fracture" }] }
+    },
+    {
+      "id": "check",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Pre-procedure checks",
+      "hint": "Median nerve, EPL, circulation, skin, allergies.",
+      "groups": {
+        "Checks": [
+          { "t": "Median nerve sensation and thumb abduction", "r": "Normal.", "mark": "Checks median nerve function" },
+          { "t": "Thumb extension (EPL)", "r": "Normal.", "mark": "Checks EPL" },
+          { "t": "Radial pulse and capillary refill; skin intact?", "r": "Normal; skin intact (closed fracture).", "mark": "Checks circulation and skin" },
+          { "t": "Allergy to local anaesthetic", "r": "None." }
+        ]
+      }
+    },
+    {
+      "id": "block",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Haematoma block",
+      "hint": "Clean, dorsal approach into the fracture, aspirate blood, inject lidocaine, wait.",
+      "opts": [
+        { "t": "Clean the dorsum of the wrist with chlorhexidine", "n": 1, "mark": "Asepsis" },
+        { "t": "Insert the needle dorsally into the fracture site (radius, not the carpus)", "n": 2, "mark": "Correct site: into the radial fracture" },
+        { "t": "Aspirate dark blood from the haematoma to confirm position", "n": 3, "mark": "Confirms position by aspirating haematoma" },
+        { "t": "Inject 1% lidocaine up to 10 mL slowly", "n": 4, "mark": "Safe dose of local anaesthetic" },
+        { "t": "Wait 5–10 minutes", "n": 5, "mark": "Waits for the block to work" },
+        { "t": "Inject 20 mL of 2% lidocaine", "trap": "critical", "r": "400 mg is well above the maximum dose (3 mg/kg plain): risk of LA toxicity." }
+      ]
+    },
+    {
+      "id": "reduce",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Reduce and cast",
+      "hint": "Counter-traction, disimpact, reduce volarly and ulnarly, mould a below-elbow backslab, check.",
+      "opts": [
+        { "t": "Assistant holds counter-traction at the elbow", "n": 1, "mark": "Counter-traction by the assistant" },
+        { "t": "Longitudinal traction, briefly exaggerate the deformity to disimpact", "n": 2, "mark": "Disimpacts the fracture" },
+        { "t": "Push the distal fragment volarly and into ulnar deviation", "n": 3, "mark": "Reduces with volar and ulnar pressure" },
+        { "t": "Apply a padded below-elbow dorsal backslab while traction is held", "n": 4, "mark": "Applies a backslab while maintaining reduction" },
+        { "t": "Three-point mould with the heels of the hands; wrist slightly flexed and ulnar deviated", "n": 5, "mark": "Three-point moulding" },
+        { "t": "Recheck circulation, median nerve; check-X-ray", "n": 6, "img": "xr:wrist-normal", "mark": "Neurovascular check and repeat X-ray", "r": "Check X-ray shows restored volar tilt and length." },
+        { "t": "Wrap a full circumferential plaster tightly on day one", "trap": true, "r": "Swelling in the first days: use a backslab to avoid compartment syndrome." }
+      ]
+    },
+    {
+      "id": "advice",
+      "kind": "say",
+      "to": "patient",
+      "label": "Discharge advice",
+      "hint": "Elevation, finger exercises, cast care, warning signs, fracture clinic.",
+      "opts": [
+        { "t": "Elevate, move your fingers, keep the plaster dry; come back at once for severe pain, numb or blue fingers; fracture clinic in 1 week with an X-ray", "mark": "Discharge advice with warning signs and follow-up" },
+        { "t": "Bone health assessment (fragility fracture)", "mark": "Considers osteoporosis assessment" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Acceptable radial shortening after reduction (AAOS)?", "a": "3 mm or less", "wrong": ["10 mm", "5 mm", "Any shortening is fine"] },
+        { "q": "Acceptable dorsal tilt?", "a": "10° or less", "wrong": ["30°", "20° dorsal", "Must be 0°"] },
+        { "q": "Maximum plain lidocaine dose?", "a": "3 mg/kg (max 200 mg)", "wrong": ["20 mg/kg", "1 mg/kg", "No limit"] },
+        { "q": "Tendon at risk of late rupture after a distal radius fracture?", "a": "Extensor pollicis longus", "wrong": ["Flexor pollicis longus", "Biceps", "FDP of the index"] },
+        { "q": "Smith's fracture is…", "a": "Volar angulation of the distal fragment", "wrong": ["Dorsal angulation", "Scaphoid fracture", "Radial head fracture"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Dinner Fork", "emoji": "🍴", "flavor": "Aspirate the haematoma, disimpact, push volar and ulnar, mould three points." },
+  "cards": [
+    { "q": "Colles fracture deformity?", "options": ["Dorsal angulation and displacement ('dinner fork')", "Volar angulation", "Radial head dislocation", "Scaphoid waist fracture"], "why": "Smith's is volar.", "source": "Orthopaedics" },
+    { "q": "Haematoma block confirmation?", "options": ["Aspirating blood from the fracture", "Feeling a pop in the joint", "Seeing CSF", "Numb fingers immediately"], "why": "Then inject lidocaine.", "source": "RCEM" },
+    { "q": "Bier's block uses…", "options": ["Prilocaine IV regional with a tourniquet", "Bupivacaine IV", "Lidocaine with adrenaline IV", "Ketamine"], "why": "Bupivacaine is cardiotoxic and contraindicated.", "source": "RCEM" },
+    { "q": "Below-elbow backslab mould uses…", "options": ["Three-point pressure", "One-point pressure", "No moulding", "Circumferential tight wrap"], "why": "Holds the reduction.", "source": "Plaster technique" },
+    { "q": "Neurological complication of a displaced distal radius fracture?", "options": ["Acute carpal tunnel syndrome (median nerve)", "Ulnar claw hand always", "Radial wrist drop", "Axillary nerve palsy"], "why": "Needs urgent reduction/decompression.", "source": "BOAST" },
+    { "q": "Fragility fracture in a 65-year-old warrants…", "options": ["Bone health assessment", "Nothing", "Only analgesia", "CT brain"], "why": "Secondary fracture prevention.", "source": "NICE" }
+  ]
+}

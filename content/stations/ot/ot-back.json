@@ -1,0 +1,69 @@
+{
+  "id": "ot-back",
+  "gym": "ot",
+  "title": "Low back pain and cauda equina",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 19. Mr Hui, 42, has had low back pain with pain down both legs for 3 days after lifting furniture. Today he noticed difficulty passing urine. Examine his lumbar spine and lower limbs and explain what you would do.",
+  "notes": "Checked against NICE NG59 (Low back pain and sciatica, 2016, updated 2020), the GIRFT national pathway for suspected cauda equina syndrome (2023), and BASS guidance.\n\nCauda equina syndrome (CES) red flags: bilateral sciatica, saddle or perianal sensory change, bladder dysfunction (retention, altered sensation, loss of desire to void), bowel dysfunction, sexual dysfunction, progressive neurological deficit. Examination: look, feel, move the lumbar spine; straight-leg raise and femoral stretch; lower limb neurology (myotomes, dermatomes, reflexes); perianal sensation and anal tone (digital rectal examination with consent and a chaperone; GIRFT emphasises perianal pinprick sensation); post-void residual bladder scan (residual over 200 mL is concerning). Suspected CES: emergency MRI of the whole lumbar spine (within 4 hours in GIRFT pathway) and spinal surgical referral; decompression within 48 hours of onset (or sooner for incomplete CES) improves outcome.\n\nYour notes list the LS spine exam headings and mention 'incomplete cauda equina syndrome, urinary retention' under HKCEM past topics; nothing conflicts.",
+  "cast": [{ "id": "patient", "name": "Mr Hui", "role": "man", "inBed": true }, { "id": "nurse", "name": "Nurse Chaperone", "role": "nurse" }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Spine, SLR, neurology, saddle sensation, anal tone (chaperone), bladder scan.",
+      "groups": {
+        "Spine": [
+          { "t": "Look and feel the spine", "r": "Loss of lumbar lordosis, paraspinal spasm, no midline step or bony tenderness.", "mark": "Inspects and palpates the spine" },
+          { "t": "Forward flexion", "r": "Limited by pain." }
+        ],
+        "Nerve root": [
+          { "t": "Straight-leg raise each side", "r": "Positive at 40° on both sides.", "mark": "Performs straight-leg raise bilaterally" },
+          { "t": "Power, sensation, reflexes (L2–S1)", "r": "Weak ankle plantarflexion bilaterally (S1), absent ankle jerks both sides, reduced sensation lateral feet.", "mark": "Examines lower limb neurology" }
+        ],
+        "Saddle": [
+          { "t": "Perianal pinprick sensation", "r": "Reduced perianal sensation.", "mark": "Tests saddle/perianal sensation" },
+          { "t": "Digital rectal examination for anal tone, with consent and a chaperone", "r": "Reduced resting tone; weak voluntary squeeze.", "mark": "Assesses anal tone with consent and chaperone" },
+          { "t": "Post-void bladder scan", "r": "Residual 650 mL.", "mark": "Measures post-void residual" }
+        ]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Plan",
+      "hint": "Suspected CES: emergency MRI, spinal team, catheter.",
+      "opts": [
+        { "t": "Suspected cauda equina syndrome with retention (CES-R)", "mark": "Recognises cauda equina syndrome" },
+        { "t": "Emergency MRI lumbar spine now; urgent spinal surgery referral", "mark": "Emergency MRI and spinal referral" },
+        { "t": "Urinary catheter; analgesia; document neurology and timings", "mark": "Catheter, analgesia and documentation" },
+        { "t": "Discharge with NSAIDs and GP review", "trap": "critical", "r": "Retention with saddle anaesthesia is a surgical emergency." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Red flag for cauda equina syndrome?", "a": "Saddle anaesthesia", "wrong": ["Unilateral sciatica only", "Back pain on bending", "Paraspinal spasm"] },
+        { "q": "Imaging for suspected CES?", "a": "Emergency MRI lumbar spine", "wrong": ["Plain X-ray", "CT abdomen", "Ultrasound"] },
+        { "q": "Nerve root for ankle jerk?", "a": "S1", "wrong": ["L4", "L2", "S3"] },
+        { "q": "Femoral stretch test assesses…", "a": "Upper lumbar roots (L2–L4)", "wrong": ["S1", "Sciatic nerve", "Hip joint only"] },
+        { "q": "Commonest cause of CES?", "a": "Central lumbar disc prolapse", "wrong": ["Spinal tumour always", "Abscess always", "Osteoarthritis of the hip"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Saddle Check", "emoji": "🐎", "flavor": "Bilateral sciatica, saddle numbness, retention: MRI now." },
+  "cards": [
+    { "q": "Cauda equina red flags?", "options": ["Bilateral sciatica, saddle anaesthesia, bladder/bowel dysfunction", "Unilateral leg pain only", "Morning stiffness", "Muscle spasm"], "why": "Emergency MRI.", "source": "GIRFT CES pathway 2023" },
+    { "q": "Post-void residual concerning for CES?", "options": ["Over 200 mL", "Over 20 mL", "Over 2 L only", "Any residual"], "why": "Combined with clinical features.", "source": "GIRFT" },
+    { "q": "L5 radiculopathy weakness?", "options": ["Great toe extension and ankle dorsiflexion", "Knee extension", "Plantarflexion", "Hip flexion"], "why": "S1: plantarflexion and ankle jerk.", "source": "Neurology" },
+    { "q": "Knee jerk root?", "options": ["L3–L4", "S1", "L5", "T12"], "why": "Ankle jerk: S1.", "source": "Neurology" },
+    { "q": "Routine imaging for non-specific low back pain?", "options": ["Not recommended", "MRI for all", "X-ray for all", "CT for all"], "why": "Only with red flags or if it changes management.", "source": "NICE NG59" },
+    { "q": "Positive straight-leg raise suggests…", "options": ["L5/S1 nerve root irritation", "Hip OA", "Femoral nerve injury", "Muscle strain only"], "why": "Pain radiating below the knee at 30–70°.", "source": "Clinical examination" }
+  ]
+}

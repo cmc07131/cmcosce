@@ -20,6 +20,7 @@
     "o": "tall grass (O&G deck)",
     "h": "tall grass (Counsel/History deck)",
     "p": "tall grass (Psychi deck)",
+    "t": "tall grass (O&T deck)",
     "x": "tall grass (mixed deck)"
   },
   "grid": [
@@ -38,9 +39,9 @@
     "T.RRRRRR........FFFFFFF,,FFFFFFF........RRRRRR.T",
     "T.######***..T..F,,,RRRRRRRR,,,F...T....######.T",
     "T.##D###***...T.F,,,RRRRRRRR,,,F....T...##D###.T",
-    "T...,,..........F,,,########,,,F..........,,...T",
-    "T...,,....T.....F,,,###D####,,,F.....T....,,...T",
-    "T...,,..........F,,,,,,,,,,,,,,F..........,,...T",
+    "T...,,.ttt......F,,,########,,,F..........,,...T",
+    "T...,,.tttT.....F,,,###D####,,,F.....T....,,...T",
+    "T...,,.ttt......F,,,,,,,,,,,,,,F..........,,...T",
     "T...,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,...T",
     "T...,,,,,,,,,,,,,,,,,,,,,,RRRRR,,,,,,,,,,,,,...T",
     "T.RRRRRR........F,,,,,,,,,RRRRRF........RRRRRR.T",
@@ -269,7 +270,7 @@
       "name": "O&T GYM",
       "badge": "Joint Badge",
       "packs": [],
-      "deck": null,
+      "deck": "ot",
       "topics": [
         "Knee exam",
         "Hip exam",

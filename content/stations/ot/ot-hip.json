@@ -1,0 +1,68 @@
+{
+  "id": "ot-hip",
+  "gym": "ot",
+  "title": "Hip examination",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 22. Mr Ho, 64, has had increasing right groin pain for 6 months, worse walking, and now struggles to put on his socks. Examine his hip and explain your findings.",
+  "notes": "Checked against NICE NG226 (Osteoarthritis, 2022) and standard hip examination.\n\nLook (gait: antalgic or Trendelenburg; standing: Trendelenburg test for abductor weakness; scars, wasting, pelvic tilt, leg length — true (ASIS to medial malleolus) versus apparent (umbilicus to medial malleolus)), feel (greater trochanter tenderness for bursitis), move (flexion, extension, abduction, adduction, internal and external rotation — internal rotation is lost first in OA), special tests (Thomas test for fixed flexion deformity; FADIR/FABER). Examine the lumbar spine and the knee (referred pain), and neurovascular status.\n\nOA is a clinical diagnosis in people 45 or over with activity-related joint pain and morning stiffness of 30 minutes or less (NICE); X-ray is not needed to diagnose it, but in the ED it helps exclude fracture or other pathology. Management: exercise, weight loss, analgesia, walking aids, and orthopaedic referral when symptoms affect quality of life despite treatment. Your notes list look (Trendelenburg, gait, leg length, Galeazzi), feel, move and Thomas test — matching.",
+  "cast": [{ "id": "patient", "name": "Mr Ho", "role": "man", "inBed": true }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine the hip",
+      "hint": "Gait, Trendelenburg, leg lengths, feel, movements, Thomas test, spine and knee.",
+      "groups": {
+        "Look": [
+          { "t": "Gait", "r": "Antalgic gait on the right.", "mark": "Observes gait" },
+          { "t": "Trendelenburg test standing on the right leg", "r": "Pelvis drops on the left: positive on the right.", "mark": "Performs the Trendelenburg test" },
+          { "t": "Measure true and apparent leg lengths", "r": "True lengths equal; apparent shortening on the right from pelvic tilt.", "mark": "Measures true and apparent leg length" }
+        ],
+        "Feel": [{ "t": "Greater trochanter and groin", "r": "Groin tenderness; trochanter not tender.", "mark": "Palpates trochanter and groin" }],
+        "Move": [
+          { "t": "Flexion and rotations with the hip at 90°", "r": "Flexion 90°, internal rotation 5° and painful, external rotation 20°.", "mark": "Tests rotations; finds loss of internal rotation" },
+          { "t": "Thomas test", "r": "Right thigh lifts off the couch: 15° fixed flexion deformity.", "mark": "Performs the Thomas test" }
+        ],
+        "Complete": [
+          { "t": "Examine the lumbar spine and knee; pulses and sensation", "r": "Normal.", "mark": "Examines the joint above and below and neurovascular status" }
+        ]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Present",
+      "hint": "Likely right hip OA; X-ray; conservative care; referral.",
+      "opts": [
+        { "t": "Right hip osteoarthritis: groin pain, loss of internal rotation, fixed flexion deformity, positive Trendelenburg", "mark": "Presents findings and diagnosis" },
+        { "t": "Pelvis and hip X-ray to exclude other causes; analgesia, exercise, weight loss, walking stick in the left hand; orthopaedic referral", "mark": "Management plan including stick in the opposite hand" },
+        { "t": "A stick in the right hand", "trap": true, "r": "A stick is held in the opposite hand to offload the painful hip." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "The Thomas test detects…", "a": "Fixed flexion deformity of the hip", "wrong": ["Abductor weakness", "Leg length discrepancy", "Knee effusion"] },
+        { "q": "Positive Trendelenburg on the right means…", "a": "The pelvis drops on the left when standing on the right leg", "wrong": ["Right knee buckles", "Pain on the right", "Left leg is short"] },
+        { "q": "First movement lost in hip OA?", "a": "Internal rotation", "wrong": ["Extension", "Adduction", "External rotation"] },
+        { "q": "True leg length is measured from…", "a": "ASIS to medial malleolus", "wrong": ["Umbilicus to medial malleolus", "Greater trochanter to heel", "Xiphisternum to toe"] },
+        { "q": "X-ray features of OA?", "a": "Loss of joint space, osteophytes, subchondral sclerosis and cysts", "wrong": ["Periosteal reaction", "Soap bubbles", "Erosions with osteopenia only"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Hip Check", "emoji": "🦴", "flavor": "Internal rotation goes first. Stick in the other hand." },
+  "cards": [
+    { "q": "Apparent leg length is measured from…", "options": ["Umbilicus to medial malleolus", "ASIS to medial malleolus", "Pubic symphysis to heel", "Greater trochanter to knee"], "why": "Reflects pelvic tilt.", "source": "Clinical examination" },
+    { "q": "Trendelenburg sign indicates weakness of…", "options": ["Hip abductors (gluteus medius)", "Quadriceps", "Hamstrings", "Adductors"], "why": "Pelvis drops on the opposite side.", "source": "Clinical examination" },
+    { "q": "NICE: OA can be diagnosed clinically in people aged…", "options": ["45 or over with typical symptoms", "Over 80 only", "Under 30", "Only with an X-ray"], "why": "Morning stiffness ≤30 min.", "source": "NICE NG226" },
+    { "q": "Walking stick for right hip pain goes in…", "options": ["The left hand", "The right hand", "Either hand", "Both hands"], "why": "Reduces load on the painful hip.", "source": "Physiotherapy" },
+    { "q": "Hip pain can refer to…", "options": ["The knee", "The shoulder", "The jaw", "The wrist"], "why": "Obturator nerve.", "source": "Anatomy" },
+    { "q": "Galeazzi test is used in…", "options": ["Infants for developmental dysplasia of the hip", "Adults with OA", "Knee injuries", "Ankle injuries"], "why": "Knee heights compared with hips flexed.", "source": "Paediatric orthopaedics" }
+  ]
+}
