@@ -27,12 +27,25 @@ const optionSchema = z.object({
   requiresItems: z.array(z.string()).optional(),
   endStation: z.boolean().optional(),
   scene: z.string().optional(),
+  /** Section heading in grouped panels (history, exam, order), or the turn id in dialogue and viva. */
+  group: z.string().optional(),
+  /** An image shown with the reply: `ecg:<atlas id>`, `xr:<id>`, `ct:<id>`, `photo:<id>`. */
+  img: z.string().optional(),
+  /** Dialogue: how this reply moves the other person's distress (−2 calms … +2 inflames). */
+  mood: z.number().optional(),
+  /** A trap that would harm the patient: shown as CRITICAL on the debrief. */
+  critical: z.boolean().optional(),
+  /** Steps: this option's place in the correct sequence (1-based). */
+  order: z.number().int().positive().optional(),
   ...performFields,
 })
 
+export const actionKinds = ['talk', 'kit', 'menu', 'examine-face', 'examine-body', 'handover', 'history', 'exam', 'order', 'steps', 'dialogue', 'viva', 'monitor'] as const
+export type ActionKind = (typeof actionKinds)[number]
+
 const actionSchema = z.object({
   id: z.string(),
-  kind: z.enum(['talk', 'kit', 'menu', 'examine-face', 'examine-body', 'handover']),
+  kind: z.enum(actionKinds),
   targetIds: z.array(z.string()).min(1),
   hint: z.string(),
   prompt: z.string().optional(),
@@ -42,6 +55,12 @@ const actionSchema = z.object({
   marksChecklistIds: z.array(z.string()).optional(),
   endStation: z.boolean().optional(),
   options: z.array(optionSchema).optional(),
+  /** Dialogue and viva: the lines the other person says, in order. Options belong to a turn by `group`. */
+  turns: z.array(z.object({ id: z.string(), line: z.string() })).optional(),
+  /** Dialogue: the starting distress, 0 calm … 10 about to walk out. */
+  startMood: z.number().optional(),
+  /** Shown at the top of the panel: the wound, the X-ray you were handed. */
+  img: z.string().optional(),
   findings: z
     .array(
       z.object({
@@ -72,6 +91,51 @@ const actionSchema = z.object({
     .optional(),
 })
 
+const vitalNums = {
+  hr: z.number().optional(),
+  sbp: z.number().optional(),
+  dbp: z.number().optional(),
+  spo2: z.number().optional(),
+  rr: z.number().optional(),
+  temp: z.number().optional(),
+  etco2: z.number().optional(),
+  gcs: z.number().optional(),
+  glucose: z.number().optional(),
+}
+
+/**
+ * The patient's physiology. Numbers start at the baseline and drift per minute until a `stop` scene flag
+ * appears; each effect applies from the moment its scene flag is set.
+ */
+export const vitalsSchema = z.object({
+  hr: z.number(),
+  sbp: z.number(),
+  dbp: z.number(),
+  spo2: z.number(),
+  rr: z.number(),
+  temp: z.number().optional(),
+  etco2: z.number().optional(),
+  gcs: z.number().optional(),
+  glucose: z.number().optional(),
+  /** An ECG atlas id for the monitor strip: `sinus`, `af`, `vt`… */
+  rhythm: z.string().optional(),
+  drift: z.object(vitalNums).optional(),
+  stop: z.array(z.string()).optional(),
+  effects: z
+    .array(
+      z.object({
+        scene: z.string(),
+        set: z.object(vitalNums).optional(),
+        /** Change applied gradually over `overS` seconds (default 30). */
+        add: z.object(vitalNums).optional(),
+        overS: z.number().optional(),
+        rhythm: z.string().optional(),
+      }),
+    )
+    .optional(),
+})
+export type Vitals = z.infer<typeof vitalsSchema>
+
 export const packSchema = z.object({
   packId: z.string(),
   title: z.string(),
@@ -79,7 +143,8 @@ export const packSchema = z.object({
   meta: z.object({
     timeLimitSec: z.number().int().positive().optional(),
     readTimeSec: z.number().int().nonnegative().optional(),
-    stationType: z.enum(['resus', 'exam', 'history', 'skills', 'teaching']),
+    stationType: z.enum(['resus', 'exam', 'history', 'skills', 'teaching', 'comms', 'psych']),
+    gym: z.string().optional(),
     stem: z.string(),
     guidelineNotes: z.string().optional(),
   }),
@@ -153,6 +218,7 @@ export const packSchema = z.object({
       failNote: z.string(),
     }),
   ),
+  vitals: vitalsSchema.optional(),
   badge: z.object({
     id: z.string(),
     name: z.string(),
@@ -192,6 +258,8 @@ export type Session = {
   /** Fixes the randomised case (which leg is out, tissue depth…) for this run. */
   seed: number
   faults: Fault[]
+  /** Seconds into the station when each scene flag was first set; drives the vitals. */
+  sceneAt?: Record<string, number>
 }
 
 export const SOLID_KINDS = new Set([

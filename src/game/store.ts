@@ -8,7 +8,7 @@ import {
   unique,
 } from '~/engine/judge'
 import { clearSession, freshSession, readSession, writeSession } from '~/engine/session'
-import { SAVE_VERSION, type Action, type Pack, type PerformKind, type Session } from '~/engine/schema'
+import { SAVE_VERSION, timeLimitOf, type Action, type ActionOption, type Fault, type Pack, type PerformKind, type Session } from '~/engine/schema'
 
 export type Overlay =
   | { kind: 'chooser'; targetId: string }
@@ -86,6 +86,7 @@ function persist(state: Session) {
     scene: state.scene ?? [],
     seed: state.seed,
     faults: state.faults ?? [],
+    sceneAt: state.sceneAt ?? {},
   }
   writeSession(session)
 }
@@ -269,10 +270,17 @@ export const usePlay = create<PlayState>((set, get) => ({
       })
       return
     }
+    const turnBased = action.kind === 'dialogue' || action.kind === 'viva'
+    const spendIds = !applied.spend
+      ? []
+      : turnBased
+        ? [optionId, ...(action.options ?? []).filter((row) => row.group === option.group && row.id !== optionId).map((row) => row.id)]
+        : [optionId]
     commit(set, get, pack, action, {
       grantMarks: applied.grantMarks,
       grantItems: applied.grantItems,
-      spendIds: applied.spend ? [optionId] : [],
+      spendIds,
+      faultsAdd: faultsFor(action, option, cur.spent[actionId] ?? []),
       trapLines: applied.trapLine && option.isTrap ? [applied.trapLine] : [],
       reply: applied.reply,
       log: applied.log,
@@ -298,6 +306,7 @@ export const usePlay = create<PlayState>((set, get) => ({
     )
     commit(set, get, pack, action, {
       ...applied,
+      faultsAdd: chosen.filter((row) => row.isTrap).flatMap((row) => faultsFor(action, row, [])),
       log: applied.grantMarks.length > 0 || applied.spendIds.some((id) => {
         const opt = action.options?.find((row) => row.id === id)
         return Boolean(opt && !opt.isTrap)
@@ -406,7 +415,9 @@ export const usePlay = create<PlayState>((set, get) => ({
       const flags = Array.isArray(result.scene) ? result.scene : result.scene ? [result.scene] : []
       if (flags.length) {
         job.scene = flags[0]
-        set({ scene: unique([...(get().scene ?? []), ...flags.slice(1)]) })
+        const sceneAt = { ...(get().sceneAt ?? {}) }
+        for (const f of flags.slice(1)) if (sceneAt[f] === undefined) sceneAt[f] = elapsedOf(pack, get())
+        set({ scene: unique([...(get().scene ?? []), ...flags.slice(1)]), sceneAt })
       }
     }
     const action = actionById(pack, job.actionId)
@@ -467,7 +478,35 @@ function slice(state: PlayState): Session {
     scene: state.scene ?? [],
     seed: state.seed,
     faults: state.faults ?? [],
+    sceneAt: state.sceneAt ?? {},
   }
+}
+
+/** Seconds since the candidate walked in, on the station clock. */
+export function elapsedOf(pack: Pack, state: Pick<Session, 'secondsLeft' | 'entered'>) {
+  return state.entered ? Math.max(0, timeLimitOf(pack) - state.secondsLeft) : 0
+}
+
+/**
+ * What goes on the debrief for a pick: a trap is a note (critical if it harms), a wrong viva answer is a
+ * note with the answer, and a procedure step done before an earlier one is an order note.
+ */
+export function faultsFor(action: Action, option: ActionOption, spentBefore: string[]): Fault[] {
+  if (option.isTrap) {
+    if (action.kind === 'viva') {
+      const q = action.turns?.find((t) => t.id === option.group)?.line ?? ''
+      return [{ actionId: action.id, text: `${q} You said "${option.label}". ${option.detail ?? ''}`.trim() }]
+    }
+    return [{ actionId: action.id, text: `"${option.label}" — ${option.detail ?? 'does not score.'}`, critical: option.critical }]
+  }
+  if (action.kind === 'steps' && option.order) {
+    const done = new Set(spentBefore)
+    const skipped = (action.options ?? []).filter((row) => row.order && row.order < (option.order ?? 0) && !row.isTrap && !done.has(row.id))
+    if (skipped.length) {
+      return [{ actionId: action.id, text: `"${option.label}" came before: ${skipped.map((row) => row.label).join('; ')}.` }]
+    }
+  }
+  return []
 }
 
 function jobFromOption(
@@ -506,6 +545,7 @@ function commit(
     endStation: boolean
     close: boolean
     sceneAdd?: string
+    faultsAdd?: Fault[]
   },
 ) {
   const cur = get()
@@ -527,6 +567,9 @@ function commit(
     }
   }
   const scene = unique([...(cur.scene ?? []), ...(result.sceneAdd ? [result.sceneAdd] : [])])
+  const sceneAt = { ...(cur.sceneAt ?? {}) }
+  if (result.sceneAdd && sceneAt[result.sceneAdd] === undefined) sceneAt[result.sceneAdd] = elapsedOf(pack, cur)
+  const faults = [...(cur.faults ?? []), ...(result.faultsAdd ?? [])]
   const atMs = cur.entered ? Date.now() - cur.startedAt : 0
   const log = result.log
     ? [...cur.log, { actionId: action.id, atMs, markIds: freshMarks }]
@@ -540,6 +583,8 @@ function commit(
     log,
     ended,
     scene,
+    sceneAt,
+    faults,
   }
   persist(next)
   const toasts = [...cur.toasts]
@@ -569,6 +614,8 @@ function overlayHasWork(action: Action, spentIds: string[], multi: boolean) {
   if (action.kind === 'examine-body') {
     return (action.regions ?? []).some((row) => !spent.has(row.id))
   }
+  if (action.kind === 'monitor') return true
+  if (action.kind === 'steps') return (action.options ?? []).some((row) => !row.isTrap && !spent.has(row.id))
   if (action.kind === 'kit' || (action.kind === 'menu' && multi)) {
     return (action.options ?? []).some((row) => row.needed && !row.isTrap && !spent.has(row.id))
   }

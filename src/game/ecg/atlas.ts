@@ -54,3 +54,15 @@ export const ATLAS: (() => EcgSpec)[] = [
   tcaToxicity,
   () => longQt(),
 ]
+
+let byId: Map<string, () => EcgSpec> | null = null
+
+/** An atlas ECG by id; `rate` re-times rhythms that have one (sinus, AF, VT…) to match the live heart rate. */
+export function ecgById(id: string, rate?: number): EcgSpec | null {
+  if (!byId) byId = new Map(ATLAS.map((make) => [make().id, make]))
+  const make = byId.get(id)
+  if (!make) return null
+  const spec = make()
+  if (rate === undefined || !('rate' in spec.rhythm)) return spec
+  return { ...spec, rhythm: { ...spec.rhythm, rate: Math.max(20, Math.round(rate)) } as EcgSpec['rhythm'] }
+}

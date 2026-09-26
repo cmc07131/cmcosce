@@ -79,13 +79,15 @@ export const Screen = forwardRef<
     talkingId: string | null
     scene: string[]
     labels: boolean
+    /** Live heart rate from the station's vitals; 0 draws a flat line. Undefined reads the pack readout. */
+    monitorBpm?: number
     onMove: (pos: Pos) => void
     onUse: (targetId: string) => void
     onEmpty: () => void
     onFacing: (targetId: string | null) => void
     onBump: () => void
   }
->(function Screen({ pack, position, paused, talkingId, scene, labels, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
+>(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
   const { cols, rows } = pack.room
   const solids = useRef(buildSolids(pack))
   solids.current = buildSolids(pack)
@@ -100,8 +102,8 @@ export const Screen = forwardRef<
   const facingHit = useRef<string | null | undefined>(undefined)
   const cb = useRef({ onMove, onUse, onEmpty, onFacing, onBump })
   cb.current = { onMove, onUse, onEmpty, onFacing, onBump }
-  const drawState = useRef({ talkingId, scene })
-  drawState.current = { talkingId, scene }
+  const drawState = useRef({ talkingId, scene, monitorBpm })
+  drawState.current = { talkingId, scene, monitorBpm }
 
   const frame = useRef<HTMLDivElement>(null)
   const world = useRef<HTMLDivElement>(null)
@@ -215,7 +217,8 @@ export const Screen = forwardRef<
     }
 
     const monitorProp = pack.room.props.find((p) => p.kind === 'monitor')
-    const bpm = bpmOf(monitorProp ? readoutText(monitorProp.readout, flags) : null)
+    const live = drawState.current.monitorBpm
+    const bpm = live ?? bpmOf(monitorProp ? readoutText(monitorProp.readout, flags) : null)
 
     const drawn = new Set<string>()
     const boxes: PropBox[] = []
@@ -237,7 +240,7 @@ export const Screen = forwardRef<
       if (matY !== null && !solids.current.has(`${b.x},${matY}`)) drawProp(c, { ...b, kind: 'mat', y: matY }, now)
     }
     for (const b of boxes) if (FLOOR_KINDS.has(b.kind)) drawProp(c, b, now)
-    for (const b of boxes) if (!FLOOR_KINDS.has(b.kind)) drawProp(c, b, now, bpm)
+    for (const b of boxes) if (!FLOOR_KINDS.has(b.kind)) drawProp(c, b, now, bpm || 60, live === 0)
 
     for (const [i, t] of pathRef.current.entries()) {
       c.fillStyle = i === pathRef.current.length - 1 ? '#e04858' : '#303848'

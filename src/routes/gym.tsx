@@ -14,6 +14,8 @@ const TYPE: Record<string, { label: string; icon: string }> = {
   history: { label: 'HISTORY', icon: '?' },
   skills: { label: 'SKILLS', icon: '✂' },
   teaching: { label: 'TEACHING', icon: '★' },
+  comms: { label: 'COMMS', icon: '♪' },
+  psych: { label: 'PSYCH', icon: '☁' },
 }
 
 function GymPage() {

@@ -2,6 +2,8 @@ import { useRef, useState } from 'react'
 import { itemLabel, menuIsMulti, missingItems } from '~/engine/judge'
 import type { Action, Pack } from '~/engine/schema'
 import type { Overlay as OverlayState } from './store'
+import { Film, FilmButton } from './imaging/Film'
+import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel } from './panels'
 import { NavItem, Win, useCursor } from './ui'
 
 export function targetName(pack: Pack, id: string) {
@@ -118,6 +120,12 @@ function Body({
   if (!action) return null
   const title = targetName(pack, overlay.targetId)
   const used = new Set(spent[action.id] ?? [])
+  const panel = { pack, action, title, spent: spent[action.id] ?? [], onClose, onOption: (id: string) => onOption(action.id, id) }
+
+  if (action.kind === 'history' || action.kind === 'exam' || action.kind === 'order') return <GroupPanel {...panel} />
+  if (action.kind === 'steps') return <StepsPanel {...panel} />
+  if (action.kind === 'dialogue' || action.kind === 'viva') return <TurnPanel {...panel} />
+  if (action.kind === 'monitor') return <MonitorPanel pack={pack} title={title} onClose={onClose} />
 
   if (action.kind === 'examine-face') {
     return (
@@ -179,10 +187,40 @@ function Body({
   }
 
   const options = (action.options ?? []).filter((option) => !used.has(option.id))
+  return <TalkList action={action} title={title} options={options} used={used} inventory={inventory} pack={pack} onClose={onClose} onOption={onOption} />
+}
+
+function TalkList({
+  pack,
+  action,
+  title,
+  options,
+  used,
+  inventory,
+  onClose,
+  onOption,
+}: {
+  pack: Pack
+  action: Action
+  title: string
+  options: NonNullable<Action['options']>
+  used: Set<string>
+  inventory: string[]
+  onClose?: () => void
+  onOption: (actionId: string, optionId: string) => void
+}) {
+  const [film, setFilm] = useState<string | null>(null)
+  const results = (action.options ?? []).filter((option) => used.has(option.id) && option.img)
   return (
     <Win title={title} onClose={onClose} className="sheet">
       <div className="sheet-scroll">
         {action.prompt && <p className="sheet-prompt">{action.prompt}</p>}
+        {action.img && <FilmButton src={action.img} onOpen={setFilm} />}
+        {results.length > 0 && (
+          <div className="results" data-testid="results">
+            {results.map((option) => option.img && <FilmButton key={option.id} src={option.img} onOpen={setFilm} />)}
+          </div>
+        )}
         {options.map((option) => {
           const missing = [...missingItems(action.requiresItems, inventory), ...missingItems(option.requiresItems, inventory)]
           return (
@@ -198,6 +236,7 @@ function Body({
           )
         })}
       </div>
+      {film && <Film src={film} onClose={() => setFilm(null)} />}
     </Win>
   )
 }

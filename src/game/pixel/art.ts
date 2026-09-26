@@ -105,6 +105,15 @@ export const LOOKS: Record<string, Look> = {
   partner: { hair: '#282020', hairHi: '#585050', skin: '#e8b890', coat: '#e87838', coatShade: '#b05020', inner: '#f8e0a0', pants: '#405890' },
   relative: { hair: '#282020', hairHi: '#585050', skin: '#e8b890', coat: '#e87838', coatShade: '#b05020', inner: '#f8e0a0', pants: '#405890' },
   patient: { hair: '#583830', hairHi: '#886050', skin: '#f8c8a0', coat: '#f0b8c8', coatShade: '#d08898', inner: '#f0b8c8', pants: '#f0b8c8', longHair: true },
+  man: { hair: '#202020', hairHi: '#484848', skin: '#e8b888', coat: '#6888c0', coatShade: '#485c90', inner: '#f8f8f8', pants: '#383848' },
+  woman: { hair: '#302020', hairHi: '#604040', skin: '#f8d0a8', coat: '#e87898', coatShade: '#b05070', inner: '#f8e0e8', pants: '#404868', longHair: true },
+  child: { hair: '#302018', hairHi: '#604030', skin: '#f8d0a8', coat: '#f8d048', coatShade: '#c8a020', inner: '#f8f8f8', pants: '#3878d8' },
+  elderly: { hair: '#d8d8d8', hairHi: '#f8f8f8', skin: '#e8b890', coat: '#a08868', coatShade: '#786048', inner: '#e8e0d0', pants: '#585048' },
+  junior: { hair: '#402818', hairHi: '#785038', skin: '#f8c8a0', coat: '#f8f8f8', coatShade: '#b8c0d0', inner: '#48a868', pants: '#3060b0' },
+  paramedic: { hair: '#282020', hairHi: '#585050', skin: '#e8b890', coat: '#2f7a3e', coatShade: '#205a2c', inner: '#f8e048', pants: '#205a2c' },
+  police: { hair: '#202020', hairHi: '#484848', skin: '#e8b888', coat: '#283868', coatShade: '#182448', inner: '#f8f8f8', pants: '#182448' },
+  security: { hair: '#202020', hairHi: '#484848', skin: '#d8a878', coat: '#383838', coatShade: '#202020', inner: '#f8e048', pants: '#202020' },
+  obstetrician: { hair: '#482818', hairHi: '#785038', skin: '#f8c8a0', coat: '#4868b8', coatShade: '#304890', inner: '#4868b8', pants: '#304890', longHair: true },
 }
 
 function lookOf(role: string): Look {

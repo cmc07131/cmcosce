@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { hintFor } from '~/engine/judge'
 import { readoutText, type Pack } from '~/engine/schema'
+import { hasOutput, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
 import { press, useButtons } from './input'
 import { OverlaySheet, targetName } from './Overlay'
@@ -10,7 +11,7 @@ import { Screen, type ScreenHandle } from './Screen'
 import { useSettings } from './settings'
 import { sfx } from './sfx'
 import { StartMenu } from './StartMenu'
-import { usePlay } from './store'
+import { elapsedOf, usePlay } from './store'
 import { TextBox, type TextBoxHandle } from './TextBox'
 import { NavItem, Win, useCursor } from './ui'
 
@@ -37,6 +38,7 @@ export function PlayView({ pack }: { pack: Pack }) {
   const toasts = usePlay((s) => s.toasts)
   const performing = usePlay((s) => s.performing)
   const scene = usePlay((s) => s.scene)
+  const sceneAt = usePlay((s) => s.sceneAt)
   const store = usePlay.getState
   const labels = useSettings((s) => s.labels)
   const screen = useRef<ScreenHandle>(null)
@@ -123,7 +125,9 @@ export function PlayView({ pack }: { pack: Pack }) {
 
   const clockTone = !entered ? '' : secondsLeft > 60 ? '' : secondsLeft > 20 ? 'hud-warn' : 'hud-alarm'
   const monitor = pack.room.props.find((prop) => prop.readout)
-  const readout = monitor ? readoutText(monitor.readout, scene ?? []) : null
+  const live = pack.vitals ? vitalsAt(pack.vitals, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered })) : null
+  const readout = live ? vitalsLine(live) : monitor ? readoutText(monitor.readout, scene ?? []) : null
+  const monitorBpm = live ? (hasOutput(live) ? Math.round(live.hr ?? 80) : 0) : undefined
   const speakerName = msg?.speakerId ? (msg.speakerId === 'player' ? 'YOU' : targetName(pack, msg.speakerId)) : msg?.tone === 'trap' ? 'NO MARK' : null
   const facingNpc = facingId ? pack.cast.some((npc) => npc.id === facingId) : false
   const idle = !entered
@@ -145,6 +149,7 @@ export function PlayView({ pack }: { pack: Pack }) {
               talkingId={typing ? (msg?.speakerId ?? null) : null}
               scene={scene ?? []}
               labels={labels}
+              monitorBpm={monitorBpm}
               onMove={(pos) => {
                 const cur = store().position
                 store().setPosition(pos)
