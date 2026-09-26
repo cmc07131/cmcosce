@@ -68,6 +68,8 @@ export const sfx = {
       { f: 1319, d: 0.16, at: 0.14 },
     ]),
   trap: () => play([{ f: 220, d: 0.12, type: 'sawtooth', v: 0.05 }, { f: 175, d: 0.18, at: 0.1, type: 'sawtooth', v: 0.05 }]),
+  /** One fetal heartbeat through the Doppler: a soft whoosh. */
+  doppler: () => play([{ f: 190, d: 0.11, type: 'triangle', v: 0.09, slide: 110 }]),
   door: () => play([{ f: 330, d: 0.18, type: 'triangle', v: 0.1, slide: 660 }]),
   battle: () =>
     play([

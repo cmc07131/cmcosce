@@ -31,7 +31,8 @@ export type PerformJob = {
   endStation: boolean
 }
 
-export type BenchResult = { marks: string[]; faults: { text: string; critical?: boolean }[]; summary: string; scene?: string }
+/** `scene` flags change the room afterwards: the monitor readout, the patient's pose. */
+export type BenchResult = { marks: string[]; faults: { text: string; critical?: boolean }[]; summary: string; scene?: string | string[] }
 
 export type MsgTone = 'say' | 'trap' | 'warn' | 'info'
 /** The one line the text box shows. `speakerId` animates that actor's mouth while it types. */
@@ -129,6 +130,7 @@ export function fallbackPerformHint(kind: PerformKind) {
       return 'Brace the leg, landmark the flat tibia, and drill the IO to the pop.'
     case 'cico':
     case 'pacing':
+    case 'cord':
       return 'Do it as you would on a real patient. Nothing stops you making a mistake.'
   }
 }
@@ -401,7 +403,11 @@ export const usePlay = create<PlayState>((set, get) => ({
       set({ faults })
       job.grantMarks = result.marks
       job.reply = result.summary
-      if (result.scene) job.scene = result.scene
+      const flags = Array.isArray(result.scene) ? result.scene : result.scene ? [result.scene] : []
+      if (flags.length) {
+        job.scene = flags[0]
+        set({ scene: unique([...(get().scene ?? []), ...flags.slice(1)]) })
+      }
     }
     const action = actionById(pack, job.actionId)
     if (!action) {

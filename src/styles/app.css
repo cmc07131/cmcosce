@@ -1550,3 +1550,27 @@ button {
 .defib-dial {
   width: 100%;
 }
+
+.monitor.fetal {
+  background: #2a2a34;
+}
+
+.monitor.fetal .monitor-trace {
+  height: 84px;
+  border-radius: 3px;
+}
+
+.m-fhr {
+  color: #f8f8f8;
+  font-size: 14px;
+}
+
+.m-fhr[data-alarm] {
+  color: #ff6070;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+.m-clock {
+  color: #f8d858;
+  font-size: 9px;
+}

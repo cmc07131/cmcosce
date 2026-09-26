@@ -4,6 +4,7 @@ import { test } from 'node:test'
 import { keyToBtn } from '../game/input'
 import { cicoCaseFor, judgeIncision, neckFeelAt, NECK, type CicoCase } from '../game/cico/case'
 import { falseTract, freshCicoRun, scoreCico, type CicoRun } from '../game/cico/score'
+import { contracting, cordCaseFor, fhrTarget, freshCordRun, scoreCord, type CordCase, type CordRun } from '../game/cord/model'
 import { captureThreshold, freshPaceRun, scorePacing, type PaceCase, type PaceRun } from '../game/pacing/model'
 import { ANATOMY, caseFor, drillOutcome, judgeLandmark, mgIn, popDepth, rightNeedle, type IoCase } from '../game/io/case'
 import { freshRun, scoreRun, type Run } from '../game/io/score'
@@ -58,6 +59,9 @@ test('every pack loads and every hotspot has a place to stand', () => {
       const plan = planActivation(start, targetTilesFor(pack, id), solids, pack.room.cols, pack.room.rows)
       assert.ok(plan, `${name}: no stand tile for ${id}`)
     }
+    for (const item of pack.room.interactables) {
+      assert.ok(pack.actions.some((action) => action.targetIds.includes(item.id)), `${name}: ${item.id} leads nowhere`)
+    }
   }
 })
 
@@ -65,7 +69,7 @@ test('hint names the first gold-path gap and then handover', () => {
   const pack = load('gym-1')
   assert.match(hintFor(pack, []), /Introduce/)
   const intro = pack.actions.find((action) => action.id === 'intro')!
-  assert.equal(hintFor(pack, marksOnAction(intro)), pack.actions.find((action) => action.id === 'ppe-kit')!.hint)
+  assert.equal(hintFor(pack, marksOnAction(intro)), pack.actions.find((action) => action.id === 'call-now')!.hint)
   assert.equal(hintFor(pack, pack.marks.map((mark) => mark.id)), 'Handover / leave when you are ready.')
 })
 
@@ -79,7 +83,7 @@ test('history before help is a caution, help before history passes, missing help
 
   const proper = judgeSequence(pack.sequenceRules, [
     { actionId: 'call-now', atMs: 1000, markIds: ['MS-05'] },
-    { actionId: 'elevate', atMs: 2000, markIds: ['MS-13'] },
+    { actionId: 'cord', atMs: 2000, markIds: ['MS-13'] },
     { actionId: 'history', atMs: 5000, markIds: ['MS-18'] },
   ])
   assert.equal(proper.find((row) => row.id === 'help-before-history')?.status, 'pass')
@@ -93,7 +97,7 @@ test('secondary survey before elevation still scores and flags sequence', () => 
   const pack = load('gym-1')
   const verdicts = judgeSequence(pack.sequenceRules, [
     { actionId: 'maternal-abc', atMs: 500, markIds: ['MS-19'] },
-    { actionId: 'elevate', atMs: 3000, markIds: ['MS-13', 'MS-14'] },
+    { actionId: 'cord', atMs: 3000, markIds: ['MS-13', 'MS-14'] },
   ])
   assert.equal(verdicts.find((row) => row.id === 'elevate-before-secondary')?.status, 'caution')
 })
@@ -116,15 +120,14 @@ test('psychiatry trap does not score; named teams do; partial kit still grants w
   assert.equal(full.complete, true)
 })
 
-test('replace-the-cord is a trap and does not log as the elevate action', () => {
-  const elevate = load('gym-1').actions.find((action) => action.id === 'elevate')!
-  const trap = applyTalkOption(elevate, elevate.options!.find((option) => option.id === 'replace')!, ['gloves'], (id) => id)
+test('replace-the-cord is a trap and the cord is managed at the bench', () => {
+  const cord = load('gym-1').actions.find((action) => action.id === 'cord')!
+  const trap = applyTalkOption(cord, cord.options!.find((option) => option.id === 'replace')!, [], (id) => id)
   assert.equal(trap.log, false)
   assert.equal(trap.grantMarks.length, 0)
-  const lift = applyTalkOption(elevate, elevate.options!.find((option) => option.id === 'lift')!, ['gloves'], (id) => id)
-  assert.deepEqual(lift.grantMarks, ['MS-13', 'MS-14'])
-  const locked = applyTalkOption(elevate, elevate.options!.find((option) => option.id === 'lift')!, [], (id) => id)
-  assert.ok(locked.lockedReason)
+  const bench = cord.options!.find((option) => option.id === 'do-it')!
+  assert.equal(bench.perform, 'cord')
+  for (const id of ['MS-11', 'MS-13', 'MS-14', 'MS-16']) assert.ok(bench.marksChecklistIds!.includes(id), id)
 })
 
 test('a-before-b ignores a one-sided pair', () => {
@@ -280,11 +283,6 @@ test('IO bench: mistakes cost their own mark and name the reason', () => {
   assert.ok(scored.faults.some((row) => /trickle/.test(row.text)))
 })
 
-test('elevate is a hand gesture, not only a menu line', () => {
-  const elevate = load('gym-1').actions.find((action) => action.id === 'elevate')!
-  assert.equal(elevate.options!.find((option) => option.id === 'lift')!.perform, 'lift')
-})
-
 test('examiner toast keeps the first clause', () => {
   const action = { id: 'x', kind: 'talk', targetIds: ['a'], hint: 'h', marksChecklistIds: ['MS-01'] } as Action
   assert.deepEqual(marksOnAction(action), ['MS-01'])
@@ -424,4 +422,57 @@ test('pacing bench: a clean run scores, a shock and a carotid-only check do not'
   assert.ok(bad.faults.some((f) => /carotid/.test(f.text)))
   assert.ok(!bad.marks.includes('MS-10'))
   assert.ok(!bad.marks.includes('MS-11'))
+})
+
+const CORD: CordCase = { visible: true, contractions: false, delayed: false, compressedFhr: 80 }
+
+test('cord: the heart recovers when the head is lifted or the bladder filled, and dips when the cord is handled', () => {
+  const run = freshCordRun()
+  assert.equal(fhrTarget(CORD, run, 10, -1), 80)
+  assert.equal(fhrTarget(CORD, { ...run, elevated: true }, 10, -1), 140)
+  assert.equal(fhrTarget(CORD, { ...run, elevated: true, handOut: true }, 10, -1), 80)
+  assert.equal(fhrTarget(CORD, { ...run, bladderMl: 600, bladderClamped: true }, 10, -1), 140)
+  assert.ok(fhrTarget(CORD, { ...run, elevated: true }, 10, 20) <= 65)
+  const labouring = { ...CORD, contractions: true }
+  assert.equal(contracting(labouring, run, 45), true)
+  assert.equal(contracting(labouring, { ...run, terbutaline: true }, 45), false)
+  assert.deepEqual(cordCaseFor(9), cordCaseFor(9))
+})
+
+function goodCord(): CordRun {
+  return {
+    ...freshCordRun(),
+    gloves: true,
+    apron: true,
+    exposed: true,
+    saidRecognised: true,
+    lift: 1,
+    elevated: true,
+    elevatedAtS: 30,
+    gauze: true,
+    bayPose: 'knee-chest',
+    doppler: true,
+    saidFhr: true,
+    transferPose: 'lateral',
+  }
+}
+
+test('cord bench: a clean run earns every bench mark', () => {
+  const scored = scoreCord(goodCord(), CORD)
+  assert.deepEqual(scored.faults, [])
+  assert.deepEqual(scored.marks.sort(), ['MS-03', 'MS-04', 'MS-11', 'MS-12', 'MS-13', 'MS-14', 'MS-15', 'MS-16', 'MS-17'])
+})
+
+test('cord bench: a delayed theatre needs a filled, clamped bladder; replacing the cord is critical', () => {
+  const delayed = { ...CORD, delayed: true, contractions: true }
+  const noFill = scoreCord(goodCord(), delayed)
+  assert.ok(noFill.faults.some((f) => /bladder was not filled/.test(f.text)))
+  assert.ok(noFill.faults.some((f) => /terbutaline/.test(f.text)))
+  const filled = scoreCord({ ...goodCord(), bladderMl: 600, bladderClamped: true, saidEmptyBladder: true, terbutaline: true }, delayed)
+  assert.deepEqual(filled.faults, [])
+  const replaced = scoreCord({ ...goodCord(), replacedCord: true }, CORD)
+  assert.ok(replaced.faults.some((f) => f.critical && /Do not replace/.test(f.text)))
+  assert.ok(!replaced.marks.includes('MS-11'))
+  const unneeded = scoreCord({ ...goodCord(), terbutaline: true }, CORD)
+  assert.ok(unneeded.faults.some((f) => /Terbutaline is for a delayed birth/.test(f.text)))
 })

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { HandSprite } from './HandSprite'
 import { CicoProcedure } from './cico/CicoProcedure'
+import { CordProcedure } from './cord/CordProcedure'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -32,6 +33,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <CicoProcedure seed={seed} coach onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'cord') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <CordProcedure seed={seed} coach onDone={onDone} />
       </BattleFrame>
     )
   }
