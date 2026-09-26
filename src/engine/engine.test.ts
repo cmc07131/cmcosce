@@ -6,7 +6,7 @@ import { ecgAt, pacedBeat } from '../game/bench/Monitor'
 import { cicoCaseFor, judgeIncision, neckFeelAt, NECK, type CicoCase } from '../game/cico/case'
 import { falseTract, freshCicoRun, scoreCico, type CicoRun } from '../game/cico/score'
 import { contracting, cordCaseFor, fhrTarget, freshCordRun, scoreCord, type CordCase, type CordRun } from '../game/cord/model'
-import { captureThreshold, freshPaceRun, scorePacing, type PaceCase, type PaceRun } from '../game/pacing/model'
+import { captureThreshold, deliver, freshPaceRun, scorePacing, type PaceCase, type PaceRun } from '../game/pacing/model'
 import { ANATOMY, caseFor, drillOutcome, judgeLandmark, mgIn, popDepth, rightNeedle, type IoCase } from '../game/io/case'
 import { freshRun, scoreRun, type Run } from '../game/io/score'
 import { spokenLine } from '../game/store'
@@ -401,6 +401,7 @@ function goodPace(): PaceRun {
     femoral: true,
     femoralWithCapture: true,
     analgesia: 'fentanyl',
+    orders: [{ drug: 'fentanyl', dose: '25 micrograms' }],
     saidClose: true,
   }
 }
@@ -410,7 +411,7 @@ test('pacing: contact, pad vector, and potassium set the capture threshold', () 
   assert.equal(captureThreshold({ ...goodPace(), dried: false }, PACE), 100)
   assert.equal(captureThreshold({ ...goodPace(), padsFront: ['alSternal', 'alApex'], padBack: null }, PACE), 70)
   assert.equal(captureThreshold({ ...goodPace(), padBack: 'rightScapula' }, PACE), Infinity)
-  assert.equal(captureThreshold(goodPace(), { ...PACE, hyperK: true }), Infinity)
+  assert.equal(captureThreshold(goodPace(), { ...PACE, hyperK: true }), 90)
   assert.equal(captureThreshold({ ...goodPace(), calcium: true }, { ...PACE, hyperK: true }), 60)
 })
 
@@ -487,4 +488,23 @@ test('monitor: a captured paced beat is spike, gap, broad QRS, then an opposite 
   const paced = { rhythm: 'paced' as const, hr: 32, paceRate: 70, spo2: 94, bp: null, etco2: 'off' as const }
   assert.equal(ecgAt(paced, 0, 0.01).spike, true)
   assert.equal(ecgAt(paced, 0.3, 0.01).spike, false)
+})
+
+test('pacing drugs: ordered through the nurse, judged on the dose you said', () => {
+  const hyperK: PaceCase = { ...PACE, hyperK: true }
+  const given = { ...goodPace(), kResult: true, ...deliver(goodPace(), { drug: 'calcium', dose: '30 mL' }) }
+  assert.equal(given.calcium, true)
+  assert.equal(captureThreshold(given, hyperK), 60)
+  assert.ok(scorePacing({ ...given, output: 70 }, hyperK).marks.includes('MS-13'))
+  const tooLittle = { ...goodPace(), kResult: true, ...deliver(goodPace(), { drug: 'calcium', dose: '10 mL' }) }
+  const low = scorePacing(tooLittle, hyperK)
+  assert.ok(!low.marks.includes('MS-13'))
+  assert.ok(low.faults.some((f) => /10 mL is too little/.test(f.text)))
+  const none = scorePacing({ ...goodPace(), kResult: true, output: 100 }, hyperK)
+  assert.ok(none.faults.some((f) => f.critical && /K\+ 7.4 came back and no calcium/.test(f.text)))
+  const bigOpioid = scorePacing({ ...goodPace(), orders: [{ drug: 'fentanyl', dose: '100 micrograms' }] }, PACE)
+  assert.ok(!bigOpioid.marks.includes('MS-12'))
+  const lowAtropine = scorePacing({ ...goodPace(), ...deliver(goodPace(), { drug: 'atropine', dose: '0.3 mg' }) }, PACE)
+  assert.ok(lowAtropine.faults.some((f) => /under 0.5 mg/.test(f.text)))
+  assert.ok(scorePacing({ ...goodPace(), calcium: true }, PACE).faults.some((f) => /not needed/.test(f.text)))
 })

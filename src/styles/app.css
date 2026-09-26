@@ -1574,3 +1574,75 @@ button {
   color: #f8d858;
   font-size: 9px;
 }
+
+/* ------------------------------------------------------------ bedside stations: defibrillator | drug cart */
+
+.bench-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.bench-tabs button {
+  min-height: 34px;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--ink);
+  background: #d8d8e0;
+  border: 3px solid var(--ink);
+  border-bottom-width: 0;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+}
+
+.bench-tabs button[data-on] {
+  background: var(--paper);
+  color: var(--color-rose);
+}
+
+.bench-tabs + .defib,
+.bench-tabs + .drug-cart {
+  margin-top: 0;
+}
+
+.drug-cart {
+  padding: 8px;
+  border: 3px solid var(--ink);
+  border-radius: 0 0 8px 8px;
+  background: var(--paper);
+  font-family: var(--font-pixel);
+}
+
+.order-list {
+  margin: 8px 0 0;
+  padding: 6px 8px;
+  list-style: none;
+  font-size: 7px;
+  line-height: 1.9;
+  border: 2px dashed #c8c8d8;
+  border-radius: 4px;
+}
+
+.lab-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-top: 4px;
+  padding: 6px 8px;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  background: #fffbe8;
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+}
+
+.lab-card b {
+  font-weight: 400;
+  color: var(--color-amber);
+}
+
+.lab-card[data-high] span:first-of-type {
+  color: var(--color-rose);
+}

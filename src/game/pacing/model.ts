@@ -12,7 +12,7 @@ export type PaceCase = {
   threshold: number
   sweaty: boolean
   hairy: boolean
-  /** Peaked T waves on the first trace; no capture until calcium. */
+  /** Peaked T waves on the first trace; capture needs 30 mA more until calcium. The gas after pacing shows K+ 7.4. */
   hyperK: boolean
 }
 
@@ -100,6 +100,10 @@ export type PaceRun = {
   atropine: boolean
   analgesia: 'fentanyl' | 'ketamine' | null
   midazolam: boolean
+  /** Every order given to the nurse, as said. */
+  orders: Order[]
+  /** The potassium came back after pacing captured. */
+  kResult: boolean
 
   saidClose: boolean | null
 }
@@ -130,6 +134,8 @@ export function freshPaceRun(): PaceRun {
     atropine: false,
     analgesia: null,
     midazolam: false,
+    orders: [],
+    kResult: false,
     saidClose: null,
   }
 }
@@ -144,9 +150,50 @@ export function padPairing(run: PaceRun): 'ap' | 'al' | 'none' {
 export function captureThreshold(run: PaceRun, c: PaceCase) {
   const pairing = padPairing(run)
   if (pairing === 'none') return Infinity
-  if (c.hyperK && !run.calcium) return Infinity
   const poorContact = (c.sweaty && !run.dried) || (c.hairy && !run.clipped)
-  return c.threshold + (poorContact ? 40 : 0) + (pairing === 'al' ? 10 : 0)
+  const potassium = c.hyperK && !run.calcium ? 30 : 0
+  return c.threshold + (poorContact ? 40 : 0) + (pairing === 'al' ? 10 : 0) + potassium
+}
+
+/* ---------------------------------------------------------------- drugs, ordered through the nurse */
+
+export type Drug = 'atropine' | 'calcium' | 'fentanyl' | 'ketamine' | 'midazolam'
+
+export type Order = { drug: Drug; dose: string }
+
+/** What is on the drug cart, the doses you can say, and the one to say. */
+export const CART: Record<Drug, { name: string; doses: string[]; right: string[] }> = {
+  atropine: { name: 'Atropine', doses: ['0.3 mg', '0.6 mg', '1 mg'], right: ['0.6 mg', '1 mg'] },
+  calcium: { name: 'Calcium gluconate 10%', doses: ['10 mL', '30 mL'], right: ['30 mL'] },
+  fentanyl: { name: 'Fentanyl', doses: ['25 micrograms', '50 micrograms', '100 micrograms'], right: ['25 micrograms', '50 micrograms'] },
+  ketamine: { name: 'Ketamine', doses: ['20 mg', '100 mg'], right: ['20 mg'] },
+  midazolam: { name: 'Midazolam', doses: ['5 mg'], right: [] },
+}
+
+export const DOSE_NOTE: Partial<Record<string, string>> = {
+  'atropine 0.3 mg': 'Atropine under 0.5 mg can slow the heart further. Give 0.6–1 mg.',
+  'calcium 10 mL': 'Calcium gluconate 10 mL is too little for hyperkalaemia. Give 30 mL of 10% (or 10 mL of calcium chloride).',
+  'fentanyl 100 micrograms': 'Fentanyl 100 micrograms in a man whose pressure was in the 70s risks dropping it. 25–50 micrograms.',
+  'ketamine 100 mg': 'Ketamine 100 mg is an induction dose. For pacing pain, about 0.25 mg/kg: 20 mg.',
+  'midazolam 5 mg': 'Midazolam 5 mg drops the pressure in a man with a systolic in the 70s. A small opioid or ketamine instead.',
+}
+
+/** What a delivered order changes. Wrong doses still act; the scorer says why they were wrong. */
+export function deliver(run: PaceRun, order: Order): Partial<PaceRun> {
+  const patch: Partial<PaceRun> = { orders: [...run.orders, order] }
+  if (order.drug === 'atropine') patch.atropine = true
+  if (order.drug === 'calcium') patch.calcium = true
+  if (order.drug === 'fentanyl' || order.drug === 'ketamine') patch.analgesia = run.analgesia ?? order.drug
+  if (order.drug === 'midazolam') patch.midazolam = true
+  return patch
+}
+
+export function doseRight(order: Order) {
+  return CART[order.drug].right.includes(order.dose)
+}
+
+export function potassiumOf(c: PaceCase) {
+  return c.hyperK ? { k: 7.4, ph: 7.22 } : { k: 4.6, ph: 7.34 }
 }
 
 export function captured(run: PaceRun, c: PaceCase) {
@@ -185,7 +232,7 @@ export function scorePacing(run: PaceRun, c: PaceCase): Scored {
   if (run.biggestStep > 20) fault(`The output jumped ${run.biggestStep} mA at once. Titrate up in 10 mA steps.`)
   if (run.captureCalledWrong) fault('You called capture on spikes alone. Capture is every spike followed by a wide QRS and a T wave.')
   if (!run.captureCalled) fault('Electrical capture was never called.')
-  if (c.hyperK && !run.calcium) fault('Peaked T waves and no capture at any current: this is hyperkalaemia. Calcium first; pacing will not capture until then.', true)
+  if (c.hyperK && !run.calcium) fault(run.kResult ? 'K+ 7.4 came back and no calcium was given. Calcium gluconate 10% 30 mL: it stabilises the membrane and lowers the pacing threshold.' : 'Peaked T waves and a high capture threshold: think hyperkalaemia. Calcium gluconate 10% 30 mL.', true)
   if (run.captureCalled && !run.captureCalledWrong && run.biggestStep <= 20) marks.push('MS-09')
 
   // Mechanical capture
@@ -202,12 +249,17 @@ export function scorePacing(run: PaceRun, c: PaceCase): Scored {
   }
 
   // Comfort
-  if (run.midazolam) fault('Midazolam 5 mg with a systolic of 70s: he can drop his pressure. A small opioid or ketamine is kinder to the BP.')
+  for (const order of run.orders) {
+    const note = DOSE_NOTE[`${order.drug} ${order.dose}`]
+    if (note) fault(note)
+  }
+  if (!c.hyperK && run.calcium) fault('K+ was 4.6. Calcium was not needed.')
   if (run.stoppedPacing) fault('The pacer was switched off. The rate falls straight back to 32.', true)
+  const comfort = run.orders.find((o) => (o.drug === 'fentanyl' || o.drug === 'ketamine') && doseRight(o))
   if (!run.analgesia) fault('No analgesia. Pacing at this current hurts.')
-  if (run.analgesia && !run.stoppedPacing) marks.push('MS-12')
+  if (comfort && !run.stoppedPacing && !run.midazolam) marks.push('MS-12')
 
-  if (c.hyperK && run.calcium) marks.push('MS-13')
+  if (c.hyperK && run.orders.some((o) => o.drug === 'calcium' && doseRight(o))) marks.push('MS-13')
   if (run.saidClose === false) fault('The handover line was wrong. Pads stay on until a transvenous wire captures.')
 
   const summary = captured(run, c)

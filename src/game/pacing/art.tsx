@@ -138,3 +138,40 @@ export function Targets({ view }: { view: 'front' | 'back' }) {
     </g>
   )
 }
+
+const DRAWERS: { drug: 'atropine' | 'calcium' | 'fentanyl' | 'ketamine' | 'midazolam'; label: string; colour: string }[] = [
+  { drug: 'atropine', label: 'ATROPINE', colour: '#58a868' },
+  { drug: 'calcium', label: 'CALCIUM GLUC', colour: '#f8f8f8' },
+  { drug: 'fentanyl', label: 'FENTANYL', colour: '#3a78d8' },
+  { drug: 'ketamine', label: 'KETAMINE', colour: '#e8b030' },
+  { drug: 'midazolam', label: 'MIDAZOLAM', colour: '#9058c8' },
+]
+
+/** The resus drug cart, drawers labelled. Tap a drawer to take that drug. */
+export function DrugCartArt({ selected, onPick }: { selected: string | null; onPick: (d: (typeof DRAWERS)[number]['drug']) => void }) {
+  return (
+    <svg viewBox="0 0 150 100" className="block h-full w-full" data-testid="cart-art" shapeRendering="crispEdges">
+      <rect width="150" height="100" fill="#dfe8f0" />
+      <rect x="10" y="4" width="130" height="10" fill="#181820" />
+      <rect x="12" y="6" width="126" height="6" fill="#d84848" />
+      <rect x="10" y="14" width="130" height="78" fill="#181820" />
+      <rect x="12" y="16" width="126" height="74" fill="#c83838" />
+      {DRAWERS.map((d, i) => {
+        const y = 18 + i * 14
+        const on = selected === d.drug
+        return (
+          <g key={d.drug} onClick={() => onPick(d.drug)} style={{ cursor: 'pointer' }} data-testid={`drawer-${d.drug}`}>
+            <rect x="16" y={y} width="118" height="12" fill={on ? '#fff0a0' : '#f0e0d8'} stroke="#181820" strokeWidth="1" />
+            <rect x="20" y={y + 3} width="8" height="6" fill={d.colour} stroke="#181820" strokeWidth="0.6" />
+            <text x="32" y={y + 8.5} fontFamily="Press Start 2P, monospace" fontSize="5" fill="#181820">
+              {d.label}
+            </text>
+            <rect x="118" y={y + 4} width="10" height="3" fill="#606874" />
+          </g>
+        )
+      })}
+      <rect x="16" y="92" width="10" height="6" fill="#181820" />
+      <rect x="124" y="92" width="10" height="6" fill="#181820" />
+    </svg>
+  )
+}

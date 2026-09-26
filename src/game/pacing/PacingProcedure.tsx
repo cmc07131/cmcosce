@@ -4,10 +4,14 @@ import { DragGhost, SayIt, Tool, useToolDrag, type SayOption } from '../bench/co
 import { Monitor, type Rhythm, type Vitals } from '../bench/Monitor'
 import type { BenchResult } from '../store'
 import { buzz, sfx } from '../sfx'
-import { ChestBack, ChestFront, LEAD_COLOUR, Pad, Targets } from './art'
+import { Sprite } from '../Sprite'
+import { ChestBack, ChestFront, DrugCartArt, LEAD_COLOUR, Pad, Targets } from './art'
 import {
+  CART,
   backPadSite,
   captureThreshold,
+  deliver,
+  potassiumOf,
   captured,
   freshPaceRun,
   frontPadSite,
@@ -17,7 +21,9 @@ import {
   scorePacing,
   type BackSite,
   type FrontSite,
+  type Drug,
   type Lead,
+  type Order,
   type PaceCase,
   type PaceRun,
 } from './model'
@@ -29,7 +35,16 @@ type Stage = BenchApi<PaceRun> & {
   next: () => void
   padPos: PadPos
   setPadPos: (p: PadPos) => void
+  tab: 'defib' | 'cart'
+  setTab: (t: 'defib' | 'cart') => void
+  pending: Order[]
+  order: (o: Order) => void
 }
+
+/** Seconds from telling the nurse to the drug being in. */
+const NURSE_S = 5
+/** Seconds from first capture to the gas result coming back. */
+const GAS_S = 8
 
 type PadPos = { front: { site: FrontSite; x: number; y: number }[]; back: { site: BackSite; x: number; y: number } | null }
 
@@ -41,6 +56,37 @@ export function PacingProcedure({ seed, coach, onDone }: { seed: number; coach: 
   const [padPos, setPadPos] = useState<PadPos>({ front: [], back: null })
   const [bp, setBp] = useState<[number, number]>([72, 40])
   const bpRef = useRef(bp)
+  const [tab, setTab] = useState<'defib' | 'cart'>('defib')
+  const [pending, setPending] = useState<Order[]>([])
+  const timers = useRef<number[]>([])
+  const cap = captured(api.run, c)
+
+  useEffect(() => () => timers.current.forEach((t) => window.clearTimeout(t)), [])
+
+  // The potassium sent earlier comes back once he is paced.
+  useEffect(() => {
+    if (!cap || api.runRef.current.kResult) return
+    const id = window.setTimeout(() => {
+      api.upd({ kResult: true })
+      const { k } = potassiumOf(c)
+      api.feel(`Nurse: The gas is back. Potassium ${k}.`)
+      buzz(40)
+    }, GAS_S * 1000)
+    return () => window.clearTimeout(id)
+  }, [cap])
+
+  function order(o: Order) {
+    const name = CART[o.drug].name
+    api.feel(`Nurse: ${name} ${o.dose} IV. Drawing it up now.`)
+    setPending((cur) => [...cur, o])
+    const id = window.setTimeout(() => {
+      api.upd((r) => deliver(r, o))
+      setPending((cur) => cur.filter((p) => p !== o))
+      api.feel(`Nurse: ${name} ${o.dose} given.`)
+      if (o.drug === 'calcium' && c.hyperK) api.why('Calcium stabilises the membrane and the pacing threshold falls. Recheck capture and bring the output back to 5–10 mA above it.')
+    }, NURSE_S * 1000)
+    timers.current.push(id)
+  }
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -65,11 +111,12 @@ export function PacingProcedure({ seed, coach, onDone }: { seed: number; coach: 
     onDone({ ...scorePacing(run, c), scene: cap ? (run.femoralWithCapture ? 'pulse' : 'paced') : 'pads' })
   }
 
-  const stage: Stage = { ...api, c, next, padPos, setPadPos }
+  const stage: Stage = { ...api, c, next, padPos, setPadPos, tab, setTab, pending, order }
   return (
     <div className="io-bench flex min-h-0 flex-1 flex-col" data-testid="pacing-bench">
       <div className="px-3 pt-1">
         <Monitor vitals={vitalsOf(api.run, c, bp)} />
+        {api.run.kResult && <GasResult c={c} />}
       </div>
       <StepStrip titles={TITLES} index={index} />
       <div className="min-h-0 flex-1 overflow-auto px-3 pb-3">
@@ -257,9 +304,19 @@ function Defib({ c, run, runRef, upd, feel, why, physical }: Stage) {
   const [charged, setCharged] = useState(false)
   const settle = useRef<{ from: number; t: number } | null>(null)
 
-  function setOutput(v: number) {
+  /** Each ±10 press is its own step. A drag on the dial counts as one jump from where it settled. */
+  function setOutput(v: number, fromButton = false) {
     const value = Math.max(0, Math.min(200, v))
-    const before = run.output
+    const before = runRef.current.output
+    if (fromButton) {
+      const r = runRef.current
+      const step = Math.abs(value - before)
+      if (r.pacing && !captured(r, c) && step > r.biggestStep) upd({ biggestStep: step })
+      upd({ output: value })
+      if (r.pacing && value >= 50 && before < 50 && !r.analgesia) physical('He groans with every beat and grabs at the pads.')
+      if (r.pacing && captured({ ...r, output: value }, c) && !captured(r, c)) buzz(20)
+      return
+    }
     if (!settle.current) settle.current = { from: before, t: 0 }
     window.clearTimeout(settle.current.t)
     const from = settle.current.from
@@ -311,11 +368,11 @@ function Defib({ c, run, runRef, upd, feel, why, physical }: Stage) {
           </div>
           <div className="defib-row">
             <span className="defib-label">OUTPUT</span>
-            <button type="button" className="defib-key" data-testid="out-down" onClick={() => setOutput(run.output - 10)}>
+            <button type="button" className="defib-key" data-testid="out-down" onClick={() => setOutput(runRef.current.output - 10, true)}>
               −10
             </button>
             <b data-testid="output-ma">{run.output} mA</b>
-            <button type="button" className="defib-key" data-testid="out-up" onClick={() => setOutput(run.output + 10)}>
+            <button type="button" className="defib-key" data-testid="out-up" onClick={() => setOutput(runRef.current.output + 10, true)}>
               +10
             </button>
           </div>
@@ -380,54 +437,96 @@ function Defib({ c, run, runRef, upd, feel, why, physical }: Stage) {
   )
 }
 
-function Drugs({ c, run, upd, feel, why }: Stage) {
+function GasResult({ c }: { c: PaceCase }) {
+  const { k, ph } = potassiumOf(c)
+  const high = k >= 6
   return (
-    <div className="io-choices mt-2" data-testid="drugs">
-      {[
-        {
-          label: 'ATROPINE 1 MG IV',
-          onClick: () => {
-            upd({ atropine: true })
-            feel('Atropine in. No change: the block is below the AV node.')
-          },
-        },
-        {
-          label: 'CALCIUM GLUCONATE 10% 30 ML',
-          testId: 'calcium',
-          onClick: () => {
-            upd({ calcium: true })
-            feel(c.hyperK ? 'Calcium over a few minutes. The peaked T waves settle.' : 'Calcium in. Nothing changes on the trace.')
-          },
-        },
-        {
-          label: 'FENTANYL 25 MICROGRAMS',
-          testId: 'fentanyl',
-          onClick: () => {
-            upd({ analgesia: 'fentanyl' })
-            feel('Fentanyl in. He settles. BP holds.')
-          },
-        },
-        {
-          label: 'KETAMINE 20 MG',
-          testId: 'ketamine',
-          onClick: () => {
-            upd({ analgesia: 'ketamine' })
-            feel('Ketamine in. He is calmer. BP holds.')
-          },
-        },
-        {
-          label: 'MIDAZOLAM 5 MG',
-          onClick: () => {
-            upd({ midazolam: true })
-            why('Midazolam 5 mg drops the pressure in a man with a systolic in the 70s. Small opioid or ketamine instead.')
-          },
-        },
-      ].map((d) => (
-        <button key={d.label} type="button" className="tap io-mini" data-on={(d.label.startsWith('FENTANYL') && run.analgesia === 'fentanyl') || (d.label.startsWith('KETAMINE') && run.analgesia === 'ketamine') || (d.label.startsWith('CALCIUM') && run.calcium) || undefined} data-testid={d.testId} onClick={d.onClick}>
-          {d.label}
-        </button>
-      ))}
+    <div className="lab-card" data-high={high || undefined} data-testid="gas-result">
+      <b>VENOUS GAS</b>
+      <span>K+ {k.toFixed(1)} mmol/L</span>
+      <span>pH {ph.toFixed(2)}</span>
     </div>
+  )
+}
+
+/** The drug cart and the nurse. You choose the drug and the dose and say it; the nurse draws it up and gives it. */
+function DrugCart({ run, pending, order }: Stage) {
+  const [drug, setDrug] = useState<Drug | null>(null)
+  const [dose, setDose] = useState<string | null>(null)
+  return (
+    <div className="drug-cart" data-testid="drug-cart">
+      <div className="grid grid-cols-[3fr_1fr] items-end gap-2">
+        <div className="io-figure aspect-[3/2]">
+          <DrugCartArt
+            selected={drug}
+            onPick={(d) => {
+              setDrug(d)
+              setDose(null)
+              sfx.cursor()
+            }}
+          />
+        </div>
+        <div className="flex flex-col items-center">
+          <Sprite role="nurse" facing="w" scale={3} />
+          <span className="io-small">Nurse</span>
+        </div>
+      </div>
+      {drug && (
+        <>
+          <p className="io-small mt-2">{CART[drug].name}: what dose?</p>
+          <div className="io-choices">
+            {CART[drug].doses.map((d) => (
+              <button key={d} type="button" className="tap io-mini" data-on={dose === d || undefined} data-testid={`dose-${d.replace(/\s+/g, '-')}`} onClick={() => setDose(d)}>
+                {d}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+      <button
+        type="button"
+        className="tap mt-2"
+        data-testid="tell-nurse"
+        disabled={!drug || !dose}
+        onClick={() => {
+          if (!drug || !dose) return
+          sfx.select()
+          order({ drug, dose })
+          setDrug(null)
+          setDose(null)
+        }}
+      >
+        {drug && dose ? `TELL THE NURSE: "${CART[drug].name} ${dose} IV, please."` : 'Pick a drawer, then a dose'}
+      </button>
+      {(pending.length > 0 || run.orders.length > 0) && (
+        <ul className="order-list" data-testid="orders">
+          {pending.map((o, i) => (
+            <li key={`p${i}`}>… {CART[o.drug].name} {o.dose}: drawing up</li>
+          ))}
+          {run.orders.map((o, i) => (
+            <li key={`g${i}`}>✓ {CART[o.drug].name} {o.dose} given</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+/** Two places at the bedside: the defibrillator, and the drug cart with the nurse. */
+function Stations(stage: Stage) {
+  const { tab, setTab } = stage
+  return (
+    <>
+      <div className="bench-tabs" role="tablist">
+        <button type="button" role="tab" data-on={tab === 'defib' || undefined} data-testid="tab-defib" onClick={() => setTab('defib')}>
+          DEFIBRILLATOR
+        </button>
+        <button type="button" role="tab" data-on={tab === 'cart' || undefined} data-testid="tab-cart" onClick={() => setTab('cart')}>
+          DRUG CART
+        </button>
+      </div>
+      {tab === 'defib' ? <Defib {...stage} /> : <DrugCart {...stage} />}
+    </>
   )
 }
 
@@ -435,8 +534,8 @@ function Pace(stage: Stage) {
   const { c, run, upd, feel, why, physical, coach, next } = stage
   return (
     <>
-      <p className="io-lede">The defibrillator. Pace him, and call capture when you see it.</p>
-      <Defib {...stage} />
+      <p className="io-lede">The defibrillator is on the trolley; the drug cart and the nurse are beside it. Pace him, and call capture when you see it.</p>
+      <Stations {...stage} />
       <button
         type="button"
         className="tap mt-2"
@@ -449,15 +548,13 @@ function Pace(stage: Stage) {
           } else {
             upd({ captureCalledWrong: true })
             physical('Look again: spikes, but no QRS after them.')
-            if (c.hyperK && !run.calcium) why('Peaked T waves and no capture even at high current: think hyperkalaemia. Calcium first.')
+            if (c.hyperK && !run.calcium) why('Peaked T waves and a high threshold: think hyperkalaemia.')
           }
         }}
       >
         I SEE ELECTRICAL CAPTURE
       </button>
-      {coach && Number.isFinite(captureThreshold(run, c)) && run.captureCalled && <p className="io-small">Threshold today: {captureThreshold(run, c)} mA</p>}
-      <p className="io-small mt-2">Drug drawer</p>
-      <Drugs {...stage} />
+      {coach && Number.isFinite(captureThreshold(run, c)) && run.captureCalled && <p className="io-small">Threshold now: {captureThreshold(run, c)} mA</p>}
       <NextButton onClick={next}>Check capture</NextButton>
     </>
   )
@@ -495,8 +592,7 @@ function Capture(stage: Stage) {
           },
         ]}
       />
-      <Defib {...stage} />
-      <Drugs {...stage} />
+      <Stations {...stage} />
       <NextButton onClick={next}>Comfort and handover</NextButton>
     </>
   )
@@ -515,7 +611,7 @@ function Comfort(stage: Stage) {
   return (
     <>
       <p className="io-lede">Pacing hurts. Keep him comfortable without dropping his pressure, then hand over.</p>
-      <Drugs {...stage} />
+      <Stations {...stage} />
       <Choices
         options={[
           {

@@ -104,6 +104,12 @@
         "kind": "trolley",
         "x": 1,
         "y": 2
+      },
+      {
+        "id": "drug-cart",
+        "kind": "trolley",
+        "x": 1,
+        "y": 4
       }
     ],
     "interactables": [
@@ -136,6 +142,13 @@
         "w": 4,
         "h": 2,
         "label": ""
+      },
+      {
+        "id": "drug-cart",
+        "kind": "trolley",
+        "x": 1,
+        "y": 4,
+        "label": "Drugs"
       }
     ]
   },
@@ -426,6 +439,22 @@
           "label": "Turn the pacer off so he can rest",
           "detail": "The pads and the current stay until a wire captures. Switching it off drops the rate back to 32.",
           "isTrap": true
+        }
+      ]
+    },
+    {
+      "id": "drug-cart",
+      "kind": "talk",
+      "targetIds": [
+        "drug-cart"
+      ],
+      "hint": "Drugs are drawn up and given by the nurse. Say the drug, the dose, and the route.",
+      "prompt": "Drug cart",
+      "options": [
+        {
+          "id": "look",
+          "label": "Look in the drawers",
+          "detail": "Atropine, calcium gluconate 10%, fentanyl, ketamine, midazolam. You do not draw up here: tell the nurse the drug, the dose, and the route, and she gives it."
         }
       ]
     },
