@@ -1845,3 +1845,29 @@ button {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #fff4b0, #f0c030 60%, #b08010);
 }
+
+/* ------------------------------------------------------------ ECG */
+
+.ecg-caption {
+  margin: 0 0 6px;
+  font-family: var(--font-pixel);
+  font-size: 9px;
+}
+
+.ecg-paper {
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.ecg-scale {
+  margin: 4px 0 0;
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  color: #686878;
+}
+
+.ecg-zoom {
+  width: min(560px, 100%);
+}

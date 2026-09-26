@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AtlasRouteImport } from './routes/atlas'
 import { Route as GymRouteImport } from './routes/gym'
 import { Route as WorldRouteImport } from './routes/world'
 import { Route as BadgePackIdRouteImport } from './routes/badge/$packId'
@@ -19,6 +20,11 @@ import { Route as PlayPackIdRouteImport } from './routes/play/$packId'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtlasRoute = AtlasRouteImport.update({
+  id: '/atlas',
+  path: '/atlas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GymRoute = GymRouteImport.update({
@@ -49,6 +55,7 @@ const PlayPackIdRoute = PlayPackIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/atlas': typeof AtlasRoute
   '/gym': typeof GymRoute
   '/world': typeof WorldRoute
   '/badge/$packId': typeof BadgePackIdRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/atlas': typeof AtlasRoute
   '/gym': typeof GymRoute
   '/world': typeof WorldRoute
   '/badge/$packId': typeof BadgePackIdRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/atlas': typeof AtlasRoute
   '/gym': typeof GymRoute
   '/world': typeof WorldRoute
   '/badge/$packId': typeof BadgePackIdRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/atlas'
     | '/gym'
     | '/world'
     | '/badge/$packId'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/atlas'
     | '/gym'
     | '/world'
     | '/badge/$packId'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/atlas'
     | '/gym'
     | '/world'
     | '/badge/$packId'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtlasRoute: typeof AtlasRoute
   GymRoute: typeof GymRoute
   WorldRoute: typeof WorldRoute
   BadgePackIdRoute: typeof BadgePackIdRoute
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atlas': {
+      id: '/atlas'
+      path: '/atlas'
+      fullPath: '/atlas'
+      preLoaderRoute: typeof AtlasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gym': {
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtlasRoute: AtlasRoute,
   GymRoute: GymRoute,
   WorldRoute: WorldRoute,
   BadgePackIdRoute: BadgePackIdRoute,
