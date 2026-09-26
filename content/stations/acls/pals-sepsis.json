@@ -1,0 +1,125 @@
+{
+  "id": "pals-sepsis",
+  "gym": "acls",
+  "title": "Infant septic shock (meningococcal)",
+  "type": "resus",
+  "time": 480,
+  "stem": "Paediatric resus. An 8-month-old boy has had a fever since this morning and is now floppy with a spreading rash. HR 195, BP 62/30, RR 52, SpO2 94% in air, temperature 39.4 °C, capillary refill 5 seconds. His mother is with him. The paediatric team is 10 minutes away.",
+  "notes": "Checked against RCUK 2025 paediatric life support, NICE NG51 (Suspected sepsis, updated 2024), NICE CG102 (Bacterial meningitis and meningococcal disease in under 16s), and the Surviving Sepsis Campaign paediatric guidelines (2020).\n\nWeight: APLS (age in months ÷ 2) + 4 = 8 kg.\n\nFluid: 10 mL/kg boluses of balanced crystalloid (or 0.9% saline) over 5–10 minutes, reassessing after each for response and overload (crackles, hepatomegaly, rising work of breathing); after 40–60 mL/kg, start inotropes (adrenaline, which can run peripherally or IO at low concentration) and involve PICU. Your notes' WETFLAGS and sepsis sections use 20 mL/kg boluses; RCUK/ERC 2021 onwards and NICE use 10 mL/kg, so 20 mL/kg is not scored.\n\nAccess: IV, and IO if IV fails in 90 seconds (or immediately in shock).\n\nAntibiotics within 1 hour: ceftriaxone 80 mg/kg IV (NICE; cefotaxime in neonates or with calcium infusions; add amoxicillin under 3 months). Your notes list cefuroxime 50 mg/kg; that is not first-line for meningococcal sepsis.\n\nGlucose: correct hypoglycaemia with 10% glucose 2 mL/kg (as in your notes). Check calcium. Notify public health; prophylaxis for close contacts.",
+  "cast": [
+    { "id": "patient", "name": "Baby Chun", "role": "child" },
+    { "id": "nurse", "name": "Nurse Liu", "role": "nurse" },
+    { "id": "mother", "name": "Mother", "role": "woman" }
+  ],
+  "vitals": {
+    "hr": 195,
+    "sbp": 62,
+    "dbp": 30,
+    "spo2": 94,
+    "rr": 52,
+    "temp": 39.4,
+    "glucose": 2.6,
+    "rhythm": "sinus-tachy",
+    "drift": { "sbp": -1, "hr": 1 },
+    "stop": ["bolus1"],
+    "effects": [
+      { "scene": "o2", "add": { "spo2": 4 }, "overS": 20 },
+      { "scene": "bolus1", "add": { "sbp": 5, "hr": -8 }, "overS": 60 },
+      { "scene": "bolus2", "add": { "sbp": 4, "hr": -6 }, "overS": 60 },
+      { "scene": "glucose", "set": { "glucose": 6.8 } },
+      { "scene": "inotrope", "add": { "sbp": 12, "dbp": 8, "hr": -10 }, "overS": 90 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "ABCDE",
+      "hint": "Rapid ABCDE; look at the rash; glucose.",
+      "groups": {
+        "A B": [
+          { "t": "Airway and breathing", "r": "Patent airway. RR 52, mild recession, clear chest.", "mark": "Assesses airway and breathing" }
+        ],
+        "C": [
+          { "t": "Heart rate, capillary refill, pulses, BP", "r": "HR 195, CRT 5 s centrally, weak peripheral pulses, BP 62/30. Mottled legs.", "mark": "Recognises decompensated shock" },
+          { "t": "Liver edge", "r": "1 cm below the costal margin (baseline before fluids).", "mark": "Checks liver size before fluids" }
+        ],
+        "D E": [
+          { "t": "AVPU, fontanelle, tone", "r": "Responds to pain only. Fontanelle full. Floppy.", "mark": "Assesses conscious level and fontanelle" },
+          { "t": "Look at the rash; glass test", "r": "Purpuric, non-blanching spots on the legs and trunk; they stay visible under the glass.", "img": "photo:purpura", "mark": "Identifies a non-blanching purpuric rash" },
+          { "t": "Capillary glucose", "r": "2.6 mmol/L.", "mark": "Checks glucose and finds hypoglycaemia" }
+        ]
+      }
+    },
+    {
+      "id": "resus",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Resuscitate",
+      "hint": "Oxygen, access (IO if needed), bloods and cultures, antibiotics, 10 mL/kg boluses with reassessment, glucose.",
+      "opts": [
+        { "t": "High-flow oxygen by non-rebreather", "n": 1, "scene": "o2", "mark": "High-flow oxygen" },
+        { "t": "IV attempt; IO in the proximal tibia if not in within 90 seconds", "n": 2, "mark": "Rapid vascular access, IO if IV fails" },
+        { "t": "Blood culture, gas, glucose, FBC, CRP, clotting, U&E, meningococcal PCR", "n": 3, "mark": "Cultures and bloods before antibiotics (without delaying them)" },
+        { "t": "Ceftriaxone 80 mg/kg (640 mg) IV/IO", "n": 4, "mark": "Ceftriaxone 80 mg/kg within the first hour" },
+        { "t": "10 mL/kg (80 mL) crystalloid bolus over 5–10 minutes; reassess", "n": 5, "scene": "bolus1", "mark": "10 mL/kg bolus with reassessment" },
+        { "t": "10% glucose 2 mL/kg (16 mL)", "n": 6, "scene": "glucose", "mark": "Treats hypoglycaemia with 2 mL/kg 10% glucose" },
+        { "t": "Second and third 10 mL/kg boluses, checking liver and chest each time", "n": 7, "scene": "bolus2", "mark": "Repeats boluses, checks for overload" },
+        { "t": "Still shocked at 40 mL/kg: start adrenaline infusion (peripheral/IO) and call PICU", "n": 8, "scene": "inotrope", "mark": "Inotrope after 40–60 mL/kg; PICU" },
+        { "t": "20 mL/kg saline boluses as fast as possible without reassessing", "trap": true, "r": "Current guidance uses 10 mL/kg with reassessment after each; overload is harmful." },
+        { "t": "Lumbar puncture before antibiotics", "trap": "critical", "r": "He is shocked with a full fontanelle: LP is contraindicated and must never delay antibiotics." }
+      ]
+    },
+    {
+      "id": "mum",
+      "kind": "dialogue",
+      "to": "mother",
+      "label": "Talk to his mother",
+      "hint": "Honest, simple, brief; she can stay.",
+      "mood": 7,
+      "turns": [
+        {
+          "line": "Is he going to die? What's happening?",
+          "opts": [
+            { "t": "He is very unwell with a serious blood infection. We are giving antibiotics and fluids now, and the intensive care team is coming. You can stay with him.", "r": "OK… please help him.", "mood": -3, "mark": "Explains honestly and simply; lets the parent stay" },
+            { "t": "Please wait outside.", "r": "No! I'm not leaving him!", "mood": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "call",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "PICU/retrieval, and public health.",
+      "opts": [
+        { "t": "PICU and retrieval: 8 kg infant, meningococcal septic shock, 40 mL/kg, adrenaline running", "mark": "Refers to PICU/retrieval with a clear summary" },
+        { "t": "Notify public health for contact prophylaxis", "mark": "Notifies public health" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "APLS weight estimate for an 8-month-old?", "a": "8 kg", "wrong": ["12 kg", "5 kg", "16 kg"] },
+        { "q": "Fluid bolus volume in paediatric septic shock (RCUK/NICE)?", "a": "10 mL/kg", "wrong": ["20 mL/kg", "60 mL/kg at once", "5 mL/kg"] },
+        { "q": "When to start inotropes?", "a": "After 40–60 mL/kg without response", "wrong": ["Before any fluid", "After 200 mL/kg", "Never in children"] },
+        { "q": "Ceftriaxone dose for meningococcal disease?", "a": "80 mg/kg", "wrong": ["10 mg/kg", "50 mg/kg cefuroxime", "200 mg/kg"] },
+        { "q": "Why no lumbar puncture now?", "a": "Shock and raised ICP signs; it would delay treatment", "wrong": ["He is too young", "The rash makes it unnecessary", "LP is never done in infants"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Glass Test", "emoji": "🥃", "flavor": "Non-blanching and floppy: antibiotics now, 10 mL/kg and reassess." },
+  "cards": [
+    { "q": "Paediatric septic shock fluid bolus (RCUK 2021+)?", "options": ["10 mL/kg, reassess after each", "20 mL/kg repeated rapidly", "60 mL/kg over 1 hour", "5 mL/kg only"], "why": "Reassess for response and overload after each bolus.", "source": "RCUK paediatric ALS; NICE NG51", "note": "Older notes: 20 mL/kg." },
+    { "q": "Antibiotic for suspected meningococcal sepsis in a child?", "options": ["Ceftriaxone 80 mg/kg", "Oral amoxicillin", "Cefuroxime 50 mg/kg", "Gentamicin alone"], "why": "Give within an hour; don't wait for tests.", "source": "NICE CG102" },
+    { "q": "Glucose for hypoglycaemia in a child?", "options": ["10% glucose 2 mL/kg", "50% glucose 5 mL/kg", "5% glucose 1 mL/kg", "Oral sugar in shock"], "why": "Recheck after.", "source": "RCUK paediatric ALS" },
+    { "q": "APLS weight formula for under 1 year?", "options": ["(Age in months ÷ 2) + 4", "(Age × 2) + 8", "(Age × 3) + 7", "Age × 10"], "why": "1–5 years: (age × 2) + 8; 6–12 years: (age × 3) + 7.", "source": "APLS" },
+    { "q": "Sign of fluid overload during boluses?", "options": ["Enlarging liver and new crackles", "Falling heart rate", "Warm peripheries", "Improved CRT"], "why": "Stop and consider inotropes.", "source": "RCUK paediatric ALS" },
+    { "q": "Vasoactive drug of choice for cold septic shock in children?", "options": ["Adrenaline infusion", "Dopamine only", "Vasopressin first", "Esmolol"], "why": "Can run peripherally/IO at low concentration until central access.", "source": "Surviving Sepsis Campaign paediatrics 2020" }
+  ]
+}

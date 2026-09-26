@@ -1,0 +1,123 @@
+{
+  "id": "acls-svt",
+  "gym": "acls",
+  "title": "SVT: vagal manoeuvres and adenosine",
+  "type": "resus",
+  "time": 420,
+  "stem": "A 30-year-old woman has had sudden-onset regular palpitations for 40 minutes. HR 190, BP 112/70, RR 18, SpO2 99%. No chest pain, no breathlessness, no dizziness. Manage her.",
+  "notes": "Checked against RCUK tachycardia algorithm (2021; unchanged 2025), ESC 2019 SVT guidelines and the REVERT trial (Lancet 2015).\n\nStable regular narrow complex tachycardia: vagal manoeuvres first — the modified Valsalva (REVERT): semi-recumbent, blow into a 10 mL syringe (≈40 mmHg) for 15 seconds, then lie flat with legs raised to 45° for 15 seconds; about 43% convert versus 17% with standard Valsalva. Carotid sinus massage only without bruits or cerebrovascular history (avoid in older patients).\n\nAdenosine: 6 mg rapid IV bolus into a large proximal vein with a 20 mL saline flush, under continuous ECG recording; if unsuccessful 12 mg, then 18 mg (RCUK; AHA uses 6 then 12). Warn the patient about brief chest discomfort, flushing and a sense of doom. Caution in severe asthma (verapamil is an alternative). Reduce the dose (start 3 mg) with dipyridamole, carbamazepine, heart transplant or a central line.\n\nAfter conversion, look for pre-excitation (short PR, delta wave): WPW needs cardiology referral for ablation, and AV-node blockers must be avoided if she ever presents with pre-excited AF.\n\nYour SVT notes list adult DC cardioversion energies from AHA (100 J for narrow complex); that applies only if unstable.",
+  "cast": [
+    { "id": "patient", "name": "Ms Ip", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Yau", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 190,
+    "sbp": 112,
+    "dbp": 70,
+    "spo2": 99,
+    "rr": 18,
+    "rhythm": "svt",
+    "effects": [
+      { "scene": "converted", "set": { "hr": 82, "sbp": 118 }, "rhythm": "wpw" }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "ABCDE, adverse features, 12-lead.",
+      "groups": {
+        "ABCDE": [
+          { "t": "Adverse features", "r": "No shock, no syncope, no chest pain, no heart failure.", "mark": "Confirms no adverse features" },
+          { "t": "History: previous episodes, asthma, drugs", "r": "Two brief episodes before that stopped on their own. No asthma. No regular medicines.", "mark": "Asks about asthma and interacting drugs" }
+        ],
+        "ECG": [
+          { "t": "12-lead ECG", "r": "Regular narrow complex tachycardia at 190, no visible P waves.", "img": "ecg:svt", "mark": "Identifies regular narrow complex tachycardia" }
+        ]
+      }
+    },
+    {
+      "id": "vagal",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Modified Valsalva",
+      "hint": "Semi-recumbent, blow into a syringe 15 s, then flat with legs up 15 s.",
+      "opts": [
+        { "t": "Explain; record a rhythm strip", "n": 1, "mark": "Explains and records the rhythm" },
+        { "t": "Sit her semi-recumbent (45°)", "n": 2, "mark": "Starts semi-recumbent" },
+        { "t": "Blow into a 10 mL syringe hard enough to move the plunger, for 15 seconds", "n": 3, "mark": "Strain at about 40 mmHg for 15 s" },
+        { "t": "Immediately lie her flat and lift her legs to 45° for 15 seconds", "n": 4, "mark": "Leg raise after the strain (modified Valsalva)" },
+        { "t": "Check the rhythm", "n": 5, "r": "Still SVT at 190.", "mark": "Reassesses the rhythm" },
+        { "t": "Press on both carotids together", "trap": "critical", "r": "Never bilateral carotid pressure: risk of cerebral ischaemia." }
+      ]
+    },
+    {
+      "id": "adenosine",
+      "kind": "steps",
+      "to": "cart",
+      "label": "Adenosine",
+      "hint": "Warn her, large proximal vein, rapid bolus with a flush, record; 6 → 12 → 18 mg.",
+      "opts": [
+        { "t": "Warn her: brief chest tightness, flushing, a feeling of doom", "n": 1, "mark": "Warns about adenosine's effects" },
+        { "t": "Cannula in the antecubital fossa; 3-way tap with a 20 mL saline flush", "n": 2, "mark": "Large proximal vein and flush" },
+        { "t": "Record the strip; 6 mg rapid push, then flush immediately", "n": 3, "r": "A few seconds' pause, then SVT again.", "mark": "6 mg rapid bolus with flush, recording" },
+        { "t": "12 mg rapid push with flush", "n": 4, "scene": "converted", "mark": "Escalates to 12 mg", "r": "Asystole for 3 seconds, then sinus rhythm at 82." },
+        { "t": "Slow 6 mg over a minute into a hand vein", "trap": true, "r": "Adenosine's half-life is seconds; it must be a rapid bolus into a large vein." }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "order",
+      "to": "trolley",
+      "label": "After conversion",
+      "hint": "Repeat the 12-lead in sinus rhythm.",
+      "groups": {
+        "ECG": [
+          { "t": "12-lead ECG in sinus rhythm", "r": "Short PR interval with a slurred upstroke (delta wave) and a slightly broad QRS: pre-excitation.", "img": "ecg:wpw", "mark": "Recognises pre-excitation (WPW) after conversion" }
+        ],
+        "Bloods": [
+          { "t": "K, Mg, TSH", "r": "Normal." }
+        ]
+      }
+    },
+    {
+      "id": "advice",
+      "kind": "say",
+      "to": "patient",
+      "label": "Talk to Ms Ip",
+      "hint": "Explain, teach the manoeuvre, refer to cardiology for ablation.",
+      "opts": [
+        { "t": "Explain WPW; cardiology referral for an electrophysiology study and ablation", "mark": "Refers WPW to cardiology" },
+        { "t": "Teach her the modified Valsalva for future episodes; return if it fails or she feels faint", "mark": "Safety-netting and self-management" },
+        { "t": "Start regular verapamil to prevent episodes", "trap": true, "r": "AV-node blockers can be dangerous with pre-excitation if AF develops." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "RCUK adenosine sequence?", "a": "6 mg, then 12 mg, then 18 mg", "wrong": ["3, 6, 9 mg", "12 mg only", "0.1 mg/kg"] },
+        { "q": "Modified Valsalva conversion rate in REVERT?", "a": "About 43%", "wrong": ["About 5%", "About 90%", "About 17%"] },
+        { "q": "Reduce adenosine dose with…", "a": "Dipyridamole or a heart transplant", "wrong": ["Theophylline", "Caffeine", "Beta-blockers"] },
+        { "q": "Why avoid AV-node blockers in pre-excited AF?", "a": "Conduction speeds down the accessory pathway, risking VF", "wrong": ["They cause asthma", "They cause heart block only", "They are ineffective but safe"] },
+        { "q": "ECG signs of WPW?", "a": "Short PR, delta wave, broad QRS", "wrong": ["Long PR, narrow QRS", "ST elevation in V1–V3", "Peaked T waves"] }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "vagal-first", "first": ["vagal"], "then": ["adenosine"], "fail": "Adenosine before trying vagal manoeuvres in a stable patient.", "ok": "Vagal manoeuvres before adenosine." }
+  ],
+  "badge": { "name": "Vagus Nerve", "emoji": "🫀", "flavor": "Blow, then legs up. Rapid push, fast flush. Look for the delta wave." },
+  "cards": [
+    { "q": "Modified Valsalva: after 15 s of strain the patient…", "options": ["Lies flat with legs raised to 45° for 15 s", "Sits upright and coughs", "Holds breath for 60 s", "Drinks ice water"], "why": "REVERT: the leg raise increases venous return and vagal tone.", "source": "Appelboam et al., Lancet 2015" },
+    { "q": "First adenosine dose for adult SVT?", "options": ["6 mg rapid IV", "12 mg slow IV", "1 mg", "0.5 mg/kg"], "why": "Then 12 mg, then 18 mg (RCUK).", "source": "RCUK tachycardia algorithm" },
+    { "q": "Adenosine should be given…", "options": ["Rapidly into a large proximal vein with a saline flush", "Slowly over 5 minutes", "Intramuscularly", "Orally"], "why": "Half-life under 10 seconds.", "source": "BNF" },
+    { "q": "Relative caution for adenosine?", "options": ["Severe asthma", "Hypertension", "Diabetes", "Migraine"], "why": "Bronchospasm; verapamil is an alternative.", "source": "BNF / RCUK" },
+    { "q": "Delta wave is a sign of…", "options": ["Pre-excitation (WPW)", "Hyperkalaemia", "Pericarditis", "Hypothermia"], "why": "Slurred upstroke from early ventricular activation via the accessory pathway.", "source": "ECG basics" },
+    { "q": "Unstable SVT: treatment?", "options": ["Synchronised DC cardioversion", "Carotid massage", "Oral verapamil", "Observation"], "why": "Adverse features mean electricity.", "source": "RCUK" }
+  ]
+}

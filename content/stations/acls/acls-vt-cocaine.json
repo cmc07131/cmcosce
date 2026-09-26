@@ -1,0 +1,111 @@
+{
+  "id": "acls-vt-cocaine",
+  "gym": "acls",
+  "title": "Broad complex tachycardia after cocaine",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 3. A 28-year-old man came from a nightclub with palpitations and agitation after 'a lot of coke'. HR 180, BP 118/76, RR 24, SpO2 97%, temperature 38.1 °C. He is restless and sweating. The monitor shows a broad complex tachycardia.",
+  "notes": "Checked against TOXBASE (UK National Poisons Information Service), RCUK tachycardia algorithm (2021; unchanged in 2025) and AHA 2023 toxicology focused update.\n\nCocaine blocks noradrenaline reuptake (sympathomimetic) and sodium channels (class I effect: broad QRS, VT). First treat agitation, hyperthermia and hypertension with benzodiazepines. Broad complex arrhythmias: sodium bicarbonate 8.4% 50 mmol IV (1–2 mmol/kg), repeat as needed; correct hypoxia, acidosis and potassium. Lidocaine is an option for VT; avoid class Ia/Ic drugs. Beta-blockers are avoided in acute cocaine toxicity (unopposed alpha stimulation; AHA now considers them less harmful than thought, but they are not first-line). Adverse features (shock, syncope, ischaemia, heart failure) → synchronised cardioversion.\n\nYour notes (sympathomimetic 'confusion' station) say benzodiazepines, cooling and avoiding beta-blockers alone; this matches.\n\nAmiodarone is the standard drug for stable monomorphic VT in RCUK; with cocaine, bicarbonate first.",
+  "cast": [
+    { "id": "patient", "name": "Mr Cheung", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Kwok", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 180,
+    "sbp": 118,
+    "dbp": 76,
+    "spo2": 97,
+    "rr": 24,
+    "temp": 38.1,
+    "gcs": 15,
+    "rhythm": "vt",
+    "effects": [
+      { "scene": "benzo", "add": { "rr": -4, "temp": -0.3 }, "overS": 120 },
+      { "scene": "bicarb", "set": { "hr": 118 }, "rhythm": "sinus-tachy" },
+      { "scene": "unstable", "set": { "sbp": 78, "dbp": 44 } },
+      { "scene": "shock", "set": { "hr": 104, "sbp": 122, "dbp": 74 }, "rhythm": "sinus-tachy" }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "ABCDE, adverse features, 12-lead, toxidrome.",
+      "groups": {
+        "ABCDE": [
+          { "t": "Adverse features: pressure, chest pain, syncope, breathlessness", "r": "BP 118/76. No chest pain now, no syncope, chest clear.", "mark": "Checks for adverse features (none yet)" },
+          { "t": "Toxidrome: pupils, skin, temperature, tone", "r": "Dilated pupils, sweaty, 38.1 °C, tremor, agitated.", "mark": "Recognises a sympathomimetic toxidrome" }
+        ],
+        "ECG": [
+          { "t": "12-lead ECG", "r": "Regular broad complex tachycardia at 180, QRS 160 ms: treat as VT.", "img": "ecg:vt", "mark": "Identifies regular broad complex tachycardia: treat as VT" }
+        ]
+      }
+    },
+    {
+      "id": "drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Benzodiazepine for the sympathomimetic state; sodium bicarbonate for the sodium-channel effect.",
+      "confirm": "Give these",
+      "opts": [
+        { "t": "Diazepam 10 mg IV (titrated) for agitation", "need": true, "scene": "benzo", "mark": "Benzodiazepine for sympathomimetic toxicity" },
+        { "t": "Sodium bicarbonate 8.4% 50 mL (50 mmol) IV", "need": true, "scene": "bicarb", "mark": "Sodium bicarbonate for cocaine-induced broad complex tachycardia" },
+        { "t": "Check K and Mg on a gas; correct", "need": true, "mark": "Checks and corrects electrolytes" },
+        { "t": "Metoprolol 5 mg IV for the rate", "trap": true, "r": "Beta-blockers are avoided in acute cocaine toxicity: unopposed alpha effects can worsen hypertension and ischaemia." },
+        { "t": "Verapamil for the tachycardia", "trap": "critical", "r": "Verapamil in VT can cause collapse." },
+        { "t": "Flecainide", "trap": "critical", "r": "A class Ic sodium-channel blocker worsens cocaine's sodium-channel toxicity." }
+      ]
+    },
+    {
+      "id": "change",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Reassess",
+      "hint": "Recheck after each treatment.",
+      "opts": [
+        { "t": "Repeat the obs and the rhythm strip", "scene": "unstable", "mark": "Reassesses after treatment", "r": "Nurse Kwok: He's gone grey. BP 78/44." }
+      ]
+    },
+    {
+      "id": "cardiovert",
+      "kind": "steps",
+      "to": "patient",
+      "label": "If he becomes unstable",
+      "hint": "Adverse features now: synchronised DC cardioversion under sedation.",
+      "opts": [
+        { "t": "Recognise shock: adverse feature", "n": 1, "mark": "Recognises a new adverse feature" },
+        { "t": "Sedation by a skilled operator; pads on; SYNC on", "n": 2, "mark": "Sedation and synchronised mode" },
+        { "t": "Synchronised shock (e.g. 120–150 J biphasic), escalating", "n": 3, "scene": "shock", "mark": "Delivers synchronised cardioversion", "r": "Sinus tachycardia 104, BP 122/74." },
+        { "t": "Reassess; 12-lead; admit to CCU/HDU", "n": 4, "mark": "Post-cardioversion reassessment" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Why sodium bicarbonate in cocaine toxicity?", "a": "It overcomes sodium-channel blockade and narrows the QRS", "wrong": ["It sedates the patient", "It lowers the temperature", "It binds cocaine"] },
+        { "q": "First-line drug for cocaine agitation and hypertension?", "a": "Benzodiazepine", "wrong": ["Labetalol", "Haloperidol", "Propranolol"] },
+        { "q": "Regular broad complex tachycardia of uncertain origin should be treated as…", "a": "VT", "wrong": ["SVT with aberrancy", "Sinus tachycardia", "AF"] },
+        { "q": "Stable VT without toxins (RCUK): drug?", "a": "Amiodarone 300 mg IV over 10–60 min", "wrong": ["Adenosine 18 mg", "Digoxin", "Atropine"] },
+        { "q": "Which sign suggests a sympathomimetic rather than anticholinergic toxidrome?", "a": "Sweating", "wrong": ["Dry skin", "Absent bowel sounds", "Urinary retention"] }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "reassess", "first": ["drugs"], "then": ["cardiovert"], "fail": "You shocked a stable patient before treating the toxicity.", "ok": "Toxicity treated first; shocked when he became unstable." }
+  ],
+  "badge": { "name": "Snow Blind", "emoji": "❄", "flavor": "Benzos for the brain, bicarbonate for the QRS, electricity if unstable." },
+  "cards": [
+    { "q": "Cocaine-induced broad complex tachycardia: first drug?", "options": ["Sodium bicarbonate", "Flecainide", "Verapamil", "Metoprolol"], "why": "Sodium loading and alkalinisation counter sodium-channel blockade.", "source": "TOXBASE" },
+    { "q": "Agitation and hypertension after cocaine are treated first with…", "options": ["Benzodiazepines", "Beta-blockers", "Haloperidol", "Physostigmine"], "why": "They reduce central sympathetic outflow.", "source": "TOXBASE" },
+    { "q": "Sympathomimetic toxidrome features?", "options": ["Tachycardia, hypertension, sweating, mydriasis", "Bradycardia, miosis, salivation", "Dry skin, retention, flushing", "Hypothermia and hyporeflexia"], "why": "Sweating separates it from anticholinergic toxicity.", "source": "Toxicology texts" },
+    { "q": "Regular broad complex tachycardia without adverse features (non-toxic): drug?", "options": ["Amiodarone 300 mg over 10–60 min", "Adenosine 6 mg", "Atropine 0.5 mg", "Digoxin"], "why": "Treat as VT.", "source": "RCUK tachycardia algorithm" },
+    { "q": "Class of antiarrhythmic to avoid in cocaine toxicity?", "options": ["Class Ia/Ic (e.g. flecainide)", "Class IV", "Class III", "Class II"], "why": "They add to sodium-channel blockade.", "source": "TOXBASE" },
+    { "q": "Hyperthermia above 39 °C after stimulants: treatment?", "options": ["Benzodiazepines and active cooling", "Paracetamol only", "Antibiotics", "Beta-blockers"], "why": "Heat comes from muscle activity; paracetamol does not help.", "source": "TOXBASE" }
+  ]
+}

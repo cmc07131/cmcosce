@@ -1,0 +1,93 @@
+{
+  "id": "pals-status",
+  "gym": "acls",
+  "title": "Convulsive status epilepticus in a child",
+  "type": "resus",
+  "time": 420,
+  "stem": "Paediatric resus. A 3-year-old girl (about 14 kg) has been fitting for 10 minutes. Her mother says she has had a cold, no previous seizures, and no medicine has been given. She is having generalised tonic–clonic movements now. HR 160, SpO2 90% in air, temperature 38.6 °C.",
+  "notes": "Checked against the APLS algorithm for convulsive status epilepticus (APLS 7th edition, 2023 update following EcLiPSE/ConSEPT: levetiracetam as a second-line option alongside phenytoin), NICE NG217 (Epilepsies, 2022) and RCUK paediatric guidance.\n\nAt 5 minutes: first benzodiazepine — IV/IO lorazepam 0.1 mg/kg (max 4 mg), or buccal midazolam 0.3 mg/kg (max 10 mg) if no access. At 15 minutes (10 minutes later): a second benzodiazepine dose. At 25 minutes: levetiracetam 40 mg/kg (max 3 g) IV over 5 minutes, or phenytoin 20 mg/kg over 20 minutes (or phenobarbital 20 mg/kg if already on phenytoin). At 45 minutes: RSI with a senior anaesthetist. Maximum two benzodiazepine doses including pre-hospital doses.\n\nAlways check glucose early (treat under 3 mmol/L with 2 mL/kg 10% glucose) and look for the cause (fever, meningitis/encephalitis, electrolytes, trauma, toxins).\n\nYour notes: buccal midazolam max 5 mg (APLS uses 0.3 mg/kg up to 10 mg) and phenytoin as the only second-line drug; APLS now lists levetiracetam first or equally. Lorazepam 0.1 mg/kg max 4 mg and PR diazepam 0.5 mg/kg match.",
+  "cast": [
+    { "id": "patient", "name": "Mei", "role": "child" },
+    { "id": "nurse", "name": "Nurse Sze", "role": "nurse" },
+    { "id": "mother", "name": "Mother", "role": "woman" }
+  ],
+  "vitals": {
+    "hr": 160,
+    "sbp": 110,
+    "dbp": 70,
+    "spo2": 90,
+    "rr": 30,
+    "temp": 38.6,
+    "glucose": 5.4,
+    "rhythm": "sinus-tachy",
+    "effects": [
+      { "scene": "o2", "add": { "spo2": 7 }, "overS": 30 },
+      { "scene": "stopped", "add": { "hr": -30, "rr": -8 }, "overS": 60 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "abc",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Immediate care",
+      "hint": "Time the seizure, airway, oxygen, glucose, access.",
+      "opts": [
+        { "t": "Note the time the seizure started; start a clock", "n": 1, "mark": "Times the seizure" },
+        { "t": "Airway: jaw thrust, suction, oral airway if tolerated; high-flow oxygen", "n": 2, "scene": "o2", "mark": "Airway manoeuvres and high-flow oxygen" },
+        { "t": "Capillary glucose", "n": 3, "mark": "Checks glucose early", "r": "5.4 mmol/L." },
+        { "t": "IV access (IO if difficult)", "n": 4, "mark": "Vascular access" },
+        { "t": "Hold her limbs down to stop the jerking", "trap": true, "r": "Restraint does not stop a seizure and can injure her. Protect from injury." },
+        { "t": "Put something in her mouth so she doesn't bite her tongue", "trap": "critical", "r": "It can break teeth and obstruct the airway." }
+      ]
+    },
+    {
+      "id": "drugs",
+      "kind": "steps",
+      "to": "cart",
+      "label": "Status epilepticus algorithm",
+      "hint": "Benzodiazepine, second benzodiazepine 10 minutes later, then levetiracetam or phenytoin, then RSI.",
+      "opts": [
+        { "t": "Lorazepam 0.1 mg/kg (1.4 mg) IV", "n": 1, "mark": "First benzodiazepine at the right dose" },
+        { "t": "Still fitting 10 minutes later: second lorazepam 0.1 mg/kg", "n": 2, "mark": "Second benzodiazepine after 10 minutes" },
+        { "t": "Still fitting: levetiracetam 40 mg/kg (560 mg) IV over 5 minutes", "n": 3, "scene": "stopped", "mark": "Second-line: levetiracetam 40 mg/kg (or phenytoin 20 mg/kg)", "r": "The seizure stops 3 minutes into the infusion." },
+        { "t": "If still fitting: RSI with an anaesthetist and PICU", "n": 4, "mark": "Knows the next step: RSI" },
+        { "t": "A third and fourth dose of lorazepam", "trap": true, "r": "More than two benzodiazepine doses causes respiratory depression without more benefit." }
+      ]
+    },
+    {
+      "id": "cause",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Look for the cause",
+      "hint": "Fever: sepsis and meningitis; electrolytes; history of trauma or toxins.",
+      "opts": [
+        { "t": "Bloods: culture, FBC, CRP, U&E, calcium, magnesium, gas", "mark": "Sends bloods for causes" },
+        { "t": "Ceftriaxone 80 mg/kg and aciclovir if meningitis or encephalitis is possible", "mark": "Covers CNS infection when indicated" },
+        { "t": "Ask about head injury and access to medicines at home", "mark": "Asks about trauma and toxins" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Buccal midazolam dose (APLS)?", "a": "0.3 mg/kg, max 10 mg", "wrong": ["0.3 mg/kg, max 5 mg", "1 mg/kg", "0.05 mg/kg"] },
+        { "q": "Second-line drug options at 25 minutes (APLS)?", "a": "Levetiracetam 40 mg/kg or phenytoin 20 mg/kg", "wrong": ["A third benzodiazepine", "Carbamazepine orally", "Paracetamol"] },
+        { "q": "Maximum benzodiazepine doses including pre-hospital?", "a": "Two", "wrong": ["One", "Four", "No limit"] },
+        { "q": "Why check glucose early?", "a": "Hypoglycaemia causes seizures and is quickly reversible", "wrong": ["To calculate the drug dose", "It predicts epilepsy", "It is required by law"] },
+        { "q": "Definition of convulsive status epilepticus (operational)?", "a": "A seizure lasting 5 minutes or more, or repeated without recovery", "wrong": ["Any seizure", "Seizure over 60 minutes", "Two seizures in a year"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Still Waters", "emoji": "🌀", "flavor": "Clock, glucose, two benzos, then levetiracetam." },
+  "cards": [
+    { "q": "IV lorazepam dose in paediatric status?", "options": ["0.1 mg/kg (max 4 mg)", "1 mg/kg", "0.01 mg/kg", "10 mg"], "why": "Repeat once after 10 minutes if still fitting.", "source": "APLS" },
+    { "q": "Levetiracetam loading dose in paediatric status?", "options": ["40 mg/kg (max 3 g) over 5 min", "10 mg/kg", "100 mg/kg", "4 mg/kg"], "why": "EcLiPSE/ConSEPT: as effective as phenytoin.", "source": "APLS 2023 update", "note": "Older notes: phenytoin only." },
+    { "q": "Phenytoin dose in status epilepticus?", "options": ["20 mg/kg over 20 minutes", "20 mg/kg bolus push", "2 mg/kg", "50 mg/kg"], "why": "Cardiac monitoring: risk of arrhythmia and hypotension.", "source": "APLS" },
+    { "q": "PR diazepam dose?", "options": ["0.5 mg/kg", "0.05 mg/kg", "5 mg/kg", "0.1 mg/kg"], "why": "If no IV access and buccal midazolam unavailable.", "source": "APLS" },
+    { "q": "Status epilepticus continuing after second-line drug: next?", "options": ["RSI (e.g. thiopental or ketamine) and PICU", "A third benzodiazepine", "Observe", "Oral sodium valproate"], "why": "Around 45 minutes into the seizure.", "source": "APLS" },
+    { "q": "What not to do during a seizure?", "options": ["Put an object in the mouth", "Protect from injury", "Time the seizure", "Give oxygen"], "why": "Risk of dental injury and obstruction.", "source": "First aid / APLS" }
+  ]
+}

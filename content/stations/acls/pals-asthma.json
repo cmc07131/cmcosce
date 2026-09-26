@@ -1,0 +1,104 @@
+{
+  "id": "pals-asthma",
+  "gym": "acls",
+  "title": "Life-threatening asthma in a child",
+  "type": "resus",
+  "time": 420,
+  "stem": "Paediatric resus. A 5-year-old boy (about 18 kg) with known asthma has been wheezy for two days and much worse tonight. He is sitting forward, too breathless to talk, and becoming quiet. HR 170, RR 44, SpO2 88% in air. His father is with him.",
+  "notes": "Checked against BTS/SIGN British guideline on the management of asthma (2019; acute section retained in the 2024 BTS/NICE/SIGN update), RCUK paediatric life support and APLS.\n\nLife-threatening features (children): SpO2 under 92%, silent chest, poor respiratory effort, altered consciousness, agitation, exhaustion, cyanosis, hypotension; PEF under 33% if measurable.\n\nTreatment: high-flow oxygen to SpO2 94–98%; nebulised salbutamol (2.5 mg under 5 years, 5 mg 5 years and over) driven by oxygen, back-to-back; nebulised ipratropium 250 microgram every 20–30 minutes for the first 2 hours; steroids (oral prednisolone 1–2 mg/kg, max 40 mg, or IV hydrocortisone 4 mg/kg); IV magnesium sulfate 40 mg/kg (max 2 g) over 20 minutes; IV salbutamol 15 microgram/kg over 10 minutes if not responding; then PICU (aminophylline, infusions, ventilation). Your notes' doses match this, except: ipratropium 125 microgram under 5 years (BTS uses 250 microgram for 2–12 years), and subcutaneous adrenaline, which is not part of BTS acute asthma management (keep adrenaline for anaphylaxis).\n\nIntubation is hazardous: experienced operator, ketamine, then low rate, long expiratory time, permissive hypercapnia (your ventilation notes are correct).\n\nNo routine chest X-ray unless pneumothorax, consolidation or life-threatening features not responding; no routine antibiotics.",
+  "cast": [
+    { "id": "patient", "name": "Hei-hei", "role": "child" },
+    { "id": "nurse", "name": "Nurse Mok", "role": "nurse" },
+    { "id": "father", "name": "Father", "role": "man" }
+  ],
+  "vitals": {
+    "hr": 170,
+    "sbp": 98,
+    "dbp": 60,
+    "spo2": 88,
+    "rr": 44,
+    "rhythm": "sinus-tachy",
+    "drift": { "spo2": -0.5 },
+    "stop": ["neb"],
+    "effects": [
+      { "scene": "neb", "add": { "spo2": 4, "hr": 6 }, "overS": 60 },
+      { "scene": "mag", "add": { "spo2": 3, "rr": -8 }, "overS": 120 },
+      { "scene": "ivsalb", "add": { "spo2": 2, "rr": -4, "hr": 8 }, "overS": 90 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "Severity: speech, work of breathing, chest, saturation, conscious level.",
+      "groups": {
+        "Severity": [
+          { "t": "Talking? Work of breathing", "r": "Cannot talk. Using accessory muscles, subcostal recession, tiring.", "mark": "Assesses speech and work of breathing" },
+          { "t": "Listen to the chest", "r": "Very quiet chest, hardly any wheeze.", "mark": "Recognises a silent chest" },
+          { "t": "Conscious level and colour", "r": "Drowsy, pale, lips dusky.", "mark": "Recognises altered consciousness" },
+          { "t": "SpO2 in air", "r": "88%.", "mark": "SpO2 under 92%: life-threatening" }
+        ],
+        "History": [
+          { "t": "Ask the father: usual inhalers, previous ICU admissions", "r": "Blue and brown inhalers, not always used. Once admitted to PICU last year.", "mark": "Asks about previous PICU admission (risk factor)" }
+        ]
+      }
+    },
+    {
+      "id": "treat",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Treat",
+      "hint": "Oxygen-driven salbutamol back-to-back plus ipratropium, steroids, IV access, magnesium, then IV salbutamol.",
+      "opts": [
+        { "t": "Oxygen-driven nebulised salbutamol 5 mg with ipratropium 250 microgram; repeat back-to-back", "n": 1, "scene": "neb", "mark": "Back-to-back salbutamol with ipratropium, oxygen-driven" },
+        { "t": "IV access; bloods and a gas", "n": 2, "mark": "IV access and gas" },
+        { "t": "Hydrocortisone 4 mg/kg IV (he cannot swallow)", "n": 3, "mark": "Systemic steroid" },
+        { "t": "Magnesium sulfate 40 mg/kg (720 mg) IV over 20 minutes", "n": 4, "scene": "mag", "mark": "IV magnesium 40 mg/kg over 20 min" },
+        { "t": "IV salbutamol 15 microgram/kg over 10 minutes; call PICU", "n": 5, "scene": "ivsalb", "mark": "IV salbutamol bolus and PICU referral" },
+        { "t": "Chest X-ray before starting treatment", "trap": true, "r": "Treat first. X-ray only for suspected pneumothorax or failure to respond." },
+        { "t": "Sedate him with midazolam so he settles on the mask", "trap": "critical", "r": "Sedation in life-threatening asthma can stop his breathing." }
+      ]
+    },
+    {
+      "id": "dad",
+      "kind": "dialogue",
+      "to": "father",
+      "label": "Talk to his father",
+      "hint": "Explain, keep the father close to calm the child.",
+      "mood": 6,
+      "turns": [
+        {
+          "line": "He's gone quiet — is that good? Is the wheeze better?",
+          "opts": [
+            { "t": "When a chest goes quiet it can mean very little air is moving. He needs strong treatment now. Stay by him and keep him calm.", "r": "Oh… OK, I'll hold his hand.", "mood": -3, "mark": "Explains the silent chest honestly; keeps the parent involved" },
+            { "t": "Yes, that's much better.", "r": "Great, can we go home soon?", "mood": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "IV magnesium dose in paediatric acute asthma?", "a": "40 mg/kg (max 2 g) over 20 minutes", "wrong": ["4 mg/kg", "100 mg/kg bolus", "2 g for any age"] },
+        { "q": "Which is a life-threatening feature?", "a": "Silent chest", "wrong": ["Audible wheeze", "SpO2 95%", "Talking in sentences"] },
+        { "q": "Nebulised salbutamol under 5 years?", "a": "2.5 mg", "wrong": ["10 mg", "0.5 mg", "100 microgram"] },
+        { "q": "IV salbutamol bolus in children over 2?", "a": "15 microgram/kg over 10 minutes", "wrong": ["1 mg/kg", "150 microgram/kg", "5 mg"] },
+        { "q": "Ventilation strategy if intubated?", "a": "Low rate, long expiration, permissive hypercapnia", "wrong": ["High rate to blow off CO2", "High PEEP of 15", "Short expiratory time"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Quiet Chest", "emoji": "🌬", "flavor": "Silence is the danger sign. Back-to-back nebs, steroid, magnesium." },
+  "cards": [
+    { "q": "Life-threatening asthma feature in a child?", "options": ["SpO2 under 92%", "Loud wheeze", "RR 30 at age 8", "Talking in sentences"], "why": "Also silent chest, poor effort, altered consciousness, cyanosis.", "source": "BTS/SIGN 2019" },
+    { "q": "Ipratropium dose in acute severe asthma (2–12 years)?", "options": ["250 microgram nebulised", "2.5 mg", "25 microgram", "500 mg"], "why": "Every 20–30 minutes in the first 2 hours.", "source": "BTS/SIGN 2019" },
+    { "q": "Oral prednisolone dose in paediatric acute asthma?", "options": ["1–2 mg/kg (max 40 mg)", "10 mg/kg", "0.1 mg/kg", "100 mg"], "why": "Or IV hydrocortisone 4 mg/kg if unable to swallow.", "source": "BTS/SIGN 2019" },
+    { "q": "Routine chest X-ray in acute asthma?", "options": ["No, only for complications or no response", "Yes, always", "Only in adults", "Before nebulisers"], "why": "Looks for pneumothorax, consolidation.", "source": "BTS/SIGN 2019" },
+    { "q": "Why use oxygen to drive nebulisers in acute asthma?", "options": ["Salbutamol can worsen V/Q mismatch and hypoxia", "Air is unavailable", "Oxygen makes smaller particles", "It is cheaper"], "why": "Keep SpO2 94–98%.", "source": "BTS/SIGN 2019" },
+    { "q": "Induction agent of choice for asthma intubation?", "options": ["Ketamine", "Thiopental", "Morphine", "Atracurium alone"], "why": "Bronchodilating properties.", "source": "APLS" }
+  ]
+}

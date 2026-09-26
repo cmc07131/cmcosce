@@ -1,0 +1,107 @@
+{
+  "id": "acls-hyperk",
+  "gym": "acls",
+  "title": "Severe hyperkalaemia",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 1. A 68-year-old man on haemodialysis missed his last two sessions. He feels weak and dizzy. HR 44, BP 88/52, RR 20, SpO2 95%, GCS 15. The nurse hands you his ECG.",
+  "notes": "Checked against the UK Kidney Association clinical practice guideline 'Treatment of acute hyperkalaemia in adults' (2023) and RCUK 2025 special circumstances.\n\nThree steps: protect the heart, shift potassium into cells, remove potassium, and monitor.\n• Protect: IV calcium if there are ECG changes — calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL over 5–10 minutes; repeat if the ECG does not improve within 5–10 minutes. It works in minutes and lasts 30–60 minutes; it does not lower potassium.\n• Shift: insulin 10 units soluble insulin with 25 g glucose (e.g. 50 mL of 50% or 250 mL of 10%) over 15 minutes; if glucose is under 7 mmol/L before treatment, follow with 10% glucose 50 mL/h for 5 hours; check glucose at 0, 15, 30, 60, 90, 120, 180, 240, 300 and 360 minutes (hypoglycaemia risk, especially in renal failure). Salbutamol 10–20 mg nebulised as an adjunct (not alone).\n• Remove: dialysis for severe hyperkalaemia in renal failure; potassium binders (sodium zirconium cyclosilicate 10 g three times daily, or patiromer).\n• Sodium bicarbonate is not routine; consider only with metabolic acidosis (and specialist advice in dialysis patients).\n\nYour notes on pacing cover hyperkalaemia in bradycardia (calcium gluconate after the potassium result); this station follows UKKA 2023 in full.",
+  "cast": [
+    { "id": "patient", "name": "Mr Law", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Ngai", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 44,
+    "sbp": 88,
+    "dbp": 52,
+    "spo2": 95,
+    "rr": 20,
+    "gcs": 15,
+    "glucose": 6.2,
+    "rhythm": "hyperk-severe",
+    "effects": [
+      { "scene": "calcium", "set": { "hr": 62, "sbp": 102 }, "rhythm": "hyperk-moderate" },
+      { "scene": "insulin", "set": { "hr": 70, "sbp": 110 }, "add": { "glucose": 3 }, "rhythm": "hyperk-mild", "overS": 60 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "ecg",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Look at the tests",
+      "hint": "ECG first, then a gas for the potassium.",
+      "groups": {
+        "Now": [
+          { "t": "12-lead ECG", "r": "Bradycardia 44, absent P waves, broad bizarre QRS, tall peaked T waves.", "img": "ecg:hyperk-severe", "mark": "Recognises severe hyperkalaemia ECG changes" },
+          { "t": "Venous gas", "r": "K 8.1 mmol/L, pH 7.26, bicarbonate 15, glucose 6.2.", "mark": "Confirms potassium quickly on a gas" }
+        ]
+      }
+    },
+    {
+      "id": "protect",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Protect the heart, shift potassium in; monitor glucose.",
+      "confirm": "Give these",
+      "opts": [
+        { "t": "Calcium gluconate 10% 30 mL IV over 10 min (or calcium chloride 10% 10 mL)", "need": true, "scene": "calcium", "mark": "IV calcium to stabilise the myocardium" },
+        { "t": "Soluble insulin 10 units with 25 g glucose IV over 15 min", "need": true, "scene": "insulin", "mark": "Insulin with glucose to shift potassium" },
+        { "t": "Salbutamol 10–20 mg nebulised as an adjunct", "need": true, "mark": "Nebulised salbutamol as an adjunct" },
+        { "t": "Insulin 10 units IV without glucose — his sugar is fine", "trap": "critical", "r": "Severe hypoglycaemia follows. Always give glucose, and monitor for 6 hours." },
+        { "t": "Sodium bicarbonate 8.4% 50 mL routinely", "trap": true, "r": "Not routine (UKKA 2023). Consider only for acidosis, with specialist advice in dialysis patients." },
+        { "t": "Calcium polystyrene resonium alone and wait", "trap": "critical", "r": "Binders act over hours. With ECG changes, protect the heart and shift potassium now." }
+      ]
+    },
+    {
+      "id": "monitor",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Talk to the nurse",
+      "hint": "Continuous ECG, repeat ECG, repeat calcium if no improvement, glucose checks, repeat potassium.",
+      "opts": [
+        { "t": "Continuous cardiac monitoring; repeat ECG after the calcium; repeat calcium if no change in 5–10 min", "mark": "Monitors the ECG response to calcium" },
+        { "t": "Capillary glucose at 15, 30, 60 min and hourly to 6 hours", "mark": "Glucose monitoring after insulin" },
+        { "t": "Repeat potassium at 1, 2, 4 and 6 hours", "mark": "Repeats potassium" },
+        { "t": "Pacing pads on in case the rate falls further", "mark": "Prepares for pacing" }
+      ]
+    },
+    {
+      "id": "remove",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "Remove potassium: the renal team for urgent dialysis.",
+      "opts": [
+        { "t": "Renal team: K 8.1 with ECG changes in a dialysis patient — urgent dialysis", "mark": "Arranges urgent dialysis to remove potassium", "r": "Renal registrar: Dialysis unit in 45 minutes. Keep him monitored." },
+        { "t": "Sodium zirconium cyclosilicate 10 g TDS as a bridge", "mark": "Potassium binder as a bridge" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Does calcium lower serum potassium?", "a": "No — it stabilises the cardiac membrane", "wrong": ["Yes, by 1 mmol/L", "Yes, by binding it in the gut", "Only calcium chloride does"] },
+        { "q": "Main complication of insulin–glucose therapy?", "a": "Hypoglycaemia", "wrong": ["Hyperkalaemia rebound in 5 min", "Hypercalcaemia", "Pulmonary oedema"] },
+        { "q": "Salbutamol dose for hyperkalaemia?", "a": "10–20 mg nebulised", "wrong": ["2.5 mg nebulised", "100 microgram inhaled", "5 mg IV"] },
+        { "q": "Order of ECG changes as potassium rises?", "a": "Peaked T, then flat P and long PR, then broad QRS, then sine wave", "wrong": ["U waves first", "ST depression, then Q waves", "Sine wave first"] },
+        { "q": "Definitive treatment in an anuric dialysis patient?", "a": "Dialysis", "wrong": ["Furosemide", "Salbutamol alone", "Calcium every hour"] }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "ecg-first", "first": ["ecg"], "then": ["remove"], "fail": "You arranged dialysis before protecting the heart.", "ok": "Heart protected before arranging removal." }
+  ],
+  "badge": { "name": "K-O", "emoji": "🍌", "flavor": "Protect, shift, remove, monitor. Never insulin without glucose." },
+  "cards": [
+    { "q": "IV calcium for hyperkalaemia with ECG changes (UKKA 2023)?", "options": ["Calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL", "Calcium gluconate 10% 1 mL", "Calcium chloride 10% 100 mL", "Oral calcium carbonate"], "why": "Repeat if the ECG does not improve in 5–10 minutes.", "source": "UK Kidney Association 2023" },
+    { "q": "Insulin–glucose regimen (UKKA 2023)?", "options": ["10 units soluble insulin with 25 g glucose", "50 units insulin alone", "10 units insulin with 5 g glucose", "1 unit/kg insulin"], "why": "Monitor glucose for 6 hours.", "source": "UK Kidney Association 2023" },
+    { "q": "Earliest ECG sign of hyperkalaemia?", "options": ["Tall peaked T waves", "Sine wave", "Broad QRS", "U waves"], "why": "Then P flattening, PR prolongation, QRS widening.", "source": "ECG basics" },
+    { "q": "Salbutamol in hyperkalaemia is…", "options": ["An adjunct to insulin–glucose", "First-line alone", "Contraindicated", "Only IV"], "why": "10–20 mg nebulised.", "source": "UK Kidney Association 2023" },
+    { "q": "Sodium bicarbonate in hyperkalaemia is…", "options": ["Not routine; consider with acidosis", "First-line in all", "Contraindicated always", "Given before calcium"], "why": "Limited evidence for potassium lowering.", "source": "UK Kidney Association 2023" },
+    { "q": "How long does IV calcium protect the heart?", "options": ["About 30–60 minutes", "24 hours", "5 seconds", "1 week"], "why": "Shift and remove potassium meanwhile.", "source": "UK Kidney Association 2023" }
+  ]
+}

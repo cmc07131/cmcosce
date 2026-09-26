@@ -1,0 +1,113 @@
+{
+  "id": "acls-af-cardioversion",
+  "gym": "acls",
+  "title": "Unstable AF: synchronised cardioversion",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 2. A 65-year-old woman has had palpitations, chest tightness and breathlessness for 2 hours. HR 160 irregular, BP 80/50, RR 26, SpO2 93%, GCS 15 but sweaty and frightened. An IV cannula is in. Manage her tachyarrhythmia.",
+  "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.",
+  "cast": [
+    { "id": "patient", "name": "Mrs Kwan", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Lo", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 160,
+    "sbp": 80,
+    "dbp": 50,
+    "spo2": 93,
+    "rr": 26,
+    "gcs": 15,
+    "rhythm": "af",
+    "drift": { "sbp": -1 },
+    "stop": ["cardioverted"],
+    "effects": [
+      { "scene": "cardioverted", "set": { "hr": 84, "sbp": 118, "dbp": 72, "rr": 18 }, "rhythm": "sinus" }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "ABCDE and the adverse features; a 12-lead if it doesn't delay.",
+      "groups": {
+        "ABCDE": [
+          { "t": "Airway and breathing", "r": "Talking. RR 26, fine basal crackles.", "mark": "Assesses A and B" },
+          { "t": "Circulation", "r": "HR 160 irregularly irregular, BP 80/50, cool peripheries, CRT 4 s.", "mark": "Identifies shock" },
+          { "t": "Chest pain?", "r": "Tight central chest pain since it started.", "mark": "Identifies myocardial ischaemia" },
+          { "t": "Conscious level", "r": "GCS 15, anxious." }
+        ],
+        "ECG": [
+          { "t": "12-lead ECG", "r": "Irregularly irregular narrow complex tachycardia, no P waves, rate about 160: AF with fast ventricular response. Rate-related ST depression.", "img": "ecg:af", "mark": "Interprets AF with fast ventricular response" }
+        ]
+      }
+    },
+    {
+      "id": "decide",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Decide",
+      "hint": "Adverse features present: synchronised DC cardioversion now.",
+      "opts": [
+        { "t": "Unstable AF — shock and ischaemia: synchronised DC cardioversion now", "mark": "Recognises adverse features and chooses DC cardioversion" },
+        { "t": "Adenosine 6 mg rapid IV", "trap": true, "r": "Adenosine does not terminate AF; it can transiently slow the rate only." },
+        { "t": "IV verapamil for rate control", "trap": "critical", "r": "Calcium channel blockers in hypotension can cause collapse (and are dangerous if pre-excited)." },
+        { "t": "Hold off: she's been in AF for 2 hours, check for clot with an echo first", "trap": "critical", "r": "Instability overrides the anticoagulation delay. Shock now; heparin with it." }
+      ]
+    },
+    {
+      "id": "shock",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Cardiovert",
+      "hint": "Consent, sedation with airway kit, pads, SYNC on and seen on the R waves, high energy for AF, all clear, re-check.",
+      "opts": [
+        { "t": "Explain and take verbal consent", "n": 1, "mark": "Explains and consents" },
+        { "t": "Anaesthetist or skilled sedationist; airway kit and suction; oxygen", "n": 2, "mark": "Sedation by a skilled operator with airway kit" },
+        { "t": "Pads antero-lateral (or antero-posterior)", "n": 3, "mark": "Places pads correctly" },
+        { "t": "Press SYNC; check a marker sits on each R wave", "n": 4, "mark": "Synchronised mode confirmed on the R waves" },
+        { "t": "Select a high energy for AF (e.g. 200 J biphasic)", "n": 5, "mark": "Appropriate energy for AF" },
+        { "t": "Sedate (e.g. small doses of propofol or ketamine)", "n": 6, "mark": "Sedates before the shock" },
+        { "t": "Charge, 'all clear, oxygen away', hold the shock button until it fires", "n": 7, "scene": "cardioverted", "mark": "Safe delivery: all clear, hold until discharge", "r": "A short pause, then the shock fires on the R wave. Sinus rhythm at 84." },
+        { "t": "Check rhythm and pulse; re-select SYNC before any further shock", "n": 8, "mark": "Reassesses and re-syncs" },
+        { "t": "Unsynchronised shock to save time", "trap": "critical", "r": "A shock on the T wave can cause VF." }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "nurse",
+      "label": "After",
+      "hint": "ABCDE, 12-lead, bloods including K and Mg, anticoagulation, cause, admit.",
+      "opts": [
+        { "t": "Repeat ABCDE and 12-lead ECG", "mark": "Reassesses with a 12-lead" },
+        { "t": "Bloods: K, Mg, TFT, troponin", "mark": "Looks for causes: electrolytes, thyroid, ischaemia" },
+        { "t": "Heparin now; long-term anticoagulation by CHA2DS2-VA", "mark": "Anticoagulation around cardioversion" },
+        { "t": "If it had failed three times: amiodarone 300 mg over 10–20 min, then shock again", "mark": "Knows the escalation after 3 failed shocks" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Adverse features in tachycardia (RCUK)?", "a": "Shock, syncope, myocardial ischaemia, heart failure", "wrong": ["Rate over 100 only", "Palpitations and anxiety", "Fever, rash, vomiting"] },
+        { "q": "Why must the shock be synchronised?", "a": "To avoid shocking on the T wave and causing VF", "wrong": ["It uses less energy", "It is less painful", "It works only in sinus rhythm"] },
+        { "q": "After three failed synchronised shocks?", "a": "Amiodarone 300 mg over 10–20 min, then shock again", "wrong": ["Adenosine 12 mg", "Stop and discharge", "Unsynchronised shock"] },
+        { "q": "When is an unsynchronised shock appropriate?", "a": "Pulseless VT/VF or polymorphic VT", "wrong": ["Fast AF", "Atrial flutter", "Sinus tachycardia"] },
+        { "q": "AF for 2 hours with shock — do you wait for anticoagulation?", "a": "No: instability overrides; give heparin with the cardioversion", "wrong": ["Yes, 3 weeks first", "Yes, TOE first", "Only if CHA2DS2-VA is zero"] }
+      ]
+    }
+  ],
+  "badge": { "name": "In Sync", "emoji": "🔄", "flavor": "Adverse features mean electricity. SYNC on, markers on the R waves." },
+  "cards": [
+    { "q": "Tachycardia with shock: first-line treatment?", "options": ["Synchronised DC cardioversion", "Adenosine", "Oral beta-blocker", "Vagal manoeuvres"], "why": "Up to 3 attempts under sedation.", "source": "RCUK tachycardia algorithm" },
+    { "q": "AHA 2025 initial synchronised energy for AF?", "options": ["200 J", "50 J", "10 J", "2 J/kg"], "why": "Escalate if unsuccessful.", "source": "AHA 2025 ACLS", "note": "ERC/RCUK: high initial energy for AF." },
+    { "q": "Initial energy for regular narrow complex SVT (AHA)?", "options": ["100 J", "360 J", "20 J", "200 J"], "why": "Organised rhythms need less energy.", "source": "AHA 2025 ACLS" },
+    { "q": "Amiodarone loading dose in unstable tachycardia after failed shocks?", "options": ["300 mg over 10–20 min", "150 mg bolus push", "900 mg in 1 h", "5 mg/kg rapid"], "why": "Then 900 mg over 24 h.", "source": "RCUK tachycardia algorithm" },
+    { "q": "Why is adenosine not useful in AF?", "options": ["AF is not dependent on the AV node for its circuit", "It is contraindicated in women", "It causes VF always", "It is too slow"], "why": "It may transiently slow the ventricular rate but will not convert AF.", "source": "RCUK" },
+    { "q": "Before each repeat synchronised shock you must…", "options": ["Re-select SYNC", "Change the pads", "Give atropine", "Wait 5 minutes"], "why": "Many devices default to unsynchronised after a shock.", "source": "RCUK ALS" }
+  ]
+}

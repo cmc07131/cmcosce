@@ -1,0 +1,130 @@
+{
+  "id": "acls-tca",
+  "gym": "acls",
+  "title": "TCA overdose and gastric lavage",
+  "type": "resus",
+  "time": 480,
+  "stem": "Resus 2. A 40-year-old woman on treatment for depression was found drowsy at home by her husband, who had left her an hour earlier. An empty packet of amitriptyline 25 mg (60 tablets) was beside her. GCS E2 V2 M4, HR 128, BP 84/46, RR 10, SpO2 91% on room air.",
+  "notes": "Checked against TOXBASE, the Hong Kong Poison Information Centre (HKPIC) guidance, and the AACT/EAPCCT position papers on gastric lavage (2013) and activated charcoal.\n\nTricyclics block fast sodium channels (broad QRS, VT), alpha receptors (hypotension), muscarinic receptors (tachycardia, dilated pupils, retention, delayed gastric emptying) and cause seizures. QRS over 100 ms predicts seizures; over 160 ms predicts arrhythmias. A terminal R wave in aVR over 3 mm is another marker.\n\nTreatment: airway (intubate for a falling GCS; avoid hypoventilation and acidosis), sodium bicarbonate 8.4% 1–2 mmol/kg (50–100 mL) boluses for QRS over 100 ms, hypotension or arrhythmia, aiming for pH 7.45–7.55; benzodiazepines for seizures (not phenytoin); fluids then noradrenaline for hypotension; lipid emulsion and prolonged CPR in arrest. Avoid flumazenil and class Ia/Ic antiarrhythmics; physostigmine is contraindicated.\n\nDecontamination: activated charcoal 50 g if within 1 hour and the airway is safe (via the tube once intubated). Gastric lavage is not routine (AACT/EAPCCT): consider it only for a potentially life-threatening ingestion, ideally within 1 hour, with a protected airway, by someone experienced. Your notes argue for lavage in exactly that setting and extend the window for anticholinergic drugs (up to about 4 hours); that is a local HK practice point, not an international recommendation. The steps in your notes (left lateral, head down, 36–40 Fr tube, measured, confirmed, 200–250 mL warm aliquots until clear, save aspirate) are correct.",
+  "cast": [
+    { "id": "patient", "name": "Mrs Yeung", "role": "patient" },
+    { "id": "nurse", "name": "Nurse Wu", "role": "nurse" }
+  ],
+  "vitals": {
+    "hr": 128,
+    "sbp": 84,
+    "dbp": 46,
+    "spo2": 91,
+    "rr": 10,
+    "gcs": 8,
+    "temp": 37.4,
+    "rhythm": "tca",
+    "drift": { "sbp": -1, "spo2": -0.5 },
+    "stop": ["bicarb"],
+    "effects": [
+      { "scene": "intubated", "set": { "spo2": 98, "rr": 16, "etco2": 4.6 } },
+      { "scene": "bicarb", "add": { "sbp": 16, "dbp": 8, "hr": -10 }, "overS": 60, "rhythm": "sinus-tachy" }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "ABCDE, toxidrome, glucose, ECG.",
+      "groups": {
+        "ABCDE": [
+          { "t": "Airway and breathing", "r": "Snoring, RR 10, shallow. Gag weak.", "mark": "Recognises an unprotected airway and hypoventilation" },
+          { "t": "Circulation", "r": "HR 128, BP 84/46, warm dry skin." },
+          { "t": "Pupils, skin, bladder, bowel sounds", "r": "Pupils 6 mm, dry flushed skin, palpable bladder, quiet bowel sounds.", "mark": "Recognises an anticholinergic toxidrome" },
+          { "t": "Glucose", "r": "6.1 mmol/L.", "mark": "Checks glucose" }
+        ],
+        "ECG": [
+          { "t": "12-lead ECG", "r": "Sinus tachycardia, QRS 150 ms, prolonged QT, tall terminal R wave in aVR.", "img": "ecg:tca", "mark": "Identifies sodium-channel blockade: broad QRS and terminal R in aVR" }
+        ]
+      }
+    },
+    {
+      "id": "treat",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Bicarbonate for the broad QRS; benzodiazepine ready for seizures.",
+      "confirm": "Give these",
+      "opts": [
+        { "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) IV now; repeat to narrow the QRS, target pH 7.45–7.55", "need": true, "scene": "bicarb", "mark": "Sodium bicarbonate for QRS over 100 ms and hypotension" },
+        { "t": "Lorazepam or diazepam drawn up for seizures", "need": true, "mark": "Benzodiazepine for seizures" },
+        { "t": "Fluid bolus; noradrenaline if still hypotensive", "need": true, "mark": "Fluids then vasopressor" },
+        { "t": "Flumazenil in case of benzodiazepines too", "trap": "critical", "r": "Flumazenil can precipitate seizures and arrhythmias in TCA overdose." },
+        { "t": "Phenytoin loading for seizure prophylaxis", "trap": true, "r": "Phenytoin blocks sodium channels too and can worsen cardiotoxicity. Benzodiazepines only." },
+        { "t": "Physostigmine for the anticholinergic signs", "trap": "critical", "r": "Contraindicated in TCA poisoning: asystole has occurred." }
+      ]
+    },
+    {
+      "id": "airway",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Airway",
+      "hint": "GCS 8 with hypoventilation: RSI, and avoid acidosis after intubation.",
+      "opts": [
+        { "t": "RSI now; after intubation ventilate a little faster to avoid acidosis (pH 7.45–7.55)", "scene": "intubated", "mark": "Intubates and avoids respiratory acidosis", "r": "Tube in. ETCO2 4.6." }
+      ]
+    },
+    {
+      "id": "lavage",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Decontamination",
+      "hint": "Airway protected, within about an hour, potentially lethal dose: lavage is considered. Left lateral, head down, measured large tube, warm aliquots, charcoal after.",
+      "opts": [
+        { "t": "Confirm the indication: life-threatening dose, early, airway protected; no caustic or sharp objects", "n": 1, "mark": "Checks indications and contraindications" },
+        { "t": "Left lateral, head down; strong suction ready", "n": 2, "mark": "Left lateral, head down, suction" },
+        { "t": "Measure a 36–40 Fr orogastric tube from the mouth to the epigastrium; lubricate", "n": 3, "mark": "Correct tube size and measurement" },
+        { "t": "Insert; confirm position (aspirate and pH, or air insufflation)", "n": 4, "mark": "Confirms position before instilling" },
+        { "t": "Aspirate the stomach and save a sample for toxicology", "n": 5, "mark": "Saves the aspirate" },
+        { "t": "Warm fluid 200–250 mL at a time by gravity; drain; repeat until clear", "n": 6, "mark": "Small warm aliquots until clear" },
+        { "t": "Instil activated charcoal 50 g down the tube, then clamp and withdraw", "n": 7, "mark": "Activated charcoal after lavage; clamps before withdrawal" },
+        { "t": "Lavage the unintubated drowsy patient in the sitting position", "trap": "critical", "r": "Unprotected airway: aspiration. Never without a protected airway." },
+        { "t": "Force a litre in quickly with a syringe", "trap": true, "r": "Large volumes push drug through the pylorus and cause aspiration and electrolyte problems." }
+      ]
+    },
+    {
+      "id": "dispo",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "Poison centre and ICU; psychiatric assessment once recovered.",
+      "opts": [
+        { "t": "Hong Kong Poison Information Centre / TOXBASE for advice", "mark": "Seeks poison centre advice" },
+        { "t": "ICU: intubated TCA overdose, QRS narrowing with bicarbonate", "mark": "Refers to ICU" },
+        { "t": "Mental health assessment when medically fit", "mark": "Plans psychiatric assessment" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "QRS duration that predicts seizures in TCA poisoning?", "a": "Over 100 ms", "wrong": ["Over 60 ms", "Over 200 ms", "QRS is not predictive"] },
+        { "q": "Target pH with bicarbonate therapy?", "a": "7.45–7.55", "wrong": ["7.20–7.30", "7.60–7.70", "7.35 exactly"] },
+        { "q": "Gastric lavage (AACT/EAPCCT) is…", "a": "Not routine; only for life-threatening ingestions with a protected airway", "wrong": ["Routine for all overdoses", "Required before charcoal", "Safe without a protected airway"] },
+        { "q": "Why may the stomach still hold tablets after an hour?", "a": "Anticholinergic effects delay gastric emptying", "wrong": ["TCAs are not absorbed", "Charcoal slows absorption", "Bicarbonate delays emptying"] },
+        { "q": "Contraindication to gastric lavage?", "a": "Caustic ingestion", "wrong": ["TCA overdose", "Intubated patient", "Ingestion 30 minutes ago"] }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "airway-before-lavage", "first": ["airway"], "then": ["lavage"], "fail": "Lavage before the airway was protected.", "ok": "Airway protected before lavage." }
+  ],
+  "badge": { "name": "Salt of the Earth", "emoji": "🧂", "flavor": "Broad QRS? Bicarbonate. Airway before the tube in the stomach." },
+  "cards": [
+    { "q": "First drug for TCA overdose with QRS 140 ms and hypotension?", "options": ["Sodium bicarbonate 8.4%", "Amiodarone", "Flumazenil", "Physostigmine"], "why": "Sodium load and alkalinisation reverse sodium-channel blockade.", "source": "TOXBASE" },
+    { "q": "ECG sign in aVR suggesting sodium-channel blockade?", "options": ["Terminal R wave over 3 mm", "ST depression", "Absent P wave", "Q wave"], "why": "Rightward terminal QRS axis.", "source": "Toxicology ECG" },
+    { "q": "Seizures after TCA overdose: treatment?", "options": ["Benzodiazepines", "Phenytoin", "Carbamazepine", "Flumazenil"], "why": "Phenytoin adds sodium-channel blockade.", "source": "TOXBASE" },
+    { "q": "Gastric lavage tube size in adults?", "options": ["36–40 Fr", "12 Fr", "18 Fr", "60 Fr"], "why": "Large bore to pass tablet fragments.", "source": "Lavage technique" },
+    { "q": "Position for gastric lavage?", "options": ["Left lateral, head down", "Sitting upright", "Prone", "Right lateral, head up"], "why": "Keeps the pylorus up and reduces aspiration.", "source": "Lavage technique" },
+    { "q": "Activated charcoal is most useful within…", "options": ["1 hour of ingestion", "12 hours", "24 hours", "Any time"], "why": "Later use may be considered for delayed-release or anticholinergic drugs.", "source": "AACT/EAPCCT" }
+  ]
+}
