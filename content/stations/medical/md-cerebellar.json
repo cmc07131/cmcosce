@@ -1,0 +1,71 @@
+{
+  "id": "md-cerebellar",
+  "gym": "medical",
+  "title": "Cerebellar examination",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 24. Mr Man, 66, with hypertension and diabetes, developed sudden unsteadiness, vomiting and slurred speech 3 hours ago. Perform a cerebellar examination and explain your findings.",
+  "notes": "Checked against standard neurological examination and ESO/AHA stroke guidance on posterior circulation stroke.\n\nCerebellar signs (DANISH): Dysdiadochokinesia, Ataxia (gait, truncal), Nystagmus, Intention tremor and past-pointing, Slurred (scanning) speech, Hypotonia (and pendular reflexes). Also heel–shin, tandem gait, Romberg (positive in sensory or vestibular ataxia, not typically in pure cerebellar disease — a cerebellar patient is unsteady with eyes open too). Signs are ipsilateral to a cerebellar hemisphere lesion; midline (vermis) lesions give truncal ataxia.\n\nSudden cerebellar signs with vascular risk factors: cerebellar infarct or haemorrhage — emergency CT and CT angiography (MRI DWI is more sensitive for posterior strokes), stroke team (thrombolysis/thrombectomy for basilar occlusion), and neurosurgery for cerebellar haemorrhage over 3 cm or hydrocephalus — the posterior fossa is small and swelling compresses the brainstem.\n\nYour notes list the full cerebellar examination and causes (unilateral: vascular, tumour, MS; bilateral: alcohol, phenytoin, Wernicke's, MS, Miller Fisher, paraneoplastic) — this matches.",
+  "cast": [{ "id": "patient", "name": "Mr Man", "role": "elderly", "inBed": true }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Speech, eyes, arms (finger–nose, rapid alternating), legs (heel–shin), gait (if safe).",
+      "groups": {
+        "Head": [
+          { "t": "Speech: say 'British constitution'", "r": "Slurred, staccato speech.", "mark": "Assesses speech (dysarthria)" },
+          { "t": "Eye movements and nystagmus", "r": "Horizontal nystagmus, fast phase to the right, worse looking right.", "mark": "Looks for nystagmus" }
+        ],
+        "Arms": [
+          { "t": "Finger–nose test", "r": "Right: intention tremor and past-pointing. Left normal.", "mark": "Finger–nose test: right intention tremor" },
+          { "t": "Rapid alternating movements", "r": "Clumsy on the right (dysdiadochokinesia).", "mark": "Tests for dysdiadochokinesia" },
+          { "t": "Tone", "r": "Reduced on the right.", "mark": "Assesses tone" }
+        ],
+        "Legs": [
+          { "t": "Heel–shin test", "r": "Right heel wavers down the shin.", "mark": "Heel–shin test" },
+          { "t": "Sit him up unsupported (truncal ataxia)", "r": "Leans to the right; needs support.", "mark": "Assesses truncal ataxia safely" },
+          { "t": "Make him walk heel-to-toe across the room alone", "trap": true, "r": "He can't sit unsupported — walking him risks a fall. Test gait only when safe." }
+        ],
+        "Other": [{ "t": "Limb power and sensation; other cranial nerves", "r": "Power normal; no facial or sensory loss.", "mark": "Screens for other deficits" }]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Present and plan",
+      "hint": "Right cerebellar syndrome, sudden onset: stroke pathway, CT/CTA, neurosurgery if haemorrhage.",
+      "opts": [
+        { "t": "Right cerebellar signs of sudden onset in a vascular patient: right cerebellar stroke until proven otherwise", "mark": "Localises to the right cerebellum and suspects stroke" },
+        { "t": "Stroke team; urgent CT head and CT angiogram (basilar/vertebral)", "mark": "Urgent imaging and stroke activation" },
+        { "t": "If haemorrhage > 3 cm or hydrocephalus: neurosurgery; monitor GCS closely", "mark": "Recognises the posterior fossa emergency" },
+        { "t": "Probably labyrinthitis — antiemetic and home", "trap": "critical", "r": "Limb ataxia and dysarthria are central signs." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Cerebellar hemisphere lesions cause signs on…", "a": "The same side", "wrong": ["The opposite side", "Both sides always", "The legs only"] },
+        { "q": "Vermis lesion typically causes…", "a": "Truncal and gait ataxia", "wrong": ["Intention tremor of one arm", "Aphasia", "Hemianopia"] },
+        { "q": "Common drug cause of bilateral cerebellar signs?", "a": "Phenytoin", "wrong": ["Paracetamol", "Aspirin", "Omeprazole"] },
+        { "q": "Romberg positive suggests…", "a": "Sensory or vestibular ataxia", "wrong": ["Cerebellar ataxia only", "Normal finding", "Myopathy"] },
+        { "q": "Why is cerebellar haemorrhage dangerous?", "a": "Posterior fossa swelling compresses the brainstem and causes hydrocephalus", "wrong": ["It always bleeds into the eye", "It causes aphasia", "It is never dangerous"] }
+      ]
+    }
+  ],
+  "badge": { "name": "DANISH", "emoji": "🎯", "flavor": "Same-side signs. Sudden onset in a vascular patient: scan the back of the brain." },
+  "cards": [
+    { "q": "DANISH stands for…", "options": ["Dysdiadochokinesia, Ataxia, Nystagmus, Intention tremor, Speech, Hypotonia", "Diplopia, Aphasia, Neglect, Inattention, Seizure, Headache", "Drowsiness, Anosmia, Neck stiffness…", "None"], "why": "Cerebellar signs.", "source": "Neurology" },
+    { "q": "Staccato speech is…", "options": ["Cerebellar dysarthria", "Aphasia", "Dysphonia", "Normal"], "why": "Scanning speech.", "source": "Neurology" },
+    { "q": "Wernicke's encephalopathy causes…", "options": ["Ataxia, confusion, ophthalmoplegia", "Fever and rash", "Hemiparesis", "Aphasia"], "why": "Give thiamine.", "source": "Neurology" },
+    { "q": "Imaging most sensitive for posterior circulation infarct?", "options": ["MRI DWI", "Plain CT", "Skull X-ray", "Ultrasound"], "why": "CT misses many early posterior strokes.", "source": "ESO" },
+    { "q": "Cerebellar haemorrhage > 3 cm with deterioration needs…", "options": ["Neurosurgical evacuation", "Thrombolysis", "Observation only", "Lumbar puncture"], "why": "Brainstem compression.", "source": "AHA ICH guideline" },
+    { "q": "Intention tremor is worst…", "options": ["At the end of a movement", "At rest", "Only in sleep", "In the morning"], "why": "Parkinsonian tremor is at rest.", "source": "Neurology" }
+  ]
+}

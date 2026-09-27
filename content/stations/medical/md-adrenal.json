@@ -1,0 +1,87 @@
+{
+  "id": "md-adrenal",
+  "gym": "medical",
+  "title": "Adrenal crisis",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 2. Mr Lo, 45, has Addison's disease. He has had vomiting and diarrhoea for 2 days and couldn't keep his tablets down. He is confused and weak. HR 118, BP 78/44, RR 22, SpO2 97%, temperature 37.9 °C.",
+  "notes": "Checked against the Society for Endocrinology emergency guidance on adrenal crisis (2020/2023), NICE NG243 (Adrenal insufficiency, 2024) and the Endocrine Society guideline.\n\nAdrenal crisis is a life-threatening emergency: hypotension/shock, vomiting, abdominal pain, confusion, often with hyponatraemia, hyperkalaemia and hypoglycaemia. Do not wait for results: hydrocortisone 100 mg IV or IM immediately, then 200 mg over 24 hours (continuous infusion or 50 mg every 6 hours IV/IM); 0.9% saline 1 L over the first hour, then guided by response; check and treat glucose; treat the trigger (gastroenteritis, infection). Take a random cortisol and ACTH before steroid only if it does not delay treatment. Fludrocortisone is not needed while hydrocortisone is 50 mg or more per day. Afterwards: sick-day rules education, emergency card, injection kit.\n\nYour notes list Addison's disease as a topic without detail.",
+  "cast": [{ "id": "patient", "name": "Mr Lo", "role": "patient" }, { "id": "nurse", "name": "Nurse Chiu", "role": "nurse" }],
+  "vitals": {
+    "hr": 118, "sbp": 78, "dbp": 44, "spo2": 97, "rr": 22, "temp": 37.9, "gcs": 13, "glucose": 3.1,
+    "rhythm": "sinus-tachy",
+    "drift": { "sbp": -1 },
+    "stop": ["hydrocortisone"],
+    "effects": [
+      { "scene": "fluids", "add": { "sbp": 8, "hr": -6 }, "overS": 90 },
+      { "scene": "hydrocortisone", "add": { "sbp": 18, "dbp": 12, "hr": -16 }, "overS": 300 },
+      { "scene": "glucose", "set": { "glucose": 6.2 } }
+    ]
+  },
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "ABCDE; pigmentation; dehydration; steroid card.",
+      "groups": {
+        "Look": [
+          { "t": "Skin and mouth", "r": "Pigmented palmar creases and buccal mucosa; dry mouth.", "mark": "Notes hyperpigmentation and dehydration" },
+          { "t": "Emergency steroid card / bracelet", "r": "Steroid emergency card: Addison's, hydrocortisone 10/5/5 mg, fludrocortisone 100 microgram.", "mark": "Finds the steroid emergency card" }
+        ],
+        "Tests": [{ "t": "Venous gas and glucose", "r": "Na 124, K 5.9, glucose 3.1, lactate 3.4.", "mark": "Finds hyponatraemia, hyperkalaemia, hypoglycaemia" }]
+      }
+    },
+    {
+      "id": "treat",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Hydrocortisone 100 mg IV now, saline, glucose.",
+      "confirm": "Give now",
+      "opts": [
+        { "t": "Hydrocortisone 100 mg IV now", "need": true, "scene": "hydrocortisone", "mark": "Immediate hydrocortisone 100 mg IV/IM" },
+        { "t": "0.9% saline 1 L over 1 hour", "need": true, "scene": "fluids", "mark": "Rapid saline" },
+        { "t": "10% glucose for the hypoglycaemia", "need": true, "scene": "glucose", "mark": "Treats hypoglycaemia" },
+        { "t": "Random cortisol and ACTH — only if it does not delay the hydrocortisone", "mark": "Sends cortisol/ACTH without delaying treatment" },
+        { "t": "Wait for the cortisol result before giving steroids", "trap": "critical", "r": "Adrenal crisis kills within hours. Treat on suspicion." },
+        { "t": "Dexamethasone 4 mg instead", "trap": true, "r": "Hydrocortisone provides glucocorticoid and mineralocorticoid effect at stress doses." }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Ongoing plan",
+      "hint": "Hydrocortisone 50 mg 6-hourly (or 200 mg/24 h), fluids, trigger, monitoring, education.",
+      "opts": [
+        { "t": "Hydrocortisone 200 mg per 24 hours (50 mg IV every 6 hours or infusion)", "mark": "Continues stress-dose hydrocortisone" },
+        { "t": "Treat the gastroenteritis; monitor sodium, potassium and glucose", "mark": "Treats the trigger and monitors electrolytes" },
+        { "t": "Before discharge: sick-day rules, injection kit and training, endocrinology follow-up", "mark": "Sick-day rules and emergency kit education" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Initial hydrocortisone dose in adrenal crisis?", "a": "100 mg IV or IM", "wrong": ["10 mg orally", "1 g IV", "25 mg IV"] },
+        { "q": "Typical electrolytes in Addisonian crisis?", "a": "Low sodium, high potassium", "wrong": ["High sodium, low potassium", "Normal", "High calcium only"] },
+        { "q": "Sick-day rule for illness with fever?", "a": "Double the usual glucocorticoid dose", "wrong": ["Stop steroids", "Halve the dose", "No change"] },
+        { "q": "When is fludrocortisone unnecessary?", "a": "While hydrocortisone is 50 mg/day or more", "wrong": ["Never", "Only in children", "When sodium is low"] },
+        { "q": "Commonest cause of primary adrenal insufficiency?", "a": "Autoimmune adrenalitis", "wrong": ["TB in all countries", "Pituitary tumour", "Steroid withdrawal"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Salt and Steroid", "emoji": "🧂", "flavor": "Card in the wallet, hydrocortisone 100 mg now, never wait for the cortisol." },
+  "cards": [
+    { "q": "Adrenal crisis first treatment?", "options": ["Hydrocortisone 100 mg IV/IM immediately", "Fludrocortisone orally", "Wait for cortisol", "Prednisolone 5 mg"], "why": "Then 200 mg/24 h.", "source": "Society for Endocrinology" },
+    { "q": "Sign suggesting primary adrenal insufficiency?", "options": ["Hyperpigmentation of creases and buccal mucosa", "Moon face", "Striae", "Weight gain"], "why": "High ACTH stimulates melanocytes.", "source": "Endocrinology" },
+    { "q": "Glucose abnormality in adrenal crisis?", "options": ["Hypoglycaemia", "Hyperglycaemia", "None", "DKA"], "why": "Cortisol deficiency.", "source": "Endocrinology" },
+    { "q": "Patients on long-term steroids should carry…", "options": ["A steroid emergency card", "A pacemaker card", "An organ donor card only", "Nothing"], "why": "NHS/Society for Endocrinology card.", "source": "NHS England 2020" },
+    { "q": "Precipitant of adrenal crisis?", "options": ["Gastroenteritis with vomiting", "Exercise", "Coffee", "Sleep"], "why": "Unable to absorb oral steroids.", "source": "Society for Endocrinology" },
+    { "q": "Fluid in adrenal crisis?", "options": ["0.9% saline 1 L over the first hour", "5% dextrose only", "Albumin", "Restrict fluids"], "why": "Guided by response.", "source": "NICE NG243" }
+  ]
+}

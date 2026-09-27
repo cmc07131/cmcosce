@@ -1,0 +1,49 @@
+{
+  "deck": "medical",
+  "name": "Medical",
+  "creatures": [
+    {
+      "id": "ketoad",
+      "name": "KETOAD",
+      "body": "blob",
+      "main": "#b8d048",
+      "accent": "#f0f8d0"
+    },
+    {
+      "id": "thyrowl",
+      "name": "THYROWL",
+      "body": "bird",
+      "main": "#e88848",
+      "accent": "#f8e0c8"
+    },
+    {
+      "id": "vertigoat",
+      "name": "VERTIGOAT",
+      "body": "beast",
+      "main": "#9898b8",
+      "accent": "#e8e8f8"
+    },
+    {
+      "id": "clotsnake",
+      "name": "CLOTSNAKE",
+      "body": "snake",
+      "main": "#a83848",
+      "accent": "#f8c8d0"
+    }
+  ],
+  "cards": [
+    {
+      "id": "md-abcde",
+      "q": "In any acutely unwell medical patient, assess…",
+      "options": [
+        "ABCDE first",
+        "History first",
+        "Investigations first",
+        "Diagnosis first"
+      ],
+      "answer": 0,
+      "why": "Treat life threats as you find them.",
+      "source": "Resuscitation Council UK"
+    }
+  ]
+}

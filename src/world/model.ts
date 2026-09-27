@@ -59,7 +59,7 @@ export type Creature = z.infer<typeof creatureSchema>
 export type Deck = z.infer<typeof deckSchema>
 
 /** Tall-grass letters pick a deck. `x` is every active deck mixed. */
-export const GRASS_DECK: Record<string, string> = { a: 'atls', c: 'acls', o: 'og', h: 'history', p: 'psychi', t: 'ot', x: 'mixed' }
+export const GRASS_DECK: Record<string, string> = { a: 'atls', c: 'acls', o: 'og', h: 'history', p: 'psychi', t: 'ot', m: 'medical', x: 'mixed' }
 
 export function deckFor(decks: Record<string, Deck>, key: string): Deck | null {
   if (key !== 'mixed') return decks[key] ?? null

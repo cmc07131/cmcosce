@@ -1,0 +1,66 @@
+{
+  "id": "md-eye",
+  "gym": "medical",
+  "title": "Visual loss: eye examination",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 27. Mr Kwan, 70, with hypertension and AF, noticed this morning that he keeps bumping into things on his right. Perform an eye examination and explain your management plan. A Snellen chart, pinhole, torch and ophthalmoscope are available.",
+  "notes": "Checked against RCOphth guidance, NICE NG128 (stroke and TIA), and standard eye examination.\n\nExamination: acuity with a Snellen chart at 6 m (each eye, with glasses; pinhole to correct refractive error), inspection, pupils (direct, consensual, swinging-light for RAPD), eye movements, visual fields by confrontation (each eye, each quadrant; red target for central fields), fundoscopy (red reflex, disc, vessels, macula). A homonymous hemianopia (same side in both eyes) localises behind the chiasm — optic tract, radiation or occipital cortex — usually a stroke in the posterior cerebral artery territory; acuity and fundi are normal. It needs urgent stroke assessment (CT/CTA; thrombolysis if within the window and disabling), and advice not to drive.\n\nOther patterns: monocular sudden painless loss (CRAO — cherry-red spot; CRVO — 'stormy sunset'; retinal detachment; GCA), bitemporal hemianopia (chiasm — pituitary), painful red eye with a mid-dilated pupil (acute angle-closure glaucoma).\n\nYour notes (2021 past paper: right homonymous hemianopia, normal acuity with pinhole, no RAPD, normal fundi) match this.",
+  "cast": [{ "id": "patient", "name": "Mr Kwan", "role": "elderly", "inBed": false }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine the eyes",
+      "hint": "Acuity (pinhole), inspection, pupils (RAPD), movements, fields, fundoscopy.",
+      "groups": {
+        "Acuity": [
+          { "t": "Snellen chart at 6 m, each eye", "r": "Right 6/9, left 6/9.", "mark": "Measures visual acuity in each eye" },
+          { "t": "Pinhole", "r": "Both improve to 6/6 — refractive error only.", "mark": "Uses a pinhole to correct refractive error" }
+        ],
+        "Pupils and movements": [
+          { "t": "Direct, consensual, swinging light test", "r": "Equal, reactive, no RAPD.", "mark": "Tests pupils including RAPD" },
+          { "t": "Eye movements", "r": "Full, no diplopia or nystagmus.", "mark": "Tests eye movements" }
+        ],
+        "Fields": [{ "t": "Confrontation fields, each eye separately, all quadrants", "r": "Both eyes miss the right half of the field: right homonymous hemianopia.", "mark": "Finds a right homonymous hemianopia" }],
+        "Fundus": [{ "t": "Fundoscopy: red reflex, disc, vessels, macula", "r": "Normal discs and vessels.", "img": "photo:fundus-normal", "mark": "Fundoscopy normal" }]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Present and plan",
+      "hint": "Localise: left post-chiasmal (occipital) lesion — stroke pathway.",
+      "opts": [
+        { "t": "Right homonymous hemianopia: left post-chiasmal lesion, likely left occipital (PCA) infarct given AF", "mark": "Localises the lesion and suggests the cause" },
+        { "t": "Stroke team, urgent CT and CTA; thrombolysis if within 4.5 h and disabling; check anticoagulation status", "mark": "Urgent stroke pathway" },
+        { "t": "Advise not to drive; formal visual fields; secondary prevention (anticoagulation for AF)", "mark": "Driving advice and secondary prevention" },
+        { "t": "Refer to an optician for new glasses", "trap": "critical", "r": "A field defect respecting the midline in both eyes is a brain lesion, not a refraction problem." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Bitemporal hemianopia suggests a lesion at…", "a": "The optic chiasm (e.g. pituitary)", "wrong": ["The occipital lobe", "One optic nerve", "The retina"] },
+        { "q": "Cherry-red spot at the macula suggests…", "a": "Central retinal artery occlusion", "wrong": ["CRVO", "Retinal detachment", "Glaucoma"] },
+        { "q": "RAPD indicates…", "a": "Optic nerve (or severe retinal) disease on that side", "wrong": ["Occipital stroke", "Cataract", "Third nerve palsy"] },
+        { "q": "Painful red eye, fixed mid-dilated pupil, halos, vomiting?", "a": "Acute angle-closure glaucoma", "wrong": ["Conjunctivitis", "Iritis", "Subconjunctival haemorrhage"] },
+        { "q": "Purpose of the pinhole?", "a": "To correct refractive error and show whether reduced acuity is refractive", "wrong": ["To dilate the pupil", "To test fields", "To measure pressure"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Field Marshal", "emoji": "👁", "flavor": "Same half in both eyes: it's the brain, not the eye." },
+  "cards": [
+    { "q": "Homonymous hemianopia localises to…", "options": ["Behind the optic chiasm", "One eye", "The chiasm", "The cornea"], "why": "Optic tract, radiation or occipital cortex.", "source": "Neuro-ophthalmology" },
+    { "q": "Sudden painless monocular loss in a patient over 50 with headache and jaw claudication?", "options": ["Giant cell arteritis", "Migraine", "Cataract", "Conjunctivitis"], "why": "Start steroids immediately.", "source": "BSR 2020" },
+    { "q": "Normal Snellen distance?", "options": ["6 metres", "1 metre", "40 cm", "10 metres"], "why": "Near vision at 33–40 cm.", "source": "Clinical examination" },
+    { "q": "Retinal detachment presents with…", "options": ["Floaters, flashes, and a curtain", "Painful red eye", "Itchy eyes", "Double vision"], "why": "Urgent ophthalmology.", "source": "RCOphth" },
+    { "q": "Papilloedema shows…", "options": ["Swollen disc with blurred margins", "Pale disc", "Cupped disc", "Normal disc"], "why": "Raised ICP.", "source": "Neuro-ophthalmology" },
+    { "q": "CRVO fundus appearance?", "options": ["'Stormy sunset' haemorrhages", "Cherry-red spot", "Normal", "Cotton wool only"], "why": "Widespread flame haemorrhages.", "source": "Ophthalmology" }
+  ]
+}

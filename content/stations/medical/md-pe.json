@@ -1,0 +1,86 @@
+{
+  "id": "md-pe",
+  "gym": "medical",
+  "title": "Pulmonary embolism",
+  "type": "resus",
+  "time": 420,
+  "stem": "Resus 3. Ms Kwok, 34, flew back from London 3 days ago. She has had sharp right-sided chest pain on breathing and breathlessness since this morning, and her left calf is swollen. HR 118, BP 108/70, RR 26, SpO2 91% in air, temperature 37.4 °C.",
+  "notes": "Checked against NICE NG158 (Venous thromboembolic diseases, 2020, updated 2023), the ESC 2019 PE guideline, PERC (Kline 2004) and PESI/sPESI.\n\nAssess clinical probability (two-level Wells: PE likely if score over 4). PE likely: CTPA immediately (interim anticoagulation if delayed); PE unlikely: D-dimer, CTPA if positive. PERC applies only when clinical suspicion is already low (under 15%): all eight criteria negative means no D-dimer needed. Haemodynamically unstable (systolic under 90) with suspected PE: bedside echo for RV dilatation, and systemic thrombolysis (alteplase 100 mg over 2 hours, or 50 mg bolus in arrest) if confirmed or highly likely. Stable: anticoagulation with a DOAC (apixaban or rivaroxaban) or LMWH; risk stratify with sPESI and RV/troponin for outpatient management. Pregnancy: test before the combined pill question; CTPA or V/Q; LMWH.\n\nYour notes (vascular and PE summary) use Wells and D-dimer and duplex for DVT — consistent.",
+  "cast": [{ "id": "patient", "name": "Ms Kwok", "role": "patient" }, { "id": "nurse", "name": "Nurse Ko", "role": "nurse" }],
+  "vitals": { "hr": 118, "sbp": 108, "dbp": 70, "spo2": 91, "rr": 26, "temp": 37.4, "rhythm": "sinus-tachy", "effects": [{ "scene": "o2", "add": { "spo2": 5 }, "overS": 30 }, { "scene": "anticoag", "add": { "hr": -6 }, "overS": 300 }] },
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "Pain, breathlessness, haemoptysis, DVT symptoms, risk factors, pregnancy and contraception.",
+      "groups": {
+        "Symptoms": [
+          { "t": "Describe the pain", "r": "Sharp, right side, worse when I breathe in.", "mark": "Characterises pleuritic pain" },
+          { "t": "Coughing blood? Fainting?", "r": "A little blood-streaked sputum. No fainting.", "mark": "Asks about haemoptysis and syncope" },
+          { "t": "Leg pain or swelling?", "r": "Left calf aching and swollen for 2 days.", "mark": "Asks DVT symptoms" }
+        ],
+        "Risks": [
+          { "t": "Recent travel, surgery, immobility, cancer, previous clots", "r": "13-hour flight. No surgery or cancer. No previous clot.", "mark": "Asks VTE risk factors" },
+          { "t": "Contraception, pregnancy, family history", "r": "Combined pill. LMP 2 weeks ago. Mother had a DVT.", "mark": "Asks contraception, pregnancy and family history" }
+        ]
+      }
+    },
+    {
+      "id": "tests",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Tests",
+      "hint": "ECG, CXR, gas, pregnancy test, Wells score; PE likely → CTPA.",
+      "groups": {
+        "Bedside": [
+          { "t": "12-lead ECG", "r": "Sinus tachycardia, S wave in I, Q wave and T inversion in III, T inversion V1–V3.", "img": "ecg:pe", "mark": "ECG: sinus tachycardia with right heart strain pattern" },
+          { "t": "Chest X-ray", "r": "Normal.", "img": "xr:cxr-normal", "mark": "Chest X-ray to exclude other causes" },
+          { "t": "Urine hCG", "r": "Negative.", "mark": "Pregnancy test" },
+          { "t": "Two-level Wells score", "r": "DVT signs 3, HR >100 1.5, PE most likely 3 = 7.5: PE likely.", "mark": "Calculates Wells: PE likely" }
+        ],
+        "Imaging": [
+          { "t": "CTPA", "r": "Filling defects in the right lower and middle lobe pulmonary arteries. RV:LV ratio 0.8.", "mark": "CTPA when PE likely" },
+          { "t": "D-dimer to decide on imaging", "trap": true, "r": "When PE is likely (Wells > 4), go straight to CTPA; a D-dimer does not change the plan." }
+        ]
+      }
+    },
+    {
+      "id": "treat",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Treatment",
+      "hint": "Oxygen, anticoagulation (DOAC or LMWH), stop the combined pill; risk stratify; no thrombolysis while stable.",
+      "confirm": "Give",
+      "opts": [
+        { "t": "Oxygen to SpO2 94–98%", "need": true, "scene": "o2", "mark": "Oxygen to target" },
+        { "t": "Apixaban 10 mg twice daily for 7 days then 5 mg twice daily (or LMWH)", "need": true, "scene": "anticoag", "mark": "Anticoagulation with a DOAC or LMWH" },
+        { "t": "Stop the combined pill; alternative contraception", "need": true, "mark": "Stops oestrogen-containing contraception" },
+        { "t": "Thrombolysis with alteplase now", "trap": "critical", "r": "She is haemodynamically stable. Thrombolysis is for high-risk (shocked) PE." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Wells score threshold for 'PE likely'?", "a": "More than 4", "wrong": ["More than 1", "More than 8", "Any positive item"] },
+        { "q": "PERC applies only when…", "a": "Clinical suspicion is already low", "wrong": ["Always", "PE is likely", "The patient is pregnant"] },
+        { "q": "Indication for systemic thrombolysis in PE?", "a": "Haemodynamic instability (high-risk PE)", "wrong": ["Any PE", "Haemoptysis", "Pleuritic pain"] },
+        { "q": "Commonest ECG finding in PE?", "a": "Sinus tachycardia", "wrong": ["S1Q3T3 in most", "AF", "ST elevation"] },
+        { "q": "Anticoagulation duration for a provoked PE?", "a": "About 3 months", "wrong": ["2 weeks", "Lifelong always", "No anticoagulation"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Clot Spotter", "emoji": "🫁", "flavor": "Wells over 4: CTPA. Stable: anticoagulate. Shocked: lyse." },
+  "cards": [
+    { "q": "Two-level Wells: PE likely if score is…", "options": ["> 4", "> 1", "> 10", "≥ 0"], "why": "Then CTPA.", "source": "NICE NG158" },
+    { "q": "PERC rule has how many criteria?", "options": ["8", "3", "5", "12"], "why": "Age, HR, SpO2, haemoptysis, oestrogen, previous VTE, recent surgery/trauma, unilateral leg swelling.", "source": "Kline 2004" },
+    { "q": "First-line anticoagulant for PE in most adults (NICE)?", "options": ["Apixaban or rivaroxaban", "Warfarin only", "Aspirin", "Clopidogrel"], "why": "No LMWH lead-in needed.", "source": "NICE NG158" },
+    { "q": "Thrombolysis for PE is indicated when…", "options": ["Systolic BP < 90 (high-risk PE)", "Any confirmed PE", "D-dimer high", "Pleuritic pain"], "why": "Consider in intermediate-high risk deteriorating.", "source": "ESC 2019" },
+    { "q": "S1Q3T3 on ECG is…", "options": ["Specific but insensitive for PE", "Present in most PE", "Diagnostic of PE", "A sign of STEMI"], "why": "Sinus tachycardia is commonest.", "source": "ESC 2019" },
+    { "q": "sPESI score of 0 means…", "options": ["Low 30-day mortality; consider outpatient treatment", "High risk", "Needs thrombolysis", "Needs ICU"], "why": "With no RV dysfunction.", "source": "ESC 2019" }
+  ]
+}

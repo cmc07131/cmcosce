@@ -21,6 +21,7 @@
     "h": "tall grass (Counsel/History deck)",
     "p": "tall grass (Psychi deck)",
     "t": "tall grass (O&T deck)",
+    "m": "tall grass (Medical deck)",
     "x": "tall grass (mixed deck)"
   },
   "grid": [
@@ -45,9 +46,9 @@
     "T...,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,...T",
     "T...,,,,,,,,,,,,,,,,,,,,,,RRRRR,,,,,,,,,,,,,...T",
     "T.RRRRRR........F,,,,,,,,,RRRRRF........RRRRRR.T",
-    "T.RRRRRR........F,***,,,,,#####F....***.RRRRRR.T",
-    "T.######....T...F,***,,,,,##D##F...T....######.T",
-    "T.##D###........F,,,,,,,,,,,,,,F........##D###.T",
+    "T.RRRRRR.mmm....F,***,,,,,#####F....***.RRRRRR.T",
+    "T.######.mmmT...F,***,,,,,##D##F...T....######.T",
+    "T.##D###.mmm....F,,,,,,,,,,,,,,F........##D###.T",
     "T...,,..........FFFFFFF,,FFFFFFF..........,,...T",
     "T...,,..hhhhhhxxxxxx...,,.......~~~~~~....,,...T",
     "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~.........T",
@@ -291,7 +292,7 @@
       "name": "MEDICAL GYM",
       "badge": "Physician Badge",
       "packs": [],
-      "deck": null,
+      "deck": "medical",
       "topics": [
         "DKA",
         "Addison disease",

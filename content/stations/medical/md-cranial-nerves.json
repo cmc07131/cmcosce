@@ -1,0 +1,73 @@
+{
+  "id": "md-cranial-nerves",
+  "gym": "medical",
+  "title": "Cranial nerve examination",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 23. Mr Choi, 52, woke this morning with his face drooping on the left and his left eye not closing properly. Examine his cranial nerves and explain your findings.",
+  "notes": "Checked against NICE CKS (Bell's palsy), the Sullivan et al. NEJM 2007 trial (prednisolone within 72 h), and standard cranial nerve examination.\n\nExamine II–XII systematically: II (acuity, fields, pupils, fundi), III/IV/VI (eye movements, diplopia, nystagmus, ptosis), V (sensation in three divisions, masseter, corneal reflex), VII (raise eyebrows, close eyes tightly, show teeth, puff cheeks), VIII (whisper, Rinne and Weber), IX/X (palate, gag if needed), XI (shrug and head turn), XII (tongue).\n\nLower motor neurone facial palsy involves the forehead (cannot raise the eyebrow); upper motor neurone (stroke) spares the forehead because of bilateral cortical innervation. Bell's palsy is a diagnosis of exclusion: check for vesicles in the ear or palate (Ramsay Hunt), parotid mass, other cranial nerve or limb signs, hearing loss, and trauma. Treatment: prednisolone 50 mg daily for 10 days (or 60 mg 5 days then taper) within 72 hours; antivirals not routinely (consider with severe palsy / Ramsay Hunt); eye protection (lubricants, tape at night) — the key complication is corneal exposure. Refer if no improvement at 3 weeks or atypical features.\n\nYour notes list cranial nerves as a topic without detail.",
+  "cast": [{ "id": "patient", "name": "Mr Choi", "role": "man", "inBed": false }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine cranial nerves",
+      "hint": "II to XII in order; compare sides; look in the ear.",
+      "groups": {
+        "II–VI": [
+          { "t": "Visual acuity, fields, pupils", "r": "6/6 both eyes, full fields, pupils equal and reactive.", "mark": "Tests CN II" },
+          { "t": "Eye movements (H pattern), ptosis, nystagmus", "r": "Full, no diplopia, no nystagmus, no ptosis.", "mark": "Tests CN III, IV, VI" },
+          { "t": "Facial sensation in three divisions; jaw clench", "r": "Normal; masseters strong.", "mark": "Tests CN V" }
+        ],
+        "VII": [
+          { "t": "Raise your eyebrows", "r": "Left forehead does not wrinkle.", "mark": "Tests forehead: involved (lower motor neurone)" },
+          { "t": "Close your eyes tightly", "r": "Left eye cannot close; the eye rolls up (Bell's phenomenon).", "mark": "Tests eye closure" },
+          { "t": "Show your teeth; puff your cheeks", "r": "Left mouth droops; air escapes on the left.", "mark": "Tests lower face" },
+          { "t": "Look in the ear canal and mouth", "r": "No vesicles. Parotid normal.", "mark": "Looks for vesicles (Ramsay Hunt) and parotid mass" }
+        ],
+        "VIII–XII": [
+          { "t": "Hearing (whisper), Rinne and Weber", "r": "Normal hearing; mild hyperacusis on the left.", "mark": "Tests CN VIII" },
+          { "t": "Palate, tongue, shoulder shrug", "r": "Normal.", "mark": "Tests CN IX–XII" }
+        ],
+        "Limbs": [{ "t": "Quick limb screen: pronator drift, power", "r": "Normal.", "mark": "Excludes limb weakness (stroke)" }]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "patient",
+      "label": "Explain",
+      "hint": "Bell's palsy; prednisolone; eye care; prognosis; return advice.",
+      "opts": [
+        { "t": "Left lower motor neurone facial palsy with no other signs: Bell's palsy, not a stroke — the forehead is involved", "mark": "Explains LMN versus UMN and the diagnosis" },
+        { "t": "Prednisolone 50 mg daily for 10 days, started within 72 hours", "mark": "Prescribes steroid within 72 hours" },
+        { "t": "Eye lubricant drops by day, ointment and tape at night, sunglasses; return if the eye becomes red or painful", "mark": "Eye protection advice" },
+        { "t": "Most recover within 3–6 months; review if not improving at 3 weeks", "mark": "Prognosis and follow-up" },
+        { "t": "Aciclovir alone without steroids", "trap": true, "r": "Antivirals alone are not effective; steroids are the treatment." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Why is the forehead spared in a stroke?", "a": "The upper face has bilateral cortical innervation", "wrong": ["The frontalis has no nerve supply", "Strokes affect only the eyes", "It isn't spared"] },
+        { "q": "Ramsay Hunt syndrome is caused by…", "a": "Varicella-zoster reactivation in the geniculate ganglion", "wrong": ["HSV-2", "Lyme disease only", "Parotid tumour"] },
+        { "q": "Weber test lateralises to the affected ear in…", "a": "Conductive hearing loss", "wrong": ["Sensorineural loss", "Normal hearing", "Tinnitus"] },
+        { "q": "Main complication to prevent in Bell's palsy?", "a": "Corneal exposure and ulceration", "wrong": ["Stroke", "Meningitis", "Tooth loss"] },
+        { "q": "Nerve for the corneal reflex (afferent)?", "a": "Trigeminal (V1)", "wrong": ["Facial", "Oculomotor", "Optic"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Twelve Pairs", "emoji": "👂", "flavor": "Forehead in? LMN. Steroid in 72 hours, protect the eye." },
+  "cards": [
+    { "q": "Forehead-sparing facial weakness suggests…", "options": ["Upper motor neurone lesion (e.g. stroke)", "Bell's palsy", "Parotid tumour", "Ramsay Hunt"], "why": "Bilateral innervation of the upper face.", "source": "Neurology" },
+    { "q": "Bell's palsy treatment?", "options": ["Prednisolone within 72 hours", "Aciclovir alone", "Surgery", "Antibiotics"], "why": "Sullivan NEJM 2007.", "source": "NICE CKS" },
+    { "q": "CN VI palsy causes…", "options": ["Failure of abduction", "Ptosis", "Mydriasis", "Loss of downgaze in adduction"], "why": "Lateral rectus.", "source": "Neurology" },
+    { "q": "Third nerve palsy with a dilated pupil suggests…", "options": ["Compressive lesion (e.g. PCom aneurysm)", "Diabetes", "Myasthenia", "Bell's palsy"], "why": "Parasympathetic fibres run superficially.", "source": "Neurology" },
+    { "q": "Rinne negative (bone > air) means…", "options": ["Conductive hearing loss in that ear", "Normal hearing", "Sensorineural loss", "Tinnitus"], "why": "Weber goes to that ear.", "source": "ENT" },
+    { "q": "Tongue deviates towards…", "options": ["The side of a CN XII lesion", "The opposite side", "Up", "It never deviates"], "why": "Weak genioglossus.", "source": "Neurology" }
+  ]
+}

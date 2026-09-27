@@ -1,0 +1,71 @@
+{
+  "id": "md-vascular",
+  "gym": "medical",
+  "title": "Acute limb ischaemia: vascular examination",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 28. Mr Fung, 72, with atrial fibrillation (stopped his anticoagulant a month ago), has had sudden severe pain in his right leg for 3 hours; the leg is cold and he says it feels numb. Examine his lower limbs and explain your plan.",
+  "notes": "Checked against the ESVS 2020 guideline on acute limb ischaemia, NICE CG147 (peripheral arterial disease) and the Rutherford classification.\n\nThe 6 Ps: pain, pallor, pulselessness, perishingly cold, paraesthesia, paralysis. Sensory loss and weakness (Rutherford IIa/IIb) mean the limb is threatened; fixed mottling, paralysis and anaesthesia mean it is irreversible (III). Embolic ischaemia (AF, sudden, no claudication history, normal contralateral pulses) versus thrombotic (claudication history, reduced contralateral pulses). Examine: inspection (colour, mottling, blanching), temperature (level), capillary refill, all pulses (femoral, popliteal, DP, PT) both sides, handheld Doppler (arterial and venous signals), sensation and motor function, calf tenderness (compartment). Treatment: immediate IV unfractionated heparin (e.g. 5000 units bolus) unless contraindicated, analgesia, urgent vascular surgery (embolectomy, thrombolysis, or bypass within hours for threatened limbs), watch for reperfusion (hyperkalaemia, compartment syndrome).\n\nYour vascular notes cover inspection, pulses, Buerger's test, ABPI and DVT management — which apply to chronic ischaemia and DVT; for the acute threatened limb, the priority is heparin and immediate vascular referral.",
+  "cast": [{ "id": "patient", "name": "Mr Fung", "role": "elderly", "inBed": true }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Compare both legs: colour, temperature, CRT, pulses, Doppler, sensation, power, calf.",
+      "groups": {
+        "Look and feel": [
+          { "t": "Colour of both legs", "r": "Right foot and calf pale and mottled (blanches with pressure).", "mark": "Inspects colour and mottling" },
+          { "t": "Temperature, feeling up both legs", "r": "Right leg cold below the mid-thigh.", "mark": "Compares temperature and finds the level" },
+          { "t": "Capillary refill", "r": "Right toes > 5 seconds; left 2 seconds." }
+        ],
+        "Pulses": [
+          { "t": "Femoral, popliteal, dorsalis pedis, posterior tibial — both sides", "r": "Right femoral present; right popliteal and foot pulses absent. Left all present.", "mark": "Palpates all pulses on both sides" },
+          { "t": "Handheld Doppler", "r": "No arterial signal at the right ankle; venous signal present.", "mark": "Uses Doppler for arterial and venous signals" }
+        ],
+        "Neuro": [
+          { "t": "Sensation and toe/ankle movement", "r": "Reduced light touch over the right foot; weak toe dorsiflexion.", "mark": "Assesses sensory and motor deficit (threatened limb)" },
+          { "t": "Calf tenderness", "r": "Right calf soft, not tender." }
+        ],
+        "Heart": [{ "t": "Pulse rhythm", "r": "Irregularly irregular.", "img": "ecg:af", "mark": "Identifies AF as an embolic source" }]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Plan",
+      "hint": "Acute embolic ischaemia, threatened limb (Rutherford IIb): heparin, analgesia, vascular surgery now.",
+      "opts": [
+        { "t": "Acute embolic limb ischaemia from AF, threatened (sensory and motor loss)", "mark": "Diagnoses acute embolic ischaemia and grades it" },
+        { "t": "IV unfractionated heparin bolus now; IV analgesia; bloods including group and save, CK, lactate", "mark": "Immediate heparin, analgesia and bloods" },
+        { "t": "Emergency vascular surgery referral for revascularisation within hours", "mark": "Emergency vascular referral" },
+        { "t": "Anticipate reperfusion: hyperkalaemia, compartment syndrome", "mark": "Anticipates reperfusion complications" },
+        { "t": "Arterial duplex next week in clinic", "trap": "critical", "r": "A threatened limb has hours, not days." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "The 6 Ps?", "a": "Pain, pallor, pulselessness, perishingly cold, paraesthesia, paralysis", "wrong": ["Pain, pus, purpura, pyrexia, pallor, paralysis", "Pulse, pressure, perfusion, pain, plasma, platelets", "None"] },
+        { "q": "Sign of an irreversibly ischaemic limb?", "a": "Fixed non-blanching mottling with paralysis", "wrong": ["Absent foot pulses alone", "Pallor", "Pain"] },
+        { "q": "Clue to embolic rather than thrombotic ischaemia?", "a": "Sudden onset, AF, normal contralateral pulses", "wrong": ["Long claudication history", "Bilateral weak pulses", "Diabetes"] },
+        { "q": "ABPI under 0.5 suggests…", "a": "Severe peripheral arterial disease", "wrong": ["Normal", "Calcified vessels", "Venous disease"] },
+        { "q": "First drug in acute limb ischaemia?", "a": "IV unfractionated heparin", "wrong": ["Aspirin only", "Warfarin", "Thrombolysis in the ED for all"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Six Ps", "emoji": "🦵", "flavor": "Cold, white, pulseless, numb: heparin and a vascular surgeon now." },
+  "cards": [
+    { "q": "Acute limb ischaemia with sensory loss and weakness is Rutherford…", "options": ["IIb (immediately threatened)", "I (viable)", "III (irreversible)", "IIa"], "why": "Needs emergency revascularisation.", "source": "ESVS 2020" },
+    { "q": "ABPI over 1.3 suggests…", "options": ["Calcified, incompressible vessels", "Normal", "Severe ischaemia", "Venous disease"], "why": "Common in diabetes.", "source": "NICE CG147" },
+    { "q": "Buerger's test assesses…", "options": ["Arterial insufficiency by elevation pallor", "DVT", "Varicose veins", "Nerve damage"], "why": "Angle of pallor under 20° is severe.", "source": "Clinical examination" },
+    { "q": "Complication after revascularisation of an ischaemic limb?", "options": ["Compartment syndrome and hyperkalaemia", "Hypoglycaemia", "Stroke always", "Anaemia only"], "why": "Reperfusion injury.", "source": "ESVS 2020" },
+    { "q": "Most common source of lower limb emboli?", "options": ["The heart (AF)", "The lungs", "The veins", "The kidney"], "why": "Left atrial appendage thrombus.", "source": "ESVS 2020" },
+    { "q": "Chronic limb ischaemia symptom?", "options": ["Intermittent claudication relieved by rest", "Sudden cold leg", "Calf swelling", "Fever"], "why": "Rest pain = critical ischaemia.", "source": "NICE CG147" }
+  ]
+}

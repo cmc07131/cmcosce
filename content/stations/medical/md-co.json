@@ -1,0 +1,79 @@
+{
+  "id": "md-co",
+  "gym": "medical",
+  "title": "Carbon monoxide poisoning: talking to the family",
+  "type": "comms",
+  "time": 420,
+  "stem": "Relatives' room. Ms Wong, 23, was found in a sealed room with a burnt charcoal burner. Her GCS was 7 and she has been intubated. COHb was 35%. Her mother has just arrived. Explain her condition and the plan, including hyperbaric oxygen.",
+  "notes": "Checked against TOXBASE, the Undersea and Hyperbaric Medical Society indications, the Cochrane review of hyperbaric oxygen for CO poisoning (2011) and Weaver et al. (NEJM 2002).\n\nCO binds haemoglobin (~240 times more than oxygen), shifts the dissociation curve left, and poisons cytochrome oxidase. Treatment: 100% oxygen (half-life of COHb about 5 hours in air, 60–90 minutes on 100%, about 20–30 minutes at 2.5–3 ATA). Hyperbaric oxygen is considered for loss of consciousness, neurological signs, COHb over 25% (over 15–20% in pregnancy), cardiac ischaemia or severe acidosis, aiming to reduce delayed neurological sequelae; evidence is mixed (Weaver 2002 positive; Cochrane 2011 inconclusive). Risks: ear and sinus barotrauma (myringotomy in intubated patients), pulmonary barotrauma, oxygen toxicity seizures, claustrophobia, transfer risks. Absolute contraindication: untreated pneumothorax. Relative/drug contraindications: bleomycin exposure, doxorubicin, cisplatin, disulfiram.\n\nDeliberate self-poisoning: psychiatric assessment once recovered; screen for co-ingestion (paracetamol, alcohol); check others at the scene.\n\nYour notes match on indications, complications, preparation and procedure; they omit untreated pneumothorax, the main absolute contraindication.",
+  "cast": [{ "id": "mother", "name": "Mrs Wong", "role": "woman" }],
+  "steps": [
+    {
+      "id": "talk",
+      "kind": "dialogue",
+      "to": "mother",
+      "label": "Talk to Mrs Wong",
+      "hint": "Introduce, what happened, why the breathing tube, hyperbaric oxygen, questions, support.",
+      "mood": 8,
+      "turns": [
+        {
+          "line": "Where's my daughter? What happened?",
+          "opts": [
+            { "t": "I'm Dr Lee, looking after your daughter. Please sit down. She was found in a room with burning charcoal; she breathed in carbon monoxide gas, which stops blood carrying oxygen. She was very drowsy, so we put a breathing tube in to protect her airway and give her pure oxygen.", "r": "[Crying] Will she live?", "mood": -2, "mark": "Explains what happened and why she was intubated" },
+            { "t": "She tried to kill herself.", "r": "No… no…", "mood": 3 }
+          ]
+        },
+        {
+          "line": "Will she live?",
+          "opts": [
+            { "t": "She is seriously ill but her heart and blood pressure are stable. The main worry is damage to the brain, which can appear days or weeks later. We'd like to give her oxygen in a pressure chamber — hyperbaric oxygen — which may reduce that risk.", "r": "A chamber? Is it dangerous?", "mood": -1, "mark": "Explains prognosis and the rationale for HBOT, including delayed sequelae" },
+            { "t": "Yes, she'll be fine.", "r": "Really?", "mood": 0 }
+          ]
+        },
+        {
+          "line": "A chamber? Is it dangerous?",
+          "opts": [
+            { "t": "It's generally safe. The pressure can hurt the ears, so an ENT doctor will make tiny holes in her eardrums that heal later. Rarely it can cause seizures from oxygen, or lung injury. A doctor and nurse will be with her throughout; usually 1–3 sessions of about 90 minutes.", "r": "OK. What do you need from me?", "mood": -2, "mark": "Explains risks and preparation (myringotomy) and the procedure" },
+            { "t": "No risks.", "r": "Hmm.", "mood": 1 }
+          ]
+        },
+        {
+          "line": "OK. What do you need from me?",
+          "opts": [
+            { "t": "Has she ever had chemotherapy, lung problems like a collapsed lung, or take medicines like disulfiram? And did she have any other medicines at home she might have taken?", "r": "No chemo. She had depression last year — sertraline.", "mood": -1, "mark": "Asks about contraindications and co-ingestion" },
+            { "t": "Nothing, just wait outside.", "r": "…", "mood": 2 }
+          ]
+        },
+        {
+          "line": "She had depression last year…",
+          "opts": [
+            { "t": "Thank you for telling me. Once she's awake, the mental health team will see her. I'll ask our social worker to support you, and I'll update you as soon as anything changes.", "r": "Thank you, doctor.", "mood": -2, "mark": "Plans psychiatric assessment and supports the family" },
+            { "t": "That's not our concern.", "r": "!", "mood": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Absolute contraindication to hyperbaric oxygen?", "a": "Untreated pneumothorax", "wrong": ["Pregnancy", "Age over 60", "Intubation"] },
+        { "q": "COHb half-life on 100% normobaric oxygen?", "a": "About 60–90 minutes", "wrong": ["5 hours", "5 minutes", "24 hours"] },
+        { "q": "Why is SpO2 unreliable in CO poisoning?", "a": "Pulse oximeters read COHb as oxyhaemoglobin", "wrong": ["CO damages the probe", "CO causes vasoconstriction", "It is reliable"] },
+        { "q": "Main aim of HBOT in CO poisoning?", "a": "Reduce delayed neurological sequelae", "wrong": ["Treat burns", "Cure depression", "Prevent pneumonia"] },
+        { "q": "A threshold commonly used for HBOT in pregnancy?", "a": "COHb over 15–20%", "wrong": ["COHb over 50%", "Any exposure", "Never in pregnancy"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Pressure Chamber", "emoji": "🫧", "flavor": "100% oxygen now, HBOT for the brain, pneumothorax excluded, family supported." },
+  "cards": [
+    { "q": "CO affinity for haemoglobin compared with oxygen?", "options": ["About 240 times", "Equal", "Half", "10 times"], "why": "Also shifts the curve left.", "source": "Toxicology" },
+    { "q": "HBOT indication in CO poisoning?", "options": ["Loss of consciousness or neurological signs", "Headache alone with COHb 5%", "Smoker with COHb 8%", "Mild nausea"], "why": "Also COHb > 25%, ischaemia, pregnancy with >15–20%.", "source": "UHMS" },
+    { "q": "Complication of HBOT?", "options": ["Middle ear barotrauma", "Hypoglycaemia", "Hyperkalaemia", "Rash"], "why": "Myringotomy for intubated patients.", "source": "UHMS" },
+    { "q": "Drug that makes HBOT hazardous (lung toxicity)?", "options": ["Bleomycin", "Paracetamol", "Amoxicillin", "Omeprazole"], "why": "Oxygen-related pneumonitis.", "source": "UHMS" },
+    { "q": "Delayed neurological sequelae after CO appear…", "options": ["Days to weeks after exposure", "Within minutes only", "Only after 1 year", "Never"], "why": "Memory, personality, movement disorders.", "source": "Weaver 2002" },
+    { "q": "After deliberate CO self-poisoning, also…", "options": ["Screen for co-ingestion and arrange psychiatric assessment", "Discharge when COHb normal", "Only HBOT", "Nothing else"], "why": "Self-harm care.", "source": "NICE NG225" }
+  ]
+}

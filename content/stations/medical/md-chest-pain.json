@@ -1,0 +1,83 @@
+{
+  "id": "md-chest-pain",
+  "gym": "medical",
+  "title": "Chest pain: history and risk",
+  "type": "history",
+  "time": 420,
+  "stem": "Cubicle 26. Mr Yeung, 56, had 30 minutes of central chest tightness while climbing stairs this morning; it eased with rest. He is pain-free now. BP 148/88, HR 76, SpO2 98%. Take a history, then discuss the ECG, tests and disposition.",
+  "notes": "Checked against ESC 2023 ACS guidelines (0/1-hour high-sensitivity troponin algorithm), NICE CG95 (Recent-onset chest pain, updated 2016) and the HEART score (Six 2008; Backus 2013).\n\nHistory: character, site, radiation, onset and trigger, duration, relief, associated symptoms (sweating, breathlessness, syncope), risk factors, and red flags for other lethal causes — aortic dissection (tearing, back, pulse deficit), PE (pleuritic, haemoptysis, DVT risk), pneumothorax, oesophageal rupture (after vomiting), pericarditis, tamponade.\n\nECG within 10 minutes. High-sensitivity troponin at 0 and 1 hour (or 0 and 3 h, depending on assay): rule-out, observe, or rule-in zones. HEART score (History, ECG, Age, Risk factors, Troponin): 0–3 low risk, discharge with outpatient follow-up; 4–6 intermediate; 7–10 high. Stable angina features get outpatient CT coronary angiography (NICE). Aspirin 300 mg if ACS is suspected.\n\nYour notes' chest pain history (site, onset, radiation, exertion, associated symptoms, risk factors, drugs including cocaine/PDE5 inhibitors, differentials by system) matches.",
+  "cast": [{ "id": "patient", "name": "Mr Yeung", "role": "man", "inBed": true }],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "SOCRATES, associated symptoms, red flags for dissection/PE, risk factors, drugs.",
+      "groups": {
+        "Pain": [
+          { "t": "Where is the pain and what is it like?", "r": "Central, a tight band. Went into my left arm.", "mark": "Asks site, character and radiation" },
+          { "t": "What were you doing? What eased it? How long?", "r": "Climbing four flights of stairs. Eased after 30 minutes' rest.", "mark": "Asks trigger, relief and duration" },
+          { "t": "Any sweating, breathlessness, nausea, fainting?", "r": "Sweaty and short of breath with it.", "mark": "Asks associated symptoms" },
+          { "t": "Has it happened before?", "r": "Twice in the last week, shorter each time.", "mark": "Asks about previous episodes (crescendo)" }
+        ],
+        "Red flags": [
+          { "t": "Tearing pain into the back? Sharp pain on breathing? Coughing blood? Leg swelling?", "r": "No.", "mark": "Screens for dissection, PE and pneumothorax" }
+        ],
+        "Risk": [
+          { "t": "Smoking, diabetes, BP, cholesterol, family history", "r": "Ex-smoker, high BP, cholesterol. Brother had bypass at 50.", "mark": "Asks cardiovascular risk factors" },
+          { "t": "Medicines, Viagra, drugs, allergies", "r": "Amlodipine. Nothing else. No allergies.", "mark": "Drug history including PDE5 inhibitors and cocaine" }
+        ]
+      }
+    },
+    {
+      "id": "tests",
+      "kind": "order",
+      "to": "trolley",
+      "label": "ECG and troponin",
+      "hint": "ECG within 10 minutes; hs-troponin 0 and 1 hour.",
+      "groups": {
+        "ECG": [{ "t": "12-lead ECG", "r": "Sinus rhythm, no ST elevation or depression.", "img": "ecg:sinus", "mark": "Reviews the ECG within 10 minutes" }],
+        "Troponin": [
+          { "t": "hs-troponin at 0 hours", "r": "14 ng/L (assay 99th centile 14).", "mark": "Baseline high-sensitivity troponin" },
+          { "t": "hs-troponin at 1 hour", "r": "31 ng/L — a significant rise.", "mark": "Repeat troponin at 1 hour" }
+        ]
+      }
+    },
+    {
+      "id": "decide",
+      "kind": "say",
+      "to": "examiner",
+      "label": "Disposition",
+      "hint": "Rising troponin with typical history: NSTEMI. Treat and admit.",
+      "opts": [
+        { "t": "Typical angina with a significant troponin rise: NSTEMI", "mark": "Diagnoses NSTEMI from the delta troponin" },
+        { "t": "Aspirin 300 mg, anticoagulation (fondaparinux/heparin), second antiplatelet per cardiology, admit to CCU; angiography within 24 hours if high risk", "mark": "ACS treatment and admission" },
+        { "t": "HEART score is high (history 2, ECG 0, age 1, risks 2, troponin 1–2)", "mark": "Applies the HEART score" },
+        { "t": "Pain has gone, discharge with GP follow-up", "trap": "critical", "r": "Troponin rise with typical pain: ACS. Pain-free does not mean safe." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "HEART score components?", "a": "History, ECG, Age, Risk factors, Troponin", "wrong": ["Heart rate, Echo, Age, Rhythm, Temperature", "Hb, ECG, Albumin, Renal, Troponin", "None"] },
+        { "q": "Low-risk HEART score?", "a": "0–3", "wrong": ["7–10", "4–6", "Over 5"] },
+        { "q": "ESC hs-troponin rapid protocol?", "a": "0 and 1 hour (0/1-h algorithm)", "wrong": ["0 and 24 hours", "Single 12-hour test", "Only if pain continues"] },
+        { "q": "Sign suggesting aortic dissection?", "a": "Pulse or BP difference between arms", "wrong": ["Pleural rub", "Reproducible chest wall tenderness", "Wheeze"] },
+        { "q": "Contraindication to nitrates?", "a": "PDE5 inhibitor in the last 24–48 hours", "wrong": ["Diabetes", "Age over 70", "Aspirin use"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Heart Scorer", "emoji": "💓", "flavor": "Typical story plus a delta troponin: it's ACS even when the pain has gone." },
+  "cards": [
+    { "q": "ECG in chest pain should be done within…", "options": ["10 minutes", "1 hour", "4 hours", "24 hours"], "why": "Identify STEMI.", "source": "ESC 2023" },
+    { "q": "A HEART score of 2 suggests…", "options": ["Low risk: early discharge with follow-up", "Admit to CCU", "Immediate angiography", "Thrombolysis"], "why": "0–3 low risk.", "source": "Backus 2013" },
+    { "q": "Pain radiating to the back with a BP difference between arms?", "options": ["Aortic dissection", "Stable angina", "Costochondritis", "GORD"], "why": "CT aortogram.", "source": "ESC aortic guideline" },
+    { "q": "Boerhaave syndrome follows…", "options": ["Forceful vomiting", "Coughing", "Exercise", "Swallowing a pill"], "why": "Oesophageal rupture.", "source": "Surgery" },
+    { "q": "NICE first-line test for stable chest pain of suspected cardiac origin?", "options": ["CT coronary angiography", "Exercise ECG", "Resting ECG only", "Chest X-ray"], "why": "CG95 update.", "source": "NICE CG95" },
+    { "q": "Pericarditis ECG?", "options": ["Widespread concave ST elevation and PR depression", "Regional ST elevation with reciprocal change", "Q waves", "Delta waves"], "why": "Pain eases sitting forward.", "source": "ESC pericardial guideline" }
+  ]
+}
