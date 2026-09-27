@@ -28,6 +28,8 @@ const optSchema = z.object({
   n: z.number().int().positive().optional(),
   end: z.boolean().optional(),
   perform: z.enum(performKinds).optional(),
+  /** Perform detail, e.g. an exam test and the lesion side: "eyes:right". */
+  pose: z.string().optional(),
   performHint: z.string().optional(),
 })
 export type StationOpt = z.infer<typeof optSchema>
@@ -323,6 +325,7 @@ export function compileStation(station: Station): Pack {
       mood: o.mood,
       order: o.n,
       perform: o.perform,
+      performPose: o.pose,
       performHint: o.performHint,
     }
   }

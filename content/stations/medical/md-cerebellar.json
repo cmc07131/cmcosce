@@ -17,10 +17,10 @@
       "groups": {
         "Head": [
           { "t": "Speech: say 'British constitution'", "r": "Slurred, staccato speech.", "mark": "Assesses speech (dysarthria)" },
-          { "t": "Eye movements and nystagmus", "r": "Horizontal nystagmus, fast phase to the right, worse looking right.", "mark": "Looks for nystagmus" }
+          { "t": "Eye movements and nystagmus", "r": "Horizontal nystagmus, fast phase to the right, worse looking right.", "mark": "Looks for nystagmus", "perform": "exam", "pose": "eyes:right", "performHint": "Pen about 50 cm away. Head still, trace an H, and pause at each side. Stop short of the extreme of gaze." }
         ],
         "Arms": [
-          { "t": "Finger–nose test", "r": "Right: intention tremor and past-pointing. Left normal.", "mark": "Finger–nose test: right intention tremor" },
+          { "t": "Finger–nose test", "r": "Right: intention tremor and past-pointing. Left normal.", "mark": "Finger–nose test: right intention tremor", "perform": "exam", "pose": "finger-nose:right", "performHint": "Demonstrate first. Hold your finger at the full stretch of his arm, move it between touches, and test both arms." },
           { "t": "Rapid alternating movements", "r": "Clumsy on the right (dysdiadochokinesia).", "mark": "Tests for dysdiadochokinesia" },
           { "t": "Tone", "r": "Reduced on the right.", "mark": "Assesses tone" }
         ],

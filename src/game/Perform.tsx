@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from '
 import { HandSprite } from './HandSprite'
 import { CicoProcedure } from './cico/CicoProcedure'
 import { CordProcedure } from './cord/CordProcedure'
+import { ExamBench } from './exam/ExamBench'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -41,6 +42,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <CordProcedure seed={seed} coach onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'exam') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <ExamBench job={job} onDone={onDone} />
       </BattleFrame>
     )
   }
@@ -148,7 +157,7 @@ function BattleFrame({ job, onCancel, children }: { job: PerformJob; onCancel: (
     <div className="battle absolute inset-0 z-40 flex flex-col" data-testid="perform">
       {intro && <div className="battle-intro" aria-hidden />}
       <div className="win battle-head">
-        <span className="battle-tag">PROCEDURE</span>
+        <span className="battle-tag">{job.kind === 'exam' ? 'EXAMINATION' : 'PROCEDURE'}</span>
         <h2 className="win-title">{job.label}</h2>
         <button type="button" className="win-close" aria-label="Close" data-testid="perform-close" onClick={onCancel}>
           B✕
