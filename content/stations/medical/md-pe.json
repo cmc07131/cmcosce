@@ -17,13 +17,13 @@
       "hint": "Pain, breathlessness, haemoptysis, DVT symptoms, risk factors, pregnancy and contraception.",
       "groups": {
         "Symptoms": [
-          { "t": "Describe the pain", "r": "Sharp, right side, worse when I breathe in.", "mark": "Characterises pleuritic pain" },
-          { "t": "Coughing blood? Fainting?", "r": "A little blood-streaked sputum. No fainting.", "mark": "Asks about haemoptysis and syncope" },
-          { "t": "Leg pain or swelling?", "r": "Left calf aching and swollen for 2 days.", "mark": "Asks DVT symptoms" }
+          { "t": "Describe the pain", "tz": "講吓個痛係點樣嘅？", "rz": "好似刺咁痛，喺右邊，吸氣就更痛。", "r": "Sharp, right side, worse when I breathe in.", "mark": "Characterises pleuritic pain" },
+          { "t": "Coughing blood? Fainting?", "tz": "有冇咳血？有冇暈過？", "rz": "痰入面有少少血絲。冇暈過。", "r": "A little blood-streaked sputum. No fainting.", "mark": "Asks about haemoptysis and syncope" },
+          { "t": "Leg pain or swelling?", "tz": "隻腳有冇痛或者腫？", "rz": "左邊小腿痠痛同腫咗兩日。", "r": "Left calf aching and swollen for 2 days.", "mark": "Asks DVT symptoms" }
         ],
         "Risks": [
-          { "t": "Recent travel, surgery, immobility, cancer, previous clots", "r": "13-hour flight. No surgery or cancer. No previous clot.", "mark": "Asks VTE risk factors" },
-          { "t": "Contraception, pregnancy, family history", "r": "Combined pill. LMP 2 weeks ago. Mother had a DVT.", "mark": "Asks contraception, pregnancy and family history" }
+          { "t": "Recent travel, surgery, immobility, cancer, previous clots", "tz": "最近有冇坐長途機、做過手術、長時間唔郁、有冇癌症，或者以前有冇試過血管栓塞？", "rz": "坐咗十三個鐘飛機。冇做過手術，冇癌症，以前冇試過血栓。", "r": "13-hour flight. No surgery or cancer. No previous clot.", "mark": "Asks VTE risk factors" },
+          { "t": "Contraception, pregnancy, family history", "tz": "你用緊咩避孕？有冇機會有咗？屋企人有冇血栓？", "rz": "食緊避孕丸。兩個禮拜前嚟過月經。阿媽試過腳靜脈栓塞。", "r": "Combined pill. LMP 2 weeks ago. Mother had a DVT.", "mark": "Asks contraception, pregnancy and family history" }
         ]
       }
     },

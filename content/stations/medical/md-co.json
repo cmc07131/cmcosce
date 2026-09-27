@@ -17,38 +17,38 @@
       "mood": 8,
       "turns": [
         {
-          "line": "Where's my daughter? What happened?",
+          "line": "Where's my daughter? What happened?", "lz": "我個女呢？佢發生咩事？",
           "opts": [
-            { "t": "I'm Dr Lee, looking after your daughter. Please sit down. She was found in a room with burning charcoal; she breathed in carbon monoxide gas, which stops blood carrying oxygen. She was very drowsy, so we put a breathing tube in to protect her airway and give her pure oxygen.", "r": "[Crying] Will she live?", "mood": -2, "mark": "Explains what happened and why she was intubated" },
-            { "t": "She tried to kill herself.", "r": "No… no…", "mood": 3 }
+            { "t": "I'm Dr Lee, looking after your daughter. Please sit down. She was found in a room with burning charcoal; she breathed in carbon monoxide gas, which stops blood carrying oxygen. She was very drowsy, so we put a breathing tube in to protect her airway and give her pure oxygen.", "tz": "我係李醫生，負責照顧你個女。你先坐低。佢喺一間燒緊炭嘅房度俾人發現，吸入咗一氧化碳，令血液運唔到氧氣。佢好唔清醒，所以我哋幫佢插咗喉，保護佢嘅氣道同埋俾純氧佢。", "rz": "（喊緊）佢會唔會冇事㗎？", "r": "[Crying] Will she live?", "mood": -2, "mark": "Explains what happened and why she was intubated" },
+            { "t": "She tried to kill herself.", "tz": "佢想自殺。", "rz": "唔會嘅……唔會嘅……", "r": "No… no…", "mood": 3 }
           ]
         },
         {
-          "line": "Will she live?",
+          "line": "Will she live?", "lz": "佢會唔會冇事？",
           "opts": [
-            { "t": "She is seriously ill but her heart and blood pressure are stable. The main worry is damage to the brain, which can appear days or weeks later. We'd like to give her oxygen in a pressure chamber — hyperbaric oxygen — which may reduce that risk.", "r": "A chamber? Is it dangerous?", "mood": -1, "mark": "Explains prognosis and the rationale for HBOT, including delayed sequelae" },
-            { "t": "Yes, she'll be fine.", "r": "Really?", "mood": 0 }
+            { "t": "She is seriously ill but her heart and blood pressure are stable. The main worry is damage to the brain, which can appear days or weeks later. We'd like to give her oxygen in a pressure chamber — hyperbaric oxygen — which may reduce that risk.", "tz": "佢而家情況好嚴重，不過心跳同血壓都穩定。最擔心係腦部受損，呢啲可以幾日甚至幾個禮拜之後先出現。我哋想俾佢入高壓氧艙，喺高壓之下吸氧氣，可能減低呢個風險。", "rz": "高壓氧艙？危唔危險㗎？", "r": "A chamber? Is it dangerous?", "mood": -1, "mark": "Explains prognosis and the rationale for HBOT, including delayed sequelae" },
+            { "t": "Yes, she'll be fine.", "tz": "係，佢會冇事嘅。", "rz": "真係？", "r": "Really?", "mood": 0 }
           ]
         },
         {
-          "line": "A chamber? Is it dangerous?",
+          "line": "A chamber? Is it dangerous?", "lz": "高壓氧艙？危唔危險㗎？",
           "opts": [
-            { "t": "It's generally safe. The pressure can hurt the ears, so an ENT doctor will make tiny holes in her eardrums that heal later. Rarely it can cause seizures from oxygen, or lung injury. A doctor and nurse will be with her throughout; usually 1–3 sessions of about 90 minutes.", "r": "OK. What do you need from me?", "mood": -2, "mark": "Explains risks and preparation (myringotomy) and the procedure" },
-            { "t": "No risks.", "r": "Hmm.", "mood": 1 }
+            { "t": "It's generally safe. The pressure can hurt the ears, so an ENT doctor will make tiny holes in her eardrums that heal later. Rarely it can cause seizures from oxygen, or lung injury. A doctor and nurse will be with her throughout; usually 1–3 sessions of about 90 minutes.", "tz": "一般都算安全。壓力可能會令耳仔痛，所以耳鼻喉醫生會喺佢耳膜開個好細嘅窿，之後會自己埋返。好少數情況，氧氣可能會引致抽筋，或者傷到肺。成個過程都有醫生同護士喺度，通常做一至三次，每次大概九十分鐘。", "rz": "好。你要我做啲咩？", "r": "OK. What do you need from me?", "mood": -2, "mark": "Explains risks and preparation (myringotomy) and the procedure" },
+            { "t": "No risks.", "tz": "完全冇風險。", "rz": "嗯……", "r": "Hmm.", "mood": 1 }
           ]
         },
         {
-          "line": "OK. What do you need from me?",
+          "line": "OK. What do you need from me?", "lz": "好。你要我做啲咩？",
           "opts": [
-            { "t": "Has she ever had chemotherapy, lung problems like a collapsed lung, or take medicines like disulfiram? And did she have any other medicines at home she might have taken?", "r": "No chemo. She had depression last year — sertraline.", "mood": -1, "mark": "Asks about contraindications and co-ingestion" },
-            { "t": "Nothing, just wait outside.", "r": "…", "mood": 2 }
+            { "t": "Has she ever had chemotherapy, lung problems like a collapsed lung, or take medicines like disulfiram? And did she have any other medicines at home she might have taken?", "tz": "佢以前有冇做過化療？有冇肺部問題，例如試過爆肺？有冇食 disulfiram 呢類藥？屋企仲有冇其他藥，佢可能食咗？", "rz": "冇做過化療。佢舊年有抑鬱症，食緊 sertraline。", "r": "No chemo. She had depression last year — sertraline.", "mood": -1, "mark": "Asks about contraindications and co-ingestion" },
+            { "t": "Nothing, just wait outside.", "tz": "冇嘢，你喺出面等啦。", "r": "…", "mood": 2 }
           ]
         },
         {
-          "line": "She had depression last year…",
+          "line": "She had depression last year…", "lz": "佢舊年有抑鬱症……",
           "opts": [
-            { "t": "Thank you for telling me. Once she's awake, the mental health team will see her. I'll ask our social worker to support you, and I'll update you as soon as anything changes.", "r": "Thank you, doctor.", "mood": -2, "mark": "Plans psychiatric assessment and supports the family" },
-            { "t": "That's not our concern.", "r": "!", "mood": 3 }
+            { "t": "Thank you for telling me. Once she's awake, the mental health team will see her. I'll ask our social worker to support you, and I'll update you as soon as anything changes.", "tz": "多謝你話俾我知。佢醒咗之後，精神科會嚟睇佢。我會叫醫務社工幫手支援你，有任何變化我都會即刻話你知。", "rz": "多謝你，醫生。", "r": "Thank you, doctor.", "mood": -2, "mark": "Plans psychiatric assessment and supports the family" },
+            { "t": "That's not our concern.", "tz": "呢啲唔關我哋事。", "r": "!", "mood": 3 }
           ]
         }
       ]

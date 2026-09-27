@@ -1,11 +1,12 @@
 import { create } from 'zustand'
+import type { PatientLang } from '~/engine/lang'
 
 const KEY = 'osce-gym:settings'
 
-type Stored = { sound: boolean; labels: boolean }
+type Stored = { sound: boolean; labels: boolean; patientLang: PatientLang }
 
-/** `labels` shows NPC name tags on the map. Kit labels always show. */
-const defaults: Stored = { sound: false, labels: false }
+/** `labels` shows NPC name tags on the map. Kit labels always show. Patients speak Cantonese by default. */
+const defaults: Stored = { sound: false, labels: false, patientLang: 'zh' }
 
 function read(): Stored {
   try {
@@ -30,24 +31,25 @@ type SettingsState = Stored & {
   load: () => void
   toggleSound: () => void
   toggleLabels: () => void
+  toggleLang: () => void
 }
 
 /** Sound is off until the player turns it on. Loaded on the client only, so SSR renders the defaults. */
-export const useSettings = create<SettingsState>((set, get) => ({
-  ...defaults,
-  loaded: false,
-  load: () => {
-    if (get().loaded) return
-    set({ ...read(), loaded: true })
-  },
-  toggleSound: () => {
-    const next = { sound: !get().sound, labels: get().labels }
+export const useSettings = create<SettingsState>((set, get) => {
+  const save = (patch: Partial<Stored>) => {
+    const next: Stored = { sound: get().sound, labels: get().labels, patientLang: get().patientLang, ...patch }
     write(next)
     set(next)
-  },
-  toggleLabels: () => {
-    const next = { sound: get().sound, labels: !get().labels }
-    write(next)
-    set(next)
-  },
-}))
+  }
+  return {
+    ...defaults,
+    loaded: false,
+    load: () => {
+      if (get().loaded) return
+      set({ ...read(), loaded: true })
+    },
+    toggleSound: () => save({ sound: !get().sound }),
+    toggleLabels: () => save({ labels: !get().labels }),
+    toggleLang: () => save({ patientLang: get().patientLang === 'zh' ? 'en' : 'zh' }),
+  }
+})

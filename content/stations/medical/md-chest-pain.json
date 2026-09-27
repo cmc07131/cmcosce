@@ -16,17 +16,17 @@
       "hint": "SOCRATES, associated symptoms, red flags for dissection/PE, risk factors, drugs.",
       "groups": {
         "Pain": [
-          { "t": "Where is the pain and what is it like?", "r": "Central, a tight band. Went into my left arm.", "mark": "Asks site, character and radiation" },
-          { "t": "What were you doing? What eased it? How long?", "r": "Climbing four flights of stairs. Eased after 30 minutes' rest.", "mark": "Asks trigger, relief and duration" },
-          { "t": "Any sweating, breathlessness, nausea, fainting?", "r": "Sweaty and short of breath with it.", "mark": "Asks associated symptoms" },
-          { "t": "Has it happened before?", "r": "Twice in the last week, shorter each time.", "mark": "Asks about previous episodes (crescendo)" }
+          { "t": "Where is the pain and what is it like?", "tz": "痛喺邊度？係點樣嘅痛？", "rz": "喺心口正中，好似有條帶箍實咁。仲痛落左手。", "r": "Central, a tight band. Went into my left arm.", "mark": "Asks site, character and radiation" },
+          { "t": "What were you doing? What eased it? How long?", "tz": "痛嗰陣你做緊咩？點樣會好啲？痛咗幾耐？", "rz": "行緊四層樓梯。坐低抖咗半個鐘先好返。", "r": "Climbing four flights of stairs. Eased after 30 minutes' rest.", "mark": "Asks trigger, relief and duration" },
+          { "t": "Any sweating, breathlessness, nausea, fainting?", "tz": "有冇出汗、唞唔到氣、想嘔或者暈？", "rz": "痛嗰陣出好多汗，又有啲喘。", "r": "Sweaty and short of breath with it.", "mark": "Asks associated symptoms" },
+          { "t": "Has it happened before?", "tz": "以前有冇試過咁？", "rz": "上個禮拜試過兩次，每次都冇咁耐。", "r": "Twice in the last week, shorter each time.", "mark": "Asks about previous episodes (crescendo)" }
         ],
         "Red flags": [
-          { "t": "Tearing pain into the back? Sharp pain on breathing? Coughing blood? Leg swelling?", "r": "No.", "mark": "Screens for dissection, PE and pneumothorax" }
+          { "t": "Tearing pain into the back? Sharp pain on breathing? Coughing blood? Leg swelling?", "tz": "有冇好似撕裂咁痛到背脊？吸氣會唔會刺痛？有冇咳血？腳有冇腫？", "rz": "冇。", "r": "No.", "mark": "Screens for dissection, PE and pneumothorax" }
         ],
         "Risk": [
-          { "t": "Smoking, diabetes, BP, cholesterol, family history", "r": "Ex-smoker, high BP, cholesterol. Brother had bypass at 50.", "mark": "Asks cardiovascular risk factors" },
-          { "t": "Medicines, Viagra, drugs, allergies", "r": "Amlodipine. Nothing else. No allergies.", "mark": "Drug history including PDE5 inhibitors and cocaine" }
+          { "t": "Smoking, diabetes, BP, cholesterol, family history", "tz": "你有冇食煙、糖尿、血壓高、膽固醇高？屋企人有冇心臟病？", "rz": "以前食煙，而家戒咗。有血壓高同膽固醇。阿哥五十歲做咗搭橋手術。", "r": "Ex-smoker, high BP, cholesterol. Brother had bypass at 50.", "mark": "Asks cardiovascular risk factors" },
+          { "t": "Medicines, Viagra, drugs, allergies", "tz": "你食緊咩藥？有冇用偉哥或者其他藥？有冇藥物敏感？", "rz": "食緊 amlodipine，冇其他。冇敏感。", "r": "Amlodipine. Nothing else. No allergies.", "mark": "Drug history including PDE5 inhibitors and cocaine" }
         ]
       }
     },

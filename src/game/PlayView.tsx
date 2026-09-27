@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { localizePack } from '~/engine/lang'
 import { hintFor, stepsDone } from '~/engine/judge'
 import { readoutText, type Action, type Pack } from '~/engine/schema'
 import { hasOutput, vitalsAt, vitalsLine } from '~/engine/vitals'
@@ -22,7 +23,10 @@ function formatClock(seconds: number) {
   return `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
 }
 
-export function PlayView({ pack }: { pack: Pack }) {
+export function PlayView({ pack: source }: { pack: Pack }) {
+  // Patients and relatives speak Cantonese (or English, from the START menu); staff and the examiner, English.
+  const patientLang = useSettings((s) => s.patientLang)
+  const pack = useMemo(() => localizePack(source, patientLang), [source, patientLang])
   const navigate = useNavigate()
   const boot = usePlay((s) => s.boot)
   const hydrated = usePlay((s) => s.hydrated && s.packId === pack.packId)

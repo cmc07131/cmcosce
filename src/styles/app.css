@@ -2,9 +2,27 @@
 @import '@fontsource/press-start-2p/latin-400.css';
 @import 'tailwindcss';
 
+/*
+ * Chinese in patient conversations. The pixel fonts have no CJK glyphs, so Chinese falls back to the phone's
+ * own font — scaled up to sit well beside the tiny pixel font, and only for CJK code points, so English is untouched.
+ */
+@font-face {
+  font-family: 'CJK Pixel';
+  src: local('PingFang TC'), local('PingFang HK'), local('Noto Sans CJK TC'), local('Noto Sans TC'), local('Microsoft JhengHei'), local('Heiti TC'), local('Source Han Sans TC');
+  unicode-range: U+2E80-2FDF, U+3000-303F, U+3100-312F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF;
+  size-adjust: 130%;
+}
+
+@font-face {
+  font-family: 'CJK Body';
+  src: local('PingFang TC'), local('PingFang HK'), local('Noto Sans CJK TC'), local('Noto Sans TC'), local('Microsoft JhengHei'), local('Heiti TC'), local('Source Han Sans TC');
+  unicode-range: U+2E80-2FDF, U+3000-303F, U+3100-312F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FF00-FFEF;
+  size-adjust: 90%;
+}
+
 @theme {
-  --font-pixel: 'Press Start 2P', ui-monospace, monospace;
-  --font-body: 'VT323', ui-monospace, monospace;
+  --font-pixel: 'Press Start 2P', 'CJK Pixel', ui-monospace, monospace;
+  --font-body: 'VT323', 'CJK Body', ui-monospace, monospace;
   --color-ink: #181820;
   --color-paper: #f8f8f8;
   --color-frame: #7888b8;

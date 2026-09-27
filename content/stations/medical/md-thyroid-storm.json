@@ -73,8 +73,8 @@
       "hint": "The slimming product, other symptoms, previous thyroid history.",
       "groups": {
         "Pills": [
-          { "t": "What are the slimming pills? Do you have the bottle?", "r": "Bought online from Thailand. The label says it contains tiratricol.", "mark": "Identifies the product (tiratricol: a T3 analogue)" },
-          { "t": "Any weight loss, palpitations, heat intolerance before?", "r": "Lost 8 kg in 2 months, always hot, heart racing.", "mark": "Asks about prior thyrotoxic symptoms" }
+          { "t": "What are the slimming pills? Do you have the bottle?", "tz": "佢食緊嘅係咩減肥丸？你有冇帶個樽嚟？", "rz": "喺網上買，由泰國寄嚟。個樽寫住有 tiratricol。", "r": "Bought online from Thailand. The label says it contains tiratricol.", "mark": "Identifies the product (tiratricol: a T3 analogue)" },
+          { "t": "Any weight loss, palpitations, heat intolerance before?", "tz": "佢之前有冇瘦咗、心跳好快、好怕熱？", "rz": "兩個月瘦咗八公斤，成日話好熱，心跳好快。", "r": "Lost 8 kg in 2 months, always hot, heart racing.", "mark": "Asks about prior thyrotoxic symptoms" }
         ]
       }
     },

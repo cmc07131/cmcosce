@@ -16,14 +16,14 @@
       "hint": "Onset, joints, previous attacks, triggers, systemic symptoms, drugs, renal function, alcohol.",
       "groups": {
         "Joint": [
-          { "t": "When did it start and how fast?", "r": "Woke at 3 a.m. with it. Worst pain ever within hours; can't bear the bedsheet.", "mark": "Asks onset and severity" },
-          { "t": "Any other joints? Injury?", "r": "Just the toe. No injury.", "mark": "Asks about other joints and trauma" },
-          { "t": "Fevers, rigors, feeling unwell?", "r": "A bit warm, no rigors.", "mark": "Screens for sepsis" }
+          { "t": "When did it start and how fast?", "tz": "幾時開始痛？係咪好快就好痛？", "rz": "凌晨三點痛醒。幾個鐘內痛到前所未有咁痛，連被單掂到都頂唔順。", "r": "Woke at 3 a.m. with it. Worst pain ever within hours; can't bear the bedsheet.", "mark": "Asks onset and severity" },
+          { "t": "Any other joints? Injury?", "tz": "其他關節有冇痛？有冇撞傷過？", "rz": "淨係腳趾公。冇撞過。", "r": "Just the toe. No injury.", "mark": "Asks about other joints and trauma" },
+          { "t": "Fevers, rigors, feeling unwell?", "tz": "有冇發燒、發冷震，或者成個人唔舒服？", "rz": "有少少熱，冇發冷震。", "r": "A bit warm, no rigors.", "mark": "Screens for sepsis" }
         ],
         "Triggers": [
-          { "t": "Alcohol, diet, recent illness?", "r": "Seafood banquet and beer last night.", "mark": "Asks about triggers" },
-          { "t": "Medicines, especially water tablets?", "r": "Bendroflumethiazide for blood pressure.", "mark": "Identifies a diuretic" },
-          { "t": "Kidney problems, diabetes, heart disease?", "r": "Borderline kidney function, per my GP.", "mark": "Asks renal and cardiovascular history" }
+          { "t": "Alcohol, diet, recent illness?", "tz": "最近有冇飲酒、食咗啲咩，或者有冇病過？", "rz": "琴晚食海鮮宴，又飲咗啤酒。", "r": "Seafood banquet and beer last night.", "mark": "Asks about triggers" },
+          { "t": "Medicines, especially water tablets?", "tz": "你食緊咩藥？特別係有冇食去水丸？", "rz": "有，食緊 bendroflumethiazide 降血壓。", "r": "Bendroflumethiazide for blood pressure.", "mark": "Identifies a diuretic" },
+          { "t": "Kidney problems, diabetes, heart disease?", "tz": "有冇腎病、糖尿病或者心臟病？", "rz": "家庭醫生話我腎功能有少少邊緣。", "r": "Borderline kidney function, per my GP.", "mark": "Asks renal and cardiovascular history" }
         ]
       }
     },
@@ -48,10 +48,10 @@
       "label": "Explain",
       "hint": "Likely gout; treat the flare; triggers; long-term urate lowering; when to return.",
       "opts": [
-        { "t": "This looks like gout — uric acid crystals in the joint. If you had a high fever or felt very unwell, we'd take fluid from the joint to exclude infection.", "mark": "Explains gout and when to exclude sepsis" },
-        { "t": "Naproxen with omeprazole (or colchicine 500 microgram 2–4 times a day, or prednisolone if NSAIDs unsuitable); rest and ice", "mark": "Treats the flare appropriately" },
-        { "t": "Reduce beer and seafood; ask your GP about changing the water tablet and starting urate-lowering treatment after the attack", "mark": "Addresses triggers, diuretics and long-term urate lowering" },
-        { "t": "Start allopurinol today at a high dose to stop this attack", "trap": true, "r": "Allopurinol doesn't treat the flare; start after it settles, with prophylaxis." }
+        { "t": "This looks like gout — uric acid crystals in the joint. If you had a high fever or felt very unwell, we'd take fluid from the joint to exclude infection.", "tz": "睇落係痛風，即係尿酸結晶積咗喺關節入面。如果你發高燒或者好唔舒服，我哋就要抽關節液驗吓，排除細菌感染。", "mark": "Explains gout and when to exclude sepsis" },
+        { "t": "Naproxen with omeprazole (or colchicine 500 microgram 2–4 times a day, or prednisolone if NSAIDs unsuitable); rest and ice", "tz": "我會開消炎止痛藥 naproxen，加埋胃藥 omeprazole；如果唔啱食，可以用 colchicine 或者類固醇。休息同埋冰敷。", "mark": "Treats the flare appropriately" },
+        { "t": "Reduce beer and seafood; ask your GP about changing the water tablet and starting urate-lowering treatment after the attack", "tz": "少飲啤酒、少食海鮮。發作過咗之後，同家庭醫生傾吓換降血壓藥，同埋開始食降尿酸藥。", "mark": "Addresses triggers, diuretics and long-term urate lowering" },
+        { "t": "Start allopurinol today at a high dose to stop this attack", "tz": "我今日就開高劑量 allopurinol 俾你，止住今次發作。", "trap": true, "r": "Allopurinol doesn't treat the flare; start after it settles, with prophylaxis." }
       ]
     },
     {

@@ -21,6 +21,9 @@ const optionSchema = z.object({
   label: z.string(),
   /** The nurse fetches this from the drug cart or the kit trolley and gives it at the bedside. */
   fetch: z.enum(['cart', 'trolley']).optional(),
+  /** Spoken Cantonese for patient conversations; shown instead of label/detail when the patient language is Chinese. */
+  labelZh: z.string().optional(),
+  detailZh: z.string().optional(),
   detail: z.string().optional(),
   needed: z.boolean().optional(),
   isTrap: z.boolean().optional(),
@@ -60,7 +63,7 @@ const actionSchema = z.object({
   ask: z.string().optional(),
   options: z.array(optionSchema).optional(),
   /** Dialogue and viva: the lines the other person says, in order. Options belong to a turn by `group`. */
-  turns: z.array(z.object({ id: z.string(), line: z.string() })).optional(),
+  turns: z.array(z.object({ id: z.string(), line: z.string(), lineZh: z.string().optional() })).optional(),
   /** Dialogue: the starting distress, 0 calm … 10 about to walk out. */
   startMood: z.number().optional(),
   /** Shown at the top of the panel: the wound, the X-ray you were handed. */

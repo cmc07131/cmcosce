@@ -40,11 +40,11 @@
       "label": "Explain",
       "hint": "Bell's palsy; prednisolone; eye care; prognosis; return advice.",
       "opts": [
-        { "t": "Left lower motor neurone facial palsy with no other signs: Bell's palsy, not a stroke — the forehead is involved", "mark": "Explains LMN versus UMN and the diagnosis" },
-        { "t": "Prednisolone 50 mg daily for 10 days, started within 72 hours", "mark": "Prescribes steroid within 72 hours" },
-        { "t": "Eye lubricant drops by day, ointment and tape at night, sunglasses; return if the eye becomes red or painful", "mark": "Eye protection advice" },
-        { "t": "Most recover within 3–6 months; review if not improving at 3 weeks", "mark": "Prognosis and follow-up" },
-        { "t": "Aciclovir alone without steroids", "trap": true, "r": "Antivirals alone are not effective; steroids are the treatment." }
+        { "t": "Left lower motor neurone facial palsy with no other signs: Bell's palsy, not a stroke — the forehead is involved", "tz": "你呢個係左邊面神經線發炎，叫 Bell's palsy，唔係中風——因為你連額頭都郁唔到，而其他神經都正常。", "mark": "Explains LMN versus UMN and the diagnosis" },
+        { "t": "Prednisolone 50 mg daily for 10 days, started within 72 hours", "tz": "我會開類固醇俾你，每日食 50 mg，食十日。三日之內開始食效果最好。", "mark": "Prescribes steroid within 72 hours" },
+        { "t": "Eye lubricant drops by day, ointment and tape at night, sunglasses; return if the eye becomes red or painful", "tz": "因為你隻眼合唔埋，日頭要滴眼藥水，夜晚搽眼藥膏再用膠布貼住，出街戴太陽眼鏡。如果隻眼變紅或者痛，要即刻返嚟。", "mark": "Eye protection advice" },
+        { "t": "Most recover within 3–6 months; review if not improving at 3 weeks", "tz": "大部分人三至六個月內會好返。如果三個禮拜都冇改善，要返嚟覆診。", "mark": "Prognosis and follow-up" },
+        { "t": "Aciclovir alone without steroids", "tz": "我淨係開抗病毒藥俾你，唔使食類固醇。", "trap": true, "r": "Antivirals alone are not effective; steroids are the treatment." }
       ]
     },
     {

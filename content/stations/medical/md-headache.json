@@ -16,17 +16,17 @@
       "hint": "Onset speed, activity, worst ever, neck, LOC, focal symptoms, previous headaches, drugs, risk factors.",
       "groups": {
         "Headache": [
-          { "t": "How quickly did it reach its worst?", "r": "Instantly — within a few seconds.", "mark": "Establishes thunderclap onset" },
-          { "t": "What were you doing?", "r": "Lifting weights.", "mark": "Asks about exertional onset" },
-          { "t": "Is it the worst headache of your life? Have you had headaches like this before?", "r": "Worst ever. I get migraines but never like this.", "mark": "Asks about severity and previous headaches" }
+          { "t": "How quickly did it reach its worst?", "tz": "個頭痛幾快去到最痛？", "rz": "即刻——幾秒之內。", "r": "Instantly — within a few seconds.", "mark": "Establishes thunderclap onset" },
+          { "t": "What were you doing?", "tz": "嗰陣你做緊咩？", "rz": "舉緊重。", "r": "Lifting weights.", "mark": "Asks about exertional onset" },
+          { "t": "Is it the worst headache of your life? Have you had headaches like this before?", "tz": "係咪你一世人最痛嘅頭痛？以前有冇試過咁？", "rz": "係最痛嘅一次。我有偏頭痛，但從來冇咁痛過。", "r": "Worst ever. I get migraines but never like this.", "mark": "Asks about severity and previous headaches" }
         ],
         "Associated": [
-          { "t": "Neck pain or stiffness? Light hurting your eyes?", "r": "My neck feels stiff.", "mark": "Asks about neck stiffness and photophobia" },
-          { "t": "Did you black out? Any weakness, numbness, double vision, seizure?", "r": "No blackout. No weakness.", "mark": "Asks about LOC and focal symptoms" }
+          { "t": "Neck pain or stiffness? Light hurting your eyes?", "tz": "條頸有冇痛或者硬？見到光會唔會好唔舒服？", "rz": "條頸好似有啲硬。", "r": "My neck feels stiff.", "mark": "Asks about neck stiffness and photophobia" },
+          { "t": "Did you black out? Any weakness, numbness, double vision, seizure?", "tz": "有冇暈低？有冇手腳冇力、麻痺、見到重影或者抽筋？", "rz": "冇暈低。手腳冇冇力。", "r": "No blackout. No weakness.", "mark": "Asks about LOC and focal symptoms" }
         ],
         "Background": [
-          { "t": "Blood pressure, smoking, family history of aneurysms or polycystic kidneys", "r": "Smoker. My aunt died of a brain haemorrhage.", "mark": "Asks risk factors and family history" },
-          { "t": "Medicines, cocaine, pregnancy, contraception", "r": "Combined pill. No drugs.", "mark": "Drug history and contraception" }
+          { "t": "Blood pressure, smoking, family history of aneurysms or polycystic kidneys", "tz": "你有冇血壓高？有冇食煙？屋企人有冇腦血管瘤或者多囊腎？", "rz": "有食煙。我阿姨係腦出血死嘅。", "r": "Smoker. My aunt died of a brain haemorrhage.", "mark": "Asks risk factors and family history" },
+          { "t": "Medicines, cocaine, pregnancy, contraception", "tz": "你食緊咩藥？有冇用可卡因？有冇機會有咗？用緊咩避孕？", "rz": "食緊避孕丸。冇用毒品。", "r": "Combined pill. No drugs.", "mark": "Drug history and contraception" }
         ]
       }
     },

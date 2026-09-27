@@ -26,6 +26,9 @@ const optSchema = z.object({
   scene: z.string().optional(),
   /** The nurse fetches this from the drug cart or the kit trolley and gives it at the bedside. */
   fetch: z.enum(['cart', 'trolley']).optional(),
+  /** Spoken Cantonese (Traditional Chinese) for conversations with patients and relatives: your line, their reply. */
+  tz: z.string().optional(),
+  rz: z.string().optional(),
   /** Steps: place in the correct sequence. */
   n: z.number().int().positive().optional(),
   end: z.boolean().optional(),
@@ -54,7 +57,8 @@ const stepSchema = z.object({
   opts: z.array(optSchema).optional(),
   groups: z.record(z.string(), z.array(optSchema)).optional(),
   mood: z.number().optional(),
-  turns: z.array(z.object({ line: z.string(), opts: z.array(optSchema) })).optional(),
+  /** `lz`: the other person's line in spoken Cantonese. */
+  turns: z.array(z.object({ line: z.string(), lz: z.string().optional(), opts: z.array(optSchema) })).optional(),
   qs: z
     .array(
       z.object({
@@ -330,6 +334,8 @@ export function compileStation(station: Station): Pack {
       order: o.n,
       perform: o.perform,
       fetch: o.fetch,
+      labelZh: o.tz,
+      detailZh: spoken(speaker, o.rz),
       performPose: o.pose,
       performHint: o.performHint,
     }
@@ -370,7 +376,7 @@ export function compileStation(station: Station): Pack {
         return { ...base, kind: step.kind, options }
       }
       case 'dialogue': {
-        const turns = (step.turns ?? []).map((turn, i) => ({ id: `t${i + 1}`, line: spoken(other, turn.line) ?? turn.line }))
+        const turns = (step.turns ?? []).map((turn, i) => ({ id: `t${i + 1}`, line: spoken(other, turn.line) ?? turn.line, lineZh: spoken(other, turn.lz) }))
         const options = (step.turns ?? []).flatMap((turn, i) => turn.opts.map((o, j) => option(step, o, j, `t${i + 1}`, other)))
         return { ...base, kind: 'dialogue', turns, startMood: step.mood ?? 5, options }
       }
