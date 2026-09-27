@@ -5,7 +5,7 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 1. A 17-year-old girl was the front-seat passenger in a car hit on her side at speed. She has a tender abdomen with a seatbelt mark. The ambulance reports HR 128, BP 88/50, RR 24, SpO2 97%, GCS 15. You are the trauma team leader; the nurse and a junior doctor are with you.",
-  "notes": "Checked against ATLS 11th edition (xABCDE, shock classes with base deficit), NICE NG39 (major trauma, 2016, reviewed), CRASH-2, and RCEM trauma team leader guidance.\n\nYour notes cover this scenario well. Differences:\n• Initial fluid: your notes say a 1–2 L crystalloid bolus. ATLS now limits crystalloid to 1 L at most and moves early to blood in a balanced ratio; NICE advises blood products, not crystalloid, in active bleeding.\n• Shock classes: ATLS 10th added base deficit (class II −2 to −6, class III −6 to −10, class IV below −10). Heart-rate cut-offs in your table are close enough.\n• TXA: 1 g over 10 minutes, then 1 g over 8 hours, within 3 hours — as in your notes.\n\nA seatbelt sign raises the risk of hollow viscus, mesenteric and lumbar spine (Chance) injuries. A positive FAST in an unstable patient means laparotomy; stable or responding patients can have CT. Ask for a pregnancy test in any female of reproductive age.\n\nTeam leader behaviours scored: pre-brief, roles, closed-loop communication, summarising aloud, and deciding on disposition.",
+  "notes": "Checked against ATLS 11th edition (xABCDE, shock classes with base deficit), NICE NG39 (major trauma, 2016, reviewed), CRASH-2, and RCEM trauma team leader guidance.\n\nYour notes cover this scenario well. Differences:\n• Initial fluid: your notes say a 1–2 L crystalloid bolus. ATLS now limits crystalloid to 1 L at most and moves early to blood in a balanced ratio; NICE advises blood products, not crystalloid, in active bleeding.\n• While blood is on its way: do not withhold volume from a crashing patient, and do not flood her either. Give warmed crystalloid in 250 mL boluses, reassessing after each, only to keep a radial pulse and mentation, then switch to blood the moment it arrives. Activate the major haemorrhage protocol early so the wait is short.\n• PERMISSIVE HYPOTENSION: aim for a systolic of 80–90 mmHg (palpable radial pulse, talking) until the bleeding is controlled. A higher pressure pops clots and more fluid dilutes clotting factors.\n• EXCEPTION — TRAUMATIC BRAIN INJURY: no permissive hypotension. Hypotension roughly doubles mortality after TBI. Keep systolic ≥110 mmHg (aged 15–49 or over 70) or ≥100 mmHg (aged 50–69), MAP ≥80 (ATLS 10th–11th, Brain Trauma Foundation). In combined bleeding and head injury, give blood (and crystalloid while waiting) to hold that pressure, and control the bleeding fast.\n• Vasopressors are not a substitute for volume in haemorrhagic shock.\n• Shock classes: ATLS 10th added base deficit (class II −2 to −6, class III −6 to −10, class IV below −10). Heart-rate cut-offs in your table are close enough.\n• TXA: 1 g over 10 minutes, then 1 g over 8 hours, within 3 hours — as in your notes.\n\nA seatbelt sign raises the risk of hollow viscus, mesenteric and lumbar spine (Chance) injuries. A positive FAST in an unstable patient means laparotomy; stable or responding patients can have CT. Ask for a pregnancy test in any female of reproductive age.\n\nTeam leader behaviours scored: pre-brief, roles, closed-loop communication, summarising aloud, and deciding on disposition.",
   "cast": [
     { "id": "patient", "name": "Wing", "role": "patient" },
     { "id": "nurse", "name": "Nurse Cheng", "role": "nurse" },
@@ -24,6 +24,7 @@
     "drift": { "sbp": -2, "hr": 2 },
     "stop": ["blood"],
     "effects": [
+      { "scene": "bridge", "add": { "sbp": 6, "dbp": 4, "hr": -4 }, "overS": 60 },
       { "scene": "blood", "add": { "sbp": 14, "dbp": 8, "hr": -10 }, "overS": 90 }
     ]
   },
@@ -88,13 +89,28 @@
       "kind": "say",
       "to": "nurse",
       "label": "Resuscitate",
-      "hint": "Access, bloods with crossmatch and pregnancy test, blood not saline, TXA, analgesia.",
+      "hint": "Access, bloods with crossmatch and pregnancy test, major haemorrhage protocol, TXA, analgesia.",
       "opts": [
         { "t": "Second large-bore cannula; bloods, crossmatch, gas, lactate, and a pregnancy test", "mark": "Access and bloods including crossmatch and pregnancy test", "r": "Nurse Cheng: Done. Gas: pH 7.26, base deficit −8, lactate 4.6, Hb 96. hCG negative." },
-        { "t": "Start O-negative blood now; major haemorrhage protocol 1:1:1", "scene": "blood", "mark": "Starts blood early", "r": "Nurse Cheng: Blood running through the warmer." },
+        { "t": "Activate the major haemorrhage protocol; O-negative to the bay", "mark": "Activates the major haemorrhage protocol early", "r": "Nurse Cheng: Blood bank says the O-negative is 10 minutes away. BP 80/46 now." },
         { "t": "Tranexamic acid 1 g IV now", "mark": "Gives tranexamic acid" },
         { "t": "Titrated IV fentanyl for pain", "mark": "Analgesia" },
         { "t": "2 L of saline wide open first, then decide on blood", "trap": true, "r": "Crystalloid dilutes clotting. Blood first in active bleeding." }
+      ]
+    },
+    {
+      "id": "bridge",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Waiting for blood",
+      "hint": "Blood is 10 minutes away and she is worsening. Don't withhold volume, don't flood her: small warmed boluses to a radial pulse, PERMISSIVE HYPOTENSION (systolic 80–90). Exception: head injury — keep the pressure up.",
+      "opts": [
+        { "t": "Warmed crystalloid 250 mL bolus now; reassess after each, and stop once she has a radial pulse and is talking", "scene": "bridge", "mark": "Bridges with small warmed crystalloid boluses while blood is on its way", "r": "Nurse Cheng: 250 mL in. Radial pulse is back and she is answering. BP 86/50." },
+        { "t": "Permissive hypotension: aim for a systolic of 80–90 until the bleeding is controlled", "mark": "Permissive hypotension (systolic 80–90) until haemorrhage control" },
+        { "t": "No head injury (GCS 15, no head signs), so permissive hypotension is safe; with a brain injury I would keep the systolic at 110 or more (MAP 80 or more)", "mark": "States the head injury exception: no permissive hypotension in TBI" },
+        { "t": "The O-negative has arrived: run it through the warmer, then 1:1:1", "scene": "blood", "mark": "Starts blood the moment it arrives", "r": "Nurse Cheng: Blood running through the warmer." },
+        { "t": "Give nothing until the blood arrives", "trap": "critical", "r": "She is peri-arrest. Withholding all volume risks cardiac arrest; small warmed boluses bridge the gap." },
+        { "t": "Noradrenaline infusion to bring her pressure back to normal", "trap": true, "r": "Vasopressors in haemorrhage hide the bleeding and cut tissue perfusion further. Volume and haemorrhage control first." }
       ]
     },
     {
@@ -144,6 +160,8 @@
         { "q": "Base deficit in class III shock?", "a": "−6 to −10 mmol/L", "wrong": ["0 to −2 mmol/L", "−2 to −6 mmol/L", "−10 mmol/L or worse"] },
         { "q": "What does FAST not reliably detect?", "a": "Retroperitoneal and hollow viscus injury", "wrong": ["Pericardial fluid in tamponade", "Free fluid in Morison's pouch", "A haemothorax (on extended FAST)"] },
         { "q": "A seatbelt sign raises concern for…", "a": "Bowel, mesentery and lumbar spine injury", "wrong": ["Skin bruising only, which is benign", "An isolated open-book pelvic ring fracture", "A head injury from the steering wheel"] },
+        { "q": "Target systolic before haemorrhage control, without a head injury?", "a": "80–90 mmHg", "wrong": ["120 mmHg or more", "Normal for her age", "60–70 mmHg, or lower"], "why": "Permissive hypotension limits clot disruption and dilution until the bleeding is controlled." },
+        { "q": "Why no permissive hypotension with a traumatic brain injury?", "a": "Low pressure cuts cerebral perfusion and worsens secondary injury", "wrong": ["It raises intracranial pressure directly", "Blood transfusion is not used in head injury", "The injured brain autoregulates at any pressure"], "why": "Keep systolic ≥110 (≥100 if aged 50–69) and MAP ≥80." },
         { "q": "Positive FAST in an unresponsive shocked patient: next?", "a": "Laparotomy", "wrong": ["CT abdomen", "Repeat FAST in an hour", "Diagnostic peritoneal lavage first"] }
       ]
     }
@@ -153,6 +171,9 @@
   ],
   "badge": { "name": "Team Leader", "emoji": "📣", "flavor": "Brief, lead, summarise. Blood, not saline. FAST positive and unstable: theatre." },
   "cards": [
+    { "q": "Permissive hypotension target in bleeding trauma without a head injury?", "options": ["Systolic 80–90 mmHg", "Systolic 120 mmHg or more", "MAP 90 mmHg or more", "Systolic 50–60 mmHg"], "why": "Until the bleeding is controlled. Not in traumatic brain injury.", "source": "ATLS 11th edition" },
+    { "q": "Bleeding trauma with a traumatic brain injury: blood pressure target?", "options": ["Systolic ≥110 (≥100 if aged 50–69), MAP ≥80", "Systolic 80–90 mmHg, as for any bleeding", "MAP 60 mmHg is enough", "No target until the CT is done"], "why": "Hypotension roughly doubles mortality after TBI.", "source": "ATLS 10th–11th edition; Brain Trauma Foundation" },
+    { "q": "Bleeding trauma patient, blood 10 minutes away, peri-arrest. Fluid now?", "options": ["Warmed 250 mL crystalloid boluses to a radial pulse", "Nothing at all until the blood arrives", "2 L of saline wide open, then reassess", "Noradrenaline to a normal pressure"], "why": "Bridge with small boluses; switch to blood as soon as it arrives.", "source": "ATLS 11th edition; NICE NG39" },
     { "q": "ATLS class II haemorrhage blood loss?", "options": ["15–30%", "Under 15%", "31–40%", "Over 40%"], "why": "Class II: tachycardia, normal systolic, narrowed pulse pressure, base deficit −2 to −6.", "source": "ATLS 10th–11th edition" },
     { "q": "Which parameter did ATLS add to the shock classes?", "options": ["Base deficit", "Serum lactate", "Haemoglobin level", "Shock index"], "why": "Base deficit correlates with blood loss and transfusion need.", "source": "ATLS 10th edition" },
     { "q": "Kehr's sign is…", "options": ["Left shoulder-tip pain from splenic bleeding", "Periumbilical bruising from intraperitoneal blood", "Flank bruising from retroperitoneal bleeding", "Right iliac fossa pain on pressing the left side"], "why": "Referred phrenic pain.", "source": "ATLS 11th edition" },
