@@ -34,7 +34,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please present your findings and your plan.",
       "label": "Plan",
       "hint": "Acute embolic ischaemia, threatened limb (Rutherford IIb): heparin, analgesia, vascular surgery now.",
       "opts": [

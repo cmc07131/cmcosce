@@ -52,7 +52,7 @@
     {
       "id": "ifleaves",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. If he still insisted on leaving, what would you do?",
       "label": "Examiner: if he still insisted on leaving?",
       "hint": "Capacitous refusal: respect it, reduce harm, document, open door.",
       "opts": [

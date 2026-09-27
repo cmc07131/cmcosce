@@ -209,5 +209,9 @@ export function stepsDone(pack: Pack, spent: Record<string, string[]>) {
     if ((a.findings ?? []).some((f) => used.has(f.id))) return true
     return (a.regions ?? []).some((r) => used.has(r.id))
   })
-  return { done: done.length, total: steps.length, left: steps.filter((a) => !done.includes(a)).map((a) => a.prompt ?? a.id) }
+  return {
+    done: done.length,
+    total: steps.length,
+    left: steps.filter((a) => !done.includes(a)).map((a) => (a.kind === 'viva' ? "Examiner's questions" : (a.prompt ?? a.id))),
+  }
 }

@@ -52,7 +52,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please summarise.",
       "label": "Summarise",
       "hint": "Likely diagnosis, differentials, risk, investigations, referral.",
       "opts": [

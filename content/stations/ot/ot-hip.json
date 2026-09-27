@@ -33,7 +33,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please present your findings.",
       "label": "Present",
       "hint": "Likely right hip OA; X-ray; conservative care; referral.",
       "opts": [

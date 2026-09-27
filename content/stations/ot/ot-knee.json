@@ -51,7 +51,7 @@
     {
       "id": "present",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please present your findings and your plan.",
       "label": "Present and plan",
       "hint": "Haemarthrosis with a positive Lachman: likely ACL rupture. Ottawa rule for X-ray. Plan.",
       "opts": [

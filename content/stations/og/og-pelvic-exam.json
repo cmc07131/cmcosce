@@ -62,7 +62,7 @@
     {
       "id": "present",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please present your findings.",
       "label": "Present",
       "hint": "Summarise findings, diagnosis, plan.",
       "opts": [

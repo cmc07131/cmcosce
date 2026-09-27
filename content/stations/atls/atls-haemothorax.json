@@ -182,7 +182,7 @@
     {
       "id": "sbar",
       "kind": "handover",
-      "to": "examiner",
+      "to": "examiner", "ask": "The cardiothoracic registrar is here. Please hand over.",
       "label": "Handover",
       "hint": "Structured handover to the surgeon: situation, xABCDE findings, what you did, what he needs.",
       "opts": [

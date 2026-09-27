@@ -56,7 +56,7 @@
     {
       "id": "present",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please present your mental state examination.",
       "label": "Present to the examiner",
       "hint": "Structured MSE, formulation, risk, plan.",
       "opts": [

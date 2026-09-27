@@ -47,7 +47,7 @@
     {
       "id": "decide",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. What is your disposition?",
       "label": "Disposition",
       "hint": "Rising troponin with typical history: NSTEMI. Treat and admit.",
       "opts": [

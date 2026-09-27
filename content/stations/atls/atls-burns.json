@@ -177,7 +177,7 @@
     {
       "id": "sbar",
       "kind": "handover",
-      "to": "examiner",
+      "to": "examiner", "ask": "The burns team has arrived. Please hand over.",
       "label": "Handover",
       "hint": "SBAR with times, TBSA, fluids and airway.",
       "opts": [

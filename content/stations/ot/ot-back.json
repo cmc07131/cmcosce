@@ -33,7 +33,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. What is your plan?",
       "label": "Plan",
       "hint": "Suspected CES: emergency MRI, spinal team, catheter.",
       "opts": [

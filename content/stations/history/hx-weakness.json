@@ -49,7 +49,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. What do you think is going on, and what is your plan?",
       "label": "Discuss",
       "hint": "Diagnosis, careful potassium, propranolol, monitoring, endocrinology.",
       "opts": [

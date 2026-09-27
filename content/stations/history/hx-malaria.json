@@ -55,7 +55,7 @@
     {
       "id": "ddx",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. What is your differential diagnosis, and your plan?",
       "label": "Discuss with the examiner",
       "hint": "Differential, severity, treatment, notification.",
       "opts": [

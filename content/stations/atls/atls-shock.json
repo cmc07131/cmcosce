@@ -142,7 +142,7 @@
     {
       "id": "summary",
       "kind": "handover",
-      "to": "examiner",
+      "to": "examiner", "ask": "The surgeon has arrived. Summarise for the team and hand over.",
       "label": "Summarise and hand over",
       "hint": "Summarise aloud to the team, then hand over to the surgeon.",
       "opts": [

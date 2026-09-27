@@ -57,7 +57,7 @@
     {
       "id": "procedure",
       "kind": "steps",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please explain the admission process to me.",
       "label": "Explain the process",
       "hint": "Try voluntary first; grounds; Forms 1, 2, 3; rights.",
       "opts": [

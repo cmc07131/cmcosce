@@ -35,7 +35,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please present your findings and your plan.",
       "label": "Present and plan",
       "hint": "Right cerebellar syndrome, sudden onset: stroke pathway, CT/CTA, neurosurgery if haemorrhage.",
       "opts": [

@@ -56,7 +56,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. What is your plan?",
       "label": "Plan",
       "hint": "Treat the injury, the cause and the consequences; multifactorial falls assessment.",
       "opts": [

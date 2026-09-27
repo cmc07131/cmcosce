@@ -262,3 +262,23 @@ test('multiple choice: no length cue and no throwaway distractors', () => {
     for (const r of [1, 2, 3, 4]) assert.ok(share(r) <= 0.55, `${gym}: the answer is length-rank ${r} in ${Math.round(share(r) * 100)}% of questions`)
   }
 })
+
+/*
+ * The end of every station belongs to the examiner: steps they prompt (`ask`) then the viva, last, asked by
+ * the examiner. The play screen holds these back until the rest is done and then walks the examiner over.
+ */
+test('station endings: the examiner prompts the last steps and asks the viva last', () => {
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    const vivas = st.steps.filter((s) => s.kind === 'viva')
+    assert.equal(vivas.length, 1, `${st.id}: exactly one viva`)
+    assert.equal(st.steps[st.steps.length - 1].kind, 'viva', `${st.id}: the viva is the last step`)
+    assert.equal(vivas[0].to, 'examiner', `${st.id}: the examiner asks the viva`)
+    const asked = st.steps.map((s, i) => ({ s, i })).filter(({ s }) => s.ask)
+    for (const { s, i } of asked) {
+      assert.equal(s.to, 'examiner', `${st.id}/${s.id}: only the examiner prompts`)
+      // Prompted steps sit together just before the viva, so the examiner can run them in one visit.
+      assert.ok(st.steps.slice(i, -1).every((later) => later.ask), `${st.id}/${s.id}: prompted steps come last, before the viva`)
+    }
+  }
+})

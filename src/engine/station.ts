@@ -46,6 +46,8 @@ const stepSchema = z.object({
   img: z.string().optional(),
   mark: markField,
   end: z.boolean().optional(),
+  /** The examiner comes over and prompts this step at the end, saying this line (e.g. "Please present your findings."). */
+  ask: z.string().optional(),
   confirm: z.string().optional(),
   opts: z.array(optSchema).optional(),
   groups: z.record(z.string(), z.array(optSchema)).optional(),
@@ -340,6 +342,7 @@ export function compileStation(station: Station): Pack {
       prompt: step.label,
       img: step.img,
       endStation: step.end,
+      ask: step.ask,
     }
     switch (step.kind) {
       case 'say':

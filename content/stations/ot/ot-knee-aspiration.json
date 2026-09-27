@@ -43,7 +43,7 @@
     {
       "id": "after",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. What happens next?",
       "label": "Next steps",
       "hint": "Blood cultures, antibiotics, orthopaedics, interpretation.",
       "opts": [

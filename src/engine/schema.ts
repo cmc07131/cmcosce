@@ -54,6 +54,8 @@ const actionSchema = z.object({
   grantsItems: z.array(z.string()).optional(),
   marksChecklistIds: z.array(z.string()).optional(),
   endStation: z.boolean().optional(),
+  /** The examiner prompts this step at the end of the station, with this line (the viva is always asked at the end). */
+  ask: z.string().optional(),
   options: z.array(optionSchema).optional(),
   /** Dialogue and viva: the lines the other person says, in order. Options belong to a turn by `group`. */
   turns: z.array(z.object({ id: z.string(), line: z.string() })).optional(),

@@ -36,7 +36,7 @@
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. Please present your findings and your plan.",
       "label": "Present and plan",
       "hint": "Subacromial pain (impingement/cuff tendinopathy), cuff strength intact; conservative plan.",
       "opts": [

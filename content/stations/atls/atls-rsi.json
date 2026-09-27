@@ -181,7 +181,7 @@
     {
       "id": "sbar",
       "kind": "handover",
-      "to": "examiner",
+      "to": "examiner", "ask": "The neurosurgical team is here. Please hand over.",
       "label": "Handover",
       "hint": "SBAR to the neurosurgeon or ICU.",
       "opts": [

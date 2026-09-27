@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { hintFor, stepsDone } from '~/engine/judge'
-import { readoutText, type Pack } from '~/engine/schema'
+import { readoutText, type Action, type Pack } from '~/engine/schema'
 import { hasOutput, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
 import { press, useButtons } from './input'
@@ -46,12 +46,30 @@ export function PlayView({ pack }: { pack: Pack }) {
   /** The START menu, or the door's hand-over question (the menu opened on its leave page). */
   const [menu, setMenu] = useState<false | 'root' | 'leave'>(false)
   const announcedDone = useRef(false)
-  // The examiner's questions: held back until the station is done (or time is short), then the examiner comes over.
-  const viva = pack.actions.find((a) => a.kind === 'viva')
-  const examinerId = viva?.targetIds[0] ?? null
-  const vivaCalled = useRef(false)
+  // The end of the station belongs to the examiner: the steps they prompt (present, hand over) and the viva.
+  // They are held back until the rest is done (or time is short), then the examiner comes over and runs them.
+  const endQueue = pack.goldPath
+    .map((id) => pack.actions.find((a) => a.id === id))
+    .filter((a): a is Action => Boolean(a && (a.kind === 'viva' || a.ask)))
+  const endIds = endQueue.map((a) => a.id)
+  const examinerId = endQueue[0]?.targetIds[0] ?? null
+  const endCalled = useRef(false)
+  const autoOpened = useRef(new Set<string>())
+  const [readyAsked, setReadyAsked] = useState(false)
   const [approach, setApproach] = useState<{ npcId: string; token: number } | null>(null)
   const [approaching, setApproaching] = useState(false)
+  const [examinerHere, setExaminerHere] = useState(false)
+  // A new run (Run again, or a fresh station) starts the examiner back at their desk.
+  const runSeed = usePlay((s) => s.seed)
+  useEffect(() => {
+    announcedDone.current = false
+    endCalled.current = false
+    autoOpened.current = new Set()
+    setReadyAsked(false)
+    setApproach(null)
+    setApproaching(false)
+    setExaminerHere(false)
+  }, [runSeed, pack.packId])
   const [typing, setTyping] = useState(false)
   const [facingId, setFacingId] = useState<string | null>(null)
   const bootEnded = useRef<string | null>(null)
@@ -109,27 +127,42 @@ export function PlayView({ pack }: { pack: Pack }) {
     return () => window.clearTimeout(id)
   }, [hydrated, entered, ended, allDone, store])
 
-  const vivaStarted = Boolean(viva && (spent[viva.id]?.length ?? 0) > 0)
-  const beforeViva = stepsDone({ ...pack, goldPath: pack.goldPath.filter((id) => id !== viva?.id) }, spent)
-  const readyForViva = beforeViva.done === beforeViva.total
+  const used = (a: Action) => (spent[a.id]?.length ?? 0) > 0
+  const endStarted = endQueue.some(used)
+  const beforeEnd = stepsDone({ ...pack, goldPath: pack.goldPath.filter((id) => !endIds.includes(id)) }, spent)
+  const readyForEnd = beforeEnd.done === beforeEnd.total
   const timeShort = entered && secondsLeft <= 90
   const idleNow = overlay === null && performing === null && menu === false
+
+  // Call the examiner over: the rest is done, the candidate says so, or time is nearly up.
   useEffect(() => {
-    if (!hydrated || !entered || ended || !viva || !examinerId || vivaStarted || vivaCalled.current || !idleNow) return
-    if (!readyForViva && !timeShort) return
+    if (!hydrated || !entered || ended || !examinerId || endStarted || endCalled.current || !idleNow) return
+    if (!readyForEnd && !timeShort && !readyAsked) return
     // Let the last reply land before the examiner moves.
     const id = window.setTimeout(() => {
-      vivaCalled.current = true
+      endCalled.current = true
       setApproaching(true)
-      store().note(
-        readyForViva ? 'Thank you. I have a few questions for you.' : "We're nearly out of time. Let me stop you there and ask a few questions.",
-        'say',
-        examinerId,
-      )
+      if (!readyForEnd && !readyAsked) store().note("We're nearly out of time. Let me stop you there.", 'say', examinerId)
       setApproach({ npcId: examinerId, token: Date.now() })
-    }, 1200)
+    }, readyAsked ? 900 : 1200)
     return () => window.clearTimeout(id)
-  }, [hydrated, entered, ended, viva, examinerId, vivaStarted, idleNow, readyForViva, timeShort, store])
+  }, [hydrated, entered, ended, examinerId, endStarted, idleNow, readyForEnd, timeShort, readyAsked, store])
+
+  // Beside the candidate, the examiner prompts each end step in turn: what they say, then the step opens.
+  useEffect(() => {
+    if (!examinerHere || !examinerId || ended || !idleNow) return
+    const next = endQueue.find((a) => !used(a) && !autoOpened.current.has(a.id))
+    if (!next) return
+    const first = !endQueue.some((a) => autoOpened.current.has(a.id))
+    const line = next.ask ?? (first ? 'Thank you. I have a few questions for you.' : 'Now a few questions.')
+    const id = window.setTimeout(() => {
+      autoOpened.current.add(next.id)
+      store().note(line, 'say', examinerId)
+      window.setTimeout(() => store().openAction(next.id, examinerId), 1100)
+    }, 700)
+    return () => window.clearTimeout(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [examinerHere, examinerId, ended, idleNow, spent])
 
   const paused = overlay !== null || performing !== null || menu !== false || approaching
 
@@ -185,6 +218,7 @@ export function PlayView({ pack }: { pack: Pack }) {
         <div className="screen">
           <div className="relative flex min-h-0 flex-1 flex-col">
             <Screen
+              key={`${pack.packId}:${runSeed}`}
               ref={screen}
               pack={pack}
               position={position}
@@ -195,10 +229,8 @@ export function PlayView({ pack }: { pack: Pack }) {
               monitorBpm={monitorBpm}
               approach={approach}
               onArrive={() => {
-                window.setTimeout(() => {
-                  setApproaching(false)
-                  if (viva && examinerId) store().openAction(viva.id, examinerId)
-                }, 700)
+                setApproaching(false)
+                setExaminerHere(true)
               }}
               onMove={(pos) => {
                 const cur = store().position
@@ -212,14 +244,14 @@ export function PlayView({ pack }: { pack: Pack }) {
                   setMenu('leave')
                   return
                 }
-                // Before the examiner is ready, the questions stay closed: walking up early gets "carry on".
-                if (viva && targetId === examinerId && !vivaStarted && !vivaCalled.current) {
-                  const other = pack.actions.some((a) => a.id !== viva.id && a.targetIds.includes(targetId))
+                // Before the end, the examiner's own steps stay closed: walking up early gets "carry on".
+                if (targetId === examinerId && !endStarted && !endCalled.current) {
+                  const other = pack.actions.some((a) => !endIds.includes(a.id) && a.targetIds.includes(targetId))
                   if (!other) {
-                    store().note("Carry on with the station. I'll ask my questions at the end.", 'say', examinerId)
+                    store().note("Carry on with the station. I'll come to you at the end.", 'say', examinerId)
                     return
                   }
-                  store().openTarget(pack, targetId, [viva.id])
+                  store().openTarget(pack, targetId, endIds)
                   return
                 }
                 store().openTarget(pack, targetId)
@@ -286,6 +318,15 @@ export function PlayView({ pack }: { pack: Pack }) {
                 earnedMarks={earnedMarks}
                 initialPage={menu}
                 stepsLeft={progress.left}
+                onReady={
+                  endQueue.length > 0 && entered && !endStarted && !endCalled.current
+                    ? () => {
+                        setMenu(false)
+                        store().note("I've finished.", 'say', 'player')
+                        setReadyAsked(true)
+                      }
+                    : undefined
+                }
                 onClose={() => setMenu(false)}
                 onNotes={() => {
                   setMenu(false)

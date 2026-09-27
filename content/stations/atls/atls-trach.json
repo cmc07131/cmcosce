@@ -69,7 +69,7 @@
     {
       "id": "plan-b",
       "kind": "say",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. If suction had failed, what would you have done next?",
       "label": "Examiner asks: if suction had failed?",
       "hint": "Deflate the cuff; then remove the tube; oxygenate face and stoma; secondary airway options.",
       "opts": [

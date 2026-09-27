@@ -168,7 +168,7 @@
     {
       "id": "sbar",
       "kind": "handover",
-      "to": "examiner",
+      "to": "examiner", "ask": "The orthopaedic and radiology team are here. Please hand over.",
       "label": "Handover",
       "hint": "ATMIST to the receiving team.",
       "opts": [

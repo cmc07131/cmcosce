@@ -51,7 +51,7 @@
     {
       "id": "plan",
       "kind": "pick",
-      "to": "examiner",
+      "to": "examiner", "ask": "Thank you. What is your plan?",
       "label": "Plan",
       "hint": "Organic screen, calm environment, stop the antidepressant, antipsychotic, psychiatry, admission.",
       "confirm": "Plan",

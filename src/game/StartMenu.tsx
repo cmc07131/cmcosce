@@ -13,6 +13,7 @@ export function StartMenu({
   earnedMarks,
   initialPage = 'root',
   stepsLeft = [],
+  onReady,
   onClose,
   onNotes,
   onHint,
@@ -25,6 +26,8 @@ export function StartMenu({
   initialPage?: Page
   /** Steps not done yet, named on the hand-over question. */
   stepsLeft?: string[]
+  /** Tell the examiner you have finished: they come over and ask their questions. Absent once asked. */
+  onReady?: () => void
   onClose: () => void
   onNotes: () => void
   onHint: () => void
@@ -54,6 +57,11 @@ export function StartMenu({
       <div ref={root} className="flex max-h-full min-w-0 flex-col" onClick={(event) => event.stopPropagation()}>
         {page === 'root' && (
           <Win className="menu-col w-[172px]">
+            {onReady && (
+              <NavItem testId="menu-ready" onClick={onReady}>
+                READY FOR QUESTIONS
+              </NavItem>
+            )}
             <NavItem testId="menu-bag" onClick={() => go('bag')}>BAG</NavItem>
             <NavItem testId="hud-stem" onClick={onNotes}>NOTES</NavItem>
             <NavItem testId="hud-hint" onClick={onHint}>HINT</NavItem>
