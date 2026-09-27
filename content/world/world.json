@@ -24,6 +24,7 @@
     "m": "tall grass (Medical deck)",
     "k": "tall grass (Paedi deck)",
     "s": "tall grass (Surgical deck)",
+    "d": "tall grass (Disaster deck)",
     "x": "tall grass (mixed deck)"
   },
   "grid": [
@@ -53,9 +54,9 @@
     "T.##D###.mmm....F,,,,,,,,,,,,,,F....kkk.##D###.T",
     "T...,,..........FFFFFFF,,FFFFFFF..........,,...T",
     "T...,,..hhhhhhxxxxxx...,,.......~~~~~~....,,...T",
-    "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~.........T",
-    "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~.........T",
-    "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~.........T",
+    "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~dddd.....T",
+    "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~dddd.....T",
+    "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~dddd.....T",
     "T....RRRRRR..........RRRRRRppp.......RRRRRR....T",
     "T....RRRRRR.......T..RRRRRRpTp.......RRRRRR.T..T",
     "T....######..........######..........######....T",
@@ -396,7 +397,7 @@
       "name": "DISASTER/TRIAGE GYM",
       "badge": "Command Badge",
       "packs": [],
-      "deck": null,
+      "deck": "disaster",
       "topics": [
         "Field triage (START)",
         "Triage of fire victims",

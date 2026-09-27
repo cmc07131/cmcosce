@@ -1,0 +1,49 @@
+{
+  "deck": "disaster",
+  "name": "Disaster",
+  "creatures": [
+    {
+      "id": "triagon",
+      "name": "TRIAGON",
+      "body": "beast",
+      "main": "#c84830",
+      "accent": "#f8d8c8"
+    },
+    {
+      "id": "hazmite",
+      "name": "HAZMITE",
+      "body": "blob",
+      "main": "#a8b838",
+      "accent": "#f0f8c0"
+    },
+    {
+      "id": "sirenix",
+      "name": "SIRENIX",
+      "body": "bird",
+      "main": "#3878c8",
+      "accent": "#d0e8f8"
+    },
+    {
+      "id": "boltworm",
+      "name": "BOLTWORM",
+      "body": "snake",
+      "main": "#e8c030",
+      "accent": "#fff4c0"
+    }
+  ],
+  "cards": [
+    {
+      "id": "dx-methane",
+      "q": "METHANE: the first E stands for…",
+      "options": [
+        "Exact location",
+        "Emergency services",
+        "Evacuation",
+        "ETA"
+      ],
+      "answer": 0,
+      "why": "Last E is emergency services.",
+      "source": "JESIP"
+    }
+  ]
+}

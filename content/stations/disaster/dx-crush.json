@@ -1,0 +1,116 @@
+{
+  "id": "dx-crush",
+  "gym": "disaster",
+  "title": "Crush syndrome",
+  "type": "resus",
+  "time": 480,
+  "stem": "Resus. Mr Kwok, 42, a construction worker, was trapped by both legs under a collapsed wall for 6 hours before firefighters freed him 30 minutes ago. He is alert, HR 118, BP 92/56. The nurse points to the monitor. Manage him.",
+  "notes": "Checked against the International Society of Nephrology/ERBP recommendations for crush victims in mass disasters (Sever 2012), ATLS 10th (crush syndrome/rhabdomyolysis), and UK Resuscitation Council hyperkalaemia guidance (2023).\n\nKey points: fluids should start before extrication (0.9% saline 1 L/h, then adjusted — about 3–6 L/day is common; in the ED aim for urine output around 200–300 mL/h with a catheter, watching for overload). Hyperkalaemia and arrhythmia appear on release: monitor, ECG, calcium, insulin–glucose, salbutamol, dialysis. Avoid potassium-containing fluids (Hartmann's) early. Bicarbonate and mannitol: no proven benefit — use only if specific indications (sever pH, adequate urine flow for mannitol). Check CK, myoglobinuria (dipstick blood positive, no red cells), calcium, phosphate, gas, lactate. Compartment syndrome: measure/assess; fasciotomy only for true compartment syndrome with ischaemia, not routinely (infection risk in crush). Tourniquet before release is not routinely recommended. Refer to renal for dialysis early.\n\nYour notes mention crush injury only as a suxamethonium contraindication — correct (hyperkalaemia).",
+  "cast": [{ "id": "patient", "name": "Mr Kwok", "role": "patient" }, { "id": "nurse", "name": "Nurse Siu", "role": "nurse" }, { "id": "fire", "name": "Fire officer", "role": "man" }],
+  "vitals": {
+    "hr": 118, "sbp": 92, "dbp": 56, "spo2": 97, "rr": 22, "temp": 36.1, "gcs": 15, "glucose": 6.4, "rhythm": "hyperk-severe",
+    "drift": { "sbp": -1 },
+    "stop": ["fluids"],
+    "effects": [
+      { "scene": "calcium", "set": { "hr": 108 }, "rhythm": "hyperk-moderate" },
+      { "scene": "insulin", "add": { "glucose": 2 }, "rhythm": "hyperk-mild", "overS": 60 },
+      { "scene": "fluids", "add": { "sbp": 18, "dbp": 10, "hr": -12 }, "overS": 120 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "handover",
+      "kind": "history",
+      "to": "fire",
+      "label": "Handover",
+      "hint": "How long trapped, what part, fluids before release, urine.",
+      "groups": {
+        "Scene": [
+          { "t": "How long was he trapped, and what was crushed?", "r": "About 6 hours; both thighs and calves under concrete.", "mark": "Establishes duration and muscle mass crushed" },
+          { "t": "Fluids given before release?", "r": "The medical team started 1 L of saline before we lifted the slab.", "mark": "Asks about pre-extrication fluids" },
+          { "t": "Has he passed urine?", "r": "Not since.", "mark": "Asks about urine output" }
+        ]
+      }
+    },
+    {
+      "id": "ecg",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Tests",
+      "hint": "ECG and gas first; CK, urine dipstick, calcium, phosphate.",
+      "groups": {
+        "Now": [
+          { "t": "12-lead ECG", "r": "Tall peaked T waves, wide QRS, flattened P waves.", "img": "ecg:hyperk-severe", "mark": "Recognises hyperkalaemic ECG" },
+          { "t": "Venous gas", "r": "K 7.4, pH 7.24, lactate 4.2, iCa 0.98.", "mark": "Confirms hyperkalaemia and acidosis" }
+        ],
+        "Later": [
+          { "t": "CK, U&E, calcium, phosphate", "r": "CK 48,000, creatinine 168.", "mark": "CK and renal function" },
+          { "t": "Urine dipstick and microscopy", "r": "Dark urine; blood 3+ on dipstick, no red cells: myoglobinuria.", "mark": "Detects myoglobinuria" }
+        ]
+      }
+    },
+    {
+      "id": "treat",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Treat",
+      "hint": "Calcium, insulin–glucose, salbutamol; saline not Hartmann's; catheter for urine output.",
+      "confirm": "Give these",
+      "opts": [
+        { "t": "Calcium gluconate 10% 30 mL IV", "need": true, "scene": "calcium", "mark": "IV calcium" },
+        { "t": "Insulin 10 units with 25 g glucose IV", "need": true, "scene": "insulin", "mark": "Insulin–glucose" },
+        { "t": "0.9% saline 1 L/h, then titrate", "need": true, "scene": "fluids", "mark": "Aggressive saline" },
+        { "t": "Urinary catheter; target urine 200–300 mL/h", "need": true, "mark": "Urine output target" },
+        { "t": "Hartmann's 2 L fast", "trap": true, "r": "Contains potassium; use saline early." },
+        { "t": "Suxamethonium if he needs intubation", "trap": "critical", "r": "Raises potassium further in crush; use rocuronium." }
+      ]
+    },
+    {
+      "id": "limbs",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Legs",
+      "hint": "Compartments, pulses, sensation.",
+      "groups": {
+        "Legs": [
+          { "t": "Feel the compartments; passive stretch", "r": "Both calves tense; pain on passive toe extension.", "mark": "Assesses compartments" },
+          { "t": "Pulses and sensation", "r": "Foot pulses present; reduced sensation in the first web space on the right.", "mark": "Checks pulses and sensation" }
+        ]
+      }
+    },
+    {
+      "id": "refer",
+      "kind": "say",
+      "to": "phone",
+      "label": "Refer",
+      "hint": "Renal for dialysis; orthopaedics for compartment pressures; ICU.",
+      "opts": [
+        { "t": "Renal: crush syndrome, K 7.4, rising creatinine — early dialysis", "mark": "Early renal referral" },
+        { "t": "Orthopaedics: possible compartment syndrome right calf — measure pressures; fasciotomy only if confirmed", "mark": "Orthopaedic referral with selective fasciotomy" },
+        { "t": "Fasciotomy of both legs now for everyone with crush", "trap": true, "r": "Routine fasciotomy in crush raises infection risk; only for confirmed compartment syndrome." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "When should fluids start in crush injury?", "a": "Before extrication", "wrong": ["Only in hospital", "After 24 hours", "Never"] },
+        { "q": "Myoglobinuria on a dipstick shows…", "a": "Blood positive without red cells on microscopy", "wrong": ["Protein only", "Nitrites", "Glucose"] },
+        { "q": "Fluid to avoid early?", "a": "Potassium-containing (Hartmann's)", "wrong": ["0.9% saline", "5% dextrose never", "Plasma"] },
+        { "q": "Paralytic to avoid?", "a": "Suxamethonium", "wrong": ["Rocuronium", "Vecuronium", "Atracurium"] },
+        { "q": "Urine output target in crush syndrome?", "a": "About 200–300 mL/h", "wrong": ["0.5 mL/kg/h", "10 mL/h", "No target"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Crush Breaker", "emoji": "🧱", "flavor": "Fluids before release, calcium on arrival, saline and urine." },
+  "cards": [
+    { "q": "Main killer early after extrication in crush?", "options": ["Hyperkalaemia", "Hypoglycaemia", "Hypothermia only", "Anaemia"], "why": "Release of muscle potassium.", "source": "ISN 2012" },
+    { "q": "Crush syndrome causes acute kidney injury via…", "options": ["Myoglobin", "Bilirubin", "Glucose", "Calcium"], "why": "Pigment nephropathy.", "source": "ATLS" },
+    { "q": "CK is typically…", "options": ["Greatly raised", "Normal", "Low", "Unmeasurable"], "why": "Rhabdomyolysis.", "source": "ATLS" },
+    { "q": "Mannitol and bicarbonate in crush?", "options": ["No proven benefit; selective use", "Mandatory", "First-line", "Harmful always"], "why": "Saline first.", "source": "ISN 2012" },
+    { "q": "Crushed limb with pulses but tense compartments?", "options": ["Measure compartment pressures", "Ignore", "Amputate", "Elevate high above heart"], "why": "Pulses persist in compartment syndrome.", "source": "BOAST" },
+    { "q": "Calcium in crush hyperkalaemia with ECG changes?", "options": ["Yes, IV calcium", "No, never", "Only oral", "Only if K > 9"], "why": "Stabilises the myocardium.", "source": "UK RC 2023" }
+  ]
+}

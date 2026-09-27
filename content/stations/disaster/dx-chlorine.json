@@ -1,0 +1,125 @@
+{
+  "id": "dx-chlorine",
+  "gym": "disaster",
+  "title": "Chlorine gas incident",
+  "type": "resus",
+  "time": 480,
+  "stem": "A chlorine leak at a public swimming pool plant room. Fire services report 12 casualties coming to your ED; the first arrives in 5 minutes, still in wet clothes. The first patient, a 35-year-old pool worker, is coughing and wheezy. Prepare the department, then manage him.",
+  "notes": "Checked against the UK CBRN/HAZMAT guidance (NHS England 'Initial Operational Response' — Remove, Remove, Remove, 2023), UKHSA chlorine toxicological overview (2022), and the Hong Kong HA/Fire Services decontamination practice.\n\nPrepare: activate the hospital major incident/HAZMAT plan; lock down the ED entrance so contaminated patients do not walk in; set up decontamination outside (hot/warm/cold zones, upwind); staff in appropriate PPE (powered respirator/level C for decontamination); ask about the agent (chlorine: intermediate water solubility, forms hydrochloric and hypochlorous acid on mucosa). Decontamination: remove the casualty from the source, disrobe (removes most contamination), bag clothes, then wash skin and irrigate eyes with water; chlorine gas itself leaves little residue, but wet clothing holds it. Treatment is supportive: high-flow humidified oxygen, nebulised salbutamol for bronchospasm, eye irrigation, CXR and gas; nebulised sodium bicarbonate (4.2%) is used by some with weak evidence; routine steroids are not recommended; intubate for severe hypoxia/ARDS with lung-protective ventilation. Most symptoms appear early, but pulmonary oedema can develop over hours — observe symptomatic patients (at least 6 hours; admit if hypoxic or CXR changes).\n\nYour notes list 'Chlorine gas incident' as a topic only. The nebulised bicarbonate point is weakly supported — present it as an option, not a standard.",
+  "cast": [{ "id": "patient", "name": "Mr Ma", "role": "patient" }, { "id": "nurse", "name": "Nurse Choi", "role": "nurse" }, { "id": "fire", "name": "Fire officer", "role": "man" }],
+  "vitals": {
+    "hr": 112, "sbp": 138, "dbp": 82, "spo2": 88, "rr": 30, "temp": 36.6, "gcs": 15, "rhythm": "sinus-tachy",
+    "drift": { "spo2": -1 },
+    "stop": ["oxygen"],
+    "effects": [
+      { "scene": "oxygen", "add": { "spo2": 6 }, "overS": 60 },
+      { "scene": "neb", "add": { "spo2": 3, "rr": -8, "hr": -8 }, "overS": 120 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "prep",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Prepare the ED",
+      "hint": "Activate the plan, lock down the entrance, decontamination outside, PPE, ask the agent.",
+      "confirm": "Do these",
+      "opts": [
+        { "t": "Activate the hospital HAZMAT / major incident plan", "need": true, "mark": "Activates the HAZMAT plan" },
+        { "t": "Lock down the ED entrance; no contaminated patients inside", "need": true, "mark": "Protects the ED (lockdown)" },
+        { "t": "Decontamination area outside, upwind; hot, warm and cold zones", "need": true, "mark": "Sets up decontamination zones outside" },
+        { "t": "Decontamination team in PPE with respirators", "need": true, "mark": "Staff PPE" },
+        { "t": "Let the first patient straight into resus — he's sick", "trap": "critical", "r": "Contaminated clothing can put the ED and staff out of action." }
+      ]
+    },
+    {
+      "id": "info",
+      "kind": "history",
+      "to": "fire",
+      "label": "Fire officer",
+      "hint": "What agent, how many, how long exposed, any decontamination done?",
+      "groups": {
+        "Incident": [
+          { "t": "What is the agent?", "r": "Chlorine gas from mixing pool chemicals. Leak now contained.", "mark": "Identifies the agent" },
+          { "t": "Number and severity?", "r": "12: 3 short of breath, the rest coughing and sore eyes.", "mark": "Asks numbers and severity" },
+          { "t": "Any decontamination at the scene?", "r": "They were moved into fresh air; no disrobing yet.", "mark": "Asks about scene decontamination" }
+        ]
+      }
+    },
+    {
+      "id": "decon",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Decontaminate",
+      "hint": "Remove from source, disrobe and bag, wash skin, irrigate eyes, then into the ED.",
+      "opts": [
+        { "t": "Disrobe outside; clothes in a sealed labelled bag", "n": 1, "mark": "Disrobes and bags clothing" },
+        { "t": "Irrigate the eyes with water or saline", "n": 2, "mark": "Irrigates the eyes" },
+        { "t": "Wash the skin with lukewarm water", "n": 3, "mark": "Washes the skin" },
+        { "t": "Into resus via the clean route", "n": 4, "mark": "Enters by the clean route" }
+      ]
+    },
+    {
+      "id": "treat",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Treat",
+      "hint": "Humidified high-flow oxygen, nebulised salbutamol; bicarbonate nebs optional; no routine steroids.",
+      "confirm": "Give these",
+      "opts": [
+        { "t": "High-flow humidified oxygen", "need": true, "scene": "oxygen", "mark": "High-flow humidified oxygen" },
+        { "t": "Nebulised salbutamol 5 mg", "need": true, "scene": "neb", "mark": "Bronchodilator for bronchospasm" },
+        { "t": "Consider nebulised sodium bicarbonate 4.2% (weak evidence)", "mark": "Knows nebulised bicarbonate is optional" },
+        { "t": "IV hydrocortisone for everyone exposed", "trap": true, "r": "Routine steroids are not recommended." }
+      ]
+    },
+    {
+      "id": "tests",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Investigations",
+      "hint": "Gas and chest X-ray; later film if he worsens.",
+      "groups": {
+        "Now": [
+          { "t": "Arterial blood gas", "r": "pH 7.36, PaO2 8.2 kPa on oxygen, PaCO2 4.6.", "mark": "Blood gas" },
+          { "t": "Chest X-ray", "r": "At 4 hours, worse hypoxia; bilateral hazy airspace shadowing.", "img": "xr:cxr-oedema", "mark": "Chest X-ray shows pulmonary oedema" }
+        ]
+      }
+    },
+    {
+      "id": "dispo",
+      "kind": "say",
+      "to": "phone",
+      "label": "Plan",
+      "hint": "Admit hypoxic patients; observe the others at least 6 hours; ICU if worsening; public health.",
+      "opts": [
+        { "t": "ICU: hypoxic chemical pneumonitis — may need lung-protective ventilation", "mark": "ICU referral for hypoxic chemical pneumonitis" },
+        { "t": "Observe the other symptomatic patients at least 6 hours", "mark": "Observation for delayed pulmonary oedema" },
+        { "t": "Inform the Poison Information Centre and Department of Health", "mark": "Informs poisons centre and public health" },
+        { "t": "Discharge the coughing patients now if SpO2 is normal", "trap": true, "r": "Pulmonary oedema can develop over hours." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Most effective single step of decontamination?", "a": "Removing clothing", "wrong": ["Showering for 30 minutes", "Bleach scrub", "Antidote"] },
+        { "q": "Chlorine forms which acids on mucosa?", "a": "Hydrochloric and hypochlorous acid", "wrong": ["Sulphuric acid", "Hydrofluoric acid", "Nitric acid"] },
+        { "q": "Specific antidote for chlorine?", "a": "None — supportive care", "wrong": ["Atropine", "Hydroxocobalamin", "Pralidoxime"] },
+        { "q": "Gas causing delayed pulmonary oedema up to 24 hours?", "a": "Phosgene", "wrong": ["Ammonia", "Carbon dioxide", "Helium"] },
+        { "q": "Decontamination area location?", "a": "Outside the ED, upwind", "wrong": ["In resus", "Downwind", "In the waiting room"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Clean Zone", "emoji": "☣", "flavor": "Lock down, strip, wash, then treat. No antidote — oxygen and salbutamol." },
+  "cards": [
+    { "q": "First step for a HAZMAT casualty?", "options": ["Protect staff and decontaminate before entry", "Straight to resus", "Intubate at the door", "Antibiotics"], "why": "Keep the ED running.", "source": "NHS England IOR" },
+    { "q": "'Remove, Remove, Remove' means…", "options": ["Remove from area, remove clothing, remove contamination", "Remove tubes", "Remove staff", "Remove patients"], "why": "Initial operational response.", "source": "NHS England" },
+    { "q": "Chlorine bronchospasm treatment?", "options": ["Nebulised salbutamol", "Adrenaline IM", "Atropine", "Naloxone"], "why": "Plus humidified oxygen.", "source": "UKHSA" },
+    { "q": "Hot zone is…", "options": ["The contaminated area", "The decontamination area", "The clean area", "The ED"], "why": "Warm = decon; cold = clean.", "source": "HAZMAT" },
+    { "q": "Routine steroids after chlorine exposure?", "options": ["Not recommended", "Always", "Only in children", "Only topical"], "why": "No proven benefit.", "source": "UKHSA" },
+    { "q": "Observe a symptomatic chlorine patient for at least…", "options": ["6 hours", "15 minutes", "1 week", "Not needed"], "why": "Delayed pulmonary oedema.", "source": "UKHSA" }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "id": "dx-transfer",
+  "gym": "disaster",
+  "title": "Interfacility transfer: intracerebral haemorrhage",
+  "type": "resus",
+  "time": 540,
+  "stem": "Resus. Mr Yip, 60, has sudden left-sided weakness. GCS 11 (E3V3M5). Your hospital has no neurosurgery; the tertiary centre has accepted him. Review the CT, prepare him for transfer and manage problems on the way.",
+  "notes": "Checked against the Association of Anaesthetists interhospital transfer guideline (2019), the Intensive Care Society transfer guidance (2019), NICE NG128 stroke (2019, updated 2022), AHA/ASA spontaneous ICH guideline (2022), and ATLS 10th.\n\nPreparation (your 8 points match): communication (patient/family, receiving team, transport team, ambulance), documentation, consent, equipment/kit (monitoring, suction, oxygen with reserve, drugs pre-drawn and labelled), pre-transport assessment and stabilisation (secure airway if GCS ≤8, falling GCS, or airway at risk; two IV lines; tubes and lines secured), appropriate escort (critical → doctor plus nurse). ICH specifics: SBP target 130–140 within an hour if presenting within 6 hours with SBP 150–220 (NICE; AHA 140, avoid under 130), reverse anticoagulation, head up 30°, glucose normal, treat seizures. Deterioration uses your REST approach (Recognise, Evaluate, Support, Transport); for the intubated patient, DOPES.\n\nDifferences from your notes: (1) needle decompression — your notes say 2nd ICS midclavicular; ATLS 10th recommends the 4th/5th ICS just anterior to the mid-axillary line in adults (2nd ICS MCL for children). (2) 'Reintubation not recommended' in the ambulance: better to say ventilate with a bag-mask or supraglottic airway first and reintubate only if needed and safe (stop the vehicle).",
+  "cast": [{ "id": "patient", "name": "Mr Yip", "role": "elderly" }, { "id": "nurse", "name": "Nurse Fung", "role": "nurse" }, { "id": "medic", "name": "Ambulance crew", "role": "paramedic" }],
+  "vitals": {
+    "hr": 64, "sbp": 196, "dbp": 104, "spo2": 96, "rr": 16, "temp": 36.8, "gcs": 11, "glucose": 7.1, "rhythm": "sinus",
+    "effects": [
+      { "scene": "bp", "add": { "sbp": -54, "dbp": -24 }, "overS": 180 },
+      { "scene": "deteriorate", "set": { "gcs": 7, "hr": 52, "sbp": 172 } },
+      { "scene": "intubated", "set": { "spo2": 99, "rr": 14, "etco2": 4.8 }, "overS": 30 },
+      { "scene": "desat", "set": { "spo2": 84 } },
+      { "scene": "fixed", "set": { "spo2": 98 }, "overS": 30 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "ct",
+      "kind": "order",
+      "to": "trolley",
+      "label": "CT and bloods",
+      "hint": "Describe the CT; check clotting and glucose.",
+      "groups": {
+        "Imaging": [
+          { "t": "CT head", "r": "Hyperdense haematoma in the right basal ganglia/thalamus with blood in the lateral ventricle.", "img": "ct:ich-r", "mark": "Describes the right deep ICH with intraventricular extension" }
+        ],
+        "Bloods": [
+          { "t": "Clotting, FBC, glucose, U&E", "r": "INR 1.0, platelets 210, glucose 7.1.", "mark": "Checks clotting and glucose" },
+          { "t": "Anticoagulant history", "r": "No anticoagulants.", "mark": "Asks about anticoagulants" }
+        ]
+      }
+    },
+    {
+      "id": "stabilise",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Stabilise",
+      "hint": "Lower SBP to 130–140, head up 30°, airway decision, lines.",
+      "confirm": "Do these",
+      "opts": [
+        { "t": "IV labetalol (or GTN/nicardipine) to SBP 130–140", "need": true, "scene": "bp", "mark": "Lowers SBP to 130–140" },
+        { "t": "Head up 30°, two IV lines, all secured", "need": true, "mark": "Head up and secure lines" },
+        { "t": "Airway: GCS 11 and protecting — no intubation now, but escort able to intubate; RSI drugs pre-drawn and labelled", "need": true, "mark": "Airway decision with contingency" },
+        { "t": "Drop SBP to 100 quickly", "trap": true, "r": "Avoid SBP under 130; risks cerebral hypoperfusion." }
+      ]
+    },
+    {
+      "id": "prepare",
+      "kind": "say",
+      "to": "phone",
+      "label": "Prepare the transfer",
+      "hint": "Communication, documentation, consent, equipment, pre-transport check, escort level.",
+      "opts": [
+        { "t": "Communicate: family, receiving neurosurgeon, transport team, ambulance; ETA agreed", "mark": "Communication with all parties" },
+        { "t": "Document condition, treatment, vital signs and plan; copy of CT and notes", "mark": "Documentation" },
+        { "t": "Explain risks and benefits to family; consent", "mark": "Consent" },
+        { "t": "Transport kit: monitor, suction, oxygen enough for twice the journey, drugs", "mark": "Equipment and oxygen reserve" },
+        { "t": "Critical patient: escorted by a doctor and a nurse", "mark": "Appropriate escort level" },
+        { "t": "Send him with the porter; he is talking", "trap": "critical", "r": "GCS 11 with ICH is critical and may deteriorate." }
+      ]
+    },
+    {
+      "id": "enroute",
+      "kind": "steps",
+      "to": "patient",
+      "label": "GCS drops en route",
+      "hint": "GCS 7, right pupil dilating. REST: recognise, evaluate ABC and pupils and glucose, support (airway), tell the receiving team.",
+      "opts": [
+        { "t": "Recognise: GCS 7, right pupil dilated, HR falling", "n": 1, "scene": "deteriorate", "mark": "Recognises deterioration and coning signs" },
+        { "t": "Evaluate: airway, breathing, glucose", "n": 2, "mark": "Evaluates ABC and glucose" },
+        { "t": "Support: stop the ambulance; RSI with pre-drawn drugs; ETCO2 4.5–5", "n": 3, "scene": "intubated", "mark": "Secures the airway, targets normocapnia" },
+        { "t": "Transport: inform the receiving team; consider hypertonic saline or mannitol per neurosurgeon", "n": 4, "mark": "Updates receiving team; osmotherapy" }
+      ]
+    },
+    {
+      "id": "dopes",
+      "kind": "exam",
+      "to": "patient",
+      "label": "SpO2 falls to 84%",
+      "hint": "DOPES: displacement, obstruction, pneumothorax, equipment, stacking.",
+      "groups": {
+        "DOPES": [
+          { "t": "Disconnect; bag with 100% oxygen", "r": "Easy to bag. Saturation climbs.", "scene": "desat", "mark": "Disconnects and hand-ventilates" },
+          { "t": "Displacement: tube mark, ETCO2 trace, bilateral air entry", "r": "Tube at 22 cm, trace present, equal air entry.", "mark": "Checks tube position" },
+          { "t": "Obstruction: pass a suction catheter", "r": "Thick secretions cleared.", "scene": "fixed", "mark": "Clears obstruction with suction" },
+          { "t": "Pneumothorax: chest rise, trachea", "r": "Symmetrical.", "mark": "Excludes pneumothorax" },
+          { "t": "Equipment: oxygen supply, circuit, ventilator", "r": "Cylinder 60% full; circuit intact.", "mark": "Checks equipment and oxygen" }
+        ]
+      }
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Adult needle decompression site (ATLS 10th)?", "a": "4th/5th ICS just anterior to the mid-axillary line", "wrong": ["2nd ICS midclavicular for all", "7th ICS posterior", "Subxiphoid"] },
+        { "q": "Target SBP in acute ICH (NICE)?", "a": "130–140 mmHg", "wrong": ["Under 100", "180–200", "Leave it"] },
+        { "q": "Indications to intubate before transfer?", "a": "GCS ≤8, falling GCS, or airway at risk", "wrong": ["All ICH", "Any GCS below 15", "Never"] },
+        { "q": "Oxygen to carry?", "a": "At least twice the expected need", "wrong": ["Exactly the expected need", "None", "Half"] },
+        { "q": "REST stands for…", "a": "Recognise, Evaluate, Support, Transport", "wrong": ["Rest, Eat, Sleep, Talk", "Rate, ECG, SpO2, Temp", "Refer, Escort, Stop, Treat"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Safe Passage", "emoji": "🚑", "flavor": "Stabilise before you go. Twice the oxygen. REST, then DOPES." },
+  "cards": [
+    { "q": "Escort for a critical transfer?", "options": ["Doctor and nurse", "Porter", "Nurse only", "None"], "why": "Matched to risk.", "source": "Association of Anaesthetists 2019" },
+    { "q": "DOPES stands for…", "options": ["Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "Drugs, Oxygen, Pulse, ECG, Sats", "Dose, Order, Plan, Escort, Sign", "None"], "why": "Intubated patient desaturation.", "source": "Airway teaching" },
+    { "q": "Oxygen for transfer: carry…", "options": ["Twice the calculated need", "Exact need", "Half", "Only if intubated"], "why": "Delays happen.", "source": "ICS 2019" },
+    { "q": "Anticoagulated ICH on warfarin?", "options": ["Reverse with PCC and vitamin K", "Continue", "Aspirin", "Heparin"], "why": "Before transfer.", "source": "NICE NG128" },
+    { "q": "Signs of coning?", "options": ["Dilated pupil, bradycardia, hypertension", "Tachycardia and hypotension", "Fever", "Rash"], "why": "Cushing response.", "source": "Neurosurgery" },
+    { "q": "Ventilation target in raised ICP?", "options": ["Normocapnia (PaCO2 4.5–5 kPa)", "PaCO2 2.5 kPa", "PaCO2 8 kPa", "No target"], "why": "Brief hyperventilation only for herniation.", "source": "BTF" }
+  ]
+}
