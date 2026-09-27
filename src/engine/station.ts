@@ -385,6 +385,12 @@ export function compileStation(station: Station): Pack {
     actions.push({ id: 'monitor', kind: 'monitor', targetIds: ['monitor'], hint: 'Look at the monitor.', prompt: 'Monitor' })
   }
 
+  // Ending early would strand the steps after it (usually the viva) and their marks.
+  station.steps.forEach((step, i) => {
+    const ends = step.end || (step.opts ?? []).some((o) => o.end)
+    if (ends && i < station.steps.length - 1) throw new Error(`${station.id}: step ${step.id} ends the station before ${station.steps[i + 1].id}`)
+  })
+
   const known = new Set(actions.map((a) => a.id))
   for (const rule of station.rules ?? []) {
     for (const id of [...rule.first, ...rule.then]) if (!known.has(id)) throw new Error(`${station.id}: rule ${rule.id} names unknown step ${id}`)

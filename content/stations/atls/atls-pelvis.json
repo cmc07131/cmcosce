@@ -172,7 +172,7 @@
       "label": "Handover",
       "hint": "ATMIST to the receiving team.",
       "opts": [
-        { "t": "ATMIST: 45, 40 minutes ago, crush at hip height, open-book pelvis, transient responder after binder, 2 units and TXA, for IR", "mark": "Structured handover with times and plan", "end": true, "r": "The IR team repeat it back and take her." },
+        { "t": "ATMIST: 45, 40 minutes ago, crush at hip height, open-book pelvis, transient responder after binder, 2 units and TXA, for IR", "mark": "Structured handover with times and plan", "r": "The IR team repeat it back and take her." },
         { "t": "Pelvis is broken, the binder's on, she's yours", "trap": true, "r": "No time of injury, no treatment, no response to treatment." }
       ]
     },

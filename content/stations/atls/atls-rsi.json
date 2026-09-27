@@ -185,7 +185,7 @@
       "label": "Handover",
       "hint": "SBAR to the neurosurgeon or ICU.",
       "opts": [
-        { "t": "SBAR: 43, fall 5 m, GCS 13 → 9, left pupil blown, intubated at 10:52, left EDH with shift, 3% saline given, for theatre", "mark": "Structured handover with GCS trend, times and plan", "end": true, "r": "The neurosurgical registrar takes him to theatre." },
+        { "t": "SBAR: 43, fall 5 m, GCS 13 → 9, left pupil blown, intubated at 10:52, left EDH with shift, 3% saline given, for theatre", "mark": "Structured handover with GCS trend, times and plan", "r": "The neurosurgical registrar takes him to theatre." },
         { "t": "Head injury, intubated, CT done", "trap": true, "r": "No GCS trend, no pupils, no times, no plan." }
       ]
     },

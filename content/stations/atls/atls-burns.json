@@ -181,7 +181,7 @@
       "label": "Handover",
       "hint": "SBAR with times, TBSA, fluids and airway.",
       "opts": [
-        { "t": "SBAR: 30, burn 19:05, inhalation injury intubated, COHb 22%, 36% TBSA, Hartmann's 360 mL/h, UO target 35 mL/h, burns centre accepted", "mark": "Structured handover with times, TBSA, fluids and plan", "end": true, "r": "The retrieval team repeat it back." },
+        { "t": "SBAR: 30, burn 19:05, inhalation injury intubated, COHb 22%, 36% TBSA, Hartmann's 360 mL/h, UO target 35 mL/h, burns centre accepted", "mark": "Structured handover with times, TBSA, fluids and plan", "r": "The retrieval team repeat it back." },
         { "t": "Big burn, tubed, fluids on", "trap": true, "r": "No size, no time, no rates." }
       ]
     },

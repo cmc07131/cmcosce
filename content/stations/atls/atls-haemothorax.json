@@ -186,7 +186,7 @@
       "label": "Handover",
       "hint": "Structured handover to the surgeon: situation, xABCDE findings, what you did, what he needs.",
       "opts": [
-        { "t": "ATMIST: 34, 40 minutes ago, handlebar to right chest, right massive haemothorax, 1600 mL drained, shocked on 2 units and TXA, needs thoracotomy", "mark": "Structured handover with times, findings, treatment and plan", "end": true, "r": "You hand over in order. The surgeon repeats it back and takes him to theatre." },
+        { "t": "ATMIST: 34, 40 minutes ago, handlebar to right chest, right massive haemothorax, 1600 mL drained, shocked on 2 units and TXA, needs thoracotomy", "mark": "Structured handover with times, findings, treatment and plan", "r": "You hand over in order. The surgeon repeats it back and takes him to theatre." },
         { "t": "He's got a chest injury, over to you", "trap": true, "r": "No times, no volumes, no treatment given. The next team starts from zero." }
       ]
     },

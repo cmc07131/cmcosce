@@ -73,7 +73,7 @@
       "label": "Handover",
       "hint": "SBAR to the ambulance crew.",
       "opts": [
-        { "t": "SBAR: 28M direct strike, VF arrest, 1 shock, ROSC at 3 min, apnoeic on bag-mask; B confused with feathering burns; C chest pain for ECG", "mark": "Structured handover", "end": true, "r": "Crew repeat back and load A first." },
+        { "t": "SBAR: 28M direct strike, VF arrest, 1 shock, ROSC at 3 min, apnoeic on bag-mask; B confused with feathering burns; C chest pain for ECG", "mark": "Structured handover", "r": "Crew repeat back and load A first." },
         { "t": "Lightning, three patients, one was dead", "trap": true, "r": "No times, no treatment, no plan." }
       ]
     },

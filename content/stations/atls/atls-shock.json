@@ -130,7 +130,7 @@
       "label": "Summarise and hand over",
       "hint": "Summarise aloud to the team, then hand over to the surgeon.",
       "opts": [
-        { "t": "Summary: 17, side impact, class III shock, positive FAST, left rib fractures, transient responder after 2 units and TXA, for laparotomy", "mark": "Summarises aloud and hands over clearly", "end": true, "r": "The surgeon repeats it back and takes her to theatre." },
+        { "t": "Summary: 17, side impact, class III shock, positive FAST, left rib fractures, transient responder after 2 units and TXA, for laparotomy", "mark": "Summarises aloud and hands over clearly", "r": "The surgeon repeats it back and takes her to theatre." },
         { "t": "Surgeons are here, she's theirs now", "trap": true, "r": "No summary means lost information." }
       ]
     },
