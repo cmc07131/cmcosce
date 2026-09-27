@@ -51,7 +51,7 @@ type PlayState = Session & {
   enterRoom: () => void
   tick: () => void
   setPosition: (position: Session['position']) => void
-  openTarget: (pack: Pack, targetId: string) => void
+  openTarget: (pack: Pack, targetId: string, hide?: string[]) => void
   openAction: (actionId: string, targetId: string) => void
   closeOverlay: () => void
   showStem: () => void
@@ -235,8 +235,8 @@ export const usePlay = create<PlayState>((set, get) => ({
     set({ position })
   },
 
-  openTarget: (pack, targetId) => {
-    const actions = pack.actions.filter((action) => action.targetIds.includes(targetId))
+  openTarget: (pack, targetId, hide = []) => {
+    const actions = pack.actions.filter((action) => action.targetIds.includes(targetId) && !hide.includes(action.id))
     if (!actions.length) {
       set({ msg: message('Nothing to use here.', 'info') })
       return

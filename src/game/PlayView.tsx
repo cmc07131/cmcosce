@@ -46,6 +46,12 @@ export function PlayView({ pack }: { pack: Pack }) {
   /** The START menu, or the door's hand-over question (the menu opened on its leave page). */
   const [menu, setMenu] = useState<false | 'root' | 'leave'>(false)
   const announcedDone = useRef(false)
+  // The examiner's questions: held back until the station is done (or time is short), then the examiner comes over.
+  const viva = pack.actions.find((a) => a.kind === 'viva')
+  const examinerId = viva?.targetIds[0] ?? null
+  const vivaCalled = useRef(false)
+  const [approach, setApproach] = useState<{ npcId: string; token: number } | null>(null)
+  const [approaching, setApproaching] = useState(false)
   const [typing, setTyping] = useState(false)
   const [facingId, setFacingId] = useState<string | null>(null)
   const bootEnded = useRef<string | null>(null)
@@ -103,7 +109,29 @@ export function PlayView({ pack }: { pack: Pack }) {
     return () => window.clearTimeout(id)
   }, [hydrated, entered, ended, allDone, store])
 
-  const paused = overlay !== null || performing !== null || menu !== false
+  const vivaStarted = Boolean(viva && (spent[viva.id]?.length ?? 0) > 0)
+  const beforeViva = stepsDone({ ...pack, goldPath: pack.goldPath.filter((id) => id !== viva?.id) }, spent)
+  const readyForViva = beforeViva.done === beforeViva.total
+  const timeShort = entered && secondsLeft <= 90
+  const idleNow = overlay === null && performing === null && menu === false
+  useEffect(() => {
+    if (!hydrated || !entered || ended || !viva || !examinerId || vivaStarted || vivaCalled.current || !idleNow) return
+    if (!readyForViva && !timeShort) return
+    // Let the last reply land before the examiner moves.
+    const id = window.setTimeout(() => {
+      vivaCalled.current = true
+      setApproaching(true)
+      store().note(
+        readyForViva ? 'Thank you. I have a few questions for you.' : "We're nearly out of time. Let me stop you there and ask a few questions.",
+        'say',
+        examinerId,
+      )
+      setApproach({ npcId: examinerId, token: Date.now() })
+    }, 1200)
+    return () => window.clearTimeout(id)
+  }, [hydrated, entered, ended, viva, examinerId, vivaStarted, idleNow, readyForViva, timeShort, store])
+
+  const paused = overlay !== null || performing !== null || menu !== false || approaching
 
   useButtons(0, hydrated && !ended && !paused, (btn) => {
     if (btn === 'a') {
@@ -165,6 +193,13 @@ export function PlayView({ pack }: { pack: Pack }) {
               scene={scene ?? []}
               labels={labels}
               monitorBpm={monitorBpm}
+              approach={approach}
+              onArrive={() => {
+                window.setTimeout(() => {
+                  setApproaching(false)
+                  if (viva && examinerId) store().openAction(viva.id, examinerId)
+                }, 700)
+              }}
               onMove={(pos) => {
                 const cur = store().position
                 store().setPosition(pos)
@@ -175,6 +210,16 @@ export function PlayView({ pack }: { pack: Pack }) {
                 // The door is the way out: it asks whether to hand over and end the station.
                 if (targetId === 'door' && entered && !pack.actions.some((a) => a.targetIds.includes('door'))) {
                   setMenu('leave')
+                  return
+                }
+                // Before the examiner is ready, the questions stay closed: walking up early gets "carry on".
+                if (viva && targetId === examinerId && !vivaStarted && !vivaCalled.current) {
+                  const other = pack.actions.some((a) => a.id !== viva.id && a.targetIds.includes(targetId))
+                  if (!other) {
+                    store().note("Carry on with the station. I'll ask my questions at the end.", 'say', examinerId)
+                    return
+                  }
+                  store().openTarget(pack, targetId, [viva.id])
                   return
                 }
                 store().openTarget(pack, targetId)

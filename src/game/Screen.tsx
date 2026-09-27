@@ -48,8 +48,8 @@ function bedPose(scene: string[]): BedPose {
   return found.slice(5) === 'lateral' ? 'lateral' : 'knee'
 }
 
-function hitAt(pack: Pack, x: number, y: number) {
-  const npc = pack.cast.find((c) => c.spawn.x === x && c.spawn.y === y)
+function hitAt(pack: Pack, x: number, y: number, npcTiles: Record<string, Tile>) {
+  const npc = pack.cast.find((c) => (npcTiles[c.id] ?? c.spawn).x === x && (npcTiles[c.id] ?? c.spawn).y === y)
   if (npc) return npc.id
   const item = pack.room.interactables.find((entry) => tilesOf(entry).some((tile) => tile.x === x && tile.y === y))
   return item?.id ?? null
@@ -81,16 +81,35 @@ export const Screen = forwardRef<
     labels: boolean
     /** Live heart rate from the station's vitals; 0 draws a flat line. Undefined reads the pack readout. */
     monitorBpm?: number
+    /** A cast member walking over to stand beside the player (the examiner coming to ask questions). */
+    approach?: { npcId: string; token: number } | null
+    onArrive?: (npcId: string) => void
     onMove: (pos: Pos) => void
     onUse: (targetId: string) => void
     onEmpty: () => void
     onFacing: (targetId: string | null) => void
     onBump: () => void
   }
->(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
+>(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, approach, onArrive, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
   const { cols, rows } = pack.room
-  const solids = useRef(buildSolids(pack))
-  solids.current = buildSolids(pack)
+  // Where each cast member stands now; most never move, the examiner may walk over.
+  const npcTile = useRef<Record<string, Tile>>(Object.fromEntries(pack.cast.map((c) => [c.id, c.spawn])))
+  const npcVis = useRef<Record<string, { x: number; y: number; facing: Dir | null }>>(
+    Object.fromEntries(pack.cast.map((c) => [c.id, { x: c.spawn.x, y: c.spawn.y, facing: null }])),
+  )
+  const npcWalk = useRef<{ id: string; path: Tile[]; from: Tile; to: Tile | null; t: number } | null>(null)
+  const [tagTiles, setTagTiles] = useState<Record<string, Tile>>(npcTile.current)
+  const solidsNow = () => {
+    const set = buildSolids(pack)
+    for (const c of pack.cast) {
+      set.delete(keyOf(c.spawn))
+      set.add(keyOf(npcTile.current[c.id] ?? c.spawn))
+    }
+    return set
+  }
+  const solids = useRef(solidsNow())
+  solids.current = solidsNow()
+  const targetsOf = (id: string) => (npcTile.current[id] ? [npcTile.current[id]] : targetTilesFor(pack, id))
   const visual = useRef<Visual>({ x: position.x, y: position.y, facing: position.facing, frame: 0, bob: 0 })
   const glide = useRef<Glide | null>(null)
   const stride = useRef(0)
@@ -100,8 +119,8 @@ export const Screen = forwardRef<
   const pendingRef = useRef<string | null>(null)
   const pendingFacing = useRef<Dir>('n')
   const facingHit = useRef<string | null | undefined>(undefined)
-  const cb = useRef({ onMove, onUse, onEmpty, onFacing, onBump })
-  cb.current = { onMove, onUse, onEmpty, onFacing, onBump }
+  const cb = useRef({ onMove, onUse, onEmpty, onFacing, onBump, onArrive })
+  cb.current = { onMove, onUse, onEmpty, onFacing, onBump, onArrive }
   const drawState = useRef({ talkingId, scene, monitorBpm })
   drawState.current = { talkingId, scene, monitorBpm }
 
@@ -258,14 +277,17 @@ export const Screen = forwardRef<
         drawPatientInBed(c, bedBox, LOOKS.patient, bedPose(flags), flags, talking === npc.id && Math.floor(now / 140) % 2 === 0)
         continue
       }
-      const dx = v.x - npc.spawn.x
-      const dy = v.y - npc.spawn.y
+      const at = npcVis.current[npc.id] ?? { x: npc.spawn.x, y: npc.spawn.y, facing: null }
+      const dx = v.x - at.x
+      const dy = v.y - at.y
       const near = Math.abs(dx) + Math.abs(dy) <= 2.2
-      const facing: Dir = near ? (Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'e' : 'w') : dy > 0 ? 's' : 'n') : 's'
+      const walk = npcWalk.current?.id === npc.id ? npcWalk.current : null
+      const facing: Dir = at.facing ?? (near ? (Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'e' : 'w') : dy > 0 ? 's' : 'n') : 's')
+      const stepFrame = walk && walk.to && walk.t < 0.5 ? 1 : 0
       const mouth = talking === npc.id && Math.floor(now / 140) % 2 === 0
       actors.push({
-        y: npc.spawn.y,
-        paint: () => c.drawImage(actorSprite(role, facing, 0, false, mouth), npc.spawn.x * TILE, npc.spawn.y * TILE - 2),
+        y: at.y,
+        paint: () => c.drawImage(actorSprite(role, facing, stepFrame, false, mouth), Math.round(at.x * TILE), Math.round(at.y * TILE - 2)),
       })
     }
     const playerMouth = talking === 'player' && Math.floor(now / 140) % 2 === 0
@@ -315,9 +337,10 @@ export const Screen = forwardRef<
       } else if (!pausedRef.current) {
         tryStep()
       }
+      stepNpc(dt)
       const here = gridNow()
       const d = DIR_DELTA[here.facing]
-      const front = glide.current ? null : hitAt(pack, here.x + d.x, here.y + d.y)
+      const front = glide.current ? null : hitAt(pack, here.x + d.x, here.y + d.y, npcTile.current)
       if (front !== facingHit.current) {
         facingHit.current = front
         cb.current.onFacing(front)
@@ -333,9 +356,9 @@ export const Screen = forwardRef<
   function goTo(tile: Tile) {
     if (pausedRef.current) return
     const here = gridNow()
-    const hit = hitAt(pack, tile.x, tile.y)
+    const hit = hitAt(pack, tile.x, tile.y, npcTile.current)
     if (hit) {
-      const plan = planActivation(here, targetTilesFor(pack, hit), solids.current, cols, rows)
+      const plan = planActivation(here, targetsOf(hit), solids.current, cols, rows)
       if (!plan) {
         cb.current.onEmpty()
         return
@@ -359,12 +382,89 @@ export const Screen = forwardRef<
     pathRef.current = path
   }
 
+  /** Advance a walking NPC one frame; on the last tile it turns to the player and the player turns to it. */
+  function stepNpc(dt: number) {
+    const w = npcWalk.current
+    if (!w) return
+    if (!w.to) {
+      const next = w.path.shift()
+      if (!next) {
+        npcWalk.current = null
+        arrive(w.id)
+        return
+      }
+      w.to = next
+      w.t = 0
+      npcVis.current[w.id] = { ...npcVis.current[w.id], facing: facingBetween(w.from, next) }
+    }
+    w.t += dt / (STEP_MS * 1.25)
+    const t = Math.min(1, w.t)
+    npcVis.current[w.id] = {
+      x: w.from.x + (w.to.x - w.from.x) * t,
+      y: w.from.y + (w.to.y - w.from.y) * t,
+      facing: npcVis.current[w.id].facing,
+    }
+    if (t >= 1) {
+      npcTile.current[w.id] = w.to
+      w.from = w.to
+      w.to = null
+    }
+  }
+
+  function arrive(id: string) {
+    const here = gridNow()
+    const at = npcTile.current[id]
+    npcVis.current[id] = { x: at.x, y: at.y, facing: facingBetween(at, here) }
+    const face = facingBetween(here, at)
+    visual.current = { ...visual.current, facing: face, bob: 0, frame: 0 }
+    cb.current.onMove({ ...here, facing: face })
+    setTagTiles({ ...npcTile.current })
+    cb.current.onArrive?.(id)
+  }
+
+  useEffect(() => {
+    if (!approach) return
+    const from = npcTile.current[approach.npcId]
+    if (!from) return
+    const here = gridNow()
+    if (Math.abs(from.x - here.x) + Math.abs(from.y - here.y) === 1) {
+      arrive(approach.npcId)
+      return
+    }
+    // Stand on the free tile beside the player that is quickest to reach.
+    const others = solidsNow()
+    others.delete(keyOf(from))
+    others.add(keyOf(here))
+    let best: Tile[] | null = null
+    for (const d of Object.values(DIR_DELTA)) {
+      const spot = { x: here.x + d.x, y: here.y + d.y }
+      const path = findPath(from, spot, others, cols, rows)
+      if (path && (!best || path.length < best.length)) best = path
+    }
+    if (!best) {
+      arrive(approach.npcId)
+      return
+    }
+    npcWalk.current = { id: approach.npcId, path: best, from, to: null, t: 0 }
+    // If the walk stalls (a paused tab, a slow phone), the examiner simply arrives: the game never waits forever.
+    const end = best[best.length - 1]
+    const id = approach.npcId
+    const guard = window.setTimeout(() => {
+      if (npcWalk.current?.id !== id) return
+      npcWalk.current = null
+      npcTile.current[id] = end
+      arrive(id)
+    }, best.length * STEP_MS * 1.25 + 1500)
+    return () => window.clearTimeout(guard)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [approach?.token])
+
   useImperativeHandle(ref, () => ({
     useFacing: () => {
       if (pausedRef.current || glide.current) return
       const pos = gridNow()
       const d = DIR_DELTA[pos.facing]
-      const hit = hitAt(pack, pos.x + d.x, pos.y + d.y)
+      const hit = hitAt(pack, pos.x + d.x, pos.y + d.y, npcTile.current)
       if (!hit) {
         cb.current.onEmpty()
         return
@@ -378,7 +478,12 @@ export const Screen = forwardRef<
     ...pack.room.interactables
       .filter((item) => item.label.trim() && item.kind !== 'door')
       .map((item) => ({ id: item.id, label: item.label, x: item.x + (item.w ?? 1) / 2, y: item.y, npc: false })),
-    ...(labels ? pack.cast.map((npc) => ({ id: npc.id, label: npc.displayName, x: npc.spawn.x + 0.5, y: npc.spawn.y + 1, npc: true })) : []),
+    ...(labels
+      ? pack.cast.map((npc) => {
+          const at = tagTiles[npc.id] ?? npc.spawn
+          return { id: npc.id, label: npc.displayName, x: at.x + 0.5, y: at.y + 1, npc: true }
+        })
+      : []),
   ]
 
   return (
