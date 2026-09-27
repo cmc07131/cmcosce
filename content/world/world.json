@@ -23,6 +23,7 @@
     "t": "tall grass (O&T deck)",
     "m": "tall grass (Medical deck)",
     "k": "tall grass (Paedi deck)",
+    "s": "tall grass (Surgical deck)",
     "x": "tall grass (mixed deck)"
   },
   "grid": [
@@ -41,9 +42,9 @@
     "T.RRRRRR........FFFFFFF,,FFFFFFF........RRRRRR.T",
     "T.######***..T..F,,,RRRRRRRR,,,F...T....######.T",
     "T.##D###***...T.F,,,RRRRRRRR,,,F....T...##D###.T",
-    "T...,,.ttt......F,,,########,,,F..........,,...T",
-    "T...,,.tttT.....F,,,###D####,,,F.....T....,,...T",
-    "T...,,.ttt......F,,,,,,,,,,,,,,F..........,,...T",
+    "T...,,.ttt......F,,,########,,,F.....sss..,,...T",
+    "T...,,.tttT.....F,,,###D####,,,F.....Tss..,,...T",
+    "T...,,.ttt......F,,,,,,,,,,,,,,F.....sss..,,...T",
     "T...,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,...T",
     "T...,,,,,,,,,,,,,,,,,,,,,,RRRRR,,,,,,,,,,,,,...T",
     "T.RRRRRR........F,,,,,,,,,RRRRRF........RRRRRR.T",
@@ -314,7 +315,7 @@
       "name": "SURGICAL GYM",
       "badge": "Scalpel Badge",
       "packs": [],
-      "deck": null,
+      "deck": "surgical",
       "topics": [
         "Massive GI bleed",
         "Renal stone",

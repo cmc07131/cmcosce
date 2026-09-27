@@ -1,0 +1,94 @@
+{
+  "id": "sx-gi-bleed",
+  "gym": "surgical",
+  "title": "Massive upper GI bleed",
+  "type": "resus",
+  "time": 480,
+  "stem": "Resus 2. Mr Chow, 55, with alcohol-related cirrhosis, has vomited about a litre of fresh blood. He is confused. HR 128, BP 82/50, RR 24, SpO2 95%, GCS 14. Manage him.",
+  "notes": "Checked against NICE CG141 (Acute upper GI bleeding, 2012, updated 2016), the BSG/UK variceal bleeding guideline (2015; BSG 2023 decompensated cirrhosis), Baveno VII (2022), and the HALT-IT trial (2020).\n\nResuscitate: two large-bore cannulae, bloods (FBC, U&E, LFT, clotting, crossmatch), major haemorrhage protocol if needed, restrictive transfusion (Hb threshold 70–80 g/L, target 70–90; higher in cardiovascular disease) — over-transfusion raises portal pressure. Protect the airway (intubate before endoscopy if confused or vomiting heavily). Risk scores: Glasgow–Blatchford before endoscopy (0 can be discharged); Rockall after.\n\nSuspected variceal bleed: terlipressin 2 mg IV every 4 hours (1 mg if under 50 kg or once bleeding controlled) and prophylactic antibiotics (e.g. ceftriaxone 1 g daily) at presentation; endoscopy within 12 hours of resuscitation (band ligation for oesophageal varices, cyanoacrylate for gastric); balloon tamponade (Sengstaken–Blakemore/Minnesota) as a bridge for uncontrolled bleeding; TIPS for refractory bleeding. Non-variceal: PPI after endoscopy (not before, per NICE), endoscopy within 24 hours. Do not give tranexamic acid (HALT-IT: no benefit, more VTE). Correct coagulopathy only if actively bleeding with specific deficits; lactulose for encephalopathy.\n\nYour notes list 'massive GIB' and 'UGIB + VF' as topics without detail.",
+  "cast": [{ "id": "patient", "name": "Mr Chow", "role": "patient" }, { "id": "nurse", "name": "Nurse Tam", "role": "nurse" }],
+  "vitals": {
+    "hr": 128, "sbp": 82, "dbp": 50, "spo2": 95, "rr": 24, "gcs": 14,
+    "rhythm": "sinus-tachy",
+    "drift": { "sbp": -2, "hr": 2 },
+    "stop": ["terlipressin"],
+    "effects": [
+      { "scene": "blood", "add": { "sbp": 14, "dbp": 8, "hr": -12 }, "overS": 120 },
+      { "scene": "terlipressin", "add": { "sbp": 8, "hr": -8 }, "overS": 120 }
+    ]
+  },
+  "steps": [
+    {
+      "id": "resus",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Resuscitate",
+      "hint": "Two large-bore cannulae, bloods and crossmatch, MHP, blood to a restrictive target, airway assessment.",
+      "confirm": "Now",
+      "opts": [
+        { "t": "Two large-bore cannulae; FBC, U&E, LFT, clotting, crossmatch 6 units, gas", "need": true, "mark": "Access and bloods including crossmatch" },
+        { "t": "Major haemorrhage protocol; transfuse red cells to Hb 70–90", "need": true, "scene": "blood", "mark": "Transfuses to a restrictive target" },
+        { "t": "Airway: suction; anaesthetist to intubate before endoscopy given confusion", "need": true, "mark": "Airway protection before endoscopy" },
+        { "t": "Transfuse to Hb 140 to be safe", "trap": true, "r": "Over-transfusion raises portal pressure and rebleeding in variceal bleeds." }
+      ]
+    },
+    {
+      "id": "drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Suspected variceal: terlipressin and antibiotics now. No TXA.",
+      "confirm": "Give",
+      "opts": [
+        { "t": "Terlipressin 2 mg IV", "need": true, "scene": "terlipressin", "mark": "Terlipressin for suspected variceal bleeding" },
+        { "t": "Ceftriaxone 1 g IV (prophylactic antibiotics in cirrhosis)", "need": true, "mark": "Prophylactic antibiotics in cirrhosis" },
+        { "t": "Tranexamic acid 1 g IV", "trap": true, "r": "HALT-IT showed no benefit and more thrombotic events in GI bleeding." },
+        { "t": "Omeprazole 80 mg IV before endoscopy routinely", "trap": true, "r": "NICE: PPIs after endoscopy for non-variceal bleeding, not before." }
+      ]
+    },
+    {
+      "id": "scores",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Results and risk",
+      "hint": "Bloods, Glasgow–Blatchford.",
+      "groups": { "Results": [
+        { "t": "Bloods", "r": "Hb 68, urea 18, INR 1.9, platelets 72, bilirubin 58.", "mark": "Reviews bloods" },
+        { "t": "Glasgow–Blatchford score", "r": "High (urea, Hb, SBP, pulse, melaena, liver disease): 16.", "mark": "Calculates a pre-endoscopy risk score" }
+      ] }
+    },
+    {
+      "id": "endo",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone",
+      "hint": "Emergency endoscopy after resuscitation; balloon tamponade/TIPS if uncontrolled.",
+      "opts": [
+        { "t": "GI/endoscopy: variceal bleed in cirrhosis, unstable — emergency endoscopy for band ligation after resuscitation and intubation", "mark": "Arranges emergency endoscopy" },
+        { "t": "If bleeding cannot be controlled: balloon tamponade as a bridge and TIPS", "mark": "Knows rescue options" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Terlipressin dose in variceal bleeding?", "a": "2 mg IV every 4 hours", "wrong": ["20 mg once", "0.1 mg/kg/h", "1 g IV"] },
+        { "q": "Why antibiotics in cirrhotic GI bleeding?", "a": "They reduce infection, rebleeding and mortality", "wrong": ["To treat H. pylori", "To lower ammonia only", "Not indicated"] },
+        { "q": "A Glasgow–Blatchford score of 0 means…", "a": "Low risk: suitable for outpatient management", "wrong": ["Needs ICU", "Needs endoscopy tonight", "Needs surgery"] },
+        { "q": "Tranexamic acid in upper GI bleeding?", "a": "Not recommended (HALT-IT)", "wrong": ["1 g for all", "Only in varices", "2 g oral"] },
+        { "q": "First-line endoscopic treatment of oesophageal varices?", "a": "Band ligation", "wrong": ["Adrenaline injection alone", "Clips", "Sclerotherapy only"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Varix Tamer", "emoji": "🩸", "flavor": "Restrictive blood, terlipressin, antibiotics, airway, scope." },
+  "cards": [
+    { "q": "Pre-endoscopy risk score for upper GI bleed?", "options": ["Glasgow–Blatchford", "Rockall (full)", "CURB-65", "Wells"], "why": "Full Rockall needs endoscopy findings.", "source": "NICE CG141" },
+    { "q": "Transfusion target in upper GI bleeding?", "options": ["Hb 70–90 g/L (threshold 70)", "Hb 140", "Hb 50", "Transfuse everyone"], "why": "Villanueva 2013.", "source": "BSG" },
+    { "q": "Terlipressin is used in…", "options": ["Suspected variceal bleeding", "Peptic ulcer bleeding only", "Mallory–Weiss tears", "Lower GI bleeding"], "why": "Splanchnic vasoconstriction.", "source": "BSG / Baveno VII" },
+    { "q": "PPI timing in non-variceal bleeding (NICE)?", "options": ["After endoscopy", "Before endoscopy routinely", "Never", "Only oral"], "why": "NICE CG141.", "source": "NICE CG141" },
+    { "q": "Balloon tamponade device?", "options": ["Sengstaken–Blakemore / Minnesota tube", "Foley catheter", "NG tube", "Chest drain"], "why": "Bridge to TIPS/endoscopy.", "source": "BSG" },
+    { "q": "Endoscopy timing in unstable upper GI bleeding?", "options": ["Immediately after resuscitation", "Within 1 week", "Only if rebleeding", "Within 72 h"], "why": "Within 24 h for others.", "source": "NICE CG141" }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "id": "sx-renal-colic",
+  "gym": "surgical",
+  "title": "Renal colic",
+  "type": "history",
+  "time": 420,
+  "stem": "Cubicle 31. Ms Lau, 35, has severe colicky left loin pain radiating to the groin since this afternoon. BP 135/85, HR 90, temperature 36.8 °C. Take a history, then discuss investigations and management.",
+  "notes": "Checked against NICE NG118 (Renal and ureteric stones, 2019), EAU Urolithiasis guideline (2024).\n\nImaging: urgent low-dose non-contrast CT KUB within 24 hours of presentation in adults (ultrasound first in pregnancy and children). Analgesia: NSAIDs (e.g. IM/PR diclofenac or IV/oral) first-line, then IV paracetamol, then opioids; no antispasmodics. Medical expulsive therapy: alpha-blocker (tamsulosin) for distal ureteric stones under 10 mm (EAU: most benefit 5–10 mm). Most stones under 5 mm pass spontaneously. Emergency referral: signs of infection with obstruction (obstructed infected kidney — urgent decompression by nephrostomy or stent; antibiotics), solitary kidney, bilateral obstruction, AKI, uncontrolled pain. Always exclude AAA in older patients with 'renal colic', and ectopic pregnancy in women.\n\nYour notes use a KUB X-ray and bedside ultrasound, and nifedipine or alpha-blockers; NICE recommends non-contrast CT (KUB X-ray alone misses many stones) and alpha-blockers rather than nifedipine. Discharge advice (fluids, strain urine, return if fever) matches.",
+  "cast": [{ "id": "patient", "name": "Ms Lau", "role": "woman", "inBed": true }],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "History",
+      "hint": "Analgesia first, SOCRATES, urinary symptoms, fever, LMP/pregnancy, previous stones, PMH, drugs.",
+      "groups": {
+        "Start": [{ "t": "Offer analgesia first", "r": "Yes please — it's unbearable.", "mark": "Offers analgesia" }],
+        "Pain": [
+          { "t": "Where and what is the pain like?", "r": "Left loin, comes in waves, into my groin. Can't keep still.", "mark": "Characterises colicky loin-to-groin pain" },
+          { "t": "Urinary symptoms: blood, burning, frequency?", "r": "Pinkish urine.", "mark": "Asks about haematuria and urinary symptoms" },
+          { "t": "Fever or rigors?", "r": "No.", "mark": "Asks about fever (infected obstruction)" }
+        ],
+        "Other": [
+          { "t": "Last period; could you be pregnant?", "r": "LMP a week ago; not pregnant.", "mark": "Asks LMP and pregnancy" },
+          { "t": "Previous stones; kidney disease; one kidney?", "r": "First time. Two kidneys as far as I know.", "mark": "Asks previous stones and solitary kidney" },
+          { "t": "Medicines, allergies, asthma, stomach ulcers?", "r": "None.", "mark": "Asks contraindications to NSAIDs" }
+        ]
+      }
+    },
+    {
+      "id": "tests",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Investigations",
+      "hint": "Urine dip and hCG, bloods, non-contrast CT KUB.",
+      "groups": {
+        "Bedside": [
+          { "t": "Urine dipstick and pregnancy test", "r": "Blood +++, nitrite negative; hCG negative.", "mark": "Urine dipstick and pregnancy test" },
+          { "t": "U&E, FBC, CRP, calcium, urate", "r": "Creatinine 72; WCC 9.", "mark": "Renal function and stone bloods" }
+        ],
+        "Imaging": [
+          { "t": "Non-contrast CT KUB", "r": "6 mm stone at the left vesicoureteric junction with mild hydronephrosis.", "mark": "Non-contrast CT KUB" },
+          { "t": "KUB X-ray alone to diagnose", "trap": true, "r": "Misses radiolucent and small stones; CT is the first-line test (NICE)." }
+        ]
+      }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "patient",
+      "label": "Explain",
+      "hint": "Stone diagnosis, NSAID, tamsulosin, fluids, strain urine, return advice, urology follow-up.",
+      "opts": [
+        { "t": "A 6 mm stone near the bladder; most this size pass within weeks", "mark": "Explains diagnosis and likelihood of passage" },
+        { "t": "NSAID analgesia; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone", "mark": "NSAID, alpha-blocker, fluids and straining" },
+        { "t": "Return at once with fever, rigors, vomiting, or uncontrolled pain; urology follow-up and repeat imaging", "mark": "Safety-netting (infected obstructed kidney) and follow-up" },
+        { "t": "Buscopan for the colic", "trap": true, "r": "Antispasmodics are not recommended (NICE)." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "First-line imaging for suspected renal colic in adults (NICE)?", "a": "Low-dose non-contrast CT KUB within 24 hours", "wrong": ["KUB X-ray", "IVU", "MRI"] },
+        { "q": "First-line analgesia?", "a": "NSAIDs", "wrong": ["Morphine", "Buscopan", "Codeine"] },
+        { "q": "Obstructed infected kidney needs…", "a": "Urgent decompression (nephrostomy or stent) and antibiotics", "wrong": ["Tamsulosin", "Lithotripsy today", "Discharge"] },
+        { "q": "Differential to exclude in an older man with 'renal colic'?", "a": "Abdominal aortic aneurysm", "wrong": ["Appendicitis", "Gallstones", "Hernia"] },
+        { "q": "MET drug?", "a": "Tamsulosin", "wrong": ["Nifedipine first-line", "Furosemide", "Allopurinol"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Stone Cold", "emoji": "🪨", "flavor": "NSAID, CT KUB, tamsulosin, and watch for fever." },
+  "cards": [
+    { "q": "Most ureteric stones under 5 mm…", "options": ["Pass spontaneously", "Need surgery", "Cause renal failure", "Need lithotripsy"], "why": "Larger ones less likely.", "source": "EAU 2024" },
+    { "q": "Obstruction plus infection is…", "options": ["A urological emergency", "Managed with fluids only", "Treated with tamsulosin", "Discharged with antibiotics"], "why": "Decompress urgently.", "source": "NICE NG118" },
+    { "q": "Imaging for renal colic in pregnancy?", "options": ["Ultrasound", "CT KUB", "IVU", "X-ray"], "why": "Avoid radiation.", "source": "NICE NG118" },
+    { "q": "Renal colic analgesia after NSAIDs?", "options": ["IV paracetamol, then opioids", "Antispasmodics", "Nothing", "Steroids"], "why": "NICE NG118.", "source": "NICE NG118", "note": "Your notes use KUB X-ray and nifedipine." },
+    { "q": "Commonest stone type?", "options": ["Calcium oxalate", "Uric acid", "Cystine", "Struvite"], "why": "Radio-opaque.", "source": "Urology" },
+    { "q": "Stone size where urology intervention is more likely?", "options": ["Over 10 mm", "Under 2 mm", "Any size", "Only 1 mm"], "why": "Low spontaneous passage.", "source": "EAU 2024" }
+  ]
+}

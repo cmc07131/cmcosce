@@ -77,7 +77,7 @@ const gymSpots = {
 for (const [id, [x, y]] of Object.entries(gymSpots)) building(id, x, y)
 
 // Tall grass. Letters pick the question deck: a = ATLS, c = ACLS/PALS, o = O&G, h = Counsel/History,
-// p = Psychi, t = O&T, m = Medical, k = Paedi, x = mixed.
+// p = Psychi, t = O&T, m = Medical, k = Paedi, s = Surgical, x = mixed.
 // Grass only grows on plain ground: it never paints over buildings, roads or trees.
 const grass = (x, y, w, h, ch) => {
   for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) if (g[y + j]?.[x + i] === '.') set(x + i, y + j, ch)
@@ -93,6 +93,7 @@ grass(27, 26, 3, 5, 'p')
 grass(7, 15, 3, 3, 't')
 grass(9, 21, 3, 3, 'm')
 grass(36, 21, 3, 3, 'k')
+grass(37, 15, 3, 3, 's')
 
 // Pond, trees, flowers for texture.
 rect(32, 25, 6, 4, '~')
@@ -129,7 +130,7 @@ const gyms = [
   },
   { id: 'ot', name: 'O&T GYM', badge: 'Joint Badge', packs: [], deck: 'ot', topics: ['Knee exam', 'Hip exam', 'Shoulder dislocation', 'Shoulder impingement', 'Ankle and Ottawa rules', 'Hand, FDP/FDS', 'Colles', 'LS spine'] },
   { id: 'medical', name: 'MEDICAL GYM', badge: 'Physician Badge', packs: [], deck: 'medical', topics: ['DKA', 'Addison disease', 'Anaemia', 'Chest pain', 'Dizziness', 'Cranial nerves', 'Cerebellar and Hallpike', 'Polyarthritis'] },
-  { id: 'surgical', name: 'SURGICAL GYM', badge: 'Scalpel Badge', packs: [], deck: null, topics: ['Massive GI bleed', 'Renal stone', 'Epididymo-orchitis', 'Hepatosplenomegaly', 'Suturing', 'Digital nerve block', 'Venous cut-down'] },
+  { id: 'surgical', name: 'SURGICAL GYM', badge: 'Scalpel Badge', packs: [], deck: 'surgical', topics: ['Massive GI bleed', 'Renal stone', 'Epididymo-orchitis', 'Hepatosplenomegaly', 'Suturing', 'Digital nerve block', 'Venous cut-down'] },
   { id: 'paedi', name: 'PAEDI GYM', badge: 'Growth Badge', packs: [], deck: 'paedi', topics: ['Epiglottitis', 'Scarlet fever', 'Fever and rash', 'Paediatric vomiting', 'Paediatric seizure', 'Milestones', 'Limping child', 'NAI'] },
   { id: 'history', name: 'COUNSEL/HISTORY GYM', badge: 'Listener Badge', packs: [], deck: 'history', topics: ['Breaking bad news', 'Advance directive', 'Procedural sedation consent', 'DAMA', 'Needlestick injury', 'Returning traveller', 'Malaria'] },
   { id: 'psychi', name: 'PSYCHI GYM', badge: 'Mind Badge', packs: [], deck: 'psychi', topics: ['Mental state exam', 'Self-harm and SAD PERSONS', 'Manic patient', 'Psychosis history', 'Depression', 'Schizophrenia', 'Violent patient and restraint'] },
@@ -160,6 +161,7 @@ const world = {
     t: 'tall grass (O&T deck)',
     m: 'tall grass (Medical deck)',
     k: 'tall grass (Paedi deck)',
+    s: 'tall grass (Surgical deck)',
     x: 'tall grass (mixed deck)',
   },
   grid: rows,

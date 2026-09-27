@@ -1,0 +1,78 @@
+{
+  "id": "sx-scrotum",
+  "gym": "surgical",
+  "title": "Acute scrotum: torsion or epididymo-orchitis?",
+  "type": "exam",
+  "time": 420,
+  "stem": "Cubicle 32. Chris, 15, woke 3 hours ago with severe right scrotal pain and has vomited twice. Take a brief history, examine (with a chaperone and consent), and decide what to do.",
+  "notes": "Checked against EAU paediatric urology guidance, BAUS guidance on testicular torsion, and NICE CKS (Scrotal pain and swelling).\n\nTesticular torsion is the diagnosis until excluded in any boy or young man with sudden severe testicular pain: salvage falls sharply after 6 hours. Features: sudden onset (often waking from sleep), nausea/vomiting, high-riding testis with a horizontal lie, absent cremasteric reflex, pain not relieved by elevation (negative Prehn's sign is unreliable). Do not delay for ultrasound when clinical suspicion is high — urgent urology referral for scrotal exploration (and bilateral fixation). Manual detorsion ('open the book', rotating medially to laterally) may be tried by trained clinicians if theatre is delayed. Differentials: torsion of a testicular appendage (blue dot sign, pain at the upper pole), epididymo-orchitis (gradual onset, urinary symptoms, sexually active — test for chlamydia/gonorrhoea; in older men, enteric organisms), incarcerated hernia, trauma, tumour, Henoch–Schönlein purpura.\n\nYour notes list epididymo-orchitis as a topic; the key exam point is not to label torsion as epididymo-orchitis.",
+  "cast": [{ "id": "patient", "name": "Chris", "role": "man", "inBed": true }, { "id": "nurse", "name": "Nurse Chaperone", "role": "nurse" }],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "patient",
+      "label": "Brief history",
+      "hint": "Onset, time, vomiting, previous episodes, urinary symptoms, sexual history, trauma.",
+      "groups": {
+        "Pain": [
+          { "t": "When exactly did it start and how?", "r": "Woke me at 5 a.m. — suddenly, very bad.", "mark": "Establishes sudden onset and time" },
+          { "t": "Any similar short episodes before?", "r": "A couple of brief ones last month that went away.", "mark": "Asks about intermittent torsion episodes" },
+          { "t": "Burning urine, discharge, sexual activity?", "r": "No.", "mark": "Asks urinary and sexual history (epididymo-orchitis)" },
+          { "t": "Any injury?", "r": "No." }
+        ]
+      }
+    },
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine (consent and chaperone)",
+      "hint": "Lie of the testes, swelling, tenderness, cremasteric reflex, abdomen and hernial orifices.",
+      "groups": {
+        "Scrotum": [
+          { "t": "Obtain consent; chaperone present", "r": "Agreed; Nurse Chaperone present.", "mark": "Consent and chaperone for an intimate examination" },
+          { "t": "Look at the lie of both testes", "r": "Right testis high with a horizontal lie.", "mark": "Finds a high-riding, horizontal testis" },
+          { "t": "Palpate", "r": "Right testis swollen and exquisitely tender throughout.", "mark": "Palpates gently" },
+          { "t": "Cremasteric reflex", "r": "Absent on the right, present on the left.", "mark": "Tests the cremasteric reflex" }
+        ],
+        "Abdomen": [{ "t": "Abdomen and inguinal canals", "r": "Soft, no hernia.", "mark": "Examines the abdomen and hernial orifices" }]
+      }
+    },
+    {
+      "id": "decide",
+      "kind": "say",
+      "to": "phone",
+      "label": "Decide",
+      "hint": "Torsion: urgent urology for exploration now; nil by mouth; analgesia; consent with parents.",
+      "opts": [
+        { "t": "Urology on-call now: suspected right testicular torsion, 3 hours — emergency scrotal exploration", "mark": "Refers urgently for exploration" },
+        { "t": "Nil by mouth, IV analgesia, antiemetic; inform his parents and consent for bilateral fixation", "mark": "Prepares for theatre and involves parents" },
+        { "t": "Book an ultrasound for the morning", "trap": "critical", "r": "Delay loses the testis; clinical suspicion means exploration." },
+        { "t": "Antibiotics for epididymo-orchitis and discharge", "trap": "critical", "r": "Sudden severe pain with a high horizontal testis and absent reflex is torsion." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Salvage rate falls sharply after…", "a": "6 hours", "wrong": ["24 hours", "1 week", "30 minutes"] },
+        { "q": "Cremasteric reflex in torsion?", "a": "Usually absent", "wrong": ["Always present", "Exaggerated", "Irrelevant"] },
+        { "q": "Blue dot sign indicates…", "a": "Torsion of a testicular appendage", "wrong": ["Testicular torsion", "Tumour", "Varicocele"] },
+        { "q": "Why fix the other side?", "a": "Bell-clapper anomaly is usually bilateral", "wrong": ["Cosmetic", "To prevent tumours", "Not needed"] },
+        { "q": "Epididymo-orchitis in a sexually active young man is usually…", "a": "Chlamydia or gonorrhoea", "wrong": ["E. coli always", "Mumps only", "TB"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Time Is Testis", "emoji": "⏳", "flavor": "Sudden pain, high horizontal testis: theatre, not ultrasound." },
+  "cards": [
+    { "q": "Sudden severe testicular pain in a teenager: assume…", "options": ["Torsion until proven otherwise", "Epididymitis", "Hernia", "Muscle strain"], "why": "Explore urgently.", "source": "BAUS / EAU" },
+    { "q": "Testicular torsion typical sign?", "options": ["High-riding testis with horizontal lie", "Low testis", "Painless swelling", "Transilluminable mass"], "why": "Bell-clapper deformity.", "source": "EAU" },
+    { "q": "Ultrasound in suspected torsion?", "options": ["Must not delay exploration", "Is mandatory first", "Is diagnostic always", "Is contraindicated"], "why": "Doppler can be falsely reassuring.", "source": "BAUS" },
+    { "q": "Manual detorsion direction?", "options": ["Medial to lateral ('open the book')", "Lateral to medial", "Upwards", "Any direction"], "why": "Only while arranging theatre.", "source": "EAU" },
+    { "q": "Epididymo-orchitis in men over 35 is usually…", "options": ["Enteric organisms (UTI-related)", "Chlamydia", "Viral", "Fungal"], "why": "Treat accordingly.", "source": "BASHH" },
+    { "q": "Painless scrotal mass in a young man suggests…", "options": ["Testicular tumour", "Torsion", "Epididymitis", "Hernia"], "why": "Ultrasound and tumour markers.", "source": "Urology" }
+  ]
+}

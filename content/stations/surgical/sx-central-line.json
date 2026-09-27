@@ -1,0 +1,86 @@
+{
+  "id": "sx-central-line",
+  "gym": "surgical",
+  "title": "Teaching: ultrasound-guided IJV central line",
+  "type": "teaching",
+  "time": 480,
+  "stem": "Teaching room. Your junior needs to learn how to insert an ultrasound-guided right internal jugular central line for a ventilated patient in septic shock on noradrenaline. Teach the procedure on the manikin.",
+  "notes": "Checked against NICE TA49 (ultrasound guidance for central venous access), the Association of Anaesthetists 2016 safe vascular access guideline, and the NHS 'Safety Standards for Invasive Procedures' (NatSSIPs 2023).\n\nIndications: vasopressors, poor peripheral access, CVP/ScvO2, irritant drugs. Relative contraindications: overlying infection, thrombosis, coagulopathy (weigh up), contralateral pneumothorax. Steps: consent (or best interests), NatSSIPs checklist and time-out, full barrier precautions (cap, mask, sterile gown and gloves, full-length drape), 2% chlorhexidine in 70% alcohol allowed to dry, head-down tilt, real-time ultrasound (identify the IJV lateral to the carotid, compressible, non-pulsatile; confirm needle tip in the vein), Seldinger technique (needle, wire never let go, confirm the wire in the vein on ultrasound, nick, dilate, catheter to about 15 cm on the right), aspirate and flush every lumen, secure, dressing, chest X-ray (tip at the cavo-atrial junction, no pneumothorax), document, and count the wire out. Complications: arterial puncture/cannulation (do not dilate an artery — leave the catheter and call vascular), pneumothorax, air embolism (head down, occlude hubs), arrhythmia (withdraw wire), lost guidewire, infection, thrombosis.\n\nYour notes (checklist, ultrasound, Seldinger mnemonic, complications, depth 15–16 cm right) match this.",
+  "cast": [{ "id": "junior", "name": "Dr Hung", "role": "junior" }],
+  "steps": [
+    {
+      "id": "open",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Talk to Dr Hung",
+      "hint": "Objectives, prior experience, safety focus.",
+      "mood": 4,
+      "turns": [
+        {
+          "line": "I've watched two lines but never done one.",
+          "opts": [
+            { "t": "Great start. By the end you'll know each step and the safety checks, and practise on the manikin. What worries you most?", "r": "Hitting the carotid.", "mood": -2, "mark": "Sets objectives and explores concerns" },
+            { "t": "Just watch closely.", "r": "OK.", "mood": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "procedure",
+      "kind": "steps",
+      "to": "table-ix",
+      "label": "Demonstrate",
+      "hint": "Checklist, barrier precautions, ultrasound, Seldinger, flush, secure, X-ray, count the wire.",
+      "opts": [
+        { "t": "Consent or best-interests decision; NatSSIPs checklist and time-out", "n": 1, "mark": "Consent and safety checklist" },
+        { "t": "Head-down tilt, head turned slightly left; ultrasound IJV lateral to carotid, compressible", "n": 2, "mark": "Positions and identifies anatomy on ultrasound" },
+        { "t": "Full barrier precautions; chlorhexidine 2%/alcohol, allow to dry; full drape", "n": 3, "mark": "Full aseptic barrier precautions" },
+        { "t": "Local anaesthetic; needle under real-time ultrasound into the vein; dark non-pulsatile blood", "n": 4, "mark": "Real-time ultrasound-guided venepuncture" },
+        { "t": "Pass the wire, never letting go; confirm it in the vein on ultrasound", "n": 5, "mark": "Wire control and ultrasound confirmation" },
+        { "t": "Nick the skin, dilate briefly, railroad the catheter to ~15 cm", "n": 6, "mark": "Dilates and inserts the catheter to the right depth" },
+        { "t": "Remove the wire and count it out; aspirate and flush all lumens; secure and dress", "n": 7, "mark": "Removes wire, flushes lumens, secures" },
+        { "t": "Chest X-ray: tip at the cavo-atrial junction, no pneumothorax; document", "n": 8, "mark": "Confirms position and documents" },
+        { "t": "Landmark technique without ultrasound to save time", "trap": "critical", "r": "NICE recommends ultrasound guidance; it cuts arterial puncture and pneumothorax." }
+      ]
+    },
+    {
+      "id": "check",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Check understanding",
+      "hint": "Ask about complications and what to do.",
+      "mood": 3,
+      "turns": [
+        {
+          "line": "What if I see bright red pulsatile blood after dilating?",
+          "opts": [
+            { "t": "What do you think you should do?", "r": "Leave the catheter in, don't pull it, call vascular?", "mood": -2, "mark": "Checks understanding of arterial cannulation" },
+            { "t": "Pull it out and press hard.", "r": "OK.", "mood": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "What to do after arterial dilation/cannulation?", "a": "Leave the catheter in and call vascular surgery", "wrong": ["Pull it and compress", "Use it for vasopressors", "Ignore"] },
+        { "q": "Why head-down position?", "a": "Distends the vein and reduces air embolism risk", "wrong": ["Lowers BP", "Easier drape", "Prevents pneumothorax"] },
+        { "q": "Arrhythmia while passing the wire?", "a": "Withdraw the wire a few centimetres", "wrong": ["Push further", "Give adrenaline", "Ignore"] },
+        { "q": "Ideal tip position?", "a": "At the cavo-atrial junction", "wrong": ["In the right ventricle", "In the subclavian vein", "In the left atrium"] },
+        { "q": "Best skin antiseptic for central lines?", "a": "2% chlorhexidine in 70% alcohol", "wrong": ["Povidone-iodine in water", "Soap", "Alcohol alone always"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Line Up", "emoji": "💉", "flavor": "Checklist, full barrier, ultrasound, never let go of the wire, count it out." },
+  "cards": [
+    { "q": "Central venous access should be…", "options": ["Ultrasound-guided", "Landmark only", "Blind", "Always femoral"], "why": "NICE TA49.", "source": "NICE TA49" },
+    { "q": "Seldinger sequence?", "options": ["Needle, wire, nick, dilate, catheter", "Catheter, wire, needle", "Dilate, needle, wire", "Wire, catheter, needle"], "why": "Never let go of the wire.", "source": "Procedural texts" },
+    { "q": "Right IJV catheter depth in adults?", "options": ["About 15 cm", "About 25 cm", "About 5 cm", "About 40 cm"], "why": "Left side ~18–20 cm.", "source": "Procedural texts" },
+    { "q": "Air embolism prevention?", "options": ["Head-down position and occluding hubs", "Head-up position", "Fast infusion", "Deep breath in"], "why": "Negative intrathoracic pressure draws air.", "source": "Association of Anaesthetists" },
+    { "q": "Never event with central lines?", "options": ["Retained guidewire", "Arrhythmia", "Bruising", "Infection"], "why": "Count the wire out.", "source": "NHS England" },
+    { "q": "IJV relative to the carotid on ultrasound?", "options": ["Lateral and compressible", "Medial and pulsatile", "Posterior and rigid", "Deep to the vertebra"], "why": "Compress to confirm.", "source": "Anatomy" }
+  ]
+}

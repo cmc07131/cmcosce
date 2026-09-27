@@ -1,0 +1,80 @@
+{
+  "id": "sx-suture",
+  "gym": "surgical",
+  "title": "Suturing a flap laceration",
+  "type": "skills",
+  "time": 480,
+  "stem": "Procedure room. Mr Chan, 58, a construction worker, has a V-shaped flap laceration on his left shin from a metal edge 3 hours ago. Consent has been obtained. Repair it on the skin model.",
+  "notes": "Checked against RCEM/BSSH wound care principles, the UKHSA Green Book tetanus chapter (2023 update), and standard suturing technique.\n\nAssess: mechanism, time, contamination, foreign body, tendon/nerve/vessel injury, tetanus status, diabetes/peripheral vascular disease (pretibial wounds in older patients heal poorly — consider steri-strips for thin skin). Prepare: aseptic field, irrigation with saline, local anaesthetic (1% lidocaine, max 3 mg/kg plain or 7 mg/kg with adrenaline; your notes use 4 mg/kg, the US figure), explore, debride non-viable tissue. Flap: the half-buried horizontal mattress (corner) stitch at the tip preserves blood supply; simple interrupted sutures elsewhere (vertical mattress where eversion is needed). 4-0 non-absorbable monofilament on the leg; removal at 10–14 days for the lower leg (7–10 days for other limb sites). Non-adherent dressing. Tetanus: a tetanus-prone wound (soil, manure, delay over 6 hours, devitalised tissue) needs a booster if not fully immunised or last dose over 10 years ago, and immunoglobulin for high-risk wounds in someone not fully immunised (UKHSA) — not simply '>10 years since last dose'.\n\nYour notes cover the procedure, handling of sharps and instruments, and complications, matching this.",
+  "cast": [{ "id": "patient", "name": "Mr Chan", "role": "man", "inBed": true }],
+  "steps": [
+    {
+      "id": "prep",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Prepare",
+      "hint": "Suture set, sterile gloves and drape, antiseptic, saline, lidocaine, 4-0 nylon, dressing, sharps bin.",
+      "confirm": "Take",
+      "opts": [
+        { "t": "Suture pack, sterile gloves, drape, chlorhexidine", "need": true, "mark": "Aseptic set-up" },
+        { "t": "Normal saline and syringe for irrigation", "need": true, "mark": "Irrigation" },
+        { "t": "1% lidocaine, 10 mL syringe, orange needle", "need": true, "mark": "Local anaesthetic" },
+        { "t": "4-0 non-absorbable monofilament (nylon)", "need": true, "mark": "Appropriate suture material" },
+        { "t": "Non-adherent dressing; sharps bin at hand", "need": true, "mark": "Dressing and sharps safety" },
+        { "t": "3-0 silk", "trap": true, "r": "Multifilament silk carries more infection and tissue reaction; use monofilament." }
+      ]
+    },
+    {
+      "id": "repair",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Repair",
+      "hint": "Neurovascular check, anaesthetise, irrigate, explore, corner stitch at the tip, interrupted sutures, dressing.",
+      "opts": [
+        { "t": "Check distal neurovascular status; check the flap's colour", "n": 1, "mark": "Neurovascular and flap viability check" },
+        { "t": "Clean the surrounding skin; infiltrate lidocaine from within the wound edges", "n": 2, "mark": "Local infiltration through the wound edges" },
+        { "t": "Test sensation; irrigate with saline under pressure", "n": 3, "mark": "Confirms anaesthesia and irrigates" },
+        { "t": "Explore for foreign bodies and deep injury; trim non-viable tissue", "n": 4, "mark": "Explores and debrides" },
+        { "t": "Corner stitch (half-buried horizontal mattress) to anchor the flap tip", "n": 5, "mark": "Places a corner stitch at the flap tip" },
+        { "t": "Simple interrupted sutures 5 mm apart, 5 mm from the edge, needle at 90°, edges everted, knots to one side", "n": 6, "mark": "Correct interrupted suture technique" },
+        { "t": "Dispose of the needle into the sharps bin; dress", "n": 7, "mark": "Sharps disposal and dressing" },
+        { "t": "Transfixing stitch straight through the tip of the flap", "trap": true, "r": "Strangulates the tip's blood supply; use a corner stitch." },
+        { "t": "Pick up the needle with your fingers", "trap": true, "r": "Needlestick risk; always use instruments." }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "patient",
+      "label": "Aftercare",
+      "hint": "Tetanus, suture removal time, wound care, infection signs.",
+      "opts": [
+        { "t": "Tetanus: last dose 15 years ago and a dirty wound → booster (and immunoglobulin if high-risk and not fully immunised)", "mark": "Tetanus assessment" },
+        { "t": "Remove sutures at 10–14 days (lower leg); keep dry for 48 hours; elevate the leg", "mark": "Suture removal timing and wound care" },
+        { "t": "Return for redness, pus, fever or increasing pain", "mark": "Infection advice" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Purpose of the corner stitch?", "a": "Holds the flap tip without strangling its blood supply", "wrong": ["Faster closure", "Stronger than all other stitches", "Better cosmesis on the face only"] },
+        { "q": "Maximum dose of plain lidocaine (UK)?", "a": "3 mg/kg (max 200 mg)", "wrong": ["10 mg/kg", "1 mg/kg", "No maximum"] },
+        { "q": "Suture removal on the face?", "a": "3–5 days", "wrong": ["14 days", "21 days", "1 day"] },
+        { "q": "Tetanus-prone wound feature?", "a": "Soil contamination or devitalised tissue", "wrong": ["Clean paper cut", "Surgical incision", "Burn under 1%"] },
+        { "q": "Vertical mattress suture is useful for…", "a": "Everting wound edges", "wrong": ["Inverting edges", "Buried knots", "Closing mucosa"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Stitch Master", "emoji": "🧵", "flavor": "Irrigate, explore, corner stitch the tip, everted edges, never touch the needle." },
+  "cards": [
+    { "q": "Lidocaine with adrenaline maximum dose?", "options": ["7 mg/kg", "3 mg/kg", "15 mg/kg", "1 mg/kg"], "why": "Plain: 3 mg/kg (max 200 mg).", "source": "BNF", "note": "Your notes: 4 mg/kg plain (US figure)." },
+    { "q": "Lower-leg suture removal?", "options": ["10–14 days", "3–5 days", "21 days", "Never"], "why": "Poorer blood supply.", "source": "RCEM" },
+    { "q": "Monofilament sutures have…", "options": ["Less infection risk and tissue drag", "Better knot security than all braided", "More reactivity", "No use in skin"], "why": "Nylon/polypropylene.", "source": "Surgical skills" },
+    { "q": "Tetanus immunoglobulin is given for…", "options": ["High-risk tetanus-prone wounds in the not fully immunised", "All wounds", "Any wound after 10 years", "Clean wounds"], "why": "UKHSA risk-based approach.", "source": "UKHSA Green Book" },
+    { "q": "Local anaesthetic is best infiltrated…", "options": ["Through the wound edges", "Through intact skin 5 cm away only", "Into a vein", "After suturing"], "why": "Less painful.", "source": "RCEM" },
+    { "q": "Pretibial flap in an elderly patient with thin skin?", "options": ["Steri-strips rather than sutures", "Tight sutures", "Staples", "Leave open always"], "why": "Sutures tear fragile skin.", "source": "BAD / RCEM" }
+  ]
+}

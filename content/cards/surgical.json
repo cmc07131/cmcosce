@@ -1,0 +1,49 @@
+{
+  "deck": "surgical",
+  "name": "Surgical",
+  "creatures": [
+    {
+      "id": "stitchling",
+      "name": "STITCHLING",
+      "body": "snake",
+      "main": "#4868a8",
+      "accent": "#d8e0f8"
+    },
+    {
+      "id": "gallbat",
+      "name": "GALLBAT",
+      "body": "bird",
+      "main": "#70a050",
+      "accent": "#e0f0c8"
+    },
+    {
+      "id": "hernipede",
+      "name": "HERNIPEDE",
+      "body": "beast",
+      "main": "#c89868",
+      "accent": "#f8e8d0"
+    },
+    {
+      "id": "bleedoo",
+      "name": "BLEEDOO",
+      "body": "blob",
+      "main": "#c83850",
+      "accent": "#f8c8d0"
+    }
+  ],
+  "cards": [
+    {
+      "id": "sx-asepsis",
+      "q": "Best skin antiseptic before invasive procedures?",
+      "options": [
+        "2% chlorhexidine in 70% alcohol",
+        "Water",
+        "Hydrogen peroxide",
+        "Povidone-iodine in water only"
+      ],
+      "answer": 0,
+      "why": "Allow it to dry.",
+      "source": "NICE / epic3 guidance"
+    }
+  ]
+}
