@@ -631,3 +631,133 @@ export function cspine(kind: 'normal' | 'short' | 'c5-6' = 'normal', seed = 1): 
   f.grain(0.04, seed)
   return f
 }
+
+/* ------------------------------------------------------------------ paediatric neck */
+
+/**
+ * Soft-tissue neck films in a child. Lateral: a normal epiglottis is a thin curl; epiglottitis gives the
+ * swollen 'thumb sign' with thickened aryepiglottic folds. AP: croup narrows the subglottic airway into a
+ * tapering 'steeple' instead of the normal square shoulders.
+ */
+export function neck(kind: 'lateral-normal' | 'lateral-epiglottitis' | 'ap-normal' | 'ap-croup', seed = 1): Field {
+  const f = new Field(128, 128, 0.04)
+  if (kind.startsWith('lateral')) {
+    f.poly(
+      [
+        [18, 0],
+        [110, 0],
+        [112, 128],
+        [14, 128],
+      ],
+      SOFT,
+      'set',
+      3,
+    )
+    // Cervical spine at the back (image right), airway column in front.
+    for (let i = 0; i < 7; i++) knob(f, 86, 12 + i * 16, 9, 6)
+    f.path(
+      [
+        [40, 0],
+        [46, 40],
+        [50, 70],
+        [52, 128],
+      ],
+      12,
+      0.1,
+      'set',
+      1.5,
+    )
+    // Hyoid bone.
+    f.line(34, 50, 44, 50, 3, 0.7, 'set', 0.6)
+    // Epiglottis: thin curl normally, swollen thumb when inflamed.
+    if (kind === 'lateral-epiglottitis') f.ellipse(52, 58, 7, 5, SOFT + 0.05, 'set', 1, -0.5)
+    else f.curve([48, 50], [56, 52], [54, 62], 1.6, SOFT + 0.05, 'set', 0.5)
+  } else {
+    f.poly(
+      [
+        [22, 0],
+        [106, 0],
+        [110, 128],
+        [18, 128],
+      ],
+      SOFT,
+      'set',
+      3,
+    )
+    for (let i = 0; i < 7; i++) knob(f, 64, 12 + i * 16, 10, 5)
+    // Air column: square shoulders below the cords normally; a tapering steeple in croup.
+    const pts: [number, number][] = []
+    for (let y = 0; y <= 128; y += 4) {
+      const narrow = kind === 'ap-croup' && y > 40 && y < 76 ? Math.max(1.5, 7 - (76 - y) * 0.0 - (y - 40) * 0.15) : 7
+      const shoulders = kind === 'ap-croup' && y >= 40 && y < 76 ? narrow : 7
+      pts.push([64 - shoulders, y])
+    }
+    const right = pts.map(([x, y]) => [128 - x, y] as [number, number]).reverse()
+    f.poly([...pts, ...right], 0.1, 'set', 1)
+  }
+  f.grain(0.04, seed)
+  return f
+}
+
+/** Steeple width helper for tests: narrowest air-column width between the cords and the thoracic inlet. */
+export function airwayWidth(f: Field, y: number) {
+  let n = 0
+  for (let x = 40; x < 88; x++) if (f.mean(x, y, x, y + 1) < 0.2) n++
+  return n
+}
+
+/** Frog-leg lateral hip in a teenager. SUFE: the femoral epiphysis slips posteriorly/medially off the neck. */
+export function sufe(kind: 'normal' | 'slipped', seed = 1): Field {
+  const f = new Field(128, 128, 0.04)
+  f.poly(
+    [
+      [0, 0],
+      [128, 0],
+      [128, 128],
+      [0, 128],
+    ],
+    SOFT,
+    'set',
+    3,
+  )
+  f.poly(
+    [
+      [0, 20],
+      [56, 22],
+      [66, 52],
+      [56, 70],
+      [0, 78],
+    ],
+    0.62,
+    'set',
+    1,
+  )
+  // Femoral neck and shaft abducted (frog-leg).
+  bone(f, [
+    [66, 60],
+    [96, 74],
+    [124, 110],
+  ], 16)
+  // Physis (dark line) and the epiphysis cap.
+  const slip = kind === 'slipped' ? 6 : 0
+  f.line(62, 48, 66, 66, 1.4, 0.3, 'set', 0.4)
+  knob(f, 58 - slip, 56 + slip, 9, 11)
+  // Klein's line along the superior border of the neck, extended medially: it should cut the lateral
+  // epiphysis; in a slip the epiphysis falls below it.
+  f.line(104, 68, 46, 41, 0.8, 0.95, 'max', 0.3)
+  f.grain(0.04, seed)
+  return f
+}
+
+/** True if Klein's line crosses the epiphysis (normal); tests use it. */
+export function kleinCutsEpiphysis(kind: 'normal' | 'slipped') {
+  const slip = kind === 'slipped' ? 6 : 0
+  const cx = 58 - slip
+  const cy = 56 + slip
+  for (let t = 0; t <= 1; t += 0.01) {
+    const x = 104 + (46 - 104) * t
+    const y = 68 + (41 - 68) * t
+    if (((x - cx) / 9) ** 2 + ((y - cy) / 11) ** 2 < 1) return true
+  }
+  return false
+}

@@ -2,8 +2,8 @@ import { chest } from './chest'
 import { type Field, Pixels } from './field'
 import { head } from './head'
 import { burnChart, chestEschar, chickenpox, fightBite, fundus, posture, purpura, scarletRash, scarletTongue, zoster, type BurnRegion } from './photos'
-import { ankle, cspine, elbow, hip, pelvis, shoulder, wrist } from './skeleton'
-import { cardiac, earlyPregnancy, fastPelvis, fastRuq } from './ultrasound'
+import { ankle, cspine, elbow, hip, neck, pelvis, shoulder, sufe, wrist } from './skeleton'
+import { cardiac, earlyPregnancy, fastPelvis, fastRuq, intussusception } from './ultrasound'
 
 /**
  * Every image a station can hand you, by reference: `xr:`, `ct:`, `us:`, `photo:` (and `ecg:` for the
@@ -65,6 +65,12 @@ export const IMAGES: Record<string, Entry> = {
   'xr:cspine-normal': grey('Cervical spine, lateral', () => cspine('normal')),
   'xr:cspine-short': grey('Cervical spine, lateral', () => cspine('short')),
   'xr:cspine-c5-6': grey('Cervical spine, lateral', () => cspine('c5-6')),
+  'xr:neck-lateral-normal': grey('Soft-tissue neck, lateral', () => neck('lateral-normal')),
+  'xr:neck-lateral-epiglottitis': grey('Soft-tissue neck, lateral', () => neck('lateral-epiglottitis')),
+  'xr:neck-ap-normal': grey('Soft-tissue neck, AP', () => neck('ap-normal')),
+  'xr:neck-ap-croup': grey('Soft-tissue neck, AP', () => neck('ap-croup')),
+  'xr:hip-frog-normal': grey('Hip, frog-leg lateral', () => sufe('normal')),
+  'xr:hip-frog-sufe': grey('Hip, frog-leg lateral', () => sufe('slipped')),
 
   'us:fast-ruq-pos': grey('FAST, right upper quadrant', () => fastRuq(true)),
   'us:fast-ruq-neg': grey('FAST, right upper quadrant', () => fastRuq(false)),
@@ -75,6 +81,8 @@ export const IMAGES: Record<string, Entry> = {
   'us:cardiac-normal': grey('FAST, subxiphoid', () => cardiac(false)),
   'us:early-ectopic': grey('Pelvic ultrasound, transabdominal', () => earlyPregnancy('ectopic')),
   'us:early-iup': grey('Pelvic ultrasound, transabdominal', () => earlyPregnancy('iup')),
+  'us:intussusception': grey('Abdominal ultrasound, right upper quadrant', () => intussusception(true)),
+  'us:bowel-normal': grey('Abdominal ultrasound, right upper quadrant', () => intussusception(false)),
 
   'photo:purpura': rgb('Photograph: leg, glass test', purpura),
   'photo:scarlet-tongue': rgb('Photograph: face and tongue', scarletTongue),

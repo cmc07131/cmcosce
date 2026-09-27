@@ -1,0 +1,83 @@
+{
+  "id": "pd-croup",
+  "gym": "paedi",
+  "title": "Croup",
+  "type": "resus",
+  "time": 420,
+  "stem": "Paediatric area, 02:00. Chun-hei, 18 months, woke with a barking cough and noisy breathing after a 2-day cold. HR 150, RR 42, SpO2 95% in air, temperature 38.0 °C. He is on his mother's lap. Assess and manage him.",
+  "notes": "Checked against the NICE CKS (Croup, 2023), the Alberta/TOP croup guideline, RCH Melbourne guideline, and the Westley croup score.\n\nCroup: parainfluenza commonest; 6 months to 3 years; barking cough, hoarse voice, inspiratory stridor, worse at night. Keep the child calm on the parent's lap; don't examine the throat; avoid distress (it worsens obstruction). Severity (Westley: stridor, recessions, air entry, cyanosis, conscious level): mild — stridor only when upset; moderate — stridor at rest with recession; severe — agitation or lethargy, marked recession, hypoxia.\n\nTreatment: a single oral dose of dexamethasone 0.15 mg/kg for all severities (0.3–0.6 mg/kg in some guidelines for severe; prednisolone 1–2 mg/kg if unavailable; nebulised budesonide 2 mg if vomiting). Nebulised adrenaline 1:1000, 0.5 mL/kg (max 5 mL) for moderate–severe; effect in 10–30 minutes, lasting about 2 hours, so observe for at least 2–4 hours after. Oxygen if SpO2 is low. Severe or not improving: senior/anaesthetic and ENT help, heliox, intubation with a smaller tube. No routine X-ray or antibiotics. Differentials: epiglottitis, bacterial tracheitis, foreign body, anaphylaxis, retropharyngeal abscess.\n\nYour notes match this.",
+  "cast": [{ "id": "patient", "name": "Chun-hei", "role": "child", "inBed": false }, { "id": "mother", "name": "Mother", "role": "woman" }, { "id": "nurse", "name": "Nurse Fung", "role": "nurse" }],
+  "vitals": { "hr": 150, "sbp": 96, "dbp": 60, "spo2": 95, "rr": 42, "temp": 38.0, "rhythm": "sinus-tachy", "effects": [{ "scene": "adrenaline", "add": { "rr": -10, "hr": 10, "spo2": 3 }, "overS": 600 }, { "scene": "dex", "add": { "rr": -4 }, "overS": 1200 }] },
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "mother",
+      "label": "History",
+      "hint": "Onset, cold, fever, drooling, choking episode, immunisation, previous croup.",
+      "groups": {
+        "Illness": [
+          { "t": "When did the noisy breathing start? Any cold before?", "r": "Runny nose for 2 days, then barky cough tonight.", "mark": "Asks onset and preceding URTI" },
+          { "t": "Drooling, can't swallow, very high fever?", "r": "No drooling, drinking milk, mild fever.", "mark": "Screens for epiglottitis" },
+          { "t": "Any choking on food or a toy before it started?", "r": "No.", "mark": "Screens for foreign body" }
+        ],
+        "Background": [
+          { "t": "Vaccinations, previous episodes, prematurity", "r": "Fully vaccinated. Term baby. First time.", "mark": "Asks immunisations and history" }
+        ]
+      }
+    },
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Look (keep him calm)",
+      "hint": "Observe on mum's lap: stridor at rest, recession, colour, alertness. Don't examine the throat.",
+      "groups": {
+        "Observe": [
+          { "t": "Listen: stridor at rest or only when upset?", "r": "Soft inspiratory stridor at rest.", "mark": "Assesses stridor at rest" },
+          { "t": "Recession and work of breathing", "r": "Moderate subcostal and suprasternal recession.", "mark": "Assesses recession" },
+          { "t": "Colour and alertness", "r": "Pink, alert, interactive.", "mark": "Assesses conscious level and colour" },
+          { "t": "Look in his throat with a tongue depressor", "trap": "critical", "r": "Throat examination can precipitate complete obstruction if this is epiglottitis. Don't." }
+        ],
+        "Severity": [{ "t": "Westley score", "r": "Stridor at rest 2, moderate recession 2, air entry normal 0: score 4 — moderate croup.", "mark": "Grades severity (moderate)" }]
+      }
+    },
+    {
+      "id": "treat",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Treat",
+      "hint": "Dexamethasone for all; nebulised adrenaline for moderate/severe; observe.",
+      "confirm": "Give",
+      "opts": [
+        { "t": "Oral dexamethasone 0.15 mg/kg (11 kg: 1.65 mg)", "need": true, "scene": "dex", "mark": "Oral dexamethasone 0.15 mg/kg" },
+        { "t": "Nebulised adrenaline 1:1000, 0.5 mL/kg (5 mL), with mum holding the mask", "need": true, "scene": "adrenaline", "mark": "Nebulised adrenaline for moderate croup" },
+        { "t": "Observe at least 2–4 hours after adrenaline", "need": true, "mark": "Observes for rebound after adrenaline" },
+        { "t": "Oral amoxicillin", "trap": true, "r": "Croup is viral; antibiotics don't help." },
+        { "t": "Neck X-ray to confirm", "trap": true, "r": "Croup is a clinical diagnosis; X-ray only if atypical." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Commonest cause of croup?", "a": "Parainfluenza virus", "wrong": ["RSV only", "Haemophilus influenzae b", "Streptococcus"] },
+        { "q": "Dexamethasone dose for croup?", "a": "0.15 mg/kg orally, single dose", "wrong": ["1 mg/kg IV daily", "0.015 mg/kg", "10 mg for all"] },
+        { "q": "Nebulised adrenaline dose?", "a": "1:1000, 0.5 mL/kg (max 5 mL)", "wrong": ["1:10,000 10 mL", "0.01 mL/kg", "IM 0.5 mg"] },
+        { "q": "Why observe after nebulised adrenaline?", "a": "Its effect wears off after about 2 hours", "wrong": ["It causes hypoglycaemia", "It is toxic", "It isn't needed"] },
+        { "q": "X-ray sign of croup (if done)?", "a": "Steeple sign on AP neck", "wrong": ["Thumb sign", "Sail sign", "Double bubble"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Bark Buster", "emoji": "🐶", "flavor": "Calm on mum's lap, dex for all, adrenaline for stridor at rest." },
+  "cards": [
+    { "q": "Croup typical age?", "options": ["6 months to 3 years", "Newborns only", "10–15 years", "Adults"], "why": "Peak around 2 years.", "source": "NICE CKS" },
+    { "q": "Croup X-ray sign?", "options": ["Steeple sign", "Thumb sign", "Target sign", "Double bubble"], "why": "Subglottic narrowing on AP neck.", "source": "Radiology", "note": "Not required for diagnosis." },
+    { "q": "Moderate croup feature?", "options": ["Stridor at rest with recession", "Stridor only when crying", "Cyanosis and lethargy", "No stridor"], "why": "Needs nebulised adrenaline.", "source": "NICE CKS" },
+    { "q": "Croup steroid for a vomiting child?", "options": ["Nebulised budesonide 2 mg", "Oral dexamethasone only", "No steroid", "IV hydrocortisone always"], "why": "Alternative route.", "source": "NICE CKS" },
+    { "q": "Bacterial tracheitis features?", "options": ["High fever, toxic child, purulent secretions, poor response to adrenaline", "Mild barking cough", "Wheeze", "Afebrile"], "why": "Needs airway expertise and antibiotics.", "source": "RCH Melbourne" },
+    { "q": "Croup management: examine the throat?", "options": ["Avoid — could be epiglottitis and distress worsens stridor", "Always", "Only with a spatula", "Only if febrile"], "why": "Keep the child calm.", "source": "APLS" }
+  ]
+}

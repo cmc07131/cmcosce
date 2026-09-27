@@ -1,0 +1,49 @@
+{
+  "deck": "paedi",
+  "name": "Paedi",
+  "creatures": [
+    {
+      "id": "croupup",
+      "name": "CROUPUP",
+      "body": "beast",
+      "main": "#f0c060",
+      "accent": "#fff4d8"
+    },
+    {
+      "id": "rashbit",
+      "name": "RASHBIT",
+      "body": "beast",
+      "main": "#e87078",
+      "accent": "#f8d8dc"
+    },
+    {
+      "id": "babblob",
+      "name": "BABBLOB",
+      "body": "blob",
+      "main": "#80c8f0",
+      "accent": "#e0f4ff"
+    },
+    {
+      "id": "limpling",
+      "name": "LIMPLING",
+      "body": "bird",
+      "main": "#98c870",
+      "accent": "#e8f8d8"
+    }
+  ],
+  "cards": [
+    {
+      "id": "pd-weight",
+      "q": "APLS weight estimate for a 4-year-old?",
+      "options": [
+        "16 kg",
+        "8 kg",
+        "24 kg",
+        "30 kg"
+      ],
+      "answer": 0,
+      "why": "(Age × 2) + 8 for 1–5 years.",
+      "source": "APLS"
+    }
+  ]
+}

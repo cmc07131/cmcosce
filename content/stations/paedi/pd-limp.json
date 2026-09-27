@@ -1,0 +1,77 @@
+{
+  "id": "pd-limp",
+  "gym": "paedi",
+  "title": "The limping child",
+  "type": "exam",
+  "time": 420,
+  "stem": "Paediatric area. Kai, 13, overweight, has had a limp and left knee pain for 3 weeks, worse today. Temperature 36.9 °C. Examine him and explain your findings and plan.",
+  "notes": "Checked against RCEM/RCPCH guidance on the limping child, the Kocher criteria (septic arthritis), and BOAST 'Slipped capital femoral epiphysis' (2021).\n\nDifferential by age: toddler (fracture — toddler's fracture, NAI, DDH, septic arthritis), 3–10 years (transient synovitis, septic arthritis, Perthes), adolescent (SUFE, overuse, tumours); at any age: infection, malignancy, NAI. Hip pathology often presents as knee pain (obturator nerve) — always examine the hip. SUFE: obese adolescent, loss of internal rotation, obligatory external rotation on hip flexion (Drehmann sign); frog-leg lateral X-ray (Klein's line fails to cut the epiphysis). Treatment: non-weight-bearing immediately and urgent orthopaedic referral for pinning; check the other hip. Septic arthritis (Kocher): non-weight-bearing, fever over 38.5, ESR over 40, WCC over 12 (probability rises with number of criteria; CRP over 20 in modified criteria) → aspirate and antibiotics.\n\nYour notes list the limping child ('referred pain from hip to knee'; HSP and NAI in the differential) — this matches.",
+  "cast": [{ "id": "patient", "name": "Kai", "role": "child", "inBed": true }, { "id": "mother", "name": "Mother", "role": "woman" }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Gait, both hips and knees, rotations, Drehmann sign, spine, temperature, skin.",
+      "groups": {
+        "Look": [
+          { "t": "Gait", "r": "Antalgic gait with the left foot turned out.", "mark": "Observes gait" },
+          { "t": "Leg lengths and rotation lying", "r": "Left leg externally rotated and ~1 cm short.", "mark": "Notes rotation and shortening" }
+        ],
+        "Knee": [{ "t": "Left knee", "r": "Normal: no effusion, full range, non-tender.", "mark": "Examines the knee" }],
+        "Hip": [
+          { "t": "Hip internal rotation", "r": "Left internal rotation markedly reduced and painful.", "mark": "Examines the hip: loss of internal rotation" },
+          { "t": "Flex the left hip", "r": "The thigh swings into external rotation as it flexes (Drehmann sign).", "mark": "Elicits Drehmann sign" },
+          { "t": "Right hip", "r": "Normal." }
+        ],
+        "Other": [{ "t": "Temperature, spine, skin, abdomen", "r": "Afebrile, no rash, spine and abdomen normal.", "mark": "Excludes infection and other causes" }]
+      }
+    },
+    {
+      "id": "xray",
+      "kind": "order",
+      "to": "trolley",
+      "label": "Imaging",
+      "hint": "AP pelvis and frog-leg laterals of both hips.",
+      "groups": { "X-ray": [
+        { "t": "AP pelvis and frog-leg lateral of both hips", "r": "Left femoral epiphysis displaced posteriorly and medially; Klein's line misses the epiphysis.", "img": "xr:hip-frog-sufe", "mark": "Requests frog-leg laterals and identifies SUFE" },
+        { "t": "Knee X-ray only", "trap": true, "r": "Hip pathology refers to the knee — image the hips." }
+      ] }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "mother",
+      "label": "Explain",
+      "hint": "SUFE, stop weight-bearing now, orthopaedics urgently, other hip.",
+      "opts": [
+        { "t": "The growth plate at the top of his thigh bone has slipped. He must not put weight on it — crutches or a wheelchair now — and the orthopaedic team will fix it with a pin, usually today or tomorrow.", "mark": "Explains SUFE and immediate non-weight-bearing" },
+        { "t": "The other hip can slip too, so it will be checked and watched", "mark": "Mentions the contralateral hip" },
+        { "t": "Physio and review in 6 weeks", "trap": "critical", "r": "Further slip risks avascular necrosis. This is urgent." }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Kocher criteria for septic arthritis?", "a": "Non-weight-bearing, fever > 38.5, ESR > 40, WCC > 12", "wrong": ["Age, rash, cough, headache", "CRP only", "X-ray changes"] },
+        { "q": "Typical SUFE patient?", "a": "Overweight adolescent", "wrong": ["Toddler", "Infant", "Elderly"] },
+        { "q": "X-ray view that best shows SUFE?", "a": "Frog-leg lateral", "wrong": ["AP knee", "PA chest", "Oblique ankle"] },
+        { "q": "Perthes disease typically affects…", "a": "Boys aged 4–8", "wrong": ["Teenage girls", "Infants", "Adults"] },
+        { "q": "Transient synovitis versus septic arthritis?", "a": "Transient synovitis: well, afebrile, normal inflammatory markers", "wrong": ["Septic: well and afebrile", "Both identical", "Transient synovitis needs surgery"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Hip Detective", "emoji": "🕵", "flavor": "Knee pain in a teenager: examine the hip. Slipped? Off the leg now." },
+  "cards": [
+    { "q": "Hip pain referred to the knee via…", "options": ["The obturator nerve", "The sciatic nerve", "The femoral artery", "The pudendal nerve"], "why": "Always examine the hip.", "source": "Anatomy" },
+    { "q": "Drehmann sign indicates…", "options": ["SUFE", "Perthes", "ACL tear", "Meniscal tear"], "why": "Obligatory external rotation with hip flexion.", "source": "BOAST 2021" },
+    { "q": "SUFE management?", "options": ["Non-weight-bearing and urgent in-situ pinning", "Physiotherapy", "Weight loss only", "Casting"], "why": "Prevent further slip and AVN.", "source": "BOAST 2021" },
+    { "q": "Klein's line in SUFE…", "options": ["Fails to intersect the epiphysis", "Always intersects", "Is not used", "Is on the knee"], "why": "Trethowan sign.", "source": "Radiology" },
+    { "q": "Toddler's fracture is…", "options": ["Spiral undisplaced tibial fracture", "Femoral neck fracture", "Skull fracture", "Clavicle fracture"], "why": "Minor twist in early walkers.", "source": "Paediatric orthopaedics" },
+    { "q": "Modified Kocher adds…", "options": ["CRP > 20 mg/L", "Age", "Rash", "Cough"], "why": "Caird criteria.", "source": "Caird 2006" }
+  ]
+}

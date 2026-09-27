@@ -1,0 +1,74 @@
+{
+  "id": "pd-pulled-elbow",
+  "gym": "paedi",
+  "title": "Pulled elbow",
+  "type": "skills",
+  "time": 420,
+  "stem": "Paediatric area. Ka-yee, 2, won't use her right arm after her father lifted her by the hand to stop her falling on the MTR steps. She holds the arm by her side, slightly bent, palm down. Assess and treat.",
+  "notes": "Checked against RCEM/RCH Melbourne guidance on radial head subluxation and the Cochrane review (Krul 2017: hyperpronation more successful than supination–flexion).\n\nPulled elbow (radial head subluxation, 'nursemaid's elbow'): age 1–4, a pull on the extended pronated arm, the annular ligament slips over the radial head. The child holds the arm still, slightly flexed and pronated, with no swelling, bruising or deformity, and normal shoulder, wrist and neurovascular examination. With a typical history and examination, no X-ray is needed; image if there was a fall, swelling, bruising, deformity, or failure to reduce. Reduction without analgesia: hyperpronation (support the elbow with the thumb over the radial head and pronate the forearm firmly) is first-line; supination then flexion is the alternative. A click may be felt; the child usually uses the arm within 10–30 minutes. Advise lifting under the arms, recurrence risk until about age 5.\n\nYour notes match this, including hyperpronation first.",
+  "cast": [{ "id": "patient", "name": "Ka-yee", "role": "child", "inBed": false }, { "id": "father", "name": "Father", "role": "man" }],
+  "steps": [
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess",
+      "hint": "History of a pull, no fall; look for swelling; examine shoulder to wrist; neurovascular.",
+      "groups": {
+        "History": [{ "t": "Ask how it happened; any fall?", "r": "Father: I pulled her up by the hand. She didn't fall.", "mark": "Confirms a traction mechanism without a fall" }],
+        "Exam": [
+          { "t": "Look at the arm for swelling, bruising, deformity", "r": "None. Arm held pronated and slightly flexed.", "mark": "Excludes swelling and deformity" },
+          { "t": "Feel clavicle, shoulder, humerus, forearm, wrist", "r": "Mild tenderness over the radial head only.", "mark": "Examines the whole limb" },
+          { "t": "Hand perfusion and finger movement", "r": "Normal.", "mark": "Checks neurovascular status" }
+        ]
+      }
+    },
+    {
+      "id": "reduce",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Reduce",
+      "hint": "Explain to the father, hold the elbow with a thumb on the radial head, hyperpronate; reassess.",
+      "opts": [
+        { "t": "Explain it will hurt for a second and should fix it", "n": 1, "mark": "Explains to the parent" },
+        { "t": "Child on the father's lap; support her elbow, thumb over the radial head", "n": 2, "mark": "Correct hold" },
+        { "t": "Firmly hyperpronate the forearm", "n": 3, "mark": "Hyperpronation technique", "r": "A faint click under your thumb." },
+        { "t": "Watch her play for 15–30 minutes: reaching for a toy with the right hand", "n": 4, "mark": "Reassesses function" },
+        { "t": "X-ray the elbow before trying", "trap": true, "r": "Not needed with a typical history and no swelling." },
+        { "t": "Put her arm in a plaster for 3 weeks", "trap": true, "r": "No immobilisation is needed after reduction." }
+      ]
+    },
+    {
+      "id": "advice",
+      "kind": "say",
+      "to": "father",
+      "label": "Advice",
+      "hint": "Lift under the arms, recurrence, return if not using the arm.",
+      "opts": [
+        { "t": "Lift her under the arms, not by the hands; it can happen again until about 5; come back if she stops using the arm again", "mark": "Prevention and recurrence advice" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Which reduction technique is more successful (Cochrane)?", "a": "Hyperpronation", "wrong": ["Supination only", "Traction", "Immobilisation"] },
+        { "q": "Structure that slips in a pulled elbow?", "a": "Annular ligament over the radial head", "wrong": ["Ulnar collateral ligament", "Biceps tendon", "Olecranon bursa"] },
+        { "q": "When is an X-ray indicated?", "a": "Fall, swelling, bruising, deformity or failed reduction", "wrong": ["Always", "Never", "Only if under 1"] },
+        { "q": "Typical age?", "a": "1–4 years", "wrong": ["Newborn", "8–12 years", "Teenagers"] },
+        { "q": "Is analgesia or sedation needed?", "a": "Usually not", "wrong": ["Always general anaesthesia", "Always ketamine", "Always a nerve block"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Click", "emoji": "👶", "flavor": "Pull, not fall: hyperpronate, watch her reach." },
+  "cards": [
+    { "q": "Pulled elbow posture?", "options": ["Arm by the side, slightly flexed and pronated", "Arm abducted", "Wrist drop", "Elbow fully extended above the head"], "why": "Child won't use it.", "source": "RCH Melbourne" },
+    { "q": "First-line reduction?", "options": ["Hyperpronation", "Supination–flexion", "Traction", "Open reduction"], "why": "Higher first-attempt success.", "source": "Cochrane 2017" },
+    { "q": "After reduction the child…", "options": ["Usually uses the arm within 30 minutes", "Needs a cast", "Needs admission", "Needs physio"], "why": "Reassess function.", "source": "RCEM" },
+    { "q": "Prevention advice?", "options": ["Lift under the arms", "Swing by the hands", "Avoid all play", "Use a sling"], "why": "Reduces recurrence.", "source": "RCH Melbourne" },
+    { "q": "Red flag suggesting a fracture instead?", "options": ["Swelling or bruising after a fall", "Pain on pronation", "Refusal to use the arm", "Age 3"], "why": "X-ray it.", "source": "RCEM" },
+    { "q": "Pulled elbow recurrence risk continues until about age…", "options": ["5", "1", "10", "15"], "why": "Annular ligament strengthens.", "source": "RCH Melbourne" }
+  ]
+}

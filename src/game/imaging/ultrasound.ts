@@ -159,3 +159,18 @@ export function earlyPregnancy(kind: 'iup' | 'ectopic', seed = 1): Field {
   )
   return sector(f)
 }
+
+/** Paediatric abdominal ultrasound: intussusception gives a 'target' (doughnut) of concentric bowel wall. */
+export function intussusception(present: boolean, seed = 1): Field {
+  const f = new Field(128, 128, 0.32)
+  if (present) {
+    f.ellipse(64, 60, 26, 24, 0.12, 'set', 2)
+    f.ellipse(64, 60, 20, 18, 0.55, 'set', 1.5)
+    f.ellipse(64, 60, 13, 11, 0.12, 'set', 1.5)
+    f.ellipse(64, 60, 7, 6, 0.6, 'set', 1)
+  } else {
+    for (let i = 0; i < 4; i++) f.ellipse(40 + i * 16, 60 + (i % 2) * 14, 6, 4, 0.5, 'set', 1)
+  }
+  speckle(f, 0.14, seed)
+  return sector(f)
+}

@@ -1,0 +1,77 @@
+{
+  "id": "pd-epiglottitis",
+  "gym": "paedi",
+  "title": "Epiglottitis",
+  "type": "resus",
+  "time": 420,
+  "stem": "Paediatric resus. Nadia, 5, arrived with a 6-hour history of high fever and sore throat. She is sitting forward with her mouth open, drooling, and speaks in a muffled voice. Soft stridor. HR 150, RR 30, SpO2 94% in air, temperature 39.8 °C. She has not been vaccinated.",
+  "notes": "Checked against APLS, RCH Melbourne guidance on acute upper airway obstruction, and the Hib immunisation literature.\n\nEpiglottitis (Hib in unvaccinated children; streptococci and staphylococci now): sudden high fever, toxic, drooling, muffled voice, tripod posture, soft stridor, little cough. The airway can obstruct completely at any moment. Do not lie the child down, examine the throat, cannulate, or do anything that upsets her; keep her with her parent, give oxygen without distress, and call the most senior anaesthetist and ENT surgeon for intubation in theatre (gas induction, with a surgical airway ready). Only after the airway is secured: cannula, blood cultures, IV ceftriaxone. Nebulised adrenaline may buy time. A lateral neck X-ray (thumb sign) is only for an uncertain, stable child and must never delay airway management. Notify public health for Hib; rifampicin prophylaxis for household contacts.\n\nYour notes list epiglottitis as a Paedi gym topic and in the stridor differential (toxic, drooling, high fever) — this matches.",
+  "cast": [{ "id": "patient", "name": "Nadia", "role": "child", "inBed": false }, { "id": "father", "name": "Father", "role": "man" }, { "id": "nurse", "name": "Nurse Tsang", "role": "nurse" }],
+  "vitals": { "hr": 150, "sbp": 100, "dbp": 62, "spo2": 94, "rr": 30, "temp": 39.8, "rhythm": "sinus-tachy", "effects": [{ "scene": "upset", "set": { "spo2": 82, "hr": 170 } }, { "scene": "o2", "add": { "spo2": 3 }, "overS": 60 }, { "scene": "airway", "set": { "spo2": 99, "hr": 130, "etco2": 5.0 } }] },
+  "steps": [
+    {
+      "id": "recognise",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Look only",
+      "hint": "Observe from a distance: posture, drooling, voice, stridor, colour.",
+      "groups": {
+        "Observe": [
+          { "t": "Posture and drooling", "r": "Sitting forward on her father's lap, neck extended, mouth open, drooling.", "mark": "Recognises tripod posture and drooling" },
+          { "t": "Voice and cough", "r": "Muffled 'hot potato' voice; no barking cough.", "mark": "Notes muffled voice without barking cough" },
+          { "t": "Toxic appearance", "r": "Flushed, anxious, very unwell.", "mark": "Recognises a toxic child" },
+          { "t": "Lie her flat and look at the throat with a torch", "trap": "critical", "r": "Lying flat and throat examination can cause complete obstruction.", "scene": "upset" }
+        ]
+      }
+    },
+    {
+      "id": "call",
+      "kind": "pick",
+      "to": "nurse",
+      "label": "Call and prepare",
+      "hint": "Senior anaesthetist and ENT now, theatre, difficult airway kit including surgical airway; oxygen held by dad.",
+      "confirm": "Now",
+      "opts": [
+        { "t": "Most senior anaesthetist and ENT surgeon to resus now; theatre alerted", "need": true, "mark": "Calls senior anaesthesia and ENT immediately" },
+        { "t": "Difficult airway kit, smaller tubes, needle/surgical airway kit ready", "need": true, "mark": "Prepares for a difficult and surgical airway" },
+        { "t": "Oxygen held near her face by her father, no mask forced", "need": true, "scene": "o2", "mark": "Oxygen without upsetting her" },
+        { "t": "Keep her upright with her father; minimise interventions", "need": true, "mark": "Keeps the child calm and upright" },
+        { "t": "IV cannula and bloods now", "trap": "critical", "r": "Distress may cause obstruction. Cannulate after the airway is secured.", "scene": "upset" },
+        { "t": "Lateral neck X-ray in the radiology department", "trap": "critical", "r": "Never send a child with suspected epiglottitis away from airway expertise." }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "nurse",
+      "label": "After intubation in theatre",
+      "hint": "Cultures, ceftriaxone, PICU, public health, contacts.",
+      "opts": [
+        { "t": "After gas induction and intubation: blood cultures, IV ceftriaxone 80 mg/kg, PICU", "scene": "airway", "mark": "Antibiotics and cultures after the airway is secure" },
+        { "t": "Notify public health; rifampicin for household contacts (Hib); catch-up vaccination", "mark": "Public health and contact prophylaxis" }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Classic lateral neck X-ray sign of epiglottitis?", "a": "Thumb sign", "img": "xr:neck-lateral-epiglottitis", "wrong": ["Steeple sign", "Sail sign", "Target sign"] },
+        { "q": "Organism in unvaccinated children?", "a": "Haemophilus influenzae type b", "wrong": ["Parainfluenza", "RSV", "Mycoplasma"] },
+        { "q": "How is the airway secured?", "a": "Gas induction in theatre by a senior anaesthetist with ENT ready", "wrong": ["RSI in the ED by the most junior", "Awake nasal intubation", "Needle cricothyroidotomy first"] },
+        { "q": "Feature distinguishing epiglottitis from croup?", "a": "Drooling and a muffled voice without a barking cough", "wrong": ["Stridor", "Fever", "Worse at night"] },
+        { "q": "Prophylaxis for household contacts (Hib)?", "a": "Rifampicin", "wrong": ["Amoxicillin", "Nothing", "Oseltamivir"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Hands Off", "emoji": "🤫", "flavor": "Toxic, drooling, upright: don't touch, call the anaesthetist." },
+  "cards": [
+    { "q": "Epiglottitis: first priority?", "options": ["Secure the airway in theatre with senior help", "IV cannula", "Throat swab", "X-ray"], "why": "Avoid upsetting the child.", "source": "APLS" },
+    { "q": "Tripod position means…", "options": ["Sitting forward, neck extended, leaning on hands", "Lying flat", "Knees to chest", "Standing on one leg"], "why": "Maximises airway.", "source": "APLS" },
+    { "q": "Epiglottitis thumb sign is seen on…", "options": ["Lateral soft-tissue neck X-ray", "AP neck", "CXR", "CT head"], "why": "Only in a stable child with airway staff present.", "source": "Radiology" },
+    { "q": "Epiglottitis voice?", "options": ["Muffled 'hot potato'", "Hoarse with barking cough", "Normal", "High-pitched"], "why": "Supraglottic swelling.", "source": "APLS" },
+    { "q": "Antibiotic after airway secured?", "options": ["IV ceftriaxone", "Oral penicillin", "Azithromycin", "None"], "why": "Covers Hib and streptococci.", "source": "RCH Melbourne" },
+    { "q": "Vaccine that made epiglottitis rare?", "options": ["Hib", "MMR", "BCG", "Rotavirus"], "why": "Check immunisation status.", "source": "CHP HK" }
+  ]
+}

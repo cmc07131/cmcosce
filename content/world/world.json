@@ -22,6 +22,7 @@
     "p": "tall grass (Psychi deck)",
     "t": "tall grass (O&T deck)",
     "m": "tall grass (Medical deck)",
+    "k": "tall grass (Paedi deck)",
     "x": "tall grass (mixed deck)"
   },
   "grid": [
@@ -47,8 +48,8 @@
     "T...,,,,,,,,,,,,,,,,,,,,,,RRRRR,,,,,,,,,,,,,...T",
     "T.RRRRRR........F,,,,,,,,,RRRRRF........RRRRRR.T",
     "T.RRRRRR.mmm....F,***,,,,,#####F....***.RRRRRR.T",
-    "T.######.mmmT...F,***,,,,,##D##F...T....######.T",
-    "T.##D###.mmm....F,,,,,,,,,,,,,,F........##D###.T",
+    "T.######.mmmT...F,***,,,,,##D##F...Tkkk.######.T",
+    "T.##D###.mmm....F,,,,,,,,,,,,,,F....kkk.##D###.T",
     "T...,,..........FFFFFFF,,FFFFFFF..........,,...T",
     "T...,,..hhhhhhxxxxxx...,,.......~~~~~~....,,...T",
     "T.......hhhhhhxxxxxx...,,..ppp..~~~~~~.........T",
@@ -333,7 +334,7 @@
       "name": "PAEDI GYM",
       "badge": "Growth Badge",
       "packs": [],
-      "deck": null,
+      "deck": "paedi",
       "topics": [
         "Epiglottitis",
         "Scarlet fever",

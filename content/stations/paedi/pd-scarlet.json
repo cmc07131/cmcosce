@@ -1,0 +1,82 @@
+{
+  "id": "pd-scarlet",
+  "gym": "paedi",
+  "title": "Scarlet fever",
+  "type": "comms",
+  "time": 420,
+  "stem": "Paediatric area. Hoi-yan, 5, has had a sore throat and fever for 2 days, and today a rough red rash. Her mother wants to know what it is, whether she can go to school, and whether her baby brother is at risk. Examine and counsel.",
+  "notes": "Checked against the Hong Kong Centre for Health Protection (scarlet fever is a notifiable disease in HK), UKHSA guidance on scarlet fever and invasive group A streptococcus (2023), and NICE CKS.\n\nScarlet fever (Streptococcus pyogenes toxin): fever, sore throat, strawberry tongue, flushed cheeks with circumoral pallor, a fine sandpaper-like rash starting on the chest and spreading, accentuated in skin creases (Pastia's lines), later peeling of fingers and toes. Throat swab to confirm where available. Treatment: phenoxymethylpenicillin for 10 days (amoxicillin is an alternative; azithromycin/clarithromycin if penicillin-allergic). Exclude from school or nursery until 24 hours after starting antibiotics. Notify in HK (CHP). Complications: otitis, sinusitis, peritonsillar abscess; rarely rheumatic fever, post-streptococcal glomerulonephritis, invasive GAS (toxic shock, necrotising fasciitis) — safety-net for worsening. Contacts: hygiene; household contacts treated if symptomatic; heightened vigilance for invasive disease, especially with concurrent chickenpox.\n\nYour notes list scarlet fever as a Paedi gym topic without detail.",
+  "cast": [{ "id": "mother", "name": "Mother", "role": "woman" }, { "id": "patient", "name": "Hoi-yan", "role": "child", "inBed": true }],
+  "steps": [
+    {
+      "id": "exam",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Face, tongue, throat, rash texture, skin creases, nodes, hydration.",
+      "groups": {
+        "Face": [
+          { "t": "Face and tongue", "r": "Flushed cheeks, pale around the mouth; red bumpy 'strawberry' tongue.", "img": "photo:scarlet-tongue", "mark": "Finds strawberry tongue and circumoral pallor" },
+          { "t": "Throat and neck nodes", "r": "Enlarged red tonsils with exudate; tender anterior cervical nodes.", "mark": "Examines throat and nodes" }
+        ],
+        "Skin": [
+          { "t": "Feel the rash; look in the elbow creases", "r": "Fine rough 'sandpaper' rash on the trunk; red lines in the elbow creases.", "img": "photo:scarlet-rash", "mark": "Identifies sandpaper rash and Pastia's lines" },
+          { "t": "Hydration and general state", "r": "Drinking, alert, well hydrated.", "mark": "Assesses hydration and wellness" }
+        ]
+      }
+    },
+    {
+      "id": "counsel",
+      "kind": "dialogue",
+      "to": "mother",
+      "label": "Talk to her mother",
+      "hint": "Diagnosis, antibiotics 10 days, school exclusion 24 h, notification, siblings, warning signs.",
+      "mood": 5,
+      "turns": [
+        {
+          "line": "What is it?",
+          "opts": [
+            { "t": "It's scarlet fever — a throat infection with streptococcus bacteria that makes a toxin, which causes the rash. It's treated easily with antibiotics.", "r": "Antibiotics for how long?", "mood": -2, "mark": "Explains the diagnosis simply" },
+            { "t": "Just a viral rash.", "r": "OK.", "mood": 0 }
+          ]
+        },
+        {
+          "line": "Antibiotics for how long? Can she go to school?",
+          "opts": [
+            { "t": "Penicillin for the full 10 days, even when she feels better, to prevent complications. She can go back to school 24 hours after starting it. We report scarlet fever to the Department of Health.", "r": "And her baby brother?", "mood": -2, "mark": "Explains 10-day course, school exclusion and notification" },
+            { "t": "Three days of antibiotics; school tomorrow morning is fine.", "r": "OK.", "mood": 0 }
+          ]
+        },
+        {
+          "line": "And her baby brother?",
+          "opts": [
+            { "t": "Wash hands well, don't share cups or towels. If he gets a fever, sore throat or rash, bring him to be seen. Bring her back at once if she's getting worse, very sleepy, not drinking, or has a painful swollen limb or a rash that looks like a burn.", "r": "Thank you, I'll watch closely.", "mood": -2, "mark": "Advice for contacts and safety-netting for invasive GAS" },
+            { "t": "No risk to him.", "r": "OK.", "mood": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Organism causing scarlet fever?", "a": "Group A Streptococcus (S. pyogenes)", "wrong": ["Staphylococcus aureus", "Parvovirus B19", "HHV-6"] },
+        { "q": "Antibiotic and duration?", "a": "Phenoxymethylpenicillin for 10 days", "wrong": ["Amoxicillin 3 days", "Ciprofloxacin 5 days", "None"] },
+        { "q": "School exclusion?", "a": "Until 24 hours after starting antibiotics", "wrong": ["2 weeks", "No exclusion", "Until the rash is gone"] },
+        { "q": "Late complication?", "a": "Rheumatic fever or post-streptococcal glomerulonephritis", "wrong": ["Diabetes", "Asthma", "Kawasaki disease"] },
+        { "q": "Pastia's lines are…", "a": "Rash accentuated in skin creases", "wrong": ["Lines on the tongue", "Nail changes", "Peeling of the palms"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Strawberry Field", "emoji": "🍓", "flavor": "Sandpaper rash, strawberry tongue: penicillin 10 days, school after 24 hours." },
+  "cards": [
+    { "q": "Scarlet fever rash feels like…", "options": ["Sandpaper", "Velvet", "Blisters", "Plaques"], "why": "Fine papular erythema.", "source": "UKHSA" },
+    { "q": "Scarlet fever in Hong Kong is…", "options": ["Notifiable to the CHP", "Not reportable", "Only reported if fatal", "Reported by schools only"], "why": "Statutorily notifiable.", "source": "CHP HK" },
+    { "q": "Penicillin allergy alternative for GAS?", "options": ["Clarithromycin or azithromycin", "Ciprofloxacin", "Nitrofurantoin", "Trimethoprim"], "why": "Macrolide.", "source": "NICE CKS" },
+    { "q": "Warning sign of invasive GAS?", "options": ["Severe pain in a limb, rapid deterioration, toxic appearance", "Mild sore throat", "Peeling fingertips at 2 weeks", "Itchy rash"], "why": "Necrotising fasciitis or toxic shock.", "source": "UKHSA 2023" },
+    { "q": "Peeling of fingers and toes after scarlet fever appears…", "options": ["After about 1 week", "Day 1", "Never", "After 1 year"], "why": "Desquamation.", "source": "Paediatrics" },
+    { "q": "Strawberry tongue also occurs in…", "options": ["Kawasaki disease", "Measles", "Chickenpox", "Rubella"], "why": "Check for Kawasaki features if fever lasts ≥5 days.", "source": "AHA Kawasaki 2017" }
+  ]
+}

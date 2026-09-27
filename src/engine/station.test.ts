@@ -7,7 +7,7 @@ import { chest, tracheaX } from '../game/imaging/chest'
 import { edhArc, head, onInner, SUTURES } from '../game/imaging/head'
 import { imageEntry } from '../game/imaging/library'
 import { burnPercent } from '../game/imaging/photos'
-import { anteriorHumeralOffset, pelvis, symphysisWidth } from '../game/imaging/skeleton'
+import { airwayWidth, anteriorHumeralOffset, kleinCutsEpiphysis, neck, pelvis, symphysisWidth } from '../game/imaging/skeleton'
 import { fastRuq } from '../game/imaging/ultrasound'
 import { faultsFor } from '../game/store'
 import { worldSchema } from '../world/model'
@@ -163,6 +163,9 @@ test('plain films and ultrasound show the named sign', () => {
   assert.ok(symphysisWidth(pelvis('open-book')) > symphysisWidth(pelvis('normal')) + 4)
   assert.ok(anteriorHumeralOffset('normal') > 0.2 && anteriorHumeralOffset('normal') < 0.8, 'line through the middle third')
   assert.ok(anteriorHumeralOffset('supracondylar') > 1, 'capitellum behind the line')
+  assert.equal(kleinCutsEpiphysis('normal'), true, "Klein's line cuts a normal epiphysis")
+  assert.equal(kleinCutsEpiphysis('slipped'), false, 'and misses a slipped one')
+  assert.ok(airwayWidth(neck('ap-croup'), 70) < airwayWidth(neck('ap-normal'), 70) - 4, 'croup narrows the subglottic airway (steeple)')
   assert.ok(fastRuq(true).mean(68, 64, 76, 67) < fastRuq(false).mean(68, 64, 76, 67) - 0.2)
   assert.equal(burnPercent([{ region: 'chest', depth: 'partial' }, { region: 'r-arm', depth: 'full' }, { region: 'abdomen', depth: 'superficial' }]), 18)
 })

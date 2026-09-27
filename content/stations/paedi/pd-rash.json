@@ -1,0 +1,82 @@
+{
+  "id": "pd-rash",
+  "gym": "paedi",
+  "title": "Purpuric rash: HSP or sepsis?",
+  "type": "history",
+  "time": 420,
+  "stem": "Paediatric area. Miss Ramesh has brought her son Arjun, 6, who has developed a rash on his legs over a day. Take a history from her, and answer her questions.",
+  "notes": "Checked against NICE CG102 (meningococcal disease), NICE NG143 (Fever in under 5s) principles, and the EULAR/PRINTO/PRES criteria for IgA vasculitis (Henoch–Schönlein purpura).\n\nA non-blanching rash in a febrile or unwell child is meningococcal disease until proven otherwise: antibiotics immediately. In a well child without fever, consider IgA vasculitis (HSP: palpable purpura on the buttocks and extensor legs, arthralgia/arthritis, abdominal pain, haematuria/proteinuria; often after an URTI), ITP (bruising and petechiae, isolated low platelets, well child), leukaemia (pallor, bone pain, lymphadenopathy, hepatosplenomegaly), trauma/NAI, and petechiae above the nipple line after coughing or vomiting.\n\nInvestigations: FBC and film, clotting, CRP, U&E, blood pressure, urinalysis (blood and protein), and blood cultures if febrile. HSP is managed supportively (analgesia); follow up with BP and urine checks for 6–12 months for nephritis; refer with abdominal pain (intussusception), significant proteinuria, hypertension or renal impairment.\n\nYour notes (a well 6-year-old with a leg rash, knee ache, recent cold, no fever) match this.",
+  "cast": [{ "id": "mother", "name": "Miss Ramesh", "role": "woman" }, { "id": "patient", "name": "Arjun", "role": "child", "inBed": false }],
+  "steps": [
+    {
+      "id": "history",
+      "kind": "history",
+      "to": "mother",
+      "label": "History",
+      "hint": "Rash onset and spread, fever and systemic upset, joints, abdomen, urine, bleeding, recent illness, drugs, development, social.",
+      "groups": {
+        "Rash": [
+          { "t": "When did the rash start and where?", "r": "Yesterday, on his legs and bottom. Raised red-purple spots.", "mark": "Asks onset and distribution" },
+          { "t": "Does it fade when you press a glass on it?", "r": "No, it stays.", "mark": "Asks about blanching" }
+        ],
+        "Systemic": [
+          { "t": "Fever, drowsiness, vomiting, headache?", "r": "No fever. He's playing normally.", "mark": "Screens for systemic illness (meningococcal)" },
+          { "t": "Joint pain or swelling?", "r": "His right knee aches but he walks fine.", "mark": "Asks about joints" },
+          { "t": "Tummy pain, blood in stool, red or dark urine?", "r": "Some tummy ache yesterday. Urine looks normal.", "mark": "Asks about abdominal and renal symptoms" },
+          { "t": "Nosebleeds, bleeding gums, bruising, tiredness, weight loss?", "r": "No.", "mark": "Screens for ITP and leukaemia" }
+        ],
+        "Background": [
+          { "t": "Any recent illness or medicines?", "r": "A cough and cold 2 weeks ago. No medicines.", "mark": "Asks about preceding infection and drugs" },
+          { "t": "Birth, development, vaccinations", "r": "Normal, all up to date.", "mark": "Birth, development and immunisation history" },
+          { "t": "Who is at home? Any worries about injuries?", "r": "Me, his dad and his sister. No injuries.", "mark": "Social history and safeguarding" }
+        ]
+      }
+    },
+    {
+      "id": "answers",
+      "kind": "dialogue",
+      "to": "mother",
+      "label": "Her questions",
+      "hint": "Explain likely HSP, the need to examine and test, and when to worry.",
+      "mood": 7,
+      "turns": [
+        {
+          "line": "I read that a rash that doesn't fade means meningitis. Is it that?",
+          "opts": [
+            { "t": "You were right to bring him. Because he has no fever and is playing normally, this looks more like Henoch–Schönlein purpura — a harmless-looking inflammation of small blood vessels after a virus. I'll examine him fully and check his blood, blood pressure and urine to be sure.", "r": "Oh, thank goodness. What tests?", "mood": -3, "mark": "Explains the likely diagnosis and need to examine and test" },
+            { "t": "It's definitely nothing.", "r": "How can you know without looking?", "mood": 2 }
+          ]
+        },
+        {
+          "line": "Will it affect his kidneys?",
+          "opts": [
+            { "t": "Sometimes it affects the kidneys, usually mildly, so we check his urine and blood pressure now and regularly for about 6 months. Come back straight away if he gets severe tummy pain, blood in his poo, dark urine, swelling or a fever.", "r": "Thank you — that's clear.", "mood": -2, "mark": "Explains renal follow-up and safety-netting" },
+            { "t": "No risk at all.", "r": "OK.", "mood": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        { "q": "Febrile child with a non-blanching rash: action?", "a": "Treat as meningococcal disease: antibiotics immediately", "wrong": ["Wait for FBC", "Discharge", "Oral antibiotics and review tomorrow"] },
+        { "q": "Typical HSP rash distribution?", "a": "Buttocks and extensor surfaces of the legs", "wrong": ["Face only", "Palms and soles", "Trunk only"] },
+        { "q": "Serious abdominal complication of HSP?", "a": "Intussusception", "wrong": ["Appendicitis always", "Pyloric stenosis", "Volvulus of the stomach"] },
+        { "q": "Platelet count in HSP?", "a": "Normal (or raised)", "wrong": ["Very low", "Zero", "Always over 1 million"] },
+        { "q": "Why follow up urine and BP after HSP?", "a": "To detect nephritis", "wrong": ["To detect diabetes", "To detect UTI", "Not needed"] }
+      ]
+    }
+  ],
+  "badge": { "name": "Glass Half Clear", "emoji": "🔍", "flavor": "Unwell or febrile: antibiotics. Well with leg purpura: think HSP, check urine." },
+  "cards": [
+    { "q": "IgA vasculitis (HSP) features?", "options": ["Palpable purpura, arthritis, abdominal pain, haematuria", "Fever, neck stiffness, photophobia", "Petechiae with low platelets only", "Target lesions"], "why": "Often after URTI.", "source": "EULAR/PRINTO/PRES" },
+    { "q": "ITP typically presents with…", "options": ["Petechiae/bruising in a well child with low platelets", "Fever and shock", "Joint swelling", "Haematuria and hypertension"], "why": "Often post-viral.", "source": "Paediatrics" },
+    { "q": "Petechiae limited to above the nipple line after vomiting suggest…", "options": ["Raised intrathoracic pressure (benign)", "Meningococcal disease", "Leukaemia", "HSP"], "why": "SVC distribution.", "source": "NICE NG143" },
+    { "q": "Features suggesting leukaemia in a child with a rash?", "options": ["Pallor, bone pain, hepatosplenomegaly, lymphadenopathy", "Itch", "Urticaria", "Sunburn"], "why": "FBC and film.", "source": "Paediatric oncology" },
+    { "q": "HSP renal follow-up duration?", "options": ["About 6–12 months of urine and BP checks", "None", "Lifelong dialysis", "1 week"], "why": "Nephritis can appear later.", "source": "RCPCH / EULAR" },
+    { "q": "Glass test: the spots stay visible means…", "options": ["Non-blanching (purpura/petechiae)", "Blanching", "Eczema", "Normal skin"], "why": "Needs urgent assessment.", "source": "NICE CG102" }
+  ]
+}
