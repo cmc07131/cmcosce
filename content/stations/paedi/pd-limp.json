@@ -58,10 +58,10 @@
       "label": "Examiner",
       "qs": [
         { "q": "Kocher criteria for septic arthritis?", "a": "Non-weight-bearing, fever > 38.5, ESR > 40, WCC > 12", "wrong": ["Age, rash, cough, headache", "CRP only", "X-ray changes"] },
-        { "q": "Typical SUFE patient?", "a": "Overweight adolescent", "wrong": ["Toddler", "Infant", "Elderly"] },
-        { "q": "X-ray view that best shows SUFE?", "a": "Frog-leg lateral", "wrong": ["AP knee", "PA chest", "Oblique ankle"] },
+        { "q": "Typical SUFE patient?", "a": "Overweight adolescent", "wrong": ["A toddler learning to walk", "An infant under 1 year", "An elderly woman"] },
+        { "q": "X-ray view that best shows SUFE?", "a": "Frog-leg lateral", "wrong": ["AP view of the knee", "PA chest X-ray", "Oblique view of the ankle"] },
         { "q": "Perthes disease typically affects…", "a": "Boys aged 4–8", "wrong": ["Teenage girls", "Infants", "Adults"] },
-        { "q": "Transient synovitis versus septic arthritis?", "a": "Transient synovitis: well, afebrile, normal inflammatory markers", "wrong": ["Septic: well and afebrile", "Both identical", "Transient synovitis needs surgery"] }
+        { "q": "Transient synovitis versus septic arthritis?", "a": "Transient synovitis: well, afebrile, normal markers", "wrong": ["Septic arthritis: well, afebrile, normal markers", "The two cannot be told apart", "Transient synovitis needs surgical washout"] }
       ]
     }
   ],
@@ -69,9 +69,9 @@
   "cards": [
     { "q": "Hip pain referred to the knee via…", "options": ["The obturator nerve", "The sciatic nerve", "The femoral artery", "The pudendal nerve"], "why": "Always examine the hip.", "source": "Anatomy" },
     { "q": "Drehmann sign indicates…", "options": ["SUFE", "Perthes", "ACL tear", "Meniscal tear"], "why": "Obligatory external rotation with hip flexion.", "source": "BOAST 2021" },
-    { "q": "SUFE management?", "options": ["Non-weight-bearing and urgent in-situ pinning", "Physiotherapy", "Weight loss only", "Casting"], "why": "Prevent further slip and AVN.", "source": "BOAST 2021" },
-    { "q": "Klein's line in SUFE…", "options": ["Fails to intersect the epiphysis", "Always intersects", "Is not used", "Is on the knee"], "why": "Trethowan sign.", "source": "Radiology" },
-    { "q": "Toddler's fracture is…", "options": ["Spiral undisplaced tibial fracture", "Femoral neck fracture", "Skull fracture", "Clavicle fracture"], "why": "Minor twist in early walkers.", "source": "Paediatric orthopaedics" },
-    { "q": "Modified Kocher adds…", "options": ["CRP > 20 mg/L", "Age", "Rash", "Cough"], "why": "Caird criteria.", "source": "Caird 2006" }
+    { "q": "SUFE management?", "options": ["Non-weight-bearing; urgent pinning", "Physiotherapy and a return to sport", "Weight loss and review in clinic", "A hip spica cast for 6 weeks"], "why": "Prevent further slip and AVN.", "source": "BOAST 2021" },
+    { "q": "Klein's line in SUFE…", "options": ["Fails to intersect the epiphysis", "Always intersects the epiphysis in SUFE", "Is not used on plain films", "Is drawn on the knee X-ray"], "why": "Trethowan sign.", "source": "Radiology" },
+    { "q": "Toddler's fracture is…", "options": ["Spiral undisplaced tibial fracture", "Femoral neck fracture in a toddler", "Linear parietal skull fracture after a fall", "Clavicle fracture from birth"], "why": "Minor twist in early walkers.", "source": "Paediatric orthopaedics" },
+    { "q": "Modified Kocher adds…", "options": ["CRP > 20 mg/L", "Age under 3 years", "A viral rash", "A recent cough"], "why": "Caird criteria.", "source": "Caird 2006" }
   ]
 }

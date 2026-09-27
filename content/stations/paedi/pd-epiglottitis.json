@@ -58,20 +58,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Classic lateral neck X-ray sign of epiglottitis?", "a": "Thumb sign", "img": "xr:neck-lateral-epiglottitis", "wrong": ["Steeple sign", "Sail sign", "Target sign"] },
-        { "q": "Organism in unvaccinated children?", "a": "Haemophilus influenzae type b", "wrong": ["Parainfluenza", "RSV", "Mycoplasma"] },
-        { "q": "How is the airway secured?", "a": "Gas induction in theatre by a senior anaesthetist with ENT ready", "wrong": ["RSI in the ED by the most junior", "Awake nasal intubation", "Needle cricothyroidotomy first"] },
-        { "q": "Feature distinguishing epiglottitis from croup?", "a": "Drooling and a muffled voice without a barking cough", "wrong": ["Stridor", "Fever", "Worse at night"] },
-        { "q": "Prophylaxis for household contacts (Hib)?", "a": "Rifampicin", "wrong": ["Amoxicillin", "Nothing", "Oseltamivir"] }
+        { "q": "Organism in unvaccinated children?", "a": "Haemophilus influenzae type b", "wrong": ["Parainfluenza virus type 1", "Respiratory syncytial virus (RSV)", "Mycoplasma pneumoniae"] },
+        { "q": "How is the airway secured?", "a": "Gas induction in theatre, senior anaesthetist, ENT ready", "wrong": ["RSI in the ED by whoever is most available", "Awake fibreoptic nasal intubation in the ED", "Needle cricothyroidotomy first, then intubation"] },
+        { "q": "Feature distinguishing epiglottitis from croup?", "a": "Drooling, muffled voice, no bark", "wrong": ["Inspiratory stridor at rest", "A fever over 38 °C for 2 days", "Symptoms that are worse at night and in cold air"] },
+        { "q": "Prophylaxis for household contacts (Hib)?", "a": "Rifampicin", "wrong": ["Amoxicillin", "Oseltamivir", "Azithromycin"] }
       ]
     }
   ],
   "badge": { "name": "Hands Off", "emoji": "🤫", "flavor": "Toxic, drooling, upright: don't touch, call the anaesthetist." },
   "cards": [
-    { "q": "Epiglottitis: first priority?", "options": ["Secure the airway in theatre with senior help", "IV cannula", "Throat swab", "X-ray"], "why": "Avoid upsetting the child.", "source": "APLS" },
+    { "q": "Epiglottitis: first priority?", "options": ["Secure the airway in theatre", "IV cannula and bloods first", "Throat swab and culture", "Lateral neck X-ray before anything else"], "why": "Avoid upsetting the child.", "source": "APLS" },
     { "q": "Tripod position means…", "options": ["Sitting forward, neck extended, leaning on hands", "Lying flat", "Knees to chest", "Standing on one leg"], "why": "Maximises airway.", "source": "APLS" },
-    { "q": "Epiglottitis thumb sign is seen on…", "options": ["Lateral soft-tissue neck X-ray", "AP neck", "CXR", "CT head"], "why": "Only in a stable child with airway staff present.", "source": "Radiology" },
+    { "q": "Epiglottitis thumb sign is seen on…", "options": ["Lateral soft-tissue neck X-ray", "AP soft-tissue neck X-ray with a grid", "Chest X-ray, PA view", "CT of the neck with contrast enhancement"], "why": "Only in a stable child with airway staff present.", "source": "Radiology" },
     { "q": "Epiglottitis voice?", "options": ["Muffled 'hot potato'", "Hoarse with barking cough", "Normal", "High-pitched"], "why": "Supraglottic swelling.", "source": "APLS" },
-    { "q": "Antibiotic after airway secured?", "options": ["IV ceftriaxone", "Oral penicillin", "Azithromycin", "None"], "why": "Covers Hib and streptococci.", "source": "RCH Melbourne" },
+    { "q": "Antibiotic after airway secured?", "options": ["IV ceftriaxone", "Oral penicillin V", "Oral azithromycin", "Nebulised gentamicin"], "why": "Covers Hib and streptococci.", "source": "RCH Melbourne" },
     { "q": "Vaccine that made epiglottitis rare?", "options": ["Hib", "MMR", "BCG", "Rotavirus"], "why": "Check immunisation status.", "source": "CHP HK" }
   ]
 }

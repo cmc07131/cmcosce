@@ -55,8 +55,8 @@
       "label": "Examiner",
       "qs": [
         { "q": "Which reduction technique is more successful (Cochrane)?", "a": "Hyperpronation", "wrong": ["Supination only", "Traction", "Immobilisation"] },
-        { "q": "Structure that slips in a pulled elbow?", "a": "Annular ligament over the radial head", "wrong": ["Ulnar collateral ligament", "Biceps tendon", "Olecranon bursa"] },
-        { "q": "When is an X-ray indicated?", "a": "Fall, swelling, bruising, deformity or failed reduction", "wrong": ["Always", "Never", "Only if under 1"] },
+        { "q": "Structure that slips in a pulled elbow?", "a": "Annular ligament over the radial head", "wrong": ["Ulnar collateral ligament", "Distal biceps tendon", "Olecranon bursa"] },
+        { "q": "When is an X-ray indicated?", "a": "Fall, swelling, bruising, deformity or failed reduction", "wrong": ["Always, before any reduction attempt, to be safe", "Never in a child under 5", "Only if the child is under 1"] },
         { "q": "Typical age?", "a": "1–4 years", "wrong": ["Newborn", "8–12 years", "Teenagers"] },
         { "q": "Is analgesia or sedation needed?", "a": "Usually not", "wrong": ["Always general anaesthesia", "Always ketamine", "Always a nerve block"] }
       ]
@@ -64,11 +64,11 @@
   ],
   "badge": { "name": "Click", "emoji": "👶", "flavor": "Pull, not fall: hyperpronate, watch her reach." },
   "cards": [
-    { "q": "Pulled elbow posture?", "options": ["Arm by the side, slightly flexed and pronated", "Arm abducted", "Wrist drop", "Elbow fully extended above the head"], "why": "Child won't use it.", "source": "RCH Melbourne" },
+    { "q": "Pulled elbow posture?", "options": ["Arm by the side, pronated", "Arm abducted and externally rotated", "Wrist drop with a flexed elbow", "Elbow fully extended above the head"], "why": "Child won't use it.", "source": "RCH Melbourne" },
     { "q": "First-line reduction?", "options": ["Hyperpronation", "Supination–flexion", "Traction", "Open reduction"], "why": "Higher first-attempt success.", "source": "Cochrane 2017" },
-    { "q": "After reduction the child…", "options": ["Usually uses the arm within 30 minutes", "Needs a cast", "Needs admission", "Needs physio"], "why": "Reassess function.", "source": "RCEM" },
-    { "q": "Prevention advice?", "options": ["Lift under the arms", "Swing by the hands", "Avoid all play", "Use a sling"], "why": "Reduces recurrence.", "source": "RCH Melbourne" },
-    { "q": "Red flag suggesting a fracture instead?", "options": ["Swelling or bruising after a fall", "Pain on pronation", "Refusal to use the arm", "Age 3"], "why": "X-ray it.", "source": "RCEM" },
+    { "q": "After reduction the child…", "options": ["Usually uses the arm within 30 minutes", "Needs an above-elbow cast for 3 weeks, then review", "Needs admission for observation", "Needs physiotherapy for 6 weeks"], "why": "Reassess function.", "source": "RCEM" },
+    { "q": "Prevention advice?", "options": ["Lift under the arms", "Swing the child by the hands", "Avoid all play for 6 weeks", "Use a sling when outdoors"], "why": "Reduces recurrence.", "source": "RCH Melbourne" },
+    { "q": "Red flag suggesting a fracture instead?", "options": ["Swelling or bruising after a fall", "Pain on pronation", "Refusal to use the arm after a pull on the hand", "Age over 3 years"], "why": "X-ray it.", "source": "RCEM" },
     { "q": "Pulled elbow recurrence risk continues until about age…", "options": ["5", "1", "10", "15"], "why": "Annular ligament strengthens.", "source": "RCH Melbourne" }
   ]
 }

@@ -57,9 +57,9 @@
       "label": "Examiner",
       "qs": [
         { "q": "Maintenance fluid for a 12 kg child (Holliday–Segar)?", "a": "1100 mL/day", "wrong": ["1200 mL/day", "600 mL/day", "2400 mL/day"] },
-        { "q": "Oral rehydration for clinical dehydration without shock (NICE)?", "a": "50 mL/kg ORS over 4 hours plus maintenance", "wrong": ["Water only", "Fruit juice", "Nothing by mouth for 24 h"] },
+        { "q": "Oral rehydration for clinical dehydration without shock (NICE)?", "a": "50 mL/kg ORS over 4 hours plus maintenance", "wrong": ["Water only, as much as tolerated", "Diluted fruit juice every hour", "Nothing by mouth for 24 hours"] },
         { "q": "Fluid bolus in paediatric shock (RCUK/NICE NG29)?", "a": "10 mL/kg", "wrong": ["60 mL/kg", "5 mL/kg", "40 mL/kg"] },
-        { "q": "Sign of clinical shock (NICE CG84)?", "a": "CRT > 3 s with cold extremities", "wrong": ["Thirst", "Mild tachycardia only", "Normal responsiveness"] },
+        { "q": "Sign of clinical shock (NICE CG84)?", "a": "CRT > 3 s with cold extremities", "wrong": ["Thirst and a dry mouth", "Mild tachycardia on its own", "Normal responsiveness and warm hands"] },
         { "q": "Commonest cause of gastroenteritis in young children globally (pre-vaccine)?", "a": "Rotavirus", "wrong": ["Salmonella", "Giardia", "E. coli O157"] }
       ]
     }
@@ -68,7 +68,7 @@
   "cards": [
     { "q": "Holliday–Segar maintenance: first 10 kg?", "options": ["100 mL/kg/day", "50 mL/kg/day", "20 mL/kg/day", "150 mL/kg/day"], "why": "Then 50 for the next 10 kg, 20 thereafter.", "source": "NICE NG29" },
     { "q": "Deficit replacement if shocked at presentation?", "options": ["100 mL/kg", "50 mL/kg", "10 mL/kg", "200 mL/kg"], "why": "50 mL/kg if dehydrated but not shocked.", "source": "NICE CG84" },
-    { "q": "Preferred rehydration route in dehydration without shock?", "options": ["Oral rehydration solution", "IV always", "IM", "Rectal"], "why": "NG tube if refused.", "source": "NICE CG84" },
+    { "q": "Preferred rehydration route in dehydration without shock?", "options": ["Oral rehydration solution", "IV fluids in every case", "Nasogastric water only", "Diluted fruit juice by mouth"], "why": "NG tube if refused.", "source": "NICE CG84" },
     { "q": "Red flag suggesting a surgical cause?", "options": ["Bilious vomiting", "Watery diarrhoea", "Low-grade fever", "Mild abdominal cramps"], "why": "Also blood in stool, distension.", "source": "NICE CG84" },
     { "q": "Hypoglycaemia treatment in a child?", "options": ["10% glucose 2 mL/kg", "50% glucose 10 mL/kg", "Oral sugar in a shocked child", "Insulin"], "why": "Recheck after.", "source": "APLS" },
     { "q": "Antidiarrhoeals in under-5s?", "options": ["Not used", "Loperamide first-line", "Codeine", "Opium"], "why": "Risk of ileus and toxicity.", "source": "NICE CG84" }

@@ -64,20 +64,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Commonest cause of croup?", "a": "Parainfluenza virus", "wrong": ["RSV only", "Haemophilus influenzae b", "Streptococcus"] },
-        { "q": "Dexamethasone dose for croup?", "a": "0.15 mg/kg orally, single dose", "wrong": ["1 mg/kg IV daily", "0.015 mg/kg", "10 mg for all"] },
-        { "q": "Nebulised adrenaline dose?", "a": "1:1000, 0.5 mL/kg (max 5 mL)", "wrong": ["1:10,000 10 mL", "0.01 mL/kg", "IM 0.5 mg"] },
-        { "q": "Why observe after nebulised adrenaline?", "a": "Its effect wears off after about 2 hours", "wrong": ["It causes hypoglycaemia", "It is toxic", "It isn't needed"] },
-        { "q": "X-ray sign of croup (if done)?", "a": "Steeple sign on AP neck", "wrong": ["Thumb sign", "Sail sign", "Double bubble"] }
+        { "q": "Dexamethasone dose for croup?", "a": "0.15 mg/kg orally, single dose", "wrong": ["1 mg/kg IV once daily for 3 days", "0.015 mg/kg orally, single dose", "10 mg orally for every child"] },
+        { "q": "Nebulised adrenaline dose?", "a": "1:1000, 0.5 mL/kg (max 5 mL)", "wrong": ["1:10,000, 10 mL nebulised", "1:1000, 0.05 mL/kg (max 0.5 mL)", "IM 0.5 mg of 1:1000"] },
+        { "q": "Why observe after nebulised adrenaline?", "a": "Its effect wears off after about 2 hours", "wrong": ["It commonly causes hypoglycaemia in children", "It is toxic above one dose in 24 hours", "It may trigger a supraventricular tachycardia"] },
+        { "q": "X-ray sign of croup (if done)?", "a": "Steeple sign on AP neck", "wrong": ["Thumb sign on the lateral neck", "Sail sign on the chest film", "Double bubble on an abdominal film"] }
       ]
     }
   ],
   "badge": { "name": "Bark Buster", "emoji": "🐶", "flavor": "Calm on mum's lap, dex for all, adrenaline for stridor at rest." },
   "cards": [
-    { "q": "Croup typical age?", "options": ["6 months to 3 years", "Newborns only", "10–15 years", "Adults"], "why": "Peak around 2 years.", "source": "NICE CKS" },
+    { "q": "Croup typical age?", "options": ["6 months to 3 years", "Newborns in the first month", "10–15 years", "Adults over 60"], "why": "Peak around 2 years.", "source": "NICE CKS" },
     { "q": "Croup X-ray sign?", "options": ["Steeple sign", "Thumb sign", "Target sign", "Double bubble"], "why": "Subglottic narrowing on AP neck.", "source": "Radiology", "note": "Not required for diagnosis." },
-    { "q": "Moderate croup feature?", "options": ["Stridor at rest with recession", "Stridor only when crying", "Cyanosis and lethargy", "No stridor"], "why": "Needs nebulised adrenaline.", "source": "NICE CKS" },
-    { "q": "Croup steroid for a vomiting child?", "options": ["Nebulised budesonide 2 mg", "Oral dexamethasone only", "No steroid", "IV hydrocortisone always"], "why": "Alternative route.", "source": "NICE CKS" },
-    { "q": "Bacterial tracheitis features?", "options": ["High fever, toxic child, purulent secretions, poor response to adrenaline", "Mild barking cough", "Wheeze", "Afebrile"], "why": "Needs airway expertise and antibiotics.", "source": "RCH Melbourne" },
-    { "q": "Croup management: examine the throat?", "options": ["Avoid — could be epiglottitis and distress worsens stridor", "Always", "Only with a spatula", "Only if febrile"], "why": "Keep the child calm.", "source": "APLS" }
+    { "q": "Moderate croup feature?", "options": ["Stridor at rest with recession", "Stridor only when crying or upset", "Cyanosis, lethargy and exhaustion", "A barking cough with no stridor at all"], "why": "Needs nebulised adrenaline.", "source": "NICE CKS" },
+    { "q": "Croup steroid for a vomiting child?", "options": ["Nebulised budesonide 2 mg", "Oral dexamethasone, repeated if vomited", "No steroid until the vomiting stops", "IV hydrocortisone 4 mg/kg"], "why": "Alternative route.", "source": "NICE CKS" },
+    { "q": "Bacterial tracheitis features?", "options": ["High fever, toxic child, purulent secretions, poor response to adrenaline", "Mild barking cough in a well child", "Expiratory wheeze with a family history of atopy", "Afebrile, sudden onset while playing"], "why": "Needs airway expertise and antibiotics.", "source": "RCH Melbourne" },
+    { "q": "Croup management: examine the throat?", "options": ["Avoid — distress can worsen stridor", "Always, with a spatula, to look for tonsillitis", "Only if the child is febrile", "Only after nebulised adrenaline"], "why": "Keep the child calm.", "source": "APLS" }
   ]
 }

@@ -62,21 +62,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Organism causing scarlet fever?", "a": "Group A Streptococcus (S. pyogenes)", "wrong": ["Staphylococcus aureus", "Parvovirus B19", "HHV-6"] },
-        { "q": "Antibiotic and duration?", "a": "Phenoxymethylpenicillin for 10 days", "wrong": ["Amoxicillin 3 days", "Ciprofloxacin 5 days", "None"] },
-        { "q": "School exclusion?", "a": "Until 24 hours after starting antibiotics", "wrong": ["2 weeks", "No exclusion", "Until the rash is gone"] },
-        { "q": "Late complication?", "a": "Rheumatic fever or post-streptococcal glomerulonephritis", "wrong": ["Diabetes", "Asthma", "Kawasaki disease"] },
-        { "q": "Pastia's lines are…", "a": "Rash accentuated in skin creases", "wrong": ["Lines on the tongue", "Nail changes", "Peeling of the palms"] }
+        { "q": "Organism causing scarlet fever?", "a": "Group A Streptococcus (S. pyogenes)", "wrong": ["Staphylococcus aureus", "Parvovirus B19", "Human herpesvirus 6"] },
+        { "q": "Antibiotic and duration?", "a": "Phenoxymethylpenicillin for 10 days", "wrong": ["Amoxicillin for 3 days", "Flucloxacillin for 5 days, then review", "No antibiotics; it is viral"] },
+        { "q": "School exclusion?", "a": "24 hours after starting antibiotics", "wrong": ["2 weeks from the start of the rash, whatever treatment", "No exclusion is needed", "Until the rash has completely gone"] },
+        { "q": "Late complication?", "a": "Rheumatic fever or post-streptococcal glomerulonephritis", "wrong": ["Type 1 diabetes", "Childhood asthma", "Kawasaki disease"] },
+        { "q": "Pastia's lines are…", "a": "Rash accentuated in skin creases", "wrong": ["White lines on the tongue", "Transverse ridges in the nails (Beau's)", "Peeling of the palms and soles"] }
       ]
     }
   ],
   "badge": { "name": "Strawberry Field", "emoji": "🍓", "flavor": "Sandpaper rash, strawberry tongue: penicillin 10 days, school after 24 hours." },
   "cards": [
-    { "q": "Scarlet fever rash feels like…", "options": ["Sandpaper", "Velvet", "Blisters", "Plaques"], "why": "Fine papular erythema.", "source": "UKHSA" },
+    { "q": "Scarlet fever rash feels like…", "options": ["Sandpaper", "Velvet", "Fluid-filled blisters", "Raised, scaly plaques"], "why": "Fine papular erythema.", "source": "UKHSA" },
     { "q": "Scarlet fever in Hong Kong is…", "options": ["Notifiable to the CHP", "Not reportable", "Only reported if fatal", "Reported by schools only"], "why": "Statutorily notifiable.", "source": "CHP HK" },
-    { "q": "Penicillin allergy alternative for GAS?", "options": ["Clarithromycin or azithromycin", "Ciprofloxacin", "Nitrofurantoin", "Trimethoprim"], "why": "Macrolide.", "source": "NICE CKS" },
-    { "q": "Warning sign of invasive GAS?", "options": ["Severe pain in a limb, rapid deterioration, toxic appearance", "Mild sore throat", "Peeling fingertips at 2 weeks", "Itchy rash"], "why": "Necrotising fasciitis or toxic shock.", "source": "UKHSA 2023" },
-    { "q": "Peeling of fingers and toes after scarlet fever appears…", "options": ["After about 1 week", "Day 1", "Never", "After 1 year"], "why": "Desquamation.", "source": "Paediatrics" },
-    { "q": "Strawberry tongue also occurs in…", "options": ["Kawasaki disease", "Measles", "Chickenpox", "Rubella"], "why": "Check for Kawasaki features if fever lasts ≥5 days.", "source": "AHA Kawasaki 2017" }
+    { "q": "Penicillin allergy alternative for GAS?", "options": ["Clarithromycin or azithromycin", "Ciprofloxacin for 5 days", "Nitrofurantoin", "Trimethoprim with sulfamethoxazole"], "why": "Macrolide.", "source": "NICE CKS" },
+    { "q": "Warning sign of invasive GAS?", "options": ["Severe limb pain, rapid decline, toxic look", "A mild sore throat for 2 days", "Peeling fingertips 2 weeks later", "An itchy rash that comes and goes"], "why": "Necrotising fasciitis or toxic shock.", "source": "UKHSA 2023" },
+    { "q": "Peeling of fingers and toes after scarlet fever appears…", "options": ["After about 1 week", "On day 1 with the rash", "After about 1 year", "Only if untreated for a month"], "why": "Desquamation.", "source": "Paediatrics" },
+    { "q": "Strawberry tongue also occurs in…", "options": ["Kawasaki disease", "Measles", "Chickenpox", "Hand, foot and mouth disease"], "why": "Check for Kawasaki features if fever lasts ≥5 days.", "source": "AHA Kawasaki 2017" }
   ]
 }

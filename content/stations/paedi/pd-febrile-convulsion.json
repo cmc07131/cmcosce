@@ -62,21 +62,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Age range for febrile seizures?", "a": "6 months to 5 years", "wrong": ["0–3 months", "5–12 years", "Any age"] },
-        { "q": "Which feature makes it complex?", "a": "Focal onset or duration over 15 minutes", "wrong": ["Generalised", "Fever above 39", "Age 2 years"] },
-        { "q": "Do antipyretics prevent recurrence?", "a": "No", "wrong": ["Yes", "Only ibuprofen", "Only if given round the clock"] },
+        { "q": "Age range for febrile seizures?", "a": "6 months to 5 years", "wrong": ["0–3 months of age", "5–12 years", "Any age, including adults"] },
+        { "q": "Which feature makes it complex?", "a": "Focal onset or lasting over 15 minutes", "wrong": ["Generalised tonic–clonic movements with eye rolling", "A fever above 39 °C", "Age 2 years at the first seizure"] },
+        { "q": "Do antipyretics prevent recurrence?", "a": "No", "wrong": ["Yes, if given early in the fever", "Only ibuprofen does", "Only if given round the clock"] },
         { "q": "Recurrence risk after a first febrile seizure?", "a": "About 30%", "wrong": ["About 90%", "About 1%", "Zero"] },
-        { "q": "When call an ambulance?", "a": "Seizure lasting over 5 minutes", "wrong": ["Any fever", "Any twitch", "After 30 minutes"] }
+        { "q": "When call an ambulance?", "a": "Seizure lasting over 5 minutes", "wrong": ["Any fever above 38 °C in a child under 5", "Any brief twitch in sleep", "After 30 minutes of seizure"] }
       ]
     }
   ],
   "badge": { "name": "Calm Parents", "emoji": "🌡", "flavor": "Simple febrile seizure: not epilepsy, no damage, side-lying, 5-minute rule." },
   "cards": [
     { "q": "Simple febrile seizure lasts…", "options": ["Less than 15 minutes", "More than 30 minutes", "Exactly 5 minutes", "Hours"], "why": "Generalised, single in 24 h.", "source": "NICE CKS" },
-    { "q": "Investigations after a simple febrile seizure in a well child?", "options": ["Find the fever source; no EEG or imaging", "EEG", "MRI brain", "CT head"], "why": "EEG not indicated.", "source": "AAP 2011" },
-    { "q": "Risk factor for recurrence?", "options": ["First seizure under 18 months", "Age 4", "High fever", "Female sex"], "why": "Also family history, low temp at seizure.", "source": "NICE CKS" },
+    { "q": "Investigations after a simple febrile seizure in a well child?", "options": ["Find the fever source; no EEG or imaging", "EEG within 48 hours to look for epilepsy", "MRI brain as an outpatient in all cases", "CT head before discharge"], "why": "EEG not indicated.", "source": "AAP 2011" },
+    { "q": "Risk factor for recurrence?", "options": ["First seizure under 18 months", "First seizure at age 4 years", "A very high fever at the time", "Female sex and a sibling history"], "why": "Also family history, low temp at seizure.", "source": "NICE CKS" },
     { "q": "Febrile seizure first aid includes…", "options": ["Recovery position and timing", "Putting a spoon in the mouth", "Cold bath", "Holding limbs"], "why": "Call ambulance if > 5 min.", "source": "NICE CKS" },
-    { "q": "Lower threshold for LP after febrile seizure in…", "options": ["Infants under 12 months or pre-treated with antibiotics", "All 4-year-olds", "Children with URTI", "Never"], "why": "Meningitis signs may be masked.", "source": "AAP 2011" },
-    { "q": "Later epilepsy risk after simple febrile seizures?", "options": ["About 1–2%", "About 50%", "About 20%", "0%"], "why": "Slightly above the baseline ~0.5–1%.", "source": "AAP 2011" }
+    { "q": "Lower threshold for LP after febrile seizure in…", "options": ["Infants under 12 months, or on antibiotics", "All children over 4 years old", "Children with an upper respiratory infection", "Any child with a temperature over 39 °C"], "why": "Meningitis signs may be masked.", "source": "AAP 2011" },
+    { "q": "Later epilepsy risk after simple febrile seizures?", "options": ["About 1–2%", "About 1 in 2 (50%)", "About 20%", "About 10%"], "why": "Slightly above the baseline ~0.5–1%.", "source": "AAP 2011" }
   ]
 }

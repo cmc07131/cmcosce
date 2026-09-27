@@ -62,21 +62,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Bilious vomiting in an infant suggests…", "a": "A surgical emergency (malrotation/volvulus, intussusception)", "wrong": ["Gastroenteritis", "Reflux", "Overfeeding"] },
+        { "q": "Bilious vomiting in an infant suggests…", "a": "A surgical emergency (malrotation/volvulus, intussusception)", "wrong": ["Simple gastroenteritis", "Gastro-oesophageal reflux", "Overfeeding by anxious parents"] },
         { "q": "Investigation of choice for intussusception?", "a": "Ultrasound", "wrong": ["CT", "Plain X-ray only", "Barium meal"] },
-        { "q": "Contraindication to air enema?", "a": "Peritonitis or perforation", "wrong": ["Age 9 months", "Vomiting", "Fever 37.6"] },
-        { "q": "Pyloric stenosis typical age and vomit?", "a": "2–8 weeks, projectile non-bilious", "wrong": ["1 year, bilious", "Newborn, bloody", "5 years, projectile"] },
-        { "q": "Classic metabolic abnormality in pyloric stenosis?", "a": "Hypochloraemic hypokalaemic metabolic alkalosis", "wrong": ["Metabolic acidosis", "Hyperkalaemia", "Hypercalcaemia"] }
+        { "q": "Contraindication to air enema?", "a": "Peritonitis or perforation", "wrong": ["Age 9 months", "Vomiting more than three times in the last hour", "A fever of 37.6 °C"] },
+        { "q": "Pyloric stenosis typical age and vomit?", "a": "2–8 weeks, projectile non-bilious", "wrong": ["1 year, bilious and with bloody stools", "Newborn, blood-stained", "5 years, projectile after meals"] },
+        { "q": "Classic metabolic abnormality in pyloric stenosis?", "a": "Hypochloraemic hypokalaemic metabolic alkalosis", "wrong": ["Hyperchloraemic metabolic acidosis", "Hyperkalaemic metabolic acidosis", "Hypercalcaemia with alkalosis"] }
       ]
     }
   ],
   "badge": { "name": "Telescope", "emoji": "🔭", "flavor": "Screaming episodes, green vomit, jelly stool: ultrasound, fluids, surgeon." },
   "cards": [
-    { "q": "Intussusception typical age?", "options": ["6 months to 2 years", "Newborn", "10 years", "Adults"], "why": "Often after a viral illness.", "source": "RCH Melbourne" },
-    { "q": "Ultrasound sign of intussusception?", "options": ["Target (doughnut) sign", "Double bubble", "Whirlpool only", "Steeple"], "why": "Concentric bowel wall.", "source": "Radiology" },
+    { "q": "Intussusception typical age?", "options": ["6 months to 2 years", "Newborns in the first week", "About 10 years", "Adults"], "why": "Often after a viral illness.", "source": "RCH Melbourne" },
+    { "q": "Ultrasound sign of intussusception?", "options": ["Target (doughnut) sign", "Double bubble on ultrasound", "Whirlpool sign of the mesentery", "Steeple sign"], "why": "Concentric bowel wall.", "source": "Radiology" },
     { "q": "Redcurrant jelly stool is…", "options": ["A late sign", "An early sign", "Diagnostic of gastroenteritis", "Normal"], "why": "Don't wait for it.", "source": "RCH Melbourne" },
-    { "q": "First-line reduction?", "options": ["Radiological air (or contrast) enema", "Laparotomy always", "Oral laxative", "Colonoscopy"], "why": "Surgeons present.", "source": "BAPS" },
+    { "q": "First-line reduction?", "options": ["Radiological air (or contrast) enema", "Laparotomy in every case", "Oral laxatives and review", "Colonoscopy under sedation"], "why": "Surgeons present.", "source": "BAPS" },
     { "q": "Double bubble on X-ray suggests…", "options": ["Duodenal atresia", "Intussusception", "Pyloric stenosis", "Hirschsprung"], "why": "Newborn, bilious vomiting.", "source": "Paediatric surgery" },
-    { "q": "Pyloric stenosis on examination?", "options": ["Olive-shaped mass during a test feed", "Sausage mass", "Right iliac fossa pain", "Distension only"], "why": "Ultrasound confirms.", "source": "Paediatric surgery" }
+    { "q": "Pyloric stenosis on examination?", "options": ["Olive-shaped mass during a test feed", "Sausage-shaped mass in the right upper quadrant", "Right iliac fossa pain and guarding", "Abdominal distension and absent bowel sounds"], "why": "Ultrasound confirms.", "source": "Paediatric surgery" }
   ]
 }
