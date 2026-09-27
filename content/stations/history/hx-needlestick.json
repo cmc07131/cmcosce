@@ -87,21 +87,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "HIV transmission risk after a percutaneous injury from an HIV-positive source?", "a": "About 0.3%", "wrong": ["About 30%", "About 3%", "Zero"] },
+        { "q": "HIV transmission risk after a percutaneous injury from an HIV-positive source?", "a": "About 0.3%", "wrong": ["About 30%", "About 3%", "About 0.003%"] },
         { "q": "HIV PEP duration?", "a": "28 days", "wrong": ["28 weeks", "7 days", "One dose"] },
         { "q": "Latest time to start HIV PEP?", "a": "72 hours", "wrong": ["7 days", "24 hours only", "Any time"] },
         { "q": "PEP when the source is on ART with an undetectable viral load (BHIVA/BASHH 2021)?", "a": "Not recommended", "wrong": ["Always recommended", "Double dose", "Only for mucosal exposures"] },
-        { "q": "HCV post-exposure prophylaxis?", "a": "None; test and follow up", "wrong": ["Interferon for 4 weeks", "Immunoglobulin", "Ribavirin for 28 days"] }
+        { "q": "HCV post-exposure prophylaxis?", "a": "None; test and follow up", "wrong": ["Interferon for 4 weeks", "Hepatitis C immunoglobulin", "Ribavirin for 28 days"] }
       ]
     }
   ],
   "badge": { "name": "Sharp Mind", "emoji": "🪡", "flavor": "Wash, test both sides, PEP by risk, follow up, never recap." },
   "cards": [
-    { "q": "First aid after a needlestick?", "options": ["Encourage bleeding and wash with soap and water", "Suck the wound", "Scrub with alcohol and bleach", "Apply a tourniquet"], "why": "Avoid scrubbing and antiseptics that damage skin.", "source": "CHP / UKHSA" },
-    { "q": "HCV transmission after a positive-source needlestick is about…", "options": ["1.8% or less", "30%", "0.003%", "50%"], "why": "No PEP exists; follow-up testing.", "source": "CHP; UKHSA" },
+    { "q": "First aid after a needlestick?", "options": ["Encourage bleeding; wash with soap and water", "Suck the wound to remove the blood", "Scrub hard with alcohol and dilute bleach solution", "Apply a tourniquet above the wound"], "why": "Avoid scrubbing and antiseptics that damage skin.", "source": "CHP / UKHSA" },
+    { "q": "HCV transmission after a positive-source needlestick is about…", "options": ["1.8% or less", "About 30%", "About 0.003%", "About 50%"], "why": "No PEP exists; follow-up testing.", "source": "CHP; UKHSA" },
     { "q": "Known HBV vaccine responder after a needlestick: HBV prophylaxis?", "options": ["None needed", "HBIG and full vaccine course", "Antivirals", "Booster only if source negative"], "why": "Anti-HBs ≥10 mIU/mL confirms protection.", "source": "CHP / UKHSA Green Book" },
-    { "q": "HIV PEP should begin…", "options": ["As soon as possible, within 72 hours", "After 1 week", "Only after source HIV confirmed", "At 6 weeks"], "why": "Efficacy falls with time.", "source": "BHIVA/BASHH 2021" },
-    { "q": "Which increases HIV risk in a needlestick?", "options": ["Hollow-bore needle with visible blood", "Solid suture needle", "Glove worn", "Superficial scratch"], "why": "Also deep injury and high source viral load.", "source": "CDC / BHIVA" },
+    { "q": "HIV PEP should begin…", "options": ["As soon as possible, within 72 hours", "After 1 week", "Only once the source is confirmed HIV-positive", "At 6 weeks"], "why": "Efficacy falls with time.", "source": "BHIVA/BASHH 2021" },
+    { "q": "Which increases HIV risk in a needlestick?", "options": ["Hollow-bore needle with visible blood", "A solid suture needle through a double glove", "Wearing a single glove", "A superficial scratch"], "why": "Also deep injury and high source viral load.", "source": "CDC / BHIVA" },
     { "q": "HIV PEP course length?", "options": ["28 days", "28 weeks", "3 days", "6 months"], "why": "Your notes say 28 weeks — a typo.", "source": "BHIVA/BASHH 2021" }
   ]
 }

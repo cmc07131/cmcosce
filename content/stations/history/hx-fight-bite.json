@@ -83,20 +83,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Organism typical of human bites?", "a": "Eikenella corrodens", "wrong": ["Pasteurella multocida", "Pseudomonas", "Clostridium tetani"] },
-        { "q": "Why examine with the fist clenched?", "a": "The tendon tract lines up with the wound in that position", "wrong": ["It is less painful", "To test grip", "To see the nails"] },
+        { "q": "Why examine with the fist clenched?", "a": "The tendon tract lines up with the wound", "wrong": ["It is less painful for the patient to hold the hand like that", "To test the grip strength", "To see the nails clearly"] },
         { "q": "First-line antibiotic for a human bite (NICE)?", "a": "Co-amoxiclav", "wrong": ["Flucloxacillin alone", "Ciprofloxacin", "No antibiotics"] },
         { "q": "Should a fight bite be sutured?", "a": "No", "wrong": ["Yes, always", "Only with nylon", "Yes, if under 1 cm"] },
-        { "q": "Indication for hand surgery referral?", "a": "Possible joint or tendon penetration", "wrong": ["Any bruise", "Pain only", "Patient request only"] }
+        { "q": "Indication for hand surgery referral?", "a": "Possible joint or tendon penetration", "wrong": ["Any bruise over the knuckle after a fight", "Pain on making a fist, even without a wound", "Patient request only"] }
       ]
     }
   ],
   "badge": { "name": "Knuckle Sandwich", "emoji": "✊", "flavor": "Small cut over a knuckle after a punch: it's in the joint until proved otherwise." },
   "cards": [
-    { "q": "A laceration over the MCP joint after a punch should be treated as…", "options": ["A human bite with possible joint penetration", "A simple laceration", "A burn", "A sprain"], "why": "High risk of septic arthritis.", "source": "BSSH" },
-    { "q": "Antibiotic for a human bite with penicillin allergy (NICE)?", "options": ["Doxycycline plus metronidazole", "Flucloxacillin", "Amoxicillin", "Nitrofurantoin"], "why": "Covers oral flora including anaerobes.", "source": "NICE NG184" },
-    { "q": "X-ray in a fight bite looks for…", "options": ["Fracture, tooth fragment, air in the joint", "Pneumonia", "Gallstones", "Nothing useful"], "why": "Changes management.", "source": "BSSH" },
+    { "q": "A laceration over the MCP joint after a punch should be treated as…", "options": ["A human bite with possible joint penetration", "A simple laceration", "A superficial burn", "A sprained knuckle"], "why": "High risk of septic arthritis.", "source": "BSSH" },
+    { "q": "Antibiotic for a human bite with penicillin allergy (NICE)?", "options": ["Doxycycline plus metronidazole", "Flucloxacillin alone for 7 days", "Clarithromycin alone for 3 days", "Nitrofurantoin"], "why": "Covers oral flora including anaerobes.", "source": "NICE NG184" },
+    { "q": "X-ray in a fight bite looks for…", "options": ["Fracture, tooth fragment, air in the joint", "Pneumonia on the chest film", "Gallstones", "Soft-tissue swelling only; X-ray adds nothing"], "why": "Changes management.", "source": "BSSH" },
     { "q": "Primary closure of a fight bite?", "options": ["Contraindicated", "Recommended", "Only with steri-strips", "Only in children"], "why": "Traps bacteria.", "source": "BSSH" },
     { "q": "Eikenella corrodens is sensitive to…", "options": ["Penicillins", "Clindamycin alone", "Metronidazole alone", "Flucloxacillin alone"], "why": "Resistant to clindamycin; co-amoxiclav covers it.", "source": "Microbiology" },
-    { "q": "Tetanus for a bite in someone last vaccinated >10 years ago?", "options": ["Booster", "Nothing", "Immunoglobulin only", "Antibiotics instead"], "why": "Tetanus-prone wound.", "source": "UKHSA Green Book" }
+    { "q": "Tetanus for a bite in someone last vaccinated >10 years ago?", "options": ["Booster", "Immunoglobulin only", "Antibiotics instead of a vaccine", "No action if the wound is clean"], "why": "Tetanus-prone wound.", "source": "UKHSA Green Book" }
   ]
 }

@@ -68,20 +68,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Which nerve is most at risk in anterior shoulder dislocation?", "a": "Axillary nerve", "wrong": ["Radial nerve", "Median nerve", "Long thoracic nerve"] },
-        { "q": "Montgomery (2015) requires disclosure of…", "a": "Material risks that this patient would want to know", "wrong": ["Only risks over 1%", "Only what most doctors would mention", "Nothing if the patient signs"] },
-        { "q": "How to test the axillary nerve?", "a": "Sensation over the regimental badge area", "wrong": ["Thumb abduction", "Wrist extension", "Little finger sensation"] },
-        { "q": "Recurrence risk after a first dislocation under 20 years?", "a": "Very high (up to 80–90%)", "wrong": ["Under 5%", "About 20%", "Zero with a sling"] },
-        { "q": "Who can consent for a 19-year-old in HK?", "a": "The patient himself", "wrong": ["His parents", "The examiner", "A social worker"] }
+        { "q": "Montgomery (2015) requires disclosure of…", "a": "Material risks this patient would want to know", "wrong": ["Only risks above 1%", "Only what a responsible body of doctors would mention", "Nothing once the patient signs"] },
+        { "q": "How to test the axillary nerve?", "a": "Sensation over the badge area", "wrong": ["Thumb abduction against resistance", "Wrist extension", "Little finger sensation"] },
+        { "q": "Recurrence risk after a first dislocation under 20 years?", "a": "Very high (up to 80–90%)", "wrong": ["Under 5%", "About 20%, falling with a sling", "Zero with a sling"] },
+        { "q": "Who can consent for a 19-year-old in HK?", "a": "The patient himself", "wrong": ["His parents, as he is under 21", "The examiner", "A social worker"] }
       ]
     }
   ],
   "badge": { "name": "Ball in Socket", "emoji": "🏀", "flavor": "Diagnosis, procedure, risks, alternatives, teach-back, yes." },
   "cards": [
     { "q": "Commonest type of shoulder dislocation?", "options": ["Anterior", "Posterior", "Inferior (luxatio erecta)", "Superior"], "why": "About 95%.", "source": "BOA" },
-    { "q": "Posterior dislocation is associated with…", "options": ["Seizures and electric shock", "Basketball", "Falls on the elbow only", "Pregnancy"], "why": "'Light bulb' sign on AP.", "source": "BOA" },
-    { "q": "Material risk (Montgomery) means…", "options": ["A risk a reasonable person, or this patient, would find significant", "Any risk over 10%", "Only fatal risks", "Risks the doctor thinks matter"], "why": "Patient-centred standard.", "source": "Montgomery v Lanarkshire 2015" },
-    { "q": "Procedural sedation requires…", "options": ["A dedicated sedationist and monitoring including capnography", "Only the proceduralist", "No monitoring", "General anaesthesia"], "why": "Separate roles.", "source": "RCEM/RCoA" },
-    { "q": "Post-reduction checks include…", "options": ["X-ray and neurovascular examination", "CT always", "MRI before discharge", "Blood tests"], "why": "Confirm reduction and exclude fracture/nerve injury.", "source": "BOA" },
-    { "q": "Young athlete after first dislocation should be…", "options": ["Referred early to a shoulder surgeon", "Immobilised 12 weeks", "Discharged without follow-up", "Given steroids"], "why": "High recurrence.", "source": "BESS/BOA" }
+    { "q": "Posterior dislocation is associated with…", "options": ["Seizures and electric shock", "Basketball injuries", "Falls onto the outstretched hand only", "Pregnancy"], "why": "'Light bulb' sign on AP.", "source": "BOA" },
+    { "q": "Material risk (Montgomery) means…", "options": ["A risk this patient would find significant", "Any risk above 10%", "Only risks that could be fatal", "Risks the doctor thinks matter, based on common practice"], "why": "Patient-centred standard.", "source": "Montgomery v Lanarkshire 2015" },
+    { "q": "Procedural sedation requires…", "options": ["A dedicated sedationist and capnography", "Only the proceduralist", "No monitoring if brief", "A general anaesthetic"], "why": "Separate roles.", "source": "RCEM/RCoA" },
+    { "q": "Post-reduction checks include…", "options": ["X-ray and neurovascular examination", "CT of the shoulder in every case, before discharge", "MRI before discharge", "Blood tests for CK"], "why": "Confirm reduction and exclude fracture/nerve injury.", "source": "BOA" },
+    { "q": "Young athlete after first dislocation should be…", "options": ["Early referral to a shoulder surgeon", "Immobilisation for 12 weeks", "Discharge without follow-up", "A course of oral steroids"], "why": "High recurrence.", "source": "BESS/BOA" }
   ]
 }

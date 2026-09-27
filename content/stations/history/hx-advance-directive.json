@@ -79,21 +79,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Who can make an advance medical directive?", "a": "A mentally capable adult, about their own future treatment", "wrong": ["The next of kin", "The GP on the patient's behalf", "Any family member with power of attorney"] },
+        { "q": "Who can make an advance medical directive?", "a": "A mentally capable adult, for their own treatment", "wrong": ["The next of kin", "The GP on the patient's behalf", "Any family member holding an enduring power of attorney"] },
         { "q": "When does the HK Advance Decision on Life-sustaining Treatment Ordinance take effect?", "a": "31 July 2026", "wrong": ["1 January 2020", "It has not been passed", "Only in private hospitals"] },
-        { "q": "Does a DNACPR order stop antibiotics and fluids?", "a": "No — it applies to CPR only", "wrong": ["Yes, all treatment stops", "Yes, except oxygen", "Only in care homes"] },
+        { "q": "Does a DNACPR order stop antibiotics and fluids?", "a": "No — it applies to CPR only", "wrong": ["Yes, all active treatment stops", "Yes, except oxygen and analgesia", "Only in residential care homes"] },
         { "q": "Can a relative override a valid, applicable AMD?", "a": "No", "wrong": ["Yes, the eldest child", "Yes, if they disagree", "Yes, by signing a form"] },
-        { "q": "What protection do doctors have under the Ordinance?", "a": "Protection when acting in honest and reasonable belief about a valid AMD or DNACPR order", "wrong": ["None", "Protection only if they do full resuscitation", "Protection only with a court order"] }
+        { "q": "What protection do doctors have under the Ordinance?", "a": "Protection when acting in good faith on a valid order", "wrong": ["None; they may still be sued for withholding CPR", "Protection only if they perform full resuscitation", "Protection only with a court order in each case"] }
       ]
     }
   ],
   "badge": { "name": "Her Own Words", "emoji": "📜", "flavor": "Valid, applicable, respected. DNACPR is not 'no care'." },
   "cards": [
-    { "q": "An advance medical directive is valid when made by…", "options": ["A mentally capable adult for themselves", "The family", "The treating team", "A social worker"], "why": "The patient's own decision.", "source": "HK Advance Decision on Life-sustaining Treatment Ordinance" },
-    { "q": "DNACPR orders under the new HK Ordinance apply…", "options": ["In and outside hospital", "Only in ICU", "Only in hospital", "Only at home"], "why": "Rescuers act on them outside hospital too.", "source": "HK Government press release, July 2026" },
+    { "q": "An advance medical directive is valid when made by…", "options": ["A mentally capable adult for themselves", "The family, on the patient's behalf, after discussion", "The treating team, by consensus", "A medical social worker"], "why": "The patient's own decision.", "source": "HK Advance Decision on Life-sustaining Treatment Ordinance" },
+    { "q": "DNACPR orders under the new HK Ordinance apply…", "options": ["In and outside hospital", "Only in intensive care units", "Only inside public hospitals", "Only in the patient's own home"], "why": "Rescuers act on them outside hospital too.", "source": "HK Government press release, July 2026" },
     { "q": "The HK advance decision law came into force on…", "options": ["31 July 2026", "1 January 2024", "20 January 2026", "Not yet"], "why": "Passed November 2024.", "source": "info.gov.hk, 31 July 2026" },
-    { "q": "A DNACPR decision means…", "options": ["No CPR; other treatment continues as appropriate", "No treatment at all", "No nursing care", "No antibiotics"], "why": "Ceilings of care are separate decisions.", "source": "HA guidance" },
-    { "q": "For an incapable adult without an AMD, decisions are made…", "options": ["By the doctor in the patient's best interests, consulting family", "By the eldest child", "By the court every time", "By majority vote of relatives"], "why": "Family inform, they do not decide.", "source": "HK Medical Council Code" },
-    { "q": "Can an AMD be revoked?", "options": ["Yes, by the maker at any time", "No, never", "Only by a court", "Only by the family"], "why": "In the manner the Ordinance specifies.", "source": "HK Ordinance" }
+    { "q": "A DNACPR decision means…", "options": ["No CPR; other care continues", "No active treatment of any kind", "No nursing or comfort care", "No antibiotics or IV fluids"], "why": "Ceilings of care are separate decisions.", "source": "HA guidance" },
+    { "q": "For an incapable adult without an AMD, decisions are made…", "options": ["The doctor, in best interests, consulting family", "The eldest child as legal next of kin, after a family meeting", "The court, every time", "A majority vote of the relatives"], "why": "Family inform, they do not decide.", "source": "HK Medical Council Code" },
+    { "q": "Can an AMD be revoked?", "options": ["Yes, by the maker at any time", "No, it is permanent once signed", "Only by an order of the court", "Only by the family, jointly"], "why": "In the manner the Ordinance specifies.", "source": "HK Ordinance" }
   ]
 }

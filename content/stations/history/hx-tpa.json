@@ -90,20 +90,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Time window for IV thrombolysis from onset?", "a": "4.5 hours", "wrong": ["3 hours only", "24 hours", "12 hours"] },
-        { "q": "Tenecteplase dose for stroke?", "a": "0.25 mg/kg single bolus (max 25 mg)", "wrong": ["0.9 mg/kg over 1 hour", "0.5 mg/kg", "50 mg fixed"] },
+        { "q": "Tenecteplase dose for stroke?", "a": "0.25 mg/kg single bolus (max 25 mg)", "wrong": ["0.9 mg/kg over 1 hour, 10% as a bolus (max 90 mg)", "0.5 mg/kg (max 50 mg) bolus", "50 mg fixed dose"] },
         { "q": "BP before thrombolysis must be below…", "a": "185/110 mmHg", "wrong": ["140/90", "220/120", "160/100"] },
         { "q": "Thrombectomy window with imaging selection?", "a": "Up to 24 hours", "wrong": ["1 hour", "4.5 hours only", "7 days"] },
-        { "q": "Antiplatelets after thrombolysis?", "a": "Avoid for 24 hours", "wrong": ["Give immediately", "Give before", "Double dose"] }
+        { "q": "Antiplatelets after thrombolysis?", "a": "Avoid for 24 hours", "wrong": ["Give immediately after", "Give before thrombolysis", "Give at double dose"] }
       ]
     }
   ],
   "badge": { "name": "Time Is Brain", "emoji": "⏱", "flavor": "4½ hours, BP under 185/110, CTA for the big clot." },
   "cards": [
-    { "q": "IV thrombolysis window for acute ischaemic stroke?", "options": ["4.5 hours from onset", "3 hours", "6 hours", "24 hours"], "why": "Longer only with imaging selection.", "source": "ESO 2021; NICE NG128", "note": "Older notes: 3 hours." },
-    { "q": "Alteplase dose for stroke?", "options": ["0.9 mg/kg, max 90 mg, 10% bolus", "1.5 mg/kg", "0.25 mg/kg bolus", "100 mg fixed"], "why": "Remainder over 60 minutes.", "source": "AHA/ASA 2019" },
-    { "q": "Tenecteplase in stroke is…", "options": ["An accepted alternative to alteplase (0.25 mg/kg)", "Contraindicated", "Only for STEMI", "Given as an infusion over 24 h"], "why": "Single bolus is practical.", "source": "ESO 2023; NICE 2024" },
-    { "q": "Mechanical thrombectomy is for…", "options": ["Large vessel occlusion", "Lacunar stroke", "ICH", "TIA"], "why": "Up to 24 h with imaging selection.", "source": "ESO/ESMINT; AHA" },
+    { "q": "IV thrombolysis window for acute ischaemic stroke?", "options": ["4.5 hours from onset", "3 hours from onset", "6 hours from onset", "24 hours from onset in all patients"], "why": "Longer only with imaging selection.", "source": "ESO 2021; NICE NG128", "note": "Older notes: 3 hours." },
+    { "q": "Alteplase dose for stroke?", "options": ["0.9 mg/kg, max 90 mg, 10% bolus", "1.5 mg/kg over 1 hour", "0.6 mg/kg, max 60 mg, 15% as a bolus", "100 mg fixed dose"], "why": "Remainder over 60 minutes.", "source": "AHA/ASA 2019" },
+    { "q": "Tenecteplase in stroke is…", "options": ["An accepted alternative (0.25 mg/kg)", "Contraindicated in stroke", "Only licensed for STEMI", "Given as a 24-hour infusion"], "why": "Single bolus is practical.", "source": "ESO 2023; NICE 2024" },
+    { "q": "Mechanical thrombectomy is for…", "options": ["Large vessel occlusion", "Lacunar stroke", "Intracerebral haemorrhage", "Transient ischaemic attack"], "why": "Up to 24 h with imaging selection.", "source": "ESO/ESMINT; AHA" },
     { "q": "Symptomatic ICH risk with thrombolysis (NINDS)?", "options": ["About 6%", "About 50%", "About 0.1%", "About 20%"], "why": "About 0.6% without.", "source": "NINDS 1995" },
-    { "q": "Which is a contraindication to thrombolysis?", "options": ["Previous intracranial haemorrhage", "Age 81", "Diabetes", "NIHSS 9"], "why": "Age and diabetes are no longer absolute exclusions.", "source": "AHA/ASA 2019" }
+    { "q": "Which is a contraindication to thrombolysis?", "options": ["Previous intracranial haemorrhage", "Age over 80 years with atrial fibrillation", "Type 2 diabetes", "NIHSS of 9"], "why": "Age and diabetes are no longer absolute exclusions.", "source": "AHA/ASA 2019" }
   ]
 }

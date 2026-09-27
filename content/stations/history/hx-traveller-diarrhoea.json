@@ -73,19 +73,19 @@
       "qs": [
         { "q": "Commonest cause of traveller's diarrhoea worldwide?", "a": "Enterotoxigenic E. coli", "wrong": ["Giardia", "Rotavirus", "Clostridioides difficile"] },
         { "q": "Antibiotic of choice after South-East Asia?", "a": "Azithromycin", "wrong": ["Ciprofloxacin", "Amoxicillin", "Metronidazole"] },
-        { "q": "When to avoid loperamide?", "a": "Fever or bloody diarrhoea", "wrong": ["Always", "Mild watery diarrhoea", "After 24 hours"] },
-        { "q": "Definition of traveller's diarrhoea?", "a": "3 or more unformed stools in 24 h plus an enteric symptom", "wrong": ["Any loose stool", "Diarrhoea lasting 2 weeks", "Blood in stool only"] },
-        { "q": "Which serious diagnosis must you consider with fever after Thailand?", "a": "Malaria (and typhoid, dengue)", "wrong": ["Coeliac disease", "IBS", "Lactose intolerance"] }
+        { "q": "When to avoid loperamide?", "a": "Fever or bloody diarrhoea", "wrong": ["Always, in every case", "Mild watery diarrhoea without fever", "After 24 hours of use"] },
+        { "q": "Definition of traveller's diarrhoea?", "a": "≥3 unformed stools in 24 h plus a symptom", "wrong": ["Any single loose stool", "Diarrhoea lasting 2 weeks after returning home", "Blood in the stool only"] },
+        { "q": "Which serious diagnosis must you consider with fever after Thailand?", "a": "Malaria (and typhoid, dengue)", "wrong": ["Coeliac disease", "Irritable bowel syndrome after infection", "Lactose intolerance"] }
       ]
     }
   ],
   "badge": { "name": "Delhi Belly", "emoji": "🚽", "flavor": "Fluids for all, azithromycin by severity, films if febrile from the tropics." },
   "cards": [
-    { "q": "First-line treatment for all traveller's diarrhoea?", "options": ["Oral rehydration", "Antibiotics", "Loperamide", "Probiotics"], "why": "Antibiotics and loperamide depend on severity.", "source": "ISTM 2017" },
-    { "q": "Why azithromycin for South-East Asia?", "options": ["High Campylobacter quinolone resistance", "It is cheaper", "It treats malaria too", "It stops diarrhoea immediately"], "why": "Fluoroquinolone resistance is common.", "source": "ISTM 2017" },
-    { "q": "Dysentery means…", "options": ["Diarrhoea with blood (± fever)", "Watery diarrhoea", "Vomiting only", "Constipation"], "why": "Suggests invasive bacteria or amoeba.", "source": "WHO" },
+    { "q": "First-line treatment for all traveller's diarrhoea?", "options": ["Oral rehydration", "Antibiotics for all", "Loperamide", "Probiotics"], "why": "Antibiotics and loperamide depend on severity.", "source": "ISTM 2017" },
+    { "q": "Why azithromycin for South-East Asia?", "options": ["High Campylobacter quinolone resistance", "It is cheaper than ciprofloxacin", "It treats malaria too", "It stops diarrhoea immediately"], "why": "Fluoroquinolone resistance is common.", "source": "ISTM 2017" },
+    { "q": "Dysentery means…", "options": ["Diarrhoea with blood (± fever)", "Profuse, rice-water diarrhoea without blood", "Vomiting without diarrhoea", "Constipation with cramps"], "why": "Suggests invasive bacteria or amoeba.", "source": "WHO" },
     { "q": "Parasite causing prolonged diarrhoea and bloating after travel?", "options": ["Giardia", "Plasmodium", "Toxoplasma", "Strongyloides only"], "why": "Treat with metronidazole or tinidazole.", "source": "Travel medicine" },
     { "q": "Loperamide is safe when…", "options": ["No fever or blood", "There is bloody diarrhoea", "The child is under 2", "There is high fever"], "why": "Avoid in dysentery.", "source": "ISTM 2017" },
-    { "q": "Stool culture is indicated for…", "options": ["Fever, blood, severe or prolonged illness", "Every case", "Never", "Only children"], "why": "Guides targeted treatment.", "source": "NICE CKS" }
+    { "q": "Stool culture is indicated for…", "options": ["Fever, blood, or severe/prolonged illness", "Every case on return", "Never; it is self-limiting", "Only in children"], "why": "Guides targeted treatment.", "source": "NICE CKS" }
   ]
 }
