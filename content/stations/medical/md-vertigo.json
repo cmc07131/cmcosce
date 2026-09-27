@@ -55,11 +55,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Typical nystagmus in posterior canal BPPV?", "a": "Torsional upbeating, with latency, fatiguing, under 1 minute", "wrong": ["Pure downbeat, persistent", "Horizontal direction-changing", "None"] },
+        { "q": "Typical nystagmus in posterior canal BPPV?", "a": "Torsional upbeating, latency, fatiguing", "wrong": ["Pure downbeat, persistent", "Horizontal, direction-changing, without latency", "No nystagmus at all"] },
         { "q": "When is HINTS used?", "a": "Acute continuous vertigo with spontaneous nystagmus", "wrong": ["Episodic positional vertigo", "Syncope", "Any dizziness"] },
         { "q": "HINTS finding suggesting a central cause?", "a": "Normal head impulse test", "wrong": ["Abnormal head impulse with corrective saccade", "Unidirectional nystagmus", "No skew"] },
-        { "q": "Wallenberg syndrome is due to…", "a": "Lateral medullary infarct (PICA/vertebral)", "wrong": ["Cerebellar tumour", "Middle ear infection", "Frontal stroke"] },
-        { "q": "Medication for BPPV?", "a": "Not routinely — repositioning is the treatment", "wrong": ["Long-term betahistine", "Antibiotics", "Steroids"] }
+        { "q": "Wallenberg syndrome is due to…", "a": "Lateral medullary infarct (PICA)", "wrong": ["A cerebellopontine angle tumour (acoustic neuroma)", "A middle ear infection with effusion", "A frontal lobe stroke"] },
+        { "q": "Medication for BPPV?", "a": "Not routinely — reposition", "wrong": ["Long-term betahistine three times daily", "A 10-day course of oral prednisolone", "Antibiotics"] }
       ]
     }
   ],
@@ -69,7 +69,7 @@
     { "q": "Treatment of posterior canal BPPV?", "options": ["Epley manoeuvre", "Betahistine long-term", "Surgery", "Antibiotics"], "why": "Particle repositioning.", "source": "AAO-HNS 2017" },
     { "q": "HINTS central sign?", "options": ["Vertical skew deviation", "Abnormal head impulse", "Unidirectional horizontal nystagmus", "Hearing preserved"], "why": "Any central sign = stroke until proven otherwise.", "source": "Kattah 2009" },
     { "q": "Direction-changing nystagmus suggests…", "options": ["A central cause", "Vestibular neuritis", "BPPV", "Anxiety"], "why": "Peripheral nystagmus is unidirectional.", "source": "Kattah 2009" },
-    { "q": "Ménière's disease triad?", "options": ["Vertigo, fluctuating hearing loss, tinnitus (aural fullness)", "Vertigo, diplopia, dysarthria", "Headache, fever, rash", "Ataxia, confusion, ophthalmoplegia"], "why": "Episodes last hours.", "source": "ENT" },
-    { "q": "Dix–Hallpike neck position?", "options": ["Rotated 45° and extended below the horizontal", "Flexed", "Neutral", "Rotated 90°"], "why": "Aligns the posterior canal.", "source": "AAO-HNS" }
+    { "q": "Ménière's disease triad?", "options": ["Vertigo, fluctuating hearing loss, tinnitus, aural fullness", "Vertigo, diplopia, dysarthria", "Headache, fever, rash", "Ataxia, confusion, ophthalmoplegia"], "why": "Episodes last hours.", "source": "ENT" },
+    { "q": "Dix–Hallpike neck position?", "options": ["Rotated 45°, extended below horizontal", "Flexed forward to the chest", "Neutral, facing the ceiling", "Rotated 90° to the side and flexed forward, chin down"], "why": "Aligns the posterior canal.", "source": "AAO-HNS" }
   ]
 }

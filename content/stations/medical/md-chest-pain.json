@@ -63,21 +63,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "HEART score components?", "a": "History, ECG, Age, Risk factors, Troponin", "wrong": ["Heart rate, Echo, Age, Rhythm, Temperature", "Hb, ECG, Albumin, Renal, Troponin", "None"] },
+        { "q": "HEART score components?", "a": "History, ECG, Age, Risk factors, Troponin", "wrong": ["Heart rate, Echo, Age, Rhythm, Temperature", "Hb, ECG, Albumin, Renal function, Troponin", "Haemoptysis, ECG, Age, Rash, Tachycardia"] },
         { "q": "Low-risk HEART score?", "a": "0–3", "wrong": ["7–10", "4–6", "Over 5"] },
-        { "q": "ESC hs-troponin rapid protocol?", "a": "0 and 1 hour (0/1-h algorithm)", "wrong": ["0 and 24 hours", "Single 12-hour test", "Only if pain continues"] },
-        { "q": "Sign suggesting aortic dissection?", "a": "Pulse or BP difference between arms", "wrong": ["Pleural rub", "Reproducible chest wall tenderness", "Wheeze"] },
-        { "q": "Contraindication to nitrates?", "a": "PDE5 inhibitor in the last 24–48 hours", "wrong": ["Diabetes", "Age over 70", "Aspirin use"] }
+        { "q": "ESC hs-troponin rapid protocol?", "a": "0 and 1 hour (0/1-h algorithm)", "wrong": ["0 and 24 hours", "A single test at 12 hours after the pain", "Only if the pain continues"] },
+        { "q": "Sign suggesting aortic dissection?", "a": "Pulse or BP difference between arms", "wrong": ["A pleural friction rub on auscultation", "Reproducible tenderness over the costochondral joints", "Widespread expiratory wheeze"] },
+        { "q": "Contraindication to nitrates?", "a": "PDE5 inhibitor in the last 24–48 hours", "wrong": ["Type 2 diabetes treated with metformin and gliclazide", "Age over 70 with chronic kidney disease", "Regular aspirin use"] }
       ]
     }
   ],
   "badge": { "name": "Heart Scorer", "emoji": "💓", "flavor": "Typical story plus a delta troponin: it's ACS even when the pain has gone." },
   "cards": [
-    { "q": "ECG in chest pain should be done within…", "options": ["10 minutes", "1 hour", "4 hours", "24 hours"], "why": "Identify STEMI.", "source": "ESC 2023" },
-    { "q": "A HEART score of 2 suggests…", "options": ["Low risk: early discharge with follow-up", "Admit to CCU", "Immediate angiography", "Thrombolysis"], "why": "0–3 low risk.", "source": "Backus 2013" },
-    { "q": "Pain radiating to the back with a BP difference between arms?", "options": ["Aortic dissection", "Stable angina", "Costochondritis", "GORD"], "why": "CT aortogram.", "source": "ESC aortic guideline" },
+    { "q": "ECG in chest pain should be done within…", "options": ["Within 10 minutes", "Within the hour", "Before the troponin result", "At the end of triage"], "why": "Identify STEMI.", "source": "ESC 2023" },
+    { "q": "A HEART score of 2 suggests…", "options": ["Low risk: early discharge", "Admit to CCU for monitoring", "Immediate coronary angiography", "Thrombolysis if the ECG is normal"], "why": "0–3 low risk.", "source": "Backus 2013" },
+    { "q": "Pain radiating to the back with a BP difference between arms?", "options": ["Aortic dissection", "Stable angina", "Costochondritis", "Gastro-oesophageal reflux"], "why": "CT aortogram.", "source": "ESC aortic guideline" },
     { "q": "Boerhaave syndrome follows…", "options": ["Forceful vomiting", "Coughing", "Exercise", "Swallowing a pill"], "why": "Oesophageal rupture.", "source": "Surgery" },
-    { "q": "NICE first-line test for stable chest pain of suspected cardiac origin?", "options": ["CT coronary angiography", "Exercise ECG", "Resting ECG only", "Chest X-ray"], "why": "CG95 update.", "source": "NICE CG95" },
-    { "q": "Pericarditis ECG?", "options": ["Widespread concave ST elevation and PR depression", "Regional ST elevation with reciprocal change", "Q waves", "Delta waves"], "why": "Pain eases sitting forward.", "source": "ESC pericardial guideline" }
+    { "q": "NICE first-line test for stable chest pain of suspected cardiac origin?", "options": ["CT coronary angiography", "Exercise ECG (treadmill)", "Resting ECG only", "Chest X-ray and troponin"], "why": "CG95 update.", "source": "NICE CG95" },
+    { "q": "Pericarditis ECG?", "options": ["Widespread concave ST elevation and PR depression", "Regional ST elevation with reciprocal depression", "Pathological Q waves in the inferior leads", "Delta waves and a short PR interval"], "why": "Pain eases sitting forward.", "source": "ESC pericardial guideline" }
   ]
 }

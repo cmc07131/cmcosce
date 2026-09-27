@@ -84,21 +84,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Why give iodine at least 1 hour after PTU?", "a": "So iodine isn't used to make more hormone", "wrong": ["Iodine inactivates PTU", "To avoid allergy", "It doesn't matter"] },
-        { "q": "Why PTU rather than carbimazole in storm?", "a": "It also blocks peripheral T4→T3 conversion", "wrong": ["It is cheaper", "It has no side effects", "It works on the adrenal"] },
-        { "q": "Score used to support thyroid storm?", "a": "Burch–Wartofsky Point Scale", "wrong": ["Glasgow–Blatchford", "Wells", "CURB-65"] },
+        { "q": "Why give iodine at least 1 hour after PTU?", "a": "So iodine isn't used to make more hormone", "wrong": ["Iodine inactivates PTU if given at the same time", "To avoid an iodine allergy", "The order does not matter"] },
+        { "q": "Why PTU rather than carbimazole in storm?", "a": "It also blocks peripheral T4→T3 conversion", "wrong": ["It is cheaper", "It has fewer side effects, including liver injury", "It acts on the adrenal"] },
+        { "q": "Score used to support thyroid storm?", "a": "Burch–Wartofsky Point Scale", "wrong": ["Glasgow–Blatchford bleeding score", "Wells score", "CURB-65"] },
         { "q": "Antipyretic to avoid?", "a": "Aspirin", "wrong": ["Paracetamol", "Ice packs", "Cooling blankets"] },
-        { "q": "Public health step for an illegal slimming product?", "a": "Report to the Centre for Health Protection / Department of Health", "wrong": ["Nothing", "Report to the pharmacist only", "Post on social media"] }
+        { "q": "Public health step for an illegal slimming product?", "a": "Report to the Department of Health", "wrong": ["No action is needed", "Tell the pharmacist who sold it, and no one else", "Post a warning on social media"] }
       ]
     }
   ],
   "badge": { "name": "Storm Chaser", "emoji": "🌩", "flavor": "Beta-block, PTU, then iodine an hour later, steroid, cool." },
   "cards": [
-    { "q": "Correct order in thyroid storm?", "options": ["Thionamide, then iodine ≥1 hour later", "Iodine first, then thionamide", "Iodine only", "Surgery first"], "why": "Prevents iodine fuelling synthesis.", "source": "ATA 2016" },
+    { "q": "Correct order in thyroid storm?", "options": ["Thionamide, then iodine ≥1 hour later", "Iodine first, then the thionamide an hour later", "Iodine alone", "Surgery first"], "why": "Prevents iodine fuelling synthesis.", "source": "ATA 2016" },
     { "q": "Beta-blocker of choice in thyroid storm?", "options": ["Propranolol", "Atenolol only", "Sotalol", "Carvedilol"], "why": "Also reduces T4→T3 conversion at high dose.", "source": "ATA 2016" },
-    { "q": "Hydrocortisone in thyroid storm?", "options": ["300 mg load then 100 mg every 8 h", "10 mg daily", "Not used", "1 g daily"], "why": "Reduces T4→T3 conversion; treats relative adrenal insufficiency.", "source": "ATA 2016", "note": "Your notes: 200 mg then 100 mg 6–8-hourly." },
-    { "q": "Tiratricol is…", "options": ["A T3 analogue found in some slimming products", "A beta-blocker", "An antipsychotic", "An iodine compound"], "why": "Can cause thyrotoxicosis.", "source": "CHP HK alerts" },
-    { "q": "Serotonin syndrome is distinguished by…", "options": ["Clonus and hyperreflexia (lower limbs)", "Goitre", "Dry skin", "Bradycardia"], "why": "Recent serotonergic drugs.", "source": "Hunter criteria" },
-    { "q": "PTU is preferred over carbimazole also in…", "options": ["First-trimester pregnancy", "Children", "Liver failure", "Agranulocytosis"], "why": "Carbimazole embryopathy.", "source": "ATA 2016" }
+    { "q": "Hydrocortisone in thyroid storm?", "options": ["300 mg load, then 100 mg every 8 h", "10 mg daily", "Not used; steroids worsen thyrotoxicosis", "1 g IV daily for 3 days (pulse)"], "why": "Reduces T4→T3 conversion; treats relative adrenal insufficiency.", "source": "ATA 2016", "note": "Your notes: 200 mg then 100 mg 6–8-hourly." },
+    { "q": "Tiratricol is…", "options": ["A T3 analogue in some slimming products", "A beta-blocker", "An antipsychotic", "An iodine compound"], "why": "Can cause thyrotoxicosis.", "source": "CHP HK alerts" },
+    { "q": "Serotonin syndrome is distinguished by…", "options": ["Clonus and hyperreflexia", "A large goitre with a bruit", "Dry, hot skin without sweating", "Bradycardia and hypotension"], "why": "Recent serotonergic drugs.", "source": "Hunter criteria" },
+    { "q": "PTU is preferred over carbimazole also in…", "options": ["First-trimester pregnancy", "Children under 12", "Pre-existing liver failure", "Previous agranulocytosis"], "why": "Carbimazole embryopathy.", "source": "ATA 2016" }
   ]
 }

@@ -51,21 +51,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "The 6 Ps?", "a": "Pain, pallor, pulselessness, perishingly cold, paraesthesia, paralysis", "wrong": ["Pain, pus, purpura, pyrexia, pallor, paralysis", "Pulse, pressure, perfusion, pain, plasma, platelets", "None"] },
-        { "q": "Sign of an irreversibly ischaemic limb?", "a": "Fixed non-blanching mottling with paralysis", "wrong": ["Absent foot pulses alone", "Pallor", "Pain"] },
-        { "q": "Clue to embolic rather than thrombotic ischaemia?", "a": "Sudden onset, AF, normal contralateral pulses", "wrong": ["Long claudication history", "Bilateral weak pulses", "Diabetes"] },
-        { "q": "ABPI under 0.5 suggests…", "a": "Severe peripheral arterial disease", "wrong": ["Normal", "Calcified vessels", "Venous disease"] },
+        { "q": "The 6 Ps?", "a": "Pain, pallor, pulselessness, perishingly cold, paraesthesia, paralysis", "wrong": ["Pain, pus, purpura, pyrexia, pallor, paralysis", "Pulse, pressure, perfusion, pain, plasma, platelets", "Pallor, puffiness, petechiae, pain, pyrexia, paralysis"] },
+        { "q": "Sign of an irreversibly ischaemic limb?", "a": "Fixed, non-blanching mottling with paralysis", "wrong": ["Absent foot pulses alone, with normal sensation", "Pallor of the foot", "Pain on walking"] },
+        { "q": "Clue to embolic rather than thrombotic ischaemia?", "a": "Sudden onset, AF, normal contralateral pulses", "wrong": ["Long history of claudication", "Bilateral weak pulses", "Known diabetes"] },
+        { "q": "ABPI under 0.5 suggests…", "a": "Severe peripheral arterial disease", "wrong": ["Normal arteries", "Calcified, incompressible vessels at the ankle", "Chronic venous insufficiency with ulcers"] },
         { "q": "First drug in acute limb ischaemia?", "a": "IV unfractionated heparin", "wrong": ["Aspirin only", "Warfarin", "Thrombolysis in the ED for all"] }
       ]
     }
   ],
   "badge": { "name": "Six Ps", "emoji": "🦵", "flavor": "Cold, white, pulseless, numb: heparin and a vascular surgeon now." },
   "cards": [
-    { "q": "Acute limb ischaemia with sensory loss and weakness is Rutherford…", "options": ["IIb (immediately threatened)", "I (viable)", "III (irreversible)", "IIa"], "why": "Needs emergency revascularisation.", "source": "ESVS 2020" },
-    { "q": "ABPI over 1.3 suggests…", "options": ["Calcified, incompressible vessels", "Normal", "Severe ischaemia", "Venous disease"], "why": "Common in diabetes.", "source": "NICE CG147" },
-    { "q": "Buerger's test assesses…", "options": ["Arterial insufficiency by elevation pallor", "DVT", "Varicose veins", "Nerve damage"], "why": "Angle of pallor under 20° is severe.", "source": "Clinical examination" },
-    { "q": "Complication after revascularisation of an ischaemic limb?", "options": ["Compartment syndrome and hyperkalaemia", "Hypoglycaemia", "Stroke always", "Anaemia only"], "why": "Reperfusion injury.", "source": "ESVS 2020" },
-    { "q": "Most common source of lower limb emboli?", "options": ["The heart (AF)", "The lungs", "The veins", "The kidney"], "why": "Left atrial appendage thrombus.", "source": "ESVS 2020" },
-    { "q": "Chronic limb ischaemia symptom?", "options": ["Intermittent claudication relieved by rest", "Sudden cold leg", "Calf swelling", "Fever"], "why": "Rest pain = critical ischaemia.", "source": "NICE CG147" }
+    { "q": "Acute limb ischaemia with sensory loss and weakness is Rutherford…", "options": ["IIb (immediately threatened)", "I (viable)", "III (irreversible)", "IIa (marginally threatened, salvageable)"], "why": "Needs emergency revascularisation.", "source": "ESVS 2020" },
+    { "q": "ABPI over 1.3 suggests…", "options": ["Calcified, incompressible vessels", "Normal arteries", "Severe ischaemia needing urgent imaging", "Venous disease"], "why": "Common in diabetes.", "source": "NICE CG147" },
+    { "q": "Buerger's test assesses…", "options": ["Arterial insufficiency", "Deep vein thrombosis of the calf", "Incompetent saphenofemoral valve", "Peripheral sensory neuropathy"], "why": "Angle of pallor under 20° is severe.", "source": "Clinical examination" },
+    { "q": "Complication after revascularisation of an ischaemic limb?", "options": ["Compartment syndrome and hyperkalaemia", "Hypoglycaemia", "Stroke in every case", "Anaemia only"], "why": "Reperfusion injury.", "source": "ESVS 2020" },
+    { "q": "Most common source of lower limb emboli?", "options": ["The heart (AF)", "The lungs", "The deep veins, through the lungs", "The kidneys"], "why": "Left atrial appendage thrombus.", "source": "ESVS 2020" },
+    { "q": "Chronic limb ischaemia symptom?", "options": ["Claudication relieved by rest", "A sudden cold, white, painful leg at rest", "Calf swelling and redness", "Fever with a hot leg"], "why": "Rest pain = critical ischaemia.", "source": "NICE CG147" }
   ]
 }

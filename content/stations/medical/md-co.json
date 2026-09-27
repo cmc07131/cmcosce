@@ -59,21 +59,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Absolute contraindication to hyperbaric oxygen?", "a": "Untreated pneumothorax", "wrong": ["Pregnancy", "Age over 60", "Intubation"] },
-        { "q": "COHb half-life on 100% normobaric oxygen?", "a": "About 60–90 minutes", "wrong": ["5 hours", "5 minutes", "24 hours"] },
-        { "q": "Why is SpO2 unreliable in CO poisoning?", "a": "Pulse oximeters read COHb as oxyhaemoglobin", "wrong": ["CO damages the probe", "CO causes vasoconstriction", "It is reliable"] },
-        { "q": "Main aim of HBOT in CO poisoning?", "a": "Reduce delayed neurological sequelae", "wrong": ["Treat burns", "Cure depression", "Prevent pneumonia"] },
+        { "q": "Absolute contraindication to hyperbaric oxygen?", "a": "Untreated pneumothorax", "wrong": ["Pregnancy at any stage", "Age over 60 years", "Current intubation and ventilation"] },
+        { "q": "COHb half-life on 100% normobaric oxygen?", "a": "About 60–90 minutes", "wrong": ["About 4–6 hours (as on room air)", "About 5 minutes", "About 24 hours"] },
+        { "q": "Why is SpO2 unreliable in CO poisoning?", "a": "Oximeters read COHb as oxyhaemoglobin", "wrong": ["CO damages the probe", "CO causes intense peripheral vasoconstriction in the fingers", "It is reliable at COHb below 30%"] },
+        { "q": "Main aim of HBOT in CO poisoning?", "a": "Reduce delayed neurological sequelae", "wrong": ["Speed healing of associated skin burns and smoke injury", "Cure the underlying depression", "Prevent aspiration pneumonia in the unconscious"] },
         { "q": "A threshold commonly used for HBOT in pregnancy?", "a": "COHb over 15–20%", "wrong": ["COHb over 50%", "Any exposure", "Never in pregnancy"] }
       ]
     }
   ],
   "badge": { "name": "Pressure Chamber", "emoji": "🫧", "flavor": "100% oxygen now, HBOT for the brain, pneumothorax excluded, family supported." },
   "cards": [
-    { "q": "CO affinity for haemoglobin compared with oxygen?", "options": ["About 240 times", "Equal", "Half", "10 times"], "why": "Also shifts the curve left.", "source": "Toxicology" },
-    { "q": "HBOT indication in CO poisoning?", "options": ["Loss of consciousness or neurological signs", "Headache alone with COHb 5%", "Smoker with COHb 8%", "Mild nausea"], "why": "Also COHb > 25%, ischaemia, pregnancy with >15–20%.", "source": "UHMS" },
-    { "q": "Complication of HBOT?", "options": ["Middle ear barotrauma", "Hypoglycaemia", "Hyperkalaemia", "Rash"], "why": "Myringotomy for intubated patients.", "source": "UHMS" },
+    { "q": "CO affinity for haemoglobin compared with oxygen?", "options": ["About 240 times", "About the same as oxygen", "About half", "About 10 times greater"], "why": "Also shifts the curve left.", "source": "Toxicology" },
+    { "q": "HBOT indication in CO poisoning?", "options": ["Loss of consciousness or neuro signs", "Headache alone with a COHb of 5% in a smoker", "A smoker with COHb 8%", "Mild nausea after exposure"], "why": "Also COHb > 25%, ischaemia, pregnancy with >15–20%.", "source": "UHMS" },
+    { "q": "Complication of HBOT?", "options": ["Middle ear barotrauma", "Hypoglycaemia in diabetic patients on insulin", "Hyperkalaemia from muscle breakdown", "A widespread rash"], "why": "Myringotomy for intubated patients.", "source": "UHMS" },
     { "q": "Drug that makes HBOT hazardous (lung toxicity)?", "options": ["Bleomycin", "Paracetamol", "Amoxicillin", "Omeprazole"], "why": "Oxygen-related pneumonitis.", "source": "UHMS" },
-    { "q": "Delayed neurological sequelae after CO appear…", "options": ["Days to weeks after exposure", "Within minutes only", "Only after 1 year", "Never"], "why": "Memory, personality, movement disorders.", "source": "Weaver 2002" },
-    { "q": "After deliberate CO self-poisoning, also…", "options": ["Screen for co-ingestion and arrange psychiatric assessment", "Discharge when COHb normal", "Only HBOT", "Nothing else"], "why": "Self-harm care.", "source": "NICE NG225" }
+    { "q": "Delayed neurological sequelae after CO appear…", "options": ["Days to weeks after exposure", "Within minutes of exposure only", "Only after 1 year", "Never, if COHb normalises"], "why": "Memory, personality, movement disorders.", "source": "Weaver 2002" },
+    { "q": "After deliberate CO self-poisoning, also…", "options": ["Screen for co-ingestion; psychiatric assessment", "Discharge once the COHb is normal", "Hyperbaric oxygen only", "No further action is needed"], "why": "Self-harm care.", "source": "NICE NG225" }
   ]
 }

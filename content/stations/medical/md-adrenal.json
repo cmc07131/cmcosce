@@ -67,21 +67,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Initial hydrocortisone dose in adrenal crisis?", "a": "100 mg IV or IM", "wrong": ["10 mg orally", "1 g IV", "25 mg IV"] },
+        { "q": "Initial hydrocortisone dose in adrenal crisis?", "a": "100 mg IV or IM", "wrong": ["10 mg orally, then review", "1 g IV over 10 minutes", "25 mg IV every 8 hours"] },
         { "q": "Typical electrolytes in Addisonian crisis?", "a": "Low sodium, high potassium", "wrong": ["High sodium, low potassium", "Normal", "High calcium only"] },
-        { "q": "Sick-day rule for illness with fever?", "a": "Double the usual glucocorticoid dose", "wrong": ["Stop steroids", "Halve the dose", "No change"] },
-        { "q": "When is fludrocortisone unnecessary?", "a": "While hydrocortisone is 50 mg/day or more", "wrong": ["Never", "Only in children", "When sodium is low"] },
-        { "q": "Commonest cause of primary adrenal insufficiency?", "a": "Autoimmune adrenalitis", "wrong": ["TB in all countries", "Pituitary tumour", "Steroid withdrawal"] }
+        { "q": "Sick-day rule for illness with fever?", "a": "Double the usual glucocorticoid dose", "wrong": ["Stop steroids until the fever settles", "Halve the dose to reduce side effects", "No change to the usual dose"] },
+        { "q": "When is fludrocortisone unnecessary?", "a": "While hydrocortisone is 50 mg/day or more", "wrong": ["It is always needed in adrenal crisis, from the first hour", "Only in children with CAH", "When the sodium is low"] },
+        { "q": "Commonest cause of primary adrenal insufficiency?", "a": "Autoimmune adrenalitis", "wrong": ["Tuberculosis, in every country", "A non-functioning pituitary tumour", "Abrupt steroid withdrawal"] }
       ]
     }
   ],
   "badge": { "name": "Salt and Steroid", "emoji": "🧂", "flavor": "Card in the wallet, hydrocortisone 100 mg now, never wait for the cortisol." },
   "cards": [
-    { "q": "Adrenal crisis first treatment?", "options": ["Hydrocortisone 100 mg IV/IM immediately", "Fludrocortisone orally", "Wait for cortisol", "Prednisolone 5 mg"], "why": "Then 200 mg/24 h.", "source": "Society for Endocrinology" },
-    { "q": "Sign suggesting primary adrenal insufficiency?", "options": ["Hyperpigmentation of creases and buccal mucosa", "Moon face", "Striae", "Weight gain"], "why": "High ACTH stimulates melanocytes.", "source": "Endocrinology" },
-    { "q": "Glucose abnormality in adrenal crisis?", "options": ["Hypoglycaemia", "Hyperglycaemia", "None", "DKA"], "why": "Cortisol deficiency.", "source": "Endocrinology" },
-    { "q": "Patients on long-term steroids should carry…", "options": ["A steroid emergency card", "A pacemaker card", "An organ donor card only", "Nothing"], "why": "NHS/Society for Endocrinology card.", "source": "NHS England 2020" },
-    { "q": "Precipitant of adrenal crisis?", "options": ["Gastroenteritis with vomiting", "Exercise", "Coffee", "Sleep"], "why": "Unable to absorb oral steroids.", "source": "Society for Endocrinology" },
-    { "q": "Fluid in adrenal crisis?", "options": ["0.9% saline 1 L over the first hour", "5% dextrose only", "Albumin", "Restrict fluids"], "why": "Guided by response.", "source": "NICE NG243" }
+    { "q": "Adrenal crisis first treatment?", "options": ["Hydrocortisone 100 mg IV/IM now", "Oral fludrocortisone 100 micrograms", "Wait for a random cortisol result first", "Prednisolone 5 mg orally"], "why": "Then 200 mg/24 h.", "source": "Society for Endocrinology" },
+    { "q": "Sign suggesting primary adrenal insufficiency?", "options": ["Pigmented palmar creases and gums", "Moon face and a dorsocervical fat pad", "Wide purple striae on the abdomen and thighs", "Central weight gain with thin, bruised skin"], "why": "High ACTH stimulates melanocytes.", "source": "Endocrinology" },
+    { "q": "Glucose abnormality in adrenal crisis?", "options": ["Hypoglycaemia", "Hyperglycaemia", "Diabetic ketoacidosis", "Hyperosmolar state"], "why": "Cortisol deficiency.", "source": "Endocrinology" },
+    { "q": "Patients on long-term steroids should carry…", "options": ["A steroid emergency card", "A pacemaker registration card", "An organ donor card only", "A blood group card"], "why": "NHS/Society for Endocrinology card.", "source": "NHS England 2020" },
+    { "q": "Precipitant of adrenal crisis?", "options": ["Gastroenteritis with vomiting", "A regular gym session", "Two cups of strong coffee", "A long-haul flight without illness"], "why": "Unable to absorb oral steroids.", "source": "Society for Endocrinology" },
+    { "q": "Fluid in adrenal crisis?", "options": ["0.9% saline 1 L over the first hour", "5% dextrose only, to treat hypoglycaemia", "Human albumin solution 4.5%", "Restrict fluids to avoid hyponatraemia"], "why": "Guided by response.", "source": "NICE NG243" }
   ]
 }

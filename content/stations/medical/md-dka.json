@@ -86,20 +86,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Fixed-rate insulin infusion dose in DKA?", "a": "0.1 unit/kg/h", "wrong": ["1 unit/kg/h", "Sliding scale by glucose", "0.01 unit/kg/h"] },
-        { "q": "When is 10% glucose added?", "a": "When glucose falls below 14 mmol/L", "wrong": ["Never", "At the start", "When glucose is below 4"] },
-        { "q": "Potassium in the second litre if K is 4.2?", "a": "40 mmol/L", "wrong": ["None", "10 mmol/L", "100 mmol/L"] },
-        { "q": "Definition of DKA resolution (JBDS)?", "a": "Ketones < 0.6 mmol/L and venous pH > 7.3", "wrong": ["Glucose < 10", "Patient eating", "Urine ketones negative"] },
+        { "q": "When is 10% glucose added?", "a": "When glucose falls below 14 mmol/L", "wrong": ["Never; it worsens ketosis", "From the start, with the saline", "Only once the glucose is below 4 mmol/L"] },
+        { "q": "Potassium in the second litre if K is 4.2?", "a": "40 mmol/L", "wrong": ["None until K is below 3.5", "10 mmol/L", "100 mmol/L"] },
+        { "q": "Definition of DKA resolution (JBDS)?", "a": "Ketones < 0.6 mmol/L and venous pH > 7.3", "wrong": ["Glucose below 10 mmol/L", "The patient is eating and drinking", "Urine ketones are negative"] },
         { "q": "Serious complication in young people?", "a": "Cerebral oedema", "wrong": ["Hyperkalaemia always", "Pancreatitis always", "Hypercalcaemia"] }
       ]
     }
   ],
   "badge": { "name": "Ketone Crusher", "emoji": "🍬", "flavor": "Saline, 0.1 unit/kg/h, K by level, glucose under 14. Treat the ketones." },
   "cards": [
-    { "q": "JBDS diagnosis of DKA includes ketones of…", "options": ["3.0 mmol/L or more", "0.6 mmol/L", "1 mmol/L", "10 mmol/L"], "why": "Plus acidosis (pH < 7.3 or HCO3 < 15) and glucose > 11 or known diabetes.", "source": "JBDS-IP 2023" },
-    { "q": "First fluid in DKA?", "options": ["0.9% saline 1 L over 1 hour (bolus if SBP < 90)", "5% dextrose", "Albumin", "Hartmann's 5 L stat"], "why": "Then slower litres.", "source": "JBDS-IP 2023" },
-    { "q": "Potassium is withheld from fluids if K is…", "options": ["Over 5.5 mmol/L", "Under 5.5", "Under 4", "Always given"], "why": "Senior review if under 3.5.", "source": "JBDS-IP 2023" },
-    { "q": "Euglycaemic DKA is associated with…", "options": ["SGLT2 inhibitors", "Metformin", "Sulfonylureas", "Statins"], "why": "Measure ketones even if glucose is modest.", "source": "MHRA / JBDS" },
-    { "q": "Target fall in blood ketones?", "options": ["0.5 mmol/L per hour", "5 mmol/L per hour", "0.05 per hour", "No target"], "why": "Increase insulin if not achieved.", "source": "JBDS-IP 2023" },
+    { "q": "JBDS diagnosis of DKA includes ketones of…", "options": ["3.0 mmol/L or more", "0.6 mmol/L or more", "1.0 mmol/L or more", "10 mmol/L or more"], "why": "Plus acidosis (pH < 7.3 or HCO3 < 15) and glucose > 11 or known diabetes.", "source": "JBDS-IP 2023" },
+    { "q": "First fluid in DKA?", "options": ["0.9% saline 1 L over 1 hour", "5% dextrose 1 L over 1 hour", "Human albumin 4.5% 500 mL", "Hartmann's 5 L as fast as possible"], "why": "Give a 500 mL bolus first if systolic BP is under 90 mmHg.", "source": "JBDS-IP 2023" },
+    { "q": "Potassium is withheld from fluids if K is…", "options": ["Over 5.5 mmol/L", "Under 5.5 mmol/L", "Under 4.0 mmol/L", "Potassium is always given, at 40 mmol/L"], "why": "Senior review if under 3.5.", "source": "JBDS-IP 2023" },
+    { "q": "Euglycaemic DKA is associated with…", "options": ["SGLT2 inhibitors", "Metformin (lactic acidosis)", "Sulfonylureas such as gliclazide", "High-dose statins"], "why": "Measure ketones even if glucose is modest.", "source": "MHRA / JBDS" },
+    { "q": "Target fall in blood ketones?", "options": ["0.5 mmol/L per hour", "5 mmol/L per hour", "0.05 mmol/L per hour", "No target; follow glucose"], "why": "Increase insulin if not achieved.", "source": "JBDS-IP 2023" },
     { "q": "Should long-acting insulin be continued during DKA?", "options": ["Yes", "No, stop it", "Only in type 2", "Double it"], "why": "Prevents rebound ketosis when the infusion stops.", "source": "JBDS-IP 2023" }
   ]
 }

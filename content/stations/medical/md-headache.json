@@ -62,21 +62,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "A normal CT within 6 hours of headache onset (NICE NG228)…", "a": "Rules out SAH without LP", "wrong": ["Always needs LP", "Needs MRI", "Needs repeat CT at 24 h"] },
-        { "q": "Timing of LP for xanthochromia?", "a": "At least 12 hours after onset", "wrong": ["Immediately", "After 1 week", "Within 1 hour"] },
-        { "q": "Purpose of nimodipine in SAH?", "a": "Reduce delayed cerebral ischaemia", "wrong": ["Lower BP only", "Stop the bleeding", "Treat seizures"] },
-        { "q": "Ottawa SAH rule criterion?", "a": "Onset during exertion", "wrong": ["Age under 30", "Photophobia", "Nausea"] },
-        { "q": "Another cause of thunderclap headache?", "a": "Reversible cerebral vasoconstriction syndrome", "wrong": ["Tension-type headache", "Sinusitis", "Refractive error"] }
+        { "q": "A normal CT within 6 hours of headache onset (NICE NG228)…", "a": "Rules out SAH without LP", "wrong": ["Always needs an LP after 12 hours", "Needs MRI within 24 hours", "Needs a repeat CT at 24 hours"] },
+        { "q": "Timing of LP for xanthochromia?", "a": "At least 12 hours after onset", "wrong": ["Immediately, before the CT scan is done", "After 1 week", "Within 1 hour of the headache onset"] },
+        { "q": "Purpose of nimodipine in SAH?", "a": "Reduce delayed cerebral ischaemia", "wrong": ["Lower the blood pressure only", "Stop the aneurysm from re-bleeding before surgery", "Treat seizures"] },
+        { "q": "Ottawa SAH rule criterion?", "a": "Onset during exertion", "wrong": ["Age under 30 years", "Photophobia with the headache", "Nausea and vomiting"] },
+        { "q": "Another cause of thunderclap headache?", "a": "Reversible cerebral vasoconstriction syndrome", "wrong": ["Tension-type headache", "Acute sinusitis", "Uncorrected refractive error"] }
       ]
     }
   ],
   "badge": { "name": "Thunderclap", "emoji": "⚡", "flavor": "Peak in a minute: CT within 6 hours rules it out; after that, LP at 12." },
   "cards": [
-    { "q": "Thunderclap headache peaks within…", "options": ["1 minute", "1 hour", "1 day", "1 week"], "why": "Exclude SAH.", "source": "NICE NG228" },
-    { "q": "Ottawa SAH rule applies to…", "options": ["Alert patients over 15 with non-traumatic headache peaking within 1 hour", "All headaches", "Children", "Trauma"], "why": "Highly sensitive.", "source": "Perry 2013" },
-    { "q": "NICE NG228: CT after 6 hours is normal. Next?", "options": ["LP at least 12 hours after onset", "Discharge", "MRI brain", "Repeat CT"], "why": "Xanthochromia.", "source": "NICE NG228" },
-    { "q": "Nimodipine dose in SAH?", "options": ["60 mg every 4 hours for 21 days", "10 mg daily", "IV 1 g", "Not used"], "why": "Reduces delayed ischaemia.", "source": "NICE NG228" },
-    { "q": "Headache red flag suggesting GCA?", "options": ["New headache over 50 with jaw claudication", "Headache in a teenager", "Tension band", "Weekend headache"], "why": "Urgent steroids.", "source": "BSR 2020" },
-    { "q": "Aspirin in GCA (BSR 2020)?", "options": ["Not routinely recommended", "Always", "Instead of steroids", "Only after biopsy"], "why": "Unless another indication.", "source": "BSR 2020", "note": "Your notes: 'Aspirin ???'." }
+    { "q": "Thunderclap headache peaks within…", "options": ["1 minute", "Within 1 hour", "Within a day", "Over a week"], "why": "Exclude SAH.", "source": "NICE NG228" },
+    { "q": "Ottawa SAH rule applies to…", "options": ["Alert, over 15, non-traumatic, peak within 1 h", "All headaches in adults and children", "Children with a first severe headache", "Headache after head trauma"], "why": "Highly sensitive.", "source": "Perry 2013" },
+    { "q": "NICE NG228: CT after 6 hours is normal. Next?", "options": ["LP at least 12 hours after onset", "Discharge with safety-net advice and GP review", "MRI brain as an outpatient", "Repeat CT at 24 hours"], "why": "Xanthochromia.", "source": "NICE NG228" },
+    { "q": "Nimodipine dose in SAH?", "options": ["60 mg every 4 hours for 21 days", "10 mg daily for 1 week", "1 g IV once", "60 mg every 4 hours until the aneurysm is secured"], "why": "Reduces delayed ischaemia.", "source": "NICE NG228" },
+    { "q": "Headache red flag suggesting GCA?", "options": ["New headache over 50 with jaw claudication", "Band-like tension-type headache worse with stress", "Headache in a teenager revising for exams", "Headache on weekends after lying in"], "why": "Urgent steroids.", "source": "BSR 2020" },
+    { "q": "Aspirin in GCA (BSR 2020)?", "options": ["Not routinely recommended", "Always, 75 mg daily", "Instead of steroids", "Only after temporal artery biopsy"], "why": "Unless another indication.", "source": "BSR 2020", "note": "Your notes: 'Aspirin ???'." }
   ]
 }

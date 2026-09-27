@@ -67,9 +67,9 @@
       "label": "Examiner",
       "qs": [
         { "q": "Wells score threshold for 'PE likely'?", "a": "More than 4", "wrong": ["More than 1", "More than 8", "Any positive item"] },
-        { "q": "PERC applies only when…", "a": "Clinical suspicion is already low", "wrong": ["Always", "PE is likely", "The patient is pregnant"] },
-        { "q": "Indication for systemic thrombolysis in PE?", "a": "Haemodynamic instability (high-risk PE)", "wrong": ["Any PE", "Haemoptysis", "Pleuritic pain"] },
-        { "q": "Commonest ECG finding in PE?", "a": "Sinus tachycardia", "wrong": ["S1Q3T3 in most", "AF", "ST elevation"] },
+        { "q": "PERC applies only when…", "a": "Clinical suspicion is already low", "wrong": ["Always, in every patient with chest pain", "PE is clinically likely", "The patient is pregnant"] },
+        { "q": "Indication for systemic thrombolysis in PE?", "a": "Haemodynamic instability (high-risk PE)", "wrong": ["Any PE seen on CTPA, to prevent recurrence", "Haemoptysis", "Pleuritic pain"] },
+        { "q": "Commonest ECG finding in PE?", "a": "Sinus tachycardia", "wrong": ["S1Q3T3 in most cases", "Atrial fibrillation", "Anterior ST elevation"] },
         { "q": "Anticoagulation duration for a provoked PE?", "a": "About 3 months", "wrong": ["2 weeks", "Lifelong always", "No anticoagulation"] }
       ]
     }
@@ -78,9 +78,9 @@
   "cards": [
     { "q": "Two-level Wells: PE likely if score is…", "options": ["> 4", "> 1", "> 10", "≥ 0"], "why": "Then CTPA.", "source": "NICE NG158" },
     { "q": "PERC rule has how many criteria?", "options": ["8", "3", "5", "12"], "why": "Age, HR, SpO2, haemoptysis, oestrogen, previous VTE, recent surgery/trauma, unilateral leg swelling.", "source": "Kline 2004" },
-    { "q": "First-line anticoagulant for PE in most adults (NICE)?", "options": ["Apixaban or rivaroxaban", "Warfarin only", "Aspirin", "Clopidogrel"], "why": "No LMWH lead-in needed.", "source": "NICE NG158" },
-    { "q": "Thrombolysis for PE is indicated when…", "options": ["Systolic BP < 90 (high-risk PE)", "Any confirmed PE", "D-dimer high", "Pleuritic pain"], "why": "Consider in intermediate-high risk deteriorating.", "source": "ESC 2019" },
-    { "q": "S1Q3T3 on ECG is…", "options": ["Specific but insensitive for PE", "Present in most PE", "Diagnostic of PE", "A sign of STEMI"], "why": "Sinus tachycardia is commonest.", "source": "ESC 2019" },
-    { "q": "sPESI score of 0 means…", "options": ["Low 30-day mortality; consider outpatient treatment", "High risk", "Needs thrombolysis", "Needs ICU"], "why": "With no RV dysfunction.", "source": "ESC 2019" }
+    { "q": "First-line anticoagulant for PE in most adults (NICE)?", "options": ["Apixaban or rivaroxaban", "Warfarin alone, without heparin", "Aspirin 300 mg daily", "Clopidogrel 75 mg daily"], "why": "No LMWH lead-in needed.", "source": "NICE NG158" },
+    { "q": "Thrombolysis for PE is indicated when…", "options": ["Systolic BP < 90 (high-risk PE)", "Any confirmed PE on CTPA, if under 75 years", "A very high D-dimer", "Pleuritic chest pain with haemoptysis"], "why": "Consider in intermediate-high risk deteriorating.", "source": "ESC 2019" },
+    { "q": "S1Q3T3 on ECG is…", "options": ["Specific but insensitive for PE", "Present in most patients with PE", "Diagnostic of PE on its own", "A sign of an inferior STEMI"], "why": "Sinus tachycardia is commonest.", "source": "ESC 2019" },
+    { "q": "sPESI score of 0 means…", "options": ["Low risk: consider outpatient care", "High risk: admit to the ICU for monitoring", "Thrombolysis is indicated within 24 hours", "Surgical embolectomy should be considered"], "why": "With no RV dysfunction.", "source": "ESC 2019" }
   ]
 }

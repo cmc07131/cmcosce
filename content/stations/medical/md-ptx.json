@@ -61,21 +61,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "BTS 2023 main change?", "a": "Management based on symptoms and risk, not size", "wrong": ["Drains for all", "No follow-up needed", "Size cut-off of 1 cm"] },
+        { "q": "BTS 2023 main change?", "a": "Management based on symptoms, not size", "wrong": ["Drains for every pneumothorax above 1 cm in size", "No follow-up is needed", "A size cut-off of 1 cm"] },
         { "q": "Where to measure pneumothorax size (BTS)?", "a": "At the level of the hilum", "wrong": ["At the apex only", "At the costophrenic angle", "Anywhere"] },
-        { "q": "Diving after pneumothorax?", "a": "Never, unless definitive surgery (e.g. pleurectomy)", "wrong": ["After 1 week", "After 1 month", "Always safe"] },
-        { "q": "Secondary pneumothorax means…", "a": "It occurs with underlying lung disease", "wrong": ["Second episode", "After trauma", "After a drain"] },
-        { "q": "Needle aspiration site?", "a": "2nd ICS mid-clavicular or 4th–5th ICS in the safe triangle", "wrong": ["7th ICS posterior", "Subxiphoid", "Supraclavicular"] }
+        { "q": "Diving after pneumothorax?", "a": "Never, unless definitive surgery", "wrong": ["After 1 week if the X-ray is clear", "After 1 month without symptoms", "Always safe with a dive buddy"] },
+        { "q": "Secondary pneumothorax means…", "a": "Underlying lung disease", "wrong": ["A second episode on the same side", "Caused by blunt chest trauma", "Caused by a chest drain"] },
+        { "q": "Needle aspiration site?", "a": "2nd ICS mid-clavicular or the safe triangle", "wrong": ["7th ICS posterior axillary line", "Subxiphoid", "Supraclavicular fossa"] }
       ]
     }
   ],
   "badge": { "name": "Air Traffic", "emoji": "🎈", "flavor": "Symptoms, not centimetres. Ask what the patient wants." },
   "cards": [
-    { "q": "BTS 2023: minimally symptomatic PSP without high-risk features can be…", "options": ["Managed conservatively regardless of size", "Drained if > 2 cm", "Aspirated always", "Admitted always"], "why": "Symptom- and preference-based.", "source": "BTS Pleural Disease 2023", "note": "Your notes follow BTS 2010 (size-based)." },
-    { "q": "High-risk pneumothorax feature?", "options": ["Haemodynamic compromise", "Age 20", "Mild pain", "Right side"], "why": "Also hypoxia, bilateral, underlying lung disease, age > 50 smoker, haemopneumothorax.", "source": "BTS 2023" },
-    { "q": "Typical patient with primary spontaneous pneumothorax?", "options": ["Tall, thin young male smoker", "Elderly woman with COPD", "Child with asthma", "Post-surgical patient"], "why": "Apical blebs.", "source": "BTS" },
-    { "q": "Flying after pneumothorax?", "options": ["Only after radiological resolution", "Immediately", "Never again", "After 24 hours"], "why": "Airlines often require 1–2 weeks after resolution.", "source": "BTS 2023" },
-    { "q": "Ambulatory device for pneumothorax is…", "options": ["A small drain with a one-way valve allowing outpatient care", "An oxygen concentrator", "A CPAP machine", "A chest binder"], "why": "Option for symptomatic PSP.", "source": "BTS 2023" },
-    { "q": "2 cm rim at the hilum corresponds to about…", "options": ["50% lung volume", "10%", "90%", "5%"], "why": "Size now matters less than symptoms.", "source": "BTS" }
+    { "q": "BTS 2023: minimally symptomatic PSP without high-risk features can be…", "options": ["Conservative care, regardless of size", "Drained with a chest tube if over 2 cm at the hilum", "Aspirated in every case", "Admitted for oxygen in every case"], "why": "Symptom- and preference-based.", "source": "BTS Pleural Disease 2023", "note": "Your notes follow BTS 2010 (size-based)." },
+    { "q": "High-risk pneumothorax feature?", "options": ["Haemodynamic compromise", "Age 20 years", "Mild pleuritic pain", "Right-sided pneumothorax"], "why": "Also hypoxia, bilateral, underlying lung disease, age > 50 smoker, haemopneumothorax.", "source": "BTS 2023" },
+    { "q": "Typical patient with primary spontaneous pneumothorax?", "options": ["Tall, thin young male smoker", "Elderly woman with COPD", "Child with asthma", "Patient after thoracic surgery"], "why": "Apical blebs.", "source": "BTS" },
+    { "q": "Flying after pneumothorax?", "options": ["Only after radiological resolution", "Immediately after discharge if the pain has settled", "Never again", "After 24 hours"], "why": "Airlines often require 1–2 weeks after resolution.", "source": "BTS 2023" },
+    { "q": "Ambulatory device for pneumothorax is…", "options": ["A small drain with a one-way valve", "A home oxygen concentrator for 2 weeks", "A home CPAP machine", "A chest binder"], "why": "Option for symptomatic PSP.", "source": "BTS 2023" },
+    { "q": "2 cm rim at the hilum corresponds to about…", "options": ["About 50%", "About 10%", "About 90%", "About 5%"], "why": "Size now matters less than symptoms.", "source": "BTS" }
   ]
 }
