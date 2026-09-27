@@ -84,21 +84,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Why is SpO2 falsely reassuring in CO poisoning?", "a": "Oximeters read COHb as oxyhaemoglobin", "wrong": ["CO blocks the probe", "Anaemia", "Hypothermia"] },
-        { "q": "Antidote for cyanide from burning plastics?", "a": "Hydroxocobalamin 5 g IV", "wrong": ["Naloxone", "Atropine", "Flumazenil"] },
-        { "q": "Burn first aid?", "a": "Cool running water for 20 minutes, within 3 hours", "wrong": ["Ice for 1 hour", "Butter", "Nothing"] },
-        { "q": "Fluid resuscitation threshold in children?", "a": "Over 10% TBSA", "wrong": ["Over 30%", "Over 50%", "Any burn"] },
-        { "q": "When is 'expectant' used for burns?", "a": "Only in a mass casualty with overwhelmed resources", "wrong": ["Always over age 70", "Always over 50%", "Never"] }
+        { "q": "Why is SpO2 falsely reassuring in CO poisoning?", "a": "Oximeters read COHb as oxyhaemoglobin", "wrong": ["CO blocks the probe's light sensor", "Smoke causes a severe anaemia", "Hypothermia slows the probe response time a lot"] },
+        { "q": "Antidote for cyanide from burning plastics?", "a": "Hydroxocobalamin 5 g IV", "wrong": ["Naloxone 400 micrograms IV", "Atropine 2 mg IV, repeated", "Flumazenil 200 micrograms IV"] },
+        { "q": "Burn first aid?", "a": "Cool running water for 20 minutes, within 3 hours", "wrong": ["Ice packs for 1 hour to stop the burning", "Butter or oil to seal the skin", "Nothing until the burns team arrives"] },
+        { "q": "Fluid resuscitation threshold in children?", "a": "Over 10% TBSA", "wrong": ["Over 30% TBSA", "Over 50% TBSA", "Any burn over 1%"] },
+        { "q": "When is 'expectant' used for burns?", "a": "Only when resources are overwhelmed", "wrong": ["For everyone over 70 with over 20% burns", "For any burn over 50% TBSA, always", "Never; everyone gets full care"] }
       ]
     }
   ],
   "badge": { "name": "Smoke Reader", "emoji": "🔥", "flavor": "Airway, CO, cyanide, size. SpO2 lies." },
   "cards": [
-    { "q": "Fire victim with normal SpO2 and confusion?", "options": ["Suspect carbon monoxide", "Reassure", "Discharge", "Give naloxone"], "why": "Co-oximetry.", "source": "ATLS" },
-    { "q": "High lactate and shock after smoke inhalation?", "options": ["Cyanide — hydroxocobalamin", "Sepsis only", "Give bicarbonate", "Hypoglycaemia"], "why": "Lactate > 8 suggests cyanide.", "source": "Toxicology" },
+    { "q": "Fire victim with normal SpO2 and confusion?", "options": ["Suspect carbon monoxide", "Reassure and discharge", "Give naloxone for opioids", "Treat for hypoglycaemia first"], "why": "Co-oximetry.", "source": "ATLS" },
+    { "q": "High lactate and shock after smoke inhalation?", "options": ["Cyanide — hydroxocobalamin", "Sepsis — broad-spectrum antibiotics", "Acidosis — sodium bicarbonate", "Hypoglycaemia — 10% glucose"], "why": "Lactate > 8 suggests cyanide.", "source": "Toxicology" },
     { "q": "Hand burn in an adult?", "options": ["Refer to burns service", "Discharge without follow-up", "Ice", "Amputation"], "why": "Special area.", "source": "BBA referral criteria" },
-    { "q": "Adults need formal burn fluids above…", "options": ["20% TBSA", "5%", "50%", "1%"], "why": "Children over 10% (ATLS).", "source": "ATLS" },
-    { "q": "Signs of inhalation injury?", "options": ["Stridor, hoarseness, soot, singed hair", "Leg burns", "Bradycardia", "Low temperature"], "why": "Early intubation.", "source": "ATLS" },
-    { "q": "Mass-casualty burn triage uses…", "options": ["Age and TBSA (ABA table)", "Hair colour", "Weight only", "Pain score"], "why": "Resource-based.", "source": "ABA" }
+    { "q": "Adults need formal burn fluids above…", "options": ["20% TBSA", "5% TBSA", "50% TBSA", "1% TBSA"], "why": "Children over 10% (ATLS).", "source": "ATLS" },
+    { "q": "Signs of inhalation injury?", "options": ["Stridor, hoarseness, soot, singed hair", "Burns to the lower legs", "Bradycardia and hypertension", "A low core temperature"], "why": "Early intubation.", "source": "ATLS" },
+    { "q": "Mass-casualty burn triage uses…", "options": ["Age and TBSA (ABA table)", "Hair colour and skin type", "Body weight only", "The patient's pain score"], "why": "Resource-based.", "source": "ABA" }
   ]
 }

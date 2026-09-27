@@ -98,21 +98,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Adult needle decompression site (ATLS 10th)?", "a": "4th/5th ICS just anterior to the mid-axillary line", "wrong": ["2nd ICS midclavicular for all", "7th ICS posterior", "Subxiphoid"] },
-        { "q": "Target SBP in acute ICH (NICE)?", "a": "130–140 mmHg", "wrong": ["Under 100", "180–200", "Leave it"] },
-        { "q": "Indications to intubate before transfer?", "a": "GCS ≤8, falling GCS, or airway at risk", "wrong": ["All ICH", "Any GCS below 15", "Never"] },
-        { "q": "Oxygen to carry?", "a": "At least twice the expected need", "wrong": ["Exactly the expected need", "None", "Half"] },
-        { "q": "REST stands for…", "a": "Recognise, Evaluate, Support, Transport", "wrong": ["Rest, Eat, Sleep, Talk", "Rate, ECG, SpO2, Temp", "Refer, Escort, Stop, Treat"] }
+        { "q": "Adult needle decompression site (ATLS 10th)?", "a": "4th/5th ICS, anterior to mid-axillary line", "wrong": ["2nd ICS in the midclavicular line, for adults and children", "7th ICS in the posterior axillary line", "Subxiphoid, toward the left shoulder"] },
+        { "q": "Target SBP in acute ICH (NICE)?", "a": "130–140 mmHg", "wrong": ["Under 100 mmHg", "180–200 mmHg", "No target; leave it alone"] },
+        { "q": "Indications to intubate before transfer?", "a": "GCS ≤8, falling GCS, or airway at risk", "wrong": ["Every intracerebral haemorrhage, whatever the GCS", "Any GCS below 15", "Never before transfer"] },
+        { "q": "Oxygen to carry?", "a": "At least twice the expected need", "wrong": ["Exactly the expected need", "Half the expected need, plus a spare", "None; ambulances carry oxygen"] },
+        { "q": "REST stands for…", "a": "Recognise, Evaluate, Support, Transport", "wrong": ["Rest, Eat, Sleep, Talk", "Rate, ECG, SpO2, Temperature", "Refer, Escort, Stabilise, Transfer"] }
       ]
     }
   ],
   "badge": { "name": "Safe Passage", "emoji": "🚑", "flavor": "Stabilise before you go. Twice the oxygen. REST, then DOPES." },
   "cards": [
-    { "q": "Escort for a critical transfer?", "options": ["Doctor and nurse", "Porter", "Nurse only", "None"], "why": "Matched to risk.", "source": "Association of Anaesthetists 2019" },
-    { "q": "DOPES stands for…", "options": ["Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "Drugs, Oxygen, Pulse, ECG, Sats", "Dose, Order, Plan, Escort, Sign", "None"], "why": "Intubated patient desaturation.", "source": "Airway teaching" },
-    { "q": "Oxygen for transfer: carry…", "options": ["Twice the calculated need", "Exact need", "Half", "Only if intubated"], "why": "Delays happen.", "source": "ICS 2019" },
-    { "q": "Anticoagulated ICH on warfarin?", "options": ["Reverse with PCC and vitamin K", "Continue", "Aspirin", "Heparin"], "why": "Before transfer.", "source": "NICE NG128" },
-    { "q": "Signs of coning?", "options": ["Dilated pupil, bradycardia, hypertension", "Tachycardia and hypotension", "Fever", "Rash"], "why": "Cushing response.", "source": "Neurosurgery" },
-    { "q": "Ventilation target in raised ICP?", "options": ["Normocapnia (PaCO2 4.5–5 kPa)", "PaCO2 2.5 kPa", "PaCO2 8 kPa", "No target"], "why": "Brief hyperventilation only for herniation.", "source": "BTF" }
+    { "q": "Escort for a critical transfer?", "options": ["Doctor and nurse", "A single nurse with an airway kit", "A porter and a healthcare assistant", "A paramedic only"], "why": "Matched to risk.", "source": "Association of Anaesthetists 2019" },
+    { "q": "DOPES stands for…", "options": ["Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "Drugs, Oxygen, Pulse, ECG, Saturations", "Dose, Order, Plan, Escort, Signature", "Disconnection, Occlusion, Pressure, Equipment, Suction"], "why": "Intubated patient desaturation.", "source": "Airway teaching" },
+    { "q": "Oxygen for transfer: carry…", "options": ["Twice the calculated need", "Exactly the calculated need", "Half the calculated need", "Only enough if intubated"], "why": "Delays happen.", "source": "ICS 2019" },
+    { "q": "Anticoagulated ICH on warfarin?", "options": ["Reverse with PCC and vitamin K", "Continue warfarin to prevent stroke", "Add aspirin 300 mg", "Start heparin infusion"], "why": "Before transfer.", "source": "NICE NG128" },
+    { "q": "Signs of coning?", "options": ["Dilated pupil, bradycardia, hypertension", "Tachycardia and hypotension", "A fever over 39 °C", "A new petechial rash"], "why": "Cushing response.", "source": "Neurosurgery" },
+    { "q": "Ventilation target in raised ICP?", "options": ["Normocapnia (PaCO2 4.5–5 kPa)", "PaCO2 2.5 kPa (hyperventilate)", "PaCO2 8 kPa (permissive)", "No specific CO2 target"], "why": "Brief hyperventilation only for herniation.", "source": "BTF" }
   ]
 }

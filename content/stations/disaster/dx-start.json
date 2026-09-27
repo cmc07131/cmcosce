@@ -106,11 +106,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Two interventions allowed during START?", "a": "Open the airway and control major bleeding", "wrong": ["CPR and intubation", "IV fluids and analgesia", "Splinting and dressing"] },
-        { "q": "START perfusion criterion for RED?", "a": "Capillary refill over 2 s or absent radial pulse", "wrong": ["BP under 90", "HR over 100", "Pale skin only"] },
+        { "q": "Two interventions allowed during START?", "a": "Open the airway and control major bleeding", "wrong": ["Start CPR and give rescue breaths to every apnoeic casualty", "Insert an IV line and give a fluid bolus", "Splinting and dressings"] },
+        { "q": "START perfusion criterion for RED?", "a": "CRT over 2 s or no radial pulse", "wrong": ["Systolic BP under 90 mmHg", "Heart rate over 120 per minute at the scene", "Pale, cool and clammy skin"] },
         { "q": "Children's version of START?", "a": "JumpSTART", "wrong": ["APGAR", "PEWS", "SALT only"] },
-        { "q": "In JumpSTART, the apnoeic child with a pulse after airway opening gets…", "a": "Five rescue breaths", "wrong": ["BLACK tag at once", "CPR 30:2", "Nothing"] },
-        { "q": "Why re-triage?", "a": "Casualties' conditions change", "wrong": ["To confuse", "Legal reasons only", "It is optional"] }
+        { "q": "In JumpSTART, the apnoeic child with a pulse after airway opening gets…", "a": "Five rescue breaths", "wrong": ["A BLACK tag at once", "CPR at 30:2 for 2 minutes", "Tag RED and move on"] },
+        { "q": "Why re-triage?", "a": "Casualties' conditions change", "wrong": ["To confuse the ambulance crews", "For legal reasons only", "It is optional if staff are busy"] }
       ]
     }
   ],
@@ -119,8 +119,8 @@
     { "q": "START: RR 34 → ?", "options": ["RED", "YELLOW", "GREEN", "BLACK"], "why": "RR over 30.", "source": "START" },
     { "q": "START: walking casualty → ?", "options": ["GREEN", "RED", "YELLOW", "BLACK"], "why": "Minor; re-triage later.", "source": "START" },
     { "q": "START: apnoeic after airway opening → ?", "options": ["BLACK", "RED", "YELLOW", "GREEN"], "why": "No CPR in triage.", "source": "START" },
-    { "q": "START: obeys commands, RR 20, CRT 1 s, cannot walk → ?", "options": ["YELLOW", "RED", "GREEN", "BLACK"], "why": "Delayed.", "source": "START" },
-    { "q": "UK triage sieve was replaced by…", "options": ["Ten Second Triage", "SALT", "RTS", "NEWS2"], "why": "NHS 2013.", "source": "NHS England" },
-    { "q": "Time per casualty in START?", "options": ["About 30 seconds", "5 minutes", "15 minutes", "No limit"], "why": "Speed saves lives.", "source": "START" }
+    { "q": "START: obeys commands, RR 20, CRT 1 s, cannot walk → ?", "options": ["YELLOW (delayed)", "RED (immediate)", "GREEN (minor)", "BLACK (expectant)"], "why": "Delayed.", "source": "START" },
+    { "q": "UK triage sieve was replaced by…", "options": ["Ten Second Triage", "SALT triage", "Revised Trauma Score", "NEWS2"], "why": "NHS 2013.", "source": "NHS England" },
+    { "q": "Time per casualty in START?", "options": ["About 30 seconds", "About 5 minutes", "About 15 minutes", "As long as each patient needs"], "why": "Speed saves lives.", "source": "START" }
   ]
 }

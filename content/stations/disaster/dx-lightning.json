@@ -83,11 +83,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What is reverse triage?", "a": "Treating the apparently dead (arrested) first", "wrong": ["Treating walking wounded first", "Tagging arrests BLACK", "Triage in reverse alphabetical order"] },
-        { "q": "Why ventilate aggressively after lightning arrest?", "a": "The heart restarts but apnoea persists", "wrong": ["To cool the patient", "To remove charge", "It is not needed"] },
-        { "q": "Fixed dilated pupils after lightning?", "a": "Unreliable — do not stop resuscitation for them", "wrong": ["Confirm death", "Mean brain death", "Indicate hypoglycaemia"] },
-        { "q": "Fern-like skin pattern?", "a": "Lichtenberg figures", "wrong": ["Livedo reticularis", "Purpura", "Scarlet rash"] },
-        { "q": "Transient limb paralysis after lightning?", "a": "Keraunoparalysis", "wrong": ["Guillain–Barré", "Stroke always", "Tetanus"] }
+        { "q": "What is reverse triage?", "a": "Treating the arrested first", "wrong": ["Treating walking wounded first", "Tagging all arrests BLACK", "Triage in reverse order of arrival"] },
+        { "q": "Why ventilate aggressively after lightning arrest?", "a": "The heart restarts but apnoea persists", "wrong": ["To cool the patient's core temperature", "To remove residual electrical charge", "It is not needed after lightning"] },
+        { "q": "Fixed dilated pupils after lightning?", "a": "Unreliable — do not stop for them", "wrong": ["They confirm death, so stop resuscitation at the scene", "They mean brain death", "They indicate hypoglycaemia"] },
+        { "q": "Fern-like skin pattern?", "a": "Lichtenberg figures", "wrong": ["Livedo reticularis", "Purpura fulminans", "Erythema marginatum"] },
+        { "q": "Transient limb paralysis after lightning?", "a": "Keraunoparalysis", "wrong": ["Guillain–Barré syndrome", "A stroke in every case", "Tetanus from the burn"] }
       ]
     }
   ],
@@ -95,9 +95,9 @@
   "cards": [
     { "q": "Lightning victims are…", "options": ["Safe to touch", "Electrically charged", "Dangerous for 10 minutes", "Only safe with gloves"], "why": "No residual charge.", "source": "ERC 2021" },
     { "q": "Lightning mass casualty priority?", "options": ["Those in arrest", "Walking wounded", "Burns first", "Children first always"], "why": "Reverse triage.", "source": "WMS" },
-    { "q": "Lichtenberg figures are…", "options": ["Fern-like marks pathognomonic of lightning", "Burns needing grafts", "Bruises", "Allergic rash"], "why": "Fade in hours.", "source": "WMS" },
+    { "q": "Lichtenberg figures are…", "options": ["Fern-like marks typical of lightning", "Deep full-thickness burns that need grafting", "Bruises from being thrown", "An allergic rash from the storm"], "why": "Fade in hours.", "source": "WMS" },
     { "q": "Common late eye complication after lightning?", "options": ["Cataract", "Glaucoma only", "Myopia", "Conjunctivitis"], "why": "Check eyes.", "source": "WMS" },
-    { "q": "Why does apnoea persist after lightning?", "options": ["Respiratory centre paralysis", "Airway burns", "Opioids", "Anxiety"], "why": "Secondary hypoxic arrest.", "source": "ERC 2021" },
-    { "q": "Ear finding after lightning?", "options": ["Tympanic membrane rupture", "Otitis media", "Wax", "Normal"], "why": "Blast effect.", "source": "WMS" }
+    { "q": "Why does apnoea persist after lightning?", "options": ["Respiratory centre paralysis", "Airway burns and swelling", "Opioids given for pain at the scene", "Anxiety and hyperventilation"], "why": "Secondary hypoxic arrest.", "source": "ERC 2021" },
+    { "q": "Ear finding after lightning?", "options": ["Tympanic membrane rupture", "Acute otitis media with an effusion", "Impacted wax from the helmet", "Normal ears"], "why": "Blast effect.", "source": "WMS" }
   ]
 }

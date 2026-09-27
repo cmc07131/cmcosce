@@ -106,20 +106,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Most effective single step of decontamination?", "a": "Removing clothing", "wrong": ["Showering for 30 minutes", "Bleach scrub", "Antidote"] },
-        { "q": "Chlorine forms which acids on mucosa?", "a": "Hydrochloric and hypochlorous acid", "wrong": ["Sulphuric acid", "Hydrofluoric acid", "Nitric acid"] },
-        { "q": "Specific antidote for chlorine?", "a": "None — supportive care", "wrong": ["Atropine", "Hydroxocobalamin", "Pralidoxime"] },
+        { "q": "Chlorine forms which acids on mucosa?", "a": "Hydrochloric and hypochlorous acid", "wrong": ["Sulphuric acid", "Hydrofluoric acid, which binds calcium", "Nitric and nitrous acid"] },
+        { "q": "Specific antidote for chlorine?", "a": "None — supportive care", "wrong": ["Atropine and pralidoxime", "Hydroxocobalamin 5 g IV", "Sodium thiosulfate and nitrite"] },
         { "q": "Gas causing delayed pulmonary oedema up to 24 hours?", "a": "Phosgene", "wrong": ["Ammonia", "Carbon dioxide", "Helium"] },
-        { "q": "Decontamination area location?", "a": "Outside the ED, upwind", "wrong": ["In resus", "Downwind", "In the waiting room"] }
+        { "q": "Decontamination area location?", "a": "Outside the ED, upwind", "wrong": ["In resus, for speed", "Outside, downwind of the ED", "In the waiting room"] }
       ]
     }
   ],
   "badge": { "name": "Clean Zone", "emoji": "☣", "flavor": "Lock down, strip, wash, then treat. No antidote — oxygen and salbutamol." },
   "cards": [
-    { "q": "First step for a HAZMAT casualty?", "options": ["Protect staff and decontaminate before entry", "Straight to resus", "Intubate at the door", "Antibiotics"], "why": "Keep the ED running.", "source": "NHS England IOR" },
-    { "q": "'Remove, Remove, Remove' means…", "options": ["Remove from area, remove clothing, remove contamination", "Remove tubes", "Remove staff", "Remove patients"], "why": "Initial operational response.", "source": "NHS England" },
-    { "q": "Chlorine bronchospasm treatment?", "options": ["Nebulised salbutamol", "Adrenaline IM", "Atropine", "Naloxone"], "why": "Plus humidified oxygen.", "source": "UKHSA" },
+    { "q": "First step for a HAZMAT casualty?", "options": ["Decontaminate before entry", "Take them straight to resus for oxygen", "Intubate at the ambulance door", "Give antibiotics and nebulisers in triage"], "why": "Keep the ED running.", "source": "NHS England IOR" },
+    { "q": "'Remove, Remove, Remove' means…", "options": ["Remove from area, remove clothing, remove contamination", "Remove tubes, lines and monitoring", "Remove all staff from the department", "Remove other patients from the ED"], "why": "Initial operational response.", "source": "NHS England" },
+    { "q": "Chlorine bronchospasm treatment?", "options": ["Nebulised salbutamol", "Adrenaline IM 0.5 mg", "Atropine 2 mg IV", "Nebulised ipratropium alone, no oxygen"], "why": "Plus humidified oxygen.", "source": "UKHSA" },
     { "q": "Hot zone is…", "options": ["The contaminated area", "The decontamination area", "The clean area", "The ED"], "why": "Warm = decon; cold = clean.", "source": "HAZMAT" },
-    { "q": "Routine steroids after chlorine exposure?", "options": ["Not recommended", "Always", "Only in children", "Only topical"], "why": "No proven benefit.", "source": "UKHSA" },
-    { "q": "Observe a symptomatic chlorine patient for at least…", "options": ["6 hours", "15 minutes", "1 week", "Not needed"], "why": "Delayed pulmonary oedema.", "source": "UKHSA" }
+    { "q": "Routine steroids after chlorine exposure?", "options": ["Not recommended", "Always, IV hydrocortisone", "Only in children", "Only as inhaled steroid"], "why": "No proven benefit.", "source": "UKHSA" },
+    { "q": "Observe a symptomatic chlorine patient for at least…", "options": ["6 hours", "15 minutes", "1 week", "No observation if SpO2 is normal"], "why": "Delayed pulmonary oedema.", "source": "UKHSA" }
   ]
 }

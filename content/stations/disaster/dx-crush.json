@@ -96,11 +96,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "When should fluids start in crush injury?", "a": "Before extrication", "wrong": ["Only in hospital", "After 24 hours", "Never"] },
-        { "q": "Myoglobinuria on a dipstick shows…", "a": "Blood positive without red cells on microscopy", "wrong": ["Protein only", "Nitrites", "Glucose"] },
-        { "q": "Fluid to avoid early?", "a": "Potassium-containing (Hartmann's)", "wrong": ["0.9% saline", "5% dextrose never", "Plasma"] },
-        { "q": "Paralytic to avoid?", "a": "Suxamethonium", "wrong": ["Rocuronium", "Vecuronium", "Atracurium"] },
-        { "q": "Urine output target in crush syndrome?", "a": "About 200–300 mL/h", "wrong": ["0.5 mL/kg/h", "10 mL/h", "No target"] }
+        { "q": "When should fluids start in crush injury?", "a": "Before extrication", "wrong": ["Only once in hospital", "After 24 hours", "Only after the limb is released"] },
+        { "q": "Myoglobinuria on a dipstick shows…", "a": "Blood +, but no red cells seen", "wrong": ["Protein positive with no blood", "Nitrites and leucocytes", "Glucose and ketones"] },
+        { "q": "Fluid to avoid early?", "a": "Potassium-containing (Hartmann's)", "wrong": ["0.9% sodium chloride because of hyperchloraemia", "5% dextrose", "Fresh frozen plasma"] },
+        { "q": "Paralytic to avoid?", "a": "Suxamethonium", "wrong": ["Rocuronium 1.2 mg/kg", "Vecuronium", "Atracurium"] },
+        { "q": "Urine output target in crush syndrome?", "a": "About 200–300 mL/h", "wrong": ["0.5 mL/kg/h, as usual", "About 10 mL/h", "Over 1 L/h"] }
       ]
     }
   ],
@@ -108,9 +108,9 @@
   "cards": [
     { "q": "Main killer early after extrication in crush?", "options": ["Hyperkalaemia", "Hypoglycaemia", "Hypothermia only", "Anaemia"], "why": "Release of muscle potassium.", "source": "ISN 2012" },
     { "q": "Crush syndrome causes acute kidney injury via…", "options": ["Myoglobin", "Bilirubin", "Glucose", "Calcium"], "why": "Pigment nephropathy.", "source": "ATLS" },
-    { "q": "CK is typically…", "options": ["Greatly raised", "Normal", "Low", "Unmeasurable"], "why": "Rhabdomyolysis.", "source": "ATLS" },
-    { "q": "Mannitol and bicarbonate in crush?", "options": ["No proven benefit; selective use", "Mandatory", "First-line", "Harmful always"], "why": "Saline first.", "source": "ISN 2012" },
-    { "q": "Crushed limb with pulses but tense compartments?", "options": ["Measure compartment pressures", "Ignore", "Amputate", "Elevate high above heart"], "why": "Pulses persist in compartment syndrome.", "source": "BOAST" },
-    { "q": "Calcium in crush hyperkalaemia with ECG changes?", "options": ["Yes, IV calcium", "No, never", "Only oral", "Only if K > 9"], "why": "Stabilises the myocardium.", "source": "UK RC 2023" }
+    { "q": "CK is typically…", "options": ["Greatly raised", "Normal in the first day", "Low from dilution", "Only mildly raised"], "why": "Rhabdomyolysis.", "source": "ATLS" },
+    { "q": "Mannitol and bicarbonate in crush?", "options": ["No proven benefit; selective use", "Mandatory for every crush victim on arrival", "First-line before saline", "Harmful in all cases"], "why": "Saline first.", "source": "ISN 2012" },
+    { "q": "Crushed limb with pulses but tense compartments?", "options": ["Measure compartment pressures", "Leave it; pulses exclude compartment syndrome", "Amputate to prevent hyperkalaemia", "Elevate high above the heart"], "why": "Pulses persist in compartment syndrome.", "source": "BOAST" },
+    { "q": "Calcium in crush hyperkalaemia with ECG changes?", "options": ["Yes, IV calcium", "No, it worsens rhabdomyolysis", "Only oral calcium carbonate", "Only if potassium is over 9"], "why": "Stabilises the myocardium.", "source": "UK RC 2023" }
   ]
 }

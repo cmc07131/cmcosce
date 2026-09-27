@@ -72,21 +72,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "CSCATTT stands for…", "a": "Command, Safety, Communication, Assessment, Triage, Treatment, Transport", "wrong": ["Call, Stop, Clear, Assess, Treat, Transfer, Talk", "Circulation, Spine, Chest, Airway…", "None"] },
-        { "q": "Who runs the ED during a major incident?", "a": "The ED commander (senior doctor) with a nurse coordinator", "wrong": ["The most junior doctor", "The media officer", "The police"] },
-        { "q": "Three types of exercise?", "a": "Tabletop, communication test, live (full-scale)", "wrong": ["Running, swimming, cycling", "Only live", "Only online"] },
-        { "q": "Purpose of a debrief?", "a": "Identify lessons and update the plan", "wrong": ["Blame staff", "Close the incident only", "Media release"] },
-        { "q": "When should the ED stand down?", "a": "When hospital command declares it", "wrong": ["When the ED is quiet", "Never", "After 1 hour"] }
+        { "q": "CSCATTT stands for…", "a": "Command, Safety, Communication, Assessment, Triage, Treatment, Transport", "wrong": ["Call, Stop, Clear, Assess, Treat, Transfer, Talk", "Circulation, Spine, Chest, Airway, Trauma, Temperature, Tubes", "Control, Scene, Casualties, Ambulance, Triage, Theatre, Talk"] },
+        { "q": "Who runs the ED during a major incident?", "a": "The ED commander with a nurse coordinator", "wrong": ["The most junior doctor on shift", "The hospital media officer", "The most senior police officer present in the hospital"] },
+        { "q": "Three types of exercise?", "a": "Tabletop, communication test, live (full-scale)", "wrong": ["Running, swimming and cycling", "Live drills only, twice a year", "Online modules only"] },
+        { "q": "Purpose of a debrief?", "a": "Identify lessons and update the plan", "wrong": ["Identify which staff made errors and discipline them", "Close the incident file", "Prepare a media release"] },
+        { "q": "When should the ED stand down?", "a": "When hospital command declares it", "wrong": ["When the ED looks quiet", "After exactly 1 hour", "When the last ambulance leaves the scene"] }
       ]
     }
   ],
   "badge": { "name": "Incident Commander", "emoji": "📋", "flavor": "METHANE in, CSCATTT out. Plan, drill, debrief." },
   "cards": [
     { "q": "METHANE's 'H' is…", "options": ["Hazards", "Hospital", "Helicopter", "Head injury"], "why": "Scene safety.", "source": "JESIP" },
-    { "q": "METHANE's 'N' is…", "options": ["Number and severity of casualties", "Nurses", "Name", "Next of kin"], "why": "Resource planning.", "source": "JESIP" },
-    { "q": "First 'C' of CSCATTT?", "options": ["Command and control", "Circulation", "Cervical spine", "Chest"], "why": "Management before medicine.", "source": "MIMMS" },
-    { "q": "Tabletop exercise is…", "options": ["Discussion-based walk-through of the plan", "Full live drill", "Fire alarm test", "Online quiz"], "why": "Cheap, tests decisions.", "source": "EPRR" },
-    { "q": "Relatives in a major incident go to…", "options": ["A separate reception area", "Resus", "The media room", "Home"], "why": "Information and support.", "source": "MIMMS" },
-    { "q": "Action cards give…", "options": ["Each role's tasks on one card", "Patient notes", "Drug doses only", "Staff rota"], "why": "Clarity under stress.", "source": "MIMMS" }
+    { "q": "METHANE's 'N' is…", "options": ["Number and severity of casualties", "Nurses and doctors needed", "Name and rank of the incident officer at the scene", "Next of kin notified"], "why": "Resource planning.", "source": "JESIP" },
+    { "q": "First 'C' of CSCATTT?", "options": ["Command and control", "Circulation", "Cervical spine control", "Chest injuries"], "why": "Management before medicine.", "source": "MIMMS" },
+    { "q": "Tabletop exercise is…", "options": ["Discussion-based walk-through of the plan", "A full live drill with actors as casualties", "A fire alarm test", "An online quiz for staff"], "why": "Cheap, tests decisions.", "source": "EPRR" },
+    { "q": "Relatives in a major incident go to…", "options": ["A separate reception area", "Resus, to be with the patient", "The media briefing room", "Home, to wait for a call"], "why": "Information and support.", "source": "MIMMS" },
+    { "q": "Action cards give…", "options": ["Each role's tasks on one card", "Patient notes for each casualty", "Drug doses only", "The staff rota for the week"], "why": "Clarity under stress.", "source": "MIMMS" }
   ]
 }
