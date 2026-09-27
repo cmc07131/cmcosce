@@ -34,24 +34,24 @@
       "mood": 5,
       "turns": [
         {
-          "line": "What is it?",
+          "line": "What is it?", "lz": "佢係咩病？",
           "opts": [
-            { "t": "It's scarlet fever — a throat infection with streptococcus bacteria that makes a toxin, which causes the rash. It's treated easily with antibiotics.", "r": "Antibiotics for how long?", "mood": -2, "mark": "Explains the diagnosis simply" },
-            { "t": "Just a viral rash.", "r": "OK.", "mood": 0 }
+            { "t": "It's scarlet fever — a throat infection with streptococcus bacteria that makes a toxin, which causes the rash. It's treated easily with antibiotics.", "tz": "佢係猩紅熱——喉嚨俾鏈球菌感染，細菌產生毒素，引致出疹。用抗生素好容易醫。", "rz": "要食幾耐抗生素？", "r": "Antibiotics for how long?", "mood": -2, "mark": "Explains the diagnosis simply" },
+            { "t": "Just a viral rash.", "tz": "只係病毒疹啫。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         },
         {
-          "line": "Antibiotics for how long? Can she go to school?",
+          "line": "Antibiotics for how long? Can she go to school?", "lz": "要食幾耐抗生素？可唔可以返學？",
           "opts": [
-            { "t": "Penicillin for the full 10 days, even when she feels better, to prevent complications. She can go back to school 24 hours after starting it. We report scarlet fever to the Department of Health.", "r": "And her baby brother?", "mood": -2, "mark": "Explains 10-day course, school exclusion and notification" },
-            { "t": "Three days of antibiotics; school tomorrow morning is fine.", "r": "OK.", "mood": 0 }
+            { "t": "Penicillin for the full 10 days, even when she feels better, to prevent complications. She can go back to school 24 hours after starting it. We report scarlet fever to the Department of Health.", "tz": "盤尼西林要食足十日，就算好返都要食晒，預防併發症。開始食藥二十四小時後就可以返學。猩紅熱我哋要通報衞生署。", "rz": "咁佢細佬呢？", "r": "And her baby brother?", "mood": -2, "mark": "Explains 10-day course, school exclusion and notification" },
+            { "t": "Three days of antibiotics; school tomorrow morning is fine.", "tz": "食三日抗生素，聽朝就可以返學。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         },
         {
-          "line": "And her baby brother?",
+          "line": "And her baby brother?", "lz": "咁佢細佬呢？",
           "opts": [
-            { "t": "Wash hands well, don't share cups or towels. If he gets a fever, sore throat or rash, bring him to be seen. Bring her back at once if she's getting worse, very sleepy, not drinking, or has a painful swollen limb or a rash that looks like a burn.", "r": "Thank you, I'll watch closely.", "mood": -2, "mark": "Advice for contacts and safety-netting for invasive GAS" },
-            { "t": "No risk to him.", "r": "OK.", "mood": 0 }
+            { "t": "Wash hands well, don't share cups or towels. If he gets a fever, sore throat or rash, bring him to be seen. Bring her back at once if she's getting worse, very sleepy, not drinking, or has a painful swollen limb or a rash that looks like a burn.", "tz": "要勤洗手，唔好共用杯同毛巾。如果佢細佬發燒、喉嚨痛或者出疹，就帶佢嚟睇。如果佢差咗、好眼瞓、唔肯飲嘢，或者手腳腫痛、出啲好似燙傷咁嘅疹，就要即刻帶佢返嚟。", "rz": "多謝你，我會留意住。", "r": "Thank you, I'll watch closely.", "mood": -2, "mark": "Advice for contacts and safety-netting for invasive GAS" },
+            { "t": "No risk to him.", "tz": "佢細佬冇風險。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         }
       ]

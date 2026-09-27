@@ -16,12 +16,12 @@
       "hint": "Mechanism, time, handedness, occupation, symptoms, tetanus, PMH.",
       "groups": {
         "Injury": [
-          { "t": "What happened, and when?", "r": "Slicing salmon 2 hours ago; the knife slipped into my ring finger.", "mark": "Asks mechanism and time" },
-          { "t": "Numbness or weakness?", "r": "The side next to the little finger is numb. I can't bend the tip.", "mark": "Asks about sensory and motor symptoms" }
+          { "t": "What happened, and when?", "tz": "發生咩事？幾時嘅事？", "rz": "兩個鐘前切三文魚，把刀一滑就界到無名指。", "r": "Slicing salmon 2 hours ago; the knife slipped into my ring finger.", "mark": "Asks mechanism and time" },
+          { "t": "Numbness or weakness?", "tz": "有冇麻痺或者冇力？", "rz": "近尾指嗰邊麻咗。手指尾屈唔到。", "r": "The side next to the little finger is numb. I can't bend the tip.", "mark": "Asks about sensory and motor symptoms" }
         ],
         "Background": [
-          { "t": "Which hand do you write with? Your job?", "r": "Left-handed. I'm a sushi chef.", "mark": "Asks handedness and occupation" },
-          { "t": "Tetanus vaccination and allergies?", "r": "Childhood vaccines in Hong Kong. No allergies.", "mark": "Asks tetanus status and allergies" }
+          { "t": "Which hand do you write with? Your job?", "tz": "你用邊隻手寫字？做咩工作？", "rz": "左撇子。我係壽司師傅。", "r": "Left-handed. I'm a sushi chef.", "mark": "Asks handedness and occupation" },
+          { "t": "Tetanus vaccination and allergies?", "tz": "有冇打過破傷風針？有冇藥物敏感？", "rz": "細個喺香港打齊晒針。冇敏感。", "r": "Childhood vaccines in Hong Kong. No allergies.", "mark": "Asks tetanus status and allergies" }
         ]
       }
     },
@@ -56,17 +56,17 @@
       "mood": 5,
       "turns": [
         {
-          "line": "Can you just stitch it so I can go back to work?",
+          "line": "Can you just stitch it so I can go back to work?", "lz": "你幫我縫埋佢就得啦，我要返工。",
           "opts": [
-            { "t": "The cut has gone through the deep tendon that bends your fingertip and one of the finger's nerves. These need repairing by the hand surgeons, usually within a few days, to get the best function. Today we'll clean it, dress it and put on a splint.", "r": "An operation? But I work with my hands…", "mood": 0, "mark": "Explains tendon and nerve injury and the need for surgical repair" },
-            { "t": "Sure, three stitches and back to work.", "r": "Great.", "mood": -1 }
+            { "t": "The cut has gone through the deep tendon that bends your fingertip and one of the finger's nerves. These need repairing by the hand surgeons, usually within a few days, to get the best function. Today we'll clean it, dress it and put on a splint.", "tz": "個傷口割斷咗屈手指尾嗰條深層筋腱，同埋一條手指神經。呢啲要手外科醫生做手術駁返，通常喺幾日內做，功能先會最好。今日我哋會幫你洗傷口、包紮，同埋上夾板。", "rz": "做手術？但我係靠對手搵食㗎……", "r": "An operation? But I work with my hands…", "mood": 0, "mark": "Explains tendon and nerve injury and the need for surgical repair" },
+            { "t": "Sure, three stitches and back to work.", "tz": "冇問題，縫三針就可以返工。", "rz": "好嘢。", "r": "Great.", "mood": -1 }
           ]
         },
         {
-          "line": "An operation? But I work with my hands…",
+          "line": "An operation? But I work with my hands…", "lz": "做手術？但我係靠對手搵食㗎……",
           "opts": [
-            { "t": "That's exactly why repair matters. Afterwards you'll need hand therapy for a few months, and you'll be off work for a while — we'll give you a certificate. Keep the splint on and the dressing dry; come back if it becomes red, hot or swollen.", "r": "OK, I understand.", "mood": -2, "mark": "Explains rehabilitation, time off work and safety-netting" },
-            { "t": "You'll be fine by tomorrow.", "r": "Really?", "mood": 1 }
+            { "t": "That's exactly why repair matters. Afterwards you'll need hand therapy for a few months, and you'll be off work for a while — we'll give you a certificate. Keep the splint on and the dressing dry; come back if it becomes red, hot or swollen.", "tz": "正正因為咁，先要駁返好佢。手術後要做幾個月手部物理治療，都要休息一排唔返得工——我哋會開病假紙俾你。夾板要戴住，敷料保持乾爽；如果變紅、發熱或者腫，就要返嚟。", "rz": "好，我明白。", "r": "OK, I understand.", "mood": -2, "mark": "Explains rehabilitation, time off work and safety-netting" },
+            { "t": "You'll be fine by tomorrow.", "tz": "聽日就會好㗎喇。", "rz": "真係？", "r": "Really?", "mood": 1 }
           ]
         }
       ]

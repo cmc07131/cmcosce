@@ -16,20 +16,20 @@
       "hint": "The act, intent now, mental health, alcohol/drugs, previous self-harm, supports, protective factors, safeguarding.",
       "groups": {
         "The act": [
-          { "t": "Can you tell me what happened last night?", "r": "I broke up with my boyfriend. I took everything in the cupboard.", "mark": "Opens gently and asks about the event" },
-          { "t": "Had you planned it? Did you leave a note or do anything to prepare?", "r": "No, it was all in 10 minutes. No note.", "mark": "Asks about planning and final acts" },
-          { "t": "What did you think would happen? Who found you?", "r": "I wanted to sleep and not wake up… then I got scared and called my sister.", "mark": "Asks about intent and whether she sought help" },
-          { "t": "How do you feel now that you're still here?", "r": "Relieved, honestly. And embarrassed.", "mark": "Asks how she feels about surviving" }
+          { "t": "Can you tell me what happened last night?", "tz": "你可唔可以話我知，琴晚發生咩事？", "rz": "我同男朋友分咗手。我將櫃入面所有藥都食晒。", "r": "I broke up with my boyfriend. I took everything in the cupboard.", "mark": "Opens gently and asks about the event" },
+          { "t": "Had you planned it? Did you leave a note or do anything to prepare?", "tz": "你之前有冇計劃過？有冇留遺書，或者做過咩準備？", "rz": "冇，十分鐘內嘅事。冇留遺書。", "r": "No, it was all in 10 minutes. No note.", "mark": "Asks about planning and final acts" },
+          { "t": "What did you think would happen? Who found you?", "tz": "你嗰陣諗住會點？邊個發現你？", "rz": "我想瞓咗之後唔好再醒……之後我驚咗，打電話俾家姐。", "r": "I wanted to sleep and not wake up… then I got scared and called my sister.", "mark": "Asks about intent and whether she sought help" },
+          { "t": "How do you feel now that you're still here?", "tz": "你而家仲喺度，心入面覺得點？", "rz": "老實講，鬆咗一口氣。又覺得好尷尬。", "r": "Relieved, honestly. And embarrassed.", "mark": "Asks how she feels about surviving" }
         ],
         "Now": [
-          { "t": "Are you thinking of harming yourself now?", "r": "No. I want to go home to my sister's.", "mark": "Asks about current suicidal thoughts" },
-          { "t": "Mood, sleep, appetite over recent weeks?", "r": "Low for a month since he started cheating. Sleeping badly.", "mark": "Screens for depression" }
+          { "t": "Are you thinking of harming yourself now?", "tz": "你而家有冇諗住傷害自己？", "rz": "冇。我想返家姐屋企。", "r": "No. I want to go home to my sister's.", "mark": "Asks about current suicidal thoughts" },
+          { "t": "Mood, sleep, appetite over recent weeks?", "tz": "最近幾個禮拜心情、瞓覺、胃口點？", "rz": "佢開始出軌之後，我低落咗一個月。瞓得好差。", "r": "Low for a month since he started cheating. Sleeping badly.", "mark": "Screens for depression" }
         ],
         "Background": [
-          { "t": "Have you hurt yourself before? Any mental health care?", "r": "I cut my arms as a teenager. Never seen a psychiatrist.", "mark": "Asks about previous self-harm and psychiatric history" },
-          { "t": "Alcohol or drugs?", "r": "I'd had a bottle of wine.", "mark": "Asks about alcohol and drugs" },
-          { "t": "Who can support you? What keeps you going?", "r": "My sister, my cat, my job — I'm a teacher.", "mark": "Explores supports and protective factors" },
-          { "t": "Is anyone at home hurting you? Any children in your care?", "r": "No. No children.", "mark": "Asks safeguarding questions" }
+          { "t": "Have you hurt yourself before? Any mental health care?", "tz": "你以前有冇傷害過自己？有冇睇過精神科？", "rz": "我後生嗰陣界過手。從來冇睇過精神科。", "r": "I cut my arms as a teenager. Never seen a psychiatrist.", "mark": "Asks about previous self-harm and psychiatric history" },
+          { "t": "Alcohol or drugs?", "tz": "有冇飲酒或者用藥物？", "rz": "我飲咗一支紅酒。", "r": "I'd had a bottle of wine.", "mark": "Asks about alcohol and drugs" },
+          { "t": "Who can support you? What keeps you going?", "tz": "有邊個可以支持你？有咩令你撐落去？", "rz": "我家姐、我隻貓、我份工——我係老師。", "r": "My sister, my cat, my job — I'm a teacher.", "mark": "Explores supports and protective factors" },
+          { "t": "Is anyone at home hurting you? Any children in your care?", "tz": "屋企有冇人傷害你？你有冇照顧緊小朋友？", "rz": "冇。冇小朋友。", "r": "No. No children.", "mark": "Asks safeguarding questions" }
         ]
       }
     },
@@ -42,17 +42,17 @@
       "mood": 5,
       "turns": [
         {
-          "line": "So can I go now?",
+          "line": "So can I go now?", "lz": "咁我而家可唔可以走？",
           "opts": [
-            { "t": "It sounds like this was a very hard moment after the break-up, and you're feeling safer now. Before you go, can we make a safety plan together — warning signs, who to call, and keeping tablets away?", "r": "OK. My sister can keep my tablets.", "mood": -2, "mark": "Summarises and builds a safety plan with her" },
-            { "t": "Yes, your score is only 3, so you're low risk.", "r": "OK… bye.", "mood": 0 }
+            { "t": "It sounds like this was a very hard moment after the break-up, and you're feeling safer now. Before you go, can we make a safety plan together — warning signs, who to call, and keeping tablets away?", "tz": "聽落分手之後嗰一刻真係好難捱，而你而家覺得安全啲。走之前，我哋一齊做個安全計劃好唔好——有咩警號、搵邊個幫手，同埋將啲藥放遠啲？", "rz": "好。我可以俾家姐幫我保管啲藥。", "r": "OK. My sister can keep my tablets.", "mood": -2, "mark": "Summarises and builds a safety plan with her" },
+            { "t": "Yes, your score is only 3, so you're low risk.", "tz": "可以，你個分數得三分，屬於低風險。", "rz": "好……拜拜。", "r": "OK… bye.", "mood": 0 }
           ]
         },
         {
-          "line": "OK. My sister can keep my tablets.",
+          "line": "OK. My sister can keep my tablets.", "lz": "好。我可以俾家姐幫我保管啲藥。",
           "opts": [
-            { "t": "Would it be OK for me to talk to your sister too? And I'll arrange a follow-up with the mental health team this week; here's the 24-hour crisis line.", "r": "Yes, that's fine.", "mood": -2, "mark": "Involves family with consent and arranges follow-up" },
-            { "t": "No need for follow-up.", "r": "OK.", "mood": 1 }
+            { "t": "Would it be OK for me to talk to your sister too? And I'll arrange a follow-up with the mental health team this week; here's the 24-hour crisis line.", "tz": "我可唔可以同你家姐都傾吓？我會安排精神健康團隊呢個禮拜跟進你；呢個係二十四小時危機熱線。", "rz": "好，冇問題。", "r": "Yes, that's fine.", "mood": -2, "mark": "Involves family with consent and arranges follow-up" },
+            { "t": "No need for follow-up.", "tz": "唔使跟進喇。", "rz": "好。", "r": "OK.", "mood": 1 }
           ]
         }
       ]

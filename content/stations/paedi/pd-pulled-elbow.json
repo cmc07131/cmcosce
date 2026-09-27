@@ -45,7 +45,7 @@
       "label": "Advice",
       "hint": "Lift under the arms, recurrence, return if not using the arm.",
       "opts": [
-        { "t": "Lift her under the arms, not by the hands; it can happen again until about 5; come back if she stops using the arm again", "mark": "Prevention and recurrence advice" }
+        { "t": "Lift her under the arms, not by the hands; it can happen again until about 5; come back if she stops using the arm again", "tz": "抱佢嗰陣要托住佢胳肋底，唔好拉佢隻手；五歲之前都有機會再甩；如果佢再唔肯用隻手，就要返嚟。", "mark": "Prevention and recurrence advice" }
       ]
     },
     {

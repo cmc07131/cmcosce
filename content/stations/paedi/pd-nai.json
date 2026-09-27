@@ -16,15 +16,15 @@
       "hint": "Non-judgemental: what happened, when, who was there, delay, development, household, previous injuries.",
       "groups": {
         "Injury": [
-          { "t": "Can you tell me exactly what happened?", "r": "Her brother, he's 6, ran the bath and put her in. She screamed.", "mark": "Open, non-judgemental questions about the event" },
-          { "t": "When was this, and when did you notice the burns?", "r": "Last night, about 8. I thought it would heal.", "mark": "Establishes timing and delay" },
-          { "t": "Where were you? Who else was home?", "r": "I was in the kitchen. My girlfriend was out.", "mark": "Asks who was present" },
-          { "t": "Can she stand or climb into a bath herself?", "r": "She's just started walking holding on to furniture.", "mark": "Checks development against the story" }
+          { "t": "Can you tell me exactly what happened?", "tz": "你可唔可以話我知，究竟發生咩事？", "rz": "佢阿哥，佢六歲，自己放水沖涼，將佢放咗入浴缸。佢尖叫。", "r": "Her brother, he's 6, ran the bath and put her in. She screamed.", "mark": "Open, non-judgemental questions about the event" },
+          { "t": "When was this, and when did you notice the burns?", "tz": "幾時發生？你幾時發覺佢燙傷？", "rz": "琴晚大概八點。我以為會自己好返。", "r": "Last night, about 8. I thought it would heal.", "mark": "Establishes timing and delay" },
+          { "t": "Where were you? Who else was home?", "tz": "嗰陣你喺邊？仲有邊個喺屋企？", "rz": "我喺廚房。我女朋友出咗街。", "r": "I was in the kitchen. My girlfriend was out.", "mark": "Asks who was present" },
+          { "t": "Can she stand or climb into a bath herself?", "tz": "佢自己識唔識企，或者爬入浴缸？", "rz": "佢啱啱先識扶住傢俬行。", "r": "She's just started walking holding on to furniture.", "mark": "Checks development against the story" }
         ],
         "Household": [
-          { "t": "Who lives at home and who looks after her?", "r": "Me, my girlfriend, her brother. My girlfriend isn't her mum.", "mark": "Asks household members and carers" },
-          { "t": "Any previous injuries or hospital visits?", "r": "She broke her arm 3 months ago — fell off the sofa.", "mark": "Asks about previous injuries" },
-          { "t": "Is everything OK at home? Does anyone feel unsafe?", "r": "It's been stressful. Money problems.", "mark": "Screens for domestic stress and violence" }
+          { "t": "Who lives at home and who looks after her?", "tz": "屋企有邊個住？邊個照顧佢？", "rz": "我、我女朋友、佢阿哥。我女朋友唔係佢阿媽。", "r": "Me, my girlfriend, her brother. My girlfriend isn't her mum.", "mark": "Asks household members and carers" },
+          { "t": "Any previous injuries or hospital visits?", "tz": "佢以前有冇受過傷，或者入過醫院？", "rz": "三個月前斷過手——喺梳化跌落嚟。", "r": "She broke her arm 3 months ago — fell off the sofa.", "mark": "Asks about previous injuries" },
+          { "t": "Is everything OK at home? Does anyone feel unsafe?", "tz": "屋企一切還好嗎？有冇人覺得唔安全？", "rz": "最近壓力好大。錢方面有問題。", "r": "It's been stressful. Money problems.", "mark": "Screens for domestic stress and violence" }
         ]
       }
     },

@@ -31,14 +31,14 @@
       "hint": "Rapport, psychotic symptoms, risk to self and others, drugs, insight, physical causes.",
       "groups": {
         "Beliefs": [
-          { "t": "Can you tell me what was happening in the road?", "r": "The lights change to send messages into my head. I have to stop them.", "mark": "Elicits delusional beliefs" },
-          { "t": "Do you hear voices when no one is there?", "r": "They tell me to go into the road and block the signals.", "mark": "Elicits command hallucinations" }
+          { "t": "Can you tell me what was happening in the road?", "tz": "你可唔可以話我知，頭先喺馬路發生咩事？", "rz": "啲交通燈一轉色就傳訊息入我個腦。我要截停佢哋。", "r": "The lights change to send messages into my head. I have to stop them.", "mark": "Elicits delusional beliefs" },
+          { "t": "Do you hear voices when no one is there?", "tz": "冇人喺度嗰陣，你會唔會聽到有人同你講嘢？", "rz": "佢哋叫我行出馬路，擋住啲訊號。", "r": "They tell me to go into the road and block the signals.", "mark": "Elicits command hallucinations" }
         ],
         "Risk": [
-          { "t": "Have you thought of harming yourself or anyone else?", "r": "If the voices tell me to, I'll do what I have to.", "mark": "Assesses risk to self and others" },
-          { "t": "Drugs or alcohol? Medical problems?", "r": "No drugs. I stopped my medicine months ago.", "mark": "Asks substances and treatment history" }
+          { "t": "Have you thought of harming yourself or anyone else?", "tz": "你有冇諗過傷害自己或者其他人？", "rz": "如果啲聲叫我做，我就要做。", "r": "If the voices tell me to, I'll do what I have to.", "mark": "Assesses risk to self and others" },
+          { "t": "Drugs or alcohol? Medical problems?", "tz": "有冇用藥物或者飲酒？身體有冇其他病？", "rz": "冇用藥物。幾個月前我停咗食藥。", "r": "No drugs. I stopped my medicine months ago.", "mark": "Asks substances and treatment history" }
         ],
-        "Insight": [{ "t": "Do you think you might be unwell? Would you stay in hospital?", "r": "I'm not sick. I'm leaving.", "mark": "Assesses insight and willingness" }]
+        "Insight": [{ "t": "Do you think you might be unwell? Would you stay in hospital?", "tz": "你覺唔覺得自己可能唔舒服？肯唔肯留喺醫院？", "rz": "我冇病。我要走。", "r": "I'm not sick. I'm leaving.", "mark": "Assesses insight and willingness" }]
       }
     },
     {
@@ -49,8 +49,8 @@
       "hint": "Background, previous illness, treatment, recent change.",
       "groups": {
         "Collateral": [
-          { "t": "Has he been unwell like this before?", "r": "He has schizophrenia. Admitted to Castle Peak twice. He stopped his injections 4 months ago.", "mark": "Takes collateral history" },
-          { "t": "Would you be willing to be the applicant?", "r": "If it keeps him safe, yes.", "mark": "Identifies a relative as applicant" }
+          { "t": "Has he been unwell like this before?", "tz": "佢以前有冇試過咁？", "rz": "佢有精神分裂，入過兩次青山醫院。四個月前佢停咗打針。", "r": "He has schizophrenia. Admitted to Castle Peak twice. He stopped his injections 4 months ago.", "mark": "Takes collateral history" },
+          { "t": "Would you be willing to be the applicant?", "tz": "你願唔願意做申請人，申請佢入院？", "rz": "如果可以保護到佢，我願意。", "r": "If it keeps him safe, yes.", "mark": "Identifies a relative as applicant" }
         ]
       }
     },

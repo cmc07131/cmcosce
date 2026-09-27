@@ -16,19 +16,19 @@
       "hint": "Rash onset and spread, fever and systemic upset, joints, abdomen, urine, bleeding, recent illness, drugs, development, social.",
       "groups": {
         "Rash": [
-          { "t": "When did the rash start and where?", "r": "Yesterday, on his legs and bottom. Raised red-purple spots.", "mark": "Asks onset and distribution" },
-          { "t": "Does it fade when you press a glass on it?", "r": "No, it stays.", "mark": "Asks about blanching" }
+          { "t": "When did the rash start and where?", "tz": "啲疹幾時開始？喺邊度？", "rz": "琴日開始，喺對腳同屁股。凸起嘅紅紫色點。", "r": "Yesterday, on his legs and bottom. Raised red-purple spots.", "mark": "Asks onset and distribution" },
+          { "t": "Does it fade when you press a glass on it?", "tz": "用玻璃杯撳落去，啲疹會唔會褪色？", "rz": "唔會，仍然見到。", "r": "No, it stays.", "mark": "Asks about blanching" }
         ],
         "Systemic": [
-          { "t": "Fever, drowsiness, vomiting, headache?", "r": "No fever. He's playing normally.", "mark": "Screens for systemic illness (meningococcal)" },
-          { "t": "Joint pain or swelling?", "r": "His right knee aches but he walks fine.", "mark": "Asks about joints" },
-          { "t": "Tummy pain, blood in stool, red or dark urine?", "r": "Some tummy ache yesterday. Urine looks normal.", "mark": "Asks about abdominal and renal symptoms" },
-          { "t": "Nosebleeds, bleeding gums, bruising, tiredness, weight loss?", "r": "No.", "mark": "Screens for ITP and leukaemia" }
+          { "t": "Fever, drowsiness, vomiting, headache?", "tz": "佢有冇發燒、好眼瞓、嘔，或者頭痛？", "rz": "冇發燒。佢照玩。", "r": "No fever. He's playing normally.", "mark": "Screens for systemic illness (meningococcal)" },
+          { "t": "Joint pain or swelling?", "tz": "有冇關節痛或者腫？", "rz": "右邊膝頭有啲痛，不過行路冇問題。", "r": "His right knee aches but he walks fine.", "mark": "Asks about joints" },
+          { "t": "Tummy pain, blood in stool, red or dark urine?", "tz": "有冇肚痛？大便有冇血？小便有冇變紅或者好深色？", "rz": "琴日有少少肚痛。小便睇落正常。", "r": "Some tummy ache yesterday. Urine looks normal.", "mark": "Asks about abdominal and renal symptoms" },
+          { "t": "Nosebleeds, bleeding gums, bruising, tiredness, weight loss?", "tz": "有冇流鼻血、牙肉出血、好易瘀、好攰，或者瘦咗？", "rz": "冇。", "r": "No.", "mark": "Screens for ITP and leukaemia" }
         ],
         "Background": [
-          { "t": "Any recent illness or medicines?", "r": "A cough and cold 2 weeks ago. No medicines.", "mark": "Asks about preceding infection and drugs" },
-          { "t": "Birth, development, vaccinations", "r": "Normal, all up to date.", "mark": "Birth, development and immunisation history" },
-          { "t": "Who is at home? Any worries about injuries?", "r": "Me, his dad and his sister. No injuries.", "mark": "Social history and safeguarding" }
+          { "t": "Any recent illness or medicines?", "tz": "最近有冇病過，或者食過咩藥？", "rz": "兩個禮拜前咳同傷風。冇食藥。", "r": "A cough and cold 2 weeks ago. No medicines.", "mark": "Asks about preceding infection and drugs" },
+          { "t": "Birth, development, vaccinations", "tz": "佢出世、發育同打針都正常嗎？", "rz": "正常，打齊晒針。", "r": "Normal, all up to date.", "mark": "Birth, development and immunisation history" },
+          { "t": "Who is at home? Any worries about injuries?", "tz": "屋企有邊個？有冇擔心佢受過傷？", "rz": "我、佢爸爸同佢家姐。冇受過傷。", "r": "Me, his dad and his sister. No injuries.", "mark": "Social history and safeguarding" }
         ]
       }
     },
@@ -41,17 +41,17 @@
       "mood": 7,
       "turns": [
         {
-          "line": "I read that a rash that doesn't fade means meningitis. Is it that?",
+          "line": "I read that a rash that doesn't fade means meningitis. Is it that?", "lz": "我喺網上睇到，啲疹撳唔褪色就係腦膜炎。係咪呀？",
           "opts": [
-            { "t": "You were right to bring him. Because he has no fever and is playing normally, this looks more like Henoch–Schönlein purpura — a harmless-looking inflammation of small blood vessels after a virus. I'll examine him fully and check his blood, blood pressure and urine to be sure.", "r": "Oh, thank goodness. What tests?", "mood": -3, "mark": "Explains the likely diagnosis and need to examine and test" },
-            { "t": "It's definitely nothing.", "r": "How can you know without looking?", "mood": 2 }
+            { "t": "You were right to bring him. Because he has no fever and is playing normally, this looks more like Henoch–Schönlein purpura — a harmless-looking inflammation of small blood vessels after a virus. I'll examine him fully and check his blood, blood pressure and urine to be sure.", "tz": "你帶佢嚟係啱嘅。因為佢冇發燒、照常玩，睇落似係 Henoch–Schönlein 紫癜——一種病毒感染後嘅細血管發炎。我會幫佢做全身檢查，再驗血、量血壓同驗小便確定。", "rz": "哦，好彩。要做咩檢查？", "r": "Oh, thank goodness. What tests?", "mood": -3, "mark": "Explains the likely diagnosis and need to examine and test" },
+            { "t": "It's definitely nothing.", "tz": "肯定冇嘢嘅。", "rz": "你都未睇，點知㗎？", "r": "How can you know without looking?", "mood": 2 }
           ]
         },
         {
-          "line": "Will it affect his kidneys?",
+          "line": "Will it affect his kidneys?", "lz": "會唔會影響佢個腎？",
           "opts": [
-            { "t": "Sometimes it affects the kidneys, usually mildly, so we check his urine and blood pressure now and regularly for about 6 months. Come back straight away if he gets severe tummy pain, blood in his poo, dark urine, swelling or a fever.", "r": "Thank you — that's clear.", "mood": -2, "mark": "Explains renal follow-up and safety-netting" },
-            { "t": "No risk at all.", "r": "OK.", "mood": 0 }
+            { "t": "Sometimes it affects the kidneys, usually mildly, so we check his urine and blood pressure now and regularly for about 6 months. Come back straight away if he gets severe tummy pain, blood in his poo, dark urine, swelling or a fever.", "tz": "有時會影響個腎，通常都係輕微，所以我哋而家同之後大概六個月，都會定期驗小便同量血壓。如果佢好劇烈肚痛、大便有血、小便好深色、腫或者發燒，就要即刻返嚟。", "rz": "多謝你——好清楚。", "r": "Thank you — that's clear.", "mood": -2, "mark": "Explains renal follow-up and safety-netting" },
+            { "t": "No risk at all.", "tz": "完全冇風險。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         }
       ]

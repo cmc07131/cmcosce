@@ -72,8 +72,8 @@
       "label": "Discharge advice",
       "hint": "Elevation, finger exercises, cast care, warning signs, fracture clinic.",
       "opts": [
-        { "t": "Elevate, move your fingers, keep the plaster dry; come back at once for severe pain, numb or blue fingers; fracture clinic in 1 week with an X-ray", "mark": "Discharge advice with warning signs and follow-up" },
-        { "t": "Bone health assessment (fragility fracture)", "mark": "Considers osteoporosis assessment" }
+        { "t": "Elevate, move your fingers, keep the plaster dry; come back at once for severe pain, numb or blue fingers; fracture clinic in 1 week with an X-ray", "tz": "隻手要舉高，郁吓啲手指，石膏要保持乾爽。如果好痛、手指麻痺或者變藍，要即刻返嚟。一個禮拜後去骨科門診，照 X 光。", "mark": "Discharge advice with warning signs and follow-up" },
+        { "t": "Bone health assessment (fragility fracture)", "tz": "你跌一跌就斷骨，可能有骨質疏鬆，我哋會安排檢查你嘅骨骼健康。", "mark": "Considers osteoporosis assessment" }
       ]
     },
     {

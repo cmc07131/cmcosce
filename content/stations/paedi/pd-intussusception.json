@@ -17,17 +17,17 @@
       "hint": "Pattern of crying, vomit colour, stool, feeding, wet nappies, fever, previous illness.",
       "groups": {
         "Pain": [
-          { "t": "What are the crying episodes like?", "r": "Every 15–20 minutes he screams, pulls his legs up, then goes pale and sleepy.", "mark": "Elicits episodic colicky pain with lethargy between" },
-          { "t": "What colour is the vomit?", "r": "Milk at first, now greenish.", "mark": "Asks vomit colour (bilious)" }
+          { "t": "What are the crying episodes like?", "tz": "佢喊嗰陣係點樣？", "rz": "每十五至二十分鐘就尖叫，雙腳縮起，之後就面青青、好眼瞓。", "r": "Every 15–20 minutes he screams, pulls his legs up, then goes pale and sleepy.", "mark": "Elicits episodic colicky pain with lethargy between" },
+          { "t": "What colour is the vomit?", "tz": "佢嘔嘅嘢係咩色？", "rz": "一開始係奶，而家有啲綠色。", "r": "Milk at first, now greenish.", "mark": "Asks vomit colour (bilious)" }
         ],
         "Stool": [
-          { "t": "What did the nappy look like?", "r": "Red and jelly-like.", "mark": "Asks about redcurrant jelly stool" },
-          { "t": "Diarrhoea before this?", "r": "No." }
+          { "t": "What did the nappy look like?", "tz": "佢片尿片係點樣？", "rz": "紅色，好似啫喱咁。", "r": "Red and jelly-like.", "mark": "Asks about redcurrant jelly stool" },
+          { "t": "Diarrhoea before this?", "tz": "之前有冇肚屙？", "rz": "冇。", "r": "No." }
         ],
         "Hydration": [
-          { "t": "Feeding and wet nappies", "r": "Refusing milk. One wet nappy since morning.", "mark": "Assesses intake and urine output" }
+          { "t": "Feeding and wet nappies", "tz": "佢食奶點？有幾多片濕尿片？", "rz": "唔肯飲奶。由朝早到而家得一片濕尿片。", "r": "Refusing milk. One wet nappy since morning.", "mark": "Assesses intake and urine output" }
         ],
-        "Background": [{ "t": "Recent illness, previous problems, vaccines", "r": "A cold last week. Fully vaccinated, rotavirus included.", "mark": "Asks recent viral illness and immunisation" }]
+        "Background": [{ "t": "Recent illness, previous problems, vaccines", "tz": "最近有冇病過？以前有冇咩問題？打齊針未？", "rz": "上個禮拜傷風。打齊晒針，包括輪狀病毒。", "r": "A cold last week. Fully vaccinated, rotavirus included.", "mark": "Asks recent viral illness and immunisation" }]
       }
     },
     {

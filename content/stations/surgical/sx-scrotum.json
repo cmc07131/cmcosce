@@ -16,10 +16,10 @@
       "hint": "Onset, time, vomiting, previous episodes, urinary symptoms, sexual history, trauma.",
       "groups": {
         "Pain": [
-          { "t": "When exactly did it start and how?", "r": "Woke me at 5 a.m. — suddenly, very bad.", "mark": "Establishes sudden onset and time" },
-          { "t": "Any similar short episodes before?", "r": "A couple of brief ones last month that went away.", "mark": "Asks about intermittent torsion episodes" },
-          { "t": "Burning urine, discharge, sexual activity?", "r": "No.", "mark": "Asks urinary and sexual history (epididymo-orchitis)" },
-          { "t": "Any injury?", "r": "No." }
+          { "t": "When exactly did it start and how?", "tz": "具體幾時開始？點樣開始？", "rz": "朝早五點痛醒——突然間好痛。", "r": "Woke me at 5 a.m. — suddenly, very bad.", "mark": "Establishes sudden onset and time" },
+          { "t": "Any similar short episodes before?", "tz": "以前有冇試過短時間咁痛？", "rz": "上個月試過兩次，好快就冇事。", "r": "A couple of brief ones last month that went away.", "mark": "Asks about intermittent torsion episodes" },
+          { "t": "Burning urine, discharge, sexual activity?", "tz": "小便有冇刺痛？有冇分泌物？最近有冇性行為？", "rz": "冇。", "r": "No.", "mark": "Asks urinary and sexual history (epididymo-orchitis)" },
+          { "t": "Any injury?", "tz": "有冇撞傷？", "rz": "冇。", "r": "No." }
         ]
       }
     },

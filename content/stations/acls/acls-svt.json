@@ -89,9 +89,9 @@
       "label": "Talk to Ms Ip",
       "hint": "Explain, teach the manoeuvre, refer to cardiology for ablation.",
       "opts": [
-        { "t": "Explain WPW; cardiology referral for an electrophysiology study and ablation", "mark": "Refers WPW to cardiology" },
-        { "t": "Teach her the modified Valsalva for future episodes; return if it fails or she feels faint", "mark": "Safety-netting and self-management" },
-        { "t": "Start regular verapamil to prevent episodes", "trap": true, "r": "AV-node blockers can be dangerous with pre-excitation if AF develops." }
+        { "t": "Explain WPW; cardiology referral for an electrophysiology study and ablation", "tz": "你心電圖見到有一條額外嘅電線路，叫 WPW，所以心跳會突然好快。我會轉介你去心臟科，做電生理檢查，可能可以用導管燒斷條額外線路。", "mark": "Refers WPW to cardiology" },
+        { "t": "Teach her the modified Valsalva for future episodes; return if it fails or she feels faint", "tz": "我教你一個方法：用力谷氣十五秒，然後即刻瞓低、對腳舉高。下次再心跳快可以試吓；如果唔得，或者覺得就嚟暈，就要即刻返嚟。", "mark": "Safety-netting and self-management" },
+        { "t": "Start regular verapamil to prevent episodes", "tz": "我開 verapamil 俾你日日食，預防再發作。", "trap": true, "r": "AV-node blockers can be dangerous with pre-excitation if AF develops." }
       ]
     },
     {

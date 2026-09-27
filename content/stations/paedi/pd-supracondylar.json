@@ -40,10 +40,10 @@
       "label": "Plan",
       "hint": "Analgesia, backslab not tight, elevate, orthopaedics for reduction and wiring, AIN palsy usually recovers.",
       "opts": [
-        { "t": "Pain relief (intranasal fentanyl), a backslab with the elbow not over-flexed, elevation", "mark": "Analgesia, backslab and elevation" },
-        { "t": "Orthopaedics for reduction and wiring; the nerve weakness usually recovers over weeks to months", "mark": "Refers for reduction; explains AIN palsy prognosis" },
-        { "t": "Watch for severe pain, numbness, pale or cold fingers — tell the nurse at once", "mark": "Explains compartment syndrome warning signs" },
-        { "t": "A tight full cast with the elbow fully bent", "trap": "critical", "r": "Hyperflexion and tight casts risk compartment syndrome and vascular compromise." }
+        { "t": "Pain relief (intranasal fentanyl), a backslab with the elbow not over-flexed, elevation", "tz": "我哋會用鼻噴止痛藥俾佢止痛，再用石膏托固定，手踭唔會屈得太盡，同埋舉高隻手。", "mark": "Analgesia, backslab and elevation" },
+        { "t": "Orthopaedics for reduction and wiring; the nerve weakness usually recovers over weeks to months", "tz": "骨科醫生會幫佢將骨駁返正，再用鋼針固定；佢手指嗰啲神經冇力，通常幾個禮拜至幾個月會好返。", "mark": "Refers for reduction; explains AIN palsy prognosis" },
+        { "t": "Watch for severe pain, numbness, pale or cold fingers — tell the nurse at once", "tz": "如果佢好痛、手指麻痺、變白或者凍冰冰，要即刻話俾護士知。", "mark": "Explains compartment syndrome warning signs" },
+        { "t": "A tight full cast with the elbow fully bent", "tz": "打一個緊啲嘅全手石膏，手踭屈到盡。", "trap": "critical", "r": "Hyperflexion and tight casts risk compartment syndrome and vascular compromise." }
       ]
     },
     {

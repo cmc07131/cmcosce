@@ -80,10 +80,10 @@
       "mood": 7,
       "turns": [
         {
-          "line": "Is he going to die? What's happening?",
+          "line": "Is he going to die? What's happening?", "lz": "佢會唔會死㗎？發生咩事？",
           "opts": [
-            { "t": "He is very unwell with a serious blood infection. We are giving antibiotics and fluids now, and the intensive care team is coming. You can stay with him.", "r": "OK… please help him.", "mood": -3, "mark": "Explains honestly and simply; lets the parent stay" },
-            { "t": "Please wait outside.", "r": "No! I'm not leaving him!", "mood": 3 }
+            { "t": "He is very unwell with a serious blood infection. We are giving antibiotics and fluids now, and the intensive care team is coming. You can stay with him.", "tz": "佢而家好唔妥，血液有嚴重細菌感染。我哋而家即刻俾抗生素同埋吊鹽水，深切治療部嘅醫生都嚟緊。你可以留喺佢身邊。", "rz": "好……求吓你救佢。", "r": "OK… please help him.", "mood": -3, "mark": "Explains honestly and simply; lets the parent stay" },
+            { "t": "Please wait outside.", "tz": "唔該你出去等。", "rz": "唔要！我唔會走！", "r": "No! I'm not leaving him!", "mood": 3 }
           ]
         }
       ]

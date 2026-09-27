@@ -22,17 +22,17 @@
       "mood": 9,
       "turns": [
         {
-          "line": "GET AWAY FROM ME! Where am I? You've kidnapped me!",
+          "line": "GET AWAY FROM ME! Where am I? You've kidnapped me!", "lz": "走開呀！呢度係邊度？你哋綁架我！",
           "opts": [
-            { "t": "[From a safe distance, door behind me, calm voice] Sir, I'm Dr Chan. You're in the hospital. You're safe. What's your name?", "r": "…Kong. Why am I in hospital?", "mood": -3, "mark": "Keeps a safe distance, introduces self, orientates calmly" },
-            { "t": "[Walks up close] Sit down NOW!", "r": "[Swings a fist]", "mood": 1 }
+            { "t": "[From a safe distance, door behind me, calm voice] Sir, I'm Dr Chan. You're in the hospital. You're safe. What's your name?", "tz": "（企喺安全距離，背後係門口，語氣平靜）先生，我係陳醫生。你而家喺醫院，你好安全。你叫咩名呀？", "rz": "……江。點解我會喺醫院？", "r": "…Kong. Why am I in hospital?", "mood": -3, "mark": "Keeps a safe distance, introduces self, orientates calmly" },
+            { "t": "[Walks up close] Sit down NOW!", "tz": "（行埋去好近）即刻坐低！", "rz": "（揮拳）", "r": "[Swings a fist]", "mood": 1 }
           ]
         },
         {
-          "line": "…Kong. Why am I in hospital?",
+          "line": "…Kong. Why am I in hospital?", "lz": "……江。點解我會喺醫院？",
           "opts": [
-            { "t": "You were found lying on the street and you've hurt your head. I'd like to help. Would you sit down and let us check your sugar with a small finger prick?", "r": "…My head hurts. OK… fine.", "mood": -3, "mark": "Offers a clear choice and a reason" },
-            { "t": "Because you're drunk.", "r": "I'm NOT drunk!", "mood": 2 }
+            { "t": "You were found lying on the street and you've hurt your head. I'd like to help. Would you sit down and let us check your sugar with a small finger prick?", "tz": "有人發現你瞓咗喺街，你撞傷咗個頭。我想幫你。你坐低，俾我哋篤少少手指驗吓血糖，好唔好？", "rz": "……我個頭好痛。好……好啦。", "r": "…My head hurts. OK… fine.", "mood": -3, "mark": "Offers a clear choice and a reason" },
+            { "t": "Because you're drunk.", "tz": "因為你飲醉咗。", "rz": "我冇醉呀！", "r": "I'm NOT drunk!", "mood": 2 }
           ]
         }
       ]

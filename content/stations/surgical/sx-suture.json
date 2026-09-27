@@ -49,9 +49,9 @@
       "label": "Aftercare",
       "hint": "Tetanus, suture removal time, wound care, infection signs.",
       "opts": [
-        { "t": "Tetanus: last dose 15 years ago and a dirty wound → booster (and immunoglobulin if high-risk and not fully immunised)", "mark": "Tetanus assessment" },
-        { "t": "Remove sutures at 10–14 days (lower leg); keep dry for 48 hours; elevate the leg", "mark": "Suture removal timing and wound care" },
-        { "t": "Return for redness, pus, fever or increasing pain", "mark": "Infection advice" }
+        { "t": "Tetanus: last dose 15 years ago and a dirty wound → booster (and immunoglobulin if high-risk and not fully immunised)", "tz": "你上次打破傷風針係十五年前，個傷口又污糟，所以今日要打多支加強針。", "mark": "Tetanus assessment" },
+        { "t": "Remove sutures at 10–14 days (lower leg); keep dry for 48 hours; elevate the leg", "tz": "小腿嘅線要十至十四日先拆；頭兩日唔好整濕；隻腳要墊高。", "mark": "Suture removal timing and wound care" },
+        { "t": "Return for redness, pus, fever or increasing pain", "tz": "如果傷口紅腫、有膿、發燒，或者越嚟越痛，就要返嚟。", "mark": "Infection advice" }
       ]
     },
     {

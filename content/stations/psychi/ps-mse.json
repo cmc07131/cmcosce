@@ -19,15 +19,15 @@
       "hint": "Presenting problem, psychiatric and medical history, drugs and alcohol, social, forensic.",
       "groups": {
         "Now": [
-          { "t": "Can you tell me what's been happening?", "r": "[Long pause] …Nothing matters any more. I haven't been out for weeks.", "mark": "Opens with an open question" },
-          { "t": "Sleep, appetite, energy, enjoyment?", "r": "Wake at 3 every morning. Not eating. No energy. Nothing I used to enjoy.", "mark": "Asks core depressive symptoms" }
+          { "t": "Can you tell me what's been happening?", "tz": "你可唔可以講吓最近發生咩事？", "rz": "（停咗好耐）……乜都冇所謂喇。我幾個禮拜冇出過街。", "r": "[Long pause] …Nothing matters any more. I haven't been out for weeks.", "mark": "Opens with an open question" },
+          { "t": "Sleep, appetite, energy, enjoyment?", "tz": "瞓覺、胃口、精神點呀？仲有冇嘢令你開心？", "rz": "每朝三點就醒。唔想食嘢。冇精神。以前鍾意做嘅嘢，而家都冇興趣。", "r": "Wake at 3 every morning. Not eating. No energy. Nothing I used to enjoy.", "mark": "Asks core depressive symptoms" }
         ],
         "Background": [
-          { "t": "Have you had problems with your mood before? Any treatment?", "r": "After my wife died two years ago. Tablets for a while; I stopped them.", "mark": "Past psychiatric history" },
-          { "t": "Physical health and medicines", "r": "Blood pressure tablets. Haven't taken them lately.", "mark": "Past medical and drug history" },
-          { "t": "Alcohol or drugs?", "r": "A bottle of whisky a week. Less now, can't be bothered.", "mark": "Alcohol and substance history" },
-          { "t": "Who's around you? Work? Money?", "r": "Live alone. Retired. My son is in Canada.", "mark": "Social history" },
-          { "t": "Any trouble with the police?", "r": "No.", "mark": "Forensic history" }
+          { "t": "Have you had problems with your mood before? Any treatment?", "tz": "你以前情緒有冇出過問題？有冇接受過治療？", "rz": "兩年前老婆過咗身之後有。食過一排藥；之後停咗。", "r": "After my wife died two years ago. Tablets for a while; I stopped them.", "mark": "Past psychiatric history" },
+          { "t": "Physical health and medicines", "tz": "身體健康點？食緊咩藥？", "rz": "食緊血壓藥。最近冇食。", "r": "Blood pressure tablets. Haven't taken them lately.", "mark": "Past medical and drug history" },
+          { "t": "Alcohol or drugs?", "tz": "有冇飲酒或者用藥物？", "rz": "一個禮拜一支威士忌。而家少咗，懶得飲。", "r": "A bottle of whisky a week. Less now, can't be bothered.", "mark": "Alcohol and substance history" },
+          { "t": "Who's around you? Work? Money?", "tz": "身邊有邊個照顧你？做咩工作？經濟有冇問題？", "rz": "一個人住。退休咗。個仔喺加拿大。", "r": "Live alone. Retired. My son is in Canada.", "mark": "Social history" },
+          { "t": "Any trouble with the police?", "tz": "有冇同警察有過麻煩？", "rz": "冇。", "r": "No.", "mark": "Forensic history" }
         ]
       }
     },

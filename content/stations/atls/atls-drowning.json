@@ -33,9 +33,9 @@
       "hint": "How long under, diving?, what was done, when.",
       "groups": {
         "Event": [
-          { "t": "How long was he under?", "r": "Not sure — maybe 5 minutes. He was found at the bottom of the deep end.", "mark": "Asks the submersion time" },
-          { "t": "Did he dive in or hit anything?", "r": "No diving there. No marks on him.", "mark": "Asks about diving or trauma (spinal risk)" },
-          { "t": "What did you do and when?", "r": "Pulled him out, no breathing, gave rescue breaths and CPR at once. Water came up. About 15 minutes of CPR.", "mark": "Asks what CPR was done and for how long" }
+          { "t": "How long was he under?", "tz": "佢喺水底浸咗幾耐？", "rz": "唔肯定——可能五分鐘左右。喺深水嗰邊池底搵到佢。", "r": "Not sure — maybe 5 minutes. He was found at the bottom of the deep end.", "mark": "Asks the submersion time" },
+          { "t": "Did he dive in or hit anything?", "tz": "佢有冇跳水，或者撞到嘢？", "rz": "嗰邊唔准跳水。佢身上冇傷痕。", "r": "No diving there. No marks on him.", "mark": "Asks about diving or trauma (spinal risk)" },
+          { "t": "What did you do and when?", "tz": "你哋做咗啲咩？幾時做？", "rz": "拉咗佢上嚟，佢冇呼吸，即刻做人工呼吸同 CPR。佢嘔咗啲水出嚟。做咗大概十五分鐘 CPR。", "r": "Pulled him out, no breathing, gave rescue breaths and CPR at once. Water came up. About 15 minutes of CPR.", "mark": "Asks what CPR was done and for how long" }
         ]
       }
     },

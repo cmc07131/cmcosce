@@ -17,12 +17,12 @@
       "hint": "Onset, cold, fever, drooling, choking episode, immunisation, previous croup.",
       "groups": {
         "Illness": [
-          { "t": "When did the noisy breathing start? Any cold before?", "r": "Runny nose for 2 days, then barky cough tonight.", "mark": "Asks onset and preceding URTI" },
-          { "t": "Drooling, can't swallow, very high fever?", "r": "No drooling, drinking milk, mild fever.", "mark": "Screens for epiglottitis" },
-          { "t": "Any choking on food or a toy before it started?", "r": "No.", "mark": "Screens for foreign body" }
+          { "t": "When did the noisy breathing start? Any cold before?", "tz": "佢幾時開始呼吸有聲？之前有冇傷風？", "rz": "流咗兩日鼻水，今晚開始咳到好似狗吠咁。", "r": "Runny nose for 2 days, then barky cough tonight.", "mark": "Asks onset and preceding URTI" },
+          { "t": "Drooling, can't swallow, very high fever?", "tz": "佢有冇流口水、吞唔到嘢，或者發高燒？", "rz": "冇流口水，有飲奶，有少少燒。", "r": "No drooling, drinking milk, mild fever.", "mark": "Screens for epiglottitis" },
+          { "t": "Any choking on food or a toy before it started?", "tz": "開始之前有冇俾嘢食或者玩具哽親？", "rz": "冇。", "r": "No.", "mark": "Screens for foreign body" }
         ],
         "Background": [
-          { "t": "Vaccinations, previous episodes, prematurity", "r": "Fully vaccinated. Term baby. First time.", "mark": "Asks immunisations and history" }
+          { "t": "Vaccinations, previous episodes, prematurity", "tz": "佢打齊針未？以前有冇試過？係咪早產？", "rz": "打齊晒針。足月出世。第一次咁。", "r": "Fully vaccinated. Term baby. First time.", "mark": "Asks immunisations and history" }
         ]
       }
     },

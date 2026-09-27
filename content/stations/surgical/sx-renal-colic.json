@@ -15,16 +15,16 @@
       "label": "History",
       "hint": "Analgesia first, SOCRATES, urinary symptoms, fever, LMP/pregnancy, previous stones, PMH, drugs.",
       "groups": {
-        "Start": [{ "t": "Offer analgesia first", "r": "Yes please — it's unbearable.", "mark": "Offers analgesia" }],
+        "Start": [{ "t": "Offer analgesia first", "tz": "我哋先俾止痛藥你，好唔好？", "rz": "好呀——痛到頂唔順。", "r": "Yes please — it's unbearable.", "mark": "Offers analgesia" }],
         "Pain": [
-          { "t": "Where and what is the pain like?", "r": "Left loin, comes in waves, into my groin. Can't keep still.", "mark": "Characterises colicky loin-to-groin pain" },
-          { "t": "Urinary symptoms: blood, burning, frequency?", "r": "Pinkish urine.", "mark": "Asks about haematuria and urinary symptoms" },
-          { "t": "Fever or rigors?", "r": "No.", "mark": "Asks about fever (infected obstruction)" }
+          { "t": "Where and what is the pain like?", "tz": "痛喺邊度？點樣痛法？", "rz": "左邊腰，一陣陣咁痛，痛到落大髀罅。成個人坐唔定。", "r": "Left loin, comes in waves, into my groin. Can't keep still.", "mark": "Characterises colicky loin-to-groin pain" },
+          { "t": "Urinary symptoms: blood, burning, frequency?", "tz": "小便有冇血、刺痛，或者特別頻密？", "rz": "小便有啲粉紅色。", "r": "Pinkish urine.", "mark": "Asks about haematuria and urinary symptoms" },
+          { "t": "Fever or rigors?", "tz": "有冇發燒或者發冷震？", "rz": "冇。", "r": "No.", "mark": "Asks about fever (infected obstruction)" }
         ],
         "Other": [
-          { "t": "Last period; could you be pregnant?", "r": "LMP a week ago; not pregnant.", "mark": "Asks LMP and pregnancy" },
-          { "t": "Previous stones; kidney disease; one kidney?", "r": "First time. Two kidneys as far as I know.", "mark": "Asks previous stones and solitary kidney" },
-          { "t": "Medicines, allergies, asthma, stomach ulcers?", "r": "None.", "mark": "Asks contraindications to NSAIDs" }
+          { "t": "Last period; could you be pregnant?", "tz": "你上次月經係幾時？有冇機會有咗？", "rz": "一個禮拜前嚟過；冇有咗。", "r": "LMP a week ago; not pregnant.", "mark": "Asks LMP and pregnancy" },
+          { "t": "Previous stones; kidney disease; one kidney?", "tz": "以前有冇試過腎石？有冇腎病？係咪得一個腎？", "rz": "第一次。就我所知有兩個腎。", "r": "First time. Two kidneys as far as I know.", "mark": "Asks previous stones and solitary kidney" },
+          { "t": "Medicines, allergies, asthma, stomach ulcers?", "tz": "你食緊咩藥？有冇敏感、哮喘或者胃潰瘍？", "rz": "冇。", "r": "None.", "mark": "Asks contraindications to NSAIDs" }
         ]
       }
     },
@@ -52,10 +52,10 @@
       "label": "Explain",
       "hint": "Stone diagnosis, NSAID, tamsulosin, fluids, strain urine, return advice, urology follow-up.",
       "opts": [
-        { "t": "A 6 mm stone near the bladder; most this size pass within weeks", "mark": "Explains diagnosis and likelihood of passage" },
-        { "t": "NSAID analgesia; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone", "mark": "NSAID, alpha-blocker, fluids and straining" },
-        { "t": "Return at once with fever, rigors, vomiting, or uncontrolled pain; urology follow-up and repeat imaging", "mark": "Safety-netting (infected obstructed kidney) and follow-up" },
-        { "t": "Buscopan for the colic", "trap": true, "r": "Antispasmodics are not recommended (NICE)." }
+        { "t": "A 6 mm stone near the bladder; most this size pass within weeks", "tz": "你有一粒六毫米嘅石，喺近膀胱嗰度；呢個大細嘅石，大部分幾個禮拜內會自己排出嚟。", "mark": "Explains diagnosis and likelihood of passage" },
+        { "t": "NSAID analgesia; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone", "tz": "我會開消炎止痛藥，同埋 tamsulosin 幫粒石排出嚟。飲多啲水，小便嗰陣用隔篩隔吓，搵到粒石就留低。", "mark": "NSAID, alpha-blocker, fluids and straining" },
+        { "t": "Return at once with fever, rigors, vomiting, or uncontrolled pain; urology follow-up and repeat imaging", "tz": "如果發燒、發冷震、嘔，或者痛到止唔到，要即刻返嚟。之後泌尿科會跟進，再照一次。", "mark": "Safety-netting (infected obstructed kidney) and follow-up" },
+        { "t": "Buscopan for the colic", "tz": "我開 Buscopan 俾你止絞痛。", "trap": true, "r": "Antispasmodics are not recommended (NICE)." }
       ]
     },
     {

@@ -31,17 +31,17 @@
       "hint": "Short and targeted: LMP, pain, bleeding, shoulder tip, risk factors.",
       "groups": {
         "Pregnancy": [
-          { "t": "When was your last period? Could you be pregnant?", "r": "Seven weeks ago. I did a test last week — positive.", "mark": "Establishes a positive pregnancy and gestation" },
-          { "t": "Any scan yet this pregnancy?", "r": "No, I haven't booked yet.", "mark": "Asks whether an intrauterine pregnancy has been confirmed" }
+          { "t": "When was your last period? Could you be pregnant?", "tz": "你上次嚟月經係幾時？有冇機會有咗？", "rz": "七個禮拜前。上個禮拜驗過——係有咗。", "r": "Seven weeks ago. I did a test last week — positive.", "mark": "Establishes a positive pregnancy and gestation" },
+          { "t": "Any scan yet this pregnancy?", "tz": "今次有咗有冇照過超聲波？", "rz": "未，我仲未登記產檢。", "r": "No, I haven't booked yet.", "mark": "Asks whether an intrauterine pregnancy has been confirmed" }
         ],
         "Symptoms": [
-          { "t": "Tell me about the pain", "r": "Sudden, sharp, left lower belly, 3 hours ago. Now all over.", "mark": "Characterises the pain" },
-          { "t": "Any pain in your shoulder?", "r": "Yes, my right shoulder tip hurts when I lie down.", "mark": "Asks about shoulder-tip pain" },
-          { "t": "How much bleeding?", "r": "Just spotting, dark." }
+          { "t": "Tell me about the pain", "tz": "講吓個痛係點樣？", "rz": "三個鐘前突然好刺痛，喺左邊下腹。而家成個肚都痛。", "r": "Sudden, sharp, left lower belly, 3 hours ago. Now all over.", "mark": "Characterises the pain" },
+          { "t": "Any pain in your shoulder?", "tz": "膊頭有冇痛？", "rz": "有，瞓低嗰陣右邊膊頭尖好痛。", "r": "Yes, my right shoulder tip hurts when I lie down.", "mark": "Asks about shoulder-tip pain" },
+          { "t": "How much bleeding?", "tz": "出血多唔多？", "rz": "得少少，深色嘅。", "r": "Just spotting, dark." }
         ],
         "Risks": [
-          { "t": "Previous ectopic, pelvic infection, tubal surgery, coil, IVF?", "r": "I had chlamydia two years ago.", "mark": "Asks ectopic risk factors" },
-          { "t": "Blood group, if known", "r": "O negative, I think." }
+          { "t": "Previous ectopic, pelvic infection, tubal surgery, coil, IVF?", "tz": "以前有冇試過宮外孕、盆腔炎、做過輸卵管手術、有冇放避孕環，或者做過人工受孕？", "rz": "兩年前有過衣原體感染。", "r": "I had chlamydia two years ago.", "mark": "Asks ectopic risk factors" },
+          { "t": "Blood group, if known", "tz": "你知唔知自己咩血型？", "rz": "我諗係 O 型 Rh 陰性。", "r": "O negative, I think." }
         ]
       }
     },

@@ -20,17 +20,17 @@
       "mood": 6,
       "turns": [
         {
-          "line": "The nurse said you need to do an internal examination?",
+          "line": "The nurse said you need to do an internal examination?", "lz": "護士話你要幫我做內診？",
           "opts": [
-            { "t": "Yes — I'd like to look at the neck of the womb with a speculum and then feel with two fingers, to find the cause of the pain. It may be uncomfortable; you can ask me to stop at any time. Is that OK?", "r": "OK… yes, that's fine.", "mood": -2, "mark": "Explains the examination and obtains consent" },
-            { "t": "Just lie back, it'll be quick.", "r": "Wait, what are you going to do?", "mood": 3 }
+            { "t": "Yes — I'd like to look at the neck of the womb with a speculum and then feel with two fingers, to find the cause of the pain. It may be uncomfortable; you can ask me to stop at any time. Is that OK?", "tz": "係——我想用鴨嘴鉗睇吓子宮頸，再用兩隻手指檢查，搵出你肚痛嘅原因。可能會有啲唔舒服；你隨時可以叫我停。可唔可以？", "rz": "好……可以嘅。", "r": "OK… yes, that's fine.", "mood": -2, "mark": "Explains the examination and obtains consent" },
+            { "t": "Just lie back, it'll be quick.", "tz": "你瞓低就得，好快㗎。", "rz": "等陣，你想做乜嘢？", "r": "Wait, what are you going to do?", "mood": 3 }
           ]
         },
         {
-          "line": "Does someone else have to be here?",
+          "line": "Does someone else have to be here?", "lz": "係咪一定要有其他人喺度？",
           "opts": [
-            { "t": "I'd like a chaperone, Nurse Chaperone, to be present; I'll note her name. I'll leave while you undress and there's a sheet to cover you.", "r": "Thank you.", "mood": -2, "mark": "Offers a chaperone and ensures privacy" },
-            { "t": "No, we don't bother with that.", "r": "I'd feel better with someone here…", "mood": 3 }
+            { "t": "I'd like a chaperone, Nurse Chaperone, to be present; I'll note her name. I'll leave while you undress and there's a sheet to cover you.", "tz": "我想請一位護士陪同喺度，我會記低佢個名。你換衫嗰陣我會出去，有張床單俾你遮住。", "rz": "多謝你。", "r": "Thank you.", "mood": -2, "mark": "Offers a chaperone and ensures privacy" },
+            { "t": "No, we don't bother with that.", "tz": "唔使喇，我哋唔搞呢啲。", "rz": "有人喺度我會安心啲……", "r": "I'd feel better with someone here…", "mood": 3 }
           ]
         }
       ]

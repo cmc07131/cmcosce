@@ -70,10 +70,10 @@
       "mood": 6,
       "turns": [
         {
-          "line": "He's gone quiet — is that good? Is the wheeze better?",
+          "line": "He's gone quiet — is that good? Is the wheeze better?", "lz": "佢靜咗落嚟喇——係咪好事嚟？係咪冇咁扯喇？",
           "opts": [
-            { "t": "When a chest goes quiet it can mean very little air is moving. He needs strong treatment now. Stay by him and keep him calm.", "r": "Oh… OK, I'll hold his hand.", "mood": -3, "mark": "Explains the silent chest honestly; keeps the parent involved" },
-            { "t": "Yes, that's much better.", "r": "Great, can we go home soon?", "mood": 1 }
+            { "t": "When a chest goes quiet it can mean very little air is moving. He needs strong treatment now. Stay by him and keep him calm.", "tz": "個胸口靜咗，有時代表入到肺嘅空氣好少。佢而家要即刻用強啲嘅藥。你陪住佢，令佢冷靜啲。", "rz": "哦……好，我拖住佢隻手。", "r": "Oh… OK, I'll hold his hand.", "mood": -3, "mark": "Explains the silent chest honestly; keeps the parent involved" },
+            { "t": "Yes, that's much better.", "tz": "係呀，好好多喇。", "rz": "好嘢，係咪就快可以返屋企？", "r": "Great, can we go home soon?", "mood": 1 }
           ]
         }
       ]

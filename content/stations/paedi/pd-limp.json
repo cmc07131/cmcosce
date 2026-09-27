@@ -46,9 +46,9 @@
       "label": "Explain",
       "hint": "SUFE, stop weight-bearing now, orthopaedics urgently, other hip.",
       "opts": [
-        { "t": "The growth plate at the top of his thigh bone has slipped. He must not put weight on it — crutches or a wheelchair now — and the orthopaedic team will fix it with a pin, usually today or tomorrow.", "mark": "Explains SUFE and immediate non-weight-bearing" },
-        { "t": "The other hip can slip too, so it will be checked and watched", "mark": "Mentions the contralateral hip" },
-        { "t": "Physio and review in 6 weeks", "trap": "critical", "r": "Further slip risks avascular necrosis. This is urgent." }
+        { "t": "The growth plate at the top of his thigh bone has slipped. He must not put weight on it — crutches or a wheelchair now — and the orthopaedic team will fix it with a pin, usually today or tomorrow.", "tz": "佢大髀骨頂嗰塊生長板滑咗位。佢而家唔可以用嗰隻腳承重——要用拐杖或者輪椅，骨科醫生會用鋼針固定，通常今日或者聽日做手術。", "mark": "Explains SUFE and immediate non-weight-bearing" },
+        { "t": "The other hip can slip too, so it will be checked and watched", "tz": "另一邊髖關節都有機會滑，所以我哋都會檢查同跟進。", "mark": "Mentions the contralateral hip" },
+        { "t": "Physio and review in 6 weeks", "tz": "做物理治療，六個禮拜後覆診。", "trap": "critical", "r": "Further slip risks avascular necrosis. This is urgent." }
       ]
     },
     {

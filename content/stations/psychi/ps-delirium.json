@@ -19,13 +19,13 @@
       "hint": "Baseline, onset, fluctuation, new medicines, infection symptoms, falls, alcohol.",
       "groups": {
         "Baseline": [
-          { "t": "What is she normally like?", "r": "Sharp! Lives with me, does the shopping, plays mahjong.", "mark": "Establishes baseline cognition and function" },
-          { "t": "When did this start? Is it the same all day?", "r": "Two days ago, suddenly. Worse at night; some hours she's almost normal.", "mark": "Establishes acute onset and fluctuation" }
+          { "t": "What is she normally like?", "tz": "佢平時係點樣嘅？", "rz": "好精㗎！同我住，自己去買餸，仲會打麻雀。", "r": "Sharp! Lives with me, does the shopping, plays mahjong.", "mark": "Establishes baseline cognition and function" },
+          { "t": "When did this start? Is it the same all day?", "tz": "幾時開始變成咁？成日都一樣嘅？", "rz": "兩日前突然間變嘅。夜晚差啲；有啲時候又差唔多正常。", "r": "Two days ago, suddenly. Worse at night; some hours she's almost normal.", "mark": "Establishes acute onset and fluctuation" }
         ],
         "Causes": [
-          { "t": "Any fever, cough, passing urine more, pain, constipation?", "r": "Going to the toilet a lot, smells strong. Hasn't opened her bowels for 4 days.", "mark": "Screens for infection and constipation" },
-          { "t": "Any new medicines?", "r": "The GP started a bladder tablet (oxybutynin) last week.", "mark": "Asks about new medicines (anticholinergic)" },
-          { "t": "Falls or head injury? Alcohol?", "r": "No falls. No alcohol.", "mark": "Asks about falls and alcohol" }
+          { "t": "Any fever, cough, passing urine more, pain, constipation?", "tz": "佢有冇發燒、咳、多咗去廁所、邊度痛，或者便秘？", "rz": "成日去廁所，小便好臭。四日冇大過便。", "r": "Going to the toilet a lot, smells strong. Hasn't opened her bowels for 4 days.", "mark": "Screens for infection and constipation" },
+          { "t": "Any new medicines?", "tz": "最近有冇食新嘅藥？", "rz": "家庭醫生上個禮拜開咗隻膀胱藥（oxybutynin）俾佢。", "r": "The GP started a bladder tablet (oxybutynin) last week.", "mark": "Asks about new medicines (anticholinergic)" },
+          { "t": "Falls or head injury? Alcohol?", "tz": "有冇跌親或者撞到頭？有冇飲酒？", "rz": "冇跌過。唔飲酒。", "r": "No falls. No alcohol.", "mark": "Asks about falls and alcohol" }
         ]
       }
     },

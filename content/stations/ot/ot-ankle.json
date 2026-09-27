@@ -44,9 +44,9 @@
       "label": "Explain",
       "hint": "Stable Weber B: boot, weight-bear as tolerated, fracture clinic; safety-net.",
       "opts": [
-        { "t": "A break of the outer ankle bone, but the joint is lined up and stable. A walking boot, weight-bear as comfortable, pain relief, fracture clinic in a week, and a repeat X-ray.", "mark": "Explains a stable Weber B and its management" },
-        { "t": "Elevate, move the toes, come back for severe pain, numbness or calf swelling (clot risk)", "mark": "Safety-netting including VTE" },
-        { "t": "Non-weight-bearing in a full plaster for 6 weeks", "trap": true, "r": "A stable Weber B does well in a boot with early weight-bearing." }
+        { "t": "A break of the outer ankle bone, but the joint is lined up and stable. A walking boot, weight-bear as comfortable, pain relief, fracture clinic in a week, and a repeat X-ray.", "tz": "你外踝嗰條骨斷咗，不過關節對得好正，亦都穩定。會俾你著一隻行路靴，唔痛就可以落地行，食止痛藥。一個禮拜後去骨科門診，再照 X 光。", "mark": "Explains a stable Weber B and its management" },
+        { "t": "Elevate, move the toes, come back for severe pain, numbness or calf swelling (clot risk)", "tz": "隻腳要墊高，郁吓啲腳趾。如果好痛、麻痺，或者小腿腫，就要即刻返嚟，因為有機會係血栓。", "mark": "Safety-netting including VTE" },
+        { "t": "Non-weight-bearing in a full plaster for 6 weeks", "tz": "要打全腳石膏，六個禮拜唔可以落地。", "trap": true, "r": "A stable Weber B does well in a boot with early weight-bearing." }
       ]
     },
     {
