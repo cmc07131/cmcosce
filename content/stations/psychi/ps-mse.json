@@ -72,21 +72,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Mood versus affect?", "a": "Mood is reported by the patient; affect is observed", "wrong": ["They are identical", "Affect is reported by relatives", "Mood is only recorded in mania"] },
-        { "q": "Nihilistic delusion example?", "a": "Belief that one's organs are rotting or one is dead", "wrong": ["Belief of being followed", "Belief of special powers", "Hearing a commenting voice"] },
-        { "q": "Does NICE NG225 support SAD PERSONS to decide discharge?", "a": "No — do not use risk scales to predict suicide or decide treatment", "wrong": ["Yes, score over 6 admits", "Yes, for all over 45", "Only in the ED"] },
-        { "q": "Organic cause of depressive symptoms to exclude?", "a": "Hypothyroidism", "wrong": ["Hyperkalaemia", "Gout", "Asthma"] },
-        { "q": "Psychomotor retardation means…", "a": "Slowed thought and movement", "wrong": ["Learning disability", "Restlessness", "Tremor"] }
+        { "q": "Mood versus affect?", "a": "Mood is reported; affect is observed", "wrong": ["They mean the same thing", "Affect is what the relatives report at home", "Mood is only recorded in mania"] },
+        { "q": "Nihilistic delusion example?", "a": "Belief that one is dead or rotting", "wrong": ["Belief of being followed by the police", "Belief of having special powers", "Hearing a voice commenting on actions"] },
+        { "q": "Does NICE NG225 support SAD PERSONS to decide discharge?", "a": "No — do not use risk scales to decide care", "wrong": ["Yes — a score of 7 or more means admission is needed", "Yes, for everyone over 45 years old", "Only in the ED, not on the wards"] },
+        { "q": "Organic cause of depressive symptoms to exclude?", "a": "Hypothyroidism", "wrong": ["Hyperkalaemia", "Gouty arthritis", "Allergic rhinitis"] },
+        { "q": "Psychomotor retardation means…", "a": "Slowed thought and movement", "wrong": ["A learning disability", "Restlessness, pacing and hand-wringing", "A fine resting tremor"] }
       ]
     }
   ],
   "badge": { "name": "ASEPTIC", "emoji": "🧠", "flavor": "Appearance to cognition, then risk and a plan." },
   "cards": [
-    { "q": "The 'T' in ASEPTIC covers…", "options": ["Thought form and content", "Temperature", "Tone of voice", "Tremor"], "why": "Including suicidal and homicidal thoughts.", "source": "MSE teaching" },
+    { "q": "The 'T' in ASEPTIC covers…", "options": ["Thought form and content", "Tone and volume of voice", "Tremor and movements", "Temperature and vitals"], "why": "Including suicidal and homicidal thoughts.", "source": "MSE teaching" },
     { "q": "Flight of ideas is typical of…", "options": ["Mania", "Depression", "Dementia", "Delirium tremens only"], "why": "Rapid shifts with connections.", "source": "MSE teaching" },
-    { "q": "Visual hallucinations suggest…", "options": ["An organic cause (delirium, drugs, Lewy body)", "Schizophrenia typically", "Depression", "Anxiety"], "why": "Auditory hallucinations are typical of schizophrenia.", "source": "MSE teaching" },
-    { "q": "Insight is…", "options": ["Awareness of illness and need for treatment", "Intelligence", "Orientation", "Memory"], "why": "Relevant to capacity and engagement.", "source": "MSE teaching" },
+    { "q": "Visual hallucinations suggest…", "options": ["An organic cause (delirium, drugs, Lewy body)", "Schizophrenia, most typically", "Severe depression", "Anxiety disorder"], "why": "Auditory hallucinations are typical of schizophrenia.", "source": "MSE teaching" },
+    { "q": "Insight is…", "options": ["Awareness of illness and need for treatment", "Intelligence, judged by the level of education", "Orientation to time and place", "Memory for recent events"], "why": "Relevant to capacity and engagement.", "source": "MSE teaching" },
     { "q": "Mood-congruent psychotic features in depression include…", "options": ["Guilt and nihilistic delusions", "Grandiose delusions", "Thought broadcasting only", "Visual hallucinations of animals"], "why": "Psychotic depression needs urgent treatment.", "source": "NICE NG222" },
-    { "q": "Risk assessment in self-harm (NICE NG225) should…", "options": ["Be a psychosocial assessment, not a score", "Use SAD PERSONS to decide admission", "Be skipped if sober", "Only include previous attempts"], "why": "Scales predict poorly.", "source": "NICE NG225" }
+    { "q": "Risk assessment in self-harm (NICE NG225) should…", "options": ["Be a psychosocial assessment, not a score", "Use SAD PERSONS, admitting everyone who scores over 6", "Be skipped if the patient is sober", "Only include previous attempts"], "why": "Scales predict poorly.", "source": "NICE NG225" }
   ]
 }

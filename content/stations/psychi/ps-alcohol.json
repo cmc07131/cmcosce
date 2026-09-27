@@ -65,19 +65,19 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Wernicke's triad?", "a": "Confusion, ataxia, ophthalmoplegia", "wrong": ["Fever, rash, headache", "Tremor, sweating, anxiety", "Jaundice, ascites, encephalopathy"] },
-        { "q": "Delirium tremens typically begins…", "a": "48–72 hours after the last drink", "wrong": ["1–2 hours", "2 weeks", "Only during intoxication"] },
-        { "q": "First-line drug for alcohol withdrawal?", "a": "A benzodiazepine", "wrong": ["Haloperidol", "Phenytoin", "Disulfiram"] },
-        { "q": "Why thiamine before glucose?", "a": "Glucose can precipitate Wernicke's in thiamine deficiency", "wrong": ["Glucose inactivates thiamine", "Thiamine lowers glucose", "It is a legal requirement"] },
+        { "q": "Wernicke's triad?", "a": "Confusion, ataxia, ophthalmoplegia", "wrong": ["Fever, rash and headache", "Tremor, sweating and anxiety", "Jaundice, ascites, encephalopathy"] },
+        { "q": "Delirium tremens typically begins…", "a": "48–72 hours after the last drink", "wrong": ["1–2 hours after the last drink", "2 weeks after the last drink", "Within 6 hours, while the alcohol level is still high"] },
+        { "q": "First-line drug for alcohol withdrawal?", "a": "A benzodiazepine", "wrong": ["Haloperidol IM", "Phenytoin loading", "Disulfiram (Antabuse)"] },
+        { "q": "Why thiamine before glucose?", "a": "Glucose can precipitate Wernicke's", "wrong": ["Glucose inactivates thiamine in the drip", "Thiamine lowers the blood glucose", "Thiamine is absorbed better when fasting"] },
         { "q": "Benzodiazepine preferred in liver failure?", "a": "Lorazepam", "wrong": ["Diazepam", "Chlordiazepoxide", "Clonazepam"] }
       ]
     }
   ],
   "badge": { "name": "Dry Spell", "emoji": "🍶", "flavor": "Pabrinex before sugar, benzos by CIWA, look for the head injury." },
   "cards": [
-    { "q": "Alcohol withdrawal seizures usually occur…", "options": ["12–48 hours after the last drink", "Within 1 hour", "After 2 weeks", "Only with intoxication"], "why": "DTs follow at 48–72 h.", "source": "NICE CG100" },
-    { "q": "CIWA-Ar is used to…", "options": ["Guide symptom-triggered benzodiazepines", "Diagnose cirrhosis", "Screen for dependence", "Measure blood alcohol"], "why": "Scores withdrawal severity.", "source": "CIWA-Ar" },
-    { "q": "CAGE is a screen for…", "options": ["Alcohol dependence", "Delirium", "Wernicke's", "Liver failure"], "why": "2 or more positive answers is significant.", "source": "CAGE questionnaire" },
+    { "q": "Alcohol withdrawal seizures usually occur…", "options": ["12–48 hours after the last drink", "Within 1 hour of the last drink", "2–3 weeks after stopping, as a late effect", "Only while still intoxicated"], "why": "DTs follow at 48–72 h.", "source": "NICE CG100" },
+    { "q": "CIWA-Ar is used to…", "options": ["Guide symptom-triggered benzodiazepines", "Diagnose cirrhosis from clinical signs", "Screen for alcohol dependence in primary care", "Estimate the blood alcohol concentration"], "why": "Scores withdrawal severity.", "source": "CIWA-Ar" },
+    { "q": "CAGE is a screen for…", "options": ["Alcohol dependence", "Delirium", "Wernicke's encephalopathy", "Alcoholic liver failure"], "why": "2 or more positive answers is significant.", "source": "CAGE questionnaire" },
     { "q": "Suspected Wernicke's in the UK is treated with…", "options": ["High-dose IV Pabrinex", "Oral thiamine 100 mg once", "Glucose first", "Vitamin C"], "why": "Parenteral, high-dose, for several days.", "source": "NICE CG100 / BNF" },
     { "q": "Hallucinations in DTs are typically…", "options": ["Visual and tactile", "Olfactory only", "Commanding voices only", "Absent"], "why": "Insects or animals are classic.", "source": "Psychiatry texts" },
     { "q": "Electrolyte often low in alcohol dependence?", "options": ["Magnesium", "Sodium always high", "Calcium always high", "Chloride high"], "why": "Also phosphate and potassium.", "source": "NICE CG100" }

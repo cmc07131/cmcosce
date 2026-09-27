@@ -78,20 +78,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Minimum criteria to treat PID empirically?", "a": "Lower abdominal pain with cervical motion or adnexal tenderness", "wrong": ["Positive chlamydia test only", "Fever over 39 °C", "Ultrasound evidence"] },
-        { "q": "Long-term complications of PID?", "a": "Infertility, ectopic pregnancy, chronic pelvic pain", "wrong": ["Ovarian cancer", "Endometriosis", "Menopause"] },
-        { "q": "Which swab detects chlamydia best?", "a": "Endocervical or vulvovaginal NAAT", "wrong": ["High vaginal culture", "Blood culture", "Urine microscopy"] },
-        { "q": "When should a chaperone be offered?", "a": "For all intimate examinations, and the outcome recorded", "wrong": ["Only for male doctors", "Only if the patient asks", "Only under 16"] },
-        { "q": "Fitz-Hugh–Curtis syndrome is…", "a": "Perihepatitis causing right upper quadrant pain in PID", "wrong": ["Ovarian torsion", "Appendicitis in pregnancy", "A cervical polyp"] }
+        { "q": "Long-term complications of PID?", "a": "Infertility, ectopic pregnancy, chronic pelvic pain", "wrong": ["Ovarian cancer and early menopause", "Endometriosis and uterine fibroids", "Cervical cancer and cervical stenosis"] },
+        { "q": "Which swab detects chlamydia best?", "a": "Endocervical or vulvovaginal NAAT", "wrong": ["High vaginal swab for Gram stain and culture", "Blood culture during a fever", "Urine microscopy and culture"] },
+        { "q": "When should a chaperone be offered?", "a": "For every intimate examination", "wrong": ["Only when the doctor is male", "Only if the patient asks for one", "Only for patients under 16 years old"] },
+        { "q": "Fitz-Hugh–Curtis syndrome is…", "a": "Perihepatitis (RUQ pain) complicating PID", "wrong": ["Ovarian torsion with a dermoid cyst", "Appendicitis in the second trimester", "Torsion of an ovarian cyst causing right-sided pain"] }
       ]
     }
   ],
   "badge": { "name": "Sensitive Hands", "emoji": "🌸", "flavor": "Consent and a chaperone first. Motion tenderness: treat now." },
   "cards": [
-    { "q": "First-line outpatient PID regimen (BASHH)?", "options": ["Ceftriaxone 1 g IM + doxycycline + metronidazole 14 days", "Amoxicillin 5 days", "Fluconazole once", "Nitrofurantoin 3 days"], "why": "Covers gonorrhoea, chlamydia and anaerobes.", "source": "BASHH PID guideline" },
-    { "q": "Cervical motion tenderness suggests…", "options": ["Pelvic inflammatory disease or ectopic pregnancy", "Normal findings", "Cystitis", "Constipation"], "why": "Peritoneal irritation in the pelvis.", "source": "BASHH" },
-    { "q": "Before an intimate examination you must…", "options": ["Explain, get consent and offer a chaperone", "Only ask the nurse to stay", "Examine first, explain later", "Get written consent"], "why": "Record the consent and the chaperone's name.", "source": "GMC 2024" },
-    { "q": "The speculum is inserted…", "options": ["Closed, along the vaginal axis downward and backward", "Open, straight up", "Sideways, open", "Only after bimanual"], "why": "Then rotated and opened to see the cervix.", "source": "Clinical skills" },
-    { "q": "PID treatment should start…", "options": ["On clinical suspicion, before results", "Only after a positive swab", "After ultrasound", "After partner testing"], "why": "Delay increases complications.", "source": "BASHH" },
-    { "q": "Admission criterion in PID?", "options": ["Tubo-ovarian abscess or pregnancy", "Mild pain", "Discharge only", "Age over 20"], "why": "Also severe illness or failure of oral therapy.", "source": "BASHH" }
+    { "q": "First-line outpatient PID regimen (BASHH)?", "options": ["Ceftriaxone 1 g IM + doxycycline + metronidazole 14 days", "Amoxicillin 500 mg three times daily for 5 days", "Fluconazole 150 mg orally as a single dose", "Nitrofurantoin 100 mg twice daily for 3 days"], "why": "Covers gonorrhoea, chlamydia and anaerobes.", "source": "BASHH PID guideline" },
+    { "q": "Cervical motion tenderness suggests…", "options": ["PID or ectopic pregnancy", "A normal finding in young women", "Lower urinary tract infection", "Constipation and faecal loading"], "why": "Peritoneal irritation in the pelvis.", "source": "BASHH" },
+    { "q": "Before an intimate examination you must…", "options": ["Explain, get consent and offer a chaperone", "Ask the nurse to stay, without asking the patient", "Examine first, then explain the findings", "Get written consent on a signed form"], "why": "Record the consent and the chaperone's name.", "source": "GMC 2024" },
+    { "q": "The speculum is inserted…", "options": ["Closed, angled down and back", "Open, pointing straight upwards", "Sideways and open, then rotated", "Only after the bimanual examination"], "why": "Then rotated and opened to see the cervix.", "source": "Clinical skills" },
+    { "q": "PID treatment should start…", "options": ["On clinical suspicion, before results", "Only after a positive chlamydia swab", "After a pelvic ultrasound confirms it", "After the partner has been tested"], "why": "Delay increases complications.", "source": "BASHH" },
+    { "q": "Admission criterion in PID?", "options": ["Tubo-ovarian abscess or pregnancy", "Mild pain with a positive chlamydia test", "Vaginal discharge alone", "Age over 20 years"], "why": "Also severe illness or failure of oral therapy.", "source": "BASHH" }
   ]
 }

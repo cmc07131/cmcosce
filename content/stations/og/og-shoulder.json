@@ -57,11 +57,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What is the turtle sign?", "a": "The delivered head retracts against the perineum", "wrong": ["Maternal neck swelling", "Fetal bradycardia", "A slow second stage"] },
+        { "q": "What is the turtle sign?", "a": "The born head pulls back against the perineum", "wrong": ["Swelling of the maternal neck veins", "A sudden fetal bradycardia on the CTG after the head", "A slow, prolonged second stage"] },
         { "q": "First-line manoeuvres?", "a": "McRoberts and suprapubic pressure", "wrong": ["Zavanelli", "Fundal pressure", "Episiotomy alone"] },
-        { "q": "Where is suprapubic pressure applied?", "a": "Over the posterior aspect of the anterior shoulder, from the fetal back side", "wrong": ["On the fundus", "On the perineum", "On the maternal sacrum"] },
+        { "q": "Where is suprapubic pressure applied?", "a": "Behind the anterior shoulder, from the fetal back", "wrong": ["On the fundus, pushing down with each contraction", "On the perineum, supporting the head", "Over the maternal sacrum, from behind"] },
         { "q": "Commonest fetal injury?", "a": "Brachial plexus injury (Erb's palsy)", "wrong": ["Skull fracture", "Spinal cord transection", "Cleft palate"] },
-        { "q": "Third-line options?", "a": "Clavicle fracture, Zavanelli, symphysiotomy", "wrong": ["Oxytocin infusion", "Forceps rotation", "Waiting for the next contraction"] }
+        { "q": "Third-line options?", "a": "Clavicle fracture, Zavanelli, symphysiotomy", "wrong": ["Oxytocin infusion to strengthen contractions", "Forceps rotation of the fetal head", "Waiting for the next contraction"] }
       ]
     }
   ],
@@ -69,9 +69,9 @@
   "cards": [
     { "q": "McRoberts manoeuvre is…", "options": ["Hyperflexion of the maternal hips", "Pressure on the fundus", "Rotation of the posterior shoulder", "Delivery on all fours"], "why": "Straightens the sacrum and rotates the symphysis.", "source": "RCOG GTG 42" },
     { "q": "Contraindicated in shoulder dystocia?", "options": ["Fundal pressure", "Suprapubic pressure", "McRoberts", "All-fours position"], "why": "Worsens impaction.", "source": "RCOG GTG 42" },
-    { "q": "Is episiotomy mandatory in shoulder dystocia?", "options": ["No — only to allow internal manoeuvres", "Yes, always first", "Only in multiparous women", "Only after Zavanelli"], "why": "It is a bony obstruction.", "source": "RCOG GTG 42", "note": "HELPERR lists episiotomy as E." },
-    { "q": "Woods' screw applies pressure…", "options": ["To the anterior aspect of the posterior shoulder", "To the fetal head", "To the maternal abdomen", "To the anterior aspect of the anterior shoulder"], "why": "Rotates the shoulders through 180°.", "source": "RCOG GTG 42" },
-    { "q": "Risk factor for shoulder dystocia?", "options": ["Fetal macrosomia", "Preterm birth", "Breech", "Oligohydramnios"], "why": "Also maternal diabetes, obesity, previous dystocia.", "source": "RCOG GTG 42" },
-    { "q": "What must be recorded after shoulder dystocia?", "options": ["Head-to-body interval and manoeuvres", "Only the Apgar", "Only the birth weight", "Nothing if the baby is well"], "why": "Clinical and medicolegal importance.", "source": "RCOG GTG 42" }
+    { "q": "Is episiotomy mandatory in shoulder dystocia?", "options": ["No — only to allow internal manoeuvres", "Yes, a large episiotomy is always the first step", "Only in multiparous women", "Only after the Zavanelli manoeuvre"], "why": "It is a bony obstruction.", "source": "RCOG GTG 42", "note": "HELPERR lists episiotomy as E." },
+    { "q": "Woods' screw applies pressure…", "options": ["To the anterior aspect of the posterior shoulder", "To the posterior aspect of the anterior shoulder", "To the fetal head during traction", "To the maternal abdomen above the pubis"], "why": "Rotates the shoulders through 180°.", "source": "RCOG GTG 42" },
+    { "q": "Risk factor for shoulder dystocia?", "options": ["Fetal macrosomia", "Preterm birth", "Breech presentation", "Oligohydramnios"], "why": "Also maternal diabetes, obesity, previous dystocia.", "source": "RCOG GTG 42" },
+    { "q": "What must be recorded after shoulder dystocia?", "options": ["Head-to-body interval and manoeuvres", "Apgar scores and the cord gases only", "Birth weight and length of the second stage", "The time the midwife was called"], "why": "Clinical and medicolegal importance.", "source": "RCOG GTG 42" }
   ]
 }

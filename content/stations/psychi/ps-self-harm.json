@@ -63,21 +63,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "NICE NG225 on risk scales like SAD PERSONS?", "a": "Do not use them to predict suicide or decide discharge", "wrong": ["Use them for all", "Admit if score over 5", "Use only in men"] },
-        { "q": "Feature suggesting high suicidal intent?", "a": "Precautions against discovery and a final note", "wrong": ["Calling for help immediately", "Impulsive act after a row", "Feeling relieved to survive"] },
-        { "q": "Paracetamol overdose treatment threshold uses…", "a": "The 100-line on the nomogram from 4 hours", "wrong": ["The 200-line", "Only the ALT", "Symptoms only"] },
-        { "q": "A protective factor?", "a": "Strong family support and reasons for living", "wrong": ["Living alone", "Alcohol use", "Previous attempts"] },
-        { "q": "What is a safety plan?", "a": "An agreed list of warning signs, coping steps, contacts and means restriction", "wrong": ["A signed promise not to self-harm", "A risk score", "A discharge letter only"] }
+        { "q": "NICE NG225 on risk scales like SAD PERSONS?", "a": "Don't use them to predict risk or decide care", "wrong": ["Use them for every patient", "Admit anyone whose SAD PERSONS score is over 5", "Use them only in men"] },
+        { "q": "Feature suggesting high suicidal intent?", "a": "Precautions against discovery and a final note", "wrong": ["Calling for help straight after", "An impulsive act straight after an argument with a partner", "Feeling relieved to have survived"] },
+        { "q": "Paracetamol overdose treatment threshold uses…", "a": "The 100-line on the nomogram from 4 hours", "wrong": ["The 200-line on the nomogram, from 4 hours", "The ALT level alone", "Symptoms such as vomiting"] },
+        { "q": "A protective factor?", "a": "Strong family support and reasons for living", "wrong": ["Living alone after a separation", "Regular heavy alcohol use", "Previous suicide attempts"] },
+        { "q": "What is a safety plan?", "a": "Agreed warning signs, coping steps, contacts, safe means", "wrong": ["A signed promise not to self-harm, kept by the GP and family", "A numerical risk score to guide discharge", "A discharge letter sent to the GP only"] }
       ]
     }
   ],
   "badge": { "name": "Safe Plan", "emoji": "🤝", "flavor": "Assess the person, not the score. Plan together, follow up." },
   "cards": [
     { "q": "After self-harm, NICE recommends…", "options": ["A psychosocial assessment", "A SAD PERSONS score to decide admission", "Discharge once medically fit, no assessment", "Routine detention"], "why": "Scales perform poorly.", "source": "NICE NG225 (2022)", "note": "Your notes use SAD PERSONS." },
-    { "q": "A 'no-suicide contract' is…", "options": ["Not recommended; use a safety plan", "Recommended for all", "Legally binding", "Required before discharge"], "why": "No evidence of protection.", "source": "NICE NG225" },
-    { "q": "Paracetamol overdose: NAC is given if the 4-hour level is…", "options": ["On or above the 100-line", "Above the 200-line only", "Any detectable level", "Only if ALT raised"], "why": "UK single 100-line nomogram.", "source": "MHRA 2012" },
+    { "q": "A 'no-suicide contract' is…", "options": ["Not recommended; use a safety plan", "Recommended for every patient before they leave", "Legally binding once signed", "Required before any discharge"], "why": "No evidence of protection.", "source": "NICE NG225" },
+    { "q": "Paracetamol overdose: NAC is given if the 4-hour level is…", "options": ["On or above the 100-line", "Above the 200-line only", "Any detectable level at all", "Only if the ALT is raised"], "why": "UK single 100-line nomogram.", "source": "MHRA 2012" },
     { "q": "Asking directly about suicide…", "options": ["Does not increase risk", "Plants the idea", "Should be avoided", "Is only for psychiatrists"], "why": "Direct questions are safe and necessary.", "source": "NICE NG225" },
-    { "q": "Staggered paracetamol overdose: management?", "options": ["Treat with NAC regardless of level", "Use the nomogram", "Observe only", "Charcoal at 24 h"], "why": "The nomogram is invalid for staggered doses.", "source": "TOXBASE" },
-    { "q": "Safeguarding questions after self-harm include…", "options": ["Children in her care and domestic abuse", "Her blood group", "Her favourite food", "Her car registration"], "why": "Risks from and to others.", "source": "NICE NG225" }
+    { "q": "Staggered paracetamol overdose: management?", "options": ["Treat with NAC regardless of level", "Plot the 4-hour level on the treatment nomogram", "Observe without treatment", "Activated charcoal at 24 hours"], "why": "The nomogram is invalid for staggered doses.", "source": "TOXBASE" },
+    { "q": "Safeguarding questions after self-harm include…", "options": ["Children in her care and domestic abuse", "Her vaccination history as a child", "Her employer and working hours", "Her travel history this year"], "why": "Risks from and to others.", "source": "NICE NG225" }
   ]
 }

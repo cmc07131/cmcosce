@@ -83,21 +83,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Order of escalation in violence?", "a": "De-escalation, oral medication, rapid tranquillisation, restraint only as needed", "wrong": ["Restraint first", "IM medication first", "Call police first"] },
+        { "q": "Order of escalation in violence?", "a": "De-escalate, oral drugs, then IM; restrain if needed", "wrong": ["Restraint first, then oral medication", "IM medication first, then talk once he is calm and safe", "Call the police first, then de-escalate"] },
         { "q": "Reversible cause here?", "a": "Hypoglycaemia", "wrong": ["Hyperkalaemia", "Anaemia", "Gout"] },
-        { "q": "Why give thiamine to a malnourished alcohol user?", "a": "To prevent Wernicke's encephalopathy", "wrong": ["To lower glucose", "To sedate", "To treat alcohol intoxication"] },
-        { "q": "Observation frequency after rapid tranquillisation?", "a": "At least every 15 minutes for the first hour", "wrong": ["Every 4 hours", "Only at handover", "None if asleep"] },
+        { "q": "Why give thiamine to a malnourished alcohol user?", "a": "To prevent Wernicke's encephalopathy", "wrong": ["To lower the blood glucose", "To sedate him", "To treat the intoxication"] },
+        { "q": "Observation frequency after rapid tranquillisation?", "a": "At least every 15 minutes for the first hour", "wrong": ["Every 4 hours, once he is settled on the ward", "Only at nursing handover", "Not needed while asleep"] },
         { "q": "Danger of prone restraint?", "a": "Positional asphyxia", "wrong": ["Hypoglycaemia", "Hypertension only", "Pressure sores only"] }
       ]
     }
   ],
   "badge": { "name": "De-escalator", "emoji": "🕊", "flavor": "Distance, voice, choices. Sugar before sedation." },
   "cards": [
-    { "q": "First step with a violent patient?", "options": ["Ensure safety and try de-escalation", "Physical restraint", "IM sedation", "Leave"], "why": "Least restrictive first.", "source": "NICE NG10" },
-    { "q": "Medical cause of aggression to check immediately?", "options": ["Hypoglycaemia", "Myopia", "Eczema", "Hay fever"], "why": "Also hypoxia, head injury, sepsis.", "source": "NICE NG10" },
-    { "q": "Rapid tranquillisation per NICE NG10 in adults?", "options": ["IM lorazepam or IM haloperidol + promethazine", "IV haloperidol", "IM diazepam", "Oral clonazepam only"], "why": "Check ECG when possible.", "source": "NICE NG10" },
-    { "q": "After tranquillisation, monitor…", "options": ["Pulse, BP, SpO2, RR, consciousness every 15 min", "Nothing", "Only temperature", "Only when he wakes"], "why": "Over-sedation and airway risk.", "source": "NICE NG10" },
-    { "q": "'Excited delirium syndrome' is now…", "options": ["Not an accepted diagnosis (ACEP 2023)", "A DSM-5 diagnosis", "Treated by restraint", "Caused by cold"], "why": "Use 'hyperactive delirium with severe agitation'.", "source": "ACEP 2023" },
-    { "q": "An intoxicated agitated man with a forehead graze needs…", "options": ["Assessment for head injury", "Only sleep", "Discharge when calm", "Police custody"], "why": "Intoxication masks intracranial injury.", "source": "NICE NG232" }
+    { "q": "First step with a violent patient?", "options": ["Ensure safety and try de-escalation", "Physical restraint by security", "IM sedation straight away, before he escalates", "Leave the room and call police"], "why": "Least restrictive first.", "source": "NICE NG10" },
+    { "q": "Medical cause of aggression to check immediately?", "options": ["Hypoglycaemia", "Hyperlipidaemia", "Hypertension", "Hyperuricaemia"], "why": "Also hypoxia, head injury, sepsis.", "source": "NICE NG10" },
+    { "q": "Rapid tranquillisation per NICE NG10 in adults?", "options": ["IM lorazepam or IM haloperidol + promethazine", "IV haloperidol 10 mg as a rapid bolus, repeated", "IM diazepam 10 mg", "Oral clonazepam only"], "why": "Check ECG when possible.", "source": "NICE NG10" },
+    { "q": "After tranquillisation, monitor…", "options": ["Pulse, BP, SpO2, RR, consciousness every 15 min", "Temperature only, every 4 hours", "Only when he wakes up", "Blood glucose once, then hourly"], "why": "Over-sedation and airway risk.", "source": "NICE NG10" },
+    { "q": "'Excited delirium syndrome' is now…", "options": ["Not an accepted diagnosis (ACEP 2023)", "A DSM-5 psychiatric diagnosis", "Best treated by prolonged prone restraint", "Caused by cold exposure"], "why": "Use 'hyperactive delirium with severe agitation'.", "source": "ACEP 2023" },
+    { "q": "An intoxicated agitated man with a forehead graze needs…", "options": ["Assessment for head injury", "Sleep it off in the ED", "Discharge once calm", "Police custody overnight to sober up"], "why": "Intoxication masks intracranial injury.", "source": "NICE NG232" }
   ]
 }

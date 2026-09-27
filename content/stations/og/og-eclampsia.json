@@ -87,9 +87,9 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "First sign of magnesium toxicity?", "a": "Loss of patellar reflexes", "wrong": ["Tachycardia", "Hypertension", "Seizures"] },
-        { "q": "Antidote to magnesium toxicity?", "a": "Calcium gluconate 10% 10 mL IV", "wrong": ["Naloxone", "Flumazenil", "Sodium bicarbonate"] },
-        { "q": "Dose for a recurrent seizure on magnesium?", "a": "Further 2–4 g over 5–15 min", "wrong": ["Stop the magnesium", "10 g bolus", "Phenytoin 20 mg/kg first"] },
+        { "q": "First sign of magnesium toxicity?", "a": "Loss of patellar reflexes", "wrong": ["Tachycardia over 120", "Rising blood pressure above 160", "Recurrent seizures"] },
+        { "q": "Antidote to magnesium toxicity?", "a": "Calcium gluconate 10% 10 mL IV", "wrong": ["Naloxone 400 micrograms IV", "Flumazenil 200 micrograms IV", "Sodium bicarbonate 8.4% 50 mL IV"] },
+        { "q": "Dose for a recurrent seizure on magnesium?", "a": "Further 2–4 g over 5–15 min", "wrong": ["Stop the magnesium infusion", "10 g magnesium as a bolus", "Phenytoin 20 mg/kg before magnesium"] },
         { "q": "BP threshold for urgent treatment in pregnancy (NICE)?", "a": "160/110 mmHg", "wrong": ["140/90 mmHg", "200/120 mmHg", "120/80 mmHg"] },
         { "q": "HELLP stands for…", "a": "Haemolysis, Elevated Liver enzymes, Low Platelets", "wrong": ["Hypertension, Epilepsy, Liver failure, Proteinuria", "Headache, Eclampsia, Low potassium", "Haemorrhage, Elevated lactate, Low pH"] }
       ]
@@ -97,11 +97,11 @@
   ],
   "badge": { "name": "Magnesium Maven", "emoji": "🧲", "flavor": "4 g load, 1 g/h, reflexes and breathing checked." },
   "cards": [
-    { "q": "Eclampsia first-line anticonvulsant?", "options": ["Magnesium sulfate", "Diazepam", "Phenytoin", "Levetiracetam"], "why": "4 g IV over 5–15 min then 1 g/h.", "source": "NICE NG133; Collaborative Eclampsia Trial" },
-    { "q": "Duration of magnesium after eclampsia?", "options": ["24 hours after the last seizure or birth", "1 hour", "7 days", "Until discharge"], "why": "Whichever is later.", "source": "NICE NG133" },
-    { "q": "Magnesium toxicity treatment?", "options": ["Calcium gluconate 10% 10 mL IV", "More magnesium", "Potassium chloride", "Insulin"], "why": "Stop the infusion too.", "source": "BNF / NICE NG133" },
+    { "q": "Eclampsia first-line anticonvulsant?", "options": ["Magnesium sulfate", "Diazepam 10 mg IV", "Phenytoin 20 mg/kg", "Levetiracetam"], "why": "4 g IV over 5–15 min then 1 g/h.", "source": "NICE NG133; Collaborative Eclampsia Trial" },
+    { "q": "Duration of magnesium after eclampsia?", "options": ["24 hours after the last seizure or birth", "1 hour after the last seizure", "7 days after birth", "Until the blood pressure is below 140/90 mmHg"], "why": "Whichever is later.", "source": "NICE NG133" },
+    { "q": "Magnesium toxicity treatment?", "options": ["Calcium gluconate 10% 10 mL IV", "More magnesium, as a loading dose", "Potassium chloride 20 mmol IV", "Insulin with 50 mL of 50% glucose"], "why": "Stop the infusion too.", "source": "BNF / NICE NG133" },
     { "q": "Antihypertensive to avoid in asthma?", "options": ["Labetalol", "Nifedipine", "Hydralazine", "Methyldopa"], "why": "Beta-blockade can cause bronchospasm.", "source": "NICE NG133" },
     { "q": "Fluid rate in severe pre-eclampsia?", "options": ["About 80 mL/h", "250 mL/h", "1 L bolus hourly", "No fluids at all"], "why": "Risk of pulmonary oedema.", "source": "NICE NG133" },
-    { "q": "When to deliver after eclampsia?", "options": ["Once the mother is stabilised", "Immediately while fitting", "After 48 hours always", "Only at term"], "why": "Maternal stabilisation first.", "source": "RCOG / NICE NG133" }
+    { "q": "When to deliver after eclampsia?", "options": ["Once the mother is stabilised", "Immediately, even while she is fitting", "After 48 hours of magnesium", "Only once she reaches term"], "why": "Maternal stabilisation first.", "source": "RCOG / NICE NG133" }
   ]
 }

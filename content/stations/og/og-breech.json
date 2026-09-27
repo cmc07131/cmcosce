@@ -56,7 +56,7 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Principle of vaginal breech delivery?", "a": "Hands off — let it deliver spontaneously", "wrong": ["Pull on the legs", "Fundal pressure", "Early episiotomy for all"] },
+        { "q": "Principle of vaginal breech delivery?", "a": "Hands off — let it deliver spontaneously", "wrong": ["Steady traction on the legs with each push", "Fundal pressure with each contraction", "Early episiotomy for every breech"] },
         { "q": "Manoeuvre for extended arms?", "a": "Løvset's", "wrong": ["McRoberts", "Woods' screw", "Zavanelli"] },
         { "q": "Manoeuvre to deliver the aftercoming head?", "a": "Mauriceau–Smellie–Veit", "wrong": ["Ritgen", "Rubin II", "Pinard"] },
         { "q": "Most feared complication?", "a": "Head entrapment", "wrong": ["Shoulder dystocia", "Uterine inversion", "Cord in front of the head"] },
@@ -66,11 +66,11 @@
   ],
   "badge": { "name": "Hands Off", "emoji": "🙌", "flavor": "Don't pull. Back up, let it hang, flex the head." },
   "cards": [
-    { "q": "Commonest breech type at term?", "options": ["Extended (frank) breech", "Footling", "Kneeling", "Complete"], "why": "Hips flexed, knees extended.", "source": "RCOG GTG 20b" },
+    { "q": "Commonest breech type at term?", "options": ["Extended (frank) breech", "Footling breech", "Kneeling breech", "Complete (flexed) breech"], "why": "Hips flexed, knees extended.", "source": "RCOG GTG 20b" },
     { "q": "Løvset's manoeuvre delivers…", "options": ["Extended arms", "The aftercoming head", "Legs", "The placenta"], "why": "Rotation brings each arm under the symphysis.", "source": "RCOG GTG 20b" },
-    { "q": "Mauriceau–Smellie–Veit flexes the head using…", "options": ["Fingers on the malar bones and a hand on the occiput", "Traction on the legs", "Suprapubic pressure", "Forceps only"], "why": "Controlled, slow delivery of the head.", "source": "RCOG GTG 20b" },
-    { "q": "When should you first handle the breech?", "options": ["Only if needed, after the umbilicus delivers or when legs need flexing", "As soon as it appears", "Never", "Before full dilatation"], "why": "Hands off the breech.", "source": "RCOG GTG 20b" },
-    { "q": "Breech babies need screening for…", "options": ["Developmental dysplasia of the hip", "Hearing loss only", "Cleft palate", "Heart murmurs"], "why": "Hip ultrasound at about 6 weeks.", "source": "NHS Newborn and Infant Physical Examination" },
+    { "q": "Mauriceau–Smellie–Veit flexes the head using…", "options": ["Malar bone pressure plus occiput flexion", "Steady traction on the legs and buttocks", "Suprapubic pressure with the heel of the hand", "Forceps applied to the aftercoming head"], "why": "Controlled, slow delivery of the head.", "source": "RCOG GTG 20b" },
+    { "q": "When should you first handle the breech?", "options": ["Only when needed, after the umbilicus is born", "As soon as the buttocks appear at the introitus", "At full dilatation, to speed the delivery", "Before full dilatation, to guide the breech down"], "why": "Hands off the breech.", "source": "RCOG GTG 20b" },
+    { "q": "Breech babies need screening for…", "options": ["Developmental dysplasia of the hip", "Congenital sensorineural hearing loss", "Cleft lip and palate", "Congenital heart disease"], "why": "Hip ultrasound at about 6 weeks.", "source": "NHS Newborn and Infant Physical Examination" },
     { "q": "Which is a contraindication to planned vaginal breech birth?", "options": ["Footling breech", "Frank breech with normal pelvis", "Multiparity", "Maternal age 30"], "why": "Cord prolapse risk.", "source": "RCOG GTG 20b" }
   ]
 }

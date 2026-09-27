@@ -93,19 +93,19 @@
       "label": "Examiner",
       "qs": [
         { "q": "Which woman needs a pregnancy test?", "a": "Any woman of reproductive age with abdominal pain, bleeding or collapse", "wrong": ["Only if she says she is pregnant", "Only if her period is late", "Only before X-rays"] },
-        { "q": "Commonest site of ectopic pregnancy?", "a": "Ampulla of the fallopian tube", "wrong": ["Ovary", "Cervix", "Abdomen"] },
-        { "q": "Shoulder-tip pain in ectopic pregnancy is due to…", "a": "Blood irritating the diaphragm", "wrong": ["Muscle strain", "Pneumothorax", "Gallstones"] },
-        { "q": "Candidate for methotrexate?", "a": "Stable, unruptured, no heartbeat, hCG under 1500 IU/L", "wrong": ["Shocked with haemoperitoneum", "Any ectopic", "Heterotopic with a live IUP"] },
-        { "q": "Anti-D after ectopic surgery?", "a": "Yes, for rhesus-negative women", "wrong": ["Never", "Only for rhesus-positive women", "Only after 20 weeks"] }
+        { "q": "Commonest site of ectopic pregnancy?", "a": "Ampulla of the fallopian tube", "wrong": ["Isthmus of the fallopian tube", "Interstitial (cornual) portion", "Ovary"] },
+        { "q": "Shoulder-tip pain in ectopic pregnancy is due to…", "a": "Blood irritating the diaphragm", "wrong": ["Referred pain from a tubal spasm", "A spontaneous pneumothorax", "Gallstones in pregnancy"] },
+        { "q": "Candidate for methotrexate?", "a": "Stable, unruptured, no heartbeat, hCG under 1500 IU/L", "wrong": ["Stable, unruptured, fetal heartbeat seen, hCG 4000 IU/L", "Shocked with a large haemoperitoneum", "Heterotopic pregnancy with a live IUP"] },
+        { "q": "Anti-D after ectopic surgery?", "a": "Yes, for rhesus-negative women", "wrong": ["No, anti-D is not needed before 12 weeks", "Only for rhesus-positive women", "Only after 20 weeks' gestation"] }
       ]
     }
   ],
   "badge": { "name": "Tube Watch", "emoji": "🧪", "flavor": "Positive test plus shock: theatre now." },
   "cards": [
-    { "q": "Collapse, abdominal pain and a positive pregnancy test: think…", "options": ["Ruptured ectopic pregnancy", "Threatened miscarriage", "Hyperemesis", "UTI"], "why": "Resuscitate and call gynaecology.", "source": "NICE NG126" },
-    { "q": "Ultrasound supporting ectopic pregnancy?", "options": ["Empty uterus, free fluid, adnexal mass", "Intrauterine sac with yolk sac", "Twin pregnancy", "Normal ovaries only"], "why": "Pseudo-sac can mimic an intrauterine sac.", "source": "NICE NG126" },
-    { "q": "Anti-D in early pregnancy loss (NICE) is given for…", "options": ["Rhesus-negative women having surgical management of ectopic or miscarriage", "All women", "Rhesus-positive only", "Medical management of miscarriage only"], "why": "Not needed for medical management or threatened miscarriage.", "source": "NICE NG126 (2023)" },
-    { "q": "Risk factor for ectopic pregnancy?", "options": ["Previous pelvic inflammatory disease", "Multiparity alone", "Vegetarian diet", "Blood group O"], "why": "Tubal damage.", "source": "NICE NG126" },
+    { "q": "Collapse, abdominal pain and a positive pregnancy test: think…", "options": ["Ruptured ectopic pregnancy", "Threatened miscarriage", "Hyperemesis gravidarum", "Ovarian cyst rupture in pregnancy"], "why": "Resuscitate and call gynaecology.", "source": "NICE NG126" },
+    { "q": "Ultrasound supporting ectopic pregnancy?", "options": ["Empty uterus, free fluid, adnexal mass", "Intrauterine gestational sac with a yolk sac", "Twin intrauterine pregnancy", "Normal ovaries and no free fluid"], "why": "Pseudo-sac can mimic an intrauterine sac.", "source": "NICE NG126" },
+    { "q": "Anti-D in early pregnancy loss (NICE) is given for…", "options": ["Rh-negative women having surgical management", "All women with bleeding in early pregnancy", "Rhesus-positive women after miscarriage", "Rh-negative women on medical management only"], "why": "Not needed for medical management or threatened miscarriage.", "source": "NICE NG126 (2023)" },
+    { "q": "Risk factor for ectopic pregnancy?", "options": ["Previous pelvic inflammatory disease", "Combined oral contraceptive pill for many years", "Previous caesarean section", "Multiparity on its own"], "why": "Tubal damage.", "source": "NICE NG126" },
     { "q": "Methotrexate criteria include hCG below…", "options": ["1500 IU/L", "50,000 IU/L", "10 IU/L", "5000 IU/L only with a heartbeat"], "why": "No pain, no heartbeat, unruptured, able to follow up.", "source": "NICE NG126" },
     { "q": "Where is ectopic free fluid first seen on ultrasound?", "options": ["Pouch of Douglas", "Morison's pouch", "Pericardium", "Splenorenal angle"], "why": "The most dependent part of the pelvis.", "source": "Ultrasound anatomy" }
   ]

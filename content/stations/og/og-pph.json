@@ -106,10 +106,10 @@
       "label": "Examiner",
       "qs": [
         { "q": "The 4 Ts of PPH?", "a": "Tone, Trauma, Tissue, Thrombin", "wrong": ["Tone, Temperature, Toxins, Tamponade", "Tears, Tone, Twins, Time", "Trauma, Tension, Tamponade, Thrombosis"] },
-        { "q": "Contraindication to ergometrine?", "a": "Hypertension or pre-eclampsia", "wrong": ["Asthma", "Diabetes", "Anaemia"] },
+        { "q": "Contraindication to ergometrine?", "a": "Hypertension or pre-eclampsia", "wrong": ["Mild asthma on a salbutamol inhaler", "Type 2 diabetes", "Iron-deficiency anaemia"] },
         { "q": "Caution with carboprost?", "a": "Asthma", "wrong": ["Hypertension", "Pre-eclampsia", "Epilepsy"] },
-        { "q": "Tranexamic acid in PPH?", "a": "1 g IV within 3 hours of birth; repeat after 30 min if bleeding", "wrong": ["Only after 6 hours", "Oral only", "Contraindicated in pregnancy"] },
-        { "q": "Misoprostol dose for PPH?", "a": "800 microgram sublingual", "wrong": ["25 microgram vaginal", "5 mg IV", "8 mg oral"] }
+        { "q": "Tranexamic acid in PPH?", "a": "1 g IV within 3 h; repeat after 30 min if needed", "wrong": ["1 g IV only if bleeding continues beyond 6 hours", "1 g orally three times daily for 5 days", "Contraindicated because of thrombosis risk"] },
+        { "q": "Misoprostol dose for PPH?", "a": "800 microgram sublingual", "wrong": ["25 microgram vaginal", "5 mg IV over 5 minutes", "8 mg oral as a single dose"] }
       ]
     }
   ],
@@ -117,9 +117,9 @@
   "cards": [
     { "q": "Commonest cause of primary PPH?", "options": ["Uterine atony", "Retained placenta", "Coagulopathy", "Uterine inversion"], "why": "Tone accounts for most PPH.", "source": "RCOG GTG 52" },
     { "q": "First-line uterotonic in PPH?", "options": ["Oxytocin", "Carboprost", "Misoprostol", "Nifedipine"], "why": "5 IU slow IV, then infusion.", "source": "RCOG GTG 52" },
-    { "q": "Tranexamic acid in PPH should start within…", "options": ["3 hours of birth", "24 hours", "6 hours", "30 days"], "why": "WOMAN trial: benefit when given early.", "source": "WOMAN trial 2017; WHO" },
-    { "q": "Carboprost dose?", "options": ["250 microgram IM every 15 min, max 8 doses", "25 microgram IV", "1 mg oral", "2.5 mg IM once"], "why": "Caution in asthma.", "source": "RCOG GTG 52" },
+    { "q": "Tranexamic acid in PPH should start within…", "options": ["3 hours of birth", "24 hours of birth", "6 hours of birth", "1 hour of birth"], "why": "WOMAN trial: benefit when given early.", "source": "WOMAN trial 2017; WHO" },
+    { "q": "Carboprost dose?", "options": ["250 microgram IM every 15 min, max 8 doses", "25 microgram IV every 5 min, max 4 doses", "1 mg orally, repeated after 1 hour", "2.5 mg IM as a single dose"], "why": "Caution in asthma.", "source": "RCOG GTG 52" },
     { "q": "Major PPH is blood loss over…", "options": ["1000 mL (or shock)", "250 mL", "500 mL only in caesarean", "3000 mL"], "why": "Minor 500–1000 mL.", "source": "RCOG GTG 52" },
-    { "q": "Why empty the bladder in PPH?", "options": ["A full bladder prevents the uterus contracting", "To measure fibrinogen", "To prevent infection", "To reduce pain"], "why": "Also allows urine output monitoring.", "source": "RCOG GTG 52" }
+    { "q": "Why empty the bladder in PPH?", "options": ["It stops the uterus contracting", "To measure the fibrinogen level", "To prevent a catheter-associated infection", "To reduce her pain"], "why": "Also allows urine output monitoring.", "source": "RCOG GTG 52" }
   ]
 }

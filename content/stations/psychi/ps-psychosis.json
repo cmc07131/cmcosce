@@ -69,20 +69,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "A first-rank symptom of schizophrenia?", "a": "Thought broadcasting", "wrong": ["Low mood", "Visual hallucinations of insects", "Obsessions"] },
-        { "q": "Negative symptoms include…", "a": "Apathy, poverty of speech, blunted affect, social withdrawal", "wrong": ["Delusions", "Hallucinations", "Pressured speech"] },
-        { "q": "Why refer early to EASY?", "a": "A shorter duration of untreated psychosis improves outcomes", "wrong": ["It is a legal requirement", "To avoid medication", "Only for over-40s"] },
+        { "q": "Negative symptoms include…", "a": "Apathy, alogia, blunted affect, withdrawal", "wrong": ["Delusions of persecution", "Auditory hallucinations", "Pressured speech, grandiosity and reduced sleep"] },
+        { "q": "Why refer early to EASY?", "a": "Shorter untreated psychosis improves outcomes", "wrong": ["EASY is a legal requirement for all new psychosis", "To avoid starting antipsychotic medication", "EASY only accepts patients over 40"] },
         { "q": "Drug that increases psychosis risk in youth?", "a": "Cannabis", "wrong": ["Caffeine", "Paracetamol", "Vitamin C"] },
-        { "q": "Delusional perception is…", "a": "A normal perception given a sudden delusional meaning", "wrong": ["A hallucination", "An illusion", "A dream"] }
+        { "q": "Delusional perception is…", "a": "A real perception given a sudden delusional meaning", "wrong": ["A hallucination in any sensory modality", "An illusion from misreading a real object", "A vivid dream remembered as real"] }
       ]
     }
   ],
   "badge": { "name": "Reality Check", "emoji": "🔮", "flavor": "Positive, negative, substances, mood, risk, early intervention." },
   "cards": [
-    { "q": "Third-person auditory hallucinations suggest…", "options": ["Schizophrenia", "Depression", "Delirium", "Anxiety"], "why": "Voices discussing the patient.", "source": "Schneider's first-rank symptoms" },
+    { "q": "Third-person auditory hallucinations suggest…", "options": ["Schizophrenia", "Psychotic depression", "Delirium", "Generalised anxiety"], "why": "Voices discussing the patient.", "source": "Schneider's first-rank symptoms" },
     { "q": "Hong Kong's early psychosis service?", "options": ["EASY", "CEASE", "RainLily", "FCPSU"], "why": "Early Assessment Service for Young people with early psychosis.", "source": "HA" },
-    { "q": "Organic screen in first-episode psychosis includes…", "options": ["Urine drugs, TFT, glucose", "Only a chest X-ray", "Stool culture", "Spirometry"], "why": "Neuroimaging if atypical features.", "source": "NICE CG178" },
+    { "q": "Organic screen in first-episode psychosis includes…", "options": ["Urine drugs, TFT, glucose", "Chest X-ray and spirometry", "Stool culture and ova", "Lipase and amylase only"], "why": "Neuroimaging if atypical features.", "source": "NICE CG178" },
     { "q": "Negative symptom?", "options": ["Alogia", "Delusion", "Hallucination", "Thought insertion"], "why": "Poverty of speech.", "source": "Psychiatry texts" },
-    { "q": "Most important risk question when psychotic and fearful?", "options": ["Weapons and intent to harm self or others", "Favourite food", "Job title", "Height"], "why": "Protective violence toward perceived persecutors.", "source": "NICE CG178" },
-    { "q": "Delusion definition?", "options": ["A fixed false belief not shared by culture", "Any strange idea", "A hallucination", "A strong opinion"], "why": "Held despite evidence.", "source": "Psychiatry texts" }
+    { "q": "Most important risk question when psychotic and fearful?", "options": ["Weapons and intent to harm self or others", "Family history of schizophrenia in first-degree relatives", "Age at first cannabis use", "Whether he is taking vitamins"], "why": "Protective violence toward perceived persecutors.", "source": "NICE CG178" },
+    { "q": "Delusion definition?", "options": ["A fixed false belief not shared by culture", "Any strange or unusual idea", "A hallucination in any sense", "A strongly held political opinion"], "why": "Held despite evidence.", "source": "Psychiatry texts" }
   ]
 }

@@ -63,20 +63,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "NICE drug for active management of the third stage?", "a": "Oxytocin 10 IU IM", "wrong": ["Syntometrine for all", "Misoprostol 800 microgram", "Carboprost 250 microgram"] },
-        { "q": "Contraindication to Syntometrine?", "a": "Pre-eclampsia / hypertension", "wrong": ["Asthma", "Multiparity", "Diabetes"] },
-        { "q": "Signs of placental separation?", "a": "Gush of blood, cord lengthening, uterus rises and becomes globular", "wrong": ["Maternal fever", "Fetal crying", "Contractions stop completely"] },
-        { "q": "Prolonged third stage with active management (NICE)?", "a": "Not completed within 30 minutes", "wrong": ["Within 5 minutes", "Within 6 hours", "Within 24 hours"] },
+        { "q": "Contraindication to Syntometrine?", "a": "Pre-eclampsia / hypertension", "wrong": ["Asthma requiring inhalers", "Grand multiparity (five or more)", "Gestational diabetes on metformin"] },
+        { "q": "Signs of placental separation?", "a": "Gush of blood, cord lengthening, uterus rises and becomes globular", "wrong": ["Maternal fever, shivering and a soft, boggy uterus", "Fetal crying followed by cord pulsation stopping", "Contractions stop completely for 10 minutes"] },
+        { "q": "Prolonged third stage with active management (NICE)?", "a": "Not completed within 30 minutes", "wrong": ["Not completed within 5 minutes", "Not completed within 6 hours", "Not completed within 60 minutes"] },
         { "q": "Delayed cord clamping in a well term baby?", "a": "At least 60 seconds", "wrong": ["Immediately", "After 10 minutes", "Only preterm babies"] }
       ]
     }
   ],
   "badge": { "name": "Safe Hands", "emoji": "🍼", "flavor": "Flex, guard, restitute. Oxytocin, wait, guard the uterus." },
   "cards": [
-    { "q": "Restitution means…", "options": ["The head rotates back in line with the shoulders after delivery", "The placenta separating", "The cord being cut", "The baby's first breath"], "why": "Wait for it before delivering the shoulders.", "source": "Obstetric mechanics" },
-    { "q": "Uterine inversion is prevented by…", "options": ["Guarding the uterus during controlled cord traction", "Fundal pressure", "Early cord traction", "Giving ergometrine"], "why": "Traction before separation, without counter-pressure, inverts the uterus.", "source": "NICE NG235" },
+    { "q": "Restitution means…", "options": ["The head turns back in line with the shoulders", "The placenta separating from the uterine wall", "The cord pulsation stopping after birth", "The baby's first breath and cry after delivery"], "why": "Wait for it before delivering the shoulders.", "source": "Obstetric mechanics" },
+    { "q": "Uterine inversion is prevented by…", "options": ["Guarding the uterus during cord traction", "Fundal pressure while pulling on the cord", "Early, firm cord traction before separation", "Giving ergometrine before the placenta"], "why": "Traction before separation, without counter-pressure, inverts the uterus.", "source": "NICE NG235" },
     { "q": "Normal umbilical cord vessels?", "options": ["Two arteries, one vein", "One artery, two veins", "Two arteries, two veins", "One artery, one vein"], "why": "A single umbilical artery is associated with anomalies.", "source": "Anatomy" },
     { "q": "NICE prolonged third stage with active management?", "options": ["Over 30 minutes", "Over 60 minutes", "Over 10 minutes", "Over 2 hours"], "why": "60 minutes with physiological management.", "source": "NICE NG235" },
-    { "q": "Tight nuchal cord that cannot be slipped over the head?", "options": ["Somersault manoeuvre, or clamp and cut as a last resort", "Pull the baby out quickly", "Push the head back in", "Wait for the next day"], "why": "Keep the baby's head close to the perineum as the body delivers.", "source": "RCOG / ALSO" },
-    { "q": "Why exclude a second twin before oxytocin?", "options": ["Oxytocin contracts the uterus on the second baby", "Twins need antibiotics", "To decide cord clamping", "To estimate weight"], "why": "Palpate before the third-stage drug.", "source": "Obstetric practice" }
+    { "q": "Tight nuchal cord that cannot be slipped over the head?", "options": ["Somersault manoeuvre, or clamp and cut as a last resort", "Pull the baby out quickly by the head", "Push the head back into the vagina", "Wait for the next contraction and restitution"], "why": "Keep the baby's head close to the perineum as the body delivers.", "source": "RCOG / ALSO" },
+    { "q": "Why exclude a second twin before oxytocin?", "options": ["Oxytocin would trap the second twin", "Twins need antibiotics before oxytocin", "To decide when to clamp the cord", "To estimate the second twin's weight"], "why": "Palpate before the third-stage drug.", "source": "Obstetric practice" }
   ]
 }
