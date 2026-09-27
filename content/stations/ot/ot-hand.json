@@ -77,10 +77,10 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "How do you test FDS in isolation?", "a": "Hold the other fingers in extension and ask her to flex the finger at the PIP", "wrong": ["Hold the PIP and flex the DIP", "Resisted wrist flexion", "Make a fist"] },
-        { "q": "How do you test FDP?", "a": "Hold the PIP straight and ask her to flex the DIP", "wrong": ["Hold the other fingers straight", "Thumb opposition", "Finger abduction"] },
+        { "q": "How do you test FDS in isolation?", "a": "Hold the other fingers straight; flex the PIP", "wrong": ["Hold the PIP straight and flex the DIP", "Resisted wrist flexion with the fingers straight", "Ask her to make a tight fist"] },
+        { "q": "How do you test FDP?", "a": "Hold the PIP straight; flex the DIP", "wrong": ["Hold the other fingers straight; flex the PIP", "Oppose the thumb to the little finger", "Spread the fingers against resistance"] },
         { "q": "Normal static two-point discrimination at the fingertip?", "a": "Under 6 mm", "wrong": ["Under 20 mm", "Under 1 mm", "Over 15 mm"] },
-        { "q": "Zone 2 flexor tendon injuries lie…", "a": "Between the distal palmar crease and the FDS insertion ('no man's land')", "wrong": ["At the wrist", "At the fingertip distal to FDS", "In the forearm"] },
+        { "q": "Zone 2 flexor tendon injuries lie…", "a": "Distal palmar crease to FDS insertion ('no man's land')", "wrong": ["At the wrist, proximal to the carpal tunnel", "At the fingertip, distal to the FDS insertion", "In the forearm, at the musculotendinous junction"] },
         { "q": "Should flexor tendons be repaired in the ED?", "a": "No — refer to hand surgery", "wrong": ["Yes, always", "Only in zone 2", "Only if the patient insists"] }
       ]
     }
@@ -90,7 +90,7 @@
     { "q": "An abnormal resting cascade suggests…", "options": ["Flexor tendon injury", "Normal hand", "Arthritis", "Skin laceration only"], "why": "The injured finger lies straighter.", "source": "BSSH" },
     { "q": "FDP inserts into…", "options": ["The distal phalanx", "The middle phalanx", "The proximal phalanx", "The metacarpal"], "why": "Flexes the DIP.", "source": "Anatomy" },
     { "q": "FDS inserts into…", "options": ["The middle phalanx", "The distal phalanx", "The metacarpal head", "The scaphoid"], "why": "Flexes the PIP.", "source": "Anatomy" },
-    { "q": "Digital nerve injury needs…", "options": ["Referral for microsurgical repair", "Nothing", "Antibiotics only", "Steroids"], "why": "Especially on the border digits' contact sides.", "source": "BSSH" },
+    { "q": "Digital nerve injury needs…", "options": ["Referral for microsurgical repair", "No treatment; sensation always returns", "Antibiotics alone for 5 days", "Oral steroids to reduce swelling"], "why": "Especially on the border digits' contact sides.", "source": "BSSH" },
     { "q": "Median nerve motor test in the hand?", "options": ["Thumb abduction (APB)", "Finger abduction", "Wrist extension", "Little finger flexion"], "why": "Ulnar: finger abduction; radial: wrist/finger extension.", "source": "Clinical examination" },
     { "q": "Antibiotics for a clean hand laceration?", "options": ["Not routinely", "Always IV", "Always oral for 2 weeks", "Only if a tendon is cut"], "why": "Clean wounds, early care.", "source": "BSSH / NICE" }
   ]

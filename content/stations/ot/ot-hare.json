@@ -49,11 +49,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Main indication for a Hare splint?", "a": "Isolated closed mid-shaft femoral fracture", "wrong": ["Pelvic fracture", "Ankle fracture", "Hip dislocation"] },
-        { "q": "A contraindication?", "a": "Ipsilateral ankle fracture", "wrong": ["Mid-shaft femur fracture", "Pain", "Age over 30"] },
-        { "q": "How much traction?", "a": "About 10% of body weight, up to 7 kg", "wrong": ["50% of body weight", "20 kg for all", "None"] },
-        { "q": "Blood loss from a closed femoral shaft fracture?", "a": "Up to 1–1.5 L", "wrong": ["50 mL", "5 L always", "None"] },
-        { "q": "Why use traction?", "a": "Reduces pain, spasm and bleeding, restores length", "wrong": ["Speeds bone healing", "Prevents infection", "Replaces surgery"] }
+        { "q": "Main indication for a Hare splint?", "a": "Isolated closed mid-shaft femoral fracture", "wrong": ["Pelvic ring fracture with shock", "Bimalleolar ankle fracture", "Posterior hip dislocation"] },
+        { "q": "A contraindication?", "a": "Ipsilateral ankle fracture", "wrong": ["A closed mid-shaft femoral fracture", "Severe thigh pain", "Age over 30 years"] },
+        { "q": "How much traction?", "a": "About 10% of body weight, up to 7 kg", "wrong": ["About 50% of body weight, up to 30 kg", "20 kg for every adult", "Just enough to take up slack"] },
+        { "q": "Blood loss from a closed femoral shaft fracture?", "a": "Up to 1–1.5 L", "wrong": ["About 50 mL", "5 L in every case", "Less than 200 mL"] },
+        { "q": "Why use traction?", "a": "Reduces pain, spasm and bleeding; restores length", "wrong": ["Speeds bone healing by weeks", "Prevents wound infection", "Replaces the need for surgery"] }
       ]
     }
   ],
@@ -61,9 +61,9 @@
   "cards": [
     { "q": "Traction splint is contraindicated in…", "options": ["Pelvic fracture", "Mid-shaft femur fracture", "Stable patient", "Closed fracture"], "why": "Pressure on the ischium worsens pelvic injury.", "source": "Manufacturer / JRCALC" },
     { "q": "The Hare splint ring sits against…", "options": ["The ischial tuberosity", "The groin vessels", "The greater trochanter", "The ASIS"], "why": "Counter-traction point.", "source": "Manufacturer" },
-    { "q": "Analgesia before a traction splint?", "options": ["IV opioid and/or femoral or fascia iliaca block", "None needed", "Oral paracetamol only", "Local infiltration at the fracture"], "why": "Traction itself also relieves pain.", "source": "RCEM" },
+    { "q": "Analgesia before a traction splint?", "options": ["IV opioid and/or a femoral nerve block", "None; the traction itself is the analgesia", "Oral paracetamol only", "Local infiltration at the fracture site"], "why": "Traction itself also relieves pain.", "source": "RCEM" },
     { "q": "Femoral shaft fracture blood loss can reach…", "options": ["1–1.5 L", "100 mL", "5 L", "No blood loss"], "why": "Can cause shock.", "source": "ATLS" },
-    { "q": "After applying a splint, always…", "options": ["Re-check neurovascular status", "Remove the hitch", "Stop analgesia", "Apply ice to the groin"], "why": "Detect compression.", "source": "Manufacturer" },
-    { "q": "Nerve at risk from a tight strap near the fibular head?", "options": ["Common peroneal", "Femoral", "Tibial", "Sural"], "why": "Foot drop.", "source": "Anatomy" }
+    { "q": "After applying a splint, always…", "options": ["Re-check neurovascular status", "Remove the ankle hitch after 10 minutes", "Stop further analgesia", "Apply ice to the groin strap"], "why": "Detect compression.", "source": "Manufacturer" },
+    { "q": "Nerve at risk from a tight strap near the fibular head?", "options": ["Common peroneal", "Femoral nerve", "Posterior tibial nerve", "Sural nerve"], "why": "Foot drop.", "source": "Anatomy" }
   ]
 }

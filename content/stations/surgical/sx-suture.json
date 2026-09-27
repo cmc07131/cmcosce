@@ -60,21 +60,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Purpose of the corner stitch?", "a": "Holds the flap tip without strangling its blood supply", "wrong": ["Faster closure", "Stronger than all other stitches", "Better cosmesis on the face only"] },
-        { "q": "Maximum dose of plain lidocaine (UK)?", "a": "3 mg/kg (max 200 mg)", "wrong": ["10 mg/kg", "1 mg/kg", "No maximum"] },
-        { "q": "Suture removal on the face?", "a": "3–5 days", "wrong": ["14 days", "21 days", "1 day"] },
-        { "q": "Tetanus-prone wound feature?", "a": "Soil contamination or devitalised tissue", "wrong": ["Clean paper cut", "Surgical incision", "Burn under 1%"] },
-        { "q": "Vertical mattress suture is useful for…", "a": "Everting wound edges", "wrong": ["Inverting edges", "Buried knots", "Closing mucosa"] }
+        { "q": "Purpose of the corner stitch?", "a": "Anchors the tip without strangling it", "wrong": ["Faster closure of the whole wound", "Stronger than all other stitches", "Better cosmesis, but only on the face and neck"] },
+        { "q": "Maximum dose of plain lidocaine (UK)?", "a": "3 mg/kg (max 200 mg)", "wrong": ["10 mg/kg (max 700 mg)", "1 mg/kg (max 100 mg)", "7 mg/kg (max 500 mg)"] },
+        { "q": "Suture removal on the face?", "a": "3–5 days", "wrong": ["14 days", "21 days", "7–10 days"] },
+        { "q": "Tetanus-prone wound feature?", "a": "Soil contamination or devitalised tissue", "wrong": ["A clean paper cut", "A surgical incision closed within 6 hours", "A burn under 1%"] },
+        { "q": "Vertical mattress suture is useful for…", "a": "Everting wound edges", "wrong": ["Inverting the edges", "Burying the knots", "Closing mucosa inside the mouth"] }
       ]
     }
   ],
   "badge": { "name": "Stitch Master", "emoji": "🧵", "flavor": "Irrigate, explore, corner stitch the tip, everted edges, never touch the needle." },
   "cards": [
     { "q": "Lidocaine with adrenaline maximum dose?", "options": ["7 mg/kg", "3 mg/kg", "15 mg/kg", "1 mg/kg"], "why": "Plain: 3 mg/kg (max 200 mg).", "source": "BNF", "note": "Your notes: 4 mg/kg plain (US figure)." },
-    { "q": "Lower-leg suture removal?", "options": ["10–14 days", "3–5 days", "21 days", "Never"], "why": "Poorer blood supply.", "source": "RCEM" },
-    { "q": "Monofilament sutures have…", "options": ["Less infection risk and tissue drag", "Better knot security than all braided", "More reactivity", "No use in skin"], "why": "Nylon/polypropylene.", "source": "Surgical skills" },
-    { "q": "Tetanus immunoglobulin is given for…", "options": ["High-risk tetanus-prone wounds in the not fully immunised", "All wounds", "Any wound after 10 years", "Clean wounds"], "why": "UKHSA risk-based approach.", "source": "UKHSA Green Book" },
+    { "q": "Lower-leg suture removal?", "options": ["10–14 days", "3–5 days", "21–28 days", "5–7 days"], "why": "Poorer blood supply.", "source": "RCEM" },
+    { "q": "Monofilament sutures have…", "options": ["Less infection risk and tissue drag", "Better knot security than braided", "More tissue reactivity than silk", "No place in skin closure"], "why": "Nylon/polypropylene.", "source": "Surgical skills" },
+    { "q": "Tetanus immunoglobulin is given for…", "options": ["High-risk wounds, not fully immunised", "All wounds, whatever the immunisation", "Any wound more than 10 years after the last dose", "Clean wounds in the elderly"], "why": "UKHSA risk-based approach.", "source": "UKHSA Green Book" },
     { "q": "Local anaesthetic is best infiltrated…", "options": ["Through the wound edges", "Through intact skin 5 cm away only", "Into a vein", "After suturing"], "why": "Less painful.", "source": "RCEM" },
-    { "q": "Pretibial flap in an elderly patient with thin skin?", "options": ["Steri-strips rather than sutures", "Tight sutures", "Staples", "Leave open always"], "why": "Sutures tear fragile skin.", "source": "BAD / RCEM" }
+    { "q": "Pretibial flap in an elderly patient with thin skin?", "options": ["Steri-strips rather than sutures", "Tight interrupted sutures", "Skin staples", "Leave open to heal by secondary intention"], "why": "Sutures tear fragile skin.", "source": "BAD / RCEM" }
   ]
 }

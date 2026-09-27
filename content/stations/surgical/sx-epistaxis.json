@@ -70,21 +70,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Commonest site of anterior epistaxis?", "a": "Little's area (Kiesselbach's plexus)", "wrong": ["Sphenopalatine artery", "Posterior ethmoid", "Inferior turbinate"] },
-        { "q": "Direction of nasal pack insertion?", "a": "Along the nasal floor, parallel to the hard palate", "wrong": ["Upwards toward the eye", "Laterally", "Any direction"] },
-        { "q": "Why not cauterise both sides of the septum?", "a": "Risk of septal perforation", "wrong": ["It hurts more", "It causes anosmia", "It is too slow"] },
+        { "q": "Commonest site of anterior epistaxis?", "a": "Little's area (Kiesselbach's plexus)", "wrong": ["Sphenopalatine artery", "Posterior ethmoidal artery", "Inferior turbinate"] },
+        { "q": "Direction of nasal pack insertion?", "a": "Along the floor, parallel to the palate", "wrong": ["Upwards and backwards toward the inner eye", "Laterally, toward the cheek", "Along the roof of the nose"] },
+        { "q": "Why not cauterise both sides of the septum?", "a": "Risk of septal perforation", "wrong": ["It is more painful", "It causes permanent loss of smell", "It takes too long to work"] },
         { "q": "Main artery in posterior epistaxis?", "a": "Sphenopalatine", "wrong": ["Facial", "Superior labial", "Anterior ethmoidal only"] },
-        { "q": "Contraindication to nasal packing?", "a": "Suspected base-of-skull fracture", "wrong": ["Hypertension", "Anticoagulation", "Age over 65"] }
+        { "q": "Contraindication to nasal packing?", "a": "Suspected base-of-skull fracture", "wrong": ["Uncontrolled hypertension", "Anticoagulation with warfarin or apixaban", "Age over 65 years"] }
       ]
     }
   ],
   "badge": { "name": "Nose Plug", "emoji": "👃", "flavor": "Pressure, look, cautery one side, pack along the floor." },
   "cards": [
-    { "q": "First aid for epistaxis?", "options": ["Lean forward and pinch the soft nose 10–15 minutes", "Tilt head back", "Pinch the bridge", "Lie flat"], "why": "Avoid swallowing blood.", "source": "ENT UK" },
-    { "q": "Silver nitrate cautery requires…", "options": ["A visible bleeding point and bleeding controlled", "Active heavy bleeding", "General anaesthesia", "Both sides"], "why": "Works poorly on active bleeding.", "source": "ENT UK" },
-    { "q": "Posterior epistaxis packing?", "options": ["Foley catheter with anterior pack", "Silver nitrate", "Ice only", "Nasal spray only"], "why": "Admit under ENT.", "source": "ENT UK" },
-    { "q": "Topical agent before examining a bleeding nose?", "options": ["Co-phenylcaine (lidocaine + phenylephrine)", "Water", "Steroid spray", "Saline only"], "why": "Anaesthesia and vasoconstriction.", "source": "ENT UK" },
-    { "q": "Routine antibiotics with an anterior pack?", "options": ["Not routinely required", "Always IV", "Always 2 weeks", "Only topical steroids"], "why": "Local policies vary.", "source": "ENT UK 2017" },
-    { "q": "Anticoagulated patient with epistaxis controlled by packing?", "options": ["Withhold with specialist advice; don't routinely reverse", "Always reverse immediately", "Double the dose", "Ignore"], "why": "Weigh thrombotic risk.", "source": "ENT UK" }
+    { "q": "First aid for epistaxis?", "options": ["Lean forward, pinch the soft nose 10–15 min", "Tilt the head back and pinch the bridge", "Pinch the bony bridge for 5 minutes", "Lie flat with an ice pack on the back of the neck"], "why": "Avoid swallowing blood.", "source": "ENT UK" },
+    { "q": "Silver nitrate cautery requires…", "options": ["A visible bleeding point and bleeding controlled", "Active heavy bleeding to find the source", "A general anaesthetic in theatre", "Treating both sides of the septum"], "why": "Works poorly on active bleeding.", "source": "ENT UK" },
+    { "q": "Posterior epistaxis packing?", "options": ["Foley catheter with an anterior pack", "Silver nitrate to the posterior septum", "Ice packs and oral tranexamic acid", "Decongestant nasal spray only"], "why": "Admit under ENT.", "source": "ENT UK" },
+    { "q": "Topical agent before examining a bleeding nose?", "options": ["Co-phenylcaine spray", "Beclometasone (steroid) nasal spray", "Sterile water irrigation", "Saline drops only"], "why": "Anaesthesia and vasoconstriction.", "source": "ENT UK" },
+    { "q": "Routine antibiotics with an anterior pack?", "options": ["Not routinely required", "Always, IV co-amoxiclav", "Always, oral for 2 weeks", "Only topical mupirocin"], "why": "Local policies vary.", "source": "ENT UK 2017" },
+    { "q": "Anticoagulated patient with epistaxis controlled by packing?", "options": ["Withhold with advice; don't routinely reverse", "Always reverse at once with PCC and vitamin K", "Double the dose to prevent a clot", "Continue unchanged without review"], "why": "Weigh thrombotic risk.", "source": "ENT UK" }
   ]
 }

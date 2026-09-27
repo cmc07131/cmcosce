@@ -66,21 +66,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What to do after arterial dilation/cannulation?", "a": "Leave the catheter in and call vascular surgery", "wrong": ["Pull it and compress", "Use it for vasopressors", "Ignore"] },
-        { "q": "Why head-down position?", "a": "Distends the vein and reduces air embolism risk", "wrong": ["Lowers BP", "Easier drape", "Prevents pneumothorax"] },
-        { "q": "Arrhythmia while passing the wire?", "a": "Withdraw the wire a few centimetres", "wrong": ["Push further", "Give adrenaline", "Ignore"] },
-        { "q": "Ideal tip position?", "a": "At the cavo-atrial junction", "wrong": ["In the right ventricle", "In the subclavian vein", "In the left atrium"] },
-        { "q": "Best skin antiseptic for central lines?", "a": "2% chlorhexidine in 70% alcohol", "wrong": ["Povidone-iodine in water", "Soap", "Alcohol alone always"] }
+        { "q": "What to do after arterial dilation/cannulation?", "a": "Leave it in; call vascular surgery", "wrong": ["Pull it out and compress for 10 minutes", "Use it for the noradrenaline infusion", "Remove the wire and re-site on the left"] },
+        { "q": "Why head-down position?", "a": "Distends the vein and reduces air embolism", "wrong": ["Lowers the blood pressure", "Makes the drape easier to place", "Prevents a pneumothorax"] },
+        { "q": "Arrhythmia while passing the wire?", "a": "Withdraw the wire a few centimetres", "wrong": ["Advance the wire further into the ventricle", "Give adrenaline 1 mg IV", "Carry on, as it always settles"] },
+        { "q": "Ideal tip position?", "a": "At the cavo-atrial junction", "wrong": ["In the brachiocephalic vein, near the IJV", "In the subclavian vein", "In the left atrium"] },
+        { "q": "Best skin antiseptic for central lines?", "a": "2% chlorhexidine in 70% alcohol", "wrong": ["10% povidone-iodine in water, left to dry", "Soap and water", "70% alcohol alone"] }
       ]
     }
   ],
   "badge": { "name": "Line Up", "emoji": "💉", "flavor": "Checklist, full barrier, ultrasound, never let go of the wire, count it out." },
   "cards": [
-    { "q": "Central venous access should be…", "options": ["Ultrasound-guided", "Landmark only", "Blind", "Always femoral"], "why": "NICE TA49.", "source": "NICE TA49" },
-    { "q": "Seldinger sequence?", "options": ["Needle, wire, nick, dilate, catheter", "Catheter, wire, needle", "Dilate, needle, wire", "Wire, catheter, needle"], "why": "Never let go of the wire.", "source": "Procedural texts" },
+    { "q": "Central venous access should be…", "options": ["Ultrasound-guided", "Landmark-guided by an expert", "Blind, using the pulse", "Always via the femoral vein"], "why": "NICE TA49.", "source": "NICE TA49" },
+    { "q": "Seldinger sequence?", "options": ["Needle, wire, nick, dilate, catheter", "Needle, catheter, wire, dilate, nick", "Nick, dilate, needle, wire, catheter", "Wire, needle, dilate, nick, catheter"], "why": "Never let go of the wire.", "source": "Procedural texts" },
     { "q": "Right IJV catheter depth in adults?", "options": ["About 15 cm", "About 25 cm", "About 5 cm", "About 40 cm"], "why": "Left side ~18–20 cm.", "source": "Procedural texts" },
-    { "q": "Air embolism prevention?", "options": ["Head-down position and occluding hubs", "Head-up position", "Fast infusion", "Deep breath in"], "why": "Negative intrathoracic pressure draws air.", "source": "Association of Anaesthetists" },
-    { "q": "Never event with central lines?", "options": ["Retained guidewire", "Arrhythmia", "Bruising", "Infection"], "why": "Count the wire out.", "source": "NHS England" },
-    { "q": "IJV relative to the carotid on ultrasound?", "options": ["Lateral and compressible", "Medial and pulsatile", "Posterior and rigid", "Deep to the vertebra"], "why": "Compress to confirm.", "source": "Anatomy" }
+    { "q": "Air embolism prevention?", "options": ["Head-down position and occluding hubs", "Head-up position during insertion", "A fast infusion through each lumen", "Asking the patient to breathe in deeply"], "why": "Negative intrathoracic pressure draws air.", "source": "Association of Anaesthetists" },
+    { "q": "Never event with central lines?", "options": ["Retained guidewire", "Arrhythmia during insertion", "Bruising at the site", "Catheter-related infection"], "why": "Count the wire out.", "source": "NHS England" },
+    { "q": "IJV relative to the carotid on ultrasound?", "options": ["Lateral and compressible", "Medial and pulsatile", "Posterior and non-compressible", "Deep to the vertebral body"], "why": "Compress to confirm.", "source": "Anatomy" }
   ]
 }

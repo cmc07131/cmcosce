@@ -77,21 +77,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Why capnography during sedation?", "a": "Detects hypoventilation before desaturation", "wrong": ["Measures sedation depth", "Detects fractures", "Required for billing"] },
+        { "q": "Why capnography during sedation?", "a": "Detects hypoventilation before desaturation", "wrong": ["Measures the depth of sedation directly and continuously", "Detects a fracture during reduction", "It is required for billing the procedure"] },
         { "q": "Which nerve to check before and after?", "a": "Axillary", "wrong": ["Musculocutaneous only", "Sciatic", "Phrenic"] },
         { "q": "Technique with higher fracture risk?", "a": "Kocher's", "wrong": ["External rotation", "Cunningham", "FARES"] },
-        { "q": "Midazolam dose range for sedation?", "a": "0.02–0.1 mg/kg titrated", "wrong": ["1 mg/kg bolus", "10 mg fixed", "0.5 mg/kg"] },
-        { "q": "A technique that often works without sedation?", "a": "Cunningham (massage and positioning)", "wrong": ["Kocher", "Hippocratic", "Traction with foot in axilla"] }
+        { "q": "Midazolam dose range for sedation?", "a": "0.02–0.1 mg/kg titrated", "wrong": ["1 mg/kg as a single bolus", "10 mg fixed dose for all", "0.5 mg/kg over 1 minute"] },
+        { "q": "A technique that often works without sedation?", "a": "Cunningham (massage and positioning)", "wrong": ["Kocher (external rotation and adduction)", "Hippocratic (foot in the axilla)", "Traction–countertraction with a sheet"] }
       ]
     }
   ],
   "badge": { "name": "Clunk", "emoji": "🛹", "flavor": "Two doctors, capnography, gentle rotation, nerves checked twice." },
   "cards": [
-    { "q": "Minimum staff for ED procedural sedation?", "options": ["A sedationist plus a separate operator", "One doctor alone", "A nurse alone", "Three consultants"], "why": "The sedationist focuses on the airway.", "source": "RCEM/RCoA" },
+    { "q": "Minimum staff for ED procedural sedation?", "options": ["A sedationist plus a separate operator", "One doctor doing both jobs", "A nurse giving the drugs alone", "Three consultants from different specialties"], "why": "The sedationist focuses on the airway.", "source": "RCEM/RCoA" },
     { "q": "Reversal for fentanyl?", "options": ["Naloxone", "Flumazenil", "Sugammadex", "Atropine"], "why": "Flumazenil reverses benzodiazepines.", "source": "BNF" },
-    { "q": "FARES technique involves…", "options": ["Traction with vertical oscillation while abducting", "Foot in the axilla", "Forceful levering", "Hanging weights for 30 minutes"], "why": "Fast, reliable and safe.", "source": "Sayegh 2009" },
+    { "q": "FARES technique involves…", "options": ["Traction with vertical oscillation while abducting", "Foot in the axilla with steady traction", "Forceful levering with external rotation", "Hanging weights from the wrist for 30 minutes"], "why": "Fast, reliable and safe.", "source": "Sayegh 2009" },
     { "q": "Ketamine sedation dose (IV)?", "options": ["1–2 mg/kg", "10 mg/kg", "0.1 mg/kg", "5 mg/kg"], "why": "Maintains airway reflexes.", "source": "RCEM" },
-    { "q": "After reduction, the X-ray looks for…", "options": ["Congruent joint and fractures (Hill-Sachs, Bankart, greater tuberosity)", "Lung pathology", "Nothing", "Cervical spine injury"], "why": "Confirms reduction.", "source": "BOA" },
-    { "q": "Modified Ramsay score 4 means…", "options": ["Asleep, rouses to a loud voice or shoulder tap", "Fully awake", "Unresponsive", "Agitated"], "why": "Target for reduction per your notes.", "source": "Ramsay scale" }
+    { "q": "After reduction, the X-ray looks for…", "options": ["Congruent joint and fractures (Hill-Sachs, Bankart, greater tuberosity)", "Lung pathology such as a pneumothorax", "Soft tissue swelling only", "A cervical spine injury"], "why": "Confirms reduction.", "source": "BOA" },
+    { "q": "Modified Ramsay score 4 means…", "options": ["Asleep, rouses to a loud voice or tap", "Fully awake and anxious", "Unresponsive, even to a firm trapezius squeeze", "Agitated and restless"], "why": "Target for reduction per your notes.", "source": "Ramsay scale" }
   ]
 }

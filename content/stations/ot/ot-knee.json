@@ -69,19 +69,19 @@
       "qs": [
         { "q": "Most sensitive test for ACL rupture?", "a": "Lachman test", "wrong": ["McMurray", "Apley grind", "Patellar apprehension"] },
         { "q": "Commonest cause of acute traumatic haemarthrosis?", "a": "ACL rupture", "wrong": ["Meniscal tear", "Gout", "Bursitis"] },
-        { "q": "Which is an Ottawa knee rule criterion?", "a": "Isolated patellar tenderness", "wrong": ["Age over 30", "Swelling", "Twisting mechanism"] },
+        { "q": "Which is an Ottawa knee rule criterion?", "a": "Isolated patellar tenderness", "wrong": ["A twisting mechanism with a pop", "Swelling within 2 hours of injury", "Age over 40 with a knee effusion"] },
         { "q": "A Segond fracture is associated with…", "a": "ACL rupture", "wrong": ["Patellar dislocation", "Osteoarthritis", "Gout"] },
-        { "q": "Straight-leg raise tests…", "a": "The extensor mechanism", "wrong": ["The ACL", "The menisci", "The hip flexors only"] }
+        { "q": "Straight-leg raise tests…", "a": "The extensor mechanism", "wrong": ["The anterior cruciate ligament", "The medial and lateral menisci", "The hip flexors only"] }
       ]
     }
   ],
   "badge": { "name": "Pop Goes the Knee", "emoji": "🦵", "flavor": "Pop plus rapid swelling: Lachman and think ACL." },
   "cards": [
-    { "q": "Ottawa knee rule: X-ray if…", "options": ["Unable to flex to 90°", "Mild swelling", "Age 40", "Twisting injury"], "why": "Also age ≥55, fibular head or isolated patellar tenderness, unable to weight bear 4 steps.", "source": "Stiell 1996" },
+    { "q": "Ottawa knee rule: X-ray if…", "options": ["Unable to flex to 90°", "Mild swelling after a twist", "Age over 40 years", "A twisting mechanism of injury"], "why": "Also age ≥55, fibular head or isolated patellar tenderness, unable to weight bear 4 steps.", "source": "Stiell 1996" },
     { "q": "Swelling within 2 hours after a knee injury suggests…", "options": ["Haemarthrosis", "Simple effusion", "Bursitis", "Cellulitis"], "why": "Delayed (overnight) swelling suggests meniscal injury.", "source": "BASK" },
     { "q": "The Lachman test is done at…", "options": ["20–30° flexion", "90° flexion", "Full extension", "Hip flexed 90°"], "why": "More sensitive than the anterior drawer.", "source": "Clinical examination" },
     { "q": "Posterior sag sign indicates…", "options": ["PCL injury", "ACL injury", "MCL tear", "Patellar dislocation"], "why": "Tibia sags back with the knee at 90°.", "source": "Clinical examination" },
-    { "q": "A locked knee suggests…", "options": ["Bucket-handle meniscal tear", "ACL tear only", "Osteoarthritis", "Bursitis"], "why": "Needs urgent orthopaedic review.", "source": "BASK" },
+    { "q": "A locked knee suggests…", "options": ["Bucket-handle meniscal tear", "Isolated ACL tear with a haemarthrosis", "Osteoarthritis of the knee", "Prepatellar bursitis"], "why": "Needs urgent orthopaedic review.", "source": "BASK" },
     { "q": "Bulge (sweep) test detects…", "options": ["Small effusions", "Large tense effusions", "Ligament tears", "Fractures"], "why": "The patellar tap detects larger effusions.", "source": "Clinical examination" }
   ]
 }

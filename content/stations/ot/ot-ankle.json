@@ -55,21 +55,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Ottawa ankle rule bony points?", "a": "Posterior edge/tip of either malleolus (distal 6 cm)", "wrong": ["Anterior talofibular ligament", "Any swelling", "Calcaneum"] },
-        { "q": "Weber C fractures are…", "a": "Above the syndesmosis and unstable", "wrong": ["Below the syndesmosis and stable", "At the level and always stable", "Only in children"] },
-        { "q": "Maisonneuve fracture is…", "a": "Proximal fibula fracture with syndesmosis and medial injury", "wrong": ["A 5th metatarsal base fracture", "A calcaneal fracture", "A tibial plateau fracture"] },
+        { "q": "Ottawa ankle rule bony points?", "a": "Posterior edge/tip of either malleolus (distal 6 cm)", "wrong": ["Anterior talofibular ligament tenderness", "Any swelling over the lateral malleolus", "Calcaneal tenderness on squeezing the heel"] },
+        { "q": "Weber C fractures are…", "a": "Above the syndesmosis and unstable", "wrong": ["Below the syndesmosis and usually stable", "At the level of the syndesmosis and always stable", "Seen only in children with open physes"] },
+        { "q": "Maisonneuve fracture is…", "a": "Proximal fibula fracture with syndesmotic injury", "wrong": ["A 5th metatarsal base avulsion fracture", "Distal fibula fracture below the syndesmosis, stable", "A tibial plateau fracture with ligament tear"] },
         { "q": "Simmonds/Thompson test examines…", "a": "The Achilles tendon", "wrong": ["The ATFL", "The syndesmosis", "The peroneal tendons"] },
-        { "q": "Sign of an unstable ankle on X-ray?", "a": "Talar shift (widened medial clear space)", "wrong": ["Soft tissue swelling", "Accessory ossicle", "Os trigonum"] }
+        { "q": "Sign of an unstable ankle on X-ray?", "a": "Talar shift (widened medial clear space)", "wrong": ["Soft tissue swelling over the lateral malleolus", "An accessory ossicle below the medial malleolus", "An os trigonum behind the talus on the lateral view"] }
       ]
     }
   ],
   "badge": { "name": "Ottawa Ace", "emoji": "🦶", "flavor": "Posterior edges, tips, four steps. Talus centred? Boot and walk." },
   "cards": [
-    { "q": "Ottawa ankle rule: X-ray if…", "options": ["Tenderness at the posterior edge or tip of a malleolus", "Any ankle swelling", "Pain only", "Bruising"], "why": "Or unable to bear weight 4 steps.", "source": "Stiell 1992" },
-    { "q": "Ottawa foot rule points?", "options": ["Base of 5th metatarsal and navicular", "Calcaneum and talus", "Hallux", "Cuboid"], "why": "Midfoot injury.", "source": "Stiell 1994" },
+    { "q": "Ottawa ankle rule: X-ray if…", "options": ["Malleolar posterior edge or tip tenderness", "Any ankle swelling after an inversion injury", "Pain on walking, even if able to take 4 steps", "Bruising over the lateral ligament complex"], "why": "Or unable to bear weight 4 steps.", "source": "Stiell 1992" },
+    { "q": "Ottawa foot rule points?", "options": ["Base of 5th metatarsal and navicular", "Calcaneum and the talar neck tenderness", "The hallux and first metatarsophalangeal joint", "The cuboid and the lateral cuneiform bones"], "why": "Midfoot injury.", "source": "Stiell 1994" },
     { "q": "Weber B fracture level?", "options": ["At the syndesmosis", "Below the syndesmosis", "Above the syndesmosis", "In the tibia"], "why": "Stability depends on the medial side.", "source": "Weber classification" },
-    { "q": "Stable Weber B management?", "options": ["Boot and weight-bearing as tolerated", "Immediate ORIF", "Non-weight-bearing 12 weeks", "Traction"], "why": "CROSSBAT and BOAST.", "source": "BOAST 2016" },
-    { "q": "Squeeze test of the calf with no plantarflexion means…", "options": ["Achilles rupture", "Normal", "Fibula fracture", "DVT"], "why": "Simmonds/Thompson test.", "source": "Clinical examination" },
-    { "q": "Always palpate which bone in an ankle injury?", "options": ["Proximal fibula", "Patella", "Femur", "Pelvis"], "why": "Maisonneuve fracture.", "source": "BOAST" }
+    { "q": "Stable Weber B management?", "options": ["Boot and weight-bearing as tolerated", "Immediate open reduction and internal fixation", "Non-weight-bearing in a cast for 12 weeks", "Skin traction on the ward"], "why": "CROSSBAT and BOAST.", "source": "BOAST 2016" },
+    { "q": "Squeeze test of the calf with no plantarflexion means…", "options": ["Achilles tendon rupture", "A normal, intact tendon", "Fracture of the fibular shaft", "Deep vein thrombosis of the calf"], "why": "Simmonds/Thompson test.", "source": "Clinical examination" },
+    { "q": "Always palpate which bone in an ankle injury?", "options": ["Proximal fibula", "The patella", "The distal femur", "Pelvis and sacroiliac joints"], "why": "Maisonneuve fracture.", "source": "BOAST" }
   ]
 }

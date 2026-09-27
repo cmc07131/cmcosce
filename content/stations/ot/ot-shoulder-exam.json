@@ -52,19 +52,19 @@
       "label": "Examiner",
       "qs": [
         { "q": "The empty can test assesses…", "a": "Supraspinatus", "wrong": ["Subscapularis", "Infraspinatus", "Biceps"] },
-        { "q": "Loss of passive external rotation suggests…", "a": "Frozen shoulder or glenohumeral OA", "wrong": ["Impingement", "AC joint sprain", "Biceps tendinopathy"] },
-        { "q": "Painful arc of subacromial pain is…", "a": "60–120° of abduction", "wrong": ["0–30°", "150–180° only", "Any movement"] },
+        { "q": "Loss of passive external rotation suggests…", "a": "Frozen shoulder or glenohumeral OA", "wrong": ["Subacromial impingement", "Acromioclavicular joint sprain after a fall", "Long head of biceps tendinopathy"] },
+        { "q": "Painful arc of subacromial pain is…", "a": "60–120° of abduction", "wrong": ["0–30° of abduction", "150–180° of abduction only", "Throughout the whole range"] },
         { "q": "The lift-off test assesses…", "a": "Subscapularis", "wrong": ["Supraspinatus", "Teres minor", "Deltoid"] },
-        { "q": "Nerve at risk after shoulder dislocation and how to test it?", "a": "Axillary nerve — badge area sensation and deltoid", "wrong": ["Radial — wrist drop", "Ulnar — finger abduction", "Median — thumb opposition"] }
+        { "q": "Nerve at risk after shoulder dislocation and how to test it?", "a": "Axillary — badge-area sensation and deltoid", "wrong": ["Radial — wrist drop and first web space", "Ulnar — finger abduction and little finger", "Median — thumb opposition and index pulp"] }
       ]
     }
   ],
   "badge": { "name": "Rotator", "emoji": "💪", "flavor": "Painful arc, Neer and Hawkins, strength intact: physio first." },
   "cards": [
     { "q": "Rotator cuff muscles?", "options": ["Supraspinatus, infraspinatus, teres minor, subscapularis", "Deltoid, biceps, triceps, pectoralis", "Trapezius, rhomboids, levator scapulae, serratus", "Teres major, latissimus, pectoralis, deltoid"], "why": "SITS.", "source": "Anatomy" },
-    { "q": "Neer's test is…", "options": ["Passive forward flexion with the arm internally rotated", "Resisted external rotation", "Hand behind the back lift-off", "Arm across the chest"], "why": "Impingement test.", "source": "Clinical examination" },
+    { "q": "Neer's test is…", "options": ["Passive forward flexion, arm internally rotated", "Resisted external rotation with the elbow at the side", "Lifting the hand off the lower back", "Adducting the arm across the chest, elbow bent"], "why": "Impingement test.", "source": "Clinical examination" },
     { "q": "Scarf test (cross-body adduction) tests…", "options": ["AC joint", "Subscapularis", "Long head of biceps", "Glenoid labrum"], "why": "Pain over the AC joint.", "source": "Clinical examination" },
-    { "q": "Winging of the scapula suggests…", "options": ["Long thoracic nerve palsy", "Axillary nerve palsy", "Radial nerve palsy", "Rotator cuff tear"], "why": "Serratus anterior weakness.", "source": "Anatomy" },
+    { "q": "Winging of the scapula suggests…", "options": ["Long thoracic nerve palsy", "Axillary nerve palsy", "Radial nerve palsy", "Full-thickness rotator cuff tear"], "why": "Serratus anterior weakness.", "source": "Anatomy" },
     { "q": "Acute traumatic cuff tear with weakness in a young patient needs…", "options": ["Early orthopaedic referral", "Physio only for 1 year", "Steroid injection immediately", "No follow-up"], "why": "Repair outcomes are better early.", "source": "BESS/BOA" },
     { "q": "Speed's test assesses…", "options": ["Biceps tendon", "Supraspinatus", "AC joint", "Deltoid"], "why": "Resisted forward flexion with a supinated arm.", "source": "Clinical examination" }
   ]

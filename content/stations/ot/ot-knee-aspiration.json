@@ -59,20 +59,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Commonest organism in adult septic arthritis?", "a": "Staphylococcus aureus", "wrong": ["E. coli", "Streptococcus pneumoniae", "Pseudomonas"] },
-        { "q": "Who aspirates a prosthetic joint?", "a": "Orthopaedics, under theatre-level asepsis", "wrong": ["Any ED doctor", "Physiotherapist", "Nobody"] },
-        { "q": "Does finding urate crystals exclude sepsis?", "a": "No", "wrong": ["Yes", "Only in men", "Only if the WCC is low"] },
+        { "q": "Who aspirates a prosthetic joint?", "a": "Orthopaedics, under theatre-level asepsis", "wrong": ["Any ED doctor in the cubicle", "A physiotherapist at clinic", "The GP at the next visit"] },
+        { "q": "Does finding urate crystals exclude sepsis?", "a": "No", "wrong": ["Yes, gout and sepsis never coexist", "Only in men over 40", "Only if the white cell count is low"] },
         { "q": "Organism to consider in a sexually active young adult?", "a": "Neisseria gonorrhoeae", "wrong": ["Salmonella", "Listeria", "Mycoplasma pneumoniae"] },
-        { "q": "Contraindication at the needle site?", "a": "Overlying cellulitis", "wrong": ["Fever", "Large effusion", "Age over 60"] }
+        { "q": "Contraindication at the needle site?", "a": "Overlying cellulitis", "wrong": ["A fever over 38 °C", "A large, tense effusion", "Age over 60 years"] }
       ]
     }
   ],
   "badge": { "name": "Tap Dancer", "emoji": "💉", "flavor": "Hot swollen joint: aspirate, culture, antibiotics, washout." },
   "cards": [
-    { "q": "Hot swollen joint: first diagnosis to exclude?", "options": ["Septic arthritis", "Gout", "Osteoarthritis", "Bursitis"], "why": "Joint destruction within days.", "source": "BSR/BOA" },
-    { "q": "Synovial fluid tests?", "options": ["Gram stain, culture, cell count, crystals", "Glucose only", "Troponin", "Amylase"], "why": "Before antibiotics where possible.", "source": "BSR/BOA" },
-    { "q": "Gout crystals under polarised light are…", "options": ["Needle-shaped, negatively birefringent", "Rhomboid, positively birefringent", "Spherical", "Invisible"], "why": "Pseudogout: rhomboid, positive.", "source": "Rheumatology" },
+    { "q": "Hot swollen joint: first diagnosis to exclude?", "options": ["Septic arthritis", "Acute gout", "Osteoarthritis flare", "Prepatellar bursitis"], "why": "Joint destruction within days.", "source": "BSR/BOA" },
+    { "q": "Synovial fluid tests?", "options": ["Gram stain, culture, cell count, crystals", "Glucose and protein only", "Troponin and CK", "Amylase and lipase"], "why": "Before antibiotics where possible.", "source": "BSR/BOA" },
+    { "q": "Gout crystals under polarised light are…", "options": ["Needle-shaped, negatively birefringent", "Rhomboid, positively birefringent", "Needle-shaped, positively birefringent", "Spherical and not birefringent"], "why": "Pseudogout: rhomboid, positive.", "source": "Rheumatology" },
     { "q": "Septic arthritis treatment besides antibiotics?", "options": ["Joint washout", "Steroid injection", "Immobilisation only", "NSAIDs only"], "why": "Surgical or needle lavage.", "source": "BOA" },
-    { "q": "Anticoagulation and joint aspiration?", "options": ["Not an absolute contraindication", "Absolute contraindication", "Must stop warfarin for a week", "Requires vitamin K first"], "why": "Weigh risks.", "source": "BSR" },
-    { "q": "Landmark for lateral knee aspiration?", "options": ["Superolateral edge of the patella", "Tibial tuberosity", "Popliteal fossa", "Fibular head"], "why": "Needle angled under the patella.", "source": "Procedural texts" }
+    { "q": "Anticoagulation and joint aspiration?", "options": ["Not an absolute contraindication", "An absolute contraindication", "Stop warfarin for a week first", "Give vitamin K the night before aspiration"], "why": "Weigh risks.", "source": "BSR" },
+    { "q": "Landmark for lateral knee aspiration?", "options": ["Superolateral edge of the patella", "Tibial tuberosity", "Medial joint line, below the patella tendon", "Popliteal fossa, between the hamstrings"], "why": "Needle angled under the patella.", "source": "Procedural texts" }
   ]
 }

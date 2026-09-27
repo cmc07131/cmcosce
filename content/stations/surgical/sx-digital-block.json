@@ -44,21 +44,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Where do digital nerves lie?", "a": "At 2, 4, 8 and 10 o'clock around the finger", "wrong": ["Only dorsally in the midline", "Inside the flexor tendon", "Only palmar midline"] },
-        { "q": "Adrenaline in digital blocks?", "a": "Safe in healthy digits; avoid in vascular disease", "wrong": ["Always contraindicated", "Required", "Causes gangrene in all"] },
-        { "q": "Maximum volume per digit?", "a": "About 5–6 mL", "wrong": ["20 mL", "0.1 mL", "No limit"] },
+        { "q": "Where do digital nerves lie?", "a": "At 2, 4, 8 and 10 o'clock", "wrong": ["Only dorsally, in the midline", "Inside the flexor tendon sheath", "Only in the palmar midline"] },
+        { "q": "Adrenaline in digital blocks?", "a": "Safe unless vascular disease", "wrong": ["Always contraindicated in digits", "Required for every digital block", "Causes gangrene in most patients"] },
+        { "q": "Maximum volume per digit?", "a": "About 5–6 mL", "wrong": ["About 20 mL", "About 0.1 mL", "As much as needed for effect"] },
         { "q": "Which nerves supply most of the fingertip?", "a": "Palmar digital nerves", "wrong": ["Dorsal digital nerves", "Radial nerve", "Musculocutaneous"] },
-        { "q": "Reversal for accidental adrenaline ischaemia?", "a": "Phentolamine infiltration", "wrong": ["Naloxone", "Flumazenil", "Atropine"] }
+        { "q": "Reversal for accidental adrenaline ischaemia?", "a": "Phentolamine infiltration", "wrong": ["Naloxone infiltration", "Flumazenil IV", "Warm compresses and elevation only"] }
       ]
     }
   ],
   "badge": { "name": "Numb Finger", "emoji": "☝", "flavor": "Both sides, dorsal then volar, small volume, test before cutting." },
   "cards": [
     { "q": "Digital block local anaesthetic?", "options": ["Lidocaine 1–2%", "Bupivacaine IV", "Prilocaine IV", "Ketamine"], "why": "With or without adrenaline.", "source": "RCEM" },
-    { "q": "Why document sensation before a digital block?", "options": ["To detect pre-existing nerve injury", "Billing", "Tradition", "Not needed"], "why": "Nerve injuries are missed after the block.", "source": "BSSH" },
-    { "q": "Phentolamine is used for…", "options": ["Reversing adrenaline-induced digital ischaemia", "Pain relief", "Infection", "Bleeding"], "why": "Alpha-blocker.", "source": "Lalonde" },
-    { "q": "Subungual haematoma > 50% with intact nail?", "options": ["Trephination usually enough", "Always remove the nail", "Antibiotics", "X-ray not needed ever"], "why": "Nail removal if nail disrupted.", "source": "BSSH" },
-    { "q": "Single palmar injection block is given…", "options": ["Subcutaneously at the palmar base of the finger", "Into the joint", "Into the nail bed", "Dorsally at the DIP"], "why": "Blocks both palmar nerves.", "source": "RCEM" },
-    { "q": "Contraindication to adrenaline in a digital block?", "options": ["Peripheral vascular disease", "Age 30", "Crush injury", "Fingertip laceration"], "why": "Risk of ischaemia.", "source": "Cochrane 2015" }
+    { "q": "Why document sensation before a digital block?", "options": ["To detect pre-existing nerve injury", "It is needed for billing the procedure", "It is a tradition, not evidence-based", "It predicts how long the block will last"], "why": "Nerve injuries are missed after the block.", "source": "BSSH" },
+    { "q": "Phentolamine is used for…", "options": ["Reversing adrenaline-induced digital ischaemia", "Pain relief after the block wears off", "Treating infection in the pulp space", "Stopping bleeding from the nail bed"], "why": "Alpha-blocker.", "source": "Lalonde" },
+    { "q": "Subungual haematoma > 50% with intact nail?", "options": ["Trephination usually enough", "Always remove the nail and repair the bed", "Antibiotics for 5 days", "X-ray and plastic surgery referral"], "why": "Nail removal if nail disrupted.", "source": "BSSH" },
+    { "q": "Single palmar injection block is given…", "options": ["Subcutaneously at the palmar base of the finger", "Into the MCP joint", "Into the nail bed", "Dorsally at the DIP joint"], "why": "Blocks both palmar nerves.", "source": "RCEM" },
+    { "q": "Contraindication to adrenaline in a digital block?", "options": ["Peripheral vascular disease", "Age over 30 years", "A crush injury to the fingertip pulp", "A fingertip laceration"], "why": "Risk of ischaemia.", "source": "Cochrane 2015" }
   ]
 }

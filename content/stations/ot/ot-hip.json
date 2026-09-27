@@ -48,21 +48,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "The Thomas test detects…", "a": "Fixed flexion deformity of the hip", "wrong": ["Abductor weakness", "Leg length discrepancy", "Knee effusion"] },
-        { "q": "Positive Trendelenburg on the right means…", "a": "The pelvis drops on the left when standing on the right leg", "wrong": ["Right knee buckles", "Pain on the right", "Left leg is short"] },
+        { "q": "The Thomas test detects…", "a": "Fixed flexion deformity of the hip", "wrong": ["Weakness of the hip abductors", "A true leg length discrepancy from the ASIS", "A knee effusion on the patellar tap test"] },
+        { "q": "Positive Trendelenburg on the right means…", "a": "Pelvis drops on the left when standing on the right", "wrong": ["The right knee buckles when standing on it", "Pain in the right groin on weight-bearing", "The left leg is short when measured from ASIS"] },
         { "q": "First movement lost in hip OA?", "a": "Internal rotation", "wrong": ["Extension", "Adduction", "External rotation"] },
         { "q": "True leg length is measured from…", "a": "ASIS to medial malleolus", "wrong": ["Umbilicus to medial malleolus", "Greater trochanter to heel", "Xiphisternum to toe"] },
-        { "q": "X-ray features of OA?", "a": "Loss of joint space, osteophytes, subchondral sclerosis and cysts", "wrong": ["Periosteal reaction", "Soap bubbles", "Erosions with osteopenia only"] }
+        { "q": "X-ray features of OA?", "a": "Loss of joint space, osteophytes, sclerosis, cysts", "wrong": ["Periosteal reaction and a sunburst pattern", "Soap-bubble lucency in the femoral head", "Periarticular erosions with osteopenia and joint-space loss"] }
       ]
     }
   ],
   "badge": { "name": "Hip Check", "emoji": "🦴", "flavor": "Internal rotation goes first. Stick in the other hand." },
   "cards": [
-    { "q": "Apparent leg length is measured from…", "options": ["Umbilicus to medial malleolus", "ASIS to medial malleolus", "Pubic symphysis to heel", "Greater trochanter to knee"], "why": "Reflects pelvic tilt.", "source": "Clinical examination" },
-    { "q": "Trendelenburg sign indicates weakness of…", "options": ["Hip abductors (gluteus medius)", "Quadriceps", "Hamstrings", "Adductors"], "why": "Pelvis drops on the opposite side.", "source": "Clinical examination" },
-    { "q": "NICE: OA can be diagnosed clinically in people aged…", "options": ["45 or over with typical symptoms", "Over 80 only", "Under 30", "Only with an X-ray"], "why": "Morning stiffness ≤30 min.", "source": "NICE NG226" },
+    { "q": "Apparent leg length is measured from…", "options": ["Umbilicus to medial malleolus", "ASIS to medial malleolus", "Pubic symphysis to the heel", "Greater trochanter to the lateral knee joint line"], "why": "Reflects pelvic tilt.", "source": "Clinical examination" },
+    { "q": "Trendelenburg sign indicates weakness of…", "options": ["Hip abductors (gluteus medius)", "Quadriceps femoris", "Hamstrings on the same side", "Hip adductors on the opposite side"], "why": "Pelvis drops on the opposite side.", "source": "Clinical examination" },
+    { "q": "NICE: OA can be diagnosed clinically in people aged…", "options": ["45 or over with typical symptoms", "Over 80 with typical symptoms", "Under 30 with morning stiffness", "Any age, but only once an X-ray confirms it"], "why": "Morning stiffness ≤30 min.", "source": "NICE NG226" },
     { "q": "Walking stick for right hip pain goes in…", "options": ["The left hand", "The right hand", "Either hand", "Both hands"], "why": "Reduces load on the painful hip.", "source": "Physiotherapy" },
     { "q": "Hip pain can refer to…", "options": ["The knee", "The shoulder", "The jaw", "The wrist"], "why": "Obturator nerve.", "source": "Anatomy" },
-    { "q": "Galeazzi test is used in…", "options": ["Infants for developmental dysplasia of the hip", "Adults with OA", "Knee injuries", "Ankle injuries"], "why": "Knee heights compared with hips flexed.", "source": "Paediatric orthopaedics" }
+    { "q": "Galeazzi test is used in…", "options": ["Infants for developmental dysplasia of the hip", "Adults with hip osteoarthritis", "Knee injuries with an effusion", "Ankle sprains in athletes"], "why": "Knee heights compared with hips flexed.", "source": "Paediatric orthopaedics" }
   ]
 }

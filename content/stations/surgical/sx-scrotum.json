@@ -60,19 +60,19 @@
       "qs": [
         { "q": "Salvage rate falls sharply after…", "a": "6 hours", "wrong": ["24 hours", "1 week", "30 minutes"] },
         { "q": "Cremasteric reflex in torsion?", "a": "Usually absent", "wrong": ["Always present", "Exaggerated", "Irrelevant"] },
-        { "q": "Blue dot sign indicates…", "a": "Torsion of a testicular appendage", "wrong": ["Testicular torsion", "Tumour", "Varicocele"] },
-        { "q": "Why fix the other side?", "a": "Bell-clapper anomaly is usually bilateral", "wrong": ["Cosmetic", "To prevent tumours", "Not needed"] },
-        { "q": "Epididymo-orchitis in a sexually active young man is usually…", "a": "Chlamydia or gonorrhoea", "wrong": ["E. coli always", "Mumps only", "TB"] }
+        { "q": "Blue dot sign indicates…", "a": "Torsion of a testicular appendage", "wrong": ["Torsion of the testis with necrosis", "Testicular tumour", "Varicocele"] },
+        { "q": "Why fix the other side?", "a": "Bell-clapper anomaly is usually bilateral", "wrong": ["Cosmetic symmetry", "To prevent testicular cancer in the remaining testis", "To preserve fertility after mumps"] },
+        { "q": "Epididymo-orchitis in a sexually active young man is usually…", "a": "Chlamydia or gonorrhoea", "wrong": ["E. coli in every case", "Mumps virus only", "Tuberculosis"] }
       ]
     }
   ],
   "badge": { "name": "Time Is Testis", "emoji": "⏳", "flavor": "Sudden pain, high horizontal testis: theatre, not ultrasound." },
   "cards": [
-    { "q": "Sudden severe testicular pain in a teenager: assume…", "options": ["Torsion until proven otherwise", "Epididymitis", "Hernia", "Muscle strain"], "why": "Explore urgently.", "source": "BAUS / EAU" },
-    { "q": "Testicular torsion typical sign?", "options": ["High-riding testis with horizontal lie", "Low testis", "Painless swelling", "Transilluminable mass"], "why": "Bell-clapper deformity.", "source": "EAU" },
-    { "q": "Ultrasound in suspected torsion?", "options": ["Must not delay exploration", "Is mandatory first", "Is diagnostic always", "Is contraindicated"], "why": "Doppler can be falsely reassuring.", "source": "BAUS" },
-    { "q": "Manual detorsion direction?", "options": ["Medial to lateral ('open the book')", "Lateral to medial", "Upwards", "Any direction"], "why": "Only while arranging theatre.", "source": "EAU" },
-    { "q": "Epididymo-orchitis in men over 35 is usually…", "options": ["Enteric organisms (UTI-related)", "Chlamydia", "Viral", "Fungal"], "why": "Treat accordingly.", "source": "BASHH" },
-    { "q": "Painless scrotal mass in a young man suggests…", "options": ["Testicular tumour", "Torsion", "Epididymitis", "Hernia"], "why": "Ultrasound and tumour markers.", "source": "Urology" }
+    { "q": "Sudden severe testicular pain in a teenager: assume…", "options": ["Torsion until proven otherwise", "Epididymo-orchitis", "Strangulated inguinal hernia", "Groin muscle strain"], "why": "Explore urgently.", "source": "BAUS / EAU" },
+    { "q": "Testicular torsion typical sign?", "options": ["High-riding testis with horizontal lie", "Low-lying testis with a vertical lie", "Painless, fluctuant swelling that transilluminates", "A mass separate from the testis"], "why": "Bell-clapper deformity.", "source": "EAU" },
+    { "q": "Ultrasound in suspected torsion?", "options": ["Must not delay exploration", "Is mandatory before surgery", "Is always diagnostic", "Is contraindicated"], "why": "Doppler can be falsely reassuring.", "source": "BAUS" },
+    { "q": "Manual detorsion direction?", "options": ["Medial to lateral ('open the book')", "Lateral to medial, like closing a book", "Upwards toward the ring", "Either direction"], "why": "Only while arranging theatre.", "source": "EAU" },
+    { "q": "Epididymo-orchitis in men over 35 is usually…", "options": ["Enteric organisms (UTI-related)", "Chlamydia trachomatis, as in young men", "Viral (mumps)", "Candida"], "why": "Treat accordingly.", "source": "BASHH" },
+    { "q": "Painless scrotal mass in a young man suggests…", "options": ["Testicular tumour", "Testicular torsion", "Epididymitis", "Inguinal hernia"], "why": "Ultrasound and tumour markers.", "source": "Urology" }
   ]
 }

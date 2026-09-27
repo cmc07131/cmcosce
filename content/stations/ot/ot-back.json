@@ -50,20 +50,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "Red flag for cauda equina syndrome?", "a": "Saddle anaesthesia", "wrong": ["Unilateral sciatica only", "Back pain on bending", "Paraspinal spasm"] },
-        { "q": "Imaging for suspected CES?", "a": "Emergency MRI lumbar spine", "wrong": ["Plain X-ray", "CT abdomen", "Ultrasound"] },
+        { "q": "Imaging for suspected CES?", "a": "Emergency MRI lumbar spine", "wrong": ["Plain X-ray of the lumbar spine", "CT abdomen and pelvis with contrast", "Bladder ultrasound alone"] },
         { "q": "Nerve root for ankle jerk?", "a": "S1", "wrong": ["L4", "L2", "S3"] },
-        { "q": "Femoral stretch test assesses…", "a": "Upper lumbar roots (L2–L4)", "wrong": ["S1", "Sciatic nerve", "Hip joint only"] },
-        { "q": "Commonest cause of CES?", "a": "Central lumbar disc prolapse", "wrong": ["Spinal tumour always", "Abscess always", "Osteoarthritis of the hip"] }
+        { "q": "Femoral stretch test assesses…", "a": "Upper lumbar roots (L2–L4)", "wrong": ["The S1 nerve root and ankle jerk", "The sciatic nerve in the buttock", "Only the hip joint and its capsule"] },
+        { "q": "Commonest cause of CES?", "a": "Central lumbar disc prolapse", "wrong": ["A spinal metastasis in every case", "An epidural abscess in every case", "Osteoarthritis of the hip"] }
       ]
     }
   ],
   "badge": { "name": "Saddle Check", "emoji": "🐎", "flavor": "Bilateral sciatica, saddle numbness, retention: MRI now." },
   "cards": [
-    { "q": "Cauda equina red flags?", "options": ["Bilateral sciatica, saddle anaesthesia, bladder/bowel dysfunction", "Unilateral leg pain only", "Morning stiffness", "Muscle spasm"], "why": "Emergency MRI.", "source": "GIRFT CES pathway 2023" },
+    { "q": "Cauda equina red flags?", "options": ["Bilateral sciatica, saddle anaesthesia, bladder/bowel dysfunction", "Unilateral leg pain below the knee", "Morning stiffness lasting over an hour", "Paraspinal muscle spasm and tenderness"], "why": "Emergency MRI.", "source": "GIRFT CES pathway 2023" },
     { "q": "Post-void residual concerning for CES?", "options": ["Over 200 mL", "Over 20 mL", "Over 2 L only", "Any residual"], "why": "Combined with clinical features.", "source": "GIRFT" },
-    { "q": "L5 radiculopathy weakness?", "options": ["Great toe extension and ankle dorsiflexion", "Knee extension", "Plantarflexion", "Hip flexion"], "why": "S1: plantarflexion and ankle jerk.", "source": "Neurology" },
-    { "q": "Knee jerk root?", "options": ["L3–L4", "S1", "L5", "T12"], "why": "Ankle jerk: S1.", "source": "Neurology" },
-    { "q": "Routine imaging for non-specific low back pain?", "options": ["Not recommended", "MRI for all", "X-ray for all", "CT for all"], "why": "Only with red flags or if it changes management.", "source": "NICE NG59" },
-    { "q": "Positive straight-leg raise suggests…", "options": ["L5/S1 nerve root irritation", "Hip OA", "Femoral nerve injury", "Muscle strain only"], "why": "Pain radiating below the knee at 30–70°.", "source": "Clinical examination" }
+    { "q": "L5 radiculopathy weakness?", "options": ["Great toe extension and ankle dorsiflexion", "Knee extension, hip adduction and the knee jerk", "Ankle plantarflexion, eversion and the ankle jerk", "Hip flexion against resistance"], "why": "S1: plantarflexion and ankle jerk.", "source": "Neurology" },
+    { "q": "Knee jerk root?", "options": ["L3–L4", "S1–S2", "L5–S1", "T12–L1"], "why": "Ankle jerk: S1.", "source": "Neurology" },
+    { "q": "Routine imaging for non-specific low back pain?", "options": ["Not recommended", "MRI for every patient", "Plain X-ray for everyone", "CT of the lumbar spine for all"], "why": "Only with red flags or if it changes management.", "source": "NICE NG59" },
+    { "q": "Positive straight-leg raise suggests…", "options": ["L5/S1 nerve root irritation", "Hip osteoarthritis", "Femoral nerve (L2–L4) irritation", "Hamstring muscle strain only"], "why": "Pain radiating below the knee at 30–70°.", "source": "Clinical examination" }
   ]
 }

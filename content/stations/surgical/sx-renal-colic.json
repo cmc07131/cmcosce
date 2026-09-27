@@ -64,10 +64,10 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "First-line imaging for suspected renal colic in adults (NICE)?", "a": "Low-dose non-contrast CT KUB within 24 hours", "wrong": ["KUB X-ray", "IVU", "MRI"] },
+        { "q": "First-line imaging for suspected renal colic in adults (NICE)?", "a": "Low-dose non-contrast CT KUB within 24 hours", "wrong": ["Plain KUB X-ray", "IV urogram", "MRI of the urinary tract"] },
         { "q": "First-line analgesia?", "a": "NSAIDs", "wrong": ["Morphine", "Buscopan", "Codeine"] },
-        { "q": "Obstructed infected kidney needs…", "a": "Urgent decompression (nephrostomy or stent) and antibiotics", "wrong": ["Tamsulosin", "Lithotripsy today", "Discharge"] },
-        { "q": "Differential to exclude in an older man with 'renal colic'?", "a": "Abdominal aortic aneurysm", "wrong": ["Appendicitis", "Gallstones", "Hernia"] },
+        { "q": "Obstructed infected kidney needs…", "a": "Urgent decompression and antibiotics", "wrong": ["Tamsulosin 400 micrograms and oral antibiotics", "Shock-wave lithotripsy the same day", "Discharge with oral antibiotics"] },
+        { "q": "Differential to exclude in an older man with 'renal colic'?", "a": "Abdominal aortic aneurysm", "wrong": ["Acute appendicitis", "Gallstones", "Inguinal hernia"] },
         { "q": "MET drug?", "a": "Tamsulosin", "wrong": ["Nifedipine first-line", "Furosemide", "Allopurinol"] }
       ]
     }
@@ -76,9 +76,9 @@
   "cards": [
     { "q": "Most ureteric stones under 5 mm…", "options": ["Pass spontaneously", "Need surgery", "Cause renal failure", "Need lithotripsy"], "why": "Larger ones less likely.", "source": "EAU 2024" },
     { "q": "Obstruction plus infection is…", "options": ["A urological emergency", "Managed with fluids only", "Treated with tamsulosin", "Discharged with antibiotics"], "why": "Decompress urgently.", "source": "NICE NG118" },
-    { "q": "Imaging for renal colic in pregnancy?", "options": ["Ultrasound", "CT KUB", "IVU", "X-ray"], "why": "Avoid radiation.", "source": "NICE NG118" },
-    { "q": "Renal colic analgesia after NSAIDs?", "options": ["IV paracetamol, then opioids", "Antispasmodics", "Nothing", "Steroids"], "why": "NICE NG118.", "source": "NICE NG118", "note": "Your notes use KUB X-ray and nifedipine." },
-    { "q": "Commonest stone type?", "options": ["Calcium oxalate", "Uric acid", "Cystine", "Struvite"], "why": "Radio-opaque.", "source": "Urology" },
+    { "q": "Imaging for renal colic in pregnancy?", "options": ["Ultrasound", "Low-dose CT KUB", "IV urogram", "Plain KUB X-ray"], "why": "Avoid radiation.", "source": "NICE NG118" },
+    { "q": "Renal colic analgesia after NSAIDs?", "options": ["IV paracetamol, then opioids", "Antispasmodics such as hyoscine", "Oral prednisolone", "No further analgesia"], "why": "NICE NG118.", "source": "NICE NG118", "note": "Your notes use KUB X-ray and nifedipine." },
+    { "q": "Commonest stone type?", "options": ["Calcium oxalate", "Uric acid", "Cystine", "Struvite (magnesium ammonium phosphate)"], "why": "Radio-opaque.", "source": "Urology" },
     { "q": "Stone size where urology intervention is more likely?", "options": ["Over 10 mm", "Under 2 mm", "Any size", "Only 1 mm"], "why": "Low spontaneous passage.", "source": "EAU 2024" }
   ]
 }
