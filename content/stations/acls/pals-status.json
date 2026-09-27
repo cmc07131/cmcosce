@@ -73,21 +73,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Buccal midazolam dose (APLS)?", "a": "0.3 mg/kg, max 10 mg", "wrong": ["0.3 mg/kg, max 5 mg", "1 mg/kg", "0.05 mg/kg"] },
-        { "q": "Second-line drug options at 25 minutes (APLS)?", "a": "Levetiracetam 40 mg/kg or phenytoin 20 mg/kg", "wrong": ["A third benzodiazepine", "Carbamazepine orally", "Paracetamol"] },
-        { "q": "Maximum benzodiazepine doses including pre-hospital?", "a": "Two", "wrong": ["One", "Four", "No limit"] },
-        { "q": "Why check glucose early?", "a": "Hypoglycaemia causes seizures and is quickly reversible", "wrong": ["To calculate the drug dose", "It predicts epilepsy", "It is required by law"] },
-        { "q": "Definition of convulsive status epilepticus (operational)?", "a": "A seizure lasting 5 minutes or more, or repeated without recovery", "wrong": ["Any seizure", "Seizure over 60 minutes", "Two seizures in a year"] }
+        { "q": "Buccal midazolam dose (APLS)?", "a": "0.3 mg/kg, max 10 mg", "wrong": ["0.3 mg/kg, max 5 mg", "1 mg/kg, max 20 mg", "0.05 mg/kg, max 2.5 mg"] },
+        { "q": "Second-line drug options at 25 minutes (APLS)?", "a": "Levetiracetam 40 mg/kg or phenytoin 20 mg/kg", "wrong": ["A third dose of lorazepam 0.1 mg/kg, then observe for 10 min", "Oral carbamazepine via NG tube", "Paracetamol and tepid sponging"] },
+        { "q": "Maximum benzodiazepine doses including pre-hospital?", "a": "Two", "wrong": ["One", "Four", "Three"] },
+        { "q": "Why check glucose early?", "a": "Hypoglycaemia causes seizures and is reversible", "wrong": ["To calculate the anticonvulsant dose", "A high glucose predicts epilepsy later in childhood", "It is required before giving lorazepam"] },
+        { "q": "Definition of convulsive status epilepticus (operational)?", "a": "A seizure of 5 minutes or more, or repeated without recovery", "wrong": ["Any seizure lasting more than 1 minute", "A seizure lasting more than 60 minutes", "Two or more seizures within a year"] }
       ]
     }
   ],
   "badge": { "name": "Still Waters", "emoji": "🌀", "flavor": "Clock, glucose, two benzos, then levetiracetam." },
   "cards": [
-    { "q": "IV lorazepam dose in paediatric status?", "options": ["0.1 mg/kg (max 4 mg)", "1 mg/kg", "0.01 mg/kg", "10 mg"], "why": "Repeat once after 10 minutes if still fitting.", "source": "APLS" },
-    { "q": "Levetiracetam loading dose in paediatric status?", "options": ["40 mg/kg (max 3 g) over 5 min", "10 mg/kg", "100 mg/kg", "4 mg/kg"], "why": "EcLiPSE/ConSEPT: as effective as phenytoin.", "source": "APLS 2023 update", "note": "Older notes: phenytoin only." },
-    { "q": "Phenytoin dose in status epilepticus?", "options": ["20 mg/kg over 20 minutes", "20 mg/kg bolus push", "2 mg/kg", "50 mg/kg"], "why": "Cardiac monitoring: risk of arrhythmia and hypotension.", "source": "APLS" },
+    { "q": "IV lorazepam dose in paediatric status?", "options": ["0.1 mg/kg (max 4 mg)", "1 mg/kg (max 10 mg)", "0.01 mg/kg (max 1 mg)", "0.5 mg/kg (max 20 mg)"], "why": "Repeat once after 10 minutes if still fitting.", "source": "APLS" },
+    { "q": "Levetiracetam loading dose in paediatric status?", "options": ["40 mg/kg (max 3 g) over 5 min", "10 mg/kg (max 1 g) over 5 min", "100 mg/kg (max 5 g) over 5 min", "20 mg/kg (max 2 g) over 60 min"], "why": "EcLiPSE/ConSEPT: as effective as phenytoin.", "source": "APLS 2023 update", "note": "Older notes: phenytoin only." },
+    { "q": "Phenytoin dose in status epilepticus?", "options": ["20 mg/kg over 20 minutes", "20 mg/kg as a rapid bolus", "2 mg/kg over 20 minutes", "50 mg/kg over 5 minutes"], "why": "Cardiac monitoring: risk of arrhythmia and hypotension.", "source": "APLS" },
     { "q": "PR diazepam dose?", "options": ["0.5 mg/kg", "0.05 mg/kg", "5 mg/kg", "0.1 mg/kg"], "why": "If no IV access and buccal midazolam unavailable.", "source": "APLS" },
-    { "q": "Status epilepticus continuing after second-line drug: next?", "options": ["RSI (e.g. thiopental or ketamine) and PICU", "A third benzodiazepine", "Observe", "Oral sodium valproate"], "why": "Around 45 minutes into the seizure.", "source": "APLS" },
-    { "q": "What not to do during a seizure?", "options": ["Put an object in the mouth", "Protect from injury", "Time the seizure", "Give oxygen"], "why": "Risk of dental injury and obstruction.", "source": "First aid / APLS" }
+    { "q": "Status epilepticus continuing after second-line drug: next?", "options": ["RSI and transfer to PICU", "A third dose of benzodiazepine", "Observe for another 20 minutes", "Oral sodium valproate via NG tube"], "why": "Around 45 minutes into the seizure.", "source": "APLS" },
+    { "q": "What not to do during a seizure?", "options": ["Put an object in the mouth", "Protect the head from injury", "Time the seizure", "Give high-flow oxygen"], "why": "Risk of dental injury and obstruction.", "source": "First aid / APLS" }
   ]
 }

@@ -107,19 +107,19 @@
       "qs": [
         { "q": "APLS weight estimate for an 8-month-old?", "a": "8 kg", "wrong": ["12 kg", "5 kg", "16 kg"] },
         { "q": "Fluid bolus volume in paediatric septic shock (RCUK/NICE)?", "a": "10 mL/kg", "wrong": ["20 mL/kg", "60 mL/kg at once", "5 mL/kg"] },
-        { "q": "When to start inotropes?", "a": "After 40–60 mL/kg without response", "wrong": ["Before any fluid", "After 200 mL/kg", "Never in children"] },
+        { "q": "When to start inotropes?", "a": "After 40–60 mL/kg without response", "wrong": ["Before any fluid is given", "After 200 mL/kg of fluid", "Only after a normal echocardiogram"] },
         { "q": "Ceftriaxone dose for meningococcal disease?", "a": "80 mg/kg", "wrong": ["10 mg/kg", "50 mg/kg cefuroxime", "200 mg/kg"] },
-        { "q": "Why no lumbar puncture now?", "a": "Shock and raised ICP signs; it would delay treatment", "wrong": ["He is too young", "The rash makes it unnecessary", "LP is never done in infants"] }
+        { "q": "Why no lumbar puncture now?", "a": "Shock and raised-ICP signs; it would delay care", "wrong": ["He is too young for a lumbar puncture", "The purpuric rash confirms meningitis, so it adds nothing", "Lumbar puncture is never done in infants"] }
       ]
     }
   ],
   "badge": { "name": "Glass Test", "emoji": "🥃", "flavor": "Non-blanching and floppy: antibiotics now, 10 mL/kg and reassess." },
   "cards": [
-    { "q": "Paediatric septic shock fluid bolus (RCUK 2021+)?", "options": ["10 mL/kg, reassess after each", "20 mL/kg repeated rapidly", "60 mL/kg over 1 hour", "5 mL/kg only"], "why": "Reassess for response and overload after each bolus.", "source": "RCUK paediatric ALS; NICE NG51", "note": "Older notes: 20 mL/kg." },
-    { "q": "Antibiotic for suspected meningococcal sepsis in a child?", "options": ["Ceftriaxone 80 mg/kg", "Oral amoxicillin", "Cefuroxime 50 mg/kg", "Gentamicin alone"], "why": "Give within an hour; don't wait for tests.", "source": "NICE CG102" },
+    { "q": "Paediatric septic shock fluid bolus (RCUK 2021+)?", "options": ["10 mL/kg, reassess after each", "20 mL/kg repeated rapidly x3", "60 mL/kg over the first hour", "5 mL/kg only, then inotropes"], "why": "Reassess for response and overload after each bolus.", "source": "RCUK paediatric ALS; NICE NG51", "note": "Older notes: 20 mL/kg." },
+    { "q": "Antibiotic for suspected meningococcal sepsis in a child?", "options": ["Ceftriaxone 80 mg/kg", "Oral amoxicillin 30 mg/kg", "Cefuroxime 50 mg/kg IV", "Gentamicin 7 mg/kg alone"], "why": "Give within an hour; don't wait for tests.", "source": "NICE CG102" },
     { "q": "Glucose for hypoglycaemia in a child?", "options": ["10% glucose 2 mL/kg", "50% glucose 5 mL/kg", "5% glucose 1 mL/kg", "Oral sugar in shock"], "why": "Recheck after.", "source": "RCUK paediatric ALS" },
     { "q": "APLS weight formula for under 1 year?", "options": ["(Age in months ÷ 2) + 4", "(Age × 2) + 8", "(Age × 3) + 7", "Age × 10"], "why": "1–5 years: (age × 2) + 8; 6–12 years: (age × 3) + 7.", "source": "APLS" },
-    { "q": "Sign of fluid overload during boluses?", "options": ["Enlarging liver and new crackles", "Falling heart rate", "Warm peripheries", "Improved CRT"], "why": "Stop and consider inotropes.", "source": "RCUK paediatric ALS" },
-    { "q": "Vasoactive drug of choice for cold septic shock in children?", "options": ["Adrenaline infusion", "Dopamine only", "Vasopressin first", "Esmolol"], "why": "Can run peripherally/IO at low concentration until central access.", "source": "Surviving Sepsis Campaign paediatrics 2020" }
+    { "q": "Sign of fluid overload during boluses?", "options": ["Enlarging liver and new crackles", "Falling heart rate and warm hands", "Warm peripheries and a bounding pulse", "Improving capillary refill time"], "why": "Stop and consider inotropes.", "source": "RCUK paediatric ALS" },
+    { "q": "Vasoactive drug of choice for cold septic shock in children?", "options": ["Adrenaline infusion", "Dopamine infusion only", "Vasopressin as first line", "Esmolol to slow the heart"], "why": "Can run peripherally/IO at low concentration until central access.", "source": "Surviving Sepsis Campaign paediatrics 2020" }
   ]
 }

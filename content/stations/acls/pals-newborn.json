@@ -78,8 +78,8 @@
       "qs": [
         { "q": "How many inflation breaths first?", "a": "5, each 2–3 seconds", "wrong": ["2 quick breaths", "10 at 60/min", "None — compressions first"] },
         { "q": "Compression-to-ventilation ratio in newborns?", "a": "3:1", "wrong": ["15:2", "30:2", "5:1"] },
-        { "q": "Indication for chest compressions?", "a": "HR under 60 after 30 s of effective ventilation", "wrong": ["HR under 100 at birth", "Any cyanosis", "Apnoea alone"] },
-        { "q": "Newborn IV adrenaline dose (RCUK)?", "a": "20 microgram/kg", "wrong": ["1 mg", "10 mg/kg", "0.1 mg/kg IV"] },
+        { "q": "Indication for chest compressions?", "a": "HR <60 after 30 s of good ventilation", "wrong": ["HR under 100 at birth, before any breaths", "Any central cyanosis at 5 minutes", "Apnoea alone at 1 minute of age"] },
+        { "q": "Newborn IV adrenaline dose (RCUK)?", "a": "20 microgram/kg", "wrong": ["1 mg (adult dose)", "10 mg/kg", "100 microgram/kg"] },
         { "q": "Initial gas for a term baby's inflation breaths?", "a": "Air (21%)", "wrong": ["100% oxygen", "50% oxygen", "Heliox"] }
       ]
     }
@@ -90,7 +90,7 @@
     { "q": "Most important action in newborn resuscitation?", "options": ["Effective ventilation", "Adrenaline", "Chest compressions", "Suction of all babies"], "why": "Newborn arrest is almost always respiratory.", "source": "RCUK NLS 2025" },
     { "q": "Newborn adrenaline interval (RCUK 2025)?", "options": ["Every 4 minutes", "Every 30 seconds", "Every 15 minutes", "Once only"], "why": "2025 standardised the interval.", "source": "RCUK NLS 2025" },
     { "q": "Sodium bicarbonate in newborn resuscitation (2025)?", "options": ["No longer recommended", "First-line", "Given before adrenaline", "Given with every breath"], "why": "Removed in 2025.", "source": "RCUK NLS 2025" },
-    { "q": "Preterm under 32 weeks: thermal care?", "options": ["Plastic bag without drying, under a radiant heater", "Dry vigorously and leave uncovered", "Cold water immersion", "Hat only"], "why": "Hypothermia worsens outcome.", "source": "RCUK NLS 2025" },
-    { "q": "Where should the oximeter probe go?", "options": ["Right wrist or hand (pre-ductal)", "Left foot", "Ear", "Either foot"], "why": "Pre-ductal saturations guide oxygen.", "source": "RCUK NLS 2025" }
+    { "q": "Preterm under 32 weeks: thermal care?", "options": ["Plastic wrap, undried, under radiant heat", "Dry vigorously, then leave uncovered", "Cool with tepid water to protect the brain", "A hat only, then skin-to-skin"], "why": "Hypothermia worsens outcome.", "source": "RCUK NLS 2025" },
+    { "q": "Where should the oximeter probe go?", "options": ["Right wrist or hand (pre-ductal)", "Left foot (post-ductal)", "Either earlobe", "Either foot, whichever is warmer"], "why": "Pre-ductal saturations guide oxygen.", "source": "RCUK NLS 2025" }
   ]
 }

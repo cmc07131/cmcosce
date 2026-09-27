@@ -100,11 +100,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "RCUK adenosine sequence?", "a": "6 mg, then 12 mg, then 18 mg", "wrong": ["3, 6, 9 mg", "12 mg only", "0.1 mg/kg"] },
+        { "q": "RCUK adenosine sequence?", "a": "6 mg, then 12 mg, then 18 mg", "wrong": ["3 mg, then 6 mg, then 9 mg", "12 mg, then 12 mg, then 12 mg", "0.1 mg/kg, then 0.2 mg/kg"] },
         { "q": "Modified Valsalva conversion rate in REVERT?", "a": "About 43%", "wrong": ["About 5%", "About 90%", "About 17%"] },
-        { "q": "Reduce adenosine dose with…", "a": "Dipyridamole or a heart transplant", "wrong": ["Theophylline", "Caffeine", "Beta-blockers"] },
-        { "q": "Why avoid AV-node blockers in pre-excited AF?", "a": "Conduction speeds down the accessory pathway, risking VF", "wrong": ["They cause asthma", "They cause heart block only", "They are ineffective but safe"] },
-        { "q": "ECG signs of WPW?", "a": "Short PR, delta wave, broad QRS", "wrong": ["Long PR, narrow QRS", "ST elevation in V1–V3", "Peaked T waves"] }
+        { "q": "Reduce adenosine dose with…", "a": "Dipyridamole or a heart transplant", "wrong": ["Theophylline or regular caffeine", "Beta-blockers or verapamil", "Metformin or long-term aminophylline"] },
+        { "q": "Why avoid AV-node blockers in pre-excited AF?", "a": "Conduction speeds down the accessory pathway, risking VF", "wrong": ["They trigger bronchospasm in most patients with WPW", "They cause complete heart block in pre-excitation", "They are ineffective but otherwise safe to try"] },
+        { "q": "ECG signs of WPW?", "a": "Short PR, delta wave, broad QRS", "wrong": ["Long PR, narrow QRS, U waves", "ST elevation in V1–V3 with RBBB", "Peaked T waves and flat P waves"] }
       ]
     }
   ],
@@ -113,11 +113,11 @@
   ],
   "badge": { "name": "Vagus Nerve", "emoji": "🫀", "flavor": "Blow, then legs up. Rapid push, fast flush. Look for the delta wave." },
   "cards": [
-    { "q": "Modified Valsalva: after 15 s of strain the patient…", "options": ["Lies flat with legs raised to 45° for 15 s", "Sits upright and coughs", "Holds breath for 60 s", "Drinks ice water"], "why": "REVERT: the leg raise increases venous return and vagal tone.", "source": "Appelboam et al., Lancet 2015" },
+    { "q": "Modified Valsalva: after 15 s of strain the patient…", "options": ["Lies flat with legs raised to 45° for 15 s", "Sits upright and coughs hard for 15 s", "Holds the breath for 60 s while sitting", "Drinks iced water while lying on the left side"], "why": "REVERT: the leg raise increases venous return and vagal tone.", "source": "Appelboam et al., Lancet 2015" },
     { "q": "First adenosine dose for adult SVT?", "options": ["6 mg rapid IV", "12 mg slow IV", "1 mg", "0.5 mg/kg"], "why": "Then 12 mg, then 18 mg (RCUK).", "source": "RCUK tachycardia algorithm" },
-    { "q": "Adenosine should be given…", "options": ["Rapidly into a large proximal vein with a saline flush", "Slowly over 5 minutes", "Intramuscularly", "Orally"], "why": "Half-life under 10 seconds.", "source": "BNF" },
-    { "q": "Relative caution for adenosine?", "options": ["Severe asthma", "Hypertension", "Diabetes", "Migraine"], "why": "Bronchospasm; verapamil is an alternative.", "source": "BNF / RCUK" },
-    { "q": "Delta wave is a sign of…", "options": ["Pre-excitation (WPW)", "Hyperkalaemia", "Pericarditis", "Hypothermia"], "why": "Slurred upstroke from early ventricular activation via the accessory pathway.", "source": "ECG basics" },
-    { "q": "Unstable SVT: treatment?", "options": ["Synchronised DC cardioversion", "Carotid massage", "Oral verapamil", "Observation"], "why": "Adverse features mean electricity.", "source": "RCUK" }
+    { "q": "Adenosine should be given…", "options": ["Rapidly into a large proximal vein with a flush", "Slowly over 5 minutes through a small hand vein", "Intramuscularly into the lateral thigh", "Orally, repeated every 2 minutes"], "why": "Half-life under 10 seconds.", "source": "BNF" },
+    { "q": "Relative caution for adenosine?", "options": ["Severe asthma", "Hypertension", "Type 2 diabetes", "Migraine with aura"], "why": "Bronchospasm; verapamil is an alternative.", "source": "BNF / RCUK" },
+    { "q": "Delta wave is a sign of…", "options": ["Pre-excitation (WPW)", "Hyperkalaemia", "Acute pericarditis", "Hypothermia (J wave)"], "why": "Slurred upstroke from early ventricular activation via the accessory pathway.", "source": "ECG basics" },
+    { "q": "Unstable SVT: treatment?", "options": ["Synchronised DC cardioversion", "Carotid sinus massage", "Oral verapamil 80 mg", "Observation on a monitor"], "why": "Adverse features mean electricity.", "source": "RCUK" }
   ]
 }

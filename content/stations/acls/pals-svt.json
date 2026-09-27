@@ -82,20 +82,20 @@
       "label": "Examiner",
       "qs": [
         { "q": "First adenosine dose (RCUK) in paediatric SVT?", "a": "150 microgram/kg", "wrong": ["6 mg regardless of weight", "10 microgram/kg", "1 mg/kg"] },
-        { "q": "Synchronised cardioversion energy for an unstable child with SVT?", "a": "1 J/kg, then 2 J/kg", "wrong": ["4 J/kg first", "10 J/kg", "200 J"] },
-        { "q": "What helps tell SVT from sinus tachycardia in an infant?", "a": "Fixed rate over 220, no variability, no P waves", "wrong": ["Rate over 150", "Fever", "Crying"] },
+        { "q": "Synchronised cardioversion energy for an unstable child with SVT?", "a": "1 J/kg, then 2 J/kg", "wrong": ["4 J/kg, then 8 J/kg", "0.5 J/kg, then 1 J/kg", "2 J/kg, then 4 J/kg"] },
+        { "q": "What helps tell SVT from sinus tachycardia in an infant?", "a": "Rate over 220, fixed, no P waves", "wrong": ["Rate over 150 with a high fever", "Irritability and crying with feeds", "Rate that varies with crying"] },
         { "q": "Which drug is contraindicated in infant SVT?", "a": "Verapamil", "wrong": ["Adenosine", "Amiodarone (with advice)", "Saline flush"] },
-        { "q": "Vagal manoeuvre for an infant?", "a": "Iced water bag to the face", "wrong": ["Valsalva into a syringe", "Carotid massage", "Eyeball pressure"] }
+        { "q": "Vagal manoeuvre for an infant?", "a": "Iced water bag to the face", "wrong": ["Valsalva by blowing into a syringe", "Unilateral carotid sinus massage", "Gentle eyeball pressure"] }
       ]
     }
   ],
   "badge": { "name": "Cool Face", "emoji": "🧊", "flavor": "Ice to the face, then adenosine by weight, fast push." },
   "cards": [
-    { "q": "Paediatric adenosine (RCUK) sequence?", "options": ["150 then 300 microgram/kg", "6 then 12 mg for all", "50 then 100 microgram/kg", "1 then 2 mg/kg"], "why": "Max single dose 500 microgram/kg (12 mg).", "source": "RCUK paediatric ALS", "note": "APLS/AHA start at 100 microgram/kg." },
+    { "q": "Paediatric adenosine (RCUK) sequence?", "options": ["150 then 300 microgram/kg", "6 then 12 mg for all ages", "50 then 100 microgram/kg", "1 then 2 mg/kg"], "why": "Max single dose 500 microgram/kg (12 mg).", "source": "RCUK paediatric ALS", "note": "APLS/AHA start at 100 microgram/kg." },
     { "q": "Heart rate suggesting SVT rather than sinus tachycardia in an infant?", "options": ["Over 220", "Over 120", "Over 160", "Over 180 while crying"], "why": "Children over 1 year: over 180.", "source": "APLS" },
     { "q": "Unstable paediatric SVT: first synchronised energy?", "options": ["1 J/kg", "4 J/kg", "0.5 J/kg", "10 J/kg"], "why": "Then 2 J/kg.", "source": "RCUK paediatric ALS" },
     { "q": "Verapamil in infants is…", "options": ["Contraindicated", "First-line", "Safe at 1 mg/kg", "Given before adenosine"], "why": "Risk of cardiovascular collapse.", "source": "APLS" },
-    { "q": "Iced water to the face works by…", "options": ["Triggering the diving reflex (vagal)", "Cooling the heart", "Blocking the AV node chemically", "Reducing fever"], "why": "Increases vagal tone.", "source": "APLS" },
+    { "q": "Iced water to the face works by…", "options": ["Triggering the diving reflex (vagal)", "Cooling the heart muscle directly", "Blocking the AV node chemically", "Lowering the core temperature and fever"], "why": "Increases vagal tone.", "source": "APLS" },
     { "q": "Amiodarone dose in paediatric tachyarrhythmia (after failed shocks)?", "options": ["5 mg/kg", "300 mg", "0.5 mg/kg", "20 mg/kg"], "why": "Given over 20 minutes in the perfusing patient.", "source": "RCUK paediatric ALS" }
   ]
 }

@@ -109,22 +109,22 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "When is amiodarone given in VF (RCUK 2025)?", "a": "300 mg after the 3rd shock, 150 mg after the 5th", "wrong": ["300 mg before the first shock", "150 mg after each shock", "Only after ROSC"] },
+        { "q": "When is amiodarone given in VF (RCUK 2025)?", "a": "300 mg after the 3rd shock, 150 mg after the 5th", "wrong": ["150 mg after the 3rd shock, 300 mg after the 5th", "300 mg after every shock up to 900 mg", "Only after ROSC, as an infusion"] },
         { "q": "Minimum first-shock energy for a biphasic defibrillator (rectilinear/truncated exponential)?", "a": "150 J", "wrong": ["50 J", "360 J always", "2 J/kg"] },
-        { "q": "Post-ROSC temperature target (2025)?", "a": "Prevent fever: 37.5 °C or less for 36–72 h", "wrong": ["33 °C for 24 h in all", "39 °C to aid immunity", "No monitoring needed"] },
-        { "q": "Why avoid nitrates here?", "a": "Right ventricular infarction is preload-dependent", "wrong": ["Nitrates cause VF", "They interact with amiodarone", "They raise the troponin"] },
-        { "q": "What to consider after three failed shocks?", "a": "Vector change to antero-posterior pads", "wrong": ["Stop resuscitation", "Double the adrenaline dose", "Give atropine"] }
+        { "q": "Post-ROSC temperature target (2025)?", "a": "Prevent fever: ≤37.5 °C for 36–72 h", "wrong": ["Cool to 33 °C for 24 h in every patient", "Allow 39 °C to support immunity", "No temperature monitoring is needed"] },
+        { "q": "Why avoid nitrates here?", "a": "RV infarction is preload-dependent", "wrong": ["Nitrates trigger VF after ROSC", "Nitrates interact with amiodarone", "Nitrates falsely raise the troponin"] },
+        { "q": "What to consider after three failed shocks?", "a": "Vector change to antero-posterior pads", "wrong": ["Stop resuscitation, as VF after three shocks is futile", "Double the adrenaline dose to 2 mg", "Give atropine 3 mg as a single dose"] }
       ]
     }
   ],
   "badge": { "name": "Shock and Awe", "emoji": "⚡", "flavor": "Shock early, CPR straight after. Three shocks, then the drugs." },
   "cards": [
     { "q": "In shockable arrest, adrenaline is first given…", "options": ["After the third shock", "Before the first shock", "After the first shock", "Only after 10 minutes"], "why": "Then every 3–5 minutes.", "source": "RCUK 2025 ALS" },
-    { "q": "Lidocaine dose in VF if amiodarone is unavailable?", "options": ["100 mg, then 50 mg after the fifth shock", "1 mg/kg every minute", "300 mg", "10 mg"], "why": "Lidocaine is the alternative antiarrhythmic.", "source": "RCUK 2025 ALS" },
-    { "q": "Where should the apical defibrillator pad sit?", "options": ["Directly below the armpit in the mid-axillary line", "Over the left nipple", "Over the sternum", "On the left shoulder"], "why": "2025 guidance stresses correct lateral pad placement.", "source": "RCUK 2025 ALS" },
+    { "q": "Lidocaine dose in VF if amiodarone is unavailable?", "options": ["100 mg, then 50 mg after the fifth shock", "1 mg/kg every minute until ROSC", "300 mg, then 150 mg after the fifth shock", "10 mg, repeated after every shock"], "why": "Lidocaine is the alternative antiarrhythmic.", "source": "RCUK 2025 ALS" },
+    { "q": "Where should the apical defibrillator pad sit?", "options": ["Below the armpit, mid-axillary line", "Over the left nipple, on the breast", "Over the lower sternum, left of midline", "On the left shoulder, below the clavicle"], "why": "2025 guidance stresses correct lateral pad placement.", "source": "RCUK 2025 ALS" },
     { "q": "Post-ROSC SpO2 target?", "options": ["94–98%", "100%", "88–92% in all", "Above 85%"], "why": "Avoid hypoxia and hyperoxia.", "source": "RCUK 2025 post-resuscitation care" },
-    { "q": "Post-ROSC blood pressure target?", "options": ["Systolic >100 mmHg or MAP 60–65", "Systolic >160", "MAP >90 always", "Any pressure"], "why": "Avoid hypotension.", "source": "RCUK 2025 post-resuscitation care" },
-    { "q": "ECG after ROSC shows ST elevation. Next?", "options": ["Emergency angiography and primary PCI", "Wait 24 h for neuroprognosis", "Thrombolysis in all", "CT head first always"], "why": "STEMI after ROSC goes to the cath lab.", "source": "RCUK/ERC 2025; ESC 2023" },
+    { "q": "Post-ROSC blood pressure target?", "options": ["Systolic >100 mmHg or MAP 60–65", "Systolic >160 mmHg to perfuse the brain", "MAP >90 mmHg in every patient", "Systolic 80–90 mmHg (permissive)"], "why": "Avoid hypotension.", "source": "RCUK 2025 post-resuscitation care" },
+    { "q": "ECG after ROSC shows ST elevation. Next?", "options": ["Emergency angiography and primary PCI", "Wait 72 hours for neuroprognostication, then decide", "Thrombolysis for every patient", "CT head first in every case"], "why": "STEMI after ROSC goes to the cath lab.", "source": "RCUK/ERC 2025; ESC 2023" },
     { "q": "Which lead best shows right ventricular infarction?", "options": ["V4R", "aVL", "V6", "I"], "why": "ST elevation ≥1 mm in V4R.", "source": "ESC 2023 ACS" }
   ]
 }

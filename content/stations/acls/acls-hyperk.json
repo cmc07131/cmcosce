@@ -84,10 +84,10 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Does calcium lower serum potassium?", "a": "No — it stabilises the cardiac membrane", "wrong": ["Yes, by 1 mmol/L", "Yes, by binding it in the gut", "Only calcium chloride does"] },
+        { "q": "Does calcium lower serum potassium?", "a": "No — it stabilises the cardiac membrane", "wrong": ["Yes, it lowers potassium by about 1 mmol/L", "Yes, by binding potassium in the gut", "Only calcium chloride lowers potassium"] },
         { "q": "Main complication of insulin–glucose therapy?", "a": "Hypoglycaemia", "wrong": ["Hyperkalaemia rebound in 5 min", "Hypercalcaemia", "Pulmonary oedema"] },
         { "q": "Salbutamol dose for hyperkalaemia?", "a": "10–20 mg nebulised", "wrong": ["2.5 mg nebulised", "100 microgram inhaled", "5 mg IV"] },
-        { "q": "Order of ECG changes as potassium rises?", "a": "Peaked T, then flat P and long PR, then broad QRS, then sine wave", "wrong": ["U waves first", "ST depression, then Q waves", "Sine wave first"] },
+        { "q": "Order of ECG changes as potassium rises?", "a": "Peaked T, then flat P and long PR, then broad QRS, then sine wave", "wrong": ["Broad QRS first, then peaked T, then flat P waves", "ST depression, then U waves, then a long QT interval", "Sine wave first, then peaked T as it worsens"] },
         { "q": "Definitive treatment in an anuric dialysis patient?", "a": "Dialysis", "wrong": ["Furosemide", "Salbutamol alone", "Calcium every hour"] }
       ]
     }
@@ -97,11 +97,11 @@
   ],
   "badge": { "name": "K-O", "emoji": "🍌", "flavor": "Protect, shift, remove, monitor. Never insulin without glucose." },
   "cards": [
-    { "q": "IV calcium for hyperkalaemia with ECG changes (UKKA 2023)?", "options": ["Calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL", "Calcium gluconate 10% 1 mL", "Calcium chloride 10% 100 mL", "Oral calcium carbonate"], "why": "Repeat if the ECG does not improve in 5–10 minutes.", "source": "UK Kidney Association 2023" },
-    { "q": "Insulin–glucose regimen (UKKA 2023)?", "options": ["10 units soluble insulin with 25 g glucose", "50 units insulin alone", "10 units insulin with 5 g glucose", "1 unit/kg insulin"], "why": "Monitor glucose for 6 hours.", "source": "UK Kidney Association 2023" },
-    { "q": "Earliest ECG sign of hyperkalaemia?", "options": ["Tall peaked T waves", "Sine wave", "Broad QRS", "U waves"], "why": "Then P flattening, PR prolongation, QRS widening.", "source": "ECG basics" },
-    { "q": "Salbutamol in hyperkalaemia is…", "options": ["An adjunct to insulin–glucose", "First-line alone", "Contraindicated", "Only IV"], "why": "10–20 mg nebulised.", "source": "UK Kidney Association 2023" },
-    { "q": "Sodium bicarbonate in hyperkalaemia is…", "options": ["Not routine; consider with acidosis", "First-line in all", "Contraindicated always", "Given before calcium"], "why": "Limited evidence for potassium lowering.", "source": "UK Kidney Association 2023" },
-    { "q": "How long does IV calcium protect the heart?", "options": ["About 30–60 minutes", "24 hours", "5 seconds", "1 week"], "why": "Shift and remove potassium meanwhile.", "source": "UK Kidney Association 2023" }
+    { "q": "IV calcium for hyperkalaemia with ECG changes (UKKA 2023)?", "options": ["Calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL", "Calcium gluconate 10% 10 mL or calcium chloride 10% 30 mL", "Calcium gluconate 10% 1 mL/kg up to 5 mL", "Oral calcium carbonate 1 g three times daily"], "why": "Repeat if the ECG does not improve in 5–10 minutes.", "source": "UK Kidney Association 2023" },
+    { "q": "Insulin–glucose regimen (UKKA 2023)?", "options": ["10 units soluble insulin with 25 g glucose", "50 units soluble insulin without glucose", "10 units soluble insulin with 5 g glucose", "1 unit/kg soluble insulin with 50 g glucose"], "why": "Monitor glucose for 6 hours.", "source": "UK Kidney Association 2023" },
+    { "q": "Earliest ECG sign of hyperkalaemia?", "options": ["Tall peaked T waves", "A sine-wave pattern", "Broad QRS complexes", "Prominent U waves"], "why": "Then P flattening, PR prolongation, QRS widening.", "source": "ECG basics" },
+    { "q": "Salbutamol in hyperkalaemia is…", "options": ["An adjunct to insulin–glucose", "First-line on its own, before calcium", "Contraindicated in hyperkalaemia", "Only effective given intravenously"], "why": "10–20 mg nebulised.", "source": "UK Kidney Association 2023" },
+    { "q": "Sodium bicarbonate in hyperkalaemia is…", "options": ["Not routine; consider with acidosis", "First-line for every patient with K over 6.5", "Contraindicated in all cases", "Given before calcium to protect the heart"], "why": "Limited evidence for potassium lowering.", "source": "UK Kidney Association 2023" },
+    { "q": "How long does IV calcium protect the heart?", "options": ["About 30–60 minutes", "About 4–6 hours", "About 24 hours", "Until the potassium is normal"], "why": "Shift and remove potassium meanwhile.", "source": "UK Kidney Association 2023" }
   ]
 }

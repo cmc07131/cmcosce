@@ -81,10 +81,10 @@
       "label": "Examiner",
       "qs": [
         { "q": "IM adrenaline dose for a 4-year-old?", "a": "150 microgram", "wrong": ["300 microgram", "500 microgram", "10 microgram/kg of 1:10,000"] },
-        { "q": "When do you repeat IM adrenaline?", "a": "After 5 minutes if not improving", "wrong": ["After 30 minutes", "Never", "After 1 minute"] },
-        { "q": "Role of chlorphenamine in emergency anaphylaxis treatment?", "a": "None; oral non-sedating antihistamine for skin symptoms after stabilisation", "wrong": ["First-line", "Replaces adrenaline in children", "Given before oxygen"] },
-        { "q": "Refractory anaphylaxis is…", "a": "Ongoing respiratory or cardiovascular problems despite 2 IM doses", "wrong": ["Any rash after 1 hour", "Anaphylaxis to two foods", "A reaction needing oxygen"] },
-        { "q": "Strength of adrenaline for IM use?", "a": "1:1000 (1 mg/mL)", "wrong": ["1:10,000", "1:100", "1:100,000"] }
+        { "q": "When do you repeat IM adrenaline?", "a": "After 5 minutes if not improving", "wrong": ["After 30 minutes if not improving", "After 1 minute if not improving", "Only once the IV line is in"] },
+        { "q": "Role of chlorphenamine in emergency anaphylaxis treatment?", "a": "None acutely; oral antihistamine later for skin", "wrong": ["First-line, before adrenaline, in all children", "It replaces adrenaline in mild paediatric cases", "Given IV before oxygen to stop the reaction"] },
+        { "q": "Refractory anaphylaxis is…", "a": "Ongoing A/B/C problems despite 2 IM doses", "wrong": ["Any rash that persists after 1 hour", "Anaphylaxis to two different foods", "Any reaction that needs supplemental oxygen at any point"] },
+        { "q": "Strength of adrenaline for IM use?", "a": "1:1000 (1 mg/mL)", "wrong": ["1:10,000 (100 microgram/mL)", "1:100 (10 mg/mL)", "1:100,000 (10 microgram/mL)"] }
       ]
     }
   ],
@@ -92,9 +92,9 @@
   "cards": [
     { "q": "IM adrenaline dose for a 10-year-old in anaphylaxis?", "options": ["300 microgram", "150 microgram", "500 microgram", "1 mg"], "why": "6–12 years: 300 microgram; over 12: 500 microgram.", "source": "RCUK anaphylaxis 2021" },
     { "q": "Best site for IM adrenaline?", "options": ["Anterolateral thigh", "Deltoid", "Buttock", "Abdomen subcutaneously"], "why": "Fastest absorption.", "source": "RCUK anaphylaxis 2021" },
-    { "q": "Steroids in emergency anaphylaxis treatment (RCUK 2021)?", "options": ["Not routine; only for refractory reactions or ongoing asthma/shock", "Always first", "Given IM instead of adrenaline", "Only for children"], "why": "No evidence they prevent biphasic reactions.", "source": "RCUK anaphylaxis 2021", "note": "Older notes list hydrocortisone doses routinely." },
-    { "q": "Mast cell tryptase timing?", "options": ["ASAP, then at 1–2 h, then at 24 h/follow-up", "Only at 24 hours", "Before adrenaline", "Only if the rash persists"], "why": "Supports the diagnosis later.", "source": "RCUK anaphylaxis 2021" },
-    { "q": "Anaphylaxis with hypotension in a child: fluid bolus?", "options": ["10 mL/kg crystalloid", "40 mL/kg albumin", "2 mL/kg glucose", "No fluids"], "why": "Along with adrenaline.", "source": "RCUK anaphylaxis 2021" },
-    { "q": "How many auto-injectors should be prescribed at discharge?", "options": ["Two", "One", "Three", "None"], "why": "A second dose may be needed.", "source": "MHRA / RCUK" }
+    { "q": "Steroids in emergency anaphylaxis treatment (RCUK 2021)?", "options": ["Not routine; only if refractory or ongoing asthma", "Always, given with the first dose of IM adrenaline", "Given IM instead of adrenaline in children", "Only for children under 5 years old"], "why": "No evidence they prevent biphasic reactions.", "source": "RCUK anaphylaxis 2021", "note": "Older notes list hydrocortisone doses routinely." },
+    { "q": "Mast cell tryptase timing?", "options": ["ASAP, then at 1–2 h, then at 24 h/follow-up", "Only once, at 24 hours, once the patient is stable", "Before adrenaline, so the result is valid", "Only if the urticarial rash persists"], "why": "Supports the diagnosis later.", "source": "RCUK anaphylaxis 2021" },
+    { "q": "Anaphylaxis with hypotension in a child: fluid bolus?", "options": ["10 mL/kg crystalloid", "40 mL/kg of 4.5% albumin", "2 mL/kg of 10% glucose", "20 mL/kg of 5% dextrose"], "why": "Along with adrenaline.", "source": "RCUK anaphylaxis 2021" },
+    { "q": "How many auto-injectors should be prescribed at discharge?", "options": ["Two", "One", "Three", "Four"], "why": "A second dose may be needed.", "source": "MHRA / RCUK" }
   ]
 }
