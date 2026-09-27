@@ -68,7 +68,7 @@
     { "q": "First-line reduction?", "options": ["Hyperpronation", "Supination–flexion", "Traction", "Open reduction"], "why": "Higher first-attempt success.", "source": "Cochrane 2017" },
     { "q": "After reduction the child…", "options": ["Usually uses the arm within 30 minutes", "Needs an above-elbow cast for 3 weeks, then review", "Needs admission for observation", "Needs physiotherapy for 6 weeks"], "why": "Reassess function.", "source": "RCEM" },
     { "q": "Prevention advice?", "options": ["Lift under the arms", "Swing the child by the hands", "Avoid all play for 6 weeks", "Use a sling when outdoors"], "why": "Reduces recurrence.", "source": "RCH Melbourne" },
-    { "q": "Red flag suggesting a fracture instead?", "options": ["Swelling or bruising after a fall", "Pain on pronation", "Refusal to use the arm after a pull on the hand", "Age over 3 years"], "why": "X-ray it.", "source": "RCEM" },
+    { "q": "Red flag suggesting a fracture instead?", "options": ["Swelling or bruising after a fall", "Pain on pronation", "Refusal to use the arm after a pull on the hand", "Age over 3 years at the time of the pull"], "why": "X-ray it.", "source": "RCEM" },
     { "q": "Pulled elbow recurrence risk continues until about age…", "options": ["5", "1", "10", "15"], "why": "Annular ligament strengthens.", "source": "RCH Melbourne" }
   ]
 }

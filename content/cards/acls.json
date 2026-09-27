@@ -11,7 +11,7 @@
     {
       "id": "acls-atropine",
       "q": "Symptomatic bradycardia in an adult. First-line atropine dosing (AHA)?",
-      "options": ["1 mg IV every 3–5 min, maximum 3 mg", "0.3 mg IV once", "3 mg IV once, then stop", "10 micrograms/kg IV"],
+      "options": ["1 mg IV every 3–5 min, maximum 3 mg", "0.3 mg IV once, repeated if needed", "3 mg IV as a single bolus, then stop", "10 micrograms/kg IV every 10 minutes"],
       "answer": 0,
       "why": "AHA: atropine 1 mg IV every 3–5 minutes up to 3 mg. Under 0.5 mg can slow the rate further.",
       "source": "AHA adult bradycardia algorithm (2020, retained 2025)"
@@ -19,7 +19,7 @@
     {
       "id": "acls-mechanical-capture",
       "q": "Transcutaneous pacing. How do you confirm mechanical capture?",
-      "options": ["A femoral pulse that matches the paced rate", "A carotid pulse", "A spike on the monitor", "The chest wall twitching"],
+      "options": ["A femoral pulse that matches the paced rate", "A carotid pulse felt through the pacing jolts", "A pacing spike on the monitor before each QRS", "Twitching of the chest wall with each spike"],
       "answer": 0,
       "why": "Pad current makes the neck muscles jump and can mimic a carotid pulse. Feel the femoral.",
       "source": "AHA ACLS; Resuscitation Council UK"
@@ -35,7 +35,7 @@
     {
       "id": "acls-hyperk-calcium",
       "q": "K+ 7.4 with peaked T waves and a wide QRS. First drug?",
-      "options": ["IV calcium: gluconate 10% 30 mL or chloride 10% 10 mL", "Insulin–dextrose first", "Oral calcium resonium", "Furosemide"],
+      "options": ["IV calcium gluconate or chloride", "Insulin–dextrose first, then calcium", "Oral calcium resonium 15 g", "Furosemide 40 mg IV"],
       "answer": 0,
       "why": "Calcium stabilises the myocardial membrane within minutes. Insulin–dextrose and salbutamol then shift potassium into cells.",
       "source": "UK Kidney Association hyperkalaemia guideline (2023)"
@@ -43,7 +43,7 @@
     {
       "id": "acls-adenosine",
       "q": "Stable regular narrow-complex tachycardia; vagal manoeuvres failed. Adenosine dosing (AHA)?",
-      "options": ["6 mg rapid IV push with a flush, then 12 mg if needed", "12 mg slow IV over 5 minutes", "3 mg IM", "1 mg/kg IV"],
+      "options": ["6 mg rapid push, then 12 mg", "12 mg slow IV over 5 minutes", "3 mg IM, repeated after 5 minutes", "1 mg/kg IV as a single bolus"],
       "answer": 0,
       "why": "AHA: 6 mg rapid push then 12 mg. ERC continues to 18 mg for a third dose.",
       "source": "AHA adult tachycardia algorithm (2020); ERC 2021"
@@ -51,7 +51,7 @@
     {
       "id": "acls-unstable-tachy",
       "q": "Tachycardia with a pulse, BP 70/40 and chest pain. Treatment?",
-      "options": ["Synchronised DC cardioversion", "Unsynchronised shock at 360 J", "Adenosine and wait", "Oral beta-blocker"],
+      "options": ["Synchronised DC cardioversion", "Unsynchronised shock at 360 J", "IV adenosine 6 mg, then reassess in 5 minutes", "Oral beta-blocker"],
       "answer": 0,
       "why": "An unstable tachyarrhythmia with a pulse gets synchronised cardioversion, with sedation if conscious.",
       "source": "AHA / ERC tachycardia algorithms"
@@ -67,7 +67,7 @@
     {
       "id": "acls-adrenaline-adult",
       "q": "Adult cardiac arrest. Adrenaline dose and interval?",
-      "options": ["1 mg IV/IO every 3–5 minutes", "0.5 mg IM once", "10 mg IV once", "1 mg every 30 seconds"],
+      "options": ["1 mg IV/IO every 3–5 minutes", "0.5 mg IM once, then reassess", "10 mg IV as a single dose", "1 mg every 30 seconds until ROSC"],
       "answer": 0,
       "why": "1 mg every 3–5 min: as soon as possible in non-shockable rhythms, after the third shock in shockable ones (ERC).",
       "source": "ERC 2021; AHA 2020"
@@ -83,7 +83,7 @@
     {
       "id": "io-landmark",
       "q": "Adult proximal tibial IO. Where do you go in?",
-      "options": ["Flat anteromedial tibia, about 2 cm medial to the tuberosity", "Directly on the tibial tuberosity", "Lateral to the tibial crest", "Just above the patella"],
+      "options": ["2 cm medial to the tuberosity, on the flat tibia", "Directly on the tibial tuberosity, perpendicular", "Lateral to the tibial crest, on the fibular side", "Just above the patella, into the quadriceps"],
       "answer": 0,
       "why": "The flat anteromedial surface has thin cortex and marrow beneath; stay away from the joint and the tendon insertion.",
       "source": "Teleflex EZ-IO technique"
@@ -91,7 +91,7 @@
     {
       "id": "io-5mm",
       "q": "EZ-IO: tip resting on bone, before drilling. What tells you the needle is long enough?",
-      "options": ["At least one black 5 mm mark visible above the skin", "The hub touching the skin", "The needle is blue", "It feels firm"],
+      "options": ["A black 5 mm mark visible above the skin", "The hub touching the skin before drilling", "The needle is the blue (45 mm) set", "It feels firm against the bone"],
       "answer": 0,
       "why": "If no black line shows with the tip on bone, the needle may not reach the marrow: take a longer one.",
       "source": "Teleflex EZ-IO technique"

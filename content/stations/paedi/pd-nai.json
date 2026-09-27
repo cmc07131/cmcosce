@@ -68,7 +68,7 @@
         { "q": "When did HK's Mandatory Reporting of Child Abuse Ordinance come into force?", "a": "20 January 2026", "wrong": ["1 January 2020", "1 July 1997", "Not yet in force"] },
         { "q": "Burn pattern suggesting forced immersion?", "a": "Symmetrical glove/stocking burns, sharp tide-marks", "wrong": ["Irregular splash marks on the chest and arm", "A single small burn on the palm of the hand", "Facial erythema after a hot bath"] },
         { "q": "Fracture highly specific for abuse in infants?", "a": "Posterior rib or metaphyseal fractures", "wrong": ["Clavicle fracture after a difficult birth", "Toddler's fracture of the tibia", "Buckle fracture of the distal radius"] },
-        { "q": "Which investigation in a child under 2 with suspected abuse?", "a": "Skeletal survey", "wrong": ["MRI spine only", "Ultrasound abdomen only", "No imaging"] },
+        { "q": "Which investigation in a child under 2 with suspected abuse?", "a": "Skeletal survey", "wrong": ["MRI of the whole spine only", "Ultrasound abdomen only", "No imaging"] },
         { "q": "Parents demand discharge; you suspect abuse. You…", "a": "Contact SWD/police; the law allows holding the child", "wrong": ["Let them go, then refer to social work by letter next week", "Sedate the child so they cannot leave", "Ask them to return tomorrow for review"] }
       ]
     }
@@ -79,7 +79,7 @@
     { "q": "Bruising in a non-mobile infant is…", "options": ["Concerning for abuse", "A normal finding", "Usually due to teething", "Expected after vaccinations"], "why": "'Those who don't cruise rarely bruise'.", "source": "NICE CG89" },
     { "q": "Immersion scald features?", "options": ["Sharp tide-marks, symmetry, sparing of flexures", "Splash marks with irregular edges", "Irregular depth on one limb", "A single small burn on the palm"], "why": "Child held in hot water.", "source": "NICE CG89" },
     { "q": "Retinal haemorrhages with subdural haematoma in an infant suggest…", "options": ["Abusive head trauma", "Migraine with aura", "Bacterial meningitis only", "Normal birth trauma at 6 months"], "why": "Ophthalmology review.", "source": "RCPCH" },
-    { "q": "Documentation in suspected NAI should be…", "options": ["Verbatim, timed, with a body map", "A brief summary at the end of the shift", "Only the final diagnosis", "Written up later from memory"], "why": "Legal record.", "source": "NICE CG89" },
+    { "q": "Documentation in suspected NAI should be…", "options": ["Verbatim, timed, with a body map", "A brief summary at the end of the shift", "Only the final diagnosis", "Written up later from memory at home"], "why": "Legal record.", "source": "NICE CG89" },
     { "q": "Sentinel injury means…", "options": ["A minor injury in an infant preceding serious abuse", "A major burn in a toddler", "A fracture in a teenager", "A sports injury in a school child"], "why": "Act on small unexplained injuries.", "source": "Paediatric safeguarding" }
   ]
 }

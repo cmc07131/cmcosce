@@ -102,7 +102,7 @@
       "qs": [
         { "q": "RCUK adenosine sequence?", "a": "6 mg, then 12 mg, then 18 mg", "wrong": ["3 mg, then 6 mg, then 9 mg", "12 mg, then 12 mg, then 12 mg", "0.1 mg/kg, then 0.2 mg/kg"] },
         { "q": "Modified Valsalva conversion rate in REVERT?", "a": "About 43%", "wrong": ["About 5%", "About 90%", "About 17%"] },
-        { "q": "Reduce adenosine dose with…", "a": "Dipyridamole or a heart transplant", "wrong": ["Theophylline or regular caffeine", "Beta-blockers or verapamil", "Metformin or long-term aminophylline"] },
+        { "q": "Reduce adenosine dose with…", "a": "Dipyridamole or a heart transplant", "wrong": ["Theophylline or regular caffeine", "Beta-blockers or verapamil in the last day", "Metformin or long-term aminophylline"] },
         { "q": "Why avoid AV-node blockers in pre-excited AF?", "a": "Conduction speeds down the accessory pathway, risking VF", "wrong": ["They trigger bronchospasm in most patients with WPW", "They cause complete heart block in pre-excitation", "They are ineffective but otherwise safe to try"] },
         { "q": "ECG signs of WPW?", "a": "Short PR, delta wave, broad QRS", "wrong": ["Long PR, narrow QRS, U waves", "ST elevation in V1–V3 with RBBB", "Peaked T waves and flat P waves"] }
       ]

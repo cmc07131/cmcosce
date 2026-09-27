@@ -100,10 +100,10 @@
   "badge": { "name": "Time Is Brain", "emoji": "⏱", "flavor": "4½ hours, BP under 185/110, CTA for the big clot." },
   "cards": [
     { "q": "IV thrombolysis window for acute ischaemic stroke?", "options": ["4.5 hours from onset", "3 hours from onset", "6 hours from onset", "24 hours from onset in all patients"], "why": "Longer only with imaging selection.", "source": "ESO 2021; NICE NG128", "note": "Older notes: 3 hours." },
-    { "q": "Alteplase dose for stroke?", "options": ["0.9 mg/kg, max 90 mg, 10% bolus", "1.5 mg/kg over 1 hour", "0.6 mg/kg, max 60 mg, 15% as a bolus", "100 mg fixed dose"], "why": "Remainder over 60 minutes.", "source": "AHA/ASA 2019" },
+    { "q": "Alteplase dose for stroke?", "options": ["0.9 mg/kg, max 90 mg, 10% bolus", "1.5 mg/kg over 1 hour, 20% as a bolus", "0.6 mg/kg, max 60 mg, 15% as a bolus", "100 mg fixed dose"], "why": "Remainder over 60 minutes.", "source": "AHA/ASA 2019" },
     { "q": "Tenecteplase in stroke is…", "options": ["An accepted alternative (0.25 mg/kg)", "Contraindicated in stroke", "Only licensed for STEMI", "Given as a 24-hour infusion"], "why": "Single bolus is practical.", "source": "ESO 2023; NICE 2024" },
     { "q": "Mechanical thrombectomy is for…", "options": ["Large vessel occlusion", "Lacunar stroke", "Intracerebral haemorrhage", "Transient ischaemic attack"], "why": "Up to 24 h with imaging selection.", "source": "ESO/ESMINT; AHA" },
     { "q": "Symptomatic ICH risk with thrombolysis (NINDS)?", "options": ["About 6%", "About 50%", "About 0.1%", "About 20%"], "why": "About 0.6% without.", "source": "NINDS 1995" },
-    { "q": "Which is a contraindication to thrombolysis?", "options": ["Previous intracranial haemorrhage", "Age over 80 years with atrial fibrillation", "Type 2 diabetes", "NIHSS of 9"], "why": "Age and diabetes are no longer absolute exclusions.", "source": "AHA/ASA 2019" }
+    { "q": "Which is a contraindication to thrombolysis?", "options": ["Previous intracranial haemorrhage", "Age over 80 years with atrial fibrillation", "Type 2 diabetes treated with insulin", "NIHSS of 9"], "why": "Age and diabetes are no longer absolute exclusions.", "source": "AHA/ASA 2019" }
   ]
 }

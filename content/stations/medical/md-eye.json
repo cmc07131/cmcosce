@@ -49,7 +49,7 @@
         { "q": "Bitemporal hemianopia suggests a lesion at…", "a": "The optic chiasm (e.g. pituitary)", "wrong": ["The occipital lobe", "One optic nerve, anterior to the chiasm", "The retina"] },
         { "q": "Cherry-red spot at the macula suggests…", "a": "Central retinal artery occlusion", "wrong": ["Central retinal vein occlusion with macular oedema", "Retinal detachment", "Acute glaucoma"] },
         { "q": "RAPD indicates…", "a": "Optic nerve (or severe retinal) disease", "wrong": ["An occipital lobe stroke", "A dense cataract", "A third nerve palsy"] },
-        { "q": "Painful red eye, fixed mid-dilated pupil, halos, vomiting?", "a": "Acute angle-closure glaucoma", "wrong": ["Viral conjunctivitis", "Anterior uveitis (iritis)", "Subconjunctival haemorrhage after coughing"] },
+        { "q": "Painful red eye, fixed mid-dilated pupil, halos, vomiting?", "a": "Acute angle-closure glaucoma", "wrong": ["Viral conjunctivitis", "Anterior uveitis (iritis) with photophobia", "Subconjunctival haemorrhage after coughing"] },
         { "q": "Purpose of the pinhole?", "a": "Shows whether poor acuity is refractive", "wrong": ["Dilates the pupil for fundoscopy", "Tests the peripheral visual fields, one quadrant at a time", "Measures intraocular pressure"] }
       ]
     }
@@ -57,7 +57,7 @@
   "badge": { "name": "Field Marshal", "emoji": "👁", "flavor": "Same half in both eyes: it's the brain, not the eye." },
   "cards": [
     { "q": "Homonymous hemianopia localises to…", "options": ["Behind the optic chiasm", "One eye (the retina)", "The optic chiasm (pituitary region)", "The cornea"], "why": "Optic tract, radiation or occipital cortex.", "source": "Neuro-ophthalmology" },
-    { "q": "Sudden painless monocular loss in a patient over 50 with headache and jaw claudication?", "options": ["Giant cell arteritis", "Retinal migraine with visual aura", "A mature cataract", "Conjunctivitis"], "why": "Start steroids immediately.", "source": "BSR 2020" },
+    { "q": "Sudden painless monocular loss in a patient over 50 with headache and jaw claudication?", "options": ["Giant cell arteritis", "Retinal migraine with visual aura", "A mature cataract in the affected eye", "Conjunctivitis"], "why": "Start steroids immediately.", "source": "BSR 2020" },
     { "q": "Normal Snellen distance?", "options": ["6 metres", "1 metre", "40 cm", "10 metres"], "why": "Near vision at 33–40 cm.", "source": "Clinical examination" },
     { "q": "Retinal detachment presents with…", "options": ["Floaters, flashes and a curtain", "A painful red eye", "Itchy, watery eyes", "Double vision on lateral gaze with ptosis"], "why": "Urgent ophthalmology.", "source": "RCOphth" },
     { "q": "Papilloedema shows…", "options": ["Swollen disc with blurred margins", "A pale disc with sharp margins (optic atrophy)", "An enlarged cup-to-disc ratio of 0.8", "A normal disc"], "why": "Raised ICP.", "source": "Neuro-ophthalmology" },

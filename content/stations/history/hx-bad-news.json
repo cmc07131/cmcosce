@@ -102,8 +102,8 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What does the P in SPIKES stand for?", "a": "Perception (what they already know)", "wrong": ["Prognosis (how long they have)", "Privacy (a quiet room)", "Planning (the next steps and follow-up)"] },
-        { "q": "What is a 'warning shot'?", "a": "A phrase signalling bad news", "wrong": ["A printed copy of the test results for them", "A sedative before the news", "Telling the family first"] },
+        { "q": "What does the P in SPIKES stand for?", "a": "Perception (what they already know)", "wrong": ["Prognosis (how long they have left to live)", "Privacy (a quiet room)", "Planning (the next steps and follow-up)"] },
+        { "q": "What is a 'warning shot'?", "a": "A phrase signalling bad news", "wrong": ["A printed copy of the test results for them", "A sedative before the news, to reduce distress", "Telling the family first"] },
         { "q": "A family asks you to withhold a diagnosis from a competent adult who wants to know. You…", "a": "Explain he has a right to know", "wrong": ["Withhold it as the family asks", "Tell only the eldest son", "Refer to the ethics committee before speaking"] },
         { "q": "Best response to crying?", "a": "Pause and acknowledge it", "wrong": ["Move on quickly to the treatment plan", "Leave the room to give them privacy", "Tell them gently not to cry"] },
         { "q": "How to answer 'How long do I have?'", "a": "Honestly, with a range and uncertainty", "wrong": ["An exact number of weeks, to help them plan ahead", "Refuse to answer the question", "Say that it depends on God"] }
@@ -113,10 +113,10 @@
   "badge": { "name": "SPIKES", "emoji": "💬", "flavor": "Ask, warn, tell plainly, pause, plan." },
   "cards": [
     { "q": "SPIKES stands for…", "options": ["Setting, Perception, Invitation, Knowledge, Emotions, Strategy/Summary", "Situation, Plan, Information, Knowledge, Empathy, Safety", "Silence, Pause, Inform, Kindness, Explain, Stop", "Setting, Prognosis, Investigation, Knowledge, Emotion, Support"], "why": "Baile et al. 2000.", "source": "SPIKES protocol" },
-    { "q": "The first question when breaking news is usually…", "options": ["What do you understand so far?", "Do you want chemotherapy or not?", "Who is your next of kin?", "Have you made a will yet?"], "why": "Perception before knowledge.", "source": "SPIKES" },
+    { "q": "The first question when breaking news is usually…", "options": ["What do you understand so far?", "Do you want chemotherapy or not?", "Who is your next of kin?", "Have you made a will and a power of attorney?"], "why": "Perception before knowledge.", "source": "SPIKES" },
     { "q": "An empathic response is…", "options": ["'This must be a terrible shock.'", "'Everyone goes through this at some point.'", "'Try to stay positive for your family.'", "'It could be a lot worse, you know.'"], "why": "Name and validate the emotion.", "source": "SPIKES" },
     { "q": "Medical jargon when breaking bad news should be…", "options": ["Avoided; use plain words", "Used to sound precise", "Written down only", "Translated by the family"], "why": "Understanding matters more than precision.", "source": "SPIKES" },
-    { "q": "A competent adult wants to know his diagnosis; the family objects. The doctor should…", "options": ["Respect the patient's wish to know", "Follow the family's wishes", "Delay until the whole family agrees to tell him", "Tell a close friend instead"], "why": "Autonomy and confidentiality belong to the patient.", "source": "Hong Kong Medical Council Code" },
+    { "q": "A competent adult wants to know his diagnosis; the family objects. The doctor should…", "options": ["Respect the patient's wish to know", "Follow the family's wishes", "Delay until the whole family agrees to tell him", "Tell a close friend of his instead, to break it gently"], "why": "Autonomy and confidentiality belong to the patient.", "source": "Hong Kong Medical Council Code" },
     { "q": "A good ending to a bad-news consultation includes…", "options": ["A plan, follow-up and time for questions", "Leaving quickly to let them grieve", "A leaflet about the diagnosis to read at home alone", "Prescribing a sedative"], "why": "Strategy and summary.", "source": "SPIKES" }
   ]
 }

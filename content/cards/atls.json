@@ -11,7 +11,7 @@
     {
       "id": "atls-efona-technique",
       "q": "Adult CICO after failed intubation. Which front-of-neck technique does DAS 2025 recommend?",
-      "options": ["Scalpel–bougie–tube through a vertical midline skin incision", "Needle cricothyroidotomy with jet ventilation", "A fourth videolaryngoscopy attempt", "Percutaneous tracheostomy"],
+      "options": ["Scalpel–bougie–tube, vertical skin incision", "Needle cricothyroidotomy with jet ventilation", "A fourth attempt with a videolaryngoscope", "Percutaneous tracheostomy by the surgeon"],
       "answer": 0,
       "why": "DAS 2025 keeps scalpel–bougie–tube for Plan D and makes a vertical midline skin incision the default for every patient.",
       "source": "DAS 2025, Br J Anaesth 2025; 136: 283–307"
@@ -19,7 +19,7 @@
     {
       "id": "atls-efona-tube",
       "q": "Which tube is railroaded over the bougie in adult scalpel cricothyroidotomy?",
-      "options": ["Cuffed 6.0 mm tracheal tube", "Uncuffed 4.0 mm tube", "Cuffed 8.0 mm tube", "A size 4 i-gel"],
+      "options": ["Cuffed 6.0 mm tracheal tube", "Uncuffed 4.0 mm paediatric tube", "Cuffed 8.0 mm standard adult tube", "A size 4 i-gel"],
       "answer": 0,
       "why": "A lubricated cuffed 6.0 mm tube fits the cricothyroid membrane and allows ventilation with a seal.",
       "source": "DAS 2015/2025 scalpel–bougie–tube"
@@ -27,7 +27,7 @@
     {
       "id": "atls-efona-confirm",
       "q": "How do you confirm a front-of-neck tube is in the trachea?",
-      "options": ["A sustained square ETCO2 waveform", "The chest rises when you bag", "Misting in the tube", "SpO2 starts to rise"],
+      "options": ["A sustained square ETCO2 waveform", "The chest rises symmetrically when you bag", "Misting in the tube", "SpO2 starts to rise"],
       "answer": 0,
       "why": "Only waveform capnography confirms tracheal placement. A false passage can still move the chest.",
       "source": "DAS 2025"
@@ -35,7 +35,7 @@
     {
       "id": "atls-massive-haemothorax",
       "q": "Chest drain for haemothorax. Which immediate output suggests the need for thoracotomy?",
-      "options": ["1500 mL of blood", "300 mL of blood", "700 mL of blood", "Any blood at all"],
+      "options": ["1500 mL of blood", "300 mL of blood", "700 mL of blood", "Any blood at all on insertion"],
       "answer": 0,
       "why": "Massive haemothorax: 1500 mL immediately, or ongoing 200 mL/h for 2–4 hours, needs surgical exploration.",
       "source": "ATLS 10th edition"
@@ -43,7 +43,7 @@
     {
       "id": "atls-needle-decompression",
       "q": "Adult tension pneumothorax. Where does ATLS 10th edition place needle decompression?",
-      "options": ["4th/5th intercostal space, just anterior to the midaxillary line", "6th intercostal space, posterior axillary line", "Directly over the sternum", "Below the costal margin"],
+      "options": ["4th/5th ICS, just anterior to the midaxillary line", "6th intercostal space in the posterior axillary line", "Directly over the sternum", "Below the costal margin, subxiphoid"],
       "answer": 0,
       "why": "ATLS 10th moved the adult site to the 4th/5th ICS just anterior to the midaxillary line; the 2nd ICS midclavicular site stays for children.",
       "source": "ATLS 10th edition"
@@ -51,7 +51,7 @@
     {
       "id": "atls-pelvic-binder",
       "q": "Where should a pelvic binder be centred?",
-      "options": ["Over the greater trochanters", "Over the iliac crests", "Over the umbilicus", "Around the mid-thighs"],
+      "options": ["Over the greater trochanters", "Over the iliac crests, like a belt", "Over the umbilicus", "Around the mid-thighs"],
       "answer": 0,
       "why": "A binder over the greater trochanters closes the pelvic ring. Placed on the iliac crests it can open it.",
       "source": "ATLS 10th edition"
@@ -75,7 +75,7 @@
     {
       "id": "atls-burns-fluid",
       "q": "Adult thermal burn over 20% TBSA. ATLS 10th starting fluid formula?",
-      "options": ["2 mL/kg/%TBSA crystalloid over 24 h, half in the first 8 h", "4 mL/kg/%TBSA, all in the first 8 h", "1 mL/kg/%TBSA over 48 h", "Colloid only"],
+      "options": ["2 mL/kg/%TBSA over 24 h, half in 8 h", "4 mL/kg/%TBSA, all in the first 8 hours", "1 mL/kg/%TBSA over 48 hours", "Colloid only, 5 mL/kg/%TBSA"],
       "answer": 0,
       "why": "ATLS 10th starts adults at 2 mL/kg/%TBSA (3 mL for children, 4 mL for electrical burns), then titrates to urine output. Older teaching (Parkland) uses 4 mL.",
       "source": "ATLS 10th edition",

@@ -72,21 +72,21 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Postural hypotension is a systolic fall of at least…", "a": "20 mmHg within 3 minutes of standing", "wrong": ["5 mmHg on standing", "50 mmHg within 10 minutes of standing up", "Any fall in blood pressure"] },
+        { "q": "Postural hypotension is a systolic fall of at least…", "a": "20 mmHg within 3 minutes of standing", "wrong": ["5 mmHg on standing", "50 mmHg within 10 minutes of standing up", "Any fall in blood pressure on standing up"] },
         { "q": "Complication of a long lie?", "a": "Rhabdomyolysis", "wrong": ["Spontaneous pneumothorax", "Acute appendicitis", "Acute gout"] },
         { "q": "Target time to hip fracture surgery (NICE)?", "a": "Day of or after admission (within 36 h)", "wrong": ["Within 1 week of admission", "Within 1 hour", "Only once medically stable, usually at 2 weeks"] },
-        { "q": "Which drug class increases falls risk?", "a": "Alpha-blockers and sedatives", "wrong": ["Statins such as atorvastatin", "Proton pump inhibitors such as omeprazole", "Vitamin D"] },
-        { "q": "Nerve block for a hip fracture in ED?", "a": "Fascia iliaca block", "wrong": ["Interscalene", "Digital block", "Femoral nerve block is contraindicated"] }
+        { "q": "Which drug class increases falls risk?", "a": "Alpha-blockers and sedatives", "wrong": ["Statins such as atorvastatin", "Proton pump inhibitors such as omeprazole", "Vitamin D and calcium tablets"] },
+        { "q": "Nerve block for a hip fracture in ED?", "a": "Fascia iliaca block", "wrong": ["Interscalene", "Digital nerve block of the toes", "Femoral nerve block is contraindicated"] }
       ]
     }
   ],
   "badge": { "name": "Why He Fell", "emoji": "🧓", "flavor": "The cause, the injury, the long lie, then the risks." },
   "cards": [
     { "q": "Three questions in any fall?", "options": ["Why, what was injured, what did the lie cause", "Where, who saw it, and how much it hurt", "When, what time, and which floor", "The pain score only"], "why": "Cause, injury, consequences.", "source": "NICE CG161 / World Falls Guidelines" },
-    { "q": "Lying and standing BP is measured after standing for…", "options": ["1 and 3 minutes", "10 seconds", "30 minutes", "It doesn't matter"], "why": "A fall of ≥20 systolic or ≥10 diastolic.", "source": "RCP guidance" },
-    { "q": "CK is raised after a long lie because of…", "options": ["Rhabdomyolysis", "Myocardial infarction always", "Liver injury", "Anaemia"], "why": "Risk of AKI.", "source": "Clinical practice" },
+    { "q": "Lying and standing BP is measured after standing for…", "options": ["1 and 3 minutes", "10 seconds after standing", "30 minutes", "It doesn't matter"], "why": "A fall of ≥20 systolic or ≥10 diastolic.", "source": "RCP guidance" },
+    { "q": "CK is raised after a long lie because of…", "options": ["Rhabdomyolysis", "Myocardial infarction always", "Liver injury", "Anaemia from occult bleeding"], "why": "Risk of AKI.", "source": "Clinical practice" },
     { "q": "Hip fracture analgesia in ED?", "options": ["Nerve block plus paracetamol", "Regular NSAIDs such as ibuprofen for everyone", "Nothing until theatre", "IM morphine only, as needed, on the ward"], "why": "Fascia iliaca or femoral nerve block.", "source": "NICE CG124" },
-    { "q": "Falls-risk medicine to review?", "options": ["Benzodiazepine hypnotics", "Regular paracetamol", "Vitamin D and calcium supplements", "Omeprazole"], "why": "Also antihypertensives, antipsychotics, opioids.", "source": "STOPPFall" },
+    { "q": "Falls-risk medicine to review?", "options": ["Benzodiazepine hypnotics", "Regular paracetamol for joint pain", "Vitamin D and calcium supplements", "Omeprazole"], "why": "Also antihypertensives, antipsychotics, opioids.", "source": "STOPPFall" },
     { "q": "After a fall with fracture, what else is assessed?", "options": ["Bone health (osteoporosis)", "Hearing only, with an audiogram", "Dental health and dentures", "Thyroid function in all"], "why": "Secondary fracture prevention.", "source": "NICE" }
   ]
 }

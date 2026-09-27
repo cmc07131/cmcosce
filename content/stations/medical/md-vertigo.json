@@ -66,9 +66,9 @@
   "badge": { "name": "Crystal Mover", "emoji": "🌀", "flavor": "Positional and brief: Hallpike then Epley. Continuous with nystagmus: HINTS." },
   "cards": [
     { "q": "Commonest cause of peripheral vertigo?", "options": ["BPPV", "Ménière's disease", "Acoustic neuroma", "Stroke"], "why": "Posterior canal most often.", "source": "AAO-HNS 2017" },
-    { "q": "Treatment of posterior canal BPPV?", "options": ["Epley manoeuvre", "Betahistine long-term", "Surgery", "Antibiotics"], "why": "Particle repositioning.", "source": "AAO-HNS 2017" },
+    { "q": "Treatment of posterior canal BPPV?", "options": ["Epley manoeuvre", "Betahistine long-term", "Surgery", "Antibiotics for labyrinthitis"], "why": "Particle repositioning.", "source": "AAO-HNS 2017" },
     { "q": "HINTS central sign?", "options": ["Vertical skew deviation", "Abnormal head impulse", "Unidirectional horizontal nystagmus", "Hearing preserved"], "why": "Any central sign = stroke until proven otherwise.", "source": "Kattah 2009" },
-    { "q": "Direction-changing nystagmus suggests…", "options": ["A central cause", "Vestibular neuritis", "BPPV", "Anxiety"], "why": "Peripheral nystagmus is unidirectional.", "source": "Kattah 2009" },
+    { "q": "Direction-changing nystagmus suggests…", "options": ["A central cause", "Vestibular neuritis", "BPPV", "Anxiety and hyperventilation"], "why": "Peripheral nystagmus is unidirectional.", "source": "Kattah 2009" },
     { "q": "Ménière's disease triad?", "options": ["Vertigo, fluctuating hearing loss, tinnitus, aural fullness", "Vertigo, diplopia, dysarthria", "Headache, fever, rash", "Ataxia, confusion, ophthalmoplegia"], "why": "Episodes last hours.", "source": "ENT" },
     { "q": "Dix–Hallpike neck position?", "options": ["Rotated 45°, extended below horizontal", "Flexed forward to the chest", "Neutral, facing the ceiling", "Rotated 90° to the side and flexed forward, chin down"], "why": "Aligns the posterior canal.", "source": "AAO-HNS" }
   ]

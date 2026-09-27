@@ -75,7 +75,7 @@
   "cards": [
     { "q": "ECG in chest pain should be done within…", "options": ["Within 10 minutes", "Within the hour", "Before the troponin result", "At the end of triage"], "why": "Identify STEMI.", "source": "ESC 2023" },
     { "q": "A HEART score of 2 suggests…", "options": ["Low risk: early discharge", "Admit to CCU for monitoring", "Immediate coronary angiography", "Thrombolysis if the ECG is normal"], "why": "0–3 low risk.", "source": "Backus 2013" },
-    { "q": "Pain radiating to the back with a BP difference between arms?", "options": ["Aortic dissection", "Stable angina", "Costochondritis", "Gastro-oesophageal reflux"], "why": "CT aortogram.", "source": "ESC aortic guideline" },
+    { "q": "Pain radiating to the back with a BP difference between arms?", "options": ["Aortic dissection", "Stable angina", "Costochondritis after lifting", "Gastro-oesophageal reflux"], "why": "CT aortogram.", "source": "ESC aortic guideline" },
     { "q": "Boerhaave syndrome follows…", "options": ["Forceful vomiting", "Coughing", "Exercise", "Swallowing a pill"], "why": "Oesophageal rupture.", "source": "Surgery" },
     { "q": "NICE first-line test for stable chest pain of suspected cardiac origin?", "options": ["CT coronary angiography", "Exercise ECG (treadmill)", "Resting ECG only", "Chest X-ray and troponin"], "why": "CG95 update.", "source": "NICE CG95" },
     { "q": "Pericarditis ECG?", "options": ["Widespread concave ST elevation and PR depression", "Regional ST elevation with reciprocal depression", "Pathological Q waves in the inferior leads", "Delta waves and a short PR interval"], "why": "Pain eases sitting forward.", "source": "ESC pericardial guideline" }

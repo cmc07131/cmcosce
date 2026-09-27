@@ -87,7 +87,7 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "First sign of magnesium toxicity?", "a": "Loss of patellar reflexes", "wrong": ["Tachycardia over 120", "Rising blood pressure above 160", "Recurrent seizures"] },
+        { "q": "First sign of magnesium toxicity?", "a": "Loss of patellar reflexes", "wrong": ["Tachycardia over 120 per minute", "Rising blood pressure above 160", "Recurrent seizures"] },
         { "q": "Antidote to magnesium toxicity?", "a": "Calcium gluconate 10% 10 mL IV", "wrong": ["Naloxone 400 micrograms IV", "Flumazenil 200 micrograms IV", "Sodium bicarbonate 8.4% 50 mL IV"] },
         { "q": "Dose for a recurrent seizure on magnesium?", "a": "Further 2–4 g over 5–15 min", "wrong": ["Stop the magnesium infusion", "10 g magnesium as a bolus", "Phenytoin 20 mg/kg before magnesium"] },
         { "q": "BP threshold for urgent treatment in pregnancy (NICE)?", "a": "160/110 mmHg", "wrong": ["140/90 mmHg", "200/120 mmHg", "120/80 mmHg"] },
@@ -102,6 +102,6 @@
     { "q": "Magnesium toxicity treatment?", "options": ["Calcium gluconate 10% 10 mL IV", "More magnesium, as a loading dose", "Potassium chloride 20 mmol IV", "Insulin with 50 mL of 50% glucose"], "why": "Stop the infusion too.", "source": "BNF / NICE NG133" },
     { "q": "Antihypertensive to avoid in asthma?", "options": ["Labetalol", "Nifedipine", "Hydralazine", "Methyldopa"], "why": "Beta-blockade can cause bronchospasm.", "source": "NICE NG133" },
     { "q": "Fluid rate in severe pre-eclampsia?", "options": ["About 80 mL/h", "250 mL/h", "1 L bolus hourly", "No fluids at all"], "why": "Risk of pulmonary oedema.", "source": "NICE NG133" },
-    { "q": "When to deliver after eclampsia?", "options": ["Once the mother is stabilised", "Immediately, even while she is fitting", "After 48 hours of magnesium", "Only once she reaches term"], "why": "Maternal stabilisation first.", "source": "RCOG / NICE NG133" }
+    { "q": "When to deliver after eclampsia?", "options": ["Once the mother is stabilised", "Immediately, even while she is fitting", "After 48 hours of magnesium, for stability", "Only once she reaches term"], "why": "Maternal stabilisation first.", "source": "RCOG / NICE NG133" }
   ]
 }

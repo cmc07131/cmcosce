@@ -59,10 +59,10 @@
       "label": "Examiner",
       "qs": [
         { "q": "Hook in the eye?", "a": "Do not remove — protect and refer to ophthalmology", "wrong": ["String-yank under local anaesthetic", "Advance-and-cut through the globe", "Retrograde pull after topical anaesthetic drops"] },
-        { "q": "Organism of concern after salt-water injury?", "a": "Vibrio vulnificus", "wrong": ["Pasteurella", "Eikenella", "Clostridium difficile"] },
+        { "q": "Organism of concern after salt-water injury?", "a": "Vibrio vulnificus", "wrong": ["Pasteurella multocida", "Eikenella", "Clostridium difficile"] },
         { "q": "Technique least damaging for moderately embedded hooks?", "a": "String-yank", "wrong": ["Pulling straight back", "Wide excision", "Leaving it in"] },
         { "q": "Main drawback of advance-and-cut?", "a": "A second wound", "wrong": ["It never works", "It requires GA", "It spreads infection always"] },
-        { "q": "Routine antibiotics for clean hook wounds?", "a": "Not routinely", "wrong": ["Always IV for 48 hours", "Always, for 6 weeks", "Only topical steroids"] }
+        { "q": "Routine antibiotics for clean hook wounds?", "a": "Not routinely", "wrong": ["Always IV for 48 hours", "Always, for 6 weeks", "Topical mupirocin only"] }
       ]
     }
   ],
@@ -71,8 +71,8 @@
     { "q": "Fish hook techniques include…", "options": ["Retrograde, string-yank, needle cover, advance-and-cut", "Surgical excision for every hook", "Leave in place for a week to loosen", "Magnet retrieval under local anaesthetic"], "why": "Choose by hook and depth.", "source": "Tintinalli" },
     { "q": "String-yank is unsuitable for…", "options": ["Loosely fixed tissue like the ear lobe", "The pulp of the thumb and fingers", "The skin of the upper back", "The dorsum of the forearm and the back of the hand"], "why": "Tissue moves with the pull.", "source": "Wilderness Medical Society" },
     { "q": "Vibrio vulnificus risk is higher in…", "options": ["Liver disease", "Young athletes", "Children", "Pregnancy only"], "why": "Severe sepsis risk.", "source": "Infectious diseases" },
-    { "q": "Antibiotic covering Vibrio?", "options": ["Doxycycline or ciprofloxacin", "Flucloxacillin alone for 7 days", "Metronidazole", "Nitrofurantoin"], "why": "For contaminated salt-water wounds.", "source": "Local guidance" },
+    { "q": "Antibiotic covering Vibrio?", "options": ["Doxycycline or ciprofloxacin", "Flucloxacillin alone for 7 days", "Metronidazole alone for 5 days", "Nitrofurantoin"], "why": "For contaminated salt-water wounds.", "source": "Local guidance" },
     { "q": "Tetanus booster needed if…", "options": ["Not up to date for a tetanus-prone wound", "Only for animal bites", "Only in children", "Only if the hook was visibly rusty and old"], "why": "Check immunisation.", "source": "UKHSA Green Book" },
-    { "q": "Before cutting wire, ensure…", "options": ["Eye protection", "Tourniquet", "General anaesthesia", "X-ray"], "why": "Metal fragments fly.", "source": "Tintinalli" }
+    { "q": "Before cutting wire, ensure…", "options": ["Eye protection", "A tourniquet on the finger", "General anaesthesia", "X-ray"], "why": "Metal fragments fly.", "source": "Tintinalli" }
   ]
 }

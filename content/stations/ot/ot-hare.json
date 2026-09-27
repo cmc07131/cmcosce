@@ -64,6 +64,6 @@
     { "q": "Analgesia before a traction splint?", "options": ["IV opioid and/or a femoral nerve block", "None; the traction itself is the analgesia", "Oral paracetamol only", "Local infiltration at the fracture site"], "why": "Traction itself also relieves pain.", "source": "RCEM" },
     { "q": "Femoral shaft fracture blood loss can reach…", "options": ["1–1.5 L", "100 mL", "5 L", "No blood loss"], "why": "Can cause shock.", "source": "ATLS" },
     { "q": "After applying a splint, always…", "options": ["Re-check neurovascular status", "Remove the ankle hitch after 10 minutes", "Stop further analgesia", "Apply ice to the groin strap"], "why": "Detect compression.", "source": "Manufacturer" },
-    { "q": "Nerve at risk from a tight strap near the fibular head?", "options": ["Common peroneal", "Femoral nerve", "Posterior tibial nerve", "Sural nerve"], "why": "Foot drop.", "source": "Anatomy" }
+    { "q": "Nerve at risk from a tight strap near the fibular head?", "options": ["Common peroneal", "Femoral nerve in the groin", "Posterior tibial nerve", "Sural nerve"], "why": "Foot drop.", "source": "Anatomy" }
   ]
 }

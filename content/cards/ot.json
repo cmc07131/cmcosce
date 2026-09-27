@@ -37,9 +37,9 @@
       "q": "Before and after any reduction you must document…",
       "options": [
         "Neurovascular status",
-        "Blood glucose",
+        "Blood glucose and ketones",
         "Temperature",
-        "Weight"
+        "Weight and height"
       ],
       "answer": 0,
       "why": "Nerve or vessel injury can occur with the injury or the manoeuvre.",

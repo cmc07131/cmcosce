@@ -120,7 +120,7 @@
     { "q": "START: walking casualty → ?", "options": ["GREEN", "RED", "YELLOW", "BLACK"], "why": "Minor; re-triage later.", "source": "START" },
     { "q": "START: apnoeic after airway opening → ?", "options": ["BLACK", "RED", "YELLOW", "GREEN"], "why": "No CPR in triage.", "source": "START" },
     { "q": "START: obeys commands, RR 20, CRT 1 s, cannot walk → ?", "options": ["YELLOW (delayed)", "RED (immediate)", "GREEN (minor)", "BLACK (expectant)"], "why": "Delayed.", "source": "START" },
-    { "q": "UK triage sieve was replaced by…", "options": ["Ten Second Triage", "SALT triage", "Revised Trauma Score", "NEWS2"], "why": "NHS 2013.", "source": "NHS England" },
+    { "q": "UK triage sieve was replaced by…", "options": ["Ten Second Triage", "SALT triage from the United States", "Revised Trauma Score", "NEWS2"], "why": "NHS 2013.", "source": "NHS England" },
     { "q": "Time per casualty in START?", "options": ["About 30 seconds", "About 5 minutes", "About 15 minutes", "As long as each patient needs"], "why": "Speed saves lives.", "source": "START" }
   ]
 }

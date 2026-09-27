@@ -81,7 +81,7 @@
         { "q": "How do you test FDP?", "a": "Hold the PIP straight; flex the DIP", "wrong": ["Hold the other fingers straight; flex the PIP", "Oppose the thumb to the little finger", "Spread the fingers against resistance"] },
         { "q": "Normal static two-point discrimination at the fingertip?", "a": "Under 6 mm", "wrong": ["Under 20 mm", "Under 1 mm", "Over 15 mm"] },
         { "q": "Zone 2 flexor tendon injuries lie…", "a": "Distal palmar crease to FDS insertion ('no man's land')", "wrong": ["At the wrist, proximal to the carpal tunnel", "At the fingertip, distal to the FDS insertion", "In the forearm, at the musculotendinous junction"] },
-        { "q": "Should flexor tendons be repaired in the ED?", "a": "No — refer to hand surgery", "wrong": ["Yes, always", "Only in zone 2", "Only if the patient insists"] }
+        { "q": "Should flexor tendons be repaired in the ED?", "a": "No — refer to hand surgery", "wrong": ["Yes, always", "Only in zone 2, where tendons adhere", "Only if the patient insists"] }
       ]
     }
   ],

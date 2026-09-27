@@ -52,7 +52,7 @@
       "label": "Examiner",
       "qs": [
         { "q": "Cerebellar hemisphere lesions cause signs on…", "a": "The same side", "wrong": ["The opposite side", "Both sides always", "The legs only"] },
-        { "q": "Vermis lesion typically causes…", "a": "Truncal and gait ataxia", "wrong": ["Intention tremor of one arm", "Aphasia", "Hemianopia"] },
+        { "q": "Vermis lesion typically causes…", "a": "Truncal and gait ataxia", "wrong": ["Intention tremor of one arm", "Aphasia", "Homonymous hemianopia on one side"] },
         { "q": "Common drug cause of bilateral cerebellar signs?", "a": "Phenytoin", "wrong": ["Paracetamol", "Aspirin", "Omeprazole"] },
         { "q": "Romberg positive suggests…", "a": "Sensory or vestibular ataxia", "wrong": ["Cerebellar ataxia only, from a vermis lesion", "A normal finding in adults", "A proximal myopathy"] },
         { "q": "Why is cerebellar haemorrhage dangerous?", "a": "Posterior fossa swelling compresses the brainstem", "wrong": ["It spreads into the cerebral hemispheres", "It causes aphasia and neglect", "It is rarely dangerous if the patient is alert"] }

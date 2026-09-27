@@ -88,6 +88,6 @@
     { "q": "Phenytoin dose in status epilepticus?", "options": ["20 mg/kg over 20 minutes", "20 mg/kg as a rapid bolus", "2 mg/kg over 20 minutes", "50 mg/kg over 5 minutes"], "why": "Cardiac monitoring: risk of arrhythmia and hypotension.", "source": "APLS" },
     { "q": "PR diazepam dose?", "options": ["0.5 mg/kg", "0.05 mg/kg", "5 mg/kg", "0.1 mg/kg"], "why": "If no IV access and buccal midazolam unavailable.", "source": "APLS" },
     { "q": "Status epilepticus continuing after second-line drug: next?", "options": ["RSI and transfer to PICU", "A third dose of benzodiazepine", "Observe for another 20 minutes", "Oral sodium valproate via NG tube"], "why": "Around 45 minutes into the seizure.", "source": "APLS" },
-    { "q": "What not to do during a seizure?", "options": ["Put an object in the mouth", "Protect the head from injury", "Time the seizure", "Give high-flow oxygen"], "why": "Risk of dental injury and obstruction.", "source": "First aid / APLS" }
+    { "q": "What not to do during a seizure?", "options": ["Put an object in the mouth", "Protect the head from injury", "Time the seizure", "Give high-flow oxygen by mask"], "why": "Risk of dental injury and obstruction.", "source": "First aid / APLS" }
   ]
 }

@@ -74,9 +74,9 @@
   "cards": [
     { "q": "IgA vasculitis (HSP) features?", "options": ["Palpable purpura, arthritis, abdominal pain, haematuria", "Fever, neck stiffness and photophobia", "Petechiae with low platelets only", "Target lesions on the palms and soles"], "why": "Often after URTI.", "source": "EULAR/PRINTO/PRES" },
     { "q": "ITP typically presents with…", "options": ["Bruising in a well child, low platelets", "Fever and shock with a spreading purpuric rash", "Joint swelling and abdominal pain", "Haematuria, hypertension and oedema"], "why": "Often post-viral.", "source": "Paediatrics" },
-    { "q": "Petechiae limited to above the nipple line after vomiting suggest…", "options": ["Raised intrathoracic pressure (benign)", "Meningococcal disease until proven otherwise", "Acute lymphoblastic leukaemia", "IgA vasculitis (HSP)"], "why": "SVC distribution.", "source": "NICE NG143" },
+    { "q": "Petechiae limited to above the nipple line after vomiting suggest…", "options": ["Raised intrathoracic pressure (benign)", "Meningococcal disease until proven otherwise", "Acute lymphoblastic leukaemia", "IgA vasculitis (HSP) on the face and chest"], "why": "SVC distribution.", "source": "NICE NG143" },
     { "q": "Features suggesting leukaemia in a child with a rash?", "options": ["Pallor, bone pain, hepatosplenomegaly, lymphadenopathy", "Itchy urticarial wheals", "A photosensitive malar rash", "Sunburn on exposed skin"], "why": "FBC and film.", "source": "Paediatric oncology" },
     { "q": "HSP renal follow-up duration?", "options": ["About 6–12 months of urine and BP checks", "No follow-up is needed", "Lifelong dialysis in most", "A single urine dipstick at 1 week, then discharge"], "why": "Nephritis can appear later.", "source": "RCPCH / EULAR" },
-    { "q": "Glass test: the spots stay visible means…", "options": ["Non-blanching (purpura/petechiae)", "Blanching erythema from vasodilation", "Eczema", "Normal skin"], "why": "Needs urgent assessment.", "source": "NICE CG102" }
+    { "q": "Glass test: the spots stay visible means…", "options": ["Non-blanching (purpura/petechiae)", "Blanching erythema from vasodilation", "Eczema with post-inflammatory changes", "Normal skin"], "why": "Needs urgent assessment.", "source": "NICE CG102" }
   ]
 }

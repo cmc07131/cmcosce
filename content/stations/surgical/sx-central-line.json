@@ -69,8 +69,8 @@
         { "q": "What to do after arterial dilation/cannulation?", "a": "Leave it in; call vascular surgery", "wrong": ["Pull it out and compress for 10 minutes", "Use it for the noradrenaline infusion", "Remove the wire and re-site on the left"] },
         { "q": "Why head-down position?", "a": "Distends the vein and reduces air embolism", "wrong": ["Lowers the blood pressure", "Makes the drape easier to place", "Prevents a pneumothorax"] },
         { "q": "Arrhythmia while passing the wire?", "a": "Withdraw the wire a few centimetres", "wrong": ["Advance the wire further into the ventricle", "Give adrenaline 1 mg IV", "Carry on, as it always settles"] },
-        { "q": "Ideal tip position?", "a": "At the cavo-atrial junction", "wrong": ["In the brachiocephalic vein, near the IJV", "In the subclavian vein", "In the left atrium"] },
-        { "q": "Best skin antiseptic for central lines?", "a": "2% chlorhexidine in 70% alcohol", "wrong": ["10% povidone-iodine in water, left to dry", "Soap and water", "70% alcohol alone"] }
+        { "q": "Ideal tip position?", "a": "At the cavo-atrial junction", "wrong": ["In the brachiocephalic vein, near the IJV", "In the subclavian vein, near the clavicle", "In the left atrium"] },
+        { "q": "Best skin antiseptic for central lines?", "a": "2% chlorhexidine in 70% alcohol", "wrong": ["10% povidone-iodine in water, left to dry", "Soap and water", "70% alcohol alone, applied twice"] }
       ]
     }
   ],

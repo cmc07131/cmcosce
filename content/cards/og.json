@@ -11,7 +11,7 @@
     {
       "id": "og-cord-handling",
       "q": "A loop of cord lies outside the introitus. What do you do with it?",
-      "options": ["Minimal handling; loose warm saline-soaked gauze", "Push it back into the vagina", "Wrap it tightly and pack with ice", "Squeeze it to check the pulse"],
+      "options": ["Minimal handling; warm, wet gauze", "Push it back into the vagina and hold it there", "Wrap it tightly in dry gauze and pack with ice", "Squeeze it to check the pulse"],
       "answer": 0,
       "why": "Handling and cold cause cord spasm. Do not replace it.",
       "source": "RCOG Green-top Guideline 50",
@@ -20,7 +20,7 @@
     {
       "id": "og-cord-elevate",
       "q": "Cord prolapse in the ED. First hands-on action?",
-      "options": ["Manually elevate the presenting part off the cord and keep the hand in", "Speculum examination", "Start oxytocin", "Ask her to push"],
+      "options": ["Elevate the presenting part off the cord", "Speculum examination to confirm it", "Start oxytocin to speed delivery", "Ask her to push with the next contraction"],
       "answer": 0,
       "why": "Lifting the presenting part relieves compression until delivery or until bladder filling takes over.",
       "source": "RCOG Green-top Guideline 50"
@@ -36,7 +36,7 @@
     {
       "id": "og-cord-bladder",
       "q": "Cord prolapse and theatre is 20 minutes away. Bladder filling volume?",
-      "options": ["500–750 mL via a Foley, then clamp", "100 mL", "2 litres", "No filling: it delays theatre"],
+      "options": ["500–750 mL via a Foley, then clamp", "100 mL via a Foley, then clamp", "2 litres via a Foley, then clamp", "No filling, because it delays getting to theatre"],
       "answer": 0,
       "why": "A full bladder lifts the presenting part. Empty it again before the caesarean.",
       "source": "RCOG Green-top Guideline 50"
@@ -44,7 +44,7 @@
     {
       "id": "og-cord-tocolysis",
       "q": "Cord prolapse, delivery delayed, the fetal heart stays abnormal after elevation. Tocolysis?",
-      "options": ["Terbutaline 0.25 mg subcutaneously", "Oxytocin 10 units IM", "Magnesium 4 g as a tocolytic", "Misoprostol"],
+      "options": ["Terbutaline 0.25 mg subcutaneously", "Oxytocin 10 units IM", "Magnesium 4 g as a tocolytic", "Misoprostol 800 micrograms sublingually"],
       "answer": 0,
       "why": "Terbutaline reduces contractions that keep compressing the cord.",
       "source": "RCOG Green-top Guideline 50"
@@ -68,7 +68,7 @@
     {
       "id": "og-pph-oxytocin",
       "q": "Primary PPH from atony. First-line uterotonic?",
-      "options": ["Oxytocin 5 IU by slow IV injection", "Carboprost first", "Misoprostol first", "Tranexamic acid alone"],
+      "options": ["Oxytocin 5 IU by slow IV injection", "Carboprost 250 micrograms IM as the first drug", "Misoprostol 800 micrograms first", "Tranexamic acid alone"],
       "answer": 0,
       "why": "Oxytocin (or ergometrine if no hypertension) first, with uterine massage; then an infusion and second-line agents.",
       "source": "RCOG Green-top Guideline 52"
@@ -76,7 +76,7 @@
     {
       "id": "og-pph-txa",
       "q": "PPH: tranexamic acid dose and timing?",
-      "options": ["1 g IV as soon as possible, within 3 hours of birth", "1 g only after 6 hours", "10 g IV bolus", "Oral only"],
+      "options": ["1 g IV, within 3 hours of birth", "1 g IV, only after 6 hours of bleeding", "10 g IV as a single bolus", "Oral only, 1 g three times daily"],
       "answer": 0,
       "why": "WOMAN trial: 1 g IV early reduces death from bleeding; a second 1 g if bleeding continues.",
       "source": "WOMAN trial (Lancet 2017); WHO 2017"
@@ -92,7 +92,7 @@
     {
       "id": "og-mg-toxicity",
       "q": "Magnesium toxicity: loss of reflexes and slow breathing. Antidote?",
-      "options": ["Calcium gluconate 10% 10 mL IV", "Naloxone", "Flumazenil", "Sodium bicarbonate"],
+      "options": ["Calcium gluconate 10% 10 mL IV", "Naloxone 400 micrograms IV", "Flumazenil 200 micrograms IV", "Sodium bicarbonate 8.4% 50 mL IV"],
       "answer": 0,
       "why": "Stop the infusion and give calcium gluconate.",
       "source": "NICE NG133 (2019)"
@@ -100,7 +100,7 @@
     {
       "id": "og-shoulder-dystocia",
       "q": "Shoulder dystocia. First manoeuvres?",
-      "options": ["McRoberts position and suprapubic pressure", "Fundal pressure", "Strong traction on the head", "Immediate Zavanelli"],
+      "options": ["McRoberts position and suprapubic pressure", "Fundal pressure with each contraction", "Strong downward traction on the fetal head, then episiotomy", "Immediate Zavanelli and caesarean"],
       "answer": 0,
       "why": "McRoberts with suprapubic pressure resolves many cases. Fundal pressure is contraindicated.",
       "source": "RCOG Green-top Guideline 42"

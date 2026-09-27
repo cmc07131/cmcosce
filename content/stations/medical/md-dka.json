@@ -86,7 +86,7 @@
       "label": "Examiner",
       "qs": [
         { "q": "Fixed-rate insulin infusion dose in DKA?", "a": "0.1 unit/kg/h", "wrong": ["1 unit/kg/h", "Sliding scale by glucose", "0.01 unit/kg/h"] },
-        { "q": "When is 10% glucose added?", "a": "When glucose falls below 14 mmol/L", "wrong": ["Never; it worsens ketosis", "From the start, with the saline", "Only once the glucose is below 4 mmol/L"] },
+        { "q": "When is 10% glucose added?", "a": "When glucose falls below 14 mmol/L", "wrong": ["Never; it worsens ketosis", "From the start, running with the saline", "Only once the glucose is below 4 mmol/L"] },
         { "q": "Potassium in the second litre if K is 4.2?", "a": "40 mmol/L", "wrong": ["None until K is below 3.5", "10 mmol/L", "100 mmol/L"] },
         { "q": "Definition of DKA resolution (JBDS)?", "a": "Ketones < 0.6 mmol/L and venous pH > 7.3", "wrong": ["Glucose below 10 mmol/L", "The patient is eating and drinking", "Urine ketones are negative"] },
         { "q": "Serious complication in young people?", "a": "Cerebral oedema", "wrong": ["Hyperkalaemia always", "Pancreatitis always", "Hypercalcaemia"] }

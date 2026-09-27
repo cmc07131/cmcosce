@@ -73,17 +73,17 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "UK first-line PEP for a non-immune pregnant woman after chickenpox exposure?", "a": "Oral aciclovir days 7–14", "wrong": ["MMR vaccine", "Varicella vaccine within 3 days of contact", "No prophylaxis"] },
+        { "q": "UK first-line PEP for a non-immune pregnant woman after chickenpox exposure?", "a": "Oral aciclovir days 7–14", "wrong": ["MMR vaccine", "Varicella vaccine within 3 days of contact", "No prophylaxis unless a rash appears"] },
         { "q": "Risk of fetal varicella syndrome before 20 weeks?", "a": "About 1–2%", "wrong": ["About 50%", "About 0.01%", "About 20%"] },
         { "q": "Maternal complication of chickenpox in pregnancy?", "a": "Varicella pneumonia", "wrong": ["Pre-eclampsia", "Gestational diabetes", "Placenta praevia"] },
-        { "q": "Varicella vaccine in pregnancy?", "a": "Contraindicated (live vaccine)", "wrong": ["Recommended in the third trimester", "Given at 28 weeks with anti-D", "Given with the aciclovir PEP"] },
+        { "q": "Varicella vaccine in pregnancy?", "a": "Contraindicated (live vaccine)", "wrong": ["Recommended in the third trimester", "Given at 28 weeks alongside routine anti-D", "Given with the aciclovir PEP"] },
         { "q": "Measles exposure in a non-immune pregnant woman?", "a": "Human normal immunoglobulin within 6 days", "wrong": ["MMR vaccine within 72 hours of the exposure", "Oral aciclovir from day 7 to day 14", "No action"] }
       ]
     }
   ],
   "badge": { "name": "Spot Check", "emoji": "🔴", "flavor": "Exposure, immunity, PEP, infectious window, rash → call." },
   "cards": [
-    { "q": "Significant VZV exposure includes…", "options": ["Face-to-face contact for 5 minutes", "Passing briefly in a hospital corridor", "A phone call with the case", "Sharing a car park"], "why": "Or 15 minutes in the same room, or household contact.", "source": "UKHSA Green Book" },
+    { "q": "Significant VZV exposure includes…", "options": ["Face-to-face contact for 5 minutes", "Passing briefly in a hospital corridor", "A phone call with the infectious case", "Sharing a car park"], "why": "Or 15 minutes in the same room, or household contact.", "source": "UKHSA Green Book" },
     { "q": "Chickenpox in a pregnant woman over 20 weeks presenting within 24 h of rash:", "options": ["Oral aciclovir", "No treatment", "Steroids", "Induction of labour"], "why": "Reduces duration and complications.", "source": "RCOG GTG 13" },
     { "q": "Non-immune pregnant contact is potentially infectious…", "options": ["8–28 days after exposure", "1–3 days after exposure", "Only if a rash appears", "For 6 months after exposure"], "why": "Avoid other pregnant women and neonates.", "source": "RCOG GTG 13" },
     { "q": "Neonatal varicella risk is highest if maternal rash appears…", "options": ["5 days before to 2 days after delivery", "In the first trimester", "Before conception", "After 1 month postpartum"], "why": "No maternal antibody transferred yet.", "source": "RCOG GTG 13" },

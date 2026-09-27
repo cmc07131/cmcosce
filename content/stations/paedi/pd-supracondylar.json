@@ -53,9 +53,9 @@
       "label": "Examiner",
       "qs": [
         { "q": "Normal anterior humeral line passes through…", "a": "The middle third of the capitellum", "wrong": ["In front of the whole capitellum", "Through the tip of the olecranon", "Through the centre of the radial head"] },
-        { "q": "Nerve most often injured in extension-type supracondylar fractures?", "a": "Anterior interosseous (median)", "wrong": ["Axillary nerve at the surgical neck", "Musculocutaneous nerve", "Long thoracic nerve"] },
+        { "q": "Nerve most often injured in extension-type supracondylar fractures?", "a": "Anterior interosseous (median)", "wrong": ["Axillary nerve at the surgical neck", "Musculocutaneous nerve at the elbow", "Long thoracic nerve"] },
         { "q": "CRITOE order?", "a": "Capitellum, Radial head, Internal epicondyle, Trochlea, Olecranon, External epicondyle", "wrong": ["Coronoid, Radial head, Internal, Trochlea, Olecranon, External", "Trochlea first, then capitellum, then radial head", "Random order, differing between children"] },
-        { "q": "Gartland III is…", "a": "Completely displaced", "wrong": ["Undisplaced", "Angulated with intact posterior cortex", "Flexion type"] },
+        { "q": "Gartland III is…", "a": "Completely displaced", "wrong": ["Undisplaced", "Angulated with intact posterior cortex", "Flexion type with an intact cortex"] },
         { "q": "Early sign of compartment syndrome?", "a": "Pain on passive finger extension", "wrong": ["An absent radial pulse at the wrist, early on", "Pallor and coldness of the whole hand", "Paralysis of the fingers"] }
       ]
     }

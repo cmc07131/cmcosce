@@ -67,7 +67,7 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Most sensitive test for ACL rupture?", "a": "Lachman test", "wrong": ["McMurray", "Apley grind", "Patellar apprehension"] },
+        { "q": "Most sensitive test for ACL rupture?", "a": "Lachman test", "wrong": ["McMurray", "Apley grind test (prone)", "Patellar apprehension"] },
         { "q": "Commonest cause of acute traumatic haemarthrosis?", "a": "ACL rupture", "wrong": ["Meniscal tear", "Gout", "Bursitis"] },
         { "q": "Which is an Ottawa knee rule criterion?", "a": "Isolated patellar tenderness", "wrong": ["A twisting mechanism with a pop", "Swelling within 2 hours of injury", "Age over 40 with a knee effusion"] },
         { "q": "A Segond fracture is associated with…", "a": "ACL rupture", "wrong": ["Patellar dislocation", "Osteoarthritis", "Gout"] },

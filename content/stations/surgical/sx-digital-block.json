@@ -59,6 +59,6 @@
     { "q": "Phentolamine is used for…", "options": ["Reversing adrenaline-induced digital ischaemia", "Pain relief after the block wears off", "Treating infection in the pulp space", "Stopping bleeding from the nail bed"], "why": "Alpha-blocker.", "source": "Lalonde" },
     { "q": "Subungual haematoma > 50% with intact nail?", "options": ["Trephination usually enough", "Always remove the nail and repair the bed", "Antibiotics for 5 days", "X-ray and plastic surgery referral"], "why": "Nail removal if nail disrupted.", "source": "BSSH" },
     { "q": "Single palmar injection block is given…", "options": ["Subcutaneously at the palmar base of the finger", "Into the MCP joint", "Into the nail bed", "Dorsally at the DIP joint"], "why": "Blocks both palmar nerves.", "source": "RCEM" },
-    { "q": "Contraindication to adrenaline in a digital block?", "options": ["Peripheral vascular disease", "Age over 30 years", "A crush injury to the fingertip pulp", "A fingertip laceration"], "why": "Risk of ischaemia.", "source": "Cochrane 2015" }
+    { "q": "Contraindication to adrenaline in a digital block?", "options": ["Peripheral vascular disease", "Age over 30 years", "A crush injury to the fingertip pulp", "A fingertip laceration needing sutures"], "why": "Risk of ischaemia.", "source": "Cochrane 2015" }
   ]
 }

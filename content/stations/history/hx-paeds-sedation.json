@@ -70,7 +70,7 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "IV midazolam dose for procedural sedation in a 4-year-old?", "a": "0.05–0.1 mg/kg titrated", "wrong": ["0.5 mg/kg as a single bolus over 1 min", "1 mg/kg IV", "5 mg fixed dose"] },
+        { "q": "IV midazolam dose for procedural sedation in a 4-year-old?", "a": "0.05–0.1 mg/kg titrated", "wrong": ["0.5 mg/kg as a single bolus over 1 min", "1 mg/kg IV", "5 mg fixed dose for any child"] },
         { "q": "Intranasal dexmedetomidine dose?", "a": "2–3 microgram/kg", "wrong": ["20 microgram/kg", "0.2 microgram/kg", "2 mg/kg"] },
         { "q": "Flumazenil dose in children?", "a": "0.01 mg/kg", "wrong": ["1 mg/kg", "0.1 mg fixed", "5 microgram/kg"] },
         { "q": "Why is sedation a concern in head injury?", "a": "It can mask a falling conscious level", "wrong": ["It raises intracranial pressure directly in all children", "It causes skull fractures", "It stops the CT being done"] },
@@ -83,7 +83,7 @@
     { "q": "PECARN high-risk feature in a child under 2?", "options": ["Non-frontal scalp haematoma", "Crying straight after the fall", "A fall from a sitting position", "Normal behaviour per the parents"], "why": "Also altered mental status and palpable skull fracture.", "source": "PECARN 2009" },
     { "q": "Chloral hydrate is preferred for…", "options": ["Non-painful imaging in children under 3", "Painful procedures in teenagers", "Sedation in adults", "Status epilepticus"], "why": "Oral, slower onset.", "source": "HA paediatric sedation guideline" },
     { "q": "Reversal agent for midazolam?", "options": ["Flumazenil", "Naloxone", "Neostigmine", "Glucagon"], "why": "0.01 mg/kg in children.", "source": "BNFc" },
-    { "q": "Capnography during sedation detects…", "options": ["Hypoventilation early", "Hypoglycaemia during fasting", "Subclinical seizures", "A rising temperature"], "why": "Before desaturation.", "source": "AAP/AAPD 2019" },
+    { "q": "Capnography during sedation detects…", "options": ["Hypoventilation early", "Hypoglycaemia during fasting", "Subclinical seizures", "A rising core temperature in infants"], "why": "Before desaturation.", "source": "AAP/AAPD 2019" },
     { "q": "Fasting before urgent ED sedation is…", "options": ["Not mandatory; weigh urgency against risk", "Always 6 hours for solids", "Always 12 hours for everything", "Irrelevant for ketamine"], "why": "Aspiration is rare.", "source": "ACEP / RCEM" },
     { "q": "NICE CT within 1 hour in a child: which sign?", "options": ["Suspected open or depressed fracture", "A single vomit after the fall at home", "Crying and distress at the scene", "A scalp laceration needing glue"], "why": "Also GCS <15 at 2 h, basal skull signs, seizure, focal deficit.", "source": "NICE NG232" }
   ]

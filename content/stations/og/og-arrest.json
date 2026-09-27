@@ -71,7 +71,7 @@
       "qs": [
         { "q": "When to perform resuscitative hysterotomy?", "a": "20 weeks or more, no ROSC at 4 minutes, delivered by 5", "wrong": ["Only after 36 weeks, once the fetus is viable", "After 30 minutes of CPR without ROSC", "Only if a fetal heartbeat is seen on ultrasound"] },
         { "q": "Main purpose of the hysterotomy?", "a": "To relieve aortocaval compression for the mother", "wrong": ["To save the baby, whatever happens to the mother", "To stop bleeding from the placental bed", "To allow a CT of the maternal abdomen"] },
-        { "q": "Defibrillation energy in pregnancy?", "a": "Same as non-pregnant adults", "wrong": ["Half the adult energy", "Double the adult energy", "Contraindicated until the baby is delivered"] },
+        { "q": "Defibrillation energy in pregnancy?", "a": "Same as non-pregnant adults", "wrong": ["Half the adult energy", "Double the adult energy for the uterus", "Contraindicated until the baby is delivered"] },
         { "q": "Why IV access above the diaphragm?", "a": "The uterus obstructs venous return from the legs", "wrong": ["The legs are too swollen to cannulate", "Drugs given in the legs harm the fetus more", "Femoral access is contraindicated in every pregnant woman"] },
         { "q": "Clinical sign of 20 weeks' gestation?", "a": "Fundus at the umbilicus", "wrong": ["Fundus at the xiphisternum", "Fundus just palpable above the pubis", "Fetal movements felt"] }
       ]
@@ -81,9 +81,9 @@
   "cards": [
     { "q": "Resuscitative hysterotomy is indicated from…", "options": ["20 weeks' gestation", "12 weeks' gestation", "28 weeks' gestation", "37 weeks (term) only"], "why": "When the uterus compresses the aorta and IVC.", "source": "RCUK 2025 special circumstances" },
     { "q": "Target time for delivery in maternal arrest?", "options": ["5 minutes after collapse", "15 minutes after collapse", "30 minutes after collapse", "1 minute after collapse"], "why": "Start at 4 minutes.", "source": "RCUK 2025" },
-    { "q": "Manual uterine displacement pushes the uterus…", "options": ["To the mother's left", "To the mother's right", "Upwards", "Downwards"], "why": "Relieves aortocaval compression.", "source": "RCUK 2025" },
+    { "q": "Manual uterine displacement pushes the uterus…", "options": ["To the mother's left", "To the mother's right", "Upwards", "Downwards, toward the feet"], "why": "Relieves aortocaval compression.", "source": "RCUK 2025" },
     { "q": "Hand position for CPR in pregnancy (current guidance)?", "options": ["Standard: lower half of the sternum", "Higher on the sternum, near the notch", "Over the uterine fundus", "Over the left side of the chest"], "why": "Older teaching suggested higher placement.", "source": "RCUK 2025", "note": "Older notes: higher on the sternum." },
     { "q": "Antidote if arrest follows magnesium infusion?", "options": ["Calcium", "Naloxone", "Flumazenil", "Glucagon"], "why": "Magnesium toxicity causes respiratory and cardiac arrest.", "source": "RCUK 2025" },
-    { "q": "Where should the resuscitative hysterotomy be done?", "options": ["Where she arrested (resus)", "In the main operating theatre", "In the delivery suite", "After transfer to the ICU"], "why": "Moving her wastes minutes.", "source": "RCUK 2025" }
+    { "q": "Where should the resuscitative hysterotomy be done?", "options": ["Where she arrested (resus)", "In the main operating theatre", "In the delivery suite", "After transfer to the obstetric ICU"], "why": "Moving her wastes minutes.", "source": "RCUK 2025" }
   ]
 }

@@ -74,8 +74,8 @@
         { "q": "Can a competent adult refuse life-saving blood?", "a": "Yes", "wrong": ["No, doctors must transfuse", "Only with a court order", "Only if the family agrees"] },
         { "q": "A Jehovah's Witness parent refuses blood for their bleeding child. You…", "a": "Seek legal authority; best interests", "wrong": ["Accept the parents' refusal", "Transfuse secretly without documenting it", "Discharge the child to another hospital"] },
         { "q": "Gillick competence concerns…", "a": "A child under 16 consenting to treatment", "wrong": ["Adult capacity under the common law", "Detention under the Mental Health Ordinance", "Consent to organ donation"] },
-        { "q": "Why speak to him alone?", "a": "To check the refusal is voluntary", "wrong": ["To persuade him away from his family", "It is required by his church", "To avoid having to document it"] },
-        { "q": "A product many Jehovah's Witnesses accept?", "a": "Albumin (individual conscience)", "wrong": ["Packed red cells if washed and filtered", "Whole blood", "Platelets"] }
+        { "q": "Why speak to him alone?", "a": "To check the refusal is voluntary", "wrong": ["To persuade him away from his family", "It is required by his church's hospital liaison committee", "To avoid having to document it"] },
+        { "q": "A product many Jehovah's Witnesses accept?", "a": "Albumin (individual conscience)", "wrong": ["Packed red cells if washed and filtered", "Whole blood from a directed donor", "Platelets"] }
       ]
     }
   ],
@@ -86,6 +86,6 @@
     { "q": "Gillick competence applies to…", "options": ["Under-16s consenting to treatment", "Adults with dementia", "Detention of adults under the MHO", "Consent to organ donation after death"], "why": "Sufficient understanding and intelligence.", "source": "Gillick v West Norfolk 1985" },
     { "q": "Parents refuse life-saving blood for a child: the doctor…", "options": ["Seek legal authority; treat in best interests", "Always accepts the parents' refusal, as their right", "Calls the church elders to decide", "Waits for the child to improve"], "why": "The child's welfare comes first.", "source": "HK / UK practice" },
     { "q": "Blood-sparing measure in GI bleeding?", "options": ["Early endoscopy and haemostasis", "Routine tranexamic acid (despite HALT-IT)", "Frequent large-volume blood tests", "Delaying endoscopy until stable"], "why": "HALT-IT showed no benefit from TXA in GI bleeding.", "source": "HALT-IT 2020" },
-    { "q": "What must be documented?", "options": ["Capacity, information given, what is refused and accepted", "Only the refusal", "Nothing", "Family opinion only"], "why": "Clear records protect patient and team.", "source": "HA guidance" }
+    { "q": "What must be documented?", "options": ["Capacity, information given, what is refused and accepted", "Only the refusal itself", "The name of the church elder present", "The family's opinion only"], "why": "Clear records protect patient and team.", "source": "HA guidance" }
   ]
 }

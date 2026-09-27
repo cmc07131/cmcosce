@@ -72,7 +72,7 @@
       "qs": [
         { "q": "Commonest site of anterior epistaxis?", "a": "Little's area (Kiesselbach's plexus)", "wrong": ["Sphenopalatine artery", "Posterior ethmoidal artery", "Inferior turbinate"] },
         { "q": "Direction of nasal pack insertion?", "a": "Along the floor, parallel to the palate", "wrong": ["Upwards and backwards toward the inner eye", "Laterally, toward the cheek", "Along the roof of the nose"] },
-        { "q": "Why not cauterise both sides of the septum?", "a": "Risk of septal perforation", "wrong": ["It is more painful", "It causes permanent loss of smell", "It takes too long to work"] },
+        { "q": "Why not cauterise both sides of the septum?", "a": "Risk of septal perforation", "wrong": ["It is more painful", "It causes permanent loss of smell", "It takes too long to work in an emergency"] },
         { "q": "Main artery in posterior epistaxis?", "a": "Sphenopalatine", "wrong": ["Facial", "Superior labial", "Anterior ethmoidal only"] },
         { "q": "Contraindication to nasal packing?", "a": "Suspected base-of-skull fracture", "wrong": ["Uncontrolled hypertension", "Anticoagulation with warfarin or apixaban", "Age over 65 years"] }
       ]

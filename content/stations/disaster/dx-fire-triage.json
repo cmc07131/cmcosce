@@ -96,7 +96,7 @@
   "cards": [
     { "q": "Fire victim with normal SpO2 and confusion?", "options": ["Suspect carbon monoxide", "Reassure and discharge", "Give naloxone for opioids", "Treat for hypoglycaemia first"], "why": "Co-oximetry.", "source": "ATLS" },
     { "q": "High lactate and shock after smoke inhalation?", "options": ["Cyanide — hydroxocobalamin", "Sepsis — broad-spectrum antibiotics", "Acidosis — sodium bicarbonate", "Hypoglycaemia — 10% glucose"], "why": "Lactate > 8 suggests cyanide.", "source": "Toxicology" },
-    { "q": "Hand burn in an adult?", "options": ["Refer to burns service", "Discharge without follow-up", "Ice", "Amputation"], "why": "Special area.", "source": "BBA referral criteria" },
+    { "q": "Hand burn in an adult?", "options": ["Refer to burns service", "Discharge without follow-up", "Ice", "Amputation of the burnt fingers"], "why": "Special area.", "source": "BBA referral criteria" },
     { "q": "Adults need formal burn fluids above…", "options": ["20% TBSA", "5% TBSA", "50% TBSA", "1% TBSA"], "why": "Children over 10% (ATLS).", "source": "ATLS" },
     { "q": "Signs of inhalation injury?", "options": ["Stridor, hoarseness, soot, singed hair", "Burns to the lower legs", "Bradycardia and hypertension", "A low core temperature"], "why": "Early intubation.", "source": "ATLS" },
     { "q": "Mass-casualty burn triage uses…", "options": ["Age and TBSA (ABA table)", "Hair colour and skin type", "Body weight only", "The patient's pain score"], "why": "Resource-based.", "source": "ABA" }

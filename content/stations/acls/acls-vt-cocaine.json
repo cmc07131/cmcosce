@@ -89,7 +89,7 @@
       "label": "Examiner",
       "qs": [
         { "q": "Why sodium bicarbonate in cocaine toxicity?", "a": "It overcomes sodium-channel blockade", "wrong": ["It sedates the patient quickly", "It lowers the core temperature", "It binds free cocaine in the bloodstream for excretion"] },
-        { "q": "First-line drug for cocaine agitation and hypertension?", "a": "Benzodiazepine", "wrong": ["Labetalol infusion", "Haloperidol", "Propranolol"] },
+        { "q": "First-line drug for cocaine agitation and hypertension?", "a": "Benzodiazepine", "wrong": ["Labetalol infusion", "Haloperidol 5 mg IM", "Propranolol"] },
         { "q": "Regular broad complex tachycardia of uncertain origin should be treated as…", "a": "VT", "wrong": ["SVT with aberrancy", "Sinus tachycardia", "AF"] },
         { "q": "Stable VT without toxins (RCUK): drug?", "a": "Amiodarone 300 mg IV over 10–60 min", "wrong": ["Adenosine 18 mg rapid IV push", "Digoxin 500 micrograms IV", "Atropine 0.5 mg IV every 3–5 minutes, up to 3 mg"] },
         { "q": "Which sign suggests a sympathomimetic rather than anticholinergic toxidrome?", "a": "Sweating", "wrong": ["Dry skin", "Absent bowel sounds", "Urinary retention"] }
@@ -102,7 +102,7 @@
   "badge": { "name": "Snow Blind", "emoji": "❄", "flavor": "Benzos for the brain, bicarbonate for the QRS, electricity if unstable." },
   "cards": [
     { "q": "Cocaine-induced broad complex tachycardia: first drug?", "options": ["Sodium bicarbonate", "Flecainide 2 mg/kg", "Verapamil 5 mg IV", "Metoprolol 5 mg IV"], "why": "Sodium loading and alkalinisation counter sodium-channel blockade.", "source": "TOXBASE" },
-    { "q": "Agitation and hypertension after cocaine are treated first with…", "options": ["Benzodiazepines", "Beta-blockers IV", "Haloperidol", "Physostigmine"], "why": "They reduce central sympathetic outflow.", "source": "TOXBASE" },
+    { "q": "Agitation and hypertension after cocaine are treated first with…", "options": ["Benzodiazepines", "Beta-blockers IV", "Haloperidol", "Physostigmine 1 mg IV"], "why": "They reduce central sympathetic outflow.", "source": "TOXBASE" },
     { "q": "Sympathomimetic toxidrome features?", "options": ["Tachycardia, hypertension, sweating, mydriasis", "Bradycardia, miosis, salivation, bronchorrhoea", "Dry skin, urinary retention, flushing, mydriasis", "Hypothermia, hyporeflexia and miosis"], "why": "Sweating separates it from anticholinergic toxicity.", "source": "Toxicology texts" },
     { "q": "Regular broad complex tachycardia without adverse features (non-toxic): drug?", "options": ["Amiodarone 300 mg over 10–60 min", "Adenosine 6 mg rapid IV push", "Atropine 0.5 mg every 3–5 minutes, max 3 mg", "Digoxin 500 micrograms IV"], "why": "Treat as VT.", "source": "RCUK tachycardia algorithm" },
     { "q": "Class of antiarrhythmic to avoid in cocaine toxicity?", "options": ["Class Ia/Ic (e.g. flecainide)", "Class Ib (e.g. lidocaine)", "Class III (e.g. intravenous amiodarone)", "Class IV (e.g. diltiazem)"], "why": "They add to sodium-channel blockade.", "source": "TOXBASE" },

@@ -59,7 +59,7 @@
         { "q": "Maintenance fluid for a 12 kg child (Holliday–Segar)?", "a": "1100 mL/day", "wrong": ["1200 mL/day", "600 mL/day", "2400 mL/day"] },
         { "q": "Oral rehydration for clinical dehydration without shock (NICE)?", "a": "50 mL/kg ORS over 4 hours plus maintenance", "wrong": ["Water only, as much as tolerated", "Diluted fruit juice every hour", "Nothing by mouth for 24 hours"] },
         { "q": "Fluid bolus in paediatric shock (RCUK/NICE NG29)?", "a": "10 mL/kg", "wrong": ["60 mL/kg", "5 mL/kg", "40 mL/kg"] },
-        { "q": "Sign of clinical shock (NICE CG84)?", "a": "CRT > 3 s with cold extremities", "wrong": ["Thirst and a dry mouth", "Mild tachycardia on its own", "Normal responsiveness and warm hands"] },
+        { "q": "Sign of clinical shock (NICE CG84)?", "a": "CRT > 3 s with cold extremities", "wrong": ["Thirst and a dry mouth", "Mild tachycardia on its own, in a crying child", "Normal responsiveness and warm hands"] },
         { "q": "Commonest cause of gastroenteritis in young children globally (pre-vaccine)?", "a": "Rotavirus", "wrong": ["Salmonella", "Giardia", "E. coli O157"] }
       ]
     }

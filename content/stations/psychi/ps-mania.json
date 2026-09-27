@@ -74,14 +74,14 @@
         { "q": "Drug that can trigger mania?", "a": "Antidepressants", "wrong": ["Paracetamol", "Proton pump inhibitors", "Amoxicillin"] },
         { "q": "Hypomania differs from mania by…", "a": "No psychosis and less functional impairment", "wrong": ["Lower mood throughout the episode", "A longer duration, at least 2 weeks of symptoms", "It occurs only in men"] },
         { "q": "Why avoid valproate in women of childbearing age?", "a": "Teratogenicity and neurodevelopmental harm", "wrong": ["It causes excess hair growth", "It is ineffective in women", "It can trigger mania"] },
-        { "q": "Organic cause of mania?", "a": "Hyperthyroidism", "wrong": ["Iron-deficiency anaemia", "Hypothyroidism", "Osteoarthritis"] }
+        { "q": "Organic cause of mania?", "a": "Hyperthyroidism", "wrong": ["Iron-deficiency anaemia", "Hypothyroidism", "Osteoarthritis of the knees"] }
       ]
     }
   ],
   "badge": { "name": "Speed Limit", "emoji": "🎢", "flavor": "No sleep, big plans, fast talk: screen organics, calm room, antipsychotic." },
   "cards": [
-    { "q": "Key feature of mania?", "options": ["Decreased need for sleep", "Early morning waking with low mood", "Anhedonia", "Psychomotor retardation"], "why": "Plus grandiosity, pressured speech, risk-taking.", "source": "ICD-11 / DSM-5" },
-    { "q": "First-line acute treatment for mania (NICE)?", "options": ["An antipsychotic", "An SSRI", "A benzodiazepine alone long-term", "ECT first"], "why": "Haloperidol, olanzapine, quetiapine or risperidone.", "source": "NICE CG185" },
+    { "q": "Key feature of mania?", "options": ["Decreased need for sleep", "Early morning waking with low mood", "Anhedonia", "Psychomotor retardation and slowed speech"], "why": "Plus grandiosity, pressured speech, risk-taking.", "source": "ICD-11 / DSM-5" },
+    { "q": "First-line acute treatment for mania (NICE)?", "options": ["An antipsychotic", "An SSRI such as fluoxetine", "A benzodiazepine alone long-term", "ECT first"], "why": "Haloperidol, olanzapine, quetiapine or risperidone.", "source": "NICE CG185" },
     { "q": "What to do with an antidepressant in mania?", "options": ["Stop it", "Double it", "Continue unchanged", "Switch to another SSRI"], "why": "It can drive mania.", "source": "NICE CG185" },
     { "q": "Pressured speech is…", "options": ["Rapid and difficult to interrupt", "Slow, with long pauses before each answer", "Absent (mutism)", "Whispered and hard to hear"], "why": "Typical of mania.", "source": "MSE teaching" },
     { "q": "Valproate in women of childbearing potential requires…", "options": ["The Pregnancy Prevention Programme", "No special precautions", "A higher starting dose", "Only a serum valproate level at 2 weeks"], "why": "Major teratogen.", "source": "MHRA 2018/2024" },

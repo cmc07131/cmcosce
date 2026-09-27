@@ -67,7 +67,7 @@
       "qs": [
         { "q": "Mechanism of hypokalaemia in TPP?", "a": "Intracellular shift via Na/K-ATPase", "wrong": ["Renal potassium loss", "Gastrointestinal loss", "Poor dietary intake"] },
         { "q": "Risk of treating TPP with large potassium doses?", "a": "Rebound hyperkalaemia", "wrong": ["Hyponatraemia from the IV fluid", "Seizures from rapid correction", "Hypoglycaemia"] },
-        { "q": "Which beta-blocker is used?", "a": "Propranolol (non-selective)", "wrong": ["Atenolol (cardioselective, once daily)", "Esmolol only", "No beta-blocker"] },
+        { "q": "Which beta-blocker is used?", "a": "Propranolol (non-selective)", "wrong": ["Atenolol (cardioselective, once daily)", "Esmolol only", "No beta-blocker; calcium channel blocker instead"] },
         { "q": "ECG sign of hypokalaemia?", "a": "U waves", "wrong": ["Peaked T waves", "Delta waves", "ST elevation"] },
         { "q": "Red flag for cord compression?", "a": "Urinary retention with back pain", "wrong": ["Fever alone", "Headache", "Proximal weakness only, with normal reflexes"] }
       ]
@@ -77,8 +77,8 @@
   "cards": [
     { "q": "Thyrotoxic periodic paralysis is most common in…", "options": ["Young East Asian men", "Elderly white women with goitre", "Children under 10", "Pregnant women"], "why": "Often the first sign of Graves' disease.", "source": "Endocrine references" },
     { "q": "Triggers for periodic paralysis?", "options": ["Carbohydrate-rich meals, alcohol, rest after exercise", "Cold-water swimming", "Caffeine withdrawal", "Sunlight"], "why": "Insulin drives potassium into cells.", "source": "Endocrine references" },
-    { "q": "Hypokalaemia ECG changes?", "options": ["Flat T waves, U waves, ST depression", "Tall peaked T waves with a widened QRS complex", "Delta waves", "A short QT interval"], "why": "Arrhythmia risk.", "source": "ECG basics" },
-    { "q": "TPP potassium replacement should be…", "options": ["Small doses with close monitoring", "Rapid high-dose IV replacement to 5.0 mmol/L", "Withheld entirely", "Oral only, after 24 hours"], "why": "Rebound hyperkalaemia.", "source": "Endocrine references" },
+    { "q": "Hypokalaemia ECG changes?", "options": ["Flat T waves, U waves, ST depression", "Tall peaked T waves with a widened QRS complex", "Delta waves", "A short QT interval with tall P waves"], "why": "Arrhythmia risk.", "source": "ECG basics" },
+    { "q": "TPP potassium replacement should be…", "options": ["Small doses with close monitoring", "Rapid high-dose IV replacement to 5.0 mmol/L", "Withheld entirely", "Oral only, starting after 24 hours of rest"], "why": "Rebound hyperkalaemia.", "source": "Endocrine references" },
     { "q": "Ascending weakness after diarrhoea suggests…", "options": ["Guillain–Barré syndrome", "Thyrotoxic periodic paralysis", "Myasthenia gravis", "Stroke"], "why": "Check forced vital capacity.", "source": "Neurology" },
     { "q": "Definitive treatment for TPP?", "options": ["Treat the hyperthyroidism", "Lifelong potassium tablets", "Oral steroids", "No treatment"], "why": "Attacks stop once euthyroid.", "source": "Endocrine references" }
   ]

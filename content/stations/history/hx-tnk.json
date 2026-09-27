@@ -97,7 +97,7 @@
         { "q": "When is fibrinolysis preferred to primary PCI (ESC 2023)?", "a": "When PCI can't be done within 120 minutes", "wrong": ["Always, as first line", "When the patient is over 75", "Only for inferior STEMI"] },
         { "q": "Sign of failed fibrinolysis?", "a": "Under 50% ST resolution at 60–90 minutes", "wrong": ["Complete relief of the chest pain within 60 minutes", "A reperfusion arrhythmia such as AIVR", "A rise in the troponin"] },
         { "q": "After successful fibrinolysis, angiography is…", "a": "Within 2–24 hours", "wrong": ["Not needed if successful", "After 6 weeks", "Only if symptoms recur"] },
-        { "q": "Absolute contraindication to fibrinolysis?", "a": "Previous intracranial haemorrhage", "wrong": ["Diabetic retinopathy on the last eye screen", "Age over 75 with hypertension", "Current smoker"] },
+        { "q": "Absolute contraindication to fibrinolysis?", "a": "Previous intracranial haemorrhage", "wrong": ["Diabetic retinopathy on the last eye screen", "Age over 75 with treated hypertension", "Current smoker"] },
         { "q": "Tenecteplase dose adjustment at 75 or older?", "a": "Half dose", "wrong": ["Double dose", "No change", "Contraindicated"] }
       ]
     }
@@ -106,7 +106,7 @@
   "cards": [
     { "q": "Fibrinolysis should start within how long of STEMI diagnosis?", "options": ["Within 10 minutes", "Within 30 minutes of arrival", "Within 12 hours", "Within 24 hours"], "why": "Door-to-needle target.", "source": "ESC 2023" },
     { "q": "Pharmaco-invasive strategy means…", "options": ["Lysis, then angiography within 2–24 h", "Primary PCI, then fibrinolysis", "Medical treatment only", "Fibrinolysis with no angiography unless symptoms recur"], "why": "STREAM trial.", "source": "ESC 2023" },
-    { "q": "Oxygen in suspected ACS (ESC 2023)?", "options": ["Only if SpO2 < 90%", "For all patients", "Only if SpO2 < 98%", "Only if the pain persists"], "why": "Hyperoxia may be harmful.", "source": "ESC 2023", "note": "Older notes: < 94%." },
+    { "q": "Oxygen in suspected ACS (ESC 2023)?", "options": ["Only if SpO2 < 90%", "For all patients with chest pain, at 15 L/min", "Only if SpO2 < 98%", "Only if the pain persists"], "why": "Hyperoxia may be harmful.", "source": "ESC 2023", "note": "Older notes: < 94%." },
     { "q": "Clopidogrel loading with fibrinolysis in a 60-year-old?", "options": ["300 mg", "600 mg", "75 mg", "None with fibrinolysis"], "why": "75 mg only if 75 or older.", "source": "ESC 2023" },
     { "q": "Rescue PCI is indicated when…", "options": ["Fibrinolysis fails", "After every lysis, routinely", "Only after 48 hours", "Only if the troponin rises"], "why": "Less than 50% ST resolution or ongoing ischaemia.", "source": "ESC 2023" },
     { "q": "ST elevation V1–V4 indicates which territory?", "options": ["Anterior (LAD)", "Inferior (RCA)", "Lateral (circumflex)", "Posterior"], "why": "Left anterior descending artery.", "source": "ECG basics" }

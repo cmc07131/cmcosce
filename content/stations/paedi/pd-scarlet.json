@@ -77,6 +77,6 @@
     { "q": "Penicillin allergy alternative for GAS?", "options": ["Clarithromycin or azithromycin", "Ciprofloxacin for 5 days", "Nitrofurantoin", "Trimethoprim with sulfamethoxazole"], "why": "Macrolide.", "source": "NICE CKS" },
     { "q": "Warning sign of invasive GAS?", "options": ["Severe limb pain, rapid decline, toxic look", "A mild sore throat for 2 days", "Peeling fingertips 2 weeks later", "An itchy rash that comes and goes"], "why": "Necrotising fasciitis or toxic shock.", "source": "UKHSA 2023" },
     { "q": "Peeling of fingers and toes after scarlet fever appears…", "options": ["After about 1 week", "On day 1 with the rash", "After about 1 year", "Only if untreated for a month"], "why": "Desquamation.", "source": "Paediatrics" },
-    { "q": "Strawberry tongue also occurs in…", "options": ["Kawasaki disease", "Measles", "Chickenpox", "Hand, foot and mouth disease"], "why": "Check for Kawasaki features if fever lasts ≥5 days.", "source": "AHA Kawasaki 2017" }
+    { "q": "Strawberry tongue also occurs in…", "options": ["Kawasaki disease", "Measles", "Chickenpox (varicella)", "Hand, foot and mouth disease"], "why": "Check for Kawasaki features if fever lasts ≥5 days.", "source": "AHA Kawasaki 2017" }
   ]
 }

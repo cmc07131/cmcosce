@@ -37,9 +37,9 @@
       "q": "Best skin antiseptic before invasive procedures?",
       "options": [
         "2% chlorhexidine in 70% alcohol",
-        "Water",
-        "Hydrogen peroxide",
-        "Povidone-iodine in water only"
+        "Sterile water, left to dry",
+        "3% hydrogen peroxide solution",
+        "10% povidone-iodine in water, left to dry"
       ],
       "answer": 0,
       "why": "Allow it to dry.",

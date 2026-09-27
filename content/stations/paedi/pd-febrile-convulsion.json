@@ -62,11 +62,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Age range for febrile seizures?", "a": "6 months to 5 years", "wrong": ["0–3 months of age", "5–12 years", "Any age, including adults"] },
+        { "q": "Age range for febrile seizures?", "a": "6 months to 5 years", "wrong": ["0–3 months of age only", "5–12 years", "Any age, including adults"] },
         { "q": "Which feature makes it complex?", "a": "Focal onset or lasting over 15 minutes", "wrong": ["Generalised tonic–clonic movements with eye rolling", "A fever above 39 °C", "Age 2 years at the first seizure"] },
         { "q": "Do antipyretics prevent recurrence?", "a": "No", "wrong": ["Yes, if given early in the fever", "Only ibuprofen does", "Only if given round the clock"] },
         { "q": "Recurrence risk after a first febrile seizure?", "a": "About 30%", "wrong": ["About 90%", "About 1%", "Zero"] },
-        { "q": "When call an ambulance?", "a": "Seizure lasting over 5 minutes", "wrong": ["Any fever above 38 °C in a child under 5", "Any brief twitch in sleep", "After 30 minutes of seizure"] }
+        { "q": "When call an ambulance?", "a": "Seizure lasting over 5 minutes", "wrong": ["Any fever above 38 °C in a child under 5", "Any brief twitch in sleep", "After 30 minutes of continuous seizure"] }
       ]
     }
   ],

@@ -73,6 +73,6 @@
     { "q": "Ultrasound in suspected torsion?", "options": ["Must not delay exploration", "Is mandatory before surgery", "Is always diagnostic", "Is contraindicated"], "why": "Doppler can be falsely reassuring.", "source": "BAUS" },
     { "q": "Manual detorsion direction?", "options": ["Medial to lateral ('open the book')", "Lateral to medial, like closing a book", "Upwards toward the ring", "Either direction"], "why": "Only while arranging theatre.", "source": "EAU" },
     { "q": "Epididymo-orchitis in men over 35 is usually…", "options": ["Enteric organisms (UTI-related)", "Chlamydia trachomatis, as in young men", "Viral (mumps)", "Candida"], "why": "Treat accordingly.", "source": "BASHH" },
-    { "q": "Painless scrotal mass in a young man suggests…", "options": ["Testicular tumour", "Testicular torsion", "Epididymitis", "Inguinal hernia"], "why": "Ultrasound and tumour markers.", "source": "Urology" }
+    { "q": "Painless scrotal mass in a young man suggests…", "options": ["Testicular tumour", "Testicular torsion", "Epididymitis", "An irreducible inguinal hernia"], "why": "Ultrasound and tumour markers.", "source": "Urology" }
   ]
 }

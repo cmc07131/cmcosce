@@ -225,3 +225,40 @@ test('station scripts: each compiles, validates, and holds its own weight', () =
     for (const s of st.vitals?.stop ?? []) assert.ok(flags.has(s), `${st.id}: nothing sets stop flag ${s}`)
   }
 })
+
+/*
+ * Multiple choice (flashcards and the examiner's viva) must not be answerable by length or by throwaway
+ * options: the right answer should be the longest about as often as chance would have it.
+ */
+const THROWAWAY = new Set(['never', 'none', 'nothing', 'ignore', 'always', 'no limit', 'not needed', 'no target', 'tradition', 'billing', 'yes', 'no', 'reassure', 'discharge', 'only topical steroids'])
+
+function lengthRank(answer: string, options: string[]) {
+  return 1 + options.filter((o) => o.length > answer.length).length
+}
+
+test('multiple choice: no length cue and no throwaway distractors', () => {
+  const byGym = new Map<string, number[]>()
+  const throwaways: string[] = []
+  const add = (gym: string, id: string, answer: string, wrong: string[]) => {
+    const list = byGym.get(gym) ?? []
+    list.push(lengthRank(answer, [answer, ...wrong]))
+    byGym.set(gym, list)
+    for (const w of wrong) if (THROWAWAY.has(w.trim().toLowerCase().replace(/\.$/, ''))) throwaways.push(`${id}: "${w}"`)
+  }
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    for (const card of st.cards ?? []) add(st.gym, `${st.id} card "${card.q}"`, card.options[0], card.options.slice(1))
+    for (const s of st.steps) for (const q of s.qs ?? []) add(st.gym, `${st.id} viva "${q.q}"`, q.a, q.wrong)
+  }
+  const deckDir = join(process.cwd(), 'content', 'cards')
+  for (const f of readdirSync(deckDir).filter((name) => name.endsWith('.json'))) {
+    const deck = JSON.parse(readFileSync(join(deckDir, f), 'utf8')) as { deck: string; cards: { id: string; options: string[]; answer: number }[] }
+    for (const card of deck.cards) add('decks', card.id, card.options[card.answer], card.options.filter((_, i) => i !== card.answer))
+  }
+  assert.deepEqual(throwaways, [])
+  for (const [gym, ranks] of byGym) {
+    const share = (r: number) => ranks.filter((x) => x === r).length / ranks.length
+    assert.ok(share(1) <= 0.35, `${gym}: the answer is the longest option in ${Math.round(share(1) * 100)}% of questions`)
+    for (const r of [1, 2, 3, 4]) assert.ok(share(r) <= 0.55, `${gym}: the answer is length-rank ${r} in ${Math.round(share(r) * 100)}% of questions`)
+  }
+})

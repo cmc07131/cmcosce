@@ -110,8 +110,8 @@
   "cards": [
     { "q": "Escort for a critical transfer?", "options": ["Doctor and nurse", "A single nurse with an airway kit", "A porter and a healthcare assistant", "A paramedic only"], "why": "Matched to risk.", "source": "Association of Anaesthetists 2019" },
     { "q": "DOPES stands for…", "options": ["Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "Drugs, Oxygen, Pulse, ECG, Saturations", "Dose, Order, Plan, Escort, Signature", "Disconnection, Occlusion, Pressure, Equipment, Suction"], "why": "Intubated patient desaturation.", "source": "Airway teaching" },
-    { "q": "Oxygen for transfer: carry…", "options": ["Twice the calculated need", "Exactly the calculated need", "Half the calculated need", "Only enough if intubated"], "why": "Delays happen.", "source": "ICS 2019" },
-    { "q": "Anticoagulated ICH on warfarin?", "options": ["Reverse with PCC and vitamin K", "Continue warfarin to prevent stroke", "Add aspirin 300 mg", "Start heparin infusion"], "why": "Before transfer.", "source": "NICE NG128" },
+    { "q": "Oxygen for transfer: carry…", "options": ["Twice the calculated need", "Exactly the calculated need", "Half the calculated need, plus a spare", "Only enough if intubated"], "why": "Delays happen.", "source": "ICS 2019" },
+    { "q": "Anticoagulated ICH on warfarin?", "options": ["Reverse with PCC and vitamin K", "Continue warfarin to prevent stroke", "Add aspirin 300 mg for the stroke", "Start heparin infusion"], "why": "Before transfer.", "source": "NICE NG128" },
     { "q": "Signs of coning?", "options": ["Dilated pupil, bradycardia, hypertension", "Tachycardia and hypotension", "A fever over 39 °C", "A new petechial rash"], "why": "Cushing response.", "source": "Neurosurgery" },
     { "q": "Ventilation target in raised ICP?", "options": ["Normocapnia (PaCO2 4.5–5 kPa)", "PaCO2 2.5 kPa (hyperventilate)", "PaCO2 8 kPa (permissive)", "No specific CO2 target"], "why": "Brief hyperventilation only for herniation.", "source": "BTF" }
   ]

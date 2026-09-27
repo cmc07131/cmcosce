@@ -71,16 +71,16 @@
       "qs": [
         { "q": "Components of capacity?", "a": "Understand, retain, weigh, communicate", "wrong": ["Age, education, IQ and income", "Agreement with the treating doctor's advice", "Orientation to time, place and person, and memory"] },
         { "q": "Is an unwise decision evidence of incapacity?", "a": "No", "wrong": ["Yes, if it risks his life", "Only if the family disagrees", "Only if he is over 80"] },
-        { "q": "Refusing to sign the DAMA form means…", "a": "He can still leave; document the refusal", "wrong": ["He must stay in the department until he signs", "The police must be called", "All treatment stops immediately"] },
+        { "q": "Refusing to sign the DAMA form means…", "a": "He can still leave; document the refusal", "wrong": ["He must stay in the department until he signs", "The police must be called", "All treatment stops immediately, including analgesia"] },
         { "q": "Management of NSTEMI with dynamic ECG changes?", "a": "Admission, antithrombotics, early angiography", "wrong": ["Discharge with GP follow-up", "Treadmill test next month", "Thrombolysis"] },
-        { "q": "When can you treat without consent?", "a": "Incapacity plus best interests", "wrong": ["When they disagree with you", "When the family consents for a capacitous adult", "Never, under any circumstances"] }
+        { "q": "When can you treat without consent?", "a": "Incapacity plus best interests", "wrong": ["When they disagree with you about the risks involved", "When the family consents for a capacitous adult", "Never, under any circumstances"] }
       ]
     }
   ],
   "badge": { "name": "Door Open", "emoji": "🚪", "flavor": "Ask why, explain risk, test capacity, negotiate, document." },
   "cards": [
-    { "q": "Adults are presumed to have capacity until…", "options": ["Shown otherwise for that decision", "They disagree with the doctor", "They turn 65 years old", "A psychiatrist has examined and signed a form"], "why": "Capacity is decision-specific.", "source": "GMC / HK Medical Council" },
-    { "q": "Which is part of assessing capacity?", "options": ["Can they weigh the information?", "Do they agree with the plan?", "Are they educated to university level?", "Are they in paid employment?"], "why": "Understand, retain, weigh, communicate.", "source": "Capacity principles" },
+    { "q": "Adults are presumed to have capacity until…", "options": ["Shown otherwise for that decision", "They disagree with the doctor's advice or plan", "They turn 65 years old", "A psychiatrist has examined and signed a form"], "why": "Capacity is decision-specific.", "source": "GMC / HK Medical Council" },
+    { "q": "Which is part of assessing capacity?", "options": ["Can they weigh the information?", "Do they agree with the plan we have suggested?", "Are they educated to university level?", "Are they in paid employment?"], "why": "Understand, retain, weigh, communicate.", "source": "Capacity principles" },
     { "q": "A capacitous patient wants to leave with an NSTEMI. You…", "options": ["Explain, negotiate, harm-reduce, document", "Restrain him until the troponin is back", "Call the police to stop him leaving", "Discharge him without advice or letter"], "why": "Autonomy with safety-netting.", "source": "HA DAMA policy" },
     { "q": "Early invasive angiography for high-risk NSTEMI (ESC 2023)?", "options": ["Within 24 hours", "Within 2 weeks", "Only if pain recurs", "Within 1 year"], "why": "Immediate (<2 h) if very high risk.", "source": "ESC 2023 ACS" },
     { "q": "Best first response to 'I'm leaving'?", "options": ["Explore the reason", "Threaten discharge paperwork", "Call security to the cubicle", "Ignore it and carry on"], "why": "Understanding the barrier opens alternatives.", "source": "Communication skills" },

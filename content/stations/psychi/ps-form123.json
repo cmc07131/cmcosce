@@ -79,7 +79,7 @@
         { "q": "Maximum detention under a Section 31 order?", "a": "7 days", "wrong": ["21 days", "48 hours", "6 months"] },
         { "q": "Extension beyond 7 days (Section 32)?", "a": "Form 4, two doctors, up to 21 days", "wrong": ["Automatic after 7 days", "A police order for 14 days", "One doctor's certificate, for up to 1 year"] },
         { "q": "Which is part of the Section 31 grounds?", "a": "Detention is needed for his or others' safety", "wrong": ["He refused his medication once last week", "He is intoxicated with alcohol tonight", "He is homeless and has no one to care for him"] },
-        { "q": "Command hallucinations are…", "a": "Voices instructing the person to act", "wrong": ["Voices commenting on the person's actions", "Visual hallucinations of people", "Smells that others cannot detect"] }
+        { "q": "Command hallucinations are…", "a": "Voices instructing the person to act", "wrong": ["Voices commenting on the person's actions", "Visual hallucinations of people", "Smells that no one else in the room can detect"] }
       ]
     }
   ],
@@ -89,7 +89,7 @@
     { "q": "Form 1 applicant must have seen the patient within…", "options": ["14 days", "7 days", "24 hours", "30 days"], "why": "Form 2 doctor: examined within 7 days.", "source": "HK Cap 136" },
     { "q": "Form 3 is signed by…", "options": ["A District Judge or Magistrate", "A consultant psychiatrist", "A senior police officer", "Two registered medical practitioners"], "why": "Judicial authorisation.", "source": "HK Cap 136" },
     { "q": "First option for a capable patient needing admission?", "options": ["Voluntary admission", "Compulsory admission", "Police custody", "Discharge with follow-up"], "why": "Least restrictive.", "source": "HK Cap 136" },
-    { "q": "Schizophrenia first-rank symptom?", "options": ["Thought broadcasting or insertion", "Persistent low mood", "Panic attacks", "Visual hallucinations of small insects"], "why": "Schneiderian symptoms.", "source": "Psychiatry texts" },
+    { "q": "Schizophrenia first-rank symptom?", "options": ["Thought broadcasting or insertion", "Persistent low mood with early waking", "Panic attacks", "Visual hallucinations of small insects"], "why": "Schneiderian symptoms.", "source": "Psychiatry texts" },
     { "q": "The patient under Section 31 has the right to…", "options": ["See the District Judge or Magistrate", "Leave the hospital whenever he wishes after 24 hours", "Refuse to sign the forms", "Choose any hospital he likes"], "why": "He must be informed of his rights.", "source": "HK Cap 136" }
   ]
 }

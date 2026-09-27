@@ -89,6 +89,6 @@
     { "q": "Terlipressin is used in…", "options": ["Suspected variceal bleeding", "Peptic ulcer bleeding only", "Mallory–Weiss tears", "Lower GI bleeding from diverticula"], "why": "Splanchnic vasoconstriction.", "source": "BSG / Baveno VII" },
     { "q": "PPI timing in non-variceal bleeding (NICE)?", "options": ["After endoscopy", "Before endoscopy, routinely", "Only as oral tablets", "Only if H. pylori is positive"], "why": "NICE CG141.", "source": "NICE CG141" },
     { "q": "Balloon tamponade device?", "options": ["Sengstaken–Blakemore / Minnesota tube", "Foley catheter", "Nasogastric tube", "Chest drain"], "why": "Bridge to TIPS/endoscopy.", "source": "BSG" },
-    { "q": "Endoscopy timing in unstable upper GI bleeding?", "options": ["Immediately after resuscitation", "Within 1 week", "Only if it rebleeds", "Within 72 hours, on the next list"], "why": "Within 24 h for others.", "source": "NICE CG141" }
+    { "q": "Endoscopy timing in unstable upper GI bleeding?", "options": ["Immediately after resuscitation", "Within 1 week", "Only if it rebleeds after admission", "Within 72 hours, on the next list"], "why": "Within 24 h for others.", "source": "NICE CG141" }
   ]
 }

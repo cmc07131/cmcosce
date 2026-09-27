@@ -59,7 +59,7 @@
   "badge": { "name": "Hip Check", "emoji": "🦴", "flavor": "Internal rotation goes first. Stick in the other hand." },
   "cards": [
     { "q": "Apparent leg length is measured from…", "options": ["Umbilicus to medial malleolus", "ASIS to medial malleolus", "Pubic symphysis to the heel", "Greater trochanter to the lateral knee joint line"], "why": "Reflects pelvic tilt.", "source": "Clinical examination" },
-    { "q": "Trendelenburg sign indicates weakness of…", "options": ["Hip abductors (gluteus medius)", "Quadriceps femoris", "Hamstrings on the same side", "Hip adductors on the opposite side"], "why": "Pelvis drops on the opposite side.", "source": "Clinical examination" },
+    { "q": "Trendelenburg sign indicates weakness of…", "options": ["Hip abductors (gluteus medius)", "Quadriceps femoris", "Hamstrings on the same side as the hip", "Hip adductors on the opposite side"], "why": "Pelvis drops on the opposite side.", "source": "Clinical examination" },
     { "q": "NICE: OA can be diagnosed clinically in people aged…", "options": ["45 or over with typical symptoms", "Over 80 with typical symptoms", "Under 30 with morning stiffness", "Any age, but only once an X-ray confirms it"], "why": "Morning stiffness ≤30 min.", "source": "NICE NG226" },
     { "q": "Walking stick for right hip pain goes in…", "options": ["The left hand", "The right hand", "Either hand", "Both hands"], "why": "Reduces load on the painful hip.", "source": "Physiotherapy" },
     { "q": "Hip pain can refer to…", "options": ["The knee", "The shoulder", "The jaw", "The wrist"], "why": "Obturator nerve.", "source": "Anatomy" },

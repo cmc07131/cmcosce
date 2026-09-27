@@ -112,14 +112,14 @@
         { "q": "When is amiodarone given in VF (RCUK 2025)?", "a": "300 mg after the 3rd shock, 150 mg after the 5th", "wrong": ["150 mg after the 3rd shock, 300 mg after the 5th", "300 mg after every shock up to 900 mg", "Only after ROSC, as an infusion"] },
         { "q": "Minimum first-shock energy for a biphasic defibrillator (rectilinear/truncated exponential)?", "a": "150 J", "wrong": ["50 J", "360 J always", "2 J/kg"] },
         { "q": "Post-ROSC temperature target (2025)?", "a": "Prevent fever: ≤37.5 °C for 36–72 h", "wrong": ["Cool to 33 °C for 24 h in every patient", "Allow 39 °C to support immunity", "No temperature monitoring is needed"] },
-        { "q": "Why avoid nitrates here?", "a": "RV infarction is preload-dependent", "wrong": ["Nitrates trigger VF after ROSC", "Nitrates interact with amiodarone", "Nitrates falsely raise the troponin"] },
+        { "q": "Why avoid nitrates here?", "a": "RV infarction is preload-dependent", "wrong": ["Nitrates trigger VF after ROSC", "Nitrates interact dangerously with amiodarone", "Nitrates falsely raise the troponin"] },
         { "q": "What to consider after three failed shocks?", "a": "Vector change to antero-posterior pads", "wrong": ["Stop resuscitation, as VF after three shocks is futile", "Double the adrenaline dose to 2 mg", "Give atropine 3 mg as a single dose"] }
       ]
     }
   ],
   "badge": { "name": "Shock and Awe", "emoji": "⚡", "flavor": "Shock early, CPR straight after. Three shocks, then the drugs." },
   "cards": [
-    { "q": "In shockable arrest, adrenaline is first given…", "options": ["After the third shock", "Before the first shock", "After the first shock", "Only after 10 minutes"], "why": "Then every 3–5 minutes.", "source": "RCUK 2025 ALS" },
+    { "q": "In shockable arrest, adrenaline is first given…", "options": ["After the third shock", "Before the first shock", "After the first shock, with adrenaline", "Only after 10 minutes"], "why": "Then every 3–5 minutes.", "source": "RCUK 2025 ALS" },
     { "q": "Lidocaine dose in VF if amiodarone is unavailable?", "options": ["100 mg, then 50 mg after the fifth shock", "1 mg/kg every minute until ROSC", "300 mg, then 150 mg after the fifth shock", "10 mg, repeated after every shock"], "why": "Lidocaine is the alternative antiarrhythmic.", "source": "RCUK 2025 ALS" },
     { "q": "Where should the apical defibrillator pad sit?", "options": ["Below the armpit, mid-axillary line", "Over the left nipple, on the breast", "Over the lower sternum, left of midline", "On the left shoulder, below the clavicle"], "why": "2025 guidance stresses correct lateral pad placement.", "source": "RCUK 2025 ALS" },
     { "q": "Post-ROSC SpO2 target?", "options": ["94–98%", "100%", "88–92% in all", "Above 85%"], "why": "Avoid hypoxia and hyperoxia.", "source": "RCUK 2025 post-resuscitation care" },

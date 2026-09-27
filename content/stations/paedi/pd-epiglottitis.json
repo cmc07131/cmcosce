@@ -70,7 +70,7 @@
     { "q": "Epiglottitis: first priority?", "options": ["Secure the airway in theatre", "IV cannula and bloods first", "Throat swab and culture", "Lateral neck X-ray before anything else"], "why": "Avoid upsetting the child.", "source": "APLS" },
     { "q": "Tripod position means…", "options": ["Sitting forward, neck extended, leaning on hands", "Lying flat", "Knees to chest", "Standing on one leg"], "why": "Maximises airway.", "source": "APLS" },
     { "q": "Epiglottitis thumb sign is seen on…", "options": ["Lateral soft-tissue neck X-ray", "AP soft-tissue neck X-ray with a grid", "Chest X-ray, PA view", "CT of the neck with contrast enhancement"], "why": "Only in a stable child with airway staff present.", "source": "Radiology" },
-    { "q": "Epiglottitis voice?", "options": ["Muffled 'hot potato'", "Hoarse with barking cough", "Normal", "High-pitched"], "why": "Supraglottic swelling.", "source": "APLS" },
+    { "q": "Epiglottitis voice?", "options": ["Muffled 'hot potato'", "Hoarse with barking cough", "Normal", "High-pitched and squeaky"], "why": "Supraglottic swelling.", "source": "APLS" },
     { "q": "Antibiotic after airway secured?", "options": ["IV ceftriaxone", "Oral penicillin V", "Oral azithromycin", "Nebulised gentamicin"], "why": "Covers Hib and streptococci.", "source": "RCH Melbourne" },
     { "q": "Vaccine that made epiglottitis rare?", "options": ["Hib", "MMR", "BCG", "Rotavirus"], "why": "Check immunisation status.", "source": "CHP HK" }
   ]

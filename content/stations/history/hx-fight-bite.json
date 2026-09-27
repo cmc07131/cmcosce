@@ -82,8 +82,8 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Organism typical of human bites?", "a": "Eikenella corrodens", "wrong": ["Pasteurella multocida", "Pseudomonas", "Clostridium tetani"] },
-        { "q": "Why examine with the fist clenched?", "a": "The tendon tract lines up with the wound", "wrong": ["It is less painful for the patient to hold the hand like that", "To test the grip strength", "To see the nails clearly"] },
+        { "q": "Organism typical of human bites?", "a": "Eikenella corrodens", "wrong": ["Pasteurella multocida", "Pseudomonas aeruginosa", "Clostridium tetani"] },
+        { "q": "Why examine with the fist clenched?", "a": "The tendon tract lines up with the wound", "wrong": ["It is less painful for the patient to hold the hand like that", "To test the grip strength and the flexor tendons", "To see the nails clearly"] },
         { "q": "First-line antibiotic for a human bite (NICE)?", "a": "Co-amoxiclav", "wrong": ["Flucloxacillin alone", "Ciprofloxacin", "No antibiotics"] },
         { "q": "Should a fight bite be sutured?", "a": "No", "wrong": ["Yes, always", "Only with nylon", "Yes, if under 1 cm"] },
         { "q": "Indication for hand surgery referral?", "a": "Possible joint or tendon penetration", "wrong": ["Any bruise over the knuckle after a fight", "Pain on making a fist, even without a wound", "Patient request only"] }

@@ -50,16 +50,16 @@
       "qs": [
         { "q": "Spleen versus kidney?", "a": "Spleen: notch, moves toward the RIF, can't get above, dull", "wrong": ["Spleen is ballotable and resonant to percussion", "Kidney has a notch and moves toward the RIF", "Kidney is dull and you cannot get above it"] },
         { "q": "SBP is diagnosed when ascitic neutrophils exceed…", "a": "250 per mm³", "wrong": ["50 per mm³", "5000 per mm³", "Any neutrophils"] },
-        { "q": "SAAG ≥ 11 g/L suggests…", "a": "Portal hypertension", "wrong": ["Peritoneal carcinomatosis", "TB peritonitis", "Pancreatitis"] },
-        { "q": "Cause of massive splenomegaly?", "a": "Myelofibrosis or CML", "wrong": ["Acute viral hepatitis A", "Gallstone disease", "Acute appendicitis"] },
-        { "q": "First-line diuretic in cirrhotic ascites?", "a": "Spironolactone", "wrong": ["Mannitol", "Acetazolamide", "Bendroflumethiazide"] }
+        { "q": "SAAG ≥ 11 g/L suggests…", "a": "Portal hypertension", "wrong": ["Peritoneal carcinomatosis", "TB peritonitis in a returning traveller", "Pancreatitis"] },
+        { "q": "Cause of massive splenomegaly?", "a": "Myelofibrosis or CML", "wrong": ["Acute viral hepatitis A", "Gallstone disease with cholecystitis", "Acute appendicitis"] },
+        { "q": "First-line diuretic in cirrhotic ascites?", "a": "Spironolactone", "wrong": ["Mannitol", "Acetazolamide, a carbonic anhydrase inhibitor", "Bendroflumethiazide"] }
       ]
     }
   ],
   "badge": { "name": "Organ Mapper", "emoji": "🫄", "flavor": "Hands first, start in the right iliac fossa, shift the dullness." },
   "cards": [
-    { "q": "Where do you start palpating for an enlarged spleen?", "options": ["Right iliac fossa", "Left upper quadrant", "Umbilicus", "Epigastrium"], "why": "A large spleen extends toward the RIF.", "source": "Clinical examination" },
-    { "q": "Caput medusae indicates…", "options": ["Portal hypertension", "IVC obstruction always", "Heart failure", "Hernia"], "why": "Flow away from the umbilicus.", "source": "Clinical examination" },
+    { "q": "Where do you start palpating for an enlarged spleen?", "options": ["Right iliac fossa", "Left upper quadrant", "Umbilicus", "Epigastrium, below the xiphisternum"], "why": "A large spleen extends toward the RIF.", "source": "Clinical examination" },
+    { "q": "Caput medusae indicates…", "options": ["Portal hypertension", "IVC obstruction always", "Right heart failure with a raised JVP", "Hernia"], "why": "Flow away from the umbilicus.", "source": "Clinical examination" },
     { "q": "Stigmata of chronic liver disease include…", "options": ["Spider naevi, palmar erythema, gynaecomastia", "Koilonychia, angular stomatitis and glossitis", "Splinter haemorrhages, Osler nodes, clubbing", "Janeway lesions, Roth spots and a new murmur"], "why": "Oestrogen excess.", "source": "Hepatology" },
     { "q": "SBP antibiotic?", "options": ["IV cephalosporin (e.g. cefotaxime/ceftriaxone)", "Oral metronidazole for 7 days", "No antibiotics until cultures return", "IV vancomycin alone"], "why": "Plus albumin to prevent AKI.", "source": "EASL / BSG" },
     { "q": "Albumin replacement after large-volume paracentesis?", "options": ["8 g per litre drained over 5 L", "None if under 10 litres are drained", "0.9% saline 1 L per 3 L drained", "Two units of packed red cells"], "why": "Prevents circulatory dysfunction.", "source": "BSG" },

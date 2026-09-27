@@ -81,17 +81,17 @@
         { "q": "Licensed window for levonorgestrel 1.5 mg?", "a": "72 hours", "wrong": ["120 hours", "24 hours", "7 days"] },
         { "q": "Ulipristal acetate window?", "a": "120 hours", "wrong": ["Up to 72 hours, like levonorgestrel", "24 hours", "10 days"] },
         { "q": "HIV PEP after sexual assault must start within…", "a": "72 hours", "wrong": ["7 days", "1 month", "24 hours only"] },
-        { "q": "Should she be made to report to the police?", "a": "No — her choice (unless child/vulnerable)", "wrong": ["Yes, always, before any examination is done", "Only if injured", "Only if the assailant is known"] }
+        { "q": "Should she be made to report to the police?", "a": "No — her choice (unless child/vulnerable)", "wrong": ["Yes, always, before any examination is done", "Only if injured", "Only if the assailant is known to her or the police"] }
       ]
     }
   ],
   "badge": { "name": "Safe Space", "emoji": "🕊", "flavor": "Believe, offer, let her choose. EC, STI, HBV, HIV, support." },
   "cards": [
     { "q": "Levonorgestrel emergency contraception is licensed up to…", "options": ["72 hours", "120 hours", "7 days", "12 hours"], "why": "Ulipristal to 120 h; copper IUD to 5 days.", "source": "FSRH 2017 (2023)", "note": "Older notes: within 5 days." },
-    { "q": "Why collect forensic evidence before washing?", "options": ["Washing destroys evidence", "It is required by law before any treatment", "To test for HIV", "It is faster"], "why": "Offer it; the choice is hers.", "source": "HA sexual violence protocol" },
+    { "q": "Why collect forensic evidence before washing?", "options": ["Washing destroys evidence", "It is required by law before any treatment", "To test for HIV", "It is faster for the forensic doctor"], "why": "Offer it; the choice is hers.", "source": "HA sexual violence protocol" },
     { "q": "24-hour sexual violence crisis support in HK?", "options": ["CEASE Crisis Centre", "Samaritans only", "Police only", "Social Welfare Department only"], "why": "Also RainLily.", "source": "HA protocol" },
     { "q": "HBV prophylaxis after sexual assault in a vaccinated person?", "options": ["Booster dose per status", "No action is ever needed", "HBIG for every case", "Tenofovir for 28 days"], "why": "Accelerated course if unvaccinated.", "source": "UKHSA Green Book" },
     { "q": "HIV PEP duration?", "options": ["28 days", "3 days", "3 months", "1 dose"], "why": "Started within 72 hours.", "source": "BASHH/BHIVA 2021" },
-    { "q": "The first priority in the consultation?", "options": ["Safety and her sense of control", "Detailed questioning about the assault", "Police statement", "Blood tests"], "why": "Trauma-informed care.", "source": "WHO / HA protocol" }
+    { "q": "The first priority in the consultation?", "options": ["Safety and her sense of control", "Detailed questioning about the assault", "An immediate written police statement", "Blood tests"], "why": "Trauma-informed care.", "source": "WHO / HA protocol" }
   ]
 }

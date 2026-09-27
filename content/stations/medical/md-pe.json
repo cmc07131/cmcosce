@@ -67,7 +67,7 @@
       "label": "Examiner",
       "qs": [
         { "q": "Wells score threshold for 'PE likely'?", "a": "More than 4", "wrong": ["More than 1", "More than 8", "Any positive item"] },
-        { "q": "PERC applies only when…", "a": "Clinical suspicion is already low", "wrong": ["Always, in every patient with chest pain", "PE is clinically likely", "The patient is pregnant"] },
+        { "q": "PERC applies only when…", "a": "Clinical suspicion is already low", "wrong": ["Always, in every patient with chest pain", "PE is clinically likely", "The patient is pregnant or post-partum"] },
         { "q": "Indication for systemic thrombolysis in PE?", "a": "Haemodynamic instability (high-risk PE)", "wrong": ["Any PE seen on CTPA, to prevent recurrence", "Haemoptysis", "Pleuritic pain"] },
         { "q": "Commonest ECG finding in PE?", "a": "Sinus tachycardia", "wrong": ["S1Q3T3 in most cases", "Atrial fibrillation", "Anterior ST elevation"] },
         { "q": "Anticoagulation duration for a provoked PE?", "a": "About 3 months", "wrong": ["2 weeks", "Lifelong always", "No anticoagulation"] }

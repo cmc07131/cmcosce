@@ -72,7 +72,7 @@
         { "q": "Key feature separating delirium from dementia?", "a": "Acute onset with fluctuating attention", "wrong": ["Memory loss for recent events, but not remote ones", "Age over 75 years", "Hallucinations in every case"] },
         { "q": "4AT score suggesting delirium?", "a": "4 or more", "wrong": ["1", "0", "10 or more only"] },
         { "q": "Which delirium subtype is most often missed?", "a": "Hypoactive", "wrong": ["Hyperactive", "Mixed", "Withdrawal-related"] },
-        { "q": "Drug class that commonly causes delirium in the elderly?", "a": "Anticholinergics", "wrong": ["Proton pump inhibitors", "Statins", "Emollients"] },
+        { "q": "Drug class that commonly causes delirium in the elderly?", "a": "Anticholinergics", "wrong": ["Proton pump inhibitors", "Statins", "Topical emollients for dry skin"] },
         { "q": "Antipsychotic to avoid in Lewy body dementia?", "a": "Haloperidol (typical antipsychotics)", "wrong": ["Rivastigmine (cholinesterase inhibitor)", "Donepezil", "Melatonin"] }
       ]
     }
@@ -80,10 +80,10 @@
   "badge": { "name": "Clear Head", "emoji": "🌫", "flavor": "Acute, fluctuating, inattentive: find the cause, not the sedative." },
   "cards": [
     { "q": "4AT stands for…", "options": ["Alertness, AMT4, Attention, Acute change", "Age, Anxiety, Agitation, Amnesia", "Agitation, AMT10, Anxiety, Alcohol history", "Airway, Anaemia, Albumin, Arrhythmia"], "why": "Score ≥4 suggests delirium.", "source": "the4AT.com" },
-    { "q": "PINCHME covers…", "options": ["Causes of delirium", "Signs of stroke", "The sepsis six bundle", "Falls risk factors"], "why": "Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment.", "source": "Geriatric teaching" },
+    { "q": "PINCHME covers…", "options": ["Causes of delirium", "The signs of an acute stroke (FAST)", "The sepsis six bundle", "Falls risk factors"], "why": "Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment.", "source": "Geriatric teaching" },
     { "q": "First-line management of delirium?", "options": ["Treat the cause and non-drug measures", "Routine haloperidol", "Restraint", "Benzodiazepines (except alcohol withdrawal)"], "why": "Drugs only for distress or danger.", "source": "NICE CG103" },
-    { "q": "Visual hallucinations in an older person suggest…", "options": ["Delirium, drugs or Lewy body dementia", "Late-onset schizophrenia, most likely of all", "Severe depression", "Normal ageing"], "why": "Look for organic causes.", "source": "Psychiatry texts" },
+    { "q": "Visual hallucinations in an older person suggest…", "options": ["Delirium, drugs or Lewy body dementia", "Late-onset schizophrenia, most likely of all", "Severe depression with psychotic features", "Normal ageing"], "why": "Look for organic causes.", "source": "Psychiatry texts" },
     { "q": "MMSE normal cut-off depends on…", "options": ["Education level", "Height and weight", "Blood pressure", "Time of day tested"], "why": "Lower cut-offs for less schooling.", "source": "MMSE norms" },
-    { "q": "Urinary retention can cause…", "options": ["Delirium in older people", "Only pain, never confusion", "Hypoglycaemia", "A generalised rash"], "why": "Always check the bladder.", "source": "NICE CG103" }
+    { "q": "Urinary retention can cause…", "options": ["Delirium in older people", "Only pain, never confusion", "Hypoglycaemia from reduced oral intake", "A generalised rash"], "why": "Always check the bladder.", "source": "NICE CG103" }
   ]
 }

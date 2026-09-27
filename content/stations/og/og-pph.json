@@ -109,7 +109,7 @@
         { "q": "Contraindication to ergometrine?", "a": "Hypertension or pre-eclampsia", "wrong": ["Mild asthma on a salbutamol inhaler", "Type 2 diabetes", "Iron-deficiency anaemia"] },
         { "q": "Caution with carboprost?", "a": "Asthma", "wrong": ["Hypertension", "Pre-eclampsia", "Epilepsy"] },
         { "q": "Tranexamic acid in PPH?", "a": "1 g IV within 3 h; repeat after 30 min if needed", "wrong": ["1 g IV only if bleeding continues beyond 6 hours", "1 g orally three times daily for 5 days", "Contraindicated because of thrombosis risk"] },
-        { "q": "Misoprostol dose for PPH?", "a": "800 microgram sublingual", "wrong": ["25 microgram vaginal", "5 mg IV over 5 minutes", "8 mg oral as a single dose"] }
+        { "q": "Misoprostol dose for PPH?", "a": "800 microgram sublingual", "wrong": ["25 microgram vaginal", "5 mg IV over 5 minutes, repeated", "8 mg oral as a single dose"] }
       ]
     }
   ],

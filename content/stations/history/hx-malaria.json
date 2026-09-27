@@ -73,19 +73,19 @@
       "label": "Examiner",
       "qs": [
         { "q": "First-line treatment for severe falciparum malaria?", "a": "IV artesunate", "wrong": ["Oral chloroquine", "IV quinine only", "Oral doxycycline"] },
-        { "q": "UK parasitaemia threshold for severe malaria?", "a": "2% or more", "wrong": ["0.1%", "10% only", "Any parasites"] },
+        { "q": "UK parasitaemia threshold for severe malaria?", "a": "2% or more", "wrong": ["0.1%", "10% only, with symptoms", "Any parasites"] },
         { "q": "Films in suspected malaria if the first is negative?", "a": "Repeat to three sets over 48–72 hours", "wrong": ["No repeat is needed", "Repeat once a week", "Only if the patient becomes unwell on the ward"] },
         { "q": "Why test G6PD before primaquine?", "a": "Risk of haemolysis", "wrong": ["It interacts with artesunate", "It raises the liver enzymes", "Only needed in children under 5"] },
-        { "q": "Most falciparum malaria presents within…", "a": "3 months of return", "wrong": ["24 hours of return", "5 years of return", "Only while still abroad"] }
+        { "q": "Most falciparum malaria presents within…", "a": "3 months of return", "wrong": ["24 hours of return", "5 years of return, for most species", "Only while still abroad"] }
       ]
     }
   ],
   "badge": { "name": "Mosquito Hunter", "emoji": "🦟", "flavor": "Fever after the tropics is malaria until three films say no." },
   "cards": [
     { "q": "Treatment of uncomplicated falciparum malaria (UK)?", "options": ["Artemether–lumefantrine", "Chloroquine for 3 days", "Primaquine alone", "Doxycycline alone for 7 days"], "why": "Or atovaquone–proguanil.", "source": "UK malaria treatment guidelines" },
-    { "q": "Severe malaria feature?", "options": ["Impaired consciousness", "A fever of 38 °C", "Headache and myalgia", "Nausea and a poor appetite"], "why": "Also acidosis, shock, AKI, hypoglycaemia, anaemia, parasitaemia ≥2%.", "source": "UKHSA / WHO" },
+    { "q": "Severe malaria feature?", "options": ["Impaired consciousness", "A fever of 38 °C", "Headache and myalgia for 3 days", "Nausea and a poor appetite"], "why": "Also acidosis, shock, AKI, hypoglycaemia, anaemia, parasitaemia ≥2%.", "source": "UKHSA / WHO" },
     { "q": "Which parasite relapses from liver hypnozoites?", "options": ["P. vivax and P. ovale", "P. falciparum and P. knowlesi", "P. knowlesi", "P. malariae only"], "why": "Needs primaquine or tafenoquine after G6PD testing.", "source": "WHO" },
-    { "q": "Thrombocytopenia with fever after Africa suggests…", "options": ["Malaria (or dengue)", "Influenza only", "A urinary tract infection", "Acute appendicitis"], "why": "Common in both; films needed.", "source": "Travel medicine" },
+    { "q": "Thrombocytopenia with fever after Africa suggests…", "options": ["Malaria (or dengue)", "Influenza, with nothing else to consider", "A urinary tract infection", "Acute appendicitis"], "why": "Common in both; films needed.", "source": "Travel medicine" },
     { "q": "Travel history must include…", "options": ["Where, when, activities and prophylaxis", "Only the country visited", "Only the airline, flight number and seat", "Only the date of return"], "why": "Incubation periods and exposures guide the differential.", "source": "RCEM / BIA" },
     { "q": "Quinine for malaria is now…", "options": ["Second-line to IV artesunate", "First-line for every case of severe malaria", "Banned in the UK", "Used only for prophylaxis"], "why": "Artesunate reduces mortality compared with quinine.", "source": "WHO; SEAQUAMAT/AQUAMAT", "note": "Older notes list quinine first." }
   ]

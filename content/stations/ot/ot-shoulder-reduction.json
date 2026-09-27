@@ -77,7 +77,7 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Why capnography during sedation?", "a": "Detects hypoventilation before desaturation", "wrong": ["Measures the depth of sedation directly and continuously", "Detects a fracture during reduction", "It is required for billing the procedure"] },
+        { "q": "Why capnography during sedation?", "a": "Detects hypoventilation before desaturation", "wrong": ["Measures the depth of sedation directly and continuously", "Detects a fracture or dislocation during reduction", "It is required for billing the procedure"] },
         { "q": "Which nerve to check before and after?", "a": "Axillary", "wrong": ["Musculocutaneous only", "Sciatic", "Phrenic"] },
         { "q": "Technique with higher fracture risk?", "a": "Kocher's", "wrong": ["External rotation", "Cunningham", "FARES"] },
         { "q": "Midazolam dose range for sedation?", "a": "0.02–0.1 mg/kg titrated", "wrong": ["1 mg/kg as a single bolus", "10 mg fixed dose for all", "0.5 mg/kg over 1 minute"] },

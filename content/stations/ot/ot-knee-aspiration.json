@@ -62,7 +62,7 @@
         { "q": "Who aspirates a prosthetic joint?", "a": "Orthopaedics, under theatre-level asepsis", "wrong": ["Any ED doctor in the cubicle", "A physiotherapist at clinic", "The GP at the next visit"] },
         { "q": "Does finding urate crystals exclude sepsis?", "a": "No", "wrong": ["Yes, gout and sepsis never coexist", "Only in men over 40", "Only if the white cell count is low"] },
         { "q": "Organism to consider in a sexually active young adult?", "a": "Neisseria gonorrhoeae", "wrong": ["Salmonella", "Listeria", "Mycoplasma pneumoniae"] },
-        { "q": "Contraindication at the needle site?", "a": "Overlying cellulitis", "wrong": ["A fever over 38 °C", "A large, tense effusion", "Age over 60 years"] }
+        { "q": "Contraindication at the needle site?", "a": "Overlying cellulitis", "wrong": ["A fever over 38 °C with rigors", "A large, tense effusion", "Age over 60 years"] }
       ]
     }
   ],

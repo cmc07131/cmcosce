@@ -72,10 +72,10 @@
   "badge": { "name": "Air Traffic", "emoji": "🎈", "flavor": "Symptoms, not centimetres. Ask what the patient wants." },
   "cards": [
     { "q": "BTS 2023: minimally symptomatic PSP without high-risk features can be…", "options": ["Conservative care, regardless of size", "Drained with a chest tube if over 2 cm at the hilum", "Aspirated in every case", "Admitted for oxygen in every case"], "why": "Symptom- and preference-based.", "source": "BTS Pleural Disease 2023", "note": "Your notes follow BTS 2010 (size-based)." },
-    { "q": "High-risk pneumothorax feature?", "options": ["Haemodynamic compromise", "Age 20 years", "Mild pleuritic pain", "Right-sided pneumothorax"], "why": "Also hypoxia, bilateral, underlying lung disease, age > 50 smoker, haemopneumothorax.", "source": "BTS 2023" },
+    { "q": "High-risk pneumothorax feature?", "options": ["Haemodynamic compromise", "Age 20 years", "Mild pleuritic pain on deep breathing", "Right-sided pneumothorax"], "why": "Also hypoxia, bilateral, underlying lung disease, age > 50 smoker, haemopneumothorax.", "source": "BTS 2023" },
     { "q": "Typical patient with primary spontaneous pneumothorax?", "options": ["Tall, thin young male smoker", "Elderly woman with COPD", "Child with asthma", "Patient after thoracic surgery"], "why": "Apical blebs.", "source": "BTS" },
     { "q": "Flying after pneumothorax?", "options": ["Only after radiological resolution", "Immediately after discharge if the pain has settled", "Never again", "After 24 hours"], "why": "Airlines often require 1–2 weeks after resolution.", "source": "BTS 2023" },
-    { "q": "Ambulatory device for pneumothorax is…", "options": ["A small drain with a one-way valve", "A home oxygen concentrator for 2 weeks", "A home CPAP machine", "A chest binder"], "why": "Option for symptomatic PSP.", "source": "BTS 2023" },
+    { "q": "Ambulatory device for pneumothorax is…", "options": ["A small drain with a one-way valve", "A home oxygen concentrator for 2 weeks", "A home CPAP machine at night for a week", "A chest binder"], "why": "Option for symptomatic PSP.", "source": "BTS 2023" },
     { "q": "2 cm rim at the hilum corresponds to about…", "options": ["About 50%", "About 10%", "About 90%", "About 5%"], "why": "Size now matters less than symptoms.", "source": "BTS" }
   ]
 }

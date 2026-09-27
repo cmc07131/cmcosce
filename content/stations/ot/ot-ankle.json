@@ -58,7 +58,7 @@
         { "q": "Ottawa ankle rule bony points?", "a": "Posterior edge/tip of either malleolus (distal 6 cm)", "wrong": ["Anterior talofibular ligament tenderness", "Any swelling over the lateral malleolus", "Calcaneal tenderness on squeezing the heel"] },
         { "q": "Weber C fractures are…", "a": "Above the syndesmosis and unstable", "wrong": ["Below the syndesmosis and usually stable", "At the level of the syndesmosis and always stable", "Seen only in children with open physes"] },
         { "q": "Maisonneuve fracture is…", "a": "Proximal fibula fracture with syndesmotic injury", "wrong": ["A 5th metatarsal base avulsion fracture", "Distal fibula fracture below the syndesmosis, stable", "A tibial plateau fracture with ligament tear"] },
-        { "q": "Simmonds/Thompson test examines…", "a": "The Achilles tendon", "wrong": ["The ATFL", "The syndesmosis", "The peroneal tendons"] },
+        { "q": "Simmonds/Thompson test examines…", "a": "The Achilles tendon", "wrong": ["The ATFL", "The syndesmosis (high ankle)", "The peroneal tendons"] },
         { "q": "Sign of an unstable ankle on X-ray?", "a": "Talar shift (widened medial clear space)", "wrong": ["Soft tissue swelling over the lateral malleolus", "An accessory ossicle below the medial malleolus", "An os trigonum behind the talus on the lateral view"] }
       ]
     }

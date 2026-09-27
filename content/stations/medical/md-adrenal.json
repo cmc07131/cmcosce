@@ -80,8 +80,8 @@
     { "q": "Adrenal crisis first treatment?", "options": ["Hydrocortisone 100 mg IV/IM now", "Oral fludrocortisone 100 micrograms", "Wait for a random cortisol result first", "Prednisolone 5 mg orally"], "why": "Then 200 mg/24 h.", "source": "Society for Endocrinology" },
     { "q": "Sign suggesting primary adrenal insufficiency?", "options": ["Pigmented palmar creases and gums", "Moon face and a dorsocervical fat pad", "Wide purple striae on the abdomen and thighs", "Central weight gain with thin, bruised skin"], "why": "High ACTH stimulates melanocytes.", "source": "Endocrinology" },
     { "q": "Glucose abnormality in adrenal crisis?", "options": ["Hypoglycaemia", "Hyperglycaemia", "Diabetic ketoacidosis", "Hyperosmolar state"], "why": "Cortisol deficiency.", "source": "Endocrinology" },
-    { "q": "Patients on long-term steroids should carry…", "options": ["A steroid emergency card", "A pacemaker registration card", "An organ donor card only", "A blood group card"], "why": "NHS/Society for Endocrinology card.", "source": "NHS England 2020" },
-    { "q": "Precipitant of adrenal crisis?", "options": ["Gastroenteritis with vomiting", "A regular gym session", "Two cups of strong coffee", "A long-haul flight without illness"], "why": "Unable to absorb oral steroids.", "source": "Society for Endocrinology" },
+    { "q": "Patients on long-term steroids should carry…", "options": ["A steroid emergency card", "A pacemaker registration card", "An organ donor card only", "A blood group and allergy card"], "why": "NHS/Society for Endocrinology card.", "source": "NHS England 2020" },
+    { "q": "Precipitant of adrenal crisis?", "options": ["Gastroenteritis with vomiting", "A regular gym session after work", "Two cups of strong coffee", "A long-haul flight without illness"], "why": "Unable to absorb oral steroids.", "source": "Society for Endocrinology" },
     { "q": "Fluid in adrenal crisis?", "options": ["0.9% saline 1 L over the first hour", "5% dextrose only, to treat hypoglycaemia", "Human albumin solution 4.5%", "Restrict fluids to avoid hyponatraemia"], "why": "Guided by response.", "source": "NICE NG243" }
   ]
 }

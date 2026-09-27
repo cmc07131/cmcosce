@@ -55,11 +55,11 @@
   ],
   "badge": { "name": "Iliac Relief", "emoji": "🧊", "flavor": "Dose by weight, see the tip, aspirate, increments, lipid nearby." },
   "cards": [
-    { "q": "Hip fracture analgesia recommended by NICE in the ED?", "options": ["Nerve block plus paracetamol", "NSAIDs for all older patients", "IM morphine alone", "No analgesia until theatre"], "why": "Fascia iliaca or femoral block.", "source": "NICE CG124" },
+    { "q": "Hip fracture analgesia recommended by NICE in the ED?", "options": ["Nerve block plus paracetamol", "NSAIDs for all older patients", "IM morphine alone", "No analgesia until theatre, to aid assessment"], "why": "Fascia iliaca or femoral block.", "source": "NICE CG124" },
     { "q": "Lipid emulsion bolus for LAST?", "options": ["20% 1.5 mL/kg over 1 minute", "20% 10 mL as a fixed bolus", "20% 15 mL/kg over 1 minute (max 1 L)", "10% 1.5 mL/kg orally"], "why": "Then infusion 15 mL/kg/h.", "source": "AAGBI LAST guideline" },
     { "q": "Maximum dose of bupivacaine/levobupivacaine (plain)?", "options": ["2 mg/kg", "10 mg/kg", "0.5 mg/kg", "20 mg/kg"], "why": "Check volume × concentration.", "source": "BNF" },
     { "q": "The femoral nerve lies relative to the femoral artery…", "options": ["Lateral", "Medial", "Posterior only", "Anterior"], "why": "NAVEL.", "source": "Anatomy" },
     { "q": "30 mL of 0.5% bupivacaine contains…", "options": ["150 mg", "15 mg", "1500 mg", "50 mg"], "why": "0.5% = 5 mg/mL.", "source": "Pharmacology" },
-    { "q": "Complication of femoral block to warn about?", "options": ["Quadriceps weakness and falls", "Sensorineural hearing loss", "Urinary retention in every case", "Bradycardia from vagal block"], "why": "No unsupervised walking.", "source": "RCEM" }
+    { "q": "Complication of femoral block to warn about?", "options": ["Quadriceps weakness and falls", "Sensorineural hearing loss", "Urinary retention in every case", "Bradycardia from blockade of the vagus nerve"], "why": "No unsupervised walking.", "source": "RCEM" }
   ]
 }

@@ -82,10 +82,10 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Acceptable radial shortening after reduction (AAOS)?", "a": "3 mm or less", "wrong": ["10 mm", "5 mm", "Any shortening is fine"] },
+        { "q": "Acceptable radial shortening after reduction (AAOS)?", "a": "3 mm or less", "wrong": ["10 mm, if the patient is elderly", "5 mm", "Any shortening is fine"] },
         { "q": "Acceptable dorsal tilt?", "a": "10° or less", "wrong": ["30° or less", "20° or less", "Exactly 0°"] },
         { "q": "Maximum plain lidocaine dose?", "a": "3 mg/kg (max 200 mg)", "wrong": ["20 mg/kg (max 1 g)", "1 mg/kg (max 50 mg)", "7 mg/kg (max 500 mg) plain"] },
-        { "q": "Tendon at risk of late rupture after a distal radius fracture?", "a": "Extensor pollicis longus", "wrong": ["Flexor pollicis longus", "Biceps brachii", "Flexor digitorum profundus"] },
+        { "q": "Tendon at risk of late rupture after a distal radius fracture?", "a": "Extensor pollicis longus", "wrong": ["Flexor pollicis longus at the wrist", "Biceps brachii", "Flexor digitorum profundus"] },
         { "q": "Smith's fracture is…", "a": "Volar angulation of the distal fragment", "wrong": ["Dorsal angulation of the distal fragment", "A fracture through the scaphoid waist", "A fracture of the radial head and neck"] }
       ]
     }
@@ -95,7 +95,7 @@
     { "q": "Colles fracture deformity?", "options": ["Dorsal angulation and displacement ('dinner fork')", "Volar angulation of the distal fragment", "Radial head dislocation at the elbow", "Scaphoid waist fracture"], "why": "Smith's is volar.", "source": "Orthopaedics" },
     { "q": "Haematoma block confirmation?", "options": ["Aspirating blood from the fracture", "Feeling a pop as the needle enters the joint", "Seeing clear fluid in the syringe", "Numb fingers immediately after injection"], "why": "Then inject lidocaine.", "source": "RCEM" },
     { "q": "Bier's block uses…", "options": ["Prilocaine IV regional with a tourniquet", "Bupivacaine IV regional with a tourniquet", "Lidocaine with adrenaline, IV", "Ketamine IV"], "why": "Bupivacaine is cardiotoxic and contraindicated.", "source": "RCEM" },
-    { "q": "Below-elbow backslab mould uses…", "options": ["Three-point pressure", "One-point pressure", "No moulding", "Circumferential tight wrap"], "why": "Holds the reduction.", "source": "Plaster technique" },
+    { "q": "Below-elbow backslab mould uses…", "options": ["Three-point pressure", "One-point pressure over the fracture", "No moulding", "Circumferential tight wrap"], "why": "Holds the reduction.", "source": "Plaster technique" },
     { "q": "Neurological complication of a displaced distal radius fracture?", "options": ["Acute carpal tunnel syndrome (median nerve)", "Ulnar claw hand in every case", "Radial nerve palsy with wrist drop", "Axillary nerve palsy from the fall on the shoulder"], "why": "Needs urgent reduction/decompression.", "source": "BOAST" },
     { "q": "Fragility fracture in a 65-year-old warrants…", "options": ["Bone health assessment", "Only analgesia and a sling", "A CT scan of the brain", "Physiotherapy referral alone"], "why": "Secondary fracture prevention.", "source": "NICE" }
   ]

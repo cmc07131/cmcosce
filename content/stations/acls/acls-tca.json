@@ -107,11 +107,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "QRS duration that predicts seizures in TCA poisoning?", "a": "Over 100 ms", "wrong": ["Over 60 ms", "Over 200 ms", "QRS is not predictive"] },
+        { "q": "QRS duration that predicts seizures in TCA poisoning?", "a": "Over 100 ms", "wrong": ["Over 60 ms, in any lead", "Over 200 ms", "QRS is not predictive"] },
         { "q": "Target pH with bicarbonate therapy?", "a": "7.45–7.55", "wrong": ["7.20–7.30", "7.60–7.70", "7.35 exactly"] },
         { "q": "Gastric lavage (AACT/EAPCCT) is…", "a": "Not routine; life-threat and protected airway only", "wrong": ["Routine for every overdose presenting within 4 hours of ingestion", "Required before giving activated charcoal", "Safe without a protected airway if awake"] },
         { "q": "Why may the stomach still hold tablets after an hour?", "a": "Anticholinergic effects delay gastric emptying", "wrong": ["TCAs are never absorbed from the stomach, only the colon", "Charcoal slows the absorption of tablets", "Bicarbonate delays gastric emptying"] },
-        { "q": "Contraindication to gastric lavage?", "a": "Caustic ingestion", "wrong": ["TCA overdose", "Intubated patient", "Ingestion 30 minutes ago"] }
+        { "q": "Contraindication to gastric lavage?", "a": "Caustic ingestion", "wrong": ["Any TCA overdose within 1 hour", "Intubated patient", "Ingestion 30 minutes ago"] }
       ]
     }
   ],
@@ -122,7 +122,7 @@
   "cards": [
     { "q": "First drug for TCA overdose with QRS 140 ms and hypotension?", "options": ["Sodium bicarbonate 8.4%", "Amiodarone 300 mg IV", "Flumazenil 200 micrograms", "Physostigmine 1 mg IV"], "why": "Sodium load and alkalinisation reverse sodium-channel blockade.", "source": "TOXBASE" },
     { "q": "ECG sign in aVR suggesting sodium-channel blockade?", "options": ["Terminal R wave over 3 mm", "ST depression over 2 mm", "A deep Q wave over 3 mm", "T-wave inversion over 5 mm"], "why": "Rightward terminal QRS axis.", "source": "Toxicology ECG" },
-    { "q": "Seizures after TCA overdose: treatment?", "options": ["Benzodiazepines", "Phenytoin 20 mg/kg", "Carbamazepine", "Flumazenil"], "why": "Phenytoin adds sodium-channel blockade.", "source": "TOXBASE" },
+    { "q": "Seizures after TCA overdose: treatment?", "options": ["Benzodiazepines", "Phenytoin 20 mg/kg", "Carbamazepine loading dose", "Flumazenil"], "why": "Phenytoin adds sodium-channel blockade.", "source": "TOXBASE" },
     { "q": "Gastric lavage tube size in adults?", "options": ["36–40 Fr", "12–14 Fr", "18–20 Fr", "60–70 Fr"], "why": "Large bore to pass tablet fragments.", "source": "Lavage technique" },
     { "q": "Position for gastric lavage?", "options": ["Left lateral, head down", "Sitting upright at 90°", "Prone, head turned left", "Right lateral, head up"], "why": "Keeps the pylorus up and reduces aspiration.", "source": "Lavage technique" },
     { "q": "Activated charcoal is most useful within…", "options": ["1 hour of ingestion", "12 hours of ingestion", "24 hours of ingestion", "4 hours of ingestion"], "why": "Later use may be considered for delayed-release or anticholinergic drugs.", "source": "AACT/EAPCCT" }

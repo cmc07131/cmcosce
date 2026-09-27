@@ -65,7 +65,7 @@
         { "q": "A normal CT within 6 hours of headache onset (NICE NG228)…", "a": "Rules out SAH without LP", "wrong": ["Always needs an LP after 12 hours", "Needs MRI within 24 hours", "Needs a repeat CT at 24 hours"] },
         { "q": "Timing of LP for xanthochromia?", "a": "At least 12 hours after onset", "wrong": ["Immediately, before the CT scan is done", "After 1 week", "Within 1 hour of the headache onset"] },
         { "q": "Purpose of nimodipine in SAH?", "a": "Reduce delayed cerebral ischaemia", "wrong": ["Lower the blood pressure only", "Stop the aneurysm from re-bleeding before surgery", "Treat seizures"] },
-        { "q": "Ottawa SAH rule criterion?", "a": "Onset during exertion", "wrong": ["Age under 30 years", "Photophobia with the headache", "Nausea and vomiting"] },
+        { "q": "Ottawa SAH rule criterion?", "a": "Onset during exertion", "wrong": ["Age under 30 years", "Photophobia with the headache", "Nausea and vomiting with the headache"] },
         { "q": "Another cause of thunderclap headache?", "a": "Reversible cerebral vasoconstriction syndrome", "wrong": ["Tension-type headache", "Acute sinusitis", "Uncorrected refractive error"] }
       ]
     }
@@ -77,6 +77,6 @@
     { "q": "NICE NG228: CT after 6 hours is normal. Next?", "options": ["LP at least 12 hours after onset", "Discharge with safety-net advice and GP review", "MRI brain as an outpatient", "Repeat CT at 24 hours"], "why": "Xanthochromia.", "source": "NICE NG228" },
     { "q": "Nimodipine dose in SAH?", "options": ["60 mg every 4 hours for 21 days", "10 mg daily for 1 week", "1 g IV once", "60 mg every 4 hours until the aneurysm is secured"], "why": "Reduces delayed ischaemia.", "source": "NICE NG228" },
     { "q": "Headache red flag suggesting GCA?", "options": ["New headache over 50 with jaw claudication", "Band-like tension-type headache worse with stress", "Headache in a teenager revising for exams", "Headache on weekends after lying in"], "why": "Urgent steroids.", "source": "BSR 2020" },
-    { "q": "Aspirin in GCA (BSR 2020)?", "options": ["Not routinely recommended", "Always, 75 mg daily", "Instead of steroids", "Only after temporal artery biopsy"], "why": "Unless another indication.", "source": "BSR 2020", "note": "Your notes: 'Aspirin ???'." }
+    { "q": "Aspirin in GCA (BSR 2020)?", "options": ["Not routinely recommended", "Always, 75 mg daily with the steroid", "Instead of steroids", "Only after temporal artery biopsy"], "why": "Unless another indication.", "source": "BSR 2020", "note": "Your notes: 'Aspirin ???'." }
   ]
 }

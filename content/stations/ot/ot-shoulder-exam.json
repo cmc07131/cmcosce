@@ -64,7 +64,7 @@
     { "q": "Rotator cuff muscles?", "options": ["Supraspinatus, infraspinatus, teres minor, subscapularis", "Deltoid, biceps, triceps, pectoralis", "Trapezius, rhomboids, levator scapulae, serratus", "Teres major, latissimus, pectoralis, deltoid"], "why": "SITS.", "source": "Anatomy" },
     { "q": "Neer's test is…", "options": ["Passive forward flexion, arm internally rotated", "Resisted external rotation with the elbow at the side", "Lifting the hand off the lower back", "Adducting the arm across the chest, elbow bent"], "why": "Impingement test.", "source": "Clinical examination" },
     { "q": "Scarf test (cross-body adduction) tests…", "options": ["AC joint", "Subscapularis", "Long head of biceps", "Glenoid labrum"], "why": "Pain over the AC joint.", "source": "Clinical examination" },
-    { "q": "Winging of the scapula suggests…", "options": ["Long thoracic nerve palsy", "Axillary nerve palsy", "Radial nerve palsy", "Full-thickness rotator cuff tear"], "why": "Serratus anterior weakness.", "source": "Anatomy" },
+    { "q": "Winging of the scapula suggests…", "options": ["Long thoracic nerve palsy", "Axillary nerve palsy after dislocation", "Radial nerve palsy", "Full-thickness rotator cuff tear"], "why": "Serratus anterior weakness.", "source": "Anatomy" },
     { "q": "Acute traumatic cuff tear with weakness in a young patient needs…", "options": ["Early orthopaedic referral", "Physio only for 1 year", "Steroid injection immediately", "No follow-up"], "why": "Repair outcomes are better early.", "source": "BESS/BOA" },
     { "q": "Speed's test assesses…", "options": ["Biceps tendon", "Supraspinatus", "AC joint", "Deltoid"], "why": "Resisted forward flexion with a supinated arm.", "source": "Clinical examination" }
   ]

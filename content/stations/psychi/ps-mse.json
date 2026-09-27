@@ -76,7 +76,7 @@
         { "q": "Nihilistic delusion example?", "a": "Belief that one is dead or rotting", "wrong": ["Belief of being followed by the police", "Belief of having special powers", "Hearing a voice commenting on actions"] },
         { "q": "Does NICE NG225 support SAD PERSONS to decide discharge?", "a": "No — do not use risk scales to decide care", "wrong": ["Yes — a score of 7 or more means admission is needed", "Yes, for everyone over 45 years old", "Only in the ED, not on the wards"] },
         { "q": "Organic cause of depressive symptoms to exclude?", "a": "Hypothyroidism", "wrong": ["Hyperkalaemia", "Gouty arthritis", "Allergic rhinitis"] },
-        { "q": "Psychomotor retardation means…", "a": "Slowed thought and movement", "wrong": ["A learning disability", "Restlessness, pacing and hand-wringing", "A fine resting tremor"] }
+        { "q": "Psychomotor retardation means…", "a": "Slowed thought and movement", "wrong": ["A learning disability from birth or childhood", "Restlessness, pacing and hand-wringing", "A fine resting tremor"] }
       ]
     }
   ],
@@ -85,7 +85,7 @@
     { "q": "The 'T' in ASEPTIC covers…", "options": ["Thought form and content", "Tone and volume of voice", "Tremor and movements", "Temperature and vitals"], "why": "Including suicidal and homicidal thoughts.", "source": "MSE teaching" },
     { "q": "Flight of ideas is typical of…", "options": ["Mania", "Depression", "Dementia", "Delirium tremens only"], "why": "Rapid shifts with connections.", "source": "MSE teaching" },
     { "q": "Visual hallucinations suggest…", "options": ["An organic cause (delirium, drugs, Lewy body)", "Schizophrenia, most typically", "Severe depression", "Anxiety disorder"], "why": "Auditory hallucinations are typical of schizophrenia.", "source": "MSE teaching" },
-    { "q": "Insight is…", "options": ["Awareness of illness and need for treatment", "Intelligence, judged by the level of education", "Orientation to time and place", "Memory for recent events"], "why": "Relevant to capacity and engagement.", "source": "MSE teaching" },
+    { "q": "Insight is…", "options": ["Awareness of illness and need for treatment", "Intelligence, judged by the level of education", "Orientation to time and place", "Memory for recent and remote events, tested formally"], "why": "Relevant to capacity and engagement.", "source": "MSE teaching" },
     { "q": "Mood-congruent psychotic features in depression include…", "options": ["Guilt and nihilistic delusions", "Grandiose delusions", "Thought broadcasting only", "Visual hallucinations of animals"], "why": "Psychotic depression needs urgent treatment.", "source": "NICE NG222" },
     { "q": "Risk assessment in self-harm (NICE NG225) should…", "options": ["Be a psychosocial assessment, not a score", "Use SAD PERSONS, admitting everyone who scores over 6", "Be skipped if the patient is sober", "Only include previous attempts"], "why": "Scales predict poorly.", "source": "NICE NG225" }
   ]

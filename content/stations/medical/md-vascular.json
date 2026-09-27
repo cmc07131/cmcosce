@@ -65,7 +65,7 @@
     { "q": "ABPI over 1.3 suggests…", "options": ["Calcified, incompressible vessels", "Normal arteries", "Severe ischaemia needing urgent imaging", "Venous disease"], "why": "Common in diabetes.", "source": "NICE CG147" },
     { "q": "Buerger's test assesses…", "options": ["Arterial insufficiency", "Deep vein thrombosis of the calf", "Incompetent saphenofemoral valve", "Peripheral sensory neuropathy"], "why": "Angle of pallor under 20° is severe.", "source": "Clinical examination" },
     { "q": "Complication after revascularisation of an ischaemic limb?", "options": ["Compartment syndrome and hyperkalaemia", "Hypoglycaemia", "Stroke in every case", "Anaemia only"], "why": "Reperfusion injury.", "source": "ESVS 2020" },
-    { "q": "Most common source of lower limb emboli?", "options": ["The heart (AF)", "The lungs", "The deep veins, through the lungs", "The kidneys"], "why": "Left atrial appendage thrombus.", "source": "ESVS 2020" },
+    { "q": "Most common source of lower limb emboli?", "options": ["The heart (AF)", "The lungs", "The deep veins, through the lungs", "The kidneys (renal artery thrombus)"], "why": "Left atrial appendage thrombus.", "source": "ESVS 2020" },
     { "q": "Chronic limb ischaemia symptom?", "options": ["Claudication relieved by rest", "A sudden cold, white, painful leg at rest", "Calf swelling and redness", "Fever with a hot leg"], "why": "Rest pain = critical ischaemia.", "source": "NICE CG147" }
   ]
 }

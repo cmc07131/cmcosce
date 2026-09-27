@@ -57,7 +57,7 @@
         { "q": "Ramsay Hunt syndrome is caused by…", "a": "VZV reactivation in the geniculate ganglion", "wrong": ["Herpes simplex type 2", "Lyme disease only", "A parotid tumour"] },
         { "q": "Weber test lateralises to the affected ear in…", "a": "Conductive hearing loss", "wrong": ["Sensorineural hearing loss", "Normal hearing", "Tinnitus"] },
         { "q": "Main complication to prevent in Bell's palsy?", "a": "Corneal exposure and ulceration", "wrong": ["A stroke in the following month", "Bacterial meningitis", "Tooth decay from drooling"] },
-        { "q": "Nerve for the corneal reflex (afferent)?", "a": "Trigeminal (V1)", "wrong": ["Facial (VII)", "Oculomotor (III)", "Optic (II)"] }
+        { "q": "Nerve for the corneal reflex (afferent)?", "a": "Trigeminal (V1)", "wrong": ["Facial (VII), the efferent limb", "Oculomotor (III)", "Optic (II)"] }
       ]
     }
   ],
@@ -65,9 +65,9 @@
   "cards": [
     { "q": "Forehead-sparing facial weakness suggests…", "options": ["Upper motor neurone lesion (e.g. stroke)", "Bell's palsy (lower motor neurone)", "A parotid tumour", "Ramsay Hunt syndrome"], "why": "Bilateral innervation of the upper face.", "source": "Neurology" },
     { "q": "Bell's palsy treatment?", "options": ["Prednisolone within 72 hours", "Aciclovir alone for 7 days, without steroids", "Surgical decompression", "Antibiotics for 10 days"], "why": "Sullivan NEJM 2007.", "source": "NICE CKS" },
-    { "q": "CN VI palsy causes…", "options": ["Failure of abduction", "Ptosis", "Mydriasis", "Loss of downgaze in adduction"], "why": "Lateral rectus.", "source": "Neurology" },
+    { "q": "CN VI palsy causes…", "options": ["Failure of abduction", "Ptosis", "Mydriasis with a fixed pupil", "Loss of downgaze in adduction"], "why": "Lateral rectus.", "source": "Neurology" },
     { "q": "Third nerve palsy with a dilated pupil suggests…", "options": ["Compressive lesion (e.g. PCom aneurysm)", "Diabetic microvascular mononeuropathy of the nerve", "Ocular myasthenia gravis with fatigable ptosis", "Bell's palsy"], "why": "Parasympathetic fibres run superficially.", "source": "Neurology" },
     { "q": "Rinne negative (bone > air) means…", "options": ["Conductive hearing loss in that ear", "Normal hearing", "Sensorineural hearing loss in that ear", "Tinnitus without hearing loss"], "why": "Weber goes to that ear.", "source": "ENT" },
-    { "q": "Tongue deviates towards…", "options": ["The side of a CN XII lesion", "The opposite side to the lesion", "Upwards toward the palate", "It never deviates"], "why": "Weak genioglossus.", "source": "Neurology" }
+    { "q": "Tongue deviates towards…", "options": ["The side of a CN XII lesion", "The opposite side to the lesion", "Upwards toward the hard palate", "It never deviates"], "why": "Weak genioglossus.", "source": "Neurology" }
   ]
 }

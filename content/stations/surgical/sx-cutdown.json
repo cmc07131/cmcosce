@@ -32,8 +32,8 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Preferred alternative when peripheral access fails in trauma?", "a": "Intraosseous access", "wrong": ["Cut-down always first", "Subcutaneous fluids", "Oral fluids"] },
-        { "q": "Nerve at risk in ankle cut-down?", "a": "Saphenous nerve", "wrong": ["Sural nerve", "Deep peroneal nerve", "Tibial nerve"] },
+        { "q": "Preferred alternative when peripheral access fails in trauma?", "a": "Intraosseous access", "wrong": ["Cut-down always first", "Subcutaneous fluids via a butterfly", "Oral fluids"] },
+        { "q": "Nerve at risk in ankle cut-down?", "a": "Saphenous nerve", "wrong": ["Sural nerve", "Deep peroneal nerve", "Posterior tibial nerve behind the malleolus"] },
         { "q": "Alternative cut-down site in the arm?", "a": "Basilic vein at the elbow", "wrong": ["Radial artery", "Cephalic vein at the shoulder only", "Axillary vein"] },
         { "q": "Contraindication to ankle cut-down?", "a": "Injury proximal on the same limb", "wrong": ["Shock with a low blood pressure", "Age over 50 years", "Obesity"] },
         { "q": "Complication of cut-down?", "a": "Infection and phlebitis", "wrong": ["Tension pneumothorax", "Hypoglycaemia from the local anaesthetic", "Cardiac arrhythmia"] }
@@ -43,10 +43,10 @@
   "badge": { "name": "Cut to the Chase", "emoji": "🔪", "flavor": "Anterior to the medial malleolus, transverse, blunt, tie distal, cannulate, tie proximal." },
   "cards": [
     { "q": "Great saphenous vein at the ankle lies…", "options": ["Anterior to the medial malleolus", "Posterior to the lateral malleolus", "Behind the Achilles", "On the dorsum of the 5th toe"], "why": "Consistent landmark.", "source": "ATLS" },
-    { "q": "Venous cut-down is used…", "options": ["When other access fails", "First-line in all trauma", "For blood tests only", "In children only"], "why": "IO and ultrasound are usually faster.", "source": "ATLS" },
+    { "q": "Venous cut-down is used…", "options": ["When other access fails", "First-line in all trauma", "For blood tests only, when veins are hidden", "In children only"], "why": "IO and ultrasound are usually faster.", "source": "ATLS" },
     { "q": "Which ligature is tied first?", "options": ["Distal", "Proximal", "Both together", "Neither"], "why": "Stops back-bleeding; proximal secures the cannula.", "source": "ATLS" },
     { "q": "Incision direction for ankle cut-down?", "options": ["Transverse", "Longitudinal deep", "Circumferential", "Oblique through the malleolus"], "why": "Crosses the vein's path.", "source": "ATLS" },
     { "q": "Saphenous vein cut-down is avoided if…", "options": ["The leg is injured proximally", "The patient is shocked", "The patient is younger than 16 years old", "IO access has failed"], "why": "Fluid may leak at the injury.", "source": "ATLS" },
-    { "q": "Adult IO first-line sites?", "options": ["Proximal tibia or humeral head", "Sternum, in every adult", "Distal radius or ulna", "Posterior iliac crest or the calcaneum"], "why": "Humeral head gives higher flow.", "source": "ATLS / manufacturer" }
+    { "q": "Adult IO first-line sites?", "options": ["Proximal tibia or humeral head", "Sternum, in every adult", "Distal radius or ulna in every adult", "Posterior iliac crest or the calcaneum"], "why": "Humeral head gives higher flow.", "source": "ATLS / manufacturer" }
   ]
 }

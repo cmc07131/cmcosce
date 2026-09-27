@@ -74,8 +74,8 @@
         { "q": "Commonest cause of traveller's diarrhoea worldwide?", "a": "Enterotoxigenic E. coli", "wrong": ["Giardia", "Rotavirus", "Clostridioides difficile"] },
         { "q": "Antibiotic of choice after South-East Asia?", "a": "Azithromycin", "wrong": ["Ciprofloxacin", "Amoxicillin", "Metronidazole"] },
         { "q": "When to avoid loperamide?", "a": "Fever or bloody diarrhoea", "wrong": ["Always, in every case", "Mild watery diarrhoea without fever", "After 24 hours of use"] },
-        { "q": "Definition of traveller's diarrhoea?", "a": "≥3 unformed stools in 24 h plus a symptom", "wrong": ["Any single loose stool", "Diarrhoea lasting 2 weeks after returning home", "Blood in the stool only"] },
-        { "q": "Which serious diagnosis must you consider with fever after Thailand?", "a": "Malaria (and typhoid, dengue)", "wrong": ["Coeliac disease", "Irritable bowel syndrome after infection", "Lactose intolerance"] }
+        { "q": "Definition of traveller's diarrhoea?", "a": "≥3 unformed stools in 24 h plus a symptom", "wrong": ["Any single loose stool", "Diarrhoea lasting 2 weeks after returning home", "Blood in the stool only, without any fever"] },
+        { "q": "Which serious diagnosis must you consider with fever after Thailand?", "a": "Malaria (and typhoid, dengue)", "wrong": ["Coeliac disease", "Irritable bowel syndrome after infection", "Lactose intolerance after gastroenteritis"] }
       ]
     }
   ],

@@ -92,6 +92,6 @@
     { "q": "Before an intimate examination you must…", "options": ["Explain, get consent and offer a chaperone", "Ask the nurse to stay, without asking the patient", "Examine first, then explain the findings", "Get written consent on a signed form"], "why": "Record the consent and the chaperone's name.", "source": "GMC 2024" },
     { "q": "The speculum is inserted…", "options": ["Closed, angled down and back", "Open, pointing straight upwards", "Sideways and open, then rotated", "Only after the bimanual examination"], "why": "Then rotated and opened to see the cervix.", "source": "Clinical skills" },
     { "q": "PID treatment should start…", "options": ["On clinical suspicion, before results", "Only after a positive chlamydia swab", "After a pelvic ultrasound confirms it", "After the partner has been tested"], "why": "Delay increases complications.", "source": "BASHH" },
-    { "q": "Admission criterion in PID?", "options": ["Tubo-ovarian abscess or pregnancy", "Mild pain with a positive chlamydia test", "Vaginal discharge alone", "Age over 20 years"], "why": "Also severe illness or failure of oral therapy.", "source": "BASHH" }
+    { "q": "Admission criterion in PID?", "options": ["Tubo-ovarian abscess or pregnancy", "Mild pain with a positive chlamydia test", "Vaginal discharge alone for a week", "Age over 20 years"], "why": "Also severe illness or failure of oral therapy.", "source": "BASHH" }
   ]
 }

@@ -64,7 +64,7 @@
         { "q": "Serum urate during an acute attack is…", "a": "Often normal", "wrong": ["Always very high", "Always low", "Diagnostic"] },
         { "q": "Target urate on urate-lowering therapy?", "a": "Below 360 µmol/L (300 with tophi)", "wrong": ["Below 600 µmol/L", "Below 100 µmol/L", "No target; adjust the dose to symptoms alone"] },
         { "q": "Pseudogout crystals are…", "a": "Rhomboid, positively birefringent (CPPD)", "wrong": ["Needle-shaped, negatively birefringent (monosodium urate)", "Round Maltese crosses (lipid)", "Invisible under polarised light"] },
-        { "q": "Drug that raises urate?", "a": "Thiazide diuretics", "wrong": ["Losartan (an ARB)", "Allopurinol (xanthine oxidase inhibitor)", "Colchicine"] }
+        { "q": "Drug that raises urate?", "a": "Thiazide diuretics", "wrong": ["Losartan (an angiotensin receptor blocker)", "Allopurinol (xanthine oxidase inhibitor)", "Colchicine"] }
       ]
     }
   ],
@@ -72,7 +72,7 @@
   "cards": [
     { "q": "Classic site of gout?", "options": ["First metatarsophalangeal joint", "Glenohumeral (shoulder) joint, bilaterally", "The hip joint in young women", "Lumbar facet joints of the lower spine"], "why": "Podagra.", "source": "EULAR 2016" },
     { "q": "Low-dose colchicine regimen for acute gout?", "options": ["500 micrograms 2–4 times daily", "1 mg every hour until diarrhoea occurs", "10 mg once, as a single loading dose", "5 mg daily for 2 weeks"], "why": "High doses cause toxicity.", "source": "BSR 2017" },
-    { "q": "Is allopurinol stopped during a flare if already taken?", "options": ["No, continue it", "Yes, always", "Double it", "Switch to febuxostat"], "why": "Stopping and restarting causes further flares.", "source": "EULAR 2016" },
+    { "q": "Is allopurinol stopped during a flare if already taken?", "options": ["No, continue it", "Yes, always, until the flare settles", "Double it", "Switch to febuxostat"], "why": "Stopping and restarting causes further flares.", "source": "EULAR 2016" },
     { "q": "Urate-lowering therapy is started with…", "options": ["Colchicine prophylaxis", "Aspirin 75 mg daily", "A thiazide diuretic to protect the kidney", "No cover is needed if the flare has settled"], "why": "Reduces flares when urate falls.", "source": "NICE NG219" },
     { "q": "Hot swollen joint with fever and a prosthesis: first think…", "options": ["Septic arthritis", "Acute gout", "An osteoarthritis flare", "Prepatellar bursitis"], "why": "Orthopaedic aspiration.", "source": "BSR/BOA" },
     { "q": "Tophi are…", "options": ["Deposits of urate in tissues", "Calcium nodules in the skin", "Rheumatoid nodules over the elbows", "Urate crystals found in the urine"], "why": "Ears, elbows, hands.", "source": "Rheumatology" }

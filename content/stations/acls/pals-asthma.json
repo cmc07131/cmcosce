@@ -87,14 +87,14 @@
         { "q": "IV magnesium dose in paediatric acute asthma?", "a": "40 mg/kg (max 2 g) over 20 minutes", "wrong": ["4 mg/kg (max 200 mg) over 20 minutes", "100 mg/kg as a rapid bolus", "2 g for any age over 20 minutes"] },
         { "q": "Which is a life-threatening feature?", "a": "Silent chest", "wrong": ["Audible wheeze", "SpO2 95%", "Talking in sentences"] },
         { "q": "Nebulised salbutamol under 5 years?", "a": "2.5 mg", "wrong": ["10 mg", "0.5 mg", "100 microgram"] },
-        { "q": "IV salbutamol bolus in children over 2?", "a": "15 microgram/kg over 10 minutes", "wrong": ["1 mg/kg over 10 minutes", "150 microgram/kg over 10 minutes", "5 mg over 10 minutes"] },
+        { "q": "IV salbutamol bolus in children over 2?", "a": "15 microgram/kg over 10 minutes", "wrong": ["1 mg/kg over 10 minutes", "150 microgram/kg over 10 minutes", "5 mg over 10 minutes, for any age"] },
         { "q": "Ventilation strategy if intubated?", "a": "Low rate, long expiration, permissive hypercapnia", "wrong": ["High rate to blow off the CO2 quickly", "High PEEP of 15 cmH2O to splint airways", "Short expiratory time and large tidal volumes"] }
       ]
     }
   ],
   "badge": { "name": "Quiet Chest", "emoji": "🌬", "flavor": "Silence is the danger sign. Back-to-back nebs, steroid, magnesium." },
   "cards": [
-    { "q": "Life-threatening asthma feature in a child?", "options": ["SpO2 under 92%", "Loud wheeze", "RR 30 at age 8", "Talking in sentences"], "why": "Also silent chest, poor effort, altered consciousness, cyanosis.", "source": "BTS/SIGN 2019" },
+    { "q": "Life-threatening asthma feature in a child?", "options": ["SpO2 under 92%", "Loud wheeze throughout both lungs", "RR 30 at age 8", "Talking in sentences"], "why": "Also silent chest, poor effort, altered consciousness, cyanosis.", "source": "BTS/SIGN 2019" },
     { "q": "Ipratropium dose in acute severe asthma (2–12 years)?", "options": ["250 microgram nebulised", "2.5 mg nebulised every 20 minutes", "25 microgram nebulised", "500 microgram IV"], "why": "Every 20–30 minutes in the first 2 hours.", "source": "BTS/SIGN 2019" },
     { "q": "Oral prednisolone dose in paediatric acute asthma?", "options": ["1–2 mg/kg (max 40 mg)", "10 mg/kg (max 200 mg)", "0.1 mg/kg (max 5 mg)", "2 mg/kg (max 100 mg)"], "why": "Or IV hydrocortisone 4 mg/kg if unable to swallow.", "source": "BTS/SIGN 2019" },
     { "q": "Routine chest X-ray in acute asthma?", "options": ["No, only for complications or no response", "Yes, in every child before treatment", "Only in children over 5 years old", "Before starting nebulisers, to exclude a foreign body"], "why": "Looks for pneumothorax, consolidation.", "source": "BTS/SIGN 2019" },

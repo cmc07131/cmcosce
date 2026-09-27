@@ -67,7 +67,7 @@
       "label": "Examiner",
       "qs": [
         { "q": "Legal basis for restraining an intoxicated, dangerous adult who lacks capacity?", "a": "Common-law necessity, in their best interests, proportionate", "wrong": ["The mother's consent", "Police powers only", "No legal basis exists"] },
-        { "q": "How often must a restrained patient be reviewed?", "a": "Every 15 minutes, with observations", "wrong": ["Every 12 hours on the ward round", "Only when he asks to be released from the restraints", "Once, at the time of restraint"] },
+        { "q": "How often must a restrained patient be reviewed?", "a": "Every 15 minutes, with observations", "wrong": ["Every 12 hours, on the consultant's ward round", "Only when he asks to be released from the restraints", "Once, at the time of restraint"] },
         { "q": "First step in de-escalation?", "a": "Ensure safety, then listen", "wrong": ["Explain the hospital rules and the facts", "Call the police and security immediately", "Leave the room until she calms down"] },
         { "q": "NICE rapid tranquillisation options?", "a": "IM lorazepam or haloperidol + promethazine", "wrong": ["IV haloperidol alone, as the first-line drug", "Oral chlorpromazine only", "IM diazepam"] },
         { "q": "When should the MHO be considered?", "a": "If a mental disorder needs detention", "wrong": ["For any intoxicated patient who is aggressive", "For any relative who becomes angry in the ED", "Never; it only applies in psychiatric wards"] }
@@ -78,9 +78,9 @@
   "cards": [
     { "q": "Rapid tranquillisation per NICE NG10?", "options": ["IM lorazepam, or IM haloperidol plus promethazine", "IM haloperidol alone", "IV diazepam first", "Oral clozapine"], "why": "Haloperidol alone risks dystonia; check ECG when possible.", "source": "NICE NG10", "note": "Your notes: lorazepam + haloperidol." },
     { "q": "Restraint must be…", "options": ["Proportionate and least restrictive", "Maximal and prolonged to prevent a repeat", "Decided by the relatives present", "Avoided even when others are at risk"], "why": "Document and review.", "source": "NICE NG10; HA policy" },
-    { "q": "A key de-escalation technique?", "options": ["Calm tone; acknowledge emotion", "Raise your voice so you can be heard clearly", "Stand close to show authority", "Argue each point with facts"], "why": "Reduces arousal.", "source": "NICE NG10" },
-    { "q": "Positional asphyxia risk is highest with…", "options": ["Prone restraint", "Seated", "Supine with head up", "Lateral"], "why": "Avoid prolonged prone restraint.", "source": "NICE NG10" },
-    { "q": "When is a relative entitled to remove an adult patient?", "options": ["Not if he lacks capacity and is at risk", "Always, as the legal next of kin of the adult", "Whenever they are the parent", "If they sign a discharge form"], "why": "Decisions follow capacity and best interests.", "source": "Common law" },
+    { "q": "A key de-escalation technique?", "options": ["Calm tone; acknowledge emotion", "Raise your voice so you can be heard clearly", "Stand close to her to show your authority", "Argue each point with facts"], "why": "Reduces arousal.", "source": "NICE NG10" },
+    { "q": "Positional asphyxia risk is highest with…", "options": ["Prone restraint", "Seated, with arms held", "Supine with head up", "Lateral"], "why": "Avoid prolonged prone restraint.", "source": "NICE NG10" },
+    { "q": "When is a relative entitled to remove an adult patient?", "options": ["Not if he lacks capacity and is at risk", "Always, as the legal next of kin of the adult", "Whenever they are the parent", "If they sign the hospital's discharge form first"], "why": "Decisions follow capacity and best interests.", "source": "Common law" },
     { "q": "The preferred term replacing 'excited delirium'?", "options": ["Hyperactive delirium with severe agitation", "Acute rage syndrome", "Mania", "Psychosis"], "why": "'Excited delirium' was abandoned (ACEP 2023) — it's not a diagnosis.", "source": "ACEP 2023", "note": "Your notes use 'excited delirium syndrome'." }
   ]
 }
