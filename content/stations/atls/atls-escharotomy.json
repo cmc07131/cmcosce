@@ -109,11 +109,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What does DOPES stand for?", "a": "Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "wrong": ["Drugs, Oxygen, Pressure, Eschar, Sedation", "Dislodged, Oesophageal, PEEP, Endobronchial, Secretions", "Depth, Occlusion, Pain, Eschar, Swelling"] },
-        { "q": "How deep is an escharotomy?", "a": "Through the eschar to subcutaneous fat", "wrong": ["Down to bone", "Through the fascia into muscle", "Epidermis only"] },
-        { "q": "Which burn more often needs a fasciotomy rather than an escharotomy?", "a": "High-voltage electrical burn", "why": "Current travels through muscle, which swells beneath intact-looking skin.", "wrong": ["Scald in a child", "Flash burn to the face", "Sunburn"] },
+        { "q": "What does DOPES stand for?", "a": "Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "wrong": ["Drugs, Oxygen supply, Pressure alarm, Eschar, Sedation", "Dislodged, Oesophageal, PEEP, Endobronchial, Secretions", "Depth, Occlusion, Pain, Eschar, Swelling"] },
+        { "q": "How deep is an escharotomy?", "a": "Through the eschar to subcutaneous fat", "wrong": ["Down to bone, through the periosteum", "Through the deep fascia into the muscle compartments", "Epidermis only, to avoid bleeding"] },
+        { "q": "Which burn more often needs a fasciotomy rather than an escharotomy?", "a": "High-voltage electrical burn", "why": "Current travels through muscle, which swells beneath intact-looking skin.", "wrong": ["Scald to both hands of a toddler", "Flash burn to the face and neck", "Extensive sunburn on the back"] },
         { "q": "Which nerve is at risk on the medial side of the elbow?", "a": "Ulnar nerve", "wrong": ["Radial nerve", "Median nerve", "Musculocutaneous nerve"] },
-        { "q": "Where are finger escharotomies placed?", "a": "Mid-lateral lines, avoiding the pinch surfaces", "wrong": ["Down the palm", "Over the dorsum of the knuckles", "Around the fingertip"] }
+        { "q": "Where are finger escharotomies placed?", "a": "Mid-lateral, sparing the pinch surfaces", "wrong": ["Down the middle of the palm", "Over the dorsum of each knuckle", "Around the fingertip pulp"] }
       ]
     }
   ],
@@ -122,10 +122,10 @@
   ],
   "badge": { "name": "Shield Maker", "emoji": "🛡", "flavor": "DOPES first. Then free the chest along the axillary lines." },
   "cards": [
-    { "q": "Chest escharotomy incisions run along…", "options": ["Both anterior axillary lines, joined along the costal margin", "The midline sternum only", "The mid-clavicular lines only", "Transversely below the nipples only"], "why": "The 'shield' releases the chest wall to move with breathing.", "source": "British Burn Association; ATLS 11th edition" },
-    { "q": "Sign of a tight chest eschar in a ventilated patient?", "options": ["Rising peak airway pressures and hypercapnia", "Falling peak pressures", "Bradycardia", "Polyuria"], "why": "The rigid shell restricts chest expansion.", "source": "ATLS 11th edition" },
-    { "q": "Limb escharotomy lines are…", "options": ["Mid-medial and mid-lateral", "Anterior midline", "Posterior midline", "Spiral"], "why": "They release the circumference while sparing tendons and nerves.", "source": "EMSB / BBA" },
-    { "q": "Why is an escharotomy often painless in the middle but painful at the edges?", "options": ["Full-thickness burns destroy nerve endings; the margins are partial thickness", "The patient is always paralysed", "Eschar contains local anaesthetic", "The fat has no nerves"], "why": "Give analgesia: the unburnt and partial-thickness margins hurt.", "source": "EMSB" },
+    { "q": "Chest escharotomy incisions run along…", "options": ["Anterior axillary lines, joined at the costal margin", "Down the midline sternum from notch to xiphoid", "Both mid-clavicular lines, joined across the clavicles", "Transversely below the nipples, from axilla to axilla"], "why": "The 'shield' releases the chest wall to move with breathing.", "source": "British Burn Association; ATLS 11th edition" },
+    { "q": "Sign of a tight chest eschar in a ventilated patient?", "options": ["Rising peak airway pressures and hypercapnia", "Falling peak airway pressures", "Bradycardia with a narrow pulse pressure", "Polyuria and a rising serum sodium"], "why": "The rigid shell restricts chest expansion.", "source": "ATLS 11th edition" },
+    { "q": "Limb escharotomy lines are…", "options": ["Mid-medial and mid-lateral", "Along the anterior midline", "Along the posterior midline", "A spiral around the limb"], "why": "They release the circumference while sparing tendons and nerves.", "source": "EMSB / BBA" },
+    { "q": "Why is an escharotomy often painless in the middle but painful at the edges?", "options": ["Full thickness is insensate; edges are partial thickness", "The patient is always paralysed and deeply sedated for it", "Burnt skin releases endorphins that block local pain", "Subcutaneous fat has no sensory nerve supply at all"], "why": "Give analgesia: the unburnt and partial-thickness margins hurt.", "source": "EMSB" },
     { "q": "An intubated burns patient desaturates. First step?", "options": ["DOPES check", "Chest escharotomy at once", "Increase PEEP to 20", "Give furosemide"], "why": "Rule out tube displacement, obstruction, pneumothorax, equipment and stacking.", "source": "Resuscitation Council / ICS airway teaching" },
     { "q": "Circumferential full-thickness burn of the arm with no Doppler signal. Action?", "options": ["Escharotomy of the arm", "Elevate and review in 24 hours", "Apply a tourniquet", "Wrap it tightly with cling film"], "why": "Ischaemia under a constricting eschar needs release.", "source": "ATLS 11th edition" }
   ]

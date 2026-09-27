@@ -198,8 +198,8 @@
       "qs": [
         {
           "q": "What makes a haemothorax 'massive'?",
-          "a": "More than 1500 mL at insertion, or a third of blood volume",
-          "wrong": ["More than 500 mL at insertion", "Any haemothorax with a rib fracture", "Any blood seen on eFAST"]
+          "a": "Over 1500 mL at once, or a third of blood volume",
+          "wrong": ["More than 500 mL at insertion, or any rib fracture", "Any haemothorax seen on the supine chest X-ray", "Any blood seen on eFAST, whatever the volume"]
         },
         {
           "q": "Which drain output means thoracotomy even after a smaller first drainage?",
@@ -210,18 +210,18 @@
           "q": "Why is this not a tension pneumothorax?",
           "a": "Dull to percussion, trachea central, neck veins flat",
           "why": "Tension is hyper-resonant with distended neck veins (unless hypovolaemic) and a trachea deviated away late.",
-          "wrong": ["Because SpO2 is above 85%", "Because he is talking", "Because the eFAST shows lung sliding on the left"]
+          "wrong": ["SpO2 is above 85% on oxygen", "He is still able to talk in sentences", "Tension needs positive-pressure ventilation"]
         },
         {
           "q": "Borders of the safe triangle?",
-          "a": "Latissimus dorsi, pectoralis major, 5th intercostal space; apex below the axilla",
-          "wrong": ["2nd intercostal space, mid-clavicular line", "Scapula, spine, 8th rib", "Sternum, nipple line, costal margin"]
+          "a": "Latissimus dorsi, pectoralis major, 5th intercostal space",
+          "wrong": ["Trapezius, pectoralis minor, 2nd intercostal space", "Serratus anterior, rectus, 7th space", "Sternum, nipple line and costal margin"]
         },
         {
           "q": "Tranexamic acid: dose and time limit?",
-          "a": "1 g over 10 min then 1 g over 8 h, only within 3 hours",
+          "a": "1 g over 10 min, 1 g over 8 h, within 3 h",
           "why": "CRASH-2: benefit falls with delay and giving it after 3 hours was associated with harm.",
-          "wrong": ["2 g bolus at any time", "1 g daily for 3 days", "10 mg/kg within 12 hours"]
+          "wrong": ["1 g over 10 min, 1 g over 8 h, within 12 h", "2 g bolus at any time after injury", "10 mg/kg over 1 h, within 24 hours"]
         }
       ]
     }
@@ -237,7 +237,7 @@
     { "q": "Percussion note over a massive haemothorax?", "options": ["Stony dull", "Hyper-resonant", "Normal", "Tympanic"], "why": "Fluid is dull; air (pneumothorax) is hyper-resonant.", "source": "ATLS 11th edition" },
     { "q": "Where do the intercostal vessels run?", "options": ["Along the lower border of each rib", "Along the upper border of each rib", "Mid-way between ribs", "Only posteriorly"], "why": "So you go over the top of the rib below the space.", "source": "BTS pleural procedures guideline" },
     { "q": "Tranexamic acid in trauma must start within…", "options": ["3 hours of injury", "12 hours of injury", "24 hours of injury", "30 minutes of arrival"], "why": "CRASH-2: late tranexamic acid was associated with harm.", "source": "CRASH-2, Lancet 2010/2011" },
-    { "q": "Preferred resuscitation fluid for a bleeding, shocked trauma patient?", "options": ["Blood products in a balanced ratio", "2 L of 0.9% saline", "Hydroxyethyl starch", "5% dextrose"], "why": "Crystalloid is limited; early blood (1:1:1) reduces coagulopathy.", "source": "ATLS 11th edition; NICE NG39" },
+    { "q": "Preferred resuscitation fluid for a bleeding, shocked trauma patient?", "options": ["Blood products in a balanced ratio", "2 L of warmed 0.9% saline first", "Hydroxyethyl starch to restore volume", "5% dextrose to avoid hyperchloraemia"], "why": "Crystalloid is limited; early blood (1:1:1) reduces coagulopathy.", "source": "ATLS 11th edition; NICE NG39" },
     { "q": "Flat neck veins in a shocked chest-injured patient point to…", "options": ["Hypovolaemia", "Tension pneumothorax", "Cardiac tamponade", "Right heart failure"], "why": "Tension and tamponade raise venous pressure unless the patient is also empty.", "source": "ATLS 11th edition" }
   ]
 }

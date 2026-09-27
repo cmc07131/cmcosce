@@ -197,9 +197,9 @@
       "qs": [
         { "q": "Which of these is a NICE indication to intubate after head injury?", "a": "Bleeding into the mouth", "why": "Also GCS 8 or less, loss of airway reflexes, ventilatory failure, hyperventilation, seizures, agitation preventing transfer.", "wrong": ["Any scalp laceration", "GCS 14 with vomiting once", "A single seizure before arrival with full recovery"] },
         { "q": "Target PaCO2 after intubation for head injury?", "a": "4.5 to 5.0 kPa", "wrong": ["3.0 to 3.5 kPa", "6.0 to 7.0 kPa", "Any value, as long as SpO2 is normal"] },
-        { "q": "Cushing's response to raised ICP?", "a": "Hypertension, bradycardia, irregular breathing", "wrong": ["Hypotension, tachycardia, fever", "Tachypnoea and hypoxia", "Hypotension and bradycardia"] },
+        { "q": "Cushing's response to raised ICP?", "a": "Hypertension, bradycardia, irregular breathing", "wrong": ["Hypotension, tachycardia and fever", "Tachypnoea, hypoxia and tachycardia", "Hypotension, bradycardia, warm skin"] },
         { "q": "Why avoid a nasal airway in this man?", "a": "Suspected base of skull fracture", "why": "Battle's sign and blood from the ear. A nasal tube or airway can pass into the cranial vault.", "wrong": ["He is intubated soon anyway", "Nasal airways cause hypoxia", "It raises intracranial pressure directly"] },
-        { "q": "Why tape rather than tie the tube?", "a": "Ties compress the jugular veins and raise ICP", "wrong": ["Tape is cheaper", "Ties damage the tube", "Tape allows a CT without artefact"] }
+        { "q": "Why tape rather than tie the tube?", "a": "Ties compress the jugular veins and raise ICP", "wrong": ["Tape is quicker to apply in the CT scanner", "Ties can cause a cuff leak", "Tape leaves no artefact on the CT images"] }
       ]
     }
   ],
@@ -211,7 +211,7 @@
   "cards": [
     { "q": "After head injury, which PaCO2 range is the target?", "options": ["4.5–5.0 kPa", "3.0–3.5 kPa", "5.5–6.5 kPa", "Below 3 kPa"], "why": "Normocapnia. Hypocapnia causes cerebral ischaemia; hypercapnia raises ICP.", "source": "NICE NG232; BTF 4th edition" },
     { "q": "Minimum systolic for a 30-year-old with severe TBI (BTF)?", "options": ["110 mmHg", "90 mmHg", "80 mmHg", "140 mmHg"], "why": "BTF 4th: ≥110 for ages 15–49 and over 70, ≥100 for 50–69.", "source": "Brain Trauma Foundation 4th edition", "note": "Older notes quote 90 mmHg." },
-    { "q": "Best confirmation of tracheal intubation?", "options": ["Sustained waveform capnography", "Auscultation of both axillae", "Misting in the tube", "Chest rise"], "why": "No trace, wrong place.", "source": "DAS; RCoA/NAP4" },
+    { "q": "Best confirmation of tracheal intubation?", "options": ["Sustained waveform capnography", "Auscultation of both axillae and the stomach", "Misting inside the tube on expiration", "Symmetrical chest rise with bagging"], "why": "No trace, wrong place.", "source": "DAS; RCoA/NAP4" },
     { "q": "Which drug worsens mortality after head injury?", "options": ["Corticosteroids", "Tranexamic acid", "Hypertonic saline", "Fentanyl"], "why": "The CRASH trial stopped steroids for head injury.", "source": "CRASH trial, Lancet 2004" },
     { "q": "Battle's sign is…", "options": ["Bruising behind the ear", "Bruising around both eyes", "Blood behind the eardrum", "A boggy scalp swelling"], "why": "Mastoid bruising: a sign of base of skull fracture (with raccoon eyes, CSF leak, haemotympanum).", "source": "ATLS 11th edition" },
     { "q": "Rocuronium dose for RSI?", "options": ["1.2 mg/kg", "0.1 mg/kg", "0.6 mg/kg", "3 mg/kg"], "why": "1.2 mg/kg gives intubating conditions in about 60 seconds.", "source": "DAS emergency airway practice" },

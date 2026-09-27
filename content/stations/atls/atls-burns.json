@@ -191,9 +191,9 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Which finding does NOT suggest inhalation injury?", "a": "Burns to the lower legs", "wrong": ["Soot in the mouth", "Hoarse voice", "Singed nasal hair"] },
-        { "q": "Why is her SpO2 misleading?", "a": "Oximeters read carboxyhaemoglobin as oxyhaemoglobin", "wrong": ["The probe is on a burnt finger", "She is anaemic", "CO shifts the curve to the right"] },
-        { "q": "Which burns count toward TBSA for fluids?", "a": "Partial and full thickness only", "wrong": ["All red areas", "Full thickness only", "Only burns over 1% each"] },
+        { "q": "Which finding does NOT suggest inhalation injury?", "a": "Burns to the lower legs", "wrong": ["Soot in the mouth and nose", "A hoarse voice and stridor", "Singed nasal hair and eyebrows"] },
+        { "q": "Why is her SpO2 misleading?", "a": "Oximeters read carboxyhaemoglobin as oxyhaemoglobin", "wrong": ["The probe sits on a burnt, poorly perfused finger", "Smoke particles in the blood scatter the light", "CO shifts the curve to the right"] },
+        { "q": "Which burns count toward TBSA for fluids?", "a": "Partial and full thickness only", "wrong": ["All red areas including erythema", "Full thickness only, as partial heals", "Any burn larger than 1% on its own"] },
         { "q": "Best way to estimate burn size in a child?", "a": "Lund–Browder chart", "why": "Children's heads are proportionally larger and legs smaller than the adult rule of nines.", "wrong": ["Rule of nines", "The child's hand is 5%", "Count blisters"] },
         { "q": "Urine output target in an adult with burns?", "a": "0.5 mL/kg/h", "wrong": ["2 mL/kg/h", "0.1 mL/kg/h", "Any output above zero"] }
       ]
@@ -205,11 +205,11 @@
   "badge": { "name": "Fire Walker", "emoji": "🔥", "flavor": "Tube early and uncut. Count from the burn, not the door." },
   "cards": [
     { "q": "ATLS adult burn fluid formula?", "options": ["2 mL × kg × %TBSA in 24 h", "4 mL × kg × %TBSA in 8 h", "1 mL × kg × %TBSA in 24 h", "10 mL/kg bolus then maintenance"], "why": "Half in the first 8 hours from the burn, the rest over 16; titrate to urine output.", "source": "ATLS 10th–11th edition", "note": "Original Parkland uses 4 mL; ATLS 10th starts adults at 2 mL." },
-    { "q": "The first 8 hours of burn fluids are timed from…", "options": ["The time of the burn", "Arrival in the ED", "The first cannula", "Admission to the burns unit"], "why": "Any delay must be caught up.", "source": "ATLS 11th edition" },
-    { "q": "Carbon monoxide poisoning: SpO2 on a standard oximeter is…", "options": ["Falsely normal", "Falsely low", "Accurate", "Unreadable"], "why": "COHb absorbs light like oxyhaemoglobin at the oximeter's wavelengths. Use co-oximetry.", "source": "RCEM / TOXBASE" },
-    { "q": "Antidote for cyanide from smoke inhalation?", "options": ["Hydroxocobalamin 5 g IV", "Naloxone", "Flumazenil", "Methylene blue"], "why": "It binds cyanide to form cyanocobalamin, excreted in urine.", "source": "TOXBASE" },
+    { "q": "The first 8 hours of burn fluids are timed from…", "options": ["The time of the burn", "Arrival in the ED", "The first cannula", "Burns unit admission"], "why": "Any delay must be caught up.", "source": "ATLS 11th edition" },
+    { "q": "Carbon monoxide poisoning: SpO2 on a standard oximeter is…", "options": ["Falsely normal", "Falsely low by about 10%", "Accurate if perfusion is good", "Unreadable at any COHb level"], "why": "COHb absorbs light like oxyhaemoglobin at the oximeter's wavelengths. Use co-oximetry.", "source": "RCEM / TOXBASE" },
+    { "q": "Antidote for cyanide from smoke inhalation?", "options": ["Hydroxocobalamin 5 g IV", "Naloxone 400 micrograms IV", "Methylene blue 1–2 mg/kg IV", "Flumazenil 200 micrograms IV"], "why": "It binds cyanide to form cyanocobalamin, excreted in urine.", "source": "TOXBASE" },
     { "q": "How should cling film be applied to a burnt arm?", "options": ["Laid in strips along the limb", "Wrapped tightly around it", "Soaked in cold water first", "Only over full-thickness areas"], "why": "Wrapping acts as a tourniquet as the limb swells.", "source": "British Burn Association first aid" },
     { "q": "Urine output target in a child with major burns?", "options": ["1 mL/kg/h", "0.5 mL/kg/h", "2 mL/kg/h", "5 mL/kg/h"], "why": "Children: 1 mL/kg/h; adults 0.5 mL/kg/h.", "source": "ATLS 11th edition" },
-    { "q": "Which is NOT a burns centre referral criterion?", "options": ["A 2% superficial (erythema) sunburn on the back", "Circumferential full-thickness burn", "Inhalation injury", "Burns to the perineum"], "why": "Erythema is not counted and a small superficial burn is managed locally.", "source": "ABA 2022; UK National Burn Care Referral Guidance" }
+    { "q": "Which is NOT a burns centre referral criterion?", "options": ["2% erythema (sunburn) on the back", "Circumferential full-thickness burn of the forearm", "Inhalation injury needing intubation", "Partial-thickness burn to the perineum"], "why": "Erythema is not counted and a small superficial burn is managed locally.", "source": "ABA 2022; UK National Burn Care Referral Guidance" }
   ]
 }

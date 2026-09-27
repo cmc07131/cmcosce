@@ -106,7 +106,7 @@
         { "q": "ERC: how many initial rescue breaths in drowning?", "a": "5", "wrong": ["2", "0 — compressions first", "10"] },
         { "q": "Adrenaline below 30 °C core temperature?", "a": "Withhold it", "wrong": ["Double the dose", "Give every 1 minute", "Give as usual"] },
         { "q": "Maximum shocks while below 30 °C?", "a": "3", "wrong": ["1", "6", "Unlimited"] },
-        { "q": "When are spinal precautions needed in drowning?", "a": "Diving, high-energy mechanism or signs of injury", "wrong": ["Always", "Never", "Only in the sea"] },
+        { "q": "When are spinal precautions needed in drowning?", "a": "Diving, high-energy mechanism or signs of injury", "wrong": ["In every drowning, whatever the history", "Only if the water was colder than 15 °C", "Only after drowning in the sea"] },
         { "q": "Salt water versus fresh water drowning?", "a": "No difference in management", "wrong": ["Fresh water needs diuretics", "Salt water needs dialysis", "Fresh water needs hypertonic saline"] }
       ]
     }
@@ -117,7 +117,7 @@
     { "q": "Abdominal thrusts to remove water in drowning are…", "options": ["Not recommended", "First-line", "Only for children", "Required before CPR"], "why": "They delay ventilation and cause aspiration.", "source": "ERC 2021" },
     { "q": "Core temperature at which adrenaline is withheld in hypothermic arrest?", "options": ["Below 30 °C", "Below 35 °C", "Below 25 °C", "Below 32 °C"], "why": "Between 30 and 35 °C, double the dosing interval.", "source": "ERC 2021" },
     { "q": "Post-arrest temperature target (ERC–ESICM 2025)?", "options": ["37.5 °C or less for 36–72 h", "Cool to 32 °C for 24 h in all", "Warm to 38.5 °C", "No temperature management"], "why": "Actively prevent fever in comatose survivors; do not actively rewarm mild hypothermia.", "source": "ERC–ESICM 2025; RCUK 2025 post-resuscitation care", "note": "2021 guidance used 37.7 °C for 72 h." },
-    { "q": "Routine C-spine immobilisation after drowning is…", "options": ["Not indicated without diving or injury", "Always required", "Required in children only", "Required if the water was cold"], "why": "Spinal injury is rare without diving or trauma.", "source": "ERC 2021" },
-    { "q": "Typical chest X-ray after significant drowning?", "options": ["Patchy bilateral infiltrates (non-cardiogenic oedema)", "Tension pneumothorax", "Normal in all cases", "Lobar collapse only"], "why": "Aspiration and surfactant loss cause ARDS-like changes.", "source": "ERC 2021" }
+    { "q": "Routine C-spine immobilisation after drowning is…", "options": ["Not indicated without diving or injury", "Always required after any drowning", "Required in all children", "Required whenever the water was cold"], "why": "Spinal injury is rare without diving or trauma.", "source": "ERC 2021" },
+    { "q": "Typical chest X-ray after significant drowning?", "options": ["Patchy bilateral infiltrates", "Always normal in the first 24 hours", "Lobar collapse of the right lower lobe", "Cardiomegaly with upper lobe diversion"], "why": "Aspiration and surfactant loss cause ARDS-like changes.", "source": "ERC 2021" }
   ]
 }

@@ -102,11 +102,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Indication for emergency front-of-neck access?", "a": "Can't intubate, can't oxygenate (CICO)", "wrong": ["Failed intubation with good mask ventilation", "Any facial fracture", "Stridor in a conscious patient"] },
+        { "q": "Indication for emergency front-of-neck access?", "a": "Can't intubate, can't oxygenate (CICO)", "wrong": ["Failed intubation, mask ventilation OK", "Any facial fracture", "Stridor in a conscious patient"] },
         { "q": "DAS 2025 default skin incision?", "a": "Vertical midline", "wrong": ["Transverse over a palpable membrane only", "Collar incision above the sternal notch", "No skin incision; stab directly"] },
         { "q": "Which is part of the SHORT mnemonic for difficult front-of-neck access?", "a": "Radiation", "why": "Surgery, Haematoma, Obesity, Radiation, Tumour.", "wrong": ["Rigid collar", "Rheumatoid arthritis", "Reflux"] },
-        { "q": "Surgical cricothyroidotomy in a 5-year-old?", "a": "No — needle cricothyroidotomy or ENT", "wrong": ["Yes, same technique with a 6.0 tube", "Yes, with a larger incision", "Only with a tracheal hook"] },
-        { "q": "What are Peyton's four steps?", "a": "Demonstrate, deconstruct, learner narrates, learner performs", "wrong": ["Read, watch, test, certify", "See one, do one, teach one, audit one", "Brief, perform, debrief, repeat"] }
+        { "q": "Surgical cricothyroidotomy in a 5-year-old?", "a": "No — needle cricothyroidotomy or ENT", "wrong": ["Yes, same technique with a 6.0 tube", "Yes, with a larger vertical incision", "Only if a tracheal hook is available"] },
+        { "q": "What are Peyton's four steps?", "a": "Demonstration, deconstruction, comprehension, performance", "wrong": ["Demonstration, practice, feedback, assessment and sign-off", "See one, do one, teach one, then audit the outcomes", "Brief, simulate, perform under supervision, debrief"] }
       ]
     }
   ],
@@ -114,9 +114,9 @@
   "cards": [
     { "q": "DAS scalpel–bougie–tube kit uses which blade?", "options": ["Size 10", "Size 11", "Size 15", "Size 22"], "why": "A broad size 10 blade makes a hole wide enough and guides the bougie.", "source": "DAS 2025", "note": "Older notes: size 11 with hook and dilator." },
     { "q": "Tube size in the DAS front-of-neck technique?", "options": ["Cuffed 6.0", "Uncuffed 8.0", "Cuffed 7.5", "3.0"], "why": "A 6.0 passes through the membrane opening over the bougie.", "source": "DAS 2025" },
-    { "q": "After the transverse stab, the blade is rotated so the sharp edge faces…", "options": ["The feet (caudally)", "The head", "The patient's left", "Upward"], "why": "Then pull it toward you to open the hole for the bougie.", "source": "DAS 2025" },
+    { "q": "After the transverse stab, the blade is rotated so the sharp edge faces…", "options": ["The feet (caudally)", "The head (cranially)", "The patient's left side", "Straight up, away from the neck"], "why": "Then pull it toward you to open the hole for the bougie.", "source": "DAS 2025" },
     { "q": "Which vessels lie near the upper cricothyroid membrane?", "options": ["Cricothyroid arteries", "Carotid arteries", "Internal jugular veins", "Vertebral arteries"], "why": "Stay in the lower third of the membrane.", "source": "Anatomy" },
-    { "q": "Peyton step 3 is…", "options": ["The learner talks the teacher through the procedure", "The learner performs alone", "The teacher demonstrates silently", "The teacher lectures"], "why": "Step 3 forces active recall before the learner performs.", "source": "Peyton 1998" },
+    { "q": "Peyton step 3 is…", "options": ["The learner talks the teacher through the procedure", "The learner performs alone without comment", "The teacher demonstrates silently at normal speed", "The teacher breaks the skill into steps"], "why": "Step 3 forces active recall before the learner performs.", "source": "Peyton 1998" },
     { "q": "Best first feedback question after a learner's attempt?", "options": ["How do you think it went?", "Why was that so slow?", "Shall we move on?", "Did you read the guideline?"], "why": "Self-assessment first (Pendleton / ask–tell–ask).", "source": "Medical education feedback models" }
   ]
 }

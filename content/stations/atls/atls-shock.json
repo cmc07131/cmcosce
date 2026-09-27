@@ -141,9 +141,9 @@
       "label": "Examiner",
       "qs": [
         { "q": "Class III haemorrhage (ATLS) means blood loss of…", "a": "31–40%", "wrong": ["Up to 15%", "15–30%", "More than 40%"] },
-        { "q": "Base deficit in class III shock?", "a": "−6 to −10 mmol/L", "wrong": ["0 to −2", "−2 to −6", "Always normal"] },
-        { "q": "What does FAST not reliably detect?", "a": "Retroperitoneal and hollow viscus injury", "wrong": ["Pericardial fluid", "Free fluid in Morison's pouch", "Haemothorax (eFAST)"] },
-        { "q": "A seatbelt sign raises concern for…", "a": "Bowel, mesenteric and lumbar spine (Chance) injuries", "wrong": ["Only skin bruising", "Isolated pelvic fracture", "Head injury"] },
+        { "q": "Base deficit in class III shock?", "a": "−6 to −10 mmol/L", "wrong": ["0 to −2 mmol/L", "−2 to −6 mmol/L", "−10 mmol/L or worse"] },
+        { "q": "What does FAST not reliably detect?", "a": "Retroperitoneal and hollow viscus injury", "wrong": ["Pericardial fluid in tamponade", "Free fluid in Morison's pouch", "A haemothorax (on extended FAST)"] },
+        { "q": "A seatbelt sign raises concern for…", "a": "Bowel, mesentery and lumbar spine injury", "wrong": ["Skin bruising only, which is benign", "An isolated open-book pelvic ring fracture", "A head injury from the steering wheel"] },
         { "q": "Positive FAST in an unresponsive shocked patient: next?", "a": "Laparotomy", "wrong": ["CT abdomen", "Repeat FAST in an hour", "Diagnostic peritoneal lavage first"] }
       ]
     }
@@ -154,10 +154,10 @@
   "badge": { "name": "Team Leader", "emoji": "📣", "flavor": "Brief, lead, summarise. Blood, not saline. FAST positive and unstable: theatre." },
   "cards": [
     { "q": "ATLS class II haemorrhage blood loss?", "options": ["15–30%", "Under 15%", "31–40%", "Over 40%"], "why": "Class II: tachycardia, normal systolic, narrowed pulse pressure, base deficit −2 to −6.", "source": "ATLS 10th–11th edition" },
-    { "q": "Which parameter did ATLS add to the shock classes?", "options": ["Base deficit", "Lactate", "Troponin", "Haemoglobin"], "why": "Base deficit correlates with blood loss and transfusion need.", "source": "ATLS 10th edition" },
-    { "q": "Kehr's sign is…", "options": ["Left shoulder-tip pain from splenic blood irritating the diaphragm", "Bruising round the umbilicus", "Flank bruising", "Pain on coughing"], "why": "Referred phrenic pain.", "source": "ATLS 11th edition" },
+    { "q": "Which parameter did ATLS add to the shock classes?", "options": ["Base deficit", "Serum lactate", "Haemoglobin level", "Shock index"], "why": "Base deficit correlates with blood loss and transfusion need.", "source": "ATLS 10th edition" },
+    { "q": "Kehr's sign is…", "options": ["Left shoulder-tip pain from splenic bleeding", "Periumbilical bruising from intraperitoneal blood", "Flank bruising from retroperitoneal bleeding", "Right iliac fossa pain on pressing the left side"], "why": "Referred phrenic pain.", "source": "ATLS 11th edition" },
     { "q": "Unstable trauma patient with a positive FAST: disposition?", "options": ["Laparotomy", "CT first", "Observation", "Diagnostic laparoscopy in the ED"], "why": "Unstable patients do not go to CT.", "source": "ATLS 11th edition; NICE NG39" },
-    { "q": "Which behaviour is NOT expected of a trauma team leader?", "options": ["Performing every procedure personally", "Allocating roles", "Summarising aloud", "Closed-loop communication"], "why": "The leader stays hands-off to keep oversight.", "source": "RCEM trauma team guidance" },
-    { "q": "Why test for pregnancy in every female trauma patient of reproductive age?", "options": ["It changes imaging, drugs and the need for obstetric input", "It predicts spleen injury", "It is required before FAST", "It excludes shock"], "why": "Pregnancy alters physiology and management.", "source": "ATLS 11th edition" }
+    { "q": "Which behaviour is NOT expected of a trauma team leader?", "options": ["Performing every procedure personally", "Allocating roles before the patient arrives", "Summarising aloud at intervals", "Using closed-loop communication"], "why": "The leader stays hands-off to keep oversight.", "source": "RCEM trauma team guidance" },
+    { "q": "Why test for pregnancy in every female trauma patient of reproductive age?", "options": ["It changes imaging, drugs and obstetric input", "It predicts splenic injury after blunt trauma", "It is required before a FAST scan", "A positive test excludes hypovolaemic shock"], "why": "Pregnancy alters physiology and management.", "source": "ATLS 11th edition" }
   ]
 }

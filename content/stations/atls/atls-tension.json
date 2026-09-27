@@ -92,10 +92,10 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Adult needle decompression site in ATLS 10th/11th?", "a": "4th/5th ICS just anterior to the mid-axillary line", "wrong": ["2nd ICS mid-clavicular line", "7th ICS posterior axillary line", "Subxiphoid"] },
-        { "q": "Where do you decompress in a child?", "a": "2nd ICS mid-clavicular line", "wrong": ["5th ICS mid-axillary line", "Subxiphoid", "Any space, anterior"] },
+        { "q": "Adult needle decompression site in ATLS 10th/11th?", "a": "4th/5th ICS, anterior to mid-axillary line", "wrong": ["2nd ICS, mid-clavicular line, above the 3rd rib", "7th ICS in the posterior axillary line", "Subxiphoid, angled towards the left shoulder"] },
+        { "q": "Where do you decompress in a child?", "a": "2nd ICS mid-clavicular line", "wrong": ["5th ICS in the mid-axillary line", "Subxiphoid, toward the left shoulder", "Any anterior space above the nipple"] },
         { "q": "Faster option in a ventilated patient?", "a": "Finger thoracostomy", "why": "An open incision and finger sweep decompresses reliably; a drain follows.", "wrong": ["Pericardiocentesis", "Repeated needle attempts", "Increasing PEEP"] },
-        { "q": "How does tension kill?", "a": "Mediastinal shift kinks the great veins and cuts venous return", "wrong": ["By bleeding into the pleura", "By compressing the aorta directly", "By causing vasodilation"] },
+        { "q": "How does tension kill?", "a": "Kinked great veins cut venous return", "wrong": ["Bleeding into the pleural space", "Direct compression of the aorta", "Hypoxia-driven vasodilation"] },
         { "q": "Which sign is late and unreliable?", "a": "Tracheal deviation", "wrong": ["Hypoxia", "Tachycardia", "Absent breath sounds"] }
       ]
     }
@@ -105,8 +105,8 @@
   ],
   "badge": { "name": "Pressure Release", "emoji": "💨", "flavor": "Hyper-resonant, trachea away, veins up: decompress, then drain." },
   "cards": [
-    { "q": "ATLS adult site for needle decompression?", "options": ["4th/5th ICS just anterior to the mid-axillary line", "2nd ICS mid-clavicular line", "8th ICS posterior axillary line", "Sternal angle"], "why": "Thinner chest wall laterally; standard cannulae often fail anteriorly.", "source": "ATLS 10th–11th edition", "note": "Older teaching: 2nd ICS MCL for adults." },
-    { "q": "Tension pneumothorax diagnosis is made by…", "options": ["Clinical examination", "Chest X-ray", "CT chest", "Arterial gas"], "why": "Treat before imaging.", "source": "ATLS 11th edition" },
+    { "q": "ATLS adult site for needle decompression?", "options": ["4th/5th ICS, anterior to mid-axillary line", "2nd ICS, mid-clavicular line, above the rib", "8th ICS in the posterior axillary line", "Through the sternal angle"], "why": "Thinner chest wall laterally; standard cannulae often fail anteriorly.", "source": "ATLS 10th–11th edition", "note": "Older teaching: 2nd ICS MCL for adults." },
+    { "q": "Tension pneumothorax diagnosis is made by…", "options": ["Clinical examination", "An urgent chest X-ray", "CT of the chest", "An arterial blood gas"], "why": "Treat before imaging.", "source": "ATLS 11th edition" },
     { "q": "Percussion note over a tension pneumothorax?", "options": ["Hyper-resonant", "Stony dull", "Normal", "Dull at the base only"], "why": "Air under pressure.", "source": "ATLS 11th edition" },
     { "q": "Minimum cannula length for adult needle decompression?", "options": ["About 8 cm", "About 3 cm", "About 1.5 cm", "12 cm or more"], "why": "Chest wall thickness often exceeds a standard 3–5 cm cannula.", "source": "ATLS 10th edition" },
     { "q": "After needle decompression, what next?", "options": ["Chest drain", "Remove the cannula", "Discharge after a normal film", "CT only"], "why": "Needle decompression is temporary.", "source": "ATLS 11th edition" },

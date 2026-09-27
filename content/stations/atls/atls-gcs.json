@@ -101,10 +101,10 @@
       "label": "Examiner",
       "qs": [
         { "q": "What is the GCS motor score for decorticate (abnormal flexion) posturing?", "a": "3", "wrong": ["4", "2", "5"] },
-        { "q": "Decerebrate posturing suggests a lesion where?", "a": "Midbrain or upper pons (below the red nucleus)", "wrong": ["Frontal cortex only", "Cerebellum", "Spinal cord at C5"] },
-        { "q": "How do you tell localising (M5) from withdrawal (M4)?", "a": "The hand crosses above the clavicle toward a head or neck stimulus", "wrong": ["The arm moves faster", "The patient opens his eyes too", "The legs move as well"] },
-        { "q": "How do you record verbal response in an intubated patient?", "a": "V as not testable (NT or T), report E and M", "wrong": ["V1", "V5, assuming normal", "Leave the GCS out"] },
-        { "q": "Which pupil sign suggests uncal herniation?", "a": "An ipsilateral fixed dilated pupil (third nerve compression)", "wrong": ["Bilateral pinpoint pupils", "A contralateral small pupil only", "Horner's syndrome"] }
+        { "q": "Decerebrate posturing suggests a lesion where?", "a": "Midbrain or upper pons", "wrong": ["The frontal cortex", "The cerebellar hemispheres", "The cervical spinal cord at C5"], "why": "Below the red nucleus; decorticate posturing points to a lesion above it." },
+        { "q": "How do you tell localising (M5) from withdrawal (M4)?", "a": "The hand moves above the clavicle to the stimulus", "wrong": ["The arm pulls away with normal flexion", "The patient also opens the eyes to pain", "The legs move as well as the arms each time"] },
+        { "q": "How do you record verbal response in an intubated patient?", "a": "Record V as T (not testable); give E and M", "wrong": ["Score V1 as no verbal response", "Score V5, assuming normal speech", "Leave the GCS out until extubation"] },
+        { "q": "Which pupil sign suggests uncal herniation?", "a": "Ipsilateral fixed dilated pupil", "wrong": ["Bilateral pinpoint pupils", "A small contralateral pupil only", "Horner's syndrome on the side of the clot"] }
       ]
     }
   ],
@@ -113,11 +113,11 @@
   ],
   "badge": { "name": "Coma Counter", "emoji": "👁", "flavor": "E, V and M, never just the total. Flexion to extension means he's coning." },
   "cards": [
-    { "q": "GCS M3 describes…", "options": ["Abnormal (decorticate) flexion", "Localising", "Extension", "Normal withdrawal"], "why": "M6 obeys, M5 localises, M4 normal flexion, M3 abnormal flexion, M2 extension, M1 none.", "source": "Teasdale 2014" },
-    { "q": "Recommended central pressure stimulus for the GCS?", "options": ["Trapezius pinch or supraorbital notch pressure", "Sternal rub", "Pinching the nipple", "Pressing on the eyeball"], "why": "Sternal rub bruises and is poorly standardised.", "source": "glasgowcomascale.org (2014)", "note": "Older teaching uses sternal rub." },
+    { "q": "GCS M3 describes…", "options": ["Abnormal (decorticate) flexion", "Localising to a central stimulus", "Extension (decerebrate) to pain", "Normal withdrawal from pain"], "why": "M6 obeys, M5 localises, M4 normal flexion, M3 abnormal flexion, M2 extension, M1 none.", "source": "Teasdale 2014" },
+    { "q": "Recommended central pressure stimulus for the GCS?", "options": ["Trapezius pinch or supraorbital pressure", "Sternal rub with the knuckles for 30 seconds", "Pinching the nipple or inner thigh", "Pressing firmly on the closed eyeball"], "why": "Sternal rub bruises and is poorly standardised.", "source": "glasgowcomascale.org (2014)", "note": "Older teaching uses sternal rub." },
     { "q": "Arms extended and internally rotated, wrists flexed, legs extended: this is…", "options": ["Decerebrate posturing (M2)", "Decorticate posturing (M3)", "Localising (M5)", "Normal withdrawal (M4)"], "why": "Extension posturing indicates brainstem compression below the red nucleus.", "source": "Teasdale 2014" },
-    { "q": "A GCS of 8 or less after head injury means…", "options": ["Secure the airway (intubate)", "Observe hourly", "Discharge with advice", "Lumbar puncture"], "why": "NICE: intubate for GCS 8 or less.", "source": "NICE NG232" },
-    { "q": "A new fixed dilated pupil on one side after head injury is due to…", "options": ["Third nerve compression by uncal herniation", "Sympathetic chain injury", "Direct optic nerve injury only", "Alcohol"], "why": "The uncus herniates over the tentorium and compresses the oculomotor nerve.", "source": "ATLS 11th edition" },
-    { "q": "Acute subdural haematoma on CT looks like…", "options": ["A crescent that crosses suture lines", "A lens that stops at sutures", "Blood in the basal cisterns", "A ring-enhancing lesion"], "why": "Subdural blood spreads under the dura across sutures; extradural blood is limited by them.", "source": "ATLS 11th edition" }
+    { "q": "A GCS of 8 or less after head injury means…", "options": ["Secure the airway (intubate)", "Observe with hourly neurological checks", "Oropharyngeal airway and observation", "Repeat the GCS in 30 minutes first"], "why": "NICE: intubate for GCS 8 or less.", "source": "NICE NG232" },
+    { "q": "A new fixed dilated pupil on one side after head injury is due to…", "options": ["Third nerve compression by uncal herniation", "Sympathetic chain injury in the neck", "Direct optic nerve injury on that side", "Alcohol or opioid intoxication"], "why": "The uncus herniates over the tentorium and compresses the oculomotor nerve.", "source": "ATLS 11th edition" },
+    { "q": "Acute subdural haematoma on CT looks like…", "options": ["A crescent that crosses suture lines", "A lens shape that stops at the sutures", "Blood filling the basal cisterns", "A ring-enhancing lesion with oedema"], "why": "Subdural blood spreads under the dura across sutures; extradural blood is limited by them.", "source": "ATLS 11th edition" }
   ]
 }

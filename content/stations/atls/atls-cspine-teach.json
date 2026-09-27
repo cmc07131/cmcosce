@@ -81,11 +81,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Which is a Canadian C-spine Rule high-risk factor?", "a": "Paraesthesia in the extremities", "wrong": ["Simple rear-end collision", "Delayed onset of neck pain", "Sitting up in the ED"] },
+        { "q": "Which is a Canadian C-spine Rule high-risk factor?", "a": "Paraesthesia in the extremities", "wrong": ["A simple rear-end motor vehicle collision", "Delayed onset of neck pain after the crash", "Able to sit up in the emergency department"] },
         { "q": "Which is NOT a NEXUS criterion?", "a": "Age over 65", "wrong": ["Midline tenderness", "Intoxication", "Focal neurological deficit"] },
         { "q": "First-line C-spine imaging in an adult who needs it (NICE)?", "a": "CT", "wrong": ["Three-view plain films", "MRI", "Flexion–extension views"] },
         { "q": "A dangerous mechanism in the CCR includes…", "a": "Fall from 1 m or 5 stairs", "wrong": ["Fall from standing", "Rear-end collision at 20 km/h", "Twisting the neck at the gym"] },
-        { "q": "A harm of a tight collar?", "a": "Raised intracranial pressure", "wrong": ["Hypoglycaemia", "Hyperkalaemia", "Bradycardia"] }
+        { "q": "A harm of a tight collar?", "a": "Raised intracranial pressure", "wrong": ["Hypoglycaemia from vagal stimulation", "Hyperkalaemia from muscle compression", "Horner's syndrome from sympathetic compression"] }
       ]
     }
   ],
@@ -93,9 +93,9 @@
   "cards": [
     { "q": "Canadian C-spine Rule: which mandates imaging?", "options": ["Age 65 or older", "Rear-end collision", "Delayed neck pain", "Ambulatory at scene"], "why": "Age ≥65, dangerous mechanism, or limb paraesthesia.", "source": "Stiell 2001" },
     { "q": "The CCR rotation test requires turning the head…", "options": ["45° left and right", "90° left and right", "Chin to chest", "Full extension"], "why": "Active rotation 45° each way.", "source": "Stiell 2001" },
-    { "q": "How is a collar sized?", "options": ["Angle of jaw to top of trapezius, in finger breadths", "Neck circumference", "Chin to sternal notch", "Patient's height"], "why": "Match that distance to the rigid part of the collar.", "source": "Manufacturer guidance" },
+    { "q": "How is a collar sized?", "options": ["Jaw angle to trapezius, in finger breadths", "Chin to sternal notch, in finger breadths", "Neck circumference with a tape", "The patient's height and weight on a chart"], "why": "Match that distance to the rigid part of the collar.", "source": "Manufacturer guidance" },
     { "q": "First-line C-spine imaging in adults (NICE NG41)?", "options": ["CT", "Plain X-ray", "MRI", "Ultrasound"], "why": "CT is more sensitive and faster in adults.", "source": "NICE NG41" },
-    { "q": "NEXUS requires which to be absent?", "options": ["Posterior midline tenderness", "Any neck pain", "Age over 65", "Dangerous mechanism"], "why": "NEXUS: no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury.", "source": "Hoffman 2000" },
-    { "q": "Current consensus on spinal immobilisation?", "options": ["Spinal motion restriction with minimal handling; collars not routine for all", "Rigid collar and long board for every trauma patient", "No precautions ever", "Soft collar for all"], "why": "Collars have harms; the self-extricating, ambulant patient may not need one.", "source": "Faculty of Pre-Hospital Care consensus 2018" }
+    { "q": "NEXUS requires which to be absent?", "options": ["Posterior midline tenderness", "Any neck pain at all", "Age over 65 years", "A dangerous mechanism of injury"], "why": "NEXUS: no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury.", "source": "Hoffman 2000" },
+    { "q": "Current consensus on spinal immobilisation?", "options": ["Motion restriction; collars not routine for all", "Rigid collar and long board for every trauma patient", "Soft collar for all patients until X-rays are done", "No precautions unless a deficit is present"], "why": "Collars have harms; the self-extricating, ambulant patient may not need one.", "source": "Faculty of Pre-Hospital Care consensus 2018" }
   ]
 }

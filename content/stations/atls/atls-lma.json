@@ -79,20 +79,20 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What makes a supraglottic airway 'second generation'?", "a": "A gastric drain channel and a better seal", "wrong": ["It is disposable", "It has a light", "It is placed through the nose"] },
+        { "q": "What makes a supraglottic airway 'second generation'?", "a": "A gastric drain channel and a better seal", "wrong": ["It is single-use and disposable", "A built-in video camera to guide placement", "It can be placed through the nose"] },
         { "q": "i-gel size for a 95 kg adult?", "a": "5", "wrong": ["3", "4", "2.5"] },
         { "q": "What is the purpose of the epiglottic elevating bar on the intubating LMA?", "a": "Lifts the epiglottis as the tube passes", "wrong": ["Seals the oesophagus", "Measures the cuff pressure", "Holds the tongue down"] },
-        { "q": "After plan B fails and you cannot oxygenate by mask, the next step is…", "a": "Front-of-neck access (scalpel–bougie–tube)", "wrong": ["A fifth laryngoscopy", "Needle cricothyroidotomy in all adults", "Wait for the anaesthetist"] },
-        { "q": "The Chandy manoeuvre is used to…", "a": "Improve ventilation and alignment for intubation through the ILMA", "wrong": ["Remove a foreign body", "Reduce a dislocated jaw", "Insert a nasopharyngeal airway"] }
+        { "q": "After plan B fails and you cannot oxygenate by mask, the next step is…", "a": "Front-of-neck access (scalpel–bougie–tube)", "wrong": ["A fifth attempt at laryngoscopy", "Needle cricothyroidotomy in all adults", "Wait for the anaesthetist to arrive"] },
+        { "q": "The Chandy manoeuvre is used to…", "a": "Improve seal and alignment for ILMA intubation", "wrong": ["Remove a foreign body from the pharynx", "Reduce a dislocated jaw after a difficult laryngoscopy", "Insert a nasopharyngeal airway safely"] }
       ]
     }
   ],
   "badge": { "name": "Plan B", "emoji": "🅱", "flavor": "Declare it, oxygenate, three attempts at most, then stop and think." },
   "cards": [
-    { "q": "DAS plan B after failed intubation?", "options": ["Second-generation supraglottic airway", "Front-of-neck access", "Wake the patient only", "Nasal intubation"], "why": "Plan B oxygenates through a supraglottic device (maximum three attempts).", "source": "DAS 2025" },
-    { "q": "i-gel for a 60 kg adult?", "options": ["Size 3 or 4 (overlap band)", "Size 5", "Size 2", "Size 1.5"], "why": "3: 30–60 kg, 4: 50–90 kg, 5: over 90 kg.", "source": "i-gel manufacturer" },
-    { "q": "How is an i-gel cuff inflated?", "options": ["It is not — the cuff is gel", "With 20 mL air", "With saline", "With 5 mL air"], "why": "Non-inflatable thermoplastic elastomer cuff.", "source": "i-gel manufacturer" },
-    { "q": "Maximum intubation attempts before plan B (DAS)?", "options": ["3 (plus 1 by a more experienced operator)", "1", "6", "No limit"], "why": "Repeated attempts cause trauma and swelling.", "source": "DAS 2025" },
+    { "q": "DAS plan B after failed intubation?", "options": ["Second-generation supraglottic airway", "Front-of-neck access", "Wake the patient and postpone", "Blind nasal intubation attempt"], "why": "Plan B oxygenates through a supraglottic device (maximum three attempts).", "source": "DAS 2025" },
+    { "q": "i-gel for a 60 kg adult?", "options": ["Size 3 or 4 (overlap band)", "Size 5 (for all adults over 50 kg)", "Size 2.5 (25–35 kg)", "Size 2 (10–25 kg)"], "why": "3: 30–60 kg, 4: 50–90 kg, 5: over 90 kg.", "source": "i-gel manufacturer" },
+    { "q": "How is an i-gel cuff inflated?", "options": ["It is not — the cuff is gel", "With 20 mL of air via the pilot", "With saline to 60 cmH2O", "With 5 mL of air, then check"], "why": "Non-inflatable thermoplastic elastomer cuff.", "source": "i-gel manufacturer" },
+    { "q": "Maximum intubation attempts before plan B (DAS)?", "options": ["3 (+1 by a more experienced operator)", "1, then straight to plan B", "5 (+1 by the most senior anaesthetist)", "Unlimited while SpO2 stays above 94%"], "why": "Repeated attempts cause trauma and swelling.", "source": "DAS 2025" },
     { "q": "Best confirmation of ventilation through a supraglottic airway?", "options": ["Waveform capnography", "Listening at the mouth", "Mist in the tube", "SpO2 alone"], "why": "Capnography confirms ventilation of the lungs.", "source": "DAS 2025" },
     { "q": "Which is a retroglottic device?", "options": ["Combitube", "i-gel", "LMA Supreme", "Air-Q"], "why": "The Combitube's distal cuff sits beyond the glottis, usually in the oesophagus.", "source": "Airway device classification" }
   ]

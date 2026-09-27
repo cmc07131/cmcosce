@@ -182,11 +182,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Where should a pelvic binder sit?", "a": "Over the greater trochanters", "wrong": ["Over the iliac crests", "Over the umbilicus", "Over the lower ribs"] },
-        { "q": "Commonest source of bleeding in a pelvic ring fracture?", "a": "The posterior venous plexus", "why": "About 85% venous and bony; a binder tamponades it. Arterial bleeding needs embolisation.", "wrong": ["The common iliac artery", "The inferior vena cava", "The femoral artery"] },
+        { "q": "Where should a pelvic binder sit?", "a": "Over the greater trochanters", "wrong": ["Over the iliac crests, like a belt", "Around the umbilicus and lower abdomen", "Over the lower ribs and upper abdomen"] },
+        { "q": "Commonest source of bleeding in a pelvic ring fracture?", "a": "The posterior venous plexus", "why": "About 85% venous and bony; a binder tamponades it. Arterial bleeding needs embolisation.", "wrong": ["The internal iliac artery trunk", "The inferior vena cava at L4", "The common femoral artery in the groin"] },
         { "q": "Which mechanism causes an open-book injury?", "a": "Anteroposterior compression", "wrong": ["Lateral compression", "A fall onto the buttocks", "A twisting injury of one leg"] },
-        { "q": "In a man, which sign stops you passing a urethral catheter?", "a": "Blood at the urethral meatus", "why": "Also a high-riding prostate or scrotal haematoma. Image the urethra first.", "wrong": ["Suprapubic tenderness", "Haematuria on dipstick", "Unable to pass urine"] },
-        { "q": "What does a transient responder need?", "a": "Haemorrhage control: angioembolisation or packing and fixation", "wrong": ["More crystalloid and a repeat CT tomorrow", "Admission for observation", "A second binder on top"] }
+        { "q": "In a man, which sign stops you passing a urethral catheter?", "a": "Blood at the urethral meatus", "why": "Also a high-riding prostate or scrotal haematoma. Image the urethra first.", "wrong": ["Suprapubic tenderness and fullness", "Microscopic haematuria on dipstick", "Inability to pass urine so far"] },
+        { "q": "What does a transient responder need?", "a": "Haemorrhage control: embolisation or packing", "wrong": ["More crystalloid and a CT tomorrow", "Admission to the ward for observation", "A second binder applied on top of the first"] }
       ]
     }
   ],
@@ -196,10 +196,10 @@
   "badge": { "name": "Ring Closer", "emoji": "⭕", "flavor": "Trochanters, not crests. Close the ring, then find the bleeder." },
   "cards": [
     { "q": "Correct level for a pelvic binder?", "options": ["Greater trochanters", "Iliac crests", "Anterior superior iliac spines", "Umbilicus"], "why": "Over the trochanters it closes the ring; over the crests it can widen the fracture.", "source": "ATLS 11th edition" },
-    { "q": "Most pelvic fracture haemorrhage is from…", "options": ["The presacral venous plexus and fracture surfaces", "The external iliac artery", "The aorta", "The femoral vein"], "why": "About 85% venous or bony; arterial bleeding is the minority that needs embolisation.", "source": "ATLS 11th edition" },
+    { "q": "Most pelvic fracture haemorrhage is from…", "options": ["Pelvic venous plexus and bone surfaces", "The external iliac artery at the pelvic brim", "The abdominal aorta at its bifurcation", "The common femoral vein below the ligament"], "why": "About 85% venous or bony; arterial bleeding is the minority that needs embolisation.", "source": "ATLS 11th edition" },
     { "q": "An open-book pelvic fracture is caused by…", "options": ["Anteroposterior compression", "Lateral compression", "Vertical shear only", "Low-energy falls in the elderly"], "why": "Front-to-back force springs the symphysis and opens the SI joints.", "source": "Young–Burgess classification" },
     { "q": "Where should IV access go in a pelvic bleed?", "options": ["Above the diaphragm", "Femoral vein", "Saphenous vein at the ankle", "Intraosseous tibia first"], "why": "Fluid given below the injury may leak from the torn pelvic veins.", "source": "ATLS 11th edition" },
-    { "q": "A shocked patient with a pelvic fracture does not respond to blood. Next?", "options": ["Theatre or IR for haemorrhage control, not CT", "CT abdomen and pelvis", "Repeat the pelvic X-ray", "Remove the binder to re-examine"], "why": "Non-responders go straight to haemorrhage control.", "source": "ATLS 11th edition; NICE NG39" },
+    { "q": "A shocked patient with a pelvic fracture does not respond to blood. Next?", "options": ["Theatre or IR for bleeding control", "CT abdomen and pelvis to find the source", "Repeat the pelvic X-ray after the binder", "Remove the binder to re-examine the ring"], "why": "Non-responders go straight to haemorrhage control.", "source": "ATLS 11th edition; NICE NG39" },
     { "q": "Which is NOT a reason to avoid a urethral catheter in male pelvic trauma?", "options": ["A negative FAST", "Blood at the meatus", "High-riding prostate", "Scrotal haematoma"], "why": "The other three suggest urethral injury: image the urethra first.", "source": "ATLS 11th edition" }
   ]
 }

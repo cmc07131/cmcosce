@@ -117,11 +117,11 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What does HOTT stand for?", "a": "Hypovolaemia, Oxygenation, Tension pneumothorax, Tamponade", "wrong": ["Hypoxia, Obstruction, Toxins, Thrombosis", "Haemorrhage, Opioids, Trauma, Temperature", "Hypothermia, Oxygen, Tamponade, Toxins"] },
-        { "q": "Best candidate for ED thoracotomy?", "a": "Penetrating chest injury, recent loss of signs of life", "wrong": ["Blunt trauma, 30 minutes of CPR", "Isolated head injury", "Elderly fall with a hip fracture"] },
-        { "q": "Why not pericardiocentesis for traumatic tamponade?", "a": "The blood is clotted and a needle cannot drain it", "wrong": ["It is illegal in the ED", "It causes tension pneumothorax", "It takes longer than a CT"] },
+        { "q": "What does HOTT stand for?", "a": "Hypovolaemia, Oxygenation, Tension, Tamponade", "wrong": ["Hypothermia, Obstruction, Tension pneumothorax, Thrombosis", "Haemorrhage, Opioids, Trauma to the heart, Temperature", "Hypoxia, Obstruction, Toxins, Thrombosis"] },
+        { "q": "Best candidate for ED thoracotomy?", "a": "Penetrating chest wound, signs of life just lost", "wrong": ["Blunt trauma after 30 minutes of CPR at the scene", "Isolated severe head injury", "Elderly fall with a hip fracture"] },
+        { "q": "Why not pericardiocentesis for traumatic tamponade?", "a": "Clotted blood will not drain through a needle", "wrong": ["It is only allowed in the cardiac catheter lab", "It routinely causes a tension pneumothorax on the left", "It takes longer than getting a CT scan"] },
         { "q": "Which nerve runs on the pericardium?", "a": "Phrenic", "wrong": ["Vagus only", "Recurrent laryngeal", "Intercostobrachial"] },
-        { "q": "Why are compressions deprioritised in traumatic arrest?", "a": "They cannot fill an empty or tamponaded heart", "wrong": ["They break ribs", "They spread infection", "They are not needed in young patients"] }
+        { "q": "Why are compressions deprioritised in traumatic arrest?", "a": "They cannot fill an empty or tamponaded heart", "wrong": ["They fracture ribs", "They spread blood-borne infection", "Young patients do not need them"] }
       ]
     }
   ],
@@ -130,11 +130,11 @@
   ],
   "badge": { "name": "Clamshell", "emoji": "🐚", "flavor": "HOTT, not just CPR. Longitudinal, in front of the phrenic." },
   "cards": [
-    { "q": "Reversible causes addressed first in traumatic cardiac arrest?", "options": ["Hypovolaemia, oxygenation, tension, tamponade", "Hypoglycaemia and hypothermia only", "Toxins and thrombosis", "Acidosis and hyperkalaemia"], "why": "HOTT, treated simultaneously, before or with compressions.", "source": "ERC 2021 special circumstances" },
+    { "q": "Reversible causes addressed first in traumatic cardiac arrest?", "options": ["Hypovolaemia, oxygenation, tension, tamponade", "Hypothermia and toxins", "Toxins, thrombosis and hyperkalaemia", "Acidosis, hyperkalaemia and hypocalcaemia"], "why": "HOTT, treated simultaneously, before or with compressions.", "source": "ERC 2021 special circumstances" },
     { "q": "Traumatic tamponade in arrest is treated by…", "options": ["Resuscitative thoracotomy", "Needle pericardiocentesis", "Adrenaline and fluids", "CT then surgery"], "why": "Clotted blood needs the pericardium opened.", "source": "ERC 2021" },
-    { "q": "Pericardial incision during clamshell thoracotomy?", "options": ["Longitudinal, anterior to the phrenic nerve", "Transverse across the apex", "Posterior to the phrenic nerve", "Circumferential"], "why": "Protects the phrenic nerves.", "source": "ATLS 11th edition" },
-    { "q": "ED thoracotomy outcomes are best for…", "options": ["Stab wounds with tamponade", "Blunt trauma arrest", "Gunshot to the head", "Falls from height"], "why": "Isolated cardiac stab wounds with tamponade have the best survival.", "source": "ERC 2021" },
-    { "q": "After ROSC from clamshell, which vessels start bleeding?", "options": ["Internal mammary (thoracic) arteries", "Carotid arteries", "Subclavian veins", "Pulmonary veins"], "why": "They were cut with the sternum; tie them.", "source": "ATLS 11th edition" },
-    { "q": "Ultrasound sign of tamponade?", "options": ["Pericardial fluid with right ventricular diastolic collapse", "Lung sliding", "B-lines", "Morison's pouch fluid"], "why": "The pressure collapses the thin-walled right heart in diastole.", "source": "ACEP / RCEM ultrasound" }
+    { "q": "Pericardial incision during clamshell thoracotomy?", "options": ["Longitudinal, anterior to the phrenic nerve", "Transverse, across the apex", "Longitudinal, posterior to the phrenic nerve", "Circumferential around the base"], "why": "Protects the phrenic nerves.", "source": "ATLS 11th edition" },
+    { "q": "ED thoracotomy outcomes are best for…", "options": ["Stab wounds with tamponade", "Blunt trauma with arrest at scene", "Gunshot wound to the head", "Falls from height with arrest"], "why": "Isolated cardiac stab wounds with tamponade have the best survival.", "source": "ERC 2021" },
+    { "q": "After ROSC from clamshell, which vessels start bleeding?", "options": ["Internal thoracic arteries", "The common carotid arteries", "The subclavian veins", "The pulmonary veins at the hilum"], "why": "They were cut with the sternum; tie them.", "source": "ATLS 11th edition" },
+    { "q": "Ultrasound sign of tamponade?", "options": ["Pericardial fluid with RV diastolic collapse", "Pericardial fluid with a hyperdynamic, full RV", "Absent lung sliding on one side", "Multiple B-lines in both lungs"], "why": "The pressure collapses the thin-walled right heart in diastole.", "source": "ACEP / RCEM ultrasound" }
   ]
 }

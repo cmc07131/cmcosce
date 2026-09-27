@@ -85,10 +85,10 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "How do you tell a tracheostomy from a laryngectomy at the bedside?", "a": "The bed-head sign and whether the upper airway connects", "wrong": ["By the tube colour", "By the patient's age", "By the size of the stoma alone"] },
-        { "q": "First manoeuvre to check tracheostomy patency?", "a": "Remove the inner cannula", "wrong": ["Remove the whole tube", "Inflate the cuff more", "Bag harder"] },
-        { "q": "A sentinel bleed from a 3-week-old tracheostomy suggests…", "a": "Tracheo-innominate fistula", "wrong": ["Granulation tissue only", "Normal healing", "Pneumothorax"] },
-        { "q": "First actions in massive tracheostomy bleeding?", "a": "Over-inflate the cuff and press through the stoma against the sternum", "wrong": ["Remove the tube immediately", "Suction deeply", "Deflate the cuff"] },
+        { "q": "How do you tell a tracheostomy from a laryngectomy at the bedside?", "a": "Bed-head sign; is the upper airway connected?", "wrong": ["The colour of the tube and flange", "The patient's age and voice", "The size of the stoma alone"] },
+        { "q": "First manoeuvre to check tracheostomy patency?", "a": "Remove the inner cannula", "wrong": ["Remove the whole tube", "Inflate the cuff more", "Bag harder through the tube"] },
+        { "q": "A sentinel bleed from a 3-week-old tracheostomy suggests…", "a": "Tracheo-innominate fistula", "wrong": ["Granulation tissue only", "Normal healing of the stoma", "A tension pneumothorax"] },
+        { "q": "First actions in massive tracheostomy bleeding?", "a": "Over-inflate the cuff; press on the stoma", "wrong": ["Remove the tube immediately", "Suction deeply and repeatedly", "Remove the tube and pack"] },
         { "q": "Where does oxygen go in a laryngectomy patient?", "a": "The stoma only", "wrong": ["The mouth and nose", "Both mouth and stoma", "Nasal cannula"] }
       ]
     }
@@ -100,9 +100,9 @@
   "cards": [
     { "q": "In a tracheostomy emergency, oxygen goes to…", "options": ["Both the face and the stoma", "The face only", "The stoma only", "Neither until a new tube is in"], "why": "The upper airway is still patent in a tracheostomy.", "source": "NTSP" },
     { "q": "In a laryngectomy patient, oxygen goes to…", "options": ["The stoma only", "The face only", "Both", "A nasal cannula"], "why": "No connection between the upper airway and the trachea.", "source": "NTSP" },
-    { "q": "First patency step in a blocked tracheostomy?", "options": ["Remove the speaking valve and inner cannula", "Remove the whole tube", "Give nebulised saline", "Increase the cuff pressure"], "why": "Most blockages are in the inner cannula.", "source": "NTSP" },
-    { "q": "If a suction catheter will not pass down the tracheostomy…", "options": ["Deflate the cuff, then consider removing the tube", "Push harder", "Bag vigorously", "Wait for ENT"], "why": "The tube may be displaced or blocked.", "source": "NTSP" },
-    { "q": "Massive bleeding from a tracheostomy weeks after insertion: first action?", "options": ["Hyper-inflate the cuff and apply pressure", "Remove the tube", "Pack the stoma with dry gauze and wait", "CT angiogram"], "why": "Tamponade the tracheo-innominate fistula while calling for surgery.", "source": "NTSP" },
-    { "q": "Tube for oral intubation in a tracheostomy patient?", "options": ["Uncut, advanced beyond the stoma", "Cut short at 18 cm", "Nasal tube", "Size 9.0 cuffless"], "why": "The cuff must sit below the stoma.", "source": "NTSP" }
+    { "q": "First patency step in a blocked tracheostomy?", "options": ["Remove the speaking valve and inner cannula", "Remove the whole tube at once", "Give nebulised saline and wait", "Increase the cuff pressure to 40 cmH2O"], "why": "Most blockages are in the inner cannula.", "source": "NTSP" },
+    { "q": "If a suction catheter will not pass down the tracheostomy…", "options": ["Deflate the cuff, then consider removal", "Push the catheter harder through the block", "Bag vigorously through the tracheostomy", "Wait for the ENT team before any action"], "why": "The tube may be displaced or blocked.", "source": "NTSP" },
+    { "q": "Massive bleeding from a tracheostomy weeks after insertion: first action?", "options": ["Hyper-inflate the cuff and apply pressure", "Remove the tube and pack the stoma", "Deflate the cuff so blood can drain upwards", "Arrange a CT angiogram of the neck first"], "why": "Tamponade the tracheo-innominate fistula while calling for surgery.", "source": "NTSP" },
+    { "q": "Tube for oral intubation in a tracheostomy patient?", "options": ["Uncut, advanced beyond the stoma", "Cut short at 18 cm at the lips", "A nasal tube to avoid the stoma", "Size 9.0 cuffless tube, cut to 20 cm"], "why": "The cuff must sit below the stoma.", "source": "NTSP" }
   ]
 }
