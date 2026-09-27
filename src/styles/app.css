@@ -2119,3 +2119,40 @@ button {
 .live-nums [data-c='glu'] b {
   color: #f89858;
 }
+
+/* All steps done: a tappable bar at the foot of the room (clear of the mark toasts) that ends the station. */
+.done-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  z-index: 21;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: #fff;
+  background: #2f7a3e;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: inset 0 -2px 0 #1f5a2c;
+  cursor: pointer;
+  animation: done-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes done-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .done-bar {
+    animation: none;
+  }
+}

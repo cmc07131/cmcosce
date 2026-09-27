@@ -11,6 +11,8 @@ export function StartMenu({
   pack,
   inventory,
   earnedMarks,
+  initialPage = 'root',
+  stepsLeft = [],
   onClose,
   onNotes,
   onHint,
@@ -19,12 +21,16 @@ export function StartMenu({
   pack: Pack
   inventory: string[]
   earnedMarks: string[]
+  /** 'leave' when opened from the door. */
+  initialPage?: Page
+  /** Steps not done yet, named on the hand-over question. */
+  stepsLeft?: string[]
   onClose: () => void
   onNotes: () => void
   onHint: () => void
   onLeave: () => void
 }) {
-  const [page, setPage] = useState<Page>('root')
+  const [page, setPage] = useState<Page>(initialPage)
   const root = useRef<HTMLDivElement>(null)
   const sound = useSettings((s) => s.sound)
   const labels = useSettings((s) => s.labels)
@@ -33,7 +39,7 @@ export function StartMenu({
   const cursor = useCursor(root, {
     priority: 20,
     onBack: () => {
-      if (page === 'root') onClose()
+      if (page === 'root' || page === initialPage) onClose()
       else go('root')
     },
   })
@@ -82,8 +88,15 @@ export function StartMenu({
         )}
         {page === 'leave' && (
           <Win title="Hand over and end the station?" className="menu-col w-[240px]">
-            <NavItem testId="leave-yes" onClick={onLeave}>YES</NavItem>
-            <NavItem testId="leave-no" onClick={() => go('root')}>NO</NavItem>
+            {stepsLeft.length > 0 ? (
+              <p className="menu-note" data-testid="leave-left">
+                Not done yet: {stepsLeft.join(', ')}.
+              </p>
+            ) : (
+              <p className="menu-note">Every step is done. The debrief is next.</p>
+            )}
+            <NavItem testId="leave-yes" onClick={onLeave}>YES, HAND OVER</NavItem>
+            <NavItem testId="leave-no" onClick={() => (initialPage === 'leave' ? onClose() : go('root'))}>NOT YET</NavItem>
           </Win>
         )}
       </div>

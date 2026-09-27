@@ -1,6 +1,6 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { hintFor } from '~/engine/judge'
+import { hintFor, stepsDone } from '~/engine/judge'
 import { readoutText, type Pack } from '~/engine/schema'
 import { hasOutput, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
@@ -43,7 +43,9 @@ export function PlayView({ pack }: { pack: Pack }) {
   const labels = useSettings((s) => s.labels)
   const screen = useRef<ScreenHandle>(null)
   const textBox = useRef<TextBoxHandle>(null)
-  const [menu, setMenu] = useState(false)
+  /** The START menu, or the door's hand-over question (the menu opened on its leave page). */
+  const [menu, setMenu] = useState<false | 'root' | 'leave'>(false)
+  const announcedDone = useRef(false)
   const [typing, setTyping] = useState(false)
   const [facingId, setFacingId] = useState<string | null>(null)
   const bootEnded = useRef<string | null>(null)
@@ -88,7 +90,20 @@ export function PlayView({ pack }: { pack: Pack }) {
     return () => window.clearTimeout(id)
   }, [firstToast?.token, store])
 
-  const paused = overlay !== null || performing !== null || menu
+  const progress = stepsDone(pack, spent)
+  const allDone = progress.total > 0 && progress.done === progress.total
+  useEffect(() => {
+    if (!hydrated || !entered || ended || !allDone || announcedDone.current) return
+    announcedDone.current = true
+    // Let the last reply finish before the examiner speaks.
+    const id = window.setTimeout(() => {
+      sfx.mark()
+      store().note("Thank you, that's the station. Walk out of the door, or tap FINISH, when you're ready for the debrief.", 'say', 'examiner')
+    }, 1800)
+    return () => window.clearTimeout(id)
+  }, [hydrated, entered, ended, allDone, store])
+
+  const paused = overlay !== null || performing !== null || menu !== false
 
   useButtons(0, hydrated && !ended && !paused, (btn) => {
     if (btn === 'a') {
@@ -102,7 +117,7 @@ export function PlayView({ pack }: { pack: Pack }) {
     }
     if (btn === 'start') {
       sfx.select()
-      setMenu(true)
+      setMenu('root')
       return
     }
     if (btn === 'select') {
@@ -157,6 +172,11 @@ export function PlayView({ pack }: { pack: Pack }) {
               }}
               onUse={(targetId) => {
                 sfx.select()
+                // The door is the way out: it asks whether to hand over and end the station.
+                if (targetId === 'door' && entered && !pack.actions.some((a) => a.targetIds.includes('door'))) {
+                  setMenu('leave')
+                  return
+                }
                 store().openTarget(pack, targetId)
               }}
               onEmpty={() => store().note('Nothing to use there.')}
@@ -176,6 +196,19 @@ export function PlayView({ pack }: { pack: Pack }) {
                 ★{earnedMarks.length}/{pack.marks.length}
               </span>
             </div>
+            {allDone && entered && !overlay && !performing && menu === false && (
+              <button
+                type="button"
+                className="done-bar"
+                data-testid="station-done"
+                onClick={() => {
+                  sfx.select()
+                  store().leave()
+                }}
+              >
+                ✓ STATION DONE · FINISH ▶
+              </button>
+            )}
             {firstToast && (
               <div className="toast" key={firstToast.token} data-testid="toast">
                 <span className="toast-tag">MARK! {firstToast.id}</span>
@@ -206,6 +239,8 @@ export function PlayView({ pack }: { pack: Pack }) {
                 pack={pack}
                 inventory={inventory}
                 earnedMarks={earnedMarks}
+                initialPage={menu}
+                stepsLeft={progress.left}
                 onClose={() => setMenu(false)}
                 onNotes={() => {
                   setMenu(false)
@@ -256,7 +291,7 @@ function EndedScreen({ pack, onDebrief, onAgain }: { pack: Pack; onDebrief: () =
   const earned = usePlay((s) => s.earnedMarks)
   return (
     <div className="page" ref={root}>
-      <Win title="HANDED OVER" className="w-full">
+      <Win title="STATION COMPLETE" className="w-full">
         <p className="sheet-text">{pack.title}</p>
         <p className="sheet-meta">
           ★ {earned.length}/{pack.marks.length} marks on the sheet

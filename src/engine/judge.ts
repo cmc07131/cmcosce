@@ -196,3 +196,18 @@ export function itemLabel(pack: Pack, id: string) {
 export function unique(ids: string[]) {
   return [...new Set(ids)]
 }
+
+/**
+ * How many of the station's steps the candidate has done (any non-trap choice, finding or region used).
+ * The monitor is a readout, not a step. All done means the examiner has nothing left to watch.
+ */
+export function stepsDone(pack: Pack, spent: Record<string, string[]>) {
+  const steps = pack.goldPath.map((id) => pack.actions.find((a) => a.id === id)).filter((a): a is Action => Boolean(a) && a!.kind !== 'monitor')
+  const done = steps.filter((a) => {
+    const used = new Set(spent[a.id] ?? [])
+    if ((a.options ?? []).some((o) => !o.isTrap && used.has(o.id))) return true
+    if ((a.findings ?? []).some((f) => used.has(f.id))) return true
+    return (a.regions ?? []).some((r) => used.has(r.id))
+  })
+  return { done: done.length, total: steps.length, left: steps.filter((a) => !done.includes(a)).map((a) => a.prompt ?? a.id) }
+}

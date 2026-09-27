@@ -3,7 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { test } from 'node:test'
 import { usePlay } from '../game/store'
-import { judgeSequence, menuIsMulti } from './judge'
+import { judgeSequence, menuIsMulti, stepsDone } from './judge'
 import type { Action, Pack } from './schema'
 import { compileStation, stationSchema } from './station'
 
@@ -71,6 +71,8 @@ test('every station can be finished with full marks, no faults, and every rule m
     const earned = new Set(end.earnedMarks)
     const missing = pack.marks.filter((m) => !earned.has(m.id))
     if (missing.length) problems.push(`${pack.packId}: unreachable marks: ${missing.map((m) => m.label).join('; ')}`)
+    const progress = stepsDone(pack, end.spent)
+    if (progress.done !== progress.total) problems.push(`${pack.packId}: a perfect run leaves steps not done: ${progress.left.join(', ')}`)
     if (end.faults.length) problems.push(`${pack.packId}: faults on a perfect run: ${end.faults.map((f) => f.text).join('; ')}`)
     for (const v of judgeSequence(pack.sequenceRules, end.log)) if (v.status !== 'pass') problems.push(`${pack.packId}: rule ${v.id} fails on the script order`)
     // Effects a good option sets must fire; effects only a trap sets (a worse patient) must not.
