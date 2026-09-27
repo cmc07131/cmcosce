@@ -42,10 +42,10 @@
       "hint": "Lower SBP to 130–140, head up 30°, airway decision, lines.",
       "confirm": "Do these",
       "opts": [
-        { "t": "IV labetalol (or GTN/nicardipine) to SBP 130–140", "need": true, "scene": "bp", "mark": "Lowers SBP to 130–140" },
+        { "t": "IV labetalol (or GTN/nicardipine) to SBP 130–140", "fetch": "cart", "need": true, "scene": "bp", "mark": "Lowers SBP to 130–140" },
         { "t": "Head up 30°, two IV lines, all secured", "need": true, "mark": "Head up and secure lines" },
-        { "t": "Airway: GCS 11 and protecting — no intubation now, but escort able to intubate; RSI drugs pre-drawn and labelled", "need": true, "mark": "Airway decision with contingency" },
-        { "t": "Drop SBP to 100 quickly", "trap": true, "r": "Avoid SBP under 130; risks cerebral hypoperfusion." }
+        { "t": "Airway: GCS 11 and protecting — no intubation now, but escort able to intubate; RSI drugs pre-drawn and labelled", "fetch": "cart", "need": true, "mark": "Airway decision with contingency" },
+        { "t": "Drop SBP to 100 quickly", "fetch": "cart", "trap": true, "r": "Avoid SBP under 130; risks cerebral hypoperfusion." }
       ]
     },
     {

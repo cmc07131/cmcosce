@@ -51,12 +51,12 @@
       "hint": "Parenteral thiamine now; benzodiazepine; check glucose, electrolytes.",
       "confirm": "Give",
       "opts": [
-        { "t": "IV Pabrinex (high-dose thiamine) now, before glucose-containing fluids", "need": true, "mark": "High-dose parenteral thiamine for suspected Wernicke's" },
-        { "t": "Diazepam (or chlordiazepoxide), titrated to CIWA-Ar", "need": true, "scene": "benzo", "mark": "Benzodiazepine titrated to symptoms" },
+        { "t": "IV Pabrinex (high-dose thiamine) now, before glucose-containing fluids", "fetch": "cart", "need": true, "mark": "High-dose parenteral thiamine for suspected Wernicke's" },
+        { "t": "Diazepam (or chlordiazepoxide), titrated to CIWA-Ar", "fetch": "cart", "need": true, "scene": "benzo", "mark": "Benzodiazepine titrated to symptoms" },
         { "t": "Bloods: glucose, Mg, phosphate, K, LFT, FBC, lipase", "need": true, "mark": "Checks glucose and electrolytes" },
         { "t": "CT head (head injury in an alcohol-dependent patient)", "need": true, "mark": "Imaging for head injury" },
-        { "t": "Haloperidol alone for the hallucinations", "trap": true, "r": "Antipsychotics lower the seizure threshold and don't treat withdrawal; benzodiazepines first." },
-        { "t": "Oral thiamine 100 mg and discharge", "trap": "critical", "r": "He has delirium tremens and possible Wernicke's: admit, parenteral thiamine, benzodiazepines." }
+        { "t": "Haloperidol alone for the hallucinations", "fetch": "cart", "trap": true, "r": "Antipsychotics lower the seizure threshold and don't treat withdrawal; benzodiazepines first." },
+        { "t": "Oral thiamine 100 mg and discharge", "fetch": "cart", "trap": "critical", "r": "He has delirium tremens and possible Wernicke's: admit, parenteral thiamine, benzodiazepines." }
       ]
     },
     {

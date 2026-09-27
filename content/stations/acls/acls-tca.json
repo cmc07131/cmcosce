@@ -53,12 +53,12 @@
       "hint": "Bicarbonate for the broad QRS; benzodiazepine ready for seizures.",
       "confirm": "Give these",
       "opts": [
-        { "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) IV now; repeat to narrow the QRS, target pH 7.45–7.55", "need": true, "scene": "bicarb", "mark": "Sodium bicarbonate for QRS over 100 ms and hypotension" },
-        { "t": "Lorazepam or diazepam drawn up for seizures", "need": true, "mark": "Benzodiazepine for seizures" },
-        { "t": "Fluid bolus; noradrenaline if still hypotensive", "need": true, "mark": "Fluids then vasopressor" },
-        { "t": "Flumazenil in case of benzodiazepines too", "trap": "critical", "r": "Flumazenil can precipitate seizures and arrhythmias in TCA overdose." },
-        { "t": "Phenytoin loading for seizure prophylaxis", "trap": true, "r": "Phenytoin blocks sodium channels too and can worsen cardiotoxicity. Benzodiazepines only." },
-        { "t": "Physostigmine for the anticholinergic signs", "trap": "critical", "r": "Contraindicated in TCA poisoning: asystole has occurred." }
+        { "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) IV now; repeat to narrow the QRS, target pH 7.45–7.55", "fetch": "cart", "need": true, "scene": "bicarb", "mark": "Sodium bicarbonate for QRS over 100 ms and hypotension" },
+        { "t": "Lorazepam or diazepam drawn up for seizures", "fetch": "cart", "need": true, "mark": "Benzodiazepine for seizures" },
+        { "t": "Fluid bolus; noradrenaline if still hypotensive", "fetch": "cart", "need": true, "mark": "Fluids then vasopressor" },
+        { "t": "Flumazenil in case of benzodiazepines too", "fetch": "cart", "trap": "critical", "r": "Flumazenil can precipitate seizures and arrhythmias in TCA overdose." },
+        { "t": "Phenytoin loading for seizure prophylaxis", "fetch": "cart", "trap": true, "r": "Phenytoin blocks sodium channels too and can worsen cardiotoxicity. Benzodiazepines only." },
+        { "t": "Physostigmine for the anticholinergic signs", "fetch": "cart", "trap": "critical", "r": "Contraindicated in TCA poisoning: asystole has occurred." }
       ]
     },
     {

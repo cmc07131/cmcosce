@@ -55,9 +55,9 @@
       "confirm": "Give",
       "opts": [
         { "t": "Oxygen to SpO2 94–98%", "need": true, "scene": "o2", "mark": "Oxygen to target" },
-        { "t": "Apixaban 10 mg twice daily for 7 days then 5 mg twice daily (or LMWH)", "need": true, "scene": "anticoag", "mark": "Anticoagulation with a DOAC or LMWH" },
+        { "t": "Apixaban 10 mg twice daily for 7 days then 5 mg twice daily (or LMWH)", "fetch": "cart", "need": true, "scene": "anticoag", "mark": "Anticoagulation with a DOAC or LMWH" },
         { "t": "Stop the combined pill; alternative contraception", "need": true, "mark": "Stops oestrogen-containing contraception" },
-        { "t": "Thrombolysis with alteplase now", "trap": "critical", "r": "She is haemodynamically stable. Thrombolysis is for high-risk (shocked) PE." }
+        { "t": "Thrombolysis with alteplase now", "fetch": "cart", "trap": "critical", "r": "She is haemodynamically stable. Thrombolysis is for high-risk (shocked) PE." }
       ]
     },
     {

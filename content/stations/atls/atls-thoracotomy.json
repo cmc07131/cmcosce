@@ -32,9 +32,9 @@
       "confirm": "Now",
       "opts": [
         { "t": "Cardiothoracic surgeon to resus now", "need": true, "mark": "Calls the cardiothoracic surgeon immediately" },
-        { "t": "Open the thoracotomy set; Gigli saw or heavy shears", "need": true, "mark": "Thoracotomy kit opened" },
-        { "t": "Major haemorrhage protocol; blood through the rapid infuser", "need": true, "mark": "Massive transfusion started" },
-        { "t": "PPE including eye protection", "need": true, "mark": "Team PPE" }
+        { "t": "Open the thoracotomy set; Gigli saw or heavy shears", "fetch": "trolley", "need": true, "mark": "Thoracotomy kit opened" },
+        { "t": "Major haemorrhage protocol; blood through the rapid infuser", "fetch": "trolley", "need": true, "mark": "Massive transfusion started" },
+        { "t": "PPE including eye protection", "fetch": "trolley", "need": true, "mark": "Team PPE" }
       ]
     },
     {

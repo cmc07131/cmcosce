@@ -7,11 +7,11 @@ import { Controller } from './Controller'
 import { press, useButtons } from './input'
 import { OverlaySheet, targetName } from './Overlay'
 import { PerformStage } from './Perform'
-import { Screen, type ScreenHandle } from './Screen'
+import { Screen, type ScreenHandle, type Walk } from './Screen'
 import { useSettings } from './settings'
 import { sfx } from './sfx'
 import { StartMenu } from './StartMenu'
-import { elapsedOf, usePlay } from './store'
+import { elapsedOf, usePlay, type Errand } from './store'
 import { TextBox, type TextBoxHandle } from './TextBox'
 import { NavItem, Win, useCursor } from './ui'
 
@@ -56,8 +56,13 @@ export function PlayView({ pack }: { pack: Pack }) {
   const endCalled = useRef(false)
   const autoOpened = useRef(new Set<string>())
   const [readyAsked, setReadyAsked] = useState(false)
-  const [approach, setApproach] = useState<{ npcId: string; token: number } | null>(null)
+  const [walks, setWalks] = useState<Walk[]>([])
+  const examinerWalk = useRef<number | null>(null)
   const [approaching, setApproaching] = useState(false)
+  // The nurse's fetch-and-give jobs, one at a time.
+  const errands = usePlay((s) => s.errands)
+  const [errand, setErrand] = useState<{ job: Errand; walk: number } | null>(null)
+  const nurseId = pack.cast.find((c) => c.role === 'nurse')?.id ?? null
   const [examinerHere, setExaminerHere] = useState(false)
   // A new run (Run again, or a fresh station) starts the examiner back at their desk.
   const runSeed = usePlay((s) => s.seed)
@@ -66,7 +71,9 @@ export function PlayView({ pack }: { pack: Pack }) {
     endCalled.current = false
     autoOpened.current = new Set()
     setReadyAsked(false)
-    setApproach(null)
+    setWalks([])
+    examinerWalk.current = null
+    setErrand(null)
     setApproaching(false)
     setExaminerHere(false)
   }, [runSeed, pack.packId])
@@ -143,7 +150,9 @@ export function PlayView({ pack }: { pack: Pack }) {
       endCalled.current = true
       setApproaching(true)
       if (!readyForEnd && !readyAsked) store().note("We're nearly out of time. Let me stop you there.", 'say', examinerId)
-      setApproach({ npcId: examinerId, token: Date.now() })
+      const token = Date.now()
+      examinerWalk.current = token
+      setWalks((cur) => [...cur, { token, npcId: examinerId, stops: ['@player'] }])
     }, readyAsked ? 900 : 1200)
     return () => window.clearTimeout(id)
   }, [hydrated, entered, ended, examinerId, endStarted, idleNow, readyForEnd, timeShort, readyAsked, store])
@@ -163,6 +172,22 @@ export function PlayView({ pack }: { pack: Pack }) {
     return () => window.clearTimeout(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examinerHere, examinerId, ended, idleNow, spent])
+
+  // The nurse takes the next job: to the cart or trolley, to the patient, and back to their spot.
+  useEffect(() => {
+    if (!hydrated || !entered || ended || errand || !errands.length) return
+    const job = errands[0]
+    const has = (id: string) => pack.room.interactables.some((i) => i.id === id)
+    const source = has(job.from) ? job.from : has('trolley') ? 'trolley' : has('cart') ? 'cart' : null
+    const patient = pack.cast.some((c) => c.id === 'patient') ? 'patient' : has('bed-ix') ? 'bed-ix' : null
+    if (!nurseId || !patient) {
+      store().takeErrand(job.token)
+      return
+    }
+    const token = Date.now() + job.token
+    setErrand({ job, walk: token })
+    setWalks((cur) => [...cur, { token, npcId: nurseId, stops: [...(source ? [source] : []), patient, '@home'] }])
+  }, [hydrated, entered, ended, errand, errands, nurseId, pack, store])
 
   const paused = overlay !== null || performing !== null || menu !== false || approaching
 
@@ -227,10 +252,24 @@ export function PlayView({ pack }: { pack: Pack }) {
               scene={scene ?? []}
               labels={labels}
               monitorBpm={monitorBpm}
-              approach={approach}
-              onArrive={() => {
-                setApproaching(false)
-                setExaminerHere(true)
+              walks={walks}
+              onWalkStop={(token, index, npcId) => {
+                // The nurse reports at the bedside: the stop before going home.
+                if (!errand || token !== errand.walk) return
+                const stops = walks.find((w) => w.token === token)?.stops ?? []
+                if (index !== stops.length - 2) return
+                store().note(nurseReport(errand.job), 'say', npcId)
+              }}
+              onWalkDone={(token) => {
+                if (token === examinerWalk.current) {
+                  setApproaching(false)
+                  setExaminerHere(true)
+                }
+                if (errand && token === errand.walk) {
+                  store().takeErrand(errand.job.token)
+                  setErrand(null)
+                }
+                setWalks((cur) => cur.filter((w) => w.token !== token))
               }}
               onMove={(pos) => {
                 const cur = store().position
@@ -369,6 +408,17 @@ export function PlayView({ pack }: { pack: Pack }) {
       <p className="keys-help">Arrows/WASD move · Z/Enter = A · X/Esc = B · M = START · Shift = SELECT</p>
     </div>
   )
+}
+
+/** What the nurse says at the bedside: the item, trimmed to its first clause, and what was done with it. */
+function nurseReport(job: Errand) {
+  const short = (label: string) => {
+    const cut = label.split(/ — |; |, then | \(|: | over | as an | if /)[0].trim()
+    return cut.length > 60 ? `${cut.slice(0, 57).trimEnd()}…` : cut
+  }
+  const items = job.items.map(short)
+  const list = items.length > 2 ? `${items.slice(0, 2).join(', ')} and ${items.length - 2} more` : items.join(' and ')
+  return job.from === 'cart' ? `${list} — given.` : `${list} — done.`
 }
 
 function EndedScreen({ pack, onDebrief, onAgain }: { pack: Pack; onDebrief: () => void; onAgain: () => void }) {

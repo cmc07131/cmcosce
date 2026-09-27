@@ -26,6 +26,25 @@ import {
   type PropBox,
 } from './pixel/art'
 
+export type Walk = { token: number; npcId: string; stops: string[] }
+
+type Walker = {
+  token: number
+  stops: string[]
+  index: number
+  path: Tile[]
+  from: Tile
+  to: Tile | null
+  t: number
+  /** Where to look on arrival. */
+  face: Tile | null
+  /** Waiting at a stop until this time (ms). */
+  pauseUntil: number
+  /** If the walk has not reached the stop by then (a paused tab), it snaps there. */
+  deadline: number
+  carrying: boolean
+}
+
 export type ScreenHandle = {
   useFacing: () => void
 }
@@ -81,23 +100,28 @@ export const Screen = forwardRef<
     labels: boolean
     /** Live heart rate from the station's vitals; 0 draws a flat line. Undefined reads the pack readout. */
     monitorBpm?: number
-    /** A cast member walking over to stand beside the player (the examiner coming to ask questions). */
-    approach?: { npcId: string; token: number } | null
-    onArrive?: (npcId: string) => void
+    /**
+     * Cast members on the move: each walk visits its stops in turn — an interactable or cast id ('cart',
+     * 'patient'), '@player' (stand beside the candidate) or '@home' (back to their spot).
+     */
+    walks?: Walk[]
+    onWalkStop?: (token: number, index: number, npcId: string) => void
+    onWalkDone?: (token: number, npcId: string) => void
     onMove: (pos: Pos) => void
     onUse: (targetId: string) => void
     onEmpty: () => void
     onFacing: (targetId: string | null) => void
     onBump: () => void
   }
->(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, approach, onArrive, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
+>(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, walks, onWalkStop, onWalkDone, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
   const { cols, rows } = pack.room
   // Where each cast member stands now; most never move, the examiner may walk over.
   const npcTile = useRef<Record<string, Tile>>(Object.fromEntries(pack.cast.map((c) => [c.id, c.spawn])))
   const npcVis = useRef<Record<string, { x: number; y: number; facing: Dir | null }>>(
     Object.fromEntries(pack.cast.map((c) => [c.id, { x: c.spawn.x, y: c.spawn.y, facing: null }])),
   )
-  const npcWalk = useRef<{ id: string; path: Tile[]; from: Tile; to: Tile | null; t: number } | null>(null)
+  const walkers = useRef(new Map<string, Walker>())
+  const startedWalks = useRef(new Set<number>())
   const [tagTiles, setTagTiles] = useState<Record<string, Tile>>(npcTile.current)
   const solidsNow = () => {
     const set = buildSolids(pack)
@@ -119,8 +143,8 @@ export const Screen = forwardRef<
   const pendingRef = useRef<string | null>(null)
   const pendingFacing = useRef<Dir>('n')
   const facingHit = useRef<string | null | undefined>(undefined)
-  const cb = useRef({ onMove, onUse, onEmpty, onFacing, onBump, onArrive })
-  cb.current = { onMove, onUse, onEmpty, onFacing, onBump, onArrive }
+  const cb = useRef({ onMove, onUse, onEmpty, onFacing, onBump, onWalkStop, onWalkDone })
+  cb.current = { onMove, onUse, onEmpty, onFacing, onBump, onWalkStop, onWalkDone }
   const drawState = useRef({ talkingId, scene, monitorBpm })
   drawState.current = { talkingId, scene, monitorBpm }
 
@@ -281,13 +305,27 @@ export const Screen = forwardRef<
       const dx = v.x - at.x
       const dy = v.y - at.y
       const near = Math.abs(dx) + Math.abs(dy) <= 2.2
-      const walk = npcWalk.current?.id === npc.id ? npcWalk.current : null
+      const walk = walkers.current.get(npc.id)
       const facing: Dir = at.facing ?? (near ? (Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'e' : 'w') : dy > 0 ? 's' : 'n') : 's')
       const stepFrame = walk && walk.to && walk.t < 0.5 ? 1 : 0
       const mouth = talking === npc.id && Math.floor(now / 140) % 2 === 0
+      const carrying = Boolean(walk?.carrying)
       actors.push({
         y: at.y,
-        paint: () => c.drawImage(actorSprite(role, facing, stepFrame, false, mouth), Math.round(at.x * TILE), Math.round(at.y * TILE - 2)),
+        paint: () => {
+          const x = Math.round(at.x * TILE)
+          const y = Math.round(at.y * TILE - 2)
+          c.drawImage(actorSprite(role, facing, stepFrame, false, mouth), x, y)
+          // Something in hand: a small tray carried at chest height.
+          if (carrying) {
+            c.fillStyle = INK
+            c.fillRect(x + 4, y + 8, 8, 5)
+            c.fillStyle = '#f4f4ec'
+            c.fillRect(x + 5, y + 9, 6, 3)
+            c.fillStyle = '#d84848'
+            c.fillRect(x + 7, y + 9, 2, 2)
+          }
+        },
       })
     }
     const playerMouth = talking === 'player' && Math.floor(now / 140) % 2 === 0
@@ -382,82 +420,135 @@ export const Screen = forwardRef<
     pathRef.current = path
   }
 
-  /** Advance a walking NPC one frame; on the last tile it turns to the player and the player turns to it. */
-  function stepNpc(dt: number) {
-    const w = npcWalk.current
-    if (!w) return
-    if (!w.to) {
-      const next = w.path.shift()
-      if (!next) {
-        npcWalk.current = null
-        arrive(w.id)
-        return
-      }
-      w.to = next
-      w.t = 0
-      npcVis.current[w.id] = { ...npcVis.current[w.id], facing: facingBetween(w.from, next) }
+  /** Tiles the stop is reached from, and the tile to face once there. */
+  function spotsFor(npcId: string, stop: string): { spots: Tile[]; face: Tile | null } {
+    const here = gridNow()
+    const around = (t: Tile) => Object.values(DIR_DELTA).map((d) => ({ x: t.x + d.x, y: t.y + d.y }))
+    if (stop === '@player') return { spots: around(here), face: here }
+    if (stop === '@home') {
+      const home = pack.cast.find((c) => c.id === npcId)?.spawn
+      return home ? { spots: [home, ...around(home)], face: null } : { spots: [], face: null }
     }
-    w.t += dt / (STEP_MS * 1.25)
-    const t = Math.min(1, w.t)
-    npcVis.current[w.id] = {
-      x: w.from.x + (w.to.x - w.from.x) * t,
-      y: w.from.y + (w.to.y - w.from.y) * t,
-      facing: npcVis.current[w.id].facing,
-    }
-    if (t >= 1) {
-      npcTile.current[w.id] = w.to
-      w.from = w.to
-      w.to = null
-    }
+    const targets = targetsOf(stop)
+    return { spots: targets.flatMap(around), face: targets[0] ?? null }
   }
 
-  function arrive(id: string) {
-    const here = gridNow()
-    const at = npcTile.current[id]
-    npcVis.current[id] = { x: at.x, y: at.y, facing: facingBetween(at, here) }
-    const face = facingBetween(here, at)
-    visual.current = { ...visual.current, facing: face, bob: 0, frame: 0 }
-    cb.current.onMove({ ...here, facing: face })
-    setTagTiles({ ...npcTile.current })
-    cb.current.onArrive?.(id)
-  }
-
-  useEffect(() => {
-    if (!approach) return
-    const from = npcTile.current[approach.npcId]
-    if (!from) return
-    const here = gridNow()
-    if (Math.abs(from.x - here.x) + Math.abs(from.y - here.y) === 1) {
-      arrive(approach.npcId)
-      return
-    }
-    // Stand on the free tile beside the player that is quickest to reach.
-    const others = solidsNow()
-    others.delete(keyOf(from))
-    others.add(keyOf(here))
+  /** Plan the walk to the walker's current stop; null when there is nowhere to stand. */
+  function plan(npcId: string, w: Walker) {
+    const from = npcTile.current[npcId]
+    const { spots, face } = spotsFor(npcId, w.stops[w.index])
+    const blocked = solidsNow()
+    blocked.delete(keyOf(from))
+    blocked.add(keyOf(gridNow()))
     let best: Tile[] | null = null
-    for (const d of Object.values(DIR_DELTA)) {
-      const spot = { x: here.x + d.x, y: here.y + d.y }
-      const path = findPath(from, spot, others, cols, rows)
+    for (const spot of spots) {
+      if (spot.x === from.x && spot.y === from.y) {
+        best = []
+        break
+      }
+      const path = findPath(from, spot, blocked, cols, rows)
       if (path && (!best || path.length < best.length)) best = path
     }
-    if (!best) {
-      arrive(approach.npcId)
+    w.face = face
+    w.from = from
+    w.to = null
+    w.t = 0
+    w.path = best ?? []
+    w.deadline = performance.now() + w.path.length * STEP_MS * 1.25 + 1500
+  }
+
+  function arriveAt(npcId: string, w: Walker) {
+    const at = npcTile.current[npcId]
+    const stop = w.stops[w.index]
+    const face = w.face && (w.face.x !== at.x || w.face.y !== at.y) ? facingBetween(at, w.face) : npcVis.current[npcId]?.facing ?? null
+    npcVis.current[npcId] = { x: at.x, y: at.y, facing: face }
+    if (stop === '@player') {
+      // The candidate turns to whoever came over.
+      const here = gridNow()
+      const turn = facingBetween(here, at)
+      visual.current = { ...visual.current, facing: turn, bob: 0, frame: 0 }
+      cb.current.onMove({ ...here, facing: turn })
+    }
+    if (stop === 'cart' || stop === 'trolley') w.carrying = true
+    else if (w.carrying && stop !== '@home') w.carrying = false
+    setTagTiles({ ...npcTile.current })
+    cb.current.onWalkStop?.(w.token, w.index, npcId)
+    // A short pause to pick up or hand over; none when coming to talk or going home.
+    w.pauseUntil = performance.now() + (stop.startsWith('@') ? 0 : 800)
+    w.path = []
+    w.to = null
+    w.index += 0.5 // marks "arrived, waiting"; the next whole index is planned after the pause
+  }
+
+  function finishStop(npcId: string, w: Walker) {
+    w.index = Math.floor(w.index) + 1
+    if (w.index >= w.stops.length) {
+      walkers.current.delete(npcId)
+      if (npcVis.current[npcId]) npcVis.current[npcId] = { ...npcVis.current[npcId], facing: null }
+      cb.current.onWalkDone?.(w.token, npcId)
       return
     }
-    npcWalk.current = { id: approach.npcId, path: best, from, to: null, t: 0 }
-    // If the walk stalls (a paused tab, a slow phone), the examiner simply arrives: the game never waits forever.
-    const end = best[best.length - 1]
-    const id = approach.npcId
-    const guard = window.setTimeout(() => {
-      if (npcWalk.current?.id !== id) return
-      npcWalk.current = null
-      npcTile.current[id] = end
-      arrive(id)
-    }, best.length * STEP_MS * 1.25 + 1500)
-    return () => window.clearTimeout(guard)
+    plan(npcId, w)
+  }
+
+  /** Move every walker one frame (animation). Pauses and stalls are also handled by a timer, below. */
+  function stepNpc(dt: number) {
+    for (const [npcId, w] of walkers.current) {
+      if (!Number.isInteger(w.index)) continue
+      if (!w.to) {
+        const next = w.path.shift()
+        if (!next) {
+          arriveAt(npcId, w)
+          continue
+        }
+        w.to = next
+        w.t = 0
+        npcVis.current[npcId] = { ...npcVis.current[npcId], facing: facingBetween(w.from, next) }
+      }
+      w.t += dt / (STEP_MS * 1.25)
+      const t = Math.min(1, w.t)
+      npcVis.current[npcId] = { x: w.from.x + (w.to.x - w.from.x) * t, y: w.from.y + (w.to.y - w.from.y) * t, facing: npcVis.current[npcId].facing }
+      if (t >= 1) {
+        npcTile.current[npcId] = w.to
+        w.from = w.to
+        w.to = null
+      }
+    }
+  }
+
+  // Start new walks.
+  useEffect(() => {
+    for (const walk of walks ?? []) {
+      if (startedWalks.current.has(walk.token) || !npcTile.current[walk.npcId]) continue
+      startedWalks.current.add(walk.token)
+      const w: Walker = { token: walk.token, stops: walk.stops, index: 0, path: [], from: npcTile.current[walk.npcId], to: null, t: 0, face: null, pauseUntil: 0, deadline: 0, carrying: false }
+      walkers.current.set(walk.npcId, w)
+      plan(walk.npcId, w)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [approach?.token])
+  }, [walks])
+
+  // Pauses end, and stalled walks snap to their stop, on a timer: the game never waits on a paused animation.
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      const now = performance.now()
+      for (const [npcId, w] of walkers.current) {
+        if (!Number.isInteger(w.index)) {
+          if (now >= w.pauseUntil) finishStop(npcId, w)
+          continue
+        }
+        if (now > w.deadline) {
+          const end = w.path.length ? w.path[w.path.length - 1] : (w.to ?? npcTile.current[npcId])
+          npcTile.current[npcId] = end
+          w.path = []
+          w.to = null
+          arriveAt(npcId, w)
+        }
+      }
+    }, 120)
+    return () => window.clearInterval(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useImperativeHandle(ref, () => ({
     useFacing: () => {

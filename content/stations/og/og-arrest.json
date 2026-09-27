@@ -31,7 +31,7 @@
       "confirm": "Now",
       "opts": [
         { "t": "Obstetric team, neonatal team and anaesthetist to resus now", "need": true, "mark": "Calls obstetric, neonatal and anaesthetic teams" },
-        { "t": "Open the resuscitative hysterotomy kit (scalpel)", "need": true, "mark": "Prepares for resuscitative hysterotomy" },
+        { "t": "Open the resuscitative hysterotomy kit (scalpel)", "fetch": "trolley", "need": true, "mark": "Prepares for resuscitative hysterotomy" },
         { "t": "Start a clock from the collapse time", "need": true, "mark": "Times the arrest" },
         { "t": "Neonatal resuscitaire ready", "need": true, "mark": "Neonatal resuscitation ready" }
       ]
@@ -59,7 +59,7 @@
       "label": "Causes",
       "hint": "4 Hs and 4 Ts plus obstetric causes; ask about magnesium.",
       "opts": [
-        { "t": "Any magnesium infusion? If so stop it and give calcium", "mark": "Considers magnesium toxicity" },
+        { "t": "Any magnesium infusion? If so stop it and give calcium", "fetch": "cart", "mark": "Considers magnesium toxicity" },
         { "t": "Consider haemorrhage, amniotic fluid embolism, PE, eclampsia, cardiomyopathy, dissection", "mark": "Lists obstetric causes of arrest" }
       ]
     },

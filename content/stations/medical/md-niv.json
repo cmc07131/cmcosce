@@ -24,11 +24,11 @@
       "hint": "Controlled oxygen 88–92%, nebulisers, steroids, antibiotics if purulent.",
       "confirm": "Give",
       "opts": [
-        { "t": "Venturi 28%, target SpO2 88–92%", "need": true, "mark": "Controlled oxygen to 88–92%" },
-        { "t": "Nebulised salbutamol 5 mg and ipratropium 500 microgram (air-driven)", "need": true, "scene": "neb", "mark": "Bronchodilators (air-driven)" },
-        { "t": "Prednisolone 40 mg for 5 days", "need": true, "mark": "Systemic steroids" },
-        { "t": "Antibiotics for purulent sputum; CXR", "need": true, "mark": "Antibiotics and CXR" },
-        { "t": "15 L oxygen by non-rebreather to get SpO2 to 98%", "trap": "critical", "r": "High-flow oxygen worsens hypercapnia in COPD. Target 88–92%." }
+        { "t": "Venturi 28%, target SpO2 88–92%", "fetch": "trolley", "need": true, "mark": "Controlled oxygen to 88–92%" },
+        { "t": "Nebulised salbutamol 5 mg and ipratropium 500 microgram (air-driven)", "fetch": "cart", "need": true, "scene": "neb", "mark": "Bronchodilators (air-driven)" },
+        { "t": "Prednisolone 40 mg for 5 days", "fetch": "cart", "need": true, "mark": "Systemic steroids" },
+        { "t": "Antibiotics for purulent sputum; CXR", "fetch": "cart", "need": true, "mark": "Antibiotics and CXR" },
+        { "t": "15 L oxygen by non-rebreather to get SpO2 to 98%", "fetch": "trolley", "trap": "critical", "r": "High-flow oxygen worsens hypercapnia in COPD. Target 88–92%." }
       ]
     },
     {

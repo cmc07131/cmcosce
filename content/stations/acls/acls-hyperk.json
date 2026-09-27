@@ -46,12 +46,12 @@
       "hint": "Protect the heart, shift potassium in; monitor glucose.",
       "confirm": "Give these",
       "opts": [
-        { "t": "Calcium gluconate 10% 30 mL IV over 10 min (or calcium chloride 10% 10 mL)", "need": true, "scene": "calcium", "mark": "IV calcium to stabilise the myocardium" },
-        { "t": "Soluble insulin 10 units with 25 g glucose IV over 15 min", "need": true, "scene": "insulin", "mark": "Insulin with glucose to shift potassium" },
-        { "t": "Salbutamol 10–20 mg nebulised as an adjunct", "need": true, "mark": "Nebulised salbutamol as an adjunct" },
-        { "t": "Insulin 10 units IV without glucose — his sugar is fine", "trap": "critical", "r": "Severe hypoglycaemia follows. Always give glucose, and monitor for 6 hours." },
-        { "t": "Sodium bicarbonate 8.4% 50 mL routinely", "trap": true, "r": "Not routine (UKKA 2023). Consider only for acidosis, with specialist advice in dialysis patients." },
-        { "t": "Calcium polystyrene resonium alone and wait", "trap": "critical", "r": "Binders act over hours. With ECG changes, protect the heart and shift potassium now." }
+        { "t": "Calcium gluconate 10% 30 mL IV over 10 min (or calcium chloride 10% 10 mL)", "fetch": "cart", "need": true, "scene": "calcium", "mark": "IV calcium to stabilise the myocardium" },
+        { "t": "Soluble insulin 10 units with 25 g glucose IV over 15 min", "fetch": "cart", "need": true, "scene": "insulin", "mark": "Insulin with glucose to shift potassium" },
+        { "t": "Salbutamol 10–20 mg nebulised as an adjunct", "fetch": "cart", "need": true, "mark": "Nebulised salbutamol as an adjunct" },
+        { "t": "Insulin 10 units IV without glucose — his sugar is fine", "fetch": "cart", "trap": "critical", "r": "Severe hypoglycaemia follows. Always give glucose, and monitor for 6 hours." },
+        { "t": "Sodium bicarbonate 8.4% 50 mL routinely", "fetch": "cart", "trap": true, "r": "Not routine (UKKA 2023). Consider only for acidosis, with specialist advice in dialysis patients." },
+        { "t": "Calcium polystyrene resonium alone and wait", "fetch": "cart", "trap": "critical", "r": "Binders act over hours. With ECG changes, protect the heart and shift potassium now." }
       ]
     },
     {
@@ -64,7 +64,7 @@
         { "t": "Continuous cardiac monitoring; repeat ECG after the calcium; repeat calcium if no change in 5–10 min", "mark": "Monitors the ECG response to calcium" },
         { "t": "Capillary glucose at 15, 30, 60 min and hourly to 6 hours", "mark": "Glucose monitoring after insulin" },
         { "t": "Repeat potassium at 1, 2, 4 and 6 hours", "mark": "Repeats potassium" },
-        { "t": "Pacing pads on in case the rate falls further", "mark": "Prepares for pacing" }
+        { "t": "Pacing pads on in case the rate falls further", "fetch": "trolley", "mark": "Prepares for pacing" }
       ]
     },
     {

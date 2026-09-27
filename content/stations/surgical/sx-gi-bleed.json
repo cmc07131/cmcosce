@@ -26,9 +26,9 @@
       "hint": "Two large-bore cannulae, bloods and crossmatch, MHP, blood to a restrictive target, airway assessment.",
       "confirm": "Now",
       "opts": [
-        { "t": "Two large-bore cannulae; FBC, U&E, LFT, clotting, crossmatch 6 units, gas", "need": true, "mark": "Access and bloods including crossmatch" },
+        { "t": "Two large-bore cannulae; FBC, U&E, LFT, clotting, crossmatch 6 units, gas", "fetch": "trolley", "need": true, "mark": "Access and bloods including crossmatch" },
         { "t": "Major haemorrhage protocol; transfuse red cells to Hb 70–90", "need": true, "scene": "blood", "mark": "Transfuses to a restrictive target" },
-        { "t": "Airway: suction; anaesthetist to intubate before endoscopy given confusion", "need": true, "mark": "Airway protection before endoscopy" },
+        { "t": "Airway: suction; anaesthetist to intubate before endoscopy given confusion", "fetch": "trolley", "need": true, "mark": "Airway protection before endoscopy" },
         { "t": "Transfuse to Hb 140 to be safe", "trap": true, "r": "Over-transfusion raises portal pressure and rebleeding in variceal bleeds." }
       ]
     },
@@ -40,10 +40,10 @@
       "hint": "Suspected variceal: terlipressin and antibiotics now. No TXA.",
       "confirm": "Give",
       "opts": [
-        { "t": "Terlipressin 2 mg IV", "need": true, "scene": "terlipressin", "mark": "Terlipressin for suspected variceal bleeding" },
-        { "t": "Ceftriaxone 1 g IV (prophylactic antibiotics in cirrhosis)", "need": true, "mark": "Prophylactic antibiotics in cirrhosis" },
-        { "t": "Tranexamic acid 1 g IV", "trap": true, "r": "HALT-IT showed no benefit and more thrombotic events in GI bleeding." },
-        { "t": "Omeprazole 80 mg IV before endoscopy routinely", "trap": true, "r": "NICE: PPIs after endoscopy for non-variceal bleeding, not before." }
+        { "t": "Terlipressin 2 mg IV", "fetch": "cart", "need": true, "scene": "terlipressin", "mark": "Terlipressin for suspected variceal bleeding" },
+        { "t": "Ceftriaxone 1 g IV (prophylactic antibiotics in cirrhosis)", "fetch": "cart", "need": true, "mark": "Prophylactic antibiotics in cirrhosis" },
+        { "t": "Tranexamic acid 1 g IV", "fetch": "cart", "trap": true, "r": "HALT-IT showed no benefit and more thrombotic events in GI bleeding." },
+        { "t": "Omeprazole 80 mg IV before endoscopy routinely", "fetch": "cart", "trap": true, "r": "NICE: PPIs after endoscopy for non-variceal bleeding, not before." }
       ]
     },
     {

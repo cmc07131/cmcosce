@@ -19,7 +19,7 @@
       "opts": [
         { "t": "Consent; allergy to local anaesthetic; anticoagulants", "need": true, "mark": "Consent and pre-procedure checks" },
         { "t": "Weigh her: 50 kg; maximum levobupivacaine 2 mg/kg = 100 mg", "need": true, "mark": "Calculates the maximum safe dose" },
-        { "t": "Monitoring and IV access; 20% lipid emulsion on the trolley", "need": true, "mark": "Monitoring, IV access and lipid emulsion available" },
+        { "t": "Monitoring and IV access; 20% lipid emulsion on the trolley", "fetch": "trolley", "need": true, "mark": "Monitoring, IV access and lipid emulsion available" },
         { "t": "Check she hasn't had a block from the ambulance crew", "need": true, "mark": "Avoids repeat dosing" }
       ]
     },

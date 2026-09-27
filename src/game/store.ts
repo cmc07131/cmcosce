@@ -38,8 +38,26 @@ export type MsgTone = 'say' | 'trap' | 'warn' | 'info'
 /** The one line the text box shows. `speakerId` animates that actor's mouth while it types. */
 export type Msg = { text: string; speakerId: string | null; tone: MsgTone; token: number }
 
+/** Something the nurse has to fetch and give: walk to the cart or trolley, then to the patient. */
+export type Errand = { token: number; from: 'cart' | 'trolley'; items: string[] }
+
+let errandToken = 1
+
+/** What the nurse fetched, grouped by where it comes from. Traps too: the nurse does as told. */
+function errandsFor(options: ActionOption[]): Errand[] {
+  const out: Errand[] = []
+  for (const from of ['cart', 'trolley'] as const) {
+    const items = options.filter((o) => o.fetch === from).map((o) => o.label)
+    if (items.length) out.push({ token: errandToken++, from, items })
+  }
+  return out
+}
+
 type PlayState = Session & {
   hydrated: boolean
+  /** Fetch-and-give jobs waiting for the nurse, oldest first. Not saved: a reload finds them done. */
+  errands: Errand[]
+  takeErrand: (token: number) => void
   overlay: Overlay | null
   msg: Msg | null
   toasts: Toast[]
@@ -175,6 +193,9 @@ export const usePlay = create<PlayState>((set, get) => ({
   findingNote: null,
   performing: null,
   performQueue: [],
+  errands: [],
+
+  takeErrand: (token) => set({ errands: get().errands.filter((e) => e.token !== token) }),
 
   boot: (pack) => {
     const saved = readSession(pack.packId)
@@ -189,6 +210,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       findingNote: null,
       performing: null,
       performQueue: [],
+      errands: [],
     })
   },
 
@@ -205,6 +227,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       findingNote: null,
       performing: null,
       performQueue: [],
+      errands: [],
     })
   },
 
@@ -291,6 +314,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       sceneAdd: option.scene,
     })
     if (applied.reply && !option.isTrap) set({ msg: spokenLine(pack, applied.reply) })
+    if (applied.spend && option.fetch) set({ errands: [...get().errands, ...errandsFor([option])] })
   },
 
   confirmOptions: (pack, actionId, optionIds) => {
@@ -320,6 +344,8 @@ export const usePlay = create<PlayState>((set, get) => ({
     if (jobs.length) {
       set({ performing: jobs[0], performQueue: jobs.slice(1), msg: applied.trapLines[0] ? message(applied.trapLines[0], 'trap') : get().msg })
     }
+    const fetched = errandsFor(chosen.filter((row) => !row.perform))
+    if (fetched.length) set({ errands: [...get().errands, ...fetched] })
   },
 
   pickFinding: (pack, actionId, findingId) => {

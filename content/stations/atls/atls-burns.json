@@ -37,11 +37,11 @@
       "confirm": "Ask for these",
       "opts": [
         { "t": "Trauma team and anaesthetist now", "need": true, "mark": "Calls the trauma team and anaesthetist early" },
-        { "t": "PPE", "need": true, "mark": "Team in PPE" },
-        { "t": "Difficult airway trolley with uncut size 7.5 and 8.0 tubes", "need": true, "mark": "Prepares for a difficult airway with uncut tubes" },
+        { "t": "PPE", "fetch": "trolley", "need": true, "mark": "Team in PPE" },
+        { "t": "Difficult airway trolley with uncut size 7.5 and 8.0 tubes", "fetch": "trolley", "need": true, "mark": "Prepares for a difficult airway with uncut tubes" },
         { "t": "Warm the room, warm fluids, warm blankets", "need": true, "mark": "Prevents hypothermia" },
-        { "t": "Cling film and burns chart", "need": true, "mark": "Cling film and a burns chart ready" },
-        { "t": "Cold wet towels over all the burns", "trap": true, "r": "Wet dressings over a large area make her hypothermic. Cooling helps only small burns in the first 3 hours." }
+        { "t": "Cling film and burns chart", "fetch": "trolley", "need": true, "mark": "Cling film and a burns chart ready" },
+        { "t": "Cold wet towels over all the burns", "fetch": "trolley", "trap": true, "r": "Wet dressings over a large area make her hypothermic. Cooling helps only small burns in the first 3 hours." }
       ]
     },
     {
@@ -126,11 +126,11 @@
       "confirm": "Give these",
       "opts": [
         { "t": "100% oxygen (ventilator FiO2 1.0)", "need": true, "mark": "100% oxygen for carbon monoxide" },
-        { "t": "Morphine IV, titrated", "need": true, "mark": "IV analgesia titrated" },
-        { "t": "Tetanus booster if not up to date", "need": true, "mark": "Tetanus prophylaxis" },
-        { "t": "Hydroxocobalamin 5 g IV if the lactate rises or she stays shocked", "mark": "Considers cyanide: hydroxocobalamin" },
-        { "t": "Prophylactic IV antibiotics", "trap": true, "r": "Not indicated for fresh burns; they select resistant organisms." },
-        { "t": "Dexamethasone for the airway swelling", "trap": true, "r": "No evidence in inhalation injury; it increases infection." }
+        { "t": "Morphine IV, titrated", "fetch": "cart", "need": true, "mark": "IV analgesia titrated" },
+        { "t": "Tetanus booster if not up to date", "fetch": "cart", "need": true, "mark": "Tetanus prophylaxis" },
+        { "t": "Hydroxocobalamin 5 g IV if the lactate rises or she stays shocked", "fetch": "cart", "mark": "Considers cyanide: hydroxocobalamin" },
+        { "t": "Prophylactic IV antibiotics", "fetch": "cart", "trap": true, "r": "Not indicated for fresh burns; they select resistant organisms." },
+        { "t": "Dexamethasone for the airway swelling", "fetch": "cart", "trap": true, "r": "No evidence in inhalation injury; it increases infection." }
       ]
     },
     {
@@ -141,8 +141,8 @@
       "hint": "TBSA counts partial and full thickness only. 2 mL × kg × %TBSA, half by 8 hours from the burn.",
       "opts": [
         { "t": "TBSA 36% (chest 9, abdomen 9, both arms 18; the face is erythema only)", "mark": "Calculates TBSA without counting erythema" },
-        { "t": "2 × 70 × 36 = 5040 mL Hartmann's in 24 h; 2520 mL by 8 h after the burn (19:05), so about 360 mL/h for the next 7 hours", "scene": "fluids", "mark": "Calculates fluids and times them from the burn", "r": "Nurse Ko: 360 mL/h of warm Hartmann's, starting now." },
-        { "t": "Urinary catheter; target 0.5 mL/kg/h (35 mL/h) and titrate", "mark": "Catheter and urine output target" },
+        { "t": "2 × 70 × 36 = 5040 mL Hartmann's in 24 h; 2520 mL by 8 h after the burn (19:05), so about 360 mL/h for the next 7 hours", "fetch": "cart", "scene": "fluids", "mark": "Calculates fluids and times them from the burn", "r": "Nurse Ko: 360 mL/h of warm Hartmann's, starting now." },
+        { "t": "Urinary catheter; target 0.5 mL/kg/h (35 mL/h) and titrate", "fetch": "trolley", "mark": "Catheter and urine output target" },
         { "t": "4 × 70 × 36 = 10,080 mL in 24 h (original Parkland)", "trap": true, "r": "The ATLS 10th starting rate for adults is 2 mL/kg/%TBSA; 4 mL leads to fluid creep and compartment syndromes." },
         { "t": "TBSA 45% including the red face", "trap": true, "r": "Erythema (superficial burns) is not counted." },
         { "t": "Start the 8 hours from arrival in the ED", "trap": true, "r": "The clock runs from the time of the burn. She is already an hour behind." }
@@ -156,10 +156,10 @@
       "hint": "Cling film in strips, keep warm, elevate, watch the circumferential arm.",
       "confirm": "Do these",
       "opts": [
-        { "t": "Cling film laid in strips, not wrapped round the limbs", "need": true, "mark": "Covers with cling film laid in strips" },
+        { "t": "Cling film laid in strips, not wrapped round the limbs", "fetch": "trolley", "need": true, "mark": "Covers with cling film laid in strips" },
         { "t": "Elevate the burnt limbs", "need": true, "mark": "Elevates burnt limbs" },
         { "t": "Check pulses in the right hand hourly: circumferential full-thickness burn", "need": true, "mark": "Monitors the circumferential burn for escharotomy" },
-        { "t": "Wrap cling film tightly around the right arm", "trap": true, "r": "Wrapping acts as a tourniquet as the arm swells." },
+        { "t": "Wrap cling film tightly around the right arm", "fetch": "trolley", "trap": true, "r": "Wrapping acts as a tourniquet as the arm swells." },
         { "t": "Burst and debride the blisters now", "trap": true, "r": "Leave it for the burns team." }
       ]
     },

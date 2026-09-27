@@ -73,9 +73,9 @@
       "opts": [
         { "t": "100% oxygen for everyone exposed to smoke", "need": true, "mark": "100% oxygen for all smoke-exposed" },
         { "t": "Blood gas with COHb and lactate for A, B, E", "need": true, "mark": "Co-oximetry and lactate" },
-        { "t": "Hydroxocobalamin available: give if lactate high and shocked", "need": true, "mark": "Considers cyanide" },
-        { "t": "Warm the bays; cling film", "need": true, "mark": "Prevents hypothermia" },
-        { "t": "Ice packs on the burns", "trap": true, "r": "Ice causes further injury and hypothermia; cool running water for 20 min." }
+        { "t": "Hydroxocobalamin available: give if lactate high and shocked", "fetch": "cart", "need": true, "mark": "Considers cyanide" },
+        { "t": "Warm the bays; cling film", "fetch": "trolley", "need": true, "mark": "Prevents hypothermia" },
+        { "t": "Ice packs on the burns", "fetch": "trolley", "trap": true, "r": "Ice causes further injury and hypothermia; cool running water for 20 min." }
       ]
     },
     {

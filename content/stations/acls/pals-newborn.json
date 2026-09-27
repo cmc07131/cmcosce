@@ -32,11 +32,11 @@
       "hint": "Warm, dry towels, hat, bag-valve-mask with correct mask, suction, SpO2 probe, clock.",
       "confirm": "Check",
       "opts": [
-        { "t": "Heater on, warm towels, hat", "need": true, "mark": "Prepares warmth" },
+        { "t": "Heater on, warm towels, hat", "fetch": "trolley", "need": true, "mark": "Prepares warmth" },
         { "t": "Clock started at birth", "need": true, "mark": "Starts the clock" },
-        { "t": "Bag or T-piece set to 30/5 cmH2O, term-size mask, air (21%)", "need": true, "mark": "Ventilation device with correct pressures and air" },
-        { "t": "Suction, supraglottic airway size 1, laryngoscope", "need": true, "mark": "Airway adjuncts ready" },
-        { "t": "Pulse oximeter probe for the right wrist", "need": true, "mark": "Pre-ductal oximetry" },
+        { "t": "Bag or T-piece set to 30/5 cmH2O, term-size mask, air (21%)", "fetch": "trolley", "need": true, "mark": "Ventilation device with correct pressures and air" },
+        { "t": "Suction, supraglottic airway size 1, laryngoscope", "fetch": "trolley", "need": true, "mark": "Airway adjuncts ready" },
+        { "t": "Pulse oximeter probe for the right wrist", "fetch": "trolley", "need": true, "mark": "Pre-ductal oximetry" },
         { "t": "100% oxygen for the first breaths", "trap": true, "r": "Start in air for 32 weeks and over; oxygen only if compressions are needed or saturations stay low." }
       ]
     },

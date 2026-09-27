@@ -40,8 +40,8 @@
         { "t": "Put out a trauma call", "need": true, "mark": "Activates the trauma team" },
         { "t": "Introductions and experience; I lead", "need": true, "mark": "Introductions and confirms experience" },
         { "t": "Roles: Dr Ng airway and C-spine, Nurse Cheng access and drugs, scribe times", "need": true, "mark": "Allocates roles" },
-        { "t": "PPE for everyone", "need": true, "mark": "Team PPE" },
-        { "t": "O-negative blood and ultrasound in the bay", "need": true, "mark": "Blood and ultrasound ready" },
+        { "t": "PPE for everyone", "fetch": "trolley", "need": true, "mark": "Team PPE" },
+        { "t": "O-negative blood and ultrasound in the bay", "fetch": "trolley", "need": true, "mark": "Blood and ultrasound ready" },
         { "t": "Expect abdominal bleeding from the seatbelt injury", "need": true, "mark": "Shares a mental model: likely abdominal haemorrhage" }
       ]
     },
@@ -91,11 +91,11 @@
       "label": "Resuscitate",
       "hint": "Access, bloods with crossmatch and pregnancy test, major haemorrhage protocol, TXA, analgesia.",
       "opts": [
-        { "t": "Second large-bore cannula; bloods, crossmatch, gas, lactate, and a pregnancy test", "mark": "Access and bloods including crossmatch and pregnancy test", "r": "Nurse Cheng: Done. Gas: pH 7.26, base deficit −8, lactate 4.6, Hb 96. hCG negative." },
+        { "t": "Second large-bore cannula; bloods, crossmatch, gas, lactate, and a pregnancy test", "fetch": "trolley", "mark": "Access and bloods including crossmatch and pregnancy test", "r": "Nurse Cheng: Done. Gas: pH 7.26, base deficit −8, lactate 4.6, Hb 96. hCG negative." },
         { "t": "Activate the major haemorrhage protocol; O-negative to the bay", "mark": "Activates the major haemorrhage protocol early", "r": "Nurse Cheng: Blood bank says the O-negative is 10 minutes away. BP 80/46 now." },
-        { "t": "Tranexamic acid 1 g IV now", "mark": "Gives tranexamic acid" },
-        { "t": "Titrated IV fentanyl for pain", "mark": "Analgesia" },
-        { "t": "2 L of saline wide open first, then decide on blood", "trap": true, "r": "Crystalloid dilutes clotting. Blood first in active bleeding." }
+        { "t": "Tranexamic acid 1 g IV now", "fetch": "cart", "mark": "Gives tranexamic acid" },
+        { "t": "Titrated IV fentanyl for pain", "fetch": "cart", "mark": "Analgesia" },
+        { "t": "2 L of saline wide open first, then decide on blood", "fetch": "cart", "trap": true, "r": "Crystalloid dilutes clotting. Blood first in active bleeding." }
       ]
     },
     {
@@ -105,12 +105,12 @@
       "label": "Waiting for blood",
       "hint": "Blood is 10 minutes away and she is worsening. Don't withhold volume, don't flood her: small warmed boluses to a radial pulse, PERMISSIVE HYPOTENSION (systolic 80–90). Exception: head injury — keep the pressure up.",
       "opts": [
-        { "t": "Warmed crystalloid 250 mL bolus now; reassess after each, and stop once she has a radial pulse and is talking", "scene": "bridge", "mark": "Bridges with small warmed crystalloid boluses while blood is on its way", "r": "Nurse Cheng: 250 mL in. Radial pulse is back and she is answering. BP 86/50." },
+        { "t": "Warmed crystalloid 250 mL bolus now; reassess after each, and stop once she has a radial pulse and is talking", "fetch": "cart", "scene": "bridge", "mark": "Bridges with small warmed crystalloid boluses while blood is on its way", "r": "Nurse Cheng: 250 mL in. Radial pulse is back and she is answering. BP 86/50." },
         { "t": "Permissive hypotension: aim for a systolic of 80–90 until the bleeding is controlled", "mark": "Permissive hypotension (systolic 80–90) until haemorrhage control" },
         { "t": "No head injury (GCS 15, no head signs), so permissive hypotension is safe; with a brain injury I would keep the systolic at 110 or more (MAP 80 or more)", "mark": "States the head injury exception: no permissive hypotension in TBI" },
         { "t": "The O-negative has arrived: run it through the warmer, then 1:1:1", "scene": "blood", "mark": "Starts blood the moment it arrives", "r": "Nurse Cheng: Blood running through the warmer." },
         { "t": "Give nothing until the blood arrives", "trap": "critical", "r": "She is peri-arrest. Withholding all volume risks cardiac arrest; small warmed boluses bridge the gap." },
-        { "t": "Noradrenaline infusion to bring her pressure back to normal", "trap": true, "r": "Vasopressors in haemorrhage hide the bleeding and cut tissue perfusion further. Volume and haemorrhage control first." }
+        { "t": "Noradrenaline infusion to bring her pressure back to normal", "fetch": "cart", "trap": true, "r": "Vasopressors in haemorrhage hide the bleeding and cut tissue perfusion further. Volume and haemorrhage control first." }
       ]
     },
     {

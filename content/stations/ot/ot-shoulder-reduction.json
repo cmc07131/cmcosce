@@ -33,10 +33,10 @@
       "hint": "Monitoring with capnography, oxygen, suction, airway kit, reversal agents, IV access, separate sedationist.",
       "confirm": "Ready",
       "opts": [
-        { "t": "SpO2, ECG, NIBP and capnography on", "need": true, "mark": "Full monitoring including capnography" },
-        { "t": "Oxygen, suction, bag-valve-mask and airway adjuncts at the bedside", "need": true, "mark": "Airway equipment ready" },
-        { "t": "Naloxone and flumazenil drawn up nearby", "need": true, "mark": "Reversal agents available" },
-        { "t": "IV cannula in the other arm", "need": true, "mark": "IV access" },
+        { "t": "SpO2, ECG, NIBP and capnography on", "fetch": "trolley", "need": true, "mark": "Full monitoring including capnography" },
+        { "t": "Oxygen, suction, bag-valve-mask and airway adjuncts at the bedside", "fetch": "trolley", "need": true, "mark": "Airway equipment ready" },
+        { "t": "Naloxone and flumazenil drawn up nearby", "fetch": "cart", "need": true, "mark": "Reversal agents available" },
+        { "t": "IV cannula in the other arm", "fetch": "trolley", "need": true, "mark": "IV access" },
         { "t": "Dr Kwan runs the sedation; I do the reduction", "need": true, "mark": "Separate sedationist and operator" }
       ]
     },

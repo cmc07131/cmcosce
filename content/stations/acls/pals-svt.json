@@ -46,7 +46,7 @@
       "label": "Vagal manoeuvre",
       "hint": "Infant: iced water bag to the face.",
       "opts": [
-        { "t": "Record a rhythm strip; bag of iced water on her face for 15 seconds, airway clear", "mark": "Uses the diving reflex for an infant", "r": "Nurse Fok: No change, still 280." },
+        { "t": "Record a rhythm strip; bag of iced water on her face for 15 seconds, airway clear", "fetch": "trolley", "mark": "Uses the diving reflex for an infant", "r": "Nurse Fok: No change, still 280." },
         { "t": "Carotid massage", "trap": true, "r": "Not used in infants." },
         { "t": "Press on her eyeballs", "trap": "critical", "r": "Ocular pressure can damage the eye; it is not recommended." }
       ]

@@ -51,12 +51,12 @@
       "hint": "Benzodiazepine for the sympathomimetic state; sodium bicarbonate for the sodium-channel effect.",
       "confirm": "Give these",
       "opts": [
-        { "t": "Diazepam 10 mg IV (titrated) for agitation", "need": true, "scene": "benzo", "mark": "Benzodiazepine for sympathomimetic toxicity" },
-        { "t": "Sodium bicarbonate 8.4% 50 mL (50 mmol) IV", "need": true, "scene": "bicarb", "mark": "Sodium bicarbonate for cocaine-induced broad complex tachycardia" },
+        { "t": "Diazepam 10 mg IV (titrated) for agitation", "fetch": "cart", "need": true, "scene": "benzo", "mark": "Benzodiazepine for sympathomimetic toxicity" },
+        { "t": "Sodium bicarbonate 8.4% 50 mL (50 mmol) IV", "fetch": "cart", "need": true, "scene": "bicarb", "mark": "Sodium bicarbonate for cocaine-induced broad complex tachycardia" },
         { "t": "Check K and Mg on a gas; correct", "need": true, "mark": "Checks and corrects electrolytes" },
-        { "t": "Metoprolol 5 mg IV for the rate", "trap": true, "r": "Beta-blockers are avoided in acute cocaine toxicity: unopposed alpha effects can worsen hypertension and ischaemia." },
-        { "t": "Verapamil for the tachycardia", "trap": "critical", "r": "Verapamil in VT can cause collapse." },
-        { "t": "Flecainide", "trap": "critical", "r": "A class Ic sodium-channel blocker worsens cocaine's sodium-channel toxicity." }
+        { "t": "Metoprolol 5 mg IV for the rate", "fetch": "cart", "trap": true, "r": "Beta-blockers are avoided in acute cocaine toxicity: unopposed alpha effects can worsen hypertension and ischaemia." },
+        { "t": "Verapamil for the tachycardia", "fetch": "cart", "trap": "critical", "r": "Verapamil in VT can cause collapse." },
+        { "t": "Flecainide", "fetch": "cart", "trap": "critical", "r": "A class Ic sodium-channel blocker worsens cocaine's sodium-channel toxicity." }
       ]
     },
     {

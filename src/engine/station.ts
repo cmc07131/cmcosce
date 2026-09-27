@@ -24,6 +24,8 @@ const optSchema = z.object({
   img: z.string().optional(),
   mood: z.number().optional(),
   scene: z.string().optional(),
+  /** The nurse fetches this from the drug cart or the kit trolley and gives it at the bedside. */
+  fetch: z.enum(['cart', 'trolley']).optional(),
   /** Steps: place in the correct sequence. */
   n: z.number().int().positive().optional(),
   end: z.boolean().optional(),
@@ -327,6 +329,7 @@ export function compileStation(station: Station): Pack {
       mood: o.mood,
       order: o.n,
       perform: o.perform,
+      fetch: o.fetch,
       performPose: o.pose,
       performHint: o.performHint,
     }

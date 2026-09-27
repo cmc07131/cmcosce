@@ -37,11 +37,11 @@
       "confirm": "Ask for these",
       "opts": [
         { "t": "Trauma team call", "need": true, "mark": "Activates the trauma team" },
-        { "t": "PPE for the team", "need": true, "mark": "Team in PPE" },
+        { "t": "PPE for the team", "fetch": "trolley", "need": true, "mark": "Team in PPE" },
         { "t": "Activate the major haemorrhage protocol; O-negative to the bedside", "need": true, "mark": "Activates the major haemorrhage protocol early" },
-        { "t": "Commercial pelvic binder ready on the trolley", "need": true, "mark": "Pelvic binder ready before arrival" },
-        { "t": "Warmer, rapid infuser, warm air blanket", "need": true, "mark": "Prevents hypothermia" },
-        { "t": "Urinary catheter set to put in first", "trap": true, "r": "Not before the urethra and perineum are checked, and it is not a priority in the primary survey." }
+        { "t": "Commercial pelvic binder ready on the trolley", "fetch": "trolley", "need": true, "mark": "Pelvic binder ready before arrival" },
+        { "t": "Warmer, rapid infuser, warm air blanket", "fetch": "trolley", "need": true, "mark": "Prevents hypothermia" },
+        { "t": "Urinary catheter set to put in first", "fetch": "trolley", "trap": true, "r": "Not before the urethra and perineum are checked, and it is not a priority in the primary survey." }
       ]
     },
     {
@@ -116,7 +116,7 @@
       "label": "Talk to the nurse",
       "hint": "Access above the diaphragm, bloods and crossmatch, blood 1:1:1, permissive hypotension.",
       "opts": [
-        { "t": "Two large-bore cannulae in the arms — not the legs", "mark": "Large-bore access above the diaphragm", "r": "Nurse Chan: Two 14 G in the antecubital fossae." },
+        { "t": "Two large-bore cannulae in the arms — not the legs", "fetch": "trolley", "mark": "Large-bore access above the diaphragm", "r": "Nurse Chan: Two 14 G in the antecubital fossae." },
         { "t": "Bloods: crossmatch, FBC, clotting, fibrinogen, gas, lactate, pregnancy test", "mark": "Bloods including crossmatch and pregnancy test", "r": "Nurse Chan: Sent. Gas: pH 7.22, lactate 6.0, Hb 94, hCG negative." },
         { "t": "O-negative now, then 1:1:1 through the warmer", "scene": "blood", "mark": "Early balanced blood transfusion", "r": "Nurse Chan: Blood running." },
         { "t": "Aim for a systolic of 80–90 until the bleeding is controlled", "mark": "Permissive hypotension" },
@@ -131,9 +131,9 @@
       "hint": "Tranexamic acid and analgesia.",
       "confirm": "Give these",
       "opts": [
-        { "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours", "need": true, "mark": "Tranexamic acid within 3 hours" },
-        { "t": "Fentanyl, small titrated IV doses", "need": true, "mark": "Titrated analgesia" },
-        { "t": "Noradrenaline infusion to a MAP of 65", "trap": "critical", "r": "Vasopressors in haemorrhagic shock hide hypovolaemia and increase mortality. Replace blood." }
+        { "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours", "fetch": "cart", "need": true, "mark": "Tranexamic acid within 3 hours" },
+        { "t": "Fentanyl, small titrated IV doses", "fetch": "cart", "need": true, "mark": "Titrated analgesia" },
+        { "t": "Noradrenaline infusion to a MAP of 65", "fetch": "cart", "trap": "critical", "r": "Vasopressors in haemorrhagic shock hide hypovolaemia and increase mortality. Replace blood." }
       ]
     },
     {

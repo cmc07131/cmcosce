@@ -57,12 +57,12 @@
       "hint": "Calcium, insulin–glucose, salbutamol; saline not Hartmann's; catheter for urine output.",
       "confirm": "Give these",
       "opts": [
-        { "t": "Calcium gluconate 10% 30 mL IV", "need": true, "scene": "calcium", "mark": "IV calcium" },
-        { "t": "Insulin 10 units with 25 g glucose IV", "need": true, "scene": "insulin", "mark": "Insulin–glucose" },
-        { "t": "0.9% saline 1 L/h, then titrate", "need": true, "scene": "fluids", "mark": "Aggressive saline" },
-        { "t": "Urinary catheter; target urine 200–300 mL/h", "need": true, "mark": "Urine output target" },
-        { "t": "Hartmann's 2 L fast", "trap": true, "r": "Contains potassium; use saline early." },
-        { "t": "Suxamethonium if he needs intubation", "trap": "critical", "r": "Raises potassium further in crush; use rocuronium." }
+        { "t": "Calcium gluconate 10% 30 mL IV", "fetch": "cart", "need": true, "scene": "calcium", "mark": "IV calcium" },
+        { "t": "Insulin 10 units with 25 g glucose IV", "fetch": "cart", "need": true, "scene": "insulin", "mark": "Insulin–glucose" },
+        { "t": "0.9% saline 1 L/h, then titrate", "fetch": "cart", "need": true, "scene": "fluids", "mark": "Aggressive saline" },
+        { "t": "Urinary catheter; target urine 200–300 mL/h", "fetch": "trolley", "need": true, "mark": "Urine output target" },
+        { "t": "Hartmann's 2 L fast", "fetch": "cart", "trap": true, "r": "Contains potassium; use saline early." },
+        { "t": "Suxamethonium if he needs intubation", "fetch": "cart", "trap": "critical", "r": "Raises potassium further in crush; use rocuronium." }
       ]
     },
     {

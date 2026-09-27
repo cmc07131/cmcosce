@@ -66,7 +66,7 @@
       "opts": [
         { "t": "PEEP 8–10, SpO2 94–98%, normocapnia", "scene": "peep", "mark": "Lung-protective ventilation with PEEP" },
         { "t": "Prevent fever: 37.5 °C or less for 36–72 hours", "mark": "Post-arrest temperature control (prevent fever)" },
-        { "t": "Nasogastric tube to decompress the stomach", "mark": "Gastric decompression" },
+        { "t": "Nasogastric tube to decompress the stomach", "fetch": "trolley", "mark": "Gastric decompression" },
         { "t": "Keep him at 32 °C for 24 hours routinely", "trap": true, "r": "Current post-arrest guidance prevents fever rather than routinely cooling to 32–36." },
         { "t": "Start IV antibiotics routinely for pool water", "trap": true, "r": "Only for grossly contaminated water or signs of infection." }
       ]

@@ -46,7 +46,7 @@
       "label": "After",
       "hint": "Neonatal assessment, third stage, documentation.",
       "opts": [
-        { "t": "Baby to the neonatal team; active third stage with oxytocin 10 IU IM", "mark": "Neonatal handover and third stage" },
+        { "t": "Baby to the neonatal team; active third stage with oxytocin 10 IU IM", "fetch": "cart", "mark": "Neonatal handover and third stage" },
         { "t": "Check hips later (breech is a risk factor for hip dysplasia)", "mark": "Mentions hip ultrasound follow-up" }
       ]
     },

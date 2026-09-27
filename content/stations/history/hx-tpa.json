@@ -46,10 +46,10 @@
       "label": "Talk to the nurse",
       "hint": "Lower BP below 185/110 before thrombolysis; CT angiogram; weight.",
       "opts": [
-        { "t": "Labetalol 10 mg IV now to get the BP below 185/110", "scene": "bp", "mark": "Lowers BP below 185/110 before thrombolysis" },
+        { "t": "Labetalol 10 mg IV now to get the BP below 185/110", "fetch": "cart", "scene": "bp", "mark": "Lowers BP below 185/110 before thrombolysis" },
         { "t": "CT angiogram now for a large vessel occlusion; call the stroke team", "mark": "CT angiography for thrombectomy and stroke team activation" },
         { "t": "Weigh her for the dose", "mark": "Weight-based dosing" },
-        { "t": "Aspirin 300 mg now", "trap": true, "r": "No antiplatelets for 24 hours after thrombolysis." }
+        { "t": "Aspirin 300 mg now", "fetch": "cart", "trap": true, "r": "No antiplatelets for 24 hours after thrombolysis." }
       ]
     },
     {

@@ -48,9 +48,9 @@
       "hint": "Severe hypertension: labetalol or hydralazine; fluid restriction.",
       "confirm": "Give",
       "opts": [
-        { "t": "Labetalol 20 mg IV, repeat/escalate, or infusion (hydralazine if asthmatic)", "need": true, "scene": "bp", "mark": "Treats severe hypertension" },
-        { "t": "Restrict fluids to about 80 mL/h; catheter and hourly urine output", "need": true, "mark": "Fluid restriction and urine output" },
-        { "t": "Ergometrine for the third stage later", "trap": "critical", "r": "Ergometrine is contraindicated in pre-eclampsia: severe hypertension and stroke." }
+        { "t": "Labetalol 20 mg IV, repeat/escalate, or infusion (hydralazine if asthmatic)", "fetch": "cart", "need": true, "scene": "bp", "mark": "Treats severe hypertension" },
+        { "t": "Restrict fluids to about 80 mL/h; catheter and hourly urine output", "fetch": "trolley", "need": true, "mark": "Fluid restriction and urine output" },
+        { "t": "Ergometrine for the third stage later", "fetch": "cart", "trap": "critical", "r": "Ergometrine is contraindicated in pre-eclampsia: severe hypertension and stroke." }
       ]
     },
     {

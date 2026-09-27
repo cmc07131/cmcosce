@@ -36,9 +36,9 @@
       "opts": [
         { "t": "Obstetric emergency call: senior obstetrician, anaesthetist, midwife", "need": true, "mark": "Calls the obstetric team" },
         { "t": "Activate the major haemorrhage protocol; O-negative available", "need": true, "mark": "Activates the major haemorrhage protocol" },
-        { "t": "Two large-bore cannulae; FBC, clotting, fibrinogen, crossmatch 4 units, gas", "need": true, "mark": "Access and bloods including fibrinogen and crossmatch" },
+        { "t": "Two large-bore cannulae; FBC, clotting, fibrinogen, crossmatch 4 units, gas", "fetch": "trolley", "need": true, "mark": "Access and bloods including fibrinogen and crossmatch" },
         { "t": "Weigh the pads and sheet to measure blood loss", "need": true, "mark": "Quantifies blood loss" },
-        { "t": "Lie her flat, oxygen, keep her warm", "need": true, "mark": "Position, oxygen and warmth" }
+        { "t": "Lie her flat, oxygen, keep her warm", "fetch": "trolley", "need": true, "mark": "Position, oxygen and warmth" }
       ]
     },
     {
@@ -84,9 +84,9 @@
       "label": "Fluids and blood",
       "hint": "Warm crystalloid, then blood; keep her warm.",
       "opts": [
-        { "t": "Warm Hartmann's up to 2 L while blood comes; then red cells and plasma per protocol", "scene": "blood", "mark": "Limits crystalloid and moves to blood", "r": "Midwife Kong: Blood running through the warmer." },
+        { "t": "Warm Hartmann's up to 2 L while blood comes; then red cells and plasma per protocol", "fetch": "cart", "scene": "blood", "mark": "Limits crystalloid and moves to blood", "r": "Midwife Kong: Blood running through the warmer." },
         { "t": "Fibrinogen above 2 g/L: cryoprecipitate or fibrinogen concentrate if lower", "mark": "Targets fibrinogen" },
-        { "t": "Six litres of saline until the pressure normalises", "trap": true, "r": "Dilutional coagulopathy. Blood and products early." }
+        { "t": "Six litres of saline until the pressure normalises", "fetch": "cart", "trap": true, "r": "Dilutional coagulopathy. Blood and products early." }
       ]
     },
     {

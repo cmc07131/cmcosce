@@ -50,10 +50,10 @@
       "hint": "Dexamethasone for all; nebulised adrenaline for moderate/severe; observe.",
       "confirm": "Give",
       "opts": [
-        { "t": "Oral dexamethasone 0.15 mg/kg (11 kg: 1.65 mg)", "need": true, "scene": "dex", "mark": "Oral dexamethasone 0.15 mg/kg" },
-        { "t": "Nebulised adrenaline 1:1000, 0.5 mL/kg (5 mL), with mum holding the mask", "need": true, "scene": "adrenaline", "mark": "Nebulised adrenaline for moderate croup" },
+        { "t": "Oral dexamethasone 0.15 mg/kg (11 kg: 1.65 mg)", "fetch": "cart", "need": true, "scene": "dex", "mark": "Oral dexamethasone 0.15 mg/kg" },
+        { "t": "Nebulised adrenaline 1:1000, 0.5 mL/kg (5 mL), with mum holding the mask", "fetch": "cart", "need": true, "scene": "adrenaline", "mark": "Nebulised adrenaline for moderate croup" },
         { "t": "Observe at least 2–4 hours after adrenaline", "need": true, "mark": "Observes for rebound after adrenaline" },
-        { "t": "Oral amoxicillin", "trap": true, "r": "Croup is viral; antibiotics don't help." },
+        { "t": "Oral amoxicillin", "fetch": "cart", "trap": true, "r": "Croup is viral; antibiotics don't help." },
         { "t": "Neck X-ray to confirm", "trap": true, "r": "Croup is a clinical diagnosis; X-ray only if atypical." }
       ]
     },

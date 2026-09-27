@@ -59,8 +59,8 @@
       "confirm": "Do these",
       "opts": [
         { "t": "Urgent endoscopy; surgeon and IR aware early", "need": true, "mark": "Early definitive haemorrhage control" },
-        { "t": "IV PPI after endoscopy; IV iron; consider erythropoietin", "need": true, "mark": "Blood-sparing treatments" },
-        { "t": "Paediatric blood tubes to minimise sampling", "need": true, "mark": "Minimises iatrogenic blood loss" },
+        { "t": "IV PPI after endoscopy; IV iron; consider erythropoietin", "fetch": "cart", "need": true, "mark": "Blood-sparing treatments" },
+        { "t": "Paediatric blood tubes to minimise sampling", "fetch": "trolley", "need": true, "mark": "Minimises iatrogenic blood loss" },
         { "t": "Document his refusal, capacity, what he accepts, and the card; inform the team", "need": true, "mark": "Documents clearly" },
         { "t": "Transfuse him once he loses consciousness", "trap": "critical", "r": "A valid refusal made while capable remains binding when he loses capacity." }
       ]

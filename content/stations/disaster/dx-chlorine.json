@@ -68,9 +68,9 @@
       "confirm": "Give these",
       "opts": [
         { "t": "High-flow humidified oxygen", "need": true, "scene": "oxygen", "mark": "High-flow humidified oxygen" },
-        { "t": "Nebulised salbutamol 5 mg", "need": true, "scene": "neb", "mark": "Bronchodilator for bronchospasm" },
-        { "t": "Consider nebulised sodium bicarbonate 4.2% (weak evidence)", "mark": "Knows nebulised bicarbonate is optional" },
-        { "t": "IV hydrocortisone for everyone exposed", "trap": true, "r": "Routine steroids are not recommended." }
+        { "t": "Nebulised salbutamol 5 mg", "fetch": "cart", "need": true, "scene": "neb", "mark": "Bronchodilator for bronchospasm" },
+        { "t": "Consider nebulised sodium bicarbonate 4.2% (weak evidence)", "fetch": "cart", "mark": "Knows nebulised bicarbonate is optional" },
+        { "t": "IV hydrocortisone for everyone exposed", "fetch": "cart", "trap": true, "r": "Routine steroids are not recommended." }
       ]
     },
     {

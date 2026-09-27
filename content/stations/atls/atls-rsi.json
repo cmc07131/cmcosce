@@ -37,13 +37,13 @@
       "hint": "Prepare for a difficult airway: two suctions, videolaryngoscope, bougie, supraglottic airway, front-of-neck kit, capnography.",
       "confirm": "Lay these out",
       "opts": [
-        { "t": "Two working Yankauer suckers", "need": true, "mark": "Suction ready (blood in the airway)" },
-        { "t": "Videolaryngoscope and a direct laryngoscope, bougie", "need": true, "mark": "Laryngoscopes and bougie" },
-        { "t": "Size 7.0 and 8.0 tubes, cuffs checked, syringe", "need": true, "mark": "Tubes checked" },
-        { "t": "Second-generation supraglottic airway (plan B)", "need": true, "mark": "Supraglottic airway for plan B" },
-        { "t": "Scalpel–bougie–tube front-of-neck kit (plan D)", "need": true, "mark": "Front-of-neck kit for plan D" },
-        { "t": "Waveform capnography on the circuit", "need": true, "mark": "Waveform capnography ready" },
-        { "t": "Nasopharyngeal airway for his blocked nose", "trap": "critical", "r": "Blood from the ear and facial injuries: possible base of skull fracture. No nasal airways." }
+        { "t": "Two working Yankauer suckers", "fetch": "trolley", "need": true, "mark": "Suction ready (blood in the airway)" },
+        { "t": "Videolaryngoscope and a direct laryngoscope, bougie", "fetch": "trolley", "need": true, "mark": "Laryngoscopes and bougie" },
+        { "t": "Size 7.0 and 8.0 tubes, cuffs checked, syringe", "fetch": "trolley", "need": true, "mark": "Tubes checked" },
+        { "t": "Second-generation supraglottic airway (plan B)", "fetch": "trolley", "need": true, "mark": "Supraglottic airway for plan B" },
+        { "t": "Scalpel–bougie–tube front-of-neck kit (plan D)", "fetch": "trolley", "need": true, "mark": "Front-of-neck kit for plan D" },
+        { "t": "Waveform capnography on the circuit", "fetch": "trolley", "need": true, "mark": "Waveform capnography ready" },
+        { "t": "Nasopharyngeal airway for his blocked nose", "fetch": "trolley", "trap": "critical", "r": "Blood from the ear and facial injuries: possible base of skull fracture. No nasal airways." }
       ]
     },
     {
@@ -109,13 +109,13 @@
       "hint": "Haemodynamically stable head injury: ketamine or etomidate, rocuronium or suxamethonium, fentanyl to blunt the surge.",
       "confirm": "Draw these up",
       "opts": [
-        { "t": "Ketamine 1.5 mg/kg IV", "need": true, "mark": "Appropriate induction agent and dose" },
-        { "t": "Rocuronium 1.2 mg/kg IV", "need": true, "mark": "Neuromuscular blocker at RSI dose" },
-        { "t": "Fentanyl 2 microgram/kg IV", "need": true, "mark": "Opioid to blunt the pressor response" },
-        { "t": "Vasopressor drawn up (metaraminol) for post-induction hypotension", "need": true, "mark": "Vasopressor ready for post-induction hypotension" },
-        { "t": "Lignocaine 1.5 mg/kg as premedication", "trap": true, "r": "No evidence it improves outcome; it is not part of current emergency RSI." },
-        { "t": "Dexamethasone 8 mg for brain swelling", "trap": "critical", "r": "Steroids increase mortality after head injury (CRASH trial)." },
-        { "t": "Propofol 2.5 mg/kg", "trap": true, "r": "A full propofol dose drops the pressure. Low pressure harms the injured brain." }
+        { "t": "Ketamine 1.5 mg/kg IV", "fetch": "cart", "need": true, "mark": "Appropriate induction agent and dose" },
+        { "t": "Rocuronium 1.2 mg/kg IV", "fetch": "cart", "need": true, "mark": "Neuromuscular blocker at RSI dose" },
+        { "t": "Fentanyl 2 microgram/kg IV", "fetch": "cart", "need": true, "mark": "Opioid to blunt the pressor response" },
+        { "t": "Vasopressor drawn up (metaraminol) for post-induction hypotension", "fetch": "cart", "need": true, "mark": "Vasopressor ready for post-induction hypotension" },
+        { "t": "Lignocaine 1.5 mg/kg as premedication", "fetch": "cart", "trap": true, "r": "No evidence it improves outcome; it is not part of current emergency RSI." },
+        { "t": "Dexamethasone 8 mg for brain swelling", "fetch": "cart", "trap": "critical", "r": "Steroids increase mortality after head injury (CRASH trial)." },
+        { "t": "Propofol 2.5 mg/kg", "fetch": "cart", "trap": true, "r": "A full propofol dose drops the pressure. Low pressure harms the injured brain." }
       ]
     },
     {
@@ -145,8 +145,8 @@
         { "t": "Ventilate to PaCO2 4.5–5.0 kPa, SpO2 94–98%", "scene": "ventilated", "mark": "Targets normocapnia and normal oxygenation" },
         { "t": "Head up 30 degrees, collar loosened or blocks and tape", "mark": "Head up 30 degrees, no venous obstruction" },
         { "t": "Keep systolic at 110 or more (age 15–49)", "mark": "Age-appropriate systolic target" },
-        { "t": "Propofol and fentanyl infusions for sedation", "mark": "Continuous sedation and analgesia" },
-        { "t": "Hypertonic saline 3% (or mannitol) now for the dilated left pupil", "scene": "hypertonic", "mark": "Treats signs of herniation with hyperosmolar therapy" },
+        { "t": "Propofol and fentanyl infusions for sedation", "fetch": "cart", "mark": "Continuous sedation and analgesia" },
+        { "t": "Hypertonic saline 3% (or mannitol) now for the dilated left pupil", "fetch": "cart", "scene": "hypertonic", "mark": "Treats signs of herniation with hyperosmolar therapy" },
         { "t": "Hyperventilate to an ETCO2 of 3 kPa for the next few hours", "trap": true, "r": "Prolonged hyperventilation causes cerebral vasoconstriction and ischaemia. Only briefly, as a bridge to theatre." }
       ]
     },

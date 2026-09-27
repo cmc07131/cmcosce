@@ -75,7 +75,7 @@
       "confirm": "Do these",
       "opts": [
         { "t": "Call the anaesthetist and prepare to intubate (GCS 8 or less)", "need": true, "mark": "Secures the airway: GCS 8 or less" },
-        { "t": "Hypertonic saline 3% or mannitol 20% now", "need": true, "mark": "Hyperosmolar therapy for herniation" },
+        { "t": "Hypertonic saline 3% or mannitol 20% now", "fetch": "cart", "need": true, "mark": "Hyperosmolar therapy for herniation" },
         { "t": "Head up 30 degrees, avoid hypoxia and hypotension", "need": true, "mark": "Neuroprotective measures" },
         { "t": "Urgent CT head and C-spine; call neurosurgery", "need": true, "mark": "Urgent CT and neurosurgical referral" },
         { "t": "Lumbar puncture to exclude meningitis", "trap": "critical", "r": "A fixed pupil means a mass effect; lumbar puncture can cause coning." },

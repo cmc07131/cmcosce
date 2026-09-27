@@ -38,12 +38,12 @@
       "confirm": "Ask for these",
       "opts": [
         { "t": "Put out a trauma team call", "need": true, "mark": "Activates the trauma team before arrival", "r": "Nurse Lam: Trauma call is out." },
-        { "t": "Everyone in gloves, apron, eye protection", "need": true, "mark": "Team in PPE" },
+        { "t": "Everyone in gloves, apron, eye protection", "fetch": "trolley", "need": true, "mark": "Team in PPE" },
         { "t": "O-negative blood to the bedside; activate the massive haemorrhage protocol", "need": true, "mark": "Blood ready and massive haemorrhage protocol activated early" },
-        { "t": "Rapid infuser with a warmer, warm blankets", "need": true, "mark": "Prevents hypothermia: warmed products, blankets" },
-        { "t": "Open a chest drain tray and ultrasound at the bedside", "need": true, "mark": "Anticipates the chest: drain tray and ultrasound ready" },
+        { "t": "Rapid infuser with a warmer, warm blankets", "fetch": "trolley", "need": true, "mark": "Prevents hypothermia: warmed products, blankets" },
+        { "t": "Open a chest drain tray and ultrasound at the bedside", "fetch": "trolley", "need": true, "mark": "Anticipates the chest: drain tray and ultrasound ready" },
         { "t": "Book a CT scanner slot straight from the ambulance bay", "trap": true, "r": "He is shocked. CT is for patients who respond; he goes to resus first." },
-        { "t": "Hang 2 L of 0.9% saline on a pressure bag", "trap": true, "r": "Large crystalloid volumes dilute clotting factors and worsen acidosis. Blood first." }
+        { "t": "Hang 2 L of 0.9% saline on a pressure bag", "fetch": "cart", "trap": true, "r": "Large crystalloid volumes dilute clotting factors and worsen acidosis. Blood first." }
       ]
     },
     {
@@ -107,11 +107,11 @@
       "hint": "Oxygen, two large-bore lines, bloods including crossmatch, and blood through the warmer.",
       "opts": [
         { "t": "High-flow oxygen 15 L via non-rebreather", "scene": "o2", "mark": "High-flow oxygen", "r": "Nurse Lam: 15 L on." },
-        { "t": "Two large-bore cannulae (14–16 G) in the antecubital fossae", "mark": "Two large-bore IV lines", "r": "Nurse Lam: Two 14 G in." },
+        { "t": "Two large-bore cannulae (14–16 G) in the antecubital fossae", "fetch": "trolley", "mark": "Two large-bore IV lines", "r": "Nurse Lam: Two 14 G in." },
         { "t": "Bloods: crossmatch 6 units, FBC, clotting with fibrinogen, U&E, lactate, venous gas", "mark": "Sends crossmatch, clotting, gas and lactate", "r": "Nurse Lam: Sent, crossmatch flagged urgent. Gas: pH 7.24, lactate 5.1, Hb 102." },
         { "t": "Start the O-negative blood now, then 1:1:1 red cells, plasma, platelets through the warmer", "scene": "blood", "mark": "Transfuses blood early in a balanced ratio", "r": "Nurse Lam: First unit running through the warmer. Plasma thawing." },
         { "t": "Aim for a systolic of about 80–90 until the bleeding is controlled", "mark": "Permissive hypotension until haemorrhage control", "r": "Nurse Lam: Titrating to a systolic of 80 to 90." },
-        { "t": "Keep pushing saline until the pressure is normal", "trap": true, "r": "Chasing a normal pressure with crystalloid dilutes clotting and raises the bleeding pressure." }
+        { "t": "Keep pushing saline until the pressure is normal", "fetch": "cart", "trap": true, "r": "Chasing a normal pressure with crystalloid dilutes clotting and raises the bleeding pressure." }
       ]
     },
     {
@@ -122,11 +122,11 @@
       "hint": "Tranexamic acid inside 3 hours, and titrated analgesia.",
       "confirm": "Give these",
       "opts": [
-        { "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours", "need": true, "mark": "Tranexamic acid 1 g within 3 hours of injury" },
-        { "t": "Fentanyl 25–50 microgram IV, titrated", "need": true, "mark": "Titrated IV analgesia" },
-        { "t": "Calcium chloride 10% 10 mL with the blood", "mark": "Replaces calcium during massive transfusion" },
-        { "t": "Adrenaline 1 mg IV", "trap": "critical", "r": "He is not in arrest. Vasopressors in bleeding shock worsen outcome." },
-        { "t": "Ketamine 2 mg/kg and suxamethonium to intubate now", "trap": true, "r": "He is talking and oxygenating. Induction in this degree of shock can cause arrest; fix the chest and the volume first." }
+        { "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours", "fetch": "cart", "need": true, "mark": "Tranexamic acid 1 g within 3 hours of injury" },
+        { "t": "Fentanyl 25–50 microgram IV, titrated", "fetch": "cart", "need": true, "mark": "Titrated IV analgesia" },
+        { "t": "Calcium chloride 10% 10 mL with the blood", "fetch": "cart", "mark": "Replaces calcium during massive transfusion" },
+        { "t": "Adrenaline 1 mg IV", "fetch": "cart", "trap": "critical", "r": "He is not in arrest. Vasopressors in bleeding shock worsen outcome." },
+        { "t": "Ketamine 2 mg/kg and suxamethonium to intubate now", "fetch": "cart", "trap": true, "r": "He is talking and oxygenating. Induction in this degree of shock can cause arrest; fix the chest and the volume first." }
       ]
     },
     {

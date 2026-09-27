@@ -20,9 +20,9 @@
       "confirm": "Ready",
       "opts": [
         { "t": "Call obstetrics and neonatology; one team for mother, one for baby", "need": true, "mark": "Calls for help and forms two teams" },
-        { "t": "PPE; sterile delivery pack with two clamps and scissors", "need": true, "mark": "Delivery pack and PPE" },
-        { "t": "Warm towels, hat, resuscitaire on", "need": true, "mark": "Warmth for the baby" },
-        { "t": "Oxytocin 10 IU drawn up for the third stage", "need": true, "mark": "Oxytocin ready for active third stage" }
+        { "t": "PPE; sterile delivery pack with two clamps and scissors", "fetch": "trolley", "need": true, "mark": "Delivery pack and PPE" },
+        { "t": "Warm towels, hat, resuscitaire on", "fetch": "trolley", "need": true, "mark": "Warmth for the baby" },
+        { "t": "Oxytocin 10 IU drawn up for the third stage", "fetch": "cart", "need": true, "mark": "Oxytocin ready for active third stage" }
       ]
     },
     {

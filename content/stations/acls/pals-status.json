@@ -63,7 +63,7 @@
       "hint": "Fever: sepsis and meningitis; electrolytes; history of trauma or toxins.",
       "opts": [
         { "t": "Bloods: culture, FBC, CRP, U&E, calcium, magnesium, gas", "mark": "Sends bloods for causes" },
-        { "t": "Ceftriaxone 80 mg/kg and aciclovir if meningitis or encephalitis is possible", "mark": "Covers CNS infection when indicated" },
+        { "t": "Ceftriaxone 80 mg/kg and aciclovir if meningitis or encephalitis is possible", "fetch": "cart", "mark": "Covers CNS infection when indicated" },
         { "t": "Ask about head injury and access to medicines at home", "mark": "Asks about trauma and toxins" }
       ]
     },

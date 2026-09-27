@@ -83,7 +83,7 @@
       "opts": [
         { "t": "Repeat ABCDE and 12-lead ECG", "mark": "Reassesses with a 12-lead" },
         { "t": "Bloods: K, Mg, TFT, troponin", "mark": "Looks for causes: electrolytes, thyroid, ischaemia" },
-        { "t": "Heparin now; long-term anticoagulation by CHA2DS2-VA", "mark": "Anticoagulation around cardioversion" },
+        { "t": "Heparin now; long-term anticoagulation by CHA2DS2-VA", "fetch": "cart", "mark": "Anticoagulation around cardioversion" },
         { "t": "If it had failed three times: amiodarone 300 mg over 10–20 min, then shock again", "mark": "Knows the escalation after 3 failed shocks" }
       ]
     },

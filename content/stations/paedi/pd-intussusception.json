@@ -49,9 +49,9 @@
       "hint": "Access, fluids, bloods, NG tube, analgesia, surgeon, air enema.",
       "confirm": "Do",
       "opts": [
-        { "t": "IV access; bloods including gas and group and save", "need": true, "mark": "IV access and bloods" },
-        { "t": "10 mL/kg crystalloid bolus, reassess", "need": true, "scene": "bolus", "mark": "Fluid resuscitation" },
-        { "t": "Nasogastric tube on free drainage; analgesia", "need": true, "mark": "NG decompression and analgesia" },
+        { "t": "IV access; bloods including gas and group and save", "fetch": "trolley", "need": true, "mark": "IV access and bloods" },
+        { "t": "10 mL/kg crystalloid bolus, reassess", "fetch": "cart", "need": true, "scene": "bolus", "mark": "Fluid resuscitation" },
+        { "t": "Nasogastric tube on free drainage; analgesia", "fetch": "trolley", "need": true, "mark": "NG decompression and analgesia" },
         { "t": "Paediatric surgeon now; air enema reduction with surgeons present", "need": true, "mark": "Surgical referral and air enema" },
         { "t": "Oral rehydration and discharge as gastroenteritis", "trap": "critical", "r": "Bilious vomiting and redcurrant stool: surgical emergency." }
       ]

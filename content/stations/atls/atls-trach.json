@@ -47,8 +47,8 @@
       "hint": "Call for help and give oxygen to both the face and the stoma.",
       "opts": [
         { "t": "Call the airway team (anaesthetist and ENT) now", "mark": "Calls for airway help early" },
-        { "t": "High-flow oxygen to the face and the stoma", "mark": "Oxygen to both face and stoma" },
-        { "t": "Oxygen only by face mask", "trap": true, "r": "He breathes mostly through the tracheostomy. Oxygen goes to both." }
+        { "t": "High-flow oxygen to the face and the stoma", "fetch": "trolley", "mark": "Oxygen to both face and stoma" },
+        { "t": "Oxygen only by face mask", "fetch": "trolley", "trap": true, "r": "He breathes mostly through the tracheostomy. Oxygen goes to both." }
       ]
     },
     {

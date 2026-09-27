@@ -33,8 +33,8 @@
       "confirm": "Now",
       "opts": [
         { "t": "Most senior anaesthetist and ENT surgeon to resus now; theatre alerted", "need": true, "mark": "Calls senior anaesthesia and ENT immediately" },
-        { "t": "Difficult airway kit, smaller tubes, needle/surgical airway kit ready", "need": true, "mark": "Prepares for a difficult and surgical airway" },
-        { "t": "Oxygen held near her face by her father, no mask forced", "need": true, "scene": "o2", "mark": "Oxygen without upsetting her" },
+        { "t": "Difficult airway kit, smaller tubes, needle/surgical airway kit ready", "fetch": "trolley", "need": true, "mark": "Prepares for a difficult and surgical airway" },
+        { "t": "Oxygen held near her face by her father, no mask forced", "fetch": "trolley", "need": true, "scene": "o2", "mark": "Oxygen without upsetting her" },
         { "t": "Keep her upright with her father; minimise interventions", "need": true, "mark": "Keeps the child calm and upright" },
         { "t": "IV cannula and bloods now", "trap": "critical", "r": "Distress may cause obstruction. Cannulate after the airway is secured.", "scene": "upset" },
         { "t": "Lateral neck X-ray in the radiology department", "trap": "critical", "r": "Never send a child with suspected epiglottitis away from airway expertise." }

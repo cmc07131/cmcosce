@@ -41,12 +41,12 @@
       "hint": "Hydrocortisone 100 mg IV now, saline, glucose.",
       "confirm": "Give now",
       "opts": [
-        { "t": "Hydrocortisone 100 mg IV now", "need": true, "scene": "hydrocortisone", "mark": "Immediate hydrocortisone 100 mg IV/IM" },
-        { "t": "0.9% saline 1 L over 1 hour", "need": true, "scene": "fluids", "mark": "Rapid saline" },
-        { "t": "10% glucose for the hypoglycaemia", "need": true, "scene": "glucose", "mark": "Treats hypoglycaemia" },
+        { "t": "Hydrocortisone 100 mg IV now", "fetch": "cart", "need": true, "scene": "hydrocortisone", "mark": "Immediate hydrocortisone 100 mg IV/IM" },
+        { "t": "0.9% saline 1 L over 1 hour", "fetch": "cart", "need": true, "scene": "fluids", "mark": "Rapid saline" },
+        { "t": "10% glucose for the hypoglycaemia", "fetch": "cart", "need": true, "scene": "glucose", "mark": "Treats hypoglycaemia" },
         { "t": "Random cortisol and ACTH — only if it does not delay the hydrocortisone", "mark": "Sends cortisol/ACTH without delaying treatment" },
         { "t": "Wait for the cortisol result before giving steroids", "trap": "critical", "r": "Adrenal crisis kills within hours. Treat on suspicion." },
-        { "t": "Dexamethasone 4 mg instead", "trap": true, "r": "Hydrocortisone provides glucocorticoid and mineralocorticoid effect at stress doses." }
+        { "t": "Dexamethasone 4 mg instead", "fetch": "cart", "trap": true, "r": "Hydrocortisone provides glucocorticoid and mineralocorticoid effect at stress doses." }
       ]
     },
     {

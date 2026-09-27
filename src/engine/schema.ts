@@ -19,6 +19,8 @@ const performFields = {
 const optionSchema = z.object({
   id: z.string(),
   label: z.string(),
+  /** The nurse fetches this from the drug cart or the kit trolley and gives it at the bedside. */
+  fetch: z.enum(['cart', 'trolley']).optional(),
   detail: z.string().optional(),
   needed: z.boolean().optional(),
   isTrap: z.boolean().optional(),

@@ -53,10 +53,10 @@
       "hint": "Two cannulae, bloods and crossmatch, urine or serum hCG, blood early.",
       "confirm": "Now",
       "opts": [
-        { "t": "Two large-bore cannulae; FBC, crossmatch 4 units, clotting, group and antibodies", "need": true, "mark": "Access and crossmatch" },
+        { "t": "Two large-bore cannulae; FBC, crossmatch 4 units, clotting, group and antibodies", "fetch": "trolley", "need": true, "mark": "Access and crossmatch" },
         { "t": "Urine pregnancy test now (and serum hCG)", "need": true, "mark": "Confirms pregnancy at the bedside" },
         { "t": "O-negative blood; major haemorrhage protocol", "need": true, "scene": "blood", "mark": "Transfuses early" },
-        { "t": "Nil by mouth; analgesia", "need": true, "mark": "Prepares for theatre; analgesia" },
+        { "t": "Nil by mouth; analgesia", "fetch": "cart", "need": true, "mark": "Prepares for theatre; analgesia" },
         { "t": "Send her to the early pregnancy unit for a scan tomorrow", "trap": "critical", "r": "She is shocked. Theatre, not tomorrow's clinic." }
       ]
     },

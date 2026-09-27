@@ -59,9 +59,9 @@
       "hint": "Treat hypoglycaemia; if still dangerous, rapid tranquillisation.",
       "confirm": "Give",
       "opts": [
-        { "t": "IV 10% glucose (or oral if he'll drink), then thiamine", "need": true, "scene": "glucose", "mark": "Treats hypoglycaemia (with thiamine in alcohol use)" },
-        { "t": "If still dangerous: IM lorazepam 1–2 mg (or midazolam) with minimum restraint", "need": true, "scene": "sedated", "mark": "Rapid tranquillisation if needed, with minimal restraint" },
-        { "t": "IM haloperidol 10 mg alone", "trap": true, "r": "NICE: combine with promethazine to reduce dystonia, and check the ECG first." }
+        { "t": "IV 10% glucose (or oral if he'll drink), then thiamine", "fetch": "cart", "need": true, "scene": "glucose", "mark": "Treats hypoglycaemia (with thiamine in alcohol use)" },
+        { "t": "If still dangerous: IM lorazepam 1–2 mg (or midazolam) with minimum restraint", "fetch": "cart", "need": true, "scene": "sedated", "mark": "Rapid tranquillisation if needed, with minimal restraint" },
+        { "t": "IM haloperidol 10 mg alone", "fetch": "cart", "trap": true, "r": "NICE: combine with promethazine to reduce dystonia, and check the ECG first." }
       ]
     },
     {

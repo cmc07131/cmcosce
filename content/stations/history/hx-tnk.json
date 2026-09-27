@@ -50,10 +50,10 @@
       "hint": "Aspirin, clopidogrel, anticoagulant, analgesia; no oxygen unless hypoxic.",
       "confirm": "Give",
       "opts": [
-        { "t": "Aspirin 300 mg chewed", "need": true, "mark": "Aspirin loading" },
-        { "t": "Clopidogrel 300 mg", "need": true, "mark": "Clopidogrel with fibrinolysis" },
-        { "t": "Enoxaparin (weight-based)", "need": true, "mark": "Anticoagulant with fibrinolysis" },
-        { "t": "GTN and IV morphine for pain", "need": true, "mark": "Analgesia" },
+        { "t": "Aspirin 300 mg chewed", "fetch": "cart", "need": true, "mark": "Aspirin loading" },
+        { "t": "Clopidogrel 300 mg", "fetch": "cart", "need": true, "mark": "Clopidogrel with fibrinolysis" },
+        { "t": "Enoxaparin (weight-based)", "fetch": "cart", "need": true, "mark": "Anticoagulant with fibrinolysis" },
+        { "t": "GTN and IV morphine for pain", "fetch": "cart", "need": true, "mark": "Analgesia" },
         { "t": "High-flow oxygen for everyone with chest pain", "trap": true, "r": "Oxygen only if SpO2 is below 90% (ESC 2023)." }
       ]
     },
