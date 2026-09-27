@@ -1,18 +1,20 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
-import { getPack } from '~/engine/loadPacks'
+import { loadPack } from '~/engine/loadPacks'
 import { sfx } from '~/game/sfx'
 import { useProgress } from '~/world/progress'
 import { NavItem, Win, useCursor } from '~/game/ui'
 
 export const Route = createFileRoute('/badge/$packId')({
+  loader: ({ params }) => loadPack(params.packId),
   component: BadgePage,
 })
 
 function BadgePage() {
   const { packId } = Route.useParams()
   const navigate = useNavigate()
-  const pack = getPack(packId)
+  const hit = Route.useLoaderData()
+  const pack = hit.ok ? hit.pack : undefined
   const root = useRef<HTMLDivElement>(null)
   useCursor(root, { priority: 10, onBack: () => void navigate({ to: '/world' }) })
   useEffect(() => {

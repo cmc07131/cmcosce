@@ -407,6 +407,16 @@ button {
   color: var(--color-amber);
 }
 
+.station-group {
+  margin-top: 12px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid currentColor;
+}
+
+.station-group:first-child {
+  margin-top: 0;
+}
+
 .sheet-prompt {
   margin: 0 0 4px;
   font-size: 8px;

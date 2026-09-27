@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { getPack } from '~/engine/loadPacks'
+import { packInfo } from '~/engine/loadPacks'
 import { readLastPackId } from '~/engine/session'
 import { useButtons } from '~/game/input'
 import { useSettings } from '~/game/settings'
@@ -20,7 +20,7 @@ function TitlePage() {
   const sound = useSettings((s) => s.sound)
   const toggleSound = useSettings((s) => s.toggleSound)
   useEffect(() => setLastId(readLastPackId()), [])
-  const last = lastId ? getPack(lastId) : undefined
+  const last = lastId ? packInfo(lastId) : undefined
 
   function start() {
     sfx.select()

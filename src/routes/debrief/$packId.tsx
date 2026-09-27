@@ -1,19 +1,21 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { judgeSequence } from '~/engine/judge'
-import { getPack } from '~/engine/loadPacks'
+import { loadPack } from '~/engine/loadPacks'
 import { readSession } from '~/engine/session'
 import type { Fault, LogEntry } from '~/engine/schema'
 import { NavItem, Win, useCursor } from '~/game/ui'
 
 export const Route = createFileRoute('/debrief/$packId')({
+  loader: ({ params }) => loadPack(params.packId),
   component: DebriefPage,
 })
 
 function DebriefPage() {
   const { packId } = Route.useParams()
   const navigate = useNavigate()
-  const pack = getPack(packId)
+  const hit = Route.useLoaderData()
+  const pack = hit.ok ? hit.pack : undefined
   const root = useRef<HTMLDivElement>(null)
   const [checked, setChecked] = useState<string[] | null>(null)
   const [log, setLog] = useState<LogEntry[]>([])

@@ -1,6 +1,6 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { getPack } from '~/engine/loadPacks'
+import { packInfo } from '~/engine/loadPacks'
 import type { Pos } from '~/engine/schema'
 import { Controller } from '~/game/Controller'
 import { press, useButtons } from '~/game/input'
@@ -232,7 +232,7 @@ function GymWindow({ gym, onClose, onPlay }: { gym: Gym; onClose: () => void; on
           </>
         ) : (
           gym.packs.map((id) => {
-            const pack = getPack(id)
+            const pack = packInfo(id)
             return (
               <NavItem key={id} testId={`gym-station-${id}`} tone={cleared.includes(id) ? 'done' : undefined} onClick={() => onPlay(id)}>
                 {cleared.includes(id) ? '✓ ' : ''}
@@ -267,7 +267,7 @@ function BoardWindow({ onClose, onTeleport }: { onClose: () => void; onTeleport:
         {todo.length === 0 && <p className="menu-note">Every open station is cleared.</p>}
         {todo.map(({ gym, id }) => (
           <p key={id} className="menu-note">
-            • {getPack(id)?.title ?? id} <b>({gym.name})</b>
+            • {packInfo(id)?.title ?? id} <b>({gym.name})</b>
           </p>
         ))}
         <p className="sheet-meta mt-2">TELEPORT TO A GYM</p>

@@ -1,5 +1,6 @@
+import stationCards from 'virtual:station-cards'
 import worldJson from '../../content/world/world.json'
-import { packsForGym, stationCardsByGym } from '~/engine/loadPacks'
+import { packsForGym } from '~/engine/loadPacks'
 import { deckFor as pick, deckSchema, worldSchema, type Deck, type World } from './model'
 
 /** Loads the world and every deck in content/cards through Vite. Station scripts join their gym. */
@@ -8,7 +9,11 @@ export const WORLD: World = { ...parsed, gyms: parsed.gyms.map((g) => ({ ...g, p
 
 const deckModules = import.meta.glob('../../content/cards/*.json', { eager: true }) as Record<string, { default?: unknown } | unknown>
 
-const extra = stationCardsByGym()
+/** Flashcards from station scripts, grouped by gym (answer index 0; the battle shuffles). */
+const extra: Record<string, Deck['cards']> = {}
+for (const st of stationCards) {
+  st.cards.forEach((card, i) => (extra[st.gym] ??= []).push({ id: `${st.id}-c${i + 1}`, answer: 0, ...card }))
+}
 
 /** Deck files give each gym its creatures and general cards; each station adds its own cards. */
 export const DECKS: Record<string, Deck> = Object.fromEntries(
