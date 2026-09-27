@@ -20,13 +20,13 @@
       "hint": "What document is it, who made it, when, was she capable, what does it cover? Her mother's values.",
       "groups": {
         "Document": [
-          { "t": "What is in the folder?", "r": "An advance directive my mother signed two years ago, before the dementia got bad. Her GP and a friend witnessed it.", "mark": "Identifies the document and who made it" },
-          { "t": "What does it say?", "r": "No CPR, no breathing machine, if she's in the final stage of an illness. She still wanted comfort care.", "mark": "Clarifies what treatments it covers" },
-          { "t": "Was she well enough to understand it when she signed?", "r": "Yes, the GP wrote that she understood.", "mark": "Checks capacity at the time of making" }
+          { "t": "What is in the folder?", "tz": "個文件夾入面係咩？", "rz": "係我阿媽兩年前簽嘅預設醫療指示，嗰陣佢嘅認知障礙症仲未咁差。佢嘅家庭醫生同一個朋友做見證人。", "r": "An advance directive my mother signed two years ago, before the dementia got bad. Her GP and a friend witnessed it.", "mark": "Identifies the document and who made it" },
+          { "t": "What does it say?", "tz": "入面寫咗啲咩？", "rz": "如果佢去到病嘅末期，唔做心肺復甦，唔用呼吸機。不過佢仍然想得到紓緩照顧。", "r": "No CPR, no breathing machine, if she's in the final stage of an illness. She still wanted comfort care.", "mark": "Clarifies what treatments it covers" },
+          { "t": "Was she well enough to understand it when she signed?", "tz": "佢簽嗰陣，精神狀態明唔明白入面嘅內容？", "rz": "明白，家庭醫生有寫低佢係明白嘅。", "r": "Yes, the GP wrote that she understood.", "mark": "Checks capacity at the time of making" }
         ],
         "Values": [
-          { "t": "What was your mother like? What mattered to her?", "r": "She hated hospitals. She said she wanted to die peacefully, not with machines.", "mark": "Explores the patient's values and wishes" },
-          { "t": "Has anything changed since, has she ever said otherwise?", "r": "No, she said it again last year.", "mark": "Checks there is no sign of revocation" }
+          { "t": "What was your mother like? What mattered to her?", "tz": "你阿媽係個點樣嘅人？佢最重視啲咩？", "rz": "佢好憎入醫院。佢話想安詳咁走，唔想插滿喉。", "r": "She hated hospitals. She said she wanted to die peacefully, not with machines.", "mark": "Explores the patient's values and wishes" },
+          { "t": "Has anything changed since, has she ever said otherwise?", "tz": "之後有冇改變過？佢有冇講過相反嘅說話？", "rz": "冇，佢舊年仲講多咗一次。", "r": "No, she said it again last year.", "mark": "Checks there is no sign of revocation" }
         ]
       }
     },
@@ -39,24 +39,24 @@
       "mood": 6,
       "turns": [
         {
-          "line": "So will you just let her die?",
+          "line": "So will you just let her die?", "lz": "咁你哋係咪就由得佢死？",
           "opts": [
-            { "t": "No — we'll keep treating the pneumonia with antibiotics, oxygen and fluids, and make sure she's comfortable. What your mother refused was CPR and a breathing machine, and her directive is valid and applies now, so we will respect it.", "r": "Thank you… that's what she wanted.", "mood": -3, "mark": "Explains that DNACPR does not mean withdrawing other treatment" },
-            { "t": "Yes, nothing more to do.", "r": "That's not what I meant!", "mood": 3 }
+            { "t": "No — we'll keep treating the pneumonia with antibiotics, oxygen and fluids, and make sure she's comfortable. What your mother refused was CPR and a breathing machine, and her directive is valid and applies now, so we will respect it.", "tz": "唔係——我哋會繼續用抗生素、氧氣同吊鹽水醫佢個肺炎，亦都會確保佢舒服。你阿媽拒絕嘅係心肺復甦同呼吸機，而佢份預設醫療指示係有效、而家適用嘅，所以我哋會尊重佢嘅意願。", "rz": "多謝你……呢個就係佢想要嘅。", "r": "Thank you… that's what she wanted.", "mood": -3, "mark": "Explains that DNACPR does not mean withdrawing other treatment" },
+            { "t": "Yes, nothing more to do.", "tz": "係，冇嘢可以再做。", "rz": "我唔係咁嘅意思！", "r": "That's not what I meant!", "mood": 3 }
           ]
         },
         {
-          "line": "My brother in Canada says we should do everything.",
+          "line": "My brother in Canada says we should do everything.", "lz": "我喺加拿大嘅阿哥話要盡晒力搶救。",
           "opts": [
-            { "t": "I understand he's worried. Family can't override a valid advance directive — it's your mother's own decision. I'm happy to speak to him by phone to explain.", "r": "Please would you? He'll listen to you.", "mood": -2, "mark": "Explains that family cannot override a valid AMD; offers to talk to the brother" },
-            { "t": "Then we'll do CPR to keep him happy.", "r": "But she didn't want that!", "mood": 3 }
+            { "t": "I understand he's worried. Family can't override a valid advance directive — it's your mother's own decision. I'm happy to speak to him by phone to explain.", "tz": "我明白佢好擔心。家人係唔可以推翻一份有效嘅預設醫療指示——呢個係你阿媽自己嘅決定。我好樂意打電話同佢解釋。", "rz": "麻煩你可以嗎？佢會聽你講。", "r": "Please would you? He'll listen to you.", "mood": -2, "mark": "Explains that family cannot override a valid AMD; offers to talk to the brother" },
+            { "t": "Then we'll do CPR to keep him happy.", "tz": "咁為咗令佢開心，我哋就做心肺復甦啦。", "rz": "但係佢唔想咁㗎！", "r": "But she didn't want that!", "mood": 3 }
           ]
         },
         {
-          "line": "How long does she have?",
+          "line": "How long does she have?", "lz": "佢仲有幾耐？",
           "opts": [
-            { "t": "She's very unwell. She may improve with antibiotics, but she might die in the next few days. We'll keep you updated and you can stay with her.", "r": "Can I stay tonight?", "mood": -1, "mark": "Gives honest prognosis and invites the family to stay" },
-            { "t": "She'll be fine.", "r": "Really?", "mood": 1 }
+            { "t": "She's very unwell. She may improve with antibiotics, but she might die in the next few days. We'll keep you updated and you can stay with her.", "tz": "佢而家病得好重。用咗抗生素可能會好轉，但都有機會喺呢幾日走。我哋會隨時同你更新，你可以陪住佢。", "rz": "我今晚可唔可以留低？", "r": "Can I stay tonight?", "mood": -1, "mark": "Gives honest prognosis and invites the family to stay" },
+            { "t": "She'll be fine.", "tz": "佢會冇事嘅。", "rz": "真係？", "r": "Really?", "mood": 1 }
           ]
         }
       ]

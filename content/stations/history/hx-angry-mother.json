@@ -31,31 +31,31 @@
       "mood": 9,
       "turns": [
         {
-          "line": "You've tied up my son like an animal! This is false imprisonment. I'll sue you!",
+          "line": "You've tied up my son like an animal! This is false imprisonment. I'll sue you!", "lz": "你哋好似綁動物咁綁住我個仔！呢個係非法禁錮。我要告你哋！",
           "opts": [
-            { "t": "I'm Dr Chan, the doctor looking after your son. I can see you're very upset — anyone would be seeing their child like this. Please tell me what worries you most.", "r": "He's not a criminal! He's my baby!", "mood": -2, "mark": "Introduces self, acknowledges emotion, invites her to speak" },
-            { "t": "Calm down or security will remove you.", "r": "Don't you threaten me!", "mood": 1 }
+            { "t": "I'm Dr Chan, the doctor looking after your son. I can see you're very upset — anyone would be seeing their child like this. Please tell me what worries you most.", "tz": "我係陳醫生，負責照顧你個仔。我見到你好激動——任何人見到自己仔女咁都會咁。你話俾我知你最擔心啲咩。", "rz": "佢唔係犯人！佢係我個仔呀！", "r": "He's not a criminal! He's my baby!", "mood": -2, "mark": "Introduces self, acknowledges emotion, invites her to speak" },
+            { "t": "Calm down or security will remove you.", "tz": "你冷靜啲，唔係我叫保安請你出去。", "rz": "你唔好恐嚇我！", "r": "Don't you threaten me!", "mood": 1 }
           ]
         },
         {
-          "line": "He's not a criminal! He's my baby!",
+          "line": "He's not a criminal! He's my baby!", "lz": "佢唔係犯人！佢係我個仔呀！",
           "opts": [
-            { "t": "We're not treating him as a criminal. When he arrived he'd taken drugs and was trying to hurt people with a knife. We gave him medicine to calm him, and the straps are there only to keep him and the staff safe while it wears off.", "r": "Drugs? He promised me he stopped…", "mood": -2, "mark": "Explains what happened honestly and why restraint is used" },
-            { "t": "He's violent, that's all you need to know.", "r": "How dare you!", "mood": 1 }
+            { "t": "We're not treating him as a criminal. When he arrived he'd taken drugs and was trying to hurt people with a knife. We gave him medicine to calm him, and the straps are there only to keep him and the staff safe while it wears off.", "tz": "我哋冇當佢係犯人。佢嚟到嗰陣食咗毒品，拎住把刀想傷人。我哋俾咗藥令佢冷靜，綁帶只係喺藥力過咗之前，保護佢同職員嘅安全。", "rz": "毒品？佢應承過我戒咗㗎……", "r": "Drugs? He promised me he stopped…", "mood": -2, "mark": "Explains what happened honestly and why restraint is used" },
+            { "t": "He's violent, that's all you need to know.", "tz": "佢有暴力傾向，你知呢樣就夠。", "rz": "你竟然咁講！", "r": "How dare you!", "mood": 1 }
           ]
         },
         {
-          "line": "I'm taking him home now. You can't stop me.",
+          "line": "I'm taking him home now. You can't stop me.", "lz": "我而家就帶佢返屋企。你哋阻唔到我。",
           "opts": [
-            { "t": "I understand you want him home. Right now the drugs mean he can't make safe decisions, and he could harm himself or others; the law allows us to care for him until he's safe. We check him every 15 minutes and remove the straps as soon as it's safe. The psychiatrist will see him today.", "r": "…Will you let me sit with him?", "mood": -3, "mark": "Explains the legal and medical basis and the plan" },
-            { "t": "Take him then, sign here.", "r": "Fine.", "mood": -1 }
+            { "t": "I understand you want him home. Right now the drugs mean he can't make safe decisions, and he could harm himself or others; the law allows us to care for him until he's safe. We check him every 15 minutes and remove the straps as soon as it's safe. The psychiatrist will see him today.", "tz": "我明白你想帶佢返屋企。但係而家啲毒品令佢做唔到安全嘅決定，佢可能會傷害自己或者其他人；法律容許我哋照顧佢，直至佢安全為止。我哋每十五分鐘檢查佢一次，一安全就會解開綁帶。精神科醫生今日會嚟睇佢。", "rz": "……你俾唔俾我坐喺度陪佢？", "r": "…Will you let me sit with him?", "mood": -3, "mark": "Explains the legal and medical basis and the plan" },
+            { "t": "Take him then, sign here.", "tz": "咁你帶佢走啦，喺度簽名。", "rz": "好。", "r": "Fine.", "mood": -1 }
           ]
         },
         {
-          "line": "Will you let me sit with him?",
+          "line": "Will you let me sit with him?", "lz": "你俾唔俾我坐喺度陪佢？",
           "opts": [
-            { "t": "Yes, when it's safe. I'll also ask our social worker to talk with you — this must be very hard. I'll write down everything we've discussed.", "r": "Thank you… sorry for shouting.", "mood": -3, "mark": "Involves her, offers social work support, documents" },
-            { "t": "No visitors.", "r": "I'm complaining.", "mood": 2 }
+            { "t": "Yes, when it's safe. I'll also ask our social worker to talk with you — this must be very hard. I'll write down everything we've discussed.", "tz": "可以，安全嘅時候就可以。我亦會請醫務社工同你傾吓——呢件事對你嚟講一定好難受。我會將我哋傾過嘅嘢全部寫低。", "rz": "多謝你……頭先大聲咗，唔好意思。", "r": "Thank you… sorry for shouting.", "mood": -3, "mark": "Involves her, offers social work support, documents" },
+            { "t": "No visitors.", "tz": "唔准探病。", "rz": "我要投訴。", "r": "I'm complaining.", "mood": 2 }
           ]
         }
       ]

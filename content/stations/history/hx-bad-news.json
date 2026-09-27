@@ -35,46 +35,46 @@
       "mood": 5,
       "turns": [
         {
-          "line": "Doctor, have the scan results come back?",
+          "line": "Doctor, have the scan results come back?", "lz": "醫生，掃描報告出咗未？",
           "opts": [
-            { "t": "They have. Before I explain, can you tell me what you understand so far about why we did the scan?", "r": "They said my yellow skin might be from the gallbladder… a blockage?", "mood": -1, "mark": "Explores his perception first" },
-            { "t": "Yes, you have pancreatic cancer with liver metastases.", "r": "What?! Just like that?", "mood": 4 }
+            { "t": "They have. Before I explain, can you tell me what you understand so far about why we did the scan?", "tz": "出咗。我解釋之前，你可唔可以講吓你明白我哋點解要做呢個掃描？", "rz": "佢哋話我皮膚黃可能係膽囊問題……有嘢塞住？", "r": "They said my yellow skin might be from the gallbladder… a blockage?", "mood": -1, "mark": "Explores his perception first" },
+            { "t": "Yes, you have pancreatic cancer with liver metastases.", "tz": "係，你有胰臟癌，已經擴散到肝。", "rz": "乜話？！就咁講？", "r": "What?! Just like that?", "mood": 4 }
           ]
         },
         {
-          "line": "They said my yellow skin might be from the gallbladder… a blockage?",
+          "line": "They said my yellow skin might be from the gallbladder… a blockage?", "lz": "佢哋話我皮膚黃可能係膽囊問題……有嘢塞住？",
           "opts": [
-            { "t": "How much detail would you like me to go into? Some people want everything, some just the main points.", "r": "Tell me everything. My wife too.", "mood": -1, "mark": "Asks how much information he wants" },
-            { "t": "Let's not worry about details.", "r": "But I want to know.", "mood": 2 }
+            { "t": "How much detail would you like me to go into? Some people want everything, some just the main points.", "tz": "你想我講得幾詳細？有啲人想知晒所有嘢，有啲人淨係想知重點。", "rz": "全部話俾我知。我太太都要聽。", "r": "Tell me everything. My wife too.", "mood": -1, "mark": "Asks how much information he wants" },
+            { "t": "Let's not worry about details.", "tz": "唔好理啲細節住。", "rz": "但係我想知。", "r": "But I want to know.", "mood": 2 }
           ]
         },
         {
-          "line": "Tell me everything. My wife too.",
+          "line": "Tell me everything. My wife too.", "lz": "全部話俾我知。我太太都要聽。",
           "opts": [
-            { "t": "I'm afraid the results are not what we hoped. [pause] The scan shows a growth in the pancreas, which is blocking the bile duct. It looks like a cancer, and it has spread to the liver.", "r": "[Silence. His wife takes his hand.] …Cancer?", "mood": 1, "mark": "Gives a warning shot, then the news in plain language" },
-            { "t": "There is a hypodense lesion in the pancreatic head with hepatic metastatic deposits.", "r": "I don't understand any of that.", "mood": 3 }
+            { "t": "I'm afraid the results are not what we hoped. [pause] The scan shows a growth in the pancreas, which is blocking the bile duct. It looks like a cancer, and it has spread to the liver.", "tz": "好抱歉，結果唔係我哋希望嘅。（停頓）掃描見到胰臟有個腫瘤，塞住咗膽管。睇落係癌症，而且已經擴散到肝。", "rz": "（沉默。太太拖住佢隻手。）……癌症？", "r": "[Silence. His wife takes his hand.] …Cancer?", "mood": 1, "mark": "Gives a warning shot, then the news in plain language" },
+            { "t": "There is a hypodense lesion in the pancreatic head with hepatic metastatic deposits.", "tz": "胰頭有一個 hypodense lesion，肝臟有轉移。", "rz": "你講嘅嘢我完全唔明。", "r": "I don't understand any of that.", "mood": 3 }
           ]
         },
         {
-          "line": "…Cancer? Can they operate?",
+          "line": "…Cancer? Can they operate?", "lz": "……癌症？可唔可以做手術？",
           "opts": [
-            { "t": "[Pause] This must be a terrible shock. [Silence] The surgeons have looked carefully; because it has spread, an operation would not cure it. But there is a lot we can do.", "r": "[Tearful] What can you do then?", "mood": -2, "mark": "Acknowledges emotion, allows silence, answers honestly" },
-            { "t": "No. Next question?", "r": "How can you be so cold?", "mood": 3 }
+            { "t": "[Pause] This must be a terrible shock. [Silence] The surgeons have looked carefully; because it has spread, an operation would not cure it. But there is a lot we can do.", "tz": "（停頓）呢個消息一定好難接受。（沉默）外科醫生已經仔細睇過；因為已經擴散，做手術都醫唔好。不過我哋仲有好多嘢可以做。", "rz": "（眼濕濕）咁你哋可以做啲咩？", "r": "[Tearful] What can you do then?", "mood": -2, "mark": "Acknowledges emotion, allows silence, answers honestly" },
+            { "t": "No. Next question?", "tz": "唔得。下一條問題？", "rz": "你點可以咁冷血？", "r": "How can you be so cold?", "mood": 3 }
           ]
         },
         {
-          "line": "How long have I got?",
+          "line": "How long have I got?", "lz": "我仲有幾耐？",
           "opts": [
-            { "t": "That's hard to say for any one person. It's likely to be months rather than years, but the oncology team can tell you more once they know how you respond to treatment.", "r": "…Months. OK. Thank you for being honest.", "mood": -1, "mark": "Answers prognosis honestly with a range, not a number" },
-            { "t": "Exactly 4 months.", "r": "How can you know that?", "mood": 2 },
-            { "t": "Don't think about that — stay positive!", "r": "Please don't avoid the question.", "mood": 2 }
+            { "t": "That's hard to say for any one person. It's likely to be months rather than years, but the oncology team can tell you more once they know how you respond to treatment.", "tz": "每個人都唔同，好難講。好可能係以月計，而唔係以年計；腫瘤科醫生睇到你對治療嘅反應之後，會話到你知多啲。", "rz": "……幾個月。好。多謝你咁坦白。", "r": "…Months. OK. Thank you for being honest.", "mood": -1, "mark": "Answers prognosis honestly with a range, not a number" },
+            { "t": "Exactly 4 months.", "tz": "啱啱好四個月。", "rz": "你點會知㗎？", "r": "How can you know that?", "mood": 2 },
+            { "t": "Don't think about that — stay positive!", "tz": "唔好諗咁多——要樂觀啲！", "rz": "唔該你唔好避開我條問題。", "r": "Please don't avoid the question.", "mood": 2 }
           ]
         },
         {
-          "line": "What happens now?",
+          "line": "What happens now?", "lz": "咁而家點算？",
           "opts": [
-            { "t": "A stent can relieve the jaundice and itch; the oncologists will discuss chemotherapy; the palliative care team will help with symptoms. I'll see you on the ward tomorrow. What questions do you have?", "r": "My wife and I need to think. Thank you, doctor.", "mood": -2, "mark": "Gives a plan, referral and follow-up, and invites questions" },
-            { "t": "Nothing more can be done.", "r": "[Breaks down]", "mood": 3 }
+            { "t": "A stent can relieve the jaundice and itch; the oncologists will discuss chemotherapy; the palliative care team will help with symptoms. I'll see you on the ward tomorrow. What questions do you have?", "tz": "放支架可以紓緩皮膚黃同痕；腫瘤科會同你傾化療；紓緩治療團隊會幫你處理唔舒服嘅症狀。我聽日會上病房睇你。你有咩問題想問？", "rz": "我同太太要諗吓。多謝你，醫生。", "r": "My wife and I need to think. Thank you, doctor.", "mood": -2, "mark": "Gives a plan, referral and follow-up, and invites questions" },
+            { "t": "Nothing more can be done.", "tz": "冇嘢可以再做喇。", "rz": "（崩潰）", "r": "[Breaks down]", "mood": 3 }
           ]
         }
       ]
@@ -88,10 +88,10 @@
       "mood": 6,
       "turns": [
         {
-          "line": "Doctor, please don't tell him any more bad news. Tell me first in future.",
+          "line": "Doctor, please don't tell him any more bad news. Tell me first in future.", "lz": "醫生，唔該你唔好再同佢講壞消息。以後先同我講。",
           "opts": [
-            { "t": "I understand you want to protect him. He has asked to be told himself, so I'll keep being honest with him — gently. With his permission, we can include you in every conversation.", "r": "…All right. As long as you're kind to him.", "mood": -3, "mark": "Respects the patient's autonomy while supporting the family" },
-            { "t": "Of course, I'll tell you and keep him in the dark.", "r": "Thank you.", "mood": -1 }
+            { "t": "I understand you want to protect him. He has asked to be told himself, so I'll keep being honest with him — gently. With his permission, we can include you in every conversation.", "tz": "我明白你想保護佢。佢要求過自己知道，所以我會繼續對佢坦白——但會好溫和咁講。佢同意嘅話，我哋每次傾都可以預埋你。", "rz": "……好啦。只要你對佢好就得。", "r": "…All right. As long as you're kind to him.", "mood": -3, "mark": "Respects the patient's autonomy while supporting the family" },
+            { "t": "Of course, I'll tell you and keep him in the dark.", "tz": "冇問題，我會話俾你知，瞞住佢。", "rz": "多謝你。", "r": "Thank you.", "mood": -1 }
           ]
         }
       ]

@@ -21,31 +21,31 @@
       "mood": 6,
       "turns": [
         {
-          "line": "I know I'm bleeding. But I won't accept blood. It's against my faith.",
+          "line": "I know I'm bleeding. But I won't accept blood. It's against my faith.", "lz": "我知我流緊血。但係我唔會接受輸血。咁樣違反我嘅信仰。",
           "opts": [
-            { "t": "Thank you for telling me — I'll respect your beliefs. Can I explain what's happening, so your decision is fully informed?", "r": "Yes, please.", "mood": -2, "mark": "Respects his beliefs and offers information" },
-            { "t": "That's ridiculous, you'll die.", "r": "Please don't mock my faith.", "mood": 3 }
+            { "t": "Thank you for telling me — I'll respect your beliefs. Can I explain what's happening, so your decision is fully informed?", "tz": "多謝你話俾我知——我會尊重你嘅信仰。我可唔可以解釋吓而家嘅情況，等你喺清楚明白之下作決定？", "rz": "好，唔該你。", "r": "Yes, please.", "mood": -2, "mark": "Respects his beliefs and offers information" },
+            { "t": "That's ridiculous, you'll die.", "tz": "咁好荒謬，你會死㗎。", "rz": "唔該你唔好嘲笑我嘅信仰。", "r": "Please don't mock my faith.", "mood": 3 }
           ]
         },
         {
-          "line": "Yes, please.",
+          "line": "Yes, please.", "lz": "好，唔該你。",
           "opts": [
-            { "t": "Your blood count is very low, about half of normal. Without blood, if the bleeding continues you could have a heart attack, organ damage, or die. Can you tell me what you understand about the risk?", "r": "I understand I might die. I still refuse whole blood.", "mood": -1, "mark": "Explains the risk including death and checks understanding (capacity)" },
-            { "t": "You'll be fine without blood.", "r": "Really?", "mood": 0 }
+            { "t": "Your blood count is very low, about half of normal. Without blood, if the bleeding continues you could have a heart attack, organ damage, or die. Can you tell me what you understand about the risk?", "tz": "你嘅血色素好低，得正常嘅一半左右。唔輸血嘅話，如果繼續出血，你可能會心臟病發、器官受損，甚至死亡。你可唔可以講吓你對呢個風險嘅理解？", "rz": "我明白我可能會死。我仍然拒絕輸全血。", "r": "I understand I might die. I still refuse whole blood.", "mood": -1, "mark": "Explains the risk including death and checks understanding (capacity)" },
+            { "t": "You'll be fine without blood.", "tz": "唔輸血你都會冇事嘅。", "rz": "真係？", "r": "Really?", "mood": 0 }
           ]
         },
         {
-          "line": "I understand I might die. I still refuse whole blood.",
+          "line": "I understand I might die. I still refuse whole blood.", "lz": "我明白我可能會死。我仍然拒絕輸全血。",
           "opts": [
-            { "t": "Are there things you would accept — for example clotting factors, albumin, or blood recycled during surgery? Do you carry an advance decision card?", "r": "I accept albumin and clotting factors. Here's my card.", "mood": -2, "mark": "Explores acceptable products and any advance directive" },
-            { "t": "OK, we'll do nothing then.", "r": "I didn't say do nothing.", "mood": 2 }
+            { "t": "Are there things you would accept — for example clotting factors, albumin, or blood recycled during surgery? Do you carry an advance decision card?", "tz": "有冇啲嘢你係接受嘅——例如凝血因子、白蛋白，或者手術時回收再用嘅血？你有冇隨身帶住預設醫療指示卡？", "rz": "我接受白蛋白同凝血因子。呢張係我張卡。", "r": "I accept albumin and clotting factors. Here's my card.", "mood": -2, "mark": "Explores acceptable products and any advance directive" },
+            { "t": "OK, we'll do nothing then.", "tz": "咁我哋乜都唔做喇。", "rz": "我冇話乜都唔做。", "r": "I didn't say do nothing.", "mood": 2 }
           ]
         },
         {
-          "line": "The elders from my congregation are outside.",
+          "line": "The elders from my congregation are outside.", "lz": "我教會嘅長老喺出面。",
           "opts": [
-            { "t": "Would you like to talk with me alone for a minute first, so I know this is entirely your own decision?", "r": "…Yes. It is my own decision.", "mood": -1, "mark": "Ensures the decision is voluntary" },
-            { "t": "Let's get them in to decide.", "r": "It's my decision.", "mood": 1 }
+            { "t": "Would you like to talk with me alone for a minute first, so I know this is entirely your own decision?", "tz": "你想唔想先同我單獨傾一分鐘，等我確定呢個完全係你自己嘅決定？", "rz": "……好。呢個係我自己嘅決定。", "r": "…Yes. It is my own decision.", "mood": -1, "mark": "Ensures the decision is voluntary" },
+            { "t": "Let's get them in to decide.", "tz": "叫佢哋入嚟一齊決定啦。", "rz": "呢個係我嘅決定。", "r": "It's my decision.", "mood": 1 }
           ]
         }
       ]

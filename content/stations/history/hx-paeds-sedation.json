@@ -19,10 +19,10 @@
       "hint": "Weight, allergies, medical problems, snoring/airway, last meal, previous sedation.",
       "groups": {
         "Safety": [
-          { "t": "Allergies? Medical problems? Heart or lung disease?", "r": "None.", "mark": "Asks allergies and comorbidities" },
-          { "t": "Does she snore or have breathing problems at night?", "r": "No.", "mark": "Screens for airway risk (OSA)" },
-          { "t": "When did she last eat and drink?", "r": "Lunch at 12, a drink at 2. It's 4 now.", "mark": "Asks last oral intake" },
-          { "t": "Has she had sedation or an anaesthetic before?", "r": "Never." }
+          { "t": "Allergies? Medical problems? Heart or lung disease?", "tz": "佢有冇藥物敏感？有咩病？心臟或者肺有冇問題？", "rz": "冇。", "r": "None.", "mark": "Asks allergies and comorbidities" },
+          { "t": "Does she snore or have breathing problems at night?", "tz": "佢夜晚有冇扯鼻鼾，或者呼吸問題？", "rz": "冇。", "r": "No.", "mark": "Screens for airway risk (OSA)" },
+          { "t": "When did she last eat and drink?", "tz": "佢最後幾時食嘢同飲嘢？", "rz": "十二點食晏，兩點飲過嘢。而家四點。", "r": "Lunch at 12, a drink at 2. It's 4 now.", "mark": "Asks last oral intake" },
+          { "t": "Has she had sedation or an anaesthetic before?", "tz": "佢以前有冇用過鎮靜劑或者全身麻醉？", "rz": "從來冇。", "r": "Never." }
         ]
       }
     },
@@ -35,31 +35,31 @@
       "mood": 7,
       "turns": [
         {
-          "line": "Why does she need a scan? Isn't that a lot of radiation?",
+          "line": "Why does she need a scan? Isn't that a lot of radiation?", "lz": "點解佢要照掃描？輻射會唔會好多？",
           "opts": [
-            { "t": "I understand your worry. She's more drowsy than we'd expect, has vomited twice and has swelling over the temple, which can go with a skull fracture or bleeding. The scan uses a small radiation dose, and missing a bleed would be far more serious.", "r": "OK… but she won't lie still.", "mood": -3, "mark": "Explains the indication for CT and weighs radiation risk" },
-            { "t": "It's routine for everyone.", "r": "Then why does she need it?", "mood": 2 }
+            { "t": "I understand your worry. She's more drowsy than we'd expect, has vomited twice and has swelling over the temple, which can go with a skull fracture or bleeding. The scan uses a small radiation dose, and missing a bleed would be far more serious.", "tz": "我明白你擔心。佢比我哋預期中眼瞓，嘔咗兩次，太陽穴仲腫咗，呢啲可能代表頭骨裂或者腦出血。掃描嘅輻射劑量好細，但係漏咗腦出血就嚴重得多。", "rz": "好……但係佢一定唔肯瞓定定。", "r": "OK… but she won't lie still.", "mood": -3, "mark": "Explains the indication for CT and weighs radiation risk" },
+            { "t": "It's routine for everyone.", "tz": "個個都照㗎，例行公事啫。", "rz": "咁點解佢要照？", "r": "Then why does she need it?", "mood": 2 }
           ]
         },
         {
-          "line": "OK… but she won't lie still.",
+          "line": "OK… but she won't lie still.", "lz": "好……但係佢一定唔肯瞓定定。",
           "opts": [
-            { "t": "We'll try with you holding her hand first. If that doesn't work, a small dose of a sedative (midazolam) through the drip will make her sleepy for the scan.", "r": "Is that safe for a little girl?", "mood": -1, "mark": "Offers non-drug measures and explains the sedation" },
-            { "t": "We'll knock her out.", "r": "What?!", "mood": 3 }
+            { "t": "We'll try with you holding her hand first. If that doesn't work, a small dose of a sedative (midazolam) through the drip will make her sleepy for the scan.", "tz": "我哋會先試吓俾你拖住佢隻手。如果唔得，就經吊針俾少少鎮靜劑（midazolam），令佢眼瞓，方便照掃描。", "rz": "咁對個細路女嚟講安唔安全？", "r": "Is that safe for a little girl?", "mood": -1, "mark": "Offers non-drug measures and explains the sedation" },
+            { "t": "We'll knock her out.", "tz": "我哋會整暈佢。", "rz": "乜話？！", "r": "What?!", "mood": 3 }
           ]
         },
         {
-          "line": "Is that safe for a little girl?",
+          "line": "Is that safe for a little girl?", "lz": "咁對個細路女嚟講安唔安全？",
           "opts": [
-            { "t": "It's generally very safe. The main risk is that it can slow her breathing, which we watch for all the time with monitors and a nurse by her side; we have medicines to reverse it. She might be grumpy or vomit afterwards. Do you have any questions? Are you happy for us to go ahead?", "r": "Yes. Can I stay with her?", "mood": -2, "mark": "Explains risks, monitoring and reversal; obtains consent" },
-            { "t": "No risks at all.", "r": "Really?", "mood": 0 }
+            { "t": "It's generally very safe. The main risk is that it can slow her breathing, which we watch for all the time with monitors and a nurse by her side; we have medicines to reverse it. She might be grumpy or vomit afterwards. Do you have any questions? Are you happy for us to go ahead?", "tz": "一般嚟講好安全。主要風險係可能令佢呼吸慢咗，所以我哋會一直用儀器監察，仲有護士喺佢身邊；我哋亦都有藥可以解。之後佢可能會扭計或者嘔。你有冇問題想問？你同唔同意我哋進行？", "rz": "同意。我可唔可以陪住佢？", "r": "Yes. Can I stay with her?", "mood": -2, "mark": "Explains risks, monitoring and reversal; obtains consent" },
+            { "t": "No risks at all.", "tz": "完全冇風險。", "rz": "真係？", "r": "Really?", "mood": 0 }
           ]
         },
         {
-          "line": "Can I stay with her?",
+          "line": "Can I stay with her?", "lz": "我可唔可以陪住佢？",
           "opts": [
-            { "t": "Yes, until she's asleep, and straight after. She'll stay with us until she's fully awake.", "r": "Thank you, doctor.", "mood": -2, "mark": "Involves the parent and explains recovery" },
-            { "t": "No, parents wait outside.", "r": "…", "mood": 2 }
+            { "t": "Yes, until she's asleep, and straight after. She'll stay with us until she's fully awake.", "tz": "可以，陪到佢瞓着為止，完咗之後即刻可以陪返佢。佢會留喺我哋度，直至完全醒返。", "rz": "多謝你，醫生。", "r": "Thank you, doctor.", "mood": -2, "mark": "Involves the parent and explains recovery" },
+            { "t": "No, parents wait outside.", "tz": "唔得，家長要喺出面等。", "r": "…", "mood": 2 }
           ]
         }
       ]

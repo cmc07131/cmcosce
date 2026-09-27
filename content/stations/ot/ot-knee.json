@@ -11,6 +11,7 @@
     {
       "id": "intro",
       "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Introduce",
       "hint": "WIPER: wash hands, introduce, permission, expose both legs, reposition; offer analgesia.",

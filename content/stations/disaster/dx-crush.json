@@ -21,6 +21,7 @@
     {
       "id": "handover",
       "kind": "history",
+      "lang": "en",
       "to": "fire",
       "label": "Handover",
       "hint": "How long trapped, what part, fluids before release, urine.",

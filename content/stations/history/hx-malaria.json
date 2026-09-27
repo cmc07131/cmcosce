@@ -18,19 +18,19 @@
       "hint": "Fever story, systems review, detailed travel history (where, when, doing what), prophylaxis, vaccines, TOCC, PMH.",
       "groups": {
         "Fever": [
-          { "t": "Tell me about the fever", "r": "Started 5 days ago. Comes in waves with shaking chills and sweats, every day now.", "mark": "Characterises the fever" },
-          { "t": "Other symptoms: cough, diarrhoea, urine, rash, confusion?", "r": "Headache, joint aches, some nausea. No cough, no rash, no diarrhoea. My urine is darker.", "mark": "Takes a systems review" }
+          { "t": "Tell me about the fever", "tz": "講吓你發燒嘅情況。", "rz": "五日前開始。一陣陣咁嚟，發冷震、出汗，而家日日都係咁。", "r": "Started 5 days ago. Comes in waves with shaking chills and sweats, every day now.", "mark": "Characterises the fever" },
+          { "t": "Other symptoms: cough, diarrhoea, urine, rash, confusion?", "tz": "仲有冇其他症狀：咳、肚屙、小便、出疹、混亂？", "rz": "頭痛、關節痛，有少少想嘔。冇咳、冇出疹、冇肚屙。小便深色咗。", "r": "Headache, joint aches, some nausea. No cough, no rash, no diarrhoea. My urine is darker.", "mark": "Takes a systems review" }
         ],
         "Travel": [
-          { "t": "Have you travelled recently? Where exactly and when?", "r": "Backpacking in Sierra Leone, three weeks, rural villages. Came back 10 days ago.", "mark": "Asks where, when and how long" },
-          { "t": "Did you take malaria tablets? Mosquito nets?", "r": "I didn't take any tablets. Lots of mosquito bites.", "mark": "Asks about malaria prophylaxis and bite prevention" },
-          { "t": "Vaccines before travel?", "r": "Yellow fever and typhoid injections.", "mark": "Asks pre-travel vaccinations" },
-          { "t": "Fresh water swimming, animal contact, sexual contact, sick contacts?", "r": "Swam in a river once. No sexual contacts. No one else ill that I know.", "mark": "Asks exposures (water, animals, sexual, contacts)" },
-          { "t": "Did you visit anywhere with Ebola or Lassa outbreaks, or care for sick people?", "r": "No healthcare work, no funerals, no sick people.", "mark": "Screens for viral haemorrhagic fever risk" }
+          { "t": "Have you travelled recently? Where exactly and when?", "tz": "最近有冇去過旅行？具體去咗邊、幾時？", "rz": "喺塞拉利昂背囊旅行咗三個禮拜，去鄉村。十日前返嚟。", "r": "Backpacking in Sierra Leone, three weeks, rural villages. Came back 10 days ago.", "mark": "Asks where, when and how long" },
+          { "t": "Did you take malaria tablets? Mosquito nets?", "tz": "有冇食預防瘧疾嘅藥？有冇用蚊帳？", "rz": "冇食藥。俾好多蚊咬過。", "r": "I didn't take any tablets. Lots of mosquito bites.", "mark": "Asks about malaria prophylaxis and bite prevention" },
+          { "t": "Vaccines before travel?", "tz": "去之前打過咩針？", "rz": "打咗黃熱病同傷寒針。", "r": "Yellow fever and typhoid injections.", "mark": "Asks pre-travel vaccinations" },
+          { "t": "Fresh water swimming, animal contact, sexual contact, sick contacts?", "tz": "有冇喺淡水游水、接觸動物、有性接觸，或者接觸過病人？", "rz": "喺河度游過一次水。冇性接觸。我所知冇其他人病。", "r": "Swam in a river once. No sexual contacts. No one else ill that I know.", "mark": "Asks exposures (water, animals, sexual, contacts)" },
+          { "t": "Did you visit anywhere with Ebola or Lassa outbreaks, or care for sick people?", "tz": "有冇去過有伊波拉或者拉沙熱爆發嘅地方，或者照顧過病人？", "rz": "冇做醫護工作，冇去喪禮，冇接觸病人。", "r": "No healthcare work, no funerals, no sick people.", "mark": "Screens for viral haemorrhagic fever risk" }
         ],
         "Background": [
-          { "t": "Past medical history, medicines, allergies", "r": "Healthy. No medicines. No allergies.", "mark": "Past history, drugs and allergies" },
-          { "t": "Occupation, cluster, contacts at home", "r": "Office worker. Lives with his girlfriend, who is well." }
+          { "t": "Past medical history, medicines, allergies", "tz": "以前有咩病？食緊咩藥？有冇敏感？", "rz": "好健康。冇食藥。冇敏感。", "r": "Healthy. No medicines. No allergies.", "mark": "Past history, drugs and allergies" },
+          { "t": "Occupation, cluster, contacts at home", "tz": "做咩工作？身邊有冇人一樣病？屋企有邊個？", "rz": "做寫字樓。同女朋友住，佢冇事。", "r": "Office worker. Lives with his girlfriend, who is well." }
         ]
       }
     },

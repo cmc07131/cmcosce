@@ -20,14 +20,14 @@
       "hint": "SOCRATES briefly, risk factors, and contraindications to fibrinolysis.",
       "groups": {
         "Pain": [
-          { "t": "Tell me about the pain", "r": "Crushing in the middle of my chest, to my left arm, started 2 hours ago walking up a hill. Sweating, feel sick.", "mark": "Characterises the pain and onset time" }
+          { "t": "Tell me about the pain", "tz": "講吓個痛係點樣？", "rz": "心口中間好似俾嘢壓住咁，痛到落左手，兩個鐘前行上斜嗰陣開始。出晒冷汗，想嘔。", "r": "Crushing in the middle of my chest, to my left arm, started 2 hours ago walking up a hill. Sweating, feel sick.", "mark": "Characterises the pain and onset time" }
         ],
-        "Risks": [{ "t": "Smoking, diabetes, BP, cholesterol, family history", "r": "Smoker, 30 a day. High cholesterol. Father had a heart attack at 55.", "mark": "Asks cardiovascular risk factors" }],
+        "Risks": [{ "t": "Smoking, diabetes, BP, cholesterol, family history", "tz": "有冇食煙、糖尿病、血壓高、膽固醇高？屋企人有冇心臟病？", "rz": "有食煙，一日三十支。膽固醇高。爸爸五十五歲心臟病發。", "r": "Smoker, 30 a day. High cholesterol. Father had a heart attack at 55.", "mark": "Asks cardiovascular risk factors" }],
         "Contraindications": [
-          { "t": "Any previous stroke, brain bleed or brain tumour?", "r": "No.", "mark": "Screens for intracranial contraindications" },
-          { "t": "Any recent bleeding, stomach ulcer, surgery or head injury?", "r": "No.", "mark": "Screens for bleeding, surgery and trauma" },
-          { "t": "Tearing pain through to the back?", "r": "No, it's in the front.", "mark": "Considers aortic dissection" },
-          { "t": "Blood thinners, Viagra, allergies?", "r": "None.", "mark": "Asks drugs and allergies" }
+          { "t": "Any previous stroke, brain bleed or brain tumour?", "tz": "以前有冇中過風、腦出血，或者腦瘤？", "rz": "冇。", "r": "No.", "mark": "Screens for intracranial contraindications" },
+          { "t": "Any recent bleeding, stomach ulcer, surgery or head injury?", "tz": "最近有冇出血、胃潰瘍、做過手術，或者撞傷過個頭？", "rz": "冇。", "r": "No.", "mark": "Screens for bleeding, surgery and trauma" },
+          { "t": "Tearing pain through to the back?", "tz": "有冇撕裂咁痛，穿到背脊？", "rz": "冇，淨係前面痛。", "r": "No, it's in the front.", "mark": "Considers aortic dissection" },
+          { "t": "Blood thinners, Viagra, allergies?", "tz": "有冇食薄血藥、偉哥？有冇藥物敏感？", "rz": "都冇。", "r": "None.", "mark": "Asks drugs and allergies" }
         ]
       }
     },
@@ -66,24 +66,24 @@
       "mood": 5,
       "turns": [
         {
-          "line": "What's going on, doctor?",
+          "line": "What's going on, doctor?", "lz": "醫生，我搞咩呀？",
           "opts": [
-            { "t": "You're having a heart attack: an artery to the heart is blocked by a clot. We need to open it quickly to save heart muscle.", "r": "How?", "mood": -1, "mark": "Explains STEMI simply" },
-            { "t": "Anterior STEMI.", "r": "Eh?", "mood": 2 }
+            { "t": "You're having a heart attack: an artery to the heart is blocked by a clot. We need to open it quickly to save heart muscle.", "tz": "你而家心臟病發：一條供血俾心臟嘅血管俾血塊塞住咗。我哋要快啲打通佢，救返啲心肌。", "rz": "點樣整？", "r": "How?", "mood": -1, "mark": "Explains STEMI simply" },
+            { "t": "Anterior STEMI.", "tz": "Anterior STEMI。", "rz": "吓？", "r": "Eh?", "mood": 2 }
           ]
         },
         {
-          "line": "How?",
+          "line": "How?", "lz": "點樣整？",
           "opts": [
-            { "t": "The fastest way here is an injection that dissolves the clot. It works in most people. The main risk is bleeding — serious bleeding in about 1 in 20, and bleeding in the brain in about 1 in 100.", "r": "I'd rather go to the big hospital for the balloon.", "mood": 0, "mark": "Explains fibrinolysis benefits and risks with numbers" },
-            { "t": "Trust me, it's fine.", "r": "What are the risks?", "mood": 2 }
+            { "t": "The fastest way here is an injection that dissolves the clot. It works in most people. The main risk is bleeding — serious bleeding in about 1 in 20, and bleeding in the brain in about 1 in 100.", "tz": "喺度最快嘅方法係打一支溶血栓針。大部分人都有效。主要風險係出血——大概每二十個有一個嚴重出血，每一百個有一個腦出血。", "rz": "我寧願去大醫院通波仔。", "r": "I'd rather go to the big hospital for the balloon.", "mood": 0, "mark": "Explains fibrinolysis benefits and risks with numbers" },
+            { "t": "Trust me, it's fine.", "tz": "信我啦，冇事嘅。", "rz": "有咩風險？", "r": "What are the risks?", "mood": 2 }
           ]
         },
         {
-          "line": "I'd rather go to the big hospital for the balloon.",
+          "line": "I'd rather go to the big hospital for the balloon.", "lz": "我寧願去大醫院通波仔。",
           "opts": [
-            { "t": "The balloon is best only if it can be done within 2 hours; the journey alone is 2½. Every minute counts — 'time is muscle'. We'll give the injection now and then transfer you for an angiogram within 24 hours anyway.", "r": "OK, go ahead.", "mood": -3, "mark": "Explains the pharmaco-invasive strategy and time dependence" },
-            { "t": "Fine, we'll send you.", "r": "OK.", "mood": 0 }
+            { "t": "The balloon is best only if it can be done within 2 hours; the journey alone is 2½. Every minute counts — 'time is muscle'. We'll give the injection now and then transfer you for an angiogram within 24 hours anyway.", "tz": "通波仔要喺兩個鐘內做到先係最好；單係車程已經要兩個半鐘。每一分鐘都好重要——「時間就係心肌」。我哋而家先打針，之後無論點都會喺二十四個鐘內轉你去做血管造影。", "rz": "好，做啦。", "r": "OK, go ahead.", "mood": -3, "mark": "Explains the pharmaco-invasive strategy and time dependence" },
+            { "t": "Fine, we'll send you.", "tz": "好，咁送你過去。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         }
       ]

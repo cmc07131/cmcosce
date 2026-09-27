@@ -282,3 +282,18 @@ test('station endings: the examiner prompts the last steps and asks the viva las
     }
   }
 })
+
+test('patient language: every line spoken with a patient or relative has its Cantonese', () => {
+  const staff = new Set(['nurse', 'doctor', 'junior', 'paramedic', 'examiner', 'police', 'security', 'obstetrician'])
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    const role = new Map(st.cast.map((c) => [c.id, c.role]))
+    for (const s of st.steps) {
+      const who = role.get(s.to)
+      if (!['say', 'history', 'dialogue'].includes(s.kind) || !who || staff.has(who) || s.lang === 'en') continue
+      const opts = [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat(), ...(s.turns ?? []).flatMap((t) => t.opts)]
+      for (const o of opts) assert.ok(o.tz, `${st.id}/${s.id}: "${o.t}" needs tz`)
+      for (const t of s.turns ?? []) assert.ok(t.lz, `${st.id}/${s.id}: "${t.line}" needs lz`)
+    }
+  }
+})

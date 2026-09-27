@@ -35,6 +35,7 @@
     {
       "id": "info",
       "kind": "history",
+      "lang": "en",
       "to": "fire",
       "label": "Fire officer",
       "hint": "What agent, how many, how long exposed, any decontamination done?",

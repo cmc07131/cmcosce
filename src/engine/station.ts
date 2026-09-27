@@ -54,6 +54,8 @@ const stepSchema = z.object({
   /** The examiner comes over and prompts this step at the end, saying this line (e.g. "Please present your findings."). */
   ask: z.string().optional(),
   confirm: z.string().optional(),
+  /** 'en': stays in English though a patient is the target (the lines are the player's actions, or the speaker is staff). */
+  lang: z.literal('en').optional(),
   opts: z.array(optSchema).optional(),
   groups: z.record(z.string(), z.array(optSchema)).optional(),
   mood: z.number().optional(),

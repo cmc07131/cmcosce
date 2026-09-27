@@ -15,25 +15,25 @@
       "label": "History",
       "hint": "Before, during and after the fall; injuries; long lie; PMH, drugs, social, function.",
       "groups": {
-        "Start": [{ "t": "Are you in pain? Can I get you something?", "r": "My left hip is killing me. Yes please.", "mark": "Offers analgesia" }],
+        "Start": [{ "t": "Are you in pain? Can I get you something?", "tz": "你有冇痛？我攞啲止痛藥俾你好嗎？", "rz": "我左邊髖關節痛到死。好呀，唔該。", "r": "My left hip is killing me. Yes please.", "mark": "Offers analgesia" }],
         "Before": [
-          { "t": "What were you doing when you fell?", "r": "Getting up from the toilet at night to go to the kitchen for water.", "mark": "Asks the activity at the time" },
-          { "t": "Any warning — dizziness, palpitations, chest pain?", "r": "I felt light-headed when I stood up, then I was on the floor.", "mark": "Asks prodromal symptoms" }
+          { "t": "What were you doing when you fell?", "tz": "你跌嗰陣做緊咩？", "rz": "半夜去完廁所，起身行去廚房攞水飲。", "r": "Getting up from the toilet at night to go to the kitchen for water.", "mark": "Asks the activity at the time" },
+          { "t": "Any warning — dizziness, palpitations, chest pain?", "tz": "跌之前有冇預兆——頭暈、心跳、心口痛？", "rz": "企起身嗰陣覺得頭輕輕，跟住就喺地下喇。", "r": "I felt light-headed when I stood up, then I was on the floor.", "mark": "Asks prodromal symptoms" }
         ],
         "During": [
-          { "t": "Did you black out? Did you hit your head?", "r": "I don't think so. I didn't hit my head.", "mark": "Asks about loss of consciousness and head injury" },
-          { "t": "Any tongue biting, wet yourself, jerking?", "r": "No." }
+          { "t": "Did you black out? Did you hit your head?", "tz": "你有冇暈低？有冇撞到個頭？", "rz": "我諗冇。冇撞到頭。", "r": "I don't think so. I didn't hit my head.", "mark": "Asks about loss of consciousness and head injury" },
+          { "t": "Any tongue biting, wet yourself, jerking?", "tz": "有冇咬到條脷、失禁，或者手腳抽搐？", "rz": "冇。", "r": "No." }
         ],
         "After": [
-          { "t": "Could you get up? How long were you on the floor?", "r": "Couldn't get up. About 6 hours until my son came.", "mark": "Asks about the long lie" },
-          { "t": "Any other pain, weakness, confusion since?", "r": "Just the hip. And I feel sick." }
+          { "t": "Could you get up? How long were you on the floor?", "tz": "你自己起唔起到身？喺地下躺咗幾耐？", "rz": "起唔到身。大概六個鐘，個仔嚟到先發現。", "r": "Couldn't get up. About 6 hours until my son came.", "mark": "Asks about the long lie" },
+          { "t": "Any other pain, weakness, confusion since?", "tz": "之後有冇其他地方痛、冇力，或者混亂？", "rz": "淨係髖關節。同埋想嘔。", "r": "Just the hip. And I feel sick." }
         ],
         "Background": [
-          { "t": "Previous falls?", "r": "Twice this year.", "mark": "Asks about previous falls" },
-          { "t": "Medical conditions and medicines", "r": "High blood pressure, prostate. Amlodipine, doxazosin, a water tablet, and sleeping tablets.", "mark": "Takes a medication history (falls risk drugs)" },
-          { "t": "Blood thinners?", "r": "No.", "mark": "Asks about anticoagulants" },
-          { "t": "Who do you live with? How do you get around? Help at home?", "r": "Alone since my wife died. Walk with a stick. Son visits daily.", "mark": "Asks social situation and mobility" },
-          { "t": "Eyesight, memory, alcohol", "r": "Cataract in my left eye. Memory OK. A glass of whisky at night." }
+          { "t": "Previous falls?", "tz": "以前有冇跌過？", "rz": "今年跌過兩次。", "r": "Twice this year.", "mark": "Asks about previous falls" },
+          { "t": "Medical conditions and medicines", "tz": "你有咩病？食緊咩藥？", "rz": "血壓高，同埋前列腺。食緊 amlodipine、doxazosin、一隻去水丸，同埋安眠藥。", "r": "High blood pressure, prostate. Amlodipine, doxazosin, a water tablet, and sleeping tablets.", "mark": "Takes a medication history (falls risk drugs)" },
+          { "t": "Blood thinners?", "tz": "有冇食薄血藥？", "rz": "冇。", "r": "No.", "mark": "Asks about anticoagulants" },
+          { "t": "Who do you live with? How do you get around? Help at home?", "tz": "你同邊個住？平時點行動？屋企有冇人幫手？", "rz": "老婆過咗身之後一個人住。用枴杖行。個仔日日都嚟探我。", "r": "Alone since my wife died. Walk with a stick. Son visits daily.", "mark": "Asks social situation and mobility" },
+          { "t": "Eyesight, memory, alcohol", "tz": "你眼睛、記性點？有冇飲酒？", "rz": "左眼有白內障。記性還可以。夜晚飲一杯威士忌。", "r": "Cataract in my left eye. Memory OK. A glass of whisky at night." }
         ]
       }
     },

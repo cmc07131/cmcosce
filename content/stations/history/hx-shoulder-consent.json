@@ -25,38 +25,38 @@
       "mood": 6,
       "turns": [
         {
-          "line": "What's wrong with it? It's agony.",
+          "line": "What's wrong with it? It's agony.", "lz": "我隻膊頭搞咩呀？痛到死。",
           "opts": [
-            { "t": "The ball of your shoulder has come out of the socket, to the front. We need to put it back. First, let's get you some pain relief.", "r": "Thanks. How do you put it back?", "mood": -2, "mark": "Explains the diagnosis simply and offers analgesia" },
-            { "t": "Anterior glenohumeral dislocation.", "r": "Eh?", "mood": 2 }
+            { "t": "The ball of your shoulder has come out of the socket, to the front. We need to put it back. First, let's get you some pain relief.", "tz": "你膊頭個波甩咗出關節窩，向前甩咗。我哋要整返佢入去。首先，我哋俾啲止痛藥你先。", "rz": "唔該。你哋點樣整返入去？", "r": "Thanks. How do you put it back?", "mood": -2, "mark": "Explains the diagnosis simply and offers analgesia" },
+            { "t": "Anterior glenohumeral dislocation.", "tz": "Anterior glenohumeral dislocation。", "rz": "吓？", "r": "Eh?", "mood": 2 }
           ]
         },
         {
-          "line": "How do you put it back?",
+          "line": "How do you put it back?", "lz": "你哋點樣整返入去？",
           "opts": [
-            { "t": "We give you a sedative through a drip so you're very sleepy and relaxed, then gently manoeuvre the arm back in. One doctor looks after the sedation and your breathing, another does the shoulder. Some shoulders go back without sedation using gentle techniques — we can try that first if you prefer.", "r": "Is the sedation dangerous?", "mood": -1, "mark": "Explains the procedure and alternatives" },
-            { "t": "We pull hard until it clunks.", "r": "That sounds awful.", "mood": 2 }
+            { "t": "We give you a sedative through a drip so you're very sleepy and relaxed, then gently manoeuvre the arm back in. One doctor looks after the sedation and your breathing, another does the shoulder. Some shoulders go back without sedation using gentle techniques — we can try that first if you prefer.", "tz": "我哋會經吊針俾鎮靜劑，令你好眼瞓、好放鬆，然後輕輕咁將隻手郁返入去。一個醫生負責鎮靜同你嘅呼吸，另一個負責膊頭。有啲膊頭用溫和嘅手法，唔使鎮靜都可以整返入去——你想嘅話我哋可以先試。", "rz": "鎮靜劑危唔危險？", "r": "Is the sedation dangerous?", "mood": -1, "mark": "Explains the procedure and alternatives" },
+            { "t": "We pull hard until it clunks.", "tz": "我哋會用力拉，拉到「咔」一聲。", "rz": "聽落好恐怖。", "r": "That sounds awful.", "mood": 2 }
           ]
         },
         {
-          "line": "Is the sedation dangerous?",
+          "line": "Is the sedation dangerous?", "lz": "鎮靜劑危唔危險？",
           "opts": [
-            { "t": "It's generally very safe. It can slow your breathing, drop your blood pressure or make you vomit; we monitor you closely and can support your breathing if needed. Serious harm is very rare.", "r": "And the shoulder itself?", "mood": -1, "mark": "Explains sedation risks" },
-            { "t": "Totally safe, no risks.", "r": "Great.", "mood": 0 }
+            { "t": "It's generally very safe. It can slow your breathing, drop your blood pressure or make you vomit; we monitor you closely and can support your breathing if needed. Serious harm is very rare.", "tz": "一般嚟講好安全。有機會令你呼吸慢咗、血壓跌，或者嘔；我哋會密切監察，有需要可以幫你呼吸。嚴重傷害好罕見。", "rz": "咁隻膊頭本身呢？", "r": "And the shoulder itself?", "mood": -1, "mark": "Explains sedation risks" },
+            { "t": "Totally safe, no risks.", "tz": "完全安全，冇風險。", "rz": "好嘢。", "r": "Great.", "mood": 0 }
           ]
         },
         {
-          "line": "And the shoulder itself?",
+          "line": "And the shoulder itself?", "lz": "咁隻膊頭本身呢？",
           "opts": [
-            { "t": "It may not go back (then we'd do it in theatre), there's a small chance of a fracture or nerve injury, and it can dislocate again. Can you tell me back what we've discussed? Are you happy to go ahead?", "r": "It might not work, might break, might happen again. Yes, go ahead.", "mood": -2, "mark": "Explains reduction risks, checks understanding and obtains consent" },
-            { "t": "Sign here please.", "r": "What am I signing?", "mood": 2 }
+            { "t": "It may not go back (then we'd do it in theatre), there's a small chance of a fracture or nerve injury, and it can dislocate again. Can you tell me back what we've discussed? Are you happy to go ahead?", "tz": "有機會整唔返入去（咁就要喺手術室做），有少少機會斷骨或者傷到神經，而且將來可能會再甩。你可唔可以講返我哋傾過啲咩？你同唔同意進行？", "rz": "可能唔成功、可能斷骨、可能會再甩。好，做啦。", "r": "It might not work, might break, might happen again. Yes, go ahead.", "mood": -2, "mark": "Explains reduction risks, checks understanding and obtains consent" },
+            { "t": "Sign here please.", "tz": "唔該喺度簽名。", "rz": "我簽緊啲咩？", "r": "What am I signing?", "mood": 2 }
           ]
         },
         {
-          "line": "Afterwards, what happens?",
+          "line": "Afterwards, what happens?", "lz": "之後會點？",
           "opts": [
-            { "t": "An X-ray to check it's back, a check of the nerves, a sling for comfort for a week or two, and early physiotherapy. Because you're young and play sport, the chance of it happening again is high, so I'll refer you to the shoulder surgeons.", "r": "Makes sense.", "mood": -2, "mark": "Explains follow-up, recurrence risk and referral" },
-            { "t": "Nothing, just go home.", "r": "OK…", "mood": 1 }
+            { "t": "An X-ray to check it's back, a check of the nerves, a sling for comfort for a week or two, and early physiotherapy. Because you're young and play sport, the chance of it happening again is high, so I'll refer you to the shoulder surgeons.", "tz": "照 X 光確定整返入去，檢查神經，用手托吊一兩個禮拜會舒服啲，然後盡早做物理治療。因為你後生又做運動，再甩嘅機會好高，所以我會轉介你去膊頭專科。", "rz": "有道理。", "r": "Makes sense.", "mood": -2, "mark": "Explains follow-up, recurrence risk and referral" },
+            { "t": "Nothing, just go home.", "tz": "冇嘢，返屋企就得。", "rz": "好……", "r": "OK…", "mood": 1 }
           ]
         }
       ]

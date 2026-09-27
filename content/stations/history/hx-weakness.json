@@ -16,20 +16,20 @@
       "hint": "Onset, distribution, triggers, red flags, thyroid symptoms, family and drug history.",
       "groups": {
         "Weakness": [
-          { "t": "When did it start and how has it changed?", "r": "Woke up at 6 like this. Getting a little better now.", "mark": "Asks onset and progression" },
-          { "t": "Which parts are weak — legs, arms, face, breathing, swallowing?", "r": "Both legs, mostly thighs. Arms a bit. Breathing and swallowing fine.", "mark": "Asks distribution including bulbar and respiratory" },
-          { "t": "Any numbness or tingling?", "r": "No numbness.", "mark": "Asks sensory symptoms" }
+          { "t": "When did it start and how has it changed?", "tz": "幾時開始？之後有咩變化？", "rz": "朝早六點醒嗰陣已經係咁。而家好返少少。", "r": "Woke up at 6 like this. Getting a little better now.", "mark": "Asks onset and progression" },
+          { "t": "Which parts are weak — legs, arms, face, breathing, swallowing?", "tz": "邊度冇力——對腳、對手、塊面？呼吸同吞嘢有冇問題？", "rz": "兩隻腳，主要係大髀。手都有少少。呼吸同吞嘢冇問題。", "r": "Both legs, mostly thighs. Arms a bit. Breathing and swallowing fine.", "mark": "Asks distribution including bulbar and respiratory" },
+          { "t": "Any numbness or tingling?", "tz": "有冇麻痺或者針刺感？", "rz": "冇麻痺。", "r": "No numbness.", "mark": "Asks sensory symptoms" }
         ],
         "Red flags": [
-          { "t": "Back pain, injury, problems passing urine or opening bowels?", "r": "No back pain, no injury, bladder and bowel normal.", "mark": "Screens for cord compression" },
-          { "t": "Recent diarrhoea or infection?", "r": "No.", "mark": "Asks about preceding infection (GBS)" }
+          { "t": "Back pain, injury, problems passing urine or opening bowels?", "tz": "有冇背痛、受傷？小便大便有冇問題？", "rz": "冇背痛，冇受傷，大小便正常。", "r": "No back pain, no injury, bladder and bowel normal.", "mark": "Screens for cord compression" },
+          { "t": "Recent diarrhoea or infection?", "tz": "最近有冇肚屙或者感染？", "rz": "冇。", "r": "No.", "mark": "Asks about preceding infection (GBS)" }
         ],
         "Triggers": [
-          { "t": "What did you do last night?", "r": "Big dinner — rice, noodles, dessert — and several beers.", "mark": "Asks about carbohydrate meal and alcohol triggers" },
-          { "t": "Has this happened before?", "r": "Once last year, milder, went away by itself.", "mark": "Asks about previous episodes" }
+          { "t": "What did you do last night?", "tz": "你琴晚做過啲咩？", "rz": "食咗餐豐富晚飯——飯、麵、甜品——仲飲咗幾罐啤酒。", "r": "Big dinner — rice, noodles, dessert — and several beers.", "mark": "Asks about carbohydrate meal and alcohol triggers" },
+          { "t": "Has this happened before?", "tz": "以前有冇試過咁？", "rz": "舊年試過一次，輕啲，自己好返。", "r": "Once last year, milder, went away by itself.", "mark": "Asks about previous episodes" }
         ],
-        "Thyroid": [{ "t": "Weight loss, palpitations, sweating, heat intolerance, tremor?", "r": "Lost 5 kg in 3 months, feel hot, heart races sometimes.", "mark": "Screens for thyrotoxicosis" }],
-        "Background": [{ "t": "Medicines, family history, alcohol, drugs", "r": "No medicines. Uncle had thyroid problems. No drugs.", "mark": "Drug and family history" }]
+        "Thyroid": [{ "t": "Weight loss, palpitations, sweating, heat intolerance, tremor?", "tz": "有冇瘦咗、心跳、出汗多、怕熱、手震？", "rz": "三個月瘦咗五公斤，成日覺得熱，有時心跳好快。", "r": "Lost 5 kg in 3 months, feel hot, heart races sometimes.", "mark": "Screens for thyrotoxicosis" }],
+        "Background": [{ "t": "Medicines, family history, alcohol, drugs", "tz": "有冇食藥？屋企人有咩病？有冇飲酒、用藥物？", "rz": "冇食藥。舅父有甲狀腺問題。冇用藥物。", "r": "No medicines. Uncle had thyroid problems. No drugs.", "mark": "Drug and family history" }]
       }
     },
     {

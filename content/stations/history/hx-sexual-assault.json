@@ -20,17 +20,17 @@
       "mood": 7,
       "turns": [
         {
-          "line": "I don't know why I came. I just want to go home and shower.",
+          "line": "I don't know why I came. I just want to go home and shower.", "lz": "我都唔知點解會嚟。我淨係想返屋企沖涼。",
           "opts": [
-            { "t": "I'm really glad you came. You're safe here, and nothing will happen without your agreement. Can I explain what we can offer, and you decide?", "r": "…OK.", "mood": -3, "mark": "Reassures, affirms and puts her in control" },
-            { "t": "Did you lead him on at all?", "r": "[Starts crying] I knew nobody would believe me.", "mood": 3 }
+            { "t": "I'm really glad you came. You're safe here, and nothing will happen without your agreement. Can I explain what we can offer, and you decide?", "tz": "我好高興你肯嚟。你喺度係安全嘅，冇你同意，乜嘢都唔會做。我可唔可以解釋吓我哋可以幫你做啲咩，然後由你決定？", "rz": "……好。", "r": "…OK.", "mood": -3, "mark": "Reassures, affirms and puts her in control" },
+            { "t": "Did you lead him on at all?", "tz": "你有冇引誘過佢？", "rz": "（開始喊）我就知冇人會信我。", "r": "[Starts crying] I knew nobody would believe me.", "mood": 3 }
           ]
         },
         {
-          "line": "Do I have to go to the police?",
+          "line": "Do I have to go to the police?", "lz": "我係咪一定要報警？",
           "opts": [
-            { "t": "It's your choice. If you might want to report, a forensic doctor can collect evidence now — it's best before showering — and we can help you contact the police. You can decide about reporting later.", "r": "I think I want the evidence taken, just in case.", "mood": -2, "mark": "Explains police and forensic options without pressure" },
-            { "t": "Yes, we have to report it.", "r": "No! I just want to leave.", "mood": 3 }
+            { "t": "It's your choice. If you might want to report, a forensic doctor can collect evidence now — it's best before showering — and we can help you contact the police. You can decide about reporting later.", "tz": "由你決定。如果你之後可能想報案，法醫可以而家收集證據——最好喺沖涼之前做——我哋亦可以幫你聯絡警方。報唔報案可以遲啲先決定。", "rz": "我諗我想先收集證據，以防萬一。", "r": "I think I want the evidence taken, just in case.", "mood": -2, "mark": "Explains police and forensic options without pressure" },
+            { "t": "Yes, we have to report it.", "tz": "係，我哋一定要報警。", "rz": "唔要！我只係想走。", "r": "No! I just want to leave.", "mood": 3 }
           ]
         }
       ]
@@ -43,15 +43,15 @@
       "hint": "Only what's needed for care: time, type of contact, condom, ejaculation, injuries, LMP, contraception, HBV vaccination, known risks of the assailant.",
       "groups": {
         "Assault": [
-          { "t": "When did it happen?", "r": "About 11 last night — 4 hours ago.", "mark": "Asks the time (for PEP and EC windows)" },
-          { "t": "What kind of contact — vaginal, anal, oral? Condom? Ejaculation?", "r": "Vaginal only. No condom. I think he ejaculated.", "mark": "Asks type of contact, condom and ejaculation" },
-          { "t": "Are you hurt anywhere?", "r": "Sore, and bruises on my wrists.", "mark": "Asks about injuries" },
-          { "t": "Were you given drinks or drugs? Can you remember everything?", "r": "I had two drinks. I remember it.", "mark": "Asks about drugs or alcohol" }
+          { "t": "When did it happen?", "tz": "幾時發生？", "rz": "琴晚大概十一點——四個鐘前。", "r": "About 11 last night — 4 hours ago.", "mark": "Asks the time (for PEP and EC windows)" },
+          { "t": "What kind of contact — vaginal, anal, oral? Condom? Ejaculation?", "tz": "係咩類型嘅接觸——陰道、肛門、口腔？有冇用安全套？有冇射精？", "rz": "淨係陰道。冇用安全套。我諗佢有射精。", "r": "Vaginal only. No condom. I think he ejaculated.", "mark": "Asks type of contact, condom and ejaculation" },
+          { "t": "Are you hurt anywhere?", "tz": "你有冇邊度受傷？", "rz": "好痛，兩隻手腕有瘀傷。", "r": "Sore, and bruises on my wrists.", "mark": "Asks about injuries" },
+          { "t": "Were you given drinks or drugs? Can you remember everything?", "tz": "有冇人俾嘢你飲或者食藥？你記唔記得晒所有嘢？", "rz": "我飲咗兩杯。我記得發生咩事。", "r": "I had two drinks. I remember it.", "mark": "Asks about drugs or alcohol" }
         ],
         "Health": [
-          { "t": "When was your last period? Any contraception?", "r": "Two weeks ago. No contraception.", "mark": "Asks LMP and contraception" },
-          { "t": "Hepatitis B vaccination? HPV vaccine?", "r": "I had hep B as a baby. No HPV vaccine.", "mark": "Asks HBV and HPV vaccination" },
-          { "t": "Do you know anything about his health — drug injection, HIV?", "r": "He's from overseas, I don't know.", "mark": "Assesses HIV risk from the assailant" }
+          { "t": "When was your last period? Any contraception?", "tz": "你上次月經係幾時？有冇避孕？", "rz": "兩個禮拜前。冇避孕。", "r": "Two weeks ago. No contraception.", "mark": "Asks LMP and contraception" },
+          { "t": "Hepatitis B vaccination? HPV vaccine?", "tz": "有冇打過乙型肝炎疫苗？HPV 疫苗呢？", "rz": "BB 嗰陣打過乙肝針。冇打 HPV 疫苗。", "r": "I had hep B as a baby. No HPV vaccine.", "mark": "Asks HBV and HPV vaccination" },
+          { "t": "Do you know anything about his health — drug injection, HIV?", "tz": "你知唔知佢健康狀況——有冇注射毒品、有冇愛滋病？", "rz": "佢係外國人，我唔知。", "r": "He's from overseas, I don't know.", "mark": "Assesses HIV risk from the assailant" }
         ]
       }
     },

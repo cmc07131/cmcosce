@@ -20,31 +20,31 @@
       "mood": 7,
       "turns": [
         {
-          "line": "I'm fine now, doc. I've got a big contract to sign tonight. I'm going.",
+          "line": "I'm fine now, doc. I've got a big contract to sign tonight. I'm going.", "lz": "醫生，我而家冇事喇。今晚我要簽份大合約。我要走。",
           "opts": [
-            { "t": "I can see this contract matters a lot. Can you tell me more about what's worrying you about staying?", "r": "If I miss it, I lose the business. My family depends on it.", "mood": -2, "mark": "Explores the reasons for leaving" },
-            { "t": "You can't leave. Sit down.", "r": "You can't keep me here!", "mood": 3 }
+            { "t": "I can see this contract matters a lot. Can you tell me more about what's worrying you about staying?", "tz": "我見到呢份合約對你好重要。你可唔可以講多啲，留喺醫院你最擔心啲咩？", "rz": "如果我錯過咗，盤生意就冇喇。成家人靠我㗎。", "r": "If I miss it, I lose the business. My family depends on it.", "mood": -2, "mark": "Explores the reasons for leaving" },
+            { "t": "You can't leave. Sit down.", "tz": "你唔可以走。坐低。", "rz": "你唔可以留住我！", "r": "You can't keep me here!", "mood": 3 }
           ]
         },
         {
-          "line": "If I miss it, I lose the business. My family depends on it.",
+          "line": "If I miss it, I lose the business. My family depends on it.", "lz": "如果我錯過咗，盤生意就冇喇。成家人靠我㗎。",
           "opts": [
-            { "t": "Your blood test and ECG show strain on the heart muscle — a type of heart attack. The risk is that it could get worse suddenly in the next few days, including a dangerous heart rhythm or death. Treatment in hospital lowers that risk a lot.", "r": "A heart attack? But the pain's gone…", "mood": -1, "mark": "Explains the diagnosis and specific risks in plain language" },
-            { "t": "Your troponin is up and there's TWI in the anterior leads.", "r": "I don't know what that means. I'm going.", "mood": 2 }
+            { "t": "Your blood test and ECG show strain on the heart muscle — a type of heart attack. The risk is that it could get worse suddenly in the next few days, including a dangerous heart rhythm or death. Treatment in hospital lowers that risk a lot.", "tz": "你驗血同心電圖顯示心肌受壓——係一種心臟病發。危險在於呢幾日可能突然惡化，包括危險嘅心律不正，甚至死亡。留喺醫院治療可以大大減低呢個風險。", "rz": "心臟病發？但係已經唔痛喇……", "r": "A heart attack? But the pain's gone…", "mood": -1, "mark": "Explains the diagnosis and specific risks in plain language" },
+            { "t": "Your troponin is up and there's TWI in the anterior leads.", "tz": "你嘅 troponin 升咗，anterior leads 有 TWI。", "rz": "我唔知你講乜。我走喇。", "r": "I don't know what that means. I'm going.", "mood": 2 }
           ]
         },
         {
-          "line": "A heart attack? But the pain's gone…",
+          "line": "A heart attack? But the pain's gone…", "lz": "心臟病發？但係已經唔痛喇……",
           "opts": [
-            { "t": "Can you tell me in your own words what could happen if you go home?", "r": "It could get worse… I could have a bigger heart attack or even die.", "mood": -1, "mark": "Checks understanding and ability to weigh information (capacity)" },
-            { "t": "Just trust me.", "r": "Hmm.", "mood": 1 }
+            { "t": "Can you tell me in your own words what could happen if you go home?", "tz": "你可唔可以用自己嘅說話講吓，如果你返屋企可能會發生咩事？", "rz": "可能會差咗……可能會心臟病發得更犀利，甚至會死。", "r": "It could get worse… I could have a bigger heart attack or even die.", "mood": -1, "mark": "Checks understanding and ability to weigh information (capacity)" },
+            { "t": "Just trust me.", "tz": "你信我啦。", "rz": "嗯……", "r": "Hmm.", "mood": 1 }
           ]
         },
         {
-          "line": "Isn't there another way? Can my partner sign for me?",
+          "line": "Isn't there another way? Can my partner sign for me?", "lz": "仲有冇其他方法？可唔可以叫我拍檔幫我簽？",
           "opts": [
-            { "t": "Could your partner or lawyer sign tonight, or could we arrange a video call from the ward? Our social worker can help with the letter to your client.", "r": "…I suppose my partner could go. OK, I'll stay.", "mood": -3, "mark": "Negotiates practical alternatives" },
-            { "t": "No. Your choice: stay or go.", "r": "Then I'm going.", "mood": 3 }
+            { "t": "Could your partner or lawyer sign tonight, or could we arrange a video call from the ward? Our social worker can help with the letter to your client.", "tz": "可唔可以叫你拍檔或者律師今晚幫你簽，或者我哋喺病房安排視像會議？我哋嘅社工可以幫你寫信俾你嘅客。", "rz": "……咁我拍檔可以去嘅。好，我留低。", "r": "…I suppose my partner could go. OK, I'll stay.", "mood": -3, "mark": "Negotiates practical alternatives" },
+            { "t": "No. Your choice: stay or go.", "tz": "唔得。你自己揀：留低定走。", "rz": "咁我走喇。", "r": "Then I'm going.", "mood": 3 }
           ]
         }
       ]

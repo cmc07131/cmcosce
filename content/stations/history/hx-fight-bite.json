@@ -16,18 +16,18 @@
       "hint": "Mechanism, time, hand dominance, occupation, symptoms, tetanus, BBV risk, PMH.",
       "groups": {
         "Injury": [
-          { "t": "How exactly did you hurt your hand?", "r": "Punched a guy in the mouth. Hit his teeth.", "mark": "Establishes a closed-fist injury against teeth" },
-          { "t": "When?", "r": "About 6 hours ago.", "mark": "Asks the time of injury" },
-          { "t": "Pain, swelling, redness, fever, can you move your fingers?", "r": "Throbbing, bit swollen. Hurts to straighten my middle finger.", "mark": "Asks symptoms of infection and tendon/joint involvement" }
+          { "t": "How exactly did you hurt your hand?", "tz": "你隻手具體點樣受傷？", "rz": "一拳打落人哋個嘴度，打中佢啲牙。", "r": "Punched a guy in the mouth. Hit his teeth.", "mark": "Establishes a closed-fist injury against teeth" },
+          { "t": "When?", "tz": "幾時發生？", "rz": "大概六個鐘前。", "r": "About 6 hours ago.", "mark": "Asks the time of injury" },
+          { "t": "Pain, swelling, redness, fever, can you move your fingers?", "tz": "有冇痛、腫、紅、發燒？啲手指郁唔郁到？", "rz": "一跳一跳咁痛，有少少腫。中指伸直嗰陣痛。", "r": "Throbbing, bit swollen. Hurts to straighten my middle finger.", "mark": "Asks symptoms of infection and tendon/joint involvement" }
         ],
         "Background": [
-          { "t": "Which is your writing hand? What do you do for work?", "r": "Right-handed. I'm a chef.", "mark": "Asks hand dominance and occupation" },
-          { "t": "Tetanus vaccination?", "r": "No idea — over 10 years ago.", "mark": "Asks tetanus status" },
-          { "t": "Allergies, diabetes, immune problems?", "r": "Penicillin gives me a rash. Otherwise healthy.", "mark": "Asks allergies and immunosuppression" }
+          { "t": "Which is your writing hand? What do you do for work?", "tz": "你用邊隻手寫字？做咩工作？", "rz": "右手。我係廚師。", "r": "Right-handed. I'm a chef.", "mark": "Asks hand dominance and occupation" },
+          { "t": "Tetanus vaccination?", "tz": "有冇打過破傷風針？", "rz": "唔記得——十幾年前喇。", "r": "No idea — over 10 years ago.", "mark": "Asks tetanus status" },
+          { "t": "Allergies, diabetes, immune problems?", "tz": "有冇藥物敏感、糖尿病，或者免疫力問題？", "rz": "食盤尼西林會出疹。其他都健康。", "r": "Penicillin gives me a rash. Otherwise healthy.", "mark": "Asks allergies and immunosuppression" }
         ],
         "Blood-borne viruses": [
-          { "t": "Was the other man bleeding from the mouth? Do you know anything about him?", "r": "His lip was bleeding. Don't know him.", "mark": "Assesses BBV exposure risk" },
-          { "t": "Hepatitis B vaccination?", "r": "Yes, as a kid." }
+          { "t": "Was the other man bleeding from the mouth? Do you know anything about him?", "tz": "對方個嘴有冇流血？你識唔識佢？", "rz": "佢嘴唇流緊血。我唔識佢。", "r": "His lip was bleeding. Don't know him.", "mark": "Assesses BBV exposure risk" },
+          { "t": "Hepatitis B vaccination?", "tz": "有冇打過乙型肝炎疫苗？", "rz": "有，細個打過。", "r": "Yes, as a kid." }
         ]
       }
     },
@@ -54,24 +54,24 @@
       "mood": 5,
       "turns": [
         {
-          "line": "It's just a small cut. Can you stitch it and let me go?",
+          "line": "It's just a small cut. Can you stitch it and let me go?", "lz": "只係一個細傷口。你幫我縫咗佢俾我走得唔得？",
           "opts": [
-            { "t": "It looks small, but teeth have gone into the knuckle joint. Mouth bacteria cause serious infection that can destroy the joint. We won't stitch it; you need antibiotics and the hand surgeons to wash out the joint.", "r": "An operation? For this?", "mood": 0, "mark": "Explains the risk of joint infection and the plan" },
-            { "t": "Sure, three stitches.", "r": "Great.", "mood": -1 }
+            { "t": "It looks small, but teeth have gone into the knuckle joint. Mouth bacteria cause serious infection that can destroy the joint. We won't stitch it; you need antibiotics and the hand surgeons to wash out the joint.", "tz": "睇落細，但係啲牙已經插入咗指節關節。口腔入面嘅細菌會引致嚴重感染，可以破壞個關節。我哋唔會縫，你要食抗生素，同埋要手外科醫生幫你洗個關節。", "rz": "做手術？為咗呢樣？", "r": "An operation? For this?", "mood": 0, "mark": "Explains the risk of joint infection and the plan" },
+            { "t": "Sure, three stitches.", "tz": "冇問題，縫三針。", "rz": "好嘢。", "r": "Great.", "mood": -1 }
           ]
         },
         {
-          "line": "An operation? For this?",
+          "line": "An operation? For this?", "lz": "做手術？為咗呢樣？",
           "opts": [
-            { "t": "As a chef your hand is your living. A washout now avoids a stiff, infected finger later. Because you're allergic to penicillin, we'll use doxycycline and metronidazole, and give a tetanus booster.", "r": "OK… makes sense.", "mood": -2, "mark": "Appropriate antibiotics for penicillin allergy and tetanus" },
-            { "t": "Your choice.", "r": "Then no.", "mood": 1 }
+            { "t": "As a chef your hand is your living. A washout now avoids a stiff, infected finger later. Because you're allergic to penicillin, we'll use doxycycline and metronidazole, and give a tetanus booster.", "tz": "你做廚師，隻手就係你搵食嘅工具。而家洗乾淨，就可以避免之後手指感染同僵硬。因為你對盤尼西林敏感，我哋會用 doxycycline 同 metronidazole，同埋打多支破傷風加強針。", "rz": "好……有道理。", "r": "OK… makes sense.", "mood": -2, "mark": "Appropriate antibiotics for penicillin allergy and tetanus" },
+            { "t": "Your choice.", "tz": "你自己揀。", "rz": "咁唔要。", "r": "Then no.", "mood": 1 }
           ]
         },
         {
-          "line": "Can I catch anything from his blood?",
+          "line": "Can I catch anything from his blood?", "lz": "我會唔會因為佢啲血而傳染到啲咩？",
           "opts": [
-            { "t": "There's a small risk of hepatitis and HIV from blood in saliva. You're protected against hepatitis B; we'll take baseline blood tests today and repeat them later. HIV medicines aren't usually needed for this type of exposure.", "r": "Thanks for explaining.", "mood": -2, "mark": "Counsels on blood-borne virus risk and testing" },
-            { "t": "No risk at all.", "r": "OK.", "mood": 0 }
+            { "t": "There's a small risk of hepatitis and HIV from blood in saliva. You're protected against hepatitis B; we'll take baseline blood tests today and repeat them later. HIV medicines aren't usually needed for this type of exposure.", "tz": "口水入面嘅血有少少機會傳染肝炎同愛滋病。你已經有乙肝抗體；我哋今日會驗血做基線，之後再覆驗。呢種情況通常唔需要食預防愛滋病嘅藥。", "rz": "多謝你解釋。", "r": "Thanks for explaining.", "mood": -2, "mark": "Counsels on blood-borne virus risk and testing" },
+            { "t": "No risk at all.", "tz": "完全冇風險。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         }
       ]

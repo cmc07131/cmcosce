@@ -57,6 +57,7 @@
     {
       "id": "others",
       "kind": "say",
+      "lang": "en",
       "to": "b",
       "label": "Patients B and C",
       "hint": "B: neuro, keraunoparalysis, spine; C: ECG and monitoring.",

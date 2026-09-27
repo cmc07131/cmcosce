@@ -47,6 +47,7 @@
     {
       "id": "handover",
       "kind": "history",
+      "lang": "en",
       "to": "medic",
       "label": "Handover",
       "hint": "Enclosed space? Time of the burn? Loss of consciousness? What was given?",

@@ -28,6 +28,7 @@
     {
       "id": "cautery",
       "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Cautery",
       "hint": "Silver nitrate to the visible point, one side of the septum, after the bleeding is controlled.",

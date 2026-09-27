@@ -29,14 +29,14 @@
       "label": "Check eligibility",
       "hint": "Exact onset, anticoagulants, bleeding, surgery, previous stroke or bleed, pregnancy.",
       "groups": {
-        "Onset": [{ "t": "When exactly did this start? When were you last normal?", "r": "At 07:40, at breakfast. I was fine a second before.", "mark": "Establishes the exact onset time" }],
+        "Onset": [{ "t": "When exactly did this start? When were you last normal?", "tz": "具體幾時開始？你最後一次正常係幾時？", "rz": "朝早七點四十，食緊早餐。前一秒仲好地地。", "r": "At 07:40, at breakfast. I was fine a second before.", "mark": "Establishes the exact onset time" }],
         "Bleeding risk": [
-          { "t": "Do you take blood thinners?", "r": "No. Just blood pressure tablets — I sometimes forget them.", "mark": "Asks about anticoagulants" },
-          { "t": "Any recent bleeding, surgery, head injury or stroke?", "r": "No.", "mark": "Asks about recent bleeding, surgery, trauma and stroke" },
-          { "t": "Ever had a brain bleed, aneurysm or brain tumour?", "r": "No.", "mark": "Asks about previous ICH or intracranial lesion" },
-          { "t": "Sudden severe headache before this?", "r": "No headache." }
+          { "t": "Do you take blood thinners?", "tz": "你有冇食薄血藥？", "rz": "冇。淨係食血壓藥——有時會唔記得食。", "r": "No. Just blood pressure tablets — I sometimes forget them.", "mark": "Asks about anticoagulants" },
+          { "t": "Any recent bleeding, surgery, head injury or stroke?", "tz": "最近有冇出血、做過手術、撞傷頭，或者中過風？", "rz": "冇。", "r": "No.", "mark": "Asks about recent bleeding, surgery, trauma and stroke" },
+          { "t": "Ever had a brain bleed, aneurysm or brain tumour?", "tz": "以前有冇試過腦出血、腦血管瘤，或者腦瘤？", "rz": "冇。", "r": "No.", "mark": "Asks about previous ICH or intracranial lesion" },
+          { "t": "Sudden severe headache before this?", "tz": "呢次之前有冇突然好劇烈頭痛？", "rz": "冇頭痛。", "r": "No headache." }
         ],
-        "Other": [{ "t": "Allergies? Function before today?", "r": "No allergies. Fully independent, still working.", "mark": "Allergies and premorbid function" }]
+        "Other": [{ "t": "Allergies? Function before today?", "tz": "有冇藥物敏感？今日之前自理能力點？", "rz": "冇敏感。完全自理，仲返緊工。", "r": "No allergies. Fully independent, still working.", "mark": "Allergies and premorbid function" }]
       }
     },
     {
@@ -61,24 +61,24 @@
       "mood": 6,
       "turns": [
         {
-          "line": "What's happened to me?",
+          "line": "What's happened to me?", "lz": "我發生咩事？",
           "opts": [
-            { "t": "You've had a stroke — a clot blocking blood flow to part of the brain. The scan shows no bleeding.", "r": "Can you fix it?", "mood": -1, "mark": "Explains the diagnosis in plain language" },
-            { "t": "Right MCA infarct.", "r": "What?", "mood": 2 }
+            { "t": "You've had a stroke — a clot blocking blood flow to part of the brain. The scan shows no bleeding.", "tz": "你中咗風——有個血塊塞住咗腦部某部分嘅血流。掃描見唔到出血。", "rz": "醫唔醫得好？", "r": "Can you fix it?", "mood": -1, "mark": "Explains the diagnosis in plain language" },
+            { "t": "Right MCA infarct.", "tz": "Right MCA infarct。", "rz": "乜話？", "r": "What?", "mood": 2 }
           ]
         },
         {
-          "line": "Can you fix it?",
+          "line": "Can you fix it?", "lz": "醫唔醫得好？",
           "opts": [
-            { "t": "There's a clot-dissolving drug. Given within 4½ hours, about 1 extra person in every 10 treated recovers with little or no disability. The main risk is bleeding in the brain — about 6 in 100 — which can be serious or fatal.", "r": "That's a big risk…", "mood": 0, "mark": "Explains benefits and risks with numbers" },
-            { "t": "It's a magic drug with no side effects.", "r": "Really?", "mood": 1 }
+            { "t": "There's a clot-dissolving drug. Given within 4½ hours, about 1 extra person in every 10 treated recovers with little or no disability. The main risk is bleeding in the brain — about 6 in 100 — which can be serious or fatal.", "tz": "有一種溶血栓藥。喺四個半鐘內用，每醫十個人，大概會多一個康復到冇乜或者冇殘障。主要風險係腦出血——大概每一百個有六個——可以好嚴重，甚至致命。", "rz": "個風險好大……", "r": "That's a big risk…", "mood": 0, "mark": "Explains benefits and risks with numbers" },
+            { "t": "It's a magic drug with no side effects.", "tz": "呢隻係神藥，完全冇副作用。", "rz": "真係？", "r": "Really?", "mood": 1 }
           ]
         },
         {
-          "line": "That's a big risk… can I think about it tomorrow?",
+          "line": "That's a big risk… can I think about it tomorrow?", "lz": "個風險好大……我可唔可以聽日先諗？",
           "opts": [
-            { "t": "I understand. The benefit falls every minute, and after 4½ hours it isn't given. Overall, many more people are helped than harmed. What would you like to do?", "r": "OK. Let's do it.", "mood": -2, "mark": "Explains time dependence and supports her decision" },
-            { "t": "Sure, tomorrow is fine.", "r": "OK.", "mood": 0 }
+            { "t": "I understand. The benefit falls every minute, and after 4½ hours it isn't given. Overall, many more people are helped than harmed. What would you like to do?", "tz": "我明白。好處每一分鐘都喺度減少，過咗四個半鐘就唔會再用。整體嚟講，得益嘅人遠多過受害嘅人。你想點做？", "rz": "好。做啦。", "r": "OK. Let's do it.", "mood": -2, "mark": "Explains time dependence and supports her decision" },
+            { "t": "Sure, tomorrow is fine.", "tz": "冇問題，聽日都得。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         }
       ]

@@ -16,15 +16,15 @@
       "hint": "Nature and date of the exposure, immunity, symptoms, pregnancy details.",
       "groups": {
         "Exposure": [
-          { "t": "When did you see your nephew, and for how long?", "r": "Saturday, 4 days ago, the whole afternoon playing indoors. His spots came out the next morning.", "mark": "Establishes significant exposure and its date" },
-          { "t": "Has he got chickenpox or shingles?", "r": "Chickenpox — spots everywhere." }
+          { "t": "When did you see your nephew, and for how long?", "tz": "你幾時見過你外甥？見咗幾耐？", "rz": "禮拜六，四日前，成個下晝喺屋企入面玩。第二朝佢就出疹。", "r": "Saturday, 4 days ago, the whole afternoon playing indoors. His spots came out the next morning.", "mark": "Establishes significant exposure and its date" },
+          { "t": "Has he got chickenpox or shingles?", "tz": "佢係出水痘定生蛇？", "rz": "水痘——成身都係。", "r": "Chickenpox — spots everywhere." }
         ],
         "Immunity": [
-          { "t": "Have you ever had chickenpox or the vaccine?", "r": "My mother isn't sure. I don't think so.", "mark": "Asks about previous chickenpox or vaccination" }
+          { "t": "Have you ever had chickenpox or the vaccine?", "tz": "你以前有冇出過水痘，或者打過水痘針？", "rz": "阿媽都唔肯定。我諗冇。", "r": "My mother isn't sure. I don't think so.", "mark": "Asks about previous chickenpox or vaccination" }
         ],
         "Now": [
-          { "t": "Any rash, fever, cough or breathlessness?", "r": "No, I feel fine.", "mark": "Asks about symptoms of infection" },
-          { "t": "How is the pregnancy going? Any other health problems, smoking?", "r": "All normal so far. I don't smoke.", "mark": "Pregnancy details and risk factors (smoking raises pneumonia risk)" }
+          { "t": "Any rash, fever, cough or breathlessness?", "tz": "你有冇出疹、發燒、咳，或者氣促？", "rz": "冇，我好好。", "r": "No, I feel fine.", "mark": "Asks about symptoms of infection" },
+          { "t": "How is the pregnancy going? Any other health problems, smoking?", "tz": "懷孕進展點？有冇其他健康問題？有冇食煙？", "rz": "到目前為止都正常。我唔食煙。", "r": "All normal so far. I don't smoke.", "mark": "Pregnancy details and risk factors (smoking raises pneumonia risk)" }
         ]
       }
     },
@@ -45,24 +45,24 @@
       "mood": 7,
       "turns": [
         {
-          "line": "Will my baby be damaged?",
+          "line": "Will my baby be damaged?", "lz": "我個BB會唔會受影響？",
           "opts": [
-            { "t": "Most babies are fine. If you did catch chickenpox before 20 weeks, the chance of the baby being affected is about 1 to 2 in 100. We can reduce your chance of catching it.", "r": "How?", "mood": -3, "mark": "Explains fetal risk honestly with numbers" },
-            { "t": "Yes, probably.", "r": "[Cries]", "mood": 3 }
+            { "t": "Most babies are fine. If you did catch chickenpox before 20 weeks, the chance of the baby being affected is about 1 to 2 in 100. We can reduce your chance of catching it.", "tz": "大部分BB都冇事。就算你喺二十週之前真係出咗水痘，BB受影響嘅機會大概係每一百個有一至兩個。我哋可以減低你感染嘅機會。", "rz": "點減？", "r": "How?", "mood": -3, "mark": "Explains fetal risk honestly with numbers" },
+            { "t": "Yes, probably.", "tz": "會，好大機會。", "rz": "（喊）", "r": "[Cries]", "mood": 3 }
           ]
         },
         {
-          "line": "How?",
+          "line": "How?", "lz": "點減？",
           "opts": [
-            { "t": "Antiviral tablets (aciclovir) from day 7 to day 14 after the contact, which lower the chance of chickenpox. Some hospitals use an antibody injection instead; we'll follow the obstetric team's advice.", "r": "OK.", "mood": -2, "mark": "Offers post-exposure prophylaxis per current guidance" },
-            { "t": "There's nothing we can do.", "r": "Nothing at all?", "mood": 2 }
+            { "t": "Antiviral tablets (aciclovir) from day 7 to day 14 after the contact, which lower the chance of chickenpox. Some hospitals use an antibody injection instead; we'll follow the obstetric team's advice.", "tz": "喺接觸後第七至第十四日食抗病毒藥（aciclovir），可以減低出水痘嘅機會。有啲醫院會改打抗體針；我哋會跟產科團隊嘅建議。", "rz": "好。", "r": "OK.", "mood": -2, "mark": "Offers post-exposure prophylaxis per current guidance" },
+            { "t": "There's nothing we can do.", "tz": "我哋乜都做唔到。", "rz": "真係乜都冇？", "r": "Nothing at all?", "mood": 2 }
           ]
         },
         {
-          "line": "Should I stay away from anyone?",
+          "line": "Should I stay away from anyone?", "lz": "我使唔使避開啲人？",
           "opts": [
-            { "t": "You could be infectious from 8 to 28 days after the contact, so avoid other pregnant women and newborn babies then. If you get a rash, call us at once — not the waiting room — so we can start treatment within 24 hours. Come immediately with any cough, breathlessness or headache.", "r": "Thank you, that's clear.", "mood": -2, "mark": "Advises on infectious period and safety-nets" },
-            { "t": "No need.", "r": "OK.", "mood": 0 }
+            { "t": "You could be infectious from 8 to 28 days after the contact, so avoid other pregnant women and newborn babies then. If you get a rash, call us at once — not the waiting room — so we can start treatment within 24 hours. Come immediately with any cough, breathlessness or headache.", "tz": "接觸後第八至第二十八日你都可能有傳染性，嗰段時間要避開其他孕婦同初生BB。如果出疹，即刻打電話俾我哋——唔好直接嚟坐喺候診室——等我哋可以喺二十四個鐘內開始治療。如果有咳、氣促或者頭痛，要即刻嚟。", "rz": "多謝你，好清楚。", "r": "Thank you, that's clear.", "mood": -2, "mark": "Advises on infectious period and safety-nets" },
+            { "t": "No need.", "tz": "唔使。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         }
       ]

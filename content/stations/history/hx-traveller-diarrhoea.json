@@ -15,22 +15,22 @@
       "label": "History",
       "hint": "Stool type and frequency, blood, fever, dehydration, travel details, food and water, others ill, vaccines, PMH, concerns.",
       "groups": {
-        "Comfort": [{ "t": "Are you in pain now? Would you like something for it?", "r": "Cramps come and go. Yes please.", "mark": "Checks comfort and offers analgesia" }],
+        "Comfort": [{ "t": "Are you in pain now? Would you like something for it?", "tz": "你而家有冇痛？要唔要啲藥止痛？", "rz": "一陣陣咁絞痛。好呀，唔該。", "r": "Cramps come and go. Yes please.", "mark": "Checks comfort and offers analgesia" }],
         "Diarrhoea": [
-          { "t": "What are the stools like, and how often?", "r": "Watery, about 8 times a day.", "mark": "Asks stool type and frequency" },
-          { "t": "Any blood or mucus?", "r": "No blood. Some mucus.", "mark": "Asks about blood and mucus (dysentery)" },
-          { "t": "Fever, vomiting, dizziness on standing, passing urine?", "r": "Felt hot. Vomited twice yesterday. Slightly dizzy. Passing a little dark urine.", "mark": "Assesses systemic symptoms and dehydration" }
+          { "t": "What are the stools like, and how often?", "tz": "大便係點樣？幾多次？", "rz": "好似水咁，一日大概八次。", "r": "Watery, about 8 times a day.", "mark": "Asks stool type and frequency" },
+          { "t": "Any blood or mucus?", "tz": "有冇血或者潺？", "rz": "冇血。有啲潺。", "r": "No blood. Some mucus.", "mark": "Asks about blood and mucus (dysentery)" },
+          { "t": "Fever, vomiting, dizziness on standing, passing urine?", "tz": "有冇發燒、嘔、企起身頭暈？小便點？", "rz": "覺得熱熱哋。琴日嘔咗兩次。有少少頭暈。小便少，深色。", "r": "Felt hot. Vomited twice yesterday. Slightly dizzy. Passing a little dark urine.", "mark": "Assesses systemic symptoms and dehydration" }
         ],
         "Travel": [
-          { "t": "Where did you go and for how long? What kind of accommodation?", "r": "Two weeks, Bangkok and the islands. Hostels.", "mark": "Asks places, duration and accommodation" },
-          { "t": "Street food, ice, salads, tap water?", "r": "Lots of street food, ice in drinks.", "mark": "Asks about food and water" },
-          { "t": "Anyone else unwell?", "r": "My friend had a bad stomach too.", "mark": "Asks whether others are affected" },
-          { "t": "Any mosquito bites or malaria tablets? Other risks — swimming, sex, drugs?", "r": "Some bites, no tablets. Beach swimming. No other risks.", "mark": "Asks other exposures including malaria risk" },
-          { "t": "Vaccines before travel?", "r": "Hepatitis A and typhoid." }
+          { "t": "Where did you go and for how long? What kind of accommodation?", "tz": "你去咗邊？去咗幾耐？住咩地方？", "rz": "兩個禮拜，曼谷同離島。住背包旅舍。", "r": "Two weeks, Bangkok and the islands. Hostels.", "mark": "Asks places, duration and accommodation" },
+          { "t": "Street food, ice, salads, tap water?", "tz": "有冇食街邊嘢、飲落冰嘅嘢、食沙律、飲水喉水？", "rz": "食咗好多街邊嘢，啲飲品有落冰。", "r": "Lots of street food, ice in drinks.", "mark": "Asks about food and water" },
+          { "t": "Anyone else unwell?", "tz": "仲有冇其他人唔舒服？", "rz": "我朋友都肚痛得好犀利。", "r": "My friend had a bad stomach too.", "mark": "Asks whether others are affected" },
+          { "t": "Any mosquito bites or malaria tablets? Other risks — swimming, sex, drugs?", "tz": "有冇俾蚊咬？有冇食預防瘧疾藥？有冇其他風險——游水、性行為、藥物？", "rz": "俾蚊咬過幾啖，冇食藥。喺海灘游過水。冇其他風險。", "r": "Some bites, no tablets. Beach swimming. No other risks.", "mark": "Asks other exposures including malaria risk" },
+          { "t": "Vaccines before travel?", "tz": "去之前打過咩針？", "rz": "甲型肝炎同傷寒。", "r": "Hepatitis A and typhoid." }
         ],
         "Background": [
-          { "t": "Past medical history, medicines, allergies", "r": "Healthy, no medicines, no allergies.", "mark": "Past history, drugs, allergies" },
-          { "t": "What are you most worried about?", "r": "I've got an important meeting on Friday.", "mark": "Elicits his concerns" }
+          { "t": "Past medical history, medicines, allergies", "tz": "以前有咩病？食緊咩藥？有冇敏感？", "rz": "好健康，冇食藥，冇敏感。", "r": "Healthy, no medicines, no allergies.", "mark": "Past history, drugs, allergies" },
+          { "t": "What are you most worried about?", "tz": "你最擔心啲咩？", "rz": "我禮拜五有個好重要嘅會議。", "r": "I've got an important meeting on Friday.", "mark": "Elicits his concerns" }
         ]
       }
     },
@@ -43,24 +43,24 @@
       "mood": 5,
       "turns": [
         {
-          "line": "So what have I got?",
+          "line": "So what have I got?", "lz": "咁我係咩病？",
           "opts": [
-            { "t": "Most likely traveller's diarrhoea — a gut infection from food or water, usually E. coli or Campylobacter. It usually settles in 3 to 5 days.", "r": "Do I need antibiotics?", "mood": -1, "mark": "Explains the likely diagnosis simply" },
-            { "t": "Gastro. Go home.", "r": "That's it?", "mood": 2 }
+            { "t": "Most likely traveller's diarrhoea — a gut infection from food or water, usually E. coli or Campylobacter. It usually settles in 3 to 5 days.", "tz": "最大可能係旅遊者腹瀉——食物或者食水引起嘅腸胃感染，通常係大腸桿菌或者彎曲桿菌。一般三至五日就會好。", "rz": "使唔使食抗生素？", "r": "Do I need antibiotics?", "mood": -1, "mark": "Explains the likely diagnosis simply" },
+            { "t": "Gastro. Go home.", "tz": "腸胃炎。返屋企啦。", "rz": "就咁？", "r": "That's it?", "mood": 2 }
           ]
         },
         {
-          "line": "Do I need antibiotics?",
+          "line": "Do I need antibiotics?", "lz": "使唔使食抗生素？",
           "opts": [
-            { "t": "You've had fever and it's affecting your day, so a single dose of azithromycin is reasonable — it works better than ciprofloxacin for infections from Thailand. Plenty of oral rehydration fluid, and we'll send a stool sample.", "r": "And the meeting?", "mood": -2, "mark": "Rehydration, stool sample, azithromycin for moderate–severe illness" },
-            { "t": "Ciprofloxacin for a week.", "r": "OK.", "mood": 0 }
+            { "t": "You've had fever and it's affecting your day, so a single dose of azithromycin is reasonable — it works better than ciprofloxacin for infections from Thailand. Plenty of oral rehydration fluid, and we'll send a stool sample.", "tz": "你有發燒，又影響到日常生活，所以食一劑 azithromycin 係合理嘅——對泰國傳染返嚟嘅感染，佢比 ciprofloxacin 有效。飲多啲口服補液，我哋會送大便樣本去化驗。", "rz": "咁個會議呢？", "r": "And the meeting?", "mood": -2, "mark": "Rehydration, stool sample, azithromycin for moderate–severe illness" },
+            { "t": "Ciprofloxacin for a week.", "tz": "食一個禮拜 ciprofloxacin。", "rz": "好。", "r": "OK.", "mood": 0 }
           ]
         },
         {
-          "line": "And the meeting?",
+          "line": "And the meeting?", "lz": "咁個會議呢？",
           "opts": [
-            { "t": "You'll probably be much better by Friday. Wash your hands well and don't prepare food for others. Come back if you see blood, get a high fever, can't keep fluids down, or feel faint.", "r": "Thanks, that's clear.", "mood": -2, "mark": "Hygiene and safety-netting advice; checks understanding" },
-            { "t": "Cancel it.", "r": "Hmm.", "mood": 1 }
+            { "t": "You'll probably be much better by Friday. Wash your hands well and don't prepare food for others. Come back if you see blood, get a high fever, can't keep fluids down, or feel faint.", "tz": "你禮拜五應該會好好多。要勤洗手，唔好幫其他人整嘢食。如果見到血、發高燒、飲嘢都嘔返出嚟，或者覺得就嚟暈，就要返嚟。", "rz": "唔該，好清楚。", "r": "Thanks, that's clear.", "mood": -2, "mark": "Hygiene and safety-netting advice; checks understanding" },
+            { "t": "Cancel it.", "tz": "取消佢啦。", "rz": "嗯……", "r": "Hmm.", "mood": 1 }
           ]
         }
       ]

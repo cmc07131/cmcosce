@@ -84,6 +84,7 @@
     {
       "id": "arm",
       "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Right arm",
       "hint": "Mid-medial and mid-lateral lines along the whole burn, protect the ulnar nerve.",
