@@ -56,7 +56,7 @@ function GymPage() {
                   {done ? '✓ ' : ''}
                   {pack.title}
                   <span className="nav-need">
-                    {type.label} · {Math.round(pack.timeLimitSec / 60)} MIN{pack.placeholder ? ' · PLACEHOLDER' : ''}
+                    {type.label} · {Math.round(pack.timeLimitSec / 60)} MIN
                   </span>
                 </NavItem>
               )

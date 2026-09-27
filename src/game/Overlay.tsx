@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { itemLabel, menuIsMulti, missingItems } from '~/engine/judge'
 import type { Action, Pack } from '~/engine/schema'
-import type { Overlay as OverlayState } from './store'
+import { usePlay, type Overlay as OverlayState } from './store'
 import { Film, FilmButton } from './imaging/Film'
-import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel } from './panels'
+import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel, seededShuffle } from './panels'
 import { NavItem, Win, useCursor } from './ui'
 
 export function targetName(pack: Pack, id: string) {
@@ -186,15 +186,19 @@ function Body({
     return <SelectList action={action} title={title} spent={spent[action.id] ?? []} onClose={onClose} onConfirm={(ids) => onConfirm(action.id, ids)} />
   }
 
-  const options = (action.options ?? []).filter((option) => !used.has(option.id))
-  return <TalkList action={action} title={title} options={options} used={used} inventory={inventory} pack={pack} onClose={onClose} onOption={onOption} />
+  return <TalkList action={action} title={title} used={used} inventory={inventory} pack={pack} onClose={onClose} onOption={onOption} />
+}
+
+/** Choices in a per-run order: the script's order (right answers first, the trap last) must not show. */
+function useShuffled(action: Action) {
+  const seed = usePlay((s) => s.seed)
+  return useMemo(() => seededShuffle(action.options ?? [], seed, action.id), [action, seed])
 }
 
 function TalkList({
   pack,
   action,
   title,
-  options,
   used,
   inventory,
   onClose,
@@ -203,13 +207,13 @@ function TalkList({
   pack: Pack
   action: Action
   title: string
-  options: NonNullable<Action['options']>
   used: Set<string>
   inventory: string[]
   onClose?: () => void
   onOption: (actionId: string, optionId: string) => void
 }) {
   const [film, setFilm] = useState<string | null>(null)
+  const options = useShuffled(action).filter((option) => !used.has(option.id))
   const results = (action.options ?? []).filter((option) => used.has(option.id) && option.img)
   return (
     <Win title={title} onClose={onClose} className="sheet">
@@ -256,11 +260,12 @@ function SelectList({
 }) {
   const [picked, setPicked] = useState<string[]>([])
   const used = new Set(spent)
+  const options = useShuffled(action)
   return (
     <Win title={title} onClose={onClose} className="sheet">
       <div className="sheet-scroll">
         {action.prompt && <p className="sheet-prompt">{action.prompt}</p>}
-        {(action.options ?? []).map((option) => {
+        {options.map((option) => {
           const taken = used.has(option.id)
           const on = picked.includes(option.id)
           return (

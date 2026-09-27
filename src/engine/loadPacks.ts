@@ -24,7 +24,6 @@ export type PackInfo = {
   stationType: Pack['meta']['stationType']
   timeLimitSec: number
   gym?: string
-  placeholder?: boolean
 }
 
 function stationIdOf(path: string) {
