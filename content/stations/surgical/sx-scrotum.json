@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 32. Chris, 15, woke 3 hours ago with severe right scrotal pain and has vomited twice. Take a brief history, examine (with a chaperone and consent), and decide what to do.",
+  "review": [],
   "notes": "Checked against EAU paediatric urology guidance, BAUS guidance on testicular torsion, and NICE CKS (Scrotal pain and swelling).\n\nTesticular torsion is the diagnosis until excluded in any boy or young man with sudden severe testicular pain: salvage falls sharply after 6 hours. Features: sudden onset (often waking from sleep), nausea/vomiting, high-riding testis with a horizontal lie, absent cremasteric reflex, pain not relieved by elevation (negative Prehn's sign is unreliable). Do not delay for ultrasound when clinical suspicion is high — urgent urology referral for scrotal exploration (and bilateral fixation). Manual detorsion ('open the book', rotating medially to laterally) may be tried by trained clinicians if theatre is delayed. Differentials: torsion of a testicular appendage (blue dot sign, pain at the upper pole), epididymo-orchitis (gradual onset, urinary symptoms, sexually active — test for chlamydia/gonorrhoea; in older men, enteric organisms), incarcerated hernia, trauma, tumour, Henoch–Schönlein purpura.\n\nYour notes list epididymo-orchitis as a topic; the key exam point is not to label torsion as epididymo-orchitis.",
   "cast": [{ "id": "patient", "name": "Chris", "role": "man", "inBed": true }, { "id": "nurse", "name": "Nurse Chaperone", "role": "nurse" }],
   "steps": [

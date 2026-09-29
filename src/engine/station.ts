@@ -90,9 +90,9 @@ export const stationSchema = z.object({
   notes: z.string(),
   /**
    * What the author should re-check against their own notes: only what differs, is outdated, is rarely used
-   * now, or is missing. Anything the notes already get right is left out. An empty list: nothing to review.
+   * now, is missing, or could not be verified. Anything the notes already get right is left out. An empty list: nothing to review.
    */
-  review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing']), text: z.string() })).optional(),
+  review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing', 'unverified']), text: z.string() })).optional(),
   cast: z
     .array(
       z.object({

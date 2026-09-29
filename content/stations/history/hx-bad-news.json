@@ -5,6 +5,7 @@
   "type": "comms",
   "time": 420,
   "stem": "Relatives' room. Mr Wong, 58, came in with weight loss and jaundice. His CT shows a mass in the head of the pancreas with liver metastases; the surgeons say it is not operable. He has asked to know his results. His wife is with him. Break the news.",
+  "review": [],
   "notes": "Checked against the SPIKES protocol (Baile et al., The Oncologist 2000), GMC guidance on decision making and consent (2020), and the Hong Kong Medical Council Code of Professional Conduct.\n\nSPIKES: Setting (private room, sit down, no interruptions, the patient's chosen companion, tissues), Perception (what do you understand so far?), Invitation (how much detail would you like?), Knowledge (a warning shot, then plain words, small chunks, no jargon, check understanding), Emotions (acknowledge, allow silence, empathic statements), Strategy and Summary (next steps, oncology and palliative care referral, symptom control, who to contact, a follow-up plan). Honesty without destroying hope; do not give precise survival figures unless asked, and then give ranges.\n\nIn Hong Kong families sometimes ask doctors to withhold a diagnosis; the competent patient has the right to know, and here he has asked. Your notes list 'Break bad news – CA' without a script; nothing conflicts.",
   "cast": [
     { "id": "patient", "name": "Mr Wong", "role": "man", "inBed": false },

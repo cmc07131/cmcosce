@@ -5,6 +5,9 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 12. Mr Jackson, 58, was brought in by a friend who could not reach him for days and found him at home, unwashed, not eating. Take a brief history, perform a mental state examination, and present your findings and plan.",
+  "review": [
+    {"tag": "outdated", "text": "Suicide risk scales. Your notes assess risk with the SAD PERSONS score. NICE NG225 advises against using risk scales to predict suicide or to decide treatment; do a psychosocial assessment instead. The items are still useful prompts."}
+  ],
   "notes": "Checked against the Royal College of Psychiatrists' MSE structure, NICE NG222 (Depression in adults, 2022) and NICE NG225 (Self-harm, 2022).\n\nMSE (your ASEPTIC mnemonic): Appearance and behaviour, Speech, Emotion (mood subjective, affect objective), Perception, Thought (form and content, including suicidal and homicidal thoughts), Insight and judgement, Cognition. Present it structured, then a formulation: likely diagnosis, risk (to self, others, from others, self-neglect), and a plan.\n\nSevere depression with psychotic features (nihilistic or guilty delusions, mood-congruent hallucinations) and self-neglect needs urgent psychiatric assessment; physical causes (hypothyroidism, B12, alcohol, medication, dementia) and physical consequences (dehydration, AKI) must be checked.\n\nYour MSE notes and marking scheme match this. The SAD PERSONS score in your notes appears under 'how to assess risk'; NICE NG225 advises against using risk scales to predict suicide or decide treatment — use a psychosocial assessment instead (see the self-harm station).",
   "cast": [
     { "id": "patient", "name": "Mr Jackson", "role": "elderly" },

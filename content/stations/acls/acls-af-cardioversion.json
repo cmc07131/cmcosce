@@ -5,6 +5,9 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 2. A 65-year-old woman has had palpitations, chest tightness and breathlessness for 2 hours. HR 160 irregular, BP 80/50, RR 26, SpO2 93%, GCS 15 but sweaty and frightened. An IV cannula is in. Manage her tachyarrhythmia.",
+  "review": [
+    {"tag": "differs", "text": "Energies. Your notes follow AHA 2025 (200 J for AF and flutter, 100 J for narrow regular tachycardia and monomorphic VT). RCUK/ERC use a high first shock for AF (at or near maximum, commonly 150–200 J) but a lower 70–120 J for flutter and regular narrow complex tachycardia. Either is accepted for AF here."}
+  ],
   "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.",
   "cast": [
     { "id": "patient", "name": "Mrs Kwan", "role": "patient" },

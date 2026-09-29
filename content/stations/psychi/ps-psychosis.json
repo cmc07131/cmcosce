@@ -5,6 +5,7 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 12. Kelvin, 20, a university student, was brought by his sister. For two months he has stopped attending classes, stays in his room, and says his neighbours are spying on him through the walls. Take a history to assess for psychosis and risk.",
+  "review": [],
   "notes": "Checked against NICE CG178 (Psychosis and schizophrenia in adults, 2014) and CG155 (children and young people), and the Hong Kong EASY (Early Assessment Service for Young people with early psychosis) programme.\n\nHistory: positive symptoms (delusions, hallucinations, thought interference — insertion, withdrawal, broadcasting — passivity), negative symptoms (withdrawal, apathy, poverty of speech, blunting), disorganisation, duration, triggers, substance use (cannabis, stimulants), mood symptoms (to separate schizoaffective and psychotic mood disorders), medical causes, family history, risk (to self, others, self-neglect, vulnerability), insight. Investigations exclude organic causes (drugs, thyroid, glucose, infection; neuroimaging if atypical). Refer urgently to early intervention in psychosis (EASY in HK) — shorter duration of untreated psychosis improves outcome.\n\nYour notes list psychosis history as a topic and have MSE descriptions (auditory hallucinations → schizophrenia; tangential, blocking); nothing conflicts.",
   "cast": [
     { "id": "patient", "name": "Kelvin", "role": "man" },

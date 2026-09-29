@@ -5,6 +5,9 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 3. Mr Sutton, 39, flew back from Thailand this morning. He has had diarrhoea for 2 days and now crampy abdominal pain. HR 96, BP 124/78, temperature 37.6 °C. Take a history, explain the likely diagnosis and plan, and answer his questions.",
+  "review": [
+    {"tag": "differs", "text": "When to give antibiotics. Your notes avoid them unless the patient is high risk. ISTM decides by severity: loperamide for mild to moderate illness; azithromycin for severe illness or dysentery (preferred after South-East Asia because of quinolone resistance)."}
+  ],
   "notes": "Checked against the International Society of Travel Medicine (ISTM) 2017 guideline on travellers' diarrhoea, NICE CKS (gastroenteritis), and UKHSA.\n\nDefinition: three or more unformed stools in 24 hours with at least one of abdominal cramps, nausea, vomiting, fever, tenesmus or blood. Commonest cause: enterotoxigenic E. coli; in South-East Asia Campylobacter is common and often fluoroquinolone-resistant. Dysentery (blood, fever) suggests Shigella, Campylobacter, Salmonella or amoebiasis.\n\nManagement: oral rehydration for all; loperamide for mild–moderate diarrhoea without fever or blood; antibiotics for severe or dysenteric illness — azithromycin (single 1 g dose or 500 mg daily for 3 days) is preferred for travel to South-East Asia because of quinolone resistance. Stool culture for fever, blood, severe or prolonged illness. Exclude malaria in fever after a malarial area, and consider typhoid.\n\nYour notes cover the history, pathogens, definition and management; they say to avoid antibiotics unless high risk, while ISTM uses severity (not risk group) to decide. Minor difference.",
   "cast": [{ "id": "patient", "name": "Mr Sutton", "role": "man", "inBed": false }],
   "steps": [

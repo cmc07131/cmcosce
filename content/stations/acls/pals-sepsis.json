@@ -5,6 +5,10 @@
   "type": "resus",
   "time": 480,
   "stem": "Paediatric resus. An 8-month-old boy has had a fever since this morning and is now floppy with a spreading rash. HR 195, BP 62/30, RR 52, SpO2 94% in air, temperature 39.4 °C, capillary refill 5 seconds. His mother is with him. The paediatric team is 10 minutes away.",
+  "review": [
+    {"tag": "outdated", "text": "Fluid bolus size. Your WETFLAGS and sepsis notes use 20 mL/kg. RCUK/ERC (2021 onwards) and NICE use 10 mL/kg, reassessing after each bolus; after 40–60 mL/kg start inotropes and involve PICU."},
+    {"tag": "differs", "text": "Antibiotic. Your notes give cefuroxime 50 mg/kg. For meningococcal sepsis, NICE uses ceftriaxone 80 mg/kg IV within 1 hour (cefotaxime in neonates; add amoxicillin under 3 months)."}
+  ],
   "notes": "Checked against RCUK 2025 paediatric life support, NICE NG51 (Suspected sepsis, updated 2024), NICE CG102 (Bacterial meningitis and meningococcal disease in under 16s), and the Surviving Sepsis Campaign paediatric guidelines (2020).\n\nWeight: APLS (age in months ÷ 2) + 4 = 8 kg.\n\nFluid: 10 mL/kg boluses of balanced crystalloid (or 0.9% saline) over 5–10 minutes, reassessing after each for response and overload (crackles, hepatomegaly, rising work of breathing); after 40–60 mL/kg, start inotropes (adrenaline, which can run peripherally or IO at low concentration) and involve PICU. Your notes' WETFLAGS and sepsis sections use 20 mL/kg boluses; RCUK/ERC 2021 onwards and NICE use 10 mL/kg, so 20 mL/kg is not scored.\n\nAccess: IV, and IO if IV fails in 90 seconds (or immediately in shock).\n\nAntibiotics within 1 hour: ceftriaxone 80 mg/kg IV (NICE; cefotaxime in neonates or with calcium infusions; add amoxicillin under 3 months). Your notes list cefuroxime 50 mg/kg; that is not first-line for meningococcal sepsis.\n\nGlucose: correct hypoglycaemia with 10% glucose 2 mL/kg (as in your notes). Check calcium. Notify public health; prophylaxis for close contacts.",
   "cast": [
     { "id": "patient", "name": "Baby Chun", "role": "child" },

@@ -5,6 +5,7 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 26. Mr Yeung, 56, had 30 minutes of central chest tightness while climbing stairs this morning; it eased with rest. He is pain-free now. BP 148/88, HR 76, SpO2 98%. Take a history, then discuss the ECG, tests and disposition.",
+  "review": [],
   "notes": "Checked against ESC 2023 ACS guidelines (0/1-hour high-sensitivity troponin algorithm), NICE CG95 (Recent-onset chest pain, updated 2016) and the HEART score (Six 2008; Backus 2013).\n\nHistory: character, site, radiation, onset and trigger, duration, relief, associated symptoms (sweating, breathlessness, syncope), risk factors, and red flags for other lethal causes — aortic dissection (tearing, back, pulse deficit), PE (pleuritic, haemoptysis, DVT risk), pneumothorax, oesophageal rupture (after vomiting), pericarditis, tamponade.\n\nECG within 10 minutes. High-sensitivity troponin at 0 and 1 hour (or 0 and 3 h, depending on assay): rule-out, observe, or rule-in zones. HEART score (History, ECG, Age, Risk factors, Troponin): 0–3 low risk, discharge with outpatient follow-up; 4–6 intermediate; 7–10 high. Stable angina features get outpatient CT coronary angiography (NICE). Aspirin 300 mg if ACS is suspected.\n\nYour notes' chest pain history (site, onset, radiation, exertion, associated symptoms, risk factors, drugs including cocaine/PDE5 inhibitors, differentials by system) matches.",
   "cast": [{ "id": "patient", "name": "Mr Yeung", "role": "man", "inBed": true }],
   "steps": [

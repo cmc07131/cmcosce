@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 16. Ms Leung, 34, went over on her left ankle stepping off a kerb 2 hours ago. She limped in. Examine her ankle and foot, decide whether she needs an X-ray, and explain the management.",
+  "review": [],
   "notes": "Checked against the Ottawa ankle and foot rules (Stiell 1992–1994), BOAST 'Management of ankle fractures' (2016) and NICE CKS (sprains).\n\nOttawa ankle rule: X-ray if pain in the malleolar zone and any of: bone tenderness along the posterior edge or tip of the lateral malleolus (distal 6 cm), or of the medial malleolus, or inability to bear weight (4 steps) immediately and in the ED. Foot rule: pain in the midfoot and tenderness at the base of the 5th metatarsal or the navicular, or inability to bear weight. Sensitivity near 100%; applies to adults (and children over 5 with care).\n\nAlso examine the proximal fibula (Maisonneuve), the Achilles tendon (Simmonds/Thompson test), and neurovascular status. Weber classification by the fibular fracture level relative to the syndesmosis: A below (usually stable), B at the level (stability depends on the medial side — medial tenderness, medial clear space widening), C above (unstable). A stable Weber B can be treated in a boot and weight-bearing as tolerated (BOAST/CROSSBAT), while talar shift needs orthopaedic fixation.\n\nYour notes list 'Ankle and Ottawa rules' without detail.",
   "cast": [{ "id": "patient", "name": "Ms Leung", "role": "woman", "inBed": true }],
   "steps": [

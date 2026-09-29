@@ -5,6 +5,7 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 4. Mr Lui, 17, dislocated his left shoulder falling while skateboarding. The X-ray confirms an anterior dislocation without fracture. Consent has been obtained. Demonstrate how you would reduce it under procedural sedation.",
+  "review": [],
   "notes": "Checked against RCEM/RCoA 'Safe sedation of adults in the ED' (2012, RCEM 2019 update), and evidence on reduction techniques (Cunningham, external rotation, FARES, Spaso, Milch, Kocher).\n\nSafety: resus bay, two clinicians (a sedationist separate from the person reducing), monitoring (SpO2, ECG, NIBP, capnography), oxygen, suction, airway kit, reversal agents. Neurovascular check before (axillary nerve badge sensation and deltoid; radial, median, ulnar motor; radial pulse) and after. Sedation: titrate, e.g. midazolam 0.02–0.1 mg/kg with fentanyl 0.5–1 microgram/kg, or propofol, or ketamine 1–2 mg/kg; aim for deep enough relaxation (your notes use the modified Ramsay score 4–5). Many dislocations reduce without sedation (Cunningham, external rotation), which avoids sedation risk.\n\nKocher's method carries a higher risk of fracture and nerve injury (your notes say so). After reduction: X-ray, sling, recovery observation until the discharge criteria are met, written advice. Your notes on doses, techniques and signs of reduction match this.",
   "cast": [
     { "id": "patient", "name": "Mr Lui", "role": "patient" },

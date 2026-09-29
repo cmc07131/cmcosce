@@ -5,6 +5,9 @@
   "type": "comms",
   "time": 420,
   "stem": "Relatives' room. Ms Wong, 23, was found in a sealed room with a burnt charcoal burner. Her GCS was 7 and she has been intubated. COHb was 35%. Her mother has just arrived. Explain her condition and the plan, including hyperbaric oxygen.",
+  "review": [
+    {"tag": "missing", "text": "Contraindication to hyperbaric oxygen. Your notes leave out untreated pneumothorax, the main absolute contraindication. Drug cautions: bleomycin, doxorubicin, cisplatin, disulfiram."}
+  ],
   "notes": "Checked against TOXBASE, the Undersea and Hyperbaric Medical Society indications, the Cochrane review of hyperbaric oxygen for CO poisoning (2011) and Weaver et al. (NEJM 2002).\n\nCO binds haemoglobin (~240 times more than oxygen), shifts the dissociation curve left, and poisons cytochrome oxidase. Treatment: 100% oxygen (half-life of COHb about 5 hours in air, 60–90 minutes on 100%, about 20–30 minutes at 2.5–3 ATA). Hyperbaric oxygen is considered for loss of consciousness, neurological signs, COHb over 25% (over 15–20% in pregnancy), cardiac ischaemia or severe acidosis, aiming to reduce delayed neurological sequelae; evidence is mixed (Weaver 2002 positive; Cochrane 2011 inconclusive). Risks: ear and sinus barotrauma (myringotomy in intubated patients), pulmonary barotrauma, oxygen toxicity seizures, claustrophobia, transfer risks. Absolute contraindication: untreated pneumothorax. Relative/drug contraindications: bleomycin exposure, doxorubicin, cisplatin, disulfiram.\n\nDeliberate self-poisoning: psychiatric assessment once recovered; screen for co-ingestion (paracetamol, alcohol); check others at the scene.\n\nYour notes match on indications, complications, preparation and procedure; they omit untreated pneumothorax, the main absolute contraindication.",
   "cast": [{ "id": "mother", "name": "Mrs Wong", "role": "woman" }],
   "steps": [

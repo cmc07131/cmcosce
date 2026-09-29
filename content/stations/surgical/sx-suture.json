@@ -5,6 +5,10 @@
   "type": "skills",
   "time": 480,
   "stem": "Procedure room. Mr Chan, 58, a construction worker, has a V-shaped flap laceration on his left shin from a metal edge 3 hours ago. Consent has been obtained. Repair it on the skin model.",
+  "review": [
+    {"tag": "differs", "text": "Lidocaine maximum. Your notes use 4 mg/kg, the US figure. UK practice: 3 mg/kg plain, 7 mg/kg with adrenaline."},
+    {"tag": "differs", "text": "Tetanus. A booster is not decided only by '>10 years since the last dose'. UKHSA: a tetanus-prone wound (soil, manure, over 6 hours, devitalised tissue) needs a booster if the patient is not fully immunised, and immunoglobulin too if the wound is high-risk."}
+  ],
   "notes": "Checked against RCEM/BSSH wound care principles, the UKHSA Green Book tetanus chapter (2023 update), and standard suturing technique.\n\nAssess: mechanism, time, contamination, foreign body, tendon/nerve/vessel injury, tetanus status, diabetes/peripheral vascular disease (pretibial wounds in older patients heal poorly — consider steri-strips for thin skin). Prepare: aseptic field, irrigation with saline, local anaesthetic (1% lidocaine, max 3 mg/kg plain or 7 mg/kg with adrenaline; your notes use 4 mg/kg, the US figure), explore, debride non-viable tissue. Flap: the half-buried horizontal mattress (corner) stitch at the tip preserves blood supply; simple interrupted sutures elsewhere (vertical mattress where eversion is needed). 4-0 non-absorbable monofilament on the leg; removal at 10–14 days for the lower leg (7–10 days for other limb sites). Non-adherent dressing. Tetanus: a tetanus-prone wound (soil, manure, delay over 6 hours, devitalised tissue) needs a booster if not fully immunised or last dose over 10 years ago, and immunoglobulin for high-risk wounds in someone not fully immunised (UKHSA) — not simply '>10 years since last dose'.\n\nYour notes cover the procedure, handling of sharps and instruments, and complications, matching this.",
   "cast": [{ "id": "patient", "name": "Mr Chan", "role": "man", "inBed": true }],
   "steps": [

@@ -297,3 +297,11 @@ test('patient language: every line spoken with a patient or relative has its Can
     }
   }
 })
+
+test('review lists: every station says what, if anything, to re-check against the notes', () => {
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    assert.ok(st.review, `${st.id}: needs a review list (empty if nothing to review)`)
+    for (const r of st.review) assert.ok(r.text.length > 20, `${st.id}: review items say what to check`)
+  }
+})

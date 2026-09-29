@@ -5,6 +5,9 @@
   "type": "resus",
   "time": 420,
   "stem": "Paediatric area. Wing, 2 years (12 kg), has had diarrhoea and vomiting for 3 days. She is lethargic, with sunken eyes and cool hands. HR 160, CRT 4 s, RR 32, temperature 37.9 °C. Glucose 3.4. Assess her hydration and manage her.",
+  "review": [
+    {"tag": "outdated", "text": "Fluid bolus size. Your notes (WETFLAGS) use 20 mL/kg. RCUK and NICE NG29 now use 10 mL/kg boluses, reassessing after each."}
+  ],
   "notes": "Checked against NICE CG84 (Diarrhoea and vomiting caused by gastroenteritis in under 5s, updated 2017/2022), RCUK paediatric life support (fluid boluses) and NICE NG29 (IV fluids in children).\n\nNICE CG84 grades: no clinical dehydration; clinical dehydration (red flags: appears unwell or deteriorating, altered responsiveness, sunken eyes, tachycardia, tachypnoea, reduced skin turgor); clinical shock (decreased consciousness, pale/mottled, cold extremities, tachycardia, tachypnoea, weak pulses, CRT over 3 s, hypotension). Shock: 10 mL/kg 0.9% saline (or balanced crystalloid) bolus over 5–10 minutes (NICE NG29 now 10 mL/kg; CG84 said 20 mL/kg), reassess, repeat; then IV rehydration: deficit (100 mL/kg if shocked at presentation, else 50 mL/kg) plus maintenance (Holliday–Segar: 100 mL/kg/day for the first 10 kg, 50 for the next 10, 20 thereafter), with 0.9% saline plus 5% glucose; check U&E and glucose. Without shock: oral rehydration solution (50 mL/kg over 4 hours plus maintenance), by NG tube if refused. Hypoglycaemia: 2 mL/kg 10% glucose. Red flags for other diagnoses: bilious vomiting, blood in stool, high fever, abdominal distension, meningism.\n\nYour notes (WETFLAGS 20 mL/kg medical fluid) differ: current RCUK/NICE NG29 use 10 mL/kg boluses.",
   "cast": [{ "id": "patient", "name": "Wing", "role": "child", "inBed": true }, { "id": "mother", "name": "Mother", "role": "woman" }, { "id": "nurse", "name": "Nurse Ho", "role": "nurse" }],
   "vitals": {

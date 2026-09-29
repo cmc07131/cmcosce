@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 17. Miss Ali, 28, a netball player, has had right shoulder pain since a match yesterday, worse lifting her arm overhead. Examine her shoulder and explain your findings and management.",
+  "review": [],
   "notes": "Checked against BESS/BOA guidance on subacromial shoulder pain (2021) and standard examination technique.\n\nLook (front, side, back: asymmetry, wasting of supraspinatus/infraspinatus, winging, swelling), feel (SC joint, clavicle, AC joint, coracoid, acromion, greater tuberosity, bicipital groove, spine of scapula), move (active then passive: flexion, extension, abduction with painful arc 60–120° in subacromial pain; external rotation — loss of passive external rotation suggests frozen shoulder or OA; internal rotation), special tests: supraspinatus (empty can/Jobe), infraspinatus/teres minor (resisted external rotation), subscapularis (lift-off, belly press), impingement (Neer, Hawkins–Kennedy), biceps (Speed's), AC joint (scarf test), instability (apprehension/relocation, sulcus). Examine the neck and neurovascular status (axillary nerve).\n\nSubacromial pain is managed with analgesia, activity modification and physiotherapy; injections for persisting symptoms; imaging if trauma, weakness (cuff tear) or no improvement. An acute traumatic cuff tear with weakness needs early (within weeks) orthopaedic referral. Your shoulder notes are thorough and match this.",
   "cast": [{ "id": "patient", "name": "Miss Ali", "role": "woman", "inBed": false }],
   "steps": [

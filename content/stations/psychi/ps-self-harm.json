@@ -5,6 +5,9 @@
   "type": "psych",
   "time": 420,
   "stem": "Observation ward. Miss Peters, 24, was admitted overnight after taking 30 paracetamol and some sleeping tablets. Her 4-hour paracetamol level was below the treatment line and all her bloods are normal. She wants to go home. Assess her before discharge.",
+  "review": [
+    {"tag": "outdated", "text": "SAD PERSONS. Your notes build the assessment around the score. NICE NG225 says not to use risk tools to predict repetition or suicide, or to decide who is treated or discharged. Do a psychosocial assessment: the act, current intent, mental illness, substances, previous self-harm, supports, protective factors, safeguarding, then a safety plan and follow-up."}
+  ],
   "notes": "Checked against NICE NG225 (Self-harm: assessment, management and preventing recurrence, 2022), NICE QS34, and HA guidance on suicide risk.\n\nNICE NG225: do not use risk assessment tools and scales (such as SAD PERSONS) to predict future suicide or repetition, or to decide who is offered treatment or discharged. Do a psychosocial assessment: the act (method, planning, precautions against discovery, final acts, whether she expected to die, how she feels now it failed), current suicidal ideation and plans, mental illness, alcohol and drugs, previous self-harm, social circumstances and supports, protective factors, safeguarding (children at home, domestic abuse), and needs. Agree a safety plan, involve family if she consents, and arrange follow-up (psychiatry/crisis team).\n\nYour notes build the station around the SAD PERSONS score; its items remain useful prompts, but the score itself should not drive the decision. The rest of your marking scheme (history, psychiatric, drug and social history, sensitive questioning, a plan) matches.",
   "cast": [{ "id": "patient", "name": "Miss Peters", "role": "woman", "inBed": true }],
   "steps": [

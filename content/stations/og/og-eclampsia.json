@@ -5,6 +5,7 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 1. A 24-year-old woman, 35 weeks pregnant with her first baby, had a seizure in the waiting room and is now fitting again on the trolley. Her partner says she had a headache and blurred vision today. BP 172/114.",
+  "review": [],
   "notes": "Checked against NICE NG133 (Hypertension in pregnancy, 2019, updated 2023), RCOG and the Magpie/Collaborative Eclampsia trials.\n\nEclampsia: seizures with pre-eclampsia. Call for help (obstetrics, anaesthetics, midwife, neonatology), left lateral position, airway and oxygen. Magnesium sulfate is the anticonvulsant of choice: 4 g IV over 5–15 minutes, then 1 g/h for 24 hours after the last seizure or birth; a recurrent seizure: a further 2–4 g over 5–15 minutes. Benzodiazepines are second-line (only if magnesium is not immediately available or seizures continue).\n\nMonitor for magnesium toxicity: loss of patellar reflexes first, then respiratory depression, then cardiac arrest. Check reflexes, respiratory rate and urine output; antidote calcium gluconate 10% 10 mL IV over 10 minutes.\n\nSevere hypertension (160/110 or more): labetalol (oral or IV), nifedipine, or IV hydralazine. Aim for 135/85 or below. Stabilise the mother before delivering the baby. Fluid restriction (about 80 mL/h) because of the risk of pulmonary oedema.\n\nYour notes link to an external page for eclampsia; nothing to compare.",
   "cast": [
     { "id": "patient", "name": "Mrs Poon", "role": "patient" },

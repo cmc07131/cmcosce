@@ -5,6 +5,7 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 3. A 29-year-old woman has lower abdominal pain and light vaginal bleeding; her last period was 7 weeks ago. She fainted at home. HR 118, BP 86/50, RR 22, SpO2 98%, GCS 15. She says she might be pregnant.",
+  "review": [],
   "notes": "Checked against NICE NG126 (Ectopic pregnancy and miscarriage, 2019, updated 2023), RCOG/AEPU guidance and ATLS principles for haemorrhage.\n\nAny woman of reproductive age with abdominal pain, bleeding or collapse needs a pregnancy test. Shock with a positive test is a ruptured ectopic until proven otherwise: resuscitate (two large-bore cannulae, crossmatch, blood early), call the gynaecology team for theatre (laparoscopy or laparotomy), and do not delay for formal ultrasound. A bedside ultrasound showing an empty uterus and free fluid supports the diagnosis. Anti-D is given to rhesus-negative women having surgery for an ectopic pregnancy (NICE). Shoulder-tip pain suggests haemoperitoneum.\n\nYour notes list the topic 'PVB early pregnancy' without detail; nothing conflicts. Stable women with a suspected ectopic go to the early pregnancy assessment unit for transvaginal ultrasound and serum hCG.",
   "cast": [
     { "id": "patient", "name": "Ms Leung", "role": "patient" },

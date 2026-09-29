@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 27. Mr Kwan, 70, with hypertension and AF, noticed this morning that he keeps bumping into things on his right. Perform an eye examination and explain your management plan. A Snellen chart, pinhole, torch and ophthalmoscope are available.",
+  "review": [],
   "notes": "Checked against RCOphth guidance, NICE NG128 (stroke and TIA), and standard eye examination.\n\nExamination: acuity with a Snellen chart at 6 m (each eye, with glasses; pinhole to correct refractive error), inspection, pupils (direct, consensual, swinging-light for RAPD), eye movements, visual fields by confrontation (each eye, each quadrant; red target for central fields), fundoscopy (red reflex, disc, vessels, macula). A homonymous hemianopia (same side in both eyes) localises behind the chiasm — optic tract, radiation or occipital cortex — usually a stroke in the posterior cerebral artery territory; acuity and fundi are normal. It needs urgent stroke assessment (CT/CTA; thrombolysis if within the window and disabling), and advice not to drive.\n\nOther patterns: monocular sudden painless loss (CRAO — cherry-red spot; CRVO — 'stormy sunset'; retinal detachment; GCA), bitemporal hemianopia (chiasm — pituitary), painful red eye with a mid-dilated pupil (acute angle-closure glaucoma).\n\nYour notes (2021 past paper: right homonymous hemianopia, normal acuity with pinhole, no RAPD, normal fundi) match this.",
   "cast": [{ "id": "patient", "name": "Mr Kwan", "role": "elderly", "inBed": false }],
   "steps": [

@@ -5,6 +5,10 @@
   "type": "resus",
   "time": 420,
   "stem": "Paediatric resus. A 5-year-old boy (about 18 kg) with known asthma has been wheezy for two days and much worse tonight. He is sitting forward, too breathless to talk, and becoming quiet. HR 170, RR 44, SpO2 88% in air. His father is with him.",
+  "review": [
+    {"tag": "differs", "text": "Ipratropium dose. Your notes give 125 microgram under 5 years. BTS gives 250 microgram for children 2–12 years, every 20–30 minutes for the first 2 hours."},
+    {"tag": "outdated", "text": "Subcutaneous adrenaline. Your notes include it. It is not part of BTS acute asthma management; keep adrenaline for anaphylaxis."}
+  ],
   "notes": "Checked against BTS/SIGN British guideline on the management of asthma (2019; acute section retained in the 2024 BTS/NICE/SIGN update), RCUK paediatric life support and APLS.\n\nLife-threatening features (children): SpO2 under 92%, silent chest, poor respiratory effort, altered consciousness, agitation, exhaustion, cyanosis, hypotension; PEF under 33% if measurable.\n\nTreatment: high-flow oxygen to SpO2 94–98%; nebulised salbutamol (2.5 mg under 5 years, 5 mg 5 years and over) driven by oxygen, back-to-back; nebulised ipratropium 250 microgram every 20–30 minutes for the first 2 hours; steroids (oral prednisolone 1–2 mg/kg, max 40 mg, or IV hydrocortisone 4 mg/kg); IV magnesium sulfate 40 mg/kg (max 2 g) over 20 minutes; IV salbutamol 15 microgram/kg over 10 minutes if not responding; then PICU (aminophylline, infusions, ventilation). Your notes' doses match this, except: ipratropium 125 microgram under 5 years (BTS uses 250 microgram for 2–12 years), and subcutaneous adrenaline, which is not part of BTS acute asthma management (keep adrenaline for anaphylaxis).\n\nIntubation is hazardous: experienced operator, ketamine, then low rate, long expiratory time, permissive hypercapnia (your ventilation notes are correct).\n\nNo routine chest X-ray unless pneumothorax, consolidation or life-threatening features not responding; no routine antibiotics.",
   "cast": [
     { "id": "patient", "name": "Hei-hei", "role": "child" },

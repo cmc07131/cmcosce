@@ -5,6 +5,7 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 30. Mr Siu, 58, woke with an extremely painful, red, swollen right big toe. He had a similar episode a year ago in the same toe. Temperature 37.6 °C. Take a history, examine the joint, and explain management.",
+  "review": [],
   "notes": "Checked against EULAR 2016 gout recommendations, the BSR 2017 gout guideline, and NICE NG219 (Gout, 2022).\n\nAcute gout: rapid onset (maximal within 24 hours), first MTP joint (podagra), triggers (alcohol, especially beer and spirits; purine-rich food; dehydration; diuretics; acute illness), recurrent episodes, tophi. Septic arthritis must be excluded when there is fever, systemic illness, or an atypical or prosthetic joint — aspirate. Diagnosis: joint aspiration with negatively birefringent needle-shaped crystals (gold standard); serum urate may be normal during an attack.\n\nTreat the flare: NSAID (with PPI) or colchicine 500 microgram two to four times daily (low-dose regimen) or oral prednisolone 30–35 mg for 3–5 days; ice, rest. Do not stop allopurinol during a flare if already taking it; urate-lowering therapy is offered after the flare (NICE NG219 offers it to people with recurrent flares; treat-to-target urate under 360 µmol/L, or 300 with tophi), with colchicine prophylaxis. Review cardiovascular risk and diuretics.\n\nYour notes list polyarthritis and joint pain topics; nothing conflicts.",
   "cast": [{ "id": "patient", "name": "Mr Siu", "role": "man", "inBed": true }],
   "steps": [

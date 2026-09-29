@@ -5,6 +5,9 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 2. A 25-year-old man was stabbed in the left chest 20 minutes ago. On arrival he is agitated and gasping. HR 140, BP 76/40, RR 36, SpO2 82% on 15 L oxygen. Manage him.",
+  "review": [
+    {"tag": "outdated", "text": "Needle decompression site. Your notes use the 2nd intercostal space, mid-clavicular line, with a 16–18 G cannula. ATLS 10th and 11th use the 4th/5th intercostal space just anterior to the mid-axillary line in adults, with a long cannula (at least 8 cm); the 2nd space mid-clavicular line is kept for children. In a ventilated patient, a finger thoracostomy is quicker and more reliable."}
+  ],
   "notes": "Checked against ATLS 10th/11th edition, BTS pleural guidance and Resuscitation Council UK traumatic cardiac arrest guidance.\n\nTension pneumothorax is a clinical diagnosis. Do not wait for an X-ray. Signs: severe respiratory distress, hypoxia, tachycardia, hypotension, reduced breath sounds and hyper-resonance on the affected side, distended neck veins (absent if hypovolaemic), and tracheal deviation away (a late, unreliable sign).\n\nATLS 10th moved needle decompression in adults from the 2nd intercostal space mid-clavicular line to the 4th/5th intercostal space just anterior to the mid-axillary line, because the chest wall is often thicker than a standard cannula at the old site. The 2nd ICS mid-clavicular line remains the site in children. Use a long (at least 8 cm) large-bore cannula. In a ventilated patient, a finger thoracostomy (open incision and finger sweep, no tube yet) is faster and more reliable. Either way, a chest drain follows.\n\nMany older notes still teach 2nd ICS mid-clavicular line for adults; this station scores the ATLS 10th/11th site.",
   "cast": [
     { "id": "patient", "name": "Mr Fung", "role": "patient" },

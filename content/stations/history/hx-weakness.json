@@ -5,6 +5,10 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 6. Mr Ng, 28, woke this morning unable to stand; both legs are weak. He was well last night after a big dinner and drinks with friends. Take a focused history and discuss your differential and management.",
+  "review": [
+    {"tag": "differs", "text": "Age. Your notes present a 70-year-old with hypokalaemic periodic paralysis. Thyrotoxic periodic paralysis is typically a young East Asian man; in an older patient, look first for diuretics, GI losses or other causes of low potassium."},
+    {"tag": "missing", "text": "Treatment detail for thyrotoxic periodic paralysis: small doses of potassium only (for example 10 mmol/h), because it shifts back out of cells and can cause rebound hyperkalaemia; propranolol treats the cause and the paralysis."}
+  ],
   "notes": "Checked against endocrine and neurology references on thyrotoxic periodic paralysis (TPP; common in young East Asian men) and the ED approach to acute flaccid weakness (cord compression, Guillain–Barré, myasthenia, stroke, electrolyte disorders).\n\nTPP: sudden proximal weakness, often after carbohydrate-rich meals, alcohol or rest after exercise, with hypokalaemia from intracellular shift (not total-body deficit) caused by thyrotoxicosis. Treat carefully: small doses of potassium (e.g. 10 mmol/h IV or oral) because of rebound hyperkalaemia when the shift reverses; non-selective beta-blocker (propranolol) treats the cause and the paralysis; then treat the thyrotoxicosis. Monitor ECG and potassium.\n\nYour notes present a 70-year-old with 'hypokalaemic periodic paralysis (age-related or thyrotoxic triggers)'. Primary periodic paralysis usually starts in youth; in an older patient think more of diuretics, GI losses, or other causes. The rest matches. Red flags for cord compression (back pain, sensory level, sphincter disturbance) must be screened in every case.",
   "cast": [{ "id": "patient", "name": "Mr Ng", "role": "man", "inBed": true }],
   "steps": [

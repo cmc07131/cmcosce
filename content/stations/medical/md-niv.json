@@ -5,6 +5,9 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 4. Mr Tse, 70, with known COPD, has been increasingly breathless for 3 days. On 28% oxygen: HR 110, BP 150/90, RR 30, SpO2 90%. Arterial gas: pH 7.26, PaCO2 9.1 kPa, PaO2 7.9 kPa, HCO3 30. He is alert. Start non-invasive ventilation.",
+  "review": [
+    {"tag": "differs", "text": "High-flow nasal oxygen. Your notes list NIV and HFNO side by side. HFNO is not a substitute for NIV in acute hypercapnic acidosis (pH under 7.35, PaCO2 over 6.5 kPa); start NIV within 60 minutes of the gas that shows the need."}
+  ],
   "notes": "Checked against BTS/ICS guideline on acute hypercapnic respiratory failure (2016), BTS quality standards for NIV (2018) and GOLD 2025.\n\nIndication: acute hypercapnic respiratory failure — pH under 7.35 and PaCO2 over 6.5 kPa — persisting despite optimal medical therapy (controlled oxygen to 88–92%, nebulised salbutamol and ipratropium, steroids, antibiotics if indicated). Start within 60 minutes of the gas that shows the need (BTS). Contraindications: undrained pneumothorax, inability to protect the airway, vomiting, recent upper GI surgery, facial trauma or burns, fixed upper airway obstruction; decide a ceiling of treatment (is he for intubation if NIV fails?).\n\nSettings: full face mask; IPAP start 15 cmH2O, titrate up to 20 (to 25–30 if needed) over 10–30 minutes; EPAP 3–5 cmH2O; backup rate; oxygen entrained to 88–92%. Recheck gas at 1 hour (and 4 hours): worsening pH/CO2 → escalate (intubation if appropriate). Your notes list NIV and HFNO as topics; HFNO is not a substitute for NIV in hypercapnic acidosis.",
   "cast": [{ "id": "patient", "name": "Mr Tse", "role": "elderly" }, { "id": "nurse", "name": "Nurse Choy", "role": "nurse" }],
   "vitals": {

@@ -5,6 +5,10 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 31. Ms Lau, 35, has severe colicky left loin pain radiating to the groin since this afternoon. BP 135/85, HR 90, temperature 36.8 °C. Take a history, then discuss investigations and management.",
+  "review": [
+    {"tag": "outdated", "text": "Imaging. Your notes use a KUB X-ray and bedside ultrasound. NICE recommends low-dose non-contrast CT KUB within 24 hours in adults (a KUB film misses many stones); ultrasound first in pregnancy and children."},
+    {"tag": "outdated", "text": "Medical expulsive therapy. Your notes offer nifedipine or an alpha-blocker. Nifedipine is no longer used; give tamsulosin for distal ureteric stones under 10 mm."}
+  ],
   "notes": "Checked against NICE NG118 (Renal and ureteric stones, 2019), EAU Urolithiasis guideline (2024).\n\nImaging: urgent low-dose non-contrast CT KUB within 24 hours of presentation in adults (ultrasound first in pregnancy and children). Analgesia: NSAIDs (e.g. IM/PR diclofenac or IV/oral) first-line, then IV paracetamol, then opioids; no antispasmodics. Medical expulsive therapy: alpha-blocker (tamsulosin) for distal ureteric stones under 10 mm (EAU: most benefit 5–10 mm). Most stones under 5 mm pass spontaneously. Emergency referral: signs of infection with obstruction (obstructed infected kidney — urgent decompression by nephrostomy or stent; antibiotics), solitary kidney, bilateral obstruction, AKI, uncontrolled pain. Always exclude AAA in older patients with 'renal colic', and ectopic pregnancy in women.\n\nYour notes use a KUB X-ray and bedside ultrasound, and nifedipine or alpha-blockers; NICE recommends non-contrast CT (KUB X-ray alone misses many stones) and alpha-blockers rather than nifedipine. Discharge advice (fluids, strain urine, return if fever) matches.",
   "cast": [{ "id": "patient", "name": "Ms Lau", "role": "woman", "inBed": true }],
   "steps": [

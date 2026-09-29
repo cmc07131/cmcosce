@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 23. Mr Choi, 52, woke this morning with his face drooping on the left and his left eye not closing properly. Examine his cranial nerves and explain your findings.",
+  "review": [],
   "notes": "Checked against NICE CKS (Bell's palsy), the Sullivan et al. NEJM 2007 trial (prednisolone within 72 h), and standard cranial nerve examination.\n\nExamine II–XII systematically: II (acuity, fields, pupils, fundi), III/IV/VI (eye movements, diplopia, nystagmus, ptosis), V (sensation in three divisions, masseter, corneal reflex), VII (raise eyebrows, close eyes tightly, show teeth, puff cheeks), VIII (whisper, Rinne and Weber), IX/X (palate, gag if needed), XI (shrug and head turn), XII (tongue).\n\nLower motor neurone facial palsy involves the forehead (cannot raise the eyebrow); upper motor neurone (stroke) spares the forehead because of bilateral cortical innervation. Bell's palsy is a diagnosis of exclusion: check for vesicles in the ear or palate (Ramsay Hunt), parotid mass, other cranial nerve or limb signs, hearing loss, and trauma. Treatment: prednisolone 50 mg daily for 10 days (or 60 mg 5 days then taper) within 72 hours; antivirals not routinely (consider with severe palsy / Ramsay Hunt); eye protection (lubricants, tape at night) — the key complication is corneal exposure. Refer if no improvement at 3 weeks or atypical features.\n\nYour notes list cranial nerves as a topic without detail.",
   "cast": [{ "id": "patient", "name": "Mr Choi", "role": "man", "inBed": false }],
   "steps": [

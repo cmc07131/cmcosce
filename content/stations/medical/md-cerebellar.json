@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 24. Mr Man, 66, with hypertension and diabetes, developed sudden unsteadiness, vomiting and slurred speech 3 hours ago. Perform a cerebellar examination and explain your findings.",
+  "review": [],
   "notes": "Checked against standard neurological examination and ESO/AHA stroke guidance on posterior circulation stroke.\n\nCerebellar signs (DANISH): Dysdiadochokinesia, Ataxia (gait, truncal), Nystagmus, Intention tremor and past-pointing, Slurred (scanning) speech, Hypotonia (and pendular reflexes). Also heel–shin, tandem gait, Romberg (positive in sensory or vestibular ataxia, not typically in pure cerebellar disease — a cerebellar patient is unsteady with eyes open too). Signs are ipsilateral to a cerebellar hemisphere lesion; midline (vermis) lesions give truncal ataxia.\n\nSudden cerebellar signs with vascular risk factors: cerebellar infarct or haemorrhage — emergency CT and CT angiography (MRI DWI is more sensitive for posterior strokes), stroke team (thrombolysis/thrombectomy for basilar occlusion), and neurosurgery for cerebellar haemorrhage over 3 cm or hydrocephalus — the posterior fossa is small and swelling compresses the brainstem.\n\nYour notes list the full cerebellar examination and causes (unilateral: vascular, tumour, MS; bilateral: alcohol, phenytoin, Wernicke's, MS, Miller Fisher, paraneoplastic) — this matches.",
   "cast": [{ "id": "patient", "name": "Mr Man", "role": "elderly", "inBed": true }],
   "steps": [

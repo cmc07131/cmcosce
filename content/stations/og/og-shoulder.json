@@ -5,6 +5,9 @@
   "type": "skills",
   "time": 420,
   "stem": "Delivery room in the ED. A woman at term is delivering on the trolley before the obstetric team arrives. The head has delivered but it has pulled back tight against the perineum, and the next push does not deliver the shoulders. A midwife and a nurse are with you. Manage the delivery on the manikin.",
+  "review": [
+    {"tag": "differs", "text": "Episiotomy. HELPERR puts it in every sequence. RCOG uses it only to make room for internal manoeuvres, not in every case."}
+  ],
   "notes": "Checked against RCOG Green-top Guideline 42 (Shoulder dystocia, 2012, reviewed) and the ALSO (HELPERR) course.\n\nRecognise: the 'turtle sign' (the head retracts against the perineum) and failure of routine axial traction. State 'shoulder dystocia' aloud, call for help, note the time the head delivered. Avoid excessive or downward traction, fundal pressure and pulling on the neck.\n\nFirst: McRoberts (hyperflex the hips, thighs to the abdomen) with suprapubic pressure over the posterior aspect of the anterior shoulder (continuous, then rocking) — resolves most cases. Then internal manoeuvres or delivery of the posterior arm (RCOG gives no fixed order); rotational manoeuvres: Rubin II (behind the anterior shoulder), Woods' screw (in front of the posterior shoulder), reverse Woods'. All-fours (Gaskin) is an alternative, especially without an epidural. Third-line: deliberate clavicle fracture, Zavanelli (cephalic replacement), symphysiotomy.\n\nYour notes use HELPERR, which matches ALSO. Difference: episiotomy is not needed in every case; RCOG uses it only to make room for internal manoeuvres. Document times and manoeuvres; debrief; paediatric review for brachial plexus injury.",
   "cast": [
     { "id": "patient", "name": "Mrs Chui", "role": "patient" },

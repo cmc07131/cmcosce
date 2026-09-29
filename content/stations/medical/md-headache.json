@@ -5,6 +5,9 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 29. Ms Chan, 41, developed a sudden, severe headache at the gym 3 hours ago — 'like being hit with a bat'. She vomited once. GCS 15, BP 168/94, temperature 37.0 °C. Take a history and plan her investigations.",
+  "review": [
+    {"tag": "differs", "text": "Aspirin in giant cell arteritis. Your notes mark it with '???'. BSR 2020 does not recommend routine aspirin for GCA; give high-dose steroids straight away and arrange a biopsy or ultrasound."}
+  ],
   "notes": "Checked against NICE NG228 (Subarachnoid haemorrhage caused by a ruptured aneurysm, 2022), the Ottawa SAH rule (Perry 2013), and Perry et al. BMJ 2011 (CT within 6 hours).\n\nThunderclap headache (peak within 1 minute) needs exclusion of SAH. Ottawa SAH rule (alert patients over 15 with non-traumatic headache peaking within an hour): investigate if age 40 or over, neck pain or stiffness, witnessed loss of consciousness, onset during exertion, thunderclap onset, or limited neck flexion. NICE NG228: non-contrast CT head within 6 hours of onset, reported by a radiologist, rules out SAH if normal (no LP needed); CT after 6 hours: if normal, lumbar puncture at least 12 hours after onset for xanthochromia. Positive: nimodipine 60 mg 4-hourly, neurosurgery, CTA, BP control, analgesia, antiemetic.\n\nOther causes of thunderclap headache: reversible cerebral vasoconstriction syndrome, cervical artery dissection, cerebral venous sinus thrombosis, pituitary apoplexy, ICH. Headache red flags include new headache over 50 (GCA), fever and neck stiffness (meningitis), papilloedema, focal signs.\n\nYour headache notes cover primary/secondary causes and GCA (steroids, biopsy, halo sign); they mark aspirin with '???' — BSR 2020 does not recommend routine aspirin for GCA.",
   "cast": [{ "id": "patient", "name": "Ms Chan", "role": "woman", "inBed": true }],
   "steps": [

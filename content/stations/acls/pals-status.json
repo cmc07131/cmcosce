@@ -5,6 +5,10 @@
   "type": "resus",
   "time": 420,
   "stem": "Paediatric resus. A 3-year-old girl (about 14 kg) has been fitting for 10 minutes. Her mother says she has had a cold, no previous seizures, and no medicine has been given. She is having generalised tonic–clonic movements now. HR 160, SpO2 90% in air, temperature 38.6 °C.",
+  "review": [
+    {"tag": "differs", "text": "Buccal midazolam dose. Your notes cap it at 5 mg. APLS uses 0.3 mg/kg up to 10 mg."},
+    {"tag": "outdated", "text": "Second-line drug. Your notes give phenytoin only. Since EcLiPSE and ConSEPT, APLS lists levetiracetam 40 mg/kg (max 3 g) over 5 minutes as first choice or equal to phenytoin."}
+  ],
   "notes": "Checked against the APLS algorithm for convulsive status epilepticus (APLS 7th edition, 2023 update following EcLiPSE/ConSEPT: levetiracetam as a second-line option alongside phenytoin), NICE NG217 (Epilepsies, 2022) and RCUK paediatric guidance.\n\nAt 5 minutes: first benzodiazepine — IV/IO lorazepam 0.1 mg/kg (max 4 mg), or buccal midazolam 0.3 mg/kg (max 10 mg) if no access. At 15 minutes (10 minutes later): a second benzodiazepine dose. At 25 minutes: levetiracetam 40 mg/kg (max 3 g) IV over 5 minutes, or phenytoin 20 mg/kg over 20 minutes (or phenobarbital 20 mg/kg if already on phenytoin). At 45 minutes: RSI with a senior anaesthetist. Maximum two benzodiazepine doses including pre-hospital doses.\n\nAlways check glucose early (treat under 3 mmol/L with 2 mL/kg 10% glucose) and look for the cause (fever, meningitis/encephalitis, electrolytes, trauma, toxins).\n\nYour notes: buccal midazolam max 5 mg (APLS uses 0.3 mg/kg up to 10 mg) and phenytoin as the only second-line drug; APLS now lists levetiracetam first or equally. Lorazepam 0.1 mg/kg max 4 mg and PR diazepam 0.5 mg/kg match.",
   "cast": [
     { "id": "patient", "name": "Mei", "role": "child" },

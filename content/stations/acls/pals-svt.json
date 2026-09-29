@@ -5,6 +5,10 @@
   "type": "resus",
   "time": 420,
   "stem": "Paediatric resus. A 3-month-old girl (about 6 kg) has been feeding poorly and sweating since this morning. HR 280, RR 50, SpO2 96%, capillary refill 2 seconds, alert and crying. Her father is holding her.",
+  "review": [
+    {"tag": "differs", "text": "Adenosine first dose. Your notes give 100 then 200 microgram/kg (APLS/AHA). RCUK starts at 150 microgram/kg, then 300 microgram/kg. Either sequence is accepted here."},
+    {"tag": "differs", "text": "Cardioversion escalation. Your notes go 1, then 2, then 5 J/kg with amiodarone. RCUK escalates to 4 J/kg, with amiodarone 5 mg/kg after the third attempt."}
+  ],
   "notes": "Checked against RCUK 2025 paediatric life support (tachyarrhythmia algorithm) and APLS.\n\nIf compensated: vagal manoeuvres first (in infants, a bag of iced water applied to the face for about 15 seconds without covering the airway — the diving reflex; older children: blowing through a syringe or Valsalva). Then adenosine: RCUK 150 microgram/kg rapid IV bolus with flush, then 300 microgram/kg (APLS teaches 100 → 200 → 300 microgram/kg; max single dose 500 microgram/kg or 12 mg). If decompensated (shock, reduced consciousness): synchronised cardioversion 1 J/kg, then 2 J/kg under sedation; adenosine can be tried first only if IV access is already in and it will not delay.\n\nYour notes give adenosine 0.1 then 0.2 mg/kg (100 then 200 microgram/kg, the AHA/APLS start) and cardioversion 1 → 2 J/kg, then 5 J/kg with amiodarone 5 mg/kg; RCUK escalates to 4 J/kg with amiodarone 5 mg/kg after the third attempt. The station accepts either adenosine sequence and scores the RCUK first dose.",
   "cast": [
     { "id": "patient", "name": "Baby Lok", "role": "child" },

@@ -5,6 +5,7 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 14. Madam Ho, 82, was brought in by her daughter: over two days she has become muddled, seeing cats that are not there, awake at night. Assess her cognition and decide what is going on.",
+  "review": [],
   "notes": "Checked against NICE CG103 (Delirium, updated 2023), the 4AT (www.the4AT.com), the MMSE (copyright PAR; use a licensed form) and the Abbreviated Mental Test.\n\nDelirium: acute onset, fluctuating course, inattention, and altered awareness or disorganised thinking (CAM). The 4AT (Alertness, AMT4, Attention — months backwards, Acute change or fluctuating course) is quick and needs no training; 4 or more suggests delirium. Hypoactive delirium is common and missed. Look for causes (PINCHME: Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment; plus retention, hypoxia, electrolytes, alcohol withdrawal, stroke). Treat the cause; reorientation, glasses and hearing aids, family presence, sleep; avoid restraint; antipsychotics (low-dose haloperidol) only for severe distress or danger, and not in Parkinson's or Lewy body dementia.\n\nDementia: insidious, progressive, attention preserved early; MMSE/MoCA help but are not diagnostic in acute illness. Your notes on delirium versus dementia, CAM and the MMSE match; the MMSE normal cut-off depends on education (your notes: 25 or more with over 7 years of schooling). Visual hallucinations suggest delirium, drugs or Lewy body disease.",
   "cast": [
     { "id": "patient", "name": "Madam Ho", "role": "elderly", "inBed": true },

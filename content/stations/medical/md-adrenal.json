@@ -5,6 +5,7 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 2. Mr Lo, 45, has Addison's disease. He has had vomiting and diarrhoea for 2 days and couldn't keep his tablets down. He is confused and weak. HR 118, BP 78/44, RR 22, SpO2 97%, temperature 37.9 °C.",
+  "review": [],
   "notes": "Checked against the Society for Endocrinology emergency guidance on adrenal crisis (2020/2023), NICE NG243 (Adrenal insufficiency, 2024) and the Endocrine Society guideline.\n\nAdrenal crisis is a life-threatening emergency: hypotension/shock, vomiting, abdominal pain, confusion, often with hyponatraemia, hyperkalaemia and hypoglycaemia. Do not wait for results: hydrocortisone 100 mg IV or IM immediately, then 200 mg over 24 hours (continuous infusion or 50 mg every 6 hours IV/IM); 0.9% saline 1 L over the first hour, then guided by response; check and treat glucose; treat the trigger (gastroenteritis, infection). Take a random cortisol and ACTH before steroid only if it does not delay treatment. Fludrocortisone is not needed while hydrocortisone is 50 mg or more per day. Afterwards: sick-day rules education, emergency card, injection kit.\n\nYour notes list Addison's disease as a topic without detail.",
   "cast": [{ "id": "patient", "name": "Mr Lo", "role": "patient" }, { "id": "nurse", "name": "Nurse Chiu", "role": "nurse" }],
   "vitals": {

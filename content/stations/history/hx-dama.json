@@ -5,6 +5,7 @@
   "type": "comms",
   "time": 420,
   "stem": "Cubicle 7. Mr Chan, 45, came in with 3 hours of central chest pain. His first troponin is mildly raised and the ECG shows new T-wave inversion in V1–V4. He wants to leave to go back to work. Talk to him.",
+  "review": [],
   "notes": "Checked against the GMC and Hong Kong Medical Council guidance on consent and capacity, the Hospital Authority DAMA policy, and ESC 2023 ACS guidelines.\n\nCapacity is decision-specific and presumed in adults. A person has capacity if they can understand, retain, use and weigh the relevant information, and communicate a decision. An unwise decision is not proof of incapacity. If capacitous, a patient may refuse treatment; the doctor's job is to explore the reasons (fear, money, childcare, work), negotiate alternatives, explain risks clearly, document, and leave the door open (safety-net, medication, follow-up, a written summary). The DAMA form documents the discussion; refusing to sign it does not stop him leaving and must not delay care.\n\nIf he lacked capacity (for example from hypoxia, intoxication or delirium), treatment in his best interests (and common-law necessity) applies. Hong Kong's Mental Health Ordinance is for mental disorder, not for chest pain.\n\nNSTEMI with dynamic ECG changes needs admission, antiplatelets, anticoagulation and early angiography (within 24 hours for high risk).\n\nYour notes list DAMA as a topic without detail.",
   "cast": [
     { "id": "patient", "name": "Mr Chan", "role": "man" },

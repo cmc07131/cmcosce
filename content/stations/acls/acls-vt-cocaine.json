@@ -5,6 +5,7 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 3. A 28-year-old man came from a nightclub with palpitations and agitation after 'a lot of coke'. HR 180, BP 118/76, RR 24, SpO2 97%, temperature 38.1 °C. He is restless and sweating. The monitor shows a broad complex tachycardia.",
+  "review": [],
   "notes": "Checked against TOXBASE (UK National Poisons Information Service), RCUK tachycardia algorithm (2021; unchanged in 2025) and AHA 2023 toxicology focused update.\n\nCocaine blocks noradrenaline reuptake (sympathomimetic) and sodium channels (class I effect: broad QRS, VT). First treat agitation, hyperthermia and hypertension with benzodiazepines. Broad complex arrhythmias: sodium bicarbonate 8.4% 50 mmol IV (1–2 mmol/kg), repeat as needed; correct hypoxia, acidosis and potassium. Lidocaine is an option for VT; avoid class Ia/Ic drugs. Beta-blockers are avoided in acute cocaine toxicity (unopposed alpha stimulation; AHA now considers them less harmful than thought, but they are not first-line). Adverse features (shock, syncope, ischaemia, heart failure) → synchronised cardioversion.\n\nYour notes (sympathomimetic 'confusion' station) say benzodiazepines, cooling and avoiding beta-blockers alone; this matches.\n\nAmiodarone is the standard drug for stable monomorphic VT in RCUK; with cocaine, bicarbonate first.",
   "cast": [
     { "id": "patient", "name": "Mr Cheung", "role": "patient" },

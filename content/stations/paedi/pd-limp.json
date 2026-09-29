@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Paediatric area. Kai, 13, overweight, has had a limp and left knee pain for 3 weeks, worse today. Temperature 36.9 °C. Examine him and explain your findings and plan.",
+  "review": [],
   "notes": "Checked against RCEM/RCPCH guidance on the limping child, the Kocher criteria (septic arthritis), and BOAST 'Slipped capital femoral epiphysis' (2021).\n\nDifferential by age: toddler (fracture — toddler's fracture, NAI, DDH, septic arthritis), 3–10 years (transient synovitis, septic arthritis, Perthes), adolescent (SUFE, overuse, tumours); at any age: infection, malignancy, NAI. Hip pathology often presents as knee pain (obturator nerve) — always examine the hip. SUFE: obese adolescent, loss of internal rotation, obligatory external rotation on hip flexion (Drehmann sign); frog-leg lateral X-ray (Klein's line fails to cut the epiphysis). Treatment: non-weight-bearing immediately and urgent orthopaedic referral for pinning; check the other hip. Septic arthritis (Kocher): non-weight-bearing, fever over 38.5, ESR over 40, WCC over 12 (probability rises with number of criteria; CRP over 20 in modified criteria) → aspirate and antibiotics.\n\nYour notes list the limping child ('referred pain from hip to knee'; HSP and NAI in the differential) — this matches.",
   "cast": [{ "id": "patient", "name": "Kai", "role": "child", "inBed": true }, { "id": "mother", "name": "Mother", "role": "woman" }],
   "steps": [

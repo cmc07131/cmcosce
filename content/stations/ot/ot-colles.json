@@ -5,6 +5,10 @@
   "type": "skills",
   "time": 480,
   "stem": "Plaster room. Mrs Wu, 65, fell on her outstretched right hand. Consent has been obtained for closed reduction. You have one assistant and a medical student. Interpret the X-ray, then demonstrate a haematoma block, reduction and cast on the model while teaching the student.",
+  "review": [
+    {"tag": "differs", "text": "Acceptable alignment. Your notes give radial shortening of 5 mm or less, and dorsal angulation of under 5° in one place and under 10° in another. Current thresholds (BOAST, AAOS): shortening 3 mm or less, dorsal tilt 10° or less, intra-articular step 2 mm or less."},
+    {"tag": "differs", "text": "Cast. Your notes suggest a long-arm cast first. A moulded below-elbow backslab is standard ED practice for a Colles fracture."}
+  ],
   "notes": "Checked against BOAST 'Management of distal radial fractures' (2017), AAOS 2020 guideline, and NICE NG38 (non-complex fractures).\n\nColles: extra-articular distal radius fracture with dorsal angulation, dorsal displacement, radial shortening ('dinner fork'). Check median nerve and EPL (thumb extension) before and after. Anaesthesia: haematoma block (1% lidocaine up to 10 mL, into the fracture haematoma from the dorsum, confirmed by aspirating blood) or Bier's block (IV regional; prilocaine, needs trained staff and a double cuff) or sedation. Reduction: traction with counter-traction to disimpact, then the distal fragment pushed volarly and into ulnar deviation. Below-elbow moulded backslab (three-point moulding); elevate. Repeat X-ray. Acceptable alignment (AAOS/BOAST): radial shortening 3 mm or less, dorsal tilt 10° or less, intra-articular step 2 mm or less; the older patient's function matters more than the film.\n\nYour notes: acceptable radial shortening '5 mm or less' and dorsal angulation '<5°' (in one place) or '<10° dorsally' (in another); current thresholds are 3 mm and 10°. Your notes also suggest a long-arm cast first; a moulded below-elbow backslab is standard in UK/HK ED practice for Colles. The block and sedation steps match.",
   "cast": [
     { "id": "patient", "name": "Mrs Wu", "role": "elderly", "inBed": true },

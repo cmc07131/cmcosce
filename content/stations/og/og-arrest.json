@@ -5,6 +5,9 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 1. A 32-year-old woman at 30 weeks (fundus well above the umbilicus) collapsed at home. Paramedics have been doing CPR for 2 minutes; she arrives in asystole. You lead.",
+  "review": [
+    {"tag": "outdated", "text": "Hand position. Your notes say to do CPR 'higher on the sternum'. Current guidance uses the normal hand position and rate, with manual left uterine displacement from 20 weeks."}
+  ],
   "notes": "Checked against RCUK 2025 special circumstances (pregnancy, including resuscitative hysterotomy), ERC 2025 and the MBRRACE-UK reports.\n\nDifferences from standard ALS: call the obstetric and neonatal teams at once; manual left uterine displacement (or left lateral tilt) from 20 weeks; standard hand position and compression rate (earlier teaching said 'higher on the sternum'; current guidance uses the normal position); early advanced airway by an experienced operator (aspiration, difficult airway); IV access above the diaphragm; normal defibrillation energies. Resuscitative hysterotomy (perimortem caesarean) if the gestation is 20 weeks or more (fundus at or above the umbilicus) and there is no ROSC within 4 minutes, aiming for delivery by 5 minutes; done where she is, without moving her. It aids maternal resuscitation by relieving aortocaval compression.\n\nCauses: 4 Hs and 4 Ts plus obstetric causes — haemorrhage, amniotic fluid embolism, eclampsia, magnesium toxicity, peripartum cardiomyopathy, aortic dissection, pulmonary embolism, anaesthetic complications.\n\nYour notes match this (prepare at 4 minutes, deliver by 5); they say 'CPR higher in sternum', which is no longer recommended.",
   "cast": [
     { "id": "patient", "name": "Mrs Mak", "role": "patient" },

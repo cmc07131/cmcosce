@@ -5,6 +5,7 @@
   "type": "skills",
   "time": 420,
   "stem": "Procedure room. Mr Wu, 30, has a crushed right middle fingertip with a subungual haematoma and a nail-bed laceration needing repair. Perform a digital nerve block on the hand model.",
+  "review": [],
   "notes": "Checked against RCEM/BSSH guidance and the evidence on adrenaline in digital blocks (Lalonde 2005; Cochrane 2015).\n\nAnatomy: two palmar (volar) and two dorsal digital nerves run at the 2, 4, 8 and 10 o'clock positions of each finger; palmar nerves supply most of the fingertip and nail bed. Techniques: ring (web-space) block injecting into both web spaces dorsally then advancing volarly (about 1–2 mL each side, plus a dorsal wheal), or a single palmar subcutaneous (transthecal-adjacent) injection at the base of the finger. Use 1% or 2% lidocaine plain (or with adrenaline — now shown safe in healthy digits; avoid in peripheral vascular disease or Raynaud's), maximum about 5–6 mL total per digit to avoid pressure ischaemia. Check allergies, neurovascular status before, aspirate before injecting, wait 5–10 minutes, test sensation. Avoid a circumferential ring of anaesthetic at the base and a finger tourniquet left on.\n\nYour notes list digital nerve block as a topic without detail.",
   "cast": [{ "id": "patient", "name": "Mr Wu", "role": "man", "inBed": true }],
   "steps": [

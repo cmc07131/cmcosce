@@ -5,6 +5,7 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 18. Ms Lam, 23, a left-handed chef, cut the palm side of her right ring finger with a sashimi knife 2 hours ago. The bleeding has stopped; the finger feels numb and weak. Take a brief history, examine her hand, and counsel her.",
+  "review": [],
   "notes": "Checked against BSSH (British Society for Surgery of the Hand) standards for hand trauma (2021), BOAST 'Hand trauma' guidance, and standard examination.\n\nFlexor digitorum profundus (FDP): flexion of the DIP joint with the PIP held straight. Flexor digitorum superficialis (FDS): flexion of the PIP joint while the other fingers are held in extension (blocks FDP). Digital nerves: two-point discrimination (normal under 6 mm at the fingertip) and light touch on each side of the finger; vascular: capillary refill and colour of the pulp. Look at the resting cascade: a finger lying straight out of line suggests a flexor tendon cut. Also check the median, ulnar and radial nerves in the hand ('123' in your notes).\n\nAny suspected flexor tendon or digital nerve injury needs referral to hand surgery for exploration and repair (ideally within days; BSSH), with the wound irrigated, dressed and the hand splinted in the meantime; antibiotics are not routine for clean wounds; tetanus as indicated. Do not explore flexor tendon wounds in the ED.\n\nYour notes (PP 2024 case) match this.",
   "cast": [{ "id": "patient", "name": "Ms Lam", "role": "woman", "inBed": false }],
   "steps": [

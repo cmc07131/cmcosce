@@ -5,6 +5,9 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 8. Mr Pang, 25, punched someone in the mouth in a bar fight 6 hours ago. He has a small cut over a knuckle of his right hand. Take a history, look at the wound, and counsel him.",
+  "review": [
+    {"tag": "missing", "text": "X-ray the hand (tooth fragment, metacarpal head fracture, air in the joint) and refer early to the hand surgeons for exploration and washout: most fight bites over the knuckle reach the joint or tendon."}
+  ],
   "notes": "Checked against NICE NG184 (Human and animal bites: antimicrobial prescribing, 2020), BSSH hand surgery guidance, and CHP / UKHSA guidance on blood-borne virus exposure.\n\nA laceration over a metacarpophalangeal joint after a punch is a human bite until proven otherwise. Teeth penetrate the extensor tendon and joint capsule with the fist clenched; when the hand opens, the tendon slides and hides the tract. Oral flora (streptococci, Staphylococcus aureus, Eikenella corrodens, anaerobes) cause septic arthritis, tenosynovitis and osteomyelitis.\n\nManage: X-ray (tooth fragment, fracture of the metacarpal head, air in the joint); irrigate; do not close primarily; co-amoxiclav prophylaxis (NICE: for human bites that break the skin and draw blood) — doxycycline plus metronidazole if penicillin-allergic; tetanus; blood-borne virus risk assessment (HBV vaccination, HCV and HIV testing; PEP rarely indicated unless the source is known high risk with blood in saliva). Refer to hand surgeons for exploration and washout if the joint or tendon may be involved (most fight bites over the MCP joint), or if presenting late or infected.\n\nYour notes match this; they could add the X-ray and early hand surgery referral for exploration.",
   "cast": [{ "id": "patient", "name": "Mr Pang", "role": "man", "inBed": false }],
   "steps": [

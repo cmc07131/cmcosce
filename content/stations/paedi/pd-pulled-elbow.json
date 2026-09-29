@@ -5,6 +5,7 @@
   "type": "skills",
   "time": 420,
   "stem": "Paediatric area. Ka-yee, 2, won't use her right arm after her father lifted her by the hand to stop her falling on the MTR steps. She holds the arm by her side, slightly bent, palm down. Assess and treat.",
+  "review": [],
   "notes": "Checked against RCEM/RCH Melbourne guidance on radial head subluxation and the Cochrane review (Krul 2017: hyperpronation more successful than supination–flexion).\n\nPulled elbow (radial head subluxation, 'nursemaid's elbow'): age 1–4, a pull on the extended pronated arm, the annular ligament slips over the radial head. The child holds the arm still, slightly flexed and pronated, with no swelling, bruising or deformity, and normal shoulder, wrist and neurovascular examination. With a typical history and examination, no X-ray is needed; image if there was a fall, swelling, bruising, deformity, or failure to reduce. Reduction without analgesia: hyperpronation (support the elbow with the thumb over the radial head and pronate the forearm firmly) is first-line; supination then flexion is the alternative. A click may be felt; the child usually uses the arm within 10–30 minutes. Advise lifting under the arms, recurrence risk until about age 5.\n\nYour notes match this, including hyperpronation first.",
   "cast": [{ "id": "patient", "name": "Ka-yee", "role": "child", "inBed": false }, { "id": "father", "name": "Father", "role": "man" }],
   "steps": [

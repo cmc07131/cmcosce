@@ -5,6 +5,10 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 2. A 16-year-old boy was pulled from a public pool after an unknown time under water. The lifeguard started CPR. He arrives with CPR in progress; the monitor shows asystole. Temperature 35.0 °C.",
+  "review": [
+    {"tag": "differs", "text": "Initial rescue breaths. Your notes give 2, or 3–5. ERC and RCUK give 5 before compressions (AHA gives 2). The station scores 5."},
+    {"tag": "outdated", "text": "After ROSC. Your notes say 'therapeutic hypothermia'. Current guidance is fever prevention: keep a comatose patient at 37.5 °C or below for 36–72 hours, and do not actively rewarm mild hypothermia (32–36 °C)."}
+  ],
   "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2025 ALS and ERC–ESICM 2025 post-resuscitation care, and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, actively prevent fever: 37.5 °C or less for 36–72 hours in a comatose patient (ERC–ESICM / RCUK 2025; 2021 used 37.7 °C). Your notes say 'therapeutic hypothermia'; current guidance moved from routine cooling to 32–36 °C toward fever prevention, and does not actively rewarm mild hypothermia (32–36 °C).\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.",
   "cast": [
     { "id": "patient", "name": "Ka-ho", "role": "patient" },

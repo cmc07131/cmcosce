@@ -5,6 +5,7 @@
   "type": "history",
   "time": 420,
   "stem": "Paediatric area. Miss Ramesh has brought her son Arjun, 6, who has developed a rash on his legs over a day. Take a history from her, and answer her questions.",
+  "review": [],
   "notes": "Checked against NICE CG102 (meningococcal disease), NICE NG143 (Fever in under 5s) principles, and the EULAR/PRINTO/PRES criteria for IgA vasculitis (Henoch–Schönlein purpura).\n\nA non-blanching rash in a febrile or unwell child is meningococcal disease until proven otherwise: antibiotics immediately. In a well child without fever, consider IgA vasculitis (HSP: palpable purpura on the buttocks and extensor legs, arthralgia/arthritis, abdominal pain, haematuria/proteinuria; often after an URTI), ITP (bruising and petechiae, isolated low platelets, well child), leukaemia (pallor, bone pain, lymphadenopathy, hepatosplenomegaly), trauma/NAI, and petechiae above the nipple line after coughing or vomiting.\n\nInvestigations: FBC and film, clotting, CRP, U&E, blood pressure, urinalysis (blood and protein), and blood cultures if febrile. HSP is managed supportively (analgesia); follow up with BP and urine checks for 6–12 months for nephritis; refer with abdominal pain (intussusception), significant proteinuria, hypertension or renal impairment.\n\nYour notes (a well 6-year-old with a leg rash, knee ache, recent cold, no fever) match this.",
   "cast": [{ "id": "mother", "name": "Miss Ramesh", "role": "woman" }, { "id": "patient", "name": "Arjun", "role": "child", "inBed": false }],
   "steps": [

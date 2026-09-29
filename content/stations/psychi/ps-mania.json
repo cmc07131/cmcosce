@@ -5,6 +5,7 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 10. Ms Fung, 31, was brought by her husband: she has not slept for 4 nights, spent HK$200,000 on luxury goods, and says she is about to become Chief Executive. Assess her and outline management.",
+  "review": [],
   "notes": "Checked against NICE CG185 (Bipolar disorder, 2014, updated 2023) and the ED approach to mania.\n\nMania: elevated or irritable mood, decreased need for sleep, pressured speech, flight of ideas, grandiosity (may be delusional), distractibility, disinhibition, risky behaviour (spending, sex, driving), for at least a week (or any duration if hospitalised). Exclude organic causes: thyrotoxicosis, steroids, stimulants, antidepressants, head injury, delirium, and pregnancy (affects drug choice).\n\nED management: safety, a calm low-stimulus environment, de-escalation; if needed, rapid tranquillisation (oral first: e.g. lorazepam or an antipsychotic; IM options per NICE NG10). Refer to psychiatry; admission (voluntary or under the MHO) for risk. Acute treatment: an antipsychotic (haloperidol, olanzapine, quetiapine or risperidone); stop antidepressants. Lithium and valproate need specialist decisions; valproate must be avoided in women of childbearing potential unless the Pregnancy Prevention Programme is met.\n\nYour notes list 'manic patient' as a topic and have MSE features of mania (pressured speech, flight of ideas, bizarre clothing); nothing conflicts.",
   "cast": [
     { "id": "patient", "name": "Ms Fung", "role": "woman" },

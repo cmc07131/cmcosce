@@ -5,6 +5,9 @@
   "type": "comms",
   "time": 420,
   "stem": "Resus 2 in a hospital without on-site PCI; the nearest PCI centre is 2½ hours away by road. Mr Siu, 53, has had crushing central chest pain for 2 hours. BP 150/80, HR 78, SpO2 98% in air. Take a focused history, interpret the ECG, and discuss treatment with him.",
+  "review": [
+    {"tag": "outdated", "text": "Aspirin and oxygen. Your notes (from a 2018 tutorial) give aspirin 160 mg and oxygen if SpO2 is under 94%. ESC 2023 gives aspirin 150–300 mg, and oxygen only if SpO2 is under 90%."}
+  ],
   "notes": "Checked against the ESC 2023 guidelines for acute coronary syndromes and the Hong Kong Hospital Authority STEMI pathway.\n\nReperfusion: primary PCI if it can be done within 120 minutes of diagnosis; otherwise fibrinolysis within 10 minutes of diagnosis (tenecteplase weight-based, half dose if 75 years or over), then transfer to a PCI centre: rescue PCI if it fails (less than 50% ST resolution at 60–90 minutes), angiography within 2–24 hours if it works (pharmaco-invasive strategy, outcomes similar to primary PCI in STREAM). Adjuncts: aspirin 150–300 mg, clopidogrel 300 mg (75 mg if 75 or older), enoxaparin or unfractionated heparin. Oxygen only if SpO2 is under 90%. Absolute contraindications include previous ICH or stroke of unknown origin, ischaemic stroke in 6 months, CNS lesion, recent major trauma/surgery/head injury (1 month), GI bleeding in 1 month, known bleeding disorder, aortic dissection, non-compressible punctures in 24 hours.\n\nYour notes (based on a 2018 NTWC tutorial) give aspirin 160 mg and oxygen if SpO2 under 94%; ESC 2023 uses 150–300 mg and under 90%. The rest (history, contraindications, and the argument that delaying for PCI transfer is worse) matches.",
   "cast": [
     { "id": "patient", "name": "Mr Siu", "role": "patient", "inBed": true },

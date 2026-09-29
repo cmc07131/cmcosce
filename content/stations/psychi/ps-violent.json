@@ -5,6 +5,10 @@
   "type": "psych",
   "time": 420,
   "stem": "Resus side room. A 60-year-old man was found lying on the street and brought in. He is now shouting, throwing a chair, and threatening staff. He smells of alcohol and has a graze on his forehead. Security and two nurses are nearby. Manage him.",
+  "review": [
+    {"tag": "outdated", "text": "'Excited delirium syndrome'. It is no longer an accepted diagnosis (ACEP withdrew support in 2023). Call it hyperactive delirium with severe agitation, and look for and treat the cause."},
+    {"tag": "differs", "text": "The 'geographic tongue sign' in your notes has no basis as a sign of this condition; leave it out."}
+  ],
   "notes": "Checked against NICE NG10 (Violence and aggression: short-term management, 2015), the HA restraint policy, and ACEP (2023) on agitation.\n\nStep up in order: de-escalation (calm, space, one person talking, exits, listen, choices, reality orientation), then oral medication offered, then rapid tranquillisation (IM lorazepam; or IM haloperidol with promethazine; or IM olanzapine — NICE; HK EDs also use IM midazolam), with physical restraint only as needed to give it, the least restrictive, proportionate, for the shortest time, never prone for long, with a doctor present, and regular observations (every 15 minutes: pulse, BP, SpO2, respiratory rate, consciousness, circulation of limbs). ECG before haloperidol when possible (QT).\n\nThink of the medical causes: hypoglycaemia, hypoxia, head injury (a graze in a drunk man is a head injury until proved otherwise), sepsis, drug withdrawal, intoxication. Once sedated: glucose, examine, CT head as indicated.\n\n'Excited delirium syndrome' in your notes is no longer an accepted diagnosis (ACEP withdrew support in 2023); describe it as hyperactive delirium with severe agitation and treat the cause. The 'geographic tongue sign' in your notes has no basis. Your de-escalation list matches.",
   "cast": [
     { "id": "patient", "name": "Mr Kong", "role": "elderly", "inBed": false },

@@ -5,6 +5,9 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 9. Mr Stephens, 83, was found on his kitchen floor this morning by his son. He has left hip pain and feels sick. Take a history, then discuss investigations and your plan.",
+  "review": [
+    {"tag": "missing", "text": "The World Falls Guidelines (2022) add a frailty assessment and prefer case-finding with risk stratification to a single risk score. Your template otherwise matches."}
+  ],
   "notes": "Checked against NICE CG161 (Falls in older people, 2013; new NG249 falls guideline 2025 draft/publication noted), the World Falls Guidelines (Age and Ageing 2022), and NICE CG124 (hip fracture).\n\nA fall is a symptom: find why he fell (syncope, arrhythmia, postural hypotension, stroke, infection, hypoglycaemia, medicines, alcohol, trip), what he injured (hip fracture, head injury — anticoagulants lower the CT threshold), and what the long lie caused (rhabdomyolysis, pressure injury, hypothermia, dehydration, AKI). Then a multifactorial risk assessment: previous falls, gait and mobility, medication review (sedatives, antihypertensives), vision, cognition, continence, home hazards, fear of falling, bone health.\n\nYour template and marking scheme match this well. The World Falls Guidelines add frailty assessment and prefer 'opportunistic case-finding' and risk stratification over single scores.",
   "cast": [{ "id": "patient", "name": "Mr Stephens", "role": "elderly", "inBed": true }],
   "steps": [

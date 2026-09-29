@@ -5,6 +5,9 @@
   "type": "skills",
   "time": 420,
   "stem": "Resus. A shocked trauma patient needs volume; peripheral cannulation has failed and IO is not available. Demonstrate a great saphenous vein cut-down at the ankle on the model.",
+  "review": [
+    {"tag": "rarely used", "text": "Venous cut-down itself. Now that IO needles and ultrasound-guided lines are available, cut-down is rarely done in the ED; it is a fallback when those fail. Know the saphenous vein landmark (1–2 cm anterior and superior to the medial malleolus) and the steps."}
+  ],
   "notes": "Checked against ATLS (venous cut-down appendix) and standard procedural texts.\n\nNowadays IO access and ultrasound-guided peripheral or central lines are preferred; cut-down remains an option when these fail. Site: the great (long) saphenous vein, 1–2 cm anterior and superior to the medial malleolus (alternative: basilic vein at the elbow). Steps: aseptic prep, local anaesthetic if conscious, a transverse full-thickness skin incision (about 2.5 cm), blunt dissection with curved haemostats to isolate the vein (avoid the saphenous nerve), pass two ligatures under it, tie the distal ligature (leave long for traction), make a small transverse venotomy, dilate, insert the cannula or IV catheter and tie the proximal ligature around it, connect fluids, close the skin, dressing. Complications: infection, haematoma, phlebitis, nerve injury, arterial transection. Your notes list venous cut-down as a topic without detail.",
   "cast": [{ "id": "patient", "name": "Trauma patient", "role": "patient", "inBed": true }],
   "steps": [
