@@ -149,6 +149,8 @@ export function fallbackPerformHint(kind: PerformKind) {
       return 'Brace the leg, landmark the flat tibia, and drill the IO to the pop.'
     case 'exam':
       return 'Examine him as you would for real, then press Finish.'
+    case 'igel':
+      return 'Size it, lubricate it, position the head, glide it along the palate to resistance, then confirm, decompress and tape.'
     case 'cico':
     case 'pacing':
     case 'cord':
@@ -157,7 +159,7 @@ export function fallbackPerformHint(kind: PerformKind) {
 }
 
 function sceneKey(kind: PerformKind, pose?: string) {
-  if (kind === 'look' || kind === 'exam') return ''
+  if (kind === 'look' || kind === 'exam' || kind === 'igel') return ''
   if (kind === 'pose') return `pose:${pose || 'knee'}`
   if (kind === 'dress') return 'dress'
   return kind

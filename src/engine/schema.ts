@@ -7,7 +7,7 @@ const tile = z.object({
   y: z.number().int(),
 })
 
-export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannula', 'look', 'release', 'io', 'cico', 'pacing', 'cord', 'exam'] as const
+export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannula', 'look', 'release', 'io', 'cico', 'pacing', 'cord', 'exam', 'igel'] as const
 export type PerformKind = (typeof performKinds)[number]
 
 const performFields = {

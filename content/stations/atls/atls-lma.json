@@ -27,20 +27,18 @@
     },
     {
       "id": "igel",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Insert the i-gel",
-      "hint": "Size by weight, lubricate the back, cuff toward the chin, glide along the palate to resistance, confirm, gastric tube, secure.",
+      "hint": "Size by weight, lubricate the back, sniffing position, cuff outlet toward the chin, glide along the palate to resistance, confirm with capnography, gastric tube, tape.",
       "opts": [
-        { "t": "Choose size 4 for 70 kg (sizes by weight)", "n": 1, "mark": "Chooses the correct size by weight" },
-        { "t": "Lubricate the back, sides and front of the cuff lightly", "n": 2, "mark": "Lubricates the device" },
-        { "t": "Hold it along the bite block; head in the sniffing position; press the chin down", "n": 3, "mark": "Correct grip and positioning" },
-        { "t": "Cuff outlet facing the chin, glide along the hard palate until definite resistance", "n": 4, "mark": "Inserts along the hard palate until resistance" },
-        { "t": "Ventilate: chest rises, waveform capnography, no large leak", "n": 5, "mark": "Confirms ventilation with capnography" },
-        { "t": "Pass a gastric tube down the drain channel", "n": 6, "mark": "Decompresses the stomach via the drain channel" },
-        { "t": "Tape from maxilla to maxilla over the bite block", "n": 7, "mark": "Secures the device" },
-        { "t": "Inflate the cuff with 30 mL of air", "trap": true, "r": "The i-gel has a gel cuff: nothing to inflate." },
-        { "t": "Insert it upside down and rotate 180° like a Guedel", "trap": true, "r": "That folds the tip. Insert it the right way up along the palate." }
+        {
+          "t": "Insert the i-gel",
+          "perform": "igel",
+          "performHint": "Size it for 70 kg, lubricate the cuff, position the head, then glide it along the hard palate to definite resistance. Confirm, decompress, tape. SpO2 falls while nobody ventilates.",
+          "mark": ["Chooses the correct size by weight", "Lubricates the device", "Correct grip and positioning", "Inserts along the hard palate until resistance", "Confirms ventilation with capnography", "Decompresses the stomach via the drain channel", "Secures the device"]
+        }
       ]
     },
     {

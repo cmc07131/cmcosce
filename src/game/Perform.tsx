@@ -3,6 +3,7 @@ import { HandSprite } from './HandSprite'
 import { CicoProcedure } from './cico/CicoProcedure'
 import { CordProcedure } from './cord/CordProcedure'
 import { ExamBench } from './exam/ExamBench'
+import { IgelProcedure } from './igel/IgelProcedure'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -50,6 +51,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <ExamBench job={job} onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'igel') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <IgelProcedure job={job} coach onDone={onDone} />
       </BattleFrame>
     )
   }
