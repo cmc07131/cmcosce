@@ -337,6 +337,20 @@ function monitor(c: Ctx, p: PropBox, t: number, bpm: number, flat: boolean, off 
   px(c, x + w - 8, y + 4, 3, 2, '#f8e058')
 }
 
+/** A transport ventilator on a pole: grey body, blue screen, three knobs. */
+function ventilator(c: Ctx, x: number, y: number, t: number) {
+  px(c, x + 7, y + 11, 2, 5, '#606870')
+  box(c, x + 1, y + 1, 14, 11, '#8898a8')
+  px(c, x + 3, y + 3, 7, 5, '#0a1420')
+  const blink = Math.floor(t / 600) % 2
+  px(c, x + 4, y + 6 - blink, 5, 1, '#f0e060')
+  px(c, x + 11, y + 3, 2, 2, '#e8e8f0')
+  px(c, x + 11, y + 6, 2, 2, '#e8e8f0')
+  px(c, x + 3, y + 9, 2, 2, '#303840')
+  px(c, x + 7, y + 9, 2, 2, '#303840')
+  px(c, x + 11, y + 9, 2, 2, '#303840')
+}
+
 function bed(c: Ctx, p: PropBox) {
   const x = p.x * TILE
   const y = p.y * TILE
@@ -455,6 +469,8 @@ export function drawProp(c: Ctx, p: PropBox, t: number, monitorBpm = 80, monitor
       return bed(c, p)
     case 'monitor':
       return monitor(c, p, t, monitorBpm, monitorFlat, monitorOff)
+    case 'ventilator':
+      return ventilator(c, x, y, t)
     case 'hazard':
       for (let i = 0; i < p.w; i++) hazard(c, x + i * TILE, y)
       return

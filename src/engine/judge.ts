@@ -201,9 +201,14 @@ export function unique(ids: string[]) {
  * How many of the station's steps the candidate has done (any non-trap choice, finding or region used).
  * The monitor is a readout, not a step. All done means the examiner has nothing left to watch.
  */
-/** A step is done once any of its non-trap options, findings or regions has been used. */
-function actionDone(a: Action, spent: Record<string, string[]>) {
+/**
+ * A step is done once any of its non-trap options, findings or regions has been used. A step that only exists for
+ * something that has not happened (a seizure on a run without one) is not waited for.
+ */
+function actionDone(a: Action, spent: Record<string, string[]>, scene: string[] = []) {
   const used = new Set(spent[a.id] ?? [])
+  const real = (a.options ?? []).filter((o) => !o.isTrap)
+  if (real.length && real.every((o) => o.when?.length) && !real.some((o) => (o.when ?? []).every((f) => scene.includes(f))) && !real.some((o) => used.has(o.id))) return true
   if ((a.options ?? []).some((o) => !o.isTrap && used.has(o.id))) return true
   if ((a.findings ?? []).some((f) => used.has(f.id))) return true
   return (a.regions ?? []).some((r) => used.has(r.id))
@@ -213,11 +218,11 @@ function actionDone(a: Action, spent: Record<string, string[]>) {
  * The objective: the first phase with a step not yet done. Null when the station has no phases or all are
  * done (the examiner takes over from there).
  */
-export function currentPhase(pack: Pack, spent: Record<string, string[]>) {
+export function currentPhase(pack: Pack, spent: Record<string, string[]>, scene: string[] = []) {
   const phases = pack.phases ?? []
   for (let i = 0; i < phases.length; i++) {
     const steps = phases[i].steps.map((id) => pack.actions.find((a) => a.id === id)).filter((a): a is Action => Boolean(a))
-    if (steps.some((a) => !actionDone(a, spent))) return { index: i, total: phases.length, title: phases[i].title, goal: phases[i].goal }
+    if (steps.some((a) => !actionDone(a, spent, scene))) return { index: i, total: phases.length, title: phases[i].title, goal: phases[i].goal }
   }
   return null
 }
@@ -238,7 +243,8 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
     const used = new Set(spent[a.id] ?? [])
     const turnDone = new Set((a.options ?? []).filter((o) => used.has(o.id)).map((o) => o.group))
     for (const o of a.options ?? []) {
-      if (o.isTrap || used.has(o.id) || !o.marksChecklistIds?.length) continue
+      // Scoring options, and treatments for something that happens to the patient (they wait on an event).
+      if (o.isTrap || used.has(o.id) || (!o.marksChecklistIds?.length && !o.when?.length)) continue
       if ((a.kind === 'dialogue') && turnDone.has(o.group)) continue
       if (!(o.when ?? []).every((f) => scene.includes(f))) {
         waiting = true
@@ -251,9 +257,33 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
   return waiting ? { kind: 'wait' } : null
 }
 
-export function stepsDone(pack: Pack, spent: Record<string, string[]>) {
+export type Level = 'normal' | 'hard'
+
+/** Events due now: on this difficulty, their trigger set long enough ago, not prevented, not already happened. */
+export function dueEvents(pack: Pack, scene: string[], sceneAt: Record<string, number>, elapsedS: number, level: Level) {
+  return (pack.events ?? []).filter((ev) => {
+    if (ev.level && ev.level !== level) return false
+    if (scene.includes(ev.scene) || (ev.unless && scene.includes(ev.unless))) return false
+    const from = ev.after ? sceneAt[ev.after] : 0
+    return from !== undefined && elapsedS >= from + ev.delayS
+  })
+}
+
+/** Things that happened to the patient and were never treated (a seizure with no benzodiazepine). */
+export function untreatedEvents(pack: Pack, scene: string[]) {
+  const hit = (pack.events ?? []).filter((ev) => ev.untreated && ev.treatedBy && scene.includes(ev.scene) && !scene.includes(ev.treatedBy))
+  // Two ways to the same seizure count once.
+  return hit.filter((ev, i) => hit.findIndex((other) => other.scene === ev.scene) === i)
+}
+
+/** Something is still happening to the patient that needs treating (she is fitting). */
+export function eventOngoing(pack: Pack, scene: string[]) {
+  return (pack.events ?? []).some((ev) => ev.treatedBy && scene.includes(ev.scene) && !scene.includes(ev.treatedBy))
+}
+
+export function stepsDone(pack: Pack, spent: Record<string, string[]>, scene: string[] = []) {
   const steps = pack.goldPath.map((id) => pack.actions.find((a) => a.id === id)).filter((a): a is Action => Boolean(a) && a!.kind !== 'monitor')
-  const done = steps.filter((a) => actionDone(a, spent))
+  const done = steps.filter((a) => actionDone(a, spent, scene))
   return {
     done: done.length,
     total: steps.length,

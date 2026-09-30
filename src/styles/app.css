@@ -685,6 +685,147 @@ button {
   bottom: 8px;
 }
 
+/* The transport ventilator (Oxylog 3000 layout). */
+.vent {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px 10px;
+}
+
+.vent-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  background: #6a7a8c;
+  border: 3px solid #303a48;
+  border-radius: 8px;
+  box-shadow: inset 0 -3px 0 #4a5868;
+}
+
+.vent-top {
+  display: flex;
+  gap: 6px;
+}
+
+.vent-screen {
+  flex: 1;
+  min-width: 0;
+  border: 3px solid #202830;
+  border-radius: 3px;
+}
+
+.vent-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.vent-mode,
+.vent-soft {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  color: #102030;
+  background: #dfe6ee;
+  border: 2px solid #303a48;
+  border-radius: 3px;
+  padding: 4px 5px;
+  cursor: pointer;
+}
+
+.vent-mode[data-on],
+.vent-soft[data-on] {
+  background: #f8d030;
+}
+
+.vent-softs {
+  display: flex;
+  gap: 6px;
+}
+
+.vent-knobs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.vent-soft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.vent-knobs .vent-soft {
+  aspect-ratio: 1;
+  justify-content: center;
+  border-radius: 50%;
+  border-width: 4px;
+  background: radial-gradient(circle at 40% 35%, #f4f6f8, #b8c2cc);
+}
+
+.vent-soft span {
+  font-size: 9px;
+}
+
+.vent-turn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.vent-readout {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: #fff;
+}
+
+/* The drug cart: a red trolley frame, grey shelves, labelled drugs. */
+.drug-cart {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 0;
+  padding: 6px;
+  background: repeating-linear-gradient(#c8ced6 0 56px, #5c6470 56px 60px);
+  border: 5px solid #c83838;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px #801818;
+}
+
+.drug-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  height: 60px;
+  padding: 3px 2px 5px;
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.drug-item:hover,
+.drug-item:focus-visible {
+  background: rgba(255, 255, 255, 0.55);
+  outline: 2px solid #f8d030;
+}
+
+.drug-item[data-given] {
+  opacity: 0.45;
+}
+
+.drug-icon {
+  width: 20px;
+  height: 26px;
+  flex: none;
+}
+
 /* Examination close-ups, played before the finding. */
 .cut-in {
   position: fixed;

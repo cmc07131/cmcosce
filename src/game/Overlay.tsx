@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react'
 import { itemLabel, menuIsMulti, missingItems } from '~/engine/judge'
 import type { Action, Pack } from '~/engine/schema'
 import { usePlay, type Overlay as OverlayState } from './store'
+import { DrugCart } from './DrugCart'
 import { Film, FilmButton } from './imaging/Film'
 import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel, seededShuffle } from './panels'
 import { NavItem, Win, useCursor } from './ui'
@@ -95,6 +96,10 @@ function Body({
   if (overlay.kind === 'chooser') {
     const actions = pack.actions.filter((action) => action.targetIds.includes(overlay.targetId))
     // A cart or trolley is one shelf of kit, whichever step each item belongs to.
+    // The drug cart proper: drugs by name on shelves, the dose after.
+    if (actions.every((a) => a.kind === 'kit') && actions.some((a) => (a.options ?? []).some((o) => o.drug))) {
+      return <DrugCart actions={actions} spent={spent} onClose={onClose} onConfirm={onConfirm} />
+    }
     if (actions.length > 1 && actions.every((a) => a.kind === 'kit')) {
       return <CartList actions={actions} title={targetName(pack, overlay.targetId)} spent={spent} onClose={onClose} onConfirm={onConfirm} />
     }
@@ -236,7 +241,11 @@ function TalkList({
               key={option.id}
               testId={`option-${action.id}-${option.id}`}
               disabled={missing.length > 0}
-              onClick={() => onOption(action.id, option.id)}
+              onClick={() => {
+                // Close straight away: the reply and what happens next play out in the room, not behind the menu.
+                onOption(action.id, option.id)
+                onClose?.()
+              }}
             >
               {option.label}
               {missing.length > 0 && <span className="nav-need">Need {missing.map((id) => itemLabel(pack, id)).join(', ')}</span>}
@@ -293,6 +302,7 @@ function SelectList({
           if (!picked.length) return
           onConfirm(picked)
           setPicked([])
+          onClose?.()
         }}
       >
         {action.confirmLabel || 'Take these'} {picked.length ? `(${picked.length})` : ''}
@@ -351,6 +361,7 @@ function CartList({
             if (ids.length) onConfirm(a.id, ids)
           }
           setPicked([])
+          onClose?.()
         }}
       >
         {actions[0]?.confirmLabel || 'Take these'} {picked.length ? `(${picked.length})` : ''}

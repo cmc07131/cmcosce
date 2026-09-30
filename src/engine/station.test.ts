@@ -10,7 +10,7 @@ import { burnPercent } from '../game/imaging/photos'
 import { airwayWidth, anteriorHumeralOffset, kleinCutsEpiphysis, neck, pelvis, symphysisWidth } from '../game/imaging/skeleton'
 import { fastRuq } from '../game/imaging/ultrasound'
 import { faultsFor, usePlay } from '../game/store'
-import { currentPhase, nextHint } from './judge'
+import { currentPhase, dueEvents, nextHint, untreatedEvents } from './judge'
 import { worldSchema } from '../world/model'
 import { packSchema } from './schema'
 import { compileStation, stationCards, stationSchema, type Station } from './station'
@@ -348,13 +348,41 @@ test('a drug asked for before it is indicated is not given, not spent, and score
   const s = () => usePlay.getState()
   s().rerun(pack)
   s().enterRoom()
-  const vt = pack.actions.find((a) => a.id === 'vt-tx')!
-  const bicarb = vt.options!.find((o) => o.marksChecklistIds?.length)!
-  s().confirmOptions(pack, 'vt-tx', [bicarb.id])
-  assert.equal((s().spent['vt-tx'] ?? []).length, 0, 'not spent')
+  const charcoal = pack.actions.find((a) => a.id === 'charcoal')!.options!.find((o) => o.marksChecklistIds?.length)!
+  s().confirmOptions(pack, 'charcoal', [charcoal.id])
+  assert.equal((s().spent['charcoal'] ?? []).length, 0, 'not spent')
   assert.equal(s().errands.length, 0, 'the nurse fetches nothing')
   assert.ok(s().faults.some((f) => /Too early/.test(f.text)))
-  s().fireEvent(pack, 'vt')
-  s().confirmOptions(pack, 'vt-tx', [bicarb.id])
-  assert.deepEqual(s().spent['vt-tx'], [bicarb.id])
+  // Once she is intubated, the same request goes ahead.
+  usePlay.setState({ scene: [...s().scene, 'bicarb', 'intubated'] })
+  s().confirmOptions(pack, 'charcoal', [charcoal.id])
+  assert.deepEqual(s().spent['charcoal'], [charcoal.id])
+})
+
+test('a seizure comes only if the bicarbonate is slow, or on hard; a prompt bolus prevents it', () => {
+  const pack = compileStation(stationSchema.parse(JSON.parse(readFileSync(files.find((f) => f.endsWith('acls-tca.json'))!, 'utf8'))))
+  const ids = (scene: string[], at: Record<string, number>, t: number, level: 'normal' | 'hard') => dueEvents(pack, scene, at, t, level).map((e) => e.id)
+  assert.deepEqual(ids([], {}, 5, 'normal'), [], 'normal: no seizure on arrival')
+  assert.deepEqual(ids([], {}, 5, 'hard'), ['seizure-arrival'], 'hard: fitting on arrival')
+  assert.deepEqual(ids(['ecg-read'], { 'ecg-read': 10 }, 40, 'normal'), [], 'not yet')
+  assert.deepEqual(ids(['ecg-read'], { 'ecg-read': 10 }, 75, 'normal'), ['seizure-late'], 'a minute without bicarbonate')
+  assert.deepEqual(ids(['ecg-read', 'bicarb'], { 'ecg-read': 10, bicarb: 30 }, 75, 'normal'), [], 'prompt bicarbonate prevents it')
+  assert.equal(untreatedEvents(pack, ['seizure']).length, 1)
+  assert.equal(untreatedEvents(pack, ['seizure', 'seizure-stopped']).length, 0)
+})
+
+test('a phase does not wait for treatment of something that never happened', () => {
+  const pack = compileStation(stationSchema.parse(JSON.parse(readFileSync(files.find((f) => f.endsWith('acls-tca.json'))!, 'utf8'))))
+  const spent: Record<string, string[]> = {}
+  const upTo = pack.phases!.slice(0, 3).flatMap((p) => p.steps)
+  for (const id of upTo) {
+    const a = pack.actions.find((x) => x.id === id)!
+    // Everything that is due on this run (the repeat ECG once the bicarbonate is in), not the seizure treatment.
+    const first = (a.options ?? []).find((o) => !o.isTrap && (o.when ?? []).every((f) => ['ecg-read', 'bicarb'].includes(f)))
+    if (first) spent[id] = [first.id]
+  }
+  // No seizure on this run: the ECG phase is done without the seizure step, and RSI is next.
+  assert.equal(currentPhase(pack, spent, ['ecg-read', 'bicarb'])?.title, 'RSI')
+  // She is fitting: the ECG phase waits for the treatment.
+  assert.equal(currentPhase(pack, spent, ['ecg-read', 'bicarb', 'seizure'])?.title, 'ECG')
 })

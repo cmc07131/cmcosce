@@ -6,13 +6,16 @@ const KEY = 'osce-gym:settings'
 /** Practice help: `guided` shows the objective and exactly what to do next; `objectives` only the phase; `off` like the exam. */
 export type Coach = 'guided' | 'objectives' | 'off'
 
-type Stored = { sound: boolean; labels: boolean; patientLang: PatientLang; coach: Coach }
+/** `hard`: harder presentations (the TCA patient arrives fitting). */
+export type Difficulty = 'normal' | 'hard'
+
+type Stored = { sound: boolean; labels: boolean; patientLang: PatientLang; coach: Coach; difficulty: Difficulty }
 
 /**
  * `labels` shows NPC name tags on the map. Kit labels always show. Patients speak Cantonese by default.
  * `coach` is guided by default: the phase, and the next action in the perfect script.
  */
-const defaults: Stored = { sound: false, labels: false, patientLang: 'zh', coach: 'guided' }
+const defaults: Stored = { sound: false, labels: false, patientLang: 'zh', coach: 'guided', difficulty: 'normal' }
 
 function read(): Stored {
   try {
@@ -42,12 +45,13 @@ type SettingsState = Stored & {
   toggleLabels: () => void
   toggleLang: () => void
   cycleCoach: () => void
+  toggleDifficulty: () => void
 }
 
 /** Sound is off until the player turns it on. Loaded on the client only, so SSR renders the defaults. */
 export const useSettings = create<SettingsState>((set, get) => {
   const save = (patch: Partial<Stored>) => {
-    const next: Stored = { sound: get().sound, labels: get().labels, patientLang: get().patientLang, coach: get().coach, ...patch }
+    const next: Stored = { sound: get().sound, labels: get().labels, patientLang: get().patientLang, coach: get().coach, difficulty: get().difficulty, ...patch }
     write(next)
     set(next)
   }
@@ -61,6 +65,7 @@ export const useSettings = create<SettingsState>((set, get) => {
     toggleSound: () => save({ sound: !get().sound }),
     toggleLabels: () => save({ labels: !get().labels }),
     toggleLang: () => save({ patientLang: get().patientLang === 'zh' ? 'en' : 'zh' }),
+    toggleDifficulty: () => save({ difficulty: get().difficulty === 'normal' ? 'hard' : 'normal' }),
     cycleCoach: () => save({ coach: get().coach === 'guided' ? 'objectives' : get().coach === 'objectives' ? 'off' : 'guided' }),
   }
 })

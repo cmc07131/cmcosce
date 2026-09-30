@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { localizePack } from '~/engine/lang'
-import { currentPhase, hintFor, nextHint, stepsDone } from '~/engine/judge'
+import { currentPhase, dueEvents, eventOngoing, hintFor, nextHint, stepsDone } from '~/engine/judge'
 import { readoutText, type Action, type Pack } from '~/engine/schema'
 import { hasOutput, monitored, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
@@ -46,6 +46,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const store = usePlay.getState
   const labels = useSettings((s) => s.labels)
   const coach = useSettings((s) => s.coach)
+  const difficulty = useSettings((s) => s.difficulty)
   const screen = useRef<ScreenHandle>(null)
   const textBox = useRef<TextBoxHandle>(null)
   /** The START menu, or the door's hand-over question (the menu opened on its leave page). */
@@ -126,10 +127,10 @@ export function PlayView({ pack: source }: { pack: Pack }) {
     return () => window.clearTimeout(id)
   }, [firstToast?.token, store])
 
-  const progress = stepsDone(pack, spent)
+  const progress = stepsDone(pack, spent, scene ?? [])
   // Practice mode: the current phase of the perfect script, until the examiner takes over; guided adds the next action.
   const coaching = coach !== 'off' && entered && !ended
-  const objective = coaching ? currentPhase(pack, spent) : null
+  const objective = coaching ? currentPhase(pack, spent, scene ?? []) : null
   const next = coaching && coach === 'guided' ? nextHint(pack, spent, scene ?? []) : null
   const guideTarget = next?.kind === 'do' ? next.targetId : null
 
@@ -138,15 +139,10 @@ export function PlayView({ pack: source }: { pack: Pack }) {
     if (!hydrated || !entered || ended || !pack.events?.length) return
     const id = window.setInterval(() => {
       const cur = store()
-      const now = elapsedOf(pack, cur)
-      for (const ev of pack.events ?? []) {
-        if ((cur.scene ?? []).includes(ev.scene)) continue
-        const from = ev.after ? cur.sceneAt?.[ev.after] : 0
-        if (from !== undefined && now >= from + ev.delayS) cur.fireEvent(pack, ev.id)
-      }
+      for (const ev of dueEvents(pack, cur.scene ?? [], cur.sceneAt ?? {}, elapsedOf(pack, cur), difficulty)) cur.fireEvent(pack, ev.id)
     }, 500)
     return () => window.clearInterval(id)
-  }, [hydrated, entered, ended, pack, store])
+  }, [hydrated, entered, ended, pack, store, difficulty])
   const allDone = progress.total > 0 && progress.done === progress.total
   useEffect(() => {
     if (!hydrated || !entered || ended || !allDone || announcedDone.current) return
@@ -161,8 +157,13 @@ export function PlayView({ pack: source }: { pack: Pack }) {
 
   const used = (a: Action) => (spent[a.id]?.length ?? 0) > 0
   const endStarted = endQueue.some(used)
-  const beforeEnd = stepsDone({ ...pack, goldPath: pack.goldPath.filter((id) => !endIds.includes(id)) }, spent)
-  const readyForEnd = beforeEnd.done === beforeEnd.total
+  const beforeEnd = stepsDone({ ...pack, goldPath: pack.goldPath.filter((id) => !endIds.includes(id)) }, spent, scene ?? [])
+  // The examiner comes when the case is really finished: nothing left in the script that can be done now, the nurse
+  // has nothing in hand, and nothing is still happening to the patient. (Stations without phases: every step used.)
+  const leftNow = nextHint(pack, spent, scene ?? [])
+  const readyForEnd = pack.phases?.length
+    ? leftNow?.kind !== 'do' && errands.length === 0 && !eventOngoing(pack, scene ?? [])
+    : beforeEnd.done === beforeEnd.total
   const timeShort = entered && secondsLeft <= 90
   const idleNow = overlay === null && performing === null && menu === false
 

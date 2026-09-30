@@ -7,10 +7,13 @@ const tile = z.object({
   y: z.number().int(),
 })
 
-export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannula', 'look', 'release', 'io', 'cico', 'pacing', 'cord', 'exam', 'igel'] as const
+export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannula', 'look', 'release', 'io', 'cico', 'pacing', 'cord', 'exam', 'igel', 'ventilator'] as const
 export type PerformKind = (typeof performKinds)[number]
 
 const performFields = {
+  /** Drug cart: the drug's name and this option's dose. */
+  drug: z.string().optional(),
+  dose: z.string().optional(),
   /** Scene flags that must all be set before this is indicated. */
   when: z.array(z.string()).optional(),
   /** What the nurse says if it is asked for too early. */
@@ -227,7 +230,7 @@ export const packSchema = z.object({
   phases: z.array(z.object({ title: z.string(), goal: z.string(), steps: z.array(z.string()) })).optional(),
   /** The case changes by itself: a scene flag `delayS` after another (or after entering). */
   events: z
-    .array(z.object({ id: z.string(), after: z.string().optional(), delayS: z.number(), scene: z.string(), say: z.string(), shakeUntil: z.string().optional() }))
+    .array(z.object({ id: z.string(), after: z.string().optional(), delayS: z.number(), scene: z.string(), say: z.string(), shakeUntil: z.string().optional(), unless: z.string().optional(), level: z.enum(['normal', 'hard']).optional(), treatedBy: z.string().optional(), untreated: z.string().optional() }))
     .optional(),
   sequenceRules: z.array(
     z.object({

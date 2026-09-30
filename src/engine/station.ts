@@ -36,6 +36,9 @@ const optSchema = z.object({
   /** Perform detail, e.g. an exam test and the lesion side: "eyes:right". */
   pose: z.string().optional(),
   performHint: z.string().optional(),
+  /** On the drug cart: the drug's name on the shelf, and this option's dose (shown after the drug is picked). */
+  drug: z.string().optional(),
+  dose: z.string().optional(),
   /** Only indicated once these scene flags are set (e.g. 'vt'): picked earlier, it is not given and scores a fault. */
   when: z.union([z.string(), z.array(z.string())]).optional(),
   /** Why it is not yet indicated, said by the nurse (e.g. "She isn't in VT."). */
@@ -116,6 +119,13 @@ export const stationSchema = z.object({
         say: z.string(),
         /** The patient shakes on the bed from this event until this scene flag (e.g. a seizure until lorazepam). */
         shakeUntil: z.string().optional(),
+        /** Does not happen if this flag is already set (a seizure that prompt bicarbonate prevents). */
+        unless: z.string().optional(),
+        /** Only on this difficulty: 'hard' presentations (she arrives fitting). */
+        level: z.enum(['normal', 'hard']).optional(),
+        /** If it happened and this flag never followed, the debrief says `untreated`. */
+        treatedBy: z.string().optional(),
+        untreated: z.string().optional(),
       }))
     .optional(),
   review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing', 'unverified']), text: z.string() })).optional(),
@@ -198,6 +208,7 @@ function resusBay(): Template {
         { id: 'trolley-prop', kind: 'trolley', x: 1, y: 2 },
         { id: 'cart-prop', kind: 'trolley', x: 1, y: 4 },
         { id: 'sink', kind: 'sink', x: 10, y: 5 },
+        { id: 'ventilator-prop', kind: 'ventilator', x: 8, y: 2 },
       ],
       interactables: [
         { id: 'door', kind: 'door', x: 5, y: 9, label: 'Door' },
@@ -205,6 +216,7 @@ function resusBay(): Template {
         { id: 'trolley', kind: 'trolley', x: 1, y: 2, label: 'Trolley' },
         { id: 'cart', kind: 'trolley', x: 1, y: 4, label: 'Drugs' },
         { id: 'phone', kind: 'phone', x: 10, y: 2, label: 'Phone' },
+        { id: 'ventilator', kind: 'ventilator', x: 8, y: 2, label: 'Vent' },
         { id: 'bed-ix', kind: 'bed', x: 4, y: 3, w: 4, h: 2, label: '' },
       ],
     },
@@ -374,6 +386,8 @@ export function compileStation(station: Station): Pack {
       anim: o.anim,
       when: o.when === undefined ? undefined : Array.isArray(o.when) ? o.when : [o.when],
       early: o.early,
+      drug: o.drug,
+      dose: o.dose,
     }
   }
 

@@ -3,7 +3,7 @@ import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { test } from 'node:test'
 import { usePlay } from '../game/store'
-import { judgeSequence, menuIsMulti, stepsDone } from './judge'
+import { dueEvents, judgeSequence, menuIsMulti, stepsDone } from './judge'
 import type { Action, Pack } from './schema'
 import { compileStation, stationSchema } from './station'
 
@@ -23,7 +23,8 @@ function drain(pack: Pack) {
     usePlay.getState().takeErrand(job.token)
   }
   // The case moves on without waiting for the clock: each event whose trigger has happened fires now.
-  for (const ev of pack.events ?? []) if (!ev.after || usePlay.getState().scene.includes(ev.after)) usePlay.getState().fireEvent(pack, ev.id)
+  const st = usePlay.getState()
+  for (const ev of dueEvents(pack, st.scene, st.sceneAt ?? {}, Number.POSITIVE_INFINITY, 'normal')) usePlay.getState().fireEvent(pack, ev.id)
 }
 
 /** The best line in each turn: the one that scores, else the first that is not a trap. */
@@ -78,7 +79,7 @@ test('every station can be finished with full marks, no faults, and every rule m
     const earned = new Set(end.earnedMarks)
     const missing = pack.marks.filter((m) => !earned.has(m.id))
     if (missing.length) problems.push(`${pack.packId}: unreachable marks: ${missing.map((m) => m.label).join('; ')}`)
-    const progress = stepsDone(pack, end.spent)
+    const progress = stepsDone(pack, end.spent, end.scene)
     if (progress.done !== progress.total) problems.push(`${pack.packId}: a perfect run leaves steps not done: ${progress.left.join(', ')}`)
     if (end.faults.length) problems.push(`${pack.packId}: faults on a perfect run: ${end.faults.map((f) => f.text).join('; ')}`)
     for (const v of judgeSequence(pack.sequenceRules, end.log)) if (v.status !== 'pass') problems.push(`${pack.packId}: rule ${v.id} fails on the script order`)

@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { judgeSequence } from '~/engine/judge'
+import { judgeSequence, untreatedEvents } from '~/engine/judge'
 import { loadPack } from '~/engine/loadPacks'
 import { readSession } from '~/engine/session'
 import type { Fault, LogEntry } from '~/engine/schema'
@@ -26,8 +26,10 @@ function DebriefPage() {
     const session = readSession(packId)
     setChecked(session?.earnedMarks ?? [])
     setLog(session?.log ?? [])
-    setFaults(session?.faults ?? [])
-  }, [packId])
+    // Something that happened to the patient and was never treated counts against you too.
+    const untreated = pack ? untreatedEvents(pack, session?.scene ?? []).map((ev) => ({ actionId: ev.id, text: ev.untreated ?? '', critical: true })) : []
+    setFaults([...(session?.faults ?? []), ...untreated])
+  }, [packId, pack])
 
   if (!pack) {
     return (

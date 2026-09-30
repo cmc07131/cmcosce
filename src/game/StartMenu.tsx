@@ -42,6 +42,8 @@ export function StartMenu({
   const patientLang = useSettings((s) => s.patientLang)
   const toggleLang = useSettings((s) => s.toggleLang)
   const coach = useSettings((s) => s.coach)
+  const difficulty = useSettings((s) => s.difficulty)
+  const toggleDifficulty = useSettings((s) => s.toggleDifficulty)
   const cycleCoach = useSettings((s) => s.cycleCoach)
   const cursor = useCursor(root, {
     priority: 20,
@@ -71,6 +73,11 @@ export function StartMenu({
             <NavItem testId="hud-hint" onClick={onHint}>HINT</NavItem>
             <NavItem testId="menu-marks" onClick={() => go('marks')}>MARKS</NavItem>
             <NavItem testId="menu-sound" onClick={toggleSound}>SOUND {sound ? 'ON' : 'OFF'}</NavItem>
+            {pack.events?.some((e) => e.level) && (
+              <NavItem testId="menu-difficulty" onClick={toggleDifficulty}>
+                DIFFICULTY: {difficulty === 'hard' ? 'HARD' : 'NORMAL'}
+              </NavItem>
+            )}
             <NavItem testId="menu-coach" onClick={cycleCoach}>
               COACH: {coach === 'guided' ? 'GUIDED' : coach === 'objectives' ? 'OBJECTIVES' : 'OFF'}
             </NavItem>

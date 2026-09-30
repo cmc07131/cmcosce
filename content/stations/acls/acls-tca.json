@@ -4,7 +4,7 @@
   "title": "TCA overdose: ECG, bicarbonate and decontamination",
   "type": "resus",
   "time": 480,
-  "stem": "Resus 2. A 40-year-old woman on treatment for depression was found drowsy at home by her husband, who last saw her well an hour ago. An empty packet of amitriptyline 25 mg (60 tablets) was beside her. GCS E2 V2 M3, HR 120, BP 90/40, RR 10, SpO2 90% on room air. A 12-lead ECG is on the trolley.",
+  "stem": "Resus 2. A 40-year-old woman (about 70 kg) on treatment for depression was found drowsy at home by her husband, who last saw her well an hour ago. An empty packet of amitriptyline 25 mg (60 tablets) was beside her. GCS E2 V2 M3, HR 120, BP 90/40, RR 10, SpO2 90% on room air. A 12-lead ECG is on the trolley.",
   "phases": [
     {
       "title": "Arrival",
@@ -25,7 +25,7 @@
     },
     {
       "title": "ECG",
-      "goal": "Read the 12-lead before any drug and treat what it shows. Get ready for VT. Watch her: treat what happens next, then repeat the ECG.",
+      "goal": "Read the 12-lead before any drug and treat what it shows, promptly. Get ready for VT. Treat anything that happens to her, then repeat the ECG.",
       "steps": [
         "ecg",
         "bicarb",
@@ -36,7 +36,7 @@
     },
     {
       "title": "RSI",
-      "goal": "Kit from the trolley, drugs from the cart, then intubate her yourself, in the right order relative to the bicarbonate. Set the ventilator for this poisoning.",
+      "goal": "Kit from the trolley, drugs from the cart, then intubate her yourself once the bicarbonate is in. Set the ventilator yourself for this poisoning.",
       "steps": [
         "rsi-kit",
         "rsi-drugs",
@@ -45,12 +45,10 @@
       ]
     },
     {
-      "title": "Deterioration",
-      "goal": "Watch the monitor after the tube. If the rhythm changes, treat it the TCA way. Then the blood pressure, one step at a time.",
+      "title": "Circulation",
+      "goal": "Still hypotensive? Treat it from the drug cart, with the right dose.",
       "steps": [
-        "vt-tx",
-        "fluid",
-        "pressor"
+        "fluid"
       ]
     },
     {
@@ -65,7 +63,7 @@
     },
     {
       "title": "Close",
-      "goal": "Call the people who need to know. The examiner will then ask for your plan.",
+      "goal": "Call the people who need to know. Then the examiner will come for your plan and questions.",
       "steps": [
         "dispo",
         "close"
@@ -158,30 +156,6 @@
         }
       },
       {
-        "scene": "vt",
-        "set": {
-          "hr": 180
-        },
-        "add": {
-          "sbp": -24,
-          "dbp": -8
-        },
-        "overS": 5,
-        "rhythm": "vt"
-      },
-      {
-        "scene": "vt-bicarb",
-        "set": {
-          "hr": 112
-        },
-        "add": {
-          "sbp": 18,
-          "dbp": 6
-        },
-        "overS": 30,
-        "rhythm": "tca-bicarb"
-      },
-      {
         "scene": "fluid",
         "add": {
           "sbp": 8,
@@ -190,12 +164,10 @@
         "overS": 30
       },
       {
-        "scene": "norad",
-        "add": {
-          "sbp": 16,
-          "dbp": 10
-        },
-        "overS": 40
+        "scene": "ventilated",
+        "set": {
+          "etco2": 3.9
+        }
       }
     ],
     "showWhen": "monitored"
@@ -367,38 +339,88 @@
       "to": "cart",
       "label": "Drug cart",
       "hint": "Treat the broad QRS before anything else.",
-      "confirm": "Give these",
+      "confirm": "Give",
       "opts": [
         {
-          "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) rapid IV, then repeat the ECG",
+          "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) rapid IV",
+          "drug": "Sodium bicarbonate 8.4%",
+          "dose": "100 mL (1–2 mmol/kg) rapid IV",
           "fetch": "cart",
           "need": true,
           "scene": "bicarb",
           "mark": "Sodium bicarbonate 8.4% 1–2 mmol/kg rapid bolus for the broad QRS"
         },
         {
-          "t": "Amiodarone 300 mg IV for the broad complexes",
+          "t": "Sodium bicarbonate 8.4% 25 mL IV",
+          "drug": "Sodium bicarbonate 8.4%",
+          "dose": "25 mL IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little. 1–2 mmol/kg: 50–100 mL of 8.4% in an adult, as a rapid bolus."
+        },
+        {
+          "t": "Sodium bicarbonate 8.4% 500 mL IV over 10 minutes",
+          "drug": "Sodium bicarbonate 8.4%",
+          "dose": "500 mL IV over 10 minutes",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much at once: hypernatraemia and severe alkalaemia. Give 50–100 mL boluses titrated to the QRS and pH."
+        },
+        {
+          "t": "Amiodarone 300 mg IV",
+          "drug": "Amiodarone",
+          "dose": "300 mg IV",
           "fetch": "cart",
           "trap": "critical",
           "r": "Amiodarone prolongs the QT and adds to the cardiotoxicity. Bicarbonate first; lignocaine only for VT once the pH is 7.5."
         },
         {
-          "t": "Flumazenil in case of benzodiazepines too",
+          "t": "Flumazenil 200 micrograms IV",
+          "drug": "Flumazenil",
+          "dose": "200 micrograms IV",
           "fetch": "cart",
           "trap": "critical",
           "r": "Flumazenil can precipitate seizures and arrhythmias in TCA overdose."
         },
         {
-          "t": "Physostigmine for the anticholinergic signs",
+          "t": "Physostigmine 1 mg IV",
+          "drug": "Physostigmine",
+          "dose": "1 mg IV",
           "fetch": "cart",
           "trap": "critical",
           "r": "Contraindicated in TCA poisoning: asystole has occurred."
         },
         {
-          "t": "Phenytoin loading for seizure prophylaxis",
+          "t": "Phenytoin 20 mg/kg IV",
+          "drug": "Phenytoin",
+          "dose": "20 mg/kg IV",
           "fetch": "cart",
           "trap": true,
           "r": "Phenytoin blocks sodium channels too and can worsen cardiotoxicity. Benzodiazepines only."
+        },
+        {
+          "t": "Flecainide 2 mg/kg IV",
+          "drug": "Flecainide",
+          "dose": "2 mg/kg IV",
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Class Ic: more sodium-channel block. Avoid class Ia and Ic drugs in TCA poisoning."
+        },
+        {
+          "t": "Lignocaine 1.5 mg/kg IV",
+          "drug": "Lignocaine",
+          "dose": "1.5 mg/kg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "She is not in VT. Lignocaine is for VT that persists once the pH is 7.5."
+        },
+        {
+          "t": "Noradrenaline infusion 0.1 microgram/kg/min",
+          "drug": "Noradrenaline",
+          "dose": "infusion 0.1 microgram/kg/min",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Not yet: bicarbonate and fluid first. Noradrenaline is for hypotension that persists after them."
         }
       ]
     },
@@ -423,22 +445,40 @@
       "to": "cart",
       "label": "Drug cart",
       "hint": "She is fitting: a benzodiazepine, and more bicarbonate.",
-      "confirm": "Give these",
+      "confirm": "Give",
       "opts": [
         {
           "t": "Lorazepam 4 mg IV",
+          "drug": "Lorazepam",
+          "dose": "4 mg IV",
           "fetch": "cart",
           "when": "seizure",
           "early": "She isn't fitting.",
-          "scene": "seizure-stopped",
-          "mark": "Seizure: lorazepam"
+          "scene": "seizure-stopped"
         },
         {
-          "t": "A further sodium bicarbonate 8.4% 50–100 mL IV",
+          "t": "Lorazepam 0.5 mg IV",
+          "drug": "Lorazepam",
+          "dose": "0.5 mg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little to stop a seizure: 4 mg IV (0.1 mg/kg), repeated once if needed."
+        },
+        {
+          "t": "Lorazepam 10 mg IV",
+          "drug": "Lorazepam",
+          "dose": "10 mg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much in one go: 4 mg IV, repeated once if needed."
+        },
+        {
+          "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) rapid IV",
+          "drug": "Sodium bicarbonate 8.4%",
+          "dose": "100 mL (1–2 mmol/kg) rapid IV",
           "fetch": "cart",
           "when": "seizure",
-          "early": "Wait and see what the ECG does.",
-          "mark": "Seizure: a further bicarbonate bolus"
+          "early": "Watch what the ECG does first."
         }
       ]
     },
@@ -485,15 +525,42 @@
       "to": "cart",
       "label": "Drug cart",
       "hint": "Induction that keeps the pressure up, and a relaxant.",
-      "confirm": "Give these",
+      "confirm": "Give",
       "opts": [
         {
-          "t": "Ketamine 1 mg/kg (reduced for shock) and rocuronium 1.2 mg/kg for RSI",
+          "t": "Ketamine 70 mg IV (1 mg/kg, reduced for shock)",
+          "drug": "Ketamine",
+          "dose": "70 mg IV (1 mg/kg, reduced for shock)",
           "fetch": "cart",
-          "mark": "Haemodynamically stable induction: ketamine and rocuronium"
+          "mark": "Ketamine, reduced for shock"
         },
         {
-          "t": "Propofol 2 mg/kg for induction",
+          "t": "Ketamine 200 mg IV (3 mg/kg)",
+          "drug": "Ketamine",
+          "dose": "200 mg IV (3 mg/kg)",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much for induction in a shocked patient: about 1 mg/kg."
+        },
+        {
+          "t": "Rocuronium 85 mg IV (1.2 mg/kg)",
+          "drug": "Rocuronium",
+          "dose": "85 mg IV (1.2 mg/kg)",
+          "fetch": "cart",
+          "mark": "Rocuronium 1.2 mg/kg for RSI"
+        },
+        {
+          "t": "Rocuronium 20 mg IV (0.3 mg/kg)",
+          "drug": "Rocuronium",
+          "dose": "20 mg IV (0.3 mg/kg)",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little for RSI: 1.2 mg/kg for fast intubating conditions."
+        },
+        {
+          "t": "Propofol 140 mg IV (2 mg/kg)",
+          "drug": "Propofol",
+          "dose": "140 mg IV (2 mg/kg)",
           "fetch": "cart",
           "trap": true,
           "r": "A full dose of propofol in a shocked patient with a BP of 90/40 risks arrest. Ketamine, reduced."
@@ -523,42 +590,23 @@
     {
       "id": "ventilate",
       "kind": "say",
-      "to": "nurse",
+      "to": "ventilator",
+      "lang": "en",
       "label": "Ventilator",
-      "hint": "Keep her alkaline.",
+      "hint": "Set it yourself: a controlled mode, 6–8 mL/kg, a faster rate to keep her alkaline.",
       "opts": [
         {
-          "t": "Ventilator: a faster rate, aim for pH 7.45–7.55. Repeat the gas and potassium.",
-          "mark": "Hyperventilates to pH 7.45–7.55 and repeats the gas and potassium"
-        },
-        {
-          "t": "Normal ventilator settings, PaCO2 5–6 kPa",
-          "trap": true,
-          "r": "Mild hyperventilation keeps her alkaline (pH 7.45–7.55); a normal or high PaCO2 lets the QRS widen again."
-        }
-      ]
-    },
-    {
-      "id": "vt-tx",
-      "kind": "pick",
-      "to": "cart",
-      "label": "Drug cart",
-      "hint": "VT with a pulse after TCA: more bicarbonate first.",
-      "confirm": "Give these",
-      "opts": [
-        {
-          "t": "Sodium bicarbonate 8.4% 100 mL rapid IV for the VT",
-          "fetch": "cart",
-          "when": "vt",
-          "early": "She isn't in VT.",
-          "scene": "vt-bicarb",
-          "mark": "VT: a further bicarbonate bolus first"
-        },
-        {
-          "t": "Lignocaine 1–1.5 mg/kg IV for VT once the pH is 7.5",
-          "fetch": "cart",
-          "when": "vt",
-          "early": "She isn't in VT."
+          "t": "Set the ventilator",
+          "perform": "ventilator",
+          "pose": "tca",
+          "performHint": "She is paralysed, 70 kg, and must stay alkaline (pH 7.45–7.55). Mode, O2, VT and RR, then PEEP and Pmax. START.",
+          "mark": [
+            "Controlled ventilation mode after RSI",
+            "Tidal volume 6–8 mL/kg",
+            "Hyperventilates to keep pH 7.45–7.55",
+            "FiO2 100% with PEEP 5 and a pressure limit"
+          ],
+          "scene": "ventilated"
         }
       ]
     },
@@ -567,38 +615,32 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Hypotension: fluid first.",
-      "confirm": "Give these",
+      "hint": "Hypotension: fluid.",
+      "confirm": "Give",
       "opts": [
         {
           "t": "Crystalloid 500–1000 mL bolus",
+          "drug": "Crystalloid",
+          "dose": "500–1000 mL bolus",
           "fetch": "cart",
           "scene": "fluid",
           "mark": "Crystalloid 500–1000 mL for hypotension"
         },
         {
-          "t": "Flecainide for the broad complexes",
+          "t": "Crystalloid 100 mL",
+          "drug": "Crystalloid",
+          "dose": "100 mL",
           "fetch": "cart",
-          "trap": "critical",
-          "r": "Class Ic: more sodium-channel block. Avoid class Ia and Ic drugs in TCA poisoning."
-        }
-      ]
-    },
-    {
-      "id": "pressor",
-      "kind": "pick",
-      "to": "cart",
-      "label": "Drug cart",
-      "hint": "Still hypotensive after the fluid: a vasopressor.",
-      "confirm": "Give these",
-      "opts": [
+          "trap": true,
+          "r": "Too little to treat hypotension: 500–1000 mL, then reassess."
+        },
         {
-          "t": "Noradrenaline infusion",
+          "t": "Crystalloid 3 L as fast as possible",
+          "drug": "Crystalloid",
+          "dose": "3 L as fast as possible",
           "fetch": "cart",
-          "when": "fluid",
-          "early": "Give the fluid first.",
-          "scene": "norad",
-          "mark": "Noradrenaline if still hypotensive after fluid"
+          "trap": true,
+          "r": "Too much without reassessment: 500–1000 mL, then reassess; bicarbonate is the main treatment."
         }
       ]
     },
@@ -627,16 +669,34 @@
       "to": "cart",
       "label": "Drug cart",
       "hint": "About an hour, a life-threatening load, airway protected.",
-      "confirm": "Give these",
+      "confirm": "Give",
       "opts": [
         {
           "t": "Activated charcoal 50 g down the orogastric tube",
+          "drug": "Activated charcoal",
+          "dose": "50 g down the orogastric tube",
           "fetch": "cart",
-          "mark": "Activated charcoal 50 g via the orogastric tube",
           "when": [
             "intubated"
           ],
-          "early": "Her airway is not protected yet."
+          "early": "Her airway is not protected yet.",
+          "mark": "Activated charcoal 50 g via the orogastric tube"
+        },
+        {
+          "t": "Activated charcoal 10 g",
+          "drug": "Activated charcoal",
+          "dose": "10 g",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little: 50 g (about 1 g/kg) in an adult."
+        },
+        {
+          "t": "Activated charcoal 200 g",
+          "drug": "Activated charcoal",
+          "dose": "200 g",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much: 50 g (about 1 g/kg) in an adult."
         }
       ]
     },
@@ -745,12 +805,21 @@
           ]
         },
         {
-          "q": "VT persists at pH 7.5. Which antiarrhythmic?",
+          "q": "VT persists despite bicarbonate at pH 7.5. Next?",
           "a": "Lignocaine 1–1.5 mg/kg",
           "wrong": [
             "Amiodarone 300 mg",
             "Flecainide 2 mg/kg",
             "Procainamide 17 mg/kg"
+          ]
+        },
+        {
+          "q": "Still hypotensive after bicarbonate and 1 L of fluid?",
+          "a": "Start noradrenaline",
+          "wrong": [
+            "Another 3 L of fluid",
+            "Give physostigmine",
+            "Start a beta-blocker"
           ]
         },
         {
@@ -901,19 +970,25 @@
   ],
   "events": [
     {
-      "id": "seizure",
+      "id": "seizure-late",
       "after": "ecg-read",
-      "delayS": 15,
+      "delayS": 60,
+      "unless": "bicarb",
       "scene": "seizure",
       "say": "She is fitting: a generalised tonic–clonic seizure. SpO2 falling.",
-      "shakeUntil": "seizure-stopped"
+      "shakeUntil": "seizure-stopped",
+      "treatedBy": "seizure-stopped",
+      "untreated": "She fitted and never got a benzodiazepine."
     },
     {
-      "id": "vt",
-      "after": "intubated",
-      "delayS": 20,
-      "scene": "vt",
-      "say": "The monitor alarms: broad complex tachycardia at 180. She still has a pulse; BP 68/40."
+      "id": "seizure-arrival",
+      "level": "hard",
+      "delayS": 2,
+      "scene": "seizure",
+      "say": "As you reach the bed she starts fitting: a generalised tonic–clonic seizure.",
+      "shakeUntil": "seizure-stopped",
+      "treatedBy": "seizure-stopped",
+      "untreated": "She fitted and never got a benzodiazepine."
     }
   ]
 }
