@@ -222,6 +222,35 @@ export function currentPhase(pack: Pack, spent: Record<string, string[]>) {
   return null
 }
 
+export type NextHint = { kind: 'do'; actionId: string; targetId: string; option: string } | { kind: 'wait' }
+
+/**
+ * Guided mode: the next thing to do in the perfect script. Walks the phases (or the script order) and returns
+ * the first scoring option not yet used whose moment has come. Examiner steps are left to the examiner. When
+ * everything left is waiting on the patient (a seizure, VT), it says to watch.
+ */
+export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: string[]): NextHint | null {
+  const order = pack.phases?.length ? pack.phases.flatMap((p) => p.steps) : pack.goldPath
+  let waiting = false
+  for (const id of order) {
+    const a = pack.actions.find((x) => x.id === id)
+    if (!a || a.kind === 'viva' || a.kind === 'monitor' || a.targetIds.includes('examiner')) continue
+    const used = new Set(spent[a.id] ?? [])
+    const turnDone = new Set((a.options ?? []).filter((o) => used.has(o.id)).map((o) => o.group))
+    for (const o of a.options ?? []) {
+      if (o.isTrap || used.has(o.id) || !o.marksChecklistIds?.length) continue
+      if ((a.kind === 'dialogue') && turnDone.has(o.group)) continue
+      if (!(o.when ?? []).every((f) => scene.includes(f))) {
+        waiting = true
+        continue
+      }
+      return { kind: 'do', actionId: a.id, targetId: a.targetIds[0], option: o.label }
+    }
+    for (const f of a.findings ?? []) if (!used.has(f.id) && f.marksChecklistIds?.length) return { kind: 'do', actionId: a.id, targetId: a.targetIds[0], option: f.label }
+  }
+  return waiting ? { kind: 'wait' } : null
+}
+
 export function stepsDone(pack: Pack, spent: Record<string, string[]>) {
   const steps = pack.goldPath.map((id) => pack.actions.find((a) => a.id === id)).filter((a): a is Action => Boolean(a) && a!.kind !== 'monitor')
   const done = steps.filter((a) => actionDone(a, spent))

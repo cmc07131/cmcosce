@@ -20,6 +20,8 @@ export function freshSession(pack: Pack): Session {
     log: [],
     ended: null,
     scene: [],
+    // Cleared too, or "Run again" keeps the last run's effect timings.
+    sceneAt: {},
     seed: Math.floor(Math.random() * 2 ** 31),
     faults: [],
   }

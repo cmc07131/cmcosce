@@ -11,6 +11,10 @@ export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannul
 export type PerformKind = (typeof performKinds)[number]
 
 const performFields = {
+  /** Scene flags that must all be set before this is indicated. */
+  when: z.array(z.string()).optional(),
+  /** What the nurse says if it is asked for too early. */
+  early: z.string().optional(),
   /** An examination close-up played before the finding. */
   anim: z.string().optional(),
   perform: z.enum(performKinds).optional(),
@@ -221,6 +225,10 @@ export const packSchema = z.object({
   goldPath: z.array(z.string()),
   /** Phases of the perfect script; practice mode shows the current one as the objective. */
   phases: z.array(z.object({ title: z.string(), goal: z.string(), steps: z.array(z.string()) })).optional(),
+  /** The case changes by itself: a scene flag `delayS` after another (or after entering). */
+  events: z
+    .array(z.object({ id: z.string(), after: z.string().optional(), delayS: z.number(), scene: z.string(), say: z.string(), shakeUntil: z.string().optional() }))
+    .optional(),
   sequenceRules: z.array(
     z.object({
       id: z.string(),

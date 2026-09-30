@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { localizePack } from '~/engine/lang'
-import { currentPhase, hintFor, stepsDone } from '~/engine/judge'
+import { currentPhase, hintFor, nextHint, stepsDone } from '~/engine/judge'
 import { readoutText, type Action, type Pack } from '~/engine/schema'
 import { hasOutput, monitored, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
@@ -45,7 +45,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const sceneAt = usePlay((s) => s.sceneAt)
   const store = usePlay.getState
   const labels = useSettings((s) => s.labels)
-  const objectives = useSettings((s) => s.objectives)
+  const coach = useSettings((s) => s.coach)
   const screen = useRef<ScreenHandle>(null)
   const textBox = useRef<TextBoxHandle>(null)
   /** The START menu, or the door's hand-over question (the menu opened on its leave page). */
@@ -127,9 +127,26 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   }, [firstToast?.token, store])
 
   const progress = stepsDone(pack, spent)
-  // Practice mode: the current phase of the perfect script, until the examiner takes over.
-  const phase = currentPhase(pack, spent)
-  const objective = objectives && entered && !ended && phase ? phase : null
+  // Practice mode: the current phase of the perfect script, until the examiner takes over; guided adds the next action.
+  const coaching = coach !== 'off' && entered && !ended
+  const objective = coaching ? currentPhase(pack, spent) : null
+  const next = coaching && coach === 'guided' ? nextHint(pack, spent, scene ?? []) : null
+  const guideTarget = next?.kind === 'do' ? next.targetId : null
+
+  // The case changes by itself: a seizure, VT. Timers, not animation frames (a hidden pane pauses those).
+  useEffect(() => {
+    if (!hydrated || !entered || ended || !pack.events?.length) return
+    const id = window.setInterval(() => {
+      const cur = store()
+      const now = elapsedOf(pack, cur)
+      for (const ev of pack.events ?? []) {
+        if ((cur.scene ?? []).includes(ev.scene)) continue
+        const from = ev.after ? cur.sceneAt?.[ev.after] : 0
+        if (from !== undefined && now >= from + ev.delayS) cur.fireEvent(pack, ev.id)
+      }
+    }, 500)
+    return () => window.clearInterval(id)
+  }, [hydrated, entered, ended, pack, store])
   const allDone = progress.total > 0 && progress.done === progress.total
   useEffect(() => {
     if (!hydrated || !entered || ended || !allDone || announcedDone.current) return
@@ -254,12 +271,21 @@ export function PlayView({ pack: source }: { pack: Pack }) {
         <div className="screen">
           <div className="relative flex min-h-0 flex-1 flex-col">
             {/* In the flow above the map, so it never covers the room; the HUD sits over its top margin. */}
-            {objective && (
+            {(objective || next) && (
               <div className="objective" data-testid="objective" aria-live="polite">
-                <b>
-                  {objective.index + 1}/{objective.total} {objective.title.toUpperCase()}
-                </b>
-                <span>{objective.goal}</span>
+                {objective && (
+                  <>
+                    <b>
+                      {objective.index + 1}/{objective.total} {objective.title.toUpperCase()}
+                    </b>
+                    <span>{objective.goal}</span>
+                  </>
+                )}
+                {next && (
+                  <span className="objective-next" data-testid="guide-next">
+                    NEXT ▶ {next.kind === 'do' ? `${targetName(pack, next.targetId)}: ${next.option}` : 'Watch the patient and the monitor.'}
+                  </span>
+                )}
               </div>
             )}
             <Screen
@@ -273,6 +299,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
               labels={labels}
               monitorBpm={monitorBpm}
               monitorOff={!leadsOn}
+              guideTarget={overlay ? null : guideTarget}
               walks={walks}
               onWalkStop={(token, index, npcId) => {
                 // The nurse reports at the bedside: the stop before going home.

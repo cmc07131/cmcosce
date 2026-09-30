@@ -9,8 +9,8 @@ import { imageEntry } from '../game/imaging/library'
 import { burnPercent } from '../game/imaging/photos'
 import { airwayWidth, anteriorHumeralOffset, kleinCutsEpiphysis, neck, pelvis, symphysisWidth } from '../game/imaging/skeleton'
 import { fastRuq } from '../game/imaging/ultrasound'
-import { faultsFor } from '../game/store'
-import { currentPhase } from './judge'
+import { faultsFor, usePlay } from '../game/store'
+import { currentPhase, nextHint } from './judge'
 import { worldSchema } from '../world/model'
 import { packSchema } from './schema'
 import { compileStation, stationCards, stationSchema, type Station } from './station'
@@ -220,8 +220,11 @@ test('station scripts: each compiles, validates, and holds its own weight', () =
       assert.ok(ns.every((n) => n !== undefined), `${st.id}/${s.id}: every real step needs n`)
       assert.deepEqual([...ns].sort((a, b) => a! - b!), ns.map((_, i) => i + 1), `${st.id}/${s.id}: steps numbered 1..n`)
     }
-    // Every scene flag an effect waits for is set by some option.
-    const flags = new Set(st.steps.flatMap((s) => [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat(), ...(s.turns ?? []).flatMap((t) => t.opts)].map((o) => o.scene)))
+    // Every scene flag an effect waits for is set by some option or event.
+    const flags = new Set([
+      ...st.steps.flatMap((s) => [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat(), ...(s.turns ?? []).flatMap((t) => t.opts)].map((o) => o.scene)),
+      ...(st.events ?? []).map((e) => e.scene),
+    ])
     for (const e of st.vitals?.effects ?? []) assert.ok(flags.has(e.scene), `${st.id}: nothing sets scene ${e.scene}`)
     for (const s of st.vitals?.stop ?? []) assert.ok(flags.has(s), `${st.id}: nothing sets stop flag ${s}`)
   }
@@ -326,4 +329,32 @@ test('phases: the objective follows the perfect script and moves on as each phas
   assert.equal(currentPhase(pack, spent)?.title, 'ABC')
   for (const phase of pack.phases ?? []) for (const id of phase.steps) done(id)
   assert.equal(currentPhase(pack, spent), null)
+})
+
+test('guided mode points at the next scripted action, and waits for the patient when that is next', () => {
+  const pack = compileStation(stationSchema.parse(JSON.parse(readFileSync(files.find((f) => f.endsWith('acls-tca.json'))!, 'utf8'))))
+  const first = nextHint(pack, {}, [])
+  assert.equal(first?.kind === 'do' && first.actionId, 'arrive')
+  // Everything done except what waits on the seizure: the guide says to watch, not to give lorazepam early.
+  const spent: Record<string, string[]> = {}
+  for (const a of pack.actions) spent[a.id] = (a.options ?? []).filter((o) => !o.isTrap && !(o.when ?? []).length).map((o) => o.id)
+  assert.equal(nextHint(pack, spent, ['ecg-read'])?.kind, 'wait')
+  const seizing = nextHint(pack, spent, ['ecg-read', 'seizure'])
+  assert.equal(seizing?.kind === 'do' && seizing.actionId, 'seizure-tx')
+})
+
+test('a drug asked for before it is indicated is not given, not spent, and scores a fault', () => {
+  const pack = compileStation(stationSchema.parse(JSON.parse(readFileSync(files.find((f) => f.endsWith('acls-tca.json'))!, 'utf8'))))
+  const s = () => usePlay.getState()
+  s().rerun(pack)
+  s().enterRoom()
+  const vt = pack.actions.find((a) => a.id === 'vt-tx')!
+  const bicarb = vt.options!.find((o) => o.marksChecklistIds?.length)!
+  s().confirmOptions(pack, 'vt-tx', [bicarb.id])
+  assert.equal((s().spent['vt-tx'] ?? []).length, 0, 'not spent')
+  assert.equal(s().errands.length, 0, 'the nurse fetches nothing')
+  assert.ok(s().faults.some((f) => /Too early/.test(f.text)))
+  s().fireEvent(pack, 'vt')
+  s().confirmOptions(pack, 'vt-tx', [bicarb.id])
+  assert.deepEqual(s().spent['vt-tx'], [bicarb.id])
 })

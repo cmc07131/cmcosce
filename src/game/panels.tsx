@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Action, ActionOption, Pack } from '~/engine/schema'
 import { hasOutput, monitored, vitalsAt, vitalsLine } from '~/engine/vitals'
-import { CUT_IN_MS, CutIn, cutInKinds, type CutInKind } from './CutIn'
+import { CutIn, cutInKinds, cutInMs, type CutInKind } from './CutIn'
 import { ecgById } from './ecg/atlas'
 import { beats, sample } from './ecg/model'
 import { Film, FilmButton } from './imaging/Film'
-import { elapsedOf, usePlay } from './store'
+import { elapsedOf, indicated, usePlay } from './store'
 import { NavItem, Win } from './ui'
 
 /** Same order every time for one run, different between runs: the right answer is never always first. */
@@ -52,15 +52,17 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
   const used = new Set(spent)
   const rows = (action.options ?? []).filter((o) => (o.group ?? '') === tab)
   // Hands on first: the close-up plays, then the finding appears.
+  const scene = usePlay((s) => s.scene)
   const examine = (o: NonNullable<typeof action.options>[number]) => {
     if (playing) return
-    if (!o.anim || !(cutInKinds as readonly string[]).includes(o.anim)) return onOption(o.id)
+    // Not indicated yet: refused at once, without playing the close-up.
+    if (!o.anim || !indicated(o, scene ?? []) || !(cutInKinds as readonly string[]).includes(o.anim)) return onOption(o.id)
     const reading = replyText(o).match(/\d+(?:\.\d+)?/)?.[0]
     setPlaying({ id: o.id, kind: o.anim as CutInKind, reading })
     window.setTimeout(() => {
       setPlaying(null)
       onOption(o.id)
-    }, CUT_IN_MS)
+    }, cutInMs(o.anim as CutInKind))
   }
   const verb = action.kind === 'history' ? 'Ask' : action.kind === 'exam' ? 'Examine' : 'Order'
   return (

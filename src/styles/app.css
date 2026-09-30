@@ -653,8 +653,36 @@ button {
   line-height: 1.3;
 }
 
+.objective .objective-next {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  line-height: 1.5;
+  color: #1a6a38;
+}
+
+/* Guided mode: a bouncing arrow over where to go next. */
+.guide-arrow {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  font-family: var(--font-pixel);
+  font-size: 18px;
+  color: #f8d030;
+  text-shadow: 1px 1px 0 #181820, -1px -1px 0 #181820, 1px -1px 0 #181820, -1px 1px 0 #181820;
+  animation: guide-bob 0.7s steps(2) infinite;
+}
+
+@keyframes guide-bob {
+  50% {
+    margin-top: -4px;
+  }
+}
+
+/* With the objective box above the room, marks pop up at the bottom of the room instead. */
 .objective ~ .toast {
-  top: 92px;
+  top: auto;
+  bottom: 8px;
 }
 
 /* Examination close-ups, played before the finding. */
@@ -709,8 +737,23 @@ button {
 @keyframes ci-drop { from { r: 0; } to { r: 3; } }
 .ci-reading { animation: ci-reading 1.4s steps(1) both; }
 @keyframes ci-reading { 0%, 70% { opacity: 0; } 71%, 100% { opacity: 1; } }
-.ci-tube { animation: ci-tube 1.4s ease-in both; }
-@keyframes ci-tube { from { transform: translate(40px, -60px); } 30% { transform: translate(40px, -60px); } to { transform: translate(0, 0); } }
+.ix-blade-in { animation: ix-blade-in 0.8s ease-out both; }
+@keyframes ix-blade-in { from { transform: translate(30px, -40px); } to { transform: translate(0, 0); } }
+.ix-lift { animation: ix-lift 0.8s ease-out both; }
+@keyframes ix-lift { from { transform: translate(0, 0); } to { transform: translate(6px, -8px); } }
+.ix-tongue { transition: all 0.6s ease-out; }
+.ix-tube { animation: ix-tube 0.85s ease-in both; }
+@keyframes ix-tube { from { transform: translate(-40px, -60px); } to { transform: translate(0, 0); } }
+.ix-squeeze { animation: ix-squeeze 0.45s ease-in-out infinite alternate; transform-origin: 130px 36px; }
+@keyframes ix-squeeze { to { transform: scaleY(0.6); } }
+.ix-syringe { animation: ix-syringe 0.8s ease-in both; }
+@keyframes ix-syringe { from { transform: translateX(0); } to { transform: translateX(-10px); } }
+.ix-pilot, .ix-cuff { animation: ix-inflate 0.8s ease-out both; transform-box: fill-box; transform-origin: center; }
+@keyframes ix-inflate { from { transform: scale(0.4); } to { transform: scale(1); } }
+.ix-capno { stroke-dasharray: 400; animation: ix-draw 0.85s linear both; }
+@keyframes ix-draw { from { stroke-dashoffset: 400; } to { stroke-dashoffset: 0; } }
+.ix-tie { stroke-dasharray: 200; animation: ix-draw-tie 0.8s ease-out both; }
+@keyframes ix-draw-tie { from { stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
 .ci-palpate { animation: ci-palpate 1.4s ease-in-out both; }
 @keyframes ci-palpate { from { transform: translate(60px, 60px) rotate(-90deg); } 50% { transform: translate(100px, 96px) rotate(-90deg); } to { transform: translate(120px, 96px) rotate(-90deg); } }
 

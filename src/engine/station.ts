@@ -36,6 +36,10 @@ const optSchema = z.object({
   /** Perform detail, e.g. an exam test and the lesion side: "eyes:right". */
   pose: z.string().optional(),
   performHint: z.string().optional(),
+  /** Only indicated once these scene flags are set (e.g. 'vt'): picked earlier, it is not given and scores a fault. */
+  when: z.union([z.string(), z.array(z.string())]).optional(),
+  /** Why it is not yet indicated, said by the nurse (e.g. "She isn't in VT."). */
+  early: z.string().optional(),
   /** An examination close-up played before the finding (see CutIn). */
   anim: z.enum(['gloves', 'packet', 'airway', 'auscultate', 'pulse', 'pupils', 'glucose', 'abdomen', 'intubate']).optional(),
 })
@@ -99,6 +103,21 @@ export const stationSchema = z.object({
    * objective; it never blocks acting out of order. Each step belongs to at most one phase.
    */
   phases: z.array(z.object({ title: z.string(), goal: z.string(), steps: z.array(z.string()).min(1) })).optional(),
+  /**
+   * The case changes by itself: `delayS` seconds after the `after` scene flag (or after entering), `scene` is set
+   * and `say` is announced (a seizure, VT). Vitals effects and `when` options key off the scene.
+   */
+  events: z
+    .array(z.object({
+        id: z.string(),
+        after: z.string().optional(),
+        delayS: z.number().nonnegative(),
+        scene: z.string(),
+        say: z.string(),
+        /** The patient shakes on the bed from this event until this scene flag (e.g. a seizure until lorazepam). */
+        shakeUntil: z.string().optional(),
+      }))
+    .optional(),
   review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing', 'unverified']), text: z.string() })).optional(),
   cast: z
     .array(
@@ -353,6 +372,8 @@ export function compileStation(station: Station): Pack {
       performPose: o.pose,
       performHint: o.performHint,
       anim: o.anim,
+      when: o.when === undefined ? undefined : Array.isArray(o.when) ? o.when : [o.when],
+      early: o.early,
     }
   }
 
@@ -434,6 +455,15 @@ export function compileStation(station: Station): Pack {
       phased.add(id)
     }
   }
+  // Every `when` flag must be one the station can actually set: by an option or by an event.
+  const settable = new Set([
+    ...station.steps.flatMap((s) => [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat(), ...(s.turns ?? []).flatMap((t) => t.opts)]).flatMap((o) => (o.scene ? [o.scene] : [])),
+    ...(station.events ?? []).map((e) => e.scene),
+  ])
+  for (const s of station.steps)
+    for (const o of [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat()])
+      for (const flag of o.when === undefined ? [] : Array.isArray(o.when) ? o.when : [o.when])
+        if (!settable.has(flag)) throw new Error(`${station.id}: ${s.id} waits for '${flag}', which nothing sets`)
   const targetIds = new Set([...cast.map((c) => c.id), ...tpl.room.interactables.map((i) => i.id)])
   for (const action of actions) {
     for (const t of action.targetIds) if (!targetIds.has(t)) throw new Error(`${station.id}: step ${action.id} walks to unknown ${t}`)
@@ -457,6 +487,7 @@ export function compileStation(station: Station): Pack {
     actions,
     goldPath: station.steps.map((s) => s.id),
     phases: station.phases,
+    events: station.events,
     sequenceRules: (station.rules ?? []).map((rule) => ({
       id: rule.id,
       earlierAny: rule.first,

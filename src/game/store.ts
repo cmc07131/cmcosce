@@ -66,6 +66,19 @@ function errandsFor(options: ActionOption[]): Errand[] {
 /** Scene effects of an option the nurse fetches wait for the bedside; everything else starts at once. */
 const startsNow = (o: ActionOption) => !o.fetch
 
+/** Is it indicated yet? Options with `when` wait for those scene flags (a seizure, VT, the fluid in). */
+export function indicated(o: ActionOption, scene: string[]) {
+  return (o.when ?? []).every((flag) => scene.includes(flag))
+}
+
+/** Asked for too early: not given, not spent, a fault, and the nurse says why. */
+function tooEarly(pack: Pack, action: Action, rows: ActionOption[]) {
+  const faults: Fault[] = rows.map((o) => ({ actionId: action.id, text: `Too early: "${o.label}". ${o.early ?? 'It was not indicated yet.'}` }))
+  const nurse = pack.cast.find((c) => c.role === 'nurse')?.id
+  const line = `Not now, doctor. ${rows[0]?.early ?? "She doesn't need that yet."}`
+  return { faults, msg: nurse ? message(line, 'say', nurse) : message(line, 'warn') }
+}
+
 type PlayState = Session & {
   hydrated: boolean
   /** Fetch-and-give jobs waiting for the nurse, oldest first. Not saved: a reload finds them done. */
@@ -73,6 +86,8 @@ type PlayState = Session & {
   takeErrand: (token: number) => void
   /** The nurse is at the bedside: the job's effects start now. */
   deliverErrand: (pack: Pack, token: number) => void
+  /** The case changes by itself (a seizure, VT): set the event's scene and announce it. */
+  fireEvent: (pack: Pack, eventId: string) => void
   overlay: Overlay | null
   msg: Msg | null
   toasts: Toast[]
@@ -214,6 +229,14 @@ export const usePlay = create<PlayState>((set, get) => ({
 
   takeErrand: (token) => set({ errands: get().errands.filter((e) => e.token !== token) }),
 
+  fireEvent: (pack, eventId) => {
+    const ev = pack.events?.find((e) => e.id === eventId)
+    const cur = get()
+    if (!ev || (cur.scene ?? []).includes(ev.scene)) return
+    const sceneAt = { ...(cur.sceneAt ?? {}), [ev.scene]: elapsedOf(pack, cur) }
+    set({ scene: [...(cur.scene ?? []), ev.scene], sceneAt, msg: message(ev.say, 'warn') })
+  },
+
   deliverErrand: (pack, token) => {
     const job = get().errands.find((e) => e.token === token)
     if (!job || job.kind !== 'give' || !job.scenes.length) return
@@ -309,6 +332,11 @@ export const usePlay = create<PlayState>((set, get) => ({
     if (!action || !option) return
     const cur = get()
     if ((cur.spent[actionId] ?? []).includes(optionId)) return
+    if (!option.isTrap && !indicated(option, cur.scene ?? [])) {
+      const early = tooEarly(pack, action, [option])
+      set({ faults: [...(cur.faults ?? []), ...early.faults], msg: early.msg })
+      return
+    }
     const applied = applyTalkOption(action, option, cur.inventory, (id) => itemLabel(pack, id))
     if (applied.lockedReason) {
       set({ msg: message(applied.lockedReason, 'warn') })
@@ -348,7 +376,15 @@ export const usePlay = create<PlayState>((set, get) => ({
     if (!action) return
     const cur = get()
     const already = new Set(cur.spent[actionId] ?? [])
-    const freshIds = optionIds.filter((id) => !already.has(id))
+    const asked = (action.options ?? []).filter((row) => optionIds.includes(row.id) && !already.has(row.id))
+    // Not indicated yet: held back, scored, and the nurse says so. The rest goes ahead.
+    const early = asked.filter((row) => !row.isTrap && !indicated(row, cur.scene ?? []))
+    if (early.length) {
+      const e = tooEarly(pack, action, early)
+      set({ faults: [...(cur.faults ?? []), ...e.faults], msg: e.msg })
+    }
+    const freshIds = asked.filter((row) => !early.includes(row)).map((row) => row.id)
+    if (!freshIds.length) return
     const chosen = (action.options ?? []).filter((row) => freshIds.includes(row.id))
     const immediate = chosen.filter((row) => row.isTrap || !row.perform).map((row) => row.id)
     const gestured = chosen.filter((row) => !row.isTrap && row.perform)

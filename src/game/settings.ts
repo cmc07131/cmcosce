@@ -3,19 +3,25 @@ import type { PatientLang } from '~/engine/lang'
 
 const KEY = 'osce-gym:settings'
 
-type Stored = { sound: boolean; labels: boolean; patientLang: PatientLang; objectives: boolean }
+/** Practice help: `guided` shows the objective and exactly what to do next; `objectives` only the phase; `off` like the exam. */
+export type Coach = 'guided' | 'objectives' | 'off'
+
+type Stored = { sound: boolean; labels: boolean; patientLang: PatientLang; coach: Coach }
 
 /**
  * `labels` shows NPC name tags on the map. Kit labels always show. Patients speak Cantonese by default.
- * `objectives` shows the current phase of the station (practice); off rehearses like the real exam.
+ * `coach` is guided by default: the phase, and the next action in the perfect script.
  */
-const defaults: Stored = { sound: false, labels: false, patientLang: 'zh', objectives: true }
+const defaults: Stored = { sound: false, labels: false, patientLang: 'zh', coach: 'guided' }
 
 function read(): Stored {
   try {
     const raw = localStorage.getItem(KEY)
     if (!raw) return defaults
-    return { ...defaults, ...(JSON.parse(raw) as Partial<Stored>) }
+    const stored = JSON.parse(raw) as Partial<Stored> & { objectives?: boolean }
+    // Older saves had an on/off objectives switch.
+    const coach = stored.coach ?? (stored.objectives === false ? 'off' : defaults.coach)
+    return { ...defaults, ...stored, coach }
   } catch {
     return defaults
   }
@@ -35,13 +41,13 @@ type SettingsState = Stored & {
   toggleSound: () => void
   toggleLabels: () => void
   toggleLang: () => void
-  toggleObjectives: () => void
+  cycleCoach: () => void
 }
 
 /** Sound is off until the player turns it on. Loaded on the client only, so SSR renders the defaults. */
 export const useSettings = create<SettingsState>((set, get) => {
   const save = (patch: Partial<Stored>) => {
-    const next: Stored = { sound: get().sound, labels: get().labels, patientLang: get().patientLang, objectives: get().objectives, ...patch }
+    const next: Stored = { sound: get().sound, labels: get().labels, patientLang: get().patientLang, coach: get().coach, ...patch }
     write(next)
     set(next)
   }
@@ -55,6 +61,6 @@ export const useSettings = create<SettingsState>((set, get) => {
     toggleSound: () => save({ sound: !get().sound }),
     toggleLabels: () => save({ labels: !get().labels }),
     toggleLang: () => save({ patientLang: get().patientLang === 'zh' ? 'en' : 'zh' }),
-    toggleObjectives: () => save({ objectives: !get().objectives }),
+    cycleCoach: () => save({ coach: get().coach === 'guided' ? 'objectives' : get().coach === 'objectives' ? 'off' : 'guided' }),
   }
 })

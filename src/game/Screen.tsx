@@ -104,6 +104,8 @@ export const Screen = forwardRef<
     monitorBpm?: number
     /** No leads on yet: the monitor screen is dark. */
     monitorOff?: boolean
+    /** Guided mode: an interactable or cast id to point at. */
+    guideTarget?: string | null
     /**
      * Cast members on the move: each walk visits its stops in turn — an interactable or cast id ('cart',
      * 'patient'), '@player' (stand beside the candidate) or '@home' (back to their spot).
@@ -117,7 +119,7 @@ export const Screen = forwardRef<
     onFacing: (targetId: string | null) => void
     onBump: () => void
   }
->(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, monitorOff, walks, onWalkStop, onWalkDone, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
+>(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, monitorOff, guideTarget, walks, onWalkStop, onWalkDone, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
   const { cols, rows } = pack.room
   // Where each cast member stands now; most never move, the examiner may walk over.
   const npcTile = useRef<Record<string, Tile>>(Object.fromEntries(pack.cast.map((c) => [c.id, c.spawn])))
@@ -303,7 +305,13 @@ export const Screen = forwardRef<
       const role = npc.pixelKey ?? npc.role
       const bedBox = role === 'patient' ? beds.find((b) => inside(npc.spawn, b) && b.w >= b.h) : undefined
       if (bedBox) {
+        // A seizure: she shakes on the bed until it is treated.
+        const shaking = (pack.events ?? []).some((e) => e.shakeUntil && flags.includes(e.scene) && !flags.includes(e.shakeUntil))
+        const jitter = shaking ? (Math.floor(now / 70) % 2 ? 1 : -1) : 0
+        c.save()
+        c.translate(jitter, shaking && Math.floor(now / 110) % 2 ? 1 : 0)
         drawPatientInBed(c, bedBox, LOOKS.patient, bedPose(flags), flags, talking === npc.id && Math.floor(now / 140) % 2 === 0)
+        c.restore()
         continue
       }
       const at = npcVis.current[npc.id] ?? { x: npc.spawn.x, y: npc.spawn.y, facing: null }
@@ -577,6 +585,16 @@ export const Screen = forwardRef<
   }))
 
   const px = TILE * scale
+  const guideAt = (() => {
+    if (!guideTarget) return null
+    const npc = pack.cast.find((c) => c.id === guideTarget)
+    if (npc) {
+      const at = tagTiles[npc.id] ?? npc.spawn
+      return { x: at.x + 0.5, y: at.y }
+    }
+    const item = pack.room.interactables.find((i) => i.id === guideTarget)
+    return item ? { x: item.x + (item.w ?? 1) / 2, y: item.y - (item.label.trim() ? 0.55 : 0) } : null
+  })()
   const tags = [
     ...pack.room.interactables
       .filter((item) => item.label.trim() && item.kind !== 'door')
@@ -605,6 +623,11 @@ export const Screen = forwardRef<
         }}
       >
         <canvas ref={canvas} width={cols * TILE} height={rows * TILE} className="pixelated block h-full w-full" />
+        {guideAt && (
+          <span className="guide-arrow" data-testid="guide-arrow" style={{ left: guideAt.x * px, top: guideAt.y * px - 4 }}>
+            ▼
+          </span>
+        )}
         {slapFx && (
           <div
             key={slapFx.key}

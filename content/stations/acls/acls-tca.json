@@ -25,11 +25,12 @@
     },
     {
       "title": "ECG",
-      "goal": "Read the 12-lead before any drug. Treat what it shows from the drug cart, get ready for VT and seizures, then repeat the ECG.",
+      "goal": "Read the 12-lead before any drug and treat what it shows. Get ready for VT. Watch her: treat what happens next, then repeat the ECG.",
       "steps": [
         "ecg",
         "bicarb",
         "pads",
+        "seizure-tx",
         "repeat-ecg"
       ]
     },
@@ -44,10 +45,12 @@
       ]
     },
     {
-      "title": "Circulation",
-      "goal": "Still hypotensive? Treat it in steps from the drug cart. Know the one antiarrhythmic you may use.",
+      "title": "Deterioration",
+      "goal": "Watch the monitor after the tube. If the rhythm changes, treat it the TCA way. Then the blood pressure, one step at a time.",
       "steps": [
-        "circulation"
+        "vt-tx",
+        "fluid",
+        "pressor"
       ]
     },
     {
@@ -121,6 +124,32 @@
         "overS": 30
       },
       {
+        "scene": "bicarb",
+        "add": {
+          "sbp": 12,
+          "dbp": 6,
+          "hr": -8
+        },
+        "overS": 60,
+        "rhythm": "tca-bicarb"
+      },
+      {
+        "scene": "seizure",
+        "add": {
+          "spo2": -8,
+          "hr": 18
+        },
+        "overS": 10
+      },
+      {
+        "scene": "seizure-stopped",
+        "add": {
+          "spo2": 8,
+          "hr": -18
+        },
+        "overS": 20
+      },
+      {
         "scene": "intubated",
         "set": {
           "spo2": 98,
@@ -129,14 +158,44 @@
         }
       },
       {
-        "scene": "bicarb",
+        "scene": "vt",
+        "set": {
+          "hr": 180
+        },
+        "add": {
+          "sbp": -24,
+          "dbp": -8
+        },
+        "overS": 5,
+        "rhythm": "vt"
+      },
+      {
+        "scene": "vt-bicarb",
+        "set": {
+          "hr": 112
+        },
+        "add": {
+          "sbp": 18,
+          "dbp": 6
+        },
+        "overS": 30,
+        "rhythm": "tca-bicarb"
+      },
+      {
+        "scene": "fluid",
+        "add": {
+          "sbp": 8,
+          "dbp": 4
+        },
+        "overS": 30
+      },
+      {
+        "scene": "norad",
         "add": {
           "sbp": 16,
-          "dbp": 8,
-          "hr": -10
+          "dbp": 10
         },
-        "overS": 60,
-        "rhythm": "tca-bicarb"
+        "overS": 40
       }
     ],
     "showWhen": "monitored"
@@ -282,7 +341,8 @@
       "opts": [
         {
           "t": "Sinus tachycardia, QRS over 100 ms, tall terminal R in aVR: sodium-channel blockade.",
-          "mark": "Reads the ECG: broad QRS and tall R in aVR, sodium-channel blockade"
+          "mark": "Reads the ECG: broad QRS and tall R in aVR, sodium-channel blockade",
+          "scene": "ecg-read"
         },
         {
           "t": "Broad complex tachycardia: VT. Amiodarone 300 mg.",
@@ -306,7 +366,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Treat the broad QRS before anything else, and have the seizure drug ready.",
+      "hint": "Treat the broad QRS before anything else.",
       "confirm": "Give these",
       "opts": [
         {
@@ -315,11 +375,6 @@
           "need": true,
           "scene": "bicarb",
           "mark": "Sodium bicarbonate 8.4% 1–2 mmol/kg rapid bolus for the broad QRS"
-        },
-        {
-          "t": "Lorazepam 4 mg drawn up and labelled, ready for a seizure",
-          "fetch": "cart",
-          "mark": "Benzodiazepine ready for seizures"
         },
         {
           "t": "Amiodarone 300 mg IV for the broad complexes",
@@ -363,6 +418,31 @@
       ]
     },
     {
+      "id": "seizure-tx",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "She is fitting: a benzodiazepine, and more bicarbonate.",
+      "confirm": "Give these",
+      "opts": [
+        {
+          "t": "Lorazepam 4 mg IV",
+          "fetch": "cart",
+          "when": "seizure",
+          "early": "She isn't fitting.",
+          "scene": "seizure-stopped",
+          "mark": "Seizure: lorazepam"
+        },
+        {
+          "t": "A further sodium bicarbonate 8.4% 50–100 mL IV",
+          "fetch": "cart",
+          "when": "seizure",
+          "early": "Wait and see what the ECG does.",
+          "mark": "Seizure: a further bicarbonate bolus"
+        }
+      ]
+    },
+    {
       "id": "repeat-ecg",
       "kind": "say",
       "to": "monitor",
@@ -372,7 +452,9 @@
       "opts": [
         {
           "t": "After bicarbonate the QRS has narrowed to about 100 ms and the rate is slower. Keep the pH 7.45–7.55.",
-          "mark": "Repeats the ECG and sees the QRS narrow"
+          "mark": "Repeats the ECG and sees the QRS narrow",
+          "when": "bicarb",
+          "early": "The bicarbonate is not in yet."
         }
       ]
     },
@@ -431,7 +513,9 @@
             "anim": "intubate",
             "scene": "intubated",
             "r": "Grade 1 view. 7.0 tube at 21 cm. ETCO2 trace on every breath.",
-            "mark": "Intubates after the bicarbonate and confirms with capnography"
+            "mark": "Intubates after the bicarbonate and confirms with capnography",
+            "when": "bicarb",
+            "early": "The bicarbonate is not in yet: the apnoea of RSI would acidify her and widen the QRS."
           }
         ]
       }
@@ -455,35 +539,66 @@
       ]
     },
     {
-      "id": "circulation",
+      "id": "vt-tx",
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Fluids, then a vasopressor. For VT once alkalinised: lignocaine.",
+      "hint": "VT with a pulse after TCA: more bicarbonate first.",
+      "confirm": "Give these",
+      "opts": [
+        {
+          "t": "Sodium bicarbonate 8.4% 100 mL rapid IV for the VT",
+          "fetch": "cart",
+          "when": "vt",
+          "early": "She isn't in VT.",
+          "scene": "vt-bicarb",
+          "mark": "VT: a further bicarbonate bolus first"
+        },
+        {
+          "t": "Lignocaine 1–1.5 mg/kg IV for VT once the pH is 7.5",
+          "fetch": "cart",
+          "when": "vt",
+          "early": "She isn't in VT."
+        }
+      ]
+    },
+    {
+      "id": "fluid",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Hypotension: fluid first.",
       "confirm": "Give these",
       "opts": [
         {
           "t": "Crystalloid 500–1000 mL bolus",
           "fetch": "cart",
-          "need": true,
+          "scene": "fluid",
           "mark": "Crystalloid 500–1000 mL for hypotension"
-        },
-        {
-          "t": "Noradrenaline infusion if still hypotensive after fluid",
-          "fetch": "cart",
-          "need": true,
-          "mark": "Noradrenaline if still hypotensive"
-        },
-        {
-          "t": "Lignocaine 1–1.5 mg/kg drawn up for VT once the pH is 7.5",
-          "fetch": "cart",
-          "mark": "Lignocaine for VT once the pH is already 7.5"
         },
         {
           "t": "Flecainide for the broad complexes",
           "fetch": "cart",
           "trap": "critical",
           "r": "Class Ic: more sodium-channel block. Avoid class Ia and Ic drugs in TCA poisoning."
+        }
+      ]
+    },
+    {
+      "id": "pressor",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Still hypotensive after the fluid: a vasopressor.",
+      "confirm": "Give these",
+      "opts": [
+        {
+          "t": "Noradrenaline infusion",
+          "fetch": "cart",
+          "when": "fluid",
+          "early": "Give the fluid first.",
+          "scene": "norad",
+          "mark": "Noradrenaline if still hypotensive after fluid"
         }
       ]
     },
@@ -498,7 +613,11 @@
         {
           "t": "Orogastric tube, placed and checked",
           "fetch": "trolley",
-          "mark": "Orogastric tube once the airway is protected"
+          "mark": "Orogastric tube once the airway is protected",
+          "when": [
+            "intubated"
+          ],
+          "early": "Not until she is intubated."
         }
       ]
     },
@@ -513,7 +632,11 @@
         {
           "t": "Activated charcoal 50 g down the orogastric tube",
           "fetch": "cart",
-          "mark": "Activated charcoal 50 g via the orogastric tube"
+          "mark": "Activated charcoal 50 g via the orogastric tube",
+          "when": [
+            "intubated"
+          ],
+          "early": "Her airway is not protected yet."
         }
       ]
     },
@@ -650,7 +773,7 @@
       ],
       "then": [
         "bicarb",
-        "circulation"
+        "fluid"
       ],
       "fail": "Drugs were given before the ECG was read.",
       "ok": "The ECG was read before other drugs."
@@ -774,6 +897,23 @@
       ],
       "why": "Later use may be considered for delayed-release or anticholinergic drugs.",
       "source": "AACT/EAPCCT"
+    }
+  ],
+  "events": [
+    {
+      "id": "seizure",
+      "after": "ecg-read",
+      "delayS": 15,
+      "scene": "seizure",
+      "say": "She is fitting: a generalised tonic–clonic seizure. SpO2 falling.",
+      "shakeUntil": "seizure-stopped"
+    },
+    {
+      "id": "vt",
+      "after": "intubated",
+      "delayS": 20,
+      "scene": "vt",
+      "say": "The monitor alarms: broad complex tachycardia at 180. She still has a pulse; BP 68/40."
     }
   ]
 }

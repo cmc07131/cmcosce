@@ -22,6 +22,8 @@ function drain(pack: Pack) {
     usePlay.getState().deliverErrand(pack, job.token)
     usePlay.getState().takeErrand(job.token)
   }
+  // The case moves on without waiting for the clock: each event whose trigger has happened fires now.
+  for (const ev of pack.events ?? []) if (!ev.after || usePlay.getState().scene.includes(ev.after)) usePlay.getState().fireEvent(pack, ev.id)
 }
 
 /** The best line in each turn: the one that scores, else the first that is not a trap. */
@@ -82,7 +84,11 @@ test('every station can be finished with full marks, no faults, and every rule m
     for (const v of judgeSequence(pack.sequenceRules, end.log)) if (v.status !== 'pass') problems.push(`${pack.packId}: rule ${v.id} fails on the script order`)
     // Effects a good option sets must fire; effects only a trap sets (a worse patient) must not.
     const fired = new Set(end.scene)
-    const byGood = new Set(pack.actions.flatMap((a) => (a.options ?? []).filter((o) => !o.isTrap).flatMap((o) => (Array.isArray(o.scene) ? o.scene : o.scene ? [o.scene] : []))))
+    const byGood = new Set([
+      ...pack.actions.flatMap((a) => (a.options ?? []).filter((o) => !o.isTrap).flatMap((o) => (Array.isArray(o.scene) ? o.scene : o.scene ? [o.scene] : []))),
+      // The case deteriorating by itself (a seizure, VT) is part of the script.
+      ...(pack.events ?? []).map((e) => e.scene),
+    ])
     for (const e of pack.vitals?.effects ?? []) {
       if (byGood.has(e.scene) && !fired.has(e.scene)) problems.push(`${pack.packId}: vitals effect ${e.scene} never fires on a perfect run`)
       if (!byGood.has(e.scene) && fired.has(e.scene)) problems.push(`${pack.packId}: trap-only effect ${e.scene} fired on a perfect run`)

@@ -1,9 +1,15 @@
+import { INTUBATE_MS, IntubateSequence } from './Intubate';
 /**
  * A short close-up of the doctor's hands doing an examination, played before the finding appears.
  * Pure SVG with CSS animation; each lasts about 1.5 s.
  */
 
 export const CUT_IN_MS = 1500;
+
+/** How long a close-up plays: intubation is a sequence of its own. */
+export function cutInMs(kind: CutInKind) {
+  return kind === 'intubate' ? INTUBATE_MS : CUT_IN_MS;
+}
 
 export const cutInKinds = [
   "gloves",
@@ -74,6 +80,7 @@ export function CutIn({
   kind: CutInKind;
   reading?: string;
 }) {
+  if (kind === 'intubate') return <IntubateSequence />;
   return (
     <div className="cut-in" data-testid={`cut-in-${kind}`} role="status">
       <svg viewBox="0 0 200 120" className="cut-in-art">
@@ -335,39 +342,6 @@ export function CutIn({
               fill="#f0f0e8"
               stroke="#7a8a98"
             />
-          </g>
-        )}
-        {kind === "intubate" && (
-          <g>
-            {/* the view down the laryngoscope: epiglottis lifted, cords, the tube passing through */}
-            <rect width="200" height="120" fill="#2a1418" />
-            <ellipse cx="100" cy="64" rx="70" ry="46" fill="#a04858" />
-            <path
-              d="M60 40 Q100 22 140 40 Q120 34 100 34 Q80 34 60 40"
-              fill="#e89098"
-            />
-            <path d="M100 60 L80 100 L120 100 Z" fill="#1a0c10" />
-            <path
-              d="M100 60 L80 100 M100 60 L120 100"
-              stroke="#fffef4"
-              strokeWidth="4"
-            />
-            <g className="ci-tube">
-              <path
-                d="M160 0 Q120 60 102 92"
-                stroke="#e8f0f8"
-                strokeWidth="12"
-                fill="none"
-                strokeLinecap="round"
-              />
-              <path
-                d="M160 0 Q120 60 102 92"
-                stroke="#9ab8d0"
-                strokeWidth="2"
-                fill="none"
-              />
-            </g>
-            <rect x="0" y="0" width="200" height="16" fill="#c0c8d0" />
           </g>
         )}
         {kind === "abdomen" && (
