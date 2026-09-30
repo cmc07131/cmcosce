@@ -5,11 +5,44 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 9. Mr Stephens, 83, was found on his kitchen floor this morning by his son. He has left hip pain and feels sick. Take a history, then discuss investigations and your plan.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "Why he fell, what he hurt, and the long lie.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Findings and tests",
+      "goal": "What to check.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Plan",
+      "goal": "Treatment and falls prevention.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "missing", "text": "The World Falls Guidelines (2022) add a frailty assessment and prefer case-finding with risk stratification to a single risk score. Your template otherwise matches."}
+    {
+      "tag": "missing",
+      "text": "The World Falls Guidelines (2022) add a frailty assessment and prefer case-finding with risk stratification to a single risk score. Your template otherwise matches."
+    }
   ],
   "notes": "Checked against NICE CG161 (Falls in older people, 2013; new NG249 falls guideline 2025 draft/publication noted), the World Falls Guidelines (Age and Ageing 2022), and NICE CG124 (hip fracture).\n\nA fall is a symptom: find why he fell (syncope, arrhythmia, postural hypotension, stroke, infection, hypoglycaemia, medicines, alcohol, trip), what he injured (hip fracture, head injury — anticoagulants lower the CT threshold), and what the long lie caused (rhabdomyolysis, pressure injury, hypothermia, dehydration, AKI). Then a multifactorial risk assessment: previous falls, gait and mobility, medication review (sedatives, antihypertensives), vision, cognition, continence, home hazards, fear of falling, bone health.\n\nYour template and marking scheme match this well. The World Falls Guidelines add frailty assessment and prefer 'opportunistic case-finding' and risk stratification over single scores.",
-  "cast": [{ "id": "patient", "name": "Mr Stephens", "role": "elderly", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Stephens",
+      "role": "elderly",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "history",
@@ -18,25 +51,96 @@
       "label": "History",
       "hint": "Before, during and after the fall; injuries; long lie; PMH, drugs, social, function.",
       "groups": {
-        "Start": [{ "t": "Are you in pain? Can I get you something?", "tz": "你有冇痛？我攞啲止痛藥俾你好嗎？", "rz": "我左邊髖關節痛到死。好呀，唔該。", "r": "My left hip is killing me. Yes please.", "mark": "Offers analgesia" }],
+        "Start": [
+          {
+            "t": "Are you in pain? Can I get you something?",
+            "tz": "你有冇痛？我攞啲止痛藥俾你好嗎？",
+            "rz": "我左邊髖關節痛到死。好呀，唔該。",
+            "r": "My left hip is killing me. Yes please.",
+            "mark": "Offers analgesia"
+          }
+        ],
         "Before": [
-          { "t": "What were you doing when you fell?", "tz": "你跌嗰陣做緊咩？", "rz": "半夜去完廁所，起身行去廚房攞水飲。", "r": "Getting up from the toilet at night to go to the kitchen for water.", "mark": "Asks the activity at the time" },
-          { "t": "Any warning — dizziness, palpitations, chest pain?", "tz": "跌之前有冇預兆——頭暈、心跳、心口痛？", "rz": "企起身嗰陣覺得頭輕輕，跟住就喺地下喇。", "r": "I felt light-headed when I stood up, then I was on the floor.", "mark": "Asks prodromal symptoms" }
+          {
+            "t": "What were you doing when you fell?",
+            "tz": "你跌嗰陣做緊咩？",
+            "rz": "半夜去完廁所，起身行去廚房攞水飲。",
+            "r": "Getting up from the toilet at night to go to the kitchen for water.",
+            "mark": "Asks the activity at the time"
+          },
+          {
+            "t": "Any warning — dizziness, palpitations, chest pain?",
+            "tz": "跌之前有冇預兆——頭暈、心跳、心口痛？",
+            "rz": "企起身嗰陣覺得頭輕輕，跟住就喺地下喇。",
+            "r": "I felt light-headed when I stood up, then I was on the floor.",
+            "mark": "Asks prodromal symptoms"
+          }
         ],
         "During": [
-          { "t": "Did you black out? Did you hit your head?", "tz": "你有冇暈低？有冇撞到個頭？", "rz": "我諗冇。冇撞到頭。", "r": "I don't think so. I didn't hit my head.", "mark": "Asks about loss of consciousness and head injury" },
-          { "t": "Any tongue biting, wet yourself, jerking?", "tz": "有冇咬到條脷、失禁，或者手腳抽搐？", "rz": "冇。", "r": "No." }
+          {
+            "t": "Did you black out? Did you hit your head?",
+            "tz": "你有冇暈低？有冇撞到個頭？",
+            "rz": "我諗冇。冇撞到頭。",
+            "r": "I don't think so. I didn't hit my head.",
+            "mark": "Asks about loss of consciousness and head injury"
+          },
+          {
+            "t": "Any tongue biting, wet yourself, jerking?",
+            "tz": "有冇咬到條脷、失禁，或者手腳抽搐？",
+            "rz": "冇。",
+            "r": "No."
+          }
         ],
         "After": [
-          { "t": "Could you get up? How long were you on the floor?", "tz": "你自己起唔起到身？喺地下躺咗幾耐？", "rz": "起唔到身。大概六個鐘，個仔嚟到先發現。", "r": "Couldn't get up. About 6 hours until my son came.", "mark": "Asks about the long lie" },
-          { "t": "Any other pain, weakness, confusion since?", "tz": "之後有冇其他地方痛、冇力，或者混亂？", "rz": "淨係髖關節。同埋想嘔。", "r": "Just the hip. And I feel sick." }
+          {
+            "t": "Could you get up? How long were you on the floor?",
+            "tz": "你自己起唔起到身？喺地下躺咗幾耐？",
+            "rz": "起唔到身。大概六個鐘，個仔嚟到先發現。",
+            "r": "Couldn't get up. About 6 hours until my son came.",
+            "mark": "Asks about the long lie"
+          },
+          {
+            "t": "Any other pain, weakness, confusion since?",
+            "tz": "之後有冇其他地方痛、冇力，或者混亂？",
+            "rz": "淨係髖關節。同埋想嘔。",
+            "r": "Just the hip. And I feel sick."
+          }
         ],
         "Background": [
-          { "t": "Previous falls?", "tz": "以前有冇跌過？", "rz": "今年跌過兩次。", "r": "Twice this year.", "mark": "Asks about previous falls" },
-          { "t": "Medical conditions and medicines", "tz": "你有咩病？食緊咩藥？", "rz": "血壓高，同埋前列腺。食緊 amlodipine、doxazosin、一隻去水丸，同埋安眠藥。", "r": "High blood pressure, prostate. Amlodipine, doxazosin, a water tablet, and sleeping tablets.", "mark": "Takes a medication history (falls risk drugs)" },
-          { "t": "Blood thinners?", "tz": "有冇食薄血藥？", "rz": "冇。", "r": "No.", "mark": "Asks about anticoagulants" },
-          { "t": "Who do you live with? How do you get around? Help at home?", "tz": "你同邊個住？平時點行動？屋企有冇人幫手？", "rz": "老婆過咗身之後一個人住。用枴杖行。個仔日日都嚟探我。", "r": "Alone since my wife died. Walk with a stick. Son visits daily.", "mark": "Asks social situation and mobility" },
-          { "t": "Eyesight, memory, alcohol", "tz": "你眼睛、記性點？有冇飲酒？", "rz": "左眼有白內障。記性還可以。夜晚飲一杯威士忌。", "r": "Cataract in my left eye. Memory OK. A glass of whisky at night." }
+          {
+            "t": "Previous falls?",
+            "tz": "以前有冇跌過？",
+            "rz": "今年跌過兩次。",
+            "r": "Twice this year.",
+            "mark": "Asks about previous falls"
+          },
+          {
+            "t": "Medical conditions and medicines",
+            "tz": "你有咩病？食緊咩藥？",
+            "rz": "血壓高，同埋前列腺。食緊 amlodipine、doxazosin、一隻去水丸，同埋安眠藥。",
+            "r": "High blood pressure, prostate. Amlodipine, doxazosin, a water tablet, and sleeping tablets.",
+            "mark": "Takes a medication history (falls risk drugs)"
+          },
+          {
+            "t": "Blood thinners?",
+            "tz": "有冇食薄血藥？",
+            "rz": "冇。",
+            "r": "No.",
+            "mark": "Asks about anticoagulants"
+          },
+          {
+            "t": "Who do you live with? How do you get around? Help at home?",
+            "tz": "你同邊個住？平時點行動？屋企有冇人幫手？",
+            "rz": "老婆過咗身之後一個人住。用枴杖行。個仔日日都嚟探我。",
+            "r": "Alone since my wife died. Walk with a stick. Son visits daily.",
+            "mark": "Asks social situation and mobility"
+          },
+          {
+            "t": "Eyesight, memory, alcohol",
+            "tz": "你眼睛、記性點？有冇飲酒？",
+            "rz": "左眼有白內障。記性還可以。夜晚飲一杯威士忌。",
+            "r": "Cataract in my left eye. Memory OK. A glass of whisky at night."
+          }
         ]
       }
     },
@@ -48,25 +152,64 @@
       "hint": "Lying and standing BP, ECG, glucose, CK, bloods, hip film.",
       "groups": {
         "Bedside": [
-          { "t": "Lying and standing blood pressure", "r": "154/80 lying, 118/66 standing with dizziness.", "mark": "Checks for postural hypotension" },
-          { "t": "12-lead ECG", "r": "Sinus rhythm, first-degree block.", "img": "ecg:avb1", "mark": "ECG for arrhythmia" },
-          { "t": "Capillary glucose, temperature", "r": "6.4; 35.9 °C.", "mark": "Glucose and temperature" }
+          {
+            "t": "Lying and standing blood pressure",
+            "r": "154/80 lying, 118/66 standing with dizziness.",
+            "mark": "Checks for postural hypotension"
+          },
+          {
+            "t": "12-lead ECG",
+            "r": "Sinus rhythm, first-degree block.",
+            "img": "ecg:avb1",
+            "mark": "ECG for arrhythmia"
+          },
+          {
+            "t": "Capillary glucose, temperature",
+            "r": "6.4; 35.9 °C.",
+            "mark": "Glucose and temperature"
+          }
         ],
-        "Bloods": [{ "t": "FBC, U&E, CK, bone profile", "r": "Creatinine 140 (baseline 90), CK 3100.", "mark": "CK and renal function after a long lie" }],
-        "X-ray": [{ "t": "Left hip X-ray", "r": "Displaced intracapsular neck of femur fracture.", "img": "xr:hip-nof", "mark": "Hip X-ray: neck of femur fracture" }]
+        "Bloods": [
+          {
+            "t": "FBC, U&E, CK, bone profile",
+            "r": "Creatinine 140 (baseline 90), CK 3100.",
+            "mark": "CK and renal function after a long lie"
+          }
+        ],
+        "X-ray": [
+          {
+            "t": "Left hip X-ray",
+            "r": "Displaced intracapsular neck of femur fracture.",
+            "img": "xr:hip-nof",
+            "mark": "Hip X-ray: neck of femur fracture"
+          }
+        ]
       }
     },
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner", "ask": "Thank you. What is your plan?",
+      "to": "examiner",
+      "ask": "Thank you. What is your plan?",
       "label": "Plan",
       "hint": "Treat the injury, the cause and the consequences; multifactorial falls assessment.",
       "opts": [
-        { "t": "Fascia iliaca block and paracetamol; orthopaedics for surgery within 36 hours", "mark": "Analgesia (nerve block) and hip fracture pathway" },
-        { "t": "IV fluids for AKI and rhabdomyolysis; monitor urine output", "mark": "Treats the consequences of the long lie" },
-        { "t": "Postural hypotension: review doxazosin, diuretic, sleeping tablets", "mark": "Medication review for falls risk" },
-        { "t": "Geriatric and therapy assessment: falls, bone health, home safety, alarm", "mark": "Multifactorial falls assessment and bone health" }
+        {
+          "t": "Fascia iliaca block and paracetamol; orthopaedics for surgery within 36 hours",
+          "mark": "Analgesia (nerve block) and hip fracture pathway"
+        },
+        {
+          "t": "IV fluids for AKI and rhabdomyolysis; monitor urine output",
+          "mark": "Treats the consequences of the long lie"
+        },
+        {
+          "t": "Postural hypotension: review doxazosin, diuretic, sleeping tablets",
+          "mark": "Medication review for falls risk"
+        },
+        {
+          "t": "Geriatric and therapy assessment: falls, bone health, home safety, alarm",
+          "mark": "Multifactorial falls assessment and bone health"
+        }
       ]
     },
     {
@@ -75,21 +218,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Postural hypotension is a systolic fall of at least…", "a": "20 mmHg within 3 minutes of standing", "wrong": ["5 mmHg on standing", "50 mmHg within 10 minutes of standing up", "Any fall in blood pressure on standing up"] },
-        { "q": "Complication of a long lie?", "a": "Rhabdomyolysis", "wrong": ["Spontaneous pneumothorax", "Acute appendicitis", "Acute gout"] },
-        { "q": "Target time to hip fracture surgery (NICE)?", "a": "Day of or after admission (within 36 h)", "wrong": ["Within 1 week of admission", "Within 1 hour", "Only once medically stable, usually at 2 weeks"] },
-        { "q": "Which drug class increases falls risk?", "a": "Alpha-blockers and sedatives", "wrong": ["Statins such as atorvastatin", "Proton pump inhibitors such as omeprazole", "Vitamin D and calcium tablets"] },
-        { "q": "Nerve block for a hip fracture in ED?", "a": "Fascia iliaca block", "wrong": ["Interscalene", "Digital nerve block of the toes", "Femoral nerve block is contraindicated"] }
+        {
+          "q": "Postural hypotension is a systolic fall of at least…",
+          "a": "20 mmHg within 3 minutes of standing",
+          "wrong": [
+            "5 mmHg on standing",
+            "50 mmHg within 10 minutes of standing up",
+            "Any fall in blood pressure on standing up"
+          ]
+        },
+        {
+          "q": "Complication of a long lie?",
+          "a": "Rhabdomyolysis",
+          "wrong": [
+            "Spontaneous pneumothorax",
+            "Acute appendicitis",
+            "Acute gout"
+          ]
+        },
+        {
+          "q": "Target time to hip fracture surgery (NICE)?",
+          "a": "Day of or after admission (within 36 h)",
+          "wrong": [
+            "Within 1 week of admission",
+            "Within 1 hour",
+            "Only once medically stable, usually at 2 weeks"
+          ]
+        },
+        {
+          "q": "Which drug class increases falls risk?",
+          "a": "Alpha-blockers and sedatives",
+          "wrong": [
+            "Statins such as atorvastatin",
+            "Proton pump inhibitors such as omeprazole",
+            "Vitamin D and calcium tablets"
+          ]
+        },
+        {
+          "q": "Nerve block for a hip fracture in ED?",
+          "a": "Fascia iliaca block",
+          "wrong": [
+            "Interscalene",
+            "Digital nerve block of the toes",
+            "Femoral nerve block is contraindicated"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Why He Fell", "emoji": "🧓", "flavor": "The cause, the injury, the long lie, then the risks." },
+  "badge": {
+    "name": "Why He Fell",
+    "emoji": "🧓",
+    "flavor": "The cause, the injury, the long lie, then the risks."
+  },
   "cards": [
-    { "q": "Three questions in any fall?", "options": ["Why, what was injured, what did the lie cause", "Where, who saw it, and how much it hurt", "When, what time, and which floor", "The pain score only"], "why": "Cause, injury, consequences.", "source": "NICE CG161 / World Falls Guidelines" },
-    { "q": "Lying and standing BP is measured after standing for…", "options": ["1 and 3 minutes", "10 seconds after standing", "30 minutes", "It doesn't matter"], "why": "A fall of ≥20 systolic or ≥10 diastolic.", "source": "RCP guidance" },
-    { "q": "CK is raised after a long lie because of…", "options": ["Rhabdomyolysis", "Myocardial infarction always", "Liver injury", "Anaemia from occult bleeding"], "why": "Risk of AKI.", "source": "Clinical practice" },
-    { "q": "Hip fracture analgesia in ED?", "options": ["Nerve block plus paracetamol", "Regular NSAIDs such as ibuprofen for everyone", "Nothing until theatre", "IM morphine only, as needed, on the ward"], "why": "Fascia iliaca or femoral nerve block.", "source": "NICE CG124" },
-    { "q": "Falls-risk medicine to review?", "options": ["Benzodiazepine hypnotics", "Regular paracetamol for joint pain", "Vitamin D and calcium supplements", "Omeprazole"], "why": "Also antihypertensives, antipsychotics, opioids.", "source": "STOPPFall" },
-    { "q": "After a fall with fracture, what else is assessed?", "options": ["Bone health (osteoporosis)", "Hearing only, with an audiogram", "Dental health and dentures", "Thyroid function in all"], "why": "Secondary fracture prevention.", "source": "NICE" }
+    {
+      "q": "Three questions in any fall?",
+      "options": [
+        "Why, what was injured, what did the lie cause",
+        "Where, who saw it, and how much it hurt",
+        "When, what time, and which floor",
+        "The pain score only"
+      ],
+      "why": "Cause, injury, consequences.",
+      "source": "NICE CG161 / World Falls Guidelines"
+    },
+    {
+      "q": "Lying and standing BP is measured after standing for…",
+      "options": [
+        "1 and 3 minutes",
+        "10 seconds after standing",
+        "30 minutes",
+        "It doesn't matter"
+      ],
+      "why": "A fall of ≥20 systolic or ≥10 diastolic.",
+      "source": "RCP guidance"
+    },
+    {
+      "q": "CK is raised after a long lie because of…",
+      "options": [
+        "Rhabdomyolysis",
+        "Myocardial infarction always",
+        "Liver injury",
+        "Anaemia from occult bleeding"
+      ],
+      "why": "Risk of AKI.",
+      "source": "Clinical practice"
+    },
+    {
+      "q": "Hip fracture analgesia in ED?",
+      "options": [
+        "Nerve block plus paracetamol",
+        "Regular NSAIDs such as ibuprofen for everyone",
+        "Nothing until theatre",
+        "IM morphine only, as needed, on the ward"
+      ],
+      "why": "Fascia iliaca or femoral nerve block.",
+      "source": "NICE CG124"
+    },
+    {
+      "q": "Falls-risk medicine to review?",
+      "options": [
+        "Benzodiazepine hypnotics",
+        "Regular paracetamol for joint pain",
+        "Vitamin D and calcium supplements",
+        "Omeprazole"
+      ],
+      "why": "Also antihypertensives, antipsychotics, opioids.",
+      "source": "STOPPFall"
+    },
+    {
+      "q": "After a fall with fracture, what else is assessed?",
+      "options": [
+        "Bone health (osteoporosis)",
+        "Hearing only, with an audiogram",
+        "Dental health and dentures",
+        "Thyroid function in all"
+      ],
+      "why": "Secondary fracture prevention.",
+      "source": "NICE"
+    }
   ]
 }

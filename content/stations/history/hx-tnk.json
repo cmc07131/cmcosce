@@ -5,15 +5,65 @@
   "type": "comms",
   "time": 420,
   "stem": "Resus 2 in a hospital without on-site PCI; the nearest PCI centre is 2½ hours away by road. Mr Siu, 53, has had crushing central chest pain for 2 hours. BP 150/80, HR 78, SpO2 98% in air. Take a focused history, interpret the ECG, and discuss treatment with him.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "The pain, the risk factors, and the contraindications to lysis.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "ECG and drugs",
+      "goal": "The ECG, then antiplatelets, anticoagulant and analgesia from the cart.",
+      "steps": [
+        "ecg",
+        "drugs"
+      ]
+    },
+    {
+      "title": "Consent",
+      "goal": "Explain, why not PCI here, the risks, and let him decide.",
+      "steps": [
+        "consent"
+      ]
+    },
+    {
+      "title": "Lysis",
+      "goal": "He agrees: the thrombolytic at the right dose.",
+      "steps": [
+        "lysis"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Aspirin and oxygen. Your notes (from a 2018 tutorial) give aspirin 160 mg and oxygen if SpO2 is under 94%. ESC 2023 gives aspirin 150–300 mg, and oxygen only if SpO2 is under 90%."}
+    {
+      "tag": "outdated",
+      "text": "Aspirin and oxygen. Your notes (from a 2018 tutorial) give aspirin 160 mg and oxygen if SpO2 is under 94%. ESC 2023 gives aspirin 150–300 mg, and oxygen only if SpO2 is under 90%."
+    }
   ],
   "notes": "Checked against the ESC 2023 guidelines for acute coronary syndromes and the Hong Kong Hospital Authority STEMI pathway.\n\nReperfusion: primary PCI if it can be done within 120 minutes of diagnosis; otherwise fibrinolysis within 10 minutes of diagnosis (tenecteplase weight-based, half dose if 75 years or over), then transfer to a PCI centre: rescue PCI if it fails (less than 50% ST resolution at 60–90 minutes), angiography within 2–24 hours if it works (pharmaco-invasive strategy, outcomes similar to primary PCI in STREAM). Adjuncts: aspirin 150–300 mg, clopidogrel 300 mg (75 mg if 75 or older), enoxaparin or unfractionated heparin. Oxygen only if SpO2 is under 90%. Absolute contraindications include previous ICH or stroke of unknown origin, ischaemic stroke in 6 months, CNS lesion, recent major trauma/surgery/head injury (1 month), GI bleeding in 1 month, known bleeding disorder, aortic dissection, non-compressible punctures in 24 hours.\n\nYour notes (based on a 2018 NTWC tutorial) give aspirin 160 mg and oxygen if SpO2 under 94%; ESC 2023 uses 150–300 mg and under 90%. The rest (history, contraindications, and the argument that delaying for PCI transfer is worse) matches.",
   "cast": [
-    { "id": "patient", "name": "Mr Siu", "role": "patient", "inBed": true },
-    { "id": "nurse", "name": "Nurse Kam", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mr Siu",
+      "role": "patient",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Kam",
+      "role": "nurse"
+    }
   ],
-  "vitals": { "hr": 78, "sbp": 150, "dbp": 80, "spo2": 98, "rr": 18, "rhythm": "stemi-anterior" },
+  "vitals": {
+    "hr": 78,
+    "sbp": 150,
+    "dbp": 80,
+    "spo2": 98,
+    "rr": 18,
+    "rhythm": "stemi-anterior"
+  },
   "steps": [
     {
       "id": "history",
@@ -23,14 +73,52 @@
       "hint": "SOCRATES briefly, risk factors, and contraindications to fibrinolysis.",
       "groups": {
         "Pain": [
-          { "t": "Tell me about the pain", "tz": "講吓個痛係點樣？", "rz": "心口中間好似俾嘢壓住咁，痛到落左手，兩個鐘前行上斜嗰陣開始。出晒冷汗，想嘔。", "r": "Crushing in the middle of my chest, to my left arm, started 2 hours ago walking up a hill. Sweating, feel sick.", "mark": "Characterises the pain and onset time" }
+          {
+            "t": "Tell me about the pain",
+            "tz": "講吓個痛係點樣？",
+            "rz": "心口中間好似俾嘢壓住咁，痛到落左手，兩個鐘前行上斜嗰陣開始。出晒冷汗，想嘔。",
+            "r": "Crushing in the middle of my chest, to my left arm, started 2 hours ago walking up a hill. Sweating, feel sick.",
+            "mark": "Characterises the pain and onset time"
+          }
         ],
-        "Risks": [{ "t": "Smoking, diabetes, BP, cholesterol, family history", "tz": "有冇食煙、糖尿病、血壓高、膽固醇高？屋企人有冇心臟病？", "rz": "有食煙，一日三十支。膽固醇高。爸爸五十五歲心臟病發。", "r": "Smoker, 30 a day. High cholesterol. Father had a heart attack at 55.", "mark": "Asks cardiovascular risk factors" }],
+        "Risks": [
+          {
+            "t": "Smoking, diabetes, BP, cholesterol, family history",
+            "tz": "有冇食煙、糖尿病、血壓高、膽固醇高？屋企人有冇心臟病？",
+            "rz": "有食煙，一日三十支。膽固醇高。爸爸五十五歲心臟病發。",
+            "r": "Smoker, 30 a day. High cholesterol. Father had a heart attack at 55.",
+            "mark": "Asks cardiovascular risk factors"
+          }
+        ],
         "Contraindications": [
-          { "t": "Any previous stroke, brain bleed or brain tumour?", "tz": "以前有冇中過風、腦出血，或者腦瘤？", "rz": "冇。", "r": "No.", "mark": "Screens for intracranial contraindications" },
-          { "t": "Any recent bleeding, stomach ulcer, surgery or head injury?", "tz": "最近有冇出血、胃潰瘍、做過手術，或者撞傷過個頭？", "rz": "冇。", "r": "No.", "mark": "Screens for bleeding, surgery and trauma" },
-          { "t": "Tearing pain through to the back?", "tz": "有冇撕裂咁痛，穿到背脊？", "rz": "冇，淨係前面痛。", "r": "No, it's in the front.", "mark": "Considers aortic dissection" },
-          { "t": "Blood thinners, Viagra, allergies?", "tz": "有冇食薄血藥、偉哥？有冇藥物敏感？", "rz": "都冇。", "r": "None.", "mark": "Asks drugs and allergies" }
+          {
+            "t": "Any previous stroke, brain bleed or brain tumour?",
+            "tz": "以前有冇中過風、腦出血，或者腦瘤？",
+            "rz": "冇。",
+            "r": "No.",
+            "mark": "Screens for intracranial contraindications"
+          },
+          {
+            "t": "Any recent bleeding, stomach ulcer, surgery or head injury?",
+            "tz": "最近有冇出血、胃潰瘍、做過手術，或者撞傷過個頭？",
+            "rz": "冇。",
+            "r": "No.",
+            "mark": "Screens for bleeding, surgery and trauma"
+          },
+          {
+            "t": "Tearing pain through to the back?",
+            "tz": "有冇撕裂咁痛，穿到背脊？",
+            "rz": "冇，淨係前面痛。",
+            "r": "No, it's in the front.",
+            "mark": "Considers aortic dissection"
+          },
+          {
+            "t": "Blood thinners, Viagra, allergies?",
+            "tz": "有冇食薄血藥、偉哥？有冇藥物敏感？",
+            "rz": "都冇。",
+            "r": "None.",
+            "mark": "Asks drugs and allergies"
+          }
         ]
       }
     },
@@ -41,8 +129,21 @@
       "label": "ECG and tests",
       "hint": "12-lead within 10 minutes; bloods; chest film if it doesn't delay.",
       "groups": {
-        "ECG": [{ "t": "12-lead ECG", "r": "ST elevation V1–V4 with reciprocal inferior depression: acute anterior STEMI.", "img": "ecg:stemi-anterior", "mark": "Diagnoses anterior STEMI" }],
-        "Bloods": [{ "t": "FBC, clotting, U&E, troponin, glucose, lipids", "r": "Sent.", "mark": "Baseline bloods without delaying reperfusion" }]
+        "ECG": [
+          {
+            "t": "12-lead ECG",
+            "r": "ST elevation V1–V4 with reciprocal inferior depression: acute anterior STEMI.",
+            "img": "ecg:stemi-anterior",
+            "mark": "Diagnoses anterior STEMI"
+          }
+        ],
+        "Bloods": [
+          {
+            "t": "FBC, clotting, U&E, troponin, glucose, lipids",
+            "r": "Sent.",
+            "mark": "Baseline bloods without delaying reperfusion"
+          }
+        ]
       }
     },
     {
@@ -50,14 +151,65 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Aspirin, clopidogrel, anticoagulant, analgesia; no oxygen unless hypoxic.",
+      "hint": "Antiplatelets, anticoagulant and analgesia for a STEMI going for lysis.",
       "confirm": "Give",
       "opts": [
-        { "t": "Aspirin 300 mg chewed", "fetch": "cart", "need": true, "mark": "Aspirin loading" },
-        { "t": "Clopidogrel 300 mg", "fetch": "cart", "need": true, "mark": "Clopidogrel with fibrinolysis" },
-        { "t": "Enoxaparin (weight-based)", "fetch": "cart", "need": true, "mark": "Anticoagulant with fibrinolysis" },
-        { "t": "GTN and IV morphine for pain", "fetch": "cart", "need": true, "mark": "Analgesia" },
-        { "t": "High-flow oxygen for everyone with chest pain", "trap": true, "r": "Oxygen only if SpO2 is below 90% (ESC 2023)." }
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "Aspirin loading",
+          "t": "Aspirin 300 mg chewed",
+          "drug": "Aspirin",
+          "dose": "300 mg chewed"
+        },
+        {
+          "t": "Aspirin 75 mg",
+          "drug": "Aspirin",
+          "dose": "75 mg",
+          "fetch": "cart",
+          "trap": true,
+          "r": "The loading dose is 150–300 mg."
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "Clopidogrel with fibrinolysis",
+          "t": "Clopidogrel 300 mg (75 mg if 75 or older)",
+          "drug": "Clopidogrel",
+          "dose": "300 mg (75 mg if 75 or older)"
+        },
+        {
+          "t": "Clopidogrel 600 mg",
+          "drug": "Clopidogrel",
+          "dose": "600 mg",
+          "fetch": "cart",
+          "trap": true,
+          "r": "With fibrinolysis the load is 300 mg (75 mg if 75 or older); 600 mg is for primary PCI."
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "Anticoagulant with fibrinolysis",
+          "t": "Enoxaparin 30 mg IV bolus, then 1 mg/kg SC (under 75)",
+          "drug": "Enoxaparin",
+          "dose": "30 mg IV bolus, then 1 mg/kg SC (under 75)"
+        },
+        {
+          "t": "Enoxaparin 1.5 mg/kg IV bolus",
+          "drug": "Enoxaparin",
+          "dose": "1.5 mg/kg IV bolus",
+          "fetch": "cart",
+          "trap": true,
+          "r": "With tenecteplase: 30 mg IV, then 1 mg/kg SC 12-hourly (no IV bolus if 75 or over)."
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "Analgesia",
+          "t": "GTN and morphine GTN 400 microgram SL; morphine 2.5–5 mg IV, titrated",
+          "drug": "GTN and morphine",
+          "dose": "GTN 400 microgram SL; morphine 2.5–5 mg IV, titrated"
+        }
       ]
     },
     {
@@ -69,25 +221,95 @@
       "mood": 5,
       "turns": [
         {
-          "line": "What's going on, doctor?", "lz": "醫生，我搞咩呀？",
+          "line": "What's going on, doctor?",
+          "lz": "醫生，我搞咩呀？",
           "opts": [
-            { "t": "You're having a heart attack: an artery to the heart is blocked by a clot. We need to open it quickly to save heart muscle.", "tz": "你而家心臟病發：一條供血俾心臟嘅血管俾血塊塞住咗。我哋要快啲打通佢，救返啲心肌。", "rz": "點樣整？", "r": "How?", "mood": -1, "mark": "Explains STEMI simply" },
-            { "t": "Anterior STEMI.", "tz": "Anterior STEMI。", "rz": "吓？", "r": "Eh?", "mood": 2 }
+            {
+              "t": "You're having a heart attack: an artery to the heart is blocked by a clot. We need to open it quickly to save heart muscle.",
+              "tz": "你而家心臟病發：一條供血俾心臟嘅血管俾血塊塞住咗。我哋要快啲打通佢，救返啲心肌。",
+              "rz": "點樣整？",
+              "r": "How?",
+              "mood": -1,
+              "mark": "Explains STEMI simply"
+            },
+            {
+              "t": "Anterior STEMI.",
+              "tz": "Anterior STEMI。",
+              "rz": "吓？",
+              "r": "Eh?",
+              "mood": 2
+            }
           ]
         },
         {
-          "line": "How?", "lz": "點樣整？",
+          "line": "How?",
+          "lz": "點樣整？",
           "opts": [
-            { "t": "The fastest way here is an injection that dissolves the clot. It works in most people. The main risk is bleeding — serious bleeding in about 1 in 20, and bleeding in the brain in about 1 in 100.", "tz": "喺度最快嘅方法係打一支溶血栓針。大部分人都有效。主要風險係出血——大概每二十個有一個嚴重出血，每一百個有一個腦出血。", "rz": "我寧願去大醫院通波仔。", "r": "I'd rather go to the big hospital for the balloon.", "mood": 0, "mark": "Explains fibrinolysis benefits and risks with numbers" },
-            { "t": "Trust me, it's fine.", "tz": "信我啦，冇事嘅。", "rz": "有咩風險？", "r": "What are the risks?", "mood": 2 }
+            {
+              "t": "The fastest way here is an injection that dissolves the clot. It works in most people. The main risk is bleeding — serious bleeding in about 1 in 20, and bleeding in the brain in about 1 in 100.",
+              "tz": "喺度最快嘅方法係打一支溶血栓針。大部分人都有效。主要風險係出血——大概每二十個有一個嚴重出血，每一百個有一個腦出血。",
+              "rz": "我寧願去大醫院通波仔。",
+              "r": "I'd rather go to the big hospital for the balloon.",
+              "mood": 0,
+              "mark": "Explains fibrinolysis benefits and risks with numbers"
+            },
+            {
+              "t": "Trust me, it's fine.",
+              "tz": "信我啦，冇事嘅。",
+              "rz": "有咩風險？",
+              "r": "What are the risks?",
+              "mood": 2
+            }
           ]
         },
         {
-          "line": "I'd rather go to the big hospital for the balloon.", "lz": "我寧願去大醫院通波仔。",
+          "line": "I'd rather go to the big hospital for the balloon.",
+          "lz": "我寧願去大醫院通波仔。",
           "opts": [
-            { "t": "The balloon is best only if it can be done within 2 hours; the journey alone is 2½. Every minute counts — 'time is muscle'. We'll give the injection now and then transfer you for an angiogram within 24 hours anyway.", "tz": "通波仔要喺兩個鐘內做到先係最好；單係車程已經要兩個半鐘。每一分鐘都好重要——「時間就係心肌」。我哋而家先打針，之後無論點都會喺二十四個鐘內轉你去做血管造影。", "rz": "好，做啦。", "r": "OK, go ahead.", "mood": -3, "mark": "Explains the pharmaco-invasive strategy and time dependence" },
-            { "t": "Fine, we'll send you.", "tz": "好，咁送你過去。", "rz": "好。", "r": "OK.", "mood": 0 }
+            {
+              "t": "The balloon is best only if it can be done within 2 hours; the journey alone is 2½. Every minute counts — 'time is muscle'. We'll give the injection now and then transfer you for an angiogram within 24 hours anyway.",
+              "tz": "通波仔要喺兩個鐘內做到先係最好；單係車程已經要兩個半鐘。每一分鐘都好重要——「時間就係心肌」。我哋而家先打針，之後無論點都會喺二十四個鐘內轉你去做血管造影。",
+              "rz": "好，做啦。",
+              "r": "OK, go ahead.",
+              "mood": -3,
+              "mark": "Explains the pharmaco-invasive strategy and time dependence",
+              "scene": "consented"
+            },
+            {
+              "t": "Fine, we'll send you.",
+              "tz": "好，咁送你過去。",
+              "rz": "好。",
+              "r": "OK.",
+              "mood": 0
+            }
           ]
+        }
+      ]
+    },
+    {
+      "id": "lysis",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Consent given: the thrombolytic, dosed by weight.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Tenecteplase weight-based single IV bolus (0.5 mg/kg, maximum 50 mg)",
+          "drug": "Tenecteplase",
+          "dose": "weight-based single IV bolus (0.5 mg/kg, maximum 50 mg)",
+          "fetch": "cart",
+          "when": "consented",
+          "early": "Discuss it with him first.",
+          "mark": "Tenecteplase at the weight-based dose once he agrees"
+        },
+        {
+          "t": "Tenecteplase 100 mg IV bolus",
+          "drug": "Tenecteplase",
+          "dose": "100 mg IV bolus",
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Double the maximum: 0.5 mg/kg, no more than 50 mg (half dose if 75 or over)."
         }
       ]
     },
@@ -97,21 +319,126 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "When is fibrinolysis preferred to primary PCI (ESC 2023)?", "a": "When PCI can't be done within 120 minutes", "wrong": ["Always, as first line", "When the patient is over 75", "Only for inferior STEMI"] },
-        { "q": "Sign of failed fibrinolysis?", "a": "Under 50% ST resolution at 60–90 minutes", "wrong": ["Complete relief of the chest pain within 60 minutes", "A reperfusion arrhythmia such as AIVR", "A rise in the troponin"] },
-        { "q": "After successful fibrinolysis, angiography is…", "a": "Within 2–24 hours", "wrong": ["Not needed if successful", "After 6 weeks", "Only if symptoms recur"] },
-        { "q": "Absolute contraindication to fibrinolysis?", "a": "Previous intracranial haemorrhage", "wrong": ["Diabetic retinopathy on the last eye screen", "Age over 75 with treated hypertension", "Current smoker"] },
-        { "q": "Tenecteplase dose adjustment at 75 or older?", "a": "Half dose", "wrong": ["Double dose", "No change", "Contraindicated"] }
+        {
+          "q": "When is fibrinolysis preferred to primary PCI (ESC 2023)?",
+          "a": "When PCI can't be done within 120 minutes",
+          "wrong": [
+            "Always, as first line",
+            "When the patient is over 75",
+            "Only for inferior STEMI"
+          ]
+        },
+        {
+          "q": "Sign of failed fibrinolysis?",
+          "a": "Under 50% ST resolution at 60–90 minutes",
+          "wrong": [
+            "Complete relief of the chest pain within 60 minutes",
+            "A reperfusion arrhythmia such as AIVR",
+            "A rise in the troponin"
+          ]
+        },
+        {
+          "q": "After successful fibrinolysis, angiography is…",
+          "a": "Within 2–24 hours",
+          "wrong": [
+            "Not needed if successful",
+            "After 6 weeks",
+            "Only if symptoms recur"
+          ]
+        },
+        {
+          "q": "Absolute contraindication to fibrinolysis?",
+          "a": "Previous intracranial haemorrhage",
+          "wrong": [
+            "Diabetic retinopathy on the last eye screen",
+            "Age over 75 with treated hypertension",
+            "Current smoker"
+          ]
+        },
+        {
+          "q": "Tenecteplase dose adjustment at 75 or older?",
+          "a": "Half dose",
+          "wrong": [
+            "Double dose",
+            "No change",
+            "Contraindicated"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Time Is Muscle", "emoji": "❤️‍🩹", "flavor": "No PCI in 120 minutes? Lyse now, transfer after." },
+  "badge": {
+    "name": "Time Is Muscle",
+    "emoji": "❤️‍🩹",
+    "flavor": "No PCI in 120 minutes? Lyse now, transfer after."
+  },
   "cards": [
-    { "q": "Fibrinolysis should start within how long of STEMI diagnosis?", "options": ["Within 10 minutes", "Within 30 minutes of arrival", "Within 12 hours", "Within 24 hours"], "why": "Door-to-needle target.", "source": "ESC 2023" },
-    { "q": "Pharmaco-invasive strategy means…", "options": ["Lysis, then angiography within 2–24 h", "Primary PCI, then fibrinolysis", "Medical treatment only", "Fibrinolysis with no angiography unless symptoms recur"], "why": "STREAM trial.", "source": "ESC 2023" },
-    { "q": "Oxygen in suspected ACS (ESC 2023)?", "options": ["Only if SpO2 < 90%", "For all patients with chest pain, at 15 L/min", "Only if SpO2 < 98%", "Only if the pain persists"], "why": "Hyperoxia may be harmful.", "source": "ESC 2023", "note": "Older notes: < 94%." },
-    { "q": "Clopidogrel loading with fibrinolysis in a 60-year-old?", "options": ["300 mg", "600 mg", "75 mg", "None with fibrinolysis"], "why": "75 mg only if 75 or older.", "source": "ESC 2023" },
-    { "q": "Rescue PCI is indicated when…", "options": ["Fibrinolysis fails", "After every lysis, routinely", "Only after 48 hours", "Only if the troponin rises"], "why": "Less than 50% ST resolution or ongoing ischaemia.", "source": "ESC 2023" },
-    { "q": "ST elevation V1–V4 indicates which territory?", "options": ["Anterior (LAD)", "Inferior (RCA)", "Lateral (circumflex)", "Posterior"], "why": "Left anterior descending artery.", "source": "ECG basics" }
+    {
+      "q": "Fibrinolysis should start within how long of STEMI diagnosis?",
+      "options": [
+        "Within 10 minutes",
+        "Within 30 minutes of arrival",
+        "Within 12 hours",
+        "Within 24 hours"
+      ],
+      "why": "Door-to-needle target.",
+      "source": "ESC 2023"
+    },
+    {
+      "q": "Pharmaco-invasive strategy means…",
+      "options": [
+        "Lysis, then angiography within 2–24 h",
+        "Primary PCI, then fibrinolysis",
+        "Medical treatment only",
+        "Fibrinolysis with no angiography unless symptoms recur"
+      ],
+      "why": "STREAM trial.",
+      "source": "ESC 2023"
+    },
+    {
+      "q": "Oxygen in suspected ACS (ESC 2023)?",
+      "options": [
+        "Only if SpO2 < 90%",
+        "For all patients with chest pain, at 15 L/min",
+        "Only if SpO2 < 98%",
+        "Only if the pain persists"
+      ],
+      "why": "Hyperoxia may be harmful.",
+      "source": "ESC 2023",
+      "note": "Older notes: < 94%."
+    },
+    {
+      "q": "Clopidogrel loading with fibrinolysis in a 60-year-old?",
+      "options": [
+        "300 mg",
+        "600 mg",
+        "75 mg",
+        "None with fibrinolysis"
+      ],
+      "why": "75 mg only if 75 or older.",
+      "source": "ESC 2023"
+    },
+    {
+      "q": "Rescue PCI is indicated when…",
+      "options": [
+        "Fibrinolysis fails",
+        "After every lysis, routinely",
+        "Only after 48 hours",
+        "Only if the troponin rises"
+      ],
+      "why": "Less than 50% ST resolution or ongoing ischaemia.",
+      "source": "ESC 2023"
+    },
+    {
+      "q": "ST elevation V1–V4 indicates which territory?",
+      "options": [
+        "Anterior (LAD)",
+        "Inferior (RCA)",
+        "Lateral (circumflex)",
+        "Posterior"
+      ],
+      "why": "Left anterior descending artery.",
+      "source": "ECG basics"
+    }
   ]
 }

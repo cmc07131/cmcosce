@@ -5,13 +5,48 @@
   "type": "comms",
   "time": 420,
   "stem": "Private room. Ms Kwan, 25, says she was sexually assaulted by an acquaintance 4 hours ago (vaginal penetration without a condom). She is physically stable. A female nurse is with her. Take the history you need and counsel her about her care.",
+  "phases": [
+    {
+      "title": "Open",
+      "goal": "Safety, choice and control.",
+      "steps": [
+        "open"
+      ]
+    },
+    {
+      "title": "History",
+      "goal": "What is needed for her care.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Offer care",
+      "goal": "Contraception, infection, forensic, support.",
+      "steps": [
+        "care"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Emergency contraception window. Your notes give levonorgestrel within 5 days. Its licensed window is 72 hours; beyond that, use ulipristal (up to 120 hours) or a copper IUD (the most effective, up to 5 days)."}
+    {
+      "tag": "differs",
+      "text": "Emergency contraception window. Your notes give levonorgestrel within 5 days. Its licensed window is 72 hours; beyond that, use ulipristal (up to 120 hours) or a copper IUD (the most effective, up to 5 days)."
+    }
   ],
   "notes": "Checked against the Hong Kong Hospital Authority protocol for management of sexual violence (with CEASE Crisis Centre and RainLily), the Faculty of Sexual and Reproductive Healthcare (FSRH) emergency contraception guideline (2017, updated 2023), BASHH/BHIVA PEPSE guidance (2021) and UKHSA HBV guidance.\n\nPrinciples: safety, privacy, a same-gender coordinator where possible, consent for each step, minimise repeated interviews; offer (not force) police reporting and forensic examination (which should come before washing where possible); offer social work support (CEASE 24-hour line, RainLily hotline 2375 5322).\n\nEmergency contraception: a copper IUD is most effective (up to 5 days after unprotected sex or ovulation); ulipristal acetate 30 mg up to 120 hours; levonorgestrel 1.5 mg up to 72 hours (effective to 96 h; double dose if BMI over 26 or enzyme inducers). Your notes give levonorgestrel within 5 days; its licensed window is 72 hours — ulipristal or a copper IUD are the options beyond that.\n\nSTI: test at 2 weeks, or offer presumptive treatment (ceftriaxone and doxycycline ± metronidazole). HBV: accelerated vaccination if not immune. HIV PEP: risk-assessed, within 72 hours, 28 days. HPV vaccination if eligible. Follow-up for STI and HIV testing and psychological support. Your notes match on the rest.",
   "cast": [
-    { "id": "patient", "name": "Ms Kwan", "role": "woman", "inBed": false },
-    { "id": "nurse", "name": "Nurse Tse", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Ms Kwan",
+      "role": "woman",
+      "inBed": false
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Tse",
+      "role": "nurse"
+    }
   ],
   "steps": [
     {
@@ -23,17 +58,45 @@
       "mood": 7,
       "turns": [
         {
-          "line": "I don't know why I came. I just want to go home and shower.", "lz": "我都唔知點解會嚟。我淨係想返屋企沖涼。",
+          "line": "I don't know why I came. I just want to go home and shower.",
+          "lz": "我都唔知點解會嚟。我淨係想返屋企沖涼。",
           "opts": [
-            { "t": "I'm really glad you came. You're safe here, and nothing will happen without your agreement. Can I explain what we can offer, and you decide?", "tz": "我好高興你肯嚟。你喺度係安全嘅，冇你同意，乜嘢都唔會做。我可唔可以解釋吓我哋可以幫你做啲咩，然後由你決定？", "rz": "……好。", "r": "…OK.", "mood": -3, "mark": "Reassures, affirms and puts her in control" },
-            { "t": "Did you lead him on at all?", "tz": "你有冇引誘過佢？", "rz": "（開始喊）我就知冇人會信我。", "r": "[Starts crying] I knew nobody would believe me.", "mood": 3 }
+            {
+              "t": "I'm really glad you came. You're safe here, and nothing will happen without your agreement. Can I explain what we can offer, and you decide?",
+              "tz": "我好高興你肯嚟。你喺度係安全嘅，冇你同意，乜嘢都唔會做。我可唔可以解釋吓我哋可以幫你做啲咩，然後由你決定？",
+              "rz": "……好。",
+              "r": "…OK.",
+              "mood": -3,
+              "mark": "Reassures, affirms and puts her in control"
+            },
+            {
+              "t": "Did you lead him on at all?",
+              "tz": "你有冇引誘過佢？",
+              "rz": "（開始喊）我就知冇人會信我。",
+              "r": "[Starts crying] I knew nobody would believe me.",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "Do I have to go to the police?", "lz": "我係咪一定要報警？",
+          "line": "Do I have to go to the police?",
+          "lz": "我係咪一定要報警？",
           "opts": [
-            { "t": "It's your choice. If you might want to report, a forensic doctor can collect evidence now — it's best before showering — and we can help you contact the police. You can decide about reporting later.", "tz": "由你決定。如果你之後可能想報案，法醫可以而家收集證據——最好喺沖涼之前做——我哋亦可以幫你聯絡警方。報唔報案可以遲啲先決定。", "rz": "我諗我想先收集證據，以防萬一。", "r": "I think I want the evidence taken, just in case.", "mood": -2, "mark": "Explains police and forensic options without pressure" },
-            { "t": "Yes, we have to report it.", "tz": "係，我哋一定要報警。", "rz": "唔要！我只係想走。", "r": "No! I just want to leave.", "mood": 3 }
+            {
+              "t": "It's your choice. If you might want to report, a forensic doctor can collect evidence now — it's best before showering — and we can help you contact the police. You can decide about reporting later.",
+              "tz": "由你決定。如果你之後可能想報案，法醫可以而家收集證據——最好喺沖涼之前做——我哋亦可以幫你聯絡警方。報唔報案可以遲啲先決定。",
+              "rz": "我諗我想先收集證據，以防萬一。",
+              "r": "I think I want the evidence taken, just in case.",
+              "mood": -2,
+              "mark": "Explains police and forensic options without pressure"
+            },
+            {
+              "t": "Yes, we have to report it.",
+              "tz": "係，我哋一定要報警。",
+              "rz": "唔要！我只係想走。",
+              "r": "No! I just want to leave.",
+              "mood": 3
+            }
           ]
         }
       ]
@@ -46,15 +109,57 @@
       "hint": "Only what's needed for care: time, type of contact, condom, ejaculation, injuries, LMP, contraception, HBV vaccination, known risks of the assailant.",
       "groups": {
         "Assault": [
-          { "t": "When did it happen?", "tz": "幾時發生？", "rz": "琴晚大概十一點——四個鐘前。", "r": "About 11 last night — 4 hours ago.", "mark": "Asks the time (for PEP and EC windows)" },
-          { "t": "What kind of contact — vaginal, anal, oral? Condom? Ejaculation?", "tz": "係咩類型嘅接觸——陰道、肛門、口腔？有冇用安全套？有冇射精？", "rz": "淨係陰道。冇用安全套。我諗佢有射精。", "r": "Vaginal only. No condom. I think he ejaculated.", "mark": "Asks type of contact, condom and ejaculation" },
-          { "t": "Are you hurt anywhere?", "tz": "你有冇邊度受傷？", "rz": "好痛，兩隻手腕有瘀傷。", "r": "Sore, and bruises on my wrists.", "mark": "Asks about injuries" },
-          { "t": "Were you given drinks or drugs? Can you remember everything?", "tz": "有冇人俾嘢你飲或者食藥？你記唔記得晒所有嘢？", "rz": "我飲咗兩杯。我記得發生咩事。", "r": "I had two drinks. I remember it.", "mark": "Asks about drugs or alcohol" }
+          {
+            "t": "When did it happen?",
+            "tz": "幾時發生？",
+            "rz": "琴晚大概十一點——四個鐘前。",
+            "r": "About 11 last night — 4 hours ago.",
+            "mark": "Asks the time (for PEP and EC windows)"
+          },
+          {
+            "t": "What kind of contact — vaginal, anal, oral? Condom? Ejaculation?",
+            "tz": "係咩類型嘅接觸——陰道、肛門、口腔？有冇用安全套？有冇射精？",
+            "rz": "淨係陰道。冇用安全套。我諗佢有射精。",
+            "r": "Vaginal only. No condom. I think he ejaculated.",
+            "mark": "Asks type of contact, condom and ejaculation"
+          },
+          {
+            "t": "Are you hurt anywhere?",
+            "tz": "你有冇邊度受傷？",
+            "rz": "好痛，兩隻手腕有瘀傷。",
+            "r": "Sore, and bruises on my wrists.",
+            "mark": "Asks about injuries"
+          },
+          {
+            "t": "Were you given drinks or drugs? Can you remember everything?",
+            "tz": "有冇人俾嘢你飲或者食藥？你記唔記得晒所有嘢？",
+            "rz": "我飲咗兩杯。我記得發生咩事。",
+            "r": "I had two drinks. I remember it.",
+            "mark": "Asks about drugs or alcohol"
+          }
         ],
         "Health": [
-          { "t": "When was your last period? Any contraception?", "tz": "你上次月經係幾時？有冇避孕？", "rz": "兩個禮拜前。冇避孕。", "r": "Two weeks ago. No contraception.", "mark": "Asks LMP and contraception" },
-          { "t": "Hepatitis B vaccination? HPV vaccine?", "tz": "有冇打過乙型肝炎疫苗？HPV 疫苗呢？", "rz": "BB 嗰陣打過乙肝針。冇打 HPV 疫苗。", "r": "I had hep B as a baby. No HPV vaccine.", "mark": "Asks HBV and HPV vaccination" },
-          { "t": "Do you know anything about his health — drug injection, HIV?", "tz": "你知唔知佢健康狀況——有冇注射毒品、有冇愛滋病？", "rz": "佢係外國人，我唔知。", "r": "He's from overseas, I don't know.", "mark": "Assesses HIV risk from the assailant" }
+          {
+            "t": "When was your last period? Any contraception?",
+            "tz": "你上次月經係幾時？有冇避孕？",
+            "rz": "兩個禮拜前。冇避孕。",
+            "r": "Two weeks ago. No contraception.",
+            "mark": "Asks LMP and contraception"
+          },
+          {
+            "t": "Hepatitis B vaccination? HPV vaccine?",
+            "tz": "有冇打過乙型肝炎疫苗？HPV 疫苗呢？",
+            "rz": "BB 嗰陣打過乙肝針。冇打 HPV 疫苗。",
+            "r": "I had hep B as a baby. No HPV vaccine.",
+            "mark": "Asks HBV and HPV vaccination"
+          },
+          {
+            "t": "Do you know anything about his health — drug injection, HIV?",
+            "tz": "你知唔知佢健康狀況——有冇注射毒品、有冇愛滋病？",
+            "rz": "佢係外國人，我唔知。",
+            "r": "He's from overseas, I don't know.",
+            "mark": "Assesses HIV risk from the assailant"
+          }
         ]
       }
     },
@@ -66,12 +171,36 @@
       "hint": "Emergency contraception, STI, HBV, HIV PEP discussion, HPV, support, follow-up.",
       "confirm": "Offer",
       "opts": [
-        { "t": "Pregnancy test; emergency contraception — copper IUD is most effective, or ulipristal 30 mg / levonorgestrel 1.5 mg", "need": true, "mark": "Offers emergency contraception with options" },
-        { "t": "STI testing at 2 weeks or presumptive antibiotics", "need": true, "mark": "Addresses STI prevention" },
-        { "t": "HBV booster (vaccinated) per HBV status; HIV PEP discussion (within 72 h)", "need": true, "mark": "HBV and HIV PEP assessed" },
-        { "t": "HPV vaccination offered", "need": true, "mark": "Offers HPV vaccination" },
-        { "t": "CEASE Crisis Centre or RainLily support; follow-up clinic", "need": true, "mark": "Psychological support and follow-up" },
-        { "t": "Full speculum examination by us before the forensic doctor comes", "trap": true, "r": "Minimise repeated intimate examinations; coordinate with the forensic doctor." }
+        {
+          "t": "Pregnancy test; emergency contraception — copper IUD is most effective, or ulipristal 30 mg / levonorgestrel 1.5 mg",
+          "need": true,
+          "mark": "Offers emergency contraception with options"
+        },
+        {
+          "t": "STI testing at 2 weeks or presumptive antibiotics",
+          "need": true,
+          "mark": "Addresses STI prevention"
+        },
+        {
+          "t": "HBV booster (vaccinated) per HBV status; HIV PEP discussion (within 72 h)",
+          "need": true,
+          "mark": "HBV and HIV PEP assessed"
+        },
+        {
+          "t": "HPV vaccination offered",
+          "need": true,
+          "mark": "Offers HPV vaccination"
+        },
+        {
+          "t": "CEASE Crisis Centre or RainLily support; follow-up clinic",
+          "need": true,
+          "mark": "Psychological support and follow-up"
+        },
+        {
+          "t": "Full speculum examination by us before the forensic doctor comes",
+          "trap": true,
+          "r": "Minimise repeated intimate examinations; coordinate with the forensic doctor."
+        }
       ]
     },
     {
@@ -80,21 +209,126 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Most effective emergency contraception?", "a": "Copper IUD", "wrong": ["Levonorgestrel", "Ulipristal", "Combined pill"] },
-        { "q": "Licensed window for levonorgestrel 1.5 mg?", "a": "72 hours", "wrong": ["120 hours", "24 hours", "7 days"] },
-        { "q": "Ulipristal acetate window?", "a": "120 hours", "wrong": ["Up to 72 hours, like levonorgestrel", "24 hours", "10 days"] },
-        { "q": "HIV PEP after sexual assault must start within…", "a": "72 hours", "wrong": ["7 days", "1 month", "24 hours only"] },
-        { "q": "Should she be made to report to the police?", "a": "No — her choice (unless child/vulnerable)", "wrong": ["Yes, always, before any examination is done", "Only if injured", "Only if the assailant is known to her or the police"] }
+        {
+          "q": "Most effective emergency contraception?",
+          "a": "Copper IUD",
+          "wrong": [
+            "Levonorgestrel",
+            "Ulipristal",
+            "Combined pill"
+          ]
+        },
+        {
+          "q": "Licensed window for levonorgestrel 1.5 mg?",
+          "a": "72 hours",
+          "wrong": [
+            "120 hours",
+            "24 hours",
+            "7 days"
+          ]
+        },
+        {
+          "q": "Ulipristal acetate window?",
+          "a": "120 hours",
+          "wrong": [
+            "Up to 72 hours, like levonorgestrel",
+            "24 hours",
+            "10 days"
+          ]
+        },
+        {
+          "q": "HIV PEP after sexual assault must start within…",
+          "a": "72 hours",
+          "wrong": [
+            "7 days",
+            "1 month",
+            "24 hours only"
+          ]
+        },
+        {
+          "q": "Should she be made to report to the police?",
+          "a": "No — her choice (unless child/vulnerable)",
+          "wrong": [
+            "Yes, always, before any examination is done",
+            "Only if injured",
+            "Only if the assailant is known to her or the police"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Safe Space", "emoji": "🕊", "flavor": "Believe, offer, let her choose. EC, STI, HBV, HIV, support." },
+  "badge": {
+    "name": "Safe Space",
+    "emoji": "🕊",
+    "flavor": "Believe, offer, let her choose. EC, STI, HBV, HIV, support."
+  },
   "cards": [
-    { "q": "Levonorgestrel emergency contraception is licensed up to…", "options": ["72 hours", "120 hours", "7 days", "12 hours"], "why": "Ulipristal to 120 h; copper IUD to 5 days.", "source": "FSRH 2017 (2023)", "note": "Older notes: within 5 days." },
-    { "q": "Why collect forensic evidence before washing?", "options": ["Washing destroys evidence", "It is required by law before any treatment", "To test for HIV", "It is faster for the forensic doctor"], "why": "Offer it; the choice is hers.", "source": "HA sexual violence protocol" },
-    { "q": "24-hour sexual violence crisis support in HK?", "options": ["CEASE Crisis Centre", "Samaritans only", "Police only", "Social Welfare Department only"], "why": "Also RainLily.", "source": "HA protocol" },
-    { "q": "HBV prophylaxis after sexual assault in a vaccinated person?", "options": ["Booster dose per status", "No action is ever needed", "HBIG for every case", "Tenofovir for 28 days"], "why": "Accelerated course if unvaccinated.", "source": "UKHSA Green Book" },
-    { "q": "HIV PEP duration?", "options": ["28 days", "3 days", "3 months", "1 dose"], "why": "Started within 72 hours.", "source": "BASHH/BHIVA 2021" },
-    { "q": "The first priority in the consultation?", "options": ["Safety and her sense of control", "Detailed questioning about the assault", "An immediate written police statement", "Blood tests"], "why": "Trauma-informed care.", "source": "WHO / HA protocol" }
+    {
+      "q": "Levonorgestrel emergency contraception is licensed up to…",
+      "options": [
+        "72 hours",
+        "120 hours",
+        "7 days",
+        "12 hours"
+      ],
+      "why": "Ulipristal to 120 h; copper IUD to 5 days.",
+      "source": "FSRH 2017 (2023)",
+      "note": "Older notes: within 5 days."
+    },
+    {
+      "q": "Why collect forensic evidence before washing?",
+      "options": [
+        "Washing destroys evidence",
+        "It is required by law before any treatment",
+        "To test for HIV",
+        "It is faster for the forensic doctor"
+      ],
+      "why": "Offer it; the choice is hers.",
+      "source": "HA sexual violence protocol"
+    },
+    {
+      "q": "24-hour sexual violence crisis support in HK?",
+      "options": [
+        "CEASE Crisis Centre",
+        "Samaritans only",
+        "Police only",
+        "Social Welfare Department only"
+      ],
+      "why": "Also RainLily.",
+      "source": "HA protocol"
+    },
+    {
+      "q": "HBV prophylaxis after sexual assault in a vaccinated person?",
+      "options": [
+        "Booster dose per status",
+        "No action is ever needed",
+        "HBIG for every case",
+        "Tenofovir for 28 days"
+      ],
+      "why": "Accelerated course if unvaccinated.",
+      "source": "UKHSA Green Book"
+    },
+    {
+      "q": "HIV PEP duration?",
+      "options": [
+        "28 days",
+        "3 days",
+        "3 months",
+        "1 dose"
+      ],
+      "why": "Started within 72 hours.",
+      "source": "BASHH/BHIVA 2021"
+    },
+    {
+      "q": "The first priority in the consultation?",
+      "options": [
+        "Safety and her sense of control",
+        "Detailed questioning about the assault",
+        "An immediate written police statement",
+        "Blood tests"
+      ],
+      "why": "Trauma-informed care.",
+      "source": "WHO / HA protocol"
+    }
   ]
 }

@@ -386,3 +386,15 @@ test('a phase does not wait for treatment of something that never happened', () 
   // She is fitting: the ECG phase waits for the treatment.
   assert.equal(currentPhase(pack, spent, ['ecg-read', 'bicarb', 'seizure'])?.title, 'ECG')
 })
+
+test('every station has phases, and every step outside the examiner’s end belongs to one', () => {
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    assert.ok(st.phases?.length, `${st.id}: needs phases`)
+    const phased = new Set(st.phases!.flatMap((p) => p.steps))
+    for (const s of st.steps) {
+      if (s.kind === 'viva' || s.ask || s.to === 'examiner') continue
+      assert.ok(phased.has(s.id), `${st.id}: step ${s.id} is in no phase`)
+    }
+  }
+})

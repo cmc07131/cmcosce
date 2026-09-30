@@ -5,20 +5,115 @@
   "type": "resus",
   "time": 540,
   "stem": "Resus. Mr Yip, 60, has sudden left-sided weakness. GCS 11 (E3V3M5). Your hospital has no neurosurgery; the tertiary centre has accepted him. Review the CT, prepare him for transfer and manage problems on the way.",
+  "phases": [
+    {
+      "title": "CT and bloods",
+      "goal": "What is it, and what must be reversed?",
+      "steps": [
+        "ct"
+      ]
+    },
+    {
+      "title": "Stabilise",
+      "goal": "The blood pressure target from the cart, and the airway plan.",
+      "steps": [
+        "stabilise",
+        "airway"
+      ]
+    },
+    {
+      "title": "Prepare the transfer",
+      "goal": "People, kit, drugs, documents, the receiving team.",
+      "steps": [
+        "prepare"
+      ]
+    },
+    {
+      "title": "En route",
+      "goal": "Deterioration in the ambulance: recognise, evaluate, support.",
+      "steps": [
+        "enroute",
+        "dopes"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Needle decompression site. Your notes use the 2nd intercostal space, mid-clavicular line. ATLS 10th and 11th use the 4th/5th space just anterior to the mid-axillary line in adults (2nd space mid-clavicular line in children)."},
-    {"tag": "differs", "text": "Reintubation in the ambulance. Your notes say it is not recommended. Better: ventilate with a bag-mask or supraglottic airway first, and reintubate only if needed and safe, with the vehicle stopped."}
+    {
+      "tag": "outdated",
+      "text": "Needle decompression site. Your notes use the 2nd intercostal space, mid-clavicular line. ATLS 10th and 11th use the 4th/5th space just anterior to the mid-axillary line in adults (2nd space mid-clavicular line in children)."
+    },
+    {
+      "tag": "differs",
+      "text": "Reintubation in the ambulance. Your notes say it is not recommended. Better: ventilate with a bag-mask or supraglottic airway first, and reintubate only if needed and safe, with the vehicle stopped."
+    }
   ],
   "notes": "Checked against the Association of Anaesthetists interhospital transfer guideline (2019), the Intensive Care Society transfer guidance (2019), NICE NG128 stroke (2019, updated 2022), AHA/ASA spontaneous ICH guideline (2022), and ATLS 10th.\n\nPreparation (your 8 points match): communication (patient/family, receiving team, transport team, ambulance), documentation, consent, equipment/kit (monitoring, suction, oxygen with reserve, drugs pre-drawn and labelled), pre-transport assessment and stabilisation (secure airway if GCS ≤8, falling GCS, or airway at risk; two IV lines; tubes and lines secured), appropriate escort (critical → doctor plus nurse). ICH specifics: SBP target 130–140 within an hour if presenting within 6 hours with SBP 150–220 (NICE; AHA 140, avoid under 130), reverse anticoagulation, head up 30°, glucose normal, treat seizures. Deterioration uses your REST approach (Recognise, Evaluate, Support, Transport); for the intubated patient, DOPES.\n\nDifferences from your notes: (1) needle decompression — your notes say 2nd ICS midclavicular; ATLS 10th recommends the 4th/5th ICS just anterior to the mid-axillary line in adults (2nd ICS MCL for children). (2) 'Reintubation not recommended' in the ambulance: better to say ventilate with a bag-mask or supraglottic airway first and reintubate only if needed and safe (stop the vehicle).",
-  "cast": [{ "id": "patient", "name": "Mr Yip", "role": "elderly" }, { "id": "nurse", "name": "Nurse Fung", "role": "nurse" }, { "id": "medic", "name": "Ambulance crew", "role": "paramedic" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Yip",
+      "role": "elderly"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Fung",
+      "role": "nurse"
+    },
+    {
+      "id": "medic",
+      "name": "Ambulance crew",
+      "role": "paramedic"
+    }
+  ],
   "vitals": {
-    "hr": 64, "sbp": 196, "dbp": 104, "spo2": 96, "rr": 16, "temp": 36.8, "gcs": 11, "glucose": 7.1, "rhythm": "sinus",
+    "hr": 64,
+    "sbp": 196,
+    "dbp": 104,
+    "spo2": 96,
+    "rr": 16,
+    "temp": 36.8,
+    "gcs": 11,
+    "glucose": 7.1,
+    "rhythm": "sinus",
     "effects": [
-      { "scene": "bp", "add": { "sbp": -54, "dbp": -24 }, "overS": 180 },
-      { "scene": "deteriorate", "set": { "gcs": 7, "hr": 52, "sbp": 172 } },
-      { "scene": "intubated", "set": { "spo2": 99, "rr": 14, "etco2": 4.8 }, "overS": 30 },
-      { "scene": "desat", "set": { "spo2": 84 } },
-      { "scene": "fixed", "set": { "spo2": 98 }, "overS": 30 }
+      {
+        "scene": "bp",
+        "add": {
+          "sbp": -54,
+          "dbp": -24
+        },
+        "overS": 180
+      },
+      {
+        "scene": "deteriorate",
+        "set": {
+          "gcs": 7,
+          "hr": 52,
+          "sbp": 172
+        }
+      },
+      {
+        "scene": "intubated",
+        "set": {
+          "spo2": 99,
+          "rr": 14,
+          "etco2": 4.8
+        },
+        "overS": 30
+      },
+      {
+        "scene": "desat",
+        "set": {
+          "spo2": 84
+        }
+      },
+      {
+        "scene": "fixed",
+        "set": {
+          "spo2": 98
+        },
+        "overS": 30
+      }
     ]
   },
   "steps": [
@@ -30,11 +125,24 @@
       "hint": "Describe the CT; check clotting and glucose.",
       "groups": {
         "Imaging": [
-          { "t": "CT head", "r": "Hyperdense haematoma in the right basal ganglia/thalamus with blood in the lateral ventricle.", "img": "ct:ich-r", "mark": "Describes the right deep ICH with intraventricular extension" }
+          {
+            "t": "CT head",
+            "r": "Hyperdense haematoma in the right basal ganglia/thalamus with blood in the lateral ventricle.",
+            "img": "ct:ich-r",
+            "mark": "Describes the right deep ICH with intraventricular extension"
+          }
         ],
         "Bloods": [
-          { "t": "Clotting, FBC, glucose, U&E", "r": "INR 1.0, platelets 210, glucose 7.1.", "mark": "Checks clotting and glucose" },
-          { "t": "Anticoagulant history", "r": "No anticoagulants.", "mark": "Asks about anticoagulants" }
+          {
+            "t": "Clotting, FBC, glucose, U&E",
+            "r": "INR 1.0, platelets 210, glucose 7.1.",
+            "mark": "Checks clotting and glucose"
+          },
+          {
+            "t": "Anticoagulant history",
+            "r": "No anticoagulants.",
+            "mark": "Asks about anticoagulants"
+          }
         ]
       }
     },
@@ -42,14 +150,41 @@
       "id": "stabilise",
       "kind": "pick",
       "to": "cart",
-      "label": "Stabilise",
-      "hint": "Lower SBP to 130–140, head up 30°, airway decision, lines.",
-      "confirm": "Do these",
+      "label": "Drug cart",
+      "hint": "Bring the systolic down to 130–140, not further.",
+      "confirm": "Give",
       "opts": [
-        { "t": "IV labetalol (or GTN/nicardipine) to SBP 130–140", "fetch": "cart", "need": true, "scene": "bp", "mark": "Lowers SBP to 130–140" },
-        { "t": "Head up 30°, two IV lines, all secured", "need": true, "mark": "Head up and secure lines" },
-        { "t": "Airway: GCS 11 and protecting — no intubation now, but escort able to intubate; RSI drugs pre-drawn and labelled", "fetch": "cart", "need": true, "mark": "Airway decision with contingency" },
-        { "t": "Drop SBP to 100 quickly", "fetch": "cart", "trap": true, "r": "Avoid SBP under 130; risks cerebral hypoperfusion." }
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "bp",
+          "mark": "Lowers SBP to 130–140",
+          "t": "Labetalol 10–20 mg IV boluses to a systolic of 130–140",
+          "drug": "Labetalol",
+          "dose": "10–20 mg IV boluses to a systolic of 130–140"
+        },
+        {
+          "fetch": "cart",
+          "trap": true,
+          "r": "Avoid SBP under 130; risks cerebral hypoperfusion.",
+          "t": "Labetalol boluses to a systolic of 100, quickly",
+          "drug": "Labetalol",
+          "dose": "boluses to a systolic of 100, quickly"
+        }
+      ]
+    },
+    {
+      "id": "airway",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "The airway plan for the journey.",
+      "opts": [
+        {
+          "t": "Airway: GCS 11 and protecting — no intubation now, but escort able to intubate; RSI drugs pre-drawn and labelled",
+          "need": true,
+          "mark": "Airway decision with contingency"
+        }
       ]
     },
     {
@@ -59,12 +194,31 @@
       "label": "Prepare the transfer",
       "hint": "Communication, documentation, consent, equipment, pre-transport check, escort level.",
       "opts": [
-        { "t": "Communicate: family, receiving neurosurgeon, transport team, ambulance; ETA agreed", "mark": "Communication with all parties" },
-        { "t": "Document condition, treatment, vital signs and plan; copy of CT and notes", "mark": "Documentation" },
-        { "t": "Explain risks and benefits to family; consent", "mark": "Consent" },
-        { "t": "Transport kit: monitor, suction, oxygen enough for twice the journey, drugs", "mark": "Equipment and oxygen reserve" },
-        { "t": "Critical patient: escorted by a doctor and a nurse", "mark": "Appropriate escort level" },
-        { "t": "Send him with the porter; he is talking", "trap": "critical", "r": "GCS 11 with ICH is critical and may deteriorate." }
+        {
+          "t": "Communicate: family, receiving neurosurgeon, transport team, ambulance; ETA agreed",
+          "mark": "Communication with all parties"
+        },
+        {
+          "t": "Document condition, treatment, vital signs and plan; copy of CT and notes",
+          "mark": "Documentation"
+        },
+        {
+          "t": "Explain risks and benefits to family; consent",
+          "mark": "Consent"
+        },
+        {
+          "t": "Transport kit: monitor, suction, oxygen enough for twice the journey, drugs",
+          "mark": "Equipment and oxygen reserve"
+        },
+        {
+          "t": "Critical patient: escorted by a doctor and a nurse",
+          "mark": "Appropriate escort level"
+        },
+        {
+          "t": "Send him with the porter; he is talking",
+          "trap": "critical",
+          "r": "GCS 11 with ICH is critical and may deteriorate."
+        }
       ]
     },
     {
@@ -74,10 +228,28 @@
       "label": "GCS drops en route",
       "hint": "GCS 7, right pupil dilating. REST: recognise, evaluate ABC and pupils and glucose, support (airway), tell the receiving team.",
       "opts": [
-        { "t": "Recognise: GCS 7, right pupil dilated, HR falling", "n": 1, "scene": "deteriorate", "mark": "Recognises deterioration and coning signs" },
-        { "t": "Evaluate: airway, breathing, glucose", "n": 2, "mark": "Evaluates ABC and glucose" },
-        { "t": "Support: stop the ambulance; RSI with pre-drawn drugs; ETCO2 4.5–5", "n": 3, "scene": "intubated", "mark": "Secures the airway, targets normocapnia" },
-        { "t": "Transport: inform the receiving team; consider hypertonic saline or mannitol per neurosurgeon", "n": 4, "mark": "Updates receiving team; osmotherapy" }
+        {
+          "t": "Recognise: GCS 7, right pupil dilated, HR falling",
+          "n": 1,
+          "scene": "deteriorate",
+          "mark": "Recognises deterioration and coning signs"
+        },
+        {
+          "t": "Evaluate: airway, breathing, glucose",
+          "n": 2,
+          "mark": "Evaluates ABC and glucose"
+        },
+        {
+          "t": "Support: stop the ambulance; RSI with pre-drawn drugs; ETCO2 4.5–5",
+          "n": 3,
+          "scene": "intubated",
+          "mark": "Secures the airway, targets normocapnia"
+        },
+        {
+          "t": "Transport: inform the receiving team; consider hypertonic saline or mannitol per neurosurgeon",
+          "n": 4,
+          "mark": "Updates receiving team; osmotherapy"
+        }
       ]
     },
     {
@@ -88,11 +260,33 @@
       "hint": "DOPES: displacement, obstruction, pneumothorax, equipment, stacking.",
       "groups": {
         "DOPES": [
-          { "t": "Disconnect; bag with 100% oxygen", "r": "Easy to bag. Saturation climbs.", "scene": "desat", "mark": "Disconnects and hand-ventilates" },
-          { "t": "Displacement: tube mark, ETCO2 trace, bilateral air entry", "r": "Tube at 22 cm, trace present, equal air entry.", "mark": "Checks tube position" },
-          { "t": "Obstruction: pass a suction catheter", "r": "Thick secretions cleared.", "scene": "fixed", "mark": "Clears obstruction with suction" },
-          { "t": "Pneumothorax: chest rise, trachea", "r": "Symmetrical.", "mark": "Excludes pneumothorax" },
-          { "t": "Equipment: oxygen supply, circuit, ventilator", "r": "Cylinder 60% full; circuit intact.", "mark": "Checks equipment and oxygen" }
+          {
+            "t": "Disconnect; bag with 100% oxygen",
+            "r": "Easy to bag. Saturation climbs.",
+            "scene": "desat",
+            "mark": "Disconnects and hand-ventilates"
+          },
+          {
+            "t": "Displacement: tube mark, ETCO2 trace, bilateral air entry",
+            "r": "Tube at 22 cm, trace present, equal air entry.",
+            "mark": "Checks tube position"
+          },
+          {
+            "t": "Obstruction: pass a suction catheter",
+            "r": "Thick secretions cleared.",
+            "scene": "fixed",
+            "mark": "Clears obstruction with suction"
+          },
+          {
+            "t": "Pneumothorax: chest rise, trachea",
+            "r": "Symmetrical.",
+            "mark": "Excludes pneumothorax"
+          },
+          {
+            "t": "Equipment: oxygen supply, circuit, ventilator",
+            "r": "Cylinder 60% full; circuit intact.",
+            "mark": "Checks equipment and oxygen"
+          }
         ]
       }
     },
@@ -102,21 +296,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Adult needle decompression site (ATLS 10th)?", "a": "4th/5th ICS, anterior to mid-axillary line", "wrong": ["2nd ICS in the midclavicular line, for adults and children", "7th ICS in the posterior axillary line", "Subxiphoid, toward the left shoulder"] },
-        { "q": "Target SBP in acute ICH (NICE)?", "a": "130–140 mmHg", "wrong": ["Under 100 mmHg", "180–200 mmHg", "No target; leave it alone"] },
-        { "q": "Indications to intubate before transfer?", "a": "GCS ≤8, falling GCS, or airway at risk", "wrong": ["Every intracerebral haemorrhage, whatever the GCS", "Any GCS below 15", "Never before transfer"] },
-        { "q": "Oxygen to carry?", "a": "At least twice the expected need", "wrong": ["Exactly the expected need", "Half the expected need, plus a spare", "None; ambulances carry oxygen"] },
-        { "q": "REST stands for…", "a": "Recognise, Evaluate, Support, Transport", "wrong": ["Rest, Eat, Sleep, Talk", "Rate, ECG, SpO2, Temperature", "Refer, Escort, Stabilise, Transfer"] }
+        {
+          "q": "Adult needle decompression site (ATLS 10th)?",
+          "a": "4th/5th ICS, anterior to mid-axillary line",
+          "wrong": [
+            "2nd ICS in the midclavicular line, for adults and children",
+            "7th ICS in the posterior axillary line",
+            "Subxiphoid, toward the left shoulder"
+          ]
+        },
+        {
+          "q": "Target SBP in acute ICH (NICE)?",
+          "a": "130–140 mmHg",
+          "wrong": [
+            "Under 100 mmHg",
+            "180–200 mmHg",
+            "No target; leave it alone"
+          ]
+        },
+        {
+          "q": "Indications to intubate before transfer?",
+          "a": "GCS ≤8, falling GCS, or airway at risk",
+          "wrong": [
+            "Every intracerebral haemorrhage, whatever the GCS",
+            "Any GCS below 15",
+            "Never before transfer"
+          ]
+        },
+        {
+          "q": "Oxygen to carry?",
+          "a": "At least twice the expected need",
+          "wrong": [
+            "Exactly the expected need",
+            "Half the expected need, plus a spare",
+            "None; ambulances carry oxygen"
+          ]
+        },
+        {
+          "q": "REST stands for…",
+          "a": "Recognise, Evaluate, Support, Transport",
+          "wrong": [
+            "Rest, Eat, Sleep, Talk",
+            "Rate, ECG, SpO2, Temperature",
+            "Refer, Escort, Stabilise, Transfer"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Safe Passage", "emoji": "🚑", "flavor": "Stabilise before you go. Twice the oxygen. REST, then DOPES." },
+  "badge": {
+    "name": "Safe Passage",
+    "emoji": "🚑",
+    "flavor": "Stabilise before you go. Twice the oxygen. REST, then DOPES."
+  },
   "cards": [
-    { "q": "Escort for a critical transfer?", "options": ["Doctor and nurse", "A single nurse with an airway kit", "A porter and a healthcare assistant", "A paramedic only"], "why": "Matched to risk.", "source": "Association of Anaesthetists 2019" },
-    { "q": "DOPES stands for…", "options": ["Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "Drugs, Oxygen, Pulse, ECG, Saturations", "Dose, Order, Plan, Escort, Signature", "Disconnection, Occlusion, Pressure, Equipment, Suction"], "why": "Intubated patient desaturation.", "source": "Airway teaching" },
-    { "q": "Oxygen for transfer: carry…", "options": ["Twice the calculated need", "Exactly the calculated need", "Half the calculated need, plus a spare", "Only enough if intubated"], "why": "Delays happen.", "source": "ICS 2019" },
-    { "q": "Anticoagulated ICH on warfarin?", "options": ["Reverse with PCC and vitamin K", "Continue warfarin to prevent stroke", "Add aspirin 300 mg for the stroke", "Start heparin infusion"], "why": "Before transfer.", "source": "NICE NG128" },
-    { "q": "Signs of coning?", "options": ["Dilated pupil, bradycardia, hypertension", "Tachycardia and hypotension", "A fever over 39 °C", "A new petechial rash"], "why": "Cushing response.", "source": "Neurosurgery" },
-    { "q": "Ventilation target in raised ICP?", "options": ["Normocapnia (PaCO2 4.5–5 kPa)", "PaCO2 2.5 kPa (hyperventilate)", "PaCO2 8 kPa (permissive)", "No specific CO2 target"], "why": "Brief hyperventilation only for herniation.", "source": "BTF" }
+    {
+      "q": "Escort for a critical transfer?",
+      "options": [
+        "Doctor and nurse",
+        "A single nurse with an airway kit",
+        "A porter and a healthcare assistant",
+        "A paramedic only"
+      ],
+      "why": "Matched to risk.",
+      "source": "Association of Anaesthetists 2019"
+    },
+    {
+      "q": "DOPES stands for…",
+      "options": [
+        "Displacement, Obstruction, Pneumothorax, Equipment, Stacking",
+        "Drugs, Oxygen, Pulse, ECG, Saturations",
+        "Dose, Order, Plan, Escort, Signature",
+        "Disconnection, Occlusion, Pressure, Equipment, Suction"
+      ],
+      "why": "Intubated patient desaturation.",
+      "source": "Airway teaching"
+    },
+    {
+      "q": "Oxygen for transfer: carry…",
+      "options": [
+        "Twice the calculated need",
+        "Exactly the calculated need",
+        "Half the calculated need, plus a spare",
+        "Only enough if intubated"
+      ],
+      "why": "Delays happen.",
+      "source": "ICS 2019"
+    },
+    {
+      "q": "Anticoagulated ICH on warfarin?",
+      "options": [
+        "Reverse with PCC and vitamin K",
+        "Continue warfarin to prevent stroke",
+        "Add aspirin 300 mg for the stroke",
+        "Start heparin infusion"
+      ],
+      "why": "Before transfer.",
+      "source": "NICE NG128"
+    },
+    {
+      "q": "Signs of coning?",
+      "options": [
+        "Dilated pupil, bradycardia, hypertension",
+        "Tachycardia and hypotension",
+        "A fever over 39 °C",
+        "A new petechial rash"
+      ],
+      "why": "Cushing response.",
+      "source": "Neurosurgery"
+    },
+    {
+      "q": "Ventilation target in raised ICP?",
+      "options": [
+        "Normocapnia (PaCO2 4.5–5 kPa)",
+        "PaCO2 2.5 kPa (hyperventilate)",
+        "PaCO2 8 kPa (permissive)",
+        "No specific CO2 target"
+      ],
+      "why": "Brief hyperventilation only for herniation.",
+      "source": "BTF"
+    }
   ]
 }

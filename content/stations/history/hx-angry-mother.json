@@ -5,11 +5,35 @@
   "type": "comms",
   "time": 420,
   "stem": "Relatives' room, with a nurse present. A 22-year-old man was brought in by police after chasing people in the street with a chopper while intoxicated. He has been sedated with IM midazolam and is physically restrained while awaiting admission. His mother has arrived. She is shouting that you are imprisoning her son illegally and demands to take him home. Talk to her.",
+  "phases": [
+    {
+      "title": "Before you go in",
+      "goal": "Safety and setting.",
+      "steps": [
+        "setting"
+      ]
+    },
+    {
+      "title": "Talk to her",
+      "goal": "Listen, explain, and agree what happens next.",
+      "steps": [
+        "talk"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against NICE NG10 (Violence and aggression, 2015), the Hong Kong Mental Health Ordinance (Cap 136), common-law duty of care, and Hospital Authority policy on restraint.\n\nConflict resolution: safety first (a nurse or security present, an exit, sit at an angle), introduce yourself, let her speak, acknowledge her feelings (without accepting abuse), explain simply what happened and why he is being looked after, explain the legal and medical basis, involve her in the plan, offer support (medical social worker), set limits calmly if she becomes threatening, and document.\n\nLegal basis: a person who lacks capacity because of intoxication or acute illness can be treated and restrained in their best interests under the common law of necessity, using the least restrictive, proportionate measures, reviewed frequently. If a mental disorder is suspected, the Mental Health Ordinance provides for detention for observation (Section 31, Forms 1–3) or an application to a Magistrate/District Judge. The mother cannot remove an adult who lacks capacity when he is a danger to himself or others.\n\nYour notes list these points (quiet room, empathy, safety of patient, others and mother, the plan, psychiatry, MSW, documentation) — this matches.",
   "cast": [
-    { "id": "mother", "name": "Mrs Lo", "role": "woman" },
-    { "id": "nurse", "name": "Nurse Ip", "role": "nurse" }
+    {
+      "id": "mother",
+      "name": "Mrs Lo",
+      "role": "woman"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Ip",
+      "role": "nurse"
+    }
   ],
   "steps": [
     {
@@ -19,8 +43,15 @@
       "label": "Before you go in",
       "hint": "Safety: a nurse with you, security aware, position near the door.",
       "opts": [
-        { "t": "Nurse Ip comes with me; security aware nearby; I'll sit near the door", "mark": "Plans for personal safety" },
-        { "t": "Go in alone and stand over her", "trap": true, "r": "Standing over someone escalates; always have a colleague and an exit." }
+        {
+          "t": "Nurse Ip comes with me; security aware nearby; I'll sit near the door",
+          "mark": "Plans for personal safety"
+        },
+        {
+          "t": "Go in alone and stand over her",
+          "trap": true,
+          "r": "Standing over someone escalates; always have a colleague and an exit."
+        }
       ]
     },
     {
@@ -32,31 +63,87 @@
       "mood": 9,
       "turns": [
         {
-          "line": "You've tied up my son like an animal! This is false imprisonment. I'll sue you!", "lz": "你哋好似綁動物咁綁住我個仔！呢個係非法禁錮。我要告你哋！",
+          "line": "You've tied up my son like an animal! This is false imprisonment. I'll sue you!",
+          "lz": "你哋好似綁動物咁綁住我個仔！呢個係非法禁錮。我要告你哋！",
           "opts": [
-            { "t": "I'm Dr Chan, the doctor looking after your son. I can see you're very upset — anyone would be seeing their child like this. Please tell me what worries you most.", "tz": "我係陳醫生，負責照顧你個仔。我見到你好激動——任何人見到自己仔女咁都會咁。你話俾我知你最擔心啲咩。", "rz": "佢唔係犯人！佢係我個仔呀！", "r": "He's not a criminal! He's my baby!", "mood": -2, "mark": "Introduces self, acknowledges emotion, invites her to speak" },
-            { "t": "Calm down or security will remove you.", "tz": "你冷靜啲，唔係我叫保安請你出去。", "rz": "你唔好恐嚇我！", "r": "Don't you threaten me!", "mood": 1 }
+            {
+              "t": "I'm Dr Chan, the doctor looking after your son. I can see you're very upset — anyone would be seeing their child like this. Please tell me what worries you most.",
+              "tz": "我係陳醫生，負責照顧你個仔。我見到你好激動——任何人見到自己仔女咁都會咁。你話俾我知你最擔心啲咩。",
+              "rz": "佢唔係犯人！佢係我個仔呀！",
+              "r": "He's not a criminal! He's my baby!",
+              "mood": -2,
+              "mark": "Introduces self, acknowledges emotion, invites her to speak"
+            },
+            {
+              "t": "Calm down or security will remove you.",
+              "tz": "你冷靜啲，唔係我叫保安請你出去。",
+              "rz": "你唔好恐嚇我！",
+              "r": "Don't you threaten me!",
+              "mood": 1
+            }
           ]
         },
         {
-          "line": "He's not a criminal! He's my baby!", "lz": "佢唔係犯人！佢係我個仔呀！",
+          "line": "He's not a criminal! He's my baby!",
+          "lz": "佢唔係犯人！佢係我個仔呀！",
           "opts": [
-            { "t": "We're not treating him as a criminal. When he arrived he'd taken drugs and was trying to hurt people with a knife. We gave him medicine to calm him, and the straps are there only to keep him and the staff safe while it wears off.", "tz": "我哋冇當佢係犯人。佢嚟到嗰陣食咗毒品，拎住把刀想傷人。我哋俾咗藥令佢冷靜，綁帶只係喺藥力過咗之前，保護佢同職員嘅安全。", "rz": "毒品？佢應承過我戒咗㗎……", "r": "Drugs? He promised me he stopped…", "mood": -2, "mark": "Explains what happened honestly and why restraint is used" },
-            { "t": "He's violent, that's all you need to know.", "tz": "佢有暴力傾向，你知呢樣就夠。", "rz": "你竟然咁講！", "r": "How dare you!", "mood": 1 }
+            {
+              "t": "We're not treating him as a criminal. When he arrived he'd taken drugs and was trying to hurt people with a knife. We gave him medicine to calm him, and the straps are there only to keep him and the staff safe while it wears off.",
+              "tz": "我哋冇當佢係犯人。佢嚟到嗰陣食咗毒品，拎住把刀想傷人。我哋俾咗藥令佢冷靜，綁帶只係喺藥力過咗之前，保護佢同職員嘅安全。",
+              "rz": "毒品？佢應承過我戒咗㗎……",
+              "r": "Drugs? He promised me he stopped…",
+              "mood": -2,
+              "mark": "Explains what happened honestly and why restraint is used"
+            },
+            {
+              "t": "He's violent, that's all you need to know.",
+              "tz": "佢有暴力傾向，你知呢樣就夠。",
+              "rz": "你竟然咁講！",
+              "r": "How dare you!",
+              "mood": 1
+            }
           ]
         },
         {
-          "line": "I'm taking him home now. You can't stop me.", "lz": "我而家就帶佢返屋企。你哋阻唔到我。",
+          "line": "I'm taking him home now. You can't stop me.",
+          "lz": "我而家就帶佢返屋企。你哋阻唔到我。",
           "opts": [
-            { "t": "I understand you want him home. Right now the drugs mean he can't make safe decisions, and he could harm himself or others; the law allows us to care for him until he's safe. We check him every 15 minutes and remove the straps as soon as it's safe. The psychiatrist will see him today.", "tz": "我明白你想帶佢返屋企。但係而家啲毒品令佢做唔到安全嘅決定，佢可能會傷害自己或者其他人；法律容許我哋照顧佢，直至佢安全為止。我哋每十五分鐘檢查佢一次，一安全就會解開綁帶。精神科醫生今日會嚟睇佢。", "rz": "……你俾唔俾我坐喺度陪佢？", "r": "…Will you let me sit with him?", "mood": -3, "mark": "Explains the legal and medical basis and the plan" },
-            { "t": "Take him then, sign here.", "tz": "咁你帶佢走啦，喺度簽名。", "rz": "好。", "r": "Fine.", "mood": -1 }
+            {
+              "t": "I understand you want him home. Right now the drugs mean he can't make safe decisions, and he could harm himself or others; the law allows us to care for him until he's safe. We check him every 15 minutes and remove the straps as soon as it's safe. The psychiatrist will see him today.",
+              "tz": "我明白你想帶佢返屋企。但係而家啲毒品令佢做唔到安全嘅決定，佢可能會傷害自己或者其他人；法律容許我哋照顧佢，直至佢安全為止。我哋每十五分鐘檢查佢一次，一安全就會解開綁帶。精神科醫生今日會嚟睇佢。",
+              "rz": "……你俾唔俾我坐喺度陪佢？",
+              "r": "…Will you let me sit with him?",
+              "mood": -3,
+              "mark": "Explains the legal and medical basis and the plan"
+            },
+            {
+              "t": "Take him then, sign here.",
+              "tz": "咁你帶佢走啦，喺度簽名。",
+              "rz": "好。",
+              "r": "Fine.",
+              "mood": -1
+            }
           ]
         },
         {
-          "line": "Will you let me sit with him?", "lz": "你俾唔俾我坐喺度陪佢？",
+          "line": "Will you let me sit with him?",
+          "lz": "你俾唔俾我坐喺度陪佢？",
           "opts": [
-            { "t": "Yes, when it's safe. I'll also ask our social worker to talk with you — this must be very hard. I'll write down everything we've discussed.", "tz": "可以，安全嘅時候就可以。我亦會請醫務社工同你傾吓——呢件事對你嚟講一定好難受。我會將我哋傾過嘅嘢全部寫低。", "rz": "多謝你……頭先大聲咗，唔好意思。", "r": "Thank you… sorry for shouting.", "mood": -3, "mark": "Involves her, offers social work support, documents" },
-            { "t": "No visitors.", "tz": "唔准探病。", "rz": "我要投訴。", "r": "I'm complaining.", "mood": 2 }
+            {
+              "t": "Yes, when it's safe. I'll also ask our social worker to talk with you — this must be very hard. I'll write down everything we've discussed.",
+              "tz": "可以，安全嘅時候就可以。我亦會請醫務社工同你傾吓——呢件事對你嚟講一定好難受。我會將我哋傾過嘅嘢全部寫低。",
+              "rz": "多謝你……頭先大聲咗，唔好意思。",
+              "r": "Thank you… sorry for shouting.",
+              "mood": -3,
+              "mark": "Involves her, offers social work support, documents"
+            },
+            {
+              "t": "No visitors.",
+              "tz": "唔准探病。",
+              "rz": "我要投訴。",
+              "r": "I'm complaining.",
+              "mood": 2
+            }
           ]
         }
       ]
@@ -67,21 +154,127 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Legal basis for restraining an intoxicated, dangerous adult who lacks capacity?", "a": "Common-law necessity, in their best interests, proportionate", "wrong": ["The mother's consent", "Police powers only", "No legal basis exists"] },
-        { "q": "How often must a restrained patient be reviewed?", "a": "Every 15 minutes, with observations", "wrong": ["Every 12 hours, on the consultant's ward round", "Only when he asks to be released from the restraints", "Once, at the time of restraint"] },
-        { "q": "First step in de-escalation?", "a": "Ensure safety, then listen", "wrong": ["Explain the hospital rules and the facts", "Call the police and security immediately", "Leave the room until she calms down"] },
-        { "q": "NICE rapid tranquillisation options?", "a": "IM lorazepam or haloperidol + promethazine", "wrong": ["IV haloperidol alone, as the first-line drug", "Oral chlorpromazine only", "IM diazepam"] },
-        { "q": "When should the MHO be considered?", "a": "If a mental disorder needs detention", "wrong": ["For any intoxicated patient who is aggressive", "For any relative who becomes angry in the ED", "Never; it only applies in psychiatric wards"] }
+        {
+          "q": "Legal basis for restraining an intoxicated, dangerous adult who lacks capacity?",
+          "a": "Common-law necessity, in their best interests, proportionate",
+          "wrong": [
+            "The mother's consent",
+            "Police powers only",
+            "No legal basis exists"
+          ]
+        },
+        {
+          "q": "How often must a restrained patient be reviewed?",
+          "a": "Every 15 minutes, with observations",
+          "wrong": [
+            "Every 12 hours, on the consultant's ward round",
+            "Only when he asks to be released from the restraints",
+            "Once, at the time of restraint"
+          ]
+        },
+        {
+          "q": "First step in de-escalation?",
+          "a": "Ensure safety, then listen",
+          "wrong": [
+            "Explain the hospital rules and the facts",
+            "Call the police and security immediately",
+            "Leave the room until she calms down"
+          ]
+        },
+        {
+          "q": "NICE rapid tranquillisation options?",
+          "a": "IM lorazepam or haloperidol + promethazine",
+          "wrong": [
+            "IV haloperidol alone, as the first-line drug",
+            "Oral chlorpromazine only",
+            "IM diazepam"
+          ]
+        },
+        {
+          "q": "When should the MHO be considered?",
+          "a": "If a mental disorder needs detention",
+          "wrong": [
+            "For any intoxicated patient who is aggressive",
+            "For any relative who becomes angry in the ED",
+            "Never; it only applies in psychiatric wards"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Calm Waters", "emoji": "🌊", "flavor": "Safety, listen, acknowledge, explain, involve, support." },
+  "badge": {
+    "name": "Calm Waters",
+    "emoji": "🌊",
+    "flavor": "Safety, listen, acknowledge, explain, involve, support."
+  },
   "cards": [
-    { "q": "Rapid tranquillisation per NICE NG10?", "options": ["IM lorazepam, or IM haloperidol plus promethazine", "IM haloperidol alone", "IV diazepam first", "Oral clozapine"], "why": "Haloperidol alone risks dystonia; check ECG when possible.", "source": "NICE NG10", "note": "Your notes: lorazepam + haloperidol." },
-    { "q": "Restraint must be…", "options": ["Proportionate and least restrictive", "Maximal and prolonged to prevent a repeat", "Decided by the relatives present", "Avoided even when others are at risk"], "why": "Document and review.", "source": "NICE NG10; HA policy" },
-    { "q": "A key de-escalation technique?", "options": ["Calm tone; acknowledge emotion", "Raise your voice so you can be heard clearly", "Stand close to her to show your authority", "Argue each point with facts"], "why": "Reduces arousal.", "source": "NICE NG10" },
-    { "q": "Positional asphyxia risk is highest with…", "options": ["Prone restraint", "Seated, with arms held", "Supine with head up", "Lateral"], "why": "Avoid prolonged prone restraint.", "source": "NICE NG10" },
-    { "q": "When is a relative entitled to remove an adult patient?", "options": ["Not if he lacks capacity and is at risk", "Always, as the legal next of kin of the adult", "Whenever they are the parent", "If they sign the hospital's discharge form first"], "why": "Decisions follow capacity and best interests.", "source": "Common law" },
-    { "q": "The preferred term replacing 'excited delirium'?", "options": ["Hyperactive delirium with severe agitation", "Acute rage syndrome", "Mania", "Psychosis"], "why": "'Excited delirium' was abandoned (ACEP 2023) — it's not a diagnosis.", "source": "ACEP 2023", "note": "Your notes use 'excited delirium syndrome'." }
+    {
+      "q": "Rapid tranquillisation per NICE NG10?",
+      "options": [
+        "IM lorazepam, or IM haloperidol plus promethazine",
+        "IM haloperidol alone",
+        "IV diazepam first",
+        "Oral clozapine"
+      ],
+      "why": "Haloperidol alone risks dystonia; check ECG when possible.",
+      "source": "NICE NG10",
+      "note": "Your notes: lorazepam + haloperidol."
+    },
+    {
+      "q": "Restraint must be…",
+      "options": [
+        "Proportionate and least restrictive",
+        "Maximal and prolonged to prevent a repeat",
+        "Decided by the relatives present",
+        "Avoided even when others are at risk"
+      ],
+      "why": "Document and review.",
+      "source": "NICE NG10; HA policy"
+    },
+    {
+      "q": "A key de-escalation technique?",
+      "options": [
+        "Calm tone; acknowledge emotion",
+        "Raise your voice so you can be heard clearly",
+        "Stand close to her to show your authority",
+        "Argue each point with facts"
+      ],
+      "why": "Reduces arousal.",
+      "source": "NICE NG10"
+    },
+    {
+      "q": "Positional asphyxia risk is highest with…",
+      "options": [
+        "Prone restraint",
+        "Seated, with arms held",
+        "Supine with head up",
+        "Lateral"
+      ],
+      "why": "Avoid prolonged prone restraint.",
+      "source": "NICE NG10"
+    },
+    {
+      "q": "When is a relative entitled to remove an adult patient?",
+      "options": [
+        "Not if he lacks capacity and is at risk",
+        "Always, as the legal next of kin of the adult",
+        "Whenever they are the parent",
+        "If they sign the hospital's discharge form first"
+      ],
+      "why": "Decisions follow capacity and best interests.",
+      "source": "Common law"
+    },
+    {
+      "q": "The preferred term replacing 'excited delirium'?",
+      "options": [
+        "Hyperactive delirium with severe agitation",
+        "Acute rage syndrome",
+        "Mania",
+        "Psychosis"
+      ],
+      "why": "'Excited delirium' was abandoned (ACEP 2023) — it's not a diagnosis.",
+      "source": "ACEP 2023",
+      "note": "Your notes use 'excited delirium syndrome'."
+    }
   ]
 }

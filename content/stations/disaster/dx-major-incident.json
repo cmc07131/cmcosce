@@ -5,11 +5,43 @@
   "type": "teaching",
   "time": 480,
   "stem": "ED office. Ambulance control rings: a train collision with about 40 casualties, 15 minutes away. You are the ED consultant in charge. Take the call, start the ED response, and afterwards explain to the nurse manager how the department should plan and train for such events.",
+  "phases": [
+    {
+      "title": "Take the call",
+      "goal": "METHANE.",
+      "steps": [
+        "call"
+      ]
+    },
+    {
+      "title": "Respond",
+      "goal": "Start the ED response.",
+      "steps": [
+        "respond"
+      ]
+    },
+    {
+      "title": "Plan and train",
+      "goal": "Planning and training.",
+      "steps": [
+        "teach"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "unverified", "text": "Hong Kong names. The station uses METHANE, CSCATTT and generic ED roles. The Hospital Authority uses its own Major Incident Control Centre and colour-coded response levels; check your cluster's current contingency plan for the exact names."}
+    {
+      "tag": "unverified",
+      "text": "Hong Kong names. The station uses METHANE, CSCATTT and generic ED roles. The Hospital Authority uses its own Major Incident Control Centre and colour-coded response levels; check your cluster's current contingency plan for the exact names."
+    }
   ],
   "notes": "Checked against the UK NHS Emergency Preparedness, Resilience and Response framework (EPRR 2022), Major Incident Medical Management and Support (MIMMS, 3rd ed.), JESIP principles (METHANE), and WHO hospital emergency response checklist (2011).\n\nMETHANE: Major incident declared/standby; Exact location; Type of incident; Hazards; Access; Number and severity of casualties; Emergency services present and required. CSCATTT: Command and control, Safety, Communication, Assessment, Triage, Treatment, Transport. ED response: activate the hospital major incident plan (cascade call-out), ED commander (consultant) and nurse coordinator with action cards, clear the ED (discharge/admit current patients), senior triage officer at the entrance, pre-assigned teams for red bays, major incident packs and numbering/ID system, blood bank/lab/radiology/theatres/ICU alerted, relatives' reception area, media liaison via hospital command, staff welfare and rotation, stand-down and debrief. Planning and training: hazard/risk assessment, written plan with action cards, surge capacity (beds, staff, supplies), communication (backup radios), exercises — tabletop, live/full-scale, and communication tests, then debrief and updating the plan (lessons identified → learned).\n\nYour notes list 'planning and training' as a topic only. The Hong Kong HA uses its own Major Incident Control Centre and colour-coded response levels; check your cluster's current contingency plan for the exact names.",
-  "cast": [{ "id": "nurse", "name": "Nurse manager Ho", "role": "nurse" }],
+  "cast": [
+    {
+      "id": "nurse",
+      "name": "Nurse manager Ho",
+      "role": "nurse"
+    }
+  ],
   "steps": [
     {
       "id": "call",
@@ -18,13 +50,41 @@
       "label": "Take the call",
       "hint": "Write down METHANE.",
       "opts": [
-        { "t": "M — Major incident declared or on standby?", "n": 1, "mark": "M: declared or standby" },
-        { "t": "E — Exact location", "n": 2, "mark": "E: exact location" },
-        { "t": "T — Type of incident", "n": 3, "mark": "T: type" },
-        { "t": "H — Hazards (fire, chemicals)", "n": 4, "mark": "H: hazards" },
-        { "t": "A — Access routes", "n": 5, "mark": "A: access" },
-        { "t": "N — Number and severity of casualties", "n": 6, "mark": "N: number and severity" },
-        { "t": "E — Emergency services present and required", "n": 7, "mark": "E: emergency services" }
+        {
+          "t": "M — Major incident declared or on standby?",
+          "n": 1,
+          "mark": "M: declared or standby"
+        },
+        {
+          "t": "E — Exact location",
+          "n": 2,
+          "mark": "E: exact location"
+        },
+        {
+          "t": "T — Type of incident",
+          "n": 3,
+          "mark": "T: type"
+        },
+        {
+          "t": "H — Hazards (fire, chemicals)",
+          "n": 4,
+          "mark": "H: hazards"
+        },
+        {
+          "t": "A — Access routes",
+          "n": 5,
+          "mark": "A: access"
+        },
+        {
+          "t": "N — Number and severity of casualties",
+          "n": 6,
+          "mark": "N: number and severity"
+        },
+        {
+          "t": "E — Emergency services present and required",
+          "n": 7,
+          "mark": "E: emergency services"
+        }
       ]
     },
     {
@@ -35,14 +95,46 @@
       "hint": "Activate the plan, command roles, clear space, triage at the door, teams, support services, relatives, media.",
       "confirm": "Do these",
       "opts": [
-        { "t": "Activate the hospital major incident plan; call-out cascade", "need": true, "mark": "Activates the major incident plan" },
-        { "t": "ED commander and nurse coordinator with action cards", "need": true, "mark": "Establishes command roles" },
-        { "t": "Clear the ED: discharge or admit current patients", "need": true, "mark": "Creates capacity" },
-        { "t": "Senior triage officer at the entrance", "need": true, "mark": "Senior triage at the door" },
-        { "t": "Pre-assigned teams to red bays; major incident packs and ID numbers", "need": true, "mark": "Teams and casualty ID system" },
-        { "t": "Alert blood bank, radiology, theatres, ICU", "need": true, "mark": "Alerts support services" },
-        { "t": "Relatives' reception area; media through hospital command only", "need": true, "mark": "Relatives and media handled" },
-        { "t": "Go to the scene yourself with the ED team", "trap": true, "r": "The ED commander runs the department; site medical teams are pre-designated." }
+        {
+          "t": "Activate the hospital major incident plan; call-out cascade",
+          "need": true,
+          "mark": "Activates the major incident plan"
+        },
+        {
+          "t": "ED commander and nurse coordinator with action cards",
+          "need": true,
+          "mark": "Establishes command roles"
+        },
+        {
+          "t": "Clear the ED: discharge or admit current patients",
+          "need": true,
+          "mark": "Creates capacity"
+        },
+        {
+          "t": "Senior triage officer at the entrance",
+          "need": true,
+          "mark": "Senior triage at the door"
+        },
+        {
+          "t": "Pre-assigned teams to red bays; major incident packs and ID numbers",
+          "need": true,
+          "mark": "Teams and casualty ID system"
+        },
+        {
+          "t": "Alert blood bank, radiology, theatres, ICU",
+          "need": true,
+          "mark": "Alerts support services"
+        },
+        {
+          "t": "Relatives' reception area; media through hospital command only",
+          "need": true,
+          "mark": "Relatives and media handled"
+        },
+        {
+          "t": "Go to the scene yourself with the ED team",
+          "trap": true,
+          "r": "The ED commander runs the department; site medical teams are pre-designated."
+        }
       ]
     },
     {
@@ -56,15 +148,33 @@
         {
           "line": "How should we get ready before the next one?",
           "opts": [
-            { "t": "A written plan based on local risks, with action cards for each role, and surge plans for beds, staff and supplies", "r": "Makes sense.", "mood": -1, "mark": "Plan with risk assessment, action cards and surge capacity" },
-            { "t": "We'll improvise when it happens.", "r": "Hmm.", "mood": 2 }
+            {
+              "t": "A written plan based on local risks, with action cards for each role, and surge plans for beds, staff and supplies",
+              "r": "Makes sense.",
+              "mood": -1,
+              "mark": "Plan with risk assessment, action cards and surge capacity"
+            },
+            {
+              "t": "We'll improvise when it happens.",
+              "r": "Hmm.",
+              "mood": 2
+            }
           ]
         },
         {
           "line": "And training?",
           "opts": [
-            { "t": "Regular exercises: tabletop, communication tests, and live full-scale drills; debrief and update the plan", "r": "I'll schedule a tabletop next month.", "mood": -1, "mark": "Exercise types and debrief" },
-            { "t": "Read the plan once a year.", "r": "OK.", "mood": 1 }
+            {
+              "t": "Regular exercises: tabletop, communication tests, and live full-scale drills; debrief and update the plan",
+              "r": "I'll schedule a tabletop next month.",
+              "mood": -1,
+              "mark": "Exercise types and debrief"
+            },
+            {
+              "t": "Read the plan once a year.",
+              "r": "OK.",
+              "mood": 1
+            }
           ]
         }
       ]
@@ -75,21 +185,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "CSCATTT stands for…", "a": "Command, Safety, Communication, Assessment, Triage, Treatment, Transport", "wrong": ["Call, Stop, Clear, Assess, Treat, Transfer, Talk", "Circulation, Spine, Chest, Airway, Trauma, Temperature, Tubes", "Control, Scene, Casualties, Ambulance, Triage, Theatre, Talk"] },
-        { "q": "Who runs the ED during a major incident?", "a": "The ED commander with a nurse coordinator", "wrong": ["The most junior doctor on shift", "The hospital media officer", "The most senior police officer present in the hospital"] },
-        { "q": "Three types of exercise?", "a": "Tabletop, communication test, live (full-scale)", "wrong": ["Running, swimming and cycling", "Live drills only, twice a year", "Online modules only"] },
-        { "q": "Purpose of a debrief?", "a": "Identify lessons and update the plan", "wrong": ["Identify which staff made errors and discipline them", "Close the incident file", "Prepare a media release"] },
-        { "q": "When should the ED stand down?", "a": "When hospital command declares it", "wrong": ["When the ED looks quiet for an hour or more", "After exactly 1 hour", "When the last ambulance leaves the scene"] }
+        {
+          "q": "CSCATTT stands for…",
+          "a": "Command, Safety, Communication, Assessment, Triage, Treatment, Transport",
+          "wrong": [
+            "Call, Stop, Clear, Assess, Treat, Transfer, Talk",
+            "Circulation, Spine, Chest, Airway, Trauma, Temperature, Tubes",
+            "Control, Scene, Casualties, Ambulance, Triage, Theatre, Talk"
+          ]
+        },
+        {
+          "q": "Who runs the ED during a major incident?",
+          "a": "The ED commander with a nurse coordinator",
+          "wrong": [
+            "The most junior doctor on shift",
+            "The hospital media officer",
+            "The most senior police officer present in the hospital"
+          ]
+        },
+        {
+          "q": "Three types of exercise?",
+          "a": "Tabletop, communication test, live (full-scale)",
+          "wrong": [
+            "Running, swimming and cycling",
+            "Live drills only, twice a year",
+            "Online modules only"
+          ]
+        },
+        {
+          "q": "Purpose of a debrief?",
+          "a": "Identify lessons and update the plan",
+          "wrong": [
+            "Identify which staff made errors and discipline them",
+            "Close the incident file",
+            "Prepare a media release"
+          ]
+        },
+        {
+          "q": "When should the ED stand down?",
+          "a": "When hospital command declares it",
+          "wrong": [
+            "When the ED looks quiet for an hour or more",
+            "After exactly 1 hour",
+            "When the last ambulance leaves the scene"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Incident Commander", "emoji": "📋", "flavor": "METHANE in, CSCATTT out. Plan, drill, debrief." },
+  "badge": {
+    "name": "Incident Commander",
+    "emoji": "📋",
+    "flavor": "METHANE in, CSCATTT out. Plan, drill, debrief."
+  },
   "cards": [
-    { "q": "METHANE's 'H' is…", "options": ["Hazards", "Hospital", "Helicopter", "Head injury"], "why": "Scene safety.", "source": "JESIP" },
-    { "q": "METHANE's 'N' is…", "options": ["Number and severity of casualties", "Nurses and doctors needed", "Name and rank of the incident officer at the scene", "Next of kin notified"], "why": "Resource planning.", "source": "JESIP" },
-    { "q": "First 'C' of CSCATTT?", "options": ["Command and control", "Circulation", "Cervical spine control", "Chest injuries (tension, tamponade)"], "why": "Management before medicine.", "source": "MIMMS" },
-    { "q": "Tabletop exercise is…", "options": ["Discussion-based walk-through of the plan", "A full live drill with actors as casualties", "A fire alarm test", "An online quiz for staff"], "why": "Cheap, tests decisions.", "source": "EPRR" },
-    { "q": "Relatives in a major incident go to…", "options": ["A separate reception area", "Resus, to be with the patient", "The media briefing room with the press", "Home, to wait for a call"], "why": "Information and support.", "source": "MIMMS" },
-    { "q": "Action cards give…", "options": ["Each role's tasks on one card", "Patient notes for each casualty", "Drug doses for each clinical area only", "The staff rota for the week"], "why": "Clarity under stress.", "source": "MIMMS" }
+    {
+      "q": "METHANE's 'H' is…",
+      "options": [
+        "Hazards",
+        "Hospital",
+        "Helicopter",
+        "Head injury"
+      ],
+      "why": "Scene safety.",
+      "source": "JESIP"
+    },
+    {
+      "q": "METHANE's 'N' is…",
+      "options": [
+        "Number and severity of casualties",
+        "Nurses and doctors needed",
+        "Name and rank of the incident officer at the scene",
+        "Next of kin notified"
+      ],
+      "why": "Resource planning.",
+      "source": "JESIP"
+    },
+    {
+      "q": "First 'C' of CSCATTT?",
+      "options": [
+        "Command and control",
+        "Circulation",
+        "Cervical spine control",
+        "Chest injuries (tension, tamponade)"
+      ],
+      "why": "Management before medicine.",
+      "source": "MIMMS"
+    },
+    {
+      "q": "Tabletop exercise is…",
+      "options": [
+        "Discussion-based walk-through of the plan",
+        "A full live drill with actors as casualties",
+        "A fire alarm test",
+        "An online quiz for staff"
+      ],
+      "why": "Cheap, tests decisions.",
+      "source": "EPRR"
+    },
+    {
+      "q": "Relatives in a major incident go to…",
+      "options": [
+        "A separate reception area",
+        "Resus, to be with the patient",
+        "The media briefing room with the press",
+        "Home, to wait for a call"
+      ],
+      "why": "Information and support.",
+      "source": "MIMMS"
+    },
+    {
+      "q": "Action cards give…",
+      "options": [
+        "Each role's tasks on one card",
+        "Patient notes for each casualty",
+        "Drug doses for each clinical area only",
+        "The staff rota for the week"
+      ],
+      "why": "Clarity under stress.",
+      "source": "MIMMS"
+    }
   ]
 }

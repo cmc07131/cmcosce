@@ -5,14 +5,53 @@
   "type": "comms",
   "time": 420,
   "stem": "Resus 3. Madam Lee, 86, with end-stage heart failure and advanced dementia, has come in from her care home with pneumonia and low blood pressure. She cannot communicate. Her daughter has arrived with a folder and asks you not to 'put her through CPR and tubes'. Discuss the plan with the daughter.",
+  "phases": [
+    {
+      "title": "The document",
+      "goal": "Is it valid and applicable?",
+      "steps": [
+        "folder"
+      ]
+    },
+    {
+      "title": "Explain",
+      "goal": "The plan, and what it does and does not mean.",
+      "steps": [
+        "explain"
+      ]
+    },
+    {
+      "title": "Document",
+      "goal": "Record it properly.",
+      "steps": [
+        "document"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "missing", "text": "The new law. Your notes list 'advanced directive' as a topic only. Hong Kong's Advance Decision on Life-sustaining Treatment Ordinance (in force 31 July 2026) gives advance medical directives and DNACPR orders legal effect, including outside hospital. Family cannot refuse treatment on an adult's behalf; they tell you the patient's wishes. Check the Hospital Authority's current forms."}
+    {
+      "tag": "missing",
+      "text": "The new law. Your notes list 'advanced directive' as a topic only. Hong Kong's Advance Decision on Life-sustaining Treatment Ordinance (in force 31 July 2026) gives advance medical directives and DNACPR orders legal effect, including outside hospital. Family cannot refuse treatment on an adult's behalf; they tell you the patient's wishes. Check the Hospital Authority's current forms."
+    }
   ],
   "notes": "Checked against Hong Kong's Advance Decision on Life-sustaining Treatment Ordinance (passed November 2024, in force 31 July 2026), the Hospital Authority guidance on advance directives and DNACPR, and the Hong Kong Medical Council Code.\n\nThe Ordinance gives legal effect to advance medical directives (AMDs) made by a mentally capable adult with an advanced, irreversible disease, meeting statutory formalities, and to DNACPR orders made by registered medical practitioners; DNACPR orders now also apply outside hospital, and rescuers act on them. The maker can revoke an AMD at any time. Clinicians are protected when they give life-sustaining treatment without notice of a valid AMD, or withhold it in the honest and reasonable belief that one is valid and applicable.\n\nFamily members cannot make or refuse treatment decisions on behalf of an adult who lacks capacity (unless appointed under a legal mechanism); they are consulted about the patient's values and wishes, and the doctor decides in the patient's best interests. Check the document: is it an AMD by the patient herself, is it valid (formalities, capacity at the time), and is it applicable to this situation? A DNACPR decision does not mean 'no treatment': antibiotics, oxygen, fluids and comfort continue unless also refused.\n\nYour notes list 'advanced directive' as a topic without detail. The Ordinance's details (forms, witnesses) should be checked against the HA's current forms.",
   "cast": [
-    { "id": "daughter", "name": "Ms Lee", "role": "woman" },
-    { "id": "patient", "name": "Madam Lee", "role": "elderly", "inBed": true },
-    { "id": "nurse", "name": "Nurse Choi", "role": "nurse" }
+    {
+      "id": "daughter",
+      "name": "Ms Lee",
+      "role": "woman"
+    },
+    {
+      "id": "patient",
+      "name": "Madam Lee",
+      "role": "elderly",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Choi",
+      "role": "nurse"
+    }
   ],
   "steps": [
     {
@@ -23,13 +62,43 @@
       "hint": "What document is it, who made it, when, was she capable, what does it cover? Her mother's values.",
       "groups": {
         "Document": [
-          { "t": "What is in the folder?", "tz": "個文件夾入面係咩？", "rz": "係我阿媽兩年前簽嘅預設醫療指示，嗰陣佢嘅認知障礙症仲未咁差。佢嘅家庭醫生同一個朋友做見證人。", "r": "An advance directive my mother signed two years ago, before the dementia got bad. Her GP and a friend witnessed it.", "mark": "Identifies the document and who made it" },
-          { "t": "What does it say?", "tz": "入面寫咗啲咩？", "rz": "如果佢去到病嘅末期，唔做心肺復甦，唔用呼吸機。不過佢仍然想得到紓緩照顧。", "r": "No CPR, no breathing machine, if she's in the final stage of an illness. She still wanted comfort care.", "mark": "Clarifies what treatments it covers" },
-          { "t": "Was she well enough to understand it when she signed?", "tz": "佢簽嗰陣，精神狀態明唔明白入面嘅內容？", "rz": "明白，家庭醫生有寫低佢係明白嘅。", "r": "Yes, the GP wrote that she understood.", "mark": "Checks capacity at the time of making" }
+          {
+            "t": "What is in the folder?",
+            "tz": "個文件夾入面係咩？",
+            "rz": "係我阿媽兩年前簽嘅預設醫療指示，嗰陣佢嘅認知障礙症仲未咁差。佢嘅家庭醫生同一個朋友做見證人。",
+            "r": "An advance directive my mother signed two years ago, before the dementia got bad. Her GP and a friend witnessed it.",
+            "mark": "Identifies the document and who made it"
+          },
+          {
+            "t": "What does it say?",
+            "tz": "入面寫咗啲咩？",
+            "rz": "如果佢去到病嘅末期，唔做心肺復甦，唔用呼吸機。不過佢仍然想得到紓緩照顧。",
+            "r": "No CPR, no breathing machine, if she's in the final stage of an illness. She still wanted comfort care.",
+            "mark": "Clarifies what treatments it covers"
+          },
+          {
+            "t": "Was she well enough to understand it when she signed?",
+            "tz": "佢簽嗰陣，精神狀態明唔明白入面嘅內容？",
+            "rz": "明白，家庭醫生有寫低佢係明白嘅。",
+            "r": "Yes, the GP wrote that she understood.",
+            "mark": "Checks capacity at the time of making"
+          }
         ],
         "Values": [
-          { "t": "What was your mother like? What mattered to her?", "tz": "你阿媽係個點樣嘅人？佢最重視啲咩？", "rz": "佢好憎入醫院。佢話想安詳咁走，唔想插滿喉。", "r": "She hated hospitals. She said she wanted to die peacefully, not with machines.", "mark": "Explores the patient's values and wishes" },
-          { "t": "Has anything changed since, has she ever said otherwise?", "tz": "之後有冇改變過？佢有冇講過相反嘅說話？", "rz": "冇，佢舊年仲講多咗一次。", "r": "No, she said it again last year.", "mark": "Checks there is no sign of revocation" }
+          {
+            "t": "What was your mother like? What mattered to her?",
+            "tz": "你阿媽係個點樣嘅人？佢最重視啲咩？",
+            "rz": "佢好憎入醫院。佢話想安詳咁走，唔想插滿喉。",
+            "r": "She hated hospitals. She said she wanted to die peacefully, not with machines.",
+            "mark": "Explores the patient's values and wishes"
+          },
+          {
+            "t": "Has anything changed since, has she ever said otherwise?",
+            "tz": "之後有冇改變過？佢有冇講過相反嘅說話？",
+            "rz": "冇，佢舊年仲講多咗一次。",
+            "r": "No, she said it again last year.",
+            "mark": "Checks there is no sign of revocation"
+          }
         ]
       }
     },
@@ -42,24 +111,66 @@
       "mood": 6,
       "turns": [
         {
-          "line": "So will you just let her die?", "lz": "咁你哋係咪就由得佢死？",
+          "line": "So will you just let her die?",
+          "lz": "咁你哋係咪就由得佢死？",
           "opts": [
-            { "t": "No — we'll keep treating the pneumonia with antibiotics, oxygen and fluids, and make sure she's comfortable. What your mother refused was CPR and a breathing machine, and her directive is valid and applies now, so we will respect it.", "tz": "唔係——我哋會繼續用抗生素、氧氣同吊鹽水醫佢個肺炎，亦都會確保佢舒服。你阿媽拒絕嘅係心肺復甦同呼吸機，而佢份預設醫療指示係有效、而家適用嘅，所以我哋會尊重佢嘅意願。", "rz": "多謝你……呢個就係佢想要嘅。", "r": "Thank you… that's what she wanted.", "mood": -3, "mark": "Explains that DNACPR does not mean withdrawing other treatment" },
-            { "t": "Yes, nothing more to do.", "tz": "係，冇嘢可以再做。", "rz": "我唔係咁嘅意思！", "r": "That's not what I meant!", "mood": 3 }
+            {
+              "t": "No — we'll keep treating the pneumonia with antibiotics, oxygen and fluids, and make sure she's comfortable. What your mother refused was CPR and a breathing machine, and her directive is valid and applies now, so we will respect it.",
+              "tz": "唔係——我哋會繼續用抗生素、氧氣同吊鹽水醫佢個肺炎，亦都會確保佢舒服。你阿媽拒絕嘅係心肺復甦同呼吸機，而佢份預設醫療指示係有效、而家適用嘅，所以我哋會尊重佢嘅意願。",
+              "rz": "多謝你……呢個就係佢想要嘅。",
+              "r": "Thank you… that's what she wanted.",
+              "mood": -3,
+              "mark": "Explains that DNACPR does not mean withdrawing other treatment"
+            },
+            {
+              "t": "Yes, nothing more to do.",
+              "tz": "係，冇嘢可以再做。",
+              "rz": "我唔係咁嘅意思！",
+              "r": "That's not what I meant!",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "My brother in Canada says we should do everything.", "lz": "我喺加拿大嘅阿哥話要盡晒力搶救。",
+          "line": "My brother in Canada says we should do everything.",
+          "lz": "我喺加拿大嘅阿哥話要盡晒力搶救。",
           "opts": [
-            { "t": "I understand he's worried. Family can't override a valid advance directive — it's your mother's own decision. I'm happy to speak to him by phone to explain.", "tz": "我明白佢好擔心。家人係唔可以推翻一份有效嘅預設醫療指示——呢個係你阿媽自己嘅決定。我好樂意打電話同佢解釋。", "rz": "麻煩你可以嗎？佢會聽你講。", "r": "Please would you? He'll listen to you.", "mood": -2, "mark": "Explains that family cannot override a valid AMD; offers to talk to the brother" },
-            { "t": "Then we'll do CPR to keep him happy.", "tz": "咁為咗令佢開心，我哋就做心肺復甦啦。", "rz": "但係佢唔想咁㗎！", "r": "But she didn't want that!", "mood": 3 }
+            {
+              "t": "I understand he's worried. Family can't override a valid advance directive — it's your mother's own decision. I'm happy to speak to him by phone to explain.",
+              "tz": "我明白佢好擔心。家人係唔可以推翻一份有效嘅預設醫療指示——呢個係你阿媽自己嘅決定。我好樂意打電話同佢解釋。",
+              "rz": "麻煩你可以嗎？佢會聽你講。",
+              "r": "Please would you? He'll listen to you.",
+              "mood": -2,
+              "mark": "Explains that family cannot override a valid AMD; offers to talk to the brother"
+            },
+            {
+              "t": "Then we'll do CPR to keep him happy.",
+              "tz": "咁為咗令佢開心，我哋就做心肺復甦啦。",
+              "rz": "但係佢唔想咁㗎！",
+              "r": "But she didn't want that!",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "How long does she have?", "lz": "佢仲有幾耐？",
+          "line": "How long does she have?",
+          "lz": "佢仲有幾耐？",
           "opts": [
-            { "t": "She's very unwell. She may improve with antibiotics, but she might die in the next few days. We'll keep you updated and you can stay with her.", "tz": "佢而家病得好重。用咗抗生素可能會好轉，但都有機會喺呢幾日走。我哋會隨時同你更新，你可以陪住佢。", "rz": "我今晚可唔可以留低？", "r": "Can I stay tonight?", "mood": -1, "mark": "Gives honest prognosis and invites the family to stay" },
-            { "t": "She'll be fine.", "tz": "佢會冇事嘅。", "rz": "真係？", "r": "Really?", "mood": 1 }
+            {
+              "t": "She's very unwell. She may improve with antibiotics, but she might die in the next few days. We'll keep you updated and you can stay with her.",
+              "tz": "佢而家病得好重。用咗抗生素可能會好轉，但都有機會喺呢幾日走。我哋會隨時同你更新，你可以陪住佢。",
+              "rz": "我今晚可唔可以留低？",
+              "r": "Can I stay tonight?",
+              "mood": -1,
+              "mark": "Gives honest prognosis and invites the family to stay"
+            },
+            {
+              "t": "She'll be fine.",
+              "tz": "佢會冇事嘅。",
+              "rz": "真係？",
+              "r": "Really?",
+              "mood": 1
+            }
           ]
         }
       ]
@@ -71,9 +182,19 @@
       "label": "Talk to the nurse",
       "hint": "Document the decision, complete the DNACPR form, a ceiling of care, comfort measures.",
       "opts": [
-        { "t": "Copy the directive into the notes; complete the DNACPR form; ward ceiling: no ICU, no intubation", "mark": "Documents the AMD and DNACPR decision clearly" },
-        { "t": "Continue antibiotics, oxygen, fluids; analgesia and mouth care; palliative care review", "mark": "Continues appropriate treatment and comfort care" },
-        { "t": "Stop all treatment including antibiotics", "trap": true, "r": "The directive refused CPR and ventilation, not antibiotics or comfort." }
+        {
+          "t": "Copy the directive into the notes; complete the DNACPR form; ward ceiling: no ICU, no intubation",
+          "mark": "Documents the AMD and DNACPR decision clearly"
+        },
+        {
+          "t": "Continue antibiotics, oxygen, fluids; analgesia and mouth care; palliative care review",
+          "mark": "Continues appropriate treatment and comfort care"
+        },
+        {
+          "t": "Stop all treatment including antibiotics",
+          "trap": true,
+          "r": "The directive refused CPR and ventilation, not antibiotics or comfort."
+        }
       ]
     },
     {
@@ -82,21 +203,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Who can make an advance medical directive?", "a": "A mentally capable adult, for their own treatment", "wrong": ["The next of kin", "The GP on the patient's behalf, at a clinic visit", "Any family member holding an enduring power of attorney"] },
-        { "q": "When does the HK Advance Decision on Life-sustaining Treatment Ordinance take effect?", "a": "31 July 2026", "wrong": ["1 January 2020", "It has not been passed", "Only in private hospitals"] },
-        { "q": "Does a DNACPR order stop antibiotics and fluids?", "a": "No — it applies to CPR only", "wrong": ["Yes, all active treatment stops", "Yes, except oxygen and analgesia", "Only in residential care homes"] },
-        { "q": "Can a relative override a valid, applicable AMD?", "a": "No", "wrong": ["Yes, the eldest child", "Yes, if they disagree", "Yes, by signing a form"] },
-        { "q": "What protection do doctors have under the Ordinance?", "a": "Protection when acting in good faith on a valid order", "wrong": ["None; they may still be sued for withholding CPR", "Protection only if they perform full resuscitation", "Protection only with a court order in each case"] }
+        {
+          "q": "Who can make an advance medical directive?",
+          "a": "A mentally capable adult, for their own treatment",
+          "wrong": [
+            "The next of kin",
+            "The GP on the patient's behalf, at a clinic visit",
+            "Any family member holding an enduring power of attorney"
+          ]
+        },
+        {
+          "q": "When does the HK Advance Decision on Life-sustaining Treatment Ordinance take effect?",
+          "a": "31 July 2026",
+          "wrong": [
+            "1 January 2020",
+            "It has not been passed",
+            "Only in private hospitals"
+          ]
+        },
+        {
+          "q": "Does a DNACPR order stop antibiotics and fluids?",
+          "a": "No — it applies to CPR only",
+          "wrong": [
+            "Yes, all active treatment stops",
+            "Yes, except oxygen and analgesia",
+            "Only in residential care homes"
+          ]
+        },
+        {
+          "q": "Can a relative override a valid, applicable AMD?",
+          "a": "No",
+          "wrong": [
+            "Yes, the eldest child",
+            "Yes, if they disagree",
+            "Yes, by signing a form"
+          ]
+        },
+        {
+          "q": "What protection do doctors have under the Ordinance?",
+          "a": "Protection when acting in good faith on a valid order",
+          "wrong": [
+            "None; they may still be sued for withholding CPR",
+            "Protection only if they perform full resuscitation",
+            "Protection only with a court order in each case"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Her Own Words", "emoji": "📜", "flavor": "Valid, applicable, respected. DNACPR is not 'no care'." },
+  "badge": {
+    "name": "Her Own Words",
+    "emoji": "📜",
+    "flavor": "Valid, applicable, respected. DNACPR is not 'no care'."
+  },
   "cards": [
-    { "q": "An advance medical directive is valid when made by…", "options": ["A mentally capable adult for themselves", "The family, on the patient's behalf, after discussion", "The treating team, by consensus", "A medical social worker assigned to the family"], "why": "The patient's own decision.", "source": "HK Advance Decision on Life-sustaining Treatment Ordinance" },
-    { "q": "DNACPR orders under the new HK Ordinance apply…", "options": ["In and outside hospital", "Only in intensive care units", "Only inside public hospitals", "Only in the patient's own home"], "why": "Rescuers act on them outside hospital too.", "source": "HK Government press release, July 2026" },
-    { "q": "The HK advance decision law came into force on…", "options": ["31 July 2026", "1 January 2024", "20 January 2026", "Not yet"], "why": "Passed November 2024.", "source": "info.gov.hk, 31 July 2026" },
-    { "q": "A DNACPR decision means…", "options": ["No CPR; other care continues", "No active treatment of any kind", "No nursing or comfort care at all", "No antibiotics or IV fluids"], "why": "Ceilings of care are separate decisions.", "source": "HA guidance" },
-    { "q": "For an incapable adult without an AMD, decisions are made…", "options": ["The doctor, in best interests, consulting family", "The eldest child as legal next of kin, after a family meeting", "The court, every time", "A majority vote of the relatives"], "why": "Family inform, they do not decide.", "source": "HK Medical Council Code" },
-    { "q": "Can an AMD be revoked?", "options": ["Yes, by the maker at any time", "No, it is permanent once signed", "Only by an order of the court", "Only by the family, acting jointly and in writing"], "why": "In the manner the Ordinance specifies.", "source": "HK Ordinance" }
+    {
+      "q": "An advance medical directive is valid when made by…",
+      "options": [
+        "A mentally capable adult for themselves",
+        "The family, on the patient's behalf, after discussion",
+        "The treating team, by consensus",
+        "A medical social worker assigned to the family"
+      ],
+      "why": "The patient's own decision.",
+      "source": "HK Advance Decision on Life-sustaining Treatment Ordinance"
+    },
+    {
+      "q": "DNACPR orders under the new HK Ordinance apply…",
+      "options": [
+        "In and outside hospital",
+        "Only in intensive care units",
+        "Only inside public hospitals",
+        "Only in the patient's own home"
+      ],
+      "why": "Rescuers act on them outside hospital too.",
+      "source": "HK Government press release, July 2026"
+    },
+    {
+      "q": "The HK advance decision law came into force on…",
+      "options": [
+        "31 July 2026",
+        "1 January 2024",
+        "20 January 2026",
+        "Not yet"
+      ],
+      "why": "Passed November 2024.",
+      "source": "info.gov.hk, 31 July 2026"
+    },
+    {
+      "q": "A DNACPR decision means…",
+      "options": [
+        "No CPR; other care continues",
+        "No active treatment of any kind",
+        "No nursing or comfort care at all",
+        "No antibiotics or IV fluids"
+      ],
+      "why": "Ceilings of care are separate decisions.",
+      "source": "HA guidance"
+    },
+    {
+      "q": "For an incapable adult without an AMD, decisions are made…",
+      "options": [
+        "The doctor, in best interests, consulting family",
+        "The eldest child as legal next of kin, after a family meeting",
+        "The court, every time",
+        "A majority vote of the relatives"
+      ],
+      "why": "Family inform, they do not decide.",
+      "source": "HK Medical Council Code"
+    },
+    {
+      "q": "Can an AMD be revoked?",
+      "options": [
+        "Yes, by the maker at any time",
+        "No, it is permanent once signed",
+        "Only by an order of the court",
+        "Only by the family, acting jointly and in writing"
+      ],
+      "why": "In the manner the Ordinance specifies.",
+      "source": "HK Ordinance"
+    }
   ]
 }

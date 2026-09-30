@@ -5,12 +5,48 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 6. Mr Ng, 28, woke this morning unable to stand; both legs are weak. He was well last night after a big dinner and drinks with friends. Take a focused history and discuss your differential and management.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "The weakness, red flags, triggers, the thyroid.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Tests",
+      "goal": "Potassium and thyroid.",
+      "steps": [
+        "tests"
+      ]
+    },
+    {
+      "title": "Discuss",
+      "goal": "The diagnosis and careful treatment.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Age. Your notes present a 70-year-old with hypokalaemic periodic paralysis. Thyrotoxic periodic paralysis is typically a young East Asian man; in an older patient, look first for diuretics, GI losses or other causes of low potassium."},
-    {"tag": "missing", "text": "Treatment detail for thyrotoxic periodic paralysis: small doses of potassium only (for example 10 mmol/h), because it shifts back out of cells and can cause rebound hyperkalaemia; propranolol treats the cause and the paralysis."}
+    {
+      "tag": "differs",
+      "text": "Age. Your notes present a 70-year-old with hypokalaemic periodic paralysis. Thyrotoxic periodic paralysis is typically a young East Asian man; in an older patient, look first for diuretics, GI losses or other causes of low potassium."
+    },
+    {
+      "tag": "missing",
+      "text": "Treatment detail for thyrotoxic periodic paralysis: small doses of potassium only (for example 10 mmol/h), because it shifts back out of cells and can cause rebound hyperkalaemia; propranolol treats the cause and the paralysis."
+    }
   ],
   "notes": "Checked against endocrine and neurology references on thyrotoxic periodic paralysis (TPP; common in young East Asian men) and the ED approach to acute flaccid weakness (cord compression, Guillain–Barré, myasthenia, stroke, electrolyte disorders).\n\nTPP: sudden proximal weakness, often after carbohydrate-rich meals, alcohol or rest after exercise, with hypokalaemia from intracellular shift (not total-body deficit) caused by thyrotoxicosis. Treat carefully: small doses of potassium (e.g. 10 mmol/h IV or oral) because of rebound hyperkalaemia when the shift reverses; non-selective beta-blocker (propranolol) treats the cause and the paralysis; then treat the thyrotoxicosis. Monitor ECG and potassium.\n\nYour notes present a 70-year-old with 'hypokalaemic periodic paralysis (age-related or thyrotoxic triggers)'. Primary periodic paralysis usually starts in youth; in an older patient think more of diuretics, GI losses, or other causes. The rest matches. Red flags for cord compression (back pain, sensory level, sphincter disturbance) must be screened in every case.",
-  "cast": [{ "id": "patient", "name": "Mr Ng", "role": "man", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Ng",
+      "role": "man",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "history",
@@ -20,20 +56,78 @@
       "hint": "Onset, distribution, triggers, red flags, thyroid symptoms, family and drug history.",
       "groups": {
         "Weakness": [
-          { "t": "When did it start and how has it changed?", "tz": "幾時開始？之後有咩變化？", "rz": "朝早六點醒嗰陣已經係咁。而家好返少少。", "r": "Woke up at 6 like this. Getting a little better now.", "mark": "Asks onset and progression" },
-          { "t": "Which parts are weak — legs, arms, face, breathing, swallowing?", "tz": "邊度冇力——對腳、對手、塊面？呼吸同吞嘢有冇問題？", "rz": "兩隻腳，主要係大髀。手都有少少。呼吸同吞嘢冇問題。", "r": "Both legs, mostly thighs. Arms a bit. Breathing and swallowing fine.", "mark": "Asks distribution including bulbar and respiratory" },
-          { "t": "Any numbness or tingling?", "tz": "有冇麻痺或者針刺感？", "rz": "冇麻痺。", "r": "No numbness.", "mark": "Asks sensory symptoms" }
+          {
+            "t": "When did it start and how has it changed?",
+            "tz": "幾時開始？之後有咩變化？",
+            "rz": "朝早六點醒嗰陣已經係咁。而家好返少少。",
+            "r": "Woke up at 6 like this. Getting a little better now.",
+            "mark": "Asks onset and progression"
+          },
+          {
+            "t": "Which parts are weak — legs, arms, face, breathing, swallowing?",
+            "tz": "邊度冇力——對腳、對手、塊面？呼吸同吞嘢有冇問題？",
+            "rz": "兩隻腳，主要係大髀。手都有少少。呼吸同吞嘢冇問題。",
+            "r": "Both legs, mostly thighs. Arms a bit. Breathing and swallowing fine.",
+            "mark": "Asks distribution including bulbar and respiratory"
+          },
+          {
+            "t": "Any numbness or tingling?",
+            "tz": "有冇麻痺或者針刺感？",
+            "rz": "冇麻痺。",
+            "r": "No numbness.",
+            "mark": "Asks sensory symptoms"
+          }
         ],
         "Red flags": [
-          { "t": "Back pain, injury, problems passing urine or opening bowels?", "tz": "有冇背痛、受傷？小便大便有冇問題？", "rz": "冇背痛，冇受傷，大小便正常。", "r": "No back pain, no injury, bladder and bowel normal.", "mark": "Screens for cord compression" },
-          { "t": "Recent diarrhoea or infection?", "tz": "最近有冇肚屙或者感染？", "rz": "冇。", "r": "No.", "mark": "Asks about preceding infection (GBS)" }
+          {
+            "t": "Back pain, injury, problems passing urine or opening bowels?",
+            "tz": "有冇背痛、受傷？小便大便有冇問題？",
+            "rz": "冇背痛，冇受傷，大小便正常。",
+            "r": "No back pain, no injury, bladder and bowel normal.",
+            "mark": "Screens for cord compression"
+          },
+          {
+            "t": "Recent diarrhoea or infection?",
+            "tz": "最近有冇肚屙或者感染？",
+            "rz": "冇。",
+            "r": "No.",
+            "mark": "Asks about preceding infection (GBS)"
+          }
         ],
         "Triggers": [
-          { "t": "What did you do last night?", "tz": "你琴晚做過啲咩？", "rz": "食咗餐豐富晚飯——飯、麵、甜品——仲飲咗幾罐啤酒。", "r": "Big dinner — rice, noodles, dessert — and several beers.", "mark": "Asks about carbohydrate meal and alcohol triggers" },
-          { "t": "Has this happened before?", "tz": "以前有冇試過咁？", "rz": "舊年試過一次，輕啲，自己好返。", "r": "Once last year, milder, went away by itself.", "mark": "Asks about previous episodes" }
+          {
+            "t": "What did you do last night?",
+            "tz": "你琴晚做過啲咩？",
+            "rz": "食咗餐豐富晚飯——飯、麵、甜品——仲飲咗幾罐啤酒。",
+            "r": "Big dinner — rice, noodles, dessert — and several beers.",
+            "mark": "Asks about carbohydrate meal and alcohol triggers"
+          },
+          {
+            "t": "Has this happened before?",
+            "tz": "以前有冇試過咁？",
+            "rz": "舊年試過一次，輕啲，自己好返。",
+            "r": "Once last year, milder, went away by itself.",
+            "mark": "Asks about previous episodes"
+          }
         ],
-        "Thyroid": [{ "t": "Weight loss, palpitations, sweating, heat intolerance, tremor?", "tz": "有冇瘦咗、心跳、出汗多、怕熱、手震？", "rz": "三個月瘦咗五公斤，成日覺得熱，有時心跳好快。", "r": "Lost 5 kg in 3 months, feel hot, heart races sometimes.", "mark": "Screens for thyrotoxicosis" }],
-        "Background": [{ "t": "Medicines, family history, alcohol, drugs", "tz": "有冇食藥？屋企人有咩病？有冇飲酒、用藥物？", "rz": "冇食藥。舅父有甲狀腺問題。冇用藥物。", "r": "No medicines. Uncle had thyroid problems. No drugs.", "mark": "Drug and family history" }]
+        "Thyroid": [
+          {
+            "t": "Weight loss, palpitations, sweating, heat intolerance, tremor?",
+            "tz": "有冇瘦咗、心跳、出汗多、怕熱、手震？",
+            "rz": "三個月瘦咗五公斤，成日覺得熱，有時心跳好快。",
+            "r": "Lost 5 kg in 3 months, feel hot, heart races sometimes.",
+            "mark": "Screens for thyrotoxicosis"
+          }
+        ],
+        "Background": [
+          {
+            "t": "Medicines, family history, alcohol, drugs",
+            "tz": "有冇食藥？屋企人有咩病？有冇飲酒、用藥物？",
+            "rz": "冇食藥。舅父有甲狀腺問題。冇用藥物。",
+            "r": "No medicines. Uncle had thyroid problems. No drugs.",
+            "mark": "Drug and family history"
+          }
+        ]
       }
     },
     {
@@ -44,23 +138,50 @@
       "hint": "Potassium, ECG, TFTs, CK.",
       "groups": {
         "Now": [
-          { "t": "Venous gas with potassium", "r": "K 1.9 mmol/L.", "mark": "Measures potassium urgently" },
-          { "t": "12-lead ECG", "r": "Sinus tachycardia 108, flattened T waves, prominent U waves.", "img": "ecg:hypok", "mark": "ECG shows hypokalaemic changes" },
-          { "t": "TSH and free T4, CK, magnesium, phosphate", "r": "TSH < 0.01, free T4 48 pmol/L.", "mark": "Thyroid function confirms thyrotoxicosis" }
+          {
+            "t": "Venous gas with potassium",
+            "r": "K 1.9 mmol/L.",
+            "mark": "Measures potassium urgently"
+          },
+          {
+            "t": "12-lead ECG",
+            "r": "Sinus tachycardia 108, flattened T waves, prominent U waves.",
+            "img": "ecg:hypok",
+            "mark": "ECG shows hypokalaemic changes"
+          },
+          {
+            "t": "TSH and free T4, CK, magnesium, phosphate",
+            "r": "TSH < 0.01, free T4 48 pmol/L.",
+            "mark": "Thyroid function confirms thyrotoxicosis"
+          }
         ]
       }
     },
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner", "ask": "Thank you. What do you think is going on, and what is your plan?",
+      "to": "examiner",
+      "ask": "Thank you. What do you think is going on, and what is your plan?",
       "label": "Discuss",
       "hint": "Diagnosis, careful potassium, propranolol, monitoring, endocrinology.",
       "opts": [
-        { "t": "Thyrotoxic periodic paralysis; differentials: GBS, cord compression, myasthenia, other hypokalaemia", "mark": "States the diagnosis and differentials" },
-        { "t": "Cautious potassium replacement (small doses) with cardiac monitoring and repeat K every 1–2 h", "mark": "Cautious potassium replacement with monitoring" },
-        { "t": "Propranolol to reverse the shift; endocrinology referral for Graves' treatment", "mark": "Non-selective beta-blocker and endocrine referral" },
-        { "t": "Potassium 40 mmol/h until normal", "trap": "critical", "r": "The potassium shifts back out as the attack ends: aggressive replacement causes rebound hyperkalaemia." }
+        {
+          "t": "Thyrotoxic periodic paralysis; differentials: GBS, cord compression, myasthenia, other hypokalaemia",
+          "mark": "States the diagnosis and differentials"
+        },
+        {
+          "t": "Cautious potassium replacement (small doses) with cardiac monitoring and repeat K every 1–2 h",
+          "mark": "Cautious potassium replacement with monitoring"
+        },
+        {
+          "t": "Propranolol to reverse the shift; endocrinology referral for Graves' treatment",
+          "mark": "Non-selective beta-blocker and endocrine referral"
+        },
+        {
+          "t": "Potassium 40 mmol/h until normal",
+          "trap": "critical",
+          "r": "The potassium shifts back out as the attack ends: aggressive replacement causes rebound hyperkalaemia."
+        }
       ]
     },
     {
@@ -69,21 +190,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Mechanism of hypokalaemia in TPP?", "a": "Intracellular shift via Na/K-ATPase", "wrong": ["Renal potassium loss", "Gastrointestinal loss", "Poor dietary intake"] },
-        { "q": "Risk of treating TPP with large potassium doses?", "a": "Rebound hyperkalaemia", "wrong": ["Hyponatraemia from the IV fluid", "Seizures from rapid correction", "Hypoglycaemia"] },
-        { "q": "Which beta-blocker is used?", "a": "Propranolol (non-selective)", "wrong": ["Atenolol (cardioselective, once daily)", "Esmolol only", "No beta-blocker; calcium channel blocker instead"] },
-        { "q": "ECG sign of hypokalaemia?", "a": "U waves", "wrong": ["Peaked T waves", "Delta waves", "ST elevation"] },
-        { "q": "Red flag for cord compression?", "a": "Urinary retention with back pain", "wrong": ["Fever alone", "Headache", "Proximal weakness only, with normal reflexes"] }
+        {
+          "q": "Mechanism of hypokalaemia in TPP?",
+          "a": "Intracellular shift via Na/K-ATPase",
+          "wrong": [
+            "Renal potassium loss",
+            "Gastrointestinal loss",
+            "Poor dietary intake"
+          ]
+        },
+        {
+          "q": "Risk of treating TPP with large potassium doses?",
+          "a": "Rebound hyperkalaemia",
+          "wrong": [
+            "Hyponatraemia from the IV fluid",
+            "Seizures from rapid correction",
+            "Hypoglycaemia"
+          ]
+        },
+        {
+          "q": "Which beta-blocker is used?",
+          "a": "Propranolol (non-selective)",
+          "wrong": [
+            "Atenolol (cardioselective, once daily)",
+            "Esmolol only",
+            "No beta-blocker; calcium channel blocker instead"
+          ]
+        },
+        {
+          "q": "ECG sign of hypokalaemia?",
+          "a": "U waves",
+          "wrong": [
+            "Peaked T waves",
+            "Delta waves",
+            "ST elevation"
+          ]
+        },
+        {
+          "q": "Red flag for cord compression?",
+          "a": "Urinary retention with back pain",
+          "wrong": [
+            "Fever alone",
+            "Headache",
+            "Proximal weakness only, with normal reflexes"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Shifty K", "emoji": "⚡", "flavor": "Young man, big meal, weak legs, low K: check the thyroid, go gently." },
+  "badge": {
+    "name": "Shifty K",
+    "emoji": "⚡",
+    "flavor": "Young man, big meal, weak legs, low K: check the thyroid, go gently."
+  },
   "cards": [
-    { "q": "Thyrotoxic periodic paralysis is most common in…", "options": ["Young East Asian men", "Elderly white women with goitre", "Children under 10", "Pregnant women"], "why": "Often the first sign of Graves' disease.", "source": "Endocrine references" },
-    { "q": "Triggers for periodic paralysis?", "options": ["Carbohydrate-rich meals, alcohol, rest after exercise", "Cold-water swimming", "Caffeine withdrawal", "Sunlight"], "why": "Insulin drives potassium into cells.", "source": "Endocrine references" },
-    { "q": "Hypokalaemia ECG changes?", "options": ["Flat T waves, U waves, ST depression", "Tall peaked T waves with a widened QRS complex", "Delta waves", "A short QT interval with tall P waves"], "why": "Arrhythmia risk.", "source": "ECG basics" },
-    { "q": "TPP potassium replacement should be…", "options": ["Small doses with close monitoring", "Rapid high-dose IV replacement to 5.0 mmol/L", "Withheld entirely", "Oral only, starting after 24 hours of rest"], "why": "Rebound hyperkalaemia.", "source": "Endocrine references" },
-    { "q": "Ascending weakness after diarrhoea suggests…", "options": ["Guillain–Barré syndrome", "Thyrotoxic periodic paralysis", "Myasthenia gravis", "Stroke"], "why": "Check forced vital capacity.", "source": "Neurology" },
-    { "q": "Definitive treatment for TPP?", "options": ["Treat the hyperthyroidism", "Lifelong potassium tablets", "Oral steroids", "No treatment"], "why": "Attacks stop once euthyroid.", "source": "Endocrine references" }
+    {
+      "q": "Thyrotoxic periodic paralysis is most common in…",
+      "options": [
+        "Young East Asian men",
+        "Elderly white women with goitre",
+        "Children under 10",
+        "Pregnant women"
+      ],
+      "why": "Often the first sign of Graves' disease.",
+      "source": "Endocrine references"
+    },
+    {
+      "q": "Triggers for periodic paralysis?",
+      "options": [
+        "Carbohydrate-rich meals, alcohol, rest after exercise",
+        "Cold-water swimming",
+        "Caffeine withdrawal",
+        "Sunlight"
+      ],
+      "why": "Insulin drives potassium into cells.",
+      "source": "Endocrine references"
+    },
+    {
+      "q": "Hypokalaemia ECG changes?",
+      "options": [
+        "Flat T waves, U waves, ST depression",
+        "Tall peaked T waves with a widened QRS complex",
+        "Delta waves",
+        "A short QT interval with tall P waves"
+      ],
+      "why": "Arrhythmia risk.",
+      "source": "ECG basics"
+    },
+    {
+      "q": "TPP potassium replacement should be…",
+      "options": [
+        "Small doses with close monitoring",
+        "Rapid high-dose IV replacement to 5.0 mmol/L",
+        "Withheld entirely",
+        "Oral only, starting after 24 hours of rest"
+      ],
+      "why": "Rebound hyperkalaemia.",
+      "source": "Endocrine references"
+    },
+    {
+      "q": "Ascending weakness after diarrhoea suggests…",
+      "options": [
+        "Guillain–Barré syndrome",
+        "Thyrotoxic periodic paralysis",
+        "Myasthenia gravis",
+        "Stroke"
+      ],
+      "why": "Check forced vital capacity.",
+      "source": "Neurology"
+    },
+    {
+      "q": "Definitive treatment for TPP?",
+      "options": [
+        "Treat the hyperthyroidism",
+        "Lifelong potassium tablets",
+        "Oral steroids",
+        "No treatment"
+      ],
+      "why": "Attacks stop once euthyroid.",
+      "source": "Endocrine references"
+    }
   ]
 }

@@ -5,17 +5,101 @@
   "type": "resus",
   "time": 420,
   "stem": "A golf course in a thunderstorm. You are the first doctor on scene with a nurse, an AED and a basic kit; ambulances are 10 minutes away. Three casualties: A, 28, apnoeic and pulseless (bystander CPR for 1 minute); B, 45, confused with fern-like skin marks; C, 60, walking with chest discomfort. Triage and resuscitate.",
+  "phases": [
+    {
+      "title": "Scene",
+      "goal": "Is it safe?",
+      "steps": [
+        "scene"
+      ]
+    },
+    {
+      "title": "Reverse triage",
+      "goal": "Who first, and why.",
+      "steps": [
+        "triage"
+      ]
+    },
+    {
+      "title": "Resuscitate",
+      "goal": "The apparently dead first.",
+      "steps": [
+        "cpr"
+      ]
+    },
+    {
+      "title": "The others",
+      "goal": "Patients B and C.",
+      "steps": [
+        "others"
+      ]
+    },
+    {
+      "title": "Handover",
+      "goal": "Hand over.",
+      "steps": [
+        "handover"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "The walking patient with chest pain. Your notes let patient C self-evacuate because he walks. After a lightning strike, anyone with chest pain, loss of consciousness or cardiac symptoms needs an ECG and monitoring: tag GREEN at the scene, but do not let him leave."},
-    {"tag": "differs", "text": "Fixed pupils. Your notes tag BLACK for prolonged arrest with fixed pupils. After lightning, pupils are unreliable (autonomic effects) and must not be used to stop resuscitation; prolonged efforts are justified."},
-    {"tag": "differs", "text": "Why reverse triage works. Your notes say 'apnoea may self-resolve'. It is the other way round: the heart often restarts on its own, but the apnoea persists and causes a second, hypoxic arrest. That is why ventilation is vital."}
+    {
+      "tag": "differs",
+      "text": "The walking patient with chest pain. Your notes let patient C self-evacuate because he walks. After a lightning strike, anyone with chest pain, loss of consciousness or cardiac symptoms needs an ECG and monitoring: tag GREEN at the scene, but do not let him leave."
+    },
+    {
+      "tag": "differs",
+      "text": "Fixed pupils. Your notes tag BLACK for prolonged arrest with fixed pupils. After lightning, pupils are unreliable (autonomic effects) and must not be used to stop resuscitation; prolonged efforts are justified."
+    },
+    {
+      "tag": "differs",
+      "text": "Why reverse triage works. Your notes say 'apnoea may self-resolve'. It is the other way round: the heart often restarts on its own, but the apnoea persists and causes a second, hypoxic arrest. That is why ventilation is vital."
+    }
   ],
   "notes": "Checked against ERC 2021 special circumstances (lightning), the Wilderness Medical Society lightning guideline (2014, updated 2021), and AHA 2020.\n\nReverse triage: in lightning incidents, patients in cardiac or respiratory arrest are treated first, because those who are moving usually survive and arrested victims have a good chance with prompt CPR and ventilation. Lightning (massive DC) often causes asystole, which may revert spontaneously, but the respiratory arrest continues longer and causes secondary hypoxic arrest — so ventilation is vital; VF also occurs. Scene: the storm is the danger (move to shelter when safe); victims carry no charge and are safe to touch. Resuscitate with standard ALS; prolonged efforts are justified. Fixed dilated pupils are unreliable (autonomic effects) and should not be used to stop resuscitation. Look for keraunoparalysis (transient limb paralysis), Lichtenberg figures, TM rupture, cataracts later, and trauma from being thrown (spinal precautions selectively). All patients with chest pain, loss of consciousness, or cardiac symptoms need an ECG and monitoring.\n\nDifferences from your notes: (1) Patient C 'walking → self-evacuate' — with chest pain after a strike he needs an ECG and monitoring; tag GREEN at scene but do not self-discharge. (2) 'BLACK if prolonged arrest + fixed pupils' — pupils are unreliable after lightning. (3) The rationale 'apnoea may self-resolve' is reversed: the heart often restarts; the apnoea persists.",
-  "cast": [{ "id": "patient", "name": "Patient A", "role": "man" }, { "id": "b", "name": "Patient B", "role": "woman" }, { "id": "c", "name": "Patient C", "role": "elderly" }, { "id": "nurse", "name": "Nurse Yu", "role": "nurse" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Patient A",
+      "role": "man"
+    },
+    {
+      "id": "b",
+      "name": "Patient B",
+      "role": "woman"
+    },
+    {
+      "id": "c",
+      "name": "Patient C",
+      "role": "elderly"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Yu",
+      "role": "nurse"
+    }
+  ],
   "vitals": {
-    "hr": 0, "sbp": 0, "dbp": 0, "spo2": 0, "rr": 0, "temp": 35.8, "rhythm": "vf",
+    "hr": 0,
+    "sbp": 0,
+    "dbp": 0,
+    "spo2": 0,
+    "rr": 0,
+    "temp": 35.8,
+    "rhythm": "vf",
     "effects": [
-      { "scene": "rosc", "set": { "hr": 112, "sbp": 102, "dbp": 60, "spo2": 90, "rr": 10, "etco2": 5.2 }, "rhythm": "sinus-tachy" }
+      {
+        "scene": "rosc",
+        "set": {
+          "hr": 112,
+          "sbp": 102,
+          "dbp": 60,
+          "spo2": 90,
+          "rr": 10,
+          "etco2": 5.2
+        },
+        "rhythm": "sinus-tachy"
+      }
     ]
   },
   "steps": [
@@ -26,10 +110,23 @@
       "label": "Scene",
       "hint": "Storm still active; victims safe to touch; call for help with METHANE.",
       "opts": [
-        { "t": "Storm still active — work low, away from trees and flagpoles; move to shelter as soon as safe", "mark": "Assesses ongoing lightning risk to rescuers" },
-        { "t": "Victims carry no charge — safe to touch", "mark": "Knows victims are safe to touch" },
-        { "t": "Radio control: lightning strike, 3 casualties, 1 in arrest — ALS ambulances and more units", "mark": "Calls for help with casualty numbers" },
-        { "t": "Wait until they are no longer 'electrified'", "trap": "critical", "r": "Lightning victims carry no charge; delay costs the arrested patient." }
+        {
+          "t": "Storm still active — work low, away from trees and flagpoles; move to shelter as soon as safe",
+          "mark": "Assesses ongoing lightning risk to rescuers"
+        },
+        {
+          "t": "Victims carry no charge — safe to touch",
+          "mark": "Knows victims are safe to touch"
+        },
+        {
+          "t": "Radio control: lightning strike, 3 casualties, 1 in arrest — ALS ambulances and more units",
+          "mark": "Calls for help with casualty numbers"
+        },
+        {
+          "t": "Wait until they are no longer 'electrified'",
+          "trap": "critical",
+          "r": "Lightning victims carry no charge; delay costs the arrested patient."
+        }
       ]
     },
     {
@@ -39,9 +136,20 @@
       "label": "Reverse triage",
       "hint": "The arrested patient first.",
       "opts": [
-        { "t": "Reverse triage: A (arrest) first; B and C are breathing and moving", "mark": "Applies reverse triage" },
-        { "t": "Treat B first — she is confused and has burns", "trap": "critical", "r": "In lightning, those moving usually survive; the arrested patient has the most to gain." },
-        { "t": "Tag A BLACK — pulseless after a strike", "trap": "critical", "r": "Lightning arrest has a good survival with prompt CPR." }
+        {
+          "t": "Reverse triage: A (arrest) first; B and C are breathing and moving",
+          "mark": "Applies reverse triage"
+        },
+        {
+          "t": "Treat B first — she is confused and has burns",
+          "trap": "critical",
+          "r": "In lightning, those moving usually survive; the arrested patient has the most to gain."
+        },
+        {
+          "t": "Tag A BLACK — pulseless after a strike",
+          "trap": "critical",
+          "r": "Lightning arrest has a good survival with prompt CPR."
+        }
       ]
     },
     {
@@ -51,12 +159,37 @@
       "label": "Resuscitate A",
       "hint": "CPR, AED, shock, ventilate well, continue.",
       "opts": [
-        { "t": "Nurse continues compressions 30:2", "n": 1, "mark": "Continues high-quality CPR" },
-        { "t": "AED pads on; analyse: shock advised", "n": 2, "mark": "Early AED" },
-        { "t": "Shock; resume CPR immediately", "n": 3, "mark": "Shocks and resumes CPR without delay" },
-        { "t": "Airway: head tilt–chin lift, OPA, bag-mask with oxygen — ventilation is key", "n": 4, "mark": "Prioritises ventilation" },
-        { "t": "Rhythm check at 2 minutes: organised rhythm with a pulse", "n": 5, "scene": "rosc", "mark": "Recognises ROSC" },
-        { "t": "Keep ventilating: still apnoeic", "n": 6, "mark": "Continues ventilation after ROSC" }
+        {
+          "t": "Nurse continues compressions 30:2",
+          "n": 1,
+          "mark": "Continues high-quality CPR"
+        },
+        {
+          "t": "AED pads on; analyse: shock advised",
+          "n": 2,
+          "mark": "Early AED"
+        },
+        {
+          "t": "Shock; resume CPR immediately",
+          "n": 3,
+          "mark": "Shocks and resumes CPR without delay"
+        },
+        {
+          "t": "Airway: head tilt–chin lift, OPA, bag-mask with oxygen — ventilation is key",
+          "n": 4,
+          "mark": "Prioritises ventilation"
+        },
+        {
+          "t": "Rhythm check at 2 minutes: organised rhythm with a pulse",
+          "n": 5,
+          "scene": "rosc",
+          "mark": "Recognises ROSC"
+        },
+        {
+          "t": "Keep ventilating: still apnoeic",
+          "n": 6,
+          "mark": "Continues ventilation after ROSC"
+        }
       ]
     },
     {
@@ -67,9 +200,19 @@
       "label": "Patients B and C",
       "hint": "B: neuro, keraunoparalysis, spine; C: ECG and monitoring.",
       "opts": [
-        { "t": "B: YELLOW — GCS, limb power (keraunoparalysis), ears, spinal precautions if thrown", "mark": "B assessed for neuro injury and trauma" },
-        { "t": "C: GREEN at scene but needs ECG and monitoring for chest pain", "mark": "C needs ECG despite walking" },
-        { "t": "C can go home — walking", "trap": true, "r": "Chest pain after lightning needs an ECG and monitoring." }
+        {
+          "t": "B: YELLOW — GCS, limb power (keraunoparalysis), ears, spinal precautions if thrown",
+          "mark": "B assessed for neuro injury and trauma"
+        },
+        {
+          "t": "C: GREEN at scene but needs ECG and monitoring for chest pain",
+          "mark": "C needs ECG despite walking"
+        },
+        {
+          "t": "C can go home — walking",
+          "trap": true,
+          "r": "Chest pain after lightning needs an ECG and monitoring."
+        }
       ]
     },
     {
@@ -79,8 +222,16 @@
       "label": "Handover",
       "hint": "SBAR to the ambulance crew.",
       "opts": [
-        { "t": "SBAR: 28M direct strike, VF arrest, 1 shock, ROSC at 3 min, apnoeic on bag-mask; B confused with feathering burns; C chest pain for ECG", "mark": "Structured handover", "r": "Crew repeat back and load A first." },
-        { "t": "Lightning, three patients, one was dead", "trap": true, "r": "No times, no treatment, no plan." }
+        {
+          "t": "SBAR: 28M direct strike, VF arrest, 1 shock, ROSC at 3 min, apnoeic on bag-mask; B confused with feathering burns; C chest pain for ECG",
+          "mark": "Structured handover",
+          "r": "Crew repeat back and load A first."
+        },
+        {
+          "t": "Lightning, three patients, one was dead",
+          "trap": true,
+          "r": "No times, no treatment, no plan."
+        }
       ]
     },
     {
@@ -89,21 +240,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What is reverse triage?", "a": "Treating the arrested first", "wrong": ["Treating walking wounded first", "Tagging all arrests BLACK", "Triage in reverse order of arrival"] },
-        { "q": "Why ventilate aggressively after lightning arrest?", "a": "The heart restarts but apnoea persists", "wrong": ["To cool the patient's core temperature", "To remove residual electrical charge", "It is not needed after lightning"] },
-        { "q": "Fixed dilated pupils after lightning?", "a": "Unreliable — do not stop for them", "wrong": ["They confirm death, so stop resuscitation at the scene", "They mean brain death", "They indicate hypoglycaemia needing glucose"] },
-        { "q": "Fern-like skin pattern?", "a": "Lichtenberg figures", "wrong": ["Livedo reticularis", "Purpura fulminans", "Erythema marginatum"] },
-        { "q": "Transient limb paralysis after lightning?", "a": "Keraunoparalysis", "wrong": ["Guillain–Barré syndrome", "A stroke in every case", "Tetanus from the burn"] }
+        {
+          "q": "What is reverse triage?",
+          "a": "Treating the arrested first",
+          "wrong": [
+            "Treating walking wounded first",
+            "Tagging all arrests BLACK",
+            "Triage in reverse order of arrival"
+          ]
+        },
+        {
+          "q": "Why ventilate aggressively after lightning arrest?",
+          "a": "The heart restarts but apnoea persists",
+          "wrong": [
+            "To cool the patient's core temperature",
+            "To remove residual electrical charge",
+            "It is not needed after lightning"
+          ]
+        },
+        {
+          "q": "Fixed dilated pupils after lightning?",
+          "a": "Unreliable — do not stop for them",
+          "wrong": [
+            "They confirm death, so stop resuscitation at the scene",
+            "They mean brain death",
+            "They indicate hypoglycaemia needing glucose"
+          ]
+        },
+        {
+          "q": "Fern-like skin pattern?",
+          "a": "Lichtenberg figures",
+          "wrong": [
+            "Livedo reticularis",
+            "Purpura fulminans",
+            "Erythema marginatum"
+          ]
+        },
+        {
+          "q": "Transient limb paralysis after lightning?",
+          "a": "Keraunoparalysis",
+          "wrong": [
+            "Guillain–Barré syndrome",
+            "A stroke in every case",
+            "Tetanus from the burn"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Storm Chaser", "emoji": "⚡", "flavor": "The still one first. Ventilate. Pupils lie." },
+  "badge": {
+    "name": "Storm Chaser",
+    "emoji": "⚡",
+    "flavor": "The still one first. Ventilate. Pupils lie."
+  },
   "cards": [
-    { "q": "Lightning victims are…", "options": ["Safe to touch", "Electrically charged", "Dangerous for 10 minutes", "Only safe with gloves"], "why": "No residual charge.", "source": "ERC 2021" },
-    { "q": "Lightning mass casualty priority?", "options": ["Those in arrest", "Walking wounded", "Those with the largest burns first", "Children first always"], "why": "Reverse triage.", "source": "WMS" },
-    { "q": "Lichtenberg figures are…", "options": ["Fern-like marks typical of lightning", "Deep full-thickness burns that need grafting", "Bruises from being thrown", "An allergic rash from the storm"], "why": "Fade in hours.", "source": "WMS" },
-    { "q": "Common late eye complication after lightning?", "options": ["Cataract", "Glaucoma only", "Myopia", "Conjunctivitis"], "why": "Check eyes.", "source": "WMS" },
-    { "q": "Why does apnoea persist after lightning?", "options": ["Respiratory centre paralysis", "Airway burns and laryngeal swelling", "Opioids given for pain at the scene", "Anxiety and hyperventilation"], "why": "Secondary hypoxic arrest.", "source": "ERC 2021" },
-    { "q": "Ear finding after lightning?", "options": ["Tympanic membrane rupture", "Acute otitis media with an effusion", "Impacted wax from the helmet", "Normal ears"], "why": "Blast effect.", "source": "WMS" }
+    {
+      "q": "Lightning victims are…",
+      "options": [
+        "Safe to touch",
+        "Electrically charged",
+        "Dangerous for 10 minutes",
+        "Only safe with gloves"
+      ],
+      "why": "No residual charge.",
+      "source": "ERC 2021"
+    },
+    {
+      "q": "Lightning mass casualty priority?",
+      "options": [
+        "Those in arrest",
+        "Walking wounded",
+        "Those with the largest burns first",
+        "Children first always"
+      ],
+      "why": "Reverse triage.",
+      "source": "WMS"
+    },
+    {
+      "q": "Lichtenberg figures are…",
+      "options": [
+        "Fern-like marks typical of lightning",
+        "Deep full-thickness burns that need grafting",
+        "Bruises from being thrown",
+        "An allergic rash from the storm"
+      ],
+      "why": "Fade in hours.",
+      "source": "WMS"
+    },
+    {
+      "q": "Common late eye complication after lightning?",
+      "options": [
+        "Cataract",
+        "Glaucoma only",
+        "Myopia",
+        "Conjunctivitis"
+      ],
+      "why": "Check eyes.",
+      "source": "WMS"
+    },
+    {
+      "q": "Why does apnoea persist after lightning?",
+      "options": [
+        "Respiratory centre paralysis",
+        "Airway burns and laryngeal swelling",
+        "Opioids given for pain at the scene",
+        "Anxiety and hyperventilation"
+      ],
+      "why": "Secondary hypoxic arrest.",
+      "source": "ERC 2021"
+    },
+    {
+      "q": "Ear finding after lightning?",
+      "options": [
+        "Tympanic membrane rupture",
+        "Acute otitis media with an effusion",
+        "Impacted wax from the helmet",
+        "Normal ears"
+      ],
+      "why": "Blast effect.",
+      "source": "WMS"
+    }
   ]
 }

@@ -5,11 +5,36 @@
   "type": "comms",
   "time": 420,
   "stem": "Paediatric area. Tsz-yan, 4 (16 kg), fell 1.5 m from a climbing frame. GCS 14, two vomits, a boggy swelling over the right temple. She needs a CT head but is too distressed to lie still. Explain to her father why she needs the scan and sedation, and obtain his consent.",
+  "phases": [
+    {
+      "title": "Check",
+      "goal": "Is sedation safe for her?",
+      "steps": [
+        "check"
+      ]
+    },
+    {
+      "title": "Consent",
+      "goal": "Why the scan, the sedation, its risks.",
+      "steps": [
+        "consent"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against NICE NG232 (Head injury, 2023), the PECARN rule, the Hong Kong Hospital Authority paediatric sedation guideline, and AAP/AAPD 2019 sedation guidance.\n\nCT head within 1 hour for a child with GCS under 15 at 2 hours, suspected skull fracture or tense fontanelle, signs of basal skull fracture, focal deficit, seizure; or, with two or more of: loss of consciousness over 5 minutes, abnormal drowsiness, three or more vomits, dangerous mechanism (NICE NG232 lowered some thresholds). A boggy temporal haematoma in a young child is a high-risk sign (PECARN).\n\nSedation: consider non-drug measures first (parent present, distraction, swaddling). HA guideline options for non-painful imaging: IV midazolam 0.05–0.1 mg/kg titrated (children 3 years and over), intranasal dexmedetomidine 2–3 microgram/kg, or chloral hydrate under 3 years. Risks: respiratory depression, airway obstruction, desaturation, hypotension, paradoxical agitation, vomiting. Monitoring: pulse oximetry, ECG, BP, capnography; a dedicated person watching the child; resuscitation equipment and reversal (flumazenil 0.01 mg/kg). Fasting is not required when the procedure is urgent. Recovery until back to baseline.\n\nYour notes match the HA guideline closely. The concern with sedation in head injury: a falling GCS may be masked, so the team watches closely and the CT is done promptly.",
   "cast": [
-    { "id": "father", "name": "Mr Tsui", "role": "man" },
-    { "id": "patient", "name": "Tsz-yan", "role": "child", "inBed": true }
+    {
+      "id": "father",
+      "name": "Mr Tsui",
+      "role": "man"
+    },
+    {
+      "id": "patient",
+      "name": "Tsz-yan",
+      "role": "child",
+      "inBed": true
+    }
   ],
   "steps": [
     {
@@ -20,10 +45,33 @@
       "hint": "Weight, allergies, medical problems, snoring/airway, last meal, previous sedation.",
       "groups": {
         "Safety": [
-          { "t": "Allergies? Medical problems? Heart or lung disease?", "tz": "佢有冇藥物敏感？有咩病？心臟或者肺有冇問題？", "rz": "冇。", "r": "None.", "mark": "Asks allergies and comorbidities" },
-          { "t": "Does she snore or have breathing problems at night?", "tz": "佢夜晚有冇扯鼻鼾，或者呼吸問題？", "rz": "冇。", "r": "No.", "mark": "Screens for airway risk (OSA)" },
-          { "t": "When did she last eat and drink?", "tz": "佢最後幾時食嘢同飲嘢？", "rz": "十二點食晏，兩點飲過嘢。而家四點。", "r": "Lunch at 12, a drink at 2. It's 4 now.", "mark": "Asks last oral intake" },
-          { "t": "Has she had sedation or an anaesthetic before?", "tz": "佢以前有冇用過鎮靜劑或者全身麻醉？", "rz": "從來冇。", "r": "Never." }
+          {
+            "t": "Allergies? Medical problems? Heart or lung disease?",
+            "tz": "佢有冇藥物敏感？有咩病？心臟或者肺有冇問題？",
+            "rz": "冇。",
+            "r": "None.",
+            "mark": "Asks allergies and comorbidities"
+          },
+          {
+            "t": "Does she snore or have breathing problems at night?",
+            "tz": "佢夜晚有冇扯鼻鼾，或者呼吸問題？",
+            "rz": "冇。",
+            "r": "No.",
+            "mark": "Screens for airway risk (OSA)"
+          },
+          {
+            "t": "When did she last eat and drink?",
+            "tz": "佢最後幾時食嘢同飲嘢？",
+            "rz": "十二點食晏，兩點飲過嘢。而家四點。",
+            "r": "Lunch at 12, a drink at 2. It's 4 now.",
+            "mark": "Asks last oral intake"
+          },
+          {
+            "t": "Has she had sedation or an anaesthetic before?",
+            "tz": "佢以前有冇用過鎮靜劑或者全身麻醉？",
+            "rz": "從來冇。",
+            "r": "Never."
+          }
         ]
       }
     },
@@ -36,31 +84,86 @@
       "mood": 7,
       "turns": [
         {
-          "line": "Why does she need a scan? Isn't that a lot of radiation?", "lz": "點解佢要照掃描？輻射會唔會好多？",
+          "line": "Why does she need a scan? Isn't that a lot of radiation?",
+          "lz": "點解佢要照掃描？輻射會唔會好多？",
           "opts": [
-            { "t": "I understand your worry. She's more drowsy than we'd expect, has vomited twice and has swelling over the temple, which can go with a skull fracture or bleeding. The scan uses a small radiation dose, and missing a bleed would be far more serious.", "tz": "我明白你擔心。佢比我哋預期中眼瞓，嘔咗兩次，太陽穴仲腫咗，呢啲可能代表頭骨裂或者腦出血。掃描嘅輻射劑量好細，但係漏咗腦出血就嚴重得多。", "rz": "好……但係佢一定唔肯瞓定定。", "r": "OK… but she won't lie still.", "mood": -3, "mark": "Explains the indication for CT and weighs radiation risk" },
-            { "t": "It's routine for everyone.", "tz": "個個都照㗎，例行公事啫。", "rz": "咁點解佢要照？", "r": "Then why does she need it?", "mood": 2 }
+            {
+              "t": "I understand your worry. She's more drowsy than we'd expect, has vomited twice and has swelling over the temple, which can go with a skull fracture or bleeding. The scan uses a small radiation dose, and missing a bleed would be far more serious.",
+              "tz": "我明白你擔心。佢比我哋預期中眼瞓，嘔咗兩次，太陽穴仲腫咗，呢啲可能代表頭骨裂或者腦出血。掃描嘅輻射劑量好細，但係漏咗腦出血就嚴重得多。",
+              "rz": "好……但係佢一定唔肯瞓定定。",
+              "r": "OK… but she won't lie still.",
+              "mood": -3,
+              "mark": "Explains the indication for CT and weighs radiation risk"
+            },
+            {
+              "t": "It's routine for everyone.",
+              "tz": "個個都照㗎，例行公事啫。",
+              "rz": "咁點解佢要照？",
+              "r": "Then why does she need it?",
+              "mood": 2
+            }
           ]
         },
         {
-          "line": "OK… but she won't lie still.", "lz": "好……但係佢一定唔肯瞓定定。",
+          "line": "OK… but she won't lie still.",
+          "lz": "好……但係佢一定唔肯瞓定定。",
           "opts": [
-            { "t": "We'll try with you holding her hand first. If that doesn't work, a small dose of a sedative (midazolam) through the drip will make her sleepy for the scan.", "tz": "我哋會先試吓俾你拖住佢隻手。如果唔得，就經吊針俾少少鎮靜劑（midazolam），令佢眼瞓，方便照掃描。", "rz": "咁對個細路女嚟講安唔安全？", "r": "Is that safe for a little girl?", "mood": -1, "mark": "Offers non-drug measures and explains the sedation" },
-            { "t": "We'll knock her out.", "tz": "我哋會整暈佢。", "rz": "乜話？！", "r": "What?!", "mood": 3 }
+            {
+              "t": "We'll try with you holding her hand first. If that doesn't work, a small dose of a sedative (midazolam) through the drip will make her sleepy for the scan.",
+              "tz": "我哋會先試吓俾你拖住佢隻手。如果唔得，就經吊針俾少少鎮靜劑（midazolam），令佢眼瞓，方便照掃描。",
+              "rz": "咁對個細路女嚟講安唔安全？",
+              "r": "Is that safe for a little girl?",
+              "mood": -1,
+              "mark": "Offers non-drug measures and explains the sedation"
+            },
+            {
+              "t": "We'll knock her out.",
+              "tz": "我哋會整暈佢。",
+              "rz": "乜話？！",
+              "r": "What?!",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "Is that safe for a little girl?", "lz": "咁對個細路女嚟講安唔安全？",
+          "line": "Is that safe for a little girl?",
+          "lz": "咁對個細路女嚟講安唔安全？",
           "opts": [
-            { "t": "It's generally very safe. The main risk is that it can slow her breathing, which we watch for all the time with monitors and a nurse by her side; we have medicines to reverse it. She might be grumpy or vomit afterwards. Do you have any questions? Are you happy for us to go ahead?", "tz": "一般嚟講好安全。主要風險係可能令佢呼吸慢咗，所以我哋會一直用儀器監察，仲有護士喺佢身邊；我哋亦都有藥可以解。之後佢可能會扭計或者嘔。你有冇問題想問？你同唔同意我哋進行？", "rz": "同意。我可唔可以陪住佢？", "r": "Yes. Can I stay with her?", "mood": -2, "mark": "Explains risks, monitoring and reversal; obtains consent" },
-            { "t": "No risks at all.", "tz": "完全冇風險。", "rz": "真係？", "r": "Really?", "mood": 0 }
+            {
+              "t": "It's generally very safe. The main risk is that it can slow her breathing, which we watch for all the time with monitors and a nurse by her side; we have medicines to reverse it. She might be grumpy or vomit afterwards. Do you have any questions? Are you happy for us to go ahead?",
+              "tz": "一般嚟講好安全。主要風險係可能令佢呼吸慢咗，所以我哋會一直用儀器監察，仲有護士喺佢身邊；我哋亦都有藥可以解。之後佢可能會扭計或者嘔。你有冇問題想問？你同唔同意我哋進行？",
+              "rz": "同意。我可唔可以陪住佢？",
+              "r": "Yes. Can I stay with her?",
+              "mood": -2,
+              "mark": "Explains risks, monitoring and reversal; obtains consent"
+            },
+            {
+              "t": "No risks at all.",
+              "tz": "完全冇風險。",
+              "rz": "真係？",
+              "r": "Really?",
+              "mood": 0
+            }
           ]
         },
         {
-          "line": "Can I stay with her?", "lz": "我可唔可以陪住佢？",
+          "line": "Can I stay with her?",
+          "lz": "我可唔可以陪住佢？",
           "opts": [
-            { "t": "Yes, until she's asleep, and straight after. She'll stay with us until she's fully awake.", "tz": "可以，陪到佢瞓着為止，完咗之後即刻可以陪返佢。佢會留喺我哋度，直至完全醒返。", "rz": "多謝你，醫生。", "r": "Thank you, doctor.", "mood": -2, "mark": "Involves the parent and explains recovery" },
-            { "t": "No, parents wait outside.", "tz": "唔得，家長要喺出面等。", "r": "…", "mood": 2 }
+            {
+              "t": "Yes, until she's asleep, and straight after. She'll stay with us until she's fully awake.",
+              "tz": "可以，陪到佢瞓着為止，完咗之後即刻可以陪返佢。佢會留喺我哋度，直至完全醒返。",
+              "rz": "多謝你，醫生。",
+              "r": "Thank you, doctor.",
+              "mood": -2,
+              "mark": "Involves the parent and explains recovery"
+            },
+            {
+              "t": "No, parents wait outside.",
+              "tz": "唔得，家長要喺出面等。",
+              "r": "…",
+              "mood": 2
+            }
           ]
         }
       ]
@@ -71,21 +174,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "IV midazolam dose for procedural sedation in a 4-year-old?", "a": "0.05–0.1 mg/kg titrated", "wrong": ["0.5 mg/kg as a single bolus over 1 min", "1 mg/kg IV", "5 mg fixed dose for any child"] },
-        { "q": "Intranasal dexmedetomidine dose?", "a": "2–3 microgram/kg", "wrong": ["20 microgram/kg", "0.2 microgram/kg", "2 mg/kg"] },
-        { "q": "Flumazenil dose in children?", "a": "0.01 mg/kg", "wrong": ["1 mg/kg", "0.1 mg fixed", "5 microgram/kg"] },
-        { "q": "Why is sedation a concern in head injury?", "a": "It can mask a falling conscious level", "wrong": ["It raises intracranial pressure directly in all children", "It causes skull fractures", "It stops the CT being done"] },
-        { "q": "Essential monitoring during sedation?", "a": "SpO2, ECG, BP, capnography, dedicated observer", "wrong": ["Temperature only", "None if a parent is present", "Blood glucose only"] }
+        {
+          "q": "IV midazolam dose for procedural sedation in a 4-year-old?",
+          "a": "0.05–0.1 mg/kg titrated",
+          "wrong": [
+            "0.5 mg/kg as a single bolus over 1 min",
+            "1 mg/kg IV",
+            "5 mg fixed dose for any child"
+          ]
+        },
+        {
+          "q": "Intranasal dexmedetomidine dose?",
+          "a": "2–3 microgram/kg",
+          "wrong": [
+            "20 microgram/kg",
+            "0.2 microgram/kg",
+            "2 mg/kg"
+          ]
+        },
+        {
+          "q": "Flumazenil dose in children?",
+          "a": "0.01 mg/kg",
+          "wrong": [
+            "1 mg/kg",
+            "0.1 mg fixed",
+            "5 microgram/kg"
+          ]
+        },
+        {
+          "q": "Why is sedation a concern in head injury?",
+          "a": "It can mask a falling conscious level",
+          "wrong": [
+            "It raises intracranial pressure directly in all children",
+            "It causes skull fractures",
+            "It stops the CT being done"
+          ]
+        },
+        {
+          "q": "Essential monitoring during sedation?",
+          "a": "SpO2, ECG, BP, capnography, dedicated observer",
+          "wrong": [
+            "Temperature only",
+            "None if a parent is present",
+            "Blood glucose only"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Sweet Dreams", "emoji": "🧸", "flavor": "Why the scan, why the sedative, what can happen, who's watching." },
+  "badge": {
+    "name": "Sweet Dreams",
+    "emoji": "🧸",
+    "flavor": "Why the scan, why the sedative, what can happen, who's watching."
+  },
   "cards": [
-    { "q": "PECARN high-risk feature in a child under 2?", "options": ["Non-frontal scalp haematoma", "Crying straight after the fall", "A fall from a sitting position", "Normal behaviour per the parents"], "why": "Also altered mental status and palpable skull fracture.", "source": "PECARN 2009" },
-    { "q": "Chloral hydrate is preferred for…", "options": ["Non-painful imaging in children under 3", "Painful procedures in teenagers", "Sedation in adults", "Status epilepticus"], "why": "Oral, slower onset.", "source": "HA paediatric sedation guideline" },
-    { "q": "Reversal agent for midazolam?", "options": ["Flumazenil", "Naloxone", "Neostigmine", "Glucagon"], "why": "0.01 mg/kg in children.", "source": "BNFc" },
-    { "q": "Capnography during sedation detects…", "options": ["Hypoventilation early", "Hypoglycaemia during fasting", "Subclinical seizures", "A rising core temperature in infants"], "why": "Before desaturation.", "source": "AAP/AAPD 2019" },
-    { "q": "Fasting before urgent ED sedation is…", "options": ["Not mandatory; weigh urgency against risk", "Always 6 hours for solids", "Always 12 hours for everything", "Irrelevant for ketamine"], "why": "Aspiration is rare.", "source": "ACEP / RCEM" },
-    { "q": "NICE CT within 1 hour in a child: which sign?", "options": ["Suspected open or depressed fracture", "A single vomit after the fall at home", "Crying and distress at the scene", "A scalp laceration needing glue"], "why": "Also GCS <15 at 2 h, basal skull signs, seizure, focal deficit.", "source": "NICE NG232" }
+    {
+      "q": "PECARN high-risk feature in a child under 2?",
+      "options": [
+        "Non-frontal scalp haematoma",
+        "Crying straight after the fall",
+        "A fall from a sitting position",
+        "Normal behaviour per the parents"
+      ],
+      "why": "Also altered mental status and palpable skull fracture.",
+      "source": "PECARN 2009"
+    },
+    {
+      "q": "Chloral hydrate is preferred for…",
+      "options": [
+        "Non-painful imaging in children under 3",
+        "Painful procedures in teenagers",
+        "Sedation in adults",
+        "Status epilepticus"
+      ],
+      "why": "Oral, slower onset.",
+      "source": "HA paediatric sedation guideline"
+    },
+    {
+      "q": "Reversal agent for midazolam?",
+      "options": [
+        "Flumazenil",
+        "Naloxone",
+        "Neostigmine",
+        "Glucagon"
+      ],
+      "why": "0.01 mg/kg in children.",
+      "source": "BNFc"
+    },
+    {
+      "q": "Capnography during sedation detects…",
+      "options": [
+        "Hypoventilation early",
+        "Hypoglycaemia during fasting",
+        "Subclinical seizures",
+        "A rising core temperature in infants"
+      ],
+      "why": "Before desaturation.",
+      "source": "AAP/AAPD 2019"
+    },
+    {
+      "q": "Fasting before urgent ED sedation is…",
+      "options": [
+        "Not mandatory; weigh urgency against risk",
+        "Always 6 hours for solids",
+        "Always 12 hours for everything",
+        "Irrelevant for ketamine"
+      ],
+      "why": "Aspiration is rare.",
+      "source": "ACEP / RCEM"
+    },
+    {
+      "q": "NICE CT within 1 hour in a child: which sign?",
+      "options": [
+        "Suspected open or depressed fracture",
+        "A single vomit after the fall at home",
+        "Crying and distress at the scene",
+        "A scalp laceration needing glue"
+      ],
+      "why": "Also GCS <15 at 2 h, basal skull signs, seizure, focal deficit.",
+      "source": "NICE NG232"
+    }
   ]
 }

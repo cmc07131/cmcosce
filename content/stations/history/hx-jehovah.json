@@ -5,13 +5,46 @@
   "type": "comms",
   "time": 420,
   "stem": "Resus 2. Mr Leung, 40, has a bleeding duodenal ulcer. Hb 58 g/L, HR 118, BP 96/60. He is alert and clear. He is a Jehovah's Witness and says he does not want a blood transfusion. Discuss this with him.",
+  "phases": [
+    {
+      "title": "Talk to him",
+      "goal": "Capacity, information, what he accepts, and a private conversation.",
+      "steps": [
+        "talk"
+      ]
+    },
+    {
+      "title": "Blood-sparing plan",
+      "goal": "Everything that saves blood.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against the Hong Kong Medical Council Code of Professional Conduct (consent), Hospital Authority guidance on patients who refuse blood, GMC guidance on consent (2020), and the Association of Anaesthetists guidance on Jehovah's Witnesses (2018).\n\nA competent adult may refuse any treatment, including life-saving blood, for any reason. Confirm capacity, give clear information about the risks (including death), explore which products he accepts (many Witnesses accept fractions such as albumin, clotting factors, cell salvage in continuity, EPO, tranexamic acid, IV iron — individual conscience), check for an advance directive / 'No Blood' card, offer a private conversation away from family or elders (to ensure the decision is voluntary), involve the Hospital Liaison Committee if he wishes, document, and maximise every blood-sparing measure: early endoscopy, tranexamic acid (in GI bleeding, HALT-IT showed no benefit, so not routine), PPI, IV iron, EPO, minimise sampling, early surgery or embolisation.\n\nChildren: parents cannot refuse life-saving treatment for a child; seek legal authority (in HK, via the court / Protection of Children and Juveniles Ordinance). Gillick competence (UK) — whether a young person under 16 can consent; refusal by a young person may still be overridden in their best interests. Your notes summarise Gillick and JW beliefs correctly.",
   "cast": [
-    { "id": "patient", "name": "Mr Leung", "role": "patient", "inBed": true },
-    { "id": "nurse", "name": "Nurse Pang", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mr Leung",
+      "role": "patient",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Pang",
+      "role": "nurse"
+    }
   ],
-  "vitals": { "hr": 118, "sbp": 96, "dbp": 60, "spo2": 97, "rr": 20, "gcs": 15, "rhythm": "sinus-tachy" },
+  "vitals": {
+    "hr": 118,
+    "sbp": 96,
+    "dbp": 60,
+    "spo2": 97,
+    "rr": 20,
+    "gcs": 15,
+    "rhythm": "sinus-tachy"
+  },
   "steps": [
     {
       "id": "talk",
@@ -22,31 +55,87 @@
       "mood": 6,
       "turns": [
         {
-          "line": "I know I'm bleeding. But I won't accept blood. It's against my faith.", "lz": "我知我流緊血。但係我唔會接受輸血。咁樣違反我嘅信仰。",
+          "line": "I know I'm bleeding. But I won't accept blood. It's against my faith.",
+          "lz": "我知我流緊血。但係我唔會接受輸血。咁樣違反我嘅信仰。",
           "opts": [
-            { "t": "Thank you for telling me — I'll respect your beliefs. Can I explain what's happening, so your decision is fully informed?", "tz": "多謝你話俾我知——我會尊重你嘅信仰。我可唔可以解釋吓而家嘅情況，等你喺清楚明白之下作決定？", "rz": "好，唔該你。", "r": "Yes, please.", "mood": -2, "mark": "Respects his beliefs and offers information" },
-            { "t": "That's ridiculous, you'll die.", "tz": "咁好荒謬，你會死㗎。", "rz": "唔該你唔好嘲笑我嘅信仰。", "r": "Please don't mock my faith.", "mood": 3 }
+            {
+              "t": "Thank you for telling me — I'll respect your beliefs. Can I explain what's happening, so your decision is fully informed?",
+              "tz": "多謝你話俾我知——我會尊重你嘅信仰。我可唔可以解釋吓而家嘅情況，等你喺清楚明白之下作決定？",
+              "rz": "好，唔該你。",
+              "r": "Yes, please.",
+              "mood": -2,
+              "mark": "Respects his beliefs and offers information"
+            },
+            {
+              "t": "That's ridiculous, you'll die.",
+              "tz": "咁好荒謬，你會死㗎。",
+              "rz": "唔該你唔好嘲笑我嘅信仰。",
+              "r": "Please don't mock my faith.",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "Yes, please.", "lz": "好，唔該你。",
+          "line": "Yes, please.",
+          "lz": "好，唔該你。",
           "opts": [
-            { "t": "Your blood count is very low, about half of normal. Without blood, if the bleeding continues you could have a heart attack, organ damage, or die. Can you tell me what you understand about the risk?", "tz": "你嘅血色素好低，得正常嘅一半左右。唔輸血嘅話，如果繼續出血，你可能會心臟病發、器官受損，甚至死亡。你可唔可以講吓你對呢個風險嘅理解？", "rz": "我明白我可能會死。我仍然拒絕輸全血。", "r": "I understand I might die. I still refuse whole blood.", "mood": -1, "mark": "Explains the risk including death and checks understanding (capacity)" },
-            { "t": "You'll be fine without blood.", "tz": "唔輸血你都會冇事嘅。", "rz": "真係？", "r": "Really?", "mood": 0 }
+            {
+              "t": "Your blood count is very low, about half of normal. Without blood, if the bleeding continues you could have a heart attack, organ damage, or die. Can you tell me what you understand about the risk?",
+              "tz": "你嘅血色素好低，得正常嘅一半左右。唔輸血嘅話，如果繼續出血，你可能會心臟病發、器官受損，甚至死亡。你可唔可以講吓你對呢個風險嘅理解？",
+              "rz": "我明白我可能會死。我仍然拒絕輸全血。",
+              "r": "I understand I might die. I still refuse whole blood.",
+              "mood": -1,
+              "mark": "Explains the risk including death and checks understanding (capacity)"
+            },
+            {
+              "t": "You'll be fine without blood.",
+              "tz": "唔輸血你都會冇事嘅。",
+              "rz": "真係？",
+              "r": "Really?",
+              "mood": 0
+            }
           ]
         },
         {
-          "line": "I understand I might die. I still refuse whole blood.", "lz": "我明白我可能會死。我仍然拒絕輸全血。",
+          "line": "I understand I might die. I still refuse whole blood.",
+          "lz": "我明白我可能會死。我仍然拒絕輸全血。",
           "opts": [
-            { "t": "Are there things you would accept — for example clotting factors, albumin, or blood recycled during surgery? Do you carry an advance decision card?", "tz": "有冇啲嘢你係接受嘅——例如凝血因子、白蛋白，或者手術時回收再用嘅血？你有冇隨身帶住預設醫療指示卡？", "rz": "我接受白蛋白同凝血因子。呢張係我張卡。", "r": "I accept albumin and clotting factors. Here's my card.", "mood": -2, "mark": "Explores acceptable products and any advance directive" },
-            { "t": "OK, we'll do nothing then.", "tz": "咁我哋乜都唔做喇。", "rz": "我冇話乜都唔做。", "r": "I didn't say do nothing.", "mood": 2 }
+            {
+              "t": "Are there things you would accept — for example clotting factors, albumin, or blood recycled during surgery? Do you carry an advance decision card?",
+              "tz": "有冇啲嘢你係接受嘅——例如凝血因子、白蛋白，或者手術時回收再用嘅血？你有冇隨身帶住預設醫療指示卡？",
+              "rz": "我接受白蛋白同凝血因子。呢張係我張卡。",
+              "r": "I accept albumin and clotting factors. Here's my card.",
+              "mood": -2,
+              "mark": "Explores acceptable products and any advance directive"
+            },
+            {
+              "t": "OK, we'll do nothing then.",
+              "tz": "咁我哋乜都唔做喇。",
+              "rz": "我冇話乜都唔做。",
+              "r": "I didn't say do nothing.",
+              "mood": 2
+            }
           ]
         },
         {
-          "line": "The elders from my congregation are outside.", "lz": "我教會嘅長老喺出面。",
+          "line": "The elders from my congregation are outside.",
+          "lz": "我教會嘅長老喺出面。",
           "opts": [
-            { "t": "Would you like to talk with me alone for a minute first, so I know this is entirely your own decision?", "tz": "你想唔想先同我單獨傾一分鐘，等我確定呢個完全係你自己嘅決定？", "rz": "……好。呢個係我自己嘅決定。", "r": "…Yes. It is my own decision.", "mood": -1, "mark": "Ensures the decision is voluntary" },
-            { "t": "Let's get them in to decide.", "tz": "叫佢哋入嚟一齊決定啦。", "rz": "呢個係我嘅決定。", "r": "It's my decision.", "mood": 1 }
+            {
+              "t": "Would you like to talk with me alone for a minute first, so I know this is entirely your own decision?",
+              "tz": "你想唔想先同我單獨傾一分鐘，等我確定呢個完全係你自己嘅決定？",
+              "rz": "……好。呢個係我自己嘅決定。",
+              "r": "…Yes. It is my own decision.",
+              "mood": -1,
+              "mark": "Ensures the decision is voluntary"
+            },
+            {
+              "t": "Let's get them in to decide.",
+              "tz": "叫佢哋入嚟一齊決定啦。",
+              "rz": "呢個係我嘅決定。",
+              "r": "It's my decision.",
+              "mood": 1
+            }
           ]
         }
       ]
@@ -59,11 +148,33 @@
       "hint": "Endoscopy urgently, PPI, IV iron, minimise sampling, early surgery/IR, document.",
       "confirm": "Do these",
       "opts": [
-        { "t": "Urgent endoscopy; surgeon and IR aware early", "need": true, "mark": "Early definitive haemorrhage control" },
-        { "t": "IV PPI after endoscopy; IV iron; consider erythropoietin", "fetch": "cart", "need": true, "mark": "Blood-sparing treatments" },
-        { "t": "Paediatric blood tubes to minimise sampling", "fetch": "trolley", "need": true, "mark": "Minimises iatrogenic blood loss" },
-        { "t": "Document his refusal, capacity, what he accepts, and the card; inform the team", "need": true, "mark": "Documents clearly" },
-        { "t": "Transfuse him once he loses consciousness", "trap": "critical", "r": "A valid refusal made while capable remains binding when he loses capacity." }
+        {
+          "t": "Urgent endoscopy; surgeon and IR aware early",
+          "need": true,
+          "mark": "Early definitive haemorrhage control"
+        },
+        {
+          "t": "IV PPI after endoscopy; IV iron; consider erythropoietin",
+          "fetch": "cart",
+          "need": true,
+          "mark": "Blood-sparing treatments"
+        },
+        {
+          "t": "Paediatric blood tubes to minimise sampling",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Minimises iatrogenic blood loss"
+        },
+        {
+          "t": "Document his refusal, capacity, what he accepts, and the card; inform the team",
+          "need": true,
+          "mark": "Documents clearly"
+        },
+        {
+          "t": "Transfuse him once he loses consciousness",
+          "trap": "critical",
+          "r": "A valid refusal made while capable remains binding when he loses capacity."
+        }
       ]
     },
     {
@@ -72,21 +183,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Can a competent adult refuse life-saving blood?", "a": "Yes", "wrong": ["No, doctors must transfuse", "Only with a court order", "Only if the family agrees"] },
-        { "q": "A Jehovah's Witness parent refuses blood for their bleeding child. You…", "a": "Seek legal authority; best interests", "wrong": ["Accept the parents' refusal", "Transfuse secretly without documenting it", "Discharge the child to another hospital"] },
-        { "q": "Gillick competence concerns…", "a": "A child under 16 consenting to treatment", "wrong": ["Adult capacity under the common law", "Detention under the Mental Health Ordinance", "Consent to organ donation"] },
-        { "q": "Why speak to him alone?", "a": "To check the refusal is voluntary", "wrong": ["To persuade him away from his family", "It is required by his church's hospital liaison committee", "To avoid having to document it"] },
-        { "q": "A product many Jehovah's Witnesses accept?", "a": "Albumin (individual conscience)", "wrong": ["Packed red cells if washed and filtered", "Whole blood from a directed donor", "Platelets"] }
+        {
+          "q": "Can a competent adult refuse life-saving blood?",
+          "a": "Yes",
+          "wrong": [
+            "No, doctors must transfuse",
+            "Only with a court order",
+            "Only if the family agrees"
+          ]
+        },
+        {
+          "q": "A Jehovah's Witness parent refuses blood for their bleeding child. You…",
+          "a": "Seek legal authority; best interests",
+          "wrong": [
+            "Accept the parents' refusal",
+            "Transfuse secretly without documenting it",
+            "Discharge the child to another hospital"
+          ]
+        },
+        {
+          "q": "Gillick competence concerns…",
+          "a": "A child under 16 consenting to treatment",
+          "wrong": [
+            "Adult capacity under the common law",
+            "Detention under the Mental Health Ordinance",
+            "Consent to organ donation"
+          ]
+        },
+        {
+          "q": "Why speak to him alone?",
+          "a": "To check the refusal is voluntary",
+          "wrong": [
+            "To persuade him away from his family",
+            "It is required by his church's hospital liaison committee",
+            "To avoid having to document it"
+          ]
+        },
+        {
+          "q": "A product many Jehovah's Witnesses accept?",
+          "a": "Albumin (individual conscience)",
+          "wrong": [
+            "Packed red cells if washed and filtered",
+            "Whole blood from a directed donor",
+            "Platelets"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Bloodless", "emoji": "🩹", "flavor": "Respect a capable refusal. Then fight the bleed every other way." },
+  "badge": {
+    "name": "Bloodless",
+    "emoji": "🩹",
+    "flavor": "Respect a capable refusal. Then fight the bleed every other way."
+  },
   "cards": [
-    { "q": "A capable adult's refusal of blood made in advance is…", "options": ["Binding if valid and applicable", "Void once the patient is unconscious", "Overridden by the family's wishes", "Only advisory for the doctor"], "why": "Respect a valid advance refusal.", "source": "HK Medical Council / GMC" },
-    { "q": "Primary components Jehovah's Witnesses usually refuse?", "options": ["Red cells, white cells, platelets, plasma", "Albumin", "Clotting factors", "IV iron"], "why": "Fractions are individual conscience.", "source": "AAGBI 2018" },
-    { "q": "Gillick competence applies to…", "options": ["Under-16s consenting to treatment", "Adults with dementia", "Detention of adults under the MHO", "Consent to organ donation after death"], "why": "Sufficient understanding and intelligence.", "source": "Gillick v West Norfolk 1985" },
-    { "q": "Parents refuse life-saving blood for a child: the doctor…", "options": ["Seek legal authority; treat in best interests", "Always accepts the parents' refusal, as their right", "Calls the church elders to decide", "Waits for the child to improve"], "why": "The child's welfare comes first.", "source": "HK / UK practice" },
-    { "q": "Blood-sparing measure in GI bleeding?", "options": ["Early endoscopy and haemostasis", "Routine tranexamic acid (despite HALT-IT)", "Frequent large-volume blood tests", "Delaying endoscopy until stable"], "why": "HALT-IT showed no benefit from TXA in GI bleeding.", "source": "HALT-IT 2020" },
-    { "q": "What must be documented?", "options": ["Capacity, information given, what is refused and accepted", "Only the refusal itself", "The name of the church elder present", "The family's opinion only"], "why": "Clear records protect patient and team.", "source": "HA guidance" }
+    {
+      "q": "A capable adult's refusal of blood made in advance is…",
+      "options": [
+        "Binding if valid and applicable",
+        "Void once the patient is unconscious",
+        "Overridden by the family's wishes",
+        "Only advisory for the doctor"
+      ],
+      "why": "Respect a valid advance refusal.",
+      "source": "HK Medical Council / GMC"
+    },
+    {
+      "q": "Primary components Jehovah's Witnesses usually refuse?",
+      "options": [
+        "Red cells, white cells, platelets, plasma",
+        "Albumin",
+        "Clotting factors",
+        "IV iron"
+      ],
+      "why": "Fractions are individual conscience.",
+      "source": "AAGBI 2018"
+    },
+    {
+      "q": "Gillick competence applies to…",
+      "options": [
+        "Under-16s consenting to treatment",
+        "Adults with dementia",
+        "Detention of adults under the MHO",
+        "Consent to organ donation after death"
+      ],
+      "why": "Sufficient understanding and intelligence.",
+      "source": "Gillick v West Norfolk 1985"
+    },
+    {
+      "q": "Parents refuse life-saving blood for a child: the doctor…",
+      "options": [
+        "Seek legal authority; treat in best interests",
+        "Always accepts the parents' refusal, as their right",
+        "Calls the church elders to decide",
+        "Waits for the child to improve"
+      ],
+      "why": "The child's welfare comes first.",
+      "source": "HK / UK practice"
+    },
+    {
+      "q": "Blood-sparing measure in GI bleeding?",
+      "options": [
+        "Early endoscopy and haemostasis",
+        "Routine tranexamic acid (despite HALT-IT)",
+        "Frequent large-volume blood tests",
+        "Delaying endoscopy until stable"
+      ],
+      "why": "HALT-IT showed no benefit from TXA in GI bleeding.",
+      "source": "HALT-IT 2020"
+    },
+    {
+      "q": "What must be documented?",
+      "options": [
+        "Capacity, information given, what is refused and accepted",
+        "Only the refusal itself",
+        "The name of the church elder present",
+        "The family's opinion only"
+      ],
+      "why": "Clear records protect patient and team.",
+      "source": "HA guidance"
+    }
   ]
 }
