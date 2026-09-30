@@ -5,9 +5,39 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 18. Ms Lam, 23, a left-handed chef, cut the palm side of her right ring finger with a sashimi knife 2 hours ago. The bleeding has stopped; the finger feels numb and weak. Take a brief history, examine her hand, and counsel her.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "How, when, hand dominance, work.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Examine",
+      "goal": "Each tendon and nerve, and the circulation.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Counsel",
+      "goal": "Why surgery, and what happens to her work.",
+      "steps": [
+        "counsel"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against BSSH (British Society for Surgery of the Hand) standards for hand trauma (2021), BOAST 'Hand trauma' guidance, and standard examination.\n\nFlexor digitorum profundus (FDP): flexion of the DIP joint with the PIP held straight. Flexor digitorum superficialis (FDS): flexion of the PIP joint while the other fingers are held in extension (blocks FDP). Digital nerves: two-point discrimination (normal under 6 mm at the fingertip) and light touch on each side of the finger; vascular: capillary refill and colour of the pulp. Look at the resting cascade: a finger lying straight out of line suggests a flexor tendon cut. Also check the median, ulnar and radial nerves in the hand ('123' in your notes).\n\nAny suspected flexor tendon or digital nerve injury needs referral to hand surgery for exploration and repair (ideally within days; BSSH), with the wound irrigated, dressed and the hand splinted in the meantime; antibiotics are not routine for clean wounds; tetanus as indicated. Do not explore flexor tendon wounds in the ED.\n\nYour notes (PP 2024 case) match this.",
-  "cast": [{ "id": "patient", "name": "Ms Lam", "role": "woman", "inBed": false }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Ms Lam",
+      "role": "woman",
+      "inBed": false
+    }
+  ],
   "steps": [
     {
       "id": "history",
@@ -17,12 +47,36 @@
       "hint": "Mechanism, time, handedness, occupation, symptoms, tetanus, PMH.",
       "groups": {
         "Injury": [
-          { "t": "What happened, and when?", "tz": "發生咩事？幾時嘅事？", "rz": "兩個鐘前切三文魚，把刀一滑就界到無名指。", "r": "Slicing salmon 2 hours ago; the knife slipped into my ring finger.", "mark": "Asks mechanism and time" },
-          { "t": "Numbness or weakness?", "tz": "有冇麻痺或者冇力？", "rz": "近尾指嗰邊麻咗。手指尾屈唔到。", "r": "The side next to the little finger is numb. I can't bend the tip.", "mark": "Asks about sensory and motor symptoms" }
+          {
+            "t": "What happened, and when?",
+            "tz": "發生咩事？幾時嘅事？",
+            "rz": "兩個鐘前切三文魚，把刀一滑就界到無名指。",
+            "r": "Slicing salmon 2 hours ago; the knife slipped into my ring finger.",
+            "mark": "Asks mechanism and time"
+          },
+          {
+            "t": "Numbness or weakness?",
+            "tz": "有冇麻痺或者冇力？",
+            "rz": "近尾指嗰邊麻咗。手指尾屈唔到。",
+            "r": "The side next to the little finger is numb. I can't bend the tip.",
+            "mark": "Asks about sensory and motor symptoms"
+          }
         ],
         "Background": [
-          { "t": "Which hand do you write with? Your job?", "tz": "你用邊隻手寫字？做咩工作？", "rz": "左撇子。我係壽司師傅。", "r": "Left-handed. I'm a sushi chef.", "mark": "Asks handedness and occupation" },
-          { "t": "Tetanus vaccination and allergies?", "tz": "有冇打過破傷風針？有冇藥物敏感？", "rz": "細個喺香港打齊晒針。冇敏感。", "r": "Childhood vaccines in Hong Kong. No allergies.", "mark": "Asks tetanus status and allergies" }
+          {
+            "t": "Which hand do you write with? Your job?",
+            "tz": "你用邊隻手寫字？做咩工作？",
+            "rz": "左撇子。我係壽司師傅。",
+            "r": "Left-handed. I'm a sushi chef.",
+            "mark": "Asks handedness and occupation"
+          },
+          {
+            "t": "Tetanus vaccination and allergies?",
+            "tz": "有冇打過破傷風針？有冇藥物敏感？",
+            "rz": "細個喺香港打齊晒針。冇敏感。",
+            "r": "Childhood vaccines in Hong Kong. No allergies.",
+            "mark": "Asks tetanus status and allergies"
+          }
         ]
       }
     },
@@ -34,18 +88,48 @@
       "hint": "Resting cascade, wound, FDP and FDS separately, digital nerves, circulation, other nerves.",
       "groups": {
         "Look": [
-          { "t": "Resting posture of the fingers (cascade)", "r": "The ring finger lies straighter than the others.", "mark": "Observes the resting cascade" },
-          { "t": "The wound", "r": "A 1.5 cm transverse laceration over the volar middle phalanx (zone 2), ulnar side.", "mark": "Describes the wound and zone" }
+          {
+            "t": "Resting posture of the fingers (cascade)",
+            "r": "The ring finger lies straighter than the others.",
+            "mark": "Observes the resting cascade"
+          },
+          {
+            "t": "The wound",
+            "r": "A 1.5 cm transverse laceration over the volar middle phalanx (zone 2), ulnar side.",
+            "mark": "Describes the wound and zone"
+          }
         ],
         "Tendons": [
-          { "t": "FDP: hold the PIP straight, ask her to bend the fingertip", "r": "Cannot flex the DIP joint.", "mark": "Tests FDP in isolation" },
-          { "t": "FDS: hold the other fingers straight, ask her to bend the finger", "r": "Can flex the PIP joint.", "mark": "Tests FDS in isolation" }
+          {
+            "t": "FDP: hold the PIP straight, ask her to bend the fingertip",
+            "r": "Cannot flex the DIP joint.",
+            "mark": "Tests FDP in isolation"
+          },
+          {
+            "t": "FDS: hold the other fingers straight, ask her to bend the finger",
+            "r": "Can flex the PIP joint.",
+            "mark": "Tests FDS in isolation"
+          }
         ],
         "Nerves": [
-          { "t": "Two-point discrimination on each side of the pulp", "r": "Radial side 4 mm. Ulnar side 12 mm and reduced light touch.", "mark": "Tests digital nerves with two-point discrimination" },
-          { "t": "Median, ulnar, radial nerve function", "r": "Normal." }
+          {
+            "t": "Two-point discrimination on each side of the pulp",
+            "r": "Radial side 4 mm. Ulnar side 12 mm and reduced light touch.",
+            "mark": "Tests digital nerves with two-point discrimination"
+          },
+          {
+            "t": "Median, ulnar, radial nerve function",
+            "r": "Normal."
+          }
         ],
-        "Circulation": [{ "t": "Capillary refill and colour of the pulp", "r": "Pink, refill under 2 s.", "mark": "Checks digital circulation" }]
+        "Circulation": [
+          {
+            "t": "Capillary refill and colour of the pulp",
+            "r": "Pink, refill under 2 s.",
+            "mark": "Checks digital circulation",
+            "anim": "glucose"
+          }
+        ]
       }
     },
     {
@@ -57,17 +141,45 @@
       "mood": 5,
       "turns": [
         {
-          "line": "Can you just stitch it so I can go back to work?", "lz": "你幫我縫埋佢就得啦，我要返工。",
+          "line": "Can you just stitch it so I can go back to work?",
+          "lz": "你幫我縫埋佢就得啦，我要返工。",
           "opts": [
-            { "t": "The cut has gone through the deep tendon that bends your fingertip and one of the finger's nerves. These need repairing by the hand surgeons, usually within a few days, to get the best function. Today we'll clean it, dress it and put on a splint.", "tz": "個傷口割斷咗屈手指尾嗰條深層筋腱，同埋一條手指神經。呢啲要手外科醫生做手術駁返，通常喺幾日內做，功能先會最好。今日我哋會幫你洗傷口、包紮，同埋上夾板。", "rz": "做手術？但我係靠對手搵食㗎……", "r": "An operation? But I work with my hands…", "mood": 0, "mark": "Explains tendon and nerve injury and the need for surgical repair" },
-            { "t": "Sure, three stitches and back to work.", "tz": "冇問題，縫三針就可以返工。", "rz": "好嘢。", "r": "Great.", "mood": -1 }
+            {
+              "t": "The cut has gone through the deep tendon that bends your fingertip and one of the finger's nerves. These need repairing by the hand surgeons, usually within a few days, to get the best function. Today we'll clean it, dress it and put on a splint.",
+              "tz": "個傷口割斷咗屈手指尾嗰條深層筋腱，同埋一條手指神經。呢啲要手外科醫生做手術駁返，通常喺幾日內做，功能先會最好。今日我哋會幫你洗傷口、包紮，同埋上夾板。",
+              "rz": "做手術？但我係靠對手搵食㗎……",
+              "r": "An operation? But I work with my hands…",
+              "mood": 0,
+              "mark": "Explains tendon and nerve injury and the need for surgical repair"
+            },
+            {
+              "t": "Sure, three stitches and back to work.",
+              "tz": "冇問題，縫三針就可以返工。",
+              "rz": "好嘢。",
+              "r": "Great.",
+              "mood": -1
+            }
           ]
         },
         {
-          "line": "An operation? But I work with my hands…", "lz": "做手術？但我係靠對手搵食㗎……",
+          "line": "An operation? But I work with my hands…",
+          "lz": "做手術？但我係靠對手搵食㗎……",
           "opts": [
-            { "t": "That's exactly why repair matters. Afterwards you'll need hand therapy for a few months, and you'll be off work for a while — we'll give you a certificate. Keep the splint on and the dressing dry; come back if it becomes red, hot or swollen.", "tz": "正正因為咁，先要駁返好佢。手術後要做幾個月手部物理治療，都要休息一排唔返得工——我哋會開病假紙俾你。夾板要戴住，敷料保持乾爽；如果變紅、發熱或者腫，就要返嚟。", "rz": "好，我明白。", "r": "OK, I understand.", "mood": -2, "mark": "Explains rehabilitation, time off work and safety-netting" },
-            { "t": "You'll be fine by tomorrow.", "tz": "聽日就會好㗎喇。", "rz": "真係？", "r": "Really?", "mood": 1 }
+            {
+              "t": "That's exactly why repair matters. Afterwards you'll need hand therapy for a few months, and you'll be off work for a while — we'll give you a certificate. Keep the splint on and the dressing dry; come back if it becomes red, hot or swollen.",
+              "tz": "正正因為咁，先要駁返好佢。手術後要做幾個月手部物理治療，都要休息一排唔返得工——我哋會開病假紙俾你。夾板要戴住，敷料保持乾爽；如果變紅、發熱或者腫，就要返嚟。",
+              "rz": "好，我明白。",
+              "r": "OK, I understand.",
+              "mood": -2,
+              "mark": "Explains rehabilitation, time off work and safety-netting"
+            },
+            {
+              "t": "You'll be fine by tomorrow.",
+              "tz": "聽日就會好㗎喇。",
+              "rz": "真係？",
+              "r": "Really?",
+              "mood": 1
+            }
           ]
         }
       ]
@@ -78,21 +190,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "How do you test FDS in isolation?", "a": "Hold the other fingers straight; flex the PIP", "wrong": ["Hold the PIP straight and flex the DIP", "Resisted wrist flexion with the fingers straight", "Ask her to make a tight fist"] },
-        { "q": "How do you test FDP?", "a": "Hold the PIP straight; flex the DIP", "wrong": ["Hold the other fingers straight; flex the PIP", "Oppose the thumb to the little finger", "Spread the fingers against resistance"] },
-        { "q": "Normal static two-point discrimination at the fingertip?", "a": "Under 6 mm", "wrong": ["Under 20 mm", "Under 1 mm", "Over 15 mm"] },
-        { "q": "Zone 2 flexor tendon injuries lie…", "a": "Distal palmar crease to FDS insertion ('no man's land')", "wrong": ["At the wrist, proximal to the carpal tunnel", "At the fingertip, distal to the FDS insertion", "In the forearm, at the musculotendinous junction"] },
-        { "q": "Should flexor tendons be repaired in the ED?", "a": "No — refer to hand surgery", "wrong": ["Yes, always", "Only in zone 2, where tendons adhere", "Only if the patient insists"] }
+        {
+          "q": "How do you test FDS in isolation?",
+          "a": "Hold the other fingers straight; flex the PIP",
+          "wrong": [
+            "Hold the PIP straight and flex the DIP",
+            "Resisted wrist flexion with the fingers straight",
+            "Ask her to make a tight fist"
+          ]
+        },
+        {
+          "q": "How do you test FDP?",
+          "a": "Hold the PIP straight; flex the DIP",
+          "wrong": [
+            "Hold the other fingers straight; flex the PIP",
+            "Oppose the thumb to the little finger",
+            "Spread the fingers against resistance"
+          ]
+        },
+        {
+          "q": "Normal static two-point discrimination at the fingertip?",
+          "a": "Under 6 mm",
+          "wrong": [
+            "Under 20 mm",
+            "Under 1 mm",
+            "Over 15 mm"
+          ]
+        },
+        {
+          "q": "Zone 2 flexor tendon injuries lie…",
+          "a": "Distal palmar crease to FDS insertion ('no man's land')",
+          "wrong": [
+            "At the wrist, proximal to the carpal tunnel",
+            "At the fingertip, distal to the FDS insertion",
+            "In the forearm, at the musculotendinous junction"
+          ]
+        },
+        {
+          "q": "Should flexor tendons be repaired in the ED?",
+          "a": "No — refer to hand surgery",
+          "wrong": [
+            "Yes, always",
+            "Only in zone 2, where tendons adhere",
+            "Only if the patient insists"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Tendon Tracker", "emoji": "✋", "flavor": "Cascade, FDP, FDS, two-point: refer, don't repair." },
+  "badge": {
+    "name": "Tendon Tracker",
+    "emoji": "✋",
+    "flavor": "Cascade, FDP, FDS, two-point: refer, don't repair."
+  },
   "cards": [
-    { "q": "An abnormal resting cascade suggests…", "options": ["Flexor tendon injury", "Normal hand", "Arthritis", "Skin laceration only"], "why": "The injured finger lies straighter.", "source": "BSSH" },
-    { "q": "FDP inserts into…", "options": ["The distal phalanx", "The middle phalanx", "The proximal phalanx", "The metacarpal"], "why": "Flexes the DIP.", "source": "Anatomy" },
-    { "q": "FDS inserts into…", "options": ["The middle phalanx", "The distal phalanx", "The metacarpal head", "The scaphoid"], "why": "Flexes the PIP.", "source": "Anatomy" },
-    { "q": "Digital nerve injury needs…", "options": ["Referral for microsurgical repair", "No treatment; sensation always returns", "Antibiotics alone for 5 days", "Oral steroids to reduce swelling"], "why": "Especially on the border digits' contact sides.", "source": "BSSH" },
-    { "q": "Median nerve motor test in the hand?", "options": ["Thumb abduction (APB)", "Finger abduction", "Wrist extension", "Little finger flexion"], "why": "Ulnar: finger abduction; radial: wrist/finger extension.", "source": "Clinical examination" },
-    { "q": "Antibiotics for a clean hand laceration?", "options": ["Not routinely", "Always IV", "Always oral for 2 weeks", "Only if a tendon is cut"], "why": "Clean wounds, early care.", "source": "BSSH / NICE" }
+    {
+      "q": "An abnormal resting cascade suggests…",
+      "options": [
+        "Flexor tendon injury",
+        "Normal hand",
+        "Arthritis",
+        "Skin laceration only"
+      ],
+      "why": "The injured finger lies straighter.",
+      "source": "BSSH"
+    },
+    {
+      "q": "FDP inserts into…",
+      "options": [
+        "The distal phalanx",
+        "The middle phalanx",
+        "The proximal phalanx",
+        "The metacarpal"
+      ],
+      "why": "Flexes the DIP.",
+      "source": "Anatomy"
+    },
+    {
+      "q": "FDS inserts into…",
+      "options": [
+        "The middle phalanx",
+        "The distal phalanx",
+        "The metacarpal head",
+        "The scaphoid"
+      ],
+      "why": "Flexes the PIP.",
+      "source": "Anatomy"
+    },
+    {
+      "q": "Digital nerve injury needs…",
+      "options": [
+        "Referral for microsurgical repair",
+        "No treatment; sensation always returns",
+        "Antibiotics alone for 5 days",
+        "Oral steroids to reduce swelling"
+      ],
+      "why": "Especially on the border digits' contact sides.",
+      "source": "BSSH"
+    },
+    {
+      "q": "Median nerve motor test in the hand?",
+      "options": [
+        "Thumb abduction (APB)",
+        "Finger abduction",
+        "Wrist extension",
+        "Little finger flexion"
+      ],
+      "why": "Ulnar: finger abduction; radial: wrist/finger extension.",
+      "source": "Clinical examination"
+    },
+    {
+      "q": "Antibiotics for a clean hand laceration?",
+      "options": [
+        "Not routinely",
+        "Always IV",
+        "Always oral for 2 weeks",
+        "Only if a tendon is cut"
+      ],
+      "why": "Clean wounds, early care.",
+      "source": "BSSH / NICE"
+    }
   ]
 }

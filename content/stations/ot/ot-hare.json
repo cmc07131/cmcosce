@@ -5,9 +5,37 @@
   "type": "skills",
   "time": 420,
   "stem": "Trauma room. Mr Lo, 30, fell from a motorbike. He has an isolated closed mid-shaft fracture of the left femur (confirmed on X-ray): the thigh is swollen, shortened and deformed. He is haemodynamically stable. Apply a Hare traction splint on the model, explaining as you go.",
+  "phases": [
+    {
+      "title": "Before the splint",
+      "goal": "Is it indicated? Analgesia and neurovascular status first.",
+      "steps": [
+        "check"
+      ]
+    },
+    {
+      "title": "Apply",
+      "goal": "Measure, hitch, traction, straps, re-check.",
+      "steps": [
+        "apply"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against manufacturer guidance for the Hare traction splint, JRCALC, and BOAST guidance on femoral shaft fractures.\n\nIndication: isolated closed mid-shaft femoral fracture — traction reduces pain, muscle spasm and bleeding, and improves alignment. Contraindications: pelvic fracture, hip injury, knee injury or proximal tibial fracture, ankle or foot injury on the same leg, partial amputation, and (relative) open fracture with exposed bone ends. Give analgesia first (IV opioid and/or a femoral nerve or fascia iliaca block). Check pulses, motor and sensory function before and after.\n\nSteps: measure against the uninjured leg (ischial tuberosity to about 20 cm beyond the heel); open and position the support straps; apply the ankle hitch; take manual traction; slide the splint under the leg with the ring against the ischial tuberosity; secure the ischial strap; attach the hitch to the traction hook; wind the ratchet to mechanical traction (about 10% of body weight, up to 7 kg / 15 lb, or until pain eases and the leg length is similar); release manual traction; fasten the leg straps (avoiding the knee and fracture); raise the stand; re-check neurovascular status.\n\nYour notes match this, including the 10% body weight up to 7 kg guide.",
-  "cast": [{ "id": "patient", "name": "Mr Lo", "role": "patient", "inBed": true }, { "id": "nurse", "name": "Nurse Tung", "role": "nurse" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Lo",
+      "role": "patient",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Tung",
+      "role": "nurse"
+    }
+  ],
   "steps": [
     {
       "id": "check",
@@ -17,12 +45,29 @@
       "hint": "Explain and consent, analgesia, expose, neurovascular check, contraindications.",
       "groups": {
         "Prepare": [
-          { "t": "Explain the splint and why; verbal consent", "r": "He agrees.", "mark": "Explains and consents" },
-          { "t": "Analgesia: IV fentanyl and a fascia iliaca block", "r": "Pain eases from 9 to 5.", "mark": "Gives analgesia first" }
+          {
+            "t": "Explain the splint and why; verbal consent",
+            "r": "He agrees.",
+            "mark": "Explains and consents"
+          },
+          {
+            "t": "Analgesia: IV fentanyl and a fascia iliaca block",
+            "r": "Pain eases from 9 to 5.",
+            "mark": "Gives analgesia first"
+          }
         ],
         "Check": [
-          { "t": "Pulses, sensation and toe movement", "r": "Dorsalis pedis and posterior tibial present, sensation and movement normal.", "mark": "Neurovascular check before" },
-          { "t": "Pelvis, hip, knee, lower leg, ankle and foot; open wound?", "r": "Pelvis stable, knee and ankle normal, skin intact.", "mark": "Excludes contraindications" }
+          {
+            "t": "Pulses, sensation and toe movement",
+            "r": "Dorsalis pedis and posterior tibial present, sensation and movement normal.",
+            "mark": "Neurovascular check before",
+            "anim": "pulse"
+          },
+          {
+            "t": "Pelvis, hip, knee, lower leg, ankle and foot; open wound?",
+            "r": "Pelvis stable, knee and ankle normal, skin intact.",
+            "mark": "Excludes contraindications"
+          }
         ]
       }
     },
@@ -33,15 +78,51 @@
       "label": "Apply the splint",
       "hint": "Measure, straps, ankle hitch, manual traction, position at the ischium, attach, ratchet, straps, stand, re-check.",
       "opts": [
-        { "t": "Measure the splint against the uninjured leg", "n": 1, "mark": "Sizes the splint on the uninjured leg" },
-        { "t": "Open and position the leg straps on the splint", "n": 2, "mark": "Prepares the straps" },
-        { "t": "Apply the ankle hitch", "n": 3, "mark": "Applies the ankle hitch" },
-        { "t": "Nurse Tung takes manual traction on the ankle", "n": 4, "mark": "Manual traction maintained" },
-        { "t": "Slide the splint under, ring against the ischial tuberosity; fasten the ischial strap", "n": 5, "mark": "Correct position against the ischial tuberosity" },
-        { "t": "Attach the hitch to the hook; wind the ratchet to ~10% body weight (max 7 kg) until comfortable", "n": 6, "mark": "Mechanical traction to the correct amount" },
-        { "t": "Release manual traction; fasten the leg straps avoiding the knee and fracture site", "n": 7, "mark": "Secures leg straps correctly" },
-        { "t": "Raise the stand; re-check pulses, sensation and movement", "n": 8, "mark": "Re-checks neurovascular status after" },
-        { "t": "Apply full traction until the knee is completely straight and he screams", "trap": "critical", "r": "Over-traction causes nerve and skin injury. Stop when pain eases and length is restored." }
+        {
+          "t": "Measure the splint against the uninjured leg",
+          "n": 1,
+          "mark": "Sizes the splint on the uninjured leg"
+        },
+        {
+          "t": "Open and position the leg straps on the splint",
+          "n": 2,
+          "mark": "Prepares the straps"
+        },
+        {
+          "t": "Apply the ankle hitch",
+          "n": 3,
+          "mark": "Applies the ankle hitch"
+        },
+        {
+          "t": "Nurse Tung takes manual traction on the ankle",
+          "n": 4,
+          "mark": "Manual traction maintained"
+        },
+        {
+          "t": "Slide the splint under, ring against the ischial tuberosity; fasten the ischial strap",
+          "n": 5,
+          "mark": "Correct position against the ischial tuberosity"
+        },
+        {
+          "t": "Attach the hitch to the hook; wind the ratchet to ~10% body weight (max 7 kg) until comfortable",
+          "n": 6,
+          "mark": "Mechanical traction to the correct amount"
+        },
+        {
+          "t": "Release manual traction; fasten the leg straps avoiding the knee and fracture site",
+          "n": 7,
+          "mark": "Secures leg straps correctly"
+        },
+        {
+          "t": "Raise the stand; re-check pulses, sensation and movement",
+          "n": 8,
+          "mark": "Re-checks neurovascular status after"
+        },
+        {
+          "t": "Apply full traction until the knee is completely straight and he screams",
+          "trap": "critical",
+          "r": "Over-traction causes nerve and skin injury. Stop when pain eases and length is restored."
+        }
       ]
     },
     {
@@ -50,21 +131,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Main indication for a Hare splint?", "a": "Isolated closed mid-shaft femoral fracture", "wrong": ["Pelvic ring fracture with shock", "Bimalleolar ankle fracture", "Posterior hip dislocation"] },
-        { "q": "A contraindication?", "a": "Ipsilateral ankle fracture", "wrong": ["A closed mid-shaft femoral fracture", "Severe thigh pain", "Age over 30 years"] },
-        { "q": "How much traction?", "a": "About 10% of body weight, up to 7 kg", "wrong": ["About 50% of body weight, up to 30 kg", "20 kg for every adult", "Just enough to take up slack"] },
-        { "q": "Blood loss from a closed femoral shaft fracture?", "a": "Up to 1–1.5 L", "wrong": ["About 50 mL", "5 L in every case", "Less than 200 mL"] },
-        { "q": "Why use traction?", "a": "Reduces pain, spasm and bleeding; restores length", "wrong": ["Speeds bone healing by weeks", "Prevents wound infection", "Replaces the need for surgery"] }
+        {
+          "q": "Main indication for a Hare splint?",
+          "a": "Isolated closed mid-shaft femoral fracture",
+          "wrong": [
+            "Pelvic ring fracture with shock",
+            "Bimalleolar ankle fracture",
+            "Posterior hip dislocation"
+          ]
+        },
+        {
+          "q": "A contraindication?",
+          "a": "Ipsilateral ankle fracture",
+          "wrong": [
+            "A closed mid-shaft femoral fracture",
+            "Severe thigh pain",
+            "Age over 30 years"
+          ]
+        },
+        {
+          "q": "How much traction?",
+          "a": "About 10% of body weight, up to 7 kg",
+          "wrong": [
+            "About 50% of body weight, up to 30 kg",
+            "20 kg for every adult",
+            "Just enough to take up slack"
+          ]
+        },
+        {
+          "q": "Blood loss from a closed femoral shaft fracture?",
+          "a": "Up to 1–1.5 L",
+          "wrong": [
+            "About 50 mL",
+            "5 L in every case",
+            "Less than 200 mL"
+          ]
+        },
+        {
+          "q": "Why use traction?",
+          "a": "Reduces pain, spasm and bleeding; restores length",
+          "wrong": [
+            "Speeds bone healing by weeks",
+            "Prevents wound infection",
+            "Replaces the need for surgery"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Pull Straight", "emoji": "🦿", "flavor": "Analgesia, hitch, ring on the ischium, 10% traction, check again." },
+  "badge": {
+    "name": "Pull Straight",
+    "emoji": "🦿",
+    "flavor": "Analgesia, hitch, ring on the ischium, 10% traction, check again."
+  },
   "cards": [
-    { "q": "Traction splint is contraindicated in…", "options": ["Pelvic fracture", "Mid-shaft femur fracture", "Stable patient", "Closed fracture"], "why": "Pressure on the ischium worsens pelvic injury.", "source": "Manufacturer / JRCALC" },
-    { "q": "The Hare splint ring sits against…", "options": ["The ischial tuberosity", "The groin vessels", "The greater trochanter", "The ASIS"], "why": "Counter-traction point.", "source": "Manufacturer" },
-    { "q": "Analgesia before a traction splint?", "options": ["IV opioid and/or a femoral nerve block", "None; the traction itself is the analgesia", "Oral paracetamol only", "Local infiltration at the fracture site"], "why": "Traction itself also relieves pain.", "source": "RCEM" },
-    { "q": "Femoral shaft fracture blood loss can reach…", "options": ["1–1.5 L", "100 mL", "5 L", "No blood loss"], "why": "Can cause shock.", "source": "ATLS" },
-    { "q": "After applying a splint, always…", "options": ["Re-check neurovascular status", "Remove the ankle hitch after 10 minutes", "Stop further analgesia", "Apply ice to the groin strap"], "why": "Detect compression.", "source": "Manufacturer" },
-    { "q": "Nerve at risk from a tight strap near the fibular head?", "options": ["Common peroneal", "Femoral nerve in the groin", "Posterior tibial nerve", "Sural nerve"], "why": "Foot drop.", "source": "Anatomy" }
+    {
+      "q": "Traction splint is contraindicated in…",
+      "options": [
+        "Pelvic fracture",
+        "Mid-shaft femur fracture",
+        "Stable patient",
+        "Closed fracture"
+      ],
+      "why": "Pressure on the ischium worsens pelvic injury.",
+      "source": "Manufacturer / JRCALC"
+    },
+    {
+      "q": "The Hare splint ring sits against…",
+      "options": [
+        "The ischial tuberosity",
+        "The groin vessels",
+        "The greater trochanter",
+        "The ASIS"
+      ],
+      "why": "Counter-traction point.",
+      "source": "Manufacturer"
+    },
+    {
+      "q": "Analgesia before a traction splint?",
+      "options": [
+        "IV opioid and/or a femoral nerve block",
+        "None; the traction itself is the analgesia",
+        "Oral paracetamol only",
+        "Local infiltration at the fracture site"
+      ],
+      "why": "Traction itself also relieves pain.",
+      "source": "RCEM"
+    },
+    {
+      "q": "Femoral shaft fracture blood loss can reach…",
+      "options": [
+        "1–1.5 L",
+        "100 mL",
+        "5 L",
+        "No blood loss"
+      ],
+      "why": "Can cause shock.",
+      "source": "ATLS"
+    },
+    {
+      "q": "After applying a splint, always…",
+      "options": [
+        "Re-check neurovascular status",
+        "Remove the ankle hitch after 10 minutes",
+        "Stop further analgesia",
+        "Apply ice to the groin strap"
+      ],
+      "why": "Detect compression.",
+      "source": "Manufacturer"
+    },
+    {
+      "q": "Nerve at risk from a tight strap near the fibular head?",
+      "options": [
+        "Common peroneal",
+        "Femoral nerve in the groin",
+        "Posterior tibial nerve",
+        "Sural nerve"
+      ],
+      "why": "Foot drop.",
+      "source": "Anatomy"
+    }
   ]
 }

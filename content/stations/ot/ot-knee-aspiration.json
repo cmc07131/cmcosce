@@ -5,9 +5,39 @@
   "type": "skills",
   "time": 420,
   "stem": "Cubicle 20. Mr Patel, 39, has a hot, swollen, painful right knee with fever and rigors for 2 days. He has post-traumatic arthritis of that knee; no joint replacement. Temperature 38.9 °C. Aspirate the knee on the model and explain what you will send the fluid for.",
+  "phases": [
+    {
+      "title": "Kit",
+      "goal": "The right kit for a sterile aspiration.",
+      "steps": [
+        "prep"
+      ]
+    },
+    {
+      "title": "Aspirate",
+      "goal": "Consent, asepsis, the right site, samples.",
+      "steps": [
+        "aspirate"
+      ]
+    },
+    {
+      "title": "Next steps",
+      "goal": "Antibiotics and orthopaedics.",
+      "steps": [
+        "after"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against the BSR/BOA guideline on the management of the hot swollen joint in adults (2006, reaffirmed), NICE CKS (septic arthritis), and standard aspiration technique.\n\nA hot, swollen joint is septic arthritis until proved otherwise: aspirate before antibiotics (unless it delays them in sepsis), send for Gram stain, culture, white cell count and crystals; take blood cultures. Empirical antibiotics (e.g. flucloxacillin, or per local guidance; cover gonococcus in sexually active young adults) once samples are taken; orthopaedic referral for washout. Prosthetic joints are aspirated by orthopaedics in theatre conditions. Overlying cellulitis is a contraindication at that site; anticoagulation is not an absolute contraindication.\n\nTechnique: consent, asepsis, knee extended and relaxed; lateral (or medial) approach 1 cm superior and lateral to the superolateral patella edge (or at mid-patella under its lateral border), angled under the patella; local anaesthetic to skin; aspirate with a 19–21 G needle; do not inject steroid. Your notes describe a site 2 cm lateral to the patella and 'milk the fluid', which is compatible. Crystals are not proof against sepsis: both can coexist.",
-  "cast": [{ "id": "patient", "name": "Mr Patel", "role": "man", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Patel",
+      "role": "man",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "prep",
@@ -17,11 +47,31 @@
       "hint": "Sterile pack, antiseptic, lidocaine, green needle, 20 mL syringes, sample pots, dressing.",
       "confirm": "Take",
       "opts": [
-        { "t": "Sterile gloves, drape, chlorhexidine", "need": true, "mark": "Aseptic kit" },
-        { "t": "1% lidocaine with orange needle for the skin", "need": true, "mark": "Local anaesthetic for the skin" },
-        { "t": "Green (21 G) or white (19 G) needle and 20 mL syringes", "need": true, "mark": "Appropriate needle and syringes" },
-        { "t": "Sterile pots for Gram stain, culture, cell count, crystals; blood culture bottles", "need": true, "mark": "Sample pots for all tests" },
-        { "t": "Triamcinolone to inject after aspiration", "trap": "critical", "r": "Never inject steroid into a possibly infected joint." }
+        {
+          "t": "Sterile gloves, drape, chlorhexidine",
+          "need": true,
+          "mark": "Aseptic kit"
+        },
+        {
+          "t": "1% lidocaine with orange needle for the skin",
+          "need": true,
+          "mark": "Local anaesthetic for the skin"
+        },
+        {
+          "t": "Green (21 G) or white (19 G) needle and 20 mL syringes",
+          "need": true,
+          "mark": "Appropriate needle and syringes"
+        },
+        {
+          "t": "Sterile pots for Gram stain, culture, cell count, crystals; blood culture bottles",
+          "need": true,
+          "mark": "Sample pots for all tests"
+        },
+        {
+          "t": "Triamcinolone to inject after aspiration",
+          "trap": "critical",
+          "r": "Never inject steroid into a possibly infected joint."
+        }
       ]
     },
     {
@@ -31,26 +81,69 @@
       "label": "Aspirate",
       "hint": "Consent, contraindications, position, landmark, clean, local, aspirate, samples, dressing.",
       "opts": [
-        { "t": "Explain, consent; check for cellulitis over the site and for a joint replacement", "n": 1, "mark": "Consent and checks contraindications" },
-        { "t": "Knee extended and relaxed; palpate the patella and confirm the effusion", "n": 2, "mark": "Positions and confirms effusion" },
-        { "t": "Mark the site at the superolateral edge of the patella", "n": 3, "mark": "Correct landmark" },
-        { "t": "Clean and drape; local anaesthetic to the skin", "n": 4, "mark": "Asepsis and local anaesthetic" },
-        { "t": "Advance the needle under the patella, aspirating as you go", "n": 5, "mark": "Aspirates under the patella" },
-        { "t": "Withdraw 20 mL of turbid fluid; fill the pots", "n": 6, "mark": "Obtains fluid for samples", "r": "Turbid yellow fluid." },
-        { "t": "Remove the needle, pressure, dressing; send samples urgently", "n": 7, "mark": "Dressing and urgent transport" },
-        { "t": "Aspirate through the red, swollen cellulitic skin at the front", "trap": true, "r": "Inoculating infection into a sterile joint. Choose another site." }
+        {
+          "t": "Explain, consent; check for cellulitis over the site and for a joint replacement",
+          "n": 1,
+          "mark": "Consent and checks contraindications"
+        },
+        {
+          "t": "Knee extended and relaxed; palpate the patella and confirm the effusion",
+          "n": 2,
+          "mark": "Positions and confirms effusion"
+        },
+        {
+          "t": "Mark the site at the superolateral edge of the patella",
+          "n": 3,
+          "mark": "Correct landmark"
+        },
+        {
+          "t": "Clean and drape; local anaesthetic to the skin",
+          "n": 4,
+          "mark": "Asepsis and local anaesthetic"
+        },
+        {
+          "t": "Advance the needle under the patella, aspirating as you go",
+          "n": 5,
+          "mark": "Aspirates under the patella"
+        },
+        {
+          "t": "Withdraw 20 mL of turbid fluid; fill the pots",
+          "n": 6,
+          "mark": "Obtains fluid for samples",
+          "r": "Turbid yellow fluid."
+        },
+        {
+          "t": "Remove the needle, pressure, dressing; send samples urgently",
+          "n": 7,
+          "mark": "Dressing and urgent transport"
+        },
+        {
+          "t": "Aspirate through the red, swollen cellulitic skin at the front",
+          "trap": true,
+          "r": "Inoculating infection into a sterile joint. Choose another site."
+        }
       ]
     },
     {
       "id": "after",
       "kind": "say",
-      "to": "examiner", "ask": "Thank you. What happens next?",
+      "to": "examiner",
+      "ask": "Thank you. What happens next?",
       "label": "Next steps",
       "hint": "Blood cultures, antibiotics, orthopaedics, interpretation.",
       "opts": [
-        { "t": "Blood cultures, then IV antibiotics per local guidance (e.g. flucloxacillin)", "mark": "Blood cultures and empirical IV antibiotics after sampling" },
-        { "t": "Orthopaedic referral for washout", "mark": "Orthopaedic referral" },
-        { "t": "Joint fluid WCC over 50,000/µL and a positive Gram stain strongly support sepsis; crystals don't exclude it", "mark": "Interprets synovial fluid results" }
+        {
+          "t": "Blood cultures, then IV antibiotics per local guidance (e.g. flucloxacillin)",
+          "mark": "Blood cultures and empirical IV antibiotics after sampling"
+        },
+        {
+          "t": "Orthopaedic referral for washout",
+          "mark": "Orthopaedic referral"
+        },
+        {
+          "t": "Joint fluid WCC over 50,000/µL and a positive Gram stain strongly support sepsis; crystals don't exclude it",
+          "mark": "Interprets synovial fluid results"
+        }
       ]
     },
     {
@@ -59,21 +152,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Commonest organism in adult septic arthritis?", "a": "Staphylococcus aureus", "wrong": ["E. coli", "Streptococcus pneumoniae", "Pseudomonas"] },
-        { "q": "Who aspirates a prosthetic joint?", "a": "Orthopaedics, under theatre-level asepsis", "wrong": ["Any ED doctor in the cubicle", "A physiotherapist at clinic", "The GP at the next visit"] },
-        { "q": "Does finding urate crystals exclude sepsis?", "a": "No", "wrong": ["Yes, gout and sepsis never coexist", "Only in men over 40", "Only if the white cell count is low"] },
-        { "q": "Organism to consider in a sexually active young adult?", "a": "Neisseria gonorrhoeae", "wrong": ["Salmonella", "Listeria", "Mycoplasma pneumoniae"] },
-        { "q": "Contraindication at the needle site?", "a": "Overlying cellulitis", "wrong": ["A fever over 38 °C with rigors", "A large, tense effusion", "Age over 60 years"] }
+        {
+          "q": "Commonest organism in adult septic arthritis?",
+          "a": "Staphylococcus aureus",
+          "wrong": [
+            "E. coli",
+            "Streptococcus pneumoniae",
+            "Pseudomonas"
+          ]
+        },
+        {
+          "q": "Who aspirates a prosthetic joint?",
+          "a": "Orthopaedics, under theatre-level asepsis",
+          "wrong": [
+            "Any ED doctor in the cubicle",
+            "A physiotherapist at clinic",
+            "The GP at the next visit"
+          ]
+        },
+        {
+          "q": "Does finding urate crystals exclude sepsis?",
+          "a": "No",
+          "wrong": [
+            "Yes, gout and sepsis never coexist",
+            "Only in men over 40",
+            "Only if the white cell count is low"
+          ]
+        },
+        {
+          "q": "Organism to consider in a sexually active young adult?",
+          "a": "Neisseria gonorrhoeae",
+          "wrong": [
+            "Salmonella",
+            "Listeria",
+            "Mycoplasma pneumoniae"
+          ]
+        },
+        {
+          "q": "Contraindication at the needle site?",
+          "a": "Overlying cellulitis",
+          "wrong": [
+            "A fever over 38 °C with rigors",
+            "A large, tense effusion",
+            "Age over 60 years"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Tap Dancer", "emoji": "💉", "flavor": "Hot swollen joint: aspirate, culture, antibiotics, washout." },
+  "badge": {
+    "name": "Tap Dancer",
+    "emoji": "💉",
+    "flavor": "Hot swollen joint: aspirate, culture, antibiotics, washout."
+  },
   "cards": [
-    { "q": "Hot swollen joint: first diagnosis to exclude?", "options": ["Septic arthritis", "Acute gout", "Osteoarthritis flare", "Prepatellar bursitis"], "why": "Joint destruction within days.", "source": "BSR/BOA" },
-    { "q": "Synovial fluid tests?", "options": ["Gram stain, culture, cell count, crystals", "Glucose and protein only", "Troponin and CK", "Amylase and lipase"], "why": "Before antibiotics where possible.", "source": "BSR/BOA" },
-    { "q": "Gout crystals under polarised light are…", "options": ["Needle-shaped, negatively birefringent", "Rhomboid, positively birefringent", "Needle-shaped, positively birefringent", "Spherical and not birefringent"], "why": "Pseudogout: rhomboid, positive.", "source": "Rheumatology" },
-    { "q": "Septic arthritis treatment besides antibiotics?", "options": ["Joint washout", "Steroid injection", "Immobilisation only", "NSAIDs only"], "why": "Surgical or needle lavage.", "source": "BOA" },
-    { "q": "Anticoagulation and joint aspiration?", "options": ["Not an absolute contraindication", "An absolute contraindication", "Stop warfarin for a week first", "Give vitamin K the night before aspiration"], "why": "Weigh risks.", "source": "BSR" },
-    { "q": "Landmark for lateral knee aspiration?", "options": ["Superolateral edge of the patella", "Tibial tuberosity", "Medial joint line, below the patella tendon", "Popliteal fossa, between the hamstrings"], "why": "Needle angled under the patella.", "source": "Procedural texts" }
+    {
+      "q": "Hot swollen joint: first diagnosis to exclude?",
+      "options": [
+        "Septic arthritis",
+        "Acute gout",
+        "Osteoarthritis flare",
+        "Prepatellar bursitis"
+      ],
+      "why": "Joint destruction within days.",
+      "source": "BSR/BOA"
+    },
+    {
+      "q": "Synovial fluid tests?",
+      "options": [
+        "Gram stain, culture, cell count, crystals",
+        "Glucose and protein only",
+        "Troponin and CK",
+        "Amylase and lipase"
+      ],
+      "why": "Before antibiotics where possible.",
+      "source": "BSR/BOA"
+    },
+    {
+      "q": "Gout crystals under polarised light are…",
+      "options": [
+        "Needle-shaped, negatively birefringent",
+        "Rhomboid, positively birefringent",
+        "Needle-shaped, positively birefringent",
+        "Spherical and not birefringent"
+      ],
+      "why": "Pseudogout: rhomboid, positive.",
+      "source": "Rheumatology"
+    },
+    {
+      "q": "Septic arthritis treatment besides antibiotics?",
+      "options": [
+        "Joint washout",
+        "Steroid injection",
+        "Immobilisation only",
+        "NSAIDs only"
+      ],
+      "why": "Surgical or needle lavage.",
+      "source": "BOA"
+    },
+    {
+      "q": "Anticoagulation and joint aspiration?",
+      "options": [
+        "Not an absolute contraindication",
+        "An absolute contraindication",
+        "Stop warfarin for a week first",
+        "Give vitamin K the night before aspiration"
+      ],
+      "why": "Weigh risks.",
+      "source": "BSR"
+    },
+    {
+      "q": "Landmark for lateral knee aspiration?",
+      "options": [
+        "Superolateral edge of the patella",
+        "Tibial tuberosity",
+        "Medial joint line, below the patella tendon",
+        "Popliteal fossa, between the hamstrings"
+      ],
+      "why": "Needle angled under the patella.",
+      "source": "Procedural texts"
+    }
   ]
 }

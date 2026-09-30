@@ -5,9 +5,39 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 16. Ms Leung, 34, went over on her left ankle stepping off a kerb 2 hours ago. She limped in. Examine her ankle and foot, decide whether she needs an X-ray, and explain the management.",
+  "phases": [
+    {
+      "title": "Examine",
+      "goal": "The ankle, the foot, and above and below.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Imaging",
+      "goal": "Does she need an X-ray (Ottawa)?",
+      "steps": [
+        "xray"
+      ]
+    },
+    {
+      "title": "Explain",
+      "goal": "The fracture, the boot, and warning signs.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against the Ottawa ankle and foot rules (Stiell 1992–1994), BOAST 'Management of ankle fractures' (2016) and NICE CKS (sprains).\n\nOttawa ankle rule: X-ray if pain in the malleolar zone and any of: bone tenderness along the posterior edge or tip of the lateral malleolus (distal 6 cm), or of the medial malleolus, or inability to bear weight (4 steps) immediately and in the ED. Foot rule: pain in the midfoot and tenderness at the base of the 5th metatarsal or the navicular, or inability to bear weight. Sensitivity near 100%; applies to adults (and children over 5 with care).\n\nAlso examine the proximal fibula (Maisonneuve), the Achilles tendon (Simmonds/Thompson test), and neurovascular status. Weber classification by the fibular fracture level relative to the syndesmosis: A below (usually stable), B at the level (stability depends on the medial side — medial tenderness, medial clear space widening), C above (unstable). A stable Weber B can be treated in a boot and weight-bearing as tolerated (BOAST/CROSSBAT), while talar shift needs orthopaedic fixation.\n\nYour notes list 'Ankle and Ottawa rules' without detail.",
-  "cast": [{ "id": "patient", "name": "Ms Leung", "role": "woman", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Ms Leung",
+      "role": "woman",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "exam",
@@ -16,17 +46,52 @@
       "label": "Examine",
       "hint": "Look, feel the Ottawa points, proximal fibula, Achilles, move, weight-bearing, neurovascular.",
       "groups": {
-        "Look": [{ "t": "Swelling, bruising, deformity", "r": "Swelling and bruising over the lateral malleolus. No deformity.", "mark": "Inspects both ankles" }],
+        "Look": [
+          {
+            "t": "Swelling, bruising, deformity",
+            "r": "Swelling and bruising over the lateral malleolus. No deformity.",
+            "mark": "Inspects both ankles"
+          }
+        ],
         "Ottawa points": [
-          { "t": "Posterior edge and tip of the lateral malleolus (distal 6 cm)", "r": "Tender over the posterior edge.", "mark": "Palpates the lateral malleolus posterior edge" },
-          { "t": "Posterior edge and tip of the medial malleolus", "r": "Not tender. No medial swelling.", "mark": "Palpates the medial malleolus" },
-          { "t": "Base of the 5th metatarsal and the navicular", "r": "Not tender.", "mark": "Palpates the foot Ottawa points" },
-          { "t": "Can you walk four steps?", "r": "Only with a lot of help.", "mark": "Assesses weight-bearing" }
+          {
+            "t": "Posterior edge and tip of the lateral malleolus (distal 6 cm)",
+            "r": "Tender over the posterior edge.",
+            "mark": "Palpates the lateral malleolus posterior edge"
+          },
+          {
+            "t": "Posterior edge and tip of the medial malleolus",
+            "r": "Not tender. No medial swelling.",
+            "mark": "Palpates the medial malleolus"
+          },
+          {
+            "t": "Base of the 5th metatarsal and the navicular",
+            "r": "Not tender.",
+            "mark": "Palpates the foot Ottawa points"
+          },
+          {
+            "t": "Can you walk four steps?",
+            "r": "Only with a lot of help.",
+            "mark": "Assesses weight-bearing"
+          }
         ],
         "Other": [
-          { "t": "Proximal fibula", "r": "Not tender.", "mark": "Checks the proximal fibula (Maisonneuve)" },
-          { "t": "Squeeze the calf (Simmonds/Thompson test)", "r": "Foot plantarflexes normally — Achilles intact.", "mark": "Tests the Achilles tendon" },
-          { "t": "Pulses and sensation", "r": "Normal.", "mark": "Neurovascular assessment" }
+          {
+            "t": "Proximal fibula",
+            "r": "Not tender.",
+            "mark": "Checks the proximal fibula (Maisonneuve)"
+          },
+          {
+            "t": "Squeeze the calf (Simmonds/Thompson test)",
+            "r": "Foot plantarflexes normally — Achilles intact.",
+            "mark": "Tests the Achilles tendon"
+          },
+          {
+            "t": "Pulses and sensation",
+            "r": "Normal.",
+            "mark": "Neurovascular assessment",
+            "anim": "pulse"
+          }
         ]
       }
     },
@@ -36,7 +101,16 @@
       "to": "trolley",
       "label": "Imaging",
       "hint": "Ottawa positive: ankle X-ray.",
-      "groups": { "X-ray": [{ "t": "Ankle X-ray (AP, mortise, lateral)", "r": "Oblique fracture of the distal fibula at the level of the syndesmosis (Weber B). Medial clear space normal, talus not shifted.", "img": "xr:ankle-weber-b", "mark": "Identifies a Weber B fracture and checks talar shift" }] }
+      "groups": {
+        "X-ray": [
+          {
+            "t": "Ankle X-ray (AP, mortise, lateral)",
+            "r": "Oblique fracture of the distal fibula at the level of the syndesmosis (Weber B). Medial clear space normal, talus not shifted.",
+            "img": "xr:ankle-weber-b",
+            "mark": "Identifies a Weber B fracture and checks talar shift"
+          }
+        ]
+      }
     },
     {
       "id": "plan",
@@ -45,9 +119,22 @@
       "label": "Explain",
       "hint": "Stable Weber B: boot, weight-bear as tolerated, fracture clinic; safety-net.",
       "opts": [
-        { "t": "A break of the outer ankle bone, but the joint is lined up and stable. A walking boot, weight-bear as comfortable, pain relief, fracture clinic in a week, and a repeat X-ray.", "tz": "你外踝嗰條骨斷咗，不過關節對得好正，亦都穩定。會俾你著一隻行路靴，唔痛就可以落地行，食止痛藥。一個禮拜後去骨科門診，再照 X 光。", "mark": "Explains a stable Weber B and its management" },
-        { "t": "Elevate, move the toes, come back for severe pain, numbness or calf swelling (clot risk)", "tz": "隻腳要墊高，郁吓啲腳趾。如果好痛、麻痺，或者小腿腫，就要即刻返嚟，因為有機會係血栓。", "mark": "Safety-netting including VTE" },
-        { "t": "Non-weight-bearing in a full plaster for 6 weeks", "tz": "要打全腳石膏，六個禮拜唔可以落地。", "trap": true, "r": "A stable Weber B does well in a boot with early weight-bearing." }
+        {
+          "t": "A break of the outer ankle bone, but the joint is lined up and stable. A walking boot, weight-bear as comfortable, pain relief, fracture clinic in a week, and a repeat X-ray.",
+          "tz": "你外踝嗰條骨斷咗，不過關節對得好正，亦都穩定。會俾你著一隻行路靴，唔痛就可以落地行，食止痛藥。一個禮拜後去骨科門診，再照 X 光。",
+          "mark": "Explains a stable Weber B and its management"
+        },
+        {
+          "t": "Elevate, move the toes, come back for severe pain, numbness or calf swelling (clot risk)",
+          "tz": "隻腳要墊高，郁吓啲腳趾。如果好痛、麻痺，或者小腿腫，就要即刻返嚟，因為有機會係血栓。",
+          "mark": "Safety-netting including VTE"
+        },
+        {
+          "t": "Non-weight-bearing in a full plaster for 6 weeks",
+          "tz": "要打全腳石膏，六個禮拜唔可以落地。",
+          "trap": true,
+          "r": "A stable Weber B does well in a boot with early weight-bearing."
+        }
       ]
     },
     {
@@ -56,21 +143,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Ottawa ankle rule bony points?", "a": "Posterior edge/tip of either malleolus (distal 6 cm)", "wrong": ["Anterior talofibular ligament tenderness", "Any swelling over the lateral malleolus", "Calcaneal tenderness on squeezing the heel"] },
-        { "q": "Weber C fractures are…", "a": "Above the syndesmosis and unstable", "wrong": ["Below the syndesmosis and usually stable", "At the level of the syndesmosis and always stable", "Seen only in children with open physes"] },
-        { "q": "Maisonneuve fracture is…", "a": "Proximal fibula fracture with syndesmotic injury", "wrong": ["A 5th metatarsal base avulsion fracture", "Distal fibula fracture below the syndesmosis, stable", "A tibial plateau fracture with ligament tear"] },
-        { "q": "Simmonds/Thompson test examines…", "a": "The Achilles tendon", "wrong": ["The ATFL", "The syndesmosis (high ankle)", "The peroneal tendons"] },
-        { "q": "Sign of an unstable ankle on X-ray?", "a": "Talar shift (widened medial clear space)", "wrong": ["Soft tissue swelling over the lateral malleolus", "An accessory ossicle below the medial malleolus", "An os trigonum behind the talus on the lateral view"] }
+        {
+          "q": "Ottawa ankle rule bony points?",
+          "a": "Posterior edge/tip of either malleolus (distal 6 cm)",
+          "wrong": [
+            "Anterior talofibular ligament tenderness",
+            "Any swelling over the lateral malleolus",
+            "Calcaneal tenderness on squeezing the heel"
+          ]
+        },
+        {
+          "q": "Weber C fractures are…",
+          "a": "Above the syndesmosis and unstable",
+          "wrong": [
+            "Below the syndesmosis and usually stable",
+            "At the level of the syndesmosis and always stable",
+            "Seen only in children with open physes"
+          ]
+        },
+        {
+          "q": "Maisonneuve fracture is…",
+          "a": "Proximal fibula fracture with syndesmotic injury",
+          "wrong": [
+            "A 5th metatarsal base avulsion fracture",
+            "Distal fibula fracture below the syndesmosis, stable",
+            "A tibial plateau fracture with ligament tear"
+          ]
+        },
+        {
+          "q": "Simmonds/Thompson test examines…",
+          "a": "The Achilles tendon",
+          "wrong": [
+            "The ATFL",
+            "The syndesmosis (high ankle)",
+            "The peroneal tendons"
+          ]
+        },
+        {
+          "q": "Sign of an unstable ankle on X-ray?",
+          "a": "Talar shift (widened medial clear space)",
+          "wrong": [
+            "Soft tissue swelling over the lateral malleolus",
+            "An accessory ossicle below the medial malleolus",
+            "An os trigonum behind the talus on the lateral view"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Ottawa Ace", "emoji": "🦶", "flavor": "Posterior edges, tips, four steps. Talus centred? Boot and walk." },
+  "badge": {
+    "name": "Ottawa Ace",
+    "emoji": "🦶",
+    "flavor": "Posterior edges, tips, four steps. Talus centred? Boot and walk."
+  },
   "cards": [
-    { "q": "Ottawa ankle rule: X-ray if…", "options": ["Malleolar posterior edge or tip tenderness", "Any ankle swelling after an inversion injury", "Pain on walking, even if able to take 4 steps", "Bruising over the lateral ligament complex"], "why": "Or unable to bear weight 4 steps.", "source": "Stiell 1992" },
-    { "q": "Ottawa foot rule points?", "options": ["Base of 5th metatarsal and navicular", "Calcaneum and the talar neck tenderness", "The hallux and first metatarsophalangeal joint", "The cuboid and the lateral cuneiform bones"], "why": "Midfoot injury.", "source": "Stiell 1994" },
-    { "q": "Weber B fracture level?", "options": ["At the syndesmosis", "Below the syndesmosis", "Above the syndesmosis", "In the tibia"], "why": "Stability depends on the medial side.", "source": "Weber classification" },
-    { "q": "Stable Weber B management?", "options": ["Boot and weight-bearing as tolerated", "Immediate open reduction and internal fixation", "Non-weight-bearing in a cast for 12 weeks", "Skin traction on the ward"], "why": "CROSSBAT and BOAST.", "source": "BOAST 2016" },
-    { "q": "Squeeze test of the calf with no plantarflexion means…", "options": ["Achilles tendon rupture", "A normal, intact tendon", "Fracture of the fibular shaft", "Deep vein thrombosis of the calf"], "why": "Simmonds/Thompson test.", "source": "Clinical examination" },
-    { "q": "Always palpate which bone in an ankle injury?", "options": ["Proximal fibula", "The patella", "The distal femur", "Pelvis and sacroiliac joints"], "why": "Maisonneuve fracture.", "source": "BOAST" }
+    {
+      "q": "Ottawa ankle rule: X-ray if…",
+      "options": [
+        "Malleolar posterior edge or tip tenderness",
+        "Any ankle swelling after an inversion injury",
+        "Pain on walking, even if able to take 4 steps",
+        "Bruising over the lateral ligament complex"
+      ],
+      "why": "Or unable to bear weight 4 steps.",
+      "source": "Stiell 1992"
+    },
+    {
+      "q": "Ottawa foot rule points?",
+      "options": [
+        "Base of 5th metatarsal and navicular",
+        "Calcaneum and the talar neck tenderness",
+        "The hallux and first metatarsophalangeal joint",
+        "The cuboid and the lateral cuneiform bones"
+      ],
+      "why": "Midfoot injury.",
+      "source": "Stiell 1994"
+    },
+    {
+      "q": "Weber B fracture level?",
+      "options": [
+        "At the syndesmosis",
+        "Below the syndesmosis",
+        "Above the syndesmosis",
+        "In the tibia"
+      ],
+      "why": "Stability depends on the medial side.",
+      "source": "Weber classification"
+    },
+    {
+      "q": "Stable Weber B management?",
+      "options": [
+        "Boot and weight-bearing as tolerated",
+        "Immediate open reduction and internal fixation",
+        "Non-weight-bearing in a cast for 12 weeks",
+        "Skin traction on the ward"
+      ],
+      "why": "CROSSBAT and BOAST.",
+      "source": "BOAST 2016"
+    },
+    {
+      "q": "Squeeze test of the calf with no plantarflexion means…",
+      "options": [
+        "Achilles tendon rupture",
+        "A normal, intact tendon",
+        "Fracture of the fibular shaft",
+        "Deep vein thrombosis of the calf"
+      ],
+      "why": "Simmonds/Thompson test.",
+      "source": "Clinical examination"
+    },
+    {
+      "q": "Always palpate which bone in an ankle injury?",
+      "options": [
+        "Proximal fibula",
+        "The patella",
+        "The distal femur",
+        "Pelvis and sacroiliac joints"
+      ],
+      "why": "Maisonneuve fracture.",
+      "source": "BOAST"
+    }
   ]
 }

@@ -5,9 +5,39 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 15. Mr Chiu, 26, twisted his right knee playing football yesterday: he heard a pop, could not continue, and the knee swelled within an hour. Examine his knee and explain your findings and plan.",
+  "phases": [
+    {
+      "title": "Introduce",
+      "goal": "Wash, introduce, consent, analgesia.",
+      "steps": [
+        "intro"
+      ]
+    },
+    {
+      "title": "Examine",
+      "goal": "Look, feel, move, special tests.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Present and plan",
+      "goal": "The findings, imaging and follow-up.",
+      "steps": [
+        "present"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against the Ottawa knee rule (Stiell 1996), BOA/BASK guidance on acute knee injury, and standard examination technique.\n\nStructure: look (gait, alignment, swelling, effusion, quadriceps wasting, scars), feel (temperature, effusion tests — patellar tap for large effusions, sweep/bulge test for small; joint line tenderness; collateral ligaments; patella), move (active and passive flexion and extension, straight-leg raise to test the extensor mechanism), special tests (Lachman — most sensitive for ACL; anterior drawer; posterior sag and drawer for PCL; valgus and varus stress at 0° and 30° for MCL and LCL; McMurray/Thessaly for menisci with caution in acute pain), and neurovascular status. Examine the hip and the other knee.\n\nAn acute haemarthrosis within hours after a twisting injury with a pop: ACL rupture (about 70%), patellar dislocation, osteochondral fracture. Ottawa knee rule for X-ray: age 55 or over, isolated patellar tenderness, fibular head tenderness, cannot flex to 90°, or cannot weight bear 4 steps immediately and in the ED. Management: RICE, analgesia, crutches, brace if needed, early physiotherapy, fracture clinic/knee clinic, MRI. A locked knee (meniscal bucket-handle) needs urgent orthopaedic review.\n\nYour notes list the knee exam headings (look, feel, move, special tests) without detail; nothing conflicts.",
-  "cast": [{ "id": "patient", "name": "Mr Chiu", "role": "man", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Chiu",
+      "role": "man",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "intro",
@@ -17,8 +47,14 @@
       "label": "Introduce",
       "hint": "WIPER: wash hands, introduce, permission, expose both legs, reposition; offer analgesia.",
       "opts": [
-        { "t": "Wash hands; introduce myself; explain and get permission; ask about pain and offer analgesia", "mark": "Hand hygiene, introduction, consent, analgesia" },
-        { "t": "Expose both legs from the thighs down, lying on the couch", "mark": "Adequate exposure of both legs" }
+        {
+          "t": "Wash hands; introduce myself; explain and get permission; ask about pain and offer analgesia",
+          "mark": "Hand hygiene, introduction, consent, analgesia"
+        },
+        {
+          "t": "Expose both legs from the thighs down, lying on the couch",
+          "mark": "Adequate exposure of both legs"
+        }
       ]
     },
     {
@@ -29,38 +65,92 @@
       "hint": "Look, feel, move, special tests, neurovascular, and compare with the other side.",
       "groups": {
         "Look": [
-          { "t": "Gait (if able) and standing alignment", "r": "Antalgic gait; can take 4 steps with difficulty.", "mark": "Observes gait and weight-bearing" },
-          { "t": "Swelling, bruising, wasting, scars", "r": "Tense swelling of the right knee, no bruising, no scars.", "mark": "Inspects for swelling and deformity" }
+          {
+            "t": "Gait (if able) and standing alignment",
+            "r": "Antalgic gait; can take 4 steps with difficulty.",
+            "mark": "Observes gait and weight-bearing"
+          },
+          {
+            "t": "Swelling, bruising, wasting, scars",
+            "r": "Tense swelling of the right knee, no bruising, no scars.",
+            "mark": "Inspects for swelling and deformity"
+          }
         ],
         "Feel": [
-          { "t": "Temperature and effusion (patellar tap)", "r": "Warm; large effusion with a positive patellar tap.", "mark": "Assesses temperature and effusion" },
-          { "t": "Joint lines, collateral ligaments, patella, tibial tuberosity, fibular head", "r": "Mild lateral joint line tenderness. No bony tenderness at the patella or fibular head.", "mark": "Palpates joint lines and bony landmarks (Ottawa)" }
+          {
+            "t": "Temperature and effusion (patellar tap)",
+            "r": "Warm; large effusion with a positive patellar tap.",
+            "mark": "Assesses temperature and effusion"
+          },
+          {
+            "t": "Joint lines, collateral ligaments, patella, tibial tuberosity, fibular head",
+            "r": "Mild lateral joint line tenderness. No bony tenderness at the patella or fibular head.",
+            "mark": "Palpates joint lines and bony landmarks (Ottawa)"
+          }
         ],
         "Move": [
-          { "t": "Active flexion and extension; straight-leg raise", "r": "Flexes to 80° (limited by swelling). Straight-leg raise intact — extensor mechanism intact.", "mark": "Assesses movement and the extensor mechanism" }
+          {
+            "t": "Active flexion and extension; straight-leg raise",
+            "r": "Flexes to 80° (limited by swelling). Straight-leg raise intact — extensor mechanism intact.",
+            "mark": "Assesses movement and the extensor mechanism"
+          }
         ],
         "Special tests": [
-          { "t": "Lachman test (knee at 20–30°)", "r": "Increased anterior translation with a soft end-point compared with the left.", "mark": "Performs Lachman: positive (ACL)" },
-          { "t": "Posterior sag and posterior drawer", "r": "No sag, firm end-point.", "mark": "Tests the PCL" },
-          { "t": "Valgus and varus stress at 0° and 30°", "r": "Stable.", "mark": "Tests collateral ligaments" },
-          { "t": "McMurray test forcefully despite pain", "trap": true, "r": "Painful and unreliable acutely; can worsen a meniscal tear. Leave it or be gentle." }
+          {
+            "t": "Lachman test (knee at 20–30°)",
+            "r": "Increased anterior translation with a soft end-point compared with the left.",
+            "mark": "Performs Lachman: positive (ACL)"
+          },
+          {
+            "t": "Posterior sag and posterior drawer",
+            "r": "No sag, firm end-point.",
+            "mark": "Tests the PCL"
+          },
+          {
+            "t": "Valgus and varus stress at 0° and 30°",
+            "r": "Stable.",
+            "mark": "Tests collateral ligaments"
+          },
+          {
+            "t": "McMurray test forcefully despite pain",
+            "trap": true,
+            "r": "Painful and unreliable acutely; can worsen a meniscal tear. Leave it or be gentle."
+          }
         ],
         "Complete": [
-          { "t": "Distal pulses and sensation; examine the hip and the other knee", "r": "Pulses and sensation normal; hip normal.", "mark": "Neurovascular check and joint above" }
+          {
+            "t": "Distal pulses and sensation; examine the hip and the other knee",
+            "r": "Pulses and sensation normal; hip normal.",
+            "mark": "Neurovascular check and joint above"
+          }
         ]
       }
     },
     {
       "id": "present",
       "kind": "say",
-      "to": "examiner", "ask": "Thank you. Please present your findings and your plan.",
+      "to": "examiner",
+      "ask": "Thank you. Please present your findings and your plan.",
       "label": "Present and plan",
       "hint": "Haemarthrosis with a positive Lachman: likely ACL rupture. Ottawa rule for X-ray. Plan.",
       "opts": [
-        { "t": "Acute haemarthrosis with a positive Lachman: likely ACL rupture; consider meniscal injury", "mark": "Gives the likely diagnosis" },
-        { "t": "Ottawa knee rule: cannot flex to 90° → knee X-ray to exclude fracture (e.g. Segond fracture)", "mark": "Applies the Ottawa knee rule" },
-        { "t": "Analgesia, ice, crutches, early physiotherapy, knee clinic and MRI", "mark": "Appropriate management and follow-up" },
-        { "t": "Aspirate every haemarthrosis in the ED", "trap": true, "r": "Not routine; aspirate only if very tense or to exclude sepsis." }
+        {
+          "t": "Acute haemarthrosis with a positive Lachman: likely ACL rupture; consider meniscal injury",
+          "mark": "Gives the likely diagnosis"
+        },
+        {
+          "t": "Ottawa knee rule: cannot flex to 90° → knee X-ray to exclude fracture (e.g. Segond fracture)",
+          "mark": "Applies the Ottawa knee rule"
+        },
+        {
+          "t": "Analgesia, ice, crutches, early physiotherapy, knee clinic and MRI",
+          "mark": "Appropriate management and follow-up"
+        },
+        {
+          "t": "Aspirate every haemarthrosis in the ED",
+          "trap": true,
+          "r": "Not routine; aspirate only if very tense or to exclude sepsis."
+        }
       ]
     },
     {
@@ -69,21 +159,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Most sensitive test for ACL rupture?", "a": "Lachman test", "wrong": ["McMurray", "Apley grind test (prone)", "Patellar apprehension"] },
-        { "q": "Commonest cause of acute traumatic haemarthrosis?", "a": "ACL rupture", "wrong": ["Meniscal tear", "Gout", "Bursitis"] },
-        { "q": "Which is an Ottawa knee rule criterion?", "a": "Isolated patellar tenderness", "wrong": ["A twisting mechanism with a pop", "Swelling within 2 hours of injury", "Age over 40 with a knee effusion"] },
-        { "q": "A Segond fracture is associated with…", "a": "ACL rupture", "wrong": ["Patellar dislocation", "Osteoarthritis", "Gout"] },
-        { "q": "Straight-leg raise tests…", "a": "The extensor mechanism", "wrong": ["The anterior cruciate ligament", "The medial and lateral menisci", "The hip flexors only"] }
+        {
+          "q": "Most sensitive test for ACL rupture?",
+          "a": "Lachman test",
+          "wrong": [
+            "McMurray",
+            "Apley grind test (prone)",
+            "Patellar apprehension"
+          ]
+        },
+        {
+          "q": "Commonest cause of acute traumatic haemarthrosis?",
+          "a": "ACL rupture",
+          "wrong": [
+            "Meniscal tear",
+            "Gout",
+            "Bursitis"
+          ]
+        },
+        {
+          "q": "Which is an Ottawa knee rule criterion?",
+          "a": "Isolated patellar tenderness",
+          "wrong": [
+            "A twisting mechanism with a pop",
+            "Swelling within 2 hours of injury",
+            "Age over 40 with a knee effusion"
+          ]
+        },
+        {
+          "q": "A Segond fracture is associated with…",
+          "a": "ACL rupture",
+          "wrong": [
+            "Patellar dislocation",
+            "Osteoarthritis",
+            "Gout"
+          ]
+        },
+        {
+          "q": "Straight-leg raise tests…",
+          "a": "The extensor mechanism",
+          "wrong": [
+            "The anterior cruciate ligament",
+            "The medial and lateral menisci",
+            "The hip flexors only"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Pop Goes the Knee", "emoji": "🦵", "flavor": "Pop plus rapid swelling: Lachman and think ACL." },
+  "badge": {
+    "name": "Pop Goes the Knee",
+    "emoji": "🦵",
+    "flavor": "Pop plus rapid swelling: Lachman and think ACL."
+  },
   "cards": [
-    { "q": "Ottawa knee rule: X-ray if…", "options": ["Unable to flex to 90°", "Mild swelling after a twist", "Age over 40 years", "A twisting mechanism of injury"], "why": "Also age ≥55, fibular head or isolated patellar tenderness, unable to weight bear 4 steps.", "source": "Stiell 1996" },
-    { "q": "Swelling within 2 hours after a knee injury suggests…", "options": ["Haemarthrosis", "Simple effusion", "Bursitis", "Cellulitis"], "why": "Delayed (overnight) swelling suggests meniscal injury.", "source": "BASK" },
-    { "q": "The Lachman test is done at…", "options": ["20–30° flexion", "90° flexion", "Full extension", "Hip flexed 90°"], "why": "More sensitive than the anterior drawer.", "source": "Clinical examination" },
-    { "q": "Posterior sag sign indicates…", "options": ["PCL injury", "ACL injury", "MCL tear", "Patellar dislocation"], "why": "Tibia sags back with the knee at 90°.", "source": "Clinical examination" },
-    { "q": "A locked knee suggests…", "options": ["Bucket-handle meniscal tear", "Isolated ACL tear with a haemarthrosis", "Osteoarthritis of the knee", "Prepatellar bursitis"], "why": "Needs urgent orthopaedic review.", "source": "BASK" },
-    { "q": "Bulge (sweep) test detects…", "options": ["Small effusions", "Large tense effusions", "Ligament tears", "Fractures"], "why": "The patellar tap detects larger effusions.", "source": "Clinical examination" }
+    {
+      "q": "Ottawa knee rule: X-ray if…",
+      "options": [
+        "Unable to flex to 90°",
+        "Mild swelling after a twist",
+        "Age over 40 years",
+        "A twisting mechanism of injury"
+      ],
+      "why": "Also age ≥55, fibular head or isolated patellar tenderness, unable to weight bear 4 steps.",
+      "source": "Stiell 1996"
+    },
+    {
+      "q": "Swelling within 2 hours after a knee injury suggests…",
+      "options": [
+        "Haemarthrosis",
+        "Simple effusion",
+        "Bursitis",
+        "Cellulitis"
+      ],
+      "why": "Delayed (overnight) swelling suggests meniscal injury.",
+      "source": "BASK"
+    },
+    {
+      "q": "The Lachman test is done at…",
+      "options": [
+        "20–30° flexion",
+        "90° flexion",
+        "Full extension",
+        "Hip flexed 90°"
+      ],
+      "why": "More sensitive than the anterior drawer.",
+      "source": "Clinical examination"
+    },
+    {
+      "q": "Posterior sag sign indicates…",
+      "options": [
+        "PCL injury",
+        "ACL injury",
+        "MCL tear",
+        "Patellar dislocation"
+      ],
+      "why": "Tibia sags back with the knee at 90°.",
+      "source": "Clinical examination"
+    },
+    {
+      "q": "A locked knee suggests…",
+      "options": [
+        "Bucket-handle meniscal tear",
+        "Isolated ACL tear with a haemarthrosis",
+        "Osteoarthritis of the knee",
+        "Prepatellar bursitis"
+      ],
+      "why": "Needs urgent orthopaedic review.",
+      "source": "BASK"
+    },
+    {
+      "q": "Bulge (sweep) test detects…",
+      "options": [
+        "Small effusions",
+        "Large tense effusions",
+        "Ligament tears",
+        "Fractures"
+      ],
+      "why": "The patellar tap detects larger effusions.",
+      "source": "Clinical examination"
+    }
   ]
 }
