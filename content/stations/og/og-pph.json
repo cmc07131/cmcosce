@@ -5,14 +5,95 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 2. A 28-year-old woman (G2P2) gave birth at home 40 minutes ago; the placenta was delivered by the midwife. She is bleeding heavily, soaking pads and the sheet. HR 124, BP 88/54, RR 24, SpO2 97%, GCS 15. Her baby is well with her partner.",
+  "phases": [
+    {
+      "title": "Call and prepare",
+      "goal": "The team, the major haemorrhage protocol, access, measured blood loss; monitoring on.",
+      "steps": [
+        "help",
+        "monitoring"
+      ]
+    },
+    {
+      "title": "Assess",
+      "goal": "The 4 Ts yourself: tone, trauma, tissue, thrombin.",
+      "steps": [
+        "assess"
+      ]
+    },
+    {
+      "title": "Tone",
+      "goal": "Rub up a contraction, empty the bladder, and the drugs from the cart in order.",
+      "steps": [
+        "hands",
+        "uterotonics"
+      ]
+    },
+    {
+      "title": "Still bleeding?",
+      "goal": "Watch her. If she keeps bleeding: the next drug.",
+      "steps": [
+        "second-line"
+      ]
+    },
+    {
+      "title": "Fluids and blood",
+      "goal": "A limited bridge of warm fluid, then blood products when they arrive.",
+      "steps": [
+        "fluid",
+        "blood",
+        "escalate"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "blood",
+      "after": "mhp",
+      "delayS": 30,
+      "scene": "blood-here",
+      "say": "The O-negative blood has arrived."
+    },
+    {
+      "id": "still-bleeding",
+      "after": "tone",
+      "delayS": 20,
+      "scene": "still-bleeding",
+      "say": "Still bleeding despite the oxytocin: another 500 mL on the pads."
+    },
+    {
+      "id": "worse",
+      "after": "monitored",
+      "delayS": 90,
+      "unless": "oxytocin",
+      "scene": "worse",
+      "say": "She is paler and confused. BP 74/40.",
+      "treatedBy": "oxytocin",
+      "untreated": "She bled on and never had a uterotonic."
+    }
+  ],
   "review": [
-    {"tag": "missing", "text": "Tranexamic acid. Your notes leave it out. Give 1 g IV within 3 hours of birth, and a second 1 g after 30 minutes if bleeding continues (WOMAN trial). It is scored here."},
-    {"tag": "missing", "text": "The E-MOTIVE approach (WHO 2023): measure blood loss to detect PPH early, then give the first-response bundle together (uterine massage, oxytocics, tranexamic acid, IV fluids, examination and escalation)."}
+    {
+      "tag": "missing",
+      "text": "Tranexamic acid. Your notes leave it out. Give 1 g IV within 3 hours of birth, and a second 1 g after 30 minutes if bleeding continues (WOMAN trial). It is scored here."
+    },
+    {
+      "tag": "missing",
+      "text": "The E-MOTIVE approach (WHO 2023): measure blood loss to detect PPH early, then give the first-response bundle together (uterine massage, oxytocics, tranexamic acid, IV fluids, examination and escalation)."
+    }
   ],
   "notes": "Checked against RCOG Green-top Guideline 52 (Postpartum haemorrhage), the WOMAN trial (tranexamic acid), WHO 2023 recommendations and the E-MOTIVE bundle (NEJM 2023), and NICE NG235 (Intrapartum care, 2023).\n\nMajor PPH: over 1000 mL or signs of shock. Call for help (senior obstetrician, anaesthetist, midwife), activate the major haemorrhage protocol, two large-bore cannulae, bloods (FBC, coagulation, fibrinogen, crossmatch 4 units), warmed fluids limited to about 2 L crystalloid before blood (RCOG), O-negative if needed. Tranexamic acid 1 g IV within 3 hours of birth, second 1 g after 30 minutes if bleeding continues (WOMAN). Your notes omit tranexamic acid; it is scored here.\n\nThe 4 Ts: Tone (commonest), Trauma, Tissue, Thrombin. Tone: rub up a contraction (fundal massage), bimanual compression, empty the bladder; oxytocin 5 IU slow IV (may repeat), ergometrine 0.5 mg IV/IM (not in hypertension), oxytocin infusion 40 IU in 500 mL at 125 mL/h, carboprost 250 microgram IM every 15 minutes (max 8 doses; caution in asthma), misoprostol 800 microgram sublingual; then balloon tamponade and surgery. Check the placenta is complete and look for tears.\n\nYour notes' structure matches this; they start with a 1 L Hartmann's bolus, which is acceptable in the RCOG limit. E-MOTIVE adds early detection by measured blood loss and a bundle given together (massage, oxytocics, tranexamic acid, fluids, examination and escalation).",
   "cast": [
-    { "id": "patient", "name": "Mrs Tsang", "role": "patient" },
-    { "id": "nurse", "name": "Midwife Kong", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mrs Tsang",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Midwife Kong",
+      "role": "nurse"
+    }
   ],
   "vitals": {
     "hr": 124,
@@ -22,12 +103,40 @@
     "rr": 24,
     "gcs": 15,
     "rhythm": "sinus-tachy",
-    "drift": { "sbp": -2, "hr": 2 },
-    "stop": ["tone"],
+    "drift": {
+      "sbp": -2,
+      "hr": 2
+    },
+    "stop": [
+      "tone"
+    ],
     "effects": [
-      { "scene": "tone", "add": { "hr": -6 }, "overS": 60 },
-      { "scene": "blood", "add": { "sbp": 16, "dbp": 8, "hr": -12 }, "overS": 120 }
-    ]
+      {
+        "scene": "worse",
+        "add": {
+          "sbp": -12,
+          "hr": 12
+        },
+        "overS": 20
+      },
+      {
+        "scene": "tone",
+        "add": {
+          "hr": -6
+        },
+        "overS": 60
+      },
+      {
+        "scene": "blood",
+        "add": {
+          "sbp": 16,
+          "dbp": 8,
+          "hr": -12
+        },
+        "overS": 120
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
     {
@@ -38,11 +147,49 @@
       "hint": "Obstetric emergency call, major haemorrhage protocol, two cannulae, bloods, warm fluids.",
       "confirm": "Now",
       "opts": [
-        { "t": "Obstetric emergency call: senior obstetrician, anaesthetist, midwife", "need": true, "mark": "Calls the obstetric team" },
-        { "t": "Activate the major haemorrhage protocol; O-negative available", "need": true, "mark": "Activates the major haemorrhage protocol" },
-        { "t": "Two large-bore cannulae; FBC, clotting, fibrinogen, crossmatch 4 units, gas", "fetch": "trolley", "need": true, "mark": "Access and bloods including fibrinogen and crossmatch" },
-        { "t": "Weigh the pads and sheet to measure blood loss", "need": true, "mark": "Quantifies blood loss" },
-        { "t": "Lie her flat, oxygen, keep her warm", "fetch": "trolley", "need": true, "mark": "Position, oxygen and warmth" }
+        {
+          "t": "Obstetric emergency call: senior obstetrician, anaesthetist, midwife",
+          "need": true,
+          "mark": "Calls the obstetric team"
+        },
+        {
+          "t": "Activate the major haemorrhage protocol; O-negative available",
+          "need": true,
+          "mark": "Activates the major haemorrhage protocol",
+          "scene": "mhp"
+        },
+        {
+          "t": "Two large-bore cannulae; FBC, clotting, fibrinogen, crossmatch 4 units, gas",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Access and bloods including fibrinogen and crossmatch"
+        },
+        {
+          "t": "Weigh the pads and sheet to measure blood loss",
+          "need": true,
+          "mark": "Quantifies blood loss"
+        },
+        {
+          "t": "Lie her flat, oxygen, keep her warm",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Position, oxygen and warmth"
+        }
+      ]
+    },
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
       ]
     },
     {
@@ -53,44 +200,188 @@
       "hint": "Quick history, the uterus, the perineum, the placenta.",
       "groups": {
         "History": [
-          { "t": "Placenta complete? Any tears? Risk factors?", "r": "Midwife: placenta looked complete. Long labour, big baby (4.3 kg). No known bleeding disorder.", "mark": "Takes a focused history for the 4 Ts" }
+          {
+            "t": "Placenta complete? Any tears? Risk factors?",
+            "r": "Midwife: placenta looked complete. Long labour, big baby (4.3 kg). No known bleeding disorder.",
+            "mark": "Takes a focused history for the 4 Ts"
+          }
         ],
         "Abdomen": [
-          { "t": "Palpate the fundus", "r": "Soft, boggy uterus at the umbilicus; blood gushes when you press.", "mark": "Finds an atonic uterus" },
-          { "t": "Bladder", "r": "Palpable full bladder." }
+          {
+            "t": "Palpate the fundus",
+            "r": "Soft, boggy uterus at the umbilicus; blood gushes when you press.",
+            "mark": "Finds an atonic uterus"
+          },
+          {
+            "t": "Bladder",
+            "r": "Palpable full bladder.",
+            "anim": "abdomen"
+          }
         ],
         "Perineum": [
-          { "t": "Inspect the perineum and vagina", "r": "Small first-degree tear, not bleeding much.", "mark": "Looks for trauma" }
+          {
+            "t": "Inspect the perineum and vagina",
+            "r": "Small first-degree tear, not bleeding much.",
+            "mark": "Looks for trauma"
+          }
         ]
       }
     },
     {
-      "id": "tone",
-      "kind": "steps",
+      "id": "hands",
+      "kind": "exam",
       "to": "patient",
-      "label": "Treat the tone",
-      "hint": "Rub up a contraction, empty the bladder, oxytocin, ergometrine, infusion, bimanual compression; tranexamic acid.",
+      "label": "Rub up a contraction",
+      "hint": "Your hands, and an empty bladder.",
+      "groups": {
+        "Uterus": [
+          {
+            "t": "Fundal massage to rub up a contraction",
+            "mark": "Fundal massage",
+            "anim": "abdomen"
+          },
+          {
+            "t": "Urinary catheter to empty the bladder",
+            "mark": "Empties the bladder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "uterotonics",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Uterotonics and tranexamic acid, at the right doses.",
+      "confirm": "Give",
       "opts": [
-        { "t": "Fundal massage to rub up a contraction", "n": 1, "mark": "Fundal massage" },
-        { "t": "Urinary catheter to empty the bladder", "n": 2, "mark": "Empties the bladder" },
-        { "t": "Oxytocin 5 IU slow IV", "n": 3, "mark": "Oxytocin 5 IU slow IV" },
-        { "t": "Tranexamic acid 1 g IV over 10 minutes", "n": 4, "mark": "Tranexamic acid within 3 hours of birth" },
-        { "t": "Ergometrine 0.5 mg IV (BP is not high)", "n": 5, "mark": "Ergometrine, checking there is no hypertension" },
-        { "t": "Oxytocin infusion 40 IU in 500 mL at 125 mL/h", "n": 6, "scene": "tone", "mark": "Oxytocin infusion", "r": "The uterus firms up. Bleeding slows." },
-        { "t": "Still bleeding: bimanual compression while carboprost 250 microgram IM is drawn up", "n": 7, "mark": "Bimanual compression and second-line uterotonic" },
-        { "t": "Ergometrine despite a BP of 170/110", "trap": "critical", "r": "Ergometrine is contraindicated in hypertension and pre-eclampsia." }
+        {
+          "t": "Oxytocin 5 IU slow IV",
+          "drug": "Oxytocin",
+          "dose": "5 IU slow IV",
+          "fetch": "cart",
+          "scene": "oxytocin",
+          "mark": "Oxytocin 5 IU slow IV"
+        },
+        {
+          "t": "Oxytocin 10 IU rapid IV push",
+          "drug": "Oxytocin",
+          "dose": "10 IU rapid IV push",
+          "fetch": "cart",
+          "trap": true,
+          "r": "A fast bolus drops the blood pressure: 5 IU slowly."
+        },
+        {
+          "t": "Tranexamic acid 1 g IV over 10 minutes",
+          "drug": "Tranexamic acid",
+          "dose": "1 g IV over 10 minutes",
+          "fetch": "cart",
+          "mark": "Tranexamic acid within 3 hours of birth"
+        },
+        {
+          "t": "Tranexamic acid 4 g IV",
+          "drug": "Tranexamic acid",
+          "dose": "4 g IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much: 1 g, and a second 1 g after 30 minutes if bleeding continues."
+        },
+        {
+          "t": "Ergometrine 0.5 mg IV (BP is not high)",
+          "drug": "Ergometrine",
+          "dose": "0.5 mg IV (BP is not high)",
+          "fetch": "cart",
+          "mark": "Ergometrine, checking there is no hypertension"
+        },
+        {
+          "trap": "critical",
+          "r": "Ergometrine is contraindicated in hypertension and pre-eclampsia.",
+          "t": "Ergometrine 0.5 mg despite a BP of 170/110",
+          "drug": "Ergometrine",
+          "dose": "0.5 mg despite a BP of 170/110",
+          "fetch": "cart"
+        },
+        {
+          "t": "Oxytocin infusion 40 IU in 500 mL at 125 mL/h",
+          "drug": "Oxytocin infusion",
+          "dose": "40 IU in 500 mL at 125 mL/h",
+          "fetch": "cart",
+          "scene": "tone",
+          "mark": "Oxytocin infusion"
+        }
       ]
     },
     {
-      "id": "fluids",
+      "id": "second-line",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Still bleeding: bimanual compression and carboprost.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Carboprost 250 microgram IM (bimanual compression meanwhile)",
+          "drug": "Carboprost",
+          "dose": "250 microgram IM (bimanual compression meanwhile)",
+          "fetch": "cart",
+          "when": "still-bleeding",
+          "early": "Give the first-line drugs time.",
+          "mark": "Bimanual compression and second-line uterotonic"
+        },
+        {
+          "t": "Carboprost 250 microgram IV",
+          "drug": "Carboprost",
+          "dose": "250 microgram IV",
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Never IV: 250 microgram IM (or intramyometrial), every 15 minutes, up to 8 doses."
+        }
+      ]
+    },
+    {
+      "id": "fluid",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Warm fluid while the blood comes: a limit.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "fetch": "cart",
+          "mark": "Limits crystalloid and moves to blood",
+          "r": "Midwife Kong: Blood running through the warmer.",
+          "t": "Hartmann's (warmed) up to 2 L while blood comes",
+          "drug": "Hartmann's (warmed)",
+          "dose": "up to 2 L while blood comes"
+        },
+        {
+          "fetch": "cart",
+          "trap": true,
+          "r": "Dilutional coagulopathy. Blood and products early.",
+          "t": "0.9% saline 6 L until the pressure normalises",
+          "drug": "0.9% saline",
+          "dose": "6 L until the pressure normalises"
+        }
+      ]
+    },
+    {
+      "id": "blood",
       "kind": "say",
       "to": "nurse",
-      "label": "Fluids and blood",
-      "hint": "Warm crystalloid, then blood; keep her warm.",
+      "label": "Blood",
+      "hint": "Red cells and plasma per the protocol; fibrinogen.",
       "opts": [
-        { "t": "Warm Hartmann's up to 2 L while blood comes; then red cells and plasma per protocol", "fetch": "cart", "scene": "blood", "mark": "Limits crystalloid and moves to blood", "r": "Midwife Kong: Blood running through the warmer." },
-        { "t": "Fibrinogen above 2 g/L: cryoprecipitate or fibrinogen concentrate if lower", "mark": "Targets fibrinogen" },
-        { "t": "Six litres of saline until the pressure normalises", "fetch": "cart", "trap": true, "r": "Dilutional coagulopathy. Blood and products early." }
+        {
+          "t": "Red cells and plasma now they are here, per the protocol.",
+          "when": "blood-here",
+          "early": "The blood is not here yet.",
+          "scene": "blood",
+          "mark": "Blood products per the major haemorrhage protocol"
+        },
+        {
+          "t": "Fibrinogen above 2 g/L: cryoprecipitate or fibrinogen concentrate if lower",
+          "mark": "Targets fibrinogen"
+        }
       ]
     },
     {
@@ -100,7 +391,10 @@
       "label": "If bleeding continues",
       "hint": "Theatre: examination under anaesthesia, balloon tamponade, surgery or radiology.",
       "opts": [
-        { "t": "Obstetrician: to theatre for examination, balloon tamponade, then compression suture or interventional radiology if needed", "mark": "Escalates to surgical and radiological options" }
+        {
+          "t": "Obstetrician: to theatre for examination, balloon tamponade, then compression suture or interventional radiology if needed",
+          "mark": "Escalates to surgical and radiological options"
+        }
       ]
     },
     {
@@ -109,21 +403,138 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "The 4 Ts of PPH?", "a": "Tone, Trauma, Tissue, Thrombin", "wrong": ["Tone, Temperature, Toxins, Tamponade", "Tears, Tone, Twins, Time", "Trauma, Tension, Tamponade, Thrombosis"] },
-        { "q": "Contraindication to ergometrine?", "a": "Hypertension or pre-eclampsia", "wrong": ["Mild asthma on a salbutamol inhaler", "Type 2 diabetes", "Iron-deficiency anaemia"] },
-        { "q": "Caution with carboprost?", "a": "Asthma", "wrong": ["Hypertension", "Pre-eclampsia", "Epilepsy"] },
-        { "q": "Tranexamic acid in PPH?", "a": "1 g IV within 3 h; repeat after 30 min if needed", "wrong": ["1 g IV only if bleeding continues beyond 6 hours", "1 g orally three times daily for 5 days", "Contraindicated because of thrombosis risk"] },
-        { "q": "Misoprostol dose for PPH?", "a": "800 microgram sublingual", "wrong": ["25 microgram vaginal", "5 mg IV over 5 minutes, repeated", "8 mg oral as a single dose"] }
+        {
+          "q": "The 4 Ts of PPH?",
+          "a": "Tone, Trauma, Tissue, Thrombin",
+          "wrong": [
+            "Tone, Temperature, Toxins, Tamponade",
+            "Tears, Tone, Twins, Time",
+            "Trauma, Tension, Tamponade, Thrombosis"
+          ]
+        },
+        {
+          "q": "Contraindication to ergometrine?",
+          "a": "Hypertension or pre-eclampsia",
+          "wrong": [
+            "Mild asthma on a salbutamol inhaler",
+            "Type 2 diabetes",
+            "Iron-deficiency anaemia"
+          ]
+        },
+        {
+          "q": "Caution with carboprost?",
+          "a": "Asthma",
+          "wrong": [
+            "Hypertension",
+            "Pre-eclampsia",
+            "Epilepsy"
+          ]
+        },
+        {
+          "q": "Tranexamic acid in PPH?",
+          "a": "1 g IV within 3 h; repeat after 30 min if needed",
+          "wrong": [
+            "1 g IV only if bleeding continues beyond 6 hours",
+            "1 g orally three times daily for 5 days",
+            "Contraindicated because of thrombosis risk"
+          ]
+        },
+        {
+          "q": "Misoprostol dose for PPH?",
+          "a": "800 microgram sublingual",
+          "wrong": [
+            "25 microgram vaginal",
+            "5 mg IV over 5 minutes, repeated",
+            "8 mg oral as a single dose"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Rub It Up", "emoji": "🩸", "flavor": "Tone first. Oxytocin, TXA, and escalate early." },
+  "rules": [
+    {
+      "id": "hands-first",
+      "first": [
+        "hands"
+      ],
+      "then": [
+        "second-line"
+      ],
+      "fail": "Second-line drugs before rubbing up a contraction.",
+      "ok": "Hands first."
+    }
+  ],
+  "badge": {
+    "name": "Rub It Up",
+    "emoji": "🩸",
+    "flavor": "Tone first. Oxytocin, TXA, and escalate early."
+  },
   "cards": [
-    { "q": "Commonest cause of primary PPH?", "options": ["Uterine atony", "Retained placenta", "Coagulopathy", "Uterine inversion"], "why": "Tone accounts for most PPH.", "source": "RCOG GTG 52" },
-    { "q": "First-line uterotonic in PPH?", "options": ["Oxytocin", "Carboprost", "Misoprostol", "Nifedipine"], "why": "5 IU slow IV, then infusion.", "source": "RCOG GTG 52" },
-    { "q": "Tranexamic acid in PPH should start within…", "options": ["3 hours of birth", "24 hours of birth", "6 hours of birth", "1 hour of birth"], "why": "WOMAN trial: benefit when given early.", "source": "WOMAN trial 2017; WHO" },
-    { "q": "Carboprost dose?", "options": ["250 microgram IM every 15 min, max 8 doses", "25 microgram IV every 5 min, max 4 doses", "1 mg orally, repeated after 1 hour", "2.5 mg IM as a single dose"], "why": "Caution in asthma.", "source": "RCOG GTG 52" },
-    { "q": "Major PPH is blood loss over…", "options": ["1000 mL (or shock)", "250 mL", "500 mL only in caesarean", "3000 mL"], "why": "Minor 500–1000 mL.", "source": "RCOG GTG 52" },
-    { "q": "Why empty the bladder in PPH?", "options": ["It stops the uterus contracting", "To measure the fibrinogen level", "To prevent a catheter-associated infection", "To reduce her pain"], "why": "Also allows urine output monitoring.", "source": "RCOG GTG 52" }
+    {
+      "q": "Commonest cause of primary PPH?",
+      "options": [
+        "Uterine atony",
+        "Retained placenta",
+        "Coagulopathy",
+        "Uterine inversion"
+      ],
+      "why": "Tone accounts for most PPH.",
+      "source": "RCOG GTG 52"
+    },
+    {
+      "q": "First-line uterotonic in PPH?",
+      "options": [
+        "Oxytocin",
+        "Carboprost",
+        "Misoprostol",
+        "Nifedipine"
+      ],
+      "why": "5 IU slow IV, then infusion.",
+      "source": "RCOG GTG 52"
+    },
+    {
+      "q": "Tranexamic acid in PPH should start within…",
+      "options": [
+        "3 hours of birth",
+        "24 hours of birth",
+        "6 hours of birth",
+        "1 hour of birth"
+      ],
+      "why": "WOMAN trial: benefit when given early.",
+      "source": "WOMAN trial 2017; WHO"
+    },
+    {
+      "q": "Carboprost dose?",
+      "options": [
+        "250 microgram IM every 15 min, max 8 doses",
+        "25 microgram IV every 5 min, max 4 doses",
+        "1 mg orally, repeated after 1 hour",
+        "2.5 mg IM as a single dose"
+      ],
+      "why": "Caution in asthma.",
+      "source": "RCOG GTG 52"
+    },
+    {
+      "q": "Major PPH is blood loss over…",
+      "options": [
+        "1000 mL (or shock)",
+        "250 mL",
+        "500 mL only in caesarean",
+        "3000 mL"
+      ],
+      "why": "Minor 500–1000 mL.",
+      "source": "RCOG GTG 52"
+    },
+    {
+      "q": "Why empty the bladder in PPH?",
+      "options": [
+        "It stops the uterus contracting",
+        "To measure the fibrinogen level",
+        "To prevent a catheter-associated infection",
+        "To reduce her pain"
+      ],
+      "why": "Also allows urine output monitoring.",
+      "source": "RCOG GTG 52"
+    }
   ]
 }

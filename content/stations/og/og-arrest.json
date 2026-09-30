@@ -5,13 +5,65 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 1. A 32-year-old woman at 30 weeks (fundus well above the umbilicus) collapsed at home. Paramedics have been doing CPR for 2 minutes; she arrives in asystole. You lead.",
+  "phases": [
+    {
+      "title": "Mobilise",
+      "goal": "Everyone you need, the hysterotomy kit, a clock from the collapse.",
+      "steps": [
+        "team"
+      ]
+    },
+    {
+      "title": "Resuscitate",
+      "goal": "CPR adapted for pregnancy, adrenaline from the cart, and the airway yourself.",
+      "steps": [
+        "cpr",
+        "adrenaline",
+        "intubate"
+      ]
+    },
+    {
+      "title": "Hysterotomy",
+      "goal": "Watch the clock. No ROSC at 4 minutes: act, where she is.",
+      "steps": [
+        "hysterotomy"
+      ]
+    },
+    {
+      "title": "Causes",
+      "goal": "The obstetric causes of arrest.",
+      "steps": [
+        "causes"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "four-min",
+      "after": "cpr",
+      "delayS": 30,
+      "scene": "four-min",
+      "say": "Four minutes since she collapsed. Still asystole."
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Hand position. Your notes say to do CPR 'higher on the sternum'. Current guidance uses the normal hand position and rate, with manual left uterine displacement from 20 weeks."}
+    {
+      "tag": "outdated",
+      "text": "Hand position. Your notes say to do CPR 'higher on the sternum'. Current guidance uses the normal hand position and rate, with manual left uterine displacement from 20 weeks."
+    }
   ],
   "notes": "Checked against RCUK 2025 special circumstances (pregnancy, including resuscitative hysterotomy), ERC 2025 and the MBRRACE-UK reports.\n\nDifferences from standard ALS: call the obstetric and neonatal teams at once; manual left uterine displacement (or left lateral tilt) from 20 weeks; standard hand position and compression rate (earlier teaching said 'higher on the sternum'; current guidance uses the normal position); early advanced airway by an experienced operator (aspiration, difficult airway); IV access above the diaphragm; normal defibrillation energies. Resuscitative hysterotomy (perimortem caesarean) if the gestation is 20 weeks or more (fundus at or above the umbilicus) and there is no ROSC within 4 minutes, aiming for delivery by 5 minutes; done where she is, without moving her. It aids maternal resuscitation by relieving aortocaval compression.\n\nCauses: 4 Hs and 4 Ts plus obstetric causes — haemorrhage, amniotic fluid embolism, eclampsia, magnesium toxicity, peripartum cardiomyopathy, aortic dissection, pulmonary embolism, anaesthetic complications.\n\nYour notes match this (prepare at 4 minutes, deliver by 5); they say 'CPR higher in sternum', which is no longer recommended.",
   "cast": [
-    { "id": "patient", "name": "Mrs Mak", "role": "patient" },
-    { "id": "nurse", "name": "Nurse Yuen", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mrs Mak",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Yuen",
+      "role": "nurse"
+    }
   ],
   "vitals": {
     "hr": 0,
@@ -21,7 +73,18 @@
     "rr": 0,
     "rhythm": "asystole",
     "effects": [
-      { "scene": "rosc", "set": { "hr": 124, "sbp": 84, "dbp": 48, "spo2": 90, "rr": 14, "etco2": 4.4 }, "rhythm": "sinus-tachy" }
+      {
+        "scene": "rosc",
+        "set": {
+          "hr": 124,
+          "sbp": 84,
+          "dbp": 48,
+          "spo2": 90,
+          "rr": 14,
+          "etco2": 4.4
+        },
+        "rhythm": "sinus-tachy"
+      }
     ]
   },
   "steps": [
@@ -33,26 +96,127 @@
       "hint": "Obstetrics, neonatology, anaesthetics; hysterotomy kit; clock.",
       "confirm": "Now",
       "opts": [
-        { "t": "Obstetric team, neonatal team and anaesthetist to resus now", "need": true, "mark": "Calls obstetric, neonatal and anaesthetic teams" },
-        { "t": "Open the resuscitative hysterotomy kit (scalpel)", "fetch": "trolley", "need": true, "mark": "Prepares for resuscitative hysterotomy" },
-        { "t": "Start a clock from the collapse time", "need": true, "mark": "Times the arrest" },
-        { "t": "Neonatal resuscitaire ready", "need": true, "mark": "Neonatal resuscitation ready" }
+        {
+          "t": "Obstetric team, neonatal team and anaesthetist to resus now",
+          "need": true,
+          "mark": "Calls obstetric, neonatal and anaesthetic teams"
+        },
+        {
+          "t": "Open the resuscitative hysterotomy kit (scalpel)",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Prepares for resuscitative hysterotomy"
+        },
+        {
+          "t": "Start a clock from the collapse time",
+          "need": true,
+          "mark": "Times the arrest"
+        },
+        {
+          "t": "Neonatal resuscitaire ready",
+          "need": true,
+          "mark": "Neonatal resuscitation ready"
+        }
       ]
     },
     {
       "id": "cpr",
-      "kind": "steps",
+      "kind": "exam",
       "to": "patient",
       "label": "Resuscitate",
-      "hint": "CPR with manual uterine displacement, airway, access above the diaphragm, adrenaline; hysterotomy by 5 minutes.",
+      "hint": "Good compressions with the uterus displaced to her left.",
+      "groups": {
+        "CPR": [
+          {
+            "t": "Compressions 30:2, normal hand position, while a helper pushes the uterus to her left",
+            "mark": "Manual left uterine displacement during CPR",
+            "scene": "cpr"
+          },
+          {
+            "t": "Compressions with her lying flat and no displacement",
+            "trap": true,
+            "r": "Aortocaval compression makes CPR ineffective at 30 weeks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "adrenaline",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Asystole: adrenaline, through access above the diaphragm.",
+      "confirm": "Give",
       "opts": [
-        { "t": "Compressions 30:2, normal hand position, while a helper pushes the uterus to her left", "n": 1, "mark": "Manual left uterine displacement during CPR" },
-        { "t": "Rhythm: asystole — adrenaline 1 mg IV (access above the diaphragm) as soon as possible", "n": 2, "mark": "Adrenaline early in non-shockable rhythm; access above the diaphragm" },
-        { "t": "Early intubation by an experienced operator; capnography", "n": 3, "mark": "Early definitive airway" },
-        { "t": "No ROSC at 4 minutes: resuscitative hysterotomy in resus, CPR continuing", "n": 4, "mark": "Resuscitative hysterotomy at 4 minutes without moving her" },
-        { "t": "Baby delivered by 5 minutes and handed to the neonatal team", "n": 5, "scene": "rosc", "mark": "Delivery by 5 minutes", "r": "Two minutes after delivery, a pulse returns." },
-        { "t": "Move her to theatre for the caesarean", "trap": "critical", "r": "Transfer wastes the minutes that matter. Do it in resus." },
-        { "t": "Compressions with her lying flat and no displacement", "trap": true, "r": "Aortocaval compression makes CPR ineffective at 30 weeks." }
+        {
+          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 1 mg IV (arm or neck access)",
+          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
+          "dose": "1 mg IV (arm or neck access)",
+          "fetch": "cart",
+          "mark": "Adrenaline early in non-shockable rhythm; access above the diaphragm"
+        },
+        {
+          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 1 mg IV into a leg vein",
+          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
+          "dose": "1 mg IV into a leg vein",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Access below the diaphragm: the gravid uterus slows the drug returning to the heart. Arms or neck."
+        },
+        {
+          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 0.1 mg IV",
+          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
+          "dose": "0.1 mg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little: 1 mg IV every 3–5 minutes."
+        }
+      ]
+    },
+    {
+      "id": "intubate",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Intubate",
+      "hint": "Secure the airway yourself.",
+      "groups": {
+        "Airway": [
+          {
+            "t": "Intubate: laryngoscope, tube through the cords, cuff up, capnography",
+            "anim": "intubate",
+            "scene": "intubated",
+            "r": "Tube through the cords, cuff up. Capnography: a square trace on every breath.",
+            "mark": "Early definitive airway"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hysterotomy",
+      "kind": "steps",
+      "to": "patient",
+      "label": "Hysterotomy",
+      "hint": "No ROSC at 4 minutes: deliver the baby by 5, where she is.",
+      "opts": [
+        {
+          "t": "No ROSC at 4 minutes: resuscitative hysterotomy in resus, CPR continuing",
+          "mark": "Resuscitative hysterotomy at 4 minutes without moving her",
+          "n": 1,
+          "when": "four-min",
+          "early": "Not yet: keep going to 4 minutes."
+        },
+        {
+          "t": "Baby delivered by 5 minutes and handed to the neonatal team",
+          "scene": "rosc",
+          "mark": "Delivery by 5 minutes",
+          "r": "Two minutes after delivery, a pulse returns.",
+          "n": 2
+        },
+        {
+          "t": "Move her to theatre for the caesarean",
+          "trap": "critical",
+          "r": "Transfer wastes the minutes that matter. Do it in resus."
+        }
       ]
     },
     {
@@ -62,8 +226,14 @@
       "label": "Causes",
       "hint": "4 Hs and 4 Ts plus obstetric causes; ask about magnesium.",
       "opts": [
-        { "t": "Any magnesium infusion? If so stop it and give calcium", "fetch": "cart", "mark": "Considers magnesium toxicity" },
-        { "t": "Consider haemorrhage, amniotic fluid embolism, PE, eclampsia, cardiomyopathy, dissection", "mark": "Lists obstetric causes of arrest" }
+        {
+          "t": "Any magnesium infusion? If so stop it and give calcium",
+          "mark": "Considers magnesium toxicity"
+        },
+        {
+          "t": "Consider haemorrhage, amniotic fluid embolism, PE, eclampsia, cardiomyopathy, dissection",
+          "mark": "Lists obstetric causes of arrest"
+        }
       ]
     },
     {
@@ -72,21 +242,126 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "When to perform resuscitative hysterotomy?", "a": "20 weeks or more, no ROSC at 4 minutes, delivered by 5", "wrong": ["Only after 36 weeks, once the fetus is viable", "After 30 minutes of CPR without ROSC", "Only if a fetal heartbeat is seen on ultrasound"] },
-        { "q": "Main purpose of the hysterotomy?", "a": "To relieve aortocaval compression for the mother", "wrong": ["To save the baby, whatever happens to the mother", "To stop bleeding from the placental bed", "To allow a CT of the maternal abdomen"] },
-        { "q": "Defibrillation energy in pregnancy?", "a": "Same as non-pregnant adults", "wrong": ["Half the adult energy", "Double the adult energy for the uterus", "Contraindicated until the baby is delivered"] },
-        { "q": "Why IV access above the diaphragm?", "a": "The uterus obstructs venous return from the legs", "wrong": ["The legs are too swollen to cannulate", "Drugs given in the legs harm the fetus more", "Femoral access is contraindicated in every pregnant woman"] },
-        { "q": "Clinical sign of 20 weeks' gestation?", "a": "Fundus at the umbilicus", "wrong": ["Fundus at the xiphisternum", "Fundus just palpable above the pubis", "Fetal movements felt"] }
+        {
+          "q": "When to perform resuscitative hysterotomy?",
+          "a": "20 weeks or more, no ROSC at 4 minutes, delivered by 5",
+          "wrong": [
+            "Only after 36 weeks, once the fetus is viable",
+            "After 30 minutes of CPR without ROSC",
+            "Only if a fetal heartbeat is seen on ultrasound"
+          ]
+        },
+        {
+          "q": "Main purpose of the hysterotomy?",
+          "a": "To relieve aortocaval compression for the mother",
+          "wrong": [
+            "To save the baby, whatever happens to the mother",
+            "To stop bleeding from the placental bed",
+            "To allow a CT of the maternal abdomen"
+          ]
+        },
+        {
+          "q": "Defibrillation energy in pregnancy?",
+          "a": "Same as non-pregnant adults",
+          "wrong": [
+            "Half the adult energy",
+            "Double the adult energy for the uterus",
+            "Contraindicated until the baby is delivered"
+          ]
+        },
+        {
+          "q": "Why IV access above the diaphragm?",
+          "a": "The uterus obstructs venous return from the legs",
+          "wrong": [
+            "The legs are too swollen to cannulate",
+            "Drugs given in the legs harm the fetus more",
+            "Femoral access is contraindicated in every pregnant woman"
+          ]
+        },
+        {
+          "q": "Clinical sign of 20 weeks' gestation?",
+          "a": "Fundus at the umbilicus",
+          "wrong": [
+            "Fundus at the xiphisternum",
+            "Fundus just palpable above the pubis",
+            "Fetal movements felt"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Two Lives", "emoji": "🤰", "flavor": "Push the uterus left. No ROSC by 4 minutes: deliver by 5." },
+  "badge": {
+    "name": "Two Lives",
+    "emoji": "🤰",
+    "flavor": "Push the uterus left. No ROSC by 4 minutes: deliver by 5."
+  },
   "cards": [
-    { "q": "Resuscitative hysterotomy is indicated from…", "options": ["20 weeks' gestation", "12 weeks' gestation", "28 weeks' gestation", "37 weeks (term) only"], "why": "When the uterus compresses the aorta and IVC.", "source": "RCUK 2025 special circumstances" },
-    { "q": "Target time for delivery in maternal arrest?", "options": ["5 minutes after collapse", "15 minutes after collapse", "30 minutes after collapse", "1 minute after collapse"], "why": "Start at 4 minutes.", "source": "RCUK 2025" },
-    { "q": "Manual uterine displacement pushes the uterus…", "options": ["To the mother's left", "To the mother's right", "Upwards", "Downwards, toward the feet"], "why": "Relieves aortocaval compression.", "source": "RCUK 2025" },
-    { "q": "Hand position for CPR in pregnancy (current guidance)?", "options": ["Standard: lower half of the sternum", "Higher on the sternum, near the notch", "Over the uterine fundus", "Over the left side of the chest"], "why": "Older teaching suggested higher placement.", "source": "RCUK 2025", "note": "Older notes: higher on the sternum." },
-    { "q": "Antidote if arrest follows magnesium infusion?", "options": ["Calcium", "Naloxone", "Flumazenil", "Glucagon"], "why": "Magnesium toxicity causes respiratory and cardiac arrest.", "source": "RCUK 2025" },
-    { "q": "Where should the resuscitative hysterotomy be done?", "options": ["Where she arrested (resus)", "In the main operating theatre", "In the delivery suite", "After transfer to the obstetric ICU"], "why": "Moving her wastes minutes.", "source": "RCUK 2025" }
+    {
+      "q": "Resuscitative hysterotomy is indicated from…",
+      "options": [
+        "20 weeks' gestation",
+        "12 weeks' gestation",
+        "28 weeks' gestation",
+        "37 weeks (term) only"
+      ],
+      "why": "When the uterus compresses the aorta and IVC.",
+      "source": "RCUK 2025 special circumstances"
+    },
+    {
+      "q": "Target time for delivery in maternal arrest?",
+      "options": [
+        "5 minutes after collapse",
+        "15 minutes after collapse",
+        "30 minutes after collapse",
+        "1 minute after collapse"
+      ],
+      "why": "Start at 4 minutes.",
+      "source": "RCUK 2025"
+    },
+    {
+      "q": "Manual uterine displacement pushes the uterus…",
+      "options": [
+        "To the mother's left",
+        "To the mother's right",
+        "Upwards",
+        "Downwards, toward the feet"
+      ],
+      "why": "Relieves aortocaval compression.",
+      "source": "RCUK 2025"
+    },
+    {
+      "q": "Hand position for CPR in pregnancy (current guidance)?",
+      "options": [
+        "Standard: lower half of the sternum",
+        "Higher on the sternum, near the notch",
+        "Over the uterine fundus",
+        "Over the left side of the chest"
+      ],
+      "why": "Older teaching suggested higher placement.",
+      "source": "RCUK 2025",
+      "note": "Older notes: higher on the sternum."
+    },
+    {
+      "q": "Antidote if arrest follows magnesium infusion?",
+      "options": [
+        "Calcium",
+        "Naloxone",
+        "Flumazenil",
+        "Glucagon"
+      ],
+      "why": "Magnesium toxicity causes respiratory and cardiac arrest.",
+      "source": "RCUK 2025"
+    },
+    {
+      "q": "Where should the resuscitative hysterotomy be done?",
+      "options": [
+        "Where she arrested (resus)",
+        "In the main operating theatre",
+        "In the delivery suite",
+        "After transfer to the obstetric ICU"
+      ],
+      "why": "Moving her wastes minutes.",
+      "source": "RCUK 2025"
+    }
   ]
 }

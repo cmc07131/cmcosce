@@ -5,11 +5,64 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 1. A 24-year-old woman, 35 weeks pregnant with her first baby, had a seizure in the waiting room and is now fitting again on the trolley. Her partner says she had a headache and blurred vision today. BP 172/114.",
+  "phases": [
+    {
+      "title": "Treat the seizure",
+      "goal": "Call the team, monitoring, protect her and her airway, then magnesium from the drug cart.",
+      "steps": [
+        "call",
+        "monitoring",
+        "protect",
+        "magnesium"
+      ]
+    },
+    {
+      "title": "Blood pressure",
+      "goal": "Treat the severe hypertension; restrict fluids.",
+      "steps": [
+        "bp",
+        "fluids"
+      ]
+    },
+    {
+      "title": "Monitor",
+      "goal": "Watch for magnesium toxicity and check mother and baby.",
+      "steps": [
+        "monitor"
+      ]
+    },
+    {
+      "title": "Plan",
+      "goal": "Stabilise first: then who decides on delivery?",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "fitting",
+      "delayS": 0,
+      "scene": "fitting",
+      "say": "She is fitting again on the trolley.",
+      "shakeUntil": "magnesium",
+      "treatedBy": "magnesium",
+      "untreated": "Her seizure was never treated with magnesium."
+    }
+  ],
   "review": [],
   "notes": "Checked against NICE NG133 (Hypertension in pregnancy, 2019, updated 2023), RCOG and the Magpie/Collaborative Eclampsia trials.\n\nEclampsia: seizures with pre-eclampsia. Call for help (obstetrics, anaesthetics, midwife, neonatology), left lateral position, airway and oxygen. Magnesium sulfate is the anticonvulsant of choice: 4 g IV over 5–15 minutes, then 1 g/h for 24 hours after the last seizure or birth; a recurrent seizure: a further 2–4 g over 5–15 minutes. Benzodiazepines are second-line (only if magnesium is not immediately available or seizures continue).\n\nMonitor for magnesium toxicity: loss of patellar reflexes first, then respiratory depression, then cardiac arrest. Check reflexes, respiratory rate and urine output; antidote calcium gluconate 10% 10 mL IV over 10 minutes.\n\nSevere hypertension (160/110 or more): labetalol (oral or IV), nifedipine, or IV hydralazine. Aim for 135/85 or below. Stabilise the mother before delivering the baby. Fluid restriction (about 80 mL/h) because of the risk of pulmonary oedema.\n\nYour notes link to an external page for eclampsia; nothing to compare.",
   "cast": [
-    { "id": "patient", "name": "Mrs Poon", "role": "patient" },
-    { "id": "nurse", "name": "Midwife Ho", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mrs Poon",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Midwife Ho",
+      "role": "nurse"
+    }
   ],
   "vitals": {
     "hr": 112,
@@ -19,39 +72,184 @@
     "rr": 22,
     "rhythm": "sinus-tachy",
     "effects": [
-      { "scene": "o2", "add": { "spo2": 5 }, "overS": 30 },
-      { "scene": "magnesium", "add": { "hr": -10 }, "overS": 60 },
-      { "scene": "bp", "add": { "sbp": -26, "dbp": -18 }, "overS": 120 }
-    ]
+      {
+        "scene": "o2",
+        "add": {
+          "spo2": 5
+        },
+        "overS": 30
+      },
+      {
+        "scene": "magnesium",
+        "add": {
+          "hr": -10
+        },
+        "overS": 60
+      },
+      {
+        "scene": "bp",
+        "add": {
+          "sbp": -26,
+          "dbp": -18
+        },
+        "overS": 120
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
     {
-      "id": "seizure",
-      "kind": "steps",
-      "to": "patient",
-      "label": "Treat the seizure",
-      "hint": "Help, left lateral, airway and oxygen, magnesium loading dose.",
+      "id": "call",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Call",
+      "hint": "The obstetric emergency team.",
       "opts": [
-        { "t": "Obstetric emergency call: obstetrician, anaesthetist, midwife, neonatologist", "n": 1, "mark": "Calls the obstetric emergency team" },
-        { "t": "Left lateral position; protect from injury", "n": 2, "mark": "Left lateral position" },
-        { "t": "Airway: suction, jaw thrust; high-flow oxygen", "n": 3, "scene": "o2", "mark": "Airway and oxygen" },
-        { "t": "Magnesium sulfate 4 g IV over 5–15 minutes", "n": 4, "scene": "magnesium", "mark": "Magnesium loading dose 4 g", "r": "The seizure stops during the infusion." },
-        { "t": "Magnesium maintenance 1 g/h for 24 hours", "n": 5, "mark": "Magnesium maintenance 1 g/h" },
-        { "t": "Diazepam 10 mg IV as first-line and no magnesium", "trap": true, "r": "Magnesium is superior to diazepam and phenytoin for eclampsia." },
-        { "t": "Lie her flat on her back", "trap": true, "r": "Aortocaval compression reduces cardiac output at 35 weeks." }
+        {
+          "t": "Obstetric emergency call: obstetrician, anaesthetist, midwife, neonatologist",
+          "mark": "Calls the obstetric emergency team"
+        }
+      ]
+    },
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG, NIBP and SpO2.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
+    {
+      "id": "protect",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Protect her",
+      "hint": "Left lateral, airway, oxygen.",
+      "groups": {
+        "Airway": [
+          {
+            "t": "Left lateral position; protect from injury",
+            "mark": "Left lateral position"
+          },
+          {
+            "t": "Airway: suction, jaw thrust; high-flow oxygen",
+            "scene": "o2",
+            "mark": "Airway and oxygen",
+            "anim": "airway"
+          },
+          {
+            "t": "Lie her flat on her back",
+            "trap": true,
+            "r": "Aortocaval compression reduces cardiac output at 35 weeks."
+          }
+        ]
+      }
+    },
+    {
+      "id": "magnesium",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Magnesium is the anticonvulsant: the loading dose, then the infusion.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Magnesium sulfate 4 g IV over 5–15 minutes",
+          "drug": "Magnesium sulfate",
+          "dose": "4 g IV over 5–15 minutes",
+          "fetch": "cart",
+          "scene": "magnesium",
+          "mark": "Magnesium loading dose 4 g"
+        },
+        {
+          "t": "Magnesium sulfate 4 g IV push over 30 seconds",
+          "drug": "Magnesium sulfate",
+          "dose": "4 g IV push over 30 seconds",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too fast: respiratory depression and arrhythmia. Over 5–15 minutes."
+        },
+        {
+          "t": "Magnesium sulfate 1 g IV loading dose",
+          "drug": "Magnesium sulfate",
+          "dose": "1 g IV loading dose",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little to load: 4 g, then 1 g/h."
+        },
+        {
+          "t": "Magnesium sulfate infusion 1 g/h for 24 hours",
+          "drug": "Magnesium sulfate",
+          "dose": "infusion 1 g/h for 24 hours",
+          "fetch": "cart",
+          "when": "magnesium",
+          "early": "Load first.",
+          "mark": "Magnesium maintenance 1 g/h"
+        },
+        {
+          "trap": true,
+          "r": "Magnesium is superior to diazepam and phenytoin for eclampsia.",
+          "t": "Diazepam 10 mg IV first-line, no magnesium",
+          "drug": "Diazepam",
+          "dose": "10 mg IV first-line, no magnesium",
+          "fetch": "cart"
+        }
       ]
     },
     {
       "id": "bp",
       "kind": "pick",
       "to": "cart",
-      "label": "Blood pressure",
-      "hint": "Severe hypertension: labetalol or hydralazine; fluid restriction.",
+      "label": "Drug cart",
+      "hint": "BP 172/114: bring it down.",
       "confirm": "Give",
       "opts": [
-        { "t": "Labetalol 20 mg IV, repeat/escalate, or infusion (hydralazine if asthmatic)", "fetch": "cart", "need": true, "scene": "bp", "mark": "Treats severe hypertension" },
-        { "t": "Restrict fluids to about 80 mL/h; catheter and hourly urine output", "fetch": "trolley", "need": true, "mark": "Fluid restriction and urine output" },
-        { "t": "Ergometrine for the third stage later", "fetch": "cart", "trap": "critical", "r": "Ergometrine is contraindicated in pre-eclampsia: severe hypertension and stroke." }
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "bp",
+          "mark": "Treats severe hypertension",
+          "t": "Labetalol 20 mg IV, repeat or escalate (hydralazine if asthmatic)",
+          "drug": "Labetalol",
+          "dose": "20 mg IV, repeat or escalate (hydralazine if asthmatic)"
+        },
+        {
+          "t": "Labetalol 200 mg IV bolus",
+          "drug": "Labetalol",
+          "dose": "200 mg IV bolus",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much at once: 20 mg IV, then 40, 80, or an infusion."
+        },
+        {
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Ergometrine is contraindicated in pre-eclampsia: severe hypertension and stroke.",
+          "t": "Ergometrine 0.5 mg IM for the third stage",
+          "drug": "Ergometrine",
+          "dose": "0.5 mg IM for the third stage"
+        }
+      ]
+    },
+    {
+      "id": "fluids",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "Fluid restriction and urine output.",
+      "opts": [
+        {
+          "t": "Restrict fluids to about 80 mL/h; catheter and hourly urine output",
+          "fetch": "trolley",
+          "mark": "Fluid restriction and urine output"
+        }
       ]
     },
     {
@@ -62,13 +260,31 @@
       "hint": "Magnesium toxicity checks; the baby.",
       "groups": {
         "Magnesium": [
-          { "t": "Patellar reflexes", "r": "Present.", "mark": "Checks reflexes for magnesium toxicity" },
-          { "t": "Respiratory rate and SpO2", "r": "RR 18, SpO2 97%.", "mark": "Monitors breathing on magnesium" }
+          {
+            "t": "Patellar reflexes",
+            "r": "Present.",
+            "mark": "Checks reflexes for magnesium toxicity"
+          },
+          {
+            "t": "Respiratory rate and SpO2",
+            "r": "RR 18, SpO2 97%.",
+            "mark": "Monitors breathing on magnesium"
+          }
         ],
         "Bloods": [
-          { "t": "FBC, U&E, LFT, urate, clotting, urine protein:creatinine", "r": "Platelets 88, ALT 190, creatinine 98. Protein:creatinine 150.", "mark": "Bloods for HELLP and renal involvement" }
+          {
+            "t": "FBC, U&E, LFT, urate, clotting, urine protein:creatinine",
+            "r": "Platelets 88, ALT 190, creatinine 98. Protein:creatinine 150.",
+            "mark": "Bloods for HELLP and renal involvement"
+          }
         ],
-        "Fetus": [{ "t": "Fetal heart / CTG once she is stable", "r": "Baseline 150, reduced variability, recovering.", "mark": "Assesses the fetus after the mother is stable" }]
+        "Fetus": [
+          {
+            "t": "Fetal heart / CTG once she is stable",
+            "r": "Baseline 150, reduced variability, recovering.",
+            "mark": "Assesses the fetus after the mother is stable"
+          }
+        ]
       }
     },
     {
@@ -78,8 +294,15 @@
       "label": "Plan",
       "hint": "Stabilise, then deliver; HDU.",
       "opts": [
-        { "t": "Stabilise first, then delivery planned by obstetrics; HDU care", "mark": "Stabilise the mother before delivery" },
-        { "t": "Immediate caesarean while she is still fitting", "trap": "critical", "r": "Stabilise first: stop the seizure, control the BP." }
+        {
+          "t": "Stabilise first, then delivery planned by obstetrics; HDU care",
+          "mark": "Stabilise the mother before delivery"
+        },
+        {
+          "t": "Immediate caesarean while she is still fitting",
+          "trap": "critical",
+          "r": "Stabilise first: stop the seizure, control the BP."
+        }
       ]
     },
     {
@@ -88,21 +311,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "First sign of magnesium toxicity?", "a": "Loss of patellar reflexes", "wrong": ["Tachycardia over 120 per minute", "Rising blood pressure above 160", "Recurrent seizures"] },
-        { "q": "Antidote to magnesium toxicity?", "a": "Calcium gluconate 10% 10 mL IV", "wrong": ["Naloxone 400 micrograms IV", "Flumazenil 200 micrograms IV", "Sodium bicarbonate 8.4% 50 mL IV"] },
-        { "q": "Dose for a recurrent seizure on magnesium?", "a": "Further 2–4 g over 5–15 min", "wrong": ["Stop the magnesium infusion", "10 g magnesium as a bolus", "Phenytoin 20 mg/kg before magnesium"] },
-        { "q": "BP threshold for urgent treatment in pregnancy (NICE)?", "a": "160/110 mmHg", "wrong": ["140/90 mmHg", "200/120 mmHg", "120/80 mmHg"] },
-        { "q": "HELLP stands for…", "a": "Haemolysis, Elevated Liver enzymes, Low Platelets", "wrong": ["Hypertension, Epilepsy, Liver failure, Proteinuria", "Headache, Eclampsia, Low potassium", "Haemorrhage, Elevated lactate, Low pH"] }
+        {
+          "q": "First sign of magnesium toxicity?",
+          "a": "Loss of patellar reflexes",
+          "wrong": [
+            "Tachycardia over 120 per minute",
+            "Rising blood pressure above 160",
+            "Recurrent seizures"
+          ]
+        },
+        {
+          "q": "Antidote to magnesium toxicity?",
+          "a": "Calcium gluconate 10% 10 mL IV",
+          "wrong": [
+            "Naloxone 400 micrograms IV",
+            "Flumazenil 200 micrograms IV",
+            "Sodium bicarbonate 8.4% 50 mL IV"
+          ]
+        },
+        {
+          "q": "Dose for a recurrent seizure on magnesium?",
+          "a": "Further 2–4 g over 5–15 min",
+          "wrong": [
+            "Stop the magnesium infusion",
+            "10 g magnesium as a bolus",
+            "Phenytoin 20 mg/kg before magnesium"
+          ]
+        },
+        {
+          "q": "BP threshold for urgent treatment in pregnancy (NICE)?",
+          "a": "160/110 mmHg",
+          "wrong": [
+            "140/90 mmHg",
+            "200/120 mmHg",
+            "120/80 mmHg"
+          ]
+        },
+        {
+          "q": "HELLP stands for…",
+          "a": "Haemolysis, Elevated Liver enzymes, Low Platelets",
+          "wrong": [
+            "Hypertension, Epilepsy, Liver failure, Proteinuria",
+            "Headache, Eclampsia, Low potassium",
+            "Haemorrhage, Elevated lactate, Low pH"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Magnesium Maven", "emoji": "🧲", "flavor": "4 g load, 1 g/h, reflexes and breathing checked." },
+  "badge": {
+    "name": "Magnesium Maven",
+    "emoji": "🧲",
+    "flavor": "4 g load, 1 g/h, reflexes and breathing checked."
+  },
   "cards": [
-    { "q": "Eclampsia first-line anticonvulsant?", "options": ["Magnesium sulfate", "Diazepam 10 mg IV", "Phenytoin 20 mg/kg", "Levetiracetam"], "why": "4 g IV over 5–15 min then 1 g/h.", "source": "NICE NG133; Collaborative Eclampsia Trial" },
-    { "q": "Duration of magnesium after eclampsia?", "options": ["24 hours after the last seizure or birth", "1 hour after the last seizure", "7 days after birth", "Until the blood pressure is below 140/90 mmHg"], "why": "Whichever is later.", "source": "NICE NG133" },
-    { "q": "Magnesium toxicity treatment?", "options": ["Calcium gluconate 10% 10 mL IV", "More magnesium, as a loading dose", "Potassium chloride 20 mmol IV", "Insulin with 50 mL of 50% glucose"], "why": "Stop the infusion too.", "source": "BNF / NICE NG133" },
-    { "q": "Antihypertensive to avoid in asthma?", "options": ["Labetalol", "Nifedipine", "Hydralazine", "Methyldopa"], "why": "Beta-blockade can cause bronchospasm.", "source": "NICE NG133" },
-    { "q": "Fluid rate in severe pre-eclampsia?", "options": ["About 80 mL/h", "250 mL/h", "1 L bolus hourly", "No fluids at all"], "why": "Risk of pulmonary oedema.", "source": "NICE NG133" },
-    { "q": "When to deliver after eclampsia?", "options": ["Once the mother is stabilised", "Immediately, even while she is fitting", "After 48 hours of magnesium, for stability", "Only once she reaches term"], "why": "Maternal stabilisation first.", "source": "RCOG / NICE NG133" }
+    {
+      "q": "Eclampsia first-line anticonvulsant?",
+      "options": [
+        "Magnesium sulfate",
+        "Diazepam 10 mg IV",
+        "Phenytoin 20 mg/kg",
+        "Levetiracetam"
+      ],
+      "why": "4 g IV over 5–15 min then 1 g/h.",
+      "source": "NICE NG133; Collaborative Eclampsia Trial"
+    },
+    {
+      "q": "Duration of magnesium after eclampsia?",
+      "options": [
+        "24 hours after the last seizure or birth",
+        "1 hour after the last seizure",
+        "7 days after birth",
+        "Until the blood pressure is below 140/90 mmHg"
+      ],
+      "why": "Whichever is later.",
+      "source": "NICE NG133"
+    },
+    {
+      "q": "Magnesium toxicity treatment?",
+      "options": [
+        "Calcium gluconate 10% 10 mL IV",
+        "More magnesium, as a loading dose",
+        "Potassium chloride 20 mmol IV",
+        "Insulin with 50 mL of 50% glucose"
+      ],
+      "why": "Stop the infusion too.",
+      "source": "BNF / NICE NG133"
+    },
+    {
+      "q": "Antihypertensive to avoid in asthma?",
+      "options": [
+        "Labetalol",
+        "Nifedipine",
+        "Hydralazine",
+        "Methyldopa"
+      ],
+      "why": "Beta-blockade can cause bronchospasm.",
+      "source": "NICE NG133"
+    },
+    {
+      "q": "Fluid rate in severe pre-eclampsia?",
+      "options": [
+        "About 80 mL/h",
+        "250 mL/h",
+        "1 L bolus hourly",
+        "No fluids at all"
+      ],
+      "why": "Risk of pulmonary oedema.",
+      "source": "NICE NG133"
+    },
+    {
+      "q": "When to deliver after eclampsia?",
+      "options": [
+        "Once the mother is stabilised",
+        "Immediately, even while she is fitting",
+        "After 48 hours of magnesium, for stability",
+        "Only once she reaches term"
+      ],
+      "why": "Maternal stabilisation first.",
+      "source": "RCOG / NICE NG133"
+    }
   ]
 }
