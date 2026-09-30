@@ -4,11 +4,72 @@
   "title": "Vomiting infant: intussusception",
   "type": "history",
   "time": 420,
-  "stem": "Paediatric area. Jason, 9 months, has had episodes of screaming and drawing his legs up since this morning, with vomiting, and he is pale and floppy between episodes. His mother noticed a 'jelly-like' red nappy an hour ago. HR 170, CRT 3 s, temperature 37.6 °C. Take a history and plan.",
+  "stem": "Paediatric area. Jason, 9 months (about 9 kg), has had episodes of screaming and drawing his legs up since this morning, with vomiting, and he is pale and floppy between episodes. His mother noticed a 'jelly-like' red nappy an hour ago. HR 170, CRT 3 s, temperature 37.6 °C. Take a history and plan.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "The pattern of the crying, the vomit and the nappy.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Examine and test",
+      "goal": "Monitoring; feel the abdomen and scan it.",
+      "steps": [
+        "monitoring",
+        "tests"
+      ]
+    },
+    {
+      "title": "Manage",
+      "goal": "Access, fluid for his weight, a tube, analgesia and the surgeon.",
+      "steps": [
+        "manage",
+        "bolus"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against RCH Melbourne and RCS/BAPS guidance on intussusception, and NICE NG143 traffic-light system.\n\nIntussusception (6 months to 2 years): episodic inconsolable crying with drawing up of legs, pallor and lethargy between episodes, vomiting (becoming bilious), late 'redcurrant jelly' stool, a sausage-shaped mass in the right upper quadrant. Bilious vomiting in any infant is a surgical emergency (malrotation with volvulus until proven otherwise). Ultrasound (target/doughnut sign) is the investigation of choice. Resuscitate with 10–20 mL/kg boluses (10 mL/kg per RCUK), IV access, bloods, NG tube, analgesia, and contact the paediatric surgeon; air enema reduction by radiology with the surgical team present if stable and no peritonitis or perforation; surgery if these fail or the child is peritonitic/shocked.\n\nOther causes of vomiting in infants to consider in the history: gastroenteritis, UTI, pyloric stenosis (2–8 weeks, projectile, non-bilious, hypochloraemic alkalosis), DKA, raised ICP, NAI, sepsis. Your notes list 'paediatric vomiting' as a topic without detail.",
-  "cast": [{ "id": "mother", "name": "Mother", "role": "woman" }, { "id": "patient", "name": "Jason", "role": "child", "inBed": true }, { "id": "nurse", "name": "Nurse Lai", "role": "nurse" }],
-  "vitals": { "hr": 170, "sbp": 80, "dbp": 48, "spo2": 98, "rr": 40, "temp": 37.6, "rhythm": "sinus-tachy", "effects": [{ "scene": "bolus", "add": { "hr": -18, "sbp": 8 }, "overS": 120 }] },
+  "cast": [
+    {
+      "id": "mother",
+      "name": "Mother",
+      "role": "woman"
+    },
+    {
+      "id": "patient",
+      "name": "Jason",
+      "role": "child",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Lai",
+      "role": "nurse"
+    }
+  ],
+  "vitals": {
+    "hr": 170,
+    "sbp": 80,
+    "dbp": 48,
+    "spo2": 98,
+    "rr": 40,
+    "temp": 37.6,
+    "rhythm": "sinus-tachy",
+    "effects": [
+      {
+        "scene": "bolus",
+        "add": {
+          "hr": -18,
+          "sbp": 8
+        },
+        "overS": 120
+      }
+    ],
+    "showWhen": "monitored"
+  },
   "steps": [
     {
       "id": "history",
@@ -18,18 +79,70 @@
       "hint": "Pattern of crying, vomit colour, stool, feeding, wet nappies, fever, previous illness.",
       "groups": {
         "Pain": [
-          { "t": "What are the crying episodes like?", "tz": "佢喊嗰陣係點樣？", "rz": "每十五至二十分鐘就尖叫，雙腳縮起，之後就面青青、好眼瞓。", "r": "Every 15–20 minutes he screams, pulls his legs up, then goes pale and sleepy.", "mark": "Elicits episodic colicky pain with lethargy between" },
-          { "t": "What colour is the vomit?", "tz": "佢嘔嘅嘢係咩色？", "rz": "一開始係奶，而家有啲綠色。", "r": "Milk at first, now greenish.", "mark": "Asks vomit colour (bilious)" }
+          {
+            "t": "What are the crying episodes like?",
+            "tz": "佢喊嗰陣係點樣？",
+            "rz": "每十五至二十分鐘就尖叫，雙腳縮起，之後就面青青、好眼瞓。",
+            "r": "Every 15–20 minutes he screams, pulls his legs up, then goes pale and sleepy.",
+            "mark": "Elicits episodic colicky pain with lethargy between"
+          },
+          {
+            "t": "What colour is the vomit?",
+            "tz": "佢嘔嘅嘢係咩色？",
+            "rz": "一開始係奶，而家有啲綠色。",
+            "r": "Milk at first, now greenish.",
+            "mark": "Asks vomit colour (bilious)"
+          }
         ],
         "Stool": [
-          { "t": "What did the nappy look like?", "tz": "佢片尿片係點樣？", "rz": "紅色，好似啫喱咁。", "r": "Red and jelly-like.", "mark": "Asks about redcurrant jelly stool" },
-          { "t": "Diarrhoea before this?", "tz": "之前有冇肚屙？", "rz": "冇。", "r": "No." }
+          {
+            "t": "What did the nappy look like?",
+            "tz": "佢片尿片係點樣？",
+            "rz": "紅色，好似啫喱咁。",
+            "r": "Red and jelly-like.",
+            "mark": "Asks about redcurrant jelly stool"
+          },
+          {
+            "t": "Diarrhoea before this?",
+            "tz": "之前有冇肚屙？",
+            "rz": "冇。",
+            "r": "No."
+          }
         ],
         "Hydration": [
-          { "t": "Feeding and wet nappies", "tz": "佢食奶點？有幾多片濕尿片？", "rz": "唔肯飲奶。由朝早到而家得一片濕尿片。", "r": "Refusing milk. One wet nappy since morning.", "mark": "Assesses intake and urine output" }
+          {
+            "t": "Feeding and wet nappies",
+            "tz": "佢食奶點？有幾多片濕尿片？",
+            "rz": "唔肯飲奶。由朝早到而家得一片濕尿片。",
+            "r": "Refusing milk. One wet nappy since morning.",
+            "mark": "Assesses intake and urine output"
+          }
         ],
-        "Background": [{ "t": "Recent illness, previous problems, vaccines", "tz": "最近有冇病過？以前有冇咩問題？打齊針未？", "rz": "上個禮拜傷風。打齊晒針，包括輪狀病毒。", "r": "A cold last week. Fully vaccinated, rotavirus included.", "mark": "Asks recent viral illness and immunisation" }]
+        "Background": [
+          {
+            "t": "Recent illness, previous problems, vaccines",
+            "tz": "最近有冇病過？以前有冇咩問題？打齊針未？",
+            "rz": "上個禮拜傷風。打齊晒針，包括輪狀病毒。",
+            "r": "A cold last week. Fully vaccinated, rotavirus included.",
+            "mark": "Asks recent viral illness and immunisation"
+          }
+        ]
       }
+    },
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put him on the monitor: ECG and SpO2.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
     },
     {
       "id": "tests",
@@ -38,8 +151,21 @@
       "label": "Examination and tests",
       "hint": "Abdomen; ultrasound.",
       "groups": {
-        "Exam": [{ "t": "Palpate the abdomen", "r": "A sausage-shaped mass in the right upper quadrant; not peritonitic.", "mark": "Finds a sausage-shaped mass" }],
-        "Imaging": [{ "t": "Abdominal ultrasound", "r": "Target (doughnut) sign in the right upper quadrant.", "img": "us:intussusception", "mark": "Ultrasound target sign" }]
+        "Exam": [
+          {
+            "t": "Palpate the abdomen",
+            "r": "A sausage-shaped mass in the right upper quadrant; not peritonitic.",
+            "mark": "Finds a sausage-shaped mass"
+          }
+        ],
+        "Imaging": [
+          {
+            "t": "Abdominal ultrasound",
+            "r": "Target (doughnut) sign in the right upper quadrant.",
+            "img": "us:intussusception",
+            "mark": "Ultrasound target sign"
+          }
+        ]
       }
     },
     {
@@ -50,11 +176,55 @@
       "hint": "Access, fluids, bloods, NG tube, analgesia, surgeon, air enema.",
       "confirm": "Do",
       "opts": [
-        { "t": "IV access; bloods including gas and group and save", "fetch": "trolley", "need": true, "mark": "IV access and bloods" },
-        { "t": "10 mL/kg crystalloid bolus, reassess", "fetch": "cart", "need": true, "scene": "bolus", "mark": "Fluid resuscitation" },
-        { "t": "Nasogastric tube on free drainage; analgesia", "fetch": "trolley", "need": true, "mark": "NG decompression and analgesia" },
-        { "t": "Paediatric surgeon now; air enema reduction with surgeons present", "need": true, "mark": "Surgical referral and air enema" },
-        { "t": "Oral rehydration and discharge as gastroenteritis", "trap": "critical", "r": "Bilious vomiting and redcurrant stool: surgical emergency." }
+        {
+          "t": "IV access; bloods including gas and group and save",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "IV access and bloods"
+        },
+        {
+          "t": "Nasogastric tube on free drainage; analgesia",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "NG decompression and analgesia"
+        },
+        {
+          "t": "Paediatric surgeon now; air enema reduction with surgeons present",
+          "need": true,
+          "mark": "Surgical referral and air enema"
+        },
+        {
+          "t": "Oral rehydration and discharge as gastroenteritis",
+          "trap": "critical",
+          "r": "Bilious vomiting and redcurrant stool: surgical emergency."
+        }
+      ]
+    },
+    {
+      "id": "bolus",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "A bolus for his weight, then reassess.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "bolus",
+          "mark": "Fluid resuscitation",
+          "t": "Crystalloid 10 mL/kg (90 mL), then reassess",
+          "drug": "Crystalloid",
+          "dose": "10 mL/kg (90 mL), then reassess"
+        },
+        {
+          "t": "Crystalloid 50 mL/kg (450 mL) fast",
+          "drug": "Crystalloid",
+          "dose": "50 mL/kg (450 mL) fast",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Far too much at once: 10 mL/kg boluses, reassessing after each."
+        }
       ]
     },
     {
@@ -63,21 +233,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Bilious vomiting in an infant suggests…", "a": "A surgical emergency (malrotation/volvulus, intussusception)", "wrong": ["Simple gastroenteritis", "Gastro-oesophageal reflux", "Overfeeding by anxious parents"] },
-        { "q": "Investigation of choice for intussusception?", "a": "Ultrasound", "wrong": ["CT", "Plain X-ray only", "Barium meal"] },
-        { "q": "Contraindication to air enema?", "a": "Peritonitis or perforation", "wrong": ["Age 9 months", "Vomiting more than three times in the last hour", "A fever of 37.6 °C on arrival"] },
-        { "q": "Pyloric stenosis typical age and vomit?", "a": "2–8 weeks, projectile non-bilious", "wrong": ["1 year, bilious and with bloody stools", "Newborn, blood-stained", "5 years, projectile after meals"] },
-        { "q": "Classic metabolic abnormality in pyloric stenosis?", "a": "Hypochloraemic hypokalaemic metabolic alkalosis", "wrong": ["Hyperchloraemic metabolic acidosis", "Hyperkalaemic metabolic acidosis", "Hypercalcaemia with alkalosis"] }
+        {
+          "q": "Bilious vomiting in an infant suggests…",
+          "a": "A surgical emergency (malrotation/volvulus, intussusception)",
+          "wrong": [
+            "Simple gastroenteritis",
+            "Gastro-oesophageal reflux",
+            "Overfeeding by anxious parents"
+          ]
+        },
+        {
+          "q": "Investigation of choice for intussusception?",
+          "a": "Ultrasound",
+          "wrong": [
+            "CT",
+            "Plain X-ray only",
+            "Barium meal"
+          ]
+        },
+        {
+          "q": "Contraindication to air enema?",
+          "a": "Peritonitis or perforation",
+          "wrong": [
+            "Age 9 months",
+            "Vomiting more than three times in the last hour",
+            "A fever of 37.6 °C on arrival"
+          ]
+        },
+        {
+          "q": "Pyloric stenosis typical age and vomit?",
+          "a": "2–8 weeks, projectile non-bilious",
+          "wrong": [
+            "1 year, bilious and with bloody stools",
+            "Newborn, blood-stained",
+            "5 years, projectile after meals"
+          ]
+        },
+        {
+          "q": "Classic metabolic abnormality in pyloric stenosis?",
+          "a": "Hypochloraemic hypokalaemic metabolic alkalosis",
+          "wrong": [
+            "Hyperchloraemic metabolic acidosis",
+            "Hyperkalaemic metabolic acidosis",
+            "Hypercalcaemia with alkalosis"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Telescope", "emoji": "🔭", "flavor": "Screaming episodes, green vomit, jelly stool: ultrasound, fluids, surgeon." },
+  "badge": {
+    "name": "Telescope",
+    "emoji": "🔭",
+    "flavor": "Screaming episodes, green vomit, jelly stool: ultrasound, fluids, surgeon."
+  },
   "cards": [
-    { "q": "Intussusception typical age?", "options": ["6 months to 2 years", "Newborns in the first week", "About 10 years, around puberty", "Adults"], "why": "Often after a viral illness.", "source": "RCH Melbourne" },
-    { "q": "Ultrasound sign of intussusception?", "options": ["Target (doughnut) sign", "Double bubble on ultrasound", "Whirlpool sign of the mesentery", "Steeple sign"], "why": "Concentric bowel wall.", "source": "Radiology" },
-    { "q": "Redcurrant jelly stool is…", "options": ["A late sign", "An early sign", "Diagnostic of gastroenteritis", "Normal"], "why": "Don't wait for it.", "source": "RCH Melbourne" },
-    { "q": "First-line reduction?", "options": ["Radiological air (or contrast) enema", "Laparotomy in every case", "Oral laxatives and review", "Colonoscopy under sedation"], "why": "Surgeons present.", "source": "BAPS" },
-    { "q": "Double bubble on X-ray suggests…", "options": ["Duodenal atresia", "Intussusception", "Pyloric stenosis", "Hirschsprung"], "why": "Newborn, bilious vomiting.", "source": "Paediatric surgery" },
-    { "q": "Pyloric stenosis on examination?", "options": ["Olive-shaped mass during a test feed", "Sausage-shaped mass in the right upper quadrant", "Right iliac fossa pain and guarding", "Abdominal distension and absent bowel sounds"], "why": "Ultrasound confirms.", "source": "Paediatric surgery" }
+    {
+      "q": "Intussusception typical age?",
+      "options": [
+        "6 months to 2 years",
+        "Newborns in the first week",
+        "About 10 years, around puberty",
+        "Adults"
+      ],
+      "why": "Often after a viral illness.",
+      "source": "RCH Melbourne"
+    },
+    {
+      "q": "Ultrasound sign of intussusception?",
+      "options": [
+        "Target (doughnut) sign",
+        "Double bubble on ultrasound",
+        "Whirlpool sign of the mesentery",
+        "Steeple sign"
+      ],
+      "why": "Concentric bowel wall.",
+      "source": "Radiology"
+    },
+    {
+      "q": "Redcurrant jelly stool is…",
+      "options": [
+        "A late sign",
+        "An early sign",
+        "Diagnostic of gastroenteritis",
+        "Normal"
+      ],
+      "why": "Don't wait for it.",
+      "source": "RCH Melbourne"
+    },
+    {
+      "q": "First-line reduction?",
+      "options": [
+        "Radiological air (or contrast) enema",
+        "Laparotomy in every case",
+        "Oral laxatives and review",
+        "Colonoscopy under sedation"
+      ],
+      "why": "Surgeons present.",
+      "source": "BAPS"
+    },
+    {
+      "q": "Double bubble on X-ray suggests…",
+      "options": [
+        "Duodenal atresia",
+        "Intussusception",
+        "Pyloric stenosis",
+        "Hirschsprung"
+      ],
+      "why": "Newborn, bilious vomiting.",
+      "source": "Paediatric surgery"
+    },
+    {
+      "q": "Pyloric stenosis on examination?",
+      "options": [
+        "Olive-shaped mass during a test feed",
+        "Sausage-shaped mass in the right upper quadrant",
+        "Right iliac fossa pain and guarding",
+        "Abdominal distension and absent bowel sounds"
+      ],
+      "why": "Ultrasound confirms.",
+      "source": "Paediatric surgery"
+    }
   ]
 }

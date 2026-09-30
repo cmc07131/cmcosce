@@ -5,11 +5,49 @@
   "type": "exam",
   "time": 420,
   "stem": "Paediatric area. Ming, 7, fell from the monkey bars onto an outstretched left hand. His elbow is swollen and he won't move it. Interpret the X-ray, assess neurovascular status, and discuss management.",
+  "phases": [
+    {
+      "title": "X-ray",
+      "goal": "Read the lateral film.",
+      "steps": [
+        "xray"
+      ]
+    },
+    {
+      "title": "Neurovascular",
+      "goal": "Pulse, perfusion, and each nerve.",
+      "steps": [
+        "nv"
+      ]
+    },
+    {
+      "title": "Plan",
+      "goal": "Analgesia, splint, orthopaedics, and warning signs.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Compartment syndrome threshold. Your notes use an absolute compartment pressure of 25 mmHg. The usual threshold is the delta pressure: diastolic pressure minus compartment pressure under 30 mmHg. The clinical signs (pain out of proportion, pain on passive finger extension) come first."}
+    {
+      "tag": "differs",
+      "text": "Compartment syndrome threshold. Your notes use an absolute compartment pressure of 25 mmHg. The usual threshold is the delta pressure: diastolic pressure minus compartment pressure under 30 mmHg. The clinical signs (pain out of proportion, pain on passive finger extension) come first."
+    }
   ],
   "notes": "Checked against BOAST 'Supracondylar fractures of the humerus in children' (2020) and the Gartland classification.\n\nX-ray: lateral view — posterior fat pad (always abnormal), elevated anterior fat pad ('sail'), anterior humeral line should pass through the middle third of the capitellum (passes anterior to it in an extension-type fracture), radiocapitellar line intact. Ossification centres CRITOE (capitellum ~1, radial head ~3, internal/medial epicondyle ~5, trochlea ~7, olecranon ~9, external/lateral epicondyle ~11 years). Gartland I undisplaced (above-elbow backslab at 90° or less, collar and cuff); II angulated with an intact posterior cortex; III completely displaced — closed reduction and K-wiring (BOAST: within 12–24 h, urgent if neurovascular compromise).\n\nNeurovascular examination and documentation of radial, median (and anterior interosseous — 'OK' sign, FPL and FDP index), and ulnar nerves, and radial pulse and perfusion. The pink pulseless hand needs urgent orthopaedic/vascular input; the white pulseless hand is an emergency (reduce and explore). Compartment syndrome: pain out of proportion, pain on passive finger extension — early; avoid tight flexion and circumferential casts.\n\nYour notes match this (they use a 25 mmHg compartment pressure question; the delta pressure — diastolic minus compartment under 30 mmHg — is the usual threshold).",
-  "cast": [{ "id": "patient", "name": "Ming", "role": "child", "inBed": true }, { "id": "mother", "name": "Mother", "role": "woman" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Ming",
+      "role": "child",
+      "inBed": true
+    },
+    {
+      "id": "mother",
+      "name": "Mother",
+      "role": "woman"
+    }
+  ],
   "steps": [
     {
       "id": "xray",
@@ -17,7 +55,16 @@
       "to": "trolley",
       "label": "X-ray",
       "hint": "Fat pads, anterior humeral line, radiocapitellar line, fracture.",
-      "groups": { "X-ray": [{ "t": "Left elbow lateral", "r": "Posterior fat pad and raised anterior 'sail'. Supracondylar fracture; the anterior humeral line passes in front of the capitellum; posterior cortex intact but the distal fragment is angulated back (Gartland II).", "img": "xr:elbow-supracondylar", "mark": "Identifies fat pads, anterior humeral line and grades the fracture" }] }
+      "groups": {
+        "X-ray": [
+          {
+            "t": "Left elbow lateral",
+            "r": "Posterior fat pad and raised anterior 'sail'. Supracondylar fracture; the anterior humeral line passes in front of the capitellum; posterior cortex intact but the distal fragment is angulated back (Gartland II).",
+            "img": "xr:elbow-supracondylar",
+            "mark": "Identifies fat pads, anterior humeral line and grades the fracture"
+          }
+        ]
+      }
     },
     {
       "id": "nv",
@@ -26,14 +73,43 @@
       "label": "Neurovascular examination",
       "hint": "Pulse, perfusion, radial, median, AIN, ulnar; compartment signs.",
       "groups": {
-        "Vascular": [{ "t": "Radial pulse and hand perfusion", "r": "Radial pulse present; hand pink, CRT under 2 s.", "mark": "Assesses pulse and perfusion" }],
-        "Nerves": [
-          { "t": "Radial: thumbs up / wrist extension; sensation dorsal first web space", "r": "Normal.", "mark": "Tests the radial nerve" },
-          { "t": "Median: thumb opposition, sensation index pulp", "r": "Normal.", "mark": "Tests the median nerve" },
-          { "t": "Anterior interosseous: make an 'OK' sign", "r": "Makes a flat pinch instead of a circle — weak FPL and FDP index.", "mark": "Tests the AIN and finds a palsy" },
-          { "t": "Ulnar: finger abduction ('crossed fingers'), little finger sensation", "r": "Normal.", "mark": "Tests the ulnar nerve" }
+        "Vascular": [
+          {
+            "t": "Radial pulse and hand perfusion",
+            "r": "Radial pulse present; hand pink, CRT under 2 s.",
+            "mark": "Assesses pulse and perfusion",
+            "anim": "pulse"
+          }
         ],
-        "Compartment": [{ "t": "Passive finger extension; forearm tension", "r": "No pain on passive stretch; forearm soft.", "mark": "Checks for compartment syndrome" }]
+        "Nerves": [
+          {
+            "t": "Radial: thumbs up / wrist extension; sensation dorsal first web space",
+            "r": "Normal.",
+            "mark": "Tests the radial nerve"
+          },
+          {
+            "t": "Median: thumb opposition, sensation index pulp",
+            "r": "Normal.",
+            "mark": "Tests the median nerve"
+          },
+          {
+            "t": "Anterior interosseous: make an 'OK' sign",
+            "r": "Makes a flat pinch instead of a circle — weak FPL and FDP index.",
+            "mark": "Tests the AIN and finds a palsy"
+          },
+          {
+            "t": "Ulnar: finger abduction ('crossed fingers'), little finger sensation",
+            "r": "Normal.",
+            "mark": "Tests the ulnar nerve"
+          }
+        ],
+        "Compartment": [
+          {
+            "t": "Passive finger extension; forearm tension",
+            "r": "No pain on passive stretch; forearm soft.",
+            "mark": "Checks for compartment syndrome"
+          }
+        ]
       }
     },
     {
@@ -43,10 +119,27 @@
       "label": "Plan",
       "hint": "Analgesia, backslab not tight, elevate, orthopaedics for reduction and wiring, AIN palsy usually recovers.",
       "opts": [
-        { "t": "Pain relief (intranasal fentanyl), a backslab with the elbow not over-flexed, elevation", "tz": "我哋會用鼻噴止痛藥俾佢止痛，再用石膏托固定，手踭唔會屈得太盡，同埋舉高隻手。", "mark": "Analgesia, backslab and elevation" },
-        { "t": "Orthopaedics for reduction and wiring; the nerve weakness usually recovers over weeks to months", "tz": "骨科醫生會幫佢將骨駁返正，再用鋼針固定；佢手指嗰啲神經冇力，通常幾個禮拜至幾個月會好返。", "mark": "Refers for reduction; explains AIN palsy prognosis" },
-        { "t": "Watch for severe pain, numbness, pale or cold fingers — tell the nurse at once", "tz": "如果佢好痛、手指麻痺、變白或者凍冰冰，要即刻話俾護士知。", "mark": "Explains compartment syndrome warning signs" },
-        { "t": "A tight full cast with the elbow fully bent", "tz": "打一個緊啲嘅全手石膏，手踭屈到盡。", "trap": "critical", "r": "Hyperflexion and tight casts risk compartment syndrome and vascular compromise." }
+        {
+          "t": "Pain relief (intranasal fentanyl), a backslab with the elbow not over-flexed, elevation",
+          "tz": "我哋會用鼻噴止痛藥俾佢止痛，再用石膏托固定，手踭唔會屈得太盡，同埋舉高隻手。",
+          "mark": "Analgesia, backslab and elevation"
+        },
+        {
+          "t": "Orthopaedics for reduction and wiring; the nerve weakness usually recovers over weeks to months",
+          "tz": "骨科醫生會幫佢將骨駁返正，再用鋼針固定；佢手指嗰啲神經冇力，通常幾個禮拜至幾個月會好返。",
+          "mark": "Refers for reduction; explains AIN palsy prognosis"
+        },
+        {
+          "t": "Watch for severe pain, numbness, pale or cold fingers — tell the nurse at once",
+          "tz": "如果佢好痛、手指麻痺、變白或者凍冰冰，要即刻話俾護士知。",
+          "mark": "Explains compartment syndrome warning signs"
+        },
+        {
+          "t": "A tight full cast with the elbow fully bent",
+          "tz": "打一個緊啲嘅全手石膏，手踭屈到盡。",
+          "trap": "critical",
+          "r": "Hyperflexion and tight casts risk compartment syndrome and vascular compromise."
+        }
       ]
     },
     {
@@ -55,21 +148,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Normal anterior humeral line passes through…", "a": "The middle third of the capitellum", "wrong": ["In front of the whole capitellum", "Through the tip of the olecranon", "Through the centre of the radial head"] },
-        { "q": "Nerve most often injured in extension-type supracondylar fractures?", "a": "Anterior interosseous (median)", "wrong": ["Axillary nerve at the surgical neck", "Musculocutaneous nerve at the elbow", "Long thoracic nerve"] },
-        { "q": "CRITOE order?", "a": "Capitellum, Radial head, Internal epicondyle, Trochlea, Olecranon, External epicondyle", "wrong": ["Coronoid, Radial head, Internal, Trochlea, Olecranon, External", "Trochlea first, then capitellum, then radial head", "Random order, differing between children"] },
-        { "q": "Gartland III is…", "a": "Completely displaced", "wrong": ["Undisplaced", "Angulated with intact posterior cortex", "Flexion type with an intact cortex"] },
-        { "q": "Early sign of compartment syndrome?", "a": "Pain on passive finger extension", "wrong": ["An absent radial pulse at the wrist, early on", "Pallor and coldness of the whole hand", "Paralysis of the fingers"] }
+        {
+          "q": "Normal anterior humeral line passes through…",
+          "a": "The middle third of the capitellum",
+          "wrong": [
+            "In front of the whole capitellum",
+            "Through the tip of the olecranon",
+            "Through the centre of the radial head"
+          ]
+        },
+        {
+          "q": "Nerve most often injured in extension-type supracondylar fractures?",
+          "a": "Anterior interosseous (median)",
+          "wrong": [
+            "Axillary nerve at the surgical neck",
+            "Musculocutaneous nerve at the elbow",
+            "Long thoracic nerve"
+          ]
+        },
+        {
+          "q": "CRITOE order?",
+          "a": "Capitellum, Radial head, Internal epicondyle, Trochlea, Olecranon, External epicondyle",
+          "wrong": [
+            "Coronoid, Radial head, Internal, Trochlea, Olecranon, External",
+            "Trochlea first, then capitellum, then radial head",
+            "Random order, differing between children"
+          ]
+        },
+        {
+          "q": "Gartland III is…",
+          "a": "Completely displaced",
+          "wrong": [
+            "Undisplaced",
+            "Angulated with intact posterior cortex",
+            "Flexion type with an intact cortex"
+          ]
+        },
+        {
+          "q": "Early sign of compartment syndrome?",
+          "a": "Pain on passive finger extension",
+          "wrong": [
+            "An absent radial pulse at the wrist, early on",
+            "Pallor and coldness of the whole hand",
+            "Paralysis of the fingers"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Fat Pad", "emoji": "🐒", "flavor": "Posterior fat pad, check AIN with an 'OK', don't cast it tight." },
+  "badge": {
+    "name": "Fat Pad",
+    "emoji": "🐒",
+    "flavor": "Posterior fat pad, check AIN with an 'OK', don't cast it tight."
+  },
   "cards": [
-    { "q": "A visible posterior fat pad on a lateral elbow film means…", "options": ["Joint effusion, likely occult fracture", "A normal finding in children", "A ruptured triceps tendon", "Septic arthritis until proven otherwise"], "why": "Always abnormal.", "source": "Radiology" },
-    { "q": "AIN palsy test?", "options": ["'OK' sign", "Froment's test", "Wrist drop", "Finger abduction"], "why": "FPL and FDP index.", "source": "BOAST 2020" },
-    { "q": "Pink pulseless hand after supracondylar fracture needs…", "options": ["Urgent orthopaedic and vascular input", "Discharge with a collar and cuff and fracture clinic review", "Physiotherapy to regain movement", "Oral analgesia and elevation only"], "why": "White pulseless hand is an emergency.", "source": "BOAST 2020" },
-    { "q": "Gartland I treatment?", "options": ["Backslab at ≤90° and collar and cuff", "K-wiring under general anaesthetic", "Open reduction and internal fixation", "No immobilisation needed"], "why": "Undisplaced.", "source": "BOAST 2020" },
-    { "q": "Radial head ossification appears around age…", "options": ["3", "11", "1", "9"], "why": "CRITOE.", "source": "Paediatric radiology" },
-    { "q": "Late deformity after supracondylar malunion?", "options": ["Cubitus varus (gunstock)", "Cubitus valgus with ulnar palsy", "Madelung deformity of the wrist", "Radial head overgrowth"], "why": "From malreduction.", "source": "Paediatric orthopaedics" }
+    {
+      "q": "A visible posterior fat pad on a lateral elbow film means…",
+      "options": [
+        "Joint effusion, likely occult fracture",
+        "A normal finding in children",
+        "A ruptured triceps tendon",
+        "Septic arthritis until proven otherwise"
+      ],
+      "why": "Always abnormal.",
+      "source": "Radiology"
+    },
+    {
+      "q": "AIN palsy test?",
+      "options": [
+        "'OK' sign",
+        "Froment's test",
+        "Wrist drop",
+        "Finger abduction"
+      ],
+      "why": "FPL and FDP index.",
+      "source": "BOAST 2020"
+    },
+    {
+      "q": "Pink pulseless hand after supracondylar fracture needs…",
+      "options": [
+        "Urgent orthopaedic and vascular input",
+        "Discharge with a collar and cuff and fracture clinic review",
+        "Physiotherapy to regain movement",
+        "Oral analgesia and elevation only"
+      ],
+      "why": "White pulseless hand is an emergency.",
+      "source": "BOAST 2020"
+    },
+    {
+      "q": "Gartland I treatment?",
+      "options": [
+        "Backslab at ≤90° and collar and cuff",
+        "K-wiring under general anaesthetic",
+        "Open reduction and internal fixation",
+        "No immobilisation needed"
+      ],
+      "why": "Undisplaced.",
+      "source": "BOAST 2020"
+    },
+    {
+      "q": "Radial head ossification appears around age…",
+      "options": [
+        "3",
+        "11",
+        "1",
+        "9"
+      ],
+      "why": "CRITOE.",
+      "source": "Paediatric radiology"
+    },
+    {
+      "q": "Late deformity after supracondylar malunion?",
+      "options": [
+        "Cubitus varus (gunstock)",
+        "Cubitus valgus with ulnar palsy",
+        "Madelung deformity of the wrist",
+        "Radial head overgrowth"
+      ],
+      "why": "From malreduction.",
+      "source": "Paediatric orthopaedics"
+    }
   ]
 }

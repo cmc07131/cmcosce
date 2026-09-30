@@ -5,9 +5,42 @@
   "type": "comms",
   "time": 420,
   "stem": "Paediatric observation ward. Lok-yin, 20 months, had a 2-minute generalised seizure at home with a temperature of 39.5 °C. He is now alert, playing, with a viral URTI and no other findings. His parents are frightened. Explain what happened and advise them.",
+  "phases": [
+    {
+      "title": "Clarify",
+      "goal": "Simple febrile convulsion? Anything worrying now?",
+      "steps": [
+        "check"
+      ]
+    },
+    {
+      "title": "Explain and advise",
+      "goal": "What it was, what it means, and what to do next time.",
+      "steps": [
+        "counsel"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against the NICE CKS (Febrile seizure, 2023), AAP 2011 clinical practice guideline on simple febrile seizures, and RCPCH guidance.\n\nSimple febrile seizure: age 6 months to 5 years, generalised, under 15 minutes, not recurring within 24 hours, complete recovery within an hour, with fever and no CNS infection. Complex: focal, over 15 minutes, recurrent within 24 hours, or incomplete recovery — needs more assessment. Look for the cause of the fever and for signs of meningitis (a lower threshold for LP in infants under 12 months, those pretreated with antibiotics, or with incomplete immunisation). Simple febrile seizures need no EEG or imaging and do not cause brain damage. Recurrence about 30% (higher if first under 18 months, family history, low fever at seizure, short fever before seizure); risk of later epilepsy about 1–2% (slightly above the population). Antipyretics make the child comfortable but do not prevent recurrence. Seizure first aid: recovery position, time it, nothing in the mouth; call an ambulance if over 5 minutes; buccal midazolam only if prescribed for prolonged seizures.\n\nYour notes list paediatric seizure as a topic; nothing conflicts.",
-  "cast": [{ "id": "mother", "name": "Mother", "role": "woman" }, { "id": "father", "name": "Father", "role": "man" }, { "id": "patient", "name": "Lok-yin", "role": "child", "inBed": false }],
+  "cast": [
+    {
+      "id": "mother",
+      "name": "Mother",
+      "role": "woman"
+    },
+    {
+      "id": "father",
+      "name": "Father",
+      "role": "man"
+    },
+    {
+      "id": "patient",
+      "name": "Lok-yin",
+      "role": "child",
+      "inBed": false
+    }
+  ],
   "steps": [
     {
       "id": "check",
@@ -17,12 +50,36 @@
       "hint": "What happened, how long, which parts, recovery, fever source, meningism, vaccines, family history.",
       "groups": {
         "Event": [
-          { "t": "What did the seizure look like, and how long did it last?", "tz": "佢抽筋嗰陣係點樣？抽咗幾耐？", "rz": "成個人硬晒，之後手腳一下下咁抽，大概兩分鐘。之後眼瞓咗二十分鐘，跟住就冇事。", "r": "His whole body stiffened then jerked for about 2 minutes. Sleepy for 20 minutes, then fine.", "mark": "Establishes a simple febrile seizure" },
-          { "t": "Did it affect one side more? Another seizure since?", "tz": "係咪一邊抽得犀利啲？之後有冇再抽過？", "rz": "兩邊一樣。得一次。", "r": "Both sides the same. Only one.", "mark": "Excludes focal or recurrent (complex) features" }
+          {
+            "t": "What did the seizure look like, and how long did it last?",
+            "tz": "佢抽筋嗰陣係點樣？抽咗幾耐？",
+            "rz": "成個人硬晒，之後手腳一下下咁抽，大概兩分鐘。之後眼瞓咗二十分鐘，跟住就冇事。",
+            "r": "His whole body stiffened then jerked for about 2 minutes. Sleepy for 20 minutes, then fine.",
+            "mark": "Establishes a simple febrile seizure"
+          },
+          {
+            "t": "Did it affect one side more? Another seizure since?",
+            "tz": "係咪一邊抽得犀利啲？之後有冇再抽過？",
+            "rz": "兩邊一樣。得一次。",
+            "r": "Both sides the same. Only one.",
+            "mark": "Excludes focal or recurrent (complex) features"
+          }
         ],
         "Background": [
-          { "t": "Vaccinations, family history of seizures", "tz": "佢打齊針未？屋企人有冇人試過抽筋？", "rz": "打齊晒。佢爸爸細個發燒都試過抽筋。", "r": "Up to date. His father had fits with fevers as a toddler.", "mark": "Asks immunisation and family history" },
-          { "t": "Rash, neck stiffness, vomiting, drowsiness now?", "tz": "佢而家有冇出疹、條頸硬、嘔，或者好眼瞓？", "rz": "冇，佢玩緊。", "r": "No, he's playing.", "mark": "Screens for meningitis" }
+          {
+            "t": "Vaccinations, family history of seizures",
+            "tz": "佢打齊針未？屋企人有冇人試過抽筋？",
+            "rz": "打齊晒。佢爸爸細個發燒都試過抽筋。",
+            "r": "Up to date. His father had fits with fevers as a toddler.",
+            "mark": "Asks immunisation and family history"
+          },
+          {
+            "t": "Rash, neck stiffness, vomiting, drowsiness now?",
+            "tz": "佢而家有冇出疹、條頸硬、嘔，或者好眼瞓？",
+            "rz": "冇，佢玩緊。",
+            "r": "No, he's playing.",
+            "mark": "Screens for meningitis"
+          }
         ]
       }
     },
@@ -35,24 +92,66 @@
       "mood": 8,
       "turns": [
         {
-          "line": "I thought he was dying. Has it damaged his brain?", "lz": "我以為佢就嚟死……佢個腦會唔會受損？",
+          "line": "I thought he was dying. Has it damaged his brain?",
+          "lz": "我以為佢就嚟死……佢個腦會唔會受損？",
           "opts": [
-            { "t": "That must have been terrifying. This was a febrile convulsion — a fit triggered by a fever. It happens in about 1 in 30 young children and doesn't cause brain damage.", "tz": "嗰陣你一定好驚。佢係熱性抽筋——即係發燒引起嘅抽筋。大概每三十個細路就有一個試過，唔會損害個腦。", "rz": "係咪癲癇症？", "r": "Is it epilepsy?", "mood": -3, "mark": "Acknowledges fear and explains febrile convulsions and no brain damage" },
-            { "t": "Calm down, it's nothing.", "tz": "冷靜啲啦，冇嘢㗎。", "rz": "冇嘢？！", "r": "Nothing?!", "mood": 3 }
+            {
+              "t": "That must have been terrifying. This was a febrile convulsion — a fit triggered by a fever. It happens in about 1 in 30 young children and doesn't cause brain damage.",
+              "tz": "嗰陣你一定好驚。佢係熱性抽筋——即係發燒引起嘅抽筋。大概每三十個細路就有一個試過，唔會損害個腦。",
+              "rz": "係咪癲癇症？",
+              "r": "Is it epilepsy?",
+              "mood": -3,
+              "mark": "Acknowledges fear and explains febrile convulsions and no brain damage"
+            },
+            {
+              "t": "Calm down, it's nothing.",
+              "tz": "冷靜啲啦，冇嘢㗎。",
+              "rz": "冇嘢？！",
+              "r": "Nothing?!",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "Is it epilepsy? Will it happen again?", "lz": "係咪癲癇症？會唔會再抽？",
+          "line": "Is it epilepsy? Will it happen again?",
+          "lz": "係咪癲癇症？會唔會再抽？",
           "opts": [
-            { "t": "It's not epilepsy. About 1 in 3 children have another with a future fever, usually before age 5. The chance of later epilepsy is only slightly higher than other children.", "tz": "唔係癲癇症。大概三個細路有一個，將來發燒會再抽，通常五歲之前。之後有癲癇嘅機會，只係比其他細路高少少。", "rz": "如果再抽，我哋應該點做？", "r": "What should we do if it happens again?", "mood": -2, "mark": "Explains recurrence and epilepsy risk" },
-            { "t": "Yes, probably epilepsy.", "tz": "係，應該係癲癇症。", "rz": "唔係啩……", "r": "Oh no.", "mood": 3 }
+            {
+              "t": "It's not epilepsy. About 1 in 3 children have another with a future fever, usually before age 5. The chance of later epilepsy is only slightly higher than other children.",
+              "tz": "唔係癲癇症。大概三個細路有一個，將來發燒會再抽，通常五歲之前。之後有癲癇嘅機會，只係比其他細路高少少。",
+              "rz": "如果再抽，我哋應該點做？",
+              "r": "What should we do if it happens again?",
+              "mood": -2,
+              "mark": "Explains recurrence and epilepsy risk"
+            },
+            {
+              "t": "Yes, probably epilepsy.",
+              "tz": "係，應該係癲癇症。",
+              "rz": "唔係啩……",
+              "r": "Oh no.",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "What should we do if it happens again?", "lz": "如果再抽，我哋應該點做？",
+          "line": "What should we do if it happens again?",
+          "lz": "如果再抽，我哋應該點做？",
           "opts": [
-            { "t": "Lay him on his side on a safe surface, time it, put nothing in his mouth. If it lasts over 5 minutes, call an ambulance. Paracetamol or ibuprofen make him comfortable but don't prevent fits, so don't wake him at night for them.", "tz": "俾佢側瞓喺安全嘅地方，計住時間，唔好放任何嘢入佢口。如果抽超過五分鐘，就打九九九叫白車。退燒藥可以令佢舒服啲，但唔可以預防抽筋，所以夜晚唔使特登叫醒佢食。", "rz": "多謝你，好有用。", "r": "Thank you, that's really helpful.", "mood": -3, "mark": "Seizure first aid and correct advice on antipyretics" },
-            { "t": "Give paracetamol every 4 hours around the clock to prevent fits.", "tz": "每四個鐘俾佢食一次退燒藥，日夜都食，預防抽筋。", "rz": "好。", "r": "OK.", "mood": 0 }
+            {
+              "t": "Lay him on his side on a safe surface, time it, put nothing in his mouth. If it lasts over 5 minutes, call an ambulance. Paracetamol or ibuprofen make him comfortable but don't prevent fits, so don't wake him at night for them.",
+              "tz": "俾佢側瞓喺安全嘅地方，計住時間，唔好放任何嘢入佢口。如果抽超過五分鐘，就打九九九叫白車。退燒藥可以令佢舒服啲，但唔可以預防抽筋，所以夜晚唔使特登叫醒佢食。",
+              "rz": "多謝你，好有用。",
+              "r": "Thank you, that's really helpful.",
+              "mood": -3,
+              "mark": "Seizure first aid and correct advice on antipyretics"
+            },
+            {
+              "t": "Give paracetamol every 4 hours around the clock to prevent fits.",
+              "tz": "每四個鐘俾佢食一次退燒藥，日夜都食，預防抽筋。",
+              "rz": "好。",
+              "r": "OK.",
+              "mood": 0
+            }
           ]
         }
       ]
@@ -63,21 +162,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Age range for febrile seizures?", "a": "6 months to 5 years", "wrong": ["0–3 months of age only", "5–12 years", "Any age, including adults"] },
-        { "q": "Which feature makes it complex?", "a": "Focal onset or lasting over 15 minutes", "wrong": ["Generalised tonic–clonic movements with eye rolling", "A fever above 39 °C", "Age 2 years at the first seizure"] },
-        { "q": "Do antipyretics prevent recurrence?", "a": "No", "wrong": ["Yes, if given early in the fever", "Only ibuprofen does", "Only if given round the clock"] },
-        { "q": "Recurrence risk after a first febrile seizure?", "a": "About 30%", "wrong": ["About 90%", "About 1%", "Zero"] },
-        { "q": "When call an ambulance?", "a": "Seizure lasting over 5 minutes", "wrong": ["Any fever above 38 °C in a child under 5", "Any brief twitch in sleep", "After 30 minutes of continuous seizure"] }
+        {
+          "q": "Age range for febrile seizures?",
+          "a": "6 months to 5 years",
+          "wrong": [
+            "0–3 months of age only",
+            "5–12 years",
+            "Any age, including adults"
+          ]
+        },
+        {
+          "q": "Which feature makes it complex?",
+          "a": "Focal onset or lasting over 15 minutes",
+          "wrong": [
+            "Generalised tonic–clonic movements with eye rolling",
+            "A fever above 39 °C",
+            "Age 2 years at the first seizure"
+          ]
+        },
+        {
+          "q": "Do antipyretics prevent recurrence?",
+          "a": "No",
+          "wrong": [
+            "Yes, if given early in the fever",
+            "Only ibuprofen does",
+            "Only if given round the clock"
+          ]
+        },
+        {
+          "q": "Recurrence risk after a first febrile seizure?",
+          "a": "About 30%",
+          "wrong": [
+            "About 90%",
+            "About 1%",
+            "Zero"
+          ]
+        },
+        {
+          "q": "When call an ambulance?",
+          "a": "Seizure lasting over 5 minutes",
+          "wrong": [
+            "Any fever above 38 °C in a child under 5",
+            "Any brief twitch in sleep",
+            "After 30 minutes of continuous seizure"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Calm Parents", "emoji": "🌡", "flavor": "Simple febrile seizure: not epilepsy, no damage, side-lying, 5-minute rule." },
+  "badge": {
+    "name": "Calm Parents",
+    "emoji": "🌡",
+    "flavor": "Simple febrile seizure: not epilepsy, no damage, side-lying, 5-minute rule."
+  },
   "cards": [
-    { "q": "Simple febrile seizure lasts…", "options": ["Less than 15 minutes", "More than 30 minutes", "Exactly 5 minutes", "Hours"], "why": "Generalised, single in 24 h.", "source": "NICE CKS" },
-    { "q": "Investigations after a simple febrile seizure in a well child?", "options": ["Find the fever source; no EEG or imaging", "EEG within 48 hours to look for epilepsy", "MRI brain as an outpatient in all cases", "CT head before discharge"], "why": "EEG not indicated.", "source": "AAP 2011" },
-    { "q": "Risk factor for recurrence?", "options": ["First seizure under 18 months", "First seizure at age 4 years", "A very high fever at the time", "Female sex and a sibling history"], "why": "Also family history, low temp at seizure.", "source": "NICE CKS" },
-    { "q": "Febrile seizure first aid includes…", "options": ["Recovery position and timing", "Putting a spoon in the mouth", "Cold bath", "Holding limbs"], "why": "Call ambulance if > 5 min.", "source": "NICE CKS" },
-    { "q": "Lower threshold for LP after febrile seizure in…", "options": ["Infants under 12 months, or on antibiotics", "All children over 4 years old", "Children with an upper respiratory infection", "Any child with a temperature over 39 °C"], "why": "Meningitis signs may be masked.", "source": "AAP 2011" },
-    { "q": "Later epilepsy risk after simple febrile seizures?", "options": ["About 1–2%", "About 1 in 2 (50%)", "About 20%", "About 10%"], "why": "Slightly above the baseline ~0.5–1%.", "source": "AAP 2011" }
+    {
+      "q": "Simple febrile seizure lasts…",
+      "options": [
+        "Less than 15 minutes",
+        "More than 30 minutes",
+        "Exactly 5 minutes",
+        "Hours"
+      ],
+      "why": "Generalised, single in 24 h.",
+      "source": "NICE CKS"
+    },
+    {
+      "q": "Investigations after a simple febrile seizure in a well child?",
+      "options": [
+        "Find the fever source; no EEG or imaging",
+        "EEG within 48 hours to look for epilepsy",
+        "MRI brain as an outpatient in all cases",
+        "CT head before discharge"
+      ],
+      "why": "EEG not indicated.",
+      "source": "AAP 2011"
+    },
+    {
+      "q": "Risk factor for recurrence?",
+      "options": [
+        "First seizure under 18 months",
+        "First seizure at age 4 years",
+        "A very high fever at the time",
+        "Female sex and a sibling history"
+      ],
+      "why": "Also family history, low temp at seizure.",
+      "source": "NICE CKS"
+    },
+    {
+      "q": "Febrile seizure first aid includes…",
+      "options": [
+        "Recovery position and timing",
+        "Putting a spoon in the mouth",
+        "Cold bath",
+        "Holding limbs"
+      ],
+      "why": "Call ambulance if > 5 min.",
+      "source": "NICE CKS"
+    },
+    {
+      "q": "Lower threshold for LP after febrile seizure in…",
+      "options": [
+        "Infants under 12 months, or on antibiotics",
+        "All children over 4 years old",
+        "Children with an upper respiratory infection",
+        "Any child with a temperature over 39 °C"
+      ],
+      "why": "Meningitis signs may be masked.",
+      "source": "AAP 2011"
+    },
+    {
+      "q": "Later epilepsy risk after simple febrile seizures?",
+      "options": [
+        "About 1–2%",
+        "About 1 in 2 (50%)",
+        "About 20%",
+        "About 10%"
+      ],
+      "why": "Slightly above the baseline ~0.5–1%.",
+      "source": "AAP 2011"
+    }
   ]
 }

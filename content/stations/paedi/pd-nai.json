@@ -5,11 +5,54 @@
   "type": "history",
   "time": 420,
   "stem": "Paediatric area. Kylie, 16 months, has been brought by her father with burns to both feet. He says an older sibling put her in the bath 12 hours ago. Take a history from the father and explain your plan.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "A careful, non-judgemental history, noted word for word.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Examine",
+      "goal": "The burns and the whole child, with a chaperone.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Plan",
+      "goal": "Protect her, document, investigate, report, and think of her brother.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Date of the new law. Your notes say Cap. 650 takes full effect on 1 January 2026. The Mandatory Reporting of Child Abuse Ordinance came into force on 20 January 2026."}
+    {
+      "tag": "differs",
+      "text": "Date of the new law. Your notes say Cap. 650 takes full effect on 1 January 2026. The Mandatory Reporting of Child Abuse Ordinance came into force on 20 January 2026."
+    }
   ],
   "notes": "Checked against Hong Kong's Mandatory Reporting of Child Abuse Ordinance (Cap. 650, in force 20 January 2026), the Social Welfare Department 'Protecting Children from Maltreatment — Procedural Guide', the Protection of Children and Juveniles Ordinance (Cap. 213), and NICE CG89 (Child maltreatment).\n\nRed flags: delay in presentation, a history inconsistent with the injury or the child's development, changing stories, injury in a non-mobile child, patterns (symmetrical 'glove and stocking' immersion scalds with sharp tide-marks and sparing of flexures; cigarette burns; bruises on the ears, neck, buttocks, or with patterns; multiple fractures of different ages, metaphyseal and posterior rib fractures), other injuries, repeated attendances. Take a careful, non-judgemental history, document verbatim with times, examine fully (with a chaperone), photograph with consent, protect the child (admit as a place of safety), and involve the senior and paediatric team. Investigations: skeletal survey, CT head (under 1 year or with neurological signs), bloods (FBC, clotting, bone profile), ophthalmology for retinal haemorrhages; consider siblings.\n\nUnder Cap. 650 (from 20 January 2026) medical practitioners are mandated reporters: report serious child abuse to the Social Welfare Department or police as soon as practicable through the reporting platform. Your notes say Cap. 650 takes full effect on 1 January 2026; it came into force on 20 January 2026. The rest of your notes (FCPSU, 24-hour SWD hotline, admission under Cap. 213 section 34F if parents refuse) matches.",
-  "cast": [{ "id": "father", "name": "Mr Lam (father)", "role": "man" }, { "id": "patient", "name": "Kylie", "role": "child", "inBed": true }, { "id": "nurse", "name": "Nurse Wan", "role": "nurse" }],
+  "cast": [
+    {
+      "id": "father",
+      "name": "Mr Lam (father)",
+      "role": "man"
+    },
+    {
+      "id": "patient",
+      "name": "Kylie",
+      "role": "child",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Wan",
+      "role": "nurse"
+    }
+  ],
   "steps": [
     {
       "id": "history",
@@ -19,15 +62,57 @@
       "hint": "Non-judgemental: what happened, when, who was there, delay, development, household, previous injuries.",
       "groups": {
         "Injury": [
-          { "t": "Can you tell me exactly what happened?", "tz": "你可唔可以話我知，究竟發生咩事？", "rz": "佢阿哥，佢六歲，自己放水沖涼，將佢放咗入浴缸。佢尖叫。", "r": "Her brother, he's 6, ran the bath and put her in. She screamed.", "mark": "Open, non-judgemental questions about the event" },
-          { "t": "When was this, and when did you notice the burns?", "tz": "幾時發生？你幾時發覺佢燙傷？", "rz": "琴晚大概八點。我以為會自己好返。", "r": "Last night, about 8. I thought it would heal.", "mark": "Establishes timing and delay" },
-          { "t": "Where were you? Who else was home?", "tz": "嗰陣你喺邊？仲有邊個喺屋企？", "rz": "我喺廚房。我女朋友出咗街。", "r": "I was in the kitchen. My girlfriend was out.", "mark": "Asks who was present" },
-          { "t": "Can she stand or climb into a bath herself?", "tz": "佢自己識唔識企，或者爬入浴缸？", "rz": "佢啱啱先識扶住傢俬行。", "r": "She's just started walking holding on to furniture.", "mark": "Checks development against the story" }
+          {
+            "t": "Can you tell me exactly what happened?",
+            "tz": "你可唔可以話我知，究竟發生咩事？",
+            "rz": "佢阿哥，佢六歲，自己放水沖涼，將佢放咗入浴缸。佢尖叫。",
+            "r": "Her brother, he's 6, ran the bath and put her in. She screamed.",
+            "mark": "Open, non-judgemental questions about the event"
+          },
+          {
+            "t": "When was this, and when did you notice the burns?",
+            "tz": "幾時發生？你幾時發覺佢燙傷？",
+            "rz": "琴晚大概八點。我以為會自己好返。",
+            "r": "Last night, about 8. I thought it would heal.",
+            "mark": "Establishes timing and delay"
+          },
+          {
+            "t": "Where were you? Who else was home?",
+            "tz": "嗰陣你喺邊？仲有邊個喺屋企？",
+            "rz": "我喺廚房。我女朋友出咗街。",
+            "r": "I was in the kitchen. My girlfriend was out.",
+            "mark": "Asks who was present"
+          },
+          {
+            "t": "Can she stand or climb into a bath herself?",
+            "tz": "佢自己識唔識企，或者爬入浴缸？",
+            "rz": "佢啱啱先識扶住傢俬行。",
+            "r": "She's just started walking holding on to furniture.",
+            "mark": "Checks development against the story"
+          }
         ],
         "Household": [
-          { "t": "Who lives at home and who looks after her?", "tz": "屋企有邊個住？邊個照顧佢？", "rz": "我、我女朋友、佢阿哥。我女朋友唔係佢阿媽。", "r": "Me, my girlfriend, her brother. My girlfriend isn't her mum.", "mark": "Asks household members and carers" },
-          { "t": "Any previous injuries or hospital visits?", "tz": "佢以前有冇受過傷，或者入過醫院？", "rz": "三個月前斷過手——喺梳化跌落嚟。", "r": "She broke her arm 3 months ago — fell off the sofa.", "mark": "Asks about previous injuries" },
-          { "t": "Is everything OK at home? Does anyone feel unsafe?", "tz": "屋企一切還好嗎？有冇人覺得唔安全？", "rz": "最近壓力好大。錢方面有問題。", "r": "It's been stressful. Money problems.", "mark": "Screens for domestic stress and violence" }
+          {
+            "t": "Who lives at home and who looks after her?",
+            "tz": "屋企有邊個住？邊個照顧佢？",
+            "rz": "我、我女朋友、佢阿哥。我女朋友唔係佢阿媽。",
+            "r": "Me, my girlfriend, her brother. My girlfriend isn't her mum.",
+            "mark": "Asks household members and carers"
+          },
+          {
+            "t": "Any previous injuries or hospital visits?",
+            "tz": "佢以前有冇受過傷，或者入過醫院？",
+            "rz": "三個月前斷過手——喺梳化跌落嚟。",
+            "r": "She broke her arm 3 months ago — fell off the sofa.",
+            "mark": "Asks about previous injuries"
+          },
+          {
+            "t": "Is everything OK at home? Does anyone feel unsafe?",
+            "tz": "屋企一切還好嗎？有冇人覺得唔安全？",
+            "rz": "最近壓力好大。錢方面有問題。",
+            "r": "It's been stressful. Money problems.",
+            "mark": "Screens for domestic stress and violence"
+          }
         ]
       }
     },
@@ -38,10 +123,24 @@
       "label": "Examine (with a chaperone)",
       "hint": "Burn pattern, other injuries head to toe, fontanelle, eyes, growth.",
       "groups": {
-        "Burns": [{ "t": "Look at the feet", "r": "Symmetrical burns to both feet up to the ankles with a sharp straight edge; soles spared; no splash marks.", "mark": "Recognises an immersion ('stocking') pattern" }],
+        "Burns": [
+          {
+            "t": "Look at the feet",
+            "r": "Symmetrical burns to both feet up to the ankles with a sharp straight edge; soles spared; no splash marks.",
+            "mark": "Recognises an immersion ('stocking') pattern"
+          }
+        ],
         "Other": [
-          { "t": "Full skin examination", "r": "Fingertip-shaped bruises on the upper arms.", "mark": "Examines fully and finds other injuries" },
-          { "t": "Fontanelle, eyes, growth chart", "r": "Fontanelle soft. Weight on the 3rd centile.", "mark": "Checks fontanelle and growth" }
+          {
+            "t": "Full skin examination",
+            "r": "Fingertip-shaped bruises on the upper arms.",
+            "mark": "Examines fully and finds other injuries"
+          },
+          {
+            "t": "Fontanelle, eyes, growth chart",
+            "r": "Fontanelle soft. Weight on the 3rd centile.",
+            "mark": "Checks fontanelle and growth"
+          }
         ]
       }
     },
@@ -53,13 +152,41 @@
       "hint": "Safety, senior and paediatrics, document, photos, investigations, report (Cap. 650), siblings.",
       "confirm": "Do",
       "opts": [
-        { "t": "Admit as a place of safety; inform my senior and the paediatric team", "need": true, "mark": "Keeps the child safe and escalates" },
-        { "t": "Document exactly what was said, with times; body map and photographs with consent", "need": true, "mark": "Contemporaneous documentation and photographs" },
-        { "t": "Skeletal survey, CT head, FBC, clotting, bone profile, ophthalmology", "need": true, "mark": "Appropriate investigations" },
-        { "t": "Mandatory report to SWD/police under Cap. 650; hospital child protection coordinator", "need": true, "mark": "Makes a mandatory report" },
-        { "t": "Consider the safety of her brother", "need": true, "mark": "Considers siblings" },
-        { "t": "Accuse the father and tell him he will be arrested", "trap": true, "r": "Stay non-judgemental; explain concerns honestly and that you must involve others to keep children safe." },
-        { "t": "Discharge with burns clinic follow-up", "trap": "critical", "r": "The history doesn't fit the injury; she needs protection now." }
+        {
+          "t": "Admit as a place of safety; inform my senior and the paediatric team",
+          "need": true,
+          "mark": "Keeps the child safe and escalates"
+        },
+        {
+          "t": "Document exactly what was said, with times; body map and photographs with consent",
+          "need": true,
+          "mark": "Contemporaneous documentation and photographs"
+        },
+        {
+          "t": "Skeletal survey, CT head, FBC, clotting, bone profile, ophthalmology",
+          "need": true,
+          "mark": "Appropriate investigations"
+        },
+        {
+          "t": "Mandatory report to SWD/police under Cap. 650; hospital child protection coordinator",
+          "need": true,
+          "mark": "Makes a mandatory report"
+        },
+        {
+          "t": "Consider the safety of her brother",
+          "need": true,
+          "mark": "Considers siblings"
+        },
+        {
+          "t": "Accuse the father and tell him he will be arrested",
+          "trap": true,
+          "r": "Stay non-judgemental; explain concerns honestly and that you must involve others to keep children safe."
+        },
+        {
+          "t": "Discharge with burns clinic follow-up",
+          "trap": "critical",
+          "r": "The history doesn't fit the injury; she needs protection now."
+        }
       ]
     },
     {
@@ -68,21 +195,126 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "When did HK's Mandatory Reporting of Child Abuse Ordinance come into force?", "a": "20 January 2026", "wrong": ["1 January 2020", "1 July 1997", "Not yet in force"] },
-        { "q": "Burn pattern suggesting forced immersion?", "a": "Symmetrical glove/stocking burns, sharp tide-marks", "wrong": ["Irregular splash marks on the chest and arm", "A single small burn on the palm of the hand", "Facial erythema after a hot bath"] },
-        { "q": "Fracture highly specific for abuse in infants?", "a": "Posterior rib or metaphyseal fractures", "wrong": ["Clavicle fracture after a difficult birth", "Toddler's fracture of the tibia", "Buckle fracture of the distal radius"] },
-        { "q": "Which investigation in a child under 2 with suspected abuse?", "a": "Skeletal survey", "wrong": ["MRI of the whole spine only", "Ultrasound abdomen only", "No imaging"] },
-        { "q": "Parents demand discharge; you suspect abuse. You…", "a": "Contact SWD/police; the law allows holding the child", "wrong": ["Let them go, then refer to social work by letter next week", "Sedate the child so they cannot leave", "Ask them to return tomorrow for review"] }
+        {
+          "q": "When did HK's Mandatory Reporting of Child Abuse Ordinance come into force?",
+          "a": "20 January 2026",
+          "wrong": [
+            "1 January 2020",
+            "1 July 1997",
+            "Not yet in force"
+          ]
+        },
+        {
+          "q": "Burn pattern suggesting forced immersion?",
+          "a": "Symmetrical glove/stocking burns, sharp tide-marks",
+          "wrong": [
+            "Irregular splash marks on the chest and arm",
+            "A single small burn on the palm of the hand",
+            "Facial erythema after a hot bath"
+          ]
+        },
+        {
+          "q": "Fracture highly specific for abuse in infants?",
+          "a": "Posterior rib or metaphyseal fractures",
+          "wrong": [
+            "Clavicle fracture after a difficult birth",
+            "Toddler's fracture of the tibia",
+            "Buckle fracture of the distal radius"
+          ]
+        },
+        {
+          "q": "Which investigation in a child under 2 with suspected abuse?",
+          "a": "Skeletal survey",
+          "wrong": [
+            "MRI of the whole spine only",
+            "Ultrasound abdomen only",
+            "No imaging"
+          ]
+        },
+        {
+          "q": "Parents demand discharge; you suspect abuse. You…",
+          "a": "Contact SWD/police; the law allows holding the child",
+          "wrong": [
+            "Let them go, then refer to social work by letter next week",
+            "Sedate the child so they cannot leave",
+            "Ask them to return tomorrow for review"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Safeguard", "emoji": "🛡", "flavor": "Story versus injury versus development. Protect, document, report." },
+  "badge": {
+    "name": "Safeguard",
+    "emoji": "🛡",
+    "flavor": "Story versus injury versus development. Protect, document, report."
+  },
   "cards": [
-    { "q": "HK Cap. 650 requires medical practitioners to…", "options": ["Report serious child abuse as soon as practicable", "Report only if the parents agree", "Report only child deaths", "Report within 30 days, after discussion with the family"], "why": "In force 20 January 2026.", "source": "info.gov.hk", "note": "Your notes: 1 January 2026." },
-    { "q": "Bruising in a non-mobile infant is…", "options": ["Concerning for abuse", "A normal finding", "Usually due to teething", "Expected after vaccinations"], "why": "'Those who don't cruise rarely bruise'.", "source": "NICE CG89" },
-    { "q": "Immersion scald features?", "options": ["Sharp tide-marks, symmetry, sparing of flexures", "Splash marks with irregular edges", "Irregular depth on one limb", "A single small burn on the palm"], "why": "Child held in hot water.", "source": "NICE CG89" },
-    { "q": "Retinal haemorrhages with subdural haematoma in an infant suggest…", "options": ["Abusive head trauma", "Migraine with aura", "Bacterial meningitis only", "Normal birth trauma at 6 months"], "why": "Ophthalmology review.", "source": "RCPCH" },
-    { "q": "Documentation in suspected NAI should be…", "options": ["Verbatim, timed, with a body map", "A brief summary at the end of the shift", "Only the final diagnosis", "Written up later from memory at home"], "why": "Legal record.", "source": "NICE CG89" },
-    { "q": "Sentinel injury means…", "options": ["A minor injury in an infant preceding serious abuse", "A major burn in a toddler", "A fracture in a teenager", "A sports injury in a school child"], "why": "Act on small unexplained injuries.", "source": "Paediatric safeguarding" }
+    {
+      "q": "HK Cap. 650 requires medical practitioners to…",
+      "options": [
+        "Report serious child abuse as soon as practicable",
+        "Report only if the parents agree",
+        "Report only child deaths",
+        "Report within 30 days, after discussion with the family"
+      ],
+      "why": "In force 20 January 2026.",
+      "source": "info.gov.hk",
+      "note": "Your notes: 1 January 2026."
+    },
+    {
+      "q": "Bruising in a non-mobile infant is…",
+      "options": [
+        "Concerning for abuse",
+        "A normal finding",
+        "Usually due to teething",
+        "Expected after vaccinations"
+      ],
+      "why": "'Those who don't cruise rarely bruise'.",
+      "source": "NICE CG89"
+    },
+    {
+      "q": "Immersion scald features?",
+      "options": [
+        "Sharp tide-marks, symmetry, sparing of flexures",
+        "Splash marks with irregular edges",
+        "Irregular depth on one limb",
+        "A single small burn on the palm"
+      ],
+      "why": "Child held in hot water.",
+      "source": "NICE CG89"
+    },
+    {
+      "q": "Retinal haemorrhages with subdural haematoma in an infant suggest…",
+      "options": [
+        "Abusive head trauma",
+        "Migraine with aura",
+        "Bacterial meningitis only",
+        "Normal birth trauma at 6 months"
+      ],
+      "why": "Ophthalmology review.",
+      "source": "RCPCH"
+    },
+    {
+      "q": "Documentation in suspected NAI should be…",
+      "options": [
+        "Verbatim, timed, with a body map",
+        "A brief summary at the end of the shift",
+        "Only the final diagnosis",
+        "Written up later from memory at home"
+      ],
+      "why": "Legal record.",
+      "source": "NICE CG89"
+    },
+    {
+      "q": "Sentinel injury means…",
+      "options": [
+        "A minor injury in an infant preceding serious abuse",
+        "A major burn in a toddler",
+        "A fracture in a teenager",
+        "A sports injury in a school child"
+      ],
+      "why": "Act on small unexplained injuries.",
+      "source": "Paediatric safeguarding"
+    }
   ]
 }

@@ -5,20 +5,99 @@
   "type": "resus",
   "time": 420,
   "stem": "Paediatric area. Wing, 2 years (12 kg), has had diarrhoea and vomiting for 3 days. She is lethargic, with sunken eyes and cool hands. HR 160, CRT 4 s, RR 32, temperature 37.9 °C. Glucose 3.4. Assess her hydration and manage her.",
+  "phases": [
+    {
+      "title": "Assess",
+      "goal": "Monitoring on; how dehydrated is she? Is she shocked?",
+      "steps": [
+        "monitoring",
+        "assess"
+      ]
+    },
+    {
+      "title": "Resuscitate",
+      "goal": "Access, a bolus for her weight, and her glucose.",
+      "steps": [
+        "access",
+        "bolus"
+      ]
+    },
+    {
+      "title": "Rehydrate",
+      "goal": "The 24-hour plan: which fluid, how fast.",
+      "steps": [
+        "rehydrate"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Fluid bolus size. Your notes (WETFLAGS) use 20 mL/kg. RCUK and NICE NG29 now use 10 mL/kg boluses, reassessing after each."}
+    {
+      "tag": "outdated",
+      "text": "Fluid bolus size. Your notes (WETFLAGS) use 20 mL/kg. RCUK and NICE NG29 now use 10 mL/kg boluses, reassessing after each."
+    }
   ],
   "notes": "Checked against NICE CG84 (Diarrhoea and vomiting caused by gastroenteritis in under 5s, updated 2017/2022), RCUK paediatric life support (fluid boluses) and NICE NG29 (IV fluids in children).\n\nNICE CG84 grades: no clinical dehydration; clinical dehydration (red flags: appears unwell or deteriorating, altered responsiveness, sunken eyes, tachycardia, tachypnoea, reduced skin turgor); clinical shock (decreased consciousness, pale/mottled, cold extremities, tachycardia, tachypnoea, weak pulses, CRT over 3 s, hypotension). Shock: 10 mL/kg 0.9% saline (or balanced crystalloid) bolus over 5–10 minutes (NICE NG29 now 10 mL/kg; CG84 said 20 mL/kg), reassess, repeat; then IV rehydration: deficit (100 mL/kg if shocked at presentation, else 50 mL/kg) plus maintenance (Holliday–Segar: 100 mL/kg/day for the first 10 kg, 50 for the next 10, 20 thereafter), with 0.9% saline plus 5% glucose; check U&E and glucose. Without shock: oral rehydration solution (50 mL/kg over 4 hours plus maintenance), by NG tube if refused. Hypoglycaemia: 2 mL/kg 10% glucose. Red flags for other diagnoses: bilious vomiting, blood in stool, high fever, abdominal distension, meningism.\n\nYour notes (WETFLAGS 20 mL/kg medical fluid) differ: current RCUK/NICE NG29 use 10 mL/kg boluses.",
-  "cast": [{ "id": "patient", "name": "Wing", "role": "child", "inBed": true }, { "id": "mother", "name": "Mother", "role": "woman" }, { "id": "nurse", "name": "Nurse Ho", "role": "nurse" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Wing",
+      "role": "child",
+      "inBed": true
+    },
+    {
+      "id": "mother",
+      "name": "Mother",
+      "role": "woman"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Ho",
+      "role": "nurse"
+    }
+  ],
   "vitals": {
-    "hr": 160, "sbp": 84, "dbp": 50, "spo2": 98, "rr": 32, "temp": 37.9, "glucose": 3.4,
+    "hr": 160,
+    "sbp": 84,
+    "dbp": 50,
+    "spo2": 98,
+    "rr": 32,
+    "temp": 37.9,
+    "glucose": 3.4,
     "rhythm": "sinus-tachy",
     "effects": [
-      { "scene": "bolus", "add": { "hr": -18, "sbp": 8 }, "overS": 120 },
-      { "scene": "glucose", "set": { "glucose": 6.0 } }
-    ]
+      {
+        "scene": "bolus",
+        "add": {
+          "hr": -18,
+          "sbp": 8
+        },
+        "overS": 120
+      },
+      {
+        "scene": "glucose",
+        "set": {
+          "glucose": 6.0
+        }
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG and SpO2.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
     {
       "id": "assess",
       "kind": "exam",
@@ -27,30 +106,135 @@
       "hint": "Appearance, responsiveness, eyes, mucosa, CRT, pulses, skin turgor, urine output, weight.",
       "groups": {
         "General": [
-          { "t": "Appearance and responsiveness", "r": "Lethargic, responds to voice, pale.", "mark": "Assesses responsiveness" },
-          { "t": "Eyes and mucous membranes", "r": "Sunken eyes, dry mouth, no tears.", "mark": "Assesses eyes and mucosa" }
+          {
+            "t": "Appearance and responsiveness",
+            "r": "Lethargic, responds to voice, pale.",
+            "mark": "Assesses responsiveness"
+          },
+          {
+            "t": "Eyes and mucous membranes",
+            "r": "Sunken eyes, dry mouth, no tears.",
+            "mark": "Assesses eyes and mucosa"
+          }
         ],
         "Circulation": [
-          { "t": "Capillary refill, peripheral pulses, temperature of hands", "r": "CRT 4 s, weak pulses, cool hands.", "mark": "Recognises clinical shock" },
-          { "t": "Skin turgor", "r": "Reduced." }
+          {
+            "t": "Capillary refill, peripheral pulses, temperature of hands",
+            "r": "CRT 4 s, weak pulses, cool hands.",
+            "mark": "Recognises clinical shock",
+            "anim": "glucose"
+          },
+          {
+            "t": "Skin turgor",
+            "r": "Reduced."
+          }
         ],
         "Other": [
-          { "t": "Wet nappies, blood in stool, bilious vomit, abdomen", "r": "One wet nappy in 18 hours; no blood; vomit not green; abdomen soft.", "mark": "Checks urine output and red flags for other diagnoses" }
+          {
+            "t": "Wet nappies, blood in stool, bilious vomit, abdomen",
+            "r": "One wet nappy in 18 hours; no blood; vomit not green; abdomen soft.",
+            "mark": "Checks urine output and red flags for other diagnoses",
+            "anim": "abdomen"
+          }
         ]
       }
     },
     {
-      "id": "treat",
-      "kind": "steps",
-      "to": "cart",
-      "label": "Treat",
-      "hint": "IV/IO access, bloods, 10 mL/kg bolus and reassess, glucose, then deficit plus maintenance.",
+      "id": "access",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "Access and bloods.",
       "opts": [
-        { "t": "IV access (IO if difficult); U&E, glucose, gas", "n": 1, "mark": "Access and bloods" },
-        { "t": "0.9% saline 10 mL/kg (120 mL) over 5–10 minutes, reassess", "n": 2, "scene": "bolus", "mark": "10 mL/kg bolus with reassessment" },
-        { "t": "10% glucose 2 mL/kg (24 mL) for glucose 3.4", "n": 3, "scene": "glucose", "mark": "Treats hypoglycaemia" },
-        { "t": "Rehydration: deficit 100 mL/kg (shocked) plus maintenance (12 kg: 1100 mL/day) over 24 h, 0.9% saline + 5% glucose; recheck U&E", "n": 4, "mark": "Calculates deficit plus maintenance correctly" },
-        { "t": "Loperamide to stop the diarrhoea", "trap": "critical", "r": "Antidiarrhoeals are contraindicated in young children." }
+        {
+          "t": "IV access (IO if difficult); U&E, glucose, gas",
+          "mark": "Access and bloods"
+        }
+      ]
+    },
+    {
+      "id": "bolus",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Shocked: a bolus for 12 kg, and treat the low glucose.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "scene": "bolus",
+          "mark": "10 mL/kg bolus with reassessment",
+          "t": "0.9% saline 10 mL/kg (120 mL) over 5–10 minutes",
+          "drug": "0.9% saline",
+          "dose": "10 mL/kg (120 mL) over 5–10 minutes",
+          "fetch": "cart"
+        },
+        {
+          "t": "0.9% saline 20 mL/kg (240 mL) bolus",
+          "drug": "0.9% saline",
+          "dose": "20 mL/kg (240 mL) bolus",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Current guidance uses 10 mL/kg boluses, reassessing after each."
+        },
+        {
+          "scene": "glucose",
+          "mark": "Treats hypoglycaemia",
+          "t": "Glucose 10% 2 mL/kg (24 mL) IV",
+          "drug": "Glucose 10%",
+          "dose": "2 mL/kg (24 mL) IV",
+          "fetch": "cart"
+        },
+        {
+          "t": "Glucose 50% 24 mL IV",
+          "drug": "Glucose 50%",
+          "dose": "24 mL IV",
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Hypertonic 50% glucose damages small veins: 10% glucose 2 mL/kg."
+        },
+        {
+          "trap": "critical",
+          "r": "Antidiarrhoeals are contraindicated in young children.",
+          "t": "Loperamide 1 mg orally",
+          "drug": "Loperamide",
+          "dose": "1 mg orally",
+          "fetch": "cart"
+        }
+      ]
+    },
+    {
+      "id": "rehydrate",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Then rehydration: deficit plus maintenance over 24 hours, isotonic.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "0.9% saline with 5% glucose 100 mL/h (deficit 1200 + maintenance 1100 mL over 24 h)",
+          "drug": "0.9% saline with 5% glucose",
+          "dose": "100 mL/h (deficit 1200 + maintenance 1100 mL over 24 h)",
+          "fetch": "cart",
+          "when": "bolus",
+          "early": "Resuscitate first.",
+          "mark": "Calculates deficit plus maintenance correctly"
+        },
+        {
+          "t": "0.9% saline with 5% glucose 46 mL/h (maintenance only)",
+          "drug": "0.9% saline with 5% glucose",
+          "dose": "46 mL/h (maintenance only)",
+          "fetch": "cart",
+          "trap": true,
+          "r": "That ignores her deficit: 100 mL/kg (shocked) plus maintenance, about 100 mL/h."
+        },
+        {
+          "t": "0.18% saline with 4% glucose 100 mL/h",
+          "drug": "0.18% saline with 4% glucose",
+          "dose": "100 mL/h",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Hypotonic fluid risks hyponatraemia: 0.9% saline with 5% glucose."
+        }
       ]
     },
     {
@@ -59,21 +243,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Maintenance fluid for a 12 kg child (Holliday–Segar)?", "a": "1100 mL/day", "wrong": ["1200 mL/day", "600 mL/day", "2400 mL/day"] },
-        { "q": "Oral rehydration for clinical dehydration without shock (NICE)?", "a": "50 mL/kg ORS over 4 hours plus maintenance", "wrong": ["Water only, as much as tolerated", "Diluted fruit juice every hour", "Nothing by mouth for 24 hours"] },
-        { "q": "Fluid bolus in paediatric shock (RCUK/NICE NG29)?", "a": "10 mL/kg", "wrong": ["60 mL/kg", "5 mL/kg", "40 mL/kg"] },
-        { "q": "Sign of clinical shock (NICE CG84)?", "a": "CRT > 3 s with cold extremities", "wrong": ["Thirst and a dry mouth", "Mild tachycardia on its own, in a crying child", "Normal responsiveness and warm hands"] },
-        { "q": "Commonest cause of gastroenteritis in young children globally (pre-vaccine)?", "a": "Rotavirus", "wrong": ["Salmonella", "Giardia", "E. coli O157"] }
+        {
+          "q": "Maintenance fluid for a 12 kg child (Holliday–Segar)?",
+          "a": "1100 mL/day",
+          "wrong": [
+            "1200 mL/day",
+            "600 mL/day",
+            "2400 mL/day"
+          ]
+        },
+        {
+          "q": "Oral rehydration for clinical dehydration without shock (NICE)?",
+          "a": "50 mL/kg ORS over 4 hours plus maintenance",
+          "wrong": [
+            "Water only, as much as tolerated",
+            "Diluted fruit juice every hour",
+            "Nothing by mouth for 24 hours"
+          ]
+        },
+        {
+          "q": "Fluid bolus in paediatric shock (RCUK/NICE NG29)?",
+          "a": "10 mL/kg",
+          "wrong": [
+            "60 mL/kg",
+            "5 mL/kg",
+            "40 mL/kg"
+          ]
+        },
+        {
+          "q": "Sign of clinical shock (NICE CG84)?",
+          "a": "CRT > 3 s with cold extremities",
+          "wrong": [
+            "Thirst and a dry mouth",
+            "Mild tachycardia on its own, in a crying child",
+            "Normal responsiveness and warm hands"
+          ]
+        },
+        {
+          "q": "Commonest cause of gastroenteritis in young children globally (pre-vaccine)?",
+          "a": "Rotavirus",
+          "wrong": [
+            "Salmonella",
+            "Giardia",
+            "E. coli O157"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Refill", "emoji": "🥤", "flavor": "Shocked? 10 mL/kg and reassess. Then deficit plus maintenance, and the sugar." },
+  "badge": {
+    "name": "Refill",
+    "emoji": "🥤",
+    "flavor": "Shocked? 10 mL/kg and reassess. Then deficit plus maintenance, and the sugar."
+  },
   "cards": [
-    { "q": "Holliday–Segar maintenance: first 10 kg?", "options": ["100 mL/kg/day", "50 mL/kg/day", "20 mL/kg/day", "150 mL/kg/day"], "why": "Then 50 for the next 10 kg, 20 thereafter.", "source": "NICE NG29" },
-    { "q": "Deficit replacement if shocked at presentation?", "options": ["100 mL/kg", "50 mL/kg", "10 mL/kg", "200 mL/kg"], "why": "50 mL/kg if dehydrated but not shocked.", "source": "NICE CG84" },
-    { "q": "Preferred rehydration route in dehydration without shock?", "options": ["Oral rehydration solution", "IV fluids in every case", "Nasogastric water only", "Diluted fruit juice by mouth"], "why": "NG tube if refused.", "source": "NICE CG84" },
-    { "q": "Red flag suggesting a surgical cause?", "options": ["Bilious vomiting", "Watery diarrhoea", "Low-grade fever", "Mild abdominal cramps"], "why": "Also blood in stool, distension.", "source": "NICE CG84" },
-    { "q": "Hypoglycaemia treatment in a child?", "options": ["10% glucose 2 mL/kg", "50% glucose 10 mL/kg", "Oral sugar in a shocked child", "Insulin"], "why": "Recheck after.", "source": "APLS" },
-    { "q": "Antidiarrhoeals in under-5s?", "options": ["Not used", "Loperamide first-line", "Codeine", "Opium"], "why": "Risk of ileus and toxicity.", "source": "NICE CG84" }
+    {
+      "q": "Holliday–Segar maintenance: first 10 kg?",
+      "options": [
+        "100 mL/kg/day",
+        "50 mL/kg/day",
+        "20 mL/kg/day",
+        "150 mL/kg/day"
+      ],
+      "why": "Then 50 for the next 10 kg, 20 thereafter.",
+      "source": "NICE NG29"
+    },
+    {
+      "q": "Deficit replacement if shocked at presentation?",
+      "options": [
+        "100 mL/kg",
+        "50 mL/kg",
+        "10 mL/kg",
+        "200 mL/kg"
+      ],
+      "why": "50 mL/kg if dehydrated but not shocked.",
+      "source": "NICE CG84"
+    },
+    {
+      "q": "Preferred rehydration route in dehydration without shock?",
+      "options": [
+        "Oral rehydration solution",
+        "IV fluids in every case",
+        "Nasogastric water only",
+        "Diluted fruit juice by mouth"
+      ],
+      "why": "NG tube if refused.",
+      "source": "NICE CG84"
+    },
+    {
+      "q": "Red flag suggesting a surgical cause?",
+      "options": [
+        "Bilious vomiting",
+        "Watery diarrhoea",
+        "Low-grade fever",
+        "Mild abdominal cramps"
+      ],
+      "why": "Also blood in stool, distension.",
+      "source": "NICE CG84"
+    },
+    {
+      "q": "Hypoglycaemia treatment in a child?",
+      "options": [
+        "10% glucose 2 mL/kg",
+        "50% glucose 10 mL/kg",
+        "Oral sugar in a shocked child",
+        "Insulin"
+      ],
+      "why": "Recheck after.",
+      "source": "APLS"
+    },
+    {
+      "q": "Antidiarrhoeals in under-5s?",
+      "options": [
+        "Not used",
+        "Loperamide first-line",
+        "Codeine",
+        "Opium"
+      ],
+      "why": "Risk of ileus and toxicity.",
+      "source": "NICE CG84"
+    }
   ]
 }
