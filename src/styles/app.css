@@ -781,6 +781,82 @@ button {
   color: #fff;
 }
 
+/* After START: each setting against its acceptable range. */
+.vent-check {
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+}
+
+.vent-check-head {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: #b83838;
+  margin-bottom: 6px;
+}
+
+.vent-check-head[data-ok] {
+  color: #1a7a40;
+}
+
+.vent-check table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.vent-check th {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  text-align: left;
+  color: #606878;
+  padding-bottom: 3px;
+}
+
+.vent-check td {
+  padding: 4px 4px;
+  border-top: 1px solid #d8d8e0;
+  vertical-align: top;
+  color: #b83838;
+}
+
+.vent-check tr[data-ok] td {
+  color: #1a7a40;
+}
+
+.vent-check td:first-child {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  white-space: nowrap;
+}
+
+.vent-check small {
+  display: block;
+  color: #606878;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.vent-check-note {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #404858;
+}
+
+.vent-check-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  align-items: stretch;
+}
+
+.vent-check-btns .io-next {
+  flex: 1;
+  margin: 0;
+}
+
 /* The drug cart: a red trolley frame, grey shelves, labelled drugs. */
 .drug-cart {
   display: grid;

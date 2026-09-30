@@ -43,6 +43,22 @@ export function ventSpec(pose?: string): VentSpec {
 export const VENT_MARKS = ['mode', 'volume', 'rate', 'oxygen'] as const
 export type VentMark = (typeof VENT_MARKS)[number]
 
+export type VentCheck = { key: 'mode' | Setting; label: string; value: string; range: string; ok: boolean; why: string }
+
+/** Each setting against its acceptable range, for the check screen after START. The scoring uses the same rules. */
+export function checkVent(s: VentSettings, spec: VentSpec): VentCheck[] {
+  const lo = spec.weightKg * 6
+  const hi = spec.weightKg * 8
+  return [
+    { key: 'mode', label: 'Mode', value: s.mode, range: 'VC-CMV (or PC-BIPAP)', ok: s.mode === 'VC-CMV' || s.mode === 'PC-BIPAP', why: 'Paralysed after RSI: every breath must be delivered by the machine.' },
+    { key: 'vt', label: 'VT', value: `${s.vt} mL`, range: `${lo}–${hi} mL`, ok: s.vt >= lo && s.vt <= hi, why: `6–8 mL/kg for ${spec.weightKg} kg: lung-protective.` },
+    { key: 'rr', label: 'RR', value: `${s.rr} /min`, range: `${spec.rr[0]}–${spec.rr[1]} /min`, ok: s.rr >= spec.rr[0] && s.rr <= spec.rr[1], why: spec.why },
+    { key: 'fio2', label: 'O2', value: `${s.fio2}%`, range: '100% to start (at least 90%)', ok: s.fio2 >= 90, why: 'Start high after intubation, then titrate to SpO2 94–98%.' },
+    { key: 'peep', label: 'PEEP', value: `${s.peep} cmH2O`, range: '5–8 cmH2O', ok: s.peep >= 5 && s.peep <= 8, why: 'Keeps the alveoli open; 5 is the usual start.' },
+    { key: 'pmax', label: 'Pmax', value: `${s.pmax} cmH2O`, range: '30–40 cmH2O (about 35)', ok: s.pmax >= 30 && s.pmax <= 40, why: 'High enough to ventilate, low enough to protect the lungs.' },
+  ]
+}
+
 export function scoreVent(s: VentSettings, spec: VentSpec) {
   const earned: VentMark[] = []
   const faults: { text: string; critical?: boolean }[] = []

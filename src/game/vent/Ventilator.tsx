@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { BenchResult, PerformJob } from '../store'
 import { sfx } from '../sfx'
-import { MODES, RANGES, VENT_MARKS, defaults, nudge, scoreVent, ventSpec, type Setting, type VentSettings } from './model'
+import { MODES, RANGES, VENT_MARKS, checkVent, defaults, nudge, scoreVent, ventSpec, type Setting, type VentSettings } from './model'
 
 /**
  * Set the ventilator yourself, on a transport ventilator laid out like an Oxylog 3000: a screen with the pressure
@@ -29,21 +29,34 @@ export function Ventilator({ job, onDone }: { job: PerformJob; onDone: (r: Bench
     setS((cur) => nudge(cur, sel, dir))
   }
 
+  // The first START is the one that is scored; after the check you may adjust and START again to learn.
+  const first = useRef<{ settings: VentSettings; score: ReturnType<typeof scoreVent> } | null>(null)
+  const [checked, setChecked] = useState(false)
+  const rows = checkVent(s, spec)
+  const allOk = rows.every((r) => r.ok)
+
   function start() {
     if (done.current) return
     sfx.select()
     setRunning(true)
-    window.setTimeout(() => {
-      if (done.current) return
-      done.current = true
-      const marks = score.earned.map((k) => job.grantMarks[VENT_MARKS.indexOf(k)]).filter((m): m is string => Boolean(m))
-      onDone({
-        marks,
-        faults: score.faults,
-        summary: `Ventilator: ${s.mode}, VT ${s.vt} mL, RR ${s.rr}, FiO2 ${s.fio2}%, PEEP ${s.peep}, Pmax ${s.pmax}. Minute volume ${score.mv.toFixed(1)} L. ETCO2 ${score.etco2.toFixed(1)} kPa.`,
-        scene: ['ventilated'],
-      })
-    }, 2600)
+    if (!first.current) first.current = { settings: s, score }
+    setChecked(true)
+  }
+
+  function finish() {
+    if (done.current || !first.current) return
+    done.current = true
+    sfx.select()
+    const f = first.current
+    const marks = f.score.earned.map((k) => job.grantMarks[VENT_MARKS.indexOf(k)]).filter((m): m is string => Boolean(m))
+    const changed = JSON.stringify(f.settings) !== JSON.stringify(s)
+    const line = (v: VentSettings) => `${v.mode}, VT ${v.vt} mL, RR ${v.rr}, FiO2 ${v.fio2}%, PEEP ${v.peep}, Pmax ${v.pmax}`
+    onDone({
+      marks,
+      faults: f.score.faults,
+      summary: `Ventilator: ${line(f.settings)}.${changed ? ` Corrected after the check to ${line(s)}.` : ''} ETCO2 ${score.etco2.toFixed(1)} kPa.`,
+      scene: ['ventilated'],
+    })
   }
 
   // A square-ish pressure waveform: inspiration at the rate set, peak by volume, baseline at PEEP.
@@ -102,9 +115,52 @@ export function Ventilator({ job, onDone }: { job: PerformJob; onDone: (r: Bench
           </button>
         </div>
       </div>
-      <button type="button" className="tap io-next mt-2" data-testid="vent-start" disabled={running} onClick={start}>
-        {running ? 'Ventilating…' : 'START ▶'}
-      </button>
+      {!checked ? (
+        <button type="button" className="tap io-next mt-2" data-testid="vent-start" onClick={start}>
+          START ▶
+        </button>
+      ) : (
+        <div className="vent-check" data-testid="vent-check">
+          <p className="vent-check-head" data-ok={allOk || undefined}>
+            {allOk ? '✓ All settings in range. Ventilating.' : `✗ ${rows.filter((r) => !r.ok).length} setting${rows.filter((r) => !r.ok).length === 1 ? '' : 's'} out of range.`}
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th />
+                <th>Set</th>
+                <th>Acceptable</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.key} data-ok={r.ok || undefined} data-testid={`vent-check-${r.key}`}>
+                  <td>{r.ok ? '✓' : '✗'} {r.label}</td>
+                  <td>{r.value}</td>
+                  <td>
+                    {r.range}
+                    <small>{r.why}</small>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="vent-check-note">
+            ETCO2 {score.etco2.toFixed(1)} kPa{spec.rr[0] >= 20 ? ' · aim for mild hypocapnia (about 3.5–4.5) to keep the pH 7.45–7.55' : ''}.
+            {first.current && JSON.stringify(first.current.settings) !== JSON.stringify(s) ? ' Scored on your first START.' : ''}
+          </p>
+          <div className="vent-check-btns">
+            {!allOk && (
+              <button type="button" className="tap io-mini" data-testid="vent-adjust" onClick={() => setChecked(false)}>
+                ◀ Adjust
+              </button>
+            )}
+            <button type="button" className="tap io-next" data-testid="vent-done" onClick={finish}>
+              Continue ▶
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

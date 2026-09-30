@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { defaults, nudge, scoreVent, ventSpec, VENT_MARKS } from './model'
+import { checkVent, defaults, nudge, scoreVent, ventSpec, VENT_MARKS } from './model'
 
 test('ventilator: TCA settings earn every mark; the switched-on defaults need changing', () => {
   const spec = ventSpec('tca')
@@ -21,4 +21,24 @@ test('ventilator: knobs stay in range and move in steps', () => {
   assert.equal(s.fio2, 100)
   s = nudge(s, 'rr', 1)
   assert.equal(s.rr, 13)
+})
+
+test('ventilator check: every row agrees with the scoring, and shows its range', () => {
+  const spec = ventSpec('tca')
+  const cases = [
+    { mode: 'VC-CMV' as const, fio2: 100, vt: 475, rr: 22, peep: 5, pmax: 35 },
+    defaults(),
+    { mode: 'CPAP' as const, fio2: 60, vt: 800, rr: 30, peep: 12, pmax: 60 },
+  ]
+  for (const s of cases) {
+    const rows = checkVent(s, spec)
+    const score = scoreVent(s, spec)
+    const ok = (k: string) => rows.find((r) => r.key === k)!.ok
+    assert.equal(score.earned.includes('mode'), ok('mode'))
+    assert.equal(score.earned.includes('volume'), ok('vt'))
+    assert.equal(score.earned.includes('rate'), ok('rr'))
+    assert.equal(score.earned.includes('oxygen'), ok('fio2') && ok('peep') && ok('pmax'))
+    assert.ok(rows.every((r) => r.range.length > 0))
+  }
+  assert.equal(checkVent(cases[0], spec).find((r) => r.key === 'vt')!.range, '420–560 mL')
 })
