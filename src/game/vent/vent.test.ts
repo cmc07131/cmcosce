@@ -42,3 +42,12 @@ test('ventilator check: every row agrees with the scoring, and shows its range',
   }
   assert.equal(checkVent(cases[0], spec).find((r) => r.key === 'vt')!.range, '420–560 mL')
 })
+
+test('ventilator: drowned lungs need PEEP 8–10; a head injury wants a normal rate', () => {
+  const drowning = ventSpec('drowning')
+  const s = { mode: 'VC-CMV' as const, fio2: 100, vt: 420, rr: 14, peep: 5, pmax: 35 }
+  assert.ok(!scoreVent(s, drowning).earned.includes('oxygen'))
+  assert.equal(checkVent(s, drowning).find((r) => r.key === 'peep')!.range, '8–10 cmH2O')
+  assert.ok(scoreVent({ ...s, peep: 9 }, drowning).earned.includes('oxygen'))
+  assert.ok(scoreVent({ ...s, vt: 525 }, ventSpec('head-injury')).earned.includes('rate'))
+})

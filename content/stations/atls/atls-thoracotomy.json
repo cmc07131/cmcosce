@@ -5,12 +5,62 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 1. A 22-year-old man was stabbed once, just left of the sternum. He lost his radial pulse three minutes ago in the ambulance and CPR is in progress as he comes through the door. A cardiothoracic surgeon is in the building. You lead.",
+  "phases": [
+    {
+      "title": "Mobilise",
+      "goal": "The surgeon, the kit, blood and PPE; the time he lost his pulse.",
+      "steps": [
+        "prep",
+        "handover"
+      ]
+    },
+    {
+      "title": "Assess",
+      "goal": "Pulse, ultrasound, pupils: is this salvageable?",
+      "steps": [
+        "assess"
+      ]
+    },
+    {
+      "title": "HOTT",
+      "goal": "Fix the reversible causes of a traumatic arrest at the same time.",
+      "steps": [
+        "hott"
+      ]
+    },
+    {
+      "title": "Clamshell",
+      "goal": "Open the chest and the pericardium correctly.",
+      "steps": [
+        "clamshell"
+      ]
+    },
+    {
+      "title": "After ROSC",
+      "goal": "Where next, and what bleeds once the pressure returns?",
+      "steps": [
+        "after"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against the European Resuscitation Council 2021 guidelines (traumatic cardiac arrest), Resuscitation Council UK 2021, and ATLS 11th edition.\n\nTraumatic cardiac arrest is treated by fixing its causes at the same time: HOTT (Hypovolaemia, Oxygenation, Tension pneumothorax, Tamponade). Chest compressions do not take priority over these, because compressing an empty or tamponaded heart achieves little. Adrenaline has a limited role.\n\nResuscitative thoracotomy (clamshell) in the ED is indicated for penetrating chest trauma with arrest, especially with tamponade, when the time since loss of signs of life is short (ERC: within about 10–15 minutes). Outcomes after blunt trauma arrest are poor. It is done by a trained operator; the station expects you to lead, prepare and understand the steps.\n\nPericardiocentesis is not the treatment for traumatic tamponade: the blood clots. Open the pericardium.\n\nClamshell: bilateral 4th/5th intercostal space incisions from the mid-axillary lines meeting across the sternum, sternum divided, retractor, pericardium lifted and opened longitudinally in front of the phrenic nerve, clot evacuated, cardiac wound controlled with a finger (then sutures or a Foley catheter), internal cardiac massage, descending aortic compression if needed. Ligate the internal mammary arteries after ROSC.\n\nYour notes list 'Thoracotomy' as a topic without detail; nothing conflicts.",
   "cast": [
-    { "id": "patient", "name": "Mr Kwok", "role": "patient" },
-    { "id": "nurse", "name": "Nurse Hui", "role": "nurse" },
-    { "id": "medic", "name": "Paramedic", "role": "paramedic" }
+    {
+      "id": "patient",
+      "name": "Mr Kwok",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Hui",
+      "role": "nurse"
+    },
+    {
+      "id": "medic",
+      "name": "Paramedic",
+      "role": "paramedic"
+    }
   ],
   "vitals": {
     "hr": 104,
@@ -20,7 +70,18 @@
     "rr": 0,
     "rhythm": "sinus-tachy",
     "effects": [
-      { "scene": "rosc", "set": { "hr": 132, "sbp": 74, "dbp": 42, "spo2": 90, "rr": 14, "etco2": 4.2 }, "rhythm": "sinus-tachy" }
+      {
+        "scene": "rosc",
+        "set": {
+          "hr": 132,
+          "sbp": 74,
+          "dbp": 42,
+          "spo2": 90,
+          "rr": 14,
+          "etco2": 4.2
+        },
+        "rhythm": "sinus-tachy"
+      }
     ]
   },
   "steps": [
@@ -32,10 +93,29 @@
       "hint": "Surgeon, thoracotomy set, blood, PPE — as he arrives.",
       "confirm": "Now",
       "opts": [
-        { "t": "Cardiothoracic surgeon to resus now", "need": true, "mark": "Calls the cardiothoracic surgeon immediately" },
-        { "t": "Open the thoracotomy set; Gigli saw or heavy shears", "fetch": "trolley", "need": true, "mark": "Thoracotomy kit opened" },
-        { "t": "Major haemorrhage protocol; blood through the rapid infuser", "fetch": "trolley", "need": true, "mark": "Massive transfusion started" },
-        { "t": "PPE including eye protection", "fetch": "trolley", "need": true, "mark": "Team PPE" }
+        {
+          "t": "Cardiothoracic surgeon to resus now",
+          "need": true,
+          "mark": "Calls the cardiothoracic surgeon immediately"
+        },
+        {
+          "t": "Open the thoracotomy set; Gigli saw or heavy shears",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Thoracotomy kit opened"
+        },
+        {
+          "t": "Major haemorrhage protocol; blood through the rapid infuser",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Massive transfusion started"
+        },
+        {
+          "t": "PPE including eye protection",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Team PPE"
+        }
       ]
     },
     {
@@ -46,11 +126,21 @@
       "hint": "When did signs of life stop? What rhythm? What has been done?",
       "groups": {
         "Timeline": [
-          { "t": "When exactly did he lose his pulse?", "r": "Three minutes ago, at 21:14. He was talking at 21:05.", "mark": "Establishes the time since loss of signs of life" },
-          { "t": "Rhythm on your monitor?", "r": "Narrow complex, about 100. No pulse." }
+          {
+            "t": "When exactly did he lose his pulse?",
+            "r": "Three minutes ago, at 21:14. He was talking at 21:05.",
+            "mark": "Establishes the time since loss of signs of life"
+          },
+          {
+            "t": "Rhythm on your monitor?",
+            "r": "Narrow complex, about 100. No pulse."
+          }
         ],
         "Injury": [
-          { "t": "The wound?", "r": "Single 2 cm stab, left of the sternum, 4th space. Kitchen knife." }
+          {
+            "t": "The wound?",
+            "r": "Single 2 cm stab, left of the sternum, 4th space. Kitchen knife."
+          }
         ]
       }
     },
@@ -62,9 +152,23 @@
       "hint": "Pulse check, rhythm, and a quick ultrasound for the pericardium.",
       "groups": {
         "Check": [
-          { "t": "Central pulse for 10 seconds", "r": "No carotid or femoral pulse. Organised narrow complexes on the monitor: PEA.", "mark": "Confirms PEA arrest" },
-          { "t": "Subxiphoid ultrasound", "r": "Black rim of fluid around the heart; the ventricles barely move.", "img": "us:cardiac-effusion", "mark": "Finds pericardial tamponade on ultrasound" },
-          { "t": "Pupils", "r": "Mid-size, reactive." }
+          {
+            "t": "Central pulse for 10 seconds",
+            "r": "No carotid or femoral pulse. Organised narrow complexes on the monitor: PEA.",
+            "mark": "Confirms PEA arrest",
+            "anim": "pulse"
+          },
+          {
+            "t": "Subxiphoid ultrasound",
+            "r": "Black rim of fluid around the heart; the ventricles barely move.",
+            "img": "us:cardiac-effusion",
+            "mark": "Finds pericardial tamponade on ultrasound"
+          },
+          {
+            "t": "Pupils",
+            "r": "Mid-size, reactive.",
+            "anim": "pupils"
+          }
         ]
       }
     },
@@ -76,12 +180,36 @@
       "hint": "HOTT at the same time: blood, oxygenation, decompress both chests, and release the tamponade.",
       "confirm": "Do these together",
       "opts": [
-        { "t": "Blood through the rapid infuser (hypovolaemia)", "need": true, "mark": "Treats hypovolaemia with blood" },
-        { "t": "Intubate and ventilate (oxygenation)", "need": true, "mark": "Airway and ventilation" },
-        { "t": "Bilateral finger thoracostomies (tension)", "need": true, "mark": "Bilateral finger thoracostomies" },
-        { "t": "Clamshell thoracotomy for the tamponade", "need": true, "mark": "Decides on resuscitative thoracotomy for tamponade" },
-        { "t": "Needle pericardiocentesis", "trap": true, "r": "Traumatic tamponade is clotted blood. A needle rarely drains it; open the pericardium." },
-        { "t": "Standard ALS: compressions and adrenaline every 4 minutes, nothing else", "trap": "critical", "r": "Compressions on a tamponaded, empty heart do not work. Treat HOTT." }
+        {
+          "t": "Blood through the rapid infuser (hypovolaemia)",
+          "need": true,
+          "mark": "Treats hypovolaemia with blood"
+        },
+        {
+          "t": "Intubate and ventilate (oxygenation)",
+          "need": true,
+          "mark": "Airway and ventilation"
+        },
+        {
+          "t": "Bilateral finger thoracostomies (tension)",
+          "need": true,
+          "mark": "Bilateral finger thoracostomies"
+        },
+        {
+          "t": "Clamshell thoracotomy for the tamponade",
+          "need": true,
+          "mark": "Decides on resuscitative thoracotomy for tamponade"
+        },
+        {
+          "t": "Needle pericardiocentesis",
+          "trap": true,
+          "r": "Traumatic tamponade is clotted blood. A needle rarely drains it; open the pericardium."
+        },
+        {
+          "t": "Standard ALS: compressions and adrenaline every 4 minutes, nothing else",
+          "trap": "critical",
+          "r": "Compressions on a tamponaded, empty heart do not work. Treat HOTT."
+        }
       ]
     },
     {
@@ -91,13 +219,43 @@
       "label": "Clamshell thoracotomy",
       "hint": "Bilateral incisions in the 4th/5th space, divide the sternum, open the pericardium in front of the phrenic nerve, relieve the clot, control the hole.",
       "opts": [
-        { "t": "Incise along the left 4th/5th intercostal space from the mid-axillary line to the sternum", "n": 1, "mark": "Left thoracostomy incision in the 4th/5th space" },
-        { "t": "Mirror it on the right and divide the sternum", "n": 2, "mark": "Extends to a clamshell across the sternum" },
-        { "t": "Retractor in; lift the pericardium with forceps", "n": 3, "mark": "Opens the chest and lifts the pericardium" },
-        { "t": "Open the pericardium longitudinally, in front of the phrenic nerve", "n": 4, "mark": "Opens the pericardium longitudinally, sparing the phrenic nerve" },
-        { "t": "Scoop out the clot; finger over the hole in the right ventricle", "n": 5, "scene": "rosc", "mark": "Evacuates clot and controls the cardiac wound", "r": "The heart fills and starts to beat strongly. Pulse returns." },
-        { "t": "Close the wound with sutures (or a Foley balloon as a bridge)", "n": 6, "mark": "Definitive or temporary wound control" },
-        { "t": "Open the pericardium transversely across the front of the heart", "trap": true, "r": "A transverse cut risks both phrenic nerves. Open it longitudinally, anterior to the phrenic." }
+        {
+          "t": "Incise along the left 4th/5th intercostal space from the mid-axillary line to the sternum",
+          "n": 1,
+          "mark": "Left thoracostomy incision in the 4th/5th space"
+        },
+        {
+          "t": "Mirror it on the right and divide the sternum",
+          "n": 2,
+          "mark": "Extends to a clamshell across the sternum"
+        },
+        {
+          "t": "Retractor in; lift the pericardium with forceps",
+          "n": 3,
+          "mark": "Opens the chest and lifts the pericardium"
+        },
+        {
+          "t": "Open the pericardium longitudinally, in front of the phrenic nerve",
+          "n": 4,
+          "mark": "Opens the pericardium longitudinally, sparing the phrenic nerve"
+        },
+        {
+          "t": "Scoop out the clot; finger over the hole in the right ventricle",
+          "n": 5,
+          "scene": "rosc",
+          "mark": "Evacuates clot and controls the cardiac wound",
+          "r": "The heart fills and starts to beat strongly. Pulse returns."
+        },
+        {
+          "t": "Close the wound with sutures (or a Foley balloon as a bridge)",
+          "n": 6,
+          "mark": "Definitive or temporary wound control"
+        },
+        {
+          "t": "Open the pericardium transversely across the front of the heart",
+          "trap": true,
+          "r": "A transverse cut risks both phrenic nerves. Open it longitudinally, anterior to the phrenic."
+        }
       ]
     },
     {
@@ -107,9 +265,20 @@
       "label": "After ROSC",
       "hint": "Theatre now; watch the internal mammary arteries; blood and calcium.",
       "opts": [
-        { "t": "Straight to theatre with the cardiothoracic surgeon", "mark": "Transfers to theatre for definitive repair", "r": "CTS: Theatre 1 ready. Bring him now." },
-        { "t": "Clamp or tie the internal mammary arteries — they bleed once the pressure returns", "mark": "Anticipates internal mammary bleeding after ROSC" },
-        { "t": "CT chest first to see the injury", "trap": "critical", "r": "He has just had a clamshell. Theatre, not CT." }
+        {
+          "t": "Straight to theatre with the cardiothoracic surgeon",
+          "mark": "Transfers to theatre for definitive repair",
+          "r": "CTS: Theatre 1 ready. Bring him now."
+        },
+        {
+          "t": "Clamp or tie the internal mammary arteries — they bleed once the pressure returns",
+          "mark": "Anticipates internal mammary bleeding after ROSC"
+        },
+        {
+          "t": "CT chest first to see the injury",
+          "trap": "critical",
+          "r": "He has just had a clamshell. Theatre, not CT."
+        }
       ]
     },
     {
@@ -118,24 +287,138 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What does HOTT stand for?", "a": "Hypovolaemia, Oxygenation, Tension, Tamponade", "wrong": ["Hypothermia, Obstruction, Tension pneumothorax, Thrombosis", "Haemorrhage, Opioids, Trauma to the heart, Temperature", "Hypoxia, Obstruction, Toxins, Thrombosis"] },
-        { "q": "Best candidate for ED thoracotomy?", "a": "Penetrating chest wound, signs of life just lost", "wrong": ["Blunt trauma after 30 minutes of CPR at the scene", "Isolated severe head injury", "Elderly fall with a hip fracture"] },
-        { "q": "Why not pericardiocentesis for traumatic tamponade?", "a": "Clotted blood will not drain through a needle", "wrong": ["It is only allowed in the cardiac catheter lab", "It routinely causes a tension pneumothorax on the left", "It takes longer than getting a CT scan"] },
-        { "q": "Which nerve runs on the pericardium?", "a": "Phrenic", "wrong": ["Vagus only", "Recurrent laryngeal", "Intercostobrachial"] },
-        { "q": "Why are compressions deprioritised in traumatic arrest?", "a": "They cannot fill an empty or tamponaded heart", "wrong": ["They fracture ribs", "They spread blood-borne infection", "Young patients do not need them"] }
+        {
+          "q": "What does HOTT stand for?",
+          "a": "Hypovolaemia, Oxygenation, Tension, Tamponade",
+          "wrong": [
+            "Hypothermia, Obstruction, Tension pneumothorax, Thrombosis",
+            "Haemorrhage, Opioids, Trauma to the heart, Temperature",
+            "Hypoxia, Obstruction, Toxins, Thrombosis"
+          ]
+        },
+        {
+          "q": "Best candidate for ED thoracotomy?",
+          "a": "Penetrating chest wound, signs of life just lost",
+          "wrong": [
+            "Blunt trauma after 30 minutes of CPR at the scene",
+            "Isolated severe head injury",
+            "Elderly fall with a hip fracture"
+          ]
+        },
+        {
+          "q": "Why not pericardiocentesis for traumatic tamponade?",
+          "a": "Clotted blood will not drain through a needle",
+          "wrong": [
+            "It is only allowed in the cardiac catheter lab",
+            "It routinely causes a tension pneumothorax on the left",
+            "It takes longer than getting a CT scan"
+          ]
+        },
+        {
+          "q": "Which nerve runs on the pericardium?",
+          "a": "Phrenic",
+          "wrong": [
+            "Vagus only",
+            "Recurrent laryngeal",
+            "Intercostobrachial"
+          ]
+        },
+        {
+          "q": "Why are compressions deprioritised in traumatic arrest?",
+          "a": "They cannot fill an empty or tamponaded heart",
+          "wrong": [
+            "They fracture ribs",
+            "They spread blood-borne infection",
+            "Young patients do not need them"
+          ]
+        }
       ]
     }
   ],
   "rules": [
-    { "id": "ultrasound-early", "first": ["assess"], "then": ["clamshell"], "fail": "You opened the chest without looking for tamponade and checking the timeline.", "ok": "Ultrasound and timeline before the clamshell." }
+    {
+      "id": "ultrasound-early",
+      "first": [
+        "assess"
+      ],
+      "then": [
+        "clamshell"
+      ],
+      "fail": "You opened the chest without looking for tamponade and checking the timeline.",
+      "ok": "Ultrasound and timeline before the clamshell."
+    }
   ],
-  "badge": { "name": "Clamshell", "emoji": "🐚", "flavor": "HOTT, not just CPR. Longitudinal, in front of the phrenic." },
+  "badge": {
+    "name": "Clamshell",
+    "emoji": "🐚",
+    "flavor": "HOTT, not just CPR. Longitudinal, in front of the phrenic."
+  },
   "cards": [
-    { "q": "Reversible causes addressed first in traumatic cardiac arrest?", "options": ["Hypovolaemia, oxygenation, tension, tamponade", "Hypothermia and toxins", "Toxins, thrombosis and hyperkalaemia", "Acidosis, hyperkalaemia and hypocalcaemia"], "why": "HOTT, treated simultaneously, before or with compressions.", "source": "ERC 2021 special circumstances" },
-    { "q": "Traumatic tamponade in arrest is treated by…", "options": ["Resuscitative thoracotomy", "Needle pericardiocentesis", "Adrenaline and fluids", "CT then surgery"], "why": "Clotted blood needs the pericardium opened.", "source": "ERC 2021" },
-    { "q": "Pericardial incision during clamshell thoracotomy?", "options": ["Longitudinal, anterior to the phrenic nerve", "Transverse, across the apex", "Longitudinal, posterior to the phrenic nerve", "Circumferential around the base"], "why": "Protects the phrenic nerves.", "source": "ATLS 11th edition" },
-    { "q": "ED thoracotomy outcomes are best for…", "options": ["Stab wounds with tamponade", "Blunt trauma with arrest at scene", "Gunshot wound to the head", "Falls from height with arrest"], "why": "Isolated cardiac stab wounds with tamponade have the best survival.", "source": "ERC 2021" },
-    { "q": "After ROSC from clamshell, which vessels start bleeding?", "options": ["Internal thoracic arteries", "The common carotid arteries", "The subclavian veins", "The pulmonary veins at the hilum"], "why": "They were cut with the sternum; tie them.", "source": "ATLS 11th edition" },
-    { "q": "Ultrasound sign of tamponade?", "options": ["Pericardial fluid with RV diastolic collapse", "Pericardial fluid with a hyperdynamic, full RV", "Absent lung sliding on one side", "Multiple B-lines in both lungs"], "why": "The pressure collapses the thin-walled right heart in diastole.", "source": "ACEP / RCEM ultrasound" }
+    {
+      "q": "Reversible causes addressed first in traumatic cardiac arrest?",
+      "options": [
+        "Hypovolaemia, oxygenation, tension, tamponade",
+        "Hypothermia and toxins",
+        "Toxins, thrombosis and hyperkalaemia",
+        "Acidosis, hyperkalaemia and hypocalcaemia"
+      ],
+      "why": "HOTT, treated simultaneously, before or with compressions.",
+      "source": "ERC 2021 special circumstances"
+    },
+    {
+      "q": "Traumatic tamponade in arrest is treated by…",
+      "options": [
+        "Resuscitative thoracotomy",
+        "Needle pericardiocentesis",
+        "Adrenaline and fluids",
+        "CT then surgery"
+      ],
+      "why": "Clotted blood needs the pericardium opened.",
+      "source": "ERC 2021"
+    },
+    {
+      "q": "Pericardial incision during clamshell thoracotomy?",
+      "options": [
+        "Longitudinal, anterior to the phrenic nerve",
+        "Transverse, across the apex",
+        "Longitudinal, posterior to the phrenic nerve",
+        "Circumferential around the base"
+      ],
+      "why": "Protects the phrenic nerves.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "ED thoracotomy outcomes are best for…",
+      "options": [
+        "Stab wounds with tamponade",
+        "Blunt trauma with arrest at scene",
+        "Gunshot wound to the head",
+        "Falls from height with arrest"
+      ],
+      "why": "Isolated cardiac stab wounds with tamponade have the best survival.",
+      "source": "ERC 2021"
+    },
+    {
+      "q": "After ROSC from clamshell, which vessels start bleeding?",
+      "options": [
+        "Internal thoracic arteries",
+        "The common carotid arteries",
+        "The subclavian veins",
+        "The pulmonary veins at the hilum"
+      ],
+      "why": "They were cut with the sternum; tie them.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "Ultrasound sign of tamponade?",
+      "options": [
+        "Pericardial fluid with RV diastolic collapse",
+        "Pericardial fluid with a hyperdynamic, full RV",
+        "Absent lung sliding on one side",
+        "Multiple B-lines in both lungs"
+      ],
+      "why": "The pressure collapses the thin-walled right heart in diastole.",
+      "source": "ACEP / RCEM ultrasound"
+    }
   ]
 }

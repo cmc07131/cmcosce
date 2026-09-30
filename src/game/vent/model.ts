@@ -32,11 +32,13 @@ export function nudge(s: VentSettings, key: Setting, dir: 1 | -1): VentSettings 
  * What this patient needs. `tca`: paralysed after RSI, 70 kg, keep her alkaline — a controlled mode, 6–8 mL/kg,
  * a faster rate to hyperventilate (pH 7.45–7.55), 100% oxygen to start, PEEP 5, a pressure limit.
  */
-export type VentSpec = { weightKg: number; rr: [number, number]; why: string; co2: string }
+export type VentSpec = { weightKg: number; rr: [number, number]; why: string; co2: string; peep?: [number, number]; peepWhy?: string }
 
 export function ventSpec(pose?: string): VentSpec {
   if (pose === 'tca') return { weightKg: 70, rr: [20, 26], why: 'Mild hyperventilation keeps her pH 7.45–7.55, which narrows the QRS.', co2: 'aim for mild hypocapnia (about 3.5–4.5) to keep the pH 7.45–7.55' }
   if (pose === 'post-arrest') return { weightKg: 80, rr: [10, 16], why: 'After ROSC: normocapnia (PaCO2 4.7–6.0 kPa). Hyperventilation lowers cerebral blood flow.', co2: 'aim for normocapnia (about 4.5–5.5)' }
+  if (pose === 'burns') return { weightKg: 70, rr: [12, 18], why: 'Normocapnia; 100% oxygen washes out the carbon monoxide.', co2: 'aim for normocapnia (about 4.5–5.5)' }
+  if (pose === 'drowning') return { weightKg: 60, rr: [12, 18], why: 'Normocapnia after ROSC.', co2: 'aim for normocapnia (about 4.5–5.5)', peep: [8, 10], peepWhy: 'Drowned lungs are wet and stiff: PEEP 8–10 recruits them.' }
   if (pose === 'head-injury') return { weightKg: 75, rr: [12, 18], why: 'Head injury: PaCO2 4.5–5.0 kPa. Too low starves the brain of blood; too high raises the ICP.', co2: 'aim for low-normal CO2 (about 4.0–4.8)' }
   return { weightKg: 70, rr: [12, 18], why: 'A normal rate for a normal PaCO2.', co2: 'aim for normocapnia (about 4.5–5.5)' }
 }
@@ -56,7 +58,7 @@ export function checkVent(s: VentSettings, spec: VentSpec): VentCheck[] {
     { key: 'vt', label: 'VT', value: `${s.vt} mL`, range: `${lo}–${hi} mL`, ok: s.vt >= lo && s.vt <= hi, why: `6–8 mL/kg for ${spec.weightKg} kg: lung-protective.` },
     { key: 'rr', label: 'RR', value: `${s.rr} /min`, range: `${spec.rr[0]}–${spec.rr[1]} /min`, ok: s.rr >= spec.rr[0] && s.rr <= spec.rr[1], why: spec.why },
     { key: 'fio2', label: 'O2', value: `${s.fio2}%`, range: '100% to start (at least 90%)', ok: s.fio2 >= 90, why: 'Start high after intubation, then titrate to SpO2 94–98%.' },
-    { key: 'peep', label: 'PEEP', value: `${s.peep} cmH2O`, range: '5–8 cmH2O', ok: s.peep >= 5 && s.peep <= 8, why: 'Keeps the alveoli open; 5 is the usual start.' },
+    { key: 'peep', label: 'PEEP', value: `${s.peep} cmH2O`, range: `${(spec.peep ?? [5, 8])[0]}–${(spec.peep ?? [5, 8])[1]} cmH2O`, ok: s.peep >= (spec.peep ?? [5, 8])[0] && s.peep <= (spec.peep ?? [5, 8])[1], why: spec.peepWhy ?? 'Keeps the alveoli open; 5 is the usual start.' },
     { key: 'pmax', label: 'Pmax', value: `${s.pmax} cmH2O`, range: '30–40 cmH2O (about 35)', ok: s.pmax >= 30 && s.pmax <= 40, why: 'High enough to ventilate, low enough to protect the lungs.' },
   ]
 }
@@ -76,10 +78,11 @@ export function scoreVent(s: VentSettings, spec: VentSpec) {
   if (s.rr >= spec.rr[0] && s.rr <= spec.rr[1]) earned.push('rate')
   else faults.push({ text: `Rate ${s.rr}/min. ${spec.why} Aim for ${spec.rr[0]}–${spec.rr[1]}/min.` })
 
-  const oxyOk = s.fio2 >= 90 && s.peep >= 5 && s.peep <= 8 && s.pmax >= 30 && s.pmax <= 40
+  const [pLo, pHi] = spec.peep ?? [5, 8]
+  const oxyOk = s.fio2 >= 90 && s.peep >= pLo && s.peep <= pHi && s.pmax >= 30 && s.pmax <= 40
   if (oxyOk) earned.push('oxygen')
   if (s.fio2 < 90) faults.push({ text: `FiO2 ${s.fio2}%. Start at 100% after intubation, then titrate to SpO2 94–98%.` })
-  if (s.peep < 5 || s.peep > 8) faults.push({ text: `PEEP ${s.peep}. Start at 5 cmH2O.` })
+  if (s.peep < pLo || s.peep > pHi) faults.push({ text: `PEEP ${s.peep}. ${spec.peepWhy ?? 'Start at 5 cmH2O.'} Aim for ${pLo}–${pHi}.` })
   if (s.pmax < 30 || s.pmax > 40) faults.push({ text: `Pmax ${s.pmax}. Set the pressure limit around 35 cmH2O: high enough to ventilate, low enough to protect the lungs.` })
 
   // Alveolar ventilation (minus about 150 mL of dead space a breath) sets her CO2; more than normal keeps her alkaline.

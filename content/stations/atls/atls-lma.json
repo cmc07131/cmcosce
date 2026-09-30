@@ -5,20 +5,75 @@
   "type": "skills",
   "time": 420,
   "stem": "Skills room. A 70 kg adult airway manikin. Scenario: a patient with respiratory failure; your two attempts at intubation have failed. Mask ventilation with two people is possible. Your senior tells you to rescue the airway with a supraglottic device and to explain the device to the medical student watching.",
-  "notes": "Checked against the Difficult Airway Society guidelines (DAS 2025 unanticipated difficult intubation; emergency airway checklist) and manufacturers' instructions for the i-gel and intubating LMA (Fastrach).\n\nDAS plan B: after failed intubation (maximum three attempts, a fourth by a more experienced operator), declare it, call for help, oxygenate by mask, and insert a second-generation supraglottic airway (with a gastric drain channel, e.g. i-gel or LMA ProSeal/Supreme): maximum three attempts. Then stop and think: wake the patient, intubate through the SGA with a fibrescope, proceed on the SGA, or front-of-neck access.\n\ni-gel sizing by weight: 3 for 30–60 kg, 4 for 50–90 kg, 5 for over 90 kg. No cuff to inflate. Lubricate the back and sides, hold along the bite block, insert along the hard palate with the cuff outlet facing the chin until definite resistance; confirm with capnography and chest movement; pass a gastric tube through the drain channel.\n\nThe intubating LMA (Fastrach) appears in the viva: rigid handle, epiglottic elevating bar, its own tube, sizes 3 (30–50 kg), 4 (50–70 kg), 5 (70–100 kg), and the Chandy manoeuvre.",
-  "review": [
-    {"tag": "differs", "text": "Which device is plan B. Your notes present the intubating LMA (Fastrach) as the rescue device after failed intubation. DAS now asks for a second-generation supraglottic airway: one with a gastric drain channel and a better seal (i-gel, LMA ProSeal, LMA Supreme). The Fastrach is first-generation, with no drain channel. In the exam, name a second-generation device first; the Fastrach is a way to intubate afterwards."},
-    {"tag": "outdated", "text": "Blind intubation through the Fastrach. Your notes pass the tube blind by lifting the handle. DAS no longer recommends blind intubation through any supraglottic airway. If you intubate through one, use a fibreoptic scope, and only once you have stopped and decided that is the plan."},
-    {"tag": "missing", "text": "Attempt limit and 'stop and think'. Not in your notes: at most three attempts at a supraglottic airway. Then stop and think: wake the patient, intubate through the device with a fibrescope, carry on with the device, or go to front-of-neck access if you cannot oxygenate."},
-    {"tag": "differs", "text": "C-spine injury as a reason to use it. Your notes say the Fastrach may move the neck less than direct laryngoscopy. The evidence is weak, and inserting it still presses on the upper cervical spine. In trauma the usual approach is video laryngoscopy with manual in-line stabilisation."},
-    {"tag": "differs", "text": "Classic LMA sizes. Your BVM notes give adult sizes as 3–4. Sizing is by weight: 3 for 30–50 kg, 4 for 50–70 kg, 5 for 70–100 kg, so many adult men need a 5. The i-gel uses different bands (4 is 50–90 kg): don't carry sizes from one device to the other."},
-    {"tag": "differs", "text": "Where the lubricant goes. One line of your notes puts KY 'to the tip'. Lubricate the back of the cuff only; gel on the front can be aspirated or block the opening. (Your other line, 'KY to pos side', is right.)"},
-    {"tag": "differs", "text": "Fastrach size 3 is labelled 'children' in your notes. It is chosen by weight (30–50 kg), so small adults use it too."},
-    {"tag": "rarely used", "text": "Combitube. Your notes list it as the retroglottic device and as a difficult-airway adjunct. It is now rarely used in emergency departments; second-generation supraglottic airways have replaced it. Know it only to recognise it."}
+  "phases": [
+    {
+      "title": "Failed intubation",
+      "goal": "Declare it, call for help, oxygenate, and move to plan B.",
+      "steps": [
+        "declare"
+      ]
+    },
+    {
+      "title": "Plan B",
+      "goal": "Insert the second-generation supraglottic airway yourself.",
+      "steps": [
+        "igel"
+      ]
+    },
+    {
+      "title": "Teach",
+      "goal": "Explain the device to the student.",
+      "steps": [
+        "teach"
+      ]
+    }
   ],
+  "review": [
+    {
+      "tag": "differs",
+      "text": "Which device is plan B. Your notes present the intubating LMA (Fastrach) as the rescue device after failed intubation. DAS now asks for a second-generation supraglottic airway: one with a gastric drain channel and a better seal (i-gel, LMA ProSeal, LMA Supreme). The Fastrach is first-generation, with no drain channel. In the exam, name a second-generation device first; the Fastrach is a way to intubate afterwards."
+    },
+    {
+      "tag": "outdated",
+      "text": "Blind intubation through the Fastrach. Your notes pass the tube blind by lifting the handle. DAS no longer recommends blind intubation through any supraglottic airway. If you intubate through one, use a fibreoptic scope, and only once you have stopped and decided that is the plan."
+    },
+    {
+      "tag": "missing",
+      "text": "Attempt limit and 'stop and think'. Not in your notes: at most three attempts at a supraglottic airway. Then stop and think: wake the patient, intubate through the device with a fibrescope, carry on with the device, or go to front-of-neck access if you cannot oxygenate."
+    },
+    {
+      "tag": "differs",
+      "text": "C-spine injury as a reason to use it. Your notes say the Fastrach may move the neck less than direct laryngoscopy. The evidence is weak, and inserting it still presses on the upper cervical spine. In trauma the usual approach is video laryngoscopy with manual in-line stabilisation."
+    },
+    {
+      "tag": "differs",
+      "text": "Classic LMA sizes. Your BVM notes give adult sizes as 3–4. Sizing is by weight: 3 for 30–50 kg, 4 for 50–70 kg, 5 for 70–100 kg, so many adult men need a 5. The i-gel uses different bands (4 is 50–90 kg): don't carry sizes from one device to the other."
+    },
+    {
+      "tag": "differs",
+      "text": "Where the lubricant goes. One line of your notes puts KY 'to the tip'. Lubricate the back of the cuff only; gel on the front can be aspirated or block the opening. (Your other line, 'KY to pos side', is right.)"
+    },
+    {
+      "tag": "differs",
+      "text": "Fastrach size 3 is labelled 'children' in your notes. It is chosen by weight (30–50 kg), so small adults use it too."
+    },
+    {
+      "tag": "rarely used",
+      "text": "Combitube. Your notes list it as the retroglottic device and as a difficult-airway adjunct. It is now rarely used in emergency departments; second-generation supraglottic airways have replaced it. Know it only to recognise it."
+    }
+  ],
+  "notes": "Checked against the Difficult Airway Society guidelines (DAS 2025 unanticipated difficult intubation; emergency airway checklist) and manufacturers' instructions for the i-gel and intubating LMA (Fastrach).\n\nDAS plan B: after failed intubation (maximum three attempts, a fourth by a more experienced operator), declare it, call for help, oxygenate by mask, and insert a second-generation supraglottic airway (with a gastric drain channel, e.g. i-gel or LMA ProSeal/Supreme): maximum three attempts. Then stop and think: wake the patient, intubate through the SGA with a fibrescope, proceed on the SGA, or front-of-neck access.\n\ni-gel sizing by weight: 3 for 30–60 kg, 4 for 50–90 kg, 5 for over 90 kg. No cuff to inflate. Lubricate the back and sides, hold along the bite block, insert along the hard palate with the cuff outlet facing the chin until definite resistance; confirm with capnography and chest movement; pass a gastric tube through the drain channel.\n\nThe intubating LMA (Fastrach) appears in the viva: rigid handle, epiglottic elevating bar, its own tube, sizes 3 (30–50 kg), 4 (50–70 kg), 5 (70–100 kg), and the Chandy manoeuvre.",
   "cast": [
-    { "id": "patient", "name": "Manikin", "role": "patient" },
-    { "id": "student", "name": "Student", "role": "junior" }
+    {
+      "id": "patient",
+      "name": "Manikin",
+      "role": "patient"
+    },
+    {
+      "id": "student",
+      "name": "Student",
+      "role": "junior"
+    }
   ],
   "steps": [
     {
@@ -29,10 +84,23 @@
       "label": "Failed intubation",
       "hint": "Declare it, call for help, oxygenate by mask, go to plan B.",
       "opts": [
-        { "t": "Declare failed intubation aloud; call for help", "mark": "Declares failed intubation and calls for help" },
-        { "t": "Two-person mask ventilation with an oropharyngeal airway while the device is prepared", "mark": "Maintains oxygenation between attempts" },
-        { "t": "Plan B: second-generation supraglottic airway, maximum three attempts", "mark": "Moves to plan B with an attempt limit" },
-        { "t": "One more laryngoscopy, then another", "trap": "critical", "r": "Repeated attempts swell the airway and turn 'can't intubate' into 'can't oxygenate'." }
+        {
+          "t": "Declare failed intubation aloud; call for help",
+          "mark": "Declares failed intubation and calls for help"
+        },
+        {
+          "t": "Two-person mask ventilation with an oropharyngeal airway while the device is prepared",
+          "mark": "Maintains oxygenation between attempts"
+        },
+        {
+          "t": "Plan B: second-generation supraglottic airway, maximum three attempts",
+          "mark": "Moves to plan B with an attempt limit"
+        },
+        {
+          "t": "One more laryngoscopy, then another",
+          "trap": "critical",
+          "r": "Repeated attempts swell the airway and turn 'can't intubate' into 'can't oxygenate'."
+        }
       ]
     },
     {
@@ -47,7 +115,15 @@
           "t": "Insert the i-gel",
           "perform": "igel",
           "performHint": "Size it for 70 kg, lubricate the cuff, position the head, then glide it along the hard palate to definite resistance. Confirm, decompress, tape. SpO2 falls while nobody ventilates.",
-          "mark": ["Chooses the correct size by weight", "Lubricates the device", "Correct grip and positioning", "Inserts along the hard palate until resistance", "Confirms ventilation with capnography", "Decompresses the stomach via the drain channel", "Secures the device"]
+          "mark": [
+            "Chooses the correct size by weight",
+            "Lubricates the device",
+            "Correct grip and positioning",
+            "Inserts along the hard palate until resistance",
+            "Confirms ventilation with capnography",
+            "Decompresses the stomach via the drain channel",
+            "Secures the device"
+          ]
         }
       ]
     },
@@ -62,22 +138,49 @@
         {
           "line": "What is that device? I've only seen the tubes.",
           "opts": [
-            { "t": "What do you already know about airway devices?", "r": "Just bag-mask and intubation.", "mood": -1, "mark": "Checks the learner's existing knowledge" },
-            { "t": "No time now, just watch.", "r": "Oh… OK.", "mood": 2 }
+            {
+              "t": "What do you already know about airway devices?",
+              "r": "Just bag-mask and intubation.",
+              "mood": -1,
+              "mark": "Checks the learner's existing knowledge"
+            },
+            {
+              "t": "No time now, just watch.",
+              "r": "Oh… OK.",
+              "mood": 2
+            }
           ]
         },
         {
           "line": "So why not just try intubating again?",
           "opts": [
-            { "t": "Repeated attempts cause swelling; the supraglottic device oxygenates while we stop and think.", "r": "That makes sense.", "mood": -1, "mark": "Explains the rationale for plan B" },
-            { "t": "Because the book says so.", "r": "Right…", "mood": 1 }
+            {
+              "t": "Repeated attempts cause swelling; the supraglottic device oxygenates while we stop and think.",
+              "r": "That makes sense.",
+              "mood": -1,
+              "mark": "Explains the rationale for plan B"
+            },
+            {
+              "t": "Because the book says so.",
+              "r": "Right…",
+              "mood": 1
+            }
           ]
         },
         {
           "line": "Any questions I should ask?",
           "opts": [
-            { "t": "What would you do if it didn't ventilate?", "r": "Call for help… and the front-of-neck kit?", "mood": -1, "mark": "Checks understanding with a question" },
-            { "t": "No, that's everything.", "r": "OK.", "mood": 1 }
+            {
+              "t": "What would you do if it didn't ventilate?",
+              "r": "Call for help… and the front-of-neck kit?",
+              "mood": -1,
+              "mark": "Checks understanding with a question"
+            },
+            {
+              "t": "No, that's everything.",
+              "r": "OK.",
+              "mood": 1
+            }
           ]
         }
       ]
@@ -88,21 +191,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What makes a supraglottic airway 'second generation'?", "a": "A gastric drain channel and a better seal", "wrong": ["It is single-use and disposable", "A built-in video camera to guide placement", "It can be placed through the nose"] },
-        { "q": "i-gel size for a 95 kg adult?", "a": "5", "wrong": ["3", "4", "2.5"] },
-        { "q": "What is the purpose of the epiglottic elevating bar on the intubating LMA?", "a": "Lifts the epiglottis as the tube passes", "wrong": ["Seals the oesophagus", "Measures the cuff pressure", "Holds the tongue down"] },
-        { "q": "After plan B fails and you cannot oxygenate by mask, the next step is…", "a": "Front-of-neck access (scalpel–bougie–tube)", "wrong": ["A fifth attempt at laryngoscopy", "Needle cricothyroidotomy in all adults", "Wait for the anaesthetist to arrive"] },
-        { "q": "The Chandy manoeuvre is used to…", "a": "Improve seal and alignment for ILMA intubation", "wrong": ["Remove a foreign body from the pharynx", "Reduce a dislocated jaw after a difficult laryngoscopy", "Insert a nasopharyngeal airway safely"] }
+        {
+          "q": "What makes a supraglottic airway 'second generation'?",
+          "a": "A gastric drain channel and a better seal",
+          "wrong": [
+            "It is single-use and disposable",
+            "A built-in video camera to guide placement",
+            "It can be placed through the nose"
+          ]
+        },
+        {
+          "q": "i-gel size for a 95 kg adult?",
+          "a": "5",
+          "wrong": [
+            "3",
+            "4",
+            "2.5"
+          ]
+        },
+        {
+          "q": "What is the purpose of the epiglottic elevating bar on the intubating LMA?",
+          "a": "Lifts the epiglottis as the tube passes",
+          "wrong": [
+            "Seals the oesophagus",
+            "Measures the cuff pressure",
+            "Holds the tongue down"
+          ]
+        },
+        {
+          "q": "After plan B fails and you cannot oxygenate by mask, the next step is…",
+          "a": "Front-of-neck access (scalpel–bougie–tube)",
+          "wrong": [
+            "A fifth attempt at laryngoscopy",
+            "Needle cricothyroidotomy in all adults",
+            "Wait for the anaesthetist to arrive"
+          ]
+        },
+        {
+          "q": "The Chandy manoeuvre is used to…",
+          "a": "Improve seal and alignment for ILMA intubation",
+          "wrong": [
+            "Remove a foreign body from the pharynx",
+            "Reduce a dislocated jaw after a difficult laryngoscopy",
+            "Insert a nasopharyngeal airway safely"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Plan B", "emoji": "🅱", "flavor": "Declare it, oxygenate, three attempts at most, then stop and think." },
+  "badge": {
+    "name": "Plan B",
+    "emoji": "🅱",
+    "flavor": "Declare it, oxygenate, three attempts at most, then stop and think."
+  },
   "cards": [
-    { "q": "DAS plan B after failed intubation?", "options": ["Second-generation supraglottic airway", "Front-of-neck access", "Wake the patient and postpone", "Blind nasal intubation attempt"], "why": "Plan B oxygenates through a supraglottic device (maximum three attempts).", "source": "DAS 2025" },
-    { "q": "i-gel for a 60 kg adult?", "options": ["Size 3 or 4 (overlap band)", "Size 5 (for all adults over 50 kg)", "Size 2.5 (25–35 kg)", "Size 2 (10–25 kg)"], "why": "3: 30–60 kg, 4: 50–90 kg, 5: over 90 kg.", "source": "i-gel manufacturer" },
-    { "q": "How is an i-gel cuff inflated?", "options": ["It is not — the cuff is gel", "With 20 mL of air via the pilot", "With saline to 60 cmH2O", "With 5 mL of air, then check"], "why": "Non-inflatable thermoplastic elastomer cuff.", "source": "i-gel manufacturer" },
-    { "q": "Maximum intubation attempts before plan B (DAS)?", "options": ["3 (+1 by a more experienced operator)", "1, then straight to plan B", "5 (+1 by the most senior anaesthetist)", "Unlimited while SpO2 stays above 94%"], "why": "Repeated attempts cause trauma and swelling.", "source": "DAS 2025" },
-    { "q": "Best confirmation of ventilation through a supraglottic airway?", "options": ["Waveform capnography", "Listening at the mouth", "Mist in the tube", "SpO2 alone"], "why": "Capnography confirms ventilation of the lungs.", "source": "DAS 2025" },
-    { "q": "Which is a retroglottic device?", "options": ["Combitube", "i-gel", "LMA Supreme", "Air-Q"], "why": "The Combitube's distal cuff sits beyond the glottis, usually in the oesophagus.", "source": "Airway device classification" }
+    {
+      "q": "DAS plan B after failed intubation?",
+      "options": [
+        "Second-generation supraglottic airway",
+        "Front-of-neck access",
+        "Wake the patient and postpone",
+        "Blind nasal intubation attempt"
+      ],
+      "why": "Plan B oxygenates through a supraglottic device (maximum three attempts).",
+      "source": "DAS 2025"
+    },
+    {
+      "q": "i-gel for a 60 kg adult?",
+      "options": [
+        "Size 3 or 4 (overlap band)",
+        "Size 5 (for all adults over 50 kg)",
+        "Size 2.5 (25–35 kg)",
+        "Size 2 (10–25 kg)"
+      ],
+      "why": "3: 30–60 kg, 4: 50–90 kg, 5: over 90 kg.",
+      "source": "i-gel manufacturer"
+    },
+    {
+      "q": "How is an i-gel cuff inflated?",
+      "options": [
+        "It is not — the cuff is gel",
+        "With 20 mL of air via the pilot",
+        "With saline to 60 cmH2O",
+        "With 5 mL of air, then check"
+      ],
+      "why": "Non-inflatable thermoplastic elastomer cuff.",
+      "source": "i-gel manufacturer"
+    },
+    {
+      "q": "Maximum intubation attempts before plan B (DAS)?",
+      "options": [
+        "3 (+1 by a more experienced operator)",
+        "1, then straight to plan B",
+        "5 (+1 by the most senior anaesthetist)",
+        "Unlimited while SpO2 stays above 94%"
+      ],
+      "why": "Repeated attempts cause trauma and swelling.",
+      "source": "DAS 2025"
+    },
+    {
+      "q": "Best confirmation of ventilation through a supraglottic airway?",
+      "options": [
+        "Waveform capnography",
+        "Listening at the mouth",
+        "Mist in the tube",
+        "SpO2 alone"
+      ],
+      "why": "Capnography confirms ventilation of the lungs.",
+      "source": "DAS 2025"
+    },
+    {
+      "q": "Which is a retroglottic device?",
+      "options": [
+        "Combitube",
+        "i-gel",
+        "LMA Supreme",
+        "Air-Q"
+      ],
+      "why": "The Combitube's distal cuff sits beyond the glottis, usually in the oesophagus.",
+      "source": "Airway device classification"
+    }
   ]
 }

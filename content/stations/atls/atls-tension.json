@@ -5,13 +5,61 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 2. A 25-year-old man was stabbed in the left chest 20 minutes ago. On arrival he is agitated and gasping. HR 140, BP 76/40, RR 36, SpO2 82% on 15 L oxygen. Manage him.",
+  "phases": [
+    {
+      "title": "Primary survey",
+      "goal": "Monitoring on, then examine him yourself: what is killing him?",
+      "steps": [
+        "monitoring",
+        "survey"
+      ]
+    },
+    {
+      "title": "Decompress",
+      "goal": "Say it and act, now, at the right site with the right needle, then a drain.",
+      "steps": [
+        "diagnose",
+        "decompress"
+      ]
+    },
+    {
+      "title": "After",
+      "goal": "Imaging after the drain.",
+      "steps": [
+        "after"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "worse",
+      "after": "monitored",
+      "delayS": 60,
+      "unless": "decompressed",
+      "scene": "worse",
+      "say": "He is losing consciousness. SpO2 74%, BP 60/30.",
+      "treatedBy": "decompressed",
+      "untreated": "The tension pneumothorax was never decompressed."
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Needle decompression site. Your notes use the 2nd intercostal space, mid-clavicular line, with a 16–18 G cannula. ATLS 10th and 11th use the 4th/5th intercostal space just anterior to the mid-axillary line in adults, with a long cannula (at least 8 cm); the 2nd space mid-clavicular line is kept for children. In a ventilated patient, a finger thoracostomy is quicker and more reliable."}
+    {
+      "tag": "outdated",
+      "text": "Needle decompression site. Your notes use the 2nd intercostal space, mid-clavicular line, with a 16–18 G cannula. ATLS 10th and 11th use the 4th/5th intercostal space just anterior to the mid-axillary line in adults, with a long cannula (at least 8 cm); the 2nd space mid-clavicular line is kept for children. In a ventilated patient, a finger thoracostomy is quicker and more reliable."
+    }
   ],
   "notes": "Checked against ATLS 10th/11th edition, BTS pleural guidance and Resuscitation Council UK traumatic cardiac arrest guidance.\n\nTension pneumothorax is a clinical diagnosis. Do not wait for an X-ray. Signs: severe respiratory distress, hypoxia, tachycardia, hypotension, reduced breath sounds and hyper-resonance on the affected side, distended neck veins (absent if hypovolaemic), and tracheal deviation away (a late, unreliable sign).\n\nATLS 10th moved needle decompression in adults from the 2nd intercostal space mid-clavicular line to the 4th/5th intercostal space just anterior to the mid-axillary line, because the chest wall is often thicker than a standard cannula at the old site. The 2nd ICS mid-clavicular line remains the site in children. Use a long (at least 8 cm) large-bore cannula. In a ventilated patient, a finger thoracostomy (open incision and finger sweep, no tube yet) is faster and more reliable. Either way, a chest drain follows.\n\nMany older notes still teach 2nd ICS mid-clavicular line for adults; this station scores the ATLS 10th/11th site.",
   "cast": [
-    { "id": "patient", "name": "Mr Fung", "role": "patient" },
-    { "id": "nurse", "name": "Nurse Au", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mr Fung",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Au",
+      "role": "nurse"
+    }
   ],
   "vitals": {
     "hr": 140,
@@ -21,14 +69,60 @@
     "rr": 36,
     "gcs": 14,
     "rhythm": "sinus-tachy",
-    "drift": { "spo2": -1.5, "sbp": -4, "hr": 2 },
-    "stop": ["decompressed"],
+    "drift": {
+      "spo2": -1.5,
+      "sbp": -4,
+      "hr": 2
+    },
+    "stop": [
+      "decompressed"
+    ],
     "effects": [
-      { "scene": "decompressed", "add": { "spo2": 12, "sbp": 30, "dbp": 20, "hr": -26, "rr": -10 }, "overS": 45 },
-      { "scene": "drain", "add": { "spo2": 2 }, "overS": 30 }
-    ]
+      {
+        "scene": "worse",
+        "add": {
+          "spo2": -8,
+          "sbp": -14
+        },
+        "overS": 20
+      },
+      {
+        "scene": "decompressed",
+        "add": {
+          "spo2": 12,
+          "sbp": 30,
+          "dbp": 20,
+          "hr": -26,
+          "rr": -10
+        },
+        "overS": 45
+      },
+      {
+        "scene": "drain",
+        "add": {
+          "spo2": 2
+        },
+        "overS": 30
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
     {
       "id": "survey",
       "kind": "exam",
@@ -36,17 +130,51 @@
       "label": "Primary survey",
       "hint": "Airway, then the chest: look, feel, percuss, listen, neck veins.",
       "groups": {
-        "A": [{ "t": "Airway", "r": "Gasping short words. Patent.", "mark": "Airway assessed first" }],
+        "A": [
+          {
+            "t": "Airway",
+            "r": "Gasping short words. Patent.",
+            "mark": "Airway assessed first",
+            "anim": "airway"
+          }
+        ],
         "Breathing": [
-          { "t": "Look at the chest", "r": "1.5 cm stab wound in the left 5th intercostal space, mid-clavicular line. Left side hardly moves. RR 36." },
-          { "t": "Feel: trachea", "r": "Trachea deviated to the right.", "mark": "Finds tracheal deviation away from the injured side" },
-          { "t": "Percuss", "r": "Hyper-resonant on the left.", "mark": "Finds hyper-resonance on the left" },
-          { "t": "Listen", "r": "Absent breath sounds on the left.", "mark": "Finds absent breath sounds on the left" }
+          {
+            "t": "Look at the chest",
+            "r": "1.5 cm stab wound in the left 5th intercostal space, mid-clavicular line. Left side hardly moves. RR 36.",
+            "anim": "auscultate"
+          },
+          {
+            "t": "Feel: trachea",
+            "r": "Trachea deviated to the right.",
+            "mark": "Finds tracheal deviation away from the injured side"
+          },
+          {
+            "t": "Percuss",
+            "r": "Hyper-resonant on the left.",
+            "mark": "Finds hyper-resonance on the left"
+          },
+          {
+            "t": "Listen",
+            "r": "Absent breath sounds on the left.",
+            "mark": "Finds absent breath sounds on the left"
+          }
         ],
         "Circulation": [
-          { "t": "Neck veins", "r": "Distended.", "mark": "Finds distended neck veins" },
-          { "t": "Pulse and skin", "r": "Weak, fast. Cold and clammy." },
-          { "t": "Heart sounds", "r": "Audible, not muffled." }
+          {
+            "t": "Neck veins",
+            "r": "Distended.",
+            "mark": "Finds distended neck veins"
+          },
+          {
+            "t": "Pulse and skin",
+            "r": "Weak, fast. Cold and clammy.",
+            "anim": "pulse"
+          },
+          {
+            "t": "Heart sounds",
+            "r": "Audible, not muffled."
+          }
         ]
       }
     },
@@ -57,8 +185,15 @@
       "label": "Talk to the nurse",
       "hint": "It is a clinical diagnosis: decompress now.",
       "opts": [
-        { "t": "Left tension pneumothorax. Decompress now — no X-ray first", "mark": "Diagnoses tension clinically and treats before imaging" },
-        { "t": "Portable chest X-ray first to confirm", "trap": "critical", "r": "He will arrest waiting for the film. Tension is a clinical diagnosis." }
+        {
+          "t": "Left tension pneumothorax. Decompress now — no X-ray first",
+          "mark": "Diagnoses tension clinically and treats before imaging"
+        },
+        {
+          "t": "Portable chest X-ray first to confirm",
+          "trap": "critical",
+          "r": "He will arrest waiting for the film. Tension is a clinical diagnosis."
+        }
       ]
     },
     {
@@ -68,12 +203,39 @@
       "label": "Decompress the left chest",
       "hint": "Adult: 4th/5th ICS just anterior to the mid-axillary line; long, large-bore cannula; then a drain.",
       "opts": [
-        { "t": "Identify the 4th/5th intercostal space just anterior to the left mid-axillary line", "n": 1, "mark": "Uses the ATLS adult site (4th/5th ICS, anterior to mid-axillary line)" },
-        { "t": "Clean the skin quickly", "n": 2, "mark": "Rapid skin prep" },
-        { "t": "Insert a 14 G cannula of at least 8 cm over the top of the rib", "n": 3, "scene": "decompressed", "mark": "Long large-bore cannula over the top of the rib", "r": "A hiss of air. His colour improves and the pressure rises." },
-        { "t": "Leave the cannula in; tape it", "n": 4, "mark": "Leaves the cannula in place" },
-        { "t": "Insert a left chest drain in the safe triangle", "n": 5, "scene": "drain", "mark": "Follows with a chest drain" },
-        { "t": "Standard 32 mm (1.25 inch) cannula at the 2nd ICS mid-clavicular line", "trap": true, "r": "Often too short for the adult chest wall at that site; ATLS 10th moved the adult site laterally." }
+        {
+          "t": "Identify the 4th/5th intercostal space just anterior to the left mid-axillary line",
+          "n": 1,
+          "mark": "Uses the ATLS adult site (4th/5th ICS, anterior to mid-axillary line)"
+        },
+        {
+          "t": "Clean the skin quickly",
+          "n": 2,
+          "mark": "Rapid skin prep"
+        },
+        {
+          "t": "Insert a 14 G cannula of at least 8 cm over the top of the rib",
+          "n": 3,
+          "scene": "decompressed",
+          "mark": "Long large-bore cannula over the top of the rib",
+          "r": "A hiss of air. His colour improves and the pressure rises."
+        },
+        {
+          "t": "Leave the cannula in; tape it",
+          "n": 4,
+          "mark": "Leaves the cannula in place"
+        },
+        {
+          "t": "Insert a left chest drain in the safe triangle",
+          "n": 5,
+          "scene": "drain",
+          "mark": "Follows with a chest drain"
+        },
+        {
+          "t": "Standard 32 mm (1.25 inch) cannula at the 2nd ICS mid-clavicular line",
+          "trap": true,
+          "r": "Often too short for the adult chest wall at that site; ATLS 10th moved the adult site laterally."
+        }
       ]
     },
     {
@@ -84,8 +246,18 @@
       "hint": "Chest film after the drain; look for other injuries.",
       "groups": {
         "Imaging": [
-          { "t": "Chest X-ray after the drain", "r": "Left lung re-expanded, drain in place. Before the drain, the ambulance crew's picture showed this:", "img": "xr:cxr-tension-l", "mark": "Chest X-ray after, not before, decompression" },
-          { "t": "eFAST including the pericardium", "r": "No pericardial fluid. No abdominal free fluid.", "img": "us:cardiac-normal", "mark": "Looks for tamponade and abdominal bleeding" }
+          {
+            "t": "Chest X-ray after the drain",
+            "r": "Left lung re-expanded, drain in place. Before the drain, the ambulance crew's picture showed this:",
+            "img": "xr:cxr-tension-l",
+            "mark": "Chest X-ray after, not before, decompression"
+          },
+          {
+            "t": "eFAST including the pericardium",
+            "r": "No pericardial fluid. No abdominal free fluid.",
+            "img": "us:cardiac-normal",
+            "mark": "Looks for tamponade and abdominal bleeding"
+          }
         ]
       }
     },
@@ -95,24 +267,140 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Adult needle decompression site in ATLS 10th/11th?", "a": "4th/5th ICS, anterior to mid-axillary line", "wrong": ["2nd ICS, mid-clavicular line, above the 3rd rib", "7th ICS in the posterior axillary line", "Subxiphoid, angled towards the left shoulder"] },
-        { "q": "Where do you decompress in a child?", "a": "2nd ICS mid-clavicular line", "wrong": ["5th ICS in the mid-axillary line", "Subxiphoid, toward the left shoulder", "Any anterior space above the nipple"] },
-        { "q": "Faster option in a ventilated patient?", "a": "Finger thoracostomy", "why": "An open incision and finger sweep decompresses reliably; a drain follows.", "wrong": ["Pericardiocentesis", "Repeated needle attempts", "Increasing PEEP"] },
-        { "q": "How does tension kill?", "a": "Kinked great veins cut venous return", "wrong": ["Bleeding into the pleural space", "Direct compression of the aorta", "Hypoxia-driven vasodilation"] },
-        { "q": "Which sign is late and unreliable?", "a": "Tracheal deviation", "wrong": ["Hypoxia", "Tachycardia", "Absent breath sounds"] }
+        {
+          "q": "Adult needle decompression site in ATLS 10th/11th?",
+          "a": "4th/5th ICS, anterior to mid-axillary line",
+          "wrong": [
+            "2nd ICS, mid-clavicular line, above the 3rd rib",
+            "7th ICS in the posterior axillary line",
+            "Subxiphoid, angled towards the left shoulder"
+          ]
+        },
+        {
+          "q": "Where do you decompress in a child?",
+          "a": "2nd ICS mid-clavicular line",
+          "wrong": [
+            "5th ICS in the mid-axillary line",
+            "Subxiphoid, toward the left shoulder",
+            "Any anterior space above the nipple"
+          ]
+        },
+        {
+          "q": "Faster option in a ventilated patient?",
+          "a": "Finger thoracostomy",
+          "why": "An open incision and finger sweep decompresses reliably; a drain follows.",
+          "wrong": [
+            "Pericardiocentesis",
+            "Repeated needle attempts",
+            "Increasing PEEP"
+          ]
+        },
+        {
+          "q": "How does tension kill?",
+          "a": "Kinked great veins cut venous return",
+          "wrong": [
+            "Bleeding into the pleural space",
+            "Direct compression of the aorta",
+            "Hypoxia-driven vasodilation"
+          ]
+        },
+        {
+          "q": "Which sign is late and unreliable?",
+          "a": "Tracheal deviation",
+          "wrong": [
+            "Hypoxia",
+            "Tachycardia",
+            "Absent breath sounds"
+          ]
+        }
       ]
     }
   ],
   "rules": [
-    { "id": "treat-before-film", "first": ["decompress"], "then": ["after"], "fail": "Imaging before decompression. Tension is treated on clinical signs.", "ok": "Decompressed before any film." }
+    {
+      "id": "treat-before-film",
+      "first": [
+        "decompress"
+      ],
+      "then": [
+        "after"
+      ],
+      "fail": "Imaging before decompression. Tension is treated on clinical signs.",
+      "ok": "Decompressed before any film."
+    }
   ],
-  "badge": { "name": "Pressure Release", "emoji": "💨", "flavor": "Hyper-resonant, trachea away, veins up: decompress, then drain." },
+  "badge": {
+    "name": "Pressure Release",
+    "emoji": "💨",
+    "flavor": "Hyper-resonant, trachea away, veins up: decompress, then drain."
+  },
   "cards": [
-    { "q": "ATLS adult site for needle decompression?", "options": ["4th/5th ICS, anterior to mid-axillary line", "2nd ICS, mid-clavicular line, above the rib", "8th ICS in the posterior axillary line", "Through the sternal angle"], "why": "Thinner chest wall laterally; standard cannulae often fail anteriorly.", "source": "ATLS 10th–11th edition", "note": "Older teaching: 2nd ICS MCL for adults." },
-    { "q": "Tension pneumothorax diagnosis is made by…", "options": ["Clinical examination", "An urgent chest X-ray", "CT of the chest", "An arterial blood gas"], "why": "Treat before imaging.", "source": "ATLS 11th edition" },
-    { "q": "Percussion note over a tension pneumothorax?", "options": ["Hyper-resonant", "Stony dull", "Normal", "Dull at the base only"], "why": "Air under pressure.", "source": "ATLS 11th edition" },
-    { "q": "Minimum cannula length for adult needle decompression?", "options": ["About 8 cm", "About 3 cm", "About 1.5 cm", "12 cm or more"], "why": "Chest wall thickness often exceeds a standard 3–5 cm cannula.", "source": "ATLS 10th edition" },
-    { "q": "After needle decompression, what next?", "options": ["Chest drain", "Remove the cannula", "Discharge after a normal film", "CT only"], "why": "Needle decompression is temporary.", "source": "ATLS 11th edition" },
-    { "q": "In tension with hypovolaemia, the neck veins may be…", "options": ["Flat", "Always distended", "Pulsatile only on inspiration", "Absent on the right"], "why": "Distension needs venous volume.", "source": "ATLS 11th edition" }
+    {
+      "q": "ATLS adult site for needle decompression?",
+      "options": [
+        "4th/5th ICS, anterior to mid-axillary line",
+        "2nd ICS, mid-clavicular line, above the rib",
+        "8th ICS in the posterior axillary line",
+        "Through the sternal angle"
+      ],
+      "why": "Thinner chest wall laterally; standard cannulae often fail anteriorly.",
+      "source": "ATLS 10th–11th edition",
+      "note": "Older teaching: 2nd ICS MCL for adults."
+    },
+    {
+      "q": "Tension pneumothorax diagnosis is made by…",
+      "options": [
+        "Clinical examination",
+        "An urgent chest X-ray",
+        "CT of the chest",
+        "An arterial blood gas"
+      ],
+      "why": "Treat before imaging.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "Percussion note over a tension pneumothorax?",
+      "options": [
+        "Hyper-resonant",
+        "Stony dull",
+        "Normal",
+        "Dull at the base only"
+      ],
+      "why": "Air under pressure.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "Minimum cannula length for adult needle decompression?",
+      "options": [
+        "About 8 cm",
+        "About 3 cm",
+        "About 1.5 cm",
+        "12 cm or more"
+      ],
+      "why": "Chest wall thickness often exceeds a standard 3–5 cm cannula.",
+      "source": "ATLS 10th edition"
+    },
+    {
+      "q": "After needle decompression, what next?",
+      "options": [
+        "Chest drain",
+        "Remove the cannula",
+        "Discharge after a normal film",
+        "CT only"
+      ],
+      "why": "Needle decompression is temporary.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "In tension with hypovolaemia, the neck veins may be…",
+      "options": [
+        "Flat",
+        "Always distended",
+        "Pulsatile only on inspiration",
+        "Absent on the right"
+      ],
+      "why": "Distension needs venous volume.",
+      "source": "ATLS 11th edition"
+    }
   ]
 }

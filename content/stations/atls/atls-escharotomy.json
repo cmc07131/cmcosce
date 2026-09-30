@@ -5,13 +5,50 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 3. A 40-year-old man with 45% burns from a factory fire was intubated two hours ago and is waiting for transfer to the burns centre. The nurse calls you: the ventilator is alarming and his saturation is falling. He has full-thickness burns around his whole chest and his right arm.",
+  "phases": [
+    {
+      "title": "DOPES",
+      "goal": "The ventilator is alarming: work through the causes yourself before blaming the eschar.",
+      "steps": [
+        "dopes",
+        "decide"
+      ]
+    },
+    {
+      "title": "Chest escharotomy",
+      "goal": "Analgesia from the cart, then the incisions in the right places, to the right depth.",
+      "steps": [
+        "analgesia",
+        "chest"
+      ]
+    },
+    {
+      "title": "The arm and the call",
+      "goal": "The ischaemic arm, then tell the burns centre.",
+      "steps": [
+        "arm",
+        "call"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Chest incisions. Your notes join them 'at the sternum and pubis'. The standard chest escharotomy joins the two anterior axillary incisions along the costal margin (a 'shield'). An abdominal extension is added only if the abdomen is burned and tight too."}
+    {
+      "tag": "differs",
+      "text": "Chest incisions. Your notes join them 'at the sternum and pubis'. The standard chest escharotomy joins the two anterior axillary incisions along the costal margin (a 'shield'). An abdominal extension is added only if the abdomen is burned and tight too."
+    }
   ],
   "notes": "Checked against ATLS 11th edition, British Burn Association guidance on escharotomy, and ANZBA EMSB principles.\n\nFull-thickness eschar is inelastic. As tissue swells under a circumferential eschar, the chest cannot expand (high airway pressures, hypercapnia, falling saturation) and limbs become ischaemic (loss of Doppler signal, cool, delayed capillary refill; pain and paraesthesia in an awake patient).\n\nBefore blaming the eschar in a ventilated patient, run DOPES: Displacement of the tube, Obstruction (secretions, soot), Pneumothorax, Equipment, Stacking of breaths.\n\nChest: bilateral incisions in the anterior axillary lines from the clavicle to the costal margin, joined by a transverse incision along the costal margin to make a 'shield' that moves with breathing. Your notes say to join them 'at the sternum and pubis'; the standard join for the chest is subcostal (an abdominal extension is added only when the abdomen is also burned and tight).\n\nLimbs: mid-medial and mid-lateral lines along the whole length of the eschar, avoiding the ulnar nerve behind the medial epicondyle and the common peroneal nerve at the fibular head. Hands: dorsal incisions between the metacarpals; fingers: mid-lateral, away from the pinch surfaces.\n\nDepth: through the eschar into subcutaneous fat until the edges gape, not through fascia. Electrical injury damages muscle under the skin and may need a fasciotomy; that is a surgical procedure. Your notes' indications, timing (usually within 6 hours) and contraindications match this.",
   "cast": [
-    { "id": "patient", "name": "Mr Siu", "role": "patient" },
-    { "id": "nurse", "name": "Nurse Tse", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mr Siu",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Tse",
+      "role": "nurse"
+    }
   ],
   "vitals": {
     "hr": 118,
@@ -22,11 +59,31 @@
     "etco2": 7.2,
     "temp": 36.4,
     "rhythm": "sinus-tachy",
-    "drift": { "spo2": -1, "etco2": 0.2, "hr": 1 },
-    "stop": ["eschar"],
+    "drift": {
+      "spo2": -1,
+      "etco2": 0.2,
+      "hr": 1
+    },
+    "stop": [
+      "eschar"
+    ],
     "effects": [
-      { "scene": "eschar", "add": { "spo2": 9, "etco2": -2, "hr": -12 }, "overS": 60 },
-      { "scene": "arm", "add": { "hr": -2 }, "overS": 30 }
+      {
+        "scene": "eschar",
+        "add": {
+          "spo2": 9,
+          "etco2": -2,
+          "hr": -12
+        },
+        "overS": 60
+      },
+      {
+        "scene": "arm",
+        "add": {
+          "hr": -2
+        },
+        "overS": 30
+      }
     ]
   },
   "steps": [
@@ -38,19 +95,48 @@
       "hint": "Rule out tube and ventilator causes (DOPES) before the eschar.",
       "groups": {
         "Tube": [
-          { "t": "Tube position at the teeth; capnography trace", "r": "Tube at 23 cm as documented. Square ETCO2 trace, 7.2 kPa.", "mark": "Checks tube displacement with capnography" },
-          { "t": "Pass a suction catheter down the tube", "r": "Passes easily. A little sooty sputum.", "mark": "Excludes tube obstruction" }
+          {
+            "t": "Tube position at the teeth; capnography trace",
+            "r": "Tube at 23 cm as documented. Square ETCO2 trace, 7.2 kPa.",
+            "mark": "Checks tube displacement with capnography"
+          },
+          {
+            "t": "Pass a suction catheter down the tube",
+            "r": "Passes easily. A little sooty sputum.",
+            "mark": "Excludes tube obstruction"
+          }
         ],
         "Chest": [
-          { "t": "Look at chest movement", "r": "Barely moves. Full-thickness, leathery eschar all the way round.", "img": "photo:chest-eschar", "mark": "Finds a circumferential full-thickness chest eschar" },
-          { "t": "Listen and ultrasound for pneumothorax", "r": "Quiet but equal air entry. Lung sliding on both sides.", "mark": "Excludes pneumothorax" }
+          {
+            "t": "Look at chest movement",
+            "r": "Barely moves. Full-thickness, leathery eschar all the way round.",
+            "img": "photo:chest-eschar",
+            "mark": "Finds a circumferential full-thickness chest eschar"
+          },
+          {
+            "t": "Listen and ultrasound for pneumothorax",
+            "r": "Quiet but equal air entry. Lung sliding on both sides.",
+            "mark": "Excludes pneumothorax"
+          }
         ],
         "Ventilator": [
-          { "t": "Disconnect and hand-bag", "r": "Very stiff to bag. The problem stays off the ventilator.", "mark": "Excludes the equipment by hand-bagging" },
-          { "t": "Ventilator readings", "r": "Peak pressure 44 cmH2O (was 24). Tidal volume falling. No breath stacking." }
+          {
+            "t": "Disconnect and hand-bag",
+            "r": "Very stiff to bag. The problem stays off the ventilator.",
+            "mark": "Excludes the equipment by hand-bagging"
+          },
+          {
+            "t": "Ventilator readings",
+            "r": "Peak pressure 44 cmH2O (was 24). Tidal volume falling. No breath stacking."
+          }
         ],
         "Right arm": [
-          { "t": "Pulses and capillary refill, right hand", "r": "No radial or ulnar Doppler signal. Hand cool, capillary refill 5 s. Full-thickness burn all round the arm.", "mark": "Finds an ischaemic limb under circumferential eschar" }
+          {
+            "t": "Pulses and capillary refill, right hand",
+            "r": "No radial or ulnar Doppler signal. Hand cool, capillary refill 5 s. Full-thickness burn all round the arm.",
+            "mark": "Finds an ischaemic limb under circumferential eschar",
+            "anim": "glucose"
+          }
         ]
       }
     },
@@ -61,9 +147,45 @@
       "label": "Talk to the nurse",
       "hint": "Say the indication and do it now; tell the burns centre.",
       "opts": [
-        { "t": "Circumferential chest eschar restricting ventilation: chest escharotomy now, then the right arm", "mark": "States the indication and prioritises the chest" },
-        { "t": "Increase the ventilator pressure limit and wait for the burns centre", "trap": "critical", "r": "More pressure against a rigid shell causes barotrauma and he keeps desaturating. Release it." },
-        { "t": "Paralyse him to improve compliance and leave it", "trap": true, "r": "The stiffness is the eschar, not the muscles." }
+        {
+          "t": "Circumferential chest eschar restricting ventilation: chest escharotomy now, then the right arm",
+          "mark": "States the indication and prioritises the chest"
+        },
+        {
+          "t": "Increase the ventilator pressure limit and wait for the burns centre",
+          "trap": "critical",
+          "r": "More pressure against a rigid shell causes barotrauma and he keeps desaturating. Release it."
+        },
+        {
+          "t": "Paralyse him to improve compliance and leave it",
+          "trap": true,
+          "r": "The stiffness is the eschar, not the muscles."
+        }
+      ]
+    },
+    {
+      "id": "analgesia",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Top up analgesia and sedation before you cut.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Fentanyl 1 microgram/kg (70 microgram) IV",
+          "drug": "Fentanyl",
+          "dose": "1 microgram/kg (70 microgram) IV",
+          "fetch": "cart",
+          "mark": "Analgesia and sedation (the edges are sensate)"
+        },
+        {
+          "t": "Fentanyl 1 mg IV",
+          "drug": "Fentanyl",
+          "dose": "1 mg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Ten times too much: about 1 microgram/kg, titrated."
+        }
       ]
     },
     {
@@ -73,15 +195,48 @@
       "label": "Chest escharotomy",
       "hint": "Analgesia, asepsis, mark the anterior axillary lines and the costal margin, cut through eschar only, check.",
       "opts": [
-        { "t": "Top up analgesia and sedation", "n": 1, "mark": "Analgesia and sedation (the edges are sensate)" },
-        { "t": "Clean and drape; diathermy and a scalpel ready", "n": 2, "mark": "Asepsis and diathermy for haemostasis" },
-        { "t": "Mark both anterior axillary lines from clavicle to costal margin", "n": 3, "mark": "Marks bilateral anterior axillary lines" },
-        { "t": "Mark a transverse line along the costal margin joining them", "n": 4, "mark": "Joins them along the costal margin (chest shield)" },
-        { "t": "Cut through the eschar into fat until the edges spring apart", "n": 5, "scene": "eschar", "mark": "Incises through eschar only, to subcutaneous fat", "r": "The edges gape. The chest starts to rise. Peak pressure falls to 28." },
-        { "t": "Diathermy for bleeding points; dress with alginate", "n": 6, "mark": "Haemostasis and dressing" },
-        { "t": "Check ventilation and saturation again", "n": 7, "mark": "Reassesses ventilation" },
-        { "t": "Cut on through the fascia and into muscle", "trap": true, "r": "That is a fasciotomy. Escharotomy goes through the eschar only." },
-        { "t": "One midline cut down the sternum only", "trap": true, "r": "A single midline cut does not free the chest wall. Use the anterior axillary lines and join them." }
+        {
+          "t": "Clean and drape; diathermy and a scalpel ready",
+          "n": 1,
+          "mark": "Asepsis and diathermy for haemostasis"
+        },
+        {
+          "t": "Mark both anterior axillary lines from clavicle to costal margin",
+          "n": 2,
+          "mark": "Marks bilateral anterior axillary lines"
+        },
+        {
+          "t": "Mark a transverse line along the costal margin joining them",
+          "n": 3,
+          "mark": "Joins them along the costal margin (chest shield)"
+        },
+        {
+          "t": "Cut through the eschar into fat until the edges spring apart",
+          "n": 4,
+          "scene": "eschar",
+          "mark": "Incises through eschar only, to subcutaneous fat",
+          "r": "The edges gape. The chest starts to rise. Peak pressure falls to 28."
+        },
+        {
+          "t": "Diathermy for bleeding points; dress with alginate",
+          "n": 5,
+          "mark": "Haemostasis and dressing"
+        },
+        {
+          "t": "Check ventilation and saturation again",
+          "n": 6,
+          "mark": "Reassesses ventilation"
+        },
+        {
+          "t": "Cut on through the fascia and into muscle",
+          "trap": true,
+          "r": "That is a fasciotomy. Escharotomy goes through the eschar only."
+        },
+        {
+          "t": "One midline cut down the sternum only",
+          "trap": true,
+          "r": "A single midline cut does not free the chest wall. Use the anterior axillary lines and join them."
+        }
       ]
     },
     {
@@ -92,8 +247,17 @@
       "label": "Right arm",
       "hint": "Mid-medial and mid-lateral lines along the whole burn, protect the ulnar nerve.",
       "opts": [
-        { "t": "Mid-lateral and mid-medial incisions along the length of the eschar, passing in front of the medial epicondyle; then recheck Doppler", "scene": "arm", "mark": "Limb escharotomy on the mid-axial lines, avoiding the ulnar nerve", "r": "The eschar parts. Radial Doppler returns." },
-        { "t": "One incision down the front of the forearm over the tendons", "trap": true, "r": "The anterior line damages tendons and does not release the whole circumference." }
+        {
+          "t": "Mid-lateral and mid-medial incisions along the length of the eschar, passing in front of the medial epicondyle; then recheck Doppler",
+          "scene": "arm",
+          "mark": "Limb escharotomy on the mid-axial lines, avoiding the ulnar nerve",
+          "r": "The eschar parts. Radial Doppler returns."
+        },
+        {
+          "t": "One incision down the front of the forearm over the tendons",
+          "trap": true,
+          "r": "The anterior line damages tendons and does not release the whole circumference."
+        }
       ]
     },
     {
@@ -103,8 +267,16 @@
       "label": "Phone",
       "hint": "Tell the burns centre what you did and why.",
       "opts": [
-        { "t": "Burns centre: chest and right arm escharotomy done for ventilation and ischaemia; pressures and pulses improved", "mark": "Informs the burns centre", "r": "Burns registrar: Thank you. Keep elevating the arm; transfer as planned." },
-        { "t": "Say nothing; they will see it", "trap": true, "r": "The receiving team need to know what was cut and why." }
+        {
+          "t": "Burns centre: chest and right arm escharotomy done for ventilation and ischaemia; pressures and pulses improved",
+          "mark": "Informs the burns centre",
+          "r": "Burns registrar: Thank you. Keep elevating the arm; transfer as planned."
+        },
+        {
+          "t": "Say nothing; they will see it",
+          "trap": true,
+          "r": "The receiving team need to know what was cut and why."
+        }
       ]
     },
     {
@@ -113,24 +285,150 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "What does DOPES stand for?", "a": "Displacement, Obstruction, Pneumothorax, Equipment, Stacking", "wrong": ["Drugs, Oxygen supply, Pressure alarm, Eschar, Sedation", "Dislodged, Oesophageal, PEEP, Endobronchial, Secretions", "Depth, Occlusion, Pain, Eschar, Swelling"] },
-        { "q": "How deep is an escharotomy?", "a": "Through the eschar to subcutaneous fat", "wrong": ["Down to bone, through the periosteum", "Through the deep fascia into the muscle compartments", "Epidermis only, to avoid bleeding"] },
-        { "q": "Which burn more often needs a fasciotomy rather than an escharotomy?", "a": "High-voltage electrical burn", "why": "Current travels through muscle, which swells beneath intact-looking skin.", "wrong": ["Scald to both hands of a toddler", "Flash burn to the face and neck", "Extensive sunburn on the back"] },
-        { "q": "Which nerve is at risk on the medial side of the elbow?", "a": "Ulnar nerve", "wrong": ["Radial nerve", "Median nerve", "Musculocutaneous nerve"] },
-        { "q": "Where are finger escharotomies placed?", "a": "Mid-lateral, sparing the pinch surfaces", "wrong": ["Down the middle of the palm", "Over the dorsum of each knuckle", "Around the fingertip pulp"] }
+        {
+          "q": "What does DOPES stand for?",
+          "a": "Displacement, Obstruction, Pneumothorax, Equipment, Stacking",
+          "wrong": [
+            "Drugs, Oxygen supply, Pressure alarm, Eschar, Sedation",
+            "Dislodged, Oesophageal, PEEP, Endobronchial, Secretions",
+            "Depth, Occlusion, Pain, Eschar, Swelling"
+          ]
+        },
+        {
+          "q": "How deep is an escharotomy?",
+          "a": "Through the eschar to subcutaneous fat",
+          "wrong": [
+            "Down to bone, through the periosteum",
+            "Through the deep fascia into the muscle compartments",
+            "Epidermis only, to avoid bleeding"
+          ]
+        },
+        {
+          "q": "Which burn more often needs a fasciotomy rather than an escharotomy?",
+          "a": "High-voltage electrical burn",
+          "why": "Current travels through muscle, which swells beneath intact-looking skin.",
+          "wrong": [
+            "Scald to both hands of a toddler",
+            "Flash burn to the face and neck",
+            "Extensive sunburn on the back"
+          ]
+        },
+        {
+          "q": "Which nerve is at risk on the medial side of the elbow?",
+          "a": "Ulnar nerve",
+          "wrong": [
+            "Radial nerve",
+            "Median nerve",
+            "Musculocutaneous nerve"
+          ]
+        },
+        {
+          "q": "Where are finger escharotomies placed?",
+          "a": "Mid-lateral, sparing the pinch surfaces",
+          "wrong": [
+            "Down the middle of the palm",
+            "Over the dorsum of each knuckle",
+            "Around the fingertip pulp"
+          ]
+        }
       ]
     }
   ],
   "rules": [
-    { "id": "dopes-first", "first": ["dopes"], "then": ["chest"], "fail": "You cut before excluding a displaced or blocked tube, a pneumothorax or the ventilator.", "ok": "DOPES excluded before cutting." }
+    {
+      "id": "dopes-first",
+      "first": [
+        "dopes"
+      ],
+      "then": [
+        "chest"
+      ],
+      "fail": "Cut before excluding DOPES.",
+      "ok": "DOPES first."
+    },
+    {
+      "id": "analgesia-first",
+      "first": [
+        "analgesia"
+      ],
+      "then": [
+        "chest"
+      ],
+      "fail": "Cut without analgesia.",
+      "ok": "Analgesia first."
+    }
   ],
-  "badge": { "name": "Shield Maker", "emoji": "🛡", "flavor": "DOPES first. Then free the chest along the axillary lines." },
+  "badge": {
+    "name": "Shield Maker",
+    "emoji": "🛡",
+    "flavor": "DOPES first. Then free the chest along the axillary lines."
+  },
   "cards": [
-    { "q": "Chest escharotomy incisions run along…", "options": ["Anterior axillary lines, joined at the costal margin", "Down the midline sternum from notch to xiphoid", "Both mid-clavicular lines, joined across the clavicles", "Transversely below the nipples, from axilla to axilla"], "why": "The 'shield' releases the chest wall to move with breathing.", "source": "British Burn Association; ATLS 11th edition" },
-    { "q": "Sign of a tight chest eschar in a ventilated patient?", "options": ["Rising peak airway pressures and hypercapnia", "Falling peak airway pressures", "Bradycardia with a narrow pulse pressure", "Polyuria and a rising serum sodium"], "why": "The rigid shell restricts chest expansion.", "source": "ATLS 11th edition" },
-    { "q": "Limb escharotomy lines are…", "options": ["Mid-medial and mid-lateral", "Along the anterior midline", "Along the posterior midline", "A spiral around the limb"], "why": "They release the circumference while sparing tendons and nerves.", "source": "EMSB / BBA" },
-    { "q": "Why is an escharotomy often painless in the middle but painful at the edges?", "options": ["Full thickness is insensate; edges are partial thickness", "The patient is always paralysed and deeply sedated for it", "Burnt skin releases endorphins that block local pain", "Subcutaneous fat has no sensory nerve supply at all"], "why": "Give analgesia: the unburnt and partial-thickness margins hurt.", "source": "EMSB" },
-    { "q": "An intubated burns patient desaturates. First step?", "options": ["DOPES check", "Chest escharotomy at once", "Increase PEEP to 20", "Give furosemide"], "why": "Rule out tube displacement, obstruction, pneumothorax, equipment and stacking.", "source": "Resuscitation Council / ICS airway teaching" },
-    { "q": "Circumferential full-thickness burn of the arm with no Doppler signal. Action?", "options": ["Escharotomy of the arm", "Elevate and review in 24 hours", "Apply a tourniquet", "Wrap it tightly with cling film"], "why": "Ischaemia under a constricting eschar needs release.", "source": "ATLS 11th edition" }
+    {
+      "q": "Chest escharotomy incisions run along…",
+      "options": [
+        "Anterior axillary lines, joined at the costal margin",
+        "Down the midline sternum from notch to xiphoid",
+        "Both mid-clavicular lines, joined across the clavicles",
+        "Transversely below the nipples, from axilla to axilla"
+      ],
+      "why": "The 'shield' releases the chest wall to move with breathing.",
+      "source": "British Burn Association; ATLS 11th edition"
+    },
+    {
+      "q": "Sign of a tight chest eschar in a ventilated patient?",
+      "options": [
+        "Rising peak airway pressures and hypercapnia",
+        "Falling peak airway pressures",
+        "Bradycardia with a narrow pulse pressure",
+        "Polyuria and a rising serum sodium"
+      ],
+      "why": "The rigid shell restricts chest expansion.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "Limb escharotomy lines are…",
+      "options": [
+        "Mid-medial and mid-lateral",
+        "Along the anterior midline",
+        "Along the posterior midline",
+        "A spiral around the limb"
+      ],
+      "why": "They release the circumference while sparing tendons and nerves.",
+      "source": "EMSB / BBA"
+    },
+    {
+      "q": "Why is an escharotomy often painless in the middle but painful at the edges?",
+      "options": [
+        "Full thickness is insensate; edges are partial thickness",
+        "The patient is always paralysed and deeply sedated for it",
+        "Burnt skin releases endorphins that block local pain",
+        "Subcutaneous fat has no sensory nerve supply at all"
+      ],
+      "why": "Give analgesia: the unburnt and partial-thickness margins hurt.",
+      "source": "EMSB"
+    },
+    {
+      "q": "An intubated burns patient desaturates. First step?",
+      "options": [
+        "DOPES check",
+        "Chest escharotomy at once",
+        "Increase PEEP to 20",
+        "Give furosemide"
+      ],
+      "why": "Rule out tube displacement, obstruction, pneumothorax, equipment and stacking.",
+      "source": "Resuscitation Council / ICS airway teaching"
+    },
+    {
+      "q": "Circumferential full-thickness burn of the arm with no Doppler signal. Action?",
+      "options": [
+        "Escharotomy of the arm",
+        "Elevate and review in 24 hours",
+        "Apply a tourniquet",
+        "Wrap it tightly with cling film"
+      ],
+      "why": "Ischaemia under a constricting eschar needs release.",
+      "source": "ATLS 11th edition"
+    }
   ]
 }

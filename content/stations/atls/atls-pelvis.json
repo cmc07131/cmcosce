@@ -5,14 +5,83 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 2. A 45-year-old woman was struck from the front by a reversing bus and pinned against a wall at hip level. She complains of severe pain in her hips. HR 136, BP 78/40, RR 26, SpO2 96% on oxygen, GCS 15. She arrives on a scoop with no pelvic binder. You lead the team.",
+  "phases": [
+    {
+      "title": "Prepare",
+      "goal": "Team, PPE, blood and the binder ready; monitoring on; the handover.",
+      "steps": [
+        "prep",
+        "monitoring",
+        "handover"
+      ]
+    },
+    {
+      "title": "Primary survey",
+      "goal": "Examine her yourself: is the pelvis the source? Handle it gently.",
+      "steps": [
+        "survey"
+      ]
+    },
+    {
+      "title": "Binder",
+      "goal": "The binder on, correctly, now.",
+      "steps": [
+        "binder"
+      ]
+    },
+    {
+      "title": "Resuscitate",
+      "goal": "Access in the arms, blood, and the drugs from the cart.",
+      "steps": [
+        "access",
+        "drugs"
+      ]
+    },
+    {
+      "title": "Adjuncts and definitive care",
+      "goal": "Bedside imaging; who stops the bleeding? Hand over.",
+      "steps": [
+        "images",
+        "definitive",
+        "sbar"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "worse",
+      "after": "monitored",
+      "delayS": 90,
+      "unless": "binder",
+      "scene": "worse",
+      "say": "She is paler and confused. BP 64/36.",
+      "treatedBy": "binder",
+      "untreated": "She bled from her pelvis and no binder went on."
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Contraindications to a binder. Your notes list open pelvic fractures and stable fractures. An open fracture still gets a binder if the patient is bleeding (pack the wound under it); a stable fracture simply does not need one. There is no absolute contraindication."}
+    {
+      "tag": "differs",
+      "text": "Contraindications to a binder. Your notes list open pelvic fractures and stable fractures. An open fracture still gets a binder if the patient is bleeding (pack the wound under it); a stable fracture simply does not need one. There is no absolute contraindication."
+    }
   ],
   "notes": "Checked against ATLS 11th edition (2025), NICE NG39 (major trauma), and the BOAST guideline on pelvic and acetabular fractures.\n\nAn anteroposterior compression injury (open book) springs the symphysis apart and tears the posterior sacroiliac ligaments; the pelvic volume increases and it bleeds mostly from the presacral venous plexus (about 85%), less often from arteries (internal iliac branches). A binder closes the ring and tamponades venous bleeding.\n\nThe binder goes over the greater trochanters, not the iliac crests. Bring the feet and knees together and tie them. Do not spring the pelvis to test it, and avoid unnecessary log rolls before the binder is on.\n\nYour notes list open pelvic fractures and stable fractures as contraindications. ATLS and NICE advise a binder for suspected pelvic bleeding in shock, open fractures included (wound packing under it); stable fractures simply do not need one. Your notes are otherwise consistent: greater trochanters, no absolute contraindication, skin checks, radiolucent device.\n\nTransient responders with pelvic bleeding go to angioembolisation, or pre-peritoneal packing with external fixation, depending on the centre. Non-responders do not go to CT. REBOA zone 3 is a bridge in some centres.\n\nIn a man, blood at the meatus, a high-riding prostate or scrotal haematoma means no blind urethral catheter until the urethra is imaged.",
   "cast": [
-    { "id": "patient", "name": "Mrs Wong", "role": "patient" },
-    { "id": "nurse", "name": "Nurse Chan", "role": "nurse" },
-    { "id": "medic", "name": "Paramedic", "role": "paramedic" }
+    {
+      "id": "patient",
+      "name": "Mrs Wong",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Chan",
+      "role": "nurse"
+    },
+    {
+      "id": "medic",
+      "name": "Paramedic",
+      "role": "paramedic"
+    }
   ],
   "vitals": {
     "hr": 136,
@@ -23,12 +92,42 @@
     "temp": 35.9,
     "gcs": 15,
     "rhythm": "sinus-tachy",
-    "drift": { "sbp": -3, "hr": 2 },
-    "stop": ["binder"],
+    "drift": {
+      "sbp": -3,
+      "hr": 2
+    },
+    "stop": [
+      "binder"
+    ],
     "effects": [
-      { "scene": "binder", "add": { "sbp": 8, "dbp": 6, "hr": -6 }, "overS": 60 },
-      { "scene": "blood", "add": { "sbp": 16, "dbp": 10, "hr": -14 }, "overS": 90 }
-    ]
+      {
+        "scene": "worse",
+        "add": {
+          "sbp": -12,
+          "hr": 10
+        },
+        "overS": 20
+      },
+      {
+        "scene": "binder",
+        "add": {
+          "sbp": 8,
+          "dbp": 6,
+          "hr": -6
+        },
+        "overS": 60
+      },
+      {
+        "scene": "blood",
+        "add": {
+          "sbp": 16,
+          "dbp": 10,
+          "hr": -14
+        },
+        "overS": 90
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
     {
@@ -39,12 +138,56 @@
       "hint": "Trauma call, PPE, blood and the major haemorrhage protocol, warmer, a pelvic binder.",
       "confirm": "Ask for these",
       "opts": [
-        { "t": "Trauma team call", "need": true, "mark": "Activates the trauma team" },
-        { "t": "PPE for the team", "fetch": "trolley", "need": true, "mark": "Team in PPE" },
-        { "t": "Activate the major haemorrhage protocol; O-negative to the bedside", "need": true, "mark": "Activates the major haemorrhage protocol early" },
-        { "t": "Commercial pelvic binder ready on the trolley", "fetch": "trolley", "need": true, "mark": "Pelvic binder ready before arrival" },
-        { "t": "Warmer, rapid infuser, warm air blanket", "fetch": "trolley", "need": true, "mark": "Prevents hypothermia" },
-        { "t": "Urinary catheter set to put in first", "fetch": "trolley", "trap": true, "r": "Not before the urethra and perineum are checked, and it is not a priority in the primary survey." }
+        {
+          "t": "Trauma team call",
+          "need": true,
+          "mark": "Activates the trauma team"
+        },
+        {
+          "t": "PPE for the team",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Team in PPE"
+        },
+        {
+          "t": "Activate the major haemorrhage protocol; O-negative to the bedside",
+          "need": true,
+          "mark": "Activates the major haemorrhage protocol early",
+          "scene": "mhp"
+        },
+        {
+          "t": "Commercial pelvic binder ready on the trolley",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Pelvic binder ready before arrival"
+        },
+        {
+          "t": "Warmer, rapid infuser, warm air blanket",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Prevents hypothermia"
+        },
+        {
+          "t": "Urinary catheter set to put in first",
+          "fetch": "trolley",
+          "trap": true,
+          "r": "Not before the urethra and perineum are checked, and it is not a priority in the primary survey."
+        }
+      ]
+    },
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
       ]
     },
     {
@@ -55,16 +198,32 @@
       "hint": "Mechanism, injuries, signs, treatment.",
       "groups": {
         "Mechanism": [
-          { "t": "What happened?", "r": "Bus reversing, crushed her against a wall at hip height for a few seconds. 30 minutes ago.", "mark": "Asks the mechanism: front-to-back compression of the pelvis" }
+          {
+            "t": "What happened?",
+            "r": "Bus reversing, crushed her against a wall at hip height for a few seconds. 30 minutes ago.",
+            "mark": "Asks the mechanism: front-to-back compression of the pelvis"
+          }
         ],
         "Injuries": [
-          { "t": "Injuries found?", "r": "Pain across both hips and the lower back. Can't move her legs because of the pain. No head injury.", "mark": "Asks the injuries found" }
+          {
+            "t": "Injuries found?",
+            "r": "Pain across both hips and the lower back. Can't move her legs because of the pain. No head injury.",
+            "mark": "Asks the injuries found"
+          }
         ],
         "Signs": [
-          { "t": "Obs and trend?", "r": "At scene HR 110, BP 100/60. Now worse.", "mark": "Asks the trend of the vital signs" }
+          {
+            "t": "Obs and trend?",
+            "r": "At scene HR 110, BP 100/60. Now worse.",
+            "mark": "Asks the trend of the vital signs"
+          }
         ],
         "Treatment": [
-          { "t": "Treatment so far?", "r": "Oxygen, one 16 G, 500 mL saline, 5 mg morphine. We didn't have a binder on the vehicle.", "mark": "Asks what has been given" }
+          {
+            "t": "Treatment so far?",
+            "r": "Oxygen, one 16 G, 500 mL saline, 5 mg morphine. We didn't have a binder on the vehicle.",
+            "mark": "Asks what has been given"
+          }
         ]
       }
     },
@@ -76,22 +235,72 @@
       "hint": "xABCDE. Look at the pelvis and legs; do not spring it.",
       "groups": {
         "x A B": [
-          { "t": "Catastrophic external bleeding?", "r": "None.", "mark": "Checks for exsanguinating external haemorrhage" },
-          { "t": "Airway", "r": "Talking in full sentences.", "mark": "Airway patent, C-spine protected" },
-          { "t": "Chest: look, feel, listen", "r": "Equal air entry, no tenderness, RR 26.", "mark": "Breathing assessed: chest clear" }
+          {
+            "t": "Catastrophic external bleeding?",
+            "r": "None.",
+            "mark": "Checks for exsanguinating external haemorrhage"
+          },
+          {
+            "t": "Airway",
+            "r": "Talking in full sentences.",
+            "mark": "Airway patent, C-spine protected",
+            "anim": "airway"
+          },
+          {
+            "t": "Chest: look, feel, listen",
+            "r": "Equal air entry, no tenderness, RR 26.",
+            "mark": "Breathing assessed: chest clear",
+            "anim": "auscultate"
+          }
         ],
         "Circulation": [
-          { "t": "Pulse, skin, capillary refill", "r": "Weak radial pulse 136. Cold peripheries. CRT 5 s." },
-          { "t": "Abdomen", "r": "Soft. Suprapubic bruising, tender low down." },
-          { "t": "Look at the pelvis and legs", "r": "Both legs externally rotated, bruising over the symphysis and a labial haematoma. Leg lengths equal.", "mark": "Looks for pelvic signs: rotation, bruising, perineal haematoma" },
-          { "t": "Press gently once over the iliac wings", "r": "She cries out. You stop: a pelvic injury is assumed and a binder goes on." },
-          { "t": "Spring the pelvis hard to test for instability", "trap": "critical", "r": "Springing a disrupted pelvis dislodges clot and restarts the bleeding." },
-          { "t": "Long bones", "r": "Femurs intact." }
+          {
+            "t": "Pulse, skin, capillary refill",
+            "r": "Weak radial pulse 136. Cold peripheries. CRT 5 s.",
+            "anim": "glucose"
+          },
+          {
+            "t": "Abdomen",
+            "r": "Soft. Suprapubic bruising, tender low down.",
+            "anim": "abdomen"
+          },
+          {
+            "t": "Look at the pelvis and legs",
+            "r": "Both legs externally rotated, bruising over the symphysis and a labial haematoma. Leg lengths equal.",
+            "mark": "Looks for pelvic signs: rotation, bruising, perineal haematoma"
+          },
+          {
+            "t": "Press gently once over the iliac wings",
+            "r": "She cries out. You stop: a pelvic injury is assumed and a binder goes on."
+          },
+          {
+            "t": "Spring the pelvis hard to test for instability",
+            "trap": "critical",
+            "r": "Springing a disrupted pelvis dislodges clot and restarts the bleeding."
+          },
+          {
+            "t": "Long bones",
+            "r": "Femurs intact."
+          }
         ],
         "D E": [
-          { "t": "GCS, pupils, glucose", "r": "GCS 15, pupils equal, glucose 8.1.", "mark": "Disability assessed" },
-          { "t": "Expose and keep warm", "r": "Temperature 35.9. Warm air blanket on.", "mark": "Exposes and prevents hypothermia" },
-          { "t": "Full log roll now to look at her back", "trap": true, "r": "Every roll moves the fracture. Minimise log rolls until the pelvis is bound and imaged." }
+          {
+            "t": "GCS, pupils, glucose",
+            "r": "GCS 15, pupils equal, glucose 8.1.",
+            "mark": "Disability assessed",
+            "anim": "glucose"
+          },
+          {
+            "t": "Expose and keep warm",
+            "r": "Temperature 35.9. Warm air blanket on.",
+            "mark": "Exposes and prevents hypothermia",
+            "anim": "abdomen"
+          },
+          {
+            "t": "Full log roll now to look at her back",
+            "trap": true,
+            "r": "Every roll moves the fracture. Minimise log rolls until the pelvis is bound and imaged."
+          }
         ]
       }
     },
@@ -102,14 +311,48 @@
       "label": "Pelvic binder",
       "hint": "Empty pockets, slide it under the knees and up to the greater trochanters, feet together, tighten, check.",
       "opts": [
-        { "t": "Explain to her; empty pockets and remove belts", "n": 1, "mark": "Explains and clears pockets before applying" },
-        { "t": "Slide the binder under the knees and work it up to the hips without log rolling", "n": 2, "mark": "Positions the binder with minimal movement" },
-        { "t": "Centre it over the greater trochanters", "n": 3, "mark": "Binder centred on the greater trochanters" },
-        { "t": "Bring the feet and knees together and tie them", "n": 4, "mark": "Internally rotates and ties the legs together" },
-        { "t": "Tighten until it locks; note the time on the binder", "n": 5, "scene": "binder", "mark": "Tightens and records the time", "r": "It clicks. Nurse Chan writes 10:42 on the strap. Her pain eases." },
-        { "t": "Recheck the pulse and pressure", "n": 6, "mark": "Reassesses after the intervention" },
-        { "t": "Place it over the iliac crests", "trap": true, "r": "Over the crests it can open the fracture further and does not close the ring. Over the trochanters." },
-        { "t": "Log roll her to feed the binder under", "trap": true, "r": "Rolling moves the fracture. Slide it under the knees and up." }
+        {
+          "t": "Explain to her; empty pockets and remove belts",
+          "n": 1,
+          "mark": "Explains and clears pockets before applying"
+        },
+        {
+          "t": "Slide the binder under the knees and work it up to the hips without log rolling",
+          "n": 2,
+          "mark": "Positions the binder with minimal movement"
+        },
+        {
+          "t": "Centre it over the greater trochanters",
+          "n": 3,
+          "mark": "Binder centred on the greater trochanters"
+        },
+        {
+          "t": "Bring the feet and knees together and tie them",
+          "n": 4,
+          "mark": "Internally rotates and ties the legs together"
+        },
+        {
+          "t": "Tighten until it locks; note the time on the binder",
+          "n": 5,
+          "scene": "binder",
+          "mark": "Tightens and records the time",
+          "r": "It clicks. Nurse Chan writes 10:42 on the strap. Her pain eases."
+        },
+        {
+          "t": "Recheck the pulse and pressure",
+          "n": 6,
+          "mark": "Reassesses after the intervention"
+        },
+        {
+          "t": "Place it over the iliac crests",
+          "trap": true,
+          "r": "Over the crests it can open the fracture further and does not close the ring. Over the trochanters."
+        },
+        {
+          "t": "Log roll her to feed the binder under",
+          "trap": true,
+          "r": "Rolling moves the fracture. Slide it under the knees and up."
+        }
       ]
     },
     {
@@ -119,11 +362,34 @@
       "label": "Talk to the nurse",
       "hint": "Access above the diaphragm, bloods and crossmatch, blood 1:1:1, permissive hypotension.",
       "opts": [
-        { "t": "Two large-bore cannulae in the arms — not the legs", "fetch": "trolley", "mark": "Large-bore access above the diaphragm", "r": "Nurse Chan: Two 14 G in the antecubital fossae." },
-        { "t": "Bloods: crossmatch, FBC, clotting, fibrinogen, gas, lactate, pregnancy test", "mark": "Bloods including crossmatch and pregnancy test", "r": "Nurse Chan: Sent. Gas: pH 7.22, lactate 6.0, Hb 94, hCG negative." },
-        { "t": "O-negative now, then 1:1:1 through the warmer", "scene": "blood", "mark": "Early balanced blood transfusion", "r": "Nurse Chan: Blood running." },
-        { "t": "Aim for a systolic of 80–90 until the bleeding is controlled", "mark": "Permissive hypotension" },
-        { "t": "Cannulate the femoral vein for fast access", "trap": true, "r": "Fluid given below a pelvic bleed may leak out of the torn veins. Go above the diaphragm." }
+        {
+          "t": "Two large-bore cannulae in the arms — not the legs",
+          "fetch": "trolley",
+          "mark": "Large-bore access above the diaphragm",
+          "r": "Nurse Chan: Two 14 G in the antecubital fossae."
+        },
+        {
+          "t": "Bloods: crossmatch, FBC, clotting, fibrinogen, gas, lactate, pregnancy test",
+          "mark": "Bloods including crossmatch and pregnancy test",
+          "r": "Nurse Chan: Sent. Gas: pH 7.22, lactate 6.0, Hb 94, hCG negative."
+        },
+        {
+          "t": "O-negative now, then 1:1:1 through the warmer",
+          "scene": "blood",
+          "mark": "Early balanced blood transfusion",
+          "r": "Nurse Chan: Blood running.",
+          "when": "mhp",
+          "early": "The blood is not here yet."
+        },
+        {
+          "t": "Aim for a systolic of 80–90 until the bleeding is controlled",
+          "mark": "Permissive hypotension"
+        },
+        {
+          "t": "Cannulate the femoral vein for fast access",
+          "trap": true,
+          "r": "Fluid given below a pelvic bleed may leak out of the torn veins. Go above the diaphragm."
+        }
       ]
     },
     {
@@ -131,12 +397,47 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Tranexamic acid and analgesia.",
-      "confirm": "Give these",
+      "hint": "Tranexamic acid and analgesia; no vasopressor in bleeding.",
+      "confirm": "Give",
       "opts": [
-        { "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours", "fetch": "cart", "need": true, "mark": "Tranexamic acid within 3 hours" },
-        { "t": "Fentanyl, small titrated IV doses", "fetch": "cart", "need": true, "mark": "Titrated analgesia" },
-        { "t": "Noradrenaline infusion to a MAP of 65", "fetch": "cart", "trap": "critical", "r": "Vasopressors in haemorrhagic shock hide hypovolaemia and increase mortality. Replace blood." }
+        {
+          "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours",
+          "drug": "Tranexamic acid",
+          "dose": "1 g IV over 10 minutes, then 1 g over 8 hours",
+          "fetch": "cart",
+          "mark": "Tranexamic acid within 3 hours"
+        },
+        {
+          "t": "Tranexamic acid 2 g IV push",
+          "drug": "Tranexamic acid",
+          "dose": "2 g IV push",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Given fast it drops the pressure: 1 g over 10 minutes, then 1 g over 8 hours."
+        },
+        {
+          "t": "Fentanyl 25–50 microgram IV, titrated",
+          "drug": "Fentanyl",
+          "dose": "25–50 microgram IV, titrated",
+          "fetch": "cart",
+          "mark": "Titrated analgesia"
+        },
+        {
+          "t": "Fentanyl 200 microgram IV bolus",
+          "drug": "Fentanyl",
+          "dose": "200 microgram IV bolus",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much at once in shock: small titrated doses."
+        },
+        {
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Vasopressors in haemorrhagic shock hide hypovolaemia and increase mortality. Replace blood.",
+          "t": "Noradrenaline infusion to a MAP of 65",
+          "drug": "Noradrenaline",
+          "dose": "infusion to a MAP of 65"
+        }
       ]
     },
     {
@@ -147,12 +448,31 @@
       "hint": "eFAST, chest and pelvic films in the bay.",
       "groups": {
         "Bedside": [
-          { "t": "Pelvic X-ray (AP)", "r": "The symphysis is sprung about 4 cm apart and both SI joints are widened.", "img": "xr:pelvis-open-book", "mark": "Pelvic film: open-book (APC) injury" },
-          { "t": "Chest X-ray", "r": "Normal.", "img": "xr:cxr-normal", "mark": "Chest X-ray: no chest source" },
-          { "t": "eFAST", "r": "No free fluid in the abdomen, no pericardial fluid, lung sliding both sides.", "img": "us:fast-ruq-neg", "mark": "eFAST negative: bleeding is pelvic or retroperitoneal" }
+          {
+            "t": "Pelvic X-ray (AP)",
+            "r": "The symphysis is sprung about 4 cm apart and both SI joints are widened.",
+            "img": "xr:pelvis-open-book",
+            "mark": "Pelvic film: open-book (APC) injury"
+          },
+          {
+            "t": "Chest X-ray",
+            "r": "Normal.",
+            "img": "xr:cxr-normal",
+            "mark": "Chest X-ray: no chest source"
+          },
+          {
+            "t": "eFAST",
+            "r": "No free fluid in the abdomen, no pericardial fluid, lung sliding both sides.",
+            "img": "us:fast-ruq-neg",
+            "mark": "eFAST negative: bleeding is pelvic or retroperitoneal"
+          }
         ],
         "Scanner": [
-          { "t": "CT pelvis while still hypotensive and not responding", "trap": "critical", "r": "Non-responders do not go to CT. Only once she responds." }
+          {
+            "t": "CT pelvis while still hypotensive and not responding",
+            "trap": "critical",
+            "r": "Non-responders do not go to CT. Only once she responds."
+          }
         ]
       }
     },
@@ -163,20 +483,40 @@
       "label": "Phone",
       "hint": "She responds only partly. Call for haemorrhage control: interventional radiology and orthopaedics / surgery.",
       "opts": [
-        { "t": "Interventional radiology: angioembolisation for pelvic bleeding in a transient responder", "mark": "Arranges angioembolisation", "r": "IR consultant: Suite open in 20 minutes. CT angiogram first if she holds her pressure." },
-        { "t": "Orthopaedics and general surgery: pre-peritoneal packing and external fixation if she does not respond", "mark": "Plans surgical haemorrhage control (packing, external fixation)" },
-        { "t": "Admit to the orthopaedic ward for traction", "trap": "critical", "r": "She is still bleeding. Ward care is not haemorrhage control." }
+        {
+          "t": "Interventional radiology: angioembolisation for pelvic bleeding in a transient responder",
+          "mark": "Arranges angioembolisation",
+          "r": "IR consultant: Suite open in 20 minutes. CT angiogram first if she holds her pressure."
+        },
+        {
+          "t": "Orthopaedics and general surgery: pre-peritoneal packing and external fixation if she does not respond",
+          "mark": "Plans surgical haemorrhage control (packing, external fixation)"
+        },
+        {
+          "t": "Admit to the orthopaedic ward for traction",
+          "trap": "critical",
+          "r": "She is still bleeding. Ward care is not haemorrhage control."
+        }
       ]
     },
     {
       "id": "sbar",
       "kind": "handover",
-      "to": "examiner", "ask": "The orthopaedic and radiology team are here. Please hand over.",
+      "to": "examiner",
+      "ask": "The orthopaedic and radiology team are here. Please hand over.",
       "label": "Handover",
       "hint": "ATMIST to the receiving team.",
       "opts": [
-        { "t": "ATMIST: 45, 40 minutes ago, crush at hip height, open-book pelvis, transient responder after binder, 2 units and TXA, for IR", "mark": "Structured handover with times and plan", "r": "The IR team repeat it back and take her." },
-        { "t": "Pelvis is broken, the binder's on, she's yours", "trap": true, "r": "No time of injury, no treatment, no response to treatment." }
+        {
+          "t": "ATMIST: 45, 40 minutes ago, crush at hip height, open-book pelvis, transient responder after binder, 2 units and TXA, for IR",
+          "mark": "Structured handover with times and plan",
+          "r": "The IR team repeat it back and take her."
+        },
+        {
+          "t": "Pelvis is broken, the binder's on, she's yours",
+          "trap": true,
+          "r": "No time of injury, no treatment, no response to treatment."
+        }
       ]
     },
     {
@@ -185,24 +525,140 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Where should a pelvic binder sit?", "a": "Over the greater trochanters", "wrong": ["Over the iliac crests, like a belt", "Around the umbilicus and lower abdomen", "Over the lower ribs and upper abdomen"] },
-        { "q": "Commonest source of bleeding in a pelvic ring fracture?", "a": "The posterior venous plexus", "why": "About 85% venous and bony; a binder tamponades it. Arterial bleeding needs embolisation.", "wrong": ["The internal iliac artery trunk", "The inferior vena cava at L4", "The common femoral artery in the groin"] },
-        { "q": "Which mechanism causes an open-book injury?", "a": "Anteroposterior compression", "wrong": ["Lateral compression", "A fall onto the buttocks", "A twisting injury of one leg"] },
-        { "q": "In a man, which sign stops you passing a urethral catheter?", "a": "Blood at the urethral meatus", "why": "Also a high-riding prostate or scrotal haematoma. Image the urethra first.", "wrong": ["Suprapubic tenderness and fullness", "Microscopic haematuria on dipstick", "Inability to pass urine so far"] },
-        { "q": "What does a transient responder need?", "a": "Haemorrhage control: embolisation or packing", "wrong": ["More crystalloid and a CT tomorrow", "Admission to the ward for observation", "A second binder applied on top of the first"] }
+        {
+          "q": "Where should a pelvic binder sit?",
+          "a": "Over the greater trochanters",
+          "wrong": [
+            "Over the iliac crests, like a belt",
+            "Around the umbilicus and lower abdomen",
+            "Over the lower ribs and upper abdomen"
+          ]
+        },
+        {
+          "q": "Commonest source of bleeding in a pelvic ring fracture?",
+          "a": "The posterior venous plexus",
+          "why": "About 85% venous and bony; a binder tamponades it. Arterial bleeding needs embolisation.",
+          "wrong": [
+            "The internal iliac artery trunk",
+            "The inferior vena cava at L4",
+            "The common femoral artery in the groin"
+          ]
+        },
+        {
+          "q": "Which mechanism causes an open-book injury?",
+          "a": "Anteroposterior compression",
+          "wrong": [
+            "Lateral compression",
+            "A fall onto the buttocks",
+            "A twisting injury of one leg"
+          ]
+        },
+        {
+          "q": "In a man, which sign stops you passing a urethral catheter?",
+          "a": "Blood at the urethral meatus",
+          "why": "Also a high-riding prostate or scrotal haematoma. Image the urethra first.",
+          "wrong": [
+            "Suprapubic tenderness and fullness",
+            "Microscopic haematuria on dipstick",
+            "Inability to pass urine so far"
+          ]
+        },
+        {
+          "q": "What does a transient responder need?",
+          "a": "Haemorrhage control: embolisation or packing",
+          "wrong": [
+            "More crystalloid and a CT tomorrow",
+            "Admission to the ward for observation",
+            "A second binder applied on top of the first"
+          ]
+        }
       ]
     }
   ],
   "rules": [
-    { "id": "binder-early", "first": ["binder"], "then": ["images"], "fail": "Films before the binder. In a shocked patient with a suspected pelvic injury, the binder goes on in the primary survey, not after the X-ray.", "ok": "Binder on before the films." }
+    {
+      "id": "binder-early",
+      "first": [
+        "binder"
+      ],
+      "then": [
+        "images"
+      ],
+      "fail": "Films before the binder. In a shocked patient with a suspected pelvic injury, the binder goes on in the primary survey, not after the X-ray.",
+      "ok": "Binder on before the films."
+    }
   ],
-  "badge": { "name": "Ring Closer", "emoji": "⭕", "flavor": "Trochanters, not crests. Close the ring, then find the bleeder." },
+  "badge": {
+    "name": "Ring Closer",
+    "emoji": "⭕",
+    "flavor": "Trochanters, not crests. Close the ring, then find the bleeder."
+  },
   "cards": [
-    { "q": "Correct level for a pelvic binder?", "options": ["Greater trochanters", "Iliac crests", "Anterior superior iliac spines", "Umbilicus"], "why": "Over the trochanters it closes the ring; over the crests it can widen the fracture.", "source": "ATLS 11th edition" },
-    { "q": "Most pelvic fracture haemorrhage is from…", "options": ["Pelvic venous plexus and bone surfaces", "The external iliac artery at the pelvic brim", "The abdominal aorta at its bifurcation", "The common femoral vein below the ligament"], "why": "About 85% venous or bony; arterial bleeding is the minority that needs embolisation.", "source": "ATLS 11th edition" },
-    { "q": "An open-book pelvic fracture is caused by…", "options": ["Anteroposterior compression", "Lateral compression", "Vertical shear only", "Low-energy falls in the elderly"], "why": "Front-to-back force springs the symphysis and opens the SI joints.", "source": "Young–Burgess classification" },
-    { "q": "Where should IV access go in a pelvic bleed?", "options": ["Above the diaphragm", "Femoral vein", "Saphenous vein at the ankle", "Intraosseous tibia first"], "why": "Fluid given below the injury may leak from the torn pelvic veins.", "source": "ATLS 11th edition" },
-    { "q": "A shocked patient with a pelvic fracture does not respond to blood. Next?", "options": ["Theatre or IR for bleeding control", "CT abdomen and pelvis to find the source", "Repeat the pelvic X-ray after the binder", "Remove the binder to re-examine the ring"], "why": "Non-responders go straight to haemorrhage control.", "source": "ATLS 11th edition; NICE NG39" },
-    { "q": "Which is NOT a reason to avoid a urethral catheter in male pelvic trauma?", "options": ["A negative FAST", "Blood at the meatus", "High-riding prostate", "Scrotal haematoma"], "why": "The other three suggest urethral injury: image the urethra first.", "source": "ATLS 11th edition" }
+    {
+      "q": "Correct level for a pelvic binder?",
+      "options": [
+        "Greater trochanters",
+        "Iliac crests",
+        "Anterior superior iliac spines",
+        "Umbilicus"
+      ],
+      "why": "Over the trochanters it closes the ring; over the crests it can widen the fracture.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "Most pelvic fracture haemorrhage is from…",
+      "options": [
+        "Pelvic venous plexus and bone surfaces",
+        "The external iliac artery at the pelvic brim",
+        "The abdominal aorta at its bifurcation",
+        "The common femoral vein below the ligament"
+      ],
+      "why": "About 85% venous or bony; arterial bleeding is the minority that needs embolisation.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "An open-book pelvic fracture is caused by…",
+      "options": [
+        "Anteroposterior compression",
+        "Lateral compression",
+        "Vertical shear only",
+        "Low-energy falls in the elderly"
+      ],
+      "why": "Front-to-back force springs the symphysis and opens the SI joints.",
+      "source": "Young–Burgess classification"
+    },
+    {
+      "q": "Where should IV access go in a pelvic bleed?",
+      "options": [
+        "Above the diaphragm",
+        "Femoral vein",
+        "Saphenous vein at the ankle",
+        "Intraosseous tibia first"
+      ],
+      "why": "Fluid given below the injury may leak from the torn pelvic veins.",
+      "source": "ATLS 11th edition"
+    },
+    {
+      "q": "A shocked patient with a pelvic fracture does not respond to blood. Next?",
+      "options": [
+        "Theatre or IR for bleeding control",
+        "CT abdomen and pelvis to find the source",
+        "Repeat the pelvic X-ray after the binder",
+        "Remove the binder to re-examine the ring"
+      ],
+      "why": "Non-responders go straight to haemorrhage control.",
+      "source": "ATLS 11th edition; NICE NG39"
+    },
+    {
+      "q": "Which is NOT a reason to avoid a urethral catheter in male pelvic trauma?",
+      "options": [
+        "A negative FAST",
+        "Blood at the meatus",
+        "High-riding prostate",
+        "Scrotal haematoma"
+      ],
+      "why": "The other three suggest urethral injury: image the urethra first.",
+      "source": "ATLS 11th edition"
+    }
   ]
 }
