@@ -5,12 +5,48 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 31. Ms Lau, 35, has severe colicky left loin pain radiating to the groin since this afternoon. BP 135/85, HR 90, temperature 36.8 °C. Take a history, then discuss investigations and management.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "Analgesia first, then the story and the red flags.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Investigations",
+      "goal": "The right tests, and the right imaging.",
+      "steps": [
+        "tests"
+      ]
+    },
+    {
+      "title": "Explain",
+      "goal": "The stone, the treatment, and when to come back.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Imaging. Your notes use a KUB X-ray and bedside ultrasound. NICE recommends low-dose non-contrast CT KUB within 24 hours in adults (a KUB film misses many stones); ultrasound first in pregnancy and children."},
-    {"tag": "outdated", "text": "Medical expulsive therapy. Your notes offer nifedipine or an alpha-blocker. Nifedipine is no longer used; give tamsulosin for distal ureteric stones under 10 mm."}
+    {
+      "tag": "outdated",
+      "text": "Imaging. Your notes use a KUB X-ray and bedside ultrasound. NICE recommends low-dose non-contrast CT KUB within 24 hours in adults (a KUB film misses many stones); ultrasound first in pregnancy and children."
+    },
+    {
+      "tag": "outdated",
+      "text": "Medical expulsive therapy. Your notes offer nifedipine or an alpha-blocker. Nifedipine is no longer used; give tamsulosin for distal ureteric stones under 10 mm."
+    }
   ],
   "notes": "Checked against NICE NG118 (Renal and ureteric stones, 2019), EAU Urolithiasis guideline (2024).\n\nImaging: urgent low-dose non-contrast CT KUB within 24 hours of presentation in adults (ultrasound first in pregnancy and children). Analgesia: NSAIDs (e.g. IM/PR diclofenac or IV/oral) first-line, then IV paracetamol, then opioids; no antispasmodics. Medical expulsive therapy: alpha-blocker (tamsulosin) for distal ureteric stones under 10 mm (EAU: most benefit 5–10 mm). Most stones under 5 mm pass spontaneously. Emergency referral: signs of infection with obstruction (obstructed infected kidney — urgent decompression by nephrostomy or stent; antibiotics), solitary kidney, bilateral obstruction, AKI, uncontrolled pain. Always exclude AAA in older patients with 'renal colic', and ectopic pregnancy in women.\n\nYour notes use a KUB X-ray and bedside ultrasound, and nifedipine or alpha-blockers; NICE recommends non-contrast CT (KUB X-ray alone misses many stones) and alpha-blockers rather than nifedipine. Discharge advice (fluids, strain urine, return if fever) matches.",
-  "cast": [{ "id": "patient", "name": "Ms Lau", "role": "woman", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Ms Lau",
+      "role": "woman",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "history",
@@ -19,16 +55,60 @@
       "label": "History",
       "hint": "Analgesia first, SOCRATES, urinary symptoms, fever, LMP/pregnancy, previous stones, PMH, drugs.",
       "groups": {
-        "Start": [{ "t": "Offer analgesia first", "tz": "我哋先俾止痛藥你，好唔好？", "rz": "好呀——痛到頂唔順。", "r": "Yes please — it's unbearable.", "mark": "Offers analgesia" }],
+        "Start": [
+          {
+            "t": "Offer analgesia first",
+            "tz": "我哋先俾止痛藥你，好唔好？",
+            "rz": "好呀——痛到頂唔順。",
+            "r": "Yes please — it's unbearable.",
+            "mark": "Offers analgesia"
+          }
+        ],
         "Pain": [
-          { "t": "Where and what is the pain like?", "tz": "痛喺邊度？點樣痛法？", "rz": "左邊腰，一陣陣咁痛，痛到落大髀罅。成個人坐唔定。", "r": "Left loin, comes in waves, into my groin. Can't keep still.", "mark": "Characterises colicky loin-to-groin pain" },
-          { "t": "Urinary symptoms: blood, burning, frequency?", "tz": "小便有冇血、刺痛，或者特別頻密？", "rz": "小便有啲粉紅色。", "r": "Pinkish urine.", "mark": "Asks about haematuria and urinary symptoms" },
-          { "t": "Fever or rigors?", "tz": "有冇發燒或者發冷震？", "rz": "冇。", "r": "No.", "mark": "Asks about fever (infected obstruction)" }
+          {
+            "t": "Where and what is the pain like?",
+            "tz": "痛喺邊度？點樣痛法？",
+            "rz": "左邊腰，一陣陣咁痛，痛到落大髀罅。成個人坐唔定。",
+            "r": "Left loin, comes in waves, into my groin. Can't keep still.",
+            "mark": "Characterises colicky loin-to-groin pain"
+          },
+          {
+            "t": "Urinary symptoms: blood, burning, frequency?",
+            "tz": "小便有冇血、刺痛，或者特別頻密？",
+            "rz": "小便有啲粉紅色。",
+            "r": "Pinkish urine.",
+            "mark": "Asks about haematuria and urinary symptoms"
+          },
+          {
+            "t": "Fever or rigors?",
+            "tz": "有冇發燒或者發冷震？",
+            "rz": "冇。",
+            "r": "No.",
+            "mark": "Asks about fever (infected obstruction)"
+          }
         ],
         "Other": [
-          { "t": "Last period; could you be pregnant?", "tz": "你上次月經係幾時？有冇機會有咗？", "rz": "一個禮拜前嚟過；冇有咗。", "r": "LMP a week ago; not pregnant.", "mark": "Asks LMP and pregnancy" },
-          { "t": "Previous stones; kidney disease; one kidney?", "tz": "以前有冇試過腎石？有冇腎病？係咪得一個腎？", "rz": "第一次。就我所知有兩個腎。", "r": "First time. Two kidneys as far as I know.", "mark": "Asks previous stones and solitary kidney" },
-          { "t": "Medicines, allergies, asthma, stomach ulcers?", "tz": "你食緊咩藥？有冇敏感、哮喘或者胃潰瘍？", "rz": "冇。", "r": "None.", "mark": "Asks contraindications to NSAIDs" }
+          {
+            "t": "Last period; could you be pregnant?",
+            "tz": "你上次月經係幾時？有冇機會有咗？",
+            "rz": "一個禮拜前嚟過；冇有咗。",
+            "r": "LMP a week ago; not pregnant.",
+            "mark": "Asks LMP and pregnancy"
+          },
+          {
+            "t": "Previous stones; kidney disease; one kidney?",
+            "tz": "以前有冇試過腎石？有冇腎病？係咪得一個腎？",
+            "rz": "第一次。就我所知有兩個腎。",
+            "r": "First time. Two kidneys as far as I know.",
+            "mark": "Asks previous stones and solitary kidney"
+          },
+          {
+            "t": "Medicines, allergies, asthma, stomach ulcers?",
+            "tz": "你食緊咩藥？有冇敏感、哮喘或者胃潰瘍？",
+            "rz": "冇。",
+            "r": "None.",
+            "mark": "Asks contraindications to NSAIDs"
+          }
         ]
       }
     },
@@ -40,12 +120,28 @@
       "hint": "Urine dip and hCG, bloods, non-contrast CT KUB.",
       "groups": {
         "Bedside": [
-          { "t": "Urine dipstick and pregnancy test", "r": "Blood +++, nitrite negative; hCG negative.", "mark": "Urine dipstick and pregnancy test" },
-          { "t": "U&E, FBC, CRP, calcium, urate", "r": "Creatinine 72; WCC 9.", "mark": "Renal function and stone bloods" }
+          {
+            "t": "Urine dipstick and pregnancy test",
+            "r": "Blood +++, nitrite negative; hCG negative.",
+            "mark": "Urine dipstick and pregnancy test"
+          },
+          {
+            "t": "U&E, FBC, CRP, calcium, urate",
+            "r": "Creatinine 72; WCC 9.",
+            "mark": "Renal function and stone bloods"
+          }
         ],
         "Imaging": [
-          { "t": "Non-contrast CT KUB", "r": "6 mm stone at the left vesicoureteric junction with mild hydronephrosis.", "mark": "Non-contrast CT KUB" },
-          { "t": "KUB X-ray alone to diagnose", "trap": true, "r": "Misses radiolucent and small stones; CT is the first-line test (NICE)." }
+          {
+            "t": "Non-contrast CT KUB",
+            "r": "6 mm stone at the left vesicoureteric junction with mild hydronephrosis.",
+            "mark": "Non-contrast CT KUB"
+          },
+          {
+            "t": "KUB X-ray alone to diagnose",
+            "trap": true,
+            "r": "Misses radiolucent and small stones; CT is the first-line test (NICE)."
+          }
         ]
       }
     },
@@ -56,10 +152,27 @@
       "label": "Explain",
       "hint": "Stone diagnosis, NSAID, tamsulosin, fluids, strain urine, return advice, urology follow-up.",
       "opts": [
-        { "t": "A 6 mm stone near the bladder; most this size pass within weeks", "tz": "你有一粒六毫米嘅石，喺近膀胱嗰度；呢個大細嘅石，大部分幾個禮拜內會自己排出嚟。", "mark": "Explains diagnosis and likelihood of passage" },
-        { "t": "NSAID analgesia; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone", "tz": "我會開消炎止痛藥，同埋 tamsulosin 幫粒石排出嚟。飲多啲水，小便嗰陣用隔篩隔吓，搵到粒石就留低。", "mark": "NSAID, alpha-blocker, fluids and straining" },
-        { "t": "Return at once with fever, rigors, vomiting, or uncontrolled pain; urology follow-up and repeat imaging", "tz": "如果發燒、發冷震、嘔，或者痛到止唔到，要即刻返嚟。之後泌尿科會跟進，再照一次。", "mark": "Safety-netting (infected obstructed kidney) and follow-up" },
-        { "t": "Buscopan for the colic", "tz": "我開 Buscopan 俾你止絞痛。", "trap": true, "r": "Antispasmodics are not recommended (NICE)." }
+        {
+          "t": "A 6 mm stone near the bladder; most this size pass within weeks",
+          "tz": "你有一粒六毫米嘅石，喺近膀胱嗰度；呢個大細嘅石，大部分幾個禮拜內會自己排出嚟。",
+          "mark": "Explains diagnosis and likelihood of passage"
+        },
+        {
+          "t": "NSAID analgesia; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone",
+          "tz": "我會開消炎止痛藥，同埋 tamsulosin 幫粒石排出嚟。飲多啲水，小便嗰陣用隔篩隔吓，搵到粒石就留低。",
+          "mark": "NSAID, alpha-blocker, fluids and straining"
+        },
+        {
+          "t": "Return at once with fever, rigors, vomiting, or uncontrolled pain; urology follow-up and repeat imaging",
+          "tz": "如果發燒、發冷震、嘔，或者痛到止唔到，要即刻返嚟。之後泌尿科會跟進，再照一次。",
+          "mark": "Safety-netting (infected obstructed kidney) and follow-up"
+        },
+        {
+          "t": "Buscopan for the colic",
+          "tz": "我開 Buscopan 俾你止絞痛。",
+          "trap": true,
+          "r": "Antispasmodics are not recommended (NICE)."
+        }
       ]
     },
     {
@@ -68,21 +181,126 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "First-line imaging for suspected renal colic in adults (NICE)?", "a": "Low-dose non-contrast CT KUB within 24 hours", "wrong": ["Plain KUB X-ray", "IV urogram", "MRI of the urinary tract"] },
-        { "q": "First-line analgesia?", "a": "NSAIDs", "wrong": ["Morphine", "Buscopan", "Codeine"] },
-        { "q": "Obstructed infected kidney needs…", "a": "Urgent decompression and antibiotics", "wrong": ["Tamsulosin 400 micrograms and oral antibiotics", "Shock-wave lithotripsy the same day", "Discharge with oral antibiotics"] },
-        { "q": "Differential to exclude in an older man with 'renal colic'?", "a": "Abdominal aortic aneurysm", "wrong": ["Acute appendicitis", "Gallstones", "Inguinal hernia"] },
-        { "q": "MET drug?", "a": "Tamsulosin", "wrong": ["Nifedipine first-line", "Furosemide", "Allopurinol"] }
+        {
+          "q": "First-line imaging for suspected renal colic in adults (NICE)?",
+          "a": "Low-dose non-contrast CT KUB within 24 hours",
+          "wrong": [
+            "Plain KUB X-ray",
+            "IV urogram",
+            "MRI of the urinary tract"
+          ]
+        },
+        {
+          "q": "First-line analgesia?",
+          "a": "NSAIDs",
+          "wrong": [
+            "Morphine",
+            "Buscopan",
+            "Codeine"
+          ]
+        },
+        {
+          "q": "Obstructed infected kidney needs…",
+          "a": "Urgent decompression and antibiotics",
+          "wrong": [
+            "Tamsulosin 400 micrograms and oral antibiotics",
+            "Shock-wave lithotripsy the same day",
+            "Discharge with oral antibiotics"
+          ]
+        },
+        {
+          "q": "Differential to exclude in an older man with 'renal colic'?",
+          "a": "Abdominal aortic aneurysm",
+          "wrong": [
+            "Acute appendicitis",
+            "Gallstones",
+            "Inguinal hernia"
+          ]
+        },
+        {
+          "q": "MET drug?",
+          "a": "Tamsulosin",
+          "wrong": [
+            "Nifedipine first-line",
+            "Furosemide",
+            "Allopurinol"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Stone Cold", "emoji": "🪨", "flavor": "NSAID, CT KUB, tamsulosin, and watch for fever." },
+  "badge": {
+    "name": "Stone Cold",
+    "emoji": "🪨",
+    "flavor": "NSAID, CT KUB, tamsulosin, and watch for fever."
+  },
   "cards": [
-    { "q": "Most ureteric stones under 5 mm…", "options": ["Pass spontaneously", "Need surgery", "Cause renal failure", "Need lithotripsy within a week"], "why": "Larger ones less likely.", "source": "EAU 2024" },
-    { "q": "Obstruction plus infection is…", "options": ["A urological emergency", "Managed with fluids only", "Treated with tamsulosin", "Discharged with antibiotics"], "why": "Decompress urgently.", "source": "NICE NG118" },
-    { "q": "Imaging for renal colic in pregnancy?", "options": ["Ultrasound", "Low-dose CT KUB", "IV urogram", "Plain KUB X-ray"], "why": "Avoid radiation.", "source": "NICE NG118" },
-    { "q": "Renal colic analgesia after NSAIDs?", "options": ["IV paracetamol, then opioids", "Antispasmodics such as hyoscine", "Oral prednisolone", "No further analgesia"], "why": "NICE NG118.", "source": "NICE NG118", "note": "Your notes use KUB X-ray and nifedipine." },
-    { "q": "Commonest stone type?", "options": ["Calcium oxalate", "Uric acid (radiolucent)", "Cystine", "Struvite (magnesium ammonium phosphate)"], "why": "Radio-opaque.", "source": "Urology" },
-    { "q": "Stone size where urology intervention is more likely?", "options": ["Over 10 mm", "Under 2 mm", "Any size", "Only 1 mm"], "why": "Low spontaneous passage.", "source": "EAU 2024" }
+    {
+      "q": "Most ureteric stones under 5 mm…",
+      "options": [
+        "Pass spontaneously",
+        "Need surgery",
+        "Cause renal failure",
+        "Need lithotripsy within a week"
+      ],
+      "why": "Larger ones less likely.",
+      "source": "EAU 2024"
+    },
+    {
+      "q": "Obstruction plus infection is…",
+      "options": [
+        "A urological emergency",
+        "Managed with fluids only",
+        "Treated with tamsulosin",
+        "Discharged with antibiotics"
+      ],
+      "why": "Decompress urgently.",
+      "source": "NICE NG118"
+    },
+    {
+      "q": "Imaging for renal colic in pregnancy?",
+      "options": [
+        "Ultrasound",
+        "Low-dose CT KUB",
+        "IV urogram",
+        "Plain KUB X-ray"
+      ],
+      "why": "Avoid radiation.",
+      "source": "NICE NG118"
+    },
+    {
+      "q": "Renal colic analgesia after NSAIDs?",
+      "options": [
+        "IV paracetamol, then opioids",
+        "Antispasmodics such as hyoscine",
+        "Oral prednisolone",
+        "No further analgesia"
+      ],
+      "why": "NICE NG118.",
+      "source": "NICE NG118",
+      "note": "Your notes use KUB X-ray and nifedipine."
+    },
+    {
+      "q": "Commonest stone type?",
+      "options": [
+        "Calcium oxalate",
+        "Uric acid (radiolucent)",
+        "Cystine",
+        "Struvite (magnesium ammonium phosphate)"
+      ],
+      "why": "Radio-opaque.",
+      "source": "Urology"
+    },
+    {
+      "q": "Stone size where urology intervention is more likely?",
+      "options": [
+        "Over 10 mm",
+        "Under 2 mm",
+        "Any size",
+        "Only 1 mm"
+      ],
+      "why": "Low spontaneous passage.",
+      "source": "EAU 2024"
+    }
   ]
 }

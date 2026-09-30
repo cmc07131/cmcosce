@@ -5,9 +5,38 @@
   "type": "teaching",
   "time": 420,
   "stem": "Teaching room. A man has a single-barbed fish hook embedded in the pulp of his left thumb after sea fishing. Teach a medical student how you would remove it, demonstrating on the model.",
+  "phases": [
+    {
+      "title": "Set the scene",
+      "goal": "What must you know before choosing a method?",
+      "steps": [
+        "open"
+      ]
+    },
+    {
+      "title": "Assess and prepare",
+      "goal": "The hook, the patient, and anaesthesia.",
+      "steps": [
+        "assess"
+      ]
+    },
+    {
+      "title": "Remove",
+      "goal": "Advance-and-cut, safely.",
+      "steps": [
+        "remove"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against standard wilderness and emergency medicine technique (Tintinalli; Wilderness Medical Society) and NICE/local antibiotic guidance.\n\nAssessment: type of hook (barbs, number of barbs, treble hook), depth, location (eye, joint, tendon, neurovascular structures need specialist removal), time, fresh or salt water (Vibrio in salt water, Aeromonas in fresh), tetanus status, allergies. Anaesthesia: local infiltration or digital block. Techniques: retrograde (small barbless or superficial hooks), string-yank (quick, little tissue damage, good for moderately embedded hooks; not for hooks in mobile tissue such as the ear lobe), needle cover (an 18 G needle sheathes the barb), advance-and-cut (push the point through the skin, cut the barb off with wire cutters, back the hook out — or cut the shank and push through; most reliable for deeply embedded hooks, but creates a second wound). Protect eyes when cutting. Clean, irrigate, dress; antibiotics are not routine for clean wounds (consider for high-risk wounds or hands/feet per local policy; ciprofloxacin or doxycycline cover for Vibrio after sea water); tetanus.\n\nYour notes list the push-through and string techniques, history points, tetanus and antibiotics — this matches.",
-  "cast": [{ "id": "junior", "name": "Student", "role": "junior" }],
+  "cast": [
+    {
+      "id": "junior",
+      "name": "Student",
+      "role": "junior"
+    }
+  ],
   "steps": [
     {
       "id": "open",
@@ -20,8 +49,17 @@
         {
           "line": "Can't we just pull it out?",
           "opts": [
-            { "t": "Let's think first: what would you want to know about the hook and the patient before choosing a method?", "r": "How deep, how many barbs, where it is… and tetanus?", "mood": -2, "mark": "Engages the learner with questions" },
-            { "t": "Yes, just yank it.", "r": "OK!", "mood": 1 }
+            {
+              "t": "Let's think first: what would you want to know about the hook and the patient before choosing a method?",
+              "r": "How deep, how many barbs, where it is… and tetanus?",
+              "mood": -2,
+              "mark": "Engages the learner with questions"
+            },
+            {
+              "t": "Yes, just yank it.",
+              "r": "OK!",
+              "mood": 1
+            }
           ]
         }
       ]
@@ -33,9 +71,21 @@
       "label": "Assess and prepare",
       "hint": "Hook type, depth, location, water type, tetanus, allergies; anaesthesia.",
       "opts": [
-        { "t": "Check the hook: single barb, depth, and whether any vital structure is near", "n": 1, "mark": "Assesses hook, depth and location" },
-        { "t": "Ask about salt or fresh water, tetanus and allergies", "n": 2, "mark": "Asks water type, tetanus and allergies" },
-        { "t": "Clean and give a digital block", "n": 3, "mark": "Anaesthesia" }
+        {
+          "t": "Check the hook: single barb, depth, and whether any vital structure is near",
+          "n": 1,
+          "mark": "Assesses hook, depth and location"
+        },
+        {
+          "t": "Ask about salt or fresh water, tetanus and allergies",
+          "n": 2,
+          "mark": "Asks water type, tetanus and allergies"
+        },
+        {
+          "t": "Clean and give a digital block",
+          "n": 3,
+          "mark": "Anaesthesia"
+        }
       ]
     },
     {
@@ -45,12 +95,36 @@
       "label": "Advance-and-cut",
       "hint": "Advance the point through the skin, cut the barb, back the hook out; eye protection.",
       "opts": [
-        { "t": "Eye protection for everyone", "n": 1, "mark": "Eye protection" },
-        { "t": "Grasp the shank with a needle holder; advance the point along its curve through the skin", "n": 2, "mark": "Advances the point out through the skin" },
-        { "t": "Cut the barb off with wire cutters", "n": 3, "mark": "Cuts the barb" },
-        { "t": "Back the hook out along its entry path", "n": 4, "mark": "Removes the hook retrogradely" },
-        { "t": "Check the hook is complete; irrigate and dress", "n": 5, "mark": "Checks the hook is intact; wound care" },
-        { "t": "Pull the barbed hook straight back out", "trap": true, "r": "The barb tears tissue; use advance-and-cut or string-yank." }
+        {
+          "t": "Eye protection for everyone",
+          "n": 1,
+          "mark": "Eye protection"
+        },
+        {
+          "t": "Grasp the shank with a needle holder; advance the point along its curve through the skin",
+          "n": 2,
+          "mark": "Advances the point out through the skin"
+        },
+        {
+          "t": "Cut the barb off with wire cutters",
+          "n": 3,
+          "mark": "Cuts the barb"
+        },
+        {
+          "t": "Back the hook out along its entry path",
+          "n": 4,
+          "mark": "Removes the hook retrogradely"
+        },
+        {
+          "t": "Check the hook is complete; irrigate and dress",
+          "n": 5,
+          "mark": "Checks the hook is intact; wound care"
+        },
+        {
+          "t": "Pull the barbed hook straight back out",
+          "trap": true,
+          "r": "The barb tears tissue; use advance-and-cut or string-yank."
+        }
       ]
     },
     {
@@ -59,21 +133,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Hook in the eye?", "a": "Do not remove — protect and refer to ophthalmology", "wrong": ["String-yank under local anaesthetic", "Advance-and-cut through the globe", "Retrograde pull after topical anaesthetic drops"] },
-        { "q": "Organism of concern after salt-water injury?", "a": "Vibrio vulnificus", "wrong": ["Pasteurella multocida", "Eikenella", "Clostridium difficile"] },
-        { "q": "Technique least damaging for moderately embedded hooks?", "a": "String-yank", "wrong": ["Pulling straight back", "Wide excision", "Leaving it in"] },
-        { "q": "Main drawback of advance-and-cut?", "a": "A second wound", "wrong": ["It never works", "It requires GA", "It spreads infection always"] },
-        { "q": "Routine antibiotics for clean hook wounds?", "a": "Not routinely", "wrong": ["Always IV for 48 hours", "Always, for 6 weeks", "Topical mupirocin only"] }
+        {
+          "q": "Hook in the eye?",
+          "a": "Do not remove — protect and refer to ophthalmology",
+          "wrong": [
+            "String-yank under local anaesthetic",
+            "Advance-and-cut through the globe",
+            "Retrograde pull after topical anaesthetic drops"
+          ]
+        },
+        {
+          "q": "Organism of concern after salt-water injury?",
+          "a": "Vibrio vulnificus",
+          "wrong": [
+            "Pasteurella multocida",
+            "Eikenella",
+            "Clostridium difficile"
+          ]
+        },
+        {
+          "q": "Technique least damaging for moderately embedded hooks?",
+          "a": "String-yank",
+          "wrong": [
+            "Pulling straight back",
+            "Wide excision",
+            "Leaving it in"
+          ]
+        },
+        {
+          "q": "Main drawback of advance-and-cut?",
+          "a": "A second wound",
+          "wrong": [
+            "It never works",
+            "It requires GA",
+            "It spreads infection always"
+          ]
+        },
+        {
+          "q": "Routine antibiotics for clean hook wounds?",
+          "a": "Not routinely",
+          "wrong": [
+            "Always IV for 48 hours",
+            "Always, for 6 weeks",
+            "Topical mupirocin only"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Off the Hook", "emoji": "🎣", "flavor": "Assess the hook, block, advance, cut the barb, back it out." },
+  "badge": {
+    "name": "Off the Hook",
+    "emoji": "🎣",
+    "flavor": "Assess the hook, block, advance, cut the barb, back it out."
+  },
   "cards": [
-    { "q": "Fish hook techniques include…", "options": ["Retrograde, string-yank, needle cover, advance-and-cut", "Surgical excision for every hook", "Leave in place for a week to loosen", "Magnet retrieval under local anaesthetic"], "why": "Choose by hook and depth.", "source": "Tintinalli" },
-    { "q": "String-yank is unsuitable for…", "options": ["Loosely fixed tissue like the ear lobe", "The pulp of the thumb and fingers", "The skin of the upper back", "The dorsum of the forearm and the back of the hand"], "why": "Tissue moves with the pull.", "source": "Wilderness Medical Society" },
-    { "q": "Vibrio vulnificus risk is higher in…", "options": ["Liver disease", "Young athletes", "Children", "Pregnancy only"], "why": "Severe sepsis risk.", "source": "Infectious diseases" },
-    { "q": "Antibiotic covering Vibrio?", "options": ["Doxycycline or ciprofloxacin", "Flucloxacillin alone for 7 days", "Metronidazole alone for 5 days", "Nitrofurantoin"], "why": "For contaminated salt-water wounds.", "source": "Local guidance" },
-    { "q": "Tetanus booster needed if…", "options": ["Not up to date for a tetanus-prone wound", "Only for animal bites", "Only in children", "Only if the hook was visibly rusty and old"], "why": "Check immunisation.", "source": "UKHSA Green Book" },
-    { "q": "Before cutting wire, ensure…", "options": ["Eye protection", "A tourniquet on the finger", "General anaesthesia", "X-ray"], "why": "Metal fragments fly.", "source": "Tintinalli" }
+    {
+      "q": "Fish hook techniques include…",
+      "options": [
+        "Retrograde, string-yank, needle cover, advance-and-cut",
+        "Surgical excision for every hook",
+        "Leave in place for a week to loosen",
+        "Magnet retrieval under local anaesthetic"
+      ],
+      "why": "Choose by hook and depth.",
+      "source": "Tintinalli"
+    },
+    {
+      "q": "String-yank is unsuitable for…",
+      "options": [
+        "Loosely fixed tissue like the ear lobe",
+        "The pulp of the thumb and fingers",
+        "The skin of the upper back",
+        "The dorsum of the forearm and the back of the hand"
+      ],
+      "why": "Tissue moves with the pull.",
+      "source": "Wilderness Medical Society"
+    },
+    {
+      "q": "Vibrio vulnificus risk is higher in…",
+      "options": [
+        "Liver disease",
+        "Young athletes",
+        "Children",
+        "Pregnancy only"
+      ],
+      "why": "Severe sepsis risk.",
+      "source": "Infectious diseases"
+    },
+    {
+      "q": "Antibiotic covering Vibrio?",
+      "options": [
+        "Doxycycline or ciprofloxacin",
+        "Flucloxacillin alone for 7 days",
+        "Metronidazole alone for 5 days",
+        "Nitrofurantoin"
+      ],
+      "why": "For contaminated salt-water wounds.",
+      "source": "Local guidance"
+    },
+    {
+      "q": "Tetanus booster needed if…",
+      "options": [
+        "Not up to date for a tetanus-prone wound",
+        "Only for animal bites",
+        "Only in children",
+        "Only if the hook was visibly rusty and old"
+      ],
+      "why": "Check immunisation.",
+      "source": "UKHSA Green Book"
+    },
+    {
+      "q": "Before cutting wire, ensure…",
+      "options": [
+        "Eye protection",
+        "A tourniquet on the finger",
+        "General anaesthesia",
+        "X-ray"
+      ],
+      "why": "Metal fragments fly.",
+      "source": "Tintinalli"
+    }
   ]
 }

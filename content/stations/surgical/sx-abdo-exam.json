@@ -5,9 +5,32 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 33. Mr Ng, 58, has increasing abdominal swelling and ankle oedema. Perform an abdominal examination and present your findings.",
+  "phases": [
+    {
+      "title": "Examine",
+      "goal": "Peripheral stigmata first, then the abdomen: liver, spleen, ascites.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Present",
+      "goal": "The diagnosis and the next tests.",
+      "steps": [
+        "present"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against standard abdominal examination technique and BSG/EASL guidance on decompensated cirrhosis and ascites.\n\nSequence: introduce, consent, position flat with one pillow, expose (nipples to knees with dignity); general inspection; hands (clubbing, leuconychia, palmar erythema, Dupuytren's, asterixis); arms (bruising, scratch marks); face and eyes (jaundice, pallor, xanthelasma, parotid swelling); neck (Virchow's node); chest (spider naevi, gynaecomastia); abdomen inspection (distension, caput medusae, scars); palpation (light, deep, liver from the right iliac fossa up with breathing, spleen from the right iliac fossa toward the left costal margin, kidneys ballotable); percussion (liver span, splenic dullness, shifting dullness for ascites); auscultation (bowel sounds, bruits); complete with hernial orifices, external genitalia and PR (offer), legs (oedema).\n\nHepatomegaly and splenomegaly with ascites and stigmata suggest cirrhosis with portal hypertension. Spleen vs kidney: the spleen has a notch, moves down and medially with inspiration, you cannot get above it, dull to percussion. Ascites: diagnostic tap (cell count for SBP — neutrophils > 250/mm³, albumin for SAAG, culture), salt restriction, spironolactone ± furosemide, large-volume paracentesis with albumin. Your notes list hepatosplenomegaly as a Surgical gym topic without detail.",
-  "cast": [{ "id": "patient", "name": "Mr Ng", "role": "man", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Ng",
+      "role": "man",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "exam",
@@ -17,30 +40,81 @@
       "hint": "Hands, face, chest, then abdomen: inspect, palpate (liver, spleen, kidneys), percuss (shifting dullness), auscultate, complete.",
       "groups": {
         "Peripheries": [
-          { "t": "Hands: nails, palms, flap", "r": "Leuconychia, palmar erythema, Dupuytren's contracture; no flap.", "mark": "Examines the hands for liver stigmata" },
-          { "t": "Eyes, face, neck", "r": "Icteric sclerae; left supraclavicular fossa normal.", "mark": "Looks for jaundice and Virchow's node" },
-          { "t": "Chest", "r": "Five spider naevi; gynaecomastia.", "mark": "Finds spider naevi and gynaecomastia" }
+          {
+            "t": "Hands: nails, palms, flap",
+            "r": "Leuconychia, palmar erythema, Dupuytren's contracture; no flap.",
+            "mark": "Examines the hands for liver stigmata"
+          },
+          {
+            "t": "Eyes, face, neck",
+            "r": "Icteric sclerae; left supraclavicular fossa normal.",
+            "mark": "Looks for jaundice and Virchow's node"
+          },
+          {
+            "t": "Chest",
+            "r": "Five spider naevi; gynaecomastia.",
+            "mark": "Finds spider naevi and gynaecomastia",
+            "anim": "auscultate"
+          }
         ],
         "Abdomen": [
-          { "t": "Inspect", "r": "Distended with dilated periumbilical veins, everted umbilicus.", "mark": "Inspects: distension and caput medusae" },
-          { "t": "Palpate the liver from the right iliac fossa upwards with breathing", "r": "Liver edge 3 cm below the costal margin, firm, irregular.", "mark": "Palpates the liver correctly" },
-          { "t": "Palpate the spleen from the right iliac fossa toward the left costal margin", "r": "Spleen tip 4 cm below the left costal margin, moves with breathing, notch felt.", "mark": "Palpates the spleen correctly" },
-          { "t": "Shifting dullness", "r": "Dullness in the flanks shifts when he rolls to his right: ascites.", "mark": "Demonstrates shifting dullness" },
-          { "t": "Auscultate", "r": "Bowel sounds normal; no bruits." }
+          {
+            "t": "Inspect",
+            "r": "Distended with dilated periumbilical veins, everted umbilicus.",
+            "mark": "Inspects: distension and caput medusae"
+          },
+          {
+            "t": "Palpate the liver from the right iliac fossa upwards with breathing",
+            "r": "Liver edge 3 cm below the costal margin, firm, irregular.",
+            "mark": "Palpates the liver correctly",
+            "anim": "auscultate"
+          },
+          {
+            "t": "Palpate the spleen from the right iliac fossa toward the left costal margin",
+            "r": "Spleen tip 4 cm below the left costal margin, moves with breathing, notch felt.",
+            "mark": "Palpates the spleen correctly"
+          },
+          {
+            "t": "Shifting dullness",
+            "r": "Dullness in the flanks shifts when he rolls to his right: ascites.",
+            "mark": "Demonstrates shifting dullness"
+          },
+          {
+            "t": "Auscultate",
+            "r": "Bowel sounds normal; no bruits.",
+            "anim": "auscultate"
+          }
         ],
-        "Complete": [{ "t": "Legs; offer hernial orifices, genitalia, PR", "r": "Pitting oedema to mid-shin.", "mark": "Completes the examination" }]
+        "Complete": [
+          {
+            "t": "Legs; offer hernial orifices, genitalia, PR",
+            "r": "Pitting oedema to mid-shin.",
+            "mark": "Completes the examination"
+          }
+        ]
       }
     },
     {
       "id": "present",
       "kind": "say",
-      "to": "examiner", "ask": "Thank you. Please present your findings.",
+      "to": "examiner",
+      "ask": "Thank you. Please present your findings.",
       "label": "Present",
       "hint": "Summarise: chronic liver disease with portal hypertension; investigations; SBP.",
       "opts": [
-        { "t": "Stigmata of chronic liver disease with hepatosplenomegaly and ascites: cirrhosis with portal hypertension", "mark": "Presents a coherent summary and diagnosis" },
-        { "t": "Diagnostic ascitic tap for cell count (SBP), albumin (SAAG), culture; LFT, clotting, ultrasound", "mark": "Investigations including diagnostic paracentesis" },
-        { "t": "A mass in the left upper quadrant I can get above is the spleen", "trap": true, "r": "You cannot get above the spleen; if you can, think kidney." }
+        {
+          "t": "Stigmata of chronic liver disease with hepatosplenomegaly and ascites: cirrhosis with portal hypertension",
+          "mark": "Presents a coherent summary and diagnosis"
+        },
+        {
+          "t": "Diagnostic ascitic tap for cell count (SBP), albumin (SAAG), culture; LFT, clotting, ultrasound",
+          "mark": "Investigations including diagnostic paracentesis"
+        },
+        {
+          "t": "A mass in the left upper quadrant I can get above is the spleen",
+          "trap": true,
+          "r": "You cannot get above the spleen; if you can, think kidney."
+        }
       ]
     },
     {
@@ -49,21 +123,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Spleen versus kidney?", "a": "Spleen: notch, moves toward the RIF, can't get above, dull", "wrong": ["Spleen is ballotable and resonant to percussion", "Kidney has a notch and moves toward the RIF", "Kidney is dull and you cannot get above it"] },
-        { "q": "SBP is diagnosed when ascitic neutrophils exceed…", "a": "250 per mm³", "wrong": ["50 per mm³", "5000 per mm³", "Any neutrophils"] },
-        { "q": "SAAG ≥ 11 g/L suggests…", "a": "Portal hypertension", "wrong": ["Peritoneal carcinomatosis", "TB peritonitis in a returning traveller", "Pancreatitis"] },
-        { "q": "Cause of massive splenomegaly?", "a": "Myelofibrosis or CML", "wrong": ["Acute viral hepatitis A", "Gallstone disease with cholecystitis", "Acute appendicitis"] },
-        { "q": "First-line diuretic in cirrhotic ascites?", "a": "Spironolactone", "wrong": ["Mannitol", "Acetazolamide, a carbonic anhydrase inhibitor", "Bendroflumethiazide"] }
+        {
+          "q": "Spleen versus kidney?",
+          "a": "Spleen: notch, moves toward the RIF, can't get above, dull",
+          "wrong": [
+            "Spleen is ballotable and resonant to percussion",
+            "Kidney has a notch and moves toward the RIF",
+            "Kidney is dull and you cannot get above it"
+          ]
+        },
+        {
+          "q": "SBP is diagnosed when ascitic neutrophils exceed…",
+          "a": "250 per mm³",
+          "wrong": [
+            "50 per mm³",
+            "5000 per mm³",
+            "Any neutrophils"
+          ]
+        },
+        {
+          "q": "SAAG ≥ 11 g/L suggests…",
+          "a": "Portal hypertension",
+          "wrong": [
+            "Peritoneal carcinomatosis",
+            "TB peritonitis in a returning traveller",
+            "Pancreatitis"
+          ]
+        },
+        {
+          "q": "Cause of massive splenomegaly?",
+          "a": "Myelofibrosis or CML",
+          "wrong": [
+            "Acute viral hepatitis A",
+            "Gallstone disease with cholecystitis",
+            "Acute appendicitis"
+          ]
+        },
+        {
+          "q": "First-line diuretic in cirrhotic ascites?",
+          "a": "Spironolactone",
+          "wrong": [
+            "Mannitol",
+            "Acetazolamide, a carbonic anhydrase inhibitor",
+            "Bendroflumethiazide"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Organ Mapper", "emoji": "🫄", "flavor": "Hands first, start in the right iliac fossa, shift the dullness." },
+  "badge": {
+    "name": "Organ Mapper",
+    "emoji": "🫄",
+    "flavor": "Hands first, start in the right iliac fossa, shift the dullness."
+  },
   "cards": [
-    { "q": "Where do you start palpating for an enlarged spleen?", "options": ["Right iliac fossa", "Left upper quadrant", "Umbilicus", "Epigastrium, below the xiphisternum"], "why": "A large spleen extends toward the RIF.", "source": "Clinical examination" },
-    { "q": "Caput medusae indicates…", "options": ["Portal hypertension", "IVC obstruction always", "Right heart failure with a raised JVP", "Hernia"], "why": "Flow away from the umbilicus.", "source": "Clinical examination" },
-    { "q": "Stigmata of chronic liver disease include…", "options": ["Spider naevi, palmar erythema, gynaecomastia", "Koilonychia, angular stomatitis and glossitis", "Splinter haemorrhages, Osler nodes, clubbing", "Janeway lesions, Roth spots and a new murmur"], "why": "Oestrogen excess.", "source": "Hepatology" },
-    { "q": "SBP antibiotic?", "options": ["IV cephalosporin (e.g. cefotaxime/ceftriaxone)", "Oral metronidazole for 7 days", "No antibiotics until cultures return", "IV vancomycin alone"], "why": "Plus albumin to prevent AKI.", "source": "EASL / BSG" },
-    { "q": "Albumin replacement after large-volume paracentesis?", "options": ["8 g per litre drained over 5 L", "None if under 10 litres are drained", "0.9% saline 1 L per 3 L drained", "Two units of packed red cells"], "why": "Prevents circulatory dysfunction.", "source": "BSG" },
-    { "q": "Asterixis suggests…", "options": ["Hepatic encephalopathy or CO2 retention", "Parkinson's disease (resting tremor)", "Hypoglycaemia in a diabetic patient", "Essential tremor, worse on holding a posture"], "why": "Metabolic flap.", "source": "Hepatology" }
+    {
+      "q": "Where do you start palpating for an enlarged spleen?",
+      "options": [
+        "Right iliac fossa",
+        "Left upper quadrant",
+        "Umbilicus",
+        "Epigastrium, below the xiphisternum"
+      ],
+      "why": "A large spleen extends toward the RIF.",
+      "source": "Clinical examination"
+    },
+    {
+      "q": "Caput medusae indicates…",
+      "options": [
+        "Portal hypertension",
+        "IVC obstruction always",
+        "Right heart failure with a raised JVP",
+        "Hernia"
+      ],
+      "why": "Flow away from the umbilicus.",
+      "source": "Clinical examination"
+    },
+    {
+      "q": "Stigmata of chronic liver disease include…",
+      "options": [
+        "Spider naevi, palmar erythema, gynaecomastia",
+        "Koilonychia, angular stomatitis and glossitis",
+        "Splinter haemorrhages, Osler nodes, clubbing",
+        "Janeway lesions, Roth spots and a new murmur"
+      ],
+      "why": "Oestrogen excess.",
+      "source": "Hepatology"
+    },
+    {
+      "q": "SBP antibiotic?",
+      "options": [
+        "IV cephalosporin (e.g. cefotaxime/ceftriaxone)",
+        "Oral metronidazole for 7 days",
+        "No antibiotics until cultures return",
+        "IV vancomycin alone"
+      ],
+      "why": "Plus albumin to prevent AKI.",
+      "source": "EASL / BSG"
+    },
+    {
+      "q": "Albumin replacement after large-volume paracentesis?",
+      "options": [
+        "8 g per litre drained over 5 L",
+        "None if under 10 litres are drained",
+        "0.9% saline 1 L per 3 L drained",
+        "Two units of packed red cells"
+      ],
+      "why": "Prevents circulatory dysfunction.",
+      "source": "BSG"
+    },
+    {
+      "q": "Asterixis suggests…",
+      "options": [
+        "Hepatic encephalopathy or CO2 retention",
+        "Parkinson's disease (resting tremor)",
+        "Hypoglycaemia in a diabetic patient",
+        "Essential tremor, worse on holding a posture"
+      ],
+      "why": "Metabolic flap.",
+      "source": "Hepatology"
+    }
   ]
 }

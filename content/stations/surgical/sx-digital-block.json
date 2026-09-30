@@ -5,9 +5,32 @@
   "type": "skills",
   "time": 420,
   "stem": "Procedure room. Mr Wu, 30, has a crushed right middle fingertip with a subungual haematoma and a nail-bed laceration needing repair. Perform a digital nerve block on the hand model.",
+  "phases": [
+    {
+      "title": "Before the block",
+      "goal": "Consent, contraindications, and document sensation first.",
+      "steps": [
+        "check"
+      ]
+    },
+    {
+      "title": "The block",
+      "goal": "Both sides of the finger, a safe volume, then test it.",
+      "steps": [
+        "block"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against RCEM/BSSH guidance and the evidence on adrenaline in digital blocks (Lalonde 2005; Cochrane 2015).\n\nAnatomy: two palmar (volar) and two dorsal digital nerves run at the 2, 4, 8 and 10 o'clock positions of each finger; palmar nerves supply most of the fingertip and nail bed. Techniques: ring (web-space) block injecting into both web spaces dorsally then advancing volarly (about 1–2 mL each side, plus a dorsal wheal), or a single palmar subcutaneous (transthecal-adjacent) injection at the base of the finger. Use 1% or 2% lidocaine plain (or with adrenaline — now shown safe in healthy digits; avoid in peripheral vascular disease or Raynaud's), maximum about 5–6 mL total per digit to avoid pressure ischaemia. Check allergies, neurovascular status before, aspirate before injecting, wait 5–10 minutes, test sensation. Avoid a circumferential ring of anaesthetic at the base and a finger tourniquet left on.\n\nYour notes list digital nerve block as a topic without detail.",
-  "cast": [{ "id": "patient", "name": "Mr Wu", "role": "man", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Wu",
+      "role": "man",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "check",
@@ -17,9 +40,21 @@
       "hint": "Consent, allergy, vascular disease, document sensation and circulation.",
       "groups": {
         "Checks": [
-          { "t": "Explain, consent; allergy to local anaesthetic?", "r": "Agrees; no allergy.", "mark": "Consent and allergy check" },
-          { "t": "Raynaud's or vascular disease?", "r": "No.", "mark": "Screens for vascular disease" },
-          { "t": "Document sensation (two-point) and capillary refill before", "r": "Two-point 4 mm both sides of the pulp; CRT < 2 s.", "mark": "Documents baseline neurovascular status" }
+          {
+            "t": "Explain, consent; allergy to local anaesthetic?",
+            "r": "Agrees; no allergy.",
+            "mark": "Consent and allergy check"
+          },
+          {
+            "t": "Raynaud's or vascular disease?",
+            "r": "No.",
+            "mark": "Screens for vascular disease"
+          },
+          {
+            "t": "Document sensation (two-point) and capillary refill before",
+            "r": "Two-point 4 mm both sides of the pulp; CRT < 2 s.",
+            "mark": "Documents baseline neurovascular status"
+          }
         ]
       }
     },
@@ -30,13 +65,41 @@
       "label": "Web-space block",
       "hint": "Clean, dorsal entry in each web space, aspirate, 1–2 mL volar and dorsal, small total volume, wait, test.",
       "opts": [
-        { "t": "Clean the base of the finger and web spaces", "n": 1, "mark": "Asepsis" },
-        { "t": "Insert a 25 G needle dorsally in the web space next to the base of the finger", "n": 2, "mark": "Correct entry point" },
-        { "t": "Aspirate, inject ~0.5 mL dorsally, then advance volarly and inject 1–2 mL near the palmar nerve", "n": 3, "mark": "Blocks dorsal and palmar nerves with aspiration" },
-        { "t": "Repeat on the other side of the finger", "n": 4, "mark": "Blocks both sides" },
-        { "t": "Keep the total under about 5 mL", "n": 5, "mark": "Limits volume to avoid pressure ischaemia" },
-        { "t": "Wait 5–10 minutes; test sensation at the tip before starting", "n": 6, "mark": "Waits and tests the block" },
-        { "t": "Inject 10 mL circumferentially around the base", "trap": "critical", "r": "A tight circumferential volume can compress digital vessels." }
+        {
+          "t": "Clean the base of the finger and web spaces",
+          "n": 1,
+          "mark": "Asepsis"
+        },
+        {
+          "t": "Insert a 25 G needle dorsally in the web space next to the base of the finger",
+          "n": 2,
+          "mark": "Correct entry point"
+        },
+        {
+          "t": "Aspirate, inject ~0.5 mL dorsally, then advance volarly and inject 1–2 mL near the palmar nerve",
+          "n": 3,
+          "mark": "Blocks dorsal and palmar nerves with aspiration"
+        },
+        {
+          "t": "Repeat on the other side of the finger",
+          "n": 4,
+          "mark": "Blocks both sides"
+        },
+        {
+          "t": "Keep the total under about 5 mL",
+          "n": 5,
+          "mark": "Limits volume to avoid pressure ischaemia"
+        },
+        {
+          "t": "Wait 5–10 minutes; test sensation at the tip before starting",
+          "n": 6,
+          "mark": "Waits and tests the block"
+        },
+        {
+          "t": "Inject 10 mL circumferentially around the base",
+          "trap": "critical",
+          "r": "A tight circumferential volume can compress digital vessels."
+        }
       ]
     },
     {
@@ -45,21 +108,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Where do digital nerves lie?", "a": "At 2, 4, 8 and 10 o'clock", "wrong": ["Only dorsally, in the midline", "Inside the flexor tendon sheath", "Only in the palmar midline"] },
-        { "q": "Adrenaline in digital blocks?", "a": "Safe unless vascular disease", "wrong": ["Always contraindicated in digits", "Required for every digital block", "Causes gangrene in most patients"] },
-        { "q": "Maximum volume per digit?", "a": "About 5–6 mL", "wrong": ["About 20 mL", "About 0.1 mL", "As much as needed for effect"] },
-        { "q": "Which nerves supply most of the fingertip?", "a": "Palmar digital nerves", "wrong": ["Dorsal digital nerves", "Radial nerve", "Musculocutaneous"] },
-        { "q": "Reversal for accidental adrenaline ischaemia?", "a": "Phentolamine infiltration", "wrong": ["Naloxone infiltration", "Flumazenil IV", "Warm compresses and elevation only"] }
+        {
+          "q": "Where do digital nerves lie?",
+          "a": "At 2, 4, 8 and 10 o'clock",
+          "wrong": [
+            "Only dorsally, in the midline",
+            "Inside the flexor tendon sheath",
+            "Only in the palmar midline"
+          ]
+        },
+        {
+          "q": "Adrenaline in digital blocks?",
+          "a": "Safe unless vascular disease",
+          "wrong": [
+            "Always contraindicated in digits",
+            "Required for every digital block",
+            "Causes gangrene in most patients"
+          ]
+        },
+        {
+          "q": "Maximum volume per digit?",
+          "a": "About 5–6 mL",
+          "wrong": [
+            "About 20 mL",
+            "About 0.1 mL",
+            "As much as needed for effect"
+          ]
+        },
+        {
+          "q": "Which nerves supply most of the fingertip?",
+          "a": "Palmar digital nerves",
+          "wrong": [
+            "Dorsal digital nerves",
+            "Radial nerve",
+            "Musculocutaneous"
+          ]
+        },
+        {
+          "q": "Reversal for accidental adrenaline ischaemia?",
+          "a": "Phentolamine infiltration",
+          "wrong": [
+            "Naloxone infiltration",
+            "Flumazenil IV",
+            "Warm compresses and elevation only"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Numb Finger", "emoji": "☝", "flavor": "Both sides, dorsal then volar, small volume, test before cutting." },
+  "badge": {
+    "name": "Numb Finger",
+    "emoji": "☝",
+    "flavor": "Both sides, dorsal then volar, small volume, test before cutting."
+  },
   "cards": [
-    { "q": "Digital block local anaesthetic?", "options": ["Lidocaine 1–2%", "Bupivacaine IV", "Prilocaine IV", "Ketamine"], "why": "With or without adrenaline.", "source": "RCEM" },
-    { "q": "Why document sensation before a digital block?", "options": ["To detect pre-existing nerve injury", "It is needed for billing the procedure", "It is a tradition, not evidence-based", "It predicts how long the block will last"], "why": "Nerve injuries are missed after the block.", "source": "BSSH" },
-    { "q": "Phentolamine is used for…", "options": ["Reversing adrenaline-induced digital ischaemia", "Pain relief after the block wears off", "Treating infection in the pulp space", "Stopping bleeding from the nail bed"], "why": "Alpha-blocker.", "source": "Lalonde" },
-    { "q": "Subungual haematoma > 50% with intact nail?", "options": ["Trephination usually enough", "Always remove the nail and repair the bed", "Antibiotics for 5 days", "X-ray and plastic surgery referral"], "why": "Nail removal if nail disrupted.", "source": "BSSH" },
-    { "q": "Single palmar injection block is given…", "options": ["Subcutaneously at the palmar base of the finger", "Into the MCP joint", "Into the nail bed", "Dorsally at the DIP joint"], "why": "Blocks both palmar nerves.", "source": "RCEM" },
-    { "q": "Contraindication to adrenaline in a digital block?", "options": ["Peripheral vascular disease", "Age over 30 years", "A crush injury to the fingertip pulp", "A fingertip laceration needing sutures"], "why": "Risk of ischaemia.", "source": "Cochrane 2015" }
+    {
+      "q": "Digital block local anaesthetic?",
+      "options": [
+        "Lidocaine 1–2%",
+        "Bupivacaine IV",
+        "Prilocaine IV",
+        "Ketamine"
+      ],
+      "why": "With or without adrenaline.",
+      "source": "RCEM"
+    },
+    {
+      "q": "Why document sensation before a digital block?",
+      "options": [
+        "To detect pre-existing nerve injury",
+        "It is needed for billing the procedure",
+        "It is a tradition, not evidence-based",
+        "It predicts how long the block will last"
+      ],
+      "why": "Nerve injuries are missed after the block.",
+      "source": "BSSH"
+    },
+    {
+      "q": "Phentolamine is used for…",
+      "options": [
+        "Reversing adrenaline-induced digital ischaemia",
+        "Pain relief after the block wears off",
+        "Treating infection in the pulp space",
+        "Stopping bleeding from the nail bed"
+      ],
+      "why": "Alpha-blocker.",
+      "source": "Lalonde"
+    },
+    {
+      "q": "Subungual haematoma > 50% with intact nail?",
+      "options": [
+        "Trephination usually enough",
+        "Always remove the nail and repair the bed",
+        "Antibiotics for 5 days",
+        "X-ray and plastic surgery referral"
+      ],
+      "why": "Nail removal if nail disrupted.",
+      "source": "BSSH"
+    },
+    {
+      "q": "Single palmar injection block is given…",
+      "options": [
+        "Subcutaneously at the palmar base of the finger",
+        "Into the MCP joint",
+        "Into the nail bed",
+        "Dorsally at the DIP joint"
+      ],
+      "why": "Blocks both palmar nerves.",
+      "source": "RCEM"
+    },
+    {
+      "q": "Contraindication to adrenaline in a digital block?",
+      "options": [
+        "Peripheral vascular disease",
+        "Age over 30 years",
+        "A crush injury to the fingertip pulp",
+        "A fingertip laceration needing sutures"
+      ],
+      "why": "Risk of ischaemia.",
+      "source": "Cochrane 2015"
+    }
   ]
 }
