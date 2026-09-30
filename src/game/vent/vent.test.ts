@@ -51,3 +51,11 @@ test('ventilator: drowned lungs need PEEP 8–10; a head injury wants a normal r
   assert.ok(scoreVent({ ...s, peep: 9 }, drowning).earned.includes('oxygen'))
   assert.ok(scoreVent({ ...s, vt: 525 }, ventSpec('head-injury')).earned.includes('rate'))
 })
+
+test('NIV: a full face mask, IPAP 15 / EPAP 4, a backup rate and controlled oxygen pass; high oxygen does not', async () => {
+  const { checkNiv } = await import('./nivModel')
+  const ok = checkNiv({ mask: 'full-face', ipap: 15, epap: 4, rate: 16, fio2: 28 })
+  assert.ok(ok.every((r) => r.ok))
+  const bad = checkNiv({ mask: 'nasal', ipap: 30, epap: 4, rate: 0, fio2: 100 })
+  assert.equal(bad.filter((r) => r.ok).length, 0)
+})

@@ -5,9 +5,32 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 27. Mr Kwan, 70, with hypertension and AF, noticed this morning that he keeps bumping into things on his right. Perform an eye examination and explain your management plan. A Snellen chart, pinhole, torch and ophthalmoscope are available.",
+  "phases": [
+    {
+      "title": "Examine",
+      "goal": "Acuity, pupils, movements, fields, fundi.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Present and plan",
+      "goal": "Where is the lesion, and what now?",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against RCOphth guidance, NICE NG128 (stroke and TIA), and standard eye examination.\n\nExamination: acuity with a Snellen chart at 6 m (each eye, with glasses; pinhole to correct refractive error), inspection, pupils (direct, consensual, swinging-light for RAPD), eye movements, visual fields by confrontation (each eye, each quadrant; red target for central fields), fundoscopy (red reflex, disc, vessels, macula). A homonymous hemianopia (same side in both eyes) localises behind the chiasm — optic tract, radiation or occipital cortex — usually a stroke in the posterior cerebral artery territory; acuity and fundi are normal. It needs urgent stroke assessment (CT/CTA; thrombolysis if within the window and disabling), and advice not to drive.\n\nOther patterns: monocular sudden painless loss (CRAO — cherry-red spot; CRVO — 'stormy sunset'; retinal detachment; GCA), bitemporal hemianopia (chiasm — pituitary), painful red eye with a mid-dilated pupil (acute angle-closure glaucoma).\n\nYour notes (2021 past paper: right homonymous hemianopia, normal acuity with pinhole, no RAPD, normal fundi) match this.",
-  "cast": [{ "id": "patient", "name": "Mr Kwan", "role": "elderly", "inBed": false }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Kwan",
+      "role": "elderly",
+      "inBed": false
+    }
+  ],
   "steps": [
     {
       "id": "exam",
@@ -17,28 +40,71 @@
       "hint": "Acuity (pinhole), inspection, pupils (RAPD), movements, fields, fundoscopy.",
       "groups": {
         "Acuity": [
-          { "t": "Snellen chart at 6 m, each eye", "r": "Right 6/9, left 6/9.", "mark": "Measures visual acuity in each eye" },
-          { "t": "Pinhole", "r": "Both improve to 6/6 — refractive error only.", "mark": "Uses a pinhole to correct refractive error" }
+          {
+            "t": "Snellen chart at 6 m, each eye",
+            "r": "Right 6/9, left 6/9.",
+            "mark": "Measures visual acuity in each eye"
+          },
+          {
+            "t": "Pinhole",
+            "r": "Both improve to 6/6 — refractive error only.",
+            "mark": "Uses a pinhole to correct refractive error"
+          }
         ],
         "Pupils and movements": [
-          { "t": "Direct, consensual, swinging light test", "r": "Equal, reactive, no RAPD.", "mark": "Tests pupils including RAPD" },
-          { "t": "Eye movements", "r": "Full, no diplopia or nystagmus.", "mark": "Tests eye movements" }
+          {
+            "t": "Direct, consensual, swinging light test",
+            "r": "Equal, reactive, no RAPD.",
+            "mark": "Tests pupils including RAPD"
+          },
+          {
+            "t": "Eye movements",
+            "r": "Full, no diplopia or nystagmus.",
+            "mark": "Tests eye movements"
+          }
         ],
-        "Fields": [{ "t": "Confrontation fields, each eye separately, all quadrants", "r": "Both eyes miss the right half of the field: right homonymous hemianopia.", "mark": "Finds a right homonymous hemianopia" }],
-        "Fundus": [{ "t": "Fundoscopy: red reflex, disc, vessels, macula", "r": "Normal discs and vessels.", "img": "photo:fundus-normal", "mark": "Fundoscopy normal" }]
+        "Fields": [
+          {
+            "t": "Confrontation fields, each eye separately, all quadrants",
+            "r": "Both eyes miss the right half of the field: right homonymous hemianopia.",
+            "mark": "Finds a right homonymous hemianopia"
+          }
+        ],
+        "Fundus": [
+          {
+            "t": "Fundoscopy: red reflex, disc, vessels, macula",
+            "r": "Normal discs and vessels.",
+            "img": "photo:fundus-normal",
+            "mark": "Fundoscopy normal"
+          }
+        ]
       }
     },
     {
       "id": "plan",
       "kind": "say",
-      "to": "examiner", "ask": "Thank you. Please present your findings and your plan.",
+      "to": "examiner",
+      "ask": "Thank you. Please present your findings and your plan.",
       "label": "Present and plan",
       "hint": "Localise: left post-chiasmal (occipital) lesion — stroke pathway.",
       "opts": [
-        { "t": "Right homonymous hemianopia: left post-chiasmal lesion, likely left occipital (PCA) infarct given AF", "mark": "Localises the lesion and suggests the cause" },
-        { "t": "Stroke team, urgent CT and CTA; thrombolysis if within 4.5 h and disabling; check anticoagulation status", "mark": "Urgent stroke pathway" },
-        { "t": "Advise not to drive; formal visual fields; secondary prevention (anticoagulation for AF)", "mark": "Driving advice and secondary prevention" },
-        { "t": "Refer to an optician for new glasses", "trap": "critical", "r": "A field defect respecting the midline in both eyes is a brain lesion, not a refraction problem." }
+        {
+          "t": "Right homonymous hemianopia: left post-chiasmal lesion, likely left occipital (PCA) infarct given AF",
+          "mark": "Localises the lesion and suggests the cause"
+        },
+        {
+          "t": "Stroke team, urgent CT and CTA; thrombolysis if within 4.5 h and disabling; check anticoagulation status",
+          "mark": "Urgent stroke pathway"
+        },
+        {
+          "t": "Advise not to drive; formal visual fields; secondary prevention (anticoagulation for AF)",
+          "mark": "Driving advice and secondary prevention"
+        },
+        {
+          "t": "Refer to an optician for new glasses",
+          "trap": "critical",
+          "r": "A field defect respecting the midline in both eyes is a brain lesion, not a refraction problem."
+        }
       ]
     },
     {
@@ -47,21 +113,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Bitemporal hemianopia suggests a lesion at…", "a": "The optic chiasm (e.g. pituitary)", "wrong": ["The occipital lobe", "One optic nerve, anterior to the chiasm", "The retina"] },
-        { "q": "Cherry-red spot at the macula suggests…", "a": "Central retinal artery occlusion", "wrong": ["Central retinal vein occlusion with macular oedema", "Retinal detachment", "Acute glaucoma"] },
-        { "q": "RAPD indicates…", "a": "Optic nerve (or severe retinal) disease", "wrong": ["An occipital lobe stroke", "A dense cataract", "A third nerve palsy"] },
-        { "q": "Painful red eye, fixed mid-dilated pupil, halos, vomiting?", "a": "Acute angle-closure glaucoma", "wrong": ["Viral conjunctivitis", "Anterior uveitis (iritis) with photophobia", "Subconjunctival haemorrhage after coughing"] },
-        { "q": "Purpose of the pinhole?", "a": "Shows whether poor acuity is refractive", "wrong": ["Dilates the pupil for fundoscopy", "Tests the peripheral visual fields, one quadrant at a time", "Measures intraocular pressure"] }
+        {
+          "q": "Bitemporal hemianopia suggests a lesion at…",
+          "a": "The optic chiasm (e.g. pituitary)",
+          "wrong": [
+            "The occipital lobe",
+            "One optic nerve, anterior to the chiasm",
+            "The retina"
+          ]
+        },
+        {
+          "q": "Cherry-red spot at the macula suggests…",
+          "a": "Central retinal artery occlusion",
+          "wrong": [
+            "Central retinal vein occlusion with macular oedema",
+            "Retinal detachment",
+            "Acute glaucoma"
+          ]
+        },
+        {
+          "q": "RAPD indicates…",
+          "a": "Optic nerve (or severe retinal) disease",
+          "wrong": [
+            "An occipital lobe stroke",
+            "A dense cataract",
+            "A third nerve palsy"
+          ]
+        },
+        {
+          "q": "Painful red eye, fixed mid-dilated pupil, halos, vomiting?",
+          "a": "Acute angle-closure glaucoma",
+          "wrong": [
+            "Viral conjunctivitis",
+            "Anterior uveitis (iritis) with photophobia",
+            "Subconjunctival haemorrhage after coughing"
+          ]
+        },
+        {
+          "q": "Purpose of the pinhole?",
+          "a": "Shows whether poor acuity is refractive",
+          "wrong": [
+            "Dilates the pupil for fundoscopy",
+            "Tests the peripheral visual fields, one quadrant at a time",
+            "Measures intraocular pressure"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Field Marshal", "emoji": "👁", "flavor": "Same half in both eyes: it's the brain, not the eye." },
+  "badge": {
+    "name": "Field Marshal",
+    "emoji": "👁",
+    "flavor": "Same half in both eyes: it's the brain, not the eye."
+  },
   "cards": [
-    { "q": "Homonymous hemianopia localises to…", "options": ["Behind the optic chiasm", "One eye (the retina)", "The optic chiasm (pituitary region)", "The cornea"], "why": "Optic tract, radiation or occipital cortex.", "source": "Neuro-ophthalmology" },
-    { "q": "Sudden painless monocular loss in a patient over 50 with headache and jaw claudication?", "options": ["Giant cell arteritis", "Retinal migraine with visual aura", "A mature cataract in the affected eye", "Conjunctivitis"], "why": "Start steroids immediately.", "source": "BSR 2020" },
-    { "q": "Normal Snellen distance?", "options": ["6 metres", "1 metre", "40 cm", "10 metres"], "why": "Near vision at 33–40 cm.", "source": "Clinical examination" },
-    { "q": "Retinal detachment presents with…", "options": ["Floaters, flashes and a curtain", "A painful red eye", "Itchy, watery eyes", "Double vision on lateral gaze with ptosis"], "why": "Urgent ophthalmology.", "source": "RCOphth" },
-    { "q": "Papilloedema shows…", "options": ["Swollen disc with blurred margins", "A pale disc with sharp margins (optic atrophy)", "An enlarged cup-to-disc ratio of 0.8", "A normal disc"], "why": "Raised ICP.", "source": "Neuro-ophthalmology" },
-    { "q": "CRVO fundus appearance?", "options": ["'Stormy sunset' haemorrhages", "A cherry-red spot at the macula with a pale retina", "A normal fundus", "Cotton wool spots only, no haemorrhages"], "why": "Widespread flame haemorrhages.", "source": "Ophthalmology" }
+    {
+      "q": "Homonymous hemianopia localises to…",
+      "options": [
+        "Behind the optic chiasm",
+        "One eye (the retina)",
+        "The optic chiasm (pituitary region)",
+        "The cornea"
+      ],
+      "why": "Optic tract, radiation or occipital cortex.",
+      "source": "Neuro-ophthalmology"
+    },
+    {
+      "q": "Sudden painless monocular loss in a patient over 50 with headache and jaw claudication?",
+      "options": [
+        "Giant cell arteritis",
+        "Retinal migraine with visual aura",
+        "A mature cataract in the affected eye",
+        "Conjunctivitis"
+      ],
+      "why": "Start steroids immediately.",
+      "source": "BSR 2020"
+    },
+    {
+      "q": "Normal Snellen distance?",
+      "options": [
+        "6 metres",
+        "1 metre",
+        "40 cm",
+        "10 metres"
+      ],
+      "why": "Near vision at 33–40 cm.",
+      "source": "Clinical examination"
+    },
+    {
+      "q": "Retinal detachment presents with…",
+      "options": [
+        "Floaters, flashes and a curtain",
+        "A painful red eye",
+        "Itchy, watery eyes",
+        "Double vision on lateral gaze with ptosis"
+      ],
+      "why": "Urgent ophthalmology.",
+      "source": "RCOphth"
+    },
+    {
+      "q": "Papilloedema shows…",
+      "options": [
+        "Swollen disc with blurred margins",
+        "A pale disc with sharp margins (optic atrophy)",
+        "An enlarged cup-to-disc ratio of 0.8",
+        "A normal disc"
+      ],
+      "why": "Raised ICP.",
+      "source": "Neuro-ophthalmology"
+    },
+    {
+      "q": "CRVO fundus appearance?",
+      "options": [
+        "'Stormy sunset' haemorrhages",
+        "A cherry-red spot at the macula with a pale retina",
+        "A normal fundus",
+        "Cotton wool spots only, no haemorrhages"
+      ],
+      "why": "Widespread flame haemorrhages.",
+      "source": "Ophthalmology"
+    }
   ]
 }

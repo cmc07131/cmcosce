@@ -6,6 +6,7 @@ import { ExamBench } from './exam/ExamBench'
 import { IgelProcedure } from './igel/IgelProcedure'
 import { Ventilator } from './vent/Ventilator'
 import { Defib } from './defib/Defib'
+import { Niv } from './vent/Niv'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -53,6 +54,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <ExamBench job={job} onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'niv') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <Niv job={job} onDone={onDone} />
       </BattleFrame>
     )
   }

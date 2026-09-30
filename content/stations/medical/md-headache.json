@@ -5,11 +5,44 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 29. Ms Chan, 41, developed a sudden, severe headache at the gym 3 hours ago — 'like being hit with a bat'. She vomited once. GCS 15, BP 168/94, temperature 37.0 °C. Take a history and plan her investigations.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "Thunderclap? The red flags.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Investigations",
+      "goal": "The right test at the right time.",
+      "steps": [
+        "tests"
+      ]
+    },
+    {
+      "title": "Plan",
+      "goal": "SAH confirmed: who, and what now?",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Aspirin in giant cell arteritis. Your notes mark it with '???'. BSR 2020 does not recommend routine aspirin for GCA; give high-dose steroids straight away and arrange a biopsy or ultrasound."}
+    {
+      "tag": "differs",
+      "text": "Aspirin in giant cell arteritis. Your notes mark it with '???'. BSR 2020 does not recommend routine aspirin for GCA; give high-dose steroids straight away and arrange a biopsy or ultrasound."
+    }
   ],
   "notes": "Checked against NICE NG228 (Subarachnoid haemorrhage caused by a ruptured aneurysm, 2022), the Ottawa SAH rule (Perry 2013), and Perry et al. BMJ 2011 (CT within 6 hours).\n\nThunderclap headache (peak within 1 minute) needs exclusion of SAH. Ottawa SAH rule (alert patients over 15 with non-traumatic headache peaking within an hour): investigate if age 40 or over, neck pain or stiffness, witnessed loss of consciousness, onset during exertion, thunderclap onset, or limited neck flexion. NICE NG228: non-contrast CT head within 6 hours of onset, reported by a radiologist, rules out SAH if normal (no LP needed); CT after 6 hours: if normal, lumbar puncture at least 12 hours after onset for xanthochromia. Positive: nimodipine 60 mg 4-hourly, neurosurgery, CTA, BP control, analgesia, antiemetic.\n\nOther causes of thunderclap headache: reversible cerebral vasoconstriction syndrome, cervical artery dissection, cerebral venous sinus thrombosis, pituitary apoplexy, ICH. Headache red flags include new headache over 50 (GCA), fever and neck stiffness (meningitis), papilloedema, focal signs.\n\nYour headache notes cover primary/secondary causes and GCA (steroids, biopsy, halo sign); they mark aspirin with '???' — BSR 2020 does not recommend routine aspirin for GCA.",
-  "cast": [{ "id": "patient", "name": "Ms Chan", "role": "woman", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Ms Chan",
+      "role": "woman",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "history",
@@ -19,17 +52,59 @@
       "hint": "Onset speed, activity, worst ever, neck, LOC, focal symptoms, previous headaches, drugs, risk factors.",
       "groups": {
         "Headache": [
-          { "t": "How quickly did it reach its worst?", "tz": "個頭痛幾快去到最痛？", "rz": "即刻——幾秒之內。", "r": "Instantly — within a few seconds.", "mark": "Establishes thunderclap onset" },
-          { "t": "What were you doing?", "tz": "嗰陣你做緊咩？", "rz": "舉緊重。", "r": "Lifting weights.", "mark": "Asks about exertional onset" },
-          { "t": "Is it the worst headache of your life? Have you had headaches like this before?", "tz": "係咪你一世人最痛嘅頭痛？以前有冇試過咁？", "rz": "係最痛嘅一次。我有偏頭痛，但從來冇咁痛過。", "r": "Worst ever. I get migraines but never like this.", "mark": "Asks about severity and previous headaches" }
+          {
+            "t": "How quickly did it reach its worst?",
+            "tz": "個頭痛幾快去到最痛？",
+            "rz": "即刻——幾秒之內。",
+            "r": "Instantly — within a few seconds.",
+            "mark": "Establishes thunderclap onset"
+          },
+          {
+            "t": "What were you doing?",
+            "tz": "嗰陣你做緊咩？",
+            "rz": "舉緊重。",
+            "r": "Lifting weights.",
+            "mark": "Asks about exertional onset"
+          },
+          {
+            "t": "Is it the worst headache of your life? Have you had headaches like this before?",
+            "tz": "係咪你一世人最痛嘅頭痛？以前有冇試過咁？",
+            "rz": "係最痛嘅一次。我有偏頭痛，但從來冇咁痛過。",
+            "r": "Worst ever. I get migraines but never like this.",
+            "mark": "Asks about severity and previous headaches"
+          }
         ],
         "Associated": [
-          { "t": "Neck pain or stiffness? Light hurting your eyes?", "tz": "條頸有冇痛或者硬？見到光會唔會好唔舒服？", "rz": "條頸好似有啲硬。", "r": "My neck feels stiff.", "mark": "Asks about neck stiffness and photophobia" },
-          { "t": "Did you black out? Any weakness, numbness, double vision, seizure?", "tz": "有冇暈低？有冇手腳冇力、麻痺、見到重影或者抽筋？", "rz": "冇暈低。手腳冇冇力。", "r": "No blackout. No weakness.", "mark": "Asks about LOC and focal symptoms" }
+          {
+            "t": "Neck pain or stiffness? Light hurting your eyes?",
+            "tz": "條頸有冇痛或者硬？見到光會唔會好唔舒服？",
+            "rz": "條頸好似有啲硬。",
+            "r": "My neck feels stiff.",
+            "mark": "Asks about neck stiffness and photophobia"
+          },
+          {
+            "t": "Did you black out? Any weakness, numbness, double vision, seizure?",
+            "tz": "有冇暈低？有冇手腳冇力、麻痺、見到重影或者抽筋？",
+            "rz": "冇暈低。手腳冇冇力。",
+            "r": "No blackout. No weakness.",
+            "mark": "Asks about LOC and focal symptoms"
+          }
         ],
         "Background": [
-          { "t": "Blood pressure, smoking, family history of aneurysms or polycystic kidneys", "tz": "你有冇血壓高？有冇食煙？屋企人有冇腦血管瘤或者多囊腎？", "rz": "有食煙。我阿姨係腦出血死嘅。", "r": "Smoker. My aunt died of a brain haemorrhage.", "mark": "Asks risk factors and family history" },
-          { "t": "Medicines, cocaine, pregnancy, contraception", "tz": "你食緊咩藥？有冇用可卡因？有冇機會有咗？用緊咩避孕？", "rz": "食緊避孕丸。冇用毒品。", "r": "Combined pill. No drugs.", "mark": "Drug history and contraception" }
+          {
+            "t": "Blood pressure, smoking, family history of aneurysms or polycystic kidneys",
+            "tz": "你有冇血壓高？有冇食煙？屋企人有冇腦血管瘤或者多囊腎？",
+            "rz": "有食煙。我阿姨係腦出血死嘅。",
+            "r": "Smoker. My aunt died of a brain haemorrhage.",
+            "mark": "Asks risk factors and family history"
+          },
+          {
+            "t": "Medicines, cocaine, pregnancy, contraception",
+            "tz": "你食緊咩藥？有冇用可卡因？有冇機會有咗？用緊咩避孕？",
+            "rz": "食緊避孕丸。冇用毒品。",
+            "r": "Combined pill. No drugs.",
+            "mark": "Drug history and contraception"
+          }
         ]
       }
     },
@@ -40,10 +115,25 @@
       "label": "Investigations",
       "hint": "CT within 6 hours of onset; if normal within 6 h, SAH excluded; after 6 h, LP at 12 h.",
       "groups": {
-        "CT": [{ "t": "Non-contrast CT head (within 6 hours of onset)", "r": "Hyperdense blood in the basal cisterns and Sylvian fissures.", "img": "ct:sah", "mark": "CT head within 6 hours shows subarachnoid haemorrhage" }],
+        "CT": [
+          {
+            "t": "Non-contrast CT head (within 6 hours of onset)",
+            "r": "Hyperdense blood in the basal cisterns and Sylvian fissures.",
+            "img": "ct:sah",
+            "mark": "CT head within 6 hours shows subarachnoid haemorrhage"
+          }
+        ],
         "Other": [
-          { "t": "Lumbar puncture now", "trap": true, "r": "CT already shows SAH; LP is only for a normal CT beyond 6 hours, done at 12 hours." },
-          { "t": "ECG, glucose, clotting, group and save", "r": "Sinus rhythm, deep T inversion in the anterior leads (neurogenic).", "mark": "Baseline tests including ECG" }
+          {
+            "t": "Lumbar puncture now",
+            "trap": true,
+            "r": "CT already shows SAH; LP is only for a normal CT beyond 6 hours, done at 12 hours."
+          },
+          {
+            "t": "ECG, glucose, clotting, group and save",
+            "r": "Sinus rhythm, deep T inversion in the anterior leads (neurogenic).",
+            "mark": "Baseline tests including ECG"
+          }
         ]
       }
     },
@@ -54,9 +144,18 @@
       "label": "Plan",
       "hint": "Neurosurgery, CTA, nimodipine, analgesia, antiemetic, BP control, reassess GCS.",
       "opts": [
-        { "t": "Neurosurgery referral; CT angiography for an aneurysm", "mark": "Neurosurgical referral and CTA" },
-        { "t": "Nimodipine 60 mg orally every 4 hours", "mark": "Nimodipine to prevent delayed ischaemia" },
-        { "t": "Analgesia, antiemetic, BP control, frequent GCS; stop the combined pill", "mark": "Supportive care and monitoring" }
+        {
+          "t": "Neurosurgery referral; CT angiography for an aneurysm",
+          "mark": "Neurosurgical referral and CTA"
+        },
+        {
+          "t": "Nimodipine 60 mg orally every 4 hours",
+          "mark": "Nimodipine to prevent delayed ischaemia"
+        },
+        {
+          "t": "Analgesia, antiemetic, BP control, frequent GCS; stop the combined pill",
+          "mark": "Supportive care and monitoring"
+        }
       ]
     },
     {
@@ -65,21 +164,126 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "A normal CT within 6 hours of headache onset (NICE NG228)…", "a": "Rules out SAH without LP", "wrong": ["Always needs an LP after 12 hours", "Needs MRI within 24 hours", "Needs a repeat CT at 24 hours"] },
-        { "q": "Timing of LP for xanthochromia?", "a": "At least 12 hours after onset", "wrong": ["Immediately, before the CT scan is done", "After 1 week", "Within 1 hour of the headache onset"] },
-        { "q": "Purpose of nimodipine in SAH?", "a": "Reduce delayed cerebral ischaemia", "wrong": ["Lower the blood pressure only", "Stop the aneurysm from re-bleeding before surgery", "Treat seizures"] },
-        { "q": "Ottawa SAH rule criterion?", "a": "Onset during exertion", "wrong": ["Age under 30 years", "Photophobia with the headache", "Nausea and vomiting with the headache"] },
-        { "q": "Another cause of thunderclap headache?", "a": "Reversible cerebral vasoconstriction syndrome", "wrong": ["Tension-type headache", "Acute sinusitis", "Uncorrected refractive error"] }
+        {
+          "q": "A normal CT within 6 hours of headache onset (NICE NG228)…",
+          "a": "Rules out SAH without LP",
+          "wrong": [
+            "Always needs an LP after 12 hours",
+            "Needs MRI within 24 hours",
+            "Needs a repeat CT at 24 hours"
+          ]
+        },
+        {
+          "q": "Timing of LP for xanthochromia?",
+          "a": "At least 12 hours after onset",
+          "wrong": [
+            "Immediately, before the CT scan is done",
+            "After 1 week",
+            "Within 1 hour of the headache onset"
+          ]
+        },
+        {
+          "q": "Purpose of nimodipine in SAH?",
+          "a": "Reduce delayed cerebral ischaemia",
+          "wrong": [
+            "Lower the blood pressure only",
+            "Stop the aneurysm from re-bleeding before surgery",
+            "Treat seizures"
+          ]
+        },
+        {
+          "q": "Ottawa SAH rule criterion?",
+          "a": "Onset during exertion",
+          "wrong": [
+            "Age under 30 years",
+            "Photophobia with the headache",
+            "Nausea and vomiting with the headache"
+          ]
+        },
+        {
+          "q": "Another cause of thunderclap headache?",
+          "a": "Reversible cerebral vasoconstriction syndrome",
+          "wrong": [
+            "Tension-type headache",
+            "Acute sinusitis",
+            "Uncorrected refractive error"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Thunderclap", "emoji": "⚡", "flavor": "Peak in a minute: CT within 6 hours rules it out; after that, LP at 12." },
+  "badge": {
+    "name": "Thunderclap",
+    "emoji": "⚡",
+    "flavor": "Peak in a minute: CT within 6 hours rules it out; after that, LP at 12."
+  },
   "cards": [
-    { "q": "Thunderclap headache peaks within…", "options": ["1 minute", "Within 1 hour", "Within a day", "Over a week"], "why": "Exclude SAH.", "source": "NICE NG228" },
-    { "q": "Ottawa SAH rule applies to…", "options": ["Alert, over 15, non-traumatic, peak within 1 h", "All headaches in adults and children", "Children with a first severe headache", "Headache after head trauma"], "why": "Highly sensitive.", "source": "Perry 2013" },
-    { "q": "NICE NG228: CT after 6 hours is normal. Next?", "options": ["LP at least 12 hours after onset", "Discharge with safety-net advice and GP review", "MRI brain as an outpatient", "Repeat CT at 24 hours"], "why": "Xanthochromia.", "source": "NICE NG228" },
-    { "q": "Nimodipine dose in SAH?", "options": ["60 mg every 4 hours for 21 days", "10 mg daily for 1 week", "1 g IV once", "60 mg every 4 hours until the aneurysm is secured"], "why": "Reduces delayed ischaemia.", "source": "NICE NG228" },
-    { "q": "Headache red flag suggesting GCA?", "options": ["New headache over 50 with jaw claudication", "Band-like tension-type headache worse with stress", "Headache in a teenager revising for exams", "Headache on weekends after lying in"], "why": "Urgent steroids.", "source": "BSR 2020" },
-    { "q": "Aspirin in GCA (BSR 2020)?", "options": ["Not routinely recommended", "Always, 75 mg daily with the steroid", "Instead of steroids", "Only after temporal artery biopsy"], "why": "Unless another indication.", "source": "BSR 2020", "note": "Your notes: 'Aspirin ???'." }
+    {
+      "q": "Thunderclap headache peaks within…",
+      "options": [
+        "1 minute",
+        "Within 1 hour",
+        "Within a day",
+        "Over a week"
+      ],
+      "why": "Exclude SAH.",
+      "source": "NICE NG228"
+    },
+    {
+      "q": "Ottawa SAH rule applies to…",
+      "options": [
+        "Alert, over 15, non-traumatic, peak within 1 h",
+        "All headaches in adults and children",
+        "Children with a first severe headache",
+        "Headache after head trauma"
+      ],
+      "why": "Highly sensitive.",
+      "source": "Perry 2013"
+    },
+    {
+      "q": "NICE NG228: CT after 6 hours is normal. Next?",
+      "options": [
+        "LP at least 12 hours after onset",
+        "Discharge with safety-net advice and GP review",
+        "MRI brain as an outpatient",
+        "Repeat CT at 24 hours"
+      ],
+      "why": "Xanthochromia.",
+      "source": "NICE NG228"
+    },
+    {
+      "q": "Nimodipine dose in SAH?",
+      "options": [
+        "60 mg every 4 hours for 21 days",
+        "10 mg daily for 1 week",
+        "1 g IV once",
+        "60 mg every 4 hours until the aneurysm is secured"
+      ],
+      "why": "Reduces delayed ischaemia.",
+      "source": "NICE NG228"
+    },
+    {
+      "q": "Headache red flag suggesting GCA?",
+      "options": [
+        "New headache over 50 with jaw claudication",
+        "Band-like tension-type headache worse with stress",
+        "Headache in a teenager revising for exams",
+        "Headache on weekends after lying in"
+      ],
+      "why": "Urgent steroids.",
+      "source": "BSR 2020"
+    },
+    {
+      "q": "Aspirin in GCA (BSR 2020)?",
+      "options": [
+        "Not routinely recommended",
+        "Always, 75 mg daily with the steroid",
+        "Instead of steroids",
+        "Only after temporal artery biopsy"
+      ],
+      "why": "Unless another indication.",
+      "source": "BSR 2020",
+      "note": "Your notes: 'Aspirin ???'."
+    }
   ]
 }

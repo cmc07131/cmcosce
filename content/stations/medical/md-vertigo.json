@@ -5,9 +5,39 @@
   "type": "exam",
   "time": 420,
   "stem": "Cubicle 25. Mrs Chau, 58, has had brief spells of spinning (under a minute) when she rolls over in bed or looks up, for 3 days. She is well between spells. Perform the appropriate positional test and treatment on her.",
+  "phases": [
+    {
+      "title": "Choose the test",
+      "goal": "Which test for this pattern, and is it safe?",
+      "steps": [
+        "choose"
+      ]
+    },
+    {
+      "title": "Dix–Hallpike",
+      "goal": "Do it properly and read the eyes.",
+      "steps": [
+        "hallpike"
+      ]
+    },
+    {
+      "title": "Epley",
+      "goal": "Treat the side that is positive.",
+      "steps": [
+        "epley"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against the AAO-HNS clinical practice guideline on BPPV (2017), and emergency approaches to the dizzy patient (TiTrATE, HINTS; Kattah 2009).\n\nChoose the test by the pattern: brief positional (triggered) episodes with no vertigo at rest → Dix–Hallpike for BPPV; continuous acute vertigo with spontaneous nystagmus (acute vestibular syndrome) → HINTS (head impulse, nystagmus, test of skew), done by a trained examiner; do not use the Dix–Hallpike in acute vestibular syndrome and do not use HINTS in episodic positional vertigo (your notes make this point well).\n\nDix–Hallpike: explain, warn about vertigo, sit with legs out so the head will hang over the end, turn the head 45° to one side, lie back quickly with the neck extended ~20° below horizontal, hold at least 30 seconds, watch for torsional upbeating nystagmus (latency a few seconds, lasts under a minute, fatigues), sit up. Positive → Epley on that side (turn the head 90° to the other side, then roll onto the side with the nose down, then sit up), each held about 30 seconds. Central features: no latency, persistent, direction-changing or vertical downbeat nystagmus without torsion, other neurology.\n\nYour notes match (including Epley and the central/peripheral table). Contraindications to positional testing: severe neck disease, carotid disease, vertebral dissection risk.",
-  "cast": [{ "id": "patient", "name": "Mrs Chau", "role": "woman", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mrs Chau",
+      "role": "woman",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "choose",
@@ -16,9 +46,19 @@
       "label": "Which test?",
       "hint": "Brief positional episodes, well between: Dix–Hallpike, not HINTS.",
       "opts": [
-        { "t": "Episodic positional vertigo, no vertigo now: Dix–Hallpike for BPPV (HINTS is for continuous vertigo with nystagmus)", "mark": "Chooses the right test for the pattern" },
-        { "t": "Ask about neck problems before moving the neck", "mark": "Checks contraindications (neck disease)" },
-        { "t": "HINTS exam on her now", "trap": true, "r": "HINTS is for acute continuous vertigo with spontaneous nystagmus, not episodic positional vertigo." }
+        {
+          "t": "Episodic positional vertigo, no vertigo now: Dix–Hallpike for BPPV (HINTS is for continuous vertigo with nystagmus)",
+          "mark": "Chooses the right test for the pattern"
+        },
+        {
+          "t": "Ask about neck problems before moving the neck",
+          "mark": "Checks contraindications (neck disease)"
+        },
+        {
+          "t": "HINTS exam on her now",
+          "trap": true,
+          "r": "HINTS is for acute continuous vertigo with spontaneous nystagmus, not episodic positional vertigo."
+        }
       ]
     },
     {
@@ -28,12 +68,37 @@
       "label": "Dix–Hallpike (right)",
       "hint": "Explain, position, head 45°, lie back fast with neck extended, observe 30 s, sit up.",
       "opts": [
-        { "t": "Explain it will make her dizzy briefly; keep her eyes open", "n": 1, "mark": "Explains and warns" },
-        { "t": "Sit her on the couch so her head will hang over the end when lying", "n": 2, "mark": "Correct starting position" },
-        { "t": "Turn her head 45° to the right", "n": 3, "mark": "Head turned 45°" },
-        { "t": "Lie her back quickly, head 20° below the horizontal, supporting it", "n": 4, "mark": "Rapid lie-back with neck extended" },
-        { "t": "Watch her eyes for at least 30 seconds", "n": 5, "r": "After 3 seconds: torsional upbeating nystagmus toward the right ear, lasting 20 seconds, with vertigo.", "mark": "Observes latency, direction and duration" },
-        { "t": "Positive right: right posterior canal BPPV", "n": 6, "mark": "Interprets a positive right Dix–Hallpike" }
+        {
+          "t": "Explain it will make her dizzy briefly; keep her eyes open",
+          "n": 1,
+          "mark": "Explains and warns"
+        },
+        {
+          "t": "Sit her on the couch so her head will hang over the end when lying",
+          "n": 2,
+          "mark": "Correct starting position"
+        },
+        {
+          "t": "Turn her head 45° to the right",
+          "n": 3,
+          "mark": "Head turned 45°"
+        },
+        {
+          "t": "Lie her back quickly, head 20° below the horizontal, supporting it",
+          "n": 4,
+          "mark": "Rapid lie-back with neck extended"
+        },
+        {
+          "t": "Watch her eyes for at least 30 seconds",
+          "n": 5,
+          "r": "After 3 seconds: torsional upbeating nystagmus toward the right ear, lasting 20 seconds, with vertigo.",
+          "mark": "Observes latency, direction and duration"
+        },
+        {
+          "t": "Positive right: right posterior canal BPPV",
+          "n": 6,
+          "mark": "Interprets a positive right Dix–Hallpike"
+        }
       ]
     },
     {
@@ -43,11 +108,32 @@
       "label": "Epley manoeuvre (right)",
       "hint": "From the right Hallpike position: head 90° left, roll onto the left side nose down, sit up.",
       "opts": [
-        { "t": "Stay in the right Hallpike position 30 seconds", "n": 1, "mark": "Starts from the Hallpike position" },
-        { "t": "Turn her head 90° to the left (still extended), hold 30 seconds", "n": 2, "mark": "Turns the head 90° to the other side" },
-        { "t": "Roll her onto her left side, nose pointing down, hold 30 seconds", "n": 3, "mark": "Rolls onto the side, nose down" },
-        { "t": "Sit her up slowly, head slightly down", "n": 4, "mark": "Sits up" },
-        { "t": "Repeat the Hallpike: no nystagmus — treated", "n": 5, "mark": "Retests after the manoeuvre", "r": "No nystagmus. She feels better." }
+        {
+          "t": "Stay in the right Hallpike position 30 seconds",
+          "n": 1,
+          "mark": "Starts from the Hallpike position"
+        },
+        {
+          "t": "Turn her head 90° to the left (still extended), hold 30 seconds",
+          "n": 2,
+          "mark": "Turns the head 90° to the other side"
+        },
+        {
+          "t": "Roll her onto her left side, nose pointing down, hold 30 seconds",
+          "n": 3,
+          "mark": "Rolls onto the side, nose down"
+        },
+        {
+          "t": "Sit her up slowly, head slightly down",
+          "n": 4,
+          "mark": "Sits up"
+        },
+        {
+          "t": "Repeat the Hallpike: no nystagmus — treated",
+          "n": 5,
+          "mark": "Retests after the manoeuvre",
+          "r": "No nystagmus. She feels better."
+        }
       ]
     },
     {
@@ -56,21 +142,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Typical nystagmus in posterior canal BPPV?", "a": "Torsional upbeating, latency, fatiguing", "wrong": ["Pure downbeat, persistent", "Horizontal, direction-changing, without latency", "No nystagmus at all"] },
-        { "q": "When is HINTS used?", "a": "Acute continuous vertigo with spontaneous nystagmus", "wrong": ["Episodic positional vertigo", "Syncope", "Any dizziness"] },
-        { "q": "HINTS finding suggesting a central cause?", "a": "Normal head impulse test", "wrong": ["Abnormal head impulse with corrective saccade", "Unidirectional nystagmus", "No skew"] },
-        { "q": "Wallenberg syndrome is due to…", "a": "Lateral medullary infarct (PICA)", "wrong": ["A cerebellopontine angle tumour (acoustic neuroma)", "A middle ear infection with effusion", "A frontal lobe stroke"] },
-        { "q": "Medication for BPPV?", "a": "Not routinely — reposition", "wrong": ["Long-term betahistine three times daily", "A 10-day course of oral prednisolone", "Antibiotics"] }
+        {
+          "q": "Typical nystagmus in posterior canal BPPV?",
+          "a": "Torsional upbeating, latency, fatiguing",
+          "wrong": [
+            "Pure downbeat, persistent",
+            "Horizontal, direction-changing, without latency",
+            "No nystagmus at all"
+          ]
+        },
+        {
+          "q": "When is HINTS used?",
+          "a": "Acute continuous vertigo with spontaneous nystagmus",
+          "wrong": [
+            "Episodic positional vertigo",
+            "Syncope",
+            "Any dizziness"
+          ]
+        },
+        {
+          "q": "HINTS finding suggesting a central cause?",
+          "a": "Normal head impulse test",
+          "wrong": [
+            "Abnormal head impulse with corrective saccade",
+            "Unidirectional nystagmus",
+            "No skew"
+          ]
+        },
+        {
+          "q": "Wallenberg syndrome is due to…",
+          "a": "Lateral medullary infarct (PICA)",
+          "wrong": [
+            "A cerebellopontine angle tumour (acoustic neuroma)",
+            "A middle ear infection with effusion",
+            "A frontal lobe stroke"
+          ]
+        },
+        {
+          "q": "Medication for BPPV?",
+          "a": "Not routinely — reposition",
+          "wrong": [
+            "Long-term betahistine three times daily",
+            "A 10-day course of oral prednisolone",
+            "Antibiotics"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Crystal Mover", "emoji": "🌀", "flavor": "Positional and brief: Hallpike then Epley. Continuous with nystagmus: HINTS." },
+  "badge": {
+    "name": "Crystal Mover",
+    "emoji": "🌀",
+    "flavor": "Positional and brief: Hallpike then Epley. Continuous with nystagmus: HINTS."
+  },
   "cards": [
-    { "q": "Commonest cause of peripheral vertigo?", "options": ["BPPV", "Ménière's disease", "Acoustic neuroma", "Stroke"], "why": "Posterior canal most often.", "source": "AAO-HNS 2017" },
-    { "q": "Treatment of posterior canal BPPV?", "options": ["Epley manoeuvre", "Betahistine long-term", "Surgery", "Antibiotics for labyrinthitis"], "why": "Particle repositioning.", "source": "AAO-HNS 2017" },
-    { "q": "HINTS central sign?", "options": ["Vertical skew deviation", "Abnormal head impulse", "Unidirectional horizontal nystagmus", "Hearing preserved"], "why": "Any central sign = stroke until proven otherwise.", "source": "Kattah 2009" },
-    { "q": "Direction-changing nystagmus suggests…", "options": ["A central cause", "Vestibular neuritis", "BPPV", "Anxiety and hyperventilation"], "why": "Peripheral nystagmus is unidirectional.", "source": "Kattah 2009" },
-    { "q": "Ménière's disease triad?", "options": ["Vertigo, fluctuating hearing loss, tinnitus, aural fullness", "Vertigo, diplopia, dysarthria", "Headache, fever, rash", "Ataxia, confusion, ophthalmoplegia"], "why": "Episodes last hours.", "source": "ENT" },
-    { "q": "Dix–Hallpike neck position?", "options": ["Rotated 45°, extended below horizontal", "Flexed forward to the chest", "Neutral, facing the ceiling", "Rotated 90° to the side and flexed forward, chin down"], "why": "Aligns the posterior canal.", "source": "AAO-HNS" }
+    {
+      "q": "Commonest cause of peripheral vertigo?",
+      "options": [
+        "BPPV",
+        "Ménière's disease",
+        "Acoustic neuroma",
+        "Stroke"
+      ],
+      "why": "Posterior canal most often.",
+      "source": "AAO-HNS 2017"
+    },
+    {
+      "q": "Treatment of posterior canal BPPV?",
+      "options": [
+        "Epley manoeuvre",
+        "Betahistine long-term",
+        "Surgery",
+        "Antibiotics for labyrinthitis"
+      ],
+      "why": "Particle repositioning.",
+      "source": "AAO-HNS 2017"
+    },
+    {
+      "q": "HINTS central sign?",
+      "options": [
+        "Vertical skew deviation",
+        "Abnormal head impulse",
+        "Unidirectional horizontal nystagmus",
+        "Hearing preserved"
+      ],
+      "why": "Any central sign = stroke until proven otherwise.",
+      "source": "Kattah 2009"
+    },
+    {
+      "q": "Direction-changing nystagmus suggests…",
+      "options": [
+        "A central cause",
+        "Vestibular neuritis",
+        "BPPV",
+        "Anxiety and hyperventilation"
+      ],
+      "why": "Peripheral nystagmus is unidirectional.",
+      "source": "Kattah 2009"
+    },
+    {
+      "q": "Ménière's disease triad?",
+      "options": [
+        "Vertigo, fluctuating hearing loss, tinnitus, aural fullness",
+        "Vertigo, diplopia, dysarthria",
+        "Headache, fever, rash",
+        "Ataxia, confusion, ophthalmoplegia"
+      ],
+      "why": "Episodes last hours.",
+      "source": "ENT"
+    },
+    {
+      "q": "Dix–Hallpike neck position?",
+      "options": [
+        "Rotated 45°, extended below horizontal",
+        "Flexed forward to the chest",
+        "Neutral, facing the ceiling",
+        "Rotated 90° to the side and flexed forward, chin down"
+      ],
+      "why": "Aligns the posterior canal.",
+      "source": "AAO-HNS"
+    }
   ]
 }

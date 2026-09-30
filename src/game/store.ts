@@ -179,6 +179,8 @@ export function fallbackPerformHint(kind: PerformKind) {
       return 'Brace the leg, landmark the flat tibia, and drill the IO to the pop.'
     case 'exam':
       return 'Examine him as you would for real, then press Finish.'
+    case 'niv':
+      return 'Choose the mask, set IPAP, EPAP, backup rate and oxygen. START.'
     case 'defib':
       return 'Tap the chest to place both pads. SYNC and energy, CHARGE, ALL CLEAR, then SHOCK.'
     case 'ventilator':
@@ -193,7 +195,7 @@ export function fallbackPerformHint(kind: PerformKind) {
 }
 
 function sceneKey(kind: PerformKind, pose?: string) {
-  if (kind === 'look' || kind === 'exam' || kind === 'igel' || kind === 'ventilator' || kind === 'defib') return ''
+  if (kind === 'look' || kind === 'exam' || kind === 'igel' || kind === 'ventilator' || kind === 'defib' || kind === 'niv') return ''
   if (kind === 'pose') return `pose:${pose || 'knee'}`
   if (kind === 'dress') return 'dress'
   return kind

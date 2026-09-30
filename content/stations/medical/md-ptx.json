@@ -5,11 +5,43 @@
   "type": "teaching",
   "time": 420,
   "stem": "Teaching room. Your junior has just seen a 22-year-old tall, thin man who smokes, with sudden right-sided chest pain and mild breathlessness. SpO2 97%, HR 88, BP 124/76. The chest X-ray is on the board. Teach the junior how to manage him.",
+  "phases": [
+    {
+      "title": "Set the scene",
+      "goal": "What does the junior know?",
+      "steps": [
+        "open"
+      ]
+    },
+    {
+      "title": "The film",
+      "goal": "Look at the X-ray together.",
+      "steps": [
+        "film"
+      ]
+    },
+    {
+      "title": "Teach the plan",
+      "goal": "BTS 2023: symptoms and high-risk features, not size.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Size-based management. Your notes use BTS 2010: observe if under 2 cm and asymptomatic, aspirate if over 2 cm. BTS 2023 decides by symptoms, high-risk features and the patient's priorities: a minimally symptomatic primary pneumothorax can be managed conservatively whatever its size; a symptomatic one gets an ambulatory device or needle aspiration, and a drain if these fail."}
+    {
+      "tag": "outdated",
+      "text": "Size-based management. Your notes use BTS 2010: observe if under 2 cm and asymptomatic, aspirate if over 2 cm. BTS 2023 decides by symptoms, high-risk features and the patient's priorities: a minimally symptomatic primary pneumothorax can be managed conservatively whatever its size; a symptomatic one gets an ambulatory device or needle aspiration, and a drain if these fail."
+    }
   ],
   "notes": "Checked against the British Thoracic Society Guideline for Pleural Disease (2023).\n\nBTS 2023 changed management from size-based to symptom-based. Primary spontaneous pneumothorax (PSP): if minimally symptomatic and the patient agrees, conservative management (outpatient review) is an option regardless of size; if symptomatic (and high-risk features absent), consider ambulatory devices or needle aspiration; chest drain if these fail. High-risk characteristics: haemodynamic compromise, significant hypoxia, bilateral, underlying lung disease (secondary pneumothorax), age over 50 with smoking, haemopneumothorax. Secondary pneumothorax: usually admission and a drain or aspiration. Size is measured at the hilum (inter-pleural distance); 2 cm roughly equals 50% volume but now matters less than symptoms. Needle aspiration site: 2nd intercostal space mid-clavicular line, or 4th–5th space in the safe triangle. Advice: stop smoking, no diving ever unless definitive surgery, no flying until resolved on X-ray (airlines often ask for 1–2 weeks after resolution).\n\nYour notes use the older BTS 2010 approach: observe if under 2 cm and asymptomatic, aspirate if over 2 cm. BTS 2023 manages by symptoms and patient priorities instead. The aspiration technique and discharge advice in your notes match.",
-  "cast": [{ "id": "junior", "name": "Dr Tsui", "role": "junior" }],
+  "cast": [
+    {
+      "id": "junior",
+      "name": "Dr Tsui",
+      "role": "junior"
+    }
+  ],
   "steps": [
     {
       "id": "open",
@@ -22,15 +54,33 @@
         {
           "line": "He's got a pneumothorax — I was going to put a drain in.",
           "opts": [
-            { "t": "Good spot. Let's make a plan together: what do you already know about managing a primary pneumothorax?", "r": "Under 2 cm observe, over 2 cm aspirate — is that right?", "mood": -2, "mark": "Assesses the learner's knowledge" },
-            { "t": "No, wrong. Watch me.", "r": "Oh.", "mood": 3 }
+            {
+              "t": "Good spot. Let's make a plan together: what do you already know about managing a primary pneumothorax?",
+              "r": "Under 2 cm observe, over 2 cm aspirate — is that right?",
+              "mood": -2,
+              "mark": "Assesses the learner's knowledge"
+            },
+            {
+              "t": "No, wrong. Watch me.",
+              "r": "Oh.",
+              "mood": 3
+            }
           ]
         },
         {
           "line": "Under 2 cm observe, over 2 cm aspirate — is that right?",
           "opts": [
-            { "t": "That was BTS 2010. The 2023 guideline treats by symptoms, not size: if he's minimally symptomatic and has no high-risk features, conservative outpatient care is an option even for a large one.", "r": "Oh! So what are the high-risk features?", "mood": -2, "mark": "Teaches the BTS 2023 symptom-based approach" },
-            { "t": "Yes, exactly.", "r": "Great.", "mood": 0 }
+            {
+              "t": "That was BTS 2010. The 2023 guideline treats by symptoms, not size: if he's minimally symptomatic and has no high-risk features, conservative outpatient care is an option even for a large one.",
+              "r": "Oh! So what are the high-risk features?",
+              "mood": -2,
+              "mark": "Teaches the BTS 2023 symptom-based approach"
+            },
+            {
+              "t": "Yes, exactly.",
+              "r": "Great.",
+              "mood": 0
+            }
           ]
         }
       ]
@@ -41,7 +91,16 @@
       "to": "board",
       "label": "Chest X-ray",
       "hint": "Describe it and measure the rim at the hilum.",
-      "groups": { "X-ray": [{ "t": "PA chest X-ray", "r": "Right pneumothorax: visceral pleural line with no lung markings beyond; 3 cm rim at the hilum. No mediastinal shift.", "img": "xr:cxr-ptx-r", "mark": "Describes the pneumothorax and measures at the hilum" }] }
+      "groups": {
+        "X-ray": [
+          {
+            "t": "PA chest X-ray",
+            "r": "Right pneumothorax: visceral pleural line with no lung markings beyond; 3 cm rim at the hilum. No mediastinal shift.",
+            "img": "xr:cxr-ptx-r",
+            "mark": "Describes the pneumothorax and measures at the hilum"
+          }
+        ]
+      }
     },
     {
       "id": "plan",
@@ -50,12 +109,36 @@
       "label": "Teach the plan",
       "hint": "High-risk features? Symptoms? Patient priorities? Then options.",
       "opts": [
-        { "t": "Check high-risk features: unstable, hypoxic, bilateral, lung disease, age > 50 and smoker, haemopneumothorax", "n": 1, "mark": "Screens for high-risk features" },
-        { "t": "Primary pneumothorax, no high-risk features: is he symptomatic? What does he prefer?", "n": 2, "mark": "Decides by symptoms and patient priorities" },
-        { "t": "Minimal symptoms: conservative, outpatient review in 2–4 days with a repeat film", "n": 3, "mark": "Conservative management option" },
-        { "t": "Symptomatic: needle aspiration or an ambulatory device; chest drain if these fail", "n": 4, "mark": "Intervention options if symptomatic" },
-        { "t": "Advice: stop smoking, no flying until resolved, never dive unless definitive surgery; return if breathless", "n": 5, "mark": "Safety advice on smoking, flying and diving" },
-        { "t": "Large pneumothorax: always a large-bore drain", "trap": true, "r": "Size alone no longer dictates a drain (BTS 2023)." }
+        {
+          "t": "Check high-risk features: unstable, hypoxic, bilateral, lung disease, age > 50 and smoker, haemopneumothorax",
+          "n": 1,
+          "mark": "Screens for high-risk features"
+        },
+        {
+          "t": "Primary pneumothorax, no high-risk features: is he symptomatic? What does he prefer?",
+          "n": 2,
+          "mark": "Decides by symptoms and patient priorities"
+        },
+        {
+          "t": "Minimal symptoms: conservative, outpatient review in 2–4 days with a repeat film",
+          "n": 3,
+          "mark": "Conservative management option"
+        },
+        {
+          "t": "Symptomatic: needle aspiration or an ambulatory device; chest drain if these fail",
+          "n": 4,
+          "mark": "Intervention options if symptomatic"
+        },
+        {
+          "t": "Advice: stop smoking, no flying until resolved, never dive unless definitive surgery; return if breathless",
+          "n": 5,
+          "mark": "Safety advice on smoking, flying and diving"
+        },
+        {
+          "t": "Large pneumothorax: always a large-bore drain",
+          "trap": true,
+          "r": "Size alone no longer dictates a drain (BTS 2023)."
+        }
       ]
     },
     {
@@ -64,21 +147,126 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "BTS 2023 main change?", "a": "Management based on symptoms, not size", "wrong": ["Drains for every pneumothorax above 1 cm in size", "No follow-up is needed", "A size cut-off of 1 cm"] },
-        { "q": "Where to measure pneumothorax size (BTS)?", "a": "At the level of the hilum", "wrong": ["At the apex only", "At the costophrenic angle", "Anywhere"] },
-        { "q": "Diving after pneumothorax?", "a": "Never, unless definitive surgery", "wrong": ["After 1 week if the X-ray is clear", "After 1 month without symptoms", "Always safe with a dive buddy"] },
-        { "q": "Secondary pneumothorax means…", "a": "Underlying lung disease", "wrong": ["A second episode on the same side", "Caused by blunt chest trauma", "Caused by a chest drain"] },
-        { "q": "Needle aspiration site?", "a": "2nd ICS mid-clavicular or the safe triangle", "wrong": ["7th ICS posterior axillary line", "Subxiphoid", "Supraclavicular fossa"] }
+        {
+          "q": "BTS 2023 main change?",
+          "a": "Management based on symptoms, not size",
+          "wrong": [
+            "Drains for every pneumothorax above 1 cm in size",
+            "No follow-up is needed",
+            "A size cut-off of 1 cm"
+          ]
+        },
+        {
+          "q": "Where to measure pneumothorax size (BTS)?",
+          "a": "At the level of the hilum",
+          "wrong": [
+            "At the apex only",
+            "At the costophrenic angle",
+            "Anywhere"
+          ]
+        },
+        {
+          "q": "Diving after pneumothorax?",
+          "a": "Never, unless definitive surgery",
+          "wrong": [
+            "After 1 week if the X-ray is clear",
+            "After 1 month without symptoms",
+            "Always safe with a dive buddy"
+          ]
+        },
+        {
+          "q": "Secondary pneumothorax means…",
+          "a": "Underlying lung disease",
+          "wrong": [
+            "A second episode on the same side",
+            "Caused by blunt chest trauma",
+            "Caused by a chest drain"
+          ]
+        },
+        {
+          "q": "Needle aspiration site?",
+          "a": "2nd ICS mid-clavicular or the safe triangle",
+          "wrong": [
+            "7th ICS posterior axillary line",
+            "Subxiphoid",
+            "Supraclavicular fossa"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Air Traffic", "emoji": "🎈", "flavor": "Symptoms, not centimetres. Ask what the patient wants." },
+  "badge": {
+    "name": "Air Traffic",
+    "emoji": "🎈",
+    "flavor": "Symptoms, not centimetres. Ask what the patient wants."
+  },
   "cards": [
-    { "q": "BTS 2023: minimally symptomatic PSP without high-risk features can be…", "options": ["Conservative care, regardless of size", "Drained with a chest tube if over 2 cm at the hilum", "Aspirated in every case", "Admitted for oxygen in every case"], "why": "Symptom- and preference-based.", "source": "BTS Pleural Disease 2023", "note": "Your notes follow BTS 2010 (size-based)." },
-    { "q": "High-risk pneumothorax feature?", "options": ["Haemodynamic compromise", "Age 20 years", "Mild pleuritic pain on deep breathing", "Right-sided pneumothorax"], "why": "Also hypoxia, bilateral, underlying lung disease, age > 50 smoker, haemopneumothorax.", "source": "BTS 2023" },
-    { "q": "Typical patient with primary spontaneous pneumothorax?", "options": ["Tall, thin young male smoker", "Elderly woman with COPD", "Child with asthma", "Patient after thoracic surgery"], "why": "Apical blebs.", "source": "BTS" },
-    { "q": "Flying after pneumothorax?", "options": ["Only after radiological resolution", "Immediately after discharge if the pain has settled", "Never again", "After 24 hours"], "why": "Airlines often require 1–2 weeks after resolution.", "source": "BTS 2023" },
-    { "q": "Ambulatory device for pneumothorax is…", "options": ["A small drain with a one-way valve", "A home oxygen concentrator for 2 weeks", "A home CPAP machine at night for a week", "A chest binder"], "why": "Option for symptomatic PSP.", "source": "BTS 2023" },
-    { "q": "2 cm rim at the hilum corresponds to about…", "options": ["About 50%", "About 10%", "About 90%", "About 5%"], "why": "Size now matters less than symptoms.", "source": "BTS" }
+    {
+      "q": "BTS 2023: minimally symptomatic PSP without high-risk features can be…",
+      "options": [
+        "Conservative care, regardless of size",
+        "Drained with a chest tube if over 2 cm at the hilum",
+        "Aspirated in every case",
+        "Admitted for oxygen in every case"
+      ],
+      "why": "Symptom- and preference-based.",
+      "source": "BTS Pleural Disease 2023",
+      "note": "Your notes follow BTS 2010 (size-based)."
+    },
+    {
+      "q": "High-risk pneumothorax feature?",
+      "options": [
+        "Haemodynamic compromise",
+        "Age 20 years",
+        "Mild pleuritic pain on deep breathing",
+        "Right-sided pneumothorax"
+      ],
+      "why": "Also hypoxia, bilateral, underlying lung disease, age > 50 smoker, haemopneumothorax.",
+      "source": "BTS 2023"
+    },
+    {
+      "q": "Typical patient with primary spontaneous pneumothorax?",
+      "options": [
+        "Tall, thin young male smoker",
+        "Elderly woman with COPD",
+        "Child with asthma",
+        "Patient after thoracic surgery"
+      ],
+      "why": "Apical blebs.",
+      "source": "BTS"
+    },
+    {
+      "q": "Flying after pneumothorax?",
+      "options": [
+        "Only after radiological resolution",
+        "Immediately after discharge if the pain has settled",
+        "Never again",
+        "After 24 hours"
+      ],
+      "why": "Airlines often require 1–2 weeks after resolution.",
+      "source": "BTS 2023"
+    },
+    {
+      "q": "Ambulatory device for pneumothorax is…",
+      "options": [
+        "A small drain with a one-way valve",
+        "A home oxygen concentrator for 2 weeks",
+        "A home CPAP machine at night for a week",
+        "A chest binder"
+      ],
+      "why": "Option for symptomatic PSP.",
+      "source": "BTS 2023"
+    },
+    {
+      "q": "2 cm rim at the hilum corresponds to about…",
+      "options": [
+        "About 50%",
+        "About 10%",
+        "About 90%",
+        "About 5%"
+      ],
+      "why": "Size now matters less than symptoms.",
+      "source": "BTS"
+    }
   ]
 }

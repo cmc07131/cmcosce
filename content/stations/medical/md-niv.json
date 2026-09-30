@@ -5,33 +5,173 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 4. Mr Tse, 70, with known COPD, has been increasingly breathless for 3 days. On 28% oxygen: HR 110, BP 150/90, RR 30, SpO2 90%. Arterial gas: pH 7.26, PaCO2 9.1 kPa, PaO2 7.9 kPa, HCO3 30. He is alert. Start non-invasive ventilation.",
+  "phases": [
+    {
+      "title": "Medical therapy",
+      "goal": "Monitoring, controlled oxygen, and optimal medical therapy from the cart.",
+      "steps": [
+        "monitoring",
+        "oxygen",
+        "medical"
+      ]
+    },
+    {
+      "title": "Decide",
+      "goal": "Does he meet the criteria for NIV? Any contraindication? What is his ceiling of care?",
+      "steps": [
+        "decide"
+      ]
+    },
+    {
+      "title": "Set up NIV",
+      "goal": "Explain it to him, then set up the machine yourself.",
+      "steps": [
+        "explain",
+        "niv"
+      ]
+    },
+    {
+      "title": "Titrate",
+      "goal": "Titrate the pressure and check the gas.",
+      "steps": [
+        "titrate"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "High-flow nasal oxygen. Your notes list NIV and HFNO side by side. HFNO is not a substitute for NIV in acute hypercapnic acidosis (pH under 7.35, PaCO2 over 6.5 kPa); start NIV within 60 minutes of the gas that shows the need."}
+    {
+      "tag": "differs",
+      "text": "High-flow nasal oxygen. Your notes list NIV and HFNO side by side. HFNO is not a substitute for NIV in acute hypercapnic acidosis (pH under 7.35, PaCO2 over 6.5 kPa); start NIV within 60 minutes of the gas that shows the need."
+    }
   ],
   "notes": "Checked against BTS/ICS guideline on acute hypercapnic respiratory failure (2016), BTS quality standards for NIV (2018) and GOLD 2025.\n\nIndication: acute hypercapnic respiratory failure — pH under 7.35 and PaCO2 over 6.5 kPa — persisting despite optimal medical therapy (controlled oxygen to 88–92%, nebulised salbutamol and ipratropium, steroids, antibiotics if indicated). Start within 60 minutes of the gas that shows the need (BTS). Contraindications: undrained pneumothorax, inability to protect the airway, vomiting, recent upper GI surgery, facial trauma or burns, fixed upper airway obstruction; decide a ceiling of treatment (is he for intubation if NIV fails?).\n\nSettings: full face mask; IPAP start 15 cmH2O, titrate up to 20 (to 25–30 if needed) over 10–30 minutes; EPAP 3–5 cmH2O; backup rate; oxygen entrained to 88–92%. Recheck gas at 1 hour (and 4 hours): worsening pH/CO2 → escalate (intubation if appropriate). Your notes list NIV and HFNO as topics; HFNO is not a substitute for NIV in hypercapnic acidosis.",
-  "cast": [{ "id": "patient", "name": "Mr Tse", "role": "elderly" }, { "id": "nurse", "name": "Nurse Choy", "role": "nurse" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Tse",
+      "role": "elderly"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Choy",
+      "role": "nurse"
+    }
+  ],
   "vitals": {
-    "hr": 110, "sbp": 150, "dbp": 90, "spo2": 90, "rr": 30, "etco2": 8.5,
+    "hr": 110,
+    "sbp": 150,
+    "dbp": 90,
+    "spo2": 90,
+    "rr": 30,
+    "etco2": 8.5,
     "rhythm": "sinus-tachy",
     "effects": [
-      { "scene": "neb", "add": { "rr": -2 }, "overS": 60 },
-      { "scene": "niv", "add": { "rr": -8, "hr": -12, "etco2": -1.5 }, "overS": 600 }
-    ]
+      {
+        "scene": "neb",
+        "add": {
+          "rr": -2
+        },
+        "overS": 60
+      },
+      {
+        "scene": "niv",
+        "add": {
+          "rr": -8,
+          "hr": -12,
+          "etco2": -1.5
+        },
+        "overS": 600
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put him on the monitor: ECG, NIBP and SpO2.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
+    {
+      "id": "oxygen",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "Controlled oxygen.",
+      "confirm": "Take these",
+      "opts": [
+        {
+          "t": "Venturi 28%, target SpO2 88–92%",
+          "fetch": "trolley",
+          "need": true,
+          "mark": "Controlled oxygen to 88–92%"
+        },
+        {
+          "t": "15 L oxygen by non-rebreather to get SpO2 to 98%",
+          "fetch": "trolley",
+          "trap": "critical",
+          "r": "High-flow oxygen worsens hypercapnia in COPD. Target 88–92%."
+        }
+      ]
+    },
     {
       "id": "medical",
       "kind": "pick",
       "to": "cart",
-      "label": "Optimal medical therapy",
-      "hint": "Controlled oxygen 88–92%, nebulisers, steroids, antibiotics if purulent.",
+      "label": "Drug cart",
+      "hint": "Optimal medical therapy first.",
       "confirm": "Give",
       "opts": [
-        { "t": "Venturi 28%, target SpO2 88–92%", "fetch": "trolley", "need": true, "mark": "Controlled oxygen to 88–92%" },
-        { "t": "Nebulised salbutamol 5 mg and ipratropium 500 microgram (air-driven)", "fetch": "cart", "need": true, "scene": "neb", "mark": "Bronchodilators (air-driven)" },
-        { "t": "Prednisolone 40 mg for 5 days", "fetch": "cart", "need": true, "mark": "Systemic steroids" },
-        { "t": "Antibiotics for purulent sputum; CXR", "fetch": "cart", "need": true, "mark": "Antibiotics and CXR" },
-        { "t": "15 L oxygen by non-rebreather to get SpO2 to 98%", "fetch": "trolley", "trap": "critical", "r": "High-flow oxygen worsens hypercapnia in COPD. Target 88–92%." }
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "neb",
+          "mark": "Bronchodilators (air-driven)",
+          "t": "Salbutamol + ipratropium nebules 5 mg + 500 microgram, air-driven",
+          "drug": "Salbutamol + ipratropium nebules",
+          "dose": "5 mg + 500 microgram, air-driven"
+        },
+        {
+          "t": "Salbutamol + ipratropium nebules 5 mg + 500 microgram, driven by 8 L oxygen",
+          "drug": "Salbutamol + ipratropium nebules",
+          "dose": "5 mg + 500 microgram, driven by 8 L oxygen",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Oxygen-driven nebulisers raise his CO2: drive them with air, oxygen by nasal cannula."
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "Systemic steroids",
+          "t": "Prednisolone 40 mg orally for 5 days",
+          "drug": "Prednisolone",
+          "dose": "40 mg orally for 5 days"
+        },
+        {
+          "t": "Prednisolone 200 mg orally",
+          "drug": "Prednisolone",
+          "dose": "200 mg orally",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Far too much: 40 mg daily for 5 days."
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "Antibiotics and CXR",
+          "t": "Amoxicillin 500 mg three times a day (purulent sputum)",
+          "drug": "Amoxicillin",
+          "dose": "500 mg three times a day (purulent sputum)"
+        }
       ]
     },
     {
@@ -41,25 +181,84 @@
       "label": "Decide",
       "hint": "Still acidotic despite therapy: NIV. Contraindications? Ceiling of care.",
       "opts": [
-        { "t": "Persisting pH < 7.35 and PaCO2 > 6.5: start NIV within the hour", "mark": "States the indication for NIV" },
-        { "t": "No contraindication: no pneumothorax on the CXR, protecting his airway, not vomiting", "mark": "Checks contraindications (including pneumothorax)" },
-        { "t": "Ceiling of care discussed: for intubation if NIV fails", "mark": "Documents a ceiling of treatment" }
+        {
+          "t": "Persisting pH < 7.35 and PaCO2 > 6.5: start NIV within the hour",
+          "mark": "States the indication for NIV"
+        },
+        {
+          "t": "No contraindication: no pneumothorax on the CXR, protecting his airway, not vomiting",
+          "mark": "Checks contraindications (including pneumothorax)"
+        },
+        {
+          "t": "Ceiling of care discussed: for intubation if NIV fails",
+          "mark": "Documents a ceiling of treatment"
+        }
       ]
     },
     {
-      "id": "setup",
-      "kind": "steps",
+      "id": "explain",
+      "kind": "say",
       "to": "patient",
-      "label": "Set up NIV",
-      "hint": "Explain, full face mask fitted, IPAP 15 → 20+, EPAP 3–5, oxygen 88–92%, gas at 1 hour.",
+      "label": "Talk to Mr Tse",
+      "hint": "Explain the mask before it goes on.",
       "opts": [
-        { "t": "Explain to him: a tight mask that helps him breathe; he can signal if distressed", "n": 1, "mark": "Explains NIV to the patient" },
-        { "t": "Choose and fit a full face mask (hold it on first, then straps)", "n": 2, "mark": "Correct mask size and fit" },
-        { "t": "Start IPAP 15, EPAP 4 cmH2O, backup rate 15", "n": 3, "mark": "Appropriate initial settings" },
-        { "t": "Titrate IPAP up to 20 over 10–30 minutes as tolerated", "n": 4, "scene": "niv", "mark": "Titrates IPAP up" },
-        { "t": "Entrain oxygen to keep SpO2 88–92%", "n": 5, "mark": "Oxygen titration on NIV" },
-        { "t": "Repeat arterial gas at 1 hour", "n": 6, "r": "pH 7.31, PaCO2 7.9 — improving.", "mark": "Reassesses with a gas at 1 hour" },
-        { "t": "Start IPAP at 30 cmH2O immediately", "trap": true, "r": "Poorly tolerated; start at 15 and titrate over minutes." }
+        {
+          "t": "Explain to him: a tight mask that helps him breathe; he can signal if distressed",
+          "mark": "Explains NIV to the patient",
+          "tz": "我哋會幫你戴個緊啲嘅面罩，幫你呼吸。一開始會唔慣，如果你好辛苦，舉手話俾我哋知。",
+          "r": "OK… I'll try it.",
+          "rz": "好……我試吓。"
+        }
+      ]
+    },
+    {
+      "id": "niv",
+      "kind": "say",
+      "to": "ventilator",
+      "label": "NIV",
+      "hint": "Set it up yourself: mask, pressures, backup rate, oxygen.",
+      "opts": [
+        {
+          "t": "Set up NIV",
+          "perform": "niv",
+          "scene": "niv",
+          "performHint": "COPD, pH 7.26, PaCO2 9.1. Full face mask, IPAP about 15, EPAP 4, a backup rate, oxygen to SpO2 88–92%. START.",
+          "mark": [
+            "Correct mask size and fit",
+            "Appropriate initial settings",
+            "Sets a backup rate",
+            "Oxygen titration on NIV"
+          ]
+        }
+      ],
+      "lang": "en"
+    },
+    {
+      "id": "titrate",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "Titrate, and check it is working.",
+      "opts": [
+        {
+          "t": "Titrate IPAP up to 20 over 10–30 minutes as tolerated",
+          "scene": "niv",
+          "mark": "Titrates IPAP up",
+          "when": "niv",
+          "early": "Start NIV first."
+        },
+        {
+          "t": "Repeat arterial gas at 1 hour",
+          "r": "pH 7.31, PaCO2 7.9 — improving.",
+          "mark": "Reassesses with a gas at 1 hour",
+          "when": "niv",
+          "early": "Start NIV first."
+        },
+        {
+          "t": "Start IPAP at 30 cmH2O immediately",
+          "trap": true,
+          "r": "Poorly tolerated; start at 15 and titrate over minutes."
+        }
       ]
     },
     {
@@ -68,21 +267,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "NIV indication in COPD?", "a": "pH < 7.35 and PaCO2 > 6.5 kPa despite treatment", "wrong": ["SpO2 below 94% on air", "Any breathlessness in COPD", "pH below 7.10 only"] },
-        { "q": "Absolute contraindication to NIV?", "a": "Undrained pneumothorax", "wrong": ["Known severe COPD", "Age over 70 with frailty", "Hypercapnia with drowsiness"] },
-        { "q": "IPAP increases…", "a": "Tidal volume and CO2 clearance", "wrong": ["Oxygen delivery, but not ventilation", "The heart rate and blood pressure", "PEEP only"] },
-        { "q": "EPAP mainly helps by…", "a": "Offsetting intrinsic PEEP; splinting airways", "wrong": ["Increasing the PaCO2", "Sedating the patient", "Preventing aspiration"] },
-        { "q": "When to recheck the gas after starting NIV?", "a": "At 1 hour", "wrong": ["At 24 hours", "Only if the patient worsens", "After discharge from HDU"] }
+        {
+          "q": "NIV indication in COPD?",
+          "a": "pH < 7.35 and PaCO2 > 6.5 kPa despite treatment",
+          "wrong": [
+            "SpO2 below 94% on air",
+            "Any breathlessness in COPD",
+            "pH below 7.10 only"
+          ]
+        },
+        {
+          "q": "Absolute contraindication to NIV?",
+          "a": "Undrained pneumothorax",
+          "wrong": [
+            "Known severe COPD",
+            "Age over 70 with frailty",
+            "Hypercapnia with drowsiness"
+          ]
+        },
+        {
+          "q": "IPAP increases…",
+          "a": "Tidal volume and CO2 clearance",
+          "wrong": [
+            "Oxygen delivery, but not ventilation",
+            "The heart rate and blood pressure",
+            "PEEP only"
+          ]
+        },
+        {
+          "q": "EPAP mainly helps by…",
+          "a": "Offsetting intrinsic PEEP; splinting airways",
+          "wrong": [
+            "Increasing the PaCO2",
+            "Sedating the patient",
+            "Preventing aspiration"
+          ]
+        },
+        {
+          "q": "When to recheck the gas after starting NIV?",
+          "a": "At 1 hour",
+          "wrong": [
+            "At 24 hours",
+            "Only if the patient worsens",
+            "After discharge from HDU"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Pressure Support", "emoji": "😷", "flavor": "88–92%, full medical therapy, then IPAP up and a gas at an hour." },
+  "badge": {
+    "name": "Pressure Support",
+    "emoji": "😷",
+    "flavor": "88–92%, full medical therapy, then IPAP up and a gas at an hour."
+  },
   "cards": [
-    { "q": "Target SpO2 in COPD with hypercapnia?", "options": ["88–92%", "94–98%", "100%", "80–85%"], "why": "Avoids worsening CO2 retention.", "source": "BTS oxygen guideline" },
-    { "q": "Typical starting IPAP/EPAP?", "options": ["IPAP 15, EPAP 3–5 cmH2O", "IPAP 40, EPAP 20 cmH2O, then wean", "IPAP 5, EPAP 10 cmH2O", "IPAP 10, EPAP 10 cmH2O"], "why": "Titrate IPAP to 20+.", "source": "BTS/ICS 2016" },
-    { "q": "NIV should start within how long of the qualifying gas (BTS)?", "options": ["60 minutes", "6 hours", "Within 24 hours of admission", "After a second gas"], "why": "Quality standard.", "source": "BTS 2018" },
-    { "q": "Nebulisers in COPD with hypercapnia are driven by…", "options": ["Compressed air (with nasal oxygen)", "Oxygen at 15 L/min through the nebuliser", "Heliox to reduce airway resistance", "Nitrous oxide"], "why": "Limit oxygen delivery.", "source": "BTS" },
-    { "q": "Steroid course for COPD exacerbation?", "options": ["Prednisolone 30–40 mg for 5 days", "Hydrocortisone 1 g IV daily", "No steroids unless there is an asthmatic history", "Prednisolone 40 mg daily for 3 months, then taper"], "why": "GOLD / NICE NG115.", "source": "NICE NG115" },
-    { "q": "High-flow nasal oxygen versus NIV for hypercapnic acidosis?", "options": ["NIV is first-line", "HFNO is first-line", "Both equal always", "Neither"], "why": "HFNO may be an alternative only if NIV not tolerated.", "source": "BTS/ERS" }
+    {
+      "q": "Target SpO2 in COPD with hypercapnia?",
+      "options": [
+        "88–92%",
+        "94–98%",
+        "100%",
+        "80–85%"
+      ],
+      "why": "Avoids worsening CO2 retention.",
+      "source": "BTS oxygen guideline"
+    },
+    {
+      "q": "Typical starting IPAP/EPAP?",
+      "options": [
+        "IPAP 15, EPAP 3–5 cmH2O",
+        "IPAP 40, EPAP 20 cmH2O, then wean",
+        "IPAP 5, EPAP 10 cmH2O",
+        "IPAP 10, EPAP 10 cmH2O"
+      ],
+      "why": "Titrate IPAP to 20+.",
+      "source": "BTS/ICS 2016"
+    },
+    {
+      "q": "NIV should start within how long of the qualifying gas (BTS)?",
+      "options": [
+        "60 minutes",
+        "6 hours",
+        "Within 24 hours of admission",
+        "After a second gas"
+      ],
+      "why": "Quality standard.",
+      "source": "BTS 2018"
+    },
+    {
+      "q": "Nebulisers in COPD with hypercapnia are driven by…",
+      "options": [
+        "Compressed air (with nasal oxygen)",
+        "Oxygen at 15 L/min through the nebuliser",
+        "Heliox to reduce airway resistance",
+        "Nitrous oxide"
+      ],
+      "why": "Limit oxygen delivery.",
+      "source": "BTS"
+    },
+    {
+      "q": "Steroid course for COPD exacerbation?",
+      "options": [
+        "Prednisolone 30–40 mg for 5 days",
+        "Hydrocortisone 1 g IV daily",
+        "No steroids unless there is an asthmatic history",
+        "Prednisolone 40 mg daily for 3 months, then taper"
+      ],
+      "why": "GOLD / NICE NG115.",
+      "source": "NICE NG115"
+    },
+    {
+      "q": "High-flow nasal oxygen versus NIV for hypercapnic acidosis?",
+      "options": [
+        "NIV is first-line",
+        "HFNO is first-line",
+        "Both equal always",
+        "Neither"
+      ],
+      "why": "HFNO may be an alternative only if NIV not tolerated.",
+      "source": "BTS/ERS"
+    }
   ]
 }

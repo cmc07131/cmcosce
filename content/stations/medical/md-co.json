@@ -5,11 +5,29 @@
   "type": "comms",
   "time": 420,
   "stem": "Relatives' room. Ms Wong, 23, was found in a sealed room with a burnt charcoal burner. Her GCS was 7 and she has been intubated. COHb was 35%. Her mother has just arrived. Explain her condition and the plan, including hyperbaric oxygen.",
+  "phases": [
+    {
+      "title": "Talk to her mother",
+      "goal": "Explain her condition, hyperbaric oxygen and its risks, check contraindications, and support the family.",
+      "steps": [
+        "talk"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "missing", "text": "Contraindication to hyperbaric oxygen. Your notes leave out untreated pneumothorax, the main absolute contraindication. Drug cautions: bleomycin, doxorubicin, cisplatin, disulfiram."}
+    {
+      "tag": "missing",
+      "text": "Contraindication to hyperbaric oxygen. Your notes leave out untreated pneumothorax, the main absolute contraindication. Drug cautions: bleomycin, doxorubicin, cisplatin, disulfiram."
+    }
   ],
   "notes": "Checked against TOXBASE, the Undersea and Hyperbaric Medical Society indications, the Cochrane review of hyperbaric oxygen for CO poisoning (2011) and Weaver et al. (NEJM 2002).\n\nCO binds haemoglobin (~240 times more than oxygen), shifts the dissociation curve left, and poisons cytochrome oxidase. Treatment: 100% oxygen (half-life of COHb about 5 hours in air, 60–90 minutes on 100%, about 20–30 minutes at 2.5–3 ATA). Hyperbaric oxygen is considered for loss of consciousness, neurological signs, COHb over 25% (over 15–20% in pregnancy), cardiac ischaemia or severe acidosis, aiming to reduce delayed neurological sequelae; evidence is mixed (Weaver 2002 positive; Cochrane 2011 inconclusive). Risks: ear and sinus barotrauma (myringotomy in intubated patients), pulmonary barotrauma, oxygen toxicity seizures, claustrophobia, transfer risks. Absolute contraindication: untreated pneumothorax. Relative/drug contraindications: bleomycin exposure, doxorubicin, cisplatin, disulfiram.\n\nDeliberate self-poisoning: psychiatric assessment once recovered; screen for co-ingestion (paracetamol, alcohol); check others at the scene.\n\nYour notes match on indications, complications, preparation and procedure; they omit untreated pneumothorax, the main absolute contraindication.",
-  "cast": [{ "id": "mother", "name": "Mrs Wong", "role": "woman" }],
+  "cast": [
+    {
+      "id": "mother",
+      "name": "Mrs Wong",
+      "role": "woman"
+    }
+  ],
   "steps": [
     {
       "id": "talk",
@@ -20,38 +38,106 @@
       "mood": 8,
       "turns": [
         {
-          "line": "Where's my daughter? What happened?", "lz": "我個女呢？佢發生咩事？",
+          "line": "Where's my daughter? What happened?",
+          "lz": "我個女呢？佢發生咩事？",
           "opts": [
-            { "t": "I'm Dr Lee, looking after your daughter. Please sit down. She was found in a room with burning charcoal; she breathed in carbon monoxide gas, which stops blood carrying oxygen. She was very drowsy, so we put a breathing tube in to protect her airway and give her pure oxygen.", "tz": "我係李醫生，負責照顧你個女。你先坐低。佢喺一間燒緊炭嘅房度俾人發現，吸入咗一氧化碳，令血液運唔到氧氣。佢好唔清醒，所以我哋幫佢插咗喉，保護佢嘅氣道同埋俾純氧佢。", "rz": "（喊緊）佢會唔會冇事㗎？", "r": "[Crying] Will she live?", "mood": -2, "mark": "Explains what happened and why she was intubated" },
-            { "t": "She tried to kill herself.", "tz": "佢想自殺。", "rz": "唔會嘅……唔會嘅……", "r": "No… no…", "mood": 3 }
+            {
+              "t": "I'm Dr Lee, looking after your daughter. Please sit down. She was found in a room with burning charcoal; she breathed in carbon monoxide gas, which stops blood carrying oxygen. She was very drowsy, so we put a breathing tube in to protect her airway and give her pure oxygen.",
+              "tz": "我係李醫生，負責照顧你個女。你先坐低。佢喺一間燒緊炭嘅房度俾人發現，吸入咗一氧化碳，令血液運唔到氧氣。佢好唔清醒，所以我哋幫佢插咗喉，保護佢嘅氣道同埋俾純氧佢。",
+              "rz": "（喊緊）佢會唔會冇事㗎？",
+              "r": "[Crying] Will she live?",
+              "mood": -2,
+              "mark": "Explains what happened and why she was intubated"
+            },
+            {
+              "t": "She tried to kill herself.",
+              "tz": "佢想自殺。",
+              "rz": "唔會嘅……唔會嘅……",
+              "r": "No… no…",
+              "mood": 3
+            }
           ]
         },
         {
-          "line": "Will she live?", "lz": "佢會唔會冇事？",
+          "line": "Will she live?",
+          "lz": "佢會唔會冇事？",
           "opts": [
-            { "t": "She is seriously ill but her heart and blood pressure are stable. The main worry is damage to the brain, which can appear days or weeks later. We'd like to give her oxygen in a pressure chamber — hyperbaric oxygen — which may reduce that risk.", "tz": "佢而家情況好嚴重，不過心跳同血壓都穩定。最擔心係腦部受損，呢啲可以幾日甚至幾個禮拜之後先出現。我哋想俾佢入高壓氧艙，喺高壓之下吸氧氣，可能減低呢個風險。", "rz": "高壓氧艙？危唔危險㗎？", "r": "A chamber? Is it dangerous?", "mood": -1, "mark": "Explains prognosis and the rationale for HBOT, including delayed sequelae" },
-            { "t": "Yes, she'll be fine.", "tz": "係，佢會冇事嘅。", "rz": "真係？", "r": "Really?", "mood": 0 }
+            {
+              "t": "She is seriously ill but her heart and blood pressure are stable. The main worry is damage to the brain, which can appear days or weeks later. We'd like to give her oxygen in a pressure chamber — hyperbaric oxygen — which may reduce that risk.",
+              "tz": "佢而家情況好嚴重，不過心跳同血壓都穩定。最擔心係腦部受損，呢啲可以幾日甚至幾個禮拜之後先出現。我哋想俾佢入高壓氧艙，喺高壓之下吸氧氣，可能減低呢個風險。",
+              "rz": "高壓氧艙？危唔危險㗎？",
+              "r": "A chamber? Is it dangerous?",
+              "mood": -1,
+              "mark": "Explains prognosis and the rationale for HBOT, including delayed sequelae"
+            },
+            {
+              "t": "Yes, she'll be fine.",
+              "tz": "係，佢會冇事嘅。",
+              "rz": "真係？",
+              "r": "Really?",
+              "mood": 0
+            }
           ]
         },
         {
-          "line": "A chamber? Is it dangerous?", "lz": "高壓氧艙？危唔危險㗎？",
+          "line": "A chamber? Is it dangerous?",
+          "lz": "高壓氧艙？危唔危險㗎？",
           "opts": [
-            { "t": "It's generally safe. The pressure can hurt the ears, so an ENT doctor will make tiny holes in her eardrums that heal later. Rarely it can cause seizures from oxygen, or lung injury. A doctor and nurse will be with her throughout; usually 1–3 sessions of about 90 minutes.", "tz": "一般都算安全。壓力可能會令耳仔痛，所以耳鼻喉醫生會喺佢耳膜開個好細嘅窿，之後會自己埋返。好少數情況，氧氣可能會引致抽筋，或者傷到肺。成個過程都有醫生同護士喺度，通常做一至三次，每次大概九十分鐘。", "rz": "好。你要我做啲咩？", "r": "OK. What do you need from me?", "mood": -2, "mark": "Explains risks and preparation (myringotomy) and the procedure" },
-            { "t": "No risks.", "tz": "完全冇風險。", "rz": "嗯……", "r": "Hmm.", "mood": 1 }
+            {
+              "t": "It's generally safe. The pressure can hurt the ears, so an ENT doctor will make tiny holes in her eardrums that heal later. Rarely it can cause seizures from oxygen, or lung injury. A doctor and nurse will be with her throughout; usually 1–3 sessions of about 90 minutes.",
+              "tz": "一般都算安全。壓力可能會令耳仔痛，所以耳鼻喉醫生會喺佢耳膜開個好細嘅窿，之後會自己埋返。好少數情況，氧氣可能會引致抽筋，或者傷到肺。成個過程都有醫生同護士喺度，通常做一至三次，每次大概九十分鐘。",
+              "rz": "好。你要我做啲咩？",
+              "r": "OK. What do you need from me?",
+              "mood": -2,
+              "mark": "Explains risks and preparation (myringotomy) and the procedure"
+            },
+            {
+              "t": "No risks.",
+              "tz": "完全冇風險。",
+              "rz": "嗯……",
+              "r": "Hmm.",
+              "mood": 1
+            }
           ]
         },
         {
-          "line": "OK. What do you need from me?", "lz": "好。你要我做啲咩？",
+          "line": "OK. What do you need from me?",
+          "lz": "好。你要我做啲咩？",
           "opts": [
-            { "t": "Has she ever had chemotherapy, lung problems like a collapsed lung, or take medicines like disulfiram? And did she have any other medicines at home she might have taken?", "tz": "佢以前有冇做過化療？有冇肺部問題，例如試過爆肺？有冇食 disulfiram 呢類藥？屋企仲有冇其他藥，佢可能食咗？", "rz": "冇做過化療。佢舊年有抑鬱症，食緊 sertraline。", "r": "No chemo. She had depression last year — sertraline.", "mood": -1, "mark": "Asks about contraindications and co-ingestion" },
-            { "t": "Nothing, just wait outside.", "tz": "冇嘢，你喺出面等啦。", "r": "…", "mood": 2 }
+            {
+              "t": "Has she ever had chemotherapy, lung problems like a collapsed lung, or take medicines like disulfiram? And did she have any other medicines at home she might have taken?",
+              "tz": "佢以前有冇做過化療？有冇肺部問題，例如試過爆肺？有冇食 disulfiram 呢類藥？屋企仲有冇其他藥，佢可能食咗？",
+              "rz": "冇做過化療。佢舊年有抑鬱症，食緊 sertraline。",
+              "r": "No chemo. She had depression last year — sertraline.",
+              "mood": -1,
+              "mark": "Asks about contraindications and co-ingestion"
+            },
+            {
+              "t": "Nothing, just wait outside.",
+              "tz": "冇嘢，你喺出面等啦。",
+              "r": "…",
+              "mood": 2
+            }
           ]
         },
         {
-          "line": "She had depression last year…", "lz": "佢舊年有抑鬱症……",
+          "line": "She had depression last year…",
+          "lz": "佢舊年有抑鬱症……",
           "opts": [
-            { "t": "Thank you for telling me. Once she's awake, the mental health team will see her. I'll ask our social worker to support you, and I'll update you as soon as anything changes.", "tz": "多謝你話俾我知。佢醒咗之後，精神科會嚟睇佢。我會叫醫務社工幫手支援你，有任何變化我都會即刻話你知。", "rz": "多謝你，醫生。", "r": "Thank you, doctor.", "mood": -2, "mark": "Plans psychiatric assessment and supports the family" },
-            { "t": "That's not our concern.", "tz": "呢啲唔關我哋事。", "r": "!", "mood": 3 }
+            {
+              "t": "Thank you for telling me. Once she's awake, the mental health team will see her. I'll ask our social worker to support you, and I'll update you as soon as anything changes.",
+              "tz": "多謝你話俾我知。佢醒咗之後，精神科會嚟睇佢。我會叫醫務社工幫手支援你，有任何變化我都會即刻話你知。",
+              "rz": "多謝你，醫生。",
+              "r": "Thank you, doctor.",
+              "mood": -2,
+              "mark": "Plans psychiatric assessment and supports the family"
+            },
+            {
+              "t": "That's not our concern.",
+              "tz": "呢啲唔關我哋事。",
+              "r": "!",
+              "mood": 3
+            }
           ]
         }
       ]
@@ -62,21 +148,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Absolute contraindication to hyperbaric oxygen?", "a": "Untreated pneumothorax", "wrong": ["Pregnancy at any stage", "Age over 60 years", "Current intubation and ventilation"] },
-        { "q": "COHb half-life on 100% normobaric oxygen?", "a": "About 60–90 minutes", "wrong": ["About 4–6 hours (as on room air)", "About 5 minutes", "About 24 hours, like in smokers"] },
-        { "q": "Why is SpO2 unreliable in CO poisoning?", "a": "Oximeters read COHb as oxyhaemoglobin", "wrong": ["CO damages the probe", "CO causes intense peripheral vasoconstriction in the fingers", "It is reliable at COHb below 30%"] },
-        { "q": "Main aim of HBOT in CO poisoning?", "a": "Reduce delayed neurological sequelae", "wrong": ["Speed healing of associated skin burns and smoke injury", "Cure the underlying depression", "Prevent aspiration pneumonia in the unconscious"] },
-        { "q": "A threshold commonly used for HBOT in pregnancy?", "a": "COHb over 15–20%", "wrong": ["COHb over 50%", "Any exposure", "Never in pregnancy"] }
+        {
+          "q": "Absolute contraindication to hyperbaric oxygen?",
+          "a": "Untreated pneumothorax",
+          "wrong": [
+            "Pregnancy at any stage",
+            "Age over 60 years",
+            "Current intubation and ventilation"
+          ]
+        },
+        {
+          "q": "COHb half-life on 100% normobaric oxygen?",
+          "a": "About 60–90 minutes",
+          "wrong": [
+            "About 4–6 hours (as on room air)",
+            "About 5 minutes",
+            "About 24 hours, like in smokers"
+          ]
+        },
+        {
+          "q": "Why is SpO2 unreliable in CO poisoning?",
+          "a": "Oximeters read COHb as oxyhaemoglobin",
+          "wrong": [
+            "CO damages the probe",
+            "CO causes intense peripheral vasoconstriction in the fingers",
+            "It is reliable at COHb below 30%"
+          ]
+        },
+        {
+          "q": "Main aim of HBOT in CO poisoning?",
+          "a": "Reduce delayed neurological sequelae",
+          "wrong": [
+            "Speed healing of associated skin burns and smoke injury",
+            "Cure the underlying depression",
+            "Prevent aspiration pneumonia in the unconscious"
+          ]
+        },
+        {
+          "q": "A threshold commonly used for HBOT in pregnancy?",
+          "a": "COHb over 15–20%",
+          "wrong": [
+            "COHb over 50%",
+            "Any exposure",
+            "Never in pregnancy"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Pressure Chamber", "emoji": "🫧", "flavor": "100% oxygen now, HBOT for the brain, pneumothorax excluded, family supported." },
+  "badge": {
+    "name": "Pressure Chamber",
+    "emoji": "🫧",
+    "flavor": "100% oxygen now, HBOT for the brain, pneumothorax excluded, family supported."
+  },
   "cards": [
-    { "q": "CO affinity for haemoglobin compared with oxygen?", "options": ["About 240 times", "About the same as oxygen", "About half", "About 10 times greater"], "why": "Also shifts the curve left.", "source": "Toxicology" },
-    { "q": "HBOT indication in CO poisoning?", "options": ["Loss of consciousness or neuro signs", "Headache alone with a COHb of 5% in a smoker", "A smoker with COHb 8%", "Mild nausea after exposure"], "why": "Also COHb > 25%, ischaemia, pregnancy with >15–20%.", "source": "UHMS" },
-    { "q": "Complication of HBOT?", "options": ["Middle ear barotrauma", "Hypoglycaemia in diabetic patients on insulin", "Hyperkalaemia from muscle breakdown", "A widespread rash"], "why": "Myringotomy for intubated patients.", "source": "UHMS" },
-    { "q": "Drug that makes HBOT hazardous (lung toxicity)?", "options": ["Bleomycin", "Paracetamol", "Amoxicillin", "Omeprazole"], "why": "Oxygen-related pneumonitis.", "source": "UHMS" },
-    { "q": "Delayed neurological sequelae after CO appear…", "options": ["Days to weeks after exposure", "Within minutes of exposure only", "Only after 1 year", "Never, if the COHb normalises quickly"], "why": "Memory, personality, movement disorders.", "source": "Weaver 2002" },
-    { "q": "After deliberate CO self-poisoning, also…", "options": ["Screen for co-ingestion; psychiatric assessment", "Discharge once the COHb is normal", "Hyperbaric oxygen only", "No further action is needed"], "why": "Self-harm care.", "source": "NICE NG225" }
+    {
+      "q": "CO affinity for haemoglobin compared with oxygen?",
+      "options": [
+        "About 240 times",
+        "About the same as oxygen",
+        "About half",
+        "About 10 times greater"
+      ],
+      "why": "Also shifts the curve left.",
+      "source": "Toxicology"
+    },
+    {
+      "q": "HBOT indication in CO poisoning?",
+      "options": [
+        "Loss of consciousness or neuro signs",
+        "Headache alone with a COHb of 5% in a smoker",
+        "A smoker with COHb 8%",
+        "Mild nausea after exposure"
+      ],
+      "why": "Also COHb > 25%, ischaemia, pregnancy with >15–20%.",
+      "source": "UHMS"
+    },
+    {
+      "q": "Complication of HBOT?",
+      "options": [
+        "Middle ear barotrauma",
+        "Hypoglycaemia in diabetic patients on insulin",
+        "Hyperkalaemia from muscle breakdown",
+        "A widespread rash"
+      ],
+      "why": "Myringotomy for intubated patients.",
+      "source": "UHMS"
+    },
+    {
+      "q": "Drug that makes HBOT hazardous (lung toxicity)?",
+      "options": [
+        "Bleomycin",
+        "Paracetamol",
+        "Amoxicillin",
+        "Omeprazole"
+      ],
+      "why": "Oxygen-related pneumonitis.",
+      "source": "UHMS"
+    },
+    {
+      "q": "Delayed neurological sequelae after CO appear…",
+      "options": [
+        "Days to weeks after exposure",
+        "Within minutes of exposure only",
+        "Only after 1 year",
+        "Never, if the COHb normalises quickly"
+      ],
+      "why": "Memory, personality, movement disorders.",
+      "source": "Weaver 2002"
+    },
+    {
+      "q": "After deliberate CO self-poisoning, also…",
+      "options": [
+        "Screen for co-ingestion; psychiatric assessment",
+        "Discharge once the COHb is normal",
+        "Hyperbaric oxygen only",
+        "No further action is needed"
+      ],
+      "why": "Self-harm care.",
+      "source": "NICE NG225"
+    }
   ]
 }

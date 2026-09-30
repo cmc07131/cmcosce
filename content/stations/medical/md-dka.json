@@ -5,20 +5,117 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 3. Miss Tsang, 19, with type 1 diabetes, has vomited for a day and is drowsy and breathing deeply. HR 124, BP 98/60, RR 32, SpO2 99%, temperature 37.8 °C. Capillary glucose reads 'HI'. Manage her.",
+  "phases": [
+    {
+      "title": "Assess",
+      "goal": "Monitoring on, then assess her yourself and confirm the diagnosis.",
+      "steps": [
+        "monitoring",
+        "assess",
+        "tests"
+      ]
+    },
+    {
+      "title": "Fluid and insulin",
+      "goal": "The first litre, then fixed-rate insulin for her weight.",
+      "steps": [
+        "fluids",
+        "insulin"
+      ]
+    },
+    {
+      "title": "Potassium and glucose",
+      "goal": "Potassium in the next litre; dextrose when the glucose falls.",
+      "steps": [
+        "potassium",
+        "glucose",
+        "monitor"
+      ]
+    },
+    {
+      "title": "Refer",
+      "goal": "Where does severe DKA go?",
+      "steps": [
+        "refer"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "glucose-down",
+      "after": "insulin",
+      "delayS": 30,
+      "scene": "glucose-down",
+      "say": "Hourly check: glucose 13.2 mmol/L, ketones 4.1."
+    }
+  ],
   "review": [],
   "notes": "Checked against the Joint British Diabetes Societies (JBDS-IP) guideline 'The management of diabetic ketoacidosis in adults' (2023 update) and ADA 2024 hyperglycaemic crises consensus.\n\nDiagnosis: ketonaemia 3.0 mmol/L or more (or significant ketonuria), glucose over 11 mmol/L or known diabetes, and bicarbonate under 15 or venous pH under 7.3 (JBDS 2023; euglycaemic DKA exists, e.g. with SGLT2 inhibitors). Severe: pH under 7.0, bicarbonate under 5, ketones over 6, K under 3.5 on admission, GCS under 12, SpO2 under 92%, systolic under 90, HR over 100 or under 60, anion gap over 16.\n\nFluids: 0.9% saline 1 L over 1 hour (if systolic under 90: 500 mL bolus over 10–15 minutes, repeat), then 1 L over 2 h, 2 h, 4 h, 4 h, 6 h (slower in the young, old, heart or renal failure). Potassium: none in the first litre usually; then 40 mmol/L if K 3.5–5.5; none if over 5.5; senior review if under 3.5. Insulin: fixed-rate IV insulin infusion 0.1 unit/kg/h (continue the patient's long-acting insulin). Add 10% glucose at 125 mL/h when glucose falls under 14 mmol/L. Targets: ketones down by 0.5 mmol/L/h, bicarbonate up 3 mmol/L/h, glucose down 3 mmol/L/h, K 4–5.5. Look for the precipitant (infection, missed insulin, MI, pregnancy). Resolution: ketones under 0.6 and pH over 7.3. Avoid bicarbonate; cerebral oedema risk in the young — watch for headache and falling GCS.\n\nYour notes list DKA as a Medical gym topic without detail.",
-  "cast": [{ "id": "patient", "name": "Miss Tsang", "role": "patient" }, { "id": "nurse", "name": "Nurse Lui", "role": "nurse" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Miss Tsang",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Lui",
+      "role": "nurse"
+    }
+  ],
   "vitals": {
-    "hr": 124, "sbp": 98, "dbp": 60, "spo2": 99, "rr": 32, "temp": 37.8, "gcs": 13, "glucose": 32,
+    "hr": 124,
+    "sbp": 98,
+    "dbp": 60,
+    "spo2": 99,
+    "rr": 32,
+    "temp": 37.8,
+    "gcs": 13,
+    "glucose": 32,
     "rhythm": "sinus-tachy",
-    "drift": { "sbp": -1 },
-    "stop": ["fluids"],
+    "drift": {
+      "sbp": -1
+    },
+    "stop": [
+      "fluids"
+    ],
     "effects": [
-      { "scene": "fluids", "add": { "sbp": 14, "dbp": 8, "hr": -14 }, "overS": 180 },
-      { "scene": "insulin", "add": { "glucose": -8, "rr": -6 }, "overS": 300 }
-    ]
+      {
+        "scene": "fluids",
+        "add": {
+          "sbp": 14,
+          "dbp": 8,
+          "hr": -14
+        },
+        "overS": 180
+      },
+      {
+        "scene": "insulin",
+        "add": {
+          "glucose": -8,
+          "rr": -6
+        },
+        "overS": 300
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
     {
       "id": "assess",
       "kind": "exam",
@@ -27,12 +124,31 @@
       "hint": "ABCDE, hydration, conscious level, precipitant.",
       "groups": {
         "ABCDE": [
-          { "t": "Breathing pattern and breath", "r": "Deep, sighing breathing (Kussmaul); fruity smell.", "mark": "Recognises Kussmaul breathing" },
-          { "t": "Hydration and circulation", "r": "Dry mucosa, CRT 3 s, cool peripheries.", "mark": "Assesses dehydration" },
-          { "t": "GCS", "r": "GCS 13 (E3 V4 M6).", "mark": "Assesses conscious level" }
+          {
+            "t": "Breathing pattern and breath",
+            "r": "Deep, sighing breathing (Kussmaul); fruity smell.",
+            "mark": "Recognises Kussmaul breathing",
+            "anim": "auscultate"
+          },
+          {
+            "t": "Hydration and circulation",
+            "r": "Dry mucosa, CRT 3 s, cool peripheries.",
+            "mark": "Assesses dehydration",
+            "anim": "pulse"
+          },
+          {
+            "t": "GCS",
+            "r": "GCS 13 (E3 V4 M6).",
+            "mark": "Assesses conscious level",
+            "anim": "pupils"
+          }
         ],
         "Precipitant": [
-          { "t": "Ask about insulin, infection, pregnancy", "r": "Ran out of insulin 3 days ago; burning when passing urine; LMP 2 weeks ago.", "mark": "Looks for the precipitant" }
+          {
+            "t": "Ask about insulin, infection, pregnancy",
+            "r": "Ran out of insulin 3 days ago; burning when passing urine; LMP 2 weeks ago.",
+            "mark": "Looks for the precipitant"
+          }
         ]
       }
     },
@@ -44,30 +160,169 @@
       "hint": "Venous gas, blood ketones, U&E, FBC, cultures, urine, ECG, pregnancy test.",
       "groups": {
         "Now": [
-          { "t": "Venous gas", "r": "pH 7.08, bicarbonate 7, K 5.8, Na 131, lactate 2.1, glucose 32.", "mark": "Venous gas: severe acidosis and potassium" },
-          { "t": "Capillary blood ketones", "r": "6.4 mmol/L.", "mark": "Measures blood ketones" },
-          { "t": "12-lead ECG", "r": "Sinus tachycardia, peaked T waves.", "img": "ecg:hyperk-mild", "mark": "ECG for potassium effects" }
+          {
+            "t": "Venous gas",
+            "r": "pH 7.08, bicarbonate 7, K 5.8, Na 131, lactate 2.1, glucose 32.",
+            "mark": "Venous gas: severe acidosis and potassium"
+          },
+          {
+            "t": "Capillary blood ketones",
+            "r": "6.4 mmol/L.",
+            "mark": "Measures blood ketones"
+          },
+          {
+            "t": "12-lead ECG",
+            "r": "Sinus tachycardia, peaked T waves.",
+            "img": "ecg:hyperk-mild",
+            "mark": "ECG for potassium effects"
+          }
         ],
         "Other": [
-          { "t": "U&E, FBC, CRP, blood and urine cultures, urine hCG", "r": "Creatinine 140, WCC 17; urine nitrites positive; hCG negative.", "mark": "Bloods, cultures and pregnancy test" }
+          {
+            "t": "U&E, FBC, CRP, blood and urine cultures, urine hCG",
+            "r": "Creatinine 140, WCC 17; urine nitrites positive; hCG negative.",
+            "mark": "Bloods, cultures and pregnancy test"
+          }
         ]
       }
     },
     {
-      "id": "treat",
-      "kind": "steps",
+      "id": "fluids",
+      "kind": "pick",
       "to": "cart",
-      "label": "Treat",
-      "hint": "Saline, fixed-rate insulin 0.1 unit/kg/h, potassium by level, glucose when under 14, monitoring.",
+      "label": "Drug cart",
+      "hint": "Fluid first: the first litre over an hour.",
+      "confirm": "Give",
       "opts": [
-        { "t": "0.9% saline 1 L over 1 hour", "n": 1, "scene": "fluids", "mark": "Fluid resuscitation with 0.9% saline" },
-        { "t": "Fixed-rate IV insulin 0.1 unit/kg/h (weight 55 kg: 5.5 units/h); continue her long-acting insulin", "n": 2, "scene": "insulin", "mark": "Fixed-rate insulin at 0.1 unit/kg/h and continue basal insulin" },
-        { "t": "Next litre: add potassium 40 mmol/L once K is under 5.5", "n": 3, "mark": "Potassium replacement guided by level" },
-        { "t": "Hourly glucose and ketones; venous gas at 1, 2 and 4 hours", "n": 4, "mark": "Hourly monitoring" },
-        { "t": "Add 10% glucose at 125 mL/h when glucose falls below 14 mmol/L", "n": 5, "mark": "Adds glucose when under 14" },
-        { "t": "Treat the UTI; urinary catheter if oliguric; VTE prophylaxis", "n": 6, "mark": "Treats the precipitant and supportive care" },
-        { "t": "Sodium bicarbonate 8.4% 100 mL for the pH of 7.08", "trap": true, "r": "Not recommended: it worsens hypokalaemia and may raise cerebral oedema risk." },
-        { "t": "Insulin 10 units IV bolus then stop the infusion when glucose is normal", "trap": "critical", "r": "Treat the ketones, not the glucose: keep the fixed-rate insulin running with glucose until ketones clear." }
+        {
+          "scene": "fluids",
+          "mark": "Fluid resuscitation with 0.9% saline",
+          "t": "0.9% saline 1 L over 1 hour",
+          "drug": "0.9% saline",
+          "dose": "1 L over 1 hour",
+          "fetch": "cart"
+        },
+        {
+          "t": "0.9% saline 3 L over 1 hour",
+          "drug": "0.9% saline",
+          "dose": "3 L over 1 hour",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too fast in a young adult: cerebral oedema risk. 1 L over the first hour, then slower."
+        },
+        {
+          "t": "0.9% saline 500 mL over 4 hours",
+          "drug": "0.9% saline",
+          "dose": "500 mL over 4 hours",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too slow for her deficit: 1 L over the first hour."
+        },
+        {
+          "trap": true,
+          "r": "Not recommended: it worsens hypokalaemia and may raise cerebral oedema risk.",
+          "t": "Sodium bicarbonate 8.4% 100 mL for the pH of 7.08",
+          "drug": "Sodium bicarbonate 8.4%",
+          "dose": "100 mL for the pH of 7.08",
+          "fetch": "cart"
+        }
+      ]
+    },
+    {
+      "id": "insulin",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Fixed-rate insulin for her weight; keep her long-acting insulin.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "scene": "insulin",
+          "mark": "Fixed-rate insulin at 0.1 unit/kg/h and continue basal insulin",
+          "t": "Insulin (fixed-rate infusion) 0.1 unit/kg/h: 5.5 units/h for 55 kg",
+          "drug": "Insulin (fixed-rate infusion)",
+          "dose": "0.1 unit/kg/h: 5.5 units/h for 55 kg",
+          "fetch": "cart"
+        },
+        {
+          "t": "Insulin (fixed-rate infusion) 0.5 unit/kg/h: 27 units/h",
+          "drug": "Insulin (fixed-rate infusion)",
+          "dose": "0.5 unit/kg/h: 27 units/h",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Five times too much: 0.1 unit/kg/h. Hypoglycaemia and hypokalaemia follow."
+        },
+        {
+          "trap": "critical",
+          "r": "Treat the ketones, not the glucose: keep the fixed-rate insulin running with glucose until ketones clear.",
+          "t": "Insulin (fixed-rate infusion) 10 units IV bolus, stopped when glucose is normal",
+          "drug": "Insulin (fixed-rate infusion)",
+          "dose": "10 units IV bolus, stopped when glucose is normal",
+          "fetch": "cart"
+        }
+      ]
+    },
+    {
+      "id": "potassium",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "The second litre, with potassium once it is under 5.5.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Potassium chloride 40 mmol/L in the next litre (K under 5.5)",
+          "drug": "Potassium chloride",
+          "dose": "40 mmol/L in the next litre (K under 5.5)",
+          "fetch": "cart",
+          "when": "fluids",
+          "early": "After the first litre.",
+          "mark": "Potassium replacement guided by level"
+        },
+        {
+          "t": "Potassium chloride 20 mmol IV push",
+          "drug": "Potassium chloride",
+          "dose": "20 mmol IV push",
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Never push potassium: cardiac arrest. 40 mmol in a litre."
+        }
+      ]
+    },
+    {
+      "id": "glucose",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Glucose falling: add dextrose and keep the insulin running.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Glucose 10% 125 mL/h alongside the saline",
+          "drug": "Glucose 10%",
+          "dose": "125 mL/h alongside the saline",
+          "fetch": "cart",
+          "when": "glucose-down",
+          "early": "Not until the glucose is below 14.",
+          "mark": "Adds glucose when under 14"
+        }
+      ]
+    },
+    {
+      "id": "monitor",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "Hourly checks and the cause.",
+      "opts": [
+        {
+          "t": "Hourly glucose and ketones; venous gas at 1, 2 and 4 hours",
+          "mark": "Hourly monitoring"
+        },
+        {
+          "t": "Treat the UTI; urinary catheter if oliguric; VTE prophylaxis",
+          "mark": "Treats the precipitant and supportive care"
+        }
       ]
     },
     {
@@ -77,7 +332,10 @@
       "label": "Phone",
       "hint": "Severe DKA: HDU and the diabetes team.",
       "opts": [
-        { "t": "Medical team and HDU: severe DKA (pH 7.08, ketones 6.4, GCS 13); diabetes specialist team", "mark": "Refers severe DKA to HDU and the diabetes team" }
+        {
+          "t": "Medical team and HDU: severe DKA (pH 7.08, ketones 6.4, GCS 13); diabetes specialist team",
+          "mark": "Refers severe DKA to HDU and the diabetes team"
+        }
       ]
     },
     {
@@ -86,21 +344,138 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Fixed-rate insulin infusion dose in DKA?", "a": "0.1 unit/kg/h", "wrong": ["1 unit/kg/h", "Sliding scale by glucose", "0.01 unit/kg/h"] },
-        { "q": "When is 10% glucose added?", "a": "When glucose falls below 14 mmol/L", "wrong": ["Never; it worsens ketosis", "From the start, running with the saline", "Only once the glucose is below 4 mmol/L"] },
-        { "q": "Potassium in the second litre if K is 4.2?", "a": "40 mmol/L", "wrong": ["None until K is below 3.5", "10 mmol/L", "100 mmol/L"] },
-        { "q": "Definition of DKA resolution (JBDS)?", "a": "Ketones < 0.6 mmol/L and venous pH > 7.3", "wrong": ["Glucose below 10 mmol/L", "The patient is eating and drinking", "Urine ketones are negative"] },
-        { "q": "Serious complication in young people?", "a": "Cerebral oedema", "wrong": ["Hyperkalaemia always", "Pancreatitis always", "Hypercalcaemia"] }
+        {
+          "q": "Fixed-rate insulin infusion dose in DKA?",
+          "a": "0.1 unit/kg/h",
+          "wrong": [
+            "1 unit/kg/h",
+            "Sliding scale by glucose",
+            "0.01 unit/kg/h"
+          ]
+        },
+        {
+          "q": "When is 10% glucose added?",
+          "a": "When glucose falls below 14 mmol/L",
+          "wrong": [
+            "Never; it worsens ketosis",
+            "From the start, running with the saline",
+            "Only once the glucose is below 4 mmol/L"
+          ]
+        },
+        {
+          "q": "Potassium in the second litre if K is 4.2?",
+          "a": "40 mmol/L",
+          "wrong": [
+            "None until K is below 3.5",
+            "10 mmol/L",
+            "100 mmol/L"
+          ]
+        },
+        {
+          "q": "Definition of DKA resolution (JBDS)?",
+          "a": "Ketones < 0.6 mmol/L and venous pH > 7.3",
+          "wrong": [
+            "Glucose below 10 mmol/L",
+            "The patient is eating and drinking",
+            "Urine ketones are negative"
+          ]
+        },
+        {
+          "q": "Serious complication in young people?",
+          "a": "Cerebral oedema",
+          "wrong": [
+            "Hyperkalaemia always",
+            "Pancreatitis always",
+            "Hypercalcaemia"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Ketone Crusher", "emoji": "🍬", "flavor": "Saline, 0.1 unit/kg/h, K by level, glucose under 14. Treat the ketones." },
+  "rules": [
+    {
+      "id": "fluids-first",
+      "first": [
+        "fluids"
+      ],
+      "then": [
+        "insulin"
+      ],
+      "fail": "Insulin before fluid.",
+      "ok": "Fluid first."
+    }
+  ],
+  "badge": {
+    "name": "Ketone Crusher",
+    "emoji": "🍬",
+    "flavor": "Saline, 0.1 unit/kg/h, K by level, glucose under 14. Treat the ketones."
+  },
   "cards": [
-    { "q": "JBDS diagnosis of DKA includes ketones of…", "options": ["3.0 mmol/L or more", "0.6 mmol/L or more", "1.0 mmol/L or more", "10 mmol/L or more"], "why": "Plus acidosis (pH < 7.3 or HCO3 < 15) and glucose > 11 or known diabetes.", "source": "JBDS-IP 2023" },
-    { "q": "First fluid in DKA?", "options": ["0.9% saline 1 L over 1 hour", "5% dextrose 1 L over 1 hour", "Human albumin 4.5% 500 mL", "Hartmann's 5 L as fast as possible"], "why": "Give a 500 mL bolus first if systolic BP is under 90 mmHg.", "source": "JBDS-IP 2023" },
-    { "q": "Potassium is withheld from fluids if K is…", "options": ["Over 5.5 mmol/L", "Under 5.5 mmol/L", "Under 4.0 mmol/L", "Potassium is always given, at 40 mmol/L"], "why": "Senior review if under 3.5.", "source": "JBDS-IP 2023" },
-    { "q": "Euglycaemic DKA is associated with…", "options": ["SGLT2 inhibitors", "Metformin (lactic acidosis)", "Sulfonylureas such as gliclazide", "High-dose statins"], "why": "Measure ketones even if glucose is modest.", "source": "MHRA / JBDS" },
-    { "q": "Target fall in blood ketones?", "options": ["0.5 mmol/L per hour", "5 mmol/L per hour", "0.05 mmol/L per hour", "No target; follow glucose"], "why": "Increase insulin if not achieved.", "source": "JBDS-IP 2023" },
-    { "q": "Should long-acting insulin be continued during DKA?", "options": ["Yes", "No, stop it", "Only in type 2", "Double it"], "why": "Prevents rebound ketosis when the infusion stops.", "source": "JBDS-IP 2023" }
+    {
+      "q": "JBDS diagnosis of DKA includes ketones of…",
+      "options": [
+        "3.0 mmol/L or more",
+        "0.6 mmol/L or more",
+        "1.0 mmol/L or more",
+        "10 mmol/L or more"
+      ],
+      "why": "Plus acidosis (pH < 7.3 or HCO3 < 15) and glucose > 11 or known diabetes.",
+      "source": "JBDS-IP 2023"
+    },
+    {
+      "q": "First fluid in DKA?",
+      "options": [
+        "0.9% saline 1 L over 1 hour",
+        "5% dextrose 1 L over 1 hour",
+        "Human albumin 4.5% 500 mL",
+        "Hartmann's 5 L as fast as possible"
+      ],
+      "why": "Give a 500 mL bolus first if systolic BP is under 90 mmHg.",
+      "source": "JBDS-IP 2023"
+    },
+    {
+      "q": "Potassium is withheld from fluids if K is…",
+      "options": [
+        "Over 5.5 mmol/L",
+        "Under 5.5 mmol/L",
+        "Under 4.0 mmol/L",
+        "Potassium is always given, at 40 mmol/L"
+      ],
+      "why": "Senior review if under 3.5.",
+      "source": "JBDS-IP 2023"
+    },
+    {
+      "q": "Euglycaemic DKA is associated with…",
+      "options": [
+        "SGLT2 inhibitors",
+        "Metformin (lactic acidosis)",
+        "Sulfonylureas such as gliclazide",
+        "High-dose statins"
+      ],
+      "why": "Measure ketones even if glucose is modest.",
+      "source": "MHRA / JBDS"
+    },
+    {
+      "q": "Target fall in blood ketones?",
+      "options": [
+        "0.5 mmol/L per hour",
+        "5 mmol/L per hour",
+        "0.05 mmol/L per hour",
+        "No target; follow glucose"
+      ],
+      "why": "Increase insulin if not achieved.",
+      "source": "JBDS-IP 2023"
+    },
+    {
+      "q": "Should long-acting insulin be continued during DKA?",
+      "options": [
+        "Yes",
+        "No, stop it",
+        "Only in type 2",
+        "Double it"
+      ],
+      "why": "Prevents rebound ketosis when the infusion stops.",
+      "source": "JBDS-IP 2023"
+    }
   ]
 }

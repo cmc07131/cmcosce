@@ -5,20 +5,118 @@
   "type": "resus",
   "time": 480,
   "stem": "Resus 1. A 20-year-old woman is brought in confused and agitated. BP 200/105, HR 142 (irregular), SpO2 97%, temperature 40.2 °C. Her mother says she has been taking 'slimming pills' bought online.",
+  "phases": [
+    {
+      "title": "Assess",
+      "goal": "Monitoring on; examine her yourself: what is the differential?",
+      "steps": [
+        "monitoring",
+        "assess",
+        "tests"
+      ]
+    },
+    {
+      "title": "Cool and settle",
+      "goal": "Cool her and settle the agitation safely.",
+      "steps": [
+        "cooling",
+        "settle"
+      ]
+    },
+    {
+      "title": "Treat the storm",
+      "goal": "Beta-blocker, thionamide, steroid — then iodine an hour after the PTU.",
+      "steps": [
+        "block",
+        "support"
+      ]
+    },
+    {
+      "title": "Her mother",
+      "goal": "What are the slimming pills?",
+      "steps": [
+        "mum"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "ptu-hour",
+      "after": "ptu",
+      "delayS": 20,
+      "scene": "ptu-hour",
+      "say": "It is an hour since the PTU."
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Doses. Your notes give PTU 250 mg every 4–6 hours with no loading dose, and hydrocortisone 200 mg then 100 mg every 6–8 hours. The ATA gives a PTU load of 500–1000 mg then 250 mg every 4 hours, and hydrocortisone 300 mg IV then 100 mg every 8 hours. Propranolol is 60–80 mg every 4 hours rather than 80–120 mg every 6 hours."}
+    {
+      "tag": "differs",
+      "text": "Doses. Your notes give PTU 250 mg every 4–6 hours with no loading dose, and hydrocortisone 200 mg then 100 mg every 6–8 hours. The ATA gives a PTU load of 500–1000 mg then 250 mg every 4 hours, and hydrocortisone 300 mg IV then 100 mg every 8 hours. Propranolol is 60–80 mg every 4 hours rather than 80–120 mg every 6 hours."
+    }
   ],
   "notes": "Checked against the American Thyroid Association 2016 guidelines on hyperthyroidism and thyrotoxicosis, the Japan Thyroid Association 2016 criteria, and the Burch–Wartofsky Point Scale (1993).\n\nDifferential for fever, agitation and tachycardia: sepsis/meningitis, thyroid storm, sympathomimetic or serotonergic toxicity, anticholinergic toxicity, heat stroke, NMS. A goitre and the history point to storm; the Burch–Wartofsky score (45 or more highly suggestive) supports it.\n\nTreatment (ATA): beta-blocker (propranolol 60–80 mg orally every 4 hours, or IV/esmolol if unable; caution in heart failure); thionamide — PTU 500–1000 mg load then 250 mg every 4 hours (preferred in storm because it also blocks T4→T3 conversion) or methimazole 60–80 mg/day; iodine (potassium iodide or Lugol's) at least 1 hour after the thionamide; hydrocortisone 300 mg IV load then 100 mg every 8 hours; supportive care: cooling, paracetamol (avoid aspirin — displaces thyroxine), fluids, treat the trigger, ICU. Cholestyramine for exogenous hormone (e.g. slimming products containing thyroid hormone or tiratricol).\n\nYour notes: PTU 250 mg every 4–6 hours (no loading dose), hydrocortisone 200 mg then 100 mg every 6–8 hours, propranolol 80–120 mg every 6 hours; ATA uses a PTU load of 500–1000 mg and hydrocortisone 300 mg load. The order (thionamide, then iodine an hour later), the differential, and CHP reporting of illegal slimming drugs match.",
-  "cast": [{ "id": "patient", "name": "Miss Ng", "role": "patient" }, { "id": "nurse", "name": "Nurse Hon", "role": "nurse" }, { "id": "mother", "name": "Mother", "role": "woman" }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Miss Ng",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Hon",
+      "role": "nurse"
+    },
+    {
+      "id": "mother",
+      "name": "Mother",
+      "role": "woman"
+    }
+  ],
   "vitals": {
-    "hr": 142, "sbp": 200, "dbp": 105, "spo2": 97, "rr": 26, "temp": 40.2, "gcs": 13,
+    "hr": 142,
+    "sbp": 200,
+    "dbp": 105,
+    "spo2": 97,
+    "rr": 26,
+    "temp": 40.2,
+    "gcs": 13,
     "rhythm": "af",
     "effects": [
-      { "scene": "cool", "add": { "temp": -1.2 }, "overS": 300 },
-      { "scene": "propranolol", "add": { "hr": -30, "sbp": -30, "dbp": -15 }, "overS": 240 }
-    ]
+      {
+        "scene": "cool",
+        "add": {
+          "temp": -1.2
+        },
+        "overS": 300
+      },
+      {
+        "scene": "propranolol",
+        "add": {
+          "hr": -30,
+          "sbp": -30,
+          "dbp": -15
+        },
+        "overS": 240
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
     {
       "id": "assess",
       "kind": "exam",
@@ -27,14 +125,37 @@
       "hint": "Toxidrome, meningism, goitre, eyes, hands, reflexes.",
       "groups": {
         "Neck": [
-          { "t": "Neck stiffness, Kernig's", "r": "No meningism.", "mark": "Examines for meningism" },
-          { "t": "Thyroid", "r": "Diffuse smooth goitre with a bruit.", "mark": "Finds a goitre with a bruit" }
+          {
+            "t": "Neck stiffness, Kernig's",
+            "r": "No meningism.",
+            "mark": "Examines for meningism"
+          },
+          {
+            "t": "Thyroid",
+            "r": "Diffuse smooth goitre with a bruit.",
+            "mark": "Finds a goitre with a bruit"
+          }
         ],
         "Eyes and hands": [
-          { "t": "Eyes", "r": "Lid retraction and mild proptosis.", "mark": "Looks for thyroid eye signs" },
-          { "t": "Hands and tremor", "r": "Fine tremor, warm sweaty palms.", "mark": "Examines hands and tremor" }
+          {
+            "t": "Eyes",
+            "r": "Lid retraction and mild proptosis.",
+            "mark": "Looks for thyroid eye signs"
+          },
+          {
+            "t": "Hands and tremor",
+            "r": "Fine tremor, warm sweaty palms.",
+            "mark": "Examines hands and tremor"
+          }
         ],
-        "Toxidrome": [{ "t": "Pupils, skin, bowel sounds, tone, clonus", "r": "Pupils normal, skin sweaty, bowel sounds present, no clonus, reflexes brisk.", "mark": "Excludes other toxidromes (no clonus, sweating present)" }]
+        "Toxidrome": [
+          {
+            "t": "Pupils, skin, bowel sounds, tone, clonus",
+            "r": "Pupils normal, skin sweaty, bowel sounds present, no clonus, reflexes brisk.",
+            "mark": "Excludes other toxidromes (no clonus, sweating present)",
+            "anim": "pupils"
+          }
+        ]
       }
     },
     {
@@ -45,27 +166,158 @@
       "hint": "ECG, TFT, glucose, electrolytes, cultures, tox screen, pregnancy test.",
       "groups": {
         "Now": [
-          { "t": "12-lead ECG", "r": "AF with rapid ventricular response ~140.", "img": "ecg:af", "mark": "ECG: fast AF" },
-          { "t": "TSH, free T4 and T3", "r": "TSH < 0.01, free T4 > 100 pmol/L.", "mark": "Thyroid function" },
-          { "t": "Glucose, electrolytes, LFT, cultures, urine drugs, hCG", "r": "K 3.0, ALT 90, hCG negative, drug screen negative.", "mark": "Broad screen including pregnancy and toxicology" }
+          {
+            "t": "12-lead ECG",
+            "r": "AF with rapid ventricular response ~140.",
+            "img": "ecg:af",
+            "mark": "ECG: fast AF"
+          },
+          {
+            "t": "TSH, free T4 and T3",
+            "r": "TSH < 0.01, free T4 > 100 pmol/L.",
+            "mark": "Thyroid function"
+          },
+          {
+            "t": "Glucose, electrolytes, LFT, cultures, urine drugs, hCG",
+            "r": "K 3.0, ALT 90, hCG negative, drug screen negative.",
+            "mark": "Broad screen including pregnancy and toxicology"
+          }
         ]
       }
     },
     {
-      "id": "treat",
-      "kind": "steps",
-      "to": "cart",
-      "label": "Treat",
-      "hint": "Sedate if needed, cool, beta-blocker, PTU, iodine 1 hour later, hydrocortisone, fluids, ICU.",
+      "id": "cooling",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "External cooling.",
+      "confirm": "Take these",
       "opts": [
-        { "t": "Benzodiazepine for agitation; external cooling; paracetamol", "n": 1, "scene": "cool", "mark": "Sedation for agitation, cooling, paracetamol" },
-        { "t": "Propranolol (oral 60–80 mg 4-hourly, or IV in small doses)", "n": 2, "scene": "propranolol", "mark": "Beta-blocker for adrenergic symptoms" },
-        { "t": "PTU 500–1000 mg load, then 250 mg every 4 hours", "n": 3, "mark": "Thionamide (PTU) with a loading dose" },
-        { "t": "Hydrocortisone 300 mg IV, then 100 mg every 8 hours", "n": 4, "mark": "Hydrocortisone" },
-        { "t": "One hour after PTU: potassium iodide / Lugol's iodine", "n": 5, "mark": "Iodine at least 1 hour after the thionamide" },
-        { "t": "IV fluids; correct potassium; ICU referral", "n": 6, "mark": "Supportive care and ICU" },
-        { "t": "Aspirin for the fever", "trap": true, "r": "Aspirin displaces thyroid hormone from binding proteins, raising free hormone." },
-        { "t": "Lugol's iodine first, before PTU", "trap": "critical", "r": "Iodine before a thionamide provides substrate for more hormone synthesis." }
+        {
+          "t": "Cooling blanket, fans, tepid sponging",
+          "fetch": "trolley",
+          "scene": "cool",
+          "mark": "Sedation for agitation, cooling, paracetamol"
+        }
+      ]
+    },
+    {
+      "id": "settle",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Settle the agitation; treat the fever safely.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Diazepam 5–10 mg IV, titrated",
+          "drug": "Diazepam",
+          "dose": "5–10 mg IV, titrated",
+          "fetch": "cart",
+          "mark": "Benzodiazepine for agitation"
+        },
+        {
+          "t": "Diazepam 40 mg IV bolus",
+          "drug": "Diazepam",
+          "dose": "40 mg IV bolus",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too much at once: titrate 5–10 mg."
+        },
+        {
+          "t": "Paracetamol 1 g IV",
+          "drug": "Paracetamol",
+          "dose": "1 g IV",
+          "fetch": "cart",
+          "mark": "Paracetamol for the fever"
+        },
+        {
+          "trap": true,
+          "r": "Aspirin displaces thyroid hormone from binding proteins, raising free hormone.",
+          "t": "Aspirin 600 mg orally for the fever",
+          "drug": "Aspirin",
+          "dose": "600 mg orally for the fever",
+          "fetch": "cart"
+        }
+      ]
+    },
+    {
+      "id": "block",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Block the beta effects, stop hormone synthesis and conversion, then iodine an hour later.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Propranolol 60–80 mg orally every 4 hours",
+          "drug": "Propranolol",
+          "dose": "60–80 mg orally every 4 hours",
+          "fetch": "cart",
+          "scene": "propranolol",
+          "mark": "Beta-blocker for adrenergic symptoms"
+        },
+        {
+          "t": "Propranolol 10 mg IV bolus",
+          "drug": "Propranolol",
+          "dose": "10 mg IV bolus",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Far too much IV at once: 1 mg IV slowly, repeated, or oral 60–80 mg."
+        },
+        {
+          "t": "Propylthiouracil (PTU) 500–1000 mg load, then 250 mg every 4 hours",
+          "drug": "Propylthiouracil (PTU)",
+          "dose": "500–1000 mg load, then 250 mg every 4 hours",
+          "fetch": "cart",
+          "scene": "ptu",
+          "mark": "Thionamide (PTU) with a loading dose"
+        },
+        {
+          "t": "Propylthiouracil (PTU) 250 mg every 4 hours, no load",
+          "drug": "Propylthiouracil (PTU)",
+          "dose": "250 mg every 4 hours, no load",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Load first in thyroid storm: 500–1000 mg, then 250 mg every 4 hours."
+        },
+        {
+          "t": "Hydrocortisone 300 mg IV, then 100 mg every 8 hours",
+          "drug": "Hydrocortisone",
+          "dose": "300 mg IV, then 100 mg every 8 hours",
+          "fetch": "cart",
+          "mark": "Hydrocortisone"
+        },
+        {
+          "t": "Hydrocortisone 25 mg IV",
+          "drug": "Hydrocortisone",
+          "dose": "25 mg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little: 300 mg IV load, then 100 mg every 8 hours."
+        },
+        {
+          "t": "Lugol's iodine 5 drops orally every 6 hours",
+          "drug": "Lugol's iodine",
+          "dose": "5 drops orally every 6 hours",
+          "fetch": "cart",
+          "when": "ptu-hour",
+          "early": "Iodine before the thionamide feeds new hormone synthesis: PTU first, iodine an hour later.",
+          "mark": "Iodine at least 1 hour after the thionamide"
+        }
+      ]
+    },
+    {
+      "id": "support",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "Fluids, potassium, ICU.",
+      "opts": [
+        {
+          "t": "IV fluids; correct potassium; ICU referral",
+          "mark": "Supportive care and ICU"
+        }
       ]
     },
     {
@@ -76,8 +328,20 @@
       "hint": "The slimming product, other symptoms, previous thyroid history.",
       "groups": {
         "Pills": [
-          { "t": "What are the slimming pills? Do you have the bottle?", "tz": "佢食緊嘅係咩減肥丸？你有冇帶個樽嚟？", "rz": "喺網上買，由泰國寄嚟。個樽寫住有 tiratricol。", "r": "Bought online from Thailand. The label says it contains tiratricol.", "mark": "Identifies the product (tiratricol: a T3 analogue)" },
-          { "t": "Any weight loss, palpitations, heat intolerance before?", "tz": "佢之前有冇瘦咗、心跳好快、好怕熱？", "rz": "兩個月瘦咗八公斤，成日話好熱，心跳好快。", "r": "Lost 8 kg in 2 months, always hot, heart racing.", "mark": "Asks about prior thyrotoxic symptoms" }
+          {
+            "t": "What are the slimming pills? Do you have the bottle?",
+            "tz": "佢食緊嘅係咩減肥丸？你有冇帶個樽嚟？",
+            "rz": "喺網上買，由泰國寄嚟。個樽寫住有 tiratricol。",
+            "r": "Bought online from Thailand. The label says it contains tiratricol.",
+            "mark": "Identifies the product (tiratricol: a T3 analogue)"
+          },
+          {
+            "t": "Any weight loss, palpitations, heat intolerance before?",
+            "tz": "佢之前有冇瘦咗、心跳好快、好怕熱？",
+            "rz": "兩個月瘦咗八公斤，成日話好熱，心跳好快。",
+            "r": "Lost 8 kg in 2 months, always hot, heart racing.",
+            "mark": "Asks about prior thyrotoxic symptoms"
+          }
         ]
       }
     },
@@ -87,21 +351,127 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Why give iodine at least 1 hour after PTU?", "a": "So iodine isn't used to make more hormone", "wrong": ["Iodine inactivates PTU if given at the same time", "To avoid an iodine allergy", "The order does not matter"] },
-        { "q": "Why PTU rather than carbimazole in storm?", "a": "It also blocks peripheral T4→T3 conversion", "wrong": ["It is cheaper", "It has fewer side effects, including liver injury", "It acts on the adrenal"] },
-        { "q": "Score used to support thyroid storm?", "a": "Burch–Wartofsky Point Scale", "wrong": ["Glasgow–Blatchford bleeding score", "Wells score for pulmonary embolism", "CURB-65"] },
-        { "q": "Antipyretic to avoid?", "a": "Aspirin", "wrong": ["Paracetamol", "Ice packs", "Cooling blankets"] },
-        { "q": "Public health step for an illegal slimming product?", "a": "Report to the Department of Health", "wrong": ["No action is needed", "Tell the pharmacist who sold it, and no one else", "Post a warning on social media"] }
+        {
+          "q": "Why give iodine at least 1 hour after PTU?",
+          "a": "So iodine isn't used to make more hormone",
+          "wrong": [
+            "Iodine inactivates PTU if given at the same time",
+            "To avoid an iodine allergy",
+            "The order does not matter"
+          ]
+        },
+        {
+          "q": "Why PTU rather than carbimazole in storm?",
+          "a": "It also blocks peripheral T4→T3 conversion",
+          "wrong": [
+            "It is cheaper",
+            "It has fewer side effects, including liver injury",
+            "It acts on the adrenal"
+          ]
+        },
+        {
+          "q": "Score used to support thyroid storm?",
+          "a": "Burch–Wartofsky Point Scale",
+          "wrong": [
+            "Glasgow–Blatchford bleeding score",
+            "Wells score for pulmonary embolism",
+            "CURB-65"
+          ]
+        },
+        {
+          "q": "Antipyretic to avoid?",
+          "a": "Aspirin",
+          "wrong": [
+            "Paracetamol",
+            "Ice packs",
+            "Cooling blankets"
+          ]
+        },
+        {
+          "q": "Public health step for an illegal slimming product?",
+          "a": "Report to the Department of Health",
+          "wrong": [
+            "No action is needed",
+            "Tell the pharmacist who sold it, and no one else",
+            "Post a warning on social media"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Storm Chaser", "emoji": "🌩", "flavor": "Beta-block, PTU, then iodine an hour later, steroid, cool." },
+  "rules": [],
+  "badge": {
+    "name": "Storm Chaser",
+    "emoji": "🌩",
+    "flavor": "Beta-block, PTU, then iodine an hour later, steroid, cool."
+  },
   "cards": [
-    { "q": "Correct order in thyroid storm?", "options": ["Thionamide, then iodine ≥1 hour later", "Iodine first, then the thionamide an hour later", "Iodine alone", "Surgery first"], "why": "Prevents iodine fuelling synthesis.", "source": "ATA 2016" },
-    { "q": "Beta-blocker of choice in thyroid storm?", "options": ["Propranolol", "Atenolol only", "Sotalol", "Carvedilol (alpha and beta)"], "why": "Also reduces T4→T3 conversion at high dose.", "source": "ATA 2016" },
-    { "q": "Hydrocortisone in thyroid storm?", "options": ["300 mg load, then 100 mg every 8 h", "10 mg daily", "Not used; steroids worsen thyrotoxicosis", "1 g IV daily for 3 days (pulse)"], "why": "Reduces T4→T3 conversion; treats relative adrenal insufficiency.", "source": "ATA 2016", "note": "Your notes: 200 mg then 100 mg 6–8-hourly." },
-    { "q": "Tiratricol is…", "options": ["A T3 analogue in some slimming products", "A beta-blocker", "An antipsychotic", "An iodine compound"], "why": "Can cause thyrotoxicosis.", "source": "CHP HK alerts" },
-    { "q": "Serotonin syndrome is distinguished by…", "options": ["Clonus and hyperreflexia", "A large goitre with a bruit", "Dry, hot skin without sweating", "Bradycardia and hypotension"], "why": "Recent serotonergic drugs.", "source": "Hunter criteria" },
-    { "q": "PTU is preferred over carbimazole also in…", "options": ["First-trimester pregnancy", "Children under 12", "Pre-existing liver failure", "Previous agranulocytosis"], "why": "Carbimazole embryopathy.", "source": "ATA 2016" }
+    {
+      "q": "Correct order in thyroid storm?",
+      "options": [
+        "Thionamide, then iodine ≥1 hour later",
+        "Iodine first, then the thionamide an hour later",
+        "Iodine alone",
+        "Surgery first"
+      ],
+      "why": "Prevents iodine fuelling synthesis.",
+      "source": "ATA 2016"
+    },
+    {
+      "q": "Beta-blocker of choice in thyroid storm?",
+      "options": [
+        "Propranolol",
+        "Atenolol only",
+        "Sotalol",
+        "Carvedilol (alpha and beta)"
+      ],
+      "why": "Also reduces T4→T3 conversion at high dose.",
+      "source": "ATA 2016"
+    },
+    {
+      "q": "Hydrocortisone in thyroid storm?",
+      "options": [
+        "300 mg load, then 100 mg every 8 h",
+        "10 mg daily",
+        "Not used; steroids worsen thyrotoxicosis",
+        "1 g IV daily for 3 days (pulse)"
+      ],
+      "why": "Reduces T4→T3 conversion; treats relative adrenal insufficiency.",
+      "source": "ATA 2016",
+      "note": "Your notes: 200 mg then 100 mg 6–8-hourly."
+    },
+    {
+      "q": "Tiratricol is…",
+      "options": [
+        "A T3 analogue in some slimming products",
+        "A beta-blocker",
+        "An antipsychotic",
+        "An iodine compound"
+      ],
+      "why": "Can cause thyrotoxicosis.",
+      "source": "CHP HK alerts"
+    },
+    {
+      "q": "Serotonin syndrome is distinguished by…",
+      "options": [
+        "Clonus and hyperreflexia",
+        "A large goitre with a bruit",
+        "Dry, hot skin without sweating",
+        "Bradycardia and hypotension"
+      ],
+      "why": "Recent serotonergic drugs.",
+      "source": "Hunter criteria"
+    },
+    {
+      "q": "PTU is preferred over carbimazole also in…",
+      "options": [
+        "First-trimester pregnancy",
+        "Children under 12",
+        "Pre-existing liver failure",
+        "Previous agranulocytosis"
+      ],
+      "why": "Carbimazole embryopathy.",
+      "source": "ATA 2016"
+    }
   ]
 }

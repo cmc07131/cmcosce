@@ -5,9 +5,39 @@
   "type": "history",
   "time": 420,
   "stem": "Cubicle 30. Mr Siu, 58, woke with an extremely painful, red, swollen right big toe. He had a similar episode a year ago in the same toe. Temperature 37.6 °C. Take a history, examine the joint, and explain management.",
+  "phases": [
+    {
+      "title": "History",
+      "goal": "Gout or sepsis? The story and the triggers.",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Examine",
+      "goal": "The joint and the tophi.",
+      "steps": [
+        "exam"
+      ]
+    },
+    {
+      "title": "Explain",
+      "goal": "What it is, the treatment, and prevention.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against EULAR 2016 gout recommendations, the BSR 2017 gout guideline, and NICE NG219 (Gout, 2022).\n\nAcute gout: rapid onset (maximal within 24 hours), first MTP joint (podagra), triggers (alcohol, especially beer and spirits; purine-rich food; dehydration; diuretics; acute illness), recurrent episodes, tophi. Septic arthritis must be excluded when there is fever, systemic illness, or an atypical or prosthetic joint — aspirate. Diagnosis: joint aspiration with negatively birefringent needle-shaped crystals (gold standard); serum urate may be normal during an attack.\n\nTreat the flare: NSAID (with PPI) or colchicine 500 microgram two to four times daily (low-dose regimen) or oral prednisolone 30–35 mg for 3–5 days; ice, rest. Do not stop allopurinol during a flare if already taking it; urate-lowering therapy is offered after the flare (NICE NG219 offers it to people with recurrent flares; treat-to-target urate under 360 µmol/L, or 300 with tophi), with colchicine prophylaxis. Review cardiovascular risk and diuretics.\n\nYour notes list polyarthritis and joint pain topics; nothing conflicts.",
-  "cast": [{ "id": "patient", "name": "Mr Siu", "role": "man", "inBed": true }],
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Siu",
+      "role": "man",
+      "inBed": true
+    }
+  ],
   "steps": [
     {
       "id": "history",
@@ -17,14 +47,50 @@
       "hint": "Onset, joints, previous attacks, triggers, systemic symptoms, drugs, renal function, alcohol.",
       "groups": {
         "Joint": [
-          { "t": "When did it start and how fast?", "tz": "幾時開始痛？係咪好快就好痛？", "rz": "凌晨三點痛醒。幾個鐘內痛到前所未有咁痛，連被單掂到都頂唔順。", "r": "Woke at 3 a.m. with it. Worst pain ever within hours; can't bear the bedsheet.", "mark": "Asks onset and severity" },
-          { "t": "Any other joints? Injury?", "tz": "其他關節有冇痛？有冇撞傷過？", "rz": "淨係腳趾公。冇撞過。", "r": "Just the toe. No injury.", "mark": "Asks about other joints and trauma" },
-          { "t": "Fevers, rigors, feeling unwell?", "tz": "有冇發燒、發冷震，或者成個人唔舒服？", "rz": "有少少熱，冇發冷震。", "r": "A bit warm, no rigors.", "mark": "Screens for sepsis" }
+          {
+            "t": "When did it start and how fast?",
+            "tz": "幾時開始痛？係咪好快就好痛？",
+            "rz": "凌晨三點痛醒。幾個鐘內痛到前所未有咁痛，連被單掂到都頂唔順。",
+            "r": "Woke at 3 a.m. with it. Worst pain ever within hours; can't bear the bedsheet.",
+            "mark": "Asks onset and severity"
+          },
+          {
+            "t": "Any other joints? Injury?",
+            "tz": "其他關節有冇痛？有冇撞傷過？",
+            "rz": "淨係腳趾公。冇撞過。",
+            "r": "Just the toe. No injury.",
+            "mark": "Asks about other joints and trauma"
+          },
+          {
+            "t": "Fevers, rigors, feeling unwell?",
+            "tz": "有冇發燒、發冷震，或者成個人唔舒服？",
+            "rz": "有少少熱，冇發冷震。",
+            "r": "A bit warm, no rigors.",
+            "mark": "Screens for sepsis"
+          }
         ],
         "Triggers": [
-          { "t": "Alcohol, diet, recent illness?", "tz": "最近有冇飲酒、食咗啲咩，或者有冇病過？", "rz": "琴晚食海鮮宴，又飲咗啤酒。", "r": "Seafood banquet and beer last night.", "mark": "Asks about triggers" },
-          { "t": "Medicines, especially water tablets?", "tz": "你食緊咩藥？特別係有冇食去水丸？", "rz": "有，食緊 bendroflumethiazide 降血壓。", "r": "Bendroflumethiazide for blood pressure.", "mark": "Identifies a diuretic" },
-          { "t": "Kidney problems, diabetes, heart disease?", "tz": "有冇腎病、糖尿病或者心臟病？", "rz": "家庭醫生話我腎功能有少少邊緣。", "r": "Borderline kidney function, per my GP.", "mark": "Asks renal and cardiovascular history" }
+          {
+            "t": "Alcohol, diet, recent illness?",
+            "tz": "最近有冇飲酒、食咗啲咩，或者有冇病過？",
+            "rz": "琴晚食海鮮宴，又飲咗啤酒。",
+            "r": "Seafood banquet and beer last night.",
+            "mark": "Asks about triggers"
+          },
+          {
+            "t": "Medicines, especially water tablets?",
+            "tz": "你食緊咩藥？特別係有冇食去水丸？",
+            "rz": "有，食緊 bendroflumethiazide 降血壓。",
+            "r": "Bendroflumethiazide for blood pressure.",
+            "mark": "Identifies a diuretic"
+          },
+          {
+            "t": "Kidney problems, diabetes, heart disease?",
+            "tz": "有冇腎病、糖尿病或者心臟病？",
+            "rz": "家庭醫生話我腎功能有少少邊緣。",
+            "r": "Borderline kidney function, per my GP.",
+            "mark": "Asks renal and cardiovascular history"
+          }
         ]
       }
     },
@@ -36,9 +102,20 @@
       "hint": "The joint, other joints, tophi, skin.",
       "groups": {
         "Joint": [
-          { "t": "Right first MTP joint", "r": "Red, hot, swollen, exquisitely tender; shiny skin.", "mark": "Examines the joint" },
-          { "t": "Ears, elbows, hands for tophi", "r": "A small chalky nodule on the right ear helix.", "mark": "Looks for tophi" },
-          { "t": "Skin wounds or cellulitis", "r": "No break in the skin." }
+          {
+            "t": "Right first MTP joint",
+            "r": "Red, hot, swollen, exquisitely tender; shiny skin.",
+            "mark": "Examines the joint"
+          },
+          {
+            "t": "Ears, elbows, hands for tophi",
+            "r": "A small chalky nodule on the right ear helix.",
+            "mark": "Looks for tophi"
+          },
+          {
+            "t": "Skin wounds or cellulitis",
+            "r": "No break in the skin."
+          }
         ]
       }
     },
@@ -49,10 +126,27 @@
       "label": "Explain",
       "hint": "Likely gout; treat the flare; triggers; long-term urate lowering; when to return.",
       "opts": [
-        { "t": "This looks like gout — uric acid crystals in the joint. If you had a high fever or felt very unwell, we'd take fluid from the joint to exclude infection.", "tz": "睇落係痛風，即係尿酸結晶積咗喺關節入面。如果你發高燒或者好唔舒服，我哋就要抽關節液驗吓，排除細菌感染。", "mark": "Explains gout and when to exclude sepsis" },
-        { "t": "Naproxen with omeprazole (or colchicine 500 microgram 2–4 times a day, or prednisolone if NSAIDs unsuitable); rest and ice", "tz": "我會開消炎止痛藥 naproxen，加埋胃藥 omeprazole；如果唔啱食，可以用 colchicine 或者類固醇。休息同埋冰敷。", "mark": "Treats the flare appropriately" },
-        { "t": "Reduce beer and seafood; ask your GP about changing the water tablet and starting urate-lowering treatment after the attack", "tz": "少飲啤酒、少食海鮮。發作過咗之後，同家庭醫生傾吓換降血壓藥，同埋開始食降尿酸藥。", "mark": "Addresses triggers, diuretics and long-term urate lowering" },
-        { "t": "Start allopurinol today at a high dose to stop this attack", "tz": "我今日就開高劑量 allopurinol 俾你，止住今次發作。", "trap": true, "r": "Allopurinol doesn't treat the flare; start after it settles, with prophylaxis." }
+        {
+          "t": "This looks like gout — uric acid crystals in the joint. If you had a high fever or felt very unwell, we'd take fluid from the joint to exclude infection.",
+          "tz": "睇落係痛風，即係尿酸結晶積咗喺關節入面。如果你發高燒或者好唔舒服，我哋就要抽關節液驗吓，排除細菌感染。",
+          "mark": "Explains gout and when to exclude sepsis"
+        },
+        {
+          "t": "Naproxen with omeprazole (or colchicine 500 microgram 2–4 times a day, or prednisolone if NSAIDs unsuitable); rest and ice",
+          "tz": "我會開消炎止痛藥 naproxen，加埋胃藥 omeprazole；如果唔啱食，可以用 colchicine 或者類固醇。休息同埋冰敷。",
+          "mark": "Treats the flare appropriately"
+        },
+        {
+          "t": "Reduce beer and seafood; ask your GP about changing the water tablet and starting urate-lowering treatment after the attack",
+          "tz": "少飲啤酒、少食海鮮。發作過咗之後，同家庭醫生傾吓換降血壓藥，同埋開始食降尿酸藥。",
+          "mark": "Addresses triggers, diuretics and long-term urate lowering"
+        },
+        {
+          "t": "Start allopurinol today at a high dose to stop this attack",
+          "tz": "我今日就開高劑量 allopurinol 俾你，止住今次發作。",
+          "trap": true,
+          "r": "Allopurinol doesn't treat the flare; start after it settles, with prophylaxis."
+        }
       ]
     },
     {
@@ -61,21 +155,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Gold-standard diagnosis of gout?", "a": "Negatively birefringent needles in joint fluid", "wrong": ["A serum urate above 360 µmol/L", "Punched-out erosions on the X-ray", "A raised CRP with a hot joint"] },
-        { "q": "Serum urate during an acute attack is…", "a": "Often normal", "wrong": ["Always very high", "Always low", "Diagnostic"] },
-        { "q": "Target urate on urate-lowering therapy?", "a": "Below 360 µmol/L (300 with tophi)", "wrong": ["Below 600 µmol/L", "Below 100 µmol/L", "No target; adjust the dose to symptoms alone"] },
-        { "q": "Pseudogout crystals are…", "a": "Rhomboid, positively birefringent (CPPD)", "wrong": ["Needle-shaped, negatively birefringent (monosodium urate)", "Round Maltese crosses (lipid)", "Invisible under polarised light"] },
-        { "q": "Drug that raises urate?", "a": "Thiazide diuretics", "wrong": ["Losartan (an angiotensin receptor blocker)", "Allopurinol (xanthine oxidase inhibitor)", "Colchicine"] }
+        {
+          "q": "Gold-standard diagnosis of gout?",
+          "a": "Negatively birefringent needles in joint fluid",
+          "wrong": [
+            "A serum urate above 360 µmol/L",
+            "Punched-out erosions on the X-ray",
+            "A raised CRP with a hot joint"
+          ]
+        },
+        {
+          "q": "Serum urate during an acute attack is…",
+          "a": "Often normal",
+          "wrong": [
+            "Always very high",
+            "Always low",
+            "Diagnostic"
+          ]
+        },
+        {
+          "q": "Target urate on urate-lowering therapy?",
+          "a": "Below 360 µmol/L (300 with tophi)",
+          "wrong": [
+            "Below 600 µmol/L",
+            "Below 100 µmol/L",
+            "No target; adjust the dose to symptoms alone"
+          ]
+        },
+        {
+          "q": "Pseudogout crystals are…",
+          "a": "Rhomboid, positively birefringent (CPPD)",
+          "wrong": [
+            "Needle-shaped, negatively birefringent (monosodium urate)",
+            "Round Maltese crosses (lipid)",
+            "Invisible under polarised light"
+          ]
+        },
+        {
+          "q": "Drug that raises urate?",
+          "a": "Thiazide diuretics",
+          "wrong": [
+            "Losartan (an angiotensin receptor blocker)",
+            "Allopurinol (xanthine oxidase inhibitor)",
+            "Colchicine"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Podagra", "emoji": "🦶", "flavor": "Hot toe at 3 a.m.: treat the flare, then lower the urate." },
+  "badge": {
+    "name": "Podagra",
+    "emoji": "🦶",
+    "flavor": "Hot toe at 3 a.m.: treat the flare, then lower the urate."
+  },
   "cards": [
-    { "q": "Classic site of gout?", "options": ["First metatarsophalangeal joint", "Glenohumeral (shoulder) joint, bilaterally", "The hip joint in young women", "Lumbar facet joints of the lower spine"], "why": "Podagra.", "source": "EULAR 2016" },
-    { "q": "Low-dose colchicine regimen for acute gout?", "options": ["500 micrograms 2–4 times daily", "1 mg every hour until diarrhoea occurs", "10 mg once, as a single loading dose", "5 mg daily for 2 weeks"], "why": "High doses cause toxicity.", "source": "BSR 2017" },
-    { "q": "Is allopurinol stopped during a flare if already taken?", "options": ["No, continue it", "Yes, always, until the flare settles", "Double it", "Switch to febuxostat"], "why": "Stopping and restarting causes further flares.", "source": "EULAR 2016" },
-    { "q": "Urate-lowering therapy is started with…", "options": ["Colchicine prophylaxis", "Aspirin 75 mg daily", "A thiazide diuretic to protect the kidney", "No cover is needed if the flare has settled"], "why": "Reduces flares when urate falls.", "source": "NICE NG219" },
-    { "q": "Hot swollen joint with fever and a prosthesis: first think…", "options": ["Septic arthritis", "Acute gout", "An osteoarthritis flare", "Prepatellar bursitis"], "why": "Orthopaedic aspiration.", "source": "BSR/BOA" },
-    { "q": "Tophi are…", "options": ["Deposits of urate in tissues", "Calcium nodules in the skin", "Rheumatoid nodules over the elbows", "Urate crystals found in the urine"], "why": "Ears, elbows, hands.", "source": "Rheumatology" }
+    {
+      "q": "Classic site of gout?",
+      "options": [
+        "First metatarsophalangeal joint",
+        "Glenohumeral (shoulder) joint, bilaterally",
+        "The hip joint in young women",
+        "Lumbar facet joints of the lower spine"
+      ],
+      "why": "Podagra.",
+      "source": "EULAR 2016"
+    },
+    {
+      "q": "Low-dose colchicine regimen for acute gout?",
+      "options": [
+        "500 micrograms 2–4 times daily",
+        "1 mg every hour until diarrhoea occurs",
+        "10 mg once, as a single loading dose",
+        "5 mg daily for 2 weeks"
+      ],
+      "why": "High doses cause toxicity.",
+      "source": "BSR 2017"
+    },
+    {
+      "q": "Is allopurinol stopped during a flare if already taken?",
+      "options": [
+        "No, continue it",
+        "Yes, always, until the flare settles",
+        "Double it",
+        "Switch to febuxostat"
+      ],
+      "why": "Stopping and restarting causes further flares.",
+      "source": "EULAR 2016"
+    },
+    {
+      "q": "Urate-lowering therapy is started with…",
+      "options": [
+        "Colchicine prophylaxis",
+        "Aspirin 75 mg daily",
+        "A thiazide diuretic to protect the kidney",
+        "No cover is needed if the flare has settled"
+      ],
+      "why": "Reduces flares when urate falls.",
+      "source": "NICE NG219"
+    },
+    {
+      "q": "Hot swollen joint with fever and a prosthesis: first think…",
+      "options": [
+        "Septic arthritis",
+        "Acute gout",
+        "An osteoarthritis flare",
+        "Prepatellar bursitis"
+      ],
+      "why": "Orthopaedic aspiration.",
+      "source": "BSR/BOA"
+    },
+    {
+      "q": "Tophi are…",
+      "options": [
+        "Deposits of urate in tissues",
+        "Calcium nodules in the skin",
+        "Rheumatoid nodules over the elbows",
+        "Urate crystals found in the urine"
+      ],
+      "why": "Ears, elbows, hands.",
+      "source": "Rheumatology"
+    }
   ]
 }
