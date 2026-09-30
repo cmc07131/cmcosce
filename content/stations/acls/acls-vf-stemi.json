@@ -5,13 +5,69 @@
   "type": "resus",
   "time": 480,
   "stem": "A 58-year-old man complaining of chest pain collapses in the ED waiting area in front of the triage nurse. He has been brought into Resus 1 on a trolley. He is unresponsive. You lead the arrest team.",
+  "phases": [
+    {
+      "title": "Arrest",
+      "goal": "Confirm the arrest, call for help, start good CPR.",
+      "steps": [
+        "recognise"
+      ]
+    },
+    {
+      "title": "Shock",
+      "goal": "Pads on during CPR and the first shock yourself: VF, so no SYNC.",
+      "steps": [
+        "shock1",
+        "cycle"
+      ]
+    },
+    {
+      "title": "ALS",
+      "goal": "An airway with capnography, the drugs at the right shock, and the reversible causes. Then the rhythm check.",
+      "steps": [
+        "airway",
+        "arrest-drugs",
+        "causes",
+        "rhythm"
+      ]
+    },
+    {
+      "title": "After ROSC",
+      "goal": "Intubate, set the ventilator yourself for normocapnia, and hit the post-ROSC targets.",
+      "steps": [
+        "intubate",
+        "ventilate",
+        "post"
+      ]
+    },
+    {
+      "title": "The cause",
+      "goal": "The ECG after ROSC: what is it, and who needs to know? Antiplatelet from the cart.",
+      "steps": [
+        "ecg",
+        "cath",
+        "cath-drugs"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "When the first adrenaline goes in. Your notes follow AHA, which in some teaching gives adrenaline after the 2nd shock. RCUK and ERC give adrenaline 1 mg and amiodarone 300 mg after the 3rd shock. Know which algorithm your examiner expects."}
+    {
+      "tag": "differs",
+      "text": "When the first adrenaline goes in. Your notes follow AHA, which in some teaching gives adrenaline after the 2nd shock. RCUK and ERC give adrenaline 1 mg and amiodarone 300 mg after the 3rd shock. Know which algorithm your examiner expects."
+    }
   ],
   "notes": "Checked against Resuscitation Council UK 2025 adult ALS and post-resuscitation care guidelines (ERC 2025, ILCOR 2025), ESC 2023 ACS guidelines, and AHA 2025.\n\nShockable rhythm: shock as soon as possible (biphasic at least 150 J for the first shock; escalate if the device allows), resume CPR immediately for 2 minutes without a pulse check. Adrenaline 1 mg and amiodarone 300 mg after the third shock; adrenaline every 3–5 minutes (alternate loops); amiodarone 150 mg after the fifth shock (lidocaine 100 mg if amiodarone is not available). Place the apical pad directly below the armpit in the mid-axillary line; after three failed shocks consider a vector change to antero-posterior. RCUK 2025 does not recommend routine double sequential defibrillation.\n\nAirway: basic airway or supraglottic airway is acceptable; intubate only if skilled (over 95% success within two attempts, pause under 5 s). Waveform capnography for every advanced airway.\n\nPost-ROSC (RCUK/ERC–ESICM 2025): SpO2 94–98%, PaCO2 4.7–6.0 kPa, systolic over 100 or MAP 60–65 mmHg, actively prevent fever (37.5 °C or less) for 36–72 hours in comatose patients, treat seizures (levetiracetam or valproate), prognosticate at 72 hours or later. ST elevation after ROSC → emergency angiography and primary PCI.\n\nInferior STEMI: check right-sided leads (V4R) for right ventricular infarction; avoid nitrates and keep preload.\n\nYour notes point to the AHA 2025 ACLS algorithm and highlights; the RCUK/ERC sequence here matches it on the scored points (AHA also gives adrenaline after the second shock in some teaching; RCUK after the third).",
   "cast": [
-    { "id": "patient", "name": "Mr Choi", "role": "patient" },
-    { "id": "nurse", "name": "Nurse Tam", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mr Choi",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Tam",
+      "role": "nurse"
+    }
   ],
   "vitals": {
     "hr": 0,
@@ -21,60 +77,296 @@
     "rr": 0,
     "rhythm": "vf",
     "effects": [
-      { "scene": "rosc", "set": { "hr": 96, "sbp": 88, "dbp": 54, "spo2": 90, "rr": 12, "etco2": 4.9, "gcs": 3, "temp": 36.1 }, "rhythm": "stemi-inferior" },
-      { "scene": "targets", "add": { "sbp": 16, "dbp": 8, "spo2": 6 }, "overS": 60 }
-    ]
+      {
+        "scene": "rosc",
+        "set": {
+          "hr": 96,
+          "sbp": 88,
+          "dbp": 54,
+          "spo2": 90,
+          "rr": 12,
+          "etco2": 4.9,
+          "gcs": 3,
+          "temp": 36.1
+        },
+        "rhythm": "stemi-inferior"
+      },
+      {
+        "scene": "targets",
+        "add": {
+          "sbp": 16,
+          "dbp": 8,
+          "spo2": 6
+        },
+        "overS": 60
+      }
+    ],
+    "showWhen": "shock1"
   },
   "steps": [
     {
-      "id": "arrest",
-      "kind": "steps",
-      "to": "patient",
-      "label": "Resuscitate",
-      "hint": "Confirm arrest, CPR, pads, shock early, 2 minutes CPR, adrenaline and amiodarone after the third shock.",
+      "id": "recognise",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Arrest",
+      "hint": "Confirm the arrest, call for help, start CPR.",
       "opts": [
-        { "t": "Unresponsive, not breathing normally, no carotid pulse in 10 seconds: call the arrest", "n": 1, "mark": "Confirms cardiac arrest within 10 seconds" },
-        { "t": "Start compressions 30:2, 5–6 cm, 100–120/min", "n": 2, "mark": "Starts high-quality CPR immediately" },
-        { "t": "Pads on during CPR: right infraclavicular, apical pad below the armpit in the mid-axillary line", "n": 3, "mark": "Correct pad placement without stopping CPR" },
-        { "t": "Brief pause: rhythm is VF", "n": 4, "mark": "Recognises VF" },
-        { "t": "Charge while compressions continue; 'all clear, oxygen away'; shock at 150 J or more", "n": 5, "mark": "Safe shock with minimal pause" },
-        { "t": "Resume CPR at once for 2 minutes — no pulse check", "n": 6, "mark": "Resumes CPR immediately after the shock" },
-        { "t": "Second and third shocks at each 2-minute check (still VF)", "n": 7, "mark": "Repeats shocks at 2-minute rhythm checks" },
-        { "t": "After the third shock: adrenaline 1 mg IV and amiodarone 300 mg IV", "n": 8, "mark": "Adrenaline and amiodarone after the third shock" },
-        { "t": "Supraglottic airway with waveform capnography; ventilate 10/min", "n": 9, "mark": "Advanced airway with capnography" },
-        { "t": "Rhythm check: organised rhythm, carotid pulse, ETCO2 has jumped", "n": 10, "scene": "rosc", "mark": "Recognises ROSC", "r": "Sinus rhythm at 96 with a pulse. ETCO2 rose sharply before the check." },
-        { "t": "Adrenaline 1 mg before the first shock", "trap": true, "r": "In VF, shock first. Adrenaline comes after the third shock." },
-        { "t": "Stop CPR for a 10-second pulse check straight after each shock", "trap": true, "r": "Resume compressions immediately; check rhythm at 2 minutes." },
-        { "t": "Double sequential defibrillation after the first failed shock", "trap": true, "r": "Not recommended routinely (RCUK 2025). Consider a vector change after three failed shocks." }
+        {
+          "t": "Unresponsive, not breathing normally, no carotid pulse in 10 seconds: call the arrest",
+          "mark": "Confirms cardiac arrest within 10 seconds"
+        },
+        {
+          "t": "Start compressions 30:2, 5–6 cm, 100–120/min",
+          "mark": "Starts high-quality CPR immediately"
+        }
       ]
+    },
+    {
+      "id": "shock1",
+      "kind": "say",
+      "to": "trolley",
+      "label": "Defibrillator",
+      "hint": "Pads on during CPR; VF: unsynchronised, 150 J or more; all clear.",
+      "opts": [
+        {
+          "t": "Pads on and shock",
+          "perform": "defib",
+          "pose": "vf-arrest",
+          "scene": "shock1",
+          "performHint": "CPR continues while you place the pads. VF: SYNC off, 150 J or more, CHARGE, ALL CLEAR, SHOCK.",
+          "mark": [
+            "Correct pad placement without stopping CPR",
+            "Rhythm is VF: no SYNC",
+            "Safe shock with minimal pause",
+            "All clear, oxygen away before the shock"
+          ]
+        }
+      ],
+      "lang": "en"
+    },
+    {
+      "id": "cycle",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Team",
+      "hint": "Straight back on the chest; the next shocks at the 2-minute checks.",
+      "opts": [
+        {
+          "t": "Resume CPR at once for 2 minutes — no pulse check",
+          "mark": "Resumes CPR immediately after the shock",
+          "when": "shock1",
+          "early": "Shock first."
+        },
+        {
+          "t": "Second and third shocks at each 2-minute check (still VF)",
+          "mark": "Repeats shocks at 2-minute rhythm checks",
+          "when": "shock1",
+          "early": "Shock first.",
+          "scene": "shock3"
+        },
+        {
+          "t": "Stop CPR for a 10-second pulse check straight after each shock",
+          "trap": true,
+          "r": "Resume compressions immediately; check rhythm at 2 minutes."
+        },
+        {
+          "t": "Double sequential defibrillation after the first failed shock",
+          "trap": true,
+          "r": "Not recommended routinely (RCUK 2025). Consider a vector change after three failed shocks."
+        }
+      ]
+    },
+    {
+      "id": "airway",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "An airway with waveform capnography.",
+      "confirm": "Take these",
+      "opts": [
+        {
+          "t": "Supraglottic airway with waveform capnography; ventilate 10/min",
+          "mark": "Advanced airway with capnography",
+          "fetch": "trolley"
+        }
+      ]
+    },
+    {
+      "id": "arrest-drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "After the third shock: adrenaline and amiodarone.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 1 mg IV",
+          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
+          "dose": "1 mg IV",
+          "fetch": "cart",
+          "when": "shock3",
+          "early": "Not before the third shock.",
+          "scene": "adrenaline",
+          "mark": "Adrenaline 1 mg after the third shock"
+        },
+        {
+          "trap": true,
+          "r": "In VF, shock first. Adrenaline comes after the third shock.",
+          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 1 mg IV before the first shock",
+          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
+          "dose": "1 mg IV before the first shock",
+          "fetch": "cart"
+        },
+        {
+          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 0.1 mg IV",
+          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
+          "dose": "0.1 mg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little: 1 mg IV every 3–5 minutes."
+        },
+        {
+          "t": "Amiodarone 300 mg IV",
+          "drug": "Amiodarone",
+          "dose": "300 mg IV",
+          "fetch": "cart",
+          "when": "shock3",
+          "early": "Not before the third shock.",
+          "scene": "amiodarone",
+          "mark": "Amiodarone 300 mg after the third shock"
+        },
+        {
+          "t": "Amiodarone 150 mg IV",
+          "drug": "Amiodarone",
+          "dose": "150 mg IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "That is the second dose, after the fifth shock. The first is 300 mg."
+        }
+      ]
+    },
+    {
+      "id": "rhythm",
+      "kind": "say",
+      "to": "monitor",
+      "label": "Rhythm check",
+      "hint": "After the drugs and the next cycle: rhythm, pulse, ETCO2.",
+      "opts": [
+        {
+          "t": "Rhythm check: organised rhythm, carotid pulse, ETCO2 has jumped",
+          "scene": "rosc",
+          "mark": "Recognises ROSC",
+          "r": "Sinus rhythm at 96 with a pulse. ETCO2 rose sharply before the check.",
+          "when": [
+            "adrenaline",
+            "amiodarone"
+          ],
+          "early": "Keep going: CPR, shocks at the checks, the drugs."
+        }
+      ],
+      "lang": "en"
     },
     {
       "id": "causes",
       "kind": "say",
       "to": "nurse",
       "label": "During CPR",
-      "hint": "Reversible causes, IV/IO access, bloods and a gas; minimise pauses.",
+      "hint": "Reversible causes, access, the team.",
       "opts": [
-        { "t": "Think 4 Hs and 4 Ts aloud; likely coronary thrombosis", "mark": "Considers reversible causes" },
-        { "t": "IV access; blood gas with potassium", "mark": "Access and gas during CPR", "r": "Nurse Tam: Gas: K 4.1, pH 7.18, lactate 6." },
-        { "t": "Swap compressors every 2 minutes", "mark": "Rotates compressors" }
+        {
+          "t": "Think 4 Hs and 4 Ts aloud; likely coronary thrombosis",
+          "mark": "Considers reversible causes"
+        },
+        {
+          "t": "IV access; blood gas with potassium",
+          "mark": "Access and gas during CPR",
+          "r": "Nurse Tam: Gas: K 4.1, pH 7.18, lactate 6."
+        },
+        {
+          "t": "Swap compressors every 2 minutes",
+          "mark": "Rotates compressors"
+        }
       ]
     },
     {
+      "id": "intubate",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Intubate",
+      "hint": "GCS 3 after ROSC: secure the airway.",
+      "groups": {
+        "Airway": [
+          {
+            "t": "Intubate: laryngoscope, tube through the cords, cuff up, capnography",
+            "scene": "intubated",
+            "mark": "Secures the airway; targets normocapnia",
+            "anim": "intubate",
+            "when": "rosc",
+            "early": "Not in the middle of CPR."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ventilate",
+      "kind": "say",
+      "to": "ventilator",
+      "label": "Ventilator",
+      "hint": "Set it yourself: normocapnia after ROSC.",
+      "opts": [
+        {
+          "t": "Set the ventilator",
+          "perform": "ventilator",
+          "pose": "post-arrest",
+          "scene": "targets",
+          "performHint": "80 kg, GCS 3 after ROSC. A controlled mode, 6–8 mL/kg, a normal rate for PaCO2 4.7–6.0 kPa. START.",
+          "mark": [
+            "Controlled ventilation mode",
+            "Tidal volume 6–8 mL/kg",
+            "Rate for normocapnia (PaCO2 4.7–6.0 kPa)",
+            "Oxygen, PEEP and a pressure limit"
+          ]
+        }
+      ],
+      "lang": "en"
+    },
+    {
       "id": "post",
-      "kind": "pick",
+      "kind": "say",
       "to": "nurse",
       "label": "After ROSC",
-      "hint": "ABCDE, targets, ECG, temperature, sedation and ventilation.",
-      "confirm": "Do these",
+      "hint": "Oxygen, pressure, temperature and glucose targets.",
       "opts": [
-        { "t": "Intubate (he is GCS 3), ventilate to PaCO2 4.7–6.0 kPa", "need": true, "scene": "targets", "mark": "Secures the airway; targets normocapnia" },
-        { "t": "Titrate oxygen to SpO2 94–98%", "need": true, "mark": "Avoids hyperoxia: SpO2 94–98%" },
-        { "t": "Systolic over 100 mmHg (MAP 60–65); fluids, then noradrenaline if needed", "need": true, "mark": "Blood pressure target" },
-        { "t": "Prevent fever: 37.5 °C or less for 36–72 hours", "need": true, "mark": "Temperature control per 2025 guidance" },
-        { "t": "Check glucose; arterial line", "need": true, "mark": "Glucose and invasive monitoring" },
-        { "t": "Cool him to 33 °C for 24 hours routinely", "trap": true, "r": "Current guidance prevents fever; routine 33 °C cooling is not required." },
-        { "t": "100% oxygen for 24 hours to protect the brain", "trap": true, "r": "Hyperoxia after arrest is harmful. Titrate to 94–98%." }
+        {
+          "t": "Titrate oxygen to SpO2 94–98%",
+          "mark": "Avoids hyperoxia: SpO2 94–98%",
+          "when": "rosc"
+        },
+        {
+          "t": "Systolic over 100 mmHg (MAP 60–65); fluids, then noradrenaline if needed",
+          "mark": "Blood pressure target",
+          "when": "rosc"
+        },
+        {
+          "t": "Prevent fever: 37.5 °C or less for 36–72 hours",
+          "mark": "Temperature control per 2025 guidance",
+          "when": "rosc"
+        },
+        {
+          "t": "Check glucose; arterial line",
+          "mark": "Glucose and invasive monitoring",
+          "when": "rosc"
+        },
+        {
+          "t": "Cool him to 33 °C for 24 hours routinely",
+          "trap": true,
+          "r": "Current guidance prevents fever; routine 33 °C cooling is not required."
+        },
+        {
+          "t": "100% oxygen for 24 hours to protect the brain",
+          "trap": true,
+          "r": "Hyperoxia after arrest is harmful. Titrate to 94–98%."
+        }
       ]
     },
     {
@@ -85,12 +377,29 @@
       "hint": "12-lead ECG now; right-sided leads for an inferior STEMI.",
       "groups": {
         "ECG": [
-          { "t": "12-lead ECG", "r": "ST elevation in II, III and aVF (III more than II) with reciprocal depression in I and aVL.", "img": "ecg:stemi-inferior", "mark": "Identifies inferior STEMI with reciprocal change" },
-          { "t": "Right-sided leads (V4R)", "r": "1 mm ST elevation in V4R: right ventricular involvement.", "mark": "Checks right-sided leads" }
+          {
+            "t": "12-lead ECG",
+            "r": "ST elevation in II, III and aVF (III more than II) with reciprocal depression in I and aVL.",
+            "img": "ecg:stemi-inferior",
+            "mark": "Identifies inferior STEMI with reciprocal change"
+          },
+          {
+            "t": "Right-sided leads (V4R)",
+            "r": "1 mm ST elevation in V4R: right ventricular involvement.",
+            "mark": "Checks right-sided leads"
+          }
         ],
         "Other": [
-          { "t": "Chest X-ray", "r": "Tube in position, no pneumothorax.", "img": "xr:cxr-ett-good" },
-          { "t": "Troponin before deciding on PCI", "trap": true, "r": "ST elevation after ROSC does not wait for troponin." }
+          {
+            "t": "Chest X-ray",
+            "r": "Tube in position, no pneumothorax.",
+            "img": "xr:cxr-ett-good"
+          },
+          {
+            "t": "Troponin before deciding on PCI",
+            "trap": true,
+            "r": "ST elevation after ROSC does not wait for troponin."
+          }
         ]
       }
     },
@@ -99,11 +408,46 @@
       "kind": "say",
       "to": "phone",
       "label": "Phone",
-      "hint": "STEMI after ROSC: emergency angiography and primary PCI.",
+      "hint": "Emergency PCI.",
       "opts": [
-        { "t": "Cardiology: VF arrest, ROSC after 3 shocks, inferior STEMI with RV involvement — emergency primary PCI", "mark": "Activates primary PCI", "r": "Cardiologist: Cath lab in 15 minutes. Give aspirin and heparin." },
-        { "t": "Aspirin 300 mg (NG/PR) and unfractionated heparin as per cath lab", "mark": "Antiplatelet and anticoagulant for PCI" },
-        { "t": "GTN infusion for the chest pain", "trap": "critical", "r": "Right ventricular infarction is preload-dependent: nitrates can cause profound hypotension." }
+        {
+          "t": "Cardiology: VF arrest, ROSC after 3 shocks, inferior STEMI with RV involvement — emergency primary PCI",
+          "mark": "Activates primary PCI",
+          "r": "Cardiologist: Cath lab in 15 minutes. Give aspirin and heparin."
+        }
+      ]
+    },
+    {
+      "id": "cath-drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Antiplatelet for the STEMI; no nitrates with RV involvement.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Aspirin 300 mg (NG or PR)",
+          "drug": "Aspirin",
+          "dose": "300 mg (NG or PR)",
+          "fetch": "cart",
+          "mark": "Antiplatelet and anticoagulant for PCI"
+        },
+        {
+          "t": "Aspirin 75 mg",
+          "drug": "Aspirin",
+          "dose": "75 mg",
+          "fetch": "cart",
+          "trap": true,
+          "r": "The loading dose is 300 mg (150–300 mg)."
+        },
+        {
+          "trap": "critical",
+          "r": "Right ventricular infarction is preload-dependent: nitrates can cause profound hypotension.",
+          "t": "GTN infusion for the chest pain",
+          "drug": "GTN",
+          "dose": "infusion for the chest pain",
+          "fetch": "cart"
+        }
       ]
     },
     {
@@ -112,22 +456,160 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "When is amiodarone given in VF (RCUK 2025)?", "a": "300 mg after the 3rd shock, 150 mg after the 5th", "wrong": ["150 mg after the 3rd shock, 300 mg after the 5th", "300 mg after every shock up to 900 mg", "Only after ROSC, as an infusion"] },
-        { "q": "Minimum first-shock energy for a biphasic defibrillator (rectilinear/truncated exponential)?", "a": "150 J", "wrong": ["50 J", "360 J always", "2 J/kg"] },
-        { "q": "Post-ROSC temperature target (2025)?", "a": "Prevent fever: ≤37.5 °C for 36–72 h", "wrong": ["Cool to 33 °C for 24 h in every patient", "Allow 39 °C to support immunity", "No temperature monitoring is needed"] },
-        { "q": "Why avoid nitrates here?", "a": "RV infarction is preload-dependent", "wrong": ["Nitrates trigger VF after ROSC", "Nitrates interact dangerously with amiodarone", "Nitrates falsely raise the troponin"] },
-        { "q": "What to consider after three failed shocks?", "a": "Vector change to antero-posterior pads", "wrong": ["Stop resuscitation, as VF after three shocks is futile", "Double the adrenaline dose to 2 mg", "Give atropine 3 mg as a single dose"] }
+        {
+          "q": "When is amiodarone given in VF (RCUK 2025)?",
+          "a": "300 mg after the 3rd shock, 150 mg after the 5th",
+          "wrong": [
+            "150 mg after the 3rd shock, 300 mg after the 5th",
+            "300 mg after every shock up to 900 mg",
+            "Only after ROSC, as an infusion"
+          ]
+        },
+        {
+          "q": "Minimum first-shock energy for a biphasic defibrillator (rectilinear/truncated exponential)?",
+          "a": "150 J",
+          "wrong": [
+            "50 J",
+            "360 J always",
+            "2 J/kg"
+          ]
+        },
+        {
+          "q": "Post-ROSC temperature target (2025)?",
+          "a": "Prevent fever: ≤37.5 °C for 36–72 h",
+          "wrong": [
+            "Cool to 33 °C for 24 h in every patient",
+            "Allow 39 °C to support immunity",
+            "No temperature monitoring is needed"
+          ]
+        },
+        {
+          "q": "Why avoid nitrates here?",
+          "a": "RV infarction is preload-dependent",
+          "wrong": [
+            "Nitrates trigger VF after ROSC",
+            "Nitrates interact dangerously with amiodarone",
+            "Nitrates falsely raise the troponin"
+          ]
+        },
+        {
+          "q": "What to consider after three failed shocks?",
+          "a": "Vector change to antero-posterior pads",
+          "wrong": [
+            "Stop resuscitation, as VF after three shocks is futile",
+            "Double the adrenaline dose to 2 mg",
+            "Give atropine 3 mg as a single dose"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Shock and Awe", "emoji": "⚡", "flavor": "Shock early, CPR straight after. Three shocks, then the drugs." },
+  "rules": [
+    {
+      "id": "shock-before-drugs",
+      "first": [
+        "shock1"
+      ],
+      "then": [
+        "arrest-drugs"
+      ],
+      "fail": "Drugs before the first shocks.",
+      "ok": "Shocks before drugs."
+    },
+    {
+      "id": "rosc-before-tube",
+      "first": [
+        "rhythm"
+      ],
+      "then": [
+        "intubate"
+      ],
+      "fail": "Intubation interrupted CPR.",
+      "ok": "Intubated after ROSC."
+    }
+  ],
+  "badge": {
+    "name": "Shock and Awe",
+    "emoji": "⚡",
+    "flavor": "Shock early, CPR straight after. Three shocks, then the drugs."
+  },
   "cards": [
-    { "q": "In shockable arrest, adrenaline is first given…", "options": ["After the third shock", "Before the first shock", "After the first shock, with adrenaline", "Only after 10 minutes"], "why": "Then every 3–5 minutes.", "source": "RCUK 2025 ALS" },
-    { "q": "Lidocaine dose in VF if amiodarone is unavailable?", "options": ["100 mg, then 50 mg after the fifth shock", "1 mg/kg every minute until ROSC", "300 mg, then 150 mg after the fifth shock", "10 mg, repeated after every shock"], "why": "Lidocaine is the alternative antiarrhythmic.", "source": "RCUK 2025 ALS" },
-    { "q": "Where should the apical defibrillator pad sit?", "options": ["Below the armpit, mid-axillary line", "Over the left nipple, on the breast", "Over the lower sternum, left of midline", "On the left shoulder, below the clavicle"], "why": "2025 guidance stresses correct lateral pad placement.", "source": "RCUK 2025 ALS" },
-    { "q": "Post-ROSC SpO2 target?", "options": ["94–98%", "100%", "88–92% in all", "Above 85%"], "why": "Avoid hypoxia and hyperoxia.", "source": "RCUK 2025 post-resuscitation care" },
-    { "q": "Post-ROSC blood pressure target?", "options": ["Systolic >100 mmHg or MAP 60–65", "Systolic >160 mmHg to perfuse the brain", "MAP >90 mmHg in every patient", "Systolic 80–90 mmHg (permissive)"], "why": "Avoid hypotension.", "source": "RCUK 2025 post-resuscitation care" },
-    { "q": "ECG after ROSC shows ST elevation. Next?", "options": ["Emergency angiography and primary PCI", "Wait 72 hours for neuroprognostication, then decide", "Thrombolysis for every patient", "CT head first in every case"], "why": "STEMI after ROSC goes to the cath lab.", "source": "RCUK/ERC 2025; ESC 2023" },
-    { "q": "Which lead best shows right ventricular infarction?", "options": ["V4R", "aVL", "V6", "I"], "why": "ST elevation ≥1 mm in V4R.", "source": "ESC 2023 ACS" }
+    {
+      "q": "In shockable arrest, adrenaline is first given…",
+      "options": [
+        "After the third shock",
+        "Before the first shock",
+        "After the first shock, with adrenaline",
+        "Only after 10 minutes"
+      ],
+      "why": "Then every 3–5 minutes.",
+      "source": "RCUK 2025 ALS"
+    },
+    {
+      "q": "Lidocaine dose in VF if amiodarone is unavailable?",
+      "options": [
+        "100 mg, then 50 mg after the fifth shock",
+        "1 mg/kg every minute until ROSC",
+        "300 mg, then 150 mg after the fifth shock",
+        "10 mg, repeated after every shock"
+      ],
+      "why": "Lidocaine is the alternative antiarrhythmic.",
+      "source": "RCUK 2025 ALS"
+    },
+    {
+      "q": "Where should the apical defibrillator pad sit?",
+      "options": [
+        "Below the armpit, mid-axillary line",
+        "Over the left nipple, on the breast",
+        "Over the lower sternum, left of midline",
+        "On the left shoulder, below the clavicle"
+      ],
+      "why": "2025 guidance stresses correct lateral pad placement.",
+      "source": "RCUK 2025 ALS"
+    },
+    {
+      "q": "Post-ROSC SpO2 target?",
+      "options": [
+        "94–98%",
+        "100%",
+        "88–92% in all",
+        "Above 85%"
+      ],
+      "why": "Avoid hypoxia and hyperoxia.",
+      "source": "RCUK 2025 post-resuscitation care"
+    },
+    {
+      "q": "Post-ROSC blood pressure target?",
+      "options": [
+        "Systolic >100 mmHg or MAP 60–65",
+        "Systolic >160 mmHg to perfuse the brain",
+        "MAP >90 mmHg in every patient",
+        "Systolic 80–90 mmHg (permissive)"
+      ],
+      "why": "Avoid hypotension.",
+      "source": "RCUK 2025 post-resuscitation care"
+    },
+    {
+      "q": "ECG after ROSC shows ST elevation. Next?",
+      "options": [
+        "Emergency angiography and primary PCI",
+        "Wait 72 hours for neuroprognostication, then decide",
+        "Thrombolysis for every patient",
+        "CT head first in every case"
+      ],
+      "why": "STEMI after ROSC goes to the cath lab.",
+      "source": "RCUK/ERC 2025; ESC 2023"
+    },
+    {
+      "q": "Which lead best shows right ventricular infarction?",
+      "options": [
+        "V4R",
+        "aVL",
+        "V6",
+        "I"
+      ],
+      "why": "ST elevation ≥1 mm in V4R.",
+      "source": "ESC 2023 ACS"
+    }
   ]
 }

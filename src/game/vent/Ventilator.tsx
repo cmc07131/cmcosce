@@ -146,7 +146,7 @@ export function Ventilator({ job, onDone }: { job: PerformJob; onDone: (r: Bench
             </tbody>
           </table>
           <p className="vent-check-note">
-            ETCO2 {score.etco2.toFixed(1)} kPa{spec.rr[0] >= 20 ? ' · aim for mild hypocapnia (about 3.5–4.5) to keep the pH 7.45–7.55' : ''}.
+            ETCO2 {score.etco2.toFixed(1)} kPa · {spec.co2}.
             {first.current && JSON.stringify(first.current.settings) !== JSON.stringify(s) ? ' Scored on your first START.' : ''}
           </p>
           <div className="vent-check-btns">

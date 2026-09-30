@@ -5,15 +5,92 @@
   "type": "resus",
   "time": 420,
   "stem": "Paediatric resus. A 7-year-old girl (about 23 kg) ate a biscuit at a birthday party 15 minutes ago. She has a swollen face, a hoarse voice, wheeze and hives. HR 150, BP 72/40, RR 36, SpO2 91%. Her aunt is with her.",
+  "phases": [
+    {
+      "title": "Recognise",
+      "goal": "Monitoring on, then A to E yourself: is this anaphylaxis?",
+      "steps": [
+        "monitoring",
+        "recognise"
+      ]
+    },
+    {
+      "title": "Adrenaline",
+      "goal": "Help, position, and IM adrenaline from the drug cart — the right strength and dose — now. Oxygen.",
+      "steps": [
+        "call",
+        "im",
+        "o2"
+      ]
+    },
+    {
+      "title": "Circulation",
+      "goal": "Still hypotensive: fluid for her weight.",
+      "steps": [
+        "fluid"
+      ]
+    },
+    {
+      "title": "Reassess",
+      "goal": "Watch her. Not better after 5 minutes? Repeat.",
+      "steps": [
+        "im2"
+      ]
+    },
+    {
+      "title": "After",
+      "goal": "Tests, observation and discharge planning. Then the examiner.",
+      "steps": [
+        "after"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "worse",
+      "after": "monitored",
+      "delayS": 60,
+      "unless": "im1",
+      "scene": "worse",
+      "say": "Her voice is fading and her lips are blue. SpO2 84%, BP 64/34.",
+      "treatedBy": "im1",
+      "untreated": "She deteriorated and never got IM adrenaline."
+    },
+    {
+      "id": "still-unwell",
+      "after": "im1",
+      "delayS": 25,
+      "scene": "still-unwell",
+      "say": "Five minutes on: still wheezy and hypotensive. BP 78/42."
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Antihistamine and steroid. Your notes still give IM/IV hydrocortisone and chlorphenamine as routine. RCUK (2021) removed both from emergency treatment: an oral non-sedating antihistamine for skin symptoms once stable, and steroids only for refractory reactions or ongoing asthma or shock."},
-    {"tag": "differs", "text": "Adrenaline strength. Your notes give '0.1 mL of 1:10,000' as an IM equivalent. 1:10,000 (0.1 mg/mL) is for IV use only; IM adrenaline is always 1:1000 (1 mg/mL). Mixing them up is a known cause of harm."}
+    {
+      "tag": "outdated",
+      "text": "Antihistamine and steroid. Your notes still give IM/IV hydrocortisone and chlorphenamine as routine. RCUK (2021) removed both from emergency treatment: an oral non-sedating antihistamine for skin symptoms once stable, and steroids only for refractory reactions or ongoing asthma or shock."
+    },
+    {
+      "tag": "differs",
+      "text": "Adrenaline strength. Your notes give '0.1 mL of 1:10,000' as an IM equivalent. 1:10,000 (0.1 mg/mL) is for IV use only; IM adrenaline is always 1:1000 (1 mg/mL). Mixing them up is a known cause of harm."
+    }
   ],
   "notes": "Checked against the Resuscitation Council UK emergency treatment of anaphylaxis (2021, with the 2024 update on refractory anaphylaxis) and the RCUK 2025 guidelines.\n\nIM adrenaline 1:1000 (1 mg/mL) into the anterolateral thigh: under 6 months 100–150 microgram; 6 months–6 years 150 microgram; 6–12 years 300 microgram; over 12 years 500 microgram (300 microgram if small or prepubertal). Repeat after 5 minutes if not improving. After 2 IM doses with ongoing respiratory or circulatory problems: refractory anaphylaxis — low-dose IV adrenaline infusion with expert help, and fluids (10 mL/kg crystalloid in children).\n\nAntihistamines and steroids are no longer part of emergency treatment (RCUK 2021): non-sedating oral antihistamine for skin symptoms after stabilisation; steroids only for refractory reactions or ongoing asthma/shock. Your notes still list IM/IV hydrocortisone and chlorphenamine doses as routine; they are not scored here.\n\nYour notes also give the IM dose as '0.1 mL of 1:10,000' as an equivalent: 1:10,000 (0.1 mg/mL) is for IV use only. IM adrenaline must be 1:1000; mixing them up is a known cause of harm.\n\nMast cell tryptase: first sample as soon as possible after treatment, second within 1–2 hours (no later than 4), third at 24 hours or at follow-up. Observe (6–12 hours depending on severity), discharge with two adrenaline auto-injectors, training and an allergy clinic referral.",
   "cast": [
-    { "id": "patient", "name": "Yan", "role": "child" },
-    { "id": "nurse", "name": "Nurse Hung", "role": "nurse" },
-    { "id": "aunt", "name": "Aunt", "role": "woman" }
+    {
+      "id": "patient",
+      "name": "Yan",
+      "role": "child"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Hung",
+      "role": "nurse"
+    },
+    {
+      "id": "aunt",
+      "name": "Aunt",
+      "role": "woman"
+    }
   ],
   "vitals": {
     "hr": 150,
@@ -22,16 +99,76 @@
     "spo2": 91,
     "rr": 36,
     "rhythm": "sinus-tachy",
-    "drift": { "sbp": -1, "spo2": -0.5 },
-    "stop": ["im1"],
+    "drift": {
+      "sbp": -1,
+      "spo2": -0.5
+    },
+    "stop": [
+      "im1"
+    ],
     "effects": [
-      { "scene": "o2", "add": { "spo2": 3 }, "overS": 20 },
-      { "scene": "im1", "add": { "sbp": 10, "dbp": 6, "spo2": 2, "hr": -8 }, "overS": 120 },
-      { "scene": "fluid", "add": { "sbp": 6, "hr": -6 }, "overS": 90 },
-      { "scene": "im2", "add": { "sbp": 10, "spo2": 3, "hr": -10, "rr": -10 }, "overS": 120 }
-    ]
+      {
+        "scene": "worse",
+        "add": {
+          "spo2": -7,
+          "sbp": -8
+        },
+        "overS": 20
+      },
+      {
+        "scene": "o2",
+        "add": {
+          "spo2": 3
+        },
+        "overS": 20
+      },
+      {
+        "scene": "im1",
+        "add": {
+          "sbp": 10,
+          "dbp": 6,
+          "spo2": 2,
+          "hr": -8
+        },
+        "overS": 120
+      },
+      {
+        "scene": "fluid",
+        "add": {
+          "sbp": 6,
+          "hr": -6
+        },
+        "overS": 90
+      },
+      {
+        "scene": "im2",
+        "add": {
+          "sbp": 10,
+          "spo2": 3,
+          "hr": -10,
+          "rr": -10
+        },
+        "overS": 120
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
     {
       "id": "recognise",
       "kind": "exam",
@@ -40,29 +177,174 @@
       "hint": "Airway, breathing, circulation problems with skin changes after a trigger: anaphylaxis.",
       "groups": {
         "ABC": [
-          { "t": "Airway", "r": "Lip and tongue swelling, hoarse voice, soft stridor.", "mark": "Recognises airway involvement" },
-          { "t": "Breathing", "r": "Wheeze throughout, RR 36, SpO2 91%.", "mark": "Recognises bronchospasm" },
-          { "t": "Circulation", "r": "HR 150, BP 72/40, cool hands.", "mark": "Recognises shock" },
-          { "t": "Skin", "r": "Widespread urticaria, facial angioedema." }
+          {
+            "t": "Airway",
+            "r": "Lip and tongue swelling, hoarse voice, soft stridor.",
+            "mark": "Recognises airway involvement",
+            "anim": "airway"
+          },
+          {
+            "t": "Breathing",
+            "r": "Wheeze throughout, RR 36, SpO2 91%.",
+            "mark": "Recognises bronchospasm",
+            "anim": "auscultate"
+          },
+          {
+            "t": "Circulation",
+            "r": "HR 150, BP 72/40, cool hands.",
+            "mark": "Recognises shock",
+            "anim": "pulse"
+          },
+          {
+            "t": "Skin",
+            "r": "Widespread urticaria, facial angioedema."
+          }
         ]
       }
     },
     {
-      "id": "adrenaline",
-      "kind": "steps",
-      "to": "cart",
-      "label": "Treat",
-      "hint": "Call for help, lie her down (sit if breathless), IM adrenaline 300 microgram, oxygen, repeat at 5 minutes, fluids.",
+      "id": "call",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "Help, the trigger, and how she lies.",
       "opts": [
-        { "t": "Call for help; remove the trigger", "n": 1, "mark": "Calls for help" },
-        { "t": "Lie her flat with legs raised (or sitting up if breathing is the problem)", "n": 2, "mark": "Positions appropriately" },
-        { "t": "Adrenaline 1:1000, 300 microgram (0.3 mL) IM into the anterolateral thigh", "n": 3, "scene": "im1", "mark": "IM adrenaline 300 microgram (6–12 years) into the thigh" },
-        { "t": "High-flow oxygen", "n": 4, "scene": "o2", "mark": "High-flow oxygen" },
-        { "t": "IV access; crystalloid bolus 10 mL/kg (230 mL)", "n": 5, "scene": "fluid", "mark": "IV fluid bolus 10 mL/kg" },
-        { "t": "Not improving at 5 minutes: repeat IM adrenaline 300 microgram", "n": 6, "scene": "im2", "mark": "Repeats IM adrenaline after 5 minutes" },
-        { "t": "Adrenaline 1:10,000 3 mL IM", "trap": "critical", "r": "1:10,000 is the IV/cardiac arrest strength; the IM dose is 1:1000. This is a tenfold volume error waiting to happen." },
-        { "t": "Chlorphenamine and hydrocortisone before the adrenaline", "trap": "critical", "r": "They do not treat airway or circulation problems and delay adrenaline." },
-        { "t": "IV bolus of adrenaline 1 mg", "trap": "critical", "r": "IV bolus adrenaline outside cardiac arrest can cause arrhythmias and myocardial infarction." }
+        {
+          "t": "Call for help; remove the trigger",
+          "mark": "Calls for help"
+        },
+        {
+          "t": "Lie her flat with legs raised (or sitting up if breathing is the problem)",
+          "mark": "Positions appropriately"
+        }
+      ]
+    },
+    {
+      "id": "im",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "IM adrenaline first, the right strength and dose for her age.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Adrenaline 1 mg/mL (1:1000) 300 microgram (0.3 mL) IM, anterolateral thigh",
+          "drug": "Adrenaline 1 mg/mL (1:1000)",
+          "dose": "300 microgram (0.3 mL) IM, anterolateral thigh",
+          "fetch": "cart",
+          "scene": "im1",
+          "mark": "IM adrenaline 300 microgram (6–12 years) into the thigh"
+        },
+        {
+          "t": "Adrenaline 1 mg/mL (1:1000) 150 microgram (0.15 mL) IM",
+          "drug": "Adrenaline 1 mg/mL (1:1000)",
+          "dose": "150 microgram (0.15 mL) IM",
+          "fetch": "cart",
+          "trap": true,
+          "r": "That is the dose for 6 months to 6 years. She is 7: 300 microgram."
+        },
+        {
+          "t": "Adrenaline 1 mg/mL (1:1000) 500 microgram (0.5 mL) IM",
+          "drug": "Adrenaline 1 mg/mL (1:1000)",
+          "dose": "500 microgram (0.5 mL) IM",
+          "fetch": "cart",
+          "trap": true,
+          "r": "That is the dose for over 12 years. She is 7: 300 microgram."
+        },
+        {
+          "trap": "critical",
+          "r": "1:10,000 is the IV/cardiac arrest strength; the IM dose is 1:1000. This is a tenfold volume error waiting to happen.",
+          "t": "Adrenaline 0.1 mg/mL (1:10,000) 3 mL IM",
+          "drug": "Adrenaline 0.1 mg/mL (1:10,000)",
+          "dose": "3 mL IM",
+          "fetch": "cart"
+        },
+        {
+          "trap": "critical",
+          "r": "IV bolus adrenaline outside cardiac arrest can cause arrhythmias and myocardial infarction.",
+          "t": "Adrenaline 0.1 mg/mL (1:10,000) 1 mg IV bolus",
+          "drug": "Adrenaline 0.1 mg/mL (1:10,000)",
+          "dose": "1 mg IV bolus",
+          "fetch": "cart"
+        },
+        {
+          "trap": "critical",
+          "r": "They do not treat airway or circulation problems and delay adrenaline.",
+          "t": "Chlorphenamine 2.5 mg IV before the adrenaline",
+          "drug": "Chlorphenamine",
+          "dose": "2.5 mg IV before the adrenaline",
+          "fetch": "cart"
+        }
+      ]
+    },
+    {
+      "id": "o2",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "High-flow oxygen.",
+      "confirm": "Take these",
+      "opts": [
+        {
+          "t": "High-flow oxygen",
+          "scene": "o2",
+          "mark": "High-flow oxygen",
+          "fetch": "trolley"
+        }
+      ]
+    },
+    {
+      "id": "fluid",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Hypotensive: a fluid bolus for her weight.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Crystalloid 10 mL/kg (230 mL) bolus",
+          "drug": "Crystalloid",
+          "dose": "10 mL/kg (230 mL) bolus",
+          "fetch": "cart",
+          "scene": "fluid",
+          "mark": "IV fluid bolus 10 mL/kg"
+        },
+        {
+          "t": "Crystalloid 20 mL/kg (460 mL) bolus",
+          "drug": "Crystalloid",
+          "dose": "20 mL/kg (460 mL) bolus",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Current guidance uses 10 mL/kg boluses, reassessing after each."
+        },
+        {
+          "t": "Crystalloid 50 mL",
+          "drug": "Crystalloid",
+          "dose": "50 mL",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little: 10 mL/kg (230 mL)."
+        }
+      ]
+    },
+    {
+      "id": "im2",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Not better after 5 minutes: repeat the IM adrenaline.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Adrenaline 1 mg/mL (1:1000) 300 microgram (0.3 mL) IM again",
+          "drug": "Adrenaline 1 mg/mL (1:1000)",
+          "dose": "300 microgram (0.3 mL) IM again",
+          "fetch": "cart",
+          "when": "still-unwell",
+          "early": "Give the first dose time: 5 minutes.",
+          "scene": "im2",
+          "mark": "Repeats IM adrenaline after 5 minutes"
+        }
       ]
     },
     {
@@ -72,10 +354,18 @@
       "label": "After she improves",
       "hint": "Tryptase, observe, auto-injectors, allergy referral.",
       "opts": [
-        { "t": "Mast cell tryptase now, again within 1–2 hours", "mark": "Timed mast cell tryptase samples" },
-        { "t": "Observe for at least 12 hours (two doses needed); admit", "mark": "Appropriate observation after biphasic risk" },
-        { "t": "Two adrenaline auto-injectors, training, an allergy action plan and allergy clinic referral", "mark": "Discharge plan with auto-injectors and referral" },
-        { "t": "If still unwell after two IM doses: refractory anaphylaxis — IV adrenaline infusion with critical care", "mark": "Knows the refractory anaphylaxis pathway" }
+        {
+          "t": "Mast cell tryptase now, again within 1–2 hours",
+          "mark": "Timed mast cell tryptase samples"
+        },
+        {
+          "t": "Observe for at least 12 hours (two doses needed); admit",
+          "mark": "Appropriate observation after biphasic risk"
+        },
+        {
+          "t": "Two adrenaline auto-injectors, training, an allergy action plan and allergy clinic referral",
+          "mark": "Discharge plan with auto-injectors and referral"
+        }
       ]
     },
     {
@@ -84,21 +374,139 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "IM adrenaline dose for a 4-year-old?", "a": "150 microgram", "wrong": ["300 microgram", "500 microgram", "10 microgram/kg of 1:10,000"] },
-        { "q": "When do you repeat IM adrenaline?", "a": "After 5 minutes if not improving", "wrong": ["After 30 minutes if not improving", "After 1 minute if there is no improvement", "Only once the IV line is in"] },
-        { "q": "Role of chlorphenamine in emergency anaphylaxis treatment?", "a": "None acutely; oral antihistamine later for skin", "wrong": ["First-line, before adrenaline, in all children", "It replaces adrenaline in mild paediatric cases", "Given IV before oxygen to stop the reaction"] },
-        { "q": "Refractory anaphylaxis is…", "a": "Ongoing A/B/C problems despite 2 IM doses", "wrong": ["Any rash that persists after 1 hour", "Anaphylaxis to two different foods", "Any reaction that needs supplemental oxygen at any point"] },
-        { "q": "Strength of adrenaline for IM use?", "a": "1:1000 (1 mg/mL)", "wrong": ["1:10,000 (100 microgram/mL)", "1:100 (10 mg/mL)", "1:100,000 (10 microgram/mL)"] }
+        {
+          "q": "IM adrenaline dose for a 4-year-old?",
+          "a": "150 microgram",
+          "wrong": [
+            "300 microgram",
+            "500 microgram",
+            "10 microgram/kg of 1:10,000"
+          ]
+        },
+        {
+          "q": "When do you repeat IM adrenaline?",
+          "a": "After 5 minutes if not improving",
+          "wrong": [
+            "After 30 minutes if not improving",
+            "After 1 minute if there is no improvement",
+            "Only once the IV line is in"
+          ]
+        },
+        {
+          "q": "Role of chlorphenamine in emergency anaphylaxis treatment?",
+          "a": "None acutely; oral antihistamine later for skin",
+          "wrong": [
+            "First-line, before adrenaline, in all children",
+            "It replaces adrenaline in mild paediatric cases",
+            "Given IV before oxygen to stop the reaction"
+          ]
+        },
+        {
+          "q": "Refractory anaphylaxis is…",
+          "a": "Ongoing A/B/C problems despite 2 IM doses",
+          "wrong": [
+            "Any rash that persists after 1 hour",
+            "Anaphylaxis to two different foods",
+            "Any reaction that needs supplemental oxygen at any point"
+          ]
+        },
+        {
+          "q": "Strength of adrenaline for IM use?",
+          "a": "1:1000 (1 mg/mL)",
+          "wrong": [
+            "1:10,000 (100 microgram/mL)",
+            "1:100 (10 mg/mL)",
+            "1:100,000 (10 microgram/mL)"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Epi-Centre", "emoji": "💉", "flavor": "Thigh, 1:1000, repeat at 5 minutes. Antihistamines are not rescue drugs." },
+  "rules": [
+    {
+      "id": "adrenaline-first",
+      "first": [
+        "im"
+      ],
+      "then": [
+        "fluid"
+      ],
+      "fail": "Fluid before IM adrenaline.",
+      "ok": "Adrenaline first."
+    }
+  ],
+  "badge": {
+    "name": "Epi-Centre",
+    "emoji": "💉",
+    "flavor": "Thigh, 1:1000, repeat at 5 minutes. Antihistamines are not rescue drugs."
+  },
   "cards": [
-    { "q": "IM adrenaline dose for a 10-year-old in anaphylaxis?", "options": ["300 microgram", "150 microgram", "500 microgram", "1 mg"], "why": "6–12 years: 300 microgram; over 12: 500 microgram.", "source": "RCUK anaphylaxis 2021" },
-    { "q": "Best site for IM adrenaline?", "options": ["Anterolateral thigh", "Deltoid muscle of the upper arm", "Buttock", "Abdomen subcutaneously"], "why": "Fastest absorption.", "source": "RCUK anaphylaxis 2021" },
-    { "q": "Steroids in emergency anaphylaxis treatment (RCUK 2021)?", "options": ["Not routine; only if refractory or ongoing asthma", "Always, given with the first dose of IM adrenaline", "Given IM instead of adrenaline in children", "Only for children under 5 years old"], "why": "No evidence they prevent biphasic reactions.", "source": "RCUK anaphylaxis 2021", "note": "Older notes list hydrocortisone doses routinely." },
-    { "q": "Mast cell tryptase timing?", "options": ["ASAP, then at 1–2 h, then at 24 h/follow-up", "Only once, at 24 hours, once the patient is stable", "Before adrenaline, so the result is valid", "Only if the urticarial rash persists"], "why": "Supports the diagnosis later.", "source": "RCUK anaphylaxis 2021" },
-    { "q": "Anaphylaxis with hypotension in a child: fluid bolus?", "options": ["10 mL/kg crystalloid", "40 mL/kg of 4.5% albumin", "2 mL/kg of 10% glucose", "20 mL/kg of 5% dextrose"], "why": "Along with adrenaline.", "source": "RCUK anaphylaxis 2021" },
-    { "q": "How many auto-injectors should be prescribed at discharge?", "options": ["Two", "One", "Three", "Four"], "why": "A second dose may be needed.", "source": "MHRA / RCUK" }
+    {
+      "q": "IM adrenaline dose for a 10-year-old in anaphylaxis?",
+      "options": [
+        "300 microgram",
+        "150 microgram",
+        "500 microgram",
+        "1 mg"
+      ],
+      "why": "6–12 years: 300 microgram; over 12: 500 microgram.",
+      "source": "RCUK anaphylaxis 2021"
+    },
+    {
+      "q": "Best site for IM adrenaline?",
+      "options": [
+        "Anterolateral thigh",
+        "Deltoid muscle of the upper arm",
+        "Buttock",
+        "Abdomen subcutaneously"
+      ],
+      "why": "Fastest absorption.",
+      "source": "RCUK anaphylaxis 2021"
+    },
+    {
+      "q": "Steroids in emergency anaphylaxis treatment (RCUK 2021)?",
+      "options": [
+        "Not routine; only if refractory or ongoing asthma",
+        "Always, given with the first dose of IM adrenaline",
+        "Given IM instead of adrenaline in children",
+        "Only for children under 5 years old"
+      ],
+      "why": "No evidence they prevent biphasic reactions.",
+      "source": "RCUK anaphylaxis 2021",
+      "note": "Older notes list hydrocortisone doses routinely."
+    },
+    {
+      "q": "Mast cell tryptase timing?",
+      "options": [
+        "ASAP, then at 1–2 h, then at 24 h/follow-up",
+        "Only once, at 24 hours, once the patient is stable",
+        "Before adrenaline, so the result is valid",
+        "Only if the urticarial rash persists"
+      ],
+      "why": "Supports the diagnosis later.",
+      "source": "RCUK anaphylaxis 2021"
+    },
+    {
+      "q": "Anaphylaxis with hypotension in a child: fluid bolus?",
+      "options": [
+        "10 mL/kg crystalloid",
+        "40 mL/kg of 4.5% albumin",
+        "2 mL/kg of 10% glucose",
+        "20 mL/kg of 5% dextrose"
+      ],
+      "why": "Along with adrenaline.",
+      "source": "RCUK anaphylaxis 2021"
+    },
+    {
+      "q": "How many auto-injectors should be prescribed at discharge?",
+      "options": [
+        "Two",
+        "One",
+        "Three",
+        "Four"
+      ],
+      "why": "A second dose may be needed.",
+      "source": "MHRA / RCUK"
+    }
   ]
 }

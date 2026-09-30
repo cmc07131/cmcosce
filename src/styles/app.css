@@ -781,6 +781,82 @@ button {
   color: #fff;
 }
 
+/* The manual defibrillator. */
+.defib {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px 10px;
+}
+
+.defib-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  background: #d8dce0;
+  border: 3px solid #303a48;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 3px #e87830;
+}
+
+.defib-screen {
+  width: 100%;
+  border: 3px solid #202830;
+  border-radius: 3px;
+}
+
+.defib-row {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.defib-btn {
+  flex: 1;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  padding: 7px 4px;
+  color: #102030;
+  background: #f4f6f8;
+  border: 2px solid #303a48;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.defib-btn[data-on] {
+  background: #f8d030;
+}
+
+.defib-btn:disabled {
+  opacity: 0.45;
+}
+
+.defib-charge {
+  background: #f8e070;
+}
+
+.defib-shock {
+  color: #fff;
+  background: #d83838;
+}
+
+.defib-energy {
+  flex: 1.2;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+}
+
+.defib-chest {
+  width: min(100%, 260px);
+  align-self: center;
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
 /* After START: each setting against its acceptable range. */
 .vent-check {
   margin-top: 8px;

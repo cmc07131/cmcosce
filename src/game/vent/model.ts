@@ -32,11 +32,13 @@ export function nudge(s: VentSettings, key: Setting, dir: 1 | -1): VentSettings 
  * What this patient needs. `tca`: paralysed after RSI, 70 kg, keep her alkaline — a controlled mode, 6–8 mL/kg,
  * a faster rate to hyperventilate (pH 7.45–7.55), 100% oxygen to start, PEEP 5, a pressure limit.
  */
-export type VentSpec = { weightKg: number; rr: [number, number]; why: string }
+export type VentSpec = { weightKg: number; rr: [number, number]; why: string; co2: string }
 
 export function ventSpec(pose?: string): VentSpec {
-  if (pose === 'tca') return { weightKg: 70, rr: [20, 26], why: 'Mild hyperventilation keeps her pH 7.45–7.55, which narrows the QRS.' }
-  return { weightKg: 70, rr: [12, 18], why: 'A normal rate for a normal PaCO2.' }
+  if (pose === 'tca') return { weightKg: 70, rr: [20, 26], why: 'Mild hyperventilation keeps her pH 7.45–7.55, which narrows the QRS.', co2: 'aim for mild hypocapnia (about 3.5–4.5) to keep the pH 7.45–7.55' }
+  if (pose === 'post-arrest') return { weightKg: 80, rr: [10, 16], why: 'After ROSC: normocapnia (PaCO2 4.7–6.0 kPa). Hyperventilation lowers cerebral blood flow.', co2: 'aim for normocapnia (about 4.5–5.5)' }
+  if (pose === 'head-injury') return { weightKg: 75, rr: [12, 18], why: 'Head injury: PaCO2 4.5–5.0 kPa. Too low starves the brain of blood; too high raises the ICP.', co2: 'aim for low-normal CO2 (about 4.0–4.8)' }
+  return { weightKg: 70, rr: [12, 18], why: 'A normal rate for a normal PaCO2.', co2: 'aim for normocapnia (about 4.5–5.5)' }
 }
 
 /** The station's marks for this bench, in the order they are written on the option. */

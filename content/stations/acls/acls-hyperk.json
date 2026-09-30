@@ -5,11 +5,71 @@
   "type": "resus",
   "time": 420,
   "stem": "Resus 1. A 68-year-old man on haemodialysis missed his last two sessions. He feels weak and dizzy. HR 44, BP 88/52, RR 20, SpO2 95%, GCS 15. The nurse hands you his ECG.",
+  "phases": [
+    {
+      "title": "Monitor and ECG",
+      "goal": "Monitoring on, then read the ECG and the gas: how dangerous is this potassium?",
+      "steps": [
+        "monitoring",
+        "ecg"
+      ]
+    },
+    {
+      "title": "Protect",
+      "goal": "ECG changes: protect the heart from the drug cart, with the right dose, now.",
+      "steps": [
+        "calcium"
+      ]
+    },
+    {
+      "title": "Shift",
+      "goal": "Push the potassium into the cells, safely.",
+      "steps": [
+        "shift"
+      ]
+    },
+    {
+      "title": "Monitor",
+      "goal": "What must be repeated, and how often? Be ready if the rate falls.",
+      "steps": [
+        "monitor",
+        "pads"
+      ]
+    },
+    {
+      "title": "Remove",
+      "goal": "Get the potassium out of the body.",
+      "steps": [
+        "remove",
+        "bind"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "brady",
+      "after": "ecg-read",
+      "delayS": 60,
+      "unless": "calcium",
+      "scene": "brady-worse",
+      "say": "The monitor slows: HR 32, BP 72/40. He is grey and drowsy.",
+      "treatedBy": "calcium",
+      "untreated": "His bradycardia worsened and calcium was never given."
+    }
+  ],
   "review": [],
   "notes": "Checked against the UK Kidney Association clinical practice guideline 'Treatment of acute hyperkalaemia in adults' (2023) and RCUK 2025 special circumstances.\n\nThree steps: protect the heart, shift potassium into cells, remove potassium, and monitor.\n• Protect: IV calcium if there are ECG changes — calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL over 5–10 minutes; repeat if the ECG does not improve within 5–10 minutes. It works in minutes and lasts 30–60 minutes; it does not lower potassium.\n• Shift: insulin 10 units soluble insulin with 25 g glucose (e.g. 50 mL of 50% or 250 mL of 10%) over 15 minutes; if glucose is under 7 mmol/L before treatment, follow with 10% glucose 50 mL/h for 5 hours; check glucose at 0, 15, 30, 60, 90, 120, 180, 240, 300 and 360 minutes (hypoglycaemia risk, especially in renal failure). Salbutamol 10–20 mg nebulised as an adjunct (not alone).\n• Remove: dialysis for severe hyperkalaemia in renal failure; potassium binders (sodium zirconium cyclosilicate 10 g three times daily, or patiromer).\n• Sodium bicarbonate is not routine; consider only with metabolic acidosis (and specialist advice in dialysis patients).\n\nYour notes on pacing cover hyperkalaemia in bradycardia (calcium gluconate after the potassium result); this station follows UKKA 2023 in full.",
   "cast": [
-    { "id": "patient", "name": "Mr Law", "role": "patient" },
-    { "id": "nurse", "name": "Nurse Ngai", "role": "nurse" }
+    {
+      "id": "patient",
+      "name": "Mr Law",
+      "role": "patient"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Ngai",
+      "role": "nurse"
+    }
   ],
   "vitals": {
     "hr": 44,
@@ -21,11 +81,56 @@
     "glucose": 6.2,
     "rhythm": "hyperk-severe",
     "effects": [
-      { "scene": "calcium", "set": { "hr": 62, "sbp": 102 }, "rhythm": "hyperk-moderate" },
-      { "scene": "insulin", "set": { "hr": 70, "sbp": 110 }, "add": { "glucose": 3 }, "rhythm": "hyperk-mild", "overS": 60 }
-    ]
+      {
+        "scene": "brady-worse",
+        "set": {
+          "hr": 32
+        },
+        "add": {
+          "sbp": -16,
+          "dbp": -10
+        },
+        "overS": 15
+      },
+      {
+        "scene": "calcium",
+        "set": {
+          "hr": 62,
+          "sbp": 102
+        },
+        "rhythm": "hyperk-moderate"
+      },
+      {
+        "scene": "insulin",
+        "set": {
+          "hr": 70,
+          "sbp": 110
+        },
+        "add": {
+          "glucose": 3
+        },
+        "rhythm": "hyperk-mild",
+        "overS": 60
+      }
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put him on the monitor: ECG leads, NIBP and SpO2.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
     {
       "id": "ecg",
       "kind": "order",
@@ -34,25 +139,121 @@
       "hint": "ECG first, then a gas for the potassium.",
       "groups": {
         "Now": [
-          { "t": "12-lead ECG", "r": "Bradycardia 44, absent P waves, broad bizarre QRS, tall peaked T waves.", "img": "ecg:hyperk-severe", "mark": "Recognises severe hyperkalaemia ECG changes" },
-          { "t": "Venous gas", "r": "K 8.1 mmol/L, pH 7.26, bicarbonate 15, glucose 6.2.", "mark": "Confirms potassium quickly on a gas" }
+          {
+            "t": "12-lead ECG",
+            "r": "Bradycardia 44, absent P waves, broad bizarre QRS, tall peaked T waves.",
+            "img": "ecg:hyperk-severe",
+            "mark": "Recognises severe hyperkalaemia ECG changes",
+            "scene": "ecg-read"
+          },
+          {
+            "t": "Venous gas",
+            "r": "K 8.1 mmol/L, pH 7.26, bicarbonate 15, glucose 6.2.",
+            "mark": "Confirms potassium quickly on a gas"
+          }
         ]
       }
     },
     {
-      "id": "protect",
+      "id": "calcium",
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Protect the heart, shift potassium in; monitor glucose.",
-      "confirm": "Give these",
+      "hint": "Protect the heart first.",
+      "confirm": "Give",
       "opts": [
-        { "t": "Calcium gluconate 10% 30 mL IV over 10 min (or calcium chloride 10% 10 mL)", "fetch": "cart", "need": true, "scene": "calcium", "mark": "IV calcium to stabilise the myocardium" },
-        { "t": "Soluble insulin 10 units with 25 g glucose IV over 15 min", "fetch": "cart", "need": true, "scene": "insulin", "mark": "Insulin with glucose to shift potassium" },
-        { "t": "Salbutamol 10–20 mg nebulised as an adjunct", "fetch": "cart", "need": true, "mark": "Nebulised salbutamol as an adjunct" },
-        { "t": "Insulin 10 units IV without glucose — his sugar is fine", "fetch": "cart", "trap": "critical", "r": "Severe hypoglycaemia follows. Always give glucose, and monitor for 6 hours." },
-        { "t": "Sodium bicarbonate 8.4% 50 mL routinely", "fetch": "cart", "trap": true, "r": "Not routine (UKKA 2023). Consider only for acidosis, with specialist advice in dialysis patients." },
-        { "t": "Calcium polystyrene resonium alone and wait", "fetch": "cart", "trap": "critical", "r": "Binders act over hours. With ECG changes, protect the heart and shift potassium now." }
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "calcium",
+          "mark": "IV calcium to stabilise the myocardium",
+          "t": "Calcium gluconate 10% 30 mL IV over 5–10 minutes",
+          "drug": "Calcium gluconate 10%",
+          "dose": "30 mL IV over 5–10 minutes"
+        },
+        {
+          "t": "Calcium gluconate 10% 10 mL IV",
+          "drug": "Calcium gluconate 10%",
+          "dose": "10 mL IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little: 30 mL of 10% gluconate (or 10 mL of 10% chloride), repeated if the ECG does not improve."
+        },
+        {
+          "t": "Calcium gluconate 10% 100 mL IV",
+          "drug": "Calcium gluconate 10%",
+          "dose": "100 mL IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Far too much at once: 30 mL, then repeat if the ECG does not improve in 5–10 minutes."
+        }
+      ]
+    },
+    {
+      "id": "shift",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Shift the potassium into the cells.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "insulin",
+          "mark": "Insulin with glucose to shift potassium",
+          "t": "Insulin with glucose 10 units soluble insulin + 25 g glucose IV over 15 minutes",
+          "drug": "Insulin with glucose",
+          "dose": "10 units soluble insulin + 25 g glucose IV over 15 minutes"
+        },
+        {
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Severe hypoglycaemia follows. Always give glucose, and monitor for 6 hours.",
+          "t": "Insulin with glucose 10 units soluble insulin alone, no glucose",
+          "drug": "Insulin with glucose",
+          "dose": "10 units soluble insulin alone, no glucose"
+        },
+        {
+          "t": "Insulin with glucose 50 units soluble insulin + 25 g glucose",
+          "drug": "Insulin with glucose",
+          "dose": "50 units soluble insulin + 25 g glucose",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Far too much insulin: 10 units with 25 g glucose, and glucose checks for 6 hours."
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "Nebulised salbutamol as an adjunct",
+          "t": "Salbutamol 10–20 mg nebulised",
+          "drug": "Salbutamol",
+          "dose": "10–20 mg nebulised"
+        },
+        {
+          "t": "Salbutamol 2.5 mg nebulised",
+          "drug": "Salbutamol",
+          "dose": "2.5 mg nebulised",
+          "fetch": "cart",
+          "trap": true,
+          "r": "The asthma dose is too small to shift potassium: 10–20 mg."
+        },
+        {
+          "fetch": "cart",
+          "trap": true,
+          "r": "Not routine (UKKA 2023). Consider only for acidosis, with specialist advice in dialysis patients.",
+          "t": "Sodium bicarbonate 8.4% 50 mL IV",
+          "drug": "Sodium bicarbonate 8.4%",
+          "dose": "50 mL IV"
+        },
+        {
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Binders act over hours. With ECG changes, protect the heart and shift potassium now.",
+          "t": "Calcium polystyrene sulfonate 15 g orally, and wait",
+          "drug": "Calcium polystyrene sulfonate",
+          "dose": "15 g orally, and wait"
+        }
       ]
     },
     {
@@ -60,12 +261,35 @@
       "kind": "say",
       "to": "nurse",
       "label": "Talk to the nurse",
-      "hint": "Continuous ECG, repeat ECG, repeat calcium if no improvement, glucose checks, repeat potassium.",
+      "hint": "Repeat ECG, glucose and potassium checks.",
       "opts": [
-        { "t": "Continuous cardiac monitoring; repeat ECG after the calcium; repeat calcium if no change in 5–10 min", "mark": "Monitors the ECG response to calcium" },
-        { "t": "Capillary glucose at 15, 30, 60 min and hourly to 6 hours", "mark": "Glucose monitoring after insulin" },
-        { "t": "Repeat potassium at 1, 2, 4 and 6 hours", "mark": "Repeats potassium" },
-        { "t": "Pacing pads on in case the rate falls further", "fetch": "trolley", "mark": "Prepares for pacing" }
+        {
+          "t": "Continuous cardiac monitoring; repeat ECG after the calcium; repeat calcium if no change in 5–10 min",
+          "mark": "Monitors the ECG response to calcium"
+        },
+        {
+          "t": "Capillary glucose at 15, 30, 60 min and hourly to 6 hours",
+          "mark": "Glucose monitoring after insulin"
+        },
+        {
+          "t": "Repeat potassium at 1, 2, 4 and 6 hours",
+          "mark": "Repeats potassium"
+        }
+      ]
+    },
+    {
+      "id": "pads",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "Be ready if the rate falls further.",
+      "confirm": "Take these",
+      "opts": [
+        {
+          "t": "Pacing pads on in case the rate falls further",
+          "fetch": "trolley",
+          "mark": "Prepares for pacing"
+        }
       ]
     },
     {
@@ -73,10 +297,38 @@
       "kind": "say",
       "to": "phone",
       "label": "Phone",
-      "hint": "Remove potassium: the renal team for urgent dialysis.",
+      "hint": "Get it out: dialysis.",
       "opts": [
-        { "t": "Renal team: K 8.1 with ECG changes in a dialysis patient — urgent dialysis", "mark": "Arranges urgent dialysis to remove potassium", "r": "Renal registrar: Dialysis unit in 45 minutes. Keep him monitored." },
-        { "t": "Sodium zirconium cyclosilicate 10 g TDS as a bridge", "mark": "Potassium binder as a bridge" }
+        {
+          "t": "Renal team: K 8.1 with ECG changes in a dialysis patient — urgent dialysis",
+          "mark": "Arranges urgent dialysis to remove potassium",
+          "r": "Renal registrar: Dialysis unit in 45 minutes. Keep him monitored."
+        }
+      ]
+    },
+    {
+      "id": "bind",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "A binder as a bridge to dialysis.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Sodium zirconium cyclosilicate 10 g three times a day orally",
+          "drug": "Sodium zirconium cyclosilicate",
+          "dose": "10 g three times a day orally",
+          "fetch": "cart",
+          "mark": "Potassium binder as a bridge"
+        },
+        {
+          "t": "Sodium zirconium cyclosilicate 1 g once",
+          "drug": "Sodium zirconium cyclosilicate",
+          "dose": "1 g once",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little: 10 g three times a day for up to 72 hours."
+        }
       ]
     },
     {
@@ -85,24 +337,149 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Does calcium lower serum potassium?", "a": "No — it stabilises the cardiac membrane", "wrong": ["Yes, it lowers potassium by about 1 mmol/L", "Yes, by binding potassium in the gut", "Only calcium chloride lowers potassium"] },
-        { "q": "Main complication of insulin–glucose therapy?", "a": "Hypoglycaemia", "wrong": ["Hyperkalaemia rebound in 5 min", "Hypercalcaemia", "Pulmonary oedema"] },
-        { "q": "Salbutamol dose for hyperkalaemia?", "a": "10–20 mg nebulised", "wrong": ["2.5 mg nebulised, as for asthma", "100 microgram inhaled", "5 mg IV"] },
-        { "q": "Order of ECG changes as potassium rises?", "a": "Peaked T, then flat P and long PR, then broad QRS, then sine wave", "wrong": ["Broad QRS first, then peaked T, then flat P waves", "ST depression, then U waves, then a long QT interval", "Sine wave first, then peaked T as it worsens"] },
-        { "q": "Definitive treatment in an anuric dialysis patient?", "a": "Dialysis", "wrong": ["Furosemide", "Salbutamol alone", "Calcium every hour"] }
+        {
+          "q": "Does calcium lower serum potassium?",
+          "a": "No — it stabilises the cardiac membrane",
+          "wrong": [
+            "Yes, it lowers potassium by about 1 mmol/L",
+            "Yes, by binding potassium in the gut",
+            "Only calcium chloride lowers potassium"
+          ]
+        },
+        {
+          "q": "Main complication of insulin–glucose therapy?",
+          "a": "Hypoglycaemia",
+          "wrong": [
+            "Hyperkalaemia rebound in 5 min",
+            "Hypercalcaemia",
+            "Pulmonary oedema"
+          ]
+        },
+        {
+          "q": "Salbutamol dose for hyperkalaemia?",
+          "a": "10–20 mg nebulised",
+          "wrong": [
+            "2.5 mg nebulised, as for asthma",
+            "100 microgram inhaled",
+            "5 mg IV"
+          ]
+        },
+        {
+          "q": "Order of ECG changes as potassium rises?",
+          "a": "Peaked T, then flat P and long PR, then broad QRS, then sine wave",
+          "wrong": [
+            "Broad QRS first, then peaked T, then flat P waves",
+            "ST depression, then U waves, then a long QT interval",
+            "Sine wave first, then peaked T as it worsens"
+          ]
+        },
+        {
+          "q": "Definitive treatment in an anuric dialysis patient?",
+          "a": "Dialysis",
+          "wrong": [
+            "Furosemide",
+            "Salbutamol alone",
+            "Calcium every hour"
+          ]
+        }
       ]
     }
   ],
   "rules": [
-    { "id": "ecg-first", "first": ["ecg"], "then": ["remove"], "fail": "You arranged dialysis before protecting the heart.", "ok": "Heart protected before arranging removal." }
+    {
+      "id": "ecg-first",
+      "first": [
+        "ecg"
+      ],
+      "then": [
+        "remove"
+      ],
+      "fail": "Referred before reading the ECG.",
+      "ok": "ECG read first."
+    },
+    {
+      "id": "calcium-first",
+      "first": [
+        "calcium"
+      ],
+      "then": [
+        "shift"
+      ],
+      "fail": "Shifted potassium before protecting the heart.",
+      "ok": "Calcium first, then shift."
+    }
   ],
-  "badge": { "name": "K-O", "emoji": "🍌", "flavor": "Protect, shift, remove, monitor. Never insulin without glucose." },
+  "badge": {
+    "name": "K-O",
+    "emoji": "🍌",
+    "flavor": "Protect, shift, remove, monitor. Never insulin without glucose."
+  },
   "cards": [
-    { "q": "IV calcium for hyperkalaemia with ECG changes (UKKA 2023)?", "options": ["Calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL", "Calcium gluconate 10% 10 mL or calcium chloride 10% 30 mL", "Calcium gluconate 10% 1 mL/kg up to 5 mL", "Oral calcium carbonate 1 g three times daily"], "why": "Repeat if the ECG does not improve in 5–10 minutes.", "source": "UK Kidney Association 2023" },
-    { "q": "Insulin–glucose regimen (UKKA 2023)?", "options": ["10 units soluble insulin with 25 g glucose", "50 units soluble insulin without glucose", "10 units soluble insulin with 5 g glucose", "1 unit/kg soluble insulin with 50 g glucose"], "why": "Monitor glucose for 6 hours.", "source": "UK Kidney Association 2023" },
-    { "q": "Earliest ECG sign of hyperkalaemia?", "options": ["Tall peaked T waves", "A sine-wave pattern", "Broad QRS complexes", "Prominent U waves"], "why": "Then P flattening, PR prolongation, QRS widening.", "source": "ECG basics" },
-    { "q": "Salbutamol in hyperkalaemia is…", "options": ["An adjunct to insulin–glucose", "First-line on its own, before calcium", "Contraindicated in hyperkalaemia", "Only effective given intravenously"], "why": "10–20 mg nebulised.", "source": "UK Kidney Association 2023" },
-    { "q": "Sodium bicarbonate in hyperkalaemia is…", "options": ["Not routine; consider with acidosis", "First-line for every patient with K over 6.5", "Contraindicated in all cases", "Given before calcium to protect the heart"], "why": "Limited evidence for potassium lowering.", "source": "UK Kidney Association 2023" },
-    { "q": "How long does IV calcium protect the heart?", "options": ["About 30–60 minutes", "About 4–6 hours, like insulin", "About 24 hours", "Until the potassium is normal"], "why": "Shift and remove potassium meanwhile.", "source": "UK Kidney Association 2023" }
+    {
+      "q": "IV calcium for hyperkalaemia with ECG changes (UKKA 2023)?",
+      "options": [
+        "Calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL",
+        "Calcium gluconate 10% 10 mL or calcium chloride 10% 30 mL",
+        "Calcium gluconate 10% 1 mL/kg up to 5 mL",
+        "Oral calcium carbonate 1 g three times daily"
+      ],
+      "why": "Repeat if the ECG does not improve in 5–10 minutes.",
+      "source": "UK Kidney Association 2023"
+    },
+    {
+      "q": "Insulin–glucose regimen (UKKA 2023)?",
+      "options": [
+        "10 units soluble insulin with 25 g glucose",
+        "50 units soluble insulin without glucose",
+        "10 units soluble insulin with 5 g glucose",
+        "1 unit/kg soluble insulin with 50 g glucose"
+      ],
+      "why": "Monitor glucose for 6 hours.",
+      "source": "UK Kidney Association 2023"
+    },
+    {
+      "q": "Earliest ECG sign of hyperkalaemia?",
+      "options": [
+        "Tall peaked T waves",
+        "A sine-wave pattern",
+        "Broad QRS complexes",
+        "Prominent U waves"
+      ],
+      "why": "Then P flattening, PR prolongation, QRS widening.",
+      "source": "ECG basics"
+    },
+    {
+      "q": "Salbutamol in hyperkalaemia is…",
+      "options": [
+        "An adjunct to insulin–glucose",
+        "First-line on its own, before calcium",
+        "Contraindicated in hyperkalaemia",
+        "Only effective given intravenously"
+      ],
+      "why": "10–20 mg nebulised.",
+      "source": "UK Kidney Association 2023"
+    },
+    {
+      "q": "Sodium bicarbonate in hyperkalaemia is…",
+      "options": [
+        "Not routine; consider with acidosis",
+        "First-line for every patient with K over 6.5",
+        "Contraindicated in all cases",
+        "Given before calcium to protect the heart"
+      ],
+      "why": "Limited evidence for potassium lowering.",
+      "source": "UK Kidney Association 2023"
+    },
+    {
+      "q": "How long does IV calcium protect the heart?",
+      "options": [
+        "About 30–60 minutes",
+        "About 4–6 hours, like insulin",
+        "About 24 hours",
+        "Until the potassium is normal"
+      ],
+      "why": "Shift and remove potassium meanwhile.",
+      "source": "UK Kidney Association 2023"
+    }
   ]
 }

@@ -48,7 +48,11 @@ function play(pack: Pack, problems: string[]) {
     }
     const good = (action.options ?? []).filter((o) => !o.isTrap)
     if (action.kind === 'kit' || (action.kind === 'menu' && menuIsMulti(action))) {
-      s().confirmOptions(pack, id, good.map((o) => o.id))
+      // One at a time, as a candidate would: each is delivered (and the case moves on) before the next.
+      for (const o of good) {
+        s().confirmOptions(pack, id, [o.id])
+        drain(pack)
+      }
     } else if (action.kind === 'dialogue' || action.kind === 'viva') {
       for (const o of bestPerTurn(action)) {
         s().pickOption(pack, id, o.id)

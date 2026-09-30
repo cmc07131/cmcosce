@@ -5,6 +5,7 @@ import { CordProcedure } from './cord/CordProcedure'
 import { ExamBench } from './exam/ExamBench'
 import { IgelProcedure } from './igel/IgelProcedure'
 import { Ventilator } from './vent/Ventilator'
+import { Defib } from './defib/Defib'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -52,6 +53,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <ExamBench job={job} onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'defib') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <Defib job={job} onDone={onDone} />
       </BattleFrame>
     )
   }
