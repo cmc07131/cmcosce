@@ -5,17 +5,91 @@
   "type": "psych",
   "time": 420,
   "stem": "Resus side room. A 60-year-old man was found lying on the street and brought in. He is now shouting, throwing a chair, and threatening staff. He smells of alcohol and has a graze on his forehead. Security and two nurses are nearby. Manage him.",
+  "phases": [
+    {
+      "title": "De-escalate",
+      "goal": "Safety first; calm, and his name.",
+      "steps": [
+        "deescalate"
+      ]
+    },
+    {
+      "title": "Medical causes",
+      "goal": "What could be causing this?",
+      "steps": [
+        "causes"
+      ]
+    },
+    {
+      "title": "Treat",
+      "goal": "The glucose; sedation only if needed, at the right dose.",
+      "steps": [
+        "treat"
+      ]
+    },
+    {
+      "title": "After he settles",
+      "goal": "Observations, examination, documentation.",
+      "steps": [
+        "after"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "'Excited delirium syndrome'. It is no longer an accepted diagnosis (ACEP withdrew support in 2023). Call it hyperactive delirium with severe agitation, and look for and treat the cause."},
-    {"tag": "differs", "text": "The 'geographic tongue sign' in your notes has no basis as a sign of this condition; leave it out."}
+    {
+      "tag": "outdated",
+      "text": "'Excited delirium syndrome'. It is no longer an accepted diagnosis (ACEP withdrew support in 2023). Call it hyperactive delirium with severe agitation, and look for and treat the cause."
+    },
+    {
+      "tag": "differs",
+      "text": "The 'geographic tongue sign' in your notes has no basis as a sign of this condition; leave it out."
+    }
   ],
   "notes": "Checked against NICE NG10 (Violence and aggression: short-term management, 2015), the HA restraint policy, and ACEP (2023) on agitation.\n\nStep up in order: de-escalation (calm, space, one person talking, exits, listen, choices, reality orientation), then oral medication offered, then rapid tranquillisation (IM lorazepam; or IM haloperidol with promethazine; or IM olanzapine — NICE; HK EDs also use IM midazolam), with physical restraint only as needed to give it, the least restrictive, proportionate, for the shortest time, never prone for long, with a doctor present, and regular observations (every 15 minutes: pulse, BP, SpO2, respiratory rate, consciousness, circulation of limbs). ECG before haloperidol when possible (QT).\n\nThink of the medical causes: hypoglycaemia, hypoxia, head injury (a graze in a drunk man is a head injury until proved otherwise), sepsis, drug withdrawal, intoxication. Once sedated: glucose, examine, CT head as indicated.\n\n'Excited delirium syndrome' in your notes is no longer an accepted diagnosis (ACEP withdrew support in 2023); describe it as hyperactive delirium with severe agitation and treat the cause. The 'geographic tongue sign' in your notes has no basis. Your de-escalation list matches.",
   "cast": [
-    { "id": "patient", "name": "Mr Kong", "role": "elderly", "inBed": false },
-    { "id": "nurse", "name": "Nurse Sin", "role": "nurse" },
-    { "id": "guard", "name": "Security", "role": "security" }
+    {
+      "id": "patient",
+      "name": "Mr Kong",
+      "role": "elderly",
+      "inBed": false
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Sin",
+      "role": "nurse"
+    },
+    {
+      "id": "guard",
+      "name": "Security",
+      "role": "security"
+    }
   ],
-  "vitals": { "hr": 118, "sbp": 168, "dbp": 96, "spo2": 95, "rr": 22, "glucose": 2.6, "rhythm": "sinus-tachy", "effects": [{ "scene": "glucose", "set": { "glucose": 7.8, "hr": 96 } }, { "scene": "sedated", "add": { "hr": -10, "sbp": -20 }, "overS": 120 }] },
+  "vitals": {
+    "hr": 118,
+    "sbp": 168,
+    "dbp": 96,
+    "spo2": 95,
+    "rr": 22,
+    "glucose": 2.6,
+    "rhythm": "sinus-tachy",
+    "effects": [
+      {
+        "scene": "glucose",
+        "set": {
+          "glucose": 7.8,
+          "hr": 96
+        }
+      },
+      {
+        "scene": "sedated",
+        "add": {
+          "hr": -10,
+          "sbp": -20
+        },
+        "overS": 120
+      }
+    ]
+  },
   "steps": [
     {
       "id": "deescalate",
@@ -26,17 +100,45 @@
       "mood": 9,
       "turns": [
         {
-          "line": "GET AWAY FROM ME! Where am I? You've kidnapped me!", "lz": "走開呀！呢度係邊度？你哋綁架我！",
+          "line": "GET AWAY FROM ME! Where am I? You've kidnapped me!",
+          "lz": "走開呀！呢度係邊度？你哋綁架我！",
           "opts": [
-            { "t": "[From a safe distance, door behind me, calm voice] Sir, I'm Dr Chan. You're in the hospital. You're safe. What's your name?", "tz": "（企喺安全距離，背後係門口，語氣平靜）先生，我係陳醫生。你而家喺醫院，你好安全。你叫咩名呀？", "rz": "……江。點解我會喺醫院？", "r": "…Kong. Why am I in hospital?", "mood": -3, "mark": "Keeps a safe distance, introduces self, orientates calmly" },
-            { "t": "[Walks up close] Sit down NOW!", "tz": "（行埋去好近）即刻坐低！", "rz": "（揮拳）", "r": "[Swings a fist]", "mood": 1 }
+            {
+              "t": "[From a safe distance, door behind me, calm voice] Sir, I'm Dr Chan. You're in the hospital. You're safe. What's your name?",
+              "tz": "（企喺安全距離，背後係門口，語氣平靜）先生，我係陳醫生。你而家喺醫院，你好安全。你叫咩名呀？",
+              "rz": "……江。點解我會喺醫院？",
+              "r": "…Kong. Why am I in hospital?",
+              "mood": -3,
+              "mark": "Keeps a safe distance, introduces self, orientates calmly"
+            },
+            {
+              "t": "[Walks up close] Sit down NOW!",
+              "tz": "（行埋去好近）即刻坐低！",
+              "rz": "（揮拳）",
+              "r": "[Swings a fist]",
+              "mood": 1
+            }
           ]
         },
         {
-          "line": "…Kong. Why am I in hospital?", "lz": "……江。點解我會喺醫院？",
+          "line": "…Kong. Why am I in hospital?",
+          "lz": "……江。點解我會喺醫院？",
           "opts": [
-            { "t": "You were found lying on the street and you've hurt your head. I'd like to help. Would you sit down and let us check your sugar with a small finger prick?", "tz": "有人發現你瞓咗喺街，你撞傷咗個頭。我想幫你。你坐低，俾我哋篤少少手指驗吓血糖，好唔好？", "rz": "……我個頭好痛。好……好啦。", "r": "…My head hurts. OK… fine.", "mood": -3, "mark": "Offers a clear choice and a reason" },
-            { "t": "Because you're drunk.", "tz": "因為你飲醉咗。", "rz": "我冇醉呀！", "r": "I'm NOT drunk!", "mood": 2 }
+            {
+              "t": "You were found lying on the street and you've hurt your head. I'd like to help. Would you sit down and let us check your sugar with a small finger prick?",
+              "tz": "有人發現你瞓咗喺街，你撞傷咗個頭。我想幫你。你坐低，俾我哋篤少少手指驗吓血糖，好唔好？",
+              "rz": "……我個頭好痛。好……好啦。",
+              "r": "…My head hurts. OK… fine.",
+              "mood": -3,
+              "mark": "Offers a clear choice and a reason"
+            },
+            {
+              "t": "Because you're drunk.",
+              "tz": "因為你飲醉咗。",
+              "rz": "我冇醉呀！",
+              "r": "I'm NOT drunk!",
+              "mood": 2
+            }
           ]
         }
       ]
@@ -49,9 +151,21 @@
       "hint": "Glucose, oxygen, head injury, infection, drugs.",
       "groups": {
         "Bedside": [
-          { "t": "Capillary glucose", "r": "2.6 mmol/L.", "mark": "Checks glucose early" },
-          { "t": "SpO2 and temperature", "r": "95%, 36.9 °C." },
-          { "t": "12-lead ECG", "r": "Sinus tachycardia, QTc 440 ms.", "img": "ecg:sinus-tachy", "mark": "ECG before antipsychotic" }
+          {
+            "t": "Capillary glucose",
+            "r": "2.6 mmol/L.",
+            "mark": "Checks glucose early"
+          },
+          {
+            "t": "SpO2 and temperature",
+            "r": "95%, 36.9 °C."
+          },
+          {
+            "t": "12-lead ECG",
+            "r": "Sinus tachycardia, QTc 440 ms.",
+            "img": "ecg:sinus-tachy",
+            "mark": "ECG before antipsychotic"
+          }
         ]
       }
     },
@@ -60,12 +174,51 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Treat hypoglycaemia; if still dangerous, rapid tranquillisation.",
+      "hint": "Treat the low glucose; rapid tranquillisation only if still dangerous.",
       "confirm": "Give",
       "opts": [
-        { "t": "IV 10% glucose (or oral if he'll drink), then thiamine", "fetch": "cart", "need": true, "scene": "glucose", "mark": "Treats hypoglycaemia (with thiamine in alcohol use)" },
-        { "t": "If still dangerous: IM lorazepam 1–2 mg (or midazolam) with minimum restraint", "fetch": "cart", "need": true, "scene": "sedated", "mark": "Rapid tranquillisation if needed, with minimal restraint" },
-        { "t": "IM haloperidol 10 mg alone", "fetch": "cart", "trap": true, "r": "NICE: combine with promethazine to reduce dystonia, and check the ECG first." }
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "glucose",
+          "mark": "Treats hypoglycaemia (with thiamine in alcohol use)",
+          "t": "Glucose 10% 150–200 mL IV (then thiamine)",
+          "drug": "Glucose 10%",
+          "dose": "150–200 mL IV (then thiamine)"
+        },
+        {
+          "t": "Glucose 10% 20 mL IV",
+          "drug": "Glucose 10%",
+          "dose": "20 mL IV",
+          "fetch": "cart",
+          "trap": true,
+          "r": "Too little to correct hypoglycaemia: 150–200 mL of 10%."
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "sedated",
+          "mark": "Rapid tranquillisation if needed, with minimal restraint",
+          "t": "Lorazepam 1–2 mg IM, minimum restraint",
+          "drug": "Lorazepam",
+          "dose": "1–2 mg IM, minimum restraint"
+        },
+        {
+          "t": "Lorazepam 10 mg IM",
+          "drug": "Lorazepam",
+          "dose": "10 mg IM",
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "Far too much: 1–2 mg IM, repeated if needed."
+        },
+        {
+          "fetch": "cart",
+          "trap": true,
+          "r": "NICE: combine with promethazine to reduce dystonia, and check the ECG first.",
+          "t": "Haloperidol 10 mg IM alone",
+          "drug": "Haloperidol",
+          "dose": "10 mg IM alone"
+        }
       ]
     },
     {
@@ -75,10 +228,23 @@
       "label": "After he settles",
       "hint": "Observations every 15 min, head injury assessment, document, debrief.",
       "opts": [
-        { "t": "Observations every 15 minutes: pulse, BP, SpO2, RR, GCS, limb circulation", "mark": "Monitoring after tranquillisation" },
-        { "t": "Full examination and CT head: head injury in an intoxicated man", "mark": "Assesses the head injury" },
-        { "t": "Document the incident, restraint time and reasons; staff debrief", "mark": "Documentation and debrief" },
-        { "t": "Keep him prone and restrained until morning", "trap": "critical", "r": "Prolonged prone restraint risks positional asphyxia; release as soon as safe." }
+        {
+          "t": "Observations every 15 minutes: pulse, BP, SpO2, RR, GCS, limb circulation",
+          "mark": "Monitoring after tranquillisation"
+        },
+        {
+          "t": "Full examination and CT head: head injury in an intoxicated man",
+          "mark": "Assesses the head injury"
+        },
+        {
+          "t": "Document the incident, restraint time and reasons; staff debrief",
+          "mark": "Documentation and debrief"
+        },
+        {
+          "t": "Keep him prone and restrained until morning",
+          "trap": "critical",
+          "r": "Prolonged prone restraint risks positional asphyxia; release as soon as safe."
+        }
       ]
     },
     {
@@ -87,21 +253,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Order of escalation in violence?", "a": "De-escalate, oral drugs, then IM; restrain if needed", "wrong": ["Restraint first, then oral medication", "IM medication first, then talk once he is calm and safe", "Call the police first, then de-escalate"] },
-        { "q": "Reversible cause here?", "a": "Hypoglycaemia", "wrong": ["Hyperkalaemia", "Anaemia", "Gout"] },
-        { "q": "Why give thiamine to a malnourished alcohol user?", "a": "To prevent Wernicke's encephalopathy", "wrong": ["To lower the blood glucose", "To sedate him", "To treat the intoxication"] },
-        { "q": "Observation frequency after rapid tranquillisation?", "a": "At least every 15 minutes for the first hour", "wrong": ["Every 4 hours, once he is settled on the ward", "Only at nursing handover, every 8 hours or so", "Not needed while asleep"] },
-        { "q": "Danger of prone restraint?", "a": "Positional asphyxia", "wrong": ["Hypoglycaemia", "Hypertension only", "Pressure sores only"] }
+        {
+          "q": "Order of escalation in violence?",
+          "a": "De-escalate, oral drugs, then IM; restrain if needed",
+          "wrong": [
+            "Restraint first, then oral medication",
+            "IM medication first, then talk once he is calm and safe",
+            "Call the police first, then de-escalate"
+          ]
+        },
+        {
+          "q": "Reversible cause here?",
+          "a": "Hypoglycaemia",
+          "wrong": [
+            "Hyperkalaemia",
+            "Anaemia",
+            "Gout"
+          ]
+        },
+        {
+          "q": "Why give thiamine to a malnourished alcohol user?",
+          "a": "To prevent Wernicke's encephalopathy",
+          "wrong": [
+            "To lower the blood glucose",
+            "To sedate him",
+            "To treat the intoxication"
+          ]
+        },
+        {
+          "q": "Observation frequency after rapid tranquillisation?",
+          "a": "At least every 15 minutes for the first hour",
+          "wrong": [
+            "Every 4 hours, once he is settled on the ward",
+            "Only at nursing handover, every 8 hours or so",
+            "Not needed while asleep"
+          ]
+        },
+        {
+          "q": "Danger of prone restraint?",
+          "a": "Positional asphyxia",
+          "wrong": [
+            "Hypoglycaemia",
+            "Hypertension only",
+            "Pressure sores only"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "De-escalator", "emoji": "🕊", "flavor": "Distance, voice, choices. Sugar before sedation." },
+  "badge": {
+    "name": "De-escalator",
+    "emoji": "🕊",
+    "flavor": "Distance, voice, choices. Sugar before sedation."
+  },
   "cards": [
-    { "q": "First step with a violent patient?", "options": ["Ensure safety and try de-escalation", "Physical restraint by security, then assessment", "IM sedation straight away, before he escalates", "Leave the room and call police"], "why": "Least restrictive first.", "source": "NICE NG10" },
-    { "q": "Medical cause of aggression to check immediately?", "options": ["Hypoglycaemia", "Hyperlipidaemia", "Hypertension", "Hyperuricaemia"], "why": "Also hypoxia, head injury, sepsis.", "source": "NICE NG10" },
-    { "q": "Rapid tranquillisation per NICE NG10 in adults?", "options": ["IM lorazepam or IM haloperidol + promethazine", "IV haloperidol 10 mg as a rapid bolus, repeated", "IM diazepam 10 mg", "Oral clonazepam only"], "why": "Check ECG when possible.", "source": "NICE NG10" },
-    { "q": "After tranquillisation, monitor…", "options": ["Pulse, BP, SpO2, RR, consciousness every 15 min", "Temperature only, every 4 hours", "Only when he wakes up", "Blood glucose once, then hourly"], "why": "Over-sedation and airway risk.", "source": "NICE NG10" },
-    { "q": "'Excited delirium syndrome' is now…", "options": ["Not an accepted diagnosis (ACEP 2023)", "A DSM-5 psychiatric diagnosis", "Best treated by prolonged prone restraint", "Caused by cold exposure"], "why": "Use 'hyperactive delirium with severe agitation'.", "source": "ACEP 2023" },
-    { "q": "An intoxicated agitated man with a forehead graze needs…", "options": ["Assessment for head injury", "Let him sleep it off in the ED, observed hourly", "Discharge once calm", "Police custody overnight to sober up"], "why": "Intoxication masks intracranial injury.", "source": "NICE NG232" }
+    {
+      "q": "First step with a violent patient?",
+      "options": [
+        "Ensure safety and try de-escalation",
+        "Physical restraint by security, then assessment",
+        "IM sedation straight away, before he escalates",
+        "Leave the room and call police"
+      ],
+      "why": "Least restrictive first.",
+      "source": "NICE NG10"
+    },
+    {
+      "q": "Medical cause of aggression to check immediately?",
+      "options": [
+        "Hypoglycaemia",
+        "Hyperlipidaemia",
+        "Hypertension",
+        "Hyperuricaemia"
+      ],
+      "why": "Also hypoxia, head injury, sepsis.",
+      "source": "NICE NG10"
+    },
+    {
+      "q": "Rapid tranquillisation per NICE NG10 in adults?",
+      "options": [
+        "IM lorazepam or IM haloperidol + promethazine",
+        "IV haloperidol 10 mg as a rapid bolus, repeated",
+        "IM diazepam 10 mg",
+        "Oral clonazepam only"
+      ],
+      "why": "Check ECG when possible.",
+      "source": "NICE NG10"
+    },
+    {
+      "q": "After tranquillisation, monitor…",
+      "options": [
+        "Pulse, BP, SpO2, RR, consciousness every 15 min",
+        "Temperature only, every 4 hours",
+        "Only when he wakes up",
+        "Blood glucose once, then hourly"
+      ],
+      "why": "Over-sedation and airway risk.",
+      "source": "NICE NG10"
+    },
+    {
+      "q": "'Excited delirium syndrome' is now…",
+      "options": [
+        "Not an accepted diagnosis (ACEP 2023)",
+        "A DSM-5 psychiatric diagnosis",
+        "Best treated by prolonged prone restraint",
+        "Caused by cold exposure"
+      ],
+      "why": "Use 'hyperactive delirium with severe agitation'.",
+      "source": "ACEP 2023"
+    },
+    {
+      "q": "An intoxicated agitated man with a forehead graze needs…",
+      "options": [
+        "Assessment for head injury",
+        "Let him sleep it off in the ED, observed hourly",
+        "Discharge once calm",
+        "Police custody overnight to sober up"
+      ],
+      "why": "Intoxication masks intracranial injury.",
+      "source": "NICE NG232"
+    }
   ]
 }

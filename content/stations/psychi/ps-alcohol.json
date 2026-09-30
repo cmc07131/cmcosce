@@ -5,13 +5,102 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 3. Mr Tse, 48, drinks a bottle of spirits a day and stopped 30 hours ago because he ran out of money. He is sweaty and shaking and says he can see spiders on the wall. HR 124, BP 164/98, temperature 37.9 °C. Assess and manage him.",
+  "phases": [
+    {
+      "title": "Assess",
+      "goal": "Monitoring, the drinking history, and examine him yourself: Wernicke's?",
+      "steps": [
+        "monitoring",
+        "history",
+        "exam"
+      ]
+    },
+    {
+      "title": "Treat",
+      "goal": "Thiamine before glucose, and a benzodiazepine, from the cart. Promptly.",
+      "steps": [
+        "treat"
+      ]
+    },
+    {
+      "title": "Work-up",
+      "goal": "Bloods and imaging for what alcohol hides.",
+      "steps": [
+        "work-up"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "seizure",
+      "after": "monitored",
+      "delayS": 90,
+      "unless": "benzo",
+      "scene": "withdrawal-fit",
+      "say": "He has a generalised withdrawal seizure.",
+      "shakeUntil": "benzo",
+      "treatedBy": "benzo",
+      "untreated": "He had a withdrawal seizure and was never given a benzodiazepine."
+    }
+  ],
   "review": [
-    {"tag": "differs", "text": "Thiamine dose. Your notes give thiamine 100 mg IV. For suspected Wernicke's encephalopathy, UK practice uses high-dose parenteral thiamine (Pabrinex, 2 pairs three times a day for 3–5 days). 'Thiamine before glucose' is sensible, but never delay treating hypoglycaemia for it."}
+    {
+      "tag": "differs",
+      "text": "Thiamine dose. Your notes give thiamine 100 mg IV. For suspected Wernicke's encephalopathy, UK practice uses high-dose parenteral thiamine (Pabrinex, 2 pairs three times a day for 3–5 days). 'Thiamine before glucose' is sensible, but never delay treating hypoglycaemia for it."
+    }
   ],
   "notes": "Checked against NICE CG100 (Alcohol-use disorders: physical complications, 2010, updated 2017), NICE CG115, and the CIWA-Ar.\n\nWithdrawal: tremor, sweating, anxiety, tachycardia (6–24 h); seizures (12–48 h); delirium tremens (48–72 h): confusion, hallucinations (often visual or tactile), autonomic instability; mortality without treatment. Treat with a benzodiazepine (chlordiazepoxide or diazepam) by a symptom-triggered regimen guided by CIWA-Ar, or a fixed-dose reducing regimen; lorazepam if liver failure. Delirium tremens: IV/oral benzodiazepine titrated; haloperidol only as an adjunct; phenobarbital in refractory cases.\n\nWernicke's encephalopathy (confusion, ataxia, ophthalmoplegia — the triad is incomplete in most): give parenteral thiamine (Pabrinex) before glucose where possible, high dose (e.g. 2 pairs of Pabrinex three times daily for 3–5 days if suspected; prophylactic 1 pair daily if at risk). Check glucose, electrolytes (magnesium, phosphate, potassium), and look for head injury, sepsis, GI bleeding and pancreatitis.\n\nYour notes: thiamine 100 mg IV — UK practice uses Pabrinex doses higher than that for suspected Wernicke's; 'always thiamine before glucose' is sensible but never delay treating hypoglycaemia. CAGE and CIWA-Ar descriptions match.",
-  "cast": [{ "id": "patient", "name": "Mr Tse", "role": "man", "inBed": true }, { "id": "nurse", "name": "Nurse Law", "role": "nurse" }],
-  "vitals": { "hr": 124, "sbp": 164, "dbp": 98, "spo2": 97, "rr": 20, "temp": 37.9, "glucose": 4.4, "rhythm": "sinus-tachy", "effects": [{ "scene": "benzo", "add": { "hr": -20, "sbp": -18, "dbp": -10 }, "overS": 120 }] },
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Mr Tse",
+      "role": "man",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Law",
+      "role": "nurse"
+    }
+  ],
+  "vitals": {
+    "hr": 124,
+    "sbp": 164,
+    "dbp": 98,
+    "spo2": 97,
+    "rr": 20,
+    "temp": 37.9,
+    "glucose": 4.4,
+    "rhythm": "sinus-tachy",
+    "effects": [
+      {
+        "scene": "benzo",
+        "add": {
+          "hr": -20,
+          "sbp": -18,
+          "dbp": -10
+        },
+        "overS": 120
+      }
+    ],
+    "showWhen": "monitored"
+  },
   "steps": [
+    {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Ask the nurse to put the patient on the monitor.",
+      "opts": [
+        {
+          "t": "Put him on the monitor: ECG, NIBP and SpO2.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        }
+      ]
+    },
     {
       "id": "history",
       "kind": "history",
@@ -20,13 +109,42 @@
       "hint": "Quantity, last drink, previous withdrawal, seizures, DTs, other substances, injuries, symptoms.",
       "groups": {
         "Drinking": [
-          { "t": "How much do you drink, and when was your last drink?", "tz": "你平時飲幾多酒？上一次飲係幾時？", "rz": "飲咗好多年，一日一支威士忌。上次飲係琴日朝早。", "r": "A bottle of whisky a day for years. Last drink yesterday morning.", "mark": "Quantifies alcohol and time of last drink" },
-          { "t": "Have you had fits or DTs when stopping before?", "tz": "以前戒酒嗰陣有冇抽過筋，或者出現震顫性譫妄？", "rz": "上次戒嗰陣抽過一次筋。", "r": "I had a fit last time I stopped.", "mark": "Asks about previous withdrawal seizures or DTs" },
-          { "t": "Any other drugs, sleeping tablets?", "tz": "有冇用其他藥物，或者食安眠藥？", "rz": "冇。", "r": "No." }
+          {
+            "t": "How much do you drink, and when was your last drink?",
+            "tz": "你平時飲幾多酒？上一次飲係幾時？",
+            "rz": "飲咗好多年，一日一支威士忌。上次飲係琴日朝早。",
+            "r": "A bottle of whisky a day for years. Last drink yesterday morning.",
+            "mark": "Quantifies alcohol and time of last drink"
+          },
+          {
+            "t": "Have you had fits or DTs when stopping before?",
+            "tz": "以前戒酒嗰陣有冇抽過筋，或者出現震顫性譫妄？",
+            "rz": "上次戒嗰陣抽過一次筋。",
+            "r": "I had a fit last time I stopped.",
+            "mark": "Asks about previous withdrawal seizures or DTs"
+          },
+          {
+            "t": "Any other drugs, sleeping tablets?",
+            "tz": "有冇用其他藥物，或者食安眠藥？",
+            "rz": "冇。",
+            "r": "No."
+          }
         ],
         "Now": [
-          { "t": "What are you seeing?", "tz": "你而家見到啲咩？", "rz": "有好多蜘蛛喺牆上面，仲爬上我隻手。", "r": "Spiders crawling on the wall and on my arms.", "mark": "Elicits visual and tactile hallucinations" },
-          { "t": "Any vomiting blood, belly pain, falls or head injury?", "tz": "有冇嘔血、肚痛？有冇跌親或者撞到個頭？", "rz": "冇嘔血。上個禮拜跌親，撞到個頭。", "r": "No blood. Fell last week, hit my head.", "mark": "Screens for GI bleeding and head injury" }
+          {
+            "t": "What are you seeing?",
+            "tz": "你而家見到啲咩？",
+            "rz": "有好多蜘蛛喺牆上面，仲爬上我隻手。",
+            "r": "Spiders crawling on the wall and on my arms.",
+            "mark": "Elicits visual and tactile hallucinations"
+          },
+          {
+            "t": "Any vomiting blood, belly pain, falls or head injury?",
+            "tz": "有冇嘔血、肚痛？有冇跌親或者撞到個頭？",
+            "rz": "冇嘔血。上個禮拜跌親，撞到個頭。",
+            "r": "No blood. Fell last week, hit my head.",
+            "mark": "Screens for GI bleeding and head injury"
+          }
         ]
       }
     },
@@ -38,12 +156,33 @@
       "hint": "Orientation, eyes, gait, tremor, liver, head.",
       "groups": {
         "Neuro": [
-          { "t": "Orientation and attention", "r": "Disorientated to date and place, inattentive.", "mark": "Assesses orientation (delirium)" },
-          { "t": "Eye movements", "r": "Horizontal nystagmus, weak lateral gaze.", "mark": "Looks for ophthalmoplegia (Wernicke's)" },
-          { "t": "Gait", "r": "Wide-based and unsteady.", "mark": "Assesses ataxia" },
-          { "t": "Tremor", "r": "Coarse tremor of outstretched hands." }
+          {
+            "t": "Orientation and attention",
+            "r": "Disorientated to date and place, inattentive.",
+            "mark": "Assesses orientation (delirium)"
+          },
+          {
+            "t": "Eye movements",
+            "r": "Horizontal nystagmus, weak lateral gaze.",
+            "mark": "Looks for ophthalmoplegia (Wernicke's)"
+          },
+          {
+            "t": "Gait",
+            "r": "Wide-based and unsteady.",
+            "mark": "Assesses ataxia"
+          },
+          {
+            "t": "Tremor",
+            "r": "Coarse tremor of outstretched hands."
+          }
         ],
-        "General": [{ "t": "Liver, stigmata, head", "r": "Spider naevi, liver edge 3 cm. Old bruise on the occiput." }]
+        "General": [
+          {
+            "t": "Liver, stigmata, head",
+            "r": "Spider naevi, liver edge 3 cm. Old bruise on the occiput.",
+            "anim": "abdomen"
+          }
+        ]
       }
     },
     {
@@ -51,15 +190,69 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Parenteral thiamine now; benzodiazepine; check glucose, electrolytes.",
+      "hint": "Thiamine before glucose; a benzodiazepine titrated to CIWA-Ar.",
       "confirm": "Give",
       "opts": [
-        { "t": "IV Pabrinex (high-dose thiamine) now, before glucose-containing fluids", "fetch": "cart", "need": true, "mark": "High-dose parenteral thiamine for suspected Wernicke's" },
-        { "t": "Diazepam (or chlordiazepoxide), titrated to CIWA-Ar", "fetch": "cart", "need": true, "scene": "benzo", "mark": "Benzodiazepine titrated to symptoms" },
-        { "t": "Bloods: glucose, Mg, phosphate, K, LFT, FBC, lipase", "need": true, "mark": "Checks glucose and electrolytes" },
-        { "t": "CT head (head injury in an alcohol-dependent patient)", "need": true, "mark": "Imaging for head injury" },
-        { "t": "Haloperidol alone for the hallucinations", "fetch": "cart", "trap": true, "r": "Antipsychotics lower the seizure threshold and don't treat withdrawal; benzodiazepines first." },
-        { "t": "Oral thiamine 100 mg and discharge", "fetch": "cart", "trap": "critical", "r": "He has delirium tremens and possible Wernicke's: admit, parenteral thiamine, benzodiazepines." }
+        {
+          "fetch": "cart",
+          "need": true,
+          "mark": "High-dose parenteral thiamine for suspected Wernicke's",
+          "t": "Pabrinex (high-dose thiamine) 2 pairs IV three times a day",
+          "drug": "Pabrinex (high-dose thiamine)",
+          "dose": "2 pairs IV three times a day"
+        },
+        {
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "He has delirium tremens and possible Wernicke's: admit, parenteral thiamine, benzodiazepines.",
+          "t": "Thiamine (oral) 100 mg, and discharge",
+          "drug": "Thiamine (oral)",
+          "dose": "100 mg, and discharge"
+        },
+        {
+          "fetch": "cart",
+          "need": true,
+          "scene": "benzo",
+          "mark": "Benzodiazepine titrated to symptoms",
+          "t": "Diazepam 10–20 mg orally, titrated to CIWA-Ar",
+          "drug": "Diazepam",
+          "dose": "10–20 mg orally, titrated to CIWA-Ar"
+        },
+        {
+          "t": "Diazepam 100 mg IV bolus",
+          "drug": "Diazepam",
+          "dose": "100 mg IV bolus",
+          "fetch": "cart",
+          "trap": "critical",
+          "r": "A huge IV bolus can stop him breathing: titrate 10–20 mg to CIWA-Ar."
+        },
+        {
+          "fetch": "cart",
+          "trap": true,
+          "r": "Antipsychotics lower the seizure threshold and don't treat withdrawal; benzodiazepines first.",
+          "t": "Haloperidol 5 mg IM alone for the hallucinations",
+          "drug": "Haloperidol",
+          "dose": "5 mg IM alone for the hallucinations"
+        }
+      ]
+    },
+    {
+      "id": "work-up",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "Bloods and imaging.",
+      "opts": [
+        {
+          "t": "Bloods: glucose, Mg, phosphate, K, LFT, FBC, lipase",
+          "need": true,
+          "mark": "Checks glucose and electrolytes"
+        },
+        {
+          "t": "CT head (head injury in an alcohol-dependent patient)",
+          "need": true,
+          "mark": "Imaging for head injury"
+        }
       ]
     },
     {
@@ -68,21 +261,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Wernicke's triad?", "a": "Confusion, ataxia, ophthalmoplegia", "wrong": ["Fever, rash and headache", "Tremor, sweating and anxiety", "Jaundice, ascites, encephalopathy"] },
-        { "q": "Delirium tremens typically begins…", "a": "48–72 hours after the last drink", "wrong": ["1–2 hours after the last drink, as the level falls", "2 weeks after the last drink", "Within 6 hours, while the alcohol level is still high"] },
-        { "q": "First-line drug for alcohol withdrawal?", "a": "A benzodiazepine", "wrong": ["Haloperidol IM", "Phenytoin loading", "Disulfiram (Antabuse)"] },
-        { "q": "Why thiamine before glucose?", "a": "Glucose can precipitate Wernicke's", "wrong": ["Glucose inactivates thiamine in the drip", "Thiamine lowers the blood glucose", "Thiamine is absorbed better when fasting"] },
-        { "q": "Benzodiazepine preferred in liver failure?", "a": "Lorazepam", "wrong": ["Diazepam", "Chlordiazepoxide", "Clonazepam"] }
+        {
+          "q": "Wernicke's triad?",
+          "a": "Confusion, ataxia, ophthalmoplegia",
+          "wrong": [
+            "Fever, rash and headache",
+            "Tremor, sweating and anxiety",
+            "Jaundice, ascites, encephalopathy"
+          ]
+        },
+        {
+          "q": "Delirium tremens typically begins…",
+          "a": "48–72 hours after the last drink",
+          "wrong": [
+            "1–2 hours after the last drink, as the level falls",
+            "2 weeks after the last drink",
+            "Within 6 hours, while the alcohol level is still high"
+          ]
+        },
+        {
+          "q": "First-line drug for alcohol withdrawal?",
+          "a": "A benzodiazepine",
+          "wrong": [
+            "Haloperidol IM",
+            "Phenytoin loading",
+            "Disulfiram (Antabuse)"
+          ]
+        },
+        {
+          "q": "Why thiamine before glucose?",
+          "a": "Glucose can precipitate Wernicke's",
+          "wrong": [
+            "Glucose inactivates thiamine in the drip",
+            "Thiamine lowers the blood glucose",
+            "Thiamine is absorbed better when fasting"
+          ]
+        },
+        {
+          "q": "Benzodiazepine preferred in liver failure?",
+          "a": "Lorazepam",
+          "wrong": [
+            "Diazepam",
+            "Chlordiazepoxide",
+            "Clonazepam"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Dry Spell", "emoji": "🍶", "flavor": "Pabrinex before sugar, benzos by CIWA, look for the head injury." },
+  "badge": {
+    "name": "Dry Spell",
+    "emoji": "🍶",
+    "flavor": "Pabrinex before sugar, benzos by CIWA, look for the head injury."
+  },
   "cards": [
-    { "q": "Alcohol withdrawal seizures usually occur…", "options": ["12–48 hours after the last drink", "Within 1 hour of the last drink, while still drunk", "2–3 weeks after stopping, as a late effect", "Only while still intoxicated"], "why": "DTs follow at 48–72 h.", "source": "NICE CG100" },
-    { "q": "CIWA-Ar is used to…", "options": ["Guide symptom-triggered benzodiazepines", "Diagnose cirrhosis from clinical signs", "Screen for alcohol dependence in primary care", "Estimate the blood alcohol concentration"], "why": "Scores withdrawal severity.", "source": "CIWA-Ar" },
-    { "q": "CAGE is a screen for…", "options": ["Alcohol dependence", "Delirium", "Wernicke's encephalopathy", "Alcoholic liver failure"], "why": "2 or more positive answers is significant.", "source": "CAGE questionnaire" },
-    { "q": "Suspected Wernicke's in the UK is treated with…", "options": ["High-dose IV Pabrinex", "Oral thiamine 100 mg once", "Glucose first", "Vitamin C"], "why": "Parenteral, high-dose, for several days.", "source": "NICE CG100 / BNF" },
-    { "q": "Hallucinations in DTs are typically…", "options": ["Visual and tactile", "Olfactory hallucinations only, such as burning", "Commanding voices only", "Absent"], "why": "Insects or animals are classic.", "source": "Psychiatry texts" },
-    { "q": "Electrolyte often low in alcohol dependence?", "options": ["Magnesium", "Sodium always high", "Calcium always high", "Chloride high"], "why": "Also phosphate and potassium.", "source": "NICE CG100" }
+    {
+      "q": "Alcohol withdrawal seizures usually occur…",
+      "options": [
+        "12–48 hours after the last drink",
+        "Within 1 hour of the last drink, while still drunk",
+        "2–3 weeks after stopping, as a late effect",
+        "Only while still intoxicated"
+      ],
+      "why": "DTs follow at 48–72 h.",
+      "source": "NICE CG100"
+    },
+    {
+      "q": "CIWA-Ar is used to…",
+      "options": [
+        "Guide symptom-triggered benzodiazepines",
+        "Diagnose cirrhosis from clinical signs",
+        "Screen for alcohol dependence in primary care",
+        "Estimate the blood alcohol concentration"
+      ],
+      "why": "Scores withdrawal severity.",
+      "source": "CIWA-Ar"
+    },
+    {
+      "q": "CAGE is a screen for…",
+      "options": [
+        "Alcohol dependence",
+        "Delirium",
+        "Wernicke's encephalopathy",
+        "Alcoholic liver failure"
+      ],
+      "why": "2 or more positive answers is significant.",
+      "source": "CAGE questionnaire"
+    },
+    {
+      "q": "Suspected Wernicke's in the UK is treated with…",
+      "options": [
+        "High-dose IV Pabrinex",
+        "Oral thiamine 100 mg once",
+        "Glucose first",
+        "Vitamin C"
+      ],
+      "why": "Parenteral, high-dose, for several days.",
+      "source": "NICE CG100 / BNF"
+    },
+    {
+      "q": "Hallucinations in DTs are typically…",
+      "options": [
+        "Visual and tactile",
+        "Olfactory hallucinations only, such as burning",
+        "Commanding voices only",
+        "Absent"
+      ],
+      "why": "Insects or animals are classic.",
+      "source": "Psychiatry texts"
+    },
+    {
+      "q": "Electrolyte often low in alcohol dependence?",
+      "options": [
+        "Magnesium",
+        "Sodium always high",
+        "Calcium always high",
+        "Chloride high"
+      ],
+      "why": "Also phosphate and potassium.",
+      "source": "NICE CG100"
+    }
   ]
 }

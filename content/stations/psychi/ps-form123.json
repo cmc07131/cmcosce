@@ -5,14 +5,59 @@
   "type": "psych",
   "time": 420,
   "stem": "Hong Kong A&E. Mr Lee, 35, was brought in by police after standing in traffic shouting that the government is controlling his thoughts through the traffic lights. He refuses to stay. His mother is here. Assess him and explain how you would arrange admission if needed.",
+  "phases": [
+    {
+      "title": "Safety",
+      "goal": "Is everyone safe?",
+      "steps": [
+        "safety"
+      ]
+    },
+    {
+      "title": "Assess",
+      "goal": "His beliefs, risk and insight.",
+      "steps": [
+        "assess"
+      ]
+    },
+    {
+      "title": "His mother",
+      "goal": "Collateral history and her role.",
+      "steps": [
+        "mother"
+      ]
+    },
+    {
+      "title": "The process",
+      "goal": "Forms 1, 2 and 3, in order.",
+      "steps": [
+        "procedure"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "unverified", "text": "The station follows your notes on MHO Forms 1–3, which look accurate, but I could not check the full current Ordinance text. Confirm the form numbers and time limits against your hospital's MHO guide."}
+    {
+      "tag": "unverified",
+      "text": "The station follows your notes on MHO Forms 1–3, which look accurate, but I could not check the full current Ordinance text. Confirm the form numbers and time limits against your hospital's MHO guide."
+    }
   ],
   "notes": "Checked against the Mental Health Ordinance (Cap 136, Hong Kong), Part III (Sections 30–36) and the Hospital Authority procedures.\n\nVoluntary admission is preferred when he consents and has capacity (age 16 or over; under 16 via parent or guardian). Compulsory admission for observation (Section 31): the patient is suffering from mental disorder of a nature or degree warranting detention in a mental hospital for observation (with or without treatment) for a limited period, and it is necessary for his own health or safety or the protection of others.\n\nForms: Form 1 — application by a relative, a registered medical practitioner, or a Social Welfare Department officer, who has seen the patient within the previous 14 days; Form 2 — written medical opinion by a registered medical practitioner who examined the patient within the previous 7 days; Form 3 — order by a District Judge or Magistrate, authorising detention for up to 7 days. The patient is told of his right to see the District Judge/Magistrate. Extension (Section 32, Form 4): two medical practitioners, up to 21 days. Section 36 for longer detention.\n\nThis follows your notes, which appear accurate; confirm current form numbering and practice with your hospital's MHO guide, as I could not check the full current Ordinance text.",
   "cast": [
-    { "id": "patient", "name": "Mr Lee", "role": "man" },
-    { "id": "mother", "name": "Mother", "role": "woman" },
-    { "id": "police", "name": "Police officer", "role": "police" }
+    {
+      "id": "patient",
+      "name": "Mr Lee",
+      "role": "man"
+    },
+    {
+      "id": "mother",
+      "name": "Mother",
+      "role": "woman"
+    },
+    {
+      "id": "police",
+      "name": "Police officer",
+      "role": "police"
+    }
   ],
   "steps": [
     {
@@ -22,8 +67,15 @@
       "label": "Talk to the officer",
       "hint": "Safety, what happened, weapons, drugs.",
       "opts": [
-        { "t": "What happened? Any weapons, violence or drugs?", "mark": "Takes collateral history and checks safety", "r": "Officer: Standing in the road shouting at cars for an hour. No weapon. Pushed an officer once. We found no drugs." },
-        { "t": "Please stay nearby while I talk to him", "mark": "Arranges safety support" }
+        {
+          "t": "What happened? Any weapons, violence or drugs?",
+          "mark": "Takes collateral history and checks safety",
+          "r": "Officer: Standing in the road shouting at cars for an hour. No weapon. Pushed an officer once. We found no drugs."
+        },
+        {
+          "t": "Please stay nearby while I talk to him",
+          "mark": "Arranges safety support"
+        }
       ]
     },
     {
@@ -34,14 +86,46 @@
       "hint": "Rapport, psychotic symptoms, risk to self and others, drugs, insight, physical causes.",
       "groups": {
         "Beliefs": [
-          { "t": "Can you tell me what was happening in the road?", "tz": "你可唔可以話我知，頭先喺馬路發生咩事？", "rz": "啲交通燈一轉色就傳訊息入我個腦。我要截停佢哋。", "r": "The lights change to send messages into my head. I have to stop them.", "mark": "Elicits delusional beliefs" },
-          { "t": "Do you hear voices when no one is there?", "tz": "冇人喺度嗰陣，你會唔會聽到有人同你講嘢？", "rz": "佢哋叫我行出馬路，擋住啲訊號。", "r": "They tell me to go into the road and block the signals.", "mark": "Elicits command hallucinations" }
+          {
+            "t": "Can you tell me what was happening in the road?",
+            "tz": "你可唔可以話我知，頭先喺馬路發生咩事？",
+            "rz": "啲交通燈一轉色就傳訊息入我個腦。我要截停佢哋。",
+            "r": "The lights change to send messages into my head. I have to stop them.",
+            "mark": "Elicits delusional beliefs"
+          },
+          {
+            "t": "Do you hear voices when no one is there?",
+            "tz": "冇人喺度嗰陣，你會唔會聽到有人同你講嘢？",
+            "rz": "佢哋叫我行出馬路，擋住啲訊號。",
+            "r": "They tell me to go into the road and block the signals.",
+            "mark": "Elicits command hallucinations"
+          }
         ],
         "Risk": [
-          { "t": "Have you thought of harming yourself or anyone else?", "tz": "你有冇諗過傷害自己或者其他人？", "rz": "如果啲聲叫我做，我就要做。", "r": "If the voices tell me to, I'll do what I have to.", "mark": "Assesses risk to self and others" },
-          { "t": "Drugs or alcohol? Medical problems?", "tz": "有冇用藥物或者飲酒？身體有冇其他病？", "rz": "冇用藥物。幾個月前我停咗食藥。", "r": "No drugs. I stopped my medicine months ago.", "mark": "Asks substances and treatment history" }
+          {
+            "t": "Have you thought of harming yourself or anyone else?",
+            "tz": "你有冇諗過傷害自己或者其他人？",
+            "rz": "如果啲聲叫我做，我就要做。",
+            "r": "If the voices tell me to, I'll do what I have to.",
+            "mark": "Assesses risk to self and others"
+          },
+          {
+            "t": "Drugs or alcohol? Medical problems?",
+            "tz": "有冇用藥物或者飲酒？身體有冇其他病？",
+            "rz": "冇用藥物。幾個月前我停咗食藥。",
+            "r": "No drugs. I stopped my medicine months ago.",
+            "mark": "Asks substances and treatment history"
+          }
         ],
-        "Insight": [{ "t": "Do you think you might be unwell? Would you stay in hospital?", "tz": "你覺唔覺得自己可能唔舒服？肯唔肯留喺醫院？", "rz": "我冇病。我要走。", "r": "I'm not sick. I'm leaving.", "mark": "Assesses insight and willingness" }]
+        "Insight": [
+          {
+            "t": "Do you think you might be unwell? Would you stay in hospital?",
+            "tz": "你覺唔覺得自己可能唔舒服？肯唔肯留喺醫院？",
+            "rz": "我冇病。我要走。",
+            "r": "I'm not sick. I'm leaving.",
+            "mark": "Assesses insight and willingness"
+          }
+        ]
       }
     },
     {
@@ -52,24 +136,61 @@
       "hint": "Background, previous illness, treatment, recent change.",
       "groups": {
         "Collateral": [
-          { "t": "Has he been unwell like this before?", "tz": "佢以前有冇試過咁？", "rz": "佢有精神分裂，入過兩次青山醫院。四個月前佢停咗打針。", "r": "He has schizophrenia. Admitted to Castle Peak twice. He stopped his injections 4 months ago.", "mark": "Takes collateral history" },
-          { "t": "Would you be willing to be the applicant?", "tz": "你願唔願意做申請人，申請佢入院？", "rz": "如果可以保護到佢，我願意。", "r": "If it keeps him safe, yes.", "mark": "Identifies a relative as applicant" }
+          {
+            "t": "Has he been unwell like this before?",
+            "tz": "佢以前有冇試過咁？",
+            "rz": "佢有精神分裂，入過兩次青山醫院。四個月前佢停咗打針。",
+            "r": "He has schizophrenia. Admitted to Castle Peak twice. He stopped his injections 4 months ago.",
+            "mark": "Takes collateral history"
+          },
+          {
+            "t": "Would you be willing to be the applicant?",
+            "tz": "你願唔願意做申請人，申請佢入院？",
+            "rz": "如果可以保護到佢，我願意。",
+            "r": "If it keeps him safe, yes.",
+            "mark": "Identifies a relative as applicant"
+          }
         ]
       }
     },
     {
       "id": "procedure",
       "kind": "steps",
-      "to": "examiner", "ask": "Thank you. Please explain the admission process to me.",
+      "to": "examiner",
+      "ask": "Thank you. Please explain the admission process to me.",
       "label": "Explain the process",
       "hint": "Try voluntary first; grounds; Forms 1, 2, 3; rights.",
       "opts": [
-        { "t": "Offer voluntary admission first", "n": 1, "mark": "Offers voluntary admission first" },
-        { "t": "Grounds: mental disorder warranting detention for observation, necessary for his health or safety or others' protection", "n": 2, "mark": "States the Section 31 grounds" },
-        { "t": "Form 1: application by his mother (relative), who has seen him within 14 days", "n": 3, "mark": "Form 1 applicant and time limit" },
-        { "t": "Form 2: medical opinion by a registered medical practitioner who examined him within 7 days", "n": 4, "mark": "Form 2 medical opinion and time limit" },
-        { "t": "Form 3: order by a District Judge or Magistrate for up to 7 days; tell him of his right to see the judge", "n": 5, "mark": "Form 3 order, 7-day limit, and his rights" },
-        { "t": "Detain him under the Ordinance on my own signature for 21 days", "trap": "critical", "r": "A single doctor cannot detain for 21 days; the process needs the application, a medical opinion and a judicial order." }
+        {
+          "t": "Offer voluntary admission first",
+          "n": 1,
+          "mark": "Offers voluntary admission first"
+        },
+        {
+          "t": "Grounds: mental disorder warranting detention for observation, necessary for his health or safety or others' protection",
+          "n": 2,
+          "mark": "States the Section 31 grounds"
+        },
+        {
+          "t": "Form 1: application by his mother (relative), who has seen him within 14 days",
+          "n": 3,
+          "mark": "Form 1 applicant and time limit"
+        },
+        {
+          "t": "Form 2: medical opinion by a registered medical practitioner who examined him within 7 days",
+          "n": 4,
+          "mark": "Form 2 medical opinion and time limit"
+        },
+        {
+          "t": "Form 3: order by a District Judge or Magistrate for up to 7 days; tell him of his right to see the judge",
+          "n": 5,
+          "mark": "Form 3 order, 7-day limit, and his rights"
+        },
+        {
+          "t": "Detain him under the Ordinance on my own signature for 21 days",
+          "trap": "critical",
+          "r": "A single doctor cannot detain for 21 days; the process needs the application, a medical opinion and a judicial order."
+        }
       ]
     },
     {
@@ -78,21 +199,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Who can sign Form 1?", "a": "A relative, a registered medical practitioner, or an SWD officer", "wrong": ["Only the police", "Only a psychiatrist", "The patient"] },
-        { "q": "Maximum detention under a Section 31 order?", "a": "7 days", "wrong": ["21 days", "48 hours", "6 months"] },
-        { "q": "Extension beyond 7 days (Section 32)?", "a": "Form 4, two doctors, up to 21 days", "wrong": ["Automatic after 7 days", "A police order for 14 days", "One doctor's certificate, for up to 1 year"] },
-        { "q": "Which is part of the Section 31 grounds?", "a": "Detention is needed for his or others' safety", "wrong": ["He refused his medication once last week", "He is intoxicated with alcohol tonight", "He is homeless and has no one to care for him"] },
-        { "q": "Command hallucinations are…", "a": "Voices instructing the person to act", "wrong": ["Voices commenting on the person's actions", "Visual hallucinations of people", "Smells that no one else in the room can detect"] }
+        {
+          "q": "Who can sign Form 1?",
+          "a": "A relative, a registered medical practitioner, or an SWD officer",
+          "wrong": [
+            "Only the police",
+            "Only a psychiatrist",
+            "The patient"
+          ]
+        },
+        {
+          "q": "Maximum detention under a Section 31 order?",
+          "a": "7 days",
+          "wrong": [
+            "21 days",
+            "48 hours",
+            "6 months"
+          ]
+        },
+        {
+          "q": "Extension beyond 7 days (Section 32)?",
+          "a": "Form 4, two doctors, up to 21 days",
+          "wrong": [
+            "Automatic after 7 days",
+            "A police order for 14 days",
+            "One doctor's certificate, for up to 1 year"
+          ]
+        },
+        {
+          "q": "Which is part of the Section 31 grounds?",
+          "a": "Detention is needed for his or others' safety",
+          "wrong": [
+            "He refused his medication once last week",
+            "He is intoxicated with alcohol tonight",
+            "He is homeless and has no one to care for him"
+          ]
+        },
+        {
+          "q": "Command hallucinations are…",
+          "a": "Voices instructing the person to act",
+          "wrong": [
+            "Voices commenting on the person's actions",
+            "Visual hallucinations of people",
+            "Smells that no one else in the room can detect"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Cap 136", "emoji": "⚖", "flavor": "Voluntary first. Grounds, Form 1, Form 2, Form 3, rights." },
+  "badge": {
+    "name": "Cap 136",
+    "emoji": "⚖",
+    "flavor": "Voluntary first. Grounds, Form 1, Form 2, Form 3, rights."
+  },
   "cards": [
-    { "q": "MHO Section 31 order lasts up to…", "options": ["7 days", "21 days", "72 hours", "1 year"], "why": "For observation.", "source": "HK Cap 136" },
-    { "q": "Form 1 applicant must have seen the patient within…", "options": ["14 days", "7 days", "24 hours", "30 days"], "why": "Form 2 doctor: examined within 7 days.", "source": "HK Cap 136" },
-    { "q": "Form 3 is signed by…", "options": ["A District Judge or Magistrate", "A consultant psychiatrist", "A senior police officer", "Two registered medical practitioners"], "why": "Judicial authorisation.", "source": "HK Cap 136" },
-    { "q": "First option for a capable patient needing admission?", "options": ["Voluntary admission", "Compulsory admission", "Police custody", "Discharge with follow-up"], "why": "Least restrictive.", "source": "HK Cap 136" },
-    { "q": "Schizophrenia first-rank symptom?", "options": ["Thought broadcasting or insertion", "Persistent low mood with early waking", "Panic attacks", "Visual hallucinations of small insects"], "why": "Schneiderian symptoms.", "source": "Psychiatry texts" },
-    { "q": "The patient under Section 31 has the right to…", "options": ["See the District Judge or Magistrate", "Leave the hospital whenever he wishes after 24 hours", "Refuse to sign the forms", "Choose any hospital he likes"], "why": "He must be informed of his rights.", "source": "HK Cap 136" }
+    {
+      "q": "MHO Section 31 order lasts up to…",
+      "options": [
+        "7 days",
+        "21 days",
+        "72 hours",
+        "1 year"
+      ],
+      "why": "For observation.",
+      "source": "HK Cap 136"
+    },
+    {
+      "q": "Form 1 applicant must have seen the patient within…",
+      "options": [
+        "14 days",
+        "7 days",
+        "24 hours",
+        "30 days"
+      ],
+      "why": "Form 2 doctor: examined within 7 days.",
+      "source": "HK Cap 136"
+    },
+    {
+      "q": "Form 3 is signed by…",
+      "options": [
+        "A District Judge or Magistrate",
+        "A consultant psychiatrist",
+        "A senior police officer",
+        "Two registered medical practitioners"
+      ],
+      "why": "Judicial authorisation.",
+      "source": "HK Cap 136"
+    },
+    {
+      "q": "First option for a capable patient needing admission?",
+      "options": [
+        "Voluntary admission",
+        "Compulsory admission",
+        "Police custody",
+        "Discharge with follow-up"
+      ],
+      "why": "Least restrictive.",
+      "source": "HK Cap 136"
+    },
+    {
+      "q": "Schizophrenia first-rank symptom?",
+      "options": [
+        "Thought broadcasting or insertion",
+        "Persistent low mood with early waking",
+        "Panic attacks",
+        "Visual hallucinations of small insects"
+      ],
+      "why": "Schneiderian symptoms.",
+      "source": "Psychiatry texts"
+    },
+    {
+      "q": "The patient under Section 31 has the right to…",
+      "options": [
+        "See the District Judge or Magistrate",
+        "Leave the hospital whenever he wishes after 24 hours",
+        "Refuse to sign the forms",
+        "Choose any hospital he likes"
+      ],
+      "why": "He must be informed of his rights.",
+      "source": "HK Cap 136"
+    }
   ]
 }

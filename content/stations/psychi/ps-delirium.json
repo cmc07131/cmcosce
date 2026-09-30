@@ -5,11 +5,43 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 14. Madam Ho, 82, was brought in by her daughter: over two days she has become muddled, seeing cats that are not there, awake at night. Assess her cognition and decide what is going on.",
+  "phases": [
+    {
+      "title": "Collateral history",
+      "goal": "His baseline, the timeline, and the causes.",
+      "steps": [
+        "collateral"
+      ]
+    },
+    {
+      "title": "4AT and examination",
+      "goal": "Test attention and look for the cause.",
+      "steps": [
+        "fourat"
+      ]
+    },
+    {
+      "title": "Plan",
+      "goal": "Treat the causes; manage the delirium.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against NICE CG103 (Delirium, updated 2023), the 4AT (www.the4AT.com), the MMSE (copyright PAR; use a licensed form) and the Abbreviated Mental Test.\n\nDelirium: acute onset, fluctuating course, inattention, and altered awareness or disorganised thinking (CAM). The 4AT (Alertness, AMT4, Attention — months backwards, Acute change or fluctuating course) is quick and needs no training; 4 or more suggests delirium. Hypoactive delirium is common and missed. Look for causes (PINCHME: Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment; plus retention, hypoxia, electrolytes, alcohol withdrawal, stroke). Treat the cause; reorientation, glasses and hearing aids, family presence, sleep; avoid restraint; antipsychotics (low-dose haloperidol) only for severe distress or danger, and not in Parkinson's or Lewy body dementia.\n\nDementia: insidious, progressive, attention preserved early; MMSE/MoCA help but are not diagnostic in acute illness. Your notes on delirium versus dementia, CAM and the MMSE match; the MMSE normal cut-off depends on education (your notes: 25 or more with over 7 years of schooling). Visual hallucinations suggest delirium, drugs or Lewy body disease.",
   "cast": [
-    { "id": "patient", "name": "Madam Ho", "role": "elderly", "inBed": true },
-    { "id": "daughter", "name": "Daughter", "role": "woman" }
+    {
+      "id": "patient",
+      "name": "Madam Ho",
+      "role": "elderly",
+      "inBed": true
+    },
+    {
+      "id": "daughter",
+      "name": "Daughter",
+      "role": "woman"
+    }
   ],
   "steps": [
     {
@@ -20,13 +52,43 @@
       "hint": "Baseline, onset, fluctuation, new medicines, infection symptoms, falls, alcohol.",
       "groups": {
         "Baseline": [
-          { "t": "What is she normally like?", "tz": "佢平時係點樣嘅？", "rz": "好精㗎！同我住，自己去買餸，仲會打麻雀。", "r": "Sharp! Lives with me, does the shopping, plays mahjong.", "mark": "Establishes baseline cognition and function" },
-          { "t": "When did this start? Is it the same all day?", "tz": "幾時開始變成咁？成日都一樣嘅？", "rz": "兩日前突然間變嘅。夜晚差啲；有啲時候又差唔多正常。", "r": "Two days ago, suddenly. Worse at night; some hours she's almost normal.", "mark": "Establishes acute onset and fluctuation" }
+          {
+            "t": "What is she normally like?",
+            "tz": "佢平時係點樣嘅？",
+            "rz": "好精㗎！同我住，自己去買餸，仲會打麻雀。",
+            "r": "Sharp! Lives with me, does the shopping, plays mahjong.",
+            "mark": "Establishes baseline cognition and function"
+          },
+          {
+            "t": "When did this start? Is it the same all day?",
+            "tz": "幾時開始變成咁？成日都一樣嘅？",
+            "rz": "兩日前突然間變嘅。夜晚差啲；有啲時候又差唔多正常。",
+            "r": "Two days ago, suddenly. Worse at night; some hours she's almost normal.",
+            "mark": "Establishes acute onset and fluctuation"
+          }
         ],
         "Causes": [
-          { "t": "Any fever, cough, passing urine more, pain, constipation?", "tz": "佢有冇發燒、咳、多咗去廁所、邊度痛，或者便秘？", "rz": "成日去廁所，小便好臭。四日冇大過便。", "r": "Going to the toilet a lot, smells strong. Hasn't opened her bowels for 4 days.", "mark": "Screens for infection and constipation" },
-          { "t": "Any new medicines?", "tz": "最近有冇食新嘅藥？", "rz": "家庭醫生上個禮拜開咗隻膀胱藥（oxybutynin）俾佢。", "r": "The GP started a bladder tablet (oxybutynin) last week.", "mark": "Asks about new medicines (anticholinergic)" },
-          { "t": "Falls or head injury? Alcohol?", "tz": "有冇跌親或者撞到頭？有冇飲酒？", "rz": "冇跌過。唔飲酒。", "r": "No falls. No alcohol.", "mark": "Asks about falls and alcohol" }
+          {
+            "t": "Any fever, cough, passing urine more, pain, constipation?",
+            "tz": "佢有冇發燒、咳、多咗去廁所、邊度痛，或者便秘？",
+            "rz": "成日去廁所，小便好臭。四日冇大過便。",
+            "r": "Going to the toilet a lot, smells strong. Hasn't opened her bowels for 4 days.",
+            "mark": "Screens for infection and constipation"
+          },
+          {
+            "t": "Any new medicines?",
+            "tz": "最近有冇食新嘅藥？",
+            "rz": "家庭醫生上個禮拜開咗隻膀胱藥（oxybutynin）俾佢。",
+            "r": "The GP started a bladder tablet (oxybutynin) last week.",
+            "mark": "Asks about new medicines (anticholinergic)"
+          },
+          {
+            "t": "Falls or head injury? Alcohol?",
+            "tz": "有冇跌親或者撞到頭？有冇飲酒？",
+            "rz": "冇跌過。唔飲酒。",
+            "r": "No falls. No alcohol.",
+            "mark": "Asks about falls and alcohol"
+          }
         ]
       }
     },
@@ -38,30 +100,75 @@
       "hint": "Alertness, AMT4, months backwards, acute change; then examine for causes.",
       "groups": {
         "4AT": [
-          { "t": "Alertness", "r": "Drowsy but rousable to voice — abnormal (4 points).", "mark": "Assesses alertness" },
-          { "t": "AMT4: age, date of birth, place, year", "r": "Knows her birth date only — 2 or more errors (2 points).", "mark": "AMT4" },
-          { "t": "Attention: months of the year backwards", "r": "Stops at October (fewer than 7) (1 point).", "mark": "Tests attention" },
-          { "t": "Acute change or fluctuating course", "r": "Yes, from the daughter (4 points). Total 11: likely delirium.", "mark": "Scores acute change; 4AT total suggests delirium" }
+          {
+            "t": "Alertness",
+            "r": "Drowsy but rousable to voice — abnormal (4 points).",
+            "mark": "Assesses alertness"
+          },
+          {
+            "t": "AMT4: age, date of birth, place, year",
+            "r": "Knows her birth date only — 2 or more errors (2 points).",
+            "mark": "AMT4"
+          },
+          {
+            "t": "Attention: months of the year backwards",
+            "r": "Stops at October (fewer than 7) (1 point).",
+            "mark": "Tests attention"
+          },
+          {
+            "t": "Acute change or fluctuating course",
+            "r": "Yes, from the daughter (4 points). Total 11: likely delirium.",
+            "mark": "Scores acute change; 4AT total suggests delirium"
+          }
         ],
         "Examination": [
-          { "t": "Observations and examine", "r": "Temp 38.1, HR 104. Suprapubic tenderness, palpable bladder. Chest clear. No focal neurology.", "mark": "Examines for causes (retention, infection, focal signs)" },
-          { "t": "Bladder scan", "r": "650 mL residual.", "mark": "Checks for urinary retention" }
+          {
+            "t": "Observations and examine",
+            "r": "Temp 38.1, HR 104. Suprapubic tenderness, palpable bladder. Chest clear. No focal neurology.",
+            "mark": "Examines for causes (retention, infection, focal signs)"
+          },
+          {
+            "t": "Bladder scan",
+            "r": "650 mL residual.",
+            "mark": "Checks for urinary retention"
+          }
         ]
       }
     },
     {
       "id": "plan",
       "kind": "pick",
-      "to": "examiner", "ask": "Thank you. What is your plan?",
+      "to": "examiner",
+      "ask": "Thank you. What is your plan?",
       "label": "Plan",
       "hint": "Treat causes, stop the culprit drug, non-drug measures, avoid sedation.",
       "confirm": "Plan",
       "opts": [
-        { "t": "Catheterise for retention; urine culture; blood cultures and bloods", "need": true, "mark": "Relieves retention and investigates infection" },
-        { "t": "Stop oxybutynin (anticholinergic)", "need": true, "mark": "Stops the anticholinergic" },
-        { "t": "Treat UTI; laxatives; fluids", "need": true, "mark": "Treats infection, constipation, hydration" },
-        { "t": "Reorientation, glasses and hearing aids, daughter present, sleep, avoid moving beds", "need": true, "mark": "Non-drug delirium measures" },
-        { "t": "Haloperidol 5 mg IM to stop the hallucinations", "trap": true, "r": "Antipsychotics only for severe distress or danger, at low dose, after non-drug measures." }
+        {
+          "t": "Catheterise for retention; urine culture; blood cultures and bloods",
+          "need": true,
+          "mark": "Relieves retention and investigates infection"
+        },
+        {
+          "t": "Stop oxybutynin (anticholinergic)",
+          "need": true,
+          "mark": "Stops the anticholinergic"
+        },
+        {
+          "t": "Treat UTI; laxatives; fluids",
+          "need": true,
+          "mark": "Treats infection, constipation, hydration"
+        },
+        {
+          "t": "Reorientation, glasses and hearing aids, daughter present, sleep, avoid moving beds",
+          "need": true,
+          "mark": "Non-drug delirium measures"
+        },
+        {
+          "t": "Haloperidol 5 mg IM to stop the hallucinations",
+          "trap": true,
+          "r": "Antipsychotics only for severe distress or danger, at low dose, after non-drug measures."
+        }
       ]
     },
     {
@@ -70,21 +177,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Key feature separating delirium from dementia?", "a": "Acute onset with fluctuating attention", "wrong": ["Memory loss for recent events, but not remote ones", "Age over 75 years", "Hallucinations in every case"] },
-        { "q": "4AT score suggesting delirium?", "a": "4 or more", "wrong": ["1", "0", "10 or more only"] },
-        { "q": "Which delirium subtype is most often missed?", "a": "Hypoactive", "wrong": ["Hyperactive", "Mixed", "Withdrawal-related"] },
-        { "q": "Drug class that commonly causes delirium in the elderly?", "a": "Anticholinergics", "wrong": ["Proton pump inhibitors", "Statins", "Topical emollients for dry skin"] },
-        { "q": "Antipsychotic to avoid in Lewy body dementia?", "a": "Haloperidol (typical antipsychotics)", "wrong": ["Rivastigmine (cholinesterase inhibitor)", "Donepezil", "Melatonin"] }
+        {
+          "q": "Key feature separating delirium from dementia?",
+          "a": "Acute onset with fluctuating attention",
+          "wrong": [
+            "Memory loss for recent events, but not remote ones",
+            "Age over 75 years",
+            "Hallucinations in every case"
+          ]
+        },
+        {
+          "q": "4AT score suggesting delirium?",
+          "a": "4 or more",
+          "wrong": [
+            "1",
+            "0",
+            "10 or more only"
+          ]
+        },
+        {
+          "q": "Which delirium subtype is most often missed?",
+          "a": "Hypoactive",
+          "wrong": [
+            "Hyperactive",
+            "Mixed",
+            "Withdrawal-related"
+          ]
+        },
+        {
+          "q": "Drug class that commonly causes delirium in the elderly?",
+          "a": "Anticholinergics",
+          "wrong": [
+            "Proton pump inhibitors",
+            "Statins",
+            "Topical emollients for dry skin"
+          ]
+        },
+        {
+          "q": "Antipsychotic to avoid in Lewy body dementia?",
+          "a": "Haloperidol (typical antipsychotics)",
+          "wrong": [
+            "Rivastigmine (cholinesterase inhibitor)",
+            "Donepezil",
+            "Melatonin"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Clear Head", "emoji": "🌫", "flavor": "Acute, fluctuating, inattentive: find the cause, not the sedative." },
+  "badge": {
+    "name": "Clear Head",
+    "emoji": "🌫",
+    "flavor": "Acute, fluctuating, inattentive: find the cause, not the sedative."
+  },
   "cards": [
-    { "q": "4AT stands for…", "options": ["Alertness, AMT4, Attention, Acute change", "Age, Anxiety, Agitation, Amnesia", "Agitation, AMT10, Anxiety, Alcohol history", "Airway, Anaemia, Albumin, Arrhythmia"], "why": "Score ≥4 suggests delirium.", "source": "the4AT.com" },
-    { "q": "PINCHME covers…", "options": ["Causes of delirium", "The signs of an acute stroke (FAST)", "The sepsis six bundle", "Falls risk factors"], "why": "Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment.", "source": "Geriatric teaching" },
-    { "q": "First-line management of delirium?", "options": ["Treat the cause and non-drug measures", "Routine haloperidol", "Restraint", "Benzodiazepines (except alcohol withdrawal)"], "why": "Drugs only for distress or danger.", "source": "NICE CG103" },
-    { "q": "Visual hallucinations in an older person suggest…", "options": ["Delirium, drugs or Lewy body dementia", "Late-onset schizophrenia, most likely of all", "Severe depression with psychotic features", "Normal ageing"], "why": "Look for organic causes.", "source": "Psychiatry texts" },
-    { "q": "MMSE normal cut-off depends on…", "options": ["Education level", "Height and weight", "Blood pressure", "Time of day tested"], "why": "Lower cut-offs for less schooling.", "source": "MMSE norms" },
-    { "q": "Urinary retention can cause…", "options": ["Delirium in older people", "Only pain, never confusion", "Hypoglycaemia from reduced oral intake", "A generalised rash"], "why": "Always check the bladder.", "source": "NICE CG103" }
+    {
+      "q": "4AT stands for…",
+      "options": [
+        "Alertness, AMT4, Attention, Acute change",
+        "Age, Anxiety, Agitation, Amnesia",
+        "Agitation, AMT10, Anxiety, Alcohol history",
+        "Airway, Anaemia, Albumin, Arrhythmia"
+      ],
+      "why": "Score ≥4 suggests delirium.",
+      "source": "the4AT.com"
+    },
+    {
+      "q": "PINCHME covers…",
+      "options": [
+        "Causes of delirium",
+        "The signs of an acute stroke (FAST)",
+        "The sepsis six bundle",
+        "Falls risk factors"
+      ],
+      "why": "Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment.",
+      "source": "Geriatric teaching"
+    },
+    {
+      "q": "First-line management of delirium?",
+      "options": [
+        "Treat the cause and non-drug measures",
+        "Routine haloperidol",
+        "Restraint",
+        "Benzodiazepines (except alcohol withdrawal)"
+      ],
+      "why": "Drugs only for distress or danger.",
+      "source": "NICE CG103"
+    },
+    {
+      "q": "Visual hallucinations in an older person suggest…",
+      "options": [
+        "Delirium, drugs or Lewy body dementia",
+        "Late-onset schizophrenia, most likely of all",
+        "Severe depression with psychotic features",
+        "Normal ageing"
+      ],
+      "why": "Look for organic causes.",
+      "source": "Psychiatry texts"
+    },
+    {
+      "q": "MMSE normal cut-off depends on…",
+      "options": [
+        "Education level",
+        "Height and weight",
+        "Blood pressure",
+        "Time of day tested"
+      ],
+      "why": "Lower cut-offs for less schooling.",
+      "source": "MMSE norms"
+    },
+    {
+      "q": "Urinary retention can cause…",
+      "options": [
+        "Delirium in older people",
+        "Only pain, never confusion",
+        "Hypoglycaemia from reduced oral intake",
+        "A generalised rash"
+      ],
+      "why": "Always check the bladder.",
+      "source": "NICE CG103"
+    }
   ]
 }

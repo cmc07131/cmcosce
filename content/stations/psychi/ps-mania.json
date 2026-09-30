@@ -5,11 +5,42 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 10. Ms Fung, 31, was brought by her husband: she has not slept for 4 nights, spent HK$200,000 on luxury goods, and says she is about to become Chief Executive. Assess her and outline management.",
+  "phases": [
+    {
+      "title": "Collateral history",
+      "goal": "What has changed, the risks, and the triggers.",
+      "steps": [
+        "collateral"
+      ]
+    },
+    {
+      "title": "Mental state",
+      "goal": "Her mental state examination.",
+      "steps": [
+        "mse"
+      ]
+    },
+    {
+      "title": "Plan",
+      "goal": "Safety, causes, treatment and admission.",
+      "steps": [
+        "plan"
+      ]
+    }
+  ],
   "review": [],
   "notes": "Checked against NICE CG185 (Bipolar disorder, 2014, updated 2023) and the ED approach to mania.\n\nMania: elevated or irritable mood, decreased need for sleep, pressured speech, flight of ideas, grandiosity (may be delusional), distractibility, disinhibition, risky behaviour (spending, sex, driving), for at least a week (or any duration if hospitalised). Exclude organic causes: thyrotoxicosis, steroids, stimulants, antidepressants, head injury, delirium, and pregnancy (affects drug choice).\n\nED management: safety, a calm low-stimulus environment, de-escalation; if needed, rapid tranquillisation (oral first: e.g. lorazepam or an antipsychotic; IM options per NICE NG10). Refer to psychiatry; admission (voluntary or under the MHO) for risk. Acute treatment: an antipsychotic (haloperidol, olanzapine, quetiapine or risperidone); stop antidepressants. Lithium and valproate need specialist decisions; valproate must be avoided in women of childbearing potential unless the Pregnancy Prevention Programme is met.\n\nYour notes list 'manic patient' as a topic and have MSE features of mania (pressured speech, flight of ideas, bizarre clothing); nothing conflicts.",
   "cast": [
-    { "id": "patient", "name": "Ms Fung", "role": "woman" },
-    { "id": "husband", "name": "Husband", "role": "man" }
+    {
+      "id": "patient",
+      "name": "Ms Fung",
+      "role": "woman"
+    },
+    {
+      "id": "husband",
+      "name": "Husband",
+      "role": "man"
+    }
   ],
   "steps": [
     {
@@ -20,13 +51,42 @@
       "hint": "Timeline, sleep, spending, risk, past episodes, drugs, medical.",
       "groups": {
         "Change": [
-          { "t": "What has changed, and since when?", "tz": "佢有咩唔同咗？由幾時開始？", "rz": "十日前開始好有精神，講嘢講個不停，四晚差唔多冇瞓過。", "r": "Ten days ago she became very energetic, talking non-stop, barely sleeping for 4 nights.", "mark": "Establishes timeline and sleep" },
-          { "t": "Any risky behaviour?", "tz": "佢有冇做啲好危險嘅事？", "rz": "洗晒我哋啲積蓄。揸車揸到一百五十公里。仲用電郵辭咗職。", "r": "Spent our savings. Drove at 150 km/h. Quit her job by email.", "mark": "Asks about risky behaviour" }
+          {
+            "t": "What has changed, and since when?",
+            "tz": "佢有咩唔同咗？由幾時開始？",
+            "rz": "十日前開始好有精神，講嘢講個不停，四晚差唔多冇瞓過。",
+            "r": "Ten days ago she became very energetic, talking non-stop, barely sleeping for 4 nights.",
+            "mark": "Establishes timeline and sleep"
+          },
+          {
+            "t": "Any risky behaviour?",
+            "tz": "佢有冇做啲好危險嘅事？",
+            "rz": "洗晒我哋啲積蓄。揸車揸到一百五十公里。仲用電郵辭咗職。",
+            "r": "Spent our savings. Drove at 150 km/h. Quit her job by email.",
+            "mark": "Asks about risky behaviour"
+          }
         ],
         "Background": [
-          { "t": "Has she had depression or anything similar before?", "tz": "佢以前有冇試過抑鬱，或者類似情況？", "rz": "兩年前生完個女之後，佢好低落。", "r": "She was very low after our daughter was born two years ago.", "mark": "Asks about previous mood episodes" },
-          { "t": "Medicines, steroids, drugs, alcohol? Could she be pregnant?", "tz": "佢食緊咩藥？有冇食類固醇、用藥物或者飲酒？有冇機會有咗？", "rz": "一個月前家庭醫生開咗抗抑鬱藥俾佢。冇用藥物。我哋冇打算生BB。", "r": "Her GP started an antidepressant a month ago. No drugs. We're not trying for a baby.", "mark": "Asks medications (antidepressant), substances and pregnancy" },
-          { "t": "Thyroid problems or head injury?", "tz": "佢有冇甲狀腺問題，或者撞傷過個頭？", "rz": "冇。", "r": "No." }
+          {
+            "t": "Has she had depression or anything similar before?",
+            "tz": "佢以前有冇試過抑鬱，或者類似情況？",
+            "rz": "兩年前生完個女之後，佢好低落。",
+            "r": "She was very low after our daughter was born two years ago.",
+            "mark": "Asks about previous mood episodes"
+          },
+          {
+            "t": "Medicines, steroids, drugs, alcohol? Could she be pregnant?",
+            "tz": "佢食緊咩藥？有冇食類固醇、用藥物或者飲酒？有冇機會有咗？",
+            "rz": "一個月前家庭醫生開咗抗抑鬱藥俾佢。冇用藥物。我哋冇打算生BB。",
+            "r": "Her GP started an antidepressant a month ago. No drugs. We're not trying for a baby.",
+            "mark": "Asks medications (antidepressant), substances and pregnancy"
+          },
+          {
+            "t": "Thyroid problems or head injury?",
+            "tz": "佢有冇甲狀腺問題，或者撞傷過個頭？",
+            "rz": "冇。",
+            "r": "No."
+          }
         ]
       }
     },
@@ -38,31 +98,80 @@
       "hint": "ASEPTIC, and ask about risk.",
       "groups": {
         "Observe": [
-          { "t": "Appearance and behaviour", "r": "Bright make-up, many rings, restless, standing up, laughing loudly.", "mark": "Describes appearance and behaviour" },
-          { "t": "Speech", "r": "Rapid, loud, hard to interrupt (pressured).", "mark": "Identifies pressured speech" }
+          {
+            "t": "Appearance and behaviour",
+            "r": "Bright make-up, many rings, restless, standing up, laughing loudly.",
+            "mark": "Describes appearance and behaviour"
+          },
+          {
+            "t": "Speech",
+            "r": "Rapid, loud, hard to interrupt (pressured).",
+            "mark": "Identifies pressured speech"
+          }
         ],
         "Ask": [
-          { "t": "How are you feeling?", "r": "Fantastic! Better than ever! I'm going to run Hong Kong!", "mark": "Elevated mood and grandiosity" },
-          { "t": "Thought form", "r": "Jumps from shoes to politics to the stars with rhyming links.", "mark": "Flight of ideas" },
-          { "t": "Any thoughts of harm to yourself or others?", "r": "Why would I? I'm unstoppable. Anyone who blocks me will regret it.", "mark": "Assesses risk" },
-          { "t": "Do you think anything is wrong?", "r": "Nothing! You're jealous.", "mark": "Assesses insight" }
+          {
+            "t": "How are you feeling?",
+            "r": "Fantastic! Better than ever! I'm going to run Hong Kong!",
+            "mark": "Elevated mood and grandiosity"
+          },
+          {
+            "t": "Thought form",
+            "r": "Jumps from shoes to politics to the stars with rhyming links.",
+            "mark": "Flight of ideas"
+          },
+          {
+            "t": "Any thoughts of harm to yourself or others?",
+            "r": "Why would I? I'm unstoppable. Anyone who blocks me will regret it.",
+            "mark": "Assesses risk"
+          },
+          {
+            "t": "Do you think anything is wrong?",
+            "r": "Nothing! You're jealous.",
+            "mark": "Assesses insight"
+          }
         ]
       }
     },
     {
       "id": "plan",
       "kind": "pick",
-      "to": "examiner", "ask": "Thank you. What is your plan?",
+      "to": "examiner",
+      "ask": "Thank you. What is your plan?",
       "label": "Plan",
       "hint": "Organic screen, calm environment, stop the antidepressant, antipsychotic, psychiatry, admission.",
       "confirm": "Plan",
       "opts": [
-        { "t": "Screen for organic causes: TFT, glucose, urine drug screen, pregnancy test, bloods", "need": true, "mark": "Organic screen including TFT, drugs and pregnancy test" },
-        { "t": "Quiet, low-stimulus room; de-escalation", "need": true, "mark": "Low-stimulus environment and de-escalation" },
-        { "t": "Stop the antidepressant", "need": true, "mark": "Stops the antidepressant" },
-        { "t": "Offer an oral antipsychotic (e.g. olanzapine)", "need": true, "mark": "Antipsychotic for acute mania" },
-        { "t": "Urgent psychiatry; admission (voluntary, or MHO if she refuses and risk is high)", "need": true, "mark": "Urgent psychiatry and admission plan" },
-        { "t": "Start sodium valproate in the ED", "trap": true, "r": "Valproate is avoided in women of childbearing potential unless the Pregnancy Prevention Programme applies; leave mood stabilisers to psychiatry." }
+        {
+          "t": "Screen for organic causes: TFT, glucose, urine drug screen, pregnancy test, bloods",
+          "need": true,
+          "mark": "Organic screen including TFT, drugs and pregnancy test"
+        },
+        {
+          "t": "Quiet, low-stimulus room; de-escalation",
+          "need": true,
+          "mark": "Low-stimulus environment and de-escalation"
+        },
+        {
+          "t": "Stop the antidepressant",
+          "need": true,
+          "mark": "Stops the antidepressant"
+        },
+        {
+          "t": "Offer an oral antipsychotic (e.g. olanzapine)",
+          "need": true,
+          "mark": "Antipsychotic for acute mania"
+        },
+        {
+          "t": "Urgent psychiatry; admission (voluntary, or MHO if she refuses and risk is high)",
+          "need": true,
+          "mark": "Urgent psychiatry and admission plan"
+        },
+        {
+          "t": "Start sodium valproate in the ED",
+          "trap": true,
+          "r": "Valproate is avoided in women of childbearing potential unless the Pregnancy Prevention Programme applies; leave mood stabilisers to psychiatry."
+        }
       ]
     },
     {
@@ -71,21 +180,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Minimum duration of symptoms for a manic episode?", "a": "1 week (or any duration if hospitalised)", "wrong": ["1 day of elevated mood", "4 days, the same as hypomania, if impaired", "6 months of symptoms"] },
-        { "q": "Drug that can trigger mania?", "a": "Antidepressants", "wrong": ["Paracetamol", "Proton pump inhibitors", "Amoxicillin"] },
-        { "q": "Hypomania differs from mania by…", "a": "No psychosis and less functional impairment", "wrong": ["Lower mood throughout the episode", "A longer duration, at least 2 weeks of symptoms", "It occurs only in men"] },
-        { "q": "Why avoid valproate in women of childbearing age?", "a": "Teratogenicity and neurodevelopmental harm", "wrong": ["It causes excess hair growth", "It is ineffective in women", "It can trigger mania"] },
-        { "q": "Organic cause of mania?", "a": "Hyperthyroidism", "wrong": ["Iron-deficiency anaemia", "Hypothyroidism", "Osteoarthritis of the knees"] }
+        {
+          "q": "Minimum duration of symptoms for a manic episode?",
+          "a": "1 week (or any duration if hospitalised)",
+          "wrong": [
+            "1 day of elevated mood",
+            "4 days, the same as hypomania, if impaired",
+            "6 months of symptoms"
+          ]
+        },
+        {
+          "q": "Drug that can trigger mania?",
+          "a": "Antidepressants",
+          "wrong": [
+            "Paracetamol",
+            "Proton pump inhibitors",
+            "Amoxicillin"
+          ]
+        },
+        {
+          "q": "Hypomania differs from mania by…",
+          "a": "No psychosis and less functional impairment",
+          "wrong": [
+            "Lower mood throughout the episode",
+            "A longer duration, at least 2 weeks of symptoms",
+            "It occurs only in men"
+          ]
+        },
+        {
+          "q": "Why avoid valproate in women of childbearing age?",
+          "a": "Teratogenicity and neurodevelopmental harm",
+          "wrong": [
+            "It causes excess hair growth",
+            "It is ineffective in women",
+            "It can trigger mania"
+          ]
+        },
+        {
+          "q": "Organic cause of mania?",
+          "a": "Hyperthyroidism",
+          "wrong": [
+            "Iron-deficiency anaemia",
+            "Hypothyroidism",
+            "Osteoarthritis of the knees"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "Speed Limit", "emoji": "🎢", "flavor": "No sleep, big plans, fast talk: screen organics, calm room, antipsychotic." },
+  "badge": {
+    "name": "Speed Limit",
+    "emoji": "🎢",
+    "flavor": "No sleep, big plans, fast talk: screen organics, calm room, antipsychotic."
+  },
   "cards": [
-    { "q": "Key feature of mania?", "options": ["Decreased need for sleep", "Early morning waking with low mood", "Anhedonia", "Psychomotor retardation and slowed speech"], "why": "Plus grandiosity, pressured speech, risk-taking.", "source": "ICD-11 / DSM-5" },
-    { "q": "First-line acute treatment for mania (NICE)?", "options": ["An antipsychotic", "An SSRI such as fluoxetine", "A benzodiazepine alone long-term", "ECT first"], "why": "Haloperidol, olanzapine, quetiapine or risperidone.", "source": "NICE CG185" },
-    { "q": "What to do with an antidepressant in mania?", "options": ["Stop it", "Double it", "Continue unchanged", "Switch to another SSRI"], "why": "It can drive mania.", "source": "NICE CG185" },
-    { "q": "Pressured speech is…", "options": ["Rapid and difficult to interrupt", "Slow, with long pauses before each answer", "Absent (mutism)", "Whispered and hard to hear"], "why": "Typical of mania.", "source": "MSE teaching" },
-    { "q": "Valproate in women of childbearing potential requires…", "options": ["The Pregnancy Prevention Programme", "No special precautions", "A higher starting dose", "Only a serum valproate level at 2 weeks"], "why": "Major teratogen.", "source": "MHRA 2018/2024" },
-    { "q": "Test to request in any woman of childbearing age with mania?", "options": ["Pregnancy test", "Serum amylase", "Serum troponin", "Plasma D-dimer"], "why": "Changes drug choices.", "source": "NICE CG185" }
+    {
+      "q": "Key feature of mania?",
+      "options": [
+        "Decreased need for sleep",
+        "Early morning waking with low mood",
+        "Anhedonia",
+        "Psychomotor retardation and slowed speech"
+      ],
+      "why": "Plus grandiosity, pressured speech, risk-taking.",
+      "source": "ICD-11 / DSM-5"
+    },
+    {
+      "q": "First-line acute treatment for mania (NICE)?",
+      "options": [
+        "An antipsychotic",
+        "An SSRI such as fluoxetine",
+        "A benzodiazepine alone long-term",
+        "ECT first"
+      ],
+      "why": "Haloperidol, olanzapine, quetiapine or risperidone.",
+      "source": "NICE CG185"
+    },
+    {
+      "q": "What to do with an antidepressant in mania?",
+      "options": [
+        "Stop it",
+        "Double it",
+        "Continue unchanged",
+        "Switch to another SSRI"
+      ],
+      "why": "It can drive mania.",
+      "source": "NICE CG185"
+    },
+    {
+      "q": "Pressured speech is…",
+      "options": [
+        "Rapid and difficult to interrupt",
+        "Slow, with long pauses before each answer",
+        "Absent (mutism)",
+        "Whispered and hard to hear"
+      ],
+      "why": "Typical of mania.",
+      "source": "MSE teaching"
+    },
+    {
+      "q": "Valproate in women of childbearing potential requires…",
+      "options": [
+        "The Pregnancy Prevention Programme",
+        "No special precautions",
+        "A higher starting dose",
+        "Only a serum valproate level at 2 weeks"
+      ],
+      "why": "Major teratogen.",
+      "source": "MHRA 2018/2024"
+    },
+    {
+      "q": "Test to request in any woman of childbearing age with mania?",
+      "options": [
+        "Pregnancy test",
+        "Serum amylase",
+        "Serum troponin",
+        "Plasma D-dimer"
+      ],
+      "why": "Changes drug choices.",
+      "source": "NICE CG185"
+    }
   ]
 }

@@ -5,13 +5,47 @@
   "type": "psych",
   "time": 420,
   "stem": "Cubicle 12. Mr Jackson, 58, was brought in by a friend who could not reach him for days and found him at home, unwashed, not eating. Take a brief history, perform a mental state examination, and present your findings and plan.",
+  "phases": [
+    {
+      "title": "Brief history",
+      "goal": "What has happened?",
+      "steps": [
+        "history"
+      ]
+    },
+    {
+      "title": "Mental state examination",
+      "goal": "Appearance to cognition.",
+      "steps": [
+        "mse"
+      ]
+    },
+    {
+      "title": "Present",
+      "goal": "The MSE, the risk, and the plan.",
+      "steps": [
+        "present"
+      ]
+    }
+  ],
   "review": [
-    {"tag": "outdated", "text": "Suicide risk scales. Your notes assess risk with the SAD PERSONS score. NICE NG225 advises against using risk scales to predict suicide or to decide treatment; do a psychosocial assessment instead. The items are still useful prompts."}
+    {
+      "tag": "outdated",
+      "text": "Suicide risk scales. Your notes assess risk with the SAD PERSONS score. NICE NG225 advises against using risk scales to predict suicide or to decide treatment; do a psychosocial assessment instead. The items are still useful prompts."
+    }
   ],
   "notes": "Checked against the Royal College of Psychiatrists' MSE structure, NICE NG222 (Depression in adults, 2022) and NICE NG225 (Self-harm, 2022).\n\nMSE (your ASEPTIC mnemonic): Appearance and behaviour, Speech, Emotion (mood subjective, affect objective), Perception, Thought (form and content, including suicidal and homicidal thoughts), Insight and judgement, Cognition. Present it structured, then a formulation: likely diagnosis, risk (to self, others, from others, self-neglect), and a plan.\n\nSevere depression with psychotic features (nihilistic or guilty delusions, mood-congruent hallucinations) and self-neglect needs urgent psychiatric assessment; physical causes (hypothyroidism, B12, alcohol, medication, dementia) and physical consequences (dehydration, AKI) must be checked.\n\nYour MSE notes and marking scheme match this. The SAD PERSONS score in your notes appears under 'how to assess risk'; NICE NG225 advises against using risk scales to predict suicide or decide treatment — use a psychosocial assessment instead (see the self-harm station).",
   "cast": [
-    { "id": "patient", "name": "Mr Jackson", "role": "elderly" },
-    { "id": "friend", "name": "Friend", "role": "man" }
+    {
+      "id": "patient",
+      "name": "Mr Jackson",
+      "role": "elderly"
+    },
+    {
+      "id": "friend",
+      "name": "Friend",
+      "role": "man"
+    }
   ],
   "steps": [
     {
@@ -22,15 +56,57 @@
       "hint": "Presenting problem, psychiatric and medical history, drugs and alcohol, social, forensic.",
       "groups": {
         "Now": [
-          { "t": "Can you tell me what's been happening?", "tz": "你可唔可以講吓最近發生咩事？", "rz": "（停咗好耐）……乜都冇所謂喇。我幾個禮拜冇出過街。", "r": "[Long pause] …Nothing matters any more. I haven't been out for weeks.", "mark": "Opens with an open question" },
-          { "t": "Sleep, appetite, energy, enjoyment?", "tz": "瞓覺、胃口、精神點呀？仲有冇嘢令你開心？", "rz": "每朝三點就醒。唔想食嘢。冇精神。以前鍾意做嘅嘢，而家都冇興趣。", "r": "Wake at 3 every morning. Not eating. No energy. Nothing I used to enjoy.", "mark": "Asks core depressive symptoms" }
+          {
+            "t": "Can you tell me what's been happening?",
+            "tz": "你可唔可以講吓最近發生咩事？",
+            "rz": "（停咗好耐）……乜都冇所謂喇。我幾個禮拜冇出過街。",
+            "r": "[Long pause] …Nothing matters any more. I haven't been out for weeks.",
+            "mark": "Opens with an open question"
+          },
+          {
+            "t": "Sleep, appetite, energy, enjoyment?",
+            "tz": "瞓覺、胃口、精神點呀？仲有冇嘢令你開心？",
+            "rz": "每朝三點就醒。唔想食嘢。冇精神。以前鍾意做嘅嘢，而家都冇興趣。",
+            "r": "Wake at 3 every morning. Not eating. No energy. Nothing I used to enjoy.",
+            "mark": "Asks core depressive symptoms"
+          }
         ],
         "Background": [
-          { "t": "Have you had problems with your mood before? Any treatment?", "tz": "你以前情緒有冇出過問題？有冇接受過治療？", "rz": "兩年前老婆過咗身之後有。食過一排藥；之後停咗。", "r": "After my wife died two years ago. Tablets for a while; I stopped them.", "mark": "Past psychiatric history" },
-          { "t": "Physical health and medicines", "tz": "身體健康點？食緊咩藥？", "rz": "食緊血壓藥。最近冇食。", "r": "Blood pressure tablets. Haven't taken them lately.", "mark": "Past medical and drug history" },
-          { "t": "Alcohol or drugs?", "tz": "有冇飲酒或者用藥物？", "rz": "一個禮拜一支威士忌。而家少咗，懶得飲。", "r": "A bottle of whisky a week. Less now, can't be bothered.", "mark": "Alcohol and substance history" },
-          { "t": "Who's around you? Work? Money?", "tz": "身邊有邊個照顧你？做咩工作？經濟有冇問題？", "rz": "一個人住。退休咗。個仔喺加拿大。", "r": "Live alone. Retired. My son is in Canada.", "mark": "Social history" },
-          { "t": "Any trouble with the police?", "tz": "有冇同警察有過麻煩？", "rz": "冇。", "r": "No.", "mark": "Forensic history" }
+          {
+            "t": "Have you had problems with your mood before? Any treatment?",
+            "tz": "你以前情緒有冇出過問題？有冇接受過治療？",
+            "rz": "兩年前老婆過咗身之後有。食過一排藥；之後停咗。",
+            "r": "After my wife died two years ago. Tablets for a while; I stopped them.",
+            "mark": "Past psychiatric history"
+          },
+          {
+            "t": "Physical health and medicines",
+            "tz": "身體健康點？食緊咩藥？",
+            "rz": "食緊血壓藥。最近冇食。",
+            "r": "Blood pressure tablets. Haven't taken them lately.",
+            "mark": "Past medical and drug history"
+          },
+          {
+            "t": "Alcohol or drugs?",
+            "tz": "有冇飲酒或者用藥物？",
+            "rz": "一個禮拜一支威士忌。而家少咗，懶得飲。",
+            "r": "A bottle of whisky a week. Less now, can't be bothered.",
+            "mark": "Alcohol and substance history"
+          },
+          {
+            "t": "Who's around you? Work? Money?",
+            "tz": "身邊有邊個照顧你？做咩工作？經濟有冇問題？",
+            "rz": "一個人住。退休咗。個仔喺加拿大。",
+            "r": "Live alone. Retired. My son is in Canada.",
+            "mark": "Social history"
+          },
+          {
+            "t": "Any trouble with the police?",
+            "tz": "有冇同警察有過麻煩？",
+            "rz": "冇。",
+            "r": "No.",
+            "mark": "Forensic history"
+          }
         ]
       }
     },
@@ -41,32 +117,92 @@
       "label": "Mental state examination",
       "hint": "ASEPTIC.",
       "groups": {
-        "Appearance": [{ "t": "Observe appearance and behaviour", "r": "Unkempt, unshaven, stained clothes, thin. Slumped, poor eye contact, slowed movements.", "mark": "Describes appearance and psychomotor retardation" }],
-        "Speech": [{ "t": "Listen to speech", "r": "Quiet, slow, long pauses before answering, little spontaneous speech.", "mark": "Describes speech" }],
+        "Appearance": [
+          {
+            "t": "Observe appearance and behaviour",
+            "r": "Unkempt, unshaven, stained clothes, thin. Slumped, poor eye contact, slowed movements.",
+            "mark": "Describes appearance and psychomotor retardation"
+          }
+        ],
+        "Speech": [
+          {
+            "t": "Listen to speech",
+            "r": "Quiet, slow, long pauses before answering, little spontaneous speech.",
+            "mark": "Describes speech"
+          }
+        ],
         "Emotion": [
-          { "t": "How would you describe your mood?", "r": "'Empty. Black.'", "mark": "Records subjective mood" },
-          { "t": "Observe affect", "r": "Flat, restricted, congruent with mood.", "mark": "Describes affect and congruence" }
+          {
+            "t": "How would you describe your mood?",
+            "r": "'Empty. Black.'",
+            "mark": "Records subjective mood"
+          },
+          {
+            "t": "Observe affect",
+            "r": "Flat, restricted, congruent with mood.",
+            "mark": "Describes affect and congruence"
+          }
         ],
-        "Perception": [{ "t": "Do you ever hear voices or see things others can't?", "r": "Sometimes a voice says I'm worthless… it's right.", "mark": "Asks about hallucinations (mood-congruent voice)" }],
+        "Perception": [
+          {
+            "t": "Do you ever hear voices or see things others can't?",
+            "r": "Sometimes a voice says I'm worthless… it's right.",
+            "mark": "Asks about hallucinations (mood-congruent voice)"
+          }
+        ],
         "Thought": [
-          { "t": "Thought form and content: worries, guilt, beliefs", "r": "Believes his insides are rotting and that he caused his wife's death.", "mark": "Identifies nihilistic and guilty delusions" },
-          { "t": "Have you had thoughts of ending your life?", "r": "Every day. I've thought about the tablets in the drawer.", "mark": "Asks directly about suicidal thoughts and plans" }
+          {
+            "t": "Thought form and content: worries, guilt, beliefs",
+            "r": "Believes his insides are rotting and that he caused his wife's death.",
+            "mark": "Identifies nihilistic and guilty delusions"
+          },
+          {
+            "t": "Have you had thoughts of ending your life?",
+            "r": "Every day. I've thought about the tablets in the drawer.",
+            "mark": "Asks directly about suicidal thoughts and plans"
+          }
         ],
-        "Insight": [{ "t": "Do you think you're unwell? Would you accept help?", "r": "I'm not ill. I'm just a bad person. There's no point.", "mark": "Assesses insight" }],
-        "Cognition": [{ "t": "Orientation, attention, recall", "r": "Orientated. Slow on serial 7s. Recalls 2 of 3.", "mark": "Screens cognition" }]
+        "Insight": [
+          {
+            "t": "Do you think you're unwell? Would you accept help?",
+            "r": "I'm not ill. I'm just a bad person. There's no point.",
+            "mark": "Assesses insight"
+          }
+        ],
+        "Cognition": [
+          {
+            "t": "Orientation, attention, recall",
+            "r": "Orientated. Slow on serial 7s. Recalls 2 of 3.",
+            "mark": "Screens cognition"
+          }
+        ]
       }
     },
     {
       "id": "present",
       "kind": "say",
-      "to": "examiner", "ask": "Thank you. Please present your mental state examination.",
+      "to": "examiner",
+      "ask": "Thank you. Please present your mental state examination.",
       "label": "Present to the examiner",
       "hint": "Structured MSE, formulation, risk, plan.",
       "opts": [
-        { "t": "Severe depressive episode with psychotic features (nihilistic and guilty delusions, mood-congruent voice)", "mark": "Presents a structured MSE and diagnosis" },
-        { "t": "High risk: active suicidal ideation with a plan and access to means, self-neglect, lives alone, poor insight", "mark": "States risk to self and self-neglect" },
-        { "t": "Physical checks: bloods (U&E, glucose, TFT, B12), ECG, hydration; urgent psychiatry assessment; consider MHO if he refuses", "mark": "Plans physical work-up, urgent psychiatry and MHO if needed" },
-        { "t": "Discharge with a GP letter", "trap": "critical", "r": "Psychotic depression with a suicide plan is a high-risk emergency." }
+        {
+          "t": "Severe depressive episode with psychotic features (nihilistic and guilty delusions, mood-congruent voice)",
+          "mark": "Presents a structured MSE and diagnosis"
+        },
+        {
+          "t": "High risk: active suicidal ideation with a plan and access to means, self-neglect, lives alone, poor insight",
+          "mark": "States risk to self and self-neglect"
+        },
+        {
+          "t": "Physical checks: bloods (U&E, glucose, TFT, B12), ECG, hydration; urgent psychiatry assessment; consider MHO if he refuses",
+          "mark": "Plans physical work-up, urgent psychiatry and MHO if needed"
+        },
+        {
+          "t": "Discharge with a GP letter",
+          "trap": "critical",
+          "r": "Psychotic depression with a suicide plan is a high-risk emergency."
+        }
       ]
     },
     {
@@ -75,21 +211,125 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
-        { "q": "Mood versus affect?", "a": "Mood is reported; affect is observed", "wrong": ["They mean the same thing", "Affect is what the relatives report at home", "Mood is only recorded in mania"] },
-        { "q": "Nihilistic delusion example?", "a": "Belief that one is dead or rotting", "wrong": ["Belief of being followed by the police", "Belief of having special powers", "Hearing a voice commenting on actions"] },
-        { "q": "Does NICE NG225 support SAD PERSONS to decide discharge?", "a": "No — do not use risk scales to decide care", "wrong": ["Yes — a score of 7 or more means admission is needed", "Yes, for everyone over 45 years old", "Only in the ED, not on the wards"] },
-        { "q": "Organic cause of depressive symptoms to exclude?", "a": "Hypothyroidism", "wrong": ["Hyperkalaemia", "Gouty arthritis", "Allergic rhinitis"] },
-        { "q": "Psychomotor retardation means…", "a": "Slowed thought and movement", "wrong": ["A learning disability from birth or childhood", "Restlessness, pacing and hand-wringing", "A fine resting tremor"] }
+        {
+          "q": "Mood versus affect?",
+          "a": "Mood is reported; affect is observed",
+          "wrong": [
+            "They mean the same thing",
+            "Affect is what the relatives report at home",
+            "Mood is only recorded in mania"
+          ]
+        },
+        {
+          "q": "Nihilistic delusion example?",
+          "a": "Belief that one is dead or rotting",
+          "wrong": [
+            "Belief of being followed by the police",
+            "Belief of having special powers",
+            "Hearing a voice commenting on actions"
+          ]
+        },
+        {
+          "q": "Does NICE NG225 support SAD PERSONS to decide discharge?",
+          "a": "No — do not use risk scales to decide care",
+          "wrong": [
+            "Yes — a score of 7 or more means admission is needed",
+            "Yes, for everyone over 45 years old",
+            "Only in the ED, not on the wards"
+          ]
+        },
+        {
+          "q": "Organic cause of depressive symptoms to exclude?",
+          "a": "Hypothyroidism",
+          "wrong": [
+            "Hyperkalaemia",
+            "Gouty arthritis",
+            "Allergic rhinitis"
+          ]
+        },
+        {
+          "q": "Psychomotor retardation means…",
+          "a": "Slowed thought and movement",
+          "wrong": [
+            "A learning disability from birth or childhood",
+            "Restlessness, pacing and hand-wringing",
+            "A fine resting tremor"
+          ]
+        }
       ]
     }
   ],
-  "badge": { "name": "ASEPTIC", "emoji": "🧠", "flavor": "Appearance to cognition, then risk and a plan." },
+  "badge": {
+    "name": "ASEPTIC",
+    "emoji": "🧠",
+    "flavor": "Appearance to cognition, then risk and a plan."
+  },
   "cards": [
-    { "q": "The 'T' in ASEPTIC covers…", "options": ["Thought form and content", "Tone and volume of voice", "Tremor and movements", "Temperature and vitals"], "why": "Including suicidal and homicidal thoughts.", "source": "MSE teaching" },
-    { "q": "Flight of ideas is typical of…", "options": ["Mania", "Depression", "Dementia", "Delirium tremens only"], "why": "Rapid shifts with connections.", "source": "MSE teaching" },
-    { "q": "Visual hallucinations suggest…", "options": ["An organic cause (delirium, drugs, Lewy body)", "Schizophrenia, most typically", "Severe depression", "Anxiety disorder"], "why": "Auditory hallucinations are typical of schizophrenia.", "source": "MSE teaching" },
-    { "q": "Insight is…", "options": ["Awareness of illness and need for treatment", "Intelligence, judged by the level of education", "Orientation to time and place", "Memory for recent and remote events, tested formally"], "why": "Relevant to capacity and engagement.", "source": "MSE teaching" },
-    { "q": "Mood-congruent psychotic features in depression include…", "options": ["Guilt and nihilistic delusions", "Grandiose delusions", "Thought broadcasting only", "Visual hallucinations of animals"], "why": "Psychotic depression needs urgent treatment.", "source": "NICE NG222" },
-    { "q": "Risk assessment in self-harm (NICE NG225) should…", "options": ["Be a psychosocial assessment, not a score", "Use SAD PERSONS, admitting everyone who scores over 6", "Be skipped if the patient is sober", "Only include previous attempts"], "why": "Scales predict poorly.", "source": "NICE NG225" }
+    {
+      "q": "The 'T' in ASEPTIC covers…",
+      "options": [
+        "Thought form and content",
+        "Tone and volume of voice",
+        "Tremor and movements",
+        "Temperature and vitals"
+      ],
+      "why": "Including suicidal and homicidal thoughts.",
+      "source": "MSE teaching"
+    },
+    {
+      "q": "Flight of ideas is typical of…",
+      "options": [
+        "Mania",
+        "Depression",
+        "Dementia",
+        "Delirium tremens only"
+      ],
+      "why": "Rapid shifts with connections.",
+      "source": "MSE teaching"
+    },
+    {
+      "q": "Visual hallucinations suggest…",
+      "options": [
+        "An organic cause (delirium, drugs, Lewy body)",
+        "Schizophrenia, most typically",
+        "Severe depression",
+        "Anxiety disorder"
+      ],
+      "why": "Auditory hallucinations are typical of schizophrenia.",
+      "source": "MSE teaching"
+    },
+    {
+      "q": "Insight is…",
+      "options": [
+        "Awareness of illness and need for treatment",
+        "Intelligence, judged by the level of education",
+        "Orientation to time and place",
+        "Memory for recent and remote events, tested formally"
+      ],
+      "why": "Relevant to capacity and engagement.",
+      "source": "MSE teaching"
+    },
+    {
+      "q": "Mood-congruent psychotic features in depression include…",
+      "options": [
+        "Guilt and nihilistic delusions",
+        "Grandiose delusions",
+        "Thought broadcasting only",
+        "Visual hallucinations of animals"
+      ],
+      "why": "Psychotic depression needs urgent treatment.",
+      "source": "NICE NG222"
+    },
+    {
+      "q": "Risk assessment in self-harm (NICE NG225) should…",
+      "options": [
+        "Be a psychosocial assessment, not a score",
+        "Use SAD PERSONS, admitting everyone who scores over 6",
+        "Be skipped if the patient is sober",
+        "Only include previous attempts"
+      ],
+      "why": "Scales predict poorly.",
+      "source": "NICE NG225"
+    }
   ]
 }
