@@ -239,11 +239,20 @@ export function wpw(base = sinus(75)): EcgSpec {
 }
 
 /** Tricyclic toxicity: sinus tachycardia, QRS > 100 ms, terminal R in aVR > 3 mm. */
+/** Sodium-channel blockade: sinus tachycardia, QRS about 140 ms, a tall terminal R in aVR, deep S in I and aVL. */
 export function tcaToxicity(): EcgSpec {
-  let s = { ...sinus(125), conduction: { ...normalConduction(), qrs: 0.13, qt: 0.4 } }
-  s = apply(s, ['aVR'], { r2: 0.45 })
-  s = apply(s, ['I', 'aVL'], { s: 0.4 })
+  let s = { ...sinus(125), conduction: { ...normalConduction(), qrs: 0.15, qt: 0.44 } }
+  s = apply(s, ['aVR'], { r2: 0.7 })
+  s = apply(s, ['I', 'aVL'], { s: 0.55 })
   return relabel(s, 'tca', 'TCA toxicity: wide QRS, R in aVR')
+}
+
+/** The repeat ECG after bicarbonate: slower, QRS back to about 100 ms, the terminal R in aVR much smaller. */
+export function tcaAfterBicarbonate(): EcgSpec {
+  let s = { ...sinus(110), conduction: { ...normalConduction(), qrs: 0.1, qt: 0.38 } }
+  s = apply(s, ['aVR'], { r2: 0.15 })
+  s = apply(s, ['I', 'aVL'], { s: 0.2 })
+  return relabel(s, 'tca-bicarb', 'TCA after bicarbonate: QRS narrowing')
 }
 
 export function longQt(base = sinus(60)): EcgSpec {

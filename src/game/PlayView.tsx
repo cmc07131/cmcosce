@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { localizePack } from '~/engine/lang'
-import { hintFor, stepsDone } from '~/engine/judge'
+import { currentPhase, hintFor, stepsDone } from '~/engine/judge'
 import { readoutText, type Action, type Pack } from '~/engine/schema'
 import { hasOutput, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
@@ -45,6 +45,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const sceneAt = usePlay((s) => s.sceneAt)
   const store = usePlay.getState
   const labels = useSettings((s) => s.labels)
+  const objectives = useSettings((s) => s.objectives)
   const screen = useRef<ScreenHandle>(null)
   const textBox = useRef<TextBoxHandle>(null)
   /** The START menu, or the door's hand-over question (the menu opened on its leave page). */
@@ -126,6 +127,9 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   }, [firstToast?.token, store])
 
   const progress = stepsDone(pack, spent)
+  // Practice mode: the current phase of the perfect script, until the examiner takes over.
+  const phase = currentPhase(pack, spent)
+  const objective = objectives && entered && !ended && phase ? phase : null
   const allDone = progress.total > 0 && progress.done === progress.total
   useEffect(() => {
     if (!hydrated || !entered || ended || !allDone || announcedDone.current) return
@@ -246,6 +250,15 @@ export function PlayView({ pack: source }: { pack: Pack }) {
       <div className="bezel">
         <div className="screen">
           <div className="relative flex min-h-0 flex-1 flex-col">
+            {/* In the flow above the map, so it never covers the room; the HUD sits over its top margin. */}
+            {objective && (
+              <div className="objective" data-testid="objective" aria-live="polite">
+                <b>
+                  {objective.index + 1}/{objective.total} {objective.title.toUpperCase()}
+                </b>
+                <span>{objective.goal}</span>
+              </div>
+            )}
             <Screen
               key={`${pack.packId}:${runSeed}`}
               ref={screen}

@@ -12,6 +12,7 @@ import {
   rhythms,
   sinus,
   stemi,
+  tcaAfterBicarbonate,
   tcaToxicity,
   wpw,
   type EcgSpec,
@@ -52,6 +53,7 @@ export const ATLAS: (() => EcgSpec)[] = [
   () => brugada(),
   () => wpw(),
   tcaToxicity,
+  tcaAfterBicarbonate,
   () => longQt(),
 ]
 

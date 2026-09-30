@@ -92,6 +92,11 @@ export const stationSchema = z.object({
    * What the author should re-check against their own notes: only what differs, is outdated, is rarely used
    * now, is missing, or could not be verified. Anything the notes already get right is left out. An empty list: nothing to review.
    */
+  /**
+   * The station's phases, in the order of the perfect script. Practice mode shows the current one as the
+   * objective; it never blocks acting out of order. Each step belongs to at most one phase.
+   */
+  phases: z.array(z.object({ title: z.string(), goal: z.string(), steps: z.array(z.string()).min(1) })).optional(),
   review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing', 'unverified']), text: z.string() })).optional(),
   cast: z
     .array(
@@ -417,6 +422,15 @@ export function compileStation(station: Station): Pack {
   for (const rule of station.rules ?? []) {
     for (const id of [...rule.first, ...rule.then]) if (!known.has(id)) throw new Error(`${station.id}: rule ${rule.id} names unknown step ${id}`)
   }
+  const stepIds = new Set(station.steps.map((s) => s.id))
+  const phased = new Set<string>()
+  for (const phase of station.phases ?? []) {
+    for (const id of phase.steps) {
+      if (!stepIds.has(id)) throw new Error(`${station.id}: phase ${phase.title} names unknown step ${id}`)
+      if (phased.has(id)) throw new Error(`${station.id}: step ${id} is in two phases`)
+      phased.add(id)
+    }
+  }
   const targetIds = new Set([...cast.map((c) => c.id), ...tpl.room.interactables.map((i) => i.id)])
   for (const action of actions) {
     for (const t of action.targetIds) if (!targetIds.has(t)) throw new Error(`${station.id}: step ${action.id} walks to unknown ${t}`)
@@ -439,6 +453,7 @@ export function compileStation(station: Station): Pack {
     marks,
     actions,
     goldPath: station.steps.map((s) => s.id),
+    phases: station.phases,
     sequenceRules: (station.rules ?? []).map((rule) => ({
       id: rule.id,
       earlierAny: rule.first,

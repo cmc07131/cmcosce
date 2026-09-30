@@ -10,6 +10,7 @@ import { burnPercent } from '../game/imaging/photos'
 import { airwayWidth, anteriorHumeralOffset, kleinCutsEpiphysis, neck, pelvis, symphysisWidth } from '../game/imaging/skeleton'
 import { fastRuq } from '../game/imaging/ultrasound'
 import { faultsFor } from '../game/store'
+import { currentPhase } from './judge'
 import { worldSchema } from '../world/model'
 import { packSchema } from './schema'
 import { compileStation, stationCards, stationSchema, type Station } from './station'
@@ -304,4 +305,22 @@ test('review lists: every station says what, if anything, to re-check against th
     assert.ok(st.review, `${st.id}: needs a review list (empty if nothing to review)`)
     for (const r of st.review) assert.ok(r.text.length > 20, `${st.id}: review items say what to check`)
   }
+})
+
+test('phases: the objective follows the perfect script and moves on as each phase is done', () => {
+  const pack = compileStation(stationSchema.parse(JSON.parse(readFileSync(files.find((f) => f.endsWith('acls-tca.json'))!, 'utf8'))))
+  const spent: Record<string, string[]> = {}
+  const done = (stepId: string) => {
+    const action = pack.actions.find((a) => a.id === stepId)!
+    const first = (action.options ?? []).find((o) => !o.isTrap) ?? (action.findings ?? [])[0]
+    spent[stepId] = [first!.id]
+  }
+  assert.equal(currentPhase(pack, spent)?.title, 'Arrival')
+  done('arrive')
+  assert.equal(currentPhase(pack, spent)?.title, 'ABC')
+  // Out of order is allowed: the objective waits for the earliest unfinished phase.
+  done('rsi')
+  assert.equal(currentPhase(pack, spent)?.title, 'ABC')
+  for (const phase of pack.phases ?? []) for (const id of phase.steps) done(id)
+  assert.equal(currentPhase(pack, spent), null)
 })

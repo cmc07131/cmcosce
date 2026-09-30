@@ -201,14 +201,30 @@ export function unique(ids: string[]) {
  * How many of the station's steps the candidate has done (any non-trap choice, finding or region used).
  * The monitor is a readout, not a step. All done means the examiner has nothing left to watch.
  */
+/** A step is done once any of its non-trap options, findings or regions has been used. */
+function actionDone(a: Action, spent: Record<string, string[]>) {
+  const used = new Set(spent[a.id] ?? [])
+  if ((a.options ?? []).some((o) => !o.isTrap && used.has(o.id))) return true
+  if ((a.findings ?? []).some((f) => used.has(f.id))) return true
+  return (a.regions ?? []).some((r) => used.has(r.id))
+}
+
+/**
+ * The objective: the first phase with a step not yet done. Null when the station has no phases or all are
+ * done (the examiner takes over from there).
+ */
+export function currentPhase(pack: Pack, spent: Record<string, string[]>) {
+  const phases = pack.phases ?? []
+  for (let i = 0; i < phases.length; i++) {
+    const steps = phases[i].steps.map((id) => pack.actions.find((a) => a.id === id)).filter((a): a is Action => Boolean(a))
+    if (steps.some((a) => !actionDone(a, spent))) return { index: i, total: phases.length, title: phases[i].title, goal: phases[i].goal }
+  }
+  return null
+}
+
 export function stepsDone(pack: Pack, spent: Record<string, string[]>) {
   const steps = pack.goldPath.map((id) => pack.actions.find((a) => a.id === id)).filter((a): a is Action => Boolean(a) && a!.kind !== 'monitor')
-  const done = steps.filter((a) => {
-    const used = new Set(spent[a.id] ?? [])
-    if ((a.options ?? []).some((o) => !o.isTrap && used.has(o.id))) return true
-    if ((a.findings ?? []).some((f) => used.has(f.id))) return true
-    return (a.regions ?? []).some((r) => used.has(r.id))
-  })
+  const done = steps.filter((a) => actionDone(a, spent))
   return {
     done: done.length,
     total: steps.length,

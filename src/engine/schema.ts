@@ -215,6 +215,8 @@ export const packSchema = z.object({
   ),
   actions: z.array(actionSchema),
   goldPath: z.array(z.string()),
+  /** Phases of the perfect script; practice mode shows the current one as the objective. */
+  phases: z.array(z.object({ title: z.string(), goal: z.string(), steps: z.array(z.string()) })).optional(),
   sequenceRules: z.array(
     z.object({
       id: z.string(),

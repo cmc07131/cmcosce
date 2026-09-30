@@ -41,6 +41,8 @@ export function StartMenu({
   const toggleLabels = useSettings((s) => s.toggleLabels)
   const patientLang = useSettings((s) => s.patientLang)
   const toggleLang = useSettings((s) => s.toggleLang)
+  const objectives = useSettings((s) => s.objectives)
+  const toggleObjectives = useSettings((s) => s.toggleObjectives)
   const cursor = useCursor(root, {
     priority: 20,
     onBack: () => {
@@ -69,6 +71,11 @@ export function StartMenu({
             <NavItem testId="hud-hint" onClick={onHint}>HINT</NavItem>
             <NavItem testId="menu-marks" onClick={() => go('marks')}>MARKS</NavItem>
             <NavItem testId="menu-sound" onClick={toggleSound}>SOUND {sound ? 'ON' : 'OFF'}</NavItem>
+            {pack.phases && (
+              <NavItem testId="menu-objectives" onClick={toggleObjectives}>
+                OBJECTIVES {objectives ? 'ON' : 'OFF'}
+              </NavItem>
+            )}
             <NavItem testId="menu-names" onClick={toggleLabels}>NAMES {labels ? 'ON' : 'OFF'}</NavItem>
             <NavItem testId="menu-lang" onClick={toggleLang}>PATIENT: {patientLang === 'zh' ? '中文' : 'ENGLISH'}</NavItem>
             <NavItem testId="hud-leave" onClick={() => go('leave')}>LEAVE</NavItem>
