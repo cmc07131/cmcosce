@@ -17,6 +17,11 @@ function stationPacks(): Pack[] {
 
 function drain(pack: Pack) {
   for (let guard = 0; usePlay.getState().performing && guard < 50; guard++) usePlay.getState().finishPerform(pack)
+  // The nurse delivers every job: effects start at the bedside.
+  for (const job of usePlay.getState().errands) {
+    usePlay.getState().deliverErrand(pack, job.token)
+    usePlay.getState().takeErrand(job.token)
+  }
 }
 
 /** The best line in each turn: the one that scores, else the first that is not a trap. */

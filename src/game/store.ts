@@ -39,25 +39,40 @@ export type MsgTone = 'say' | 'trap' | 'warn' | 'info'
 export type Msg = { text: string; speakerId: string | null; tone: MsgTone; token: number }
 
 /** Something the nurse has to fetch and give: walk to the cart or trolley, then to the patient. */
-export type Errand = { token: number; from: 'cart' | 'trolley'; items: string[] }
+/**
+ * A job for the nurse. `give`: fetch from the cart or trolley and give or apply it at the bedside, where its
+ * scene effects start. `refuse`: a wrong drug or item — the nurse will not fetch it, walks over and slaps you.
+ */
+export type Errand =
+  | { token: number; kind: 'give'; from: 'cart' | 'trolley'; items: string[]; scenes: string[] }
+  | { token: number; kind: 'refuse'; from: 'cart' | 'trolley'; items: string[]; line: string }
 
 let errandToken = 1
 
 /** What the nurse fetched, grouped by where it comes from. Traps too: the nurse does as told. */
+const sceneList = (o: ActionOption) => (Array.isArray(o.scene) ? o.scene : o.scene ? [o.scene] : [])
+
 function errandsFor(options: ActionOption[]): Errand[] {
   const out: Errand[] = []
   for (const from of ['cart', 'trolley'] as const) {
-    const items = options.filter((o) => o.fetch === from).map((o) => o.label)
-    if (items.length) out.push({ token: errandToken++, from, items })
+    const good = options.filter((o) => o.fetch === from && !o.isTrap)
+    if (good.length) out.push({ token: errandToken++, kind: 'give', from, items: good.map((o) => o.label), scenes: good.flatMap(sceneList) })
+    const wrong = options.filter((o) => o.fetch === from && o.isTrap)
+    if (wrong.length) out.push({ token: errandToken++, kind: 'refuse', from, items: wrong.map((o) => o.label), line: wrong[0].detail ?? '' })
   }
   return out
 }
+
+/** Scene effects of an option the nurse fetches wait for the bedside; everything else starts at once. */
+const startsNow = (o: ActionOption) => !o.fetch
 
 type PlayState = Session & {
   hydrated: boolean
   /** Fetch-and-give jobs waiting for the nurse, oldest first. Not saved: a reload finds them done. */
   errands: Errand[]
   takeErrand: (token: number) => void
+  /** The nurse is at the bedside: the job's effects start now. */
+  deliverErrand: (pack: Pack, token: number) => void
   overlay: Overlay | null
   msg: Msg | null
   toasts: Toast[]
@@ -199,6 +214,15 @@ export const usePlay = create<PlayState>((set, get) => ({
 
   takeErrand: (token) => set({ errands: get().errands.filter((e) => e.token !== token) }),
 
+  deliverErrand: (pack, token) => {
+    const job = get().errands.find((e) => e.token === token)
+    if (!job || job.kind !== 'give' || !job.scenes.length) return
+    const cur = get()
+    const sceneAt = { ...(cur.sceneAt ?? {}) }
+    for (const flag of job.scenes) if (sceneAt[flag] === undefined) sceneAt[flag] = elapsedOf(pack, cur)
+    set({ scene: unique([...(cur.scene ?? []), ...job.scenes]), sceneAt, errands: cur.errands.map((e) => (e.token === token ? { ...e, scenes: [] } : e)) })
+  },
+
   boot: (pack) => {
     const saved = readSession(pack.packId)
     const session = saved ?? freshSession(pack)
@@ -313,7 +337,7 @@ export const usePlay = create<PlayState>((set, get) => ({
       log: applied.log,
       endStation: applied.endStation,
       close: false,
-      sceneAdd: option.scene,
+      sceneAdd: startsNow(option) ? option.scene : undefined,
     })
     if (applied.reply && !option.isTrap) set({ msg: spokenLine(pack, applied.reply) })
     if (applied.spend && option.fetch) set({ errands: [...get().errands, ...errandsFor([option])] })
@@ -334,7 +358,7 @@ export const usePlay = create<PlayState>((set, get) => ({
     )
     commit(set, get, pack, action, {
       ...applied,
-      sceneAdd: chosen.filter((row) => !row.isTrap && !row.perform && row.scene).map((row) => row.scene as string),
+      sceneAdd: chosen.filter((row) => !row.isTrap && !row.perform && row.scene && startsNow(row)).flatMap(sceneList),
       faultsAdd: chosen.filter((row) => row.isTrap).flatMap((row) => faultsFor(action, row, [])),
       log: applied.grantMarks.length > 0 || applied.spendIds.some((id) => {
         const opt = action.options?.find((row) => row.id === id)

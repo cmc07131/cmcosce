@@ -47,6 +47,8 @@ type Walker = {
 
 export type ScreenHandle = {
   useFacing: () => void
+  /** Just for fun: the NPC slaps the player (a wrong drug). A hand swipe, a burst, a shake. */
+  slap: (npcId: string) => void
 }
 
 const STEP_MS = 190
@@ -100,6 +102,8 @@ export const Screen = forwardRef<
     labels: boolean
     /** Live heart rate from the station's vitals; 0 draws a flat line. Undefined reads the pack readout. */
     monitorBpm?: number
+    /** No leads on yet: the monitor screen is dark. */
+    monitorOff?: boolean
     /**
      * Cast members on the move: each walk visits its stops in turn — an interactable or cast id ('cart',
      * 'patient'), '@player' (stand beside the candidate) or '@home' (back to their spot).
@@ -113,7 +117,7 @@ export const Screen = forwardRef<
     onFacing: (targetId: string | null) => void
     onBump: () => void
   }
->(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, walks, onWalkStop, onWalkDone, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
+>(function Screen({ pack, position, paused, talkingId, scene, labels, monitorBpm, monitorOff, walks, onWalkStop, onWalkDone, onMove, onUse, onEmpty, onFacing, onBump }, ref) {
   const { cols, rows } = pack.room
   // Where each cast member stands now; most never move, the examiner may walk over.
   const npcTile = useRef<Record<string, Tile>>(Object.fromEntries(pack.cast.map((c) => [c.id, c.spawn])))
@@ -145,8 +149,9 @@ export const Screen = forwardRef<
   const facingHit = useRef<string | null | undefined>(undefined)
   const cb = useRef({ onMove, onUse, onEmpty, onFacing, onBump, onWalkStop, onWalkDone })
   cb.current = { onMove, onUse, onEmpty, onFacing, onBump, onWalkStop, onWalkDone }
-  const drawState = useRef({ talkingId, scene, monitorBpm })
-  drawState.current = { talkingId, scene, monitorBpm }
+  const drawState = useRef({ talkingId, scene, monitorBpm, monitorOff })
+  drawState.current = { talkingId, scene, monitorBpm, monitorOff }
+  const [slapFx, setSlapFx] = useState<{ key: number; x: number; y: number; fromLeft: boolean } | null>(null)
 
   const frame = useRef<HTMLDivElement>(null)
   const world = useRef<HTMLDivElement>(null)
@@ -283,7 +288,7 @@ export const Screen = forwardRef<
       if (matY !== null && !solids.current.has(`${b.x},${matY}`)) drawProp(c, { ...b, kind: 'mat', y: matY }, now)
     }
     for (const b of boxes) if (FLOOR_KINDS.has(b.kind)) drawProp(c, b, now)
-    for (const b of boxes) if (!FLOOR_KINDS.has(b.kind)) drawProp(c, b, now, bpm || 60, live === 0)
+    for (const b of boxes) if (!FLOOR_KINDS.has(b.kind)) drawProp(c, b, now, bpm || 60, live === 0, drawState.current.monitorOff)
 
     for (const [i, t] of pathRef.current.entries()) {
       c.fillStyle = i === pathRef.current.length - 1 ? '#e04858' : '#303848'
@@ -562,6 +567,13 @@ export const Screen = forwardRef<
       }
       cb.current.onUse(hit)
     },
+    slap: (npcId) => {
+      const me = visual.current
+      const them = npcVis.current[npcId] ?? me
+      const key = Date.now()
+      setSlapFx({ key, x: me.x, y: me.y, fromLeft: them.x <= me.x })
+      window.setTimeout(() => setSlapFx((cur) => (cur?.key === key ? null : cur)), 1200)
+    },
   }))
 
   const px = TILE * scale
@@ -582,6 +594,7 @@ export const Screen = forwardRef<
       <div
         ref={world}
         data-testid="player"
+        data-shake={slapFx ? 'on' : undefined}
         className="absolute top-0 left-0"
         style={{ width: cols * px, height: rows * px }}
         onClick={(event) => {
@@ -592,6 +605,20 @@ export const Screen = forwardRef<
         }}
       >
         <canvas ref={canvas} width={cols * TILE} height={rows * TILE} className="pixelated block h-full w-full" />
+        {slapFx && (
+          <div
+            key={slapFx.key}
+            className="slap-fx"
+            data-from={slapFx.fromLeft ? 'left' : 'right'}
+            data-testid="slap"
+            style={{ left: (slapFx.x + 0.5) * px, top: slapFx.y * px, width: px * 2, height: px * 2 }}
+          >
+            <svg viewBox="0 0 16 16" className="slap-hand pixelated" aria-hidden>
+              <path d="M3 9h1V5h1v3h1V3h1v5h1V4h1v5h1V6h1v5h-1v2H9v1H5v-1H4v-2H3z" fill="#f0c090" stroke="#704828" strokeWidth="0.6" />
+            </svg>
+            <span className="slap-word">SLAP!</span>
+          </div>
+        )}
         {tags.map((tag) => (
           <span
             key={tag.id}

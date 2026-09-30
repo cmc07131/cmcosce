@@ -77,3 +77,8 @@ export function vitalsLine(now: VitalsNow) {
   const r = (n?: number) => (n === undefined ? '—' : Math.round(n))
   return `${r(now.hr)} ${r(now.sbp)}/${r(now.dbp)} ${r(now.spo2)}%`
 }
+
+/** Are the leads on? Stations with `showWhen` keep the monitor dark until the nurse attaches them. */
+export function monitored(vitals: { showWhen?: string } | undefined, scene: string[]) {
+  return !vitals?.showWhen || scene.includes(vitals.showWhen)
+}

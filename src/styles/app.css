@@ -400,6 +400,7 @@ button {
 }
 
 .sheet {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-height: 100%;
@@ -654,6 +655,122 @@ button {
 
 .objective ~ .toast {
   top: 92px;
+}
+
+/* Examination close-ups, played before the finding. */
+.cut-in {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(24, 24, 32, 0.82);
+}
+
+.cut-in-art {
+  width: min(92%, 360px);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  image-rendering: pixelated;
+  animation: ci-open 0.18s steps(3) both;
+}
+
+.cut-in-cap {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: #fff8d8;
+}
+
+@keyframes ci-open { from { transform: scaleY(0.1); } to { transform: scaleY(1); } }
+.ci-rise { animation: ci-rise 1.2s ease-out both; }
+@keyframes ci-rise { from { transform: translate(100px, 150px); } to { transform: translate(100px, 100px); } }
+.ci-tilt { animation: ci-tilt 1.4s ease-in-out both; transform-origin: 100px 55px; }
+@keyframes ci-tilt { from { transform: rotate(-8deg) scale(0.9); } to { transform: rotate(0) scale(1.05); } }
+.ci-lean { animation: ci-lean 1.4s ease-out both; }
+@keyframes ci-lean { from { transform: translate(40px, -20px); } to { transform: translate(0, 0); } }
+.ci-breathe { animation: ci-breathe 1.2s ease-in-out infinite; }
+@keyframes ci-breathe { 50% { transform: translateY(-4px); } }
+.ci-breath { animation: ci-breath 1.2s steps(4) infinite; }
+@keyframes ci-breath { from { opacity: 0; transform: translateY(4px); } 50% { opacity: 1; } to { opacity: 0; transform: translateY(-6px); } }
+.ci-slide { animation: ci-slide 1.4s ease-in-out both; }
+@keyframes ci-slide { 0% { transform: translate(-50px, 0); } 45% { transform: translate(-50px, 0); } 55% { transform: translate(40px, 0); } 100% { transform: translate(40px, 0); } }
+.ci-press { animation: ci-press 1.4s ease-in-out both; }
+@keyframes ci-press { from { transform: translate(140px, 20px) rotate(-80deg); } 40%, to { transform: translate(140px, 62px) rotate(-80deg); } }
+.ci-throb { animation: ci-throb 0.5s steps(2) infinite; }
+@keyframes ci-throb { 50% { r: 6; } }
+.ci-pupil { animation: ci-pupil 1.4s ease-out both; }
+@keyframes ci-pupil { from { r: 14; } 60% { r: 13; } to { r: 13; } }
+.ci-torch { animation: ci-torch 1.4s ease-out both; }
+@keyframes ci-torch { from { transform: translate(40px, 30px); opacity: 0.4; } 40%, to { transform: translate(0, 0); opacity: 1; } }
+.ci-drop { animation: ci-drop 0.8s ease-out both; }
+@keyframes ci-drop { from { r: 0; } to { r: 3; } }
+.ci-reading { animation: ci-reading 1.4s steps(1) both; }
+@keyframes ci-reading { 0%, 70% { opacity: 0; } 71%, 100% { opacity: 1; } }
+.ci-tube { animation: ci-tube 1.4s ease-in both; }
+@keyframes ci-tube { from { transform: translate(40px, -60px); } 30% { transform: translate(40px, -60px); } to { transform: translate(0, 0); } }
+.ci-palpate { animation: ci-palpate 1.4s ease-in-out both; }
+@keyframes ci-palpate { from { transform: translate(60px, 60px) rotate(-90deg); } 50% { transform: translate(100px, 96px) rotate(-90deg); } to { transform: translate(120px, 96px) rotate(-90deg); } }
+
+/* A wrong drug: the nurse's slap. */
+.slap-fx {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  transform: translate(-50%, -30%);
+}
+
+.slap-hand {
+  position: absolute;
+  top: 5%;
+  width: 85%;
+  height: 85%;
+  animation: slap-swipe-l 0.4s ease-out both;
+}
+
+.slap-fx[data-from='right'] .slap-hand {
+  animation-name: slap-swipe-r;
+}
+
+.slap-word {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: #f84848;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+  animation: slap-pop 1.2s steps(6) both;
+}
+
+@keyframes slap-swipe-l {
+  from { left: -40%; transform: rotate(-40deg); opacity: 1; }
+  60% { left: 30%; transform: rotate(10deg); opacity: 1; }
+  to { left: 35%; transform: rotate(10deg); opacity: 0; }
+}
+
+@keyframes slap-swipe-r {
+  from { left: 90%; transform: scaleX(-1) rotate(-40deg); opacity: 1; }
+  60% { left: 15%; transform: scaleX(-1) rotate(10deg); opacity: 1; }
+  to { left: 10%; transform: scaleX(-1) rotate(10deg); opacity: 0; }
+}
+
+@keyframes slap-pop {
+  0% { transform: translate(-50%, 0) scale(0.4); opacity: 0; }
+  25% { transform: translate(-50%, -6px) scale(1.3); opacity: 1; }
+  80% { transform: translate(-50%, -10px) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -14px) scale(1); opacity: 0; }
+}
+
+[data-shake='on'] {
+  animation: slap-shake 0.3s steps(2) 2;
+}
+
+@keyframes slap-shake {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 3px 0; }
 }
 
 .hud-warn {

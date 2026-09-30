@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Action, ActionOption, Pack } from '~/engine/schema'
-import { hasOutput, vitalsAt, vitalsLine } from '~/engine/vitals'
+import { hasOutput, monitored, vitalsAt, vitalsLine } from '~/engine/vitals'
+import { CUT_IN_MS, CutIn, cutInKinds, type CutInKind } from './CutIn'
 import { ecgById } from './ecg/atlas'
 import { beats, sample } from './ecg/model'
 import { Film, FilmButton } from './imaging/Film'
@@ -47,8 +48,20 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
   const groups = useMemo(() => [...new Set((action.options ?? []).map((o) => o.group ?? ''))], [action])
   const [tab, setTab] = useState(groups[0] ?? '')
   const [film, setFilm] = useState<string | null>(null)
+  const [playing, setPlaying] = useState<{ id: string; kind: CutInKind; reading?: string } | null>(null)
   const used = new Set(spent)
   const rows = (action.options ?? []).filter((o) => (o.group ?? '') === tab)
+  // Hands on first: the close-up plays, then the finding appears.
+  const examine = (o: NonNullable<typeof action.options>[number]) => {
+    if (playing) return
+    if (!o.anim || !(cutInKinds as readonly string[]).includes(o.anim)) return onOption(o.id)
+    const reading = replyText(o).match(/\d+(?:\.\d+)?/)?.[0]
+    setPlaying({ id: o.id, kind: o.anim as CutInKind, reading })
+    window.setTimeout(() => {
+      setPlaying(null)
+      onOption(o.id)
+    }, CUT_IN_MS)
+  }
   const verb = action.kind === 'history' ? 'Ask' : action.kind === 'exam' ? 'Examine' : 'Order'
   return (
     <Win title={title} onClose={onClose} className="sheet">
@@ -70,7 +83,7 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
           const done = used.has(o.id)
           return (
             <div key={o.id} className="qa" data-done={done || undefined}>
-              <NavItem testId={`option-${action.id}-${o.id}`} tone={done ? 'done' : undefined} disabled={done} onClick={() => onOption(o.id)}>
+              <NavItem testId={`option-${action.id}-${o.id}`} tone={done ? 'done' : undefined} disabled={done} onClick={() => examine(o)}>
                 <span className="check">{done ? '✓' : '▸'}</span>
                 {o.label}
               </NavItem>
@@ -85,6 +98,7 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
         })}
       </div>
       {film && <Film src={film} onClose={() => setFilm(null)} />}
+      {playing && <CutIn kind={playing.kind} reading={playing.reading} />}
     </Win>
   )
 }
@@ -212,8 +226,9 @@ export function MonitorPanel({ pack, title, onClose }: { pack: Pack; title: stri
   const secondsLeft = usePlay((s) => s.secondsLeft)
   const entered = usePlay((s) => s.entered)
   const sceneAt = usePlay((s) => s.sceneAt)
+  const scene = usePlay((s) => s.scene)
   const v = pack.vitals
-  const now = v ? vitalsAt(v, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered })) : null
+  const now = v && monitored(v, scene ?? []) ? vitalsAt(v, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered })) : null
   const canvas = useRef<HTMLCanvasElement>(null)
   const hr = now ? Math.round(now.hr ?? 80) : 80
   const spec = useMemo(() => (now ? ecgById(now.rhythm, hr) : null), [now?.rhythm, hr])
@@ -276,7 +291,7 @@ export function MonitorPanel({ pack, title, onClose }: { pack: Pack; title: stri
   if (!now) {
     return (
       <Win title={title} onClose={onClose} className="sheet">
-        <p className="menu-note">No monitor on this patient.</p>
+        <p className="menu-note">{v ? 'No leads on yet. Ask the nurse to attach the monitoring.' : 'No monitor on this patient.'}</p>
       </Win>
     )
   }

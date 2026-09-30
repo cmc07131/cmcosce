@@ -36,6 +36,8 @@ const optSchema = z.object({
   /** Perform detail, e.g. an exam test and the lesion side: "eyes:right". */
   pose: z.string().optional(),
   performHint: z.string().optional(),
+  /** An examination close-up played before the finding (see CutIn). */
+  anim: z.enum(['gloves', 'packet', 'airway', 'auscultate', 'pulse', 'pupils', 'glucose', 'abdomen', 'intubate']).optional(),
 })
 export type StationOpt = z.infer<typeof optSchema>
 
@@ -350,6 +352,7 @@ export function compileStation(station: Station): Pack {
       detailZh: spoken(speaker, o.rz),
       performPose: o.pose,
       performHint: o.performHint,
+      anim: o.anim,
     }
   }
 

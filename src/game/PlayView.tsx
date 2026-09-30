@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { localizePack } from '~/engine/lang'
 import { currentPhase, hintFor, stepsDone } from '~/engine/judge'
 import { readoutText, type Action, type Pack } from '~/engine/schema'
-import { hasOutput, vitalsAt, vitalsLine } from '~/engine/vitals'
+import { hasOutput, monitored, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
 import { press, useButtons } from './input'
 import { OverlaySheet, targetName } from './Overlay'
@@ -194,7 +194,9 @@ export function PlayView({ pack: source }: { pack: Pack }) {
     }
     const token = Date.now() + job.token
     setErrand({ job, walk: token })
-    setWalks((cur) => [...cur, { token, npcId: nurseId, stops: [...(source ? [source] : []), patient, '@home'] }])
+    // A wrong drug or item: the nurse will not fetch it. She comes to you instead.
+    const stops = job.kind === 'refuse' ? ['@player', '@home'] : [...(source ? [source] : []), patient, '@home']
+    setWalks((cur) => [...cur, { token, npcId: nurseId, stops }])
   }, [hydrated, entered, ended, errand, errands, nurseId, pack, store])
 
   const paused = overlay !== null || performing !== null || menu !== false || approaching
@@ -234,9 +236,10 @@ export function PlayView({ pack: source }: { pack: Pack }) {
 
   const clockTone = !entered ? '' : secondsLeft > 60 ? '' : secondsLeft > 20 ? 'hud-warn' : 'hud-alarm'
   const monitor = pack.room.props.find((prop) => prop.readout)
+  const leadsOn = monitored(pack.vitals, scene ?? [])
   const live = pack.vitals ? vitalsAt(pack.vitals, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered })) : null
-  const readout = live ? vitalsLine(live) : monitor ? readoutText(monitor.readout, scene ?? []) : null
-  const monitorBpm = live ? (hasOutput(live) ? Math.round(live.hr ?? 80) : 0) : undefined
+  const readout = live ? (leadsOn ? vitalsLine(live) : 'NO LEADS') : monitor ? readoutText(monitor.readout, scene ?? []) : null
+  const monitorBpm = live && leadsOn ? (hasOutput(live) ? Math.round(live.hr ?? 80) : 0) : undefined
   const speakerName = msg?.speakerId ? (msg.speakerId === 'player' ? 'YOU' : targetName(pack, msg.speakerId)) : msg?.tone === 'trap' ? 'NO MARK' : null
   const facingNpc = facingId ? pack.cast.some((npc) => npc.id === facingId) : false
   const idle = !entered
@@ -269,12 +272,20 @@ export function PlayView({ pack: source }: { pack: Pack }) {
               scene={scene ?? []}
               labels={labels}
               monitorBpm={monitorBpm}
+              monitorOff={!leadsOn}
               walks={walks}
               onWalkStop={(token, index, npcId) => {
                 // The nurse reports at the bedside: the stop before going home.
                 if (!errand || token !== errand.walk) return
                 const stops = walks.find((w) => w.token === token)?.stops ?? []
                 if (index !== stops.length - 2) return
+                if (errand.job.kind === 'refuse') {
+                  screen.current?.slap(npcId)
+                  sfx.bump()
+                  store().note(refusal(errand.job.items[0] ?? ''), 'say', npcId)
+                  return
+                }
+                store().deliverErrand(pack, errand.job.token)
                 store().note(nurseReport(errand.job), 'say', npcId)
               }}
               onWalkDone={(token) => {
@@ -425,6 +436,14 @@ export function PlayView({ pack: source }: { pack: Pack }) {
       <p className="keys-help">Arrows/WASD move · Z/Enter = A · X/Esc = B · M = START · Shift = SELECT</p>
     </div>
   )
+}
+
+const REFUSALS = ['Not on my watch, doctor!', 'Are you trying to kill her?', 'Doctor. No.', 'I am not giving that. Think again!']
+
+/** The nurse, after the slap: a line that names the item she would not fetch. */
+function refusal(item: string) {
+  const short = item.split(/ — |; |, | \(|: | for | in case | to /)[0].trim()
+  return `${REFUSALS[Math.floor(Math.random() * REFUSALS.length)]} No ${short.charAt(0).toLowerCase()}${short.slice(1)}.`
 }
 
 /** What the nurse says at the bedside: the item, trimmed to its first clause, and what was done with it. */

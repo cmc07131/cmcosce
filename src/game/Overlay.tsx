@@ -94,6 +94,10 @@ function Body({
 
   if (overlay.kind === 'chooser') {
     const actions = pack.actions.filter((action) => action.targetIds.includes(overlay.targetId))
+    // A cart or trolley is one shelf of kit, whichever step each item belongs to.
+    if (actions.length > 1 && actions.every((a) => a.kind === 'kit')) {
+      return <CartList actions={actions} title={targetName(pack, overlay.targetId)} spent={spent} onClose={onClose} onConfirm={onConfirm} />
+    }
     return (
       <Win title={targetName(pack, overlay.targetId)} onClose={onClose} className="sheet">
         <div className="sheet-scroll">
@@ -292,6 +296,64 @@ function SelectList({
         }}
       >
         {action.confirmLabel || 'Take these'} {picked.length ? `(${picked.length})` : ''}
+      </NavItem>
+    </Win>
+  )
+}
+
+/** Every item on a cart or trolley in one list; the choice is sent back to the step each item belongs to. */
+function CartList({
+  actions,
+  title,
+  spent,
+  onClose,
+  onConfirm,
+}: {
+  actions: Action[]
+  title: string
+  spent: Record<string, string[]>
+  onClose?: () => void
+  onConfirm: (actionId: string, optionIds: string[]) => void
+}) {
+  const seed = usePlay((s) => s.seed)
+  const rows = useMemo(
+    () => seededShuffle(actions.flatMap((a) => (a.options ?? []).map((o) => ({ actionId: a.id, option: o, key: `${a.id}:${o.id}` }))), seed, `cart:${title}`),
+    [actions, seed, title],
+  )
+  const [picked, setPicked] = useState<string[]>([])
+  return (
+    <Win title={title} onClose={onClose} className="sheet">
+      <div className="sheet-scroll">
+        {rows.map(({ actionId, option, key }) => {
+          const taken = (spent[actionId] ?? []).includes(option.id)
+          const on = picked.includes(key)
+          return (
+            <NavItem
+              key={key}
+              testId={`option-${actionId}-${option.id}`}
+              disabled={taken}
+              tone={taken ? 'done' : undefined}
+              onClick={() => setPicked((cur) => (cur.includes(key) ? cur.filter((k) => k !== key) : [...cur, key]))}
+            >
+              <span className="check">{taken ? '✓' : on ? '■' : '□'}</span>
+              {option.label}
+            </NavItem>
+          )
+        })}
+      </div>
+      <NavItem
+        testId="confirm-cart"
+        className="nav-confirm"
+        onClick={() => {
+          if (!picked.length) return
+          for (const a of actions) {
+            const ids = picked.filter((k) => k.startsWith(`${a.id}:`)).map((k) => k.slice(a.id.length + 1))
+            if (ids.length) onConfirm(a.id, ids)
+          }
+          setPicked([])
+        }}
+      >
+        {actions[0]?.confirmLabel || 'Take these'} {picked.length ? `(${picked.length})` : ''}
       </NavItem>
     </Win>
   )

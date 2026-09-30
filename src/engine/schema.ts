@@ -11,6 +11,8 @@ export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannul
 export type PerformKind = (typeof performKinds)[number]
 
 const performFields = {
+  /** An examination close-up played before the finding. */
+  anim: z.string().optional(),
   perform: z.enum(performKinds).optional(),
   performPose: z.string().optional(),
   performHint: z.string().optional(),
@@ -126,6 +128,8 @@ export const vitalsSchema = z.object({
   glucose: z.number().optional(),
   /** An ECG atlas id for the monitor strip: `sinus`, `af`, `vt`… */
   rhythm: z.string().optional(),
+  /** The monitor shows nothing until this scene flag is set (the nurse has attached the leads). */
+  showWhen: z.string().optional(),
   drift: z.object(vitalNums).optional(),
   stop: z.array(z.string()).optional(),
   effects: z

@@ -315,11 +315,14 @@ test('phases: the objective follows the perfect script and moves on as each phas
     const first = (action.options ?? []).find((o) => !o.isTrap) ?? (action.findings ?? [])[0]
     spent[stepId] = [first!.id]
   }
+  const [arrival] = pack.phases ?? []
   assert.equal(currentPhase(pack, spent)?.title, 'Arrival')
-  done('arrive')
+  for (const id of arrival.steps.slice(0, -1)) done(id)
+  assert.equal(currentPhase(pack, spent)?.title, 'Arrival', 'a phase is done only when all its steps are')
+  done(arrival.steps.at(-1)!)
   assert.equal(currentPhase(pack, spent)?.title, 'ABC')
   // Out of order is allowed: the objective waits for the earliest unfinished phase.
-  done('rsi')
+  done('intubate')
   assert.equal(currentPhase(pack, spent)?.title, 'ABC')
   for (const phase of pack.phases ?? []) for (const id of phase.steps) done(id)
   assert.equal(currentPhase(pack, spent), null)

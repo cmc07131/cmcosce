@@ -307,13 +307,14 @@ function shelf(c: Ctx, x: number, y: number) {
   })
 }
 
-function monitor(c: Ctx, p: PropBox, t: number, bpm: number, flat: boolean) {
+function monitor(c: Ctx, p: PropBox, t: number, bpm: number, flat: boolean, off = false) {
   const x = p.x * TILE
   const y = p.y * TILE
   const w = p.w * TILE
   box(c, x + 1, y + 1, w - 2, 13, '#404850')
-  px(c, x + 3, y + 3, w - 6, 9, '#082818')
+  px(c, x + 3, y + 3, w - 6, 9, off ? '#101418' : '#082818')
   px(c, x + w / 2 - 2, y + 14, 4, 2, '#404850')
+  if (off) return
   const width = w - 8
   const baseY = y + 9
   const beat = 60000 / Math.max(20, bpm)
@@ -446,14 +447,14 @@ function curtain(c: Ctx, p: PropBox) {
 /** Floor-level props draw before actors; furniture after the floor. */
 export const FLOOR_KINDS = new Set(['hazard', 'mat'])
 
-export function drawProp(c: Ctx, p: PropBox, t: number, monitorBpm = 80, monitorFlat = false) {
+export function drawProp(c: Ctx, p: PropBox, t: number, monitorBpm = 80, monitorFlat = false, monitorOff = false) {
   const x = p.x * TILE
   const y = p.y * TILE
   switch (p.kind) {
     case 'bed':
       return bed(c, p)
     case 'monitor':
-      return monitor(c, p, t, monitorBpm, monitorFlat)
+      return monitor(c, p, t, monitorBpm, monitorFlat, monitorOff)
     case 'hazard':
       for (let i = 0; i < p.w; i++) hazard(c, x + i * TILE, y)
       return

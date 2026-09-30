@@ -8,39 +8,44 @@
   "phases": [
     {
       "title": "Arrival",
-      "goal": "Take charge: call the team and the kit you will need, gloves on, and read the packet. What, how much, and when?",
+      "goal": "Take charge: call the team and the kit you will need, get your gloves on, and read the packet. What, how much, and when?",
       "steps": [
-        "arrive"
+        "arrive",
+        "ppe",
+        "packet"
       ]
     },
     {
       "title": "ABC",
-      "goal": "Assess ABC and the toxidrome. Monitoring, oxygen, access, gas and glucose. Say whether the airway is protected, and what you will not do yet.",
+      "goal": "Get the nurse to put her on the monitor, oxygen and access. Examine her yourself, A to E. Say whether the airway is protected, and what you will not do yet.",
       "steps": [
-        "assess",
-        "monitoring"
+        "monitoring",
+        "assess"
       ]
     },
     {
       "title": "ECG",
-      "goal": "Read the 12-lead before any other drug, treat what it shows, and plan for VT and seizures. Then repeat the ECG.",
+      "goal": "Read the 12-lead before any drug. Treat what it shows from the drug cart, get ready for VT and seizures, then repeat the ECG.",
       "steps": [
         "ecg",
         "bicarb",
-        "contingency",
+        "pads",
         "repeat-ecg"
       ]
     },
     {
       "title": "RSI",
-      "goal": "Secure the airway, in the right order relative to the bicarbonate, and set the ventilator for this poisoning.",
+      "goal": "Kit from the trolley, drugs from the cart, then intubate her yourself, in the right order relative to the bicarbonate. Set the ventilator for this poisoning.",
       "steps": [
-        "rsi"
+        "rsi-kit",
+        "rsi-drugs",
+        "intubate",
+        "ventilate"
       ]
     },
     {
       "title": "Circulation",
-      "goal": "Still hypotensive? Treat it in steps. Know the one antiarrhythmic you may use.",
+      "goal": "Still hypotensive? Treat it in steps from the drug cart. Know the one antiarrhythmic you may use.",
       "steps": [
         "circulation"
       ]
@@ -49,7 +54,9 @@
       "title": "Decontamination and labs",
       "goal": "Now the airway is safe: decide on charcoal and lavage, and send the bloods that matter.",
       "steps": [
-        "decon",
+        "ogt",
+        "charcoal",
+        "lavage",
         "labs"
       ]
     },
@@ -131,7 +138,8 @@
         "overS": 60,
         "rhythm": "tca-bicarb"
       }
-    ]
+    ],
+    "showWhen": "monitored"
   },
   "steps": [
     {
@@ -139,53 +147,46 @@
       "kind": "say",
       "to": "nurse",
       "label": "Take charge",
-      "hint": "Announce yourself, call the resus team with airway kit, suction and defibrillator; gloves; read the pack.",
+      "hint": "Announce yourself; call the resus team with airway kit, suction and the defibrillator.",
       "opts": [
         {
           "t": "I am the AED doctor. Resus team please: airway trolley, suction, defibrillator.",
           "mark": "Takes charge and calls the team, airway kit, suction and defibrillator"
         },
         {
-          "t": "Gloves on. Read the packet: amitriptyline 25 mg, 60 tablets gone — up to 1.5 g, about an hour ago.",
-          "mark": "Identifies the drug, the dose and the time of ingestion"
-        },
-        {
-          "t": "GCS 7, shocked and hypoxic an hour after a big dose: this is life-threatening TCA poisoning.",
-          "mark": "Recognises life-threatening TCA poisoning"
-        },
-        {
           "t": "Start with a full history from the husband before touching her",
           "trap": true,
-          "r": "She is shocked, hypoxic and GCS 7. Resuscitate first; the history comes from the pack and the door note."
+          "r": "She is shocked, hypoxic and GCS 7. Resuscitate first; the history comes from the packet and the door note."
         }
       ]
     },
     {
-      "id": "assess",
+      "id": "ppe",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "Gloves before you touch her.",
+      "confirm": "Take these",
+      "opts": [
+        {
+          "t": "Gloves and apron",
+          "mark": "Gloves and apron on"
+        }
+      ]
+    },
+    {
+      "id": "packet",
       "kind": "exam",
       "to": "patient",
-      "label": "Assess",
-      "hint": "Airway and breathing, circulation, pupils and skin (anticholinergic), glucose.",
+      "label": "The packet",
+      "hint": "Read the empty packet beside her.",
       "groups": {
-        "ABCDE": [
+        "Scene": [
           {
-            "t": "Airway and breathing",
-            "r": "Snoring, RR 10, shallow. Gag weak.",
-            "mark": "Recognises an unprotected airway and hypoventilation"
-          },
-          {
-            "t": "Circulation",
-            "r": "HR 120, BP 90/40, warm dry skin."
-          },
-          {
-            "t": "Pupils, skin, bladder, bowel sounds",
-            "r": "Pupils 6 mm, dry flushed skin, palpable bladder, quiet bowel sounds.",
-            "mark": "Recognises an anticholinergic toxidrome"
-          },
-          {
-            "t": "Glucose",
-            "r": "6.1 mmol/L.",
-            "mark": "Checks glucose"
+            "t": "Read the empty packet",
+            "anim": "packet",
+            "r": "Amitriptyline 25 mg, 60 tablets, all gone: up to 1.5 g. Her husband left her well an hour ago. GCS 7, shocked and hypoxic: life-threatening TCA poisoning.",
+            "mark": "Identifies the drug, the dose and the time: life-threatening TCA poisoning"
           }
         ]
       }
@@ -195,28 +196,81 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring and access",
-      "hint": "Oxygen, full monitoring, gas, access, glucose. Airway unprotected: plan RSI, and no charcoal or lavage tube yet.",
+      "hint": "Ask the nurse for monitoring, oxygen and access. Tell the team the airway is not protected.",
       "opts": [
         {
-          "t": "High-flow oxygen, continuous ECG, NIBP and SpO2, a blood gas, two large-bore IVs, and a glucose now.",
+          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        },
+        {
+          "t": "Non-rebreather mask at 15 L/min.",
+          "fetch": "trolley",
           "scene": "oxygen",
-          "mark": "Oxygen, monitoring, gas, IV access and glucose"
+          "mark": "High-flow oxygen"
+        },
+        {
+          "t": "Two large-bore cannulae, bloods and a venous gas.",
+          "fetch": "trolley",
+          "mark": "Two large-bore IVs, bloods and a gas"
         },
         {
           "t": "Her airway is not protected. I am planning RSI. No charcoal and no lavage tube yet.",
           "mark": "States the airway is unprotected: plans RSI, no charcoal or lavage yet"
-        },
-        {
-          "t": "Activated charcoal 50 g by mouth now, while we are early",
-          "trap": "critical",
-          "r": "GCS 7 with a weak gag: she will aspirate. Charcoal only once the airway is protected."
-        },
-        {
-          "t": "Pass a large-bore lavage tube now",
-          "trap": "critical",
-          "r": "Unprotected airway: aspiration. And lavage is not first-line."
         }
       ]
+    },
+    {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Examine",
+      "hint": "Hands on, A to E: airway, breathing, circulation, pupils and GCS, glucose, then expose.",
+      "groups": {
+        "A–B": [
+          {
+            "t": "Airway: look, listen, feel",
+            "anim": "airway",
+            "r": "Snoring. Tongue falling back. Gag weak. Airway not protected.",
+            "mark": "Recognises an unprotected airway"
+          },
+          {
+            "t": "Breathing: rate, chest movement, listen",
+            "anim": "auscultate",
+            "r": "RR 10, shallow. Equal air entry, chest clear. SpO2 90% on air.",
+            "mark": "Recognises hypoventilation"
+          }
+        ],
+        "C": [
+          {
+            "t": "Circulation: pulse, capillary refill, skin",
+            "anim": "pulse",
+            "r": "Pulse 120, regular, thready. Capillary refill 3 s. Skin warm, dry and flushed."
+          }
+        ],
+        "D": [
+          {
+            "t": "Pupils and GCS",
+            "anim": "pupils",
+            "r": "Pupils 6 mm, sluggish. GCS E2 V2 M3 = 7.",
+            "mark": "Recognises an anticholinergic toxidrome"
+          },
+          {
+            "t": "Capillary glucose",
+            "anim": "glucose",
+            "r": "6.1 mmol/L.",
+            "mark": "Checks glucose"
+          }
+        ],
+        "E": [
+          {
+            "t": "Expose: skin, bladder, bowel sounds",
+            "anim": "abdomen",
+            "r": "Dry flushed skin, palpable bladder, quiet bowel sounds. No injuries, no other packets."
+          }
+        ]
+      }
     },
     {
       "id": "ecg",
@@ -252,15 +306,20 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Treat the broad QRS before anything else.",
+      "hint": "Treat the broad QRS before anything else, and have the seizure drug ready.",
       "confirm": "Give these",
       "opts": [
         {
-          "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) rapid IV now, then repeat the ECG",
+          "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) rapid IV, then repeat the ECG",
           "fetch": "cart",
           "need": true,
           "scene": "bicarb",
           "mark": "Sodium bicarbonate 8.4% 1–2 mmol/kg rapid bolus for the broad QRS"
+        },
+        {
+          "t": "Lorazepam 4 mg drawn up and labelled, ready for a seizure",
+          "fetch": "cart",
+          "mark": "Benzodiazepine ready for seizures"
         },
         {
           "t": "Amiodarone 300 mg IV for the broad complexes",
@@ -289,19 +348,17 @@
       ]
     },
     {
-      "id": "contingency",
-      "kind": "say",
-      "to": "nurse",
-      "label": "If she gets worse",
-      "hint": "What you will do for VT or a persistently wide QRS, and for a seizure.",
+      "id": "pads",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "VT is coming: be ready to shock.",
+      "confirm": "Take these",
       "opts": [
         {
-          "t": "If VT, a QRS still wide or still shocked: another 50–100 mL of bicarbonate. Pads on; shock if pulseless. No amiodarone.",
-          "mark": "Plans for VT or persistent widening: more bicarbonate, pads, no amiodarone"
-        },
-        {
-          "t": "If she seizes: lorazepam 4 mg IV (or midazolam about 0.1 mg/kg) and another bicarbonate bolus. No phenytoin, no flumazenil.",
-          "mark": "Plans for seizures: benzodiazepine plus bicarbonate, no phenytoin or flumazenil"
+          "t": "Defibrillator pads on the chest",
+          "fetch": "trolley",
+          "mark": "Defibrillator pads on in case of VT"
         }
       ]
     },
@@ -320,26 +377,80 @@
       ]
     },
     {
-      "id": "rsi",
-      "kind": "say",
-      "to": "nurse",
-      "label": "RSI",
-      "hint": "Intubate after the bicarbonate, then hyperventilate to keep her alkaline.",
+      "id": "rsi-kit",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "Intubation kit.",
+      "confirm": "Take these",
       "opts": [
         {
-          "t": "GCS 7, hypoxic and shocked: I will intubate now. The bicarbonate is already in, so the apnoeic pause will not acidify her and widen the QRS.",
-          "scene": "intubated",
-          "mark": "Intubates after the bicarbonate, and says why",
-          "r": "Tube in. ETCO2 4.2."
+          "t": "Intubation kit: laryngoscope, size 7.0 tube, bougie, suction, capnography",
+          "fetch": "trolley",
+          "mark": "Prepares the intubation kit with capnography"
         },
         {
-          "t": "After the tube, hyperventilate to pH 7.45–7.55. Repeat the gas and potassium.",
+          "t": "Large-bore lavage tube (36–40 Fr) and funnel",
+          "fetch": "trolley",
+          "trap": true,
+          "r": "Lavage is not first-line. Only if HKPIC and a senior agree tablets are still in the stomach."
+        }
+      ]
+    },
+    {
+      "id": "rsi-drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Induction that keeps the pressure up, and a relaxant.",
+      "confirm": "Give these",
+      "opts": [
+        {
+          "t": "Ketamine 1 mg/kg (reduced for shock) and rocuronium 1.2 mg/kg for RSI",
+          "fetch": "cart",
+          "mark": "Haemodynamically stable induction: ketamine and rocuronium"
+        },
+        {
+          "t": "Propofol 2 mg/kg for induction",
+          "fetch": "cart",
+          "trap": true,
+          "r": "A full dose of propofol in a shocked patient with a BP of 90/40 risks arrest. Ketamine, reduced."
+        }
+      ]
+    },
+    {
+      "id": "intubate",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Intubate",
+      "hint": "The bicarbonate is in: now intubate.",
+      "groups": {
+        "Airway": [
+          {
+            "t": "Intubate: laryngoscope, tube through the cords, cuff up, capnography",
+            "anim": "intubate",
+            "scene": "intubated",
+            "r": "Grade 1 view. 7.0 tube at 21 cm. ETCO2 trace on every breath.",
+            "mark": "Intubates after the bicarbonate and confirms with capnography"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ventilate",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Ventilator",
+      "hint": "Keep her alkaline.",
+      "opts": [
+        {
+          "t": "Ventilator: a faster rate, aim for pH 7.45–7.55. Repeat the gas and potassium.",
           "mark": "Hyperventilates to pH 7.45–7.55 and repeats the gas and potassium"
         },
         {
-          "t": "Intubate first and give the bicarbonate afterwards",
+          "t": "Normal ventilator settings, PaCO2 5–6 kPa",
           "trap": true,
-          "r": "The apnoeic pause of RSI causes acidosis, which worsens sodium-channel block. Bicarbonate first."
+          "r": "Mild hyperventilation keeps her alkaline (pH 7.45–7.55); a normal or high PaCO2 lets the QRS widen again."
         }
       ]
     },
@@ -347,7 +458,7 @@
       "id": "circulation",
       "kind": "pick",
       "to": "cart",
-      "label": "Circulation",
+      "label": "Drug cart",
       "hint": "Fluids, then a vasopressor. For VT once alkalinised: lignocaine.",
       "confirm": "Give these",
       "opts": [
@@ -364,7 +475,7 @@
           "mark": "Noradrenaline if still hypotensive"
         },
         {
-          "t": "Lignocaine 1–1.5 mg/kg ready for VT once the pH is 7.5",
+          "t": "Lignocaine 1–1.5 mg/kg drawn up for VT once the pH is 7.5",
           "fetch": "cart",
           "mark": "Lignocaine for VT once the pH is already 7.5"
         },
@@ -377,24 +488,45 @@
       ]
     },
     {
-      "id": "decon",
-      "kind": "say",
-      "to": "nurse",
-      "label": "Decontamination",
-      "hint": "Airway protected, about an hour, a life-threatening dose.",
+      "id": "ogt",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Trolley",
+      "hint": "A way into the stomach, now the airway is safe.",
+      "confirm": "Take these",
       "opts": [
         {
-          "t": "Tube in, about an hour, a life-threatening load: activated charcoal 50 g down an orogastric tube.",
-          "mark": "Activated charcoal 50 g via an orogastric tube once the airway is protected"
-        },
+          "t": "Orogastric tube, placed and checked",
+          "fetch": "trolley",
+          "mark": "Orogastric tube once the airway is protected"
+        }
+      ]
+    },
+    {
+      "id": "charcoal",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "About an hour, a life-threatening load, airway protected.",
+      "confirm": "Give these",
+      "opts": [
         {
-          "t": "Lavage is not first-line. Only if HKPIC and a senior agree tablets are still in the stomach; delayed emptying is a discussion, not a four-hour rule.",
+          "t": "Activated charcoal 50 g down the orogastric tube",
+          "fetch": "cart",
+          "mark": "Activated charcoal 50 g via the orogastric tube"
+        }
+      ]
+    },
+    {
+      "id": "lavage",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Lavage?",
+      "hint": "Say what you will and will not do about the stomach.",
+      "opts": [
+        {
+          "t": "No lavage now. Only if HKPIC and a senior agree tablets are still in the stomach; delayed emptying is a discussion, not a four-hour rule.",
           "mark": "Lavage only if HKPIC and a senior agree: not routine"
-        },
-        {
-          "t": "Routine gastric lavage now: anticholinergics slow emptying, so it works for 4 hours",
-          "trap": true,
-          "r": "Lavage is not routine (AACT/EAPCCT). Consider it only if HKPIC and a senior agree tablets are still in the stomach."
         }
       ]
     },
@@ -406,7 +538,7 @@
       "hint": "What you send, and what you do not wait for.",
       "opts": [
         {
-          "t": "Gas, electrolytes, glucose and a paracetamol level. I am not waiting for a TCA level.",
+          "t": "Send the gas, electrolytes, glucose and a paracetamol level. We are not waiting for a TCA level.",
           "mark": "Gas, electrolytes, glucose and paracetamol; does not wait for a TCA level"
         },
         {
@@ -499,12 +631,12 @@
           ]
         },
         {
-          "q": "Gastric lavage (AACT/EAPCCT) is…",
-          "a": "Not routine; only with poison-centre agreement",
+          "q": "She seizes. Which drug, and which to avoid?",
+          "a": "Benzodiazepine; avoid phenytoin",
           "wrong": [
-            "Routine for every overdose within 4 hours",
-            "Required before any activated charcoal",
-            "Safe without a protected airway if awake"
+            "Phenytoin; avoid benzodiazepines",
+            "Levetiracetam; avoid lorazepam",
+            "Flumazenil; avoid midazolam"
           ]
         }
       ]
@@ -524,17 +656,6 @@
       "ok": "The ECG was read before other drugs."
     },
     {
-      "id": "bicarb-before-rsi",
-      "first": [
-        "bicarb"
-      ],
-      "then": [
-        "rsi"
-      ],
-      "fail": "Intubated before the bicarbonate: the apnoeic pause worsens the sodium-channel block.",
-      "ok": "Bicarbonate before RSI."
-    },
-    {
       "id": "bicarb-before-repeat",
       "first": [
         "bicarb"
@@ -546,15 +667,40 @@
       "ok": "ECG repeated after the bicarbonate."
     },
     {
-      "id": "airway-before-decon",
+      "id": "bicarb-before-rsi",
       "first": [
-        "rsi"
+        "bicarb"
       ],
       "then": [
-        "decon"
+        "rsi-drugs",
+        "intubate"
       ],
-      "fail": "Decontamination before the airway was protected.",
-      "ok": "Airway protected before charcoal."
+      "fail": "Intubated before the bicarbonate: the apnoeic pause worsens the sodium-channel block.",
+      "ok": "Bicarbonate before RSI."
+    },
+    {
+      "id": "airway-before-decon",
+      "first": [
+        "intubate"
+      ],
+      "then": [
+        "ogt",
+        "charcoal"
+      ],
+      "fail": "A tube or charcoal into the stomach before the airway was protected.",
+      "ok": "Airway protected before the stomach."
+    },
+    {
+      "id": "gloves-first",
+      "first": [
+        "ppe"
+      ],
+      "then": [
+        "assess",
+        "packet"
+      ],
+      "fail": "Touched her before gloves were on.",
+      "ok": "Gloves on before touching her."
     }
   ],
   "badge": {
