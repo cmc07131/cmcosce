@@ -146,42 +146,23 @@
     },
     {
       "id": "ntsp",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Is the tracheostomy patent?",
       "hint": "Remove the speaking valve, remove the inner cannula, pass a suction catheter; if needed deflate the cuff; then remove the tube.",
       "opts": [
         {
-          "t": "Remove any speaking valve or cap",
-          "n": 1,
-          "mark": "Removes speaking valve or cap"
-        },
-        {
-          "t": "Remove the inner cannula",
-          "n": 2,
-          "scene": "patent",
-          "mark": "Removes the inner cannula",
-          "r": "A thick plug of dried secretions comes out with it. Airflow returns at the stoma; ETCO2 trace grows."
-        },
-        {
-          "t": "Pass a suction catheter to check the tube is clear",
-          "n": 3,
-          "mark": "Passes a suction catheter to test patency"
-        },
-        {
-          "t": "Clean and replace the inner cannula; humidify the oxygen",
-          "n": 4,
-          "mark": "Replaces a clean inner cannula and humidifies"
-        },
-        {
-          "t": "Pull the whole tube out first",
-          "trap": true,
-          "r": "Remove the inner cannula and suction first; most blockages are in the inner cannula."
-        },
-        {
-          "t": "Bag hard through the blocked tube",
-          "trap": "critical",
-          "r": "Forcing air into a blocked or displaced tube causes surgical emphysema and no ventilation."
+          "t": "Is the tracheostomy patent?",
+          "perform": "trach",
+          "performHint": "Do it with your hands. His saturation is falling while you work.",
+          "mark": [
+            "Removes speaking valve or cap",
+            "Removes the inner cannula",
+            "Passes a suction catheter to test patency",
+            "Replaces a clean inner cannula and humidifies"
+          ],
+          "scene": "patent"
         }
       ]
     },
