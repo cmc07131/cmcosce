@@ -15,6 +15,8 @@ import { TrachProcedure } from './trach/TrachProcedure'
 import { DystociaProcedure } from './dystocia/DystociaProcedure'
 import { BreechProcedure } from './breech/BreechProcedure'
 import { DeliveryProcedure } from './delivery/DeliveryProcedure'
+import { ElbowProcedure } from './elbow/ElbowProcedure'
+import { ValsalvaProcedure } from './valsalva/ValsalvaProcedure'
 import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
@@ -42,4 +44,6 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   dystocia: DystociaProcedure,
   breech: BreechProcedure,
   delivery: DeliveryProcedure,
+  elbow: ElbowProcedure,
+  valsalva: ValsalvaProcedure,
 }

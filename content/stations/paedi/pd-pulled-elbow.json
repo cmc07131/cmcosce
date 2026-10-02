@@ -79,41 +79,22 @@
     },
     {
       "id": "reduce",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Reduce",
       "hint": "Explain to the father, hold the elbow with a thumb on the radial head, hyperpronate; reassess.",
       "opts": [
         {
-          "t": "Explain it will hurt for a second and should fix it",
-          "n": 1,
-          "mark": "Explains to the parent"
-        },
-        {
-          "t": "Child on the father's lap; support her elbow, thumb over the radial head",
-          "n": 2,
-          "mark": "Correct hold"
-        },
-        {
-          "t": "Firmly hyperpronate the forearm",
-          "n": 3,
-          "mark": "Hyperpronation technique",
-          "r": "A faint click under your thumb."
-        },
-        {
-          "t": "Watch her play for 15–30 minutes: reaching for a toy with the right hand",
-          "n": 4,
-          "mark": "Reassesses function"
-        },
-        {
-          "t": "X-ray the elbow before trying",
-          "trap": true,
-          "r": "Not needed with a typical history and no swelling."
-        },
-        {
-          "t": "Put her arm in a plaster for 3 weeks",
-          "trap": true,
-          "r": "No immobilisation is needed after reduction."
+          "t": "Reduce",
+          "perform": "elbow",
+          "performHint": "Do it with your hands. She will tell you when it clicks.",
+          "mark": [
+            "Explains to the parent",
+            "Correct hold",
+            "Hyperpronation technique",
+            "Reassesses function"
+          ]
         }
       ]
     },

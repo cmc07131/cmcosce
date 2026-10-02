@@ -120,41 +120,24 @@
     },
     {
       "id": "vagal",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Modified Valsalva",
       "hint": "Semi-recumbent, blow into a syringe 15 s, then flat with legs up 15 s.",
       "opts": [
         {
-          "t": "Explain; record a rhythm strip",
-          "n": 1,
-          "mark": "Explains and records the rhythm"
-        },
-        {
-          "t": "Sit her semi-recumbent (45°)",
-          "n": 2,
-          "mark": "Starts semi-recumbent"
-        },
-        {
-          "t": "Blow into a 10 mL syringe hard enough to move the plunger, for 15 seconds",
-          "n": 3,
-          "mark": "Strain at about 40 mmHg for 15 s"
-        },
-        {
-          "t": "Immediately lie her flat and lift her legs to 45° for 15 seconds",
-          "n": 4,
-          "mark": "Leg raise after the strain (modified Valsalva)"
-        },
-        {
-          "t": "Check the rhythm",
-          "n": 5,
-          "r": "Still SVT at 190.",
-          "mark": "Reassesses the rhythm"
-        },
-        {
-          "t": "Press on both carotids together",
-          "trap": "critical",
-          "r": "Never bilateral carotid pressure: risk of cerebral ischaemia."
+          "t": "Modified Valsalva",
+          "perform": "valsalva",
+          "performHint": "Do it with her. The strain has to be long and the legs go up at once.",
+          "mark": [
+            "Explains and records the rhythm",
+            "Starts semi-recumbent",
+            "Strain at about 40 mmHg for 15 s",
+            "Leg raise after the strain (modified Valsalva)",
+            "Reassesses the rhythm"
+          ],
+          "pose": "refractory"
         }
       ]
     },

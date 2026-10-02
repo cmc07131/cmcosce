@@ -7,7 +7,7 @@ const tile = z.object({
   y: z.number().int(),
 })
 
-export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannula', 'look', 'release', 'io', 'cico', 'pacing', 'cord', 'exam', 'igel', 'ventilator', 'defib', 'niv', 'hare', 'colles', 'usblock', 'knee', 'shoulder', 'digital', 'suture', 'nose', 'cutdown', 'hook', 'chest', 'binder', 'eschar', 'clamshell', 'trach', 'dystocia', 'breech', 'delivery'] as const
+export const performKinds = ['lift', 'cover', 'dress', 'listen', 'pose', 'cannula', 'look', 'release', 'io', 'cico', 'pacing', 'cord', 'exam', 'igel', 'ventilator', 'defib', 'niv', 'hare', 'colles', 'usblock', 'knee', 'shoulder', 'digital', 'suture', 'nose', 'cutdown', 'hook', 'chest', 'binder', 'eschar', 'clamshell', 'trach', 'dystocia', 'breech', 'delivery', 'elbow', 'valsalva', 'newborn', 'cpr', 'positional'] as const
 export type PerformKind = (typeof performKinds)[number]
 
 /** Scene flags a bench may set from its own result, besides the option's own scene. */
