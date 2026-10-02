@@ -22,7 +22,7 @@
     },
     {
       "title": "The block",
-      "goal": "Under ultrasound: the fascia, hydrodissection, slow aliquots, then label her.",
+      "goal": "By hand under ultrasound: the image, the anatomy, the needle under the fascia, the spread.",
       "steps": [
         "block"
       ]
@@ -135,46 +135,25 @@
     },
     {
       "id": "block",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Ultrasound-guided block",
-      "hint": "Probe below the inguinal ligament, identify artery, nerve, fascia iliaca, iliopsoas; in-plane lateral to medial; aspirate; inject in increments.",
+      "hint": "Clean, sterile probe, find the image, name the anatomy, in-plane under the fascia, aspirate, aliquots, label.",
       "opts": [
         {
-          "t": "Clean the groin; sterile probe cover",
-          "n": 1,
-          "mark": "Asepsis"
-        },
-        {
-          "t": "Linear probe transverse below the inguinal ligament: femoral artery, nerve lateral to it, fascia iliaca over iliopsoas",
-          "n": 2,
-          "mark": "Identifies sonoanatomy (NAVEL, fascia iliaca)"
-        },
-        {
-          "t": "Needle in-plane from lateral to medial, tip under the fascia iliaca lateral to the nerve",
-          "n": 3,
-          "mark": "In-plane approach with the tip under the fascia"
-        },
-        {
-          "t": "Aspirate; inject 2 mL and watch the fascia lift (hydrodissection)",
-          "n": 4,
-          "mark": "Aspirates and confirms spread"
-        },
-        {
-          "t": "Inject the 40 mL in 5 mL aliquots, aspirating between",
-          "n": 5,
-          "scene": "block",
-          "mark": "Incremental injection within the maximum dose"
-        },
-        {
-          "t": "Document; label the time and drug on her wrist; observe for LAST",
-          "n": 6,
-          "mark": "Documentation and observation"
-        },
-        {
-          "t": "Inject quickly without seeing the needle tip",
-          "trap": "critical",
-          "r": "Risk of intravascular or intraneural injection. Always see the tip."
+          "t": "Ultrasound-guided block",
+          "perform": "usblock",
+          "performHint": "Do it with your hands on the probe and the needle. Mrs Ma tells you if the tip is somewhere it should not be.",
+          "mark": [
+            "Asepsis",
+            "Identifies sonoanatomy (NAVEL, fascia iliaca)",
+            "In-plane approach with the tip under the fascia",
+            "Aspirates and confirms spread",
+            "Incremental injection within the maximum dose",
+            "Documentation and observation"
+          ],
+          "scene": "block"
         }
       ]
     },

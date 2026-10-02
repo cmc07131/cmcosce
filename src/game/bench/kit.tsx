@@ -180,10 +180,9 @@ export function Syringe({
     g.x = p.x
     const dml = (dx / (barrel.x1 - barrel.x0)) * capacity
     if (dml > 0) {
-      // Pull: first a little negative pressure, then whatever the tip finds.
-      if (contents + pullRef.current + dml > capacity) return
+      // Pull: whatever the tip finds. Nothing coming back, or a full barrel, is just negative pressure.
       const got = onPull(dml)
-      if (got.kind === 'none') {
+      if (got.kind === 'none' || contents + pullRef.current + dml > capacity) {
         pullRef.current = Math.min(1.2, pullRef.current + dml)
         setPull(pullRef.current)
       }

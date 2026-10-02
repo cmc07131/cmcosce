@@ -9,6 +9,7 @@ import { Defib } from './defib/Defib'
 import { Niv } from './vent/Niv'
 import { HareProcedure } from './hare/HareProcedure'
 import { CollesProcedure } from './colles/CollesProcedure'
+import { UsBlockProcedure } from './usblock/UsBlockProcedure'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -80,6 +81,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <Ventilator job={job} onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'usblock') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <UsBlockProcedure job={job} coach onDone={onDone} />
       </BattleFrame>
     )
   }
