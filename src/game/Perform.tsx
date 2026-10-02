@@ -7,6 +7,7 @@ import { IgelProcedure } from './igel/IgelProcedure'
 import { Ventilator } from './vent/Ventilator'
 import { Defib } from './defib/Defib'
 import { Niv } from './vent/Niv'
+import { HareProcedure } from './hare/HareProcedure'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -78,6 +79,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <Ventilator job={job} onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'hare') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <HareProcedure job={job} coach onDone={onDone} />
       </BattleFrame>
     )
   }
