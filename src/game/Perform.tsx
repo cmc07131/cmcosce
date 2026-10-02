@@ -7,11 +7,7 @@ import { IgelProcedure } from './igel/IgelProcedure'
 import { Ventilator } from './vent/Ventilator'
 import { Defib } from './defib/Defib'
 import { Niv } from './vent/Niv'
-import { HareProcedure } from './hare/HareProcedure'
-import { CollesProcedure } from './colles/CollesProcedure'
-import { UsBlockProcedure } from './usblock/UsBlockProcedure'
-import { KneeProcedure } from './knee/KneeProcedure'
-import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
+import { PROCEDURES } from './procedures'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -38,6 +34,15 @@ export function PerformStage({
   const done = useRef(false)
   const hold = useRef(0)
   const last = useRef<Pt | null>(null)
+
+  const Procedure = PROCEDURES[job.kind]
+  if (Procedure) {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <Procedure job={job} coach onDone={onDone} />
+      </BattleFrame>
+    )
+  }
 
   if (job.kind === 'cico') {
     return (
@@ -83,46 +88,6 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <Ventilator job={job} onDone={onDone} />
-      </BattleFrame>
-    )
-  }
-
-  if (job.kind === 'shoulder') {
-    return (
-      <BattleFrame job={job} onCancel={onCancel}>
-        <ShoulderProcedure job={job} coach onDone={onDone} />
-      </BattleFrame>
-    )
-  }
-
-  if (job.kind === 'knee') {
-    return (
-      <BattleFrame job={job} onCancel={onCancel}>
-        <KneeProcedure job={job} coach onDone={onDone} />
-      </BattleFrame>
-    )
-  }
-
-  if (job.kind === 'usblock') {
-    return (
-      <BattleFrame job={job} onCancel={onCancel}>
-        <UsBlockProcedure job={job} coach onDone={onDone} />
-      </BattleFrame>
-    )
-  }
-
-  if (job.kind === 'colles') {
-    return (
-      <BattleFrame job={job} onCancel={onCancel}>
-        <CollesProcedure job={job} coach onDone={onDone} />
-      </BattleFrame>
-    )
-  }
-
-  if (job.kind === 'hare') {
-    return (
-      <BattleFrame job={job} onCancel={onCancel}>
-        <HareProcedure job={job} coach onDone={onDone} />
       </BattleFrame>
     )
   }

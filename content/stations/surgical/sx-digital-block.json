@@ -7,15 +7,8 @@
   "stem": "Procedure room. Mr Wu, 30, has a crushed right middle fingertip with a subungual haematoma and a nail-bed laceration needing repair. Perform a digital nerve block on the hand model.",
   "phases": [
     {
-      "title": "Before the block",
-      "goal": "Consent, contraindications, and document sensation first.",
-      "steps": [
-        "check"
-      ]
-    },
-    {
       "title": "The block",
-      "goal": "Both sides of the finger, a safe volume, then test it.",
+      "goal": "By hand: baseline first, then both sides, dorsal and palmar, a safe volume; test it.",
       "steps": [
         "block"
       ]
@@ -33,72 +26,28 @@
   ],
   "steps": [
     {
-      "id": "check",
-      "kind": "exam",
-      "to": "patient",
-      "label": "Before the block",
-      "hint": "Consent, allergy, vascular disease, document sensation and circulation.",
-      "groups": {
-        "Checks": [
-          {
-            "t": "Explain, consent; allergy to local anaesthetic?",
-            "r": "Agrees; no allergy.",
-            "mark": "Consent and allergy check"
-          },
-          {
-            "t": "Raynaud's or vascular disease?",
-            "r": "No.",
-            "mark": "Screens for vascular disease"
-          },
-          {
-            "t": "Document sensation (two-point) and capillary refill before",
-            "r": "Two-point 4 mm both sides of the pulp; CRT < 2 s.",
-            "mark": "Documents baseline neurovascular status"
-          }
-        ]
-      }
-    },
-    {
       "id": "block",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
-      "label": "Web-space block",
-      "hint": "Clean, dorsal entry in each web space, aspirate, 1–2 mL volar and dorsal, small total volume, wait, test.",
+      "label": "Digital nerve block",
+      "hint": "Consent, vascular history, baseline; draw up, clean, both web spaces dorsal then palmar with aspiration, under 5 mL, wait and test.",
       "opts": [
         {
-          "t": "Clean the base of the finger and web spaces",
-          "n": 1,
-          "mark": "Asepsis"
-        },
-        {
-          "t": "Insert a 25 G needle dorsally in the web space next to the base of the finger",
-          "n": 2,
-          "mark": "Correct entry point"
-        },
-        {
-          "t": "Aspirate, inject ~0.5 mL dorsally, then advance volarly and inject 1–2 mL near the palmar nerve",
-          "n": 3,
-          "mark": "Blocks dorsal and palmar nerves with aspiration"
-        },
-        {
-          "t": "Repeat on the other side of the finger",
-          "n": 4,
-          "mark": "Blocks both sides"
-        },
-        {
-          "t": "Keep the total under about 5 mL",
-          "n": 5,
-          "mark": "Limits volume to avoid pressure ischaemia"
-        },
-        {
-          "t": "Wait 5–10 minutes; test sensation at the tip before starting",
-          "n": 6,
-          "mark": "Waits and tests the block"
-        },
-        {
-          "t": "Inject 10 mL circumferentially around the base",
-          "trap": "critical",
-          "r": "A tight circumferential volume can compress digital vessels."
+          "t": "Digital nerve block",
+          "perform": "digital",
+          "performHint": "Do it with your hands. The finger tells you what is numb.",
+          "mark": [
+            "Consent and allergy check",
+            "Screens for vascular disease",
+            "Documents baseline neurovascular status",
+            "Asepsis",
+            "Correct entry point",
+            "Blocks dorsal and palmar nerves with aspiration",
+            "Blocks both sides",
+            "Limits volume to avoid pressure ischaemia",
+            "Waits and tests the block"
+          ]
         }
       ]
     },

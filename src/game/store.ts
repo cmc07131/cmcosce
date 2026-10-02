@@ -200,12 +200,16 @@ export function fallbackPerformHint(kind: PerformKind) {
     case 'cico':
     case 'pacing':
     case 'cord':
+    default:
       return 'Do it as you would on a real patient. Nothing stops you making a mistake.'
   }
 }
 
+/** Benches that set their own scene flags, if any, from their result. */
+const SELF_SCORED = new Set<PerformKind>(['look', 'exam', 'igel', 'ventilator', 'defib', 'niv', 'hare', 'colles', 'usblock', 'knee', 'shoulder', 'digital', 'suture', 'nose', 'cutdown', 'hook'])
+
 function sceneKey(kind: PerformKind, pose?: string) {
-  if (kind === 'look' || kind === 'exam' || kind === 'igel' || kind === 'ventilator' || kind === 'defib' || kind === 'niv' || kind === 'hare' || kind === 'colles' || kind === 'usblock' || kind === 'knee' || kind === 'shoulder') return ''
+  if (SELF_SCORED.has(kind)) return ''
   if (kind === 'pose') return `pose:${pose || 'knee'}`
   if (kind === 'dress') return 'dress'
   return kind
