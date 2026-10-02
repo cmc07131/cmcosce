@@ -306,52 +306,25 @@
     },
     {
       "id": "binder",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Pelvic binder",
       "hint": "Empty pockets, slide it under the knees and up to the greater trochanters, feet together, tighten, check.",
       "opts": [
         {
-          "t": "Explain to her; empty pockets and remove belts",
-          "n": 1,
-          "mark": "Explains and clears pockets before applying"
-        },
-        {
-          "t": "Slide the binder under the knees and work it up to the hips without log rolling",
-          "n": 2,
-          "mark": "Positions the binder with minimal movement"
-        },
-        {
-          "t": "Centre it over the greater trochanters",
-          "n": 3,
-          "mark": "Binder centred on the greater trochanters"
-        },
-        {
-          "t": "Bring the feet and knees together and tie them",
-          "n": 4,
-          "mark": "Internally rotates and ties the legs together"
-        },
-        {
-          "t": "Tighten until it locks; note the time on the binder",
-          "n": 5,
-          "scene": "binder",
-          "mark": "Tightens and records the time",
-          "r": "It clicks. Nurse Chan writes 10:42 on the strap. Her pain eases."
-        },
-        {
-          "t": "Recheck the pulse and pressure",
-          "n": 6,
-          "mark": "Reassesses after the intervention"
-        },
-        {
-          "t": "Place it over the iliac crests",
-          "trap": true,
-          "r": "Over the crests it can open the fracture further and does not close the ring. Over the trochanters."
-        },
-        {
-          "t": "Log roll her to feed the binder under",
-          "trap": true,
-          "r": "Rolling moves the fracture. Slide it under the knees and up."
+          "t": "Pelvic binder",
+          "perform": "binder",
+          "performHint": "Do it with your hands. Every movement of her pelvis costs blood.",
+          "mark": [
+            "Explains and clears pockets before applying",
+            "Positions the binder with minimal movement",
+            "Binder centred on the greater trochanters",
+            "Internally rotates and ties the legs together",
+            "Tightens and records the time",
+            "Reassesses after the intervention"
+          ],
+          "scene": "binder"
         }
       ]
     },
