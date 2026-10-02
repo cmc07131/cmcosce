@@ -7,24 +7,10 @@
   "stem": "ENT room. Mr Lui, 68, on apixaban for AF, has had a left nosebleed for 40 minutes despite pinching. HR 96, BP 168/94. Manage the bleed and pack the nose on the model.",
   "phases": [
     {
-      "title": "Assess",
-      "goal": "First aid, his circulation, the anticoagulant, and a look inside.",
+      "title": "Stop the bleeding",
+      "goal": "By hand: first aid, find it, cauterise it, and pack it when that fails.",
       "steps": [
-        "first"
-      ]
-    },
-    {
-      "title": "Cautery",
-      "goal": "A visible anterior point: cautery, safely.",
-      "steps": [
-        "cautery"
-      ]
-    },
-    {
-      "title": "Pack",
-      "goal": "Still bleeding: an anterior pack, correctly.",
-      "steps": [
-        "pack"
+        "nose"
       ]
     },
     {
@@ -52,100 +38,30 @@
   ],
   "steps": [
     {
-      "id": "first",
-      "kind": "exam",
-      "to": "patient",
-      "label": "Assess",
-      "hint": "First aid, haemodynamics, anticoagulant, headlight and speculum after suction, find the source.",
-      "groups": {
-        "First aid": [
-          {
-            "t": "Sit him forward; firm pressure on the soft nose 15 minutes; ice to suck",
-            "r": "Still oozing after 15 minutes.",
-            "mark": "Correct first aid"
-          },
-          {
-            "t": "Pulse, BP, blood loss; FBC, group and save",
-            "r": "HR 96, BP 168/94. Hb 128.",
-            "mark": "Assesses haemodynamics and bloods"
-          },
-          {
-            "t": "Anticoagulant: when was the last apixaban?",
-            "r": "This morning.",
-            "mark": "Asks about anticoagulation"
-          }
-        ],
-        "Examine": [
-          {
-            "t": "Headlight, suction, speculum; co-phenylcaine spray",
-            "r": "Clots cleared. A bleeding vessel on the left anterior septum (Little's area).",
-            "mark": "Examines with light and speculum after vasoconstrictor"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cautery",
+      "id": "nose",
       "kind": "say",
       "lang": "en",
       "to": "patient",
-      "label": "Cautery",
-      "hint": "Silver nitrate to the visible point, one side of the septum, after the bleeding is controlled.",
+      "label": "Stop the bleeding",
+      "hint": "Lean forward, pinch the soft nose; light, suction, spray, speculum; ring the vessel with silver nitrate; pack along the floor, expand, check the throat, tape.",
       "opts": [
         {
-          "t": "Silver nitrate cautery for 10 seconds around the bleeding point, left side only",
-          "mark": "Silver nitrate cautery correctly applied",
-          "r": "It slows, then restarts from further back."
-        },
-        {
-          "t": "Cauterise both sides of the septum",
-          "trap": true,
-          "r": "Risk of septal perforation. One side only."
-        }
-      ]
-    },
-    {
-      "id": "pack",
-      "kind": "steps",
-      "to": "patient",
-      "label": "Anterior pack",
-      "hint": "Explain, lubricate, insert along the floor parallel to the palate, expand, check the throat, secure.",
-      "opts": [
-        {
-          "t": "Explain; it will be uncomfortable",
-          "n": 1,
-          "mark": "Explains the procedure"
-        },
-        {
-          "t": "Lubricate an 8 cm nasal tampon",
-          "n": 2,
-          "mark": "Prepares the tampon"
-        },
-        {
-          "t": "Insert along the floor of the nose, parallel to the hard palate, fully",
-          "n": 3,
-          "mark": "Inserts along the nasal floor (not upwards)"
-        },
-        {
-          "t": "Expand with 10 mL saline",
-          "n": 4,
-          "mark": "Expands the pack"
-        },
-        {
-          "t": "Check the back of the throat for continued bleeding",
-          "n": 5,
-          "mark": "Checks for posterior bleeding",
-          "r": "No blood in the oropharynx."
-        },
-        {
-          "t": "Tape the string to the cheek; document",
-          "n": 6,
-          "mark": "Secures and documents"
-        },
-        {
-          "t": "Push the pack upward toward the eye",
-          "trap": "critical",
-          "r": "The nose runs back, not up; upward insertion risks skull base injury."
+          "t": "Stop the bleeding",
+          "perform": "nose",
+          "performHint": "Do it with your hands. The blood goes where you send it.",
+          "mark": [
+            "Correct first aid",
+            "Assesses haemodynamics and bloods",
+            "Asks about anticoagulation",
+            "Examines with light and speculum after vasoconstrictor",
+            "Silver nitrate cautery correctly applied",
+            "Explains the procedure",
+            "Prepares the tampon",
+            "Inserts along the nasal floor (not upwards)",
+            "Expands the pack",
+            "Checks for posterior bleeding",
+            "Secures and documents"
+          ]
         }
       ]
     },
