@@ -14,17 +14,10 @@
       ]
     },
     {
-      "title": "Assess and prepare",
-      "goal": "The hook, the patient, and anaesthesia.",
-      "steps": [
-        "assess"
-      ]
-    },
-    {
       "title": "Remove",
-      "goal": "Advance-and-cut, safely.",
+      "goal": "By hand on the model: advance-and-cut, safely.",
       "steps": [
-        "remove"
+        "hook"
       ]
     }
   ],
@@ -65,65 +58,26 @@
       ]
     },
     {
-      "id": "assess",
-      "kind": "steps",
+      "id": "hook",
+      "kind": "say",
       "to": "table-ix",
-      "label": "Assess and prepare",
-      "hint": "Hook type, depth, location, water type, tetanus, allergies; anaesthesia.",
+      "label": "Remove the hook",
+      "hint": "Look, ask, block, glasses; grip the shank, advance the point through, cut the barb, back it out, check it, dress.",
       "opts": [
         {
-          "t": "Check the hook: single barb, depth, and whether any vital structure is near",
-          "n": 1,
-          "mark": "Assesses hook, depth and location"
-        },
-        {
-          "t": "Ask about salt or fresh water, tetanus and allergies",
-          "n": 2,
-          "mark": "Asks water type, tetanus and allergies"
-        },
-        {
-          "t": "Clean and give a digital block",
-          "n": 3,
-          "mark": "Anaesthesia"
-        }
-      ]
-    },
-    {
-      "id": "remove",
-      "kind": "steps",
-      "to": "table-ix",
-      "label": "Advance-and-cut",
-      "hint": "Advance the point through the skin, cut the barb, back the hook out; eye protection.",
-      "opts": [
-        {
-          "t": "Eye protection for everyone",
-          "n": 1,
-          "mark": "Eye protection"
-        },
-        {
-          "t": "Grasp the shank with a needle holder; advance the point along its curve through the skin",
-          "n": 2,
-          "mark": "Advances the point out through the skin"
-        },
-        {
-          "t": "Cut the barb off with wire cutters",
-          "n": 3,
-          "mark": "Cuts the barb"
-        },
-        {
-          "t": "Back the hook out along its entry path",
-          "n": 4,
-          "mark": "Removes the hook retrogradely"
-        },
-        {
-          "t": "Check the hook is complete; irrigate and dress",
-          "n": 5,
-          "mark": "Checks the hook is intact; wound care"
-        },
-        {
-          "t": "Pull the barbed hook straight back out",
-          "trap": true,
-          "r": "The barb tears tissue; use advance-and-cut or string-yank."
+          "t": "Remove the hook",
+          "perform": "hook",
+          "performHint": "Do it with your hands, telling the student what you are doing and why.",
+          "mark": [
+            "Assesses hook, depth and location",
+            "Asks water type, tetanus and allergies",
+            "Anaesthesia",
+            "Eye protection",
+            "Advances the point out through the skin",
+            "Cuts the barb",
+            "Removes the hook retrogradely",
+            "Checks the hook is intact; wound care"
+          ]
         }
       ]
     },

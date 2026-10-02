@@ -6,6 +6,7 @@ import { DigitalProcedure } from './digital/DigitalProcedure'
 import { SutureProcedure } from './suture/SutureProcedure'
 import { NoseProcedure } from './nose/NoseProcedure'
 import { CutdownProcedure } from './cutdown/CutdownProcedure'
+import { HookProcedure } from './hook/HookProcedure'
 import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
@@ -24,4 +25,5 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   suture: SutureProcedure,
   nose: NoseProcedure,
   cutdown: CutdownProcedure,
+  hook: HookProcedure,
 }
