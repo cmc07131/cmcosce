@@ -77,41 +77,24 @@
     },
     {
       "id": "manoeuvres",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Manoeuvres",
       "hint": "McRoberts + suprapubic pressure; then posterior arm or rotation; then all-fours.",
       "opts": [
         {
-          "t": "McRoberts: lie her flat, two helpers hyperflex her hips, thighs onto the abdomen",
-          "n": 1,
-          "mark": "McRoberts manoeuvre"
-        },
-        {
-          "t": "Suprapubic pressure from the side of the fetal back, over the anterior shoulder, continuous then rocking, with gentle axial traction",
-          "n": 2,
-          "mark": "Suprapubic pressure from the fetal back side"
-        },
-        {
-          "t": "Still stuck: hand in posteriorly; deliver the posterior arm by flexing the elbow and sweeping across the chest",
-          "n": 3,
-          "mark": "Delivers the posterior arm"
-        },
-        {
-          "t": "Or rotate: pressure behind the anterior shoulder (Rubin II) and in front of the posterior shoulder (Woods' screw)",
-          "n": 4,
-          "mark": "Internal rotational manoeuvres"
-        },
-        {
-          "t": "Shoulders deliver; baby to the resuscitaire; note the time",
-          "n": 5,
-          "mark": "Delivers and hands the baby for neonatal assessment",
-          "r": "The baby is floppy at first, then cries after inflation breaths. Head-to-body interval 3 minutes."
-        },
-        {
-          "t": "Routine large episiotomy before anything else",
-          "trap": true,
-          "r": "Shoulder dystocia is a bony problem. Episiotomy only to make room for internal manoeuvres."
+          "t": "Manoeuvres",
+          "perform": "dystocia",
+          "performHint": "Do it with your hands. The clock started when the head delivered.",
+          "mark": [
+            "McRoberts manoeuvre",
+            "Suprapubic pressure from the fetal back side",
+            "Delivers the posterior arm",
+            "Internal rotational manoeuvres",
+            "Delivers and hands the baby for neonatal assessment"
+          ],
+          "scene": "delivered"
         }
       ]
     },
