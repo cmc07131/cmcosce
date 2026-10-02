@@ -214,47 +214,25 @@
     },
     {
       "id": "clamshell",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Clamshell thoracotomy",
       "hint": "Bilateral incisions in the 4th/5th space, divide the sternum, open the pericardium in front of the phrenic nerve, relieve the clot, control the hole.",
       "opts": [
         {
-          "t": "Incise along the left 4th/5th intercostal space from the mid-axillary line to the sternum",
-          "n": 1,
-          "mark": "Left thoracostomy incision in the 4th/5th space"
-        },
-        {
-          "t": "Mirror it on the right and divide the sternum",
-          "n": 2,
-          "mark": "Extends to a clamshell across the sternum"
-        },
-        {
-          "t": "Retractor in; lift the pericardium with forceps",
-          "n": 3,
-          "mark": "Opens the chest and lifts the pericardium"
-        },
-        {
-          "t": "Open the pericardium longitudinally, in front of the phrenic nerve",
-          "n": 4,
-          "mark": "Opens the pericardium longitudinally, sparing the phrenic nerve"
-        },
-        {
-          "t": "Scoop out the clot; finger over the hole in the right ventricle",
-          "n": 5,
-          "scene": "rosc",
-          "mark": "Evacuates clot and controls the cardiac wound",
-          "r": "The heart fills and starts to beat strongly. Pulse returns."
-        },
-        {
-          "t": "Close the wound with sutures (or a Foley balloon as a bridge)",
-          "n": 6,
-          "mark": "Definitive or temporary wound control"
-        },
-        {
-          "t": "Open the pericardium transversely across the front of the heart",
-          "trap": true,
-          "r": "A transverse cut risks both phrenic nerves. Open it longitudinally, anterior to the phrenic."
+          "t": "Clamshell thoracotomy",
+          "perform": "clamshell",
+          "performHint": "Do it with your hands. Every second without output counts.",
+          "mark": [
+            "Left thoracostomy incision in the 4th/5th space",
+            "Extends to a clamshell across the sternum",
+            "Opens the chest and lifts the pericardium",
+            "Opens the pericardium longitudinally, sparing the phrenic nerve",
+            "Evacuates clot and controls the cardiac wound",
+            "Definitive or temporary wound control"
+          ],
+          "scene": "rosc"
         }
       ]
     },

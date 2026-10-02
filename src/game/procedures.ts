@@ -10,6 +10,7 @@ import { HookProcedure } from './hook/HookProcedure'
 import { ChestProcedure } from './chest/ChestProcedure'
 import { BinderProcedure } from './binder/BinderProcedure'
 import { EscharProcedure } from './eschar/EscharProcedure'
+import { ClamshellProcedure } from './clamshell/ClamshellProcedure'
 import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
@@ -32,4 +33,5 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   chest: ChestProcedure,
   binder: BinderProcedure,
   eschar: EscharProcedure,
+  clamshell: ClamshellProcedure,
 }
