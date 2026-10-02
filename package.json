@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0 --port 8080 --strictPort",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test src/engine/engine.test.ts src/game/ecg/ecg.test.ts src/engine/station.test.ts src/engine/playthrough.test.ts src/game/exam/exam.test.ts src/game/igel/igel.test.ts src/game/vent/vent.test.ts src/game/defib/defib.test.ts src/game/hare/hare.test.ts src/game/colles/colles.test.ts src/game/usblock/usblock.test.ts src/game/knee/knee.test.ts src/game/shoulder/shoulder.test.ts src/game/digital/digital.test.ts src/game/suture/suture.test.ts src/game/nose/nose.test.ts",
+    "test": "node --import tsx --test src/engine/engine.test.ts src/game/ecg/ecg.test.ts src/engine/station.test.ts src/engine/playthrough.test.ts src/game/exam/exam.test.ts src/game/igel/igel.test.ts src/game/vent/vent.test.ts src/game/defib/defib.test.ts src/game/hare/hare.test.ts src/game/colles/colles.test.ts src/game/usblock/usblock.test.ts src/game/knee/knee.test.ts src/game/shoulder/shoulder.test.ts src/game/digital/digital.test.ts src/game/suture/suture.test.ts src/game/nose/nose.test.ts src/game/cutdown/cutdown.test.ts",
     "start": "vite preview --host 0.0.0.0 --port 8080 --strictPort"
   },
   "dependencies": {

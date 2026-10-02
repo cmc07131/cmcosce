@@ -8,7 +8,7 @@
   "phases": [
     {
       "title": "Cut-down",
-      "goal": "The saphenous vein at the ankle, step by step.",
+      "goal": "By hand: the great saphenous vein at the ankle, from landmark to running fluids.",
       "steps": [
         "cutdown"
       ]
@@ -32,55 +32,26 @@
   "steps": [
     {
       "id": "cutdown",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
-      "label": "Cut-down",
-      "hint": "Landmark, prep, transverse incision, blunt dissection, two ligatures, tie distal, venotomy, cannula, tie proximal.",
+      "label": "Saphenous cut-down",
+      "hint": "Landmark, prepare, transverse skin incision, blunt dissection, two ligatures, venotomy, cannula toward the heart, tie in, close.",
       "opts": [
         {
-          "t": "Landmark: 1–2 cm anterior and superior to the medial malleolus",
-          "n": 1,
-          "mark": "Correct landmark for the great saphenous vein"
-        },
-        {
-          "t": "Clean and drape; local anaesthetic if conscious; venous tourniquet above",
-          "n": 2,
-          "mark": "Asepsis, anaesthesia and tourniquet"
-        },
-        {
-          "t": "Transverse full-thickness skin incision about 2.5 cm",
-          "n": 3,
-          "mark": "Transverse incision"
-        },
-        {
-          "t": "Blunt dissection with curved haemostats to lift the vein free, sparing the saphenous nerve",
-          "n": 4,
-          "mark": "Blunt dissection isolating the vein"
-        },
-        {
-          "t": "Pass two ligatures under the vein; tie the distal one, leave long",
-          "n": 5,
-          "mark": "Ligatures placed; distal tied"
-        },
-        {
-          "t": "Small transverse venotomy; insert the cannula proximally",
-          "n": 6,
-          "mark": "Venotomy and cannula insertion"
-        },
-        {
-          "t": "Tie the proximal ligature around the cannula; connect fluids; release the tourniquet",
-          "n": 7,
-          "mark": "Secures cannula and connects fluids"
-        },
-        {
-          "t": "Close the skin and dress",
-          "n": 8,
-          "mark": "Closure and dressing"
-        },
-        {
-          "t": "Longitudinal deep incision straight through the vein",
-          "trap": true,
-          "r": "Transects the vein and risks nerve injury; incise skin transversely and dissect bluntly."
+          "t": "Saphenous cut-down",
+          "perform": "cutdown",
+          "performHint": "Do it with your hands. The vein and the nerve look alike in a hurry.",
+          "mark": [
+            "Correct landmark for the great saphenous vein",
+            "Asepsis, anaesthesia and tourniquet",
+            "Transverse incision",
+            "Blunt dissection isolating the vein",
+            "Ligatures placed; distal tied",
+            "Venotomy and cannula insertion",
+            "Secures cannula and connects fluids",
+            "Closure and dressing"
+          ]
         }
       ]
     },
