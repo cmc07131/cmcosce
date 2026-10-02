@@ -15,7 +15,7 @@
     },
     {
       "title": "Repair",
-      "goal": "Assess, anaesthetise, clean, explore, then close the flap properly.",
+      "goal": "By hand: anaesthetise, clean out, anchor the tip, then close it stitch by stitch.",
       "steps": [
         "repair"
       ]
@@ -90,55 +90,25 @@
     },
     {
       "id": "repair",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
-      "label": "Repair",
-      "hint": "Neurovascular check, anaesthetise, irrigate, explore, corner stitch at the tip, interrupted sutures, dressing.",
+      "label": "Repair the flap",
+      "hint": "Flap and foot, infiltrate through the edges, test, irrigate, explore under the flap, corner stitch, interrupted sutures, sharps, dressing.",
       "opts": [
         {
-          "t": "Check distal neurovascular status; check the flap's colour",
-          "n": 1,
-          "mark": "Neurovascular and flap viability check"
-        },
-        {
-          "t": "Clean the surrounding skin; infiltrate lidocaine from within the wound edges",
-          "n": 2,
-          "mark": "Local infiltration through the wound edges"
-        },
-        {
-          "t": "Test sensation; irrigate with saline under pressure",
-          "n": 3,
-          "mark": "Confirms anaesthesia and irrigates"
-        },
-        {
-          "t": "Explore for foreign bodies and deep injury; trim non-viable tissue",
-          "n": 4,
-          "mark": "Explores and debrides"
-        },
-        {
-          "t": "Corner stitch (half-buried horizontal mattress) to anchor the flap tip",
-          "n": 5,
-          "mark": "Places a corner stitch at the flap tip"
-        },
-        {
-          "t": "Simple interrupted sutures 5 mm apart, 5 mm from the edge, needle at 90°, edges everted, knots to one side",
-          "n": 6,
-          "mark": "Correct interrupted suture technique"
-        },
-        {
-          "t": "Dispose of the needle into the sharps bin; dress",
-          "n": 7,
-          "mark": "Sharps disposal and dressing"
-        },
-        {
-          "t": "Transfixing stitch straight through the tip of the flap",
-          "trap": true,
-          "r": "Strangulates the tip's blood supply; use a corner stitch."
-        },
-        {
-          "t": "Pick up the needle with your fingers",
-          "trap": true,
-          "r": "Needlestick risk; always use instruments."
+          "t": "Repair the flap",
+          "perform": "suture",
+          "performHint": "Do it with your hands. Every bite is judged; nothing stops a bad one.",
+          "mark": [
+            "Neurovascular and flap viability check",
+            "Local infiltration through the wound edges",
+            "Confirms anaesthesia and irrigates",
+            "Explores and debrides",
+            "Places a corner stitch at the flap tip",
+            "Correct interrupted suture technique",
+            "Sharps disposal and dressing"
+          ]
         }
       ]
     },

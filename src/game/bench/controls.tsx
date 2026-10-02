@@ -163,7 +163,7 @@ export function HoldButton({
 
   function stop() {
     if (!raf.current) return
-    cancelAnimationFrame(raf.current)
+    window.clearInterval(raf.current)
     raf.current = 0
     setHeld(false)
     end.current?.()
@@ -186,12 +186,12 @@ export function HoldButton({
         setHeld(true)
         onStart?.()
         last.current = performance.now()
-        const loop = (now: number) => {
+        // A timer, not animation frames: frames pause when the window is hidden or the phone throttles it.
+        raf.current = window.setInterval(() => {
+          const now = performance.now()
           tick.current(Math.min(0.1, (now - last.current) / 1000) * devSpeed())
           last.current = now
-          raf.current = requestAnimationFrame(loop)
-        }
-        raf.current = requestAnimationFrame(loop)
+        }, 33)
       }}
       onPointerUp={stop}
       onPointerCancel={stop}
