@@ -15,7 +15,7 @@
     },
     {
       "title": "Aspirate",
-      "goal": "Consent, asepsis, the right site, samples.",
+      "goal": "By hand: a safe site clear of the cellulitis, under the patella, the right pots.",
       "steps": [
         "aspirate"
       ]
@@ -76,51 +76,25 @@
     },
     {
       "id": "aspirate",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
-      "label": "Aspirate",
-      "hint": "Consent, contraindications, position, landmark, clean, local, aspirate, samples, dressing.",
+      "label": "Aspirate the knee",
+      "hint": "Consent and look, confirm the effusion, mark laterally, clean, local, under the patella, draw, pots, dress and send.",
       "opts": [
         {
-          "t": "Explain, consent; check for cellulitis over the site and for a joint replacement",
-          "n": 1,
-          "mark": "Consent and checks contraindications"
-        },
-        {
-          "t": "Knee extended and relaxed; palpate the patella and confirm the effusion",
-          "n": 2,
-          "mark": "Positions and confirms effusion"
-        },
-        {
-          "t": "Mark the site at the superolateral edge of the patella",
-          "n": 3,
-          "mark": "Correct landmark"
-        },
-        {
-          "t": "Clean and drape; local anaesthetic to the skin",
-          "n": 4,
-          "mark": "Asepsis and local anaesthetic"
-        },
-        {
-          "t": "Advance the needle under the patella, aspirating as you go",
-          "n": 5,
-          "mark": "Aspirates under the patella"
-        },
-        {
-          "t": "Withdraw 20 mL of turbid fluid; fill the pots",
-          "n": 6,
-          "mark": "Obtains fluid for samples",
-          "r": "Turbid yellow fluid."
-        },
-        {
-          "t": "Remove the needle, pressure, dressing; send samples urgently",
-          "n": 7,
-          "mark": "Dressing and urgent transport"
-        },
-        {
-          "t": "Aspirate through the red, swollen cellulitic skin at the front",
-          "trap": true,
-          "r": "Inoculating infection into a sterile joint. Choose another site."
+          "t": "Aspirate the knee",
+          "perform": "knee",
+          "performHint": "Do it with your hands. Mr Patel and his knee react to what you do; nothing stops a mistake.",
+          "mark": [
+            "Consent and checks contraindications",
+            "Positions and confirms effusion",
+            "Correct landmark",
+            "Asepsis and local anaesthetic",
+            "Aspirates under the patella",
+            "Obtains fluid for samples",
+            "Dressing and urgent transport"
+          ]
         }
       ]
     },
