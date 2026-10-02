@@ -13,6 +13,7 @@ export type PerformKind = (typeof performKinds)[number]
 /** Scene flags a bench may set from its own result, besides the option's own scene. */
 export const BENCH_SCENES: Partial<Record<PerformKind, string[]>> = {
   chest: ['decompressed', 'drain'],
+  eschar: ['arm'],
 }
 
 const performFields = {

@@ -16,17 +16,16 @@
     },
     {
       "title": "Chest escharotomy",
-      "goal": "Analgesia from the cart, then the incisions in the right places, to the right depth.",
+      "goal": "By hand: both sides and the costal margin, into fat; then the arm.",
       "steps": [
         "analgesia",
         "chest"
       ]
     },
     {
-      "title": "The arm and the call",
+      "title": "The call",
       "goal": "The ischaemic arm, then tell the burns centre.",
       "steps": [
-        "arm",
         "call"
       ]
     }
@@ -190,73 +189,26 @@
     },
     {
       "id": "chest",
-      "kind": "steps",
-      "to": "patient",
-      "label": "Chest escharotomy",
-      "hint": "Analgesia, asepsis, mark the anterior axillary lines and the costal margin, cut through eschar only, check.",
-      "opts": [
-        {
-          "t": "Clean and drape; diathermy and a scalpel ready",
-          "n": 1,
-          "mark": "Asepsis and diathermy for haemostasis"
-        },
-        {
-          "t": "Mark both anterior axillary lines from clavicle to costal margin",
-          "n": 2,
-          "mark": "Marks bilateral anterior axillary lines"
-        },
-        {
-          "t": "Mark a transverse line along the costal margin joining them",
-          "n": 3,
-          "mark": "Joins them along the costal margin (chest shield)"
-        },
-        {
-          "t": "Cut through the eschar into fat until the edges spring apart",
-          "n": 4,
-          "scene": "eschar",
-          "mark": "Incises through eschar only, to subcutaneous fat",
-          "r": "The edges gape. The chest starts to rise. Peak pressure falls to 28."
-        },
-        {
-          "t": "Diathermy for bleeding points; dress with alginate",
-          "n": 5,
-          "mark": "Haemostasis and dressing"
-        },
-        {
-          "t": "Check ventilation and saturation again",
-          "n": 6,
-          "mark": "Reassesses ventilation"
-        },
-        {
-          "t": "Cut on through the fascia and into muscle",
-          "trap": true,
-          "r": "That is a fasciotomy. Escharotomy goes through the eschar only."
-        },
-        {
-          "t": "One midline cut down the sternum only",
-          "trap": true,
-          "r": "A single midline cut does not free the chest wall. Use the anterior axillary lines and join them."
-        }
-      ]
-    },
-    {
-      "id": "arm",
       "kind": "say",
       "lang": "en",
       "to": "patient",
-      "label": "Right arm",
-      "hint": "Mid-medial and mid-lateral lines along the whole burn, protect the ulnar nerve.",
+      "label": "Escharotomy",
+      "hint": "Prepare; mark both anterior axillary lines and the costal margin; cut into fat; diathermy; recheck; then the arm.",
       "opts": [
         {
-          "t": "Mid-lateral and mid-medial incisions along the length of the eschar, passing in front of the medial epicondyle; then recheck Doppler",
-          "scene": "arm",
-          "mark": "Limb escharotomy on the mid-axial lines, avoiding the ulnar nerve",
-          "r": "The eschar parts. Radial Doppler returns."
-        },
-        {
-          "t": "One incision down the front of the forearm over the tendons",
-          "trap": true,
-          "r": "The anterior line damages tendons and does not release the whole circumference."
+          "t": "Escharotomy",
+          "perform": "eschar",
+          "performHint": "Do it with your hands. Watch the airway pressure as you cut.",
+          "mark": [
+            "Asepsis and diathermy for haemostasis",
+            "Marks bilateral anterior axillary lines",
+            "Joins them along the costal margin (chest shield)",
+            "Incises through eschar only, to subcutaneous fat",
+            "Haemostasis and dressing",
+            "Reassesses ventilation",
+            "Limb escharotomy on the mid-axial lines, avoiding the ulnar nerve"
+          ],
+          "scene": "eschar"
         }
       ]
     },
