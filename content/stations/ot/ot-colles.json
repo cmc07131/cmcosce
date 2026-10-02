@@ -4,28 +4,20 @@
   "title": "Colles fracture: block, reduction and cast",
   "type": "skills",
   "time": 480,
-  "stem": "Plaster room. Mrs Wu, 65, fell on her outstretched right hand. Consent has been obtained for closed reduction. You have one assistant and a medical student. Interpret the X-ray, then demonstrate a haematoma block, reduction and cast on the model while teaching the student.",
+  "stem": "Plaster room. Mrs Wu, 65 (55 kg), fell on her outstretched right hand. Consent has been obtained for closed reduction. You have one assistant and a medical student. Interpret the X-ray, then demonstrate a haematoma block, reduction and cast on the model while teaching the student.",
   "phases": [
     {
-      "title": "X-ray and checks",
-      "goal": "Read the film; nerves before you start.",
+      "title": "X-ray",
+      "goal": "Read the film.",
       "steps": [
-        "xray",
-        "check"
+        "xray"
       ]
     },
     {
-      "title": "Haematoma block",
-      "goal": "Anaesthetise the fracture.",
+      "title": "Block, reduce and plaster",
+      "goal": "By hand: check the hand, block the haematoma, reduce, plaster, check again.",
       "steps": [
-        "block"
-      ]
-    },
-    {
-      "title": "Reduce and cast",
-      "goal": "Reduce, mould the backslab, re-check.",
-      "steps": [
-        "reduce"
+        "colles"
       ]
     },
     {
@@ -79,118 +71,33 @@
       }
     },
     {
-      "id": "check",
-      "kind": "exam",
+      "id": "colles",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
-      "label": "Pre-procedure checks",
-      "hint": "Median nerve, EPL, circulation, skin, allergies.",
-      "groups": {
-        "Checks": [
-          {
-            "t": "Median nerve sensation and thumb abduction",
-            "r": "Normal.",
-            "mark": "Checks median nerve function"
-          },
-          {
-            "t": "Thumb extension (EPL)",
-            "r": "Normal.",
-            "mark": "Checks EPL"
-          },
-          {
-            "t": "Radial pulse and capillary refill; skin intact?",
-            "r": "Normal; skin intact (closed fracture).",
-            "mark": "Checks circulation and skin",
-            "anim": "glucose"
-          },
-          {
-            "t": "Allergy to local anaesthetic",
-            "r": "None."
-          }
-        ]
-      }
-    },
-    {
-      "id": "block",
-      "kind": "steps",
-      "to": "patient",
-      "label": "Haematoma block",
-      "hint": "Clean, dorsal approach into the fracture, aspirate blood, inject lidocaine, wait.",
+      "label": "Block, reduce and plaster",
+      "hint": "Check the hand, draw up, clean, haematoma block, wait, reduce, backslab, mould, check again.",
       "opts": [
         {
-          "t": "Clean the dorsum of the wrist with chlorhexidine",
-          "n": 1,
-          "mark": "Asepsis"
-        },
-        {
-          "t": "Insert the needle dorsally into the fracture site (radius, not the carpus)",
-          "n": 2,
-          "mark": "Correct site: into the radial fracture"
-        },
-        {
-          "t": "Aspirate dark blood from the haematoma to confirm position",
-          "n": 3,
-          "mark": "Confirms position by aspirating haematoma"
-        },
-        {
-          "t": "Inject 1% lidocaine up to 10 mL slowly",
-          "n": 4,
-          "mark": "Safe dose of local anaesthetic"
-        },
-        {
-          "t": "Wait 5–10 minutes",
-          "n": 5,
-          "mark": "Waits for the block to work"
-        },
-        {
-          "t": "Inject 20 mL of 2% lidocaine",
-          "trap": "critical",
-          "r": "400 mg is well above the maximum dose (3 mg/kg plain): risk of LA toxicity."
-        }
-      ]
-    },
-    {
-      "id": "reduce",
-      "kind": "steps",
-      "to": "patient",
-      "label": "Reduce and cast",
-      "hint": "Counter-traction, disimpact, reduce volarly and ulnarly, mould a below-elbow backslab, check.",
-      "opts": [
-        {
-          "t": "Assistant holds counter-traction at the elbow",
-          "n": 1,
-          "mark": "Counter-traction by the assistant"
-        },
-        {
-          "t": "Longitudinal traction, briefly exaggerate the deformity to disimpact",
-          "n": 2,
-          "mark": "Disimpacts the fracture"
-        },
-        {
-          "t": "Push the distal fragment volarly and into ulnar deviation",
-          "n": 3,
-          "mark": "Reduces with volar and ulnar pressure"
-        },
-        {
-          "t": "Apply a padded below-elbow dorsal backslab while traction is held",
-          "n": 4,
-          "mark": "Applies a backslab while maintaining reduction"
-        },
-        {
-          "t": "Three-point mould with the heels of the hands; wrist slightly flexed and ulnar deviated",
-          "n": 5,
-          "mark": "Three-point moulding"
-        },
-        {
-          "t": "Recheck circulation, median nerve; check-X-ray",
-          "n": 6,
-          "img": "xr:wrist-normal",
-          "mark": "Neurovascular check and repeat X-ray",
-          "r": "Check X-ray shows restored volar tilt and length."
-        },
-        {
-          "t": "Wrap a full circumferential plaster tightly on day one",
-          "trap": true,
-          "r": "Swelling in the first days: use a backslab to avoid compartment syndrome."
+          "t": "Block, reduce and plaster",
+          "perform": "colles",
+          "performHint": "Do it with your hands, teaching the student as you go. Mrs Wu feels whatever the block has not reached.",
+          "mark": [
+            "Checks median nerve function",
+            "Checks EPL",
+            "Checks circulation and skin",
+            "Asepsis",
+            "Correct site: into the radial fracture",
+            "Confirms position by aspirating haematoma",
+            "Safe dose of local anaesthetic",
+            "Waits for the block to work",
+            "Counter-traction by the assistant",
+            "Disimpacts the fracture",
+            "Reduces with volar and ulnar pressure",
+            "Applies a backslab while maintaining reduction",
+            "Three-point moulding",
+            "Neurovascular check and repeat X-ray"
+          ]
         }
       ]
     },

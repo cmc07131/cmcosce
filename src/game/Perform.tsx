@@ -8,6 +8,7 @@ import { Ventilator } from './vent/Ventilator'
 import { Defib } from './defib/Defib'
 import { Niv } from './vent/Niv'
 import { HareProcedure } from './hare/HareProcedure'
+import { CollesProcedure } from './colles/CollesProcedure'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -79,6 +80,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <Ventilator job={job} onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'colles') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <CollesProcedure job={job} coach onDone={onDone} />
       </BattleFrame>
     )
   }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
 import { NextButton, NoteLine, StepStrip, useBench, type BenchApi } from '../bench/core'
 import { Dial, DragGhost, capture, useSpin, useToolDrag } from '../bench/controls'
+import { CheckCard, PullStrap, toLocal, type Pt } from '../bench/kit'
 import { usePlay, type BenchResult, type PerformJob } from '../store'
 import { buzz, sfx } from '../sfx'
 import { BESIDE, FOOT_SITES, FootView, LegScene, ROW, X0, cmOf, xOf, type Splint } from './art'
@@ -34,18 +35,9 @@ import {
   type Region,
 } from './model'
 
-type Pt = { x: number; y: number }
-
 const TITLES = ['Check', 'Measure', 'Straps', 'Ankle hitch', 'Manual traction', 'Under the leg', 'Wind', 'Secure', 'Re-check']
 
 type Stage = BenchApi<HareRun> & { next: () => void; analgesia: boolean }
-
-function toLocal(el: SVGGraphicsElement | null, event: { clientX: number; clientY: number }): Pt | null {
-  const m = el?.getScreenCTM()
-  if (!m) return null
-  const p = new DOMPoint(event.clientX, event.clientY).matrixTransform(m.inverse())
-  return { x: p.x, y: p.y }
-}
 
 /**
  * The Hare traction splint, by hand: check the leg and foot, measure on the good leg, lay out the straps, put on the
@@ -163,50 +155,6 @@ function Scene({ run, splint, onDown, onMove, onUp, hitchGhost, hookGhost, svg, 
       }}
     >
       <LegScene run={run} splint={splint} touch={touch} hitchGhost={hitchGhost} hookGhost={hookGhost} svgRef={ref} />
-    </div>
-  )
-}
-
-/** Drag the tail of a strap to tighten it. You feel how tight it is, as you would. */
-function PullStrap({ label, value, disabled, onChange, onRelease, testId }: { label: string; value: number; disabled?: boolean; onChange: (v: number) => void; onRelease: (v: number) => void; testId: string }) {
-  const track = useRef<HTMLDivElement>(null)
-  const down = useRef(false)
-  const last = useRef(value)
-  const frac = (e: ReactPointerEvent) => {
-    const rect = track.current?.getBoundingClientRect()
-    if (!rect) return value
-    return Math.max(0, Math.min(1, (e.clientX - rect.left - rect.width * 0.18) / (rect.width * 0.78)))
-  }
-  return (
-    <div className="hare-strap mt-2" data-disabled={disabled || undefined} data-testid={testId}>
-      <span className="hare-strap-label">{label}</span>
-      <div
-        ref={track}
-        className="hare-strap-track"
-        style={{ touchAction: 'none' }}
-        onPointerDown={(e) => {
-          if (disabled) return
-          down.current = true
-          capture(e)
-          last.current = frac(e)
-          onChange(last.current)
-        }}
-        onPointerMove={(e) => {
-          if (!down.current) return
-          last.current = frac(e)
-          onChange(last.current)
-        }}
-        onPointerUp={() => {
-          if (!down.current) return
-          down.current = false
-          onRelease(last.current)
-        }}
-        onPointerCancel={() => (down.current = false)}
-      >
-        <span className="hare-buckle" />
-        <span className="hare-band" style={{ width: `${18 + value * 78}%` }} />
-        <span className="hare-tail" style={{ left: `${18 + value * 78}%` }} />
-      </div>
     </div>
   )
 }
@@ -885,37 +833,12 @@ function SecureStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
 /* ================================================================ the check */
 
 function CheckTable({ run, onContinue }: { run: HareRun; onContinue: () => void }) {
-  const rows = checkHare(run)
-  const allOk = rows.every((r) => r.ok)
   return (
-    <div className="vent-check" data-testid="hare-check">
-      <p className="vent-check-head" data-ok={allOk || undefined}>
-        {allOk ? '✓ Everything right.' : `✗ ${rows.filter((r) => !r.ok).length} to review.`}
-      </p>
-      <ul className="hare-rows">
-        {rows.map((r) => (
-          <li key={r.key} data-ok={r.ok || undefined}>
-            <b>
-              {r.ok ? '✓' : '✗'} {r.label}
-            </b>
-            <span>You: {r.value}</span>
-            {!r.ok && (
-              <>
-                <span>Acceptable: {r.range}</span>
-                <small>{r.why}</small>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
-      <div className="vent-check-btns">
-        <button type="button" className="tap io-next" data-testid="hare-done" onClick={onContinue}>
-          Continue ▶
-        </button>
-      </div>
-      <p className="io-small mt-1">
-        Left leg {SHORT_CM} cm short at the start; the right heel is the dashed line at {HEEL_CM} cm.
-      </p>
-    </div>
+    <CheckCard
+      rows={checkHare(run)}
+      onContinue={onContinue}
+      testId="hare-check"
+      footer={`Left leg ${SHORT_CM} cm short at the start; the right heel is the dashed line at ${HEEL_CM} cm.`}
+    />
   )
 }

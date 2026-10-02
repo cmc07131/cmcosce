@@ -185,6 +185,8 @@ export function fallbackPerformHint(kind: PerformKind) {
       return 'Tap the chest to place both pads. SYNC and energy, CHARGE, ALL CLEAR, then SHOCK.'
     case 'ventilator':
       return 'Choose the mode, then set O2, VT and RR on the knobs and PEEP and Pmax on the screen. START when ready.'
+    case 'colles':
+      return 'Check the hand, draw up, clean, block the haematoma, wait, reduce, plaster and mould, then check again.'
     case 'hare':
       return 'Check the leg and foot, measure on the good leg, straps, hitch, traction, ring to the ischium, wind, secure, check again.'
     case 'igel':
@@ -197,7 +199,7 @@ export function fallbackPerformHint(kind: PerformKind) {
 }
 
 function sceneKey(kind: PerformKind, pose?: string) {
-  if (kind === 'look' || kind === 'exam' || kind === 'igel' || kind === 'ventilator' || kind === 'defib' || kind === 'niv' || kind === 'hare') return ''
+  if (kind === 'look' || kind === 'exam' || kind === 'igel' || kind === 'ventilator' || kind === 'defib' || kind === 'niv' || kind === 'hare' || kind === 'colles') return ''
   if (kind === 'pose') return `pose:${pose || 'knee'}`
   if (kind === 'dress') return 'dress'
   return kind
