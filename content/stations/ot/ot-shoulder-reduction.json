@@ -144,30 +144,24 @@
     },
     {
       "id": "nv",
-      "kind": "exam",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Neurovascular check",
-      "hint": "Axillary, radial, median, ulnar, radial pulse.",
-      "groups": {
-        "Before": [
-          {
-            "t": "Sensation over the regimental badge area",
-            "r": "Normal.",
-            "mark": "Checks the axillary nerve before reduction"
-          },
-          {
-            "t": "Wrist extension, finger flexion, finger abduction",
-            "r": "Normal.",
-            "mark": "Checks radial, median and ulnar motor function"
-          },
-          {
-            "t": "Radial pulse and capillary refill",
-            "r": "Normal.",
-            "mark": "Checks circulation",
-            "anim": "glucose"
-          }
-        ]
-      }
+      "hint": "Look at the shoulder; the badge area, wrist, fingers and the radial pulse.",
+      "opts": [
+        {
+          "t": "Neurovascular check",
+          "perform": "shoulder",
+          "performHint": "Examine him with your hands before anyone touches the shoulder.",
+          "mark": [
+            "Checks the axillary nerve before reduction",
+            "Checks radial, median and ulnar motor function",
+            "Checks circulation"
+          ],
+          "pose": "check"
+        }
+      ]
     },
     {
       "id": "sedation",
@@ -212,47 +206,24 @@
     },
     {
       "id": "reduce",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Reduce",
-      "hint": "Titrate sedation, one gentle technique, feel for the clunk, re-examine.",
+      "hint": "Check the depth, sedationist on the airway, slow external rotation, then nerves, sling, film, recovery.",
       "opts": [
         {
-          "t": "Wait for adequate sedation (drowsy, relaxed, responds to a firm tap)",
-          "n": 1,
-          "mark": "Assesses sedation depth"
-        },
-        {
-          "t": "External rotation technique: elbow at 90° by the side, slowly externally rotate",
-          "n": 2,
-          "mark": "Uses a gentle, evidence-based technique"
-        },
-        {
-          "t": "Feel the clunk; the contour of the shoulder returns",
-          "n": 3,
-          "mark": "Recognises successful reduction",
-          "r": "A soft clunk. The shoulder is round again."
-        },
-        {
-          "t": "Re-check nerves and pulse; sling; post-reduction X-ray",
-          "n": 4,
-          "mark": "Post-reduction neurovascular check, sling and X-ray"
-        },
-        {
-          "t": "Observe until awake and discharge criteria met",
-          "n": 5,
-          "scene": "awake",
-          "mark": "Recovery observation"
-        },
-        {
-          "t": "Kocher's method with forceful levering",
-          "trap": true,
-          "r": "Higher fracture and nerve injury rates; use gentler techniques first."
-        },
-        {
-          "t": "The sedationist leaves to help reduce",
-          "trap": "critical",
-          "r": "The sedationist must watch the airway throughout."
+          "t": "Reduce",
+          "perform": "shoulder",
+          "performHint": "Do it with your hands. Hurry and the muscles lock; be patient.",
+          "mark": [
+            "Assesses sedation depth",
+            "Uses a gentle, evidence-based technique",
+            "Recognises successful reduction",
+            "Post-reduction neurovascular check, sling and X-ray",
+            "Recovery observation"
+          ],
+          "scene": "awake"
         }
       ]
     },

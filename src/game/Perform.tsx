@@ -11,6 +11,7 @@ import { HareProcedure } from './hare/HareProcedure'
 import { CollesProcedure } from './colles/CollesProcedure'
 import { UsBlockProcedure } from './usblock/UsBlockProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
+import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
 import { IoProcedure } from './io/IoProcedure'
 import { PacingProcedure } from './pacing/PacingProcedure'
 import { useButtons } from './input'
@@ -82,6 +83,14 @@ export function PerformStage({
     return (
       <BattleFrame job={job} onCancel={onCancel}>
         <Ventilator job={job} onDone={onDone} />
+      </BattleFrame>
+    )
+  }
+
+  if (job.kind === 'shoulder') {
+    return (
+      <BattleFrame job={job} onCancel={onCancel}>
+        <ShoulderProcedure job={job} coach onDone={onDone} />
       </BattleFrame>
     )
   }
