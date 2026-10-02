@@ -71,46 +71,24 @@
     },
     {
       "id": "deliver",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Deliver",
       "hint": "Hands off; back anterior; arms (Løvset); let it hang; Mauriceau–Smellie–Veit for the head.",
       "opts": [
         {
-          "t": "Let the breech and legs deliver with pushing; touch only to flex out a leg that is stuck",
-          "n": 1,
-          "mark": "Allows spontaneous delivery of the breech"
-        },
-        {
-          "t": "Keep the baby's back anterior; wrap the body in a warm towel",
-          "n": 2,
-          "mark": "Maintains sacrum/back anterior"
-        },
-        {
-          "t": "Scapulae visible, arms not out: Løvset's manoeuvre (hold the pelvis, rotate 180° each way)",
-          "n": 3,
-          "mark": "Løvset's manoeuvre for the arms"
-        },
-        {
-          "t": "Let the body hang for a few seconds until the hairline shows",
-          "n": 4,
-          "mark": "Lets the body hang to flex the head"
-        },
-        {
-          "t": "Mauriceau–Smellie–Veit: fingers on the cheekbones, other hand on the occiput; flex and deliver the head slowly",
-          "n": 5,
-          "mark": "Controlled delivery of the head (MSV)",
-          "r": "The head delivers slowly. The baby cries."
-        },
-        {
-          "t": "Pull on the legs to speed it up",
-          "trap": "critical",
-          "r": "Traction causes arm extension and head entrapment."
-        },
-        {
-          "t": "Hold the body up high above the mother's abdomen immediately",
-          "trap": true,
-          "r": "Premature elevation hyperextends the neck."
+          "t": "Deliver",
+          "perform": "breech",
+          "performHint": "Hands off: do only what is needed, with your hands.",
+          "mark": [
+            "Allows spontaneous delivery of the breech",
+            "Maintains sacrum/back anterior",
+            "Løvset's manoeuvre for the arms",
+            "Lets the body hang to flex the head",
+            "Controlled delivery of the head (MSV)"
+          ],
+          "scene": "delivered"
         }
       ]
     },

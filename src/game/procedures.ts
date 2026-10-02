@@ -13,6 +13,7 @@ import { EscharProcedure } from './eschar/EscharProcedure'
 import { ClamshellProcedure } from './clamshell/ClamshellProcedure'
 import { TrachProcedure } from './trach/TrachProcedure'
 import { DystociaProcedure } from './dystocia/DystociaProcedure'
+import { BreechProcedure } from './breech/BreechProcedure'
 import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
@@ -38,4 +39,5 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   clamshell: ClamshellProcedure,
   trach: TrachProcedure,
   dystocia: DystociaProcedure,
+  breech: BreechProcedure,
 }
