@@ -473,68 +473,29 @@
     },
     {
       "id": "drain",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Right chest drain",
       "hint": "Safe triangle, blunt dissection over the rib, finger sweep, large-bore tube, underwater seal, secure, film.",
       "opts": [
         {
-          "t": "Arm up behind the head; confirm the side on the patient and the film",
-          "n": 1,
-          "mark": "Positions the arm up and confirms the side"
-        },
-        {
-          "t": "Mark the safe triangle: 5th intercostal space, just anterior to the mid-axillary line",
-          "n": 2,
-          "mark": "Identifies the safe triangle"
-        },
-        {
-          "t": "Clean, drape, infiltrate lidocaine down to the pleura",
-          "n": 3,
-          "mark": "Asepsis and local anaesthetic to the pleura"
-        },
-        {
-          "t": "3 cm incision along the upper border of the 6th rib",
-          "n": 4,
-          "mark": "Incises over the rib below the space"
-        },
-        {
-          "t": "Blunt dissection with forceps over the top of the rib into the pleura",
-          "n": 5,
-          "mark": "Blunt dissection over the top of the rib"
-        },
-        {
-          "t": "Finger sweep inside the pleura",
-          "n": 6,
-          "mark": "Finger sweep to exclude adhesions and organs"
-        },
-        {
-          "t": "Pass a large-bore tube (28–32 Fr) on a clamp, aimed posteriorly and up",
-          "n": 7,
-          "mark": "Large-bore tube for haemothorax, no trocar"
-        },
-        {
-          "t": "Connect to an underwater seal; watch it swing and drain",
-          "n": 8,
-          "scene": "drain",
-          "mark": "Connects to underwater seal and checks swing",
-          "r": "1600 mL of blood drains at once. It swings."
-        },
-        {
-          "t": "Suture and dress the drain; repeat chest X-ray",
-          "n": 9,
-          "img": "xr:cxr-drain-r",
-          "mark": "Secures the drain and repeats the film"
-        },
-        {
-          "t": "Push the tube in on its sharp trocar",
-          "trap": "critical",
-          "r": "The trocar can puncture the lung, heart, liver or great vessels. Never use it."
-        },
-        {
-          "t": "Cut along the lower border of the rib",
-          "trap": true,
-          "r": "The intercostal vessels and nerve run under the lower border. Go over the top of the rib below."
+          "t": "Right chest drain",
+          "perform": "chest",
+          "performHint": "Do it with your hands, from positioning to the underwater seal.",
+          "mark": [
+            "Positions the arm up and confirms the side",
+            "Identifies the safe triangle",
+            "Asepsis and local anaesthetic to the pleura",
+            "Incises over the rib below the space",
+            "Blunt dissection over the top of the rib",
+            "Finger sweep to exclude adhesions and organs",
+            "Large-bore tube for haemothorax, no trocar",
+            "Connects to underwater seal and checks swing",
+            "Secures the drain and repeats the film"
+          ],
+          "pose": "drain:right",
+          "scene": "drain"
         }
       ]
     },

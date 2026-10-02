@@ -206,7 +206,7 @@ export function fallbackPerformHint(kind: PerformKind) {
 }
 
 /** Benches that set their own scene flags, if any, from their result. */
-const SELF_SCORED = new Set<PerformKind>(['look', 'exam', 'igel', 'ventilator', 'defib', 'niv', 'hare', 'colles', 'usblock', 'knee', 'shoulder', 'digital', 'suture', 'nose', 'cutdown', 'hook'])
+const SELF_SCORED = new Set<PerformKind>(['look', 'exam', 'igel', 'ventilator', 'defib', 'niv', 'hare', 'colles', 'usblock', 'knee', 'shoulder', 'digital', 'suture', 'nose', 'cutdown', 'hook', 'chest', 'binder', 'eschar', 'clamshell', 'trach'])
 
 function sceneKey(kind: PerformKind, pose?: string) {
   if (SELF_SCORED.has(kind)) return ''

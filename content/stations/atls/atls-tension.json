@@ -198,43 +198,25 @@
     },
     {
       "id": "decompress",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Decompress the left chest",
       "hint": "Adult: 4th/5th ICS just anterior to the mid-axillary line; long, large-bore cannula; then a drain.",
       "opts": [
         {
-          "t": "Identify the 4th/5th intercostal space just anterior to the left mid-axillary line",
-          "n": 1,
-          "mark": "Uses the ATLS adult site (4th/5th ICS, anterior to mid-axillary line)"
-        },
-        {
-          "t": "Clean the skin quickly",
-          "n": 2,
-          "mark": "Rapid skin prep"
-        },
-        {
-          "t": "Insert a 14 G cannula of at least 8 cm over the top of the rib",
-          "n": 3,
-          "scene": "decompressed",
-          "mark": "Long large-bore cannula over the top of the rib",
-          "r": "A hiss of air. His colour improves and the pressure rises."
-        },
-        {
-          "t": "Leave the cannula in; tape it",
-          "n": 4,
-          "mark": "Leaves the cannula in place"
-        },
-        {
-          "t": "Insert a left chest drain in the safe triangle",
-          "n": 5,
-          "scene": "drain",
-          "mark": "Follows with a chest drain"
-        },
-        {
-          "t": "Standard 32 mm (1.25 inch) cannula at the 2nd ICS mid-clavicular line",
-          "trap": true,
-          "r": "Often too short for the adult chest wall at that site; ATLS 10th moved the adult site laterally."
+          "t": "Decompress the left chest",
+          "perform": "chest",
+          "performHint": "Do it with your hands. The chest wall is thicker than you think.",
+          "mark": [
+            "Uses the ATLS adult site (4th/5th ICS, anterior to mid-axillary line)",
+            "Rapid skin prep",
+            "Long large-bore cannula over the top of the rib",
+            "Leaves the cannula in place",
+            "Follows with a chest drain"
+          ],
+          "pose": "needle:left",
+          "scene": "decompressed"
         }
       ]
     },

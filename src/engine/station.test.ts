@@ -12,7 +12,7 @@ import { fastRuq } from '../game/imaging/ultrasound'
 import { faultsFor, usePlay } from '../game/store'
 import { currentPhase, dueEvents, nextHint, untreatedEvents } from './judge'
 import { worldSchema } from '../world/model'
-import { packSchema } from './schema'
+import { BENCH_SCENES, packSchema } from './schema'
 import { compileStation, stationCards, stationSchema, type Station } from './station'
 import { hasOutput, vitalsAt } from './vitals'
 
@@ -222,7 +222,7 @@ test('station scripts: each compiles, validates, and holds its own weight', () =
     }
     // Every scene flag an effect waits for is set by some option or event.
     const flags = new Set([
-      ...st.steps.flatMap((s) => [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat(), ...(s.turns ?? []).flatMap((t) => t.opts)].map((o) => o.scene)),
+      ...st.steps.flatMap((s) => [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat(), ...(s.turns ?? []).flatMap((t) => t.opts)].flatMap((o) => [o.scene, ...((o.perform && BENCH_SCENES[o.perform]) || [])])),
       ...(st.events ?? []).map((e) => e.scene),
     ])
     for (const e of st.vitals?.effects ?? []) assert.ok(flags.has(e.scene), `${st.id}: nothing sets scene ${e.scene}`)
