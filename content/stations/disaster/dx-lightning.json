@@ -154,41 +154,26 @@
     },
     {
       "id": "cpr",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Resuscitate A",
       "hint": "CPR, AED, shock, ventilate well, continue.",
       "opts": [
         {
-          "t": "Nurse continues compressions 30:2",
-          "n": 1,
-          "mark": "Continues high-quality CPR"
-        },
-        {
-          "t": "AED pads on; analyse: shock advised",
-          "n": 2,
-          "mark": "Early AED"
-        },
-        {
-          "t": "Shock; resume CPR immediately",
-          "n": 3,
-          "mark": "Shocks and resumes CPR without delay"
-        },
-        {
-          "t": "Airway: head tilt–chin lift, OPA, bag-mask with oxygen — ventilation is key",
-          "n": 4,
-          "mark": "Prioritises ventilation"
-        },
-        {
-          "t": "Rhythm check at 2 minutes: organised rhythm with a pulse",
-          "n": 5,
+          "t": "Resuscitate A",
+          "perform": "cpr",
+          "performHint": "Do it with your hands: keep CPR going, AED, shock, ventilate.",
+          "mark": [
+            "Continues high-quality CPR",
+            "Early AED",
+            "Shocks and resumes CPR without delay",
+            "Prioritises ventilation",
+            "Recognises ROSC",
+            "Continues ventilation after ROSC"
+          ],
           "scene": "rosc",
-          "mark": "Recognises ROSC"
-        },
-        {
-          "t": "Keep ventilating: still apnoeic",
-          "n": 6,
-          "mark": "Continues ventilation after ROSC"
+          "pose": "lightning"
         }
       ]
     },

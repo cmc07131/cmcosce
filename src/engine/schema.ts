@@ -14,6 +14,8 @@ export type PerformKind = (typeof performKinds)[number]
 export const BENCH_SCENES: Partial<Record<PerformKind, string[]>> = {
   chest: ['decompressed', 'drain'],
   eschar: ['arm'],
+  newborn: ['effective', 'breathing'],
+  cpr: ['asystole', 'rosc'],
 }
 
 const performFields = {

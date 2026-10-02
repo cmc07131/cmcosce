@@ -17,6 +17,8 @@ import { BreechProcedure } from './breech/BreechProcedure'
 import { DeliveryProcedure } from './delivery/DeliveryProcedure'
 import { ElbowProcedure } from './elbow/ElbowProcedure'
 import { ValsalvaProcedure } from './valsalva/ValsalvaProcedure'
+import { NewbornProcedure } from './newborn/NewbornProcedure'
+import { CprProcedure } from './cpr/CprProcedure'
 import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
@@ -46,4 +48,6 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   delivery: DeliveryProcedure,
   elbow: ElbowProcedure,
   valsalva: ValsalvaProcedure,
+  newborn: NewbornProcedure,
+  cpr: CprProcedure,
 }

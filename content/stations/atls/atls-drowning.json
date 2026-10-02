@@ -141,41 +141,24 @@
     },
     {
       "id": "cpr",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Resuscitate",
       "hint": "Airway, five rescue breaths, compressions, rhythm check.",
       "opts": [
         {
-          "t": "Open the airway and suction the vomit",
-          "mark": "Clears the airway with suction",
-          "n": 1
-        },
-        {
-          "t": "Five rescue breaths with bag-mask and oxygen",
-          "mark": "Gives 5 initial rescue breaths (ERC)",
-          "n": 2
-        },
-        {
-          "t": "Compressions 30:2 at 100–120/min, 5–6 cm",
-          "mark": "High-quality compressions",
-          "n": 3
-        },
-        {
-          "t": "Rhythm check: asystole — non-shockable",
-          "mark": "Identifies a non-shockable rhythm",
-          "n": 4,
-          "scene": "asystole"
-        },
-        {
-          "t": "Abdominal thrusts to empty the lungs first",
-          "trap": "critical",
-          "r": "Delays ventilation and causes vomiting and aspiration."
-        },
-        {
-          "t": "Put a rigid collar on before anything else",
-          "trap": true,
-          "r": "No diving or trauma history: a collar only obstructs the airway."
+          "t": "Resuscitate",
+          "perform": "cpr",
+          "performHint": "Do it with your hands: airway, five rescue breaths, then 30:2.",
+          "mark": [
+            "Clears the airway with suction",
+            "Gives 5 initial rescue breaths (ERC)",
+            "High-quality compressions",
+            "Identifies a non-shockable rhythm"
+          ],
+          "scene": "asystole",
+          "pose": "drowning"
         }
       ]
     },

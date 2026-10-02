@@ -130,58 +130,26 @@
     },
     {
       "id": "resus",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Resuscitate",
       "hint": "Dry and stimulate, assess, airway, 5 inflation breaths, check chest rise and HR, ventilation breaths.",
       "opts": [
         {
-          "t": "Dry, remove wet towel, wrap, hat on; stimulate",
-          "n": 1,
-          "mark": "Dries, wraps and stimulates"
-        },
-        {
-          "t": "Assess tone, breathing, heart rate (stethoscope): floppy, apnoeic, HR about 55",
-          "n": 2,
-          "mark": "Assesses tone, breathing and heart rate"
-        },
-        {
-          "t": "Head neutral, chin support or jaw thrust",
-          "n": 3,
-          "mark": "Opens the airway in a neutral position"
-        },
-        {
-          "t": "5 inflation breaths, 2–3 seconds each at 30 cmH2O",
-          "n": 4,
-          "mark": "Gives 5 inflation breaths"
-        },
-        {
-          "t": "Chest not moving: two-person jaw thrust and repeat the inflation breaths",
-          "n": 5,
-          "mark": "Corrects the airway when there is no chest rise"
-        },
-        {
-          "t": "Chest moves: ventilation breaths 30/min for 30 seconds",
-          "n": 6,
-          "scene": "effective",
-          "mark": "Ventilation breaths once the chest moves",
-          "r": "Heart rate rises to 120. SpO2 climbing."
-        },
-        {
-          "t": "Reassess: HR over 100, starting to breathe; continue support and titrate",
-          "n": 7,
-          "scene": "breathing",
-          "mark": "Reassesses heart rate and breathing"
-        },
-        {
-          "t": "Start chest compressions immediately at a heart rate of 55",
-          "trap": true,
-          "r": "Newborn bradycardia is from lack of ventilation. Ventilate effectively for 30 seconds first."
-        },
-        {
-          "t": "Hang the baby upside down to drain fluid",
-          "trap": "critical",
-          "r": "Never. Dry, warm, open the airway, ventilate."
+          "t": "Resuscitate",
+          "perform": "newborn",
+          "performHint": "Do it with your hands. Ventilation is everything in a newborn.",
+          "mark": [
+            "Dries, wraps and stimulates",
+            "Assesses tone, breathing and heart rate",
+            "Opens the airway in a neutral position",
+            "Gives 5 inflation breaths",
+            "Corrects the airway when there is no chest rise",
+            "Ventilation breaths once the chest moves",
+            "Reassesses heart rate and breathing"
+          ],
+          "scene": "breathing"
         }
       ]
     },
