@@ -83,84 +83,48 @@
     },
     {
       "id": "birth",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Deliver the baby",
       "hint": "Flex and control the head, check for cord, wait for restitution, anterior then posterior shoulder.",
       "opts": [
         {
-          "t": "Palm on the head to keep it flexed; other hand guarding the perineum",
-          "n": 1,
-          "mark": "Controls the head and guards the perineum"
-        },
-        {
-          "t": "Ask her to pant as the head crowns",
-          "n": 2,
-          "mark": "Slow controlled crowning"
-        },
-        {
-          "t": "Feel for a nuchal cord: loose — slip it over the head",
-          "n": 3,
-          "mark": "Checks for and manages nuchal cord"
-        },
-        {
-          "t": "Wait for restitution (the head turns to face a thigh)",
-          "n": 4,
-          "mark": "Waits for restitution"
-        },
-        {
-          "t": "With the next contraction: gentle downward traction for the anterior shoulder, then upward for the posterior",
-          "n": 5,
-          "mark": "Delivers shoulders with gentle axial traction"
-        },
-        {
-          "t": "Baby dried, skin to skin, crying; clamp the cord after at least 60 seconds",
-          "n": 6,
-          "mark": "Dries baby, skin-to-skin, delayed cord clamping"
-        },
-        {
-          "t": "Suction the baby's mouth and nose routinely",
-          "trap": true,
-          "r": "Not recommended routinely in a vigorous baby; it can cause bradycardia."
+          "t": "Deliver the baby",
+          "perform": "delivery",
+          "performHint": "Do it with your hands: control, pant, cord, restitution, shoulders, baby.",
+          "mark": [
+            "Controls the head and guards the perineum",
+            "Slow controlled crowning",
+            "Checks for and manages nuchal cord",
+            "Waits for restitution",
+            "Delivers shoulders with gentle axial traction",
+            "Dries baby, skin-to-skin, delayed cord clamping"
+          ],
+          "pose": "birth"
         }
       ]
     },
     {
       "id": "third",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Third stage",
       "hint": "Oxytocin IM, wait for separation signs, controlled cord traction guarding the uterus, check placenta and tears.",
       "opts": [
         {
-          "t": "Exclude a second twin (palpate the abdomen); oxytocin 10 IU IM",
-          "n": 1,
-          "mark": "Excludes a twin and gives oxytocin 10 IU IM"
-        },
-        {
-          "t": "Wait for signs of separation: gush of blood, cord lengthens, uterus firms and rises",
-          "n": 2,
-          "mark": "Recognises signs of placental separation"
-        },
-        {
-          "t": "Controlled cord traction with the other hand guarding the uterus above the pubis",
-          "n": 3,
-          "mark": "Controlled cord traction with uterine guarding"
-        },
-        {
-          "t": "Check placenta and membranes complete; three vessels in the cord",
-          "n": 4,
-          "mark": "Checks placenta, membranes and cord vessels"
-        },
-        {
-          "t": "Check the fundus is contracted; inspect for tears; estimate blood loss",
-          "n": 5,
-          "mark": "Checks tone, tears and blood loss"
-        },
-        {
-          "t": "Pull hard on the cord straight away",
-          "trap": "critical",
-          "r": "Traction before separation, without guarding the uterus, risks uterine inversion."
+          "t": "Third stage",
+          "perform": "delivery",
+          "performHint": "Do it with your hands: twin, oxytocin, separation, guarded traction, check, tone.",
+          "mark": [
+            "Excludes a twin and gives oxytocin 10 IU IM",
+            "Recognises signs of placental separation",
+            "Controlled cord traction with uterine guarding",
+            "Checks placenta, membranes and cord vessels",
+            "Checks tone, tears and blood loss"
+          ],
+          "pose": "third"
         }
       ]
     },
