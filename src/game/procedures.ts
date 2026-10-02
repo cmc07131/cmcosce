@@ -19,6 +19,7 @@ import { ElbowProcedure } from './elbow/ElbowProcedure'
 import { ValsalvaProcedure } from './valsalva/ValsalvaProcedure'
 import { NewbornProcedure } from './newborn/NewbornProcedure'
 import { CprProcedure } from './cpr/CprProcedure'
+import { PositionalProcedure } from './positional/PositionalProcedure'
 import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
@@ -50,4 +51,5 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   valsalva: ValsalvaProcedure,
   newborn: NewbornProcedure,
   cpr: CprProcedure,
+  positional: PositionalProcedure,
 }

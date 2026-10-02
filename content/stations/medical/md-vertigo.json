@@ -63,76 +63,47 @@
     },
     {
       "id": "hallpike",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Dix–Hallpike (right)",
       "hint": "Explain, position, head 45°, lie back fast with neck extended, observe 30 s, sit up.",
       "opts": [
         {
-          "t": "Explain it will make her dizzy briefly; keep her eyes open",
-          "n": 1,
-          "mark": "Explains and warns"
-        },
-        {
-          "t": "Sit her on the couch so her head will hang over the end when lying",
-          "n": 2,
-          "mark": "Correct starting position"
-        },
-        {
-          "t": "Turn her head 45° to the right",
-          "n": 3,
-          "mark": "Head turned 45°"
-        },
-        {
-          "t": "Lie her back quickly, head 20° below the horizontal, supporting it",
-          "n": 4,
-          "mark": "Rapid lie-back with neck extended"
-        },
-        {
-          "t": "Watch her eyes for at least 30 seconds",
-          "n": 5,
-          "r": "After 3 seconds: torsional upbeating nystagmus toward the right ear, lasting 20 seconds, with vertigo.",
-          "mark": "Observes latency, direction and duration"
-        },
-        {
-          "t": "Positive right: right posterior canal BPPV",
-          "n": 6,
-          "mark": "Interprets a positive right Dix–Hallpike"
+          "t": "Dix–Hallpike (right)",
+          "perform": "positional",
+          "performHint": "Position her with your hands, and watch her eyes long enough.",
+          "mark": [
+            "Explains and warns",
+            "Correct starting position",
+            "Head turned 45°",
+            "Rapid lie-back with neck extended",
+            "Observes latency, direction and duration",
+            "Interprets a positive right Dix–Hallpike"
+          ]
         }
       ]
     },
     {
       "id": "epley",
-      "kind": "steps",
+      "kind": "say",
+      "lang": "en",
       "to": "patient",
       "label": "Epley manoeuvre (right)",
       "hint": "From the right Hallpike position: head 90° left, roll onto the left side nose down, sit up.",
       "opts": [
         {
-          "t": "Stay in the right Hallpike position 30 seconds",
-          "n": 1,
-          "mark": "Starts from the Hallpike position"
-        },
-        {
-          "t": "Turn her head 90° to the left (still extended), hold 30 seconds",
-          "n": 2,
-          "mark": "Turns the head 90° to the other side"
-        },
-        {
-          "t": "Roll her onto her left side, nose pointing down, hold 30 seconds",
-          "n": 3,
-          "mark": "Rolls onto the side, nose down"
-        },
-        {
-          "t": "Sit her up slowly, head slightly down",
-          "n": 4,
-          "mark": "Sits up"
-        },
-        {
-          "t": "Repeat the Hallpike: no nystagmus — treated",
-          "n": 5,
-          "mark": "Retests after the manoeuvre",
-          "r": "No nystagmus. She feels better."
+          "t": "Epley manoeuvre (right)",
+          "perform": "positional",
+          "performHint": "Move her through each position with your hands, 30 seconds in each.",
+          "mark": [
+            "Starts from the Hallpike position",
+            "Turns the head 90° to the other side",
+            "Rolls onto the side, nose down",
+            "Sits up",
+            "Retests after the manoeuvre"
+          ],
+          "pose": "epley"
         }
       ]
     },
