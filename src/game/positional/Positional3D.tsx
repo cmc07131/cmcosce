@@ -165,6 +165,22 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     return ((dx * vx + dy * vy) / len2) * step
   }
 
+  /**
+   * A wide turn: one steady direction on screen, from where the joint is at `from` to where it is at `to`, for the
+   * whole arc. Following the instantaneous direction stalls and reverses wherever the arc runs toward the camera.
+   */
+  function followArc(r: ExamRoom, dx: number, dy: number, key: keyof Pose, from: number, to: number, joint: 'nose' | 'head' | 'chest' | 'shoulder') {
+    sync(r)
+    const a = r.probe({ [key]: from } as Partial<Pose>, joint)
+    const b = r.probe({ [key]: to } as Partial<Pose>, joint)
+    if (!a || !b) return 0
+    const vx = b.x - a.x
+    const vy = b.y - a.y
+    // Never more than 90° for 120 px of finger, however short the arc looks.
+    const len2 = Math.max(vx * vx + vy * vy, 120 * 120)
+    return ((dx * vx + dy * vy) / len2) * (to - from)
+  }
+
   function move(e: React.PointerEvent) {
     const r = room.current
     const g = grab.current
@@ -177,7 +193,8 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v))
     if (g.kind === 'slide') upd({ hipX: clamp(cur.hipX + follow(r, dx, dy, 'hipX', -0.05, 'chest'), 0.5, 0.9) })
     if (g.kind === 'head') {
-      const yaw = clamp(cur.yaw + follow(r, dx, dy, 'yaw', 8, 'nose'), -75, 75)
+      const turn = epley ? followArc(r, dx, dy, 'yaw', 45, -45, 'nose') : follow(r, dx, dy, 'yaw', 8, 'nose')
+      const yaw = clamp(cur.yaw + turn, -75, 75)
       upd({ yaw })
       if (epley && stageRef.current === 'Turn' && yaw <= -35 && !cur.turned) {
         upd({ turned: true })
@@ -227,6 +244,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     const stage = stageRef.current
     if (stage === 'Position') feel(headOverEnd(cur) ? 'Her shoulders are at the end of the couch: lying back, her head will hang over it.' : 'She is still too far up the couch.')
     if (stage === 'Turn' && !epley) feel(`Her head turned ${Math.round(Math.abs(cur.yaw))}° to the ${cur.yaw >= 0 ? 'right' : 'left'}.`)
+    if (stage === 'Turn' && epley && !cur.turned) feel(`Her head is ${Math.round(Math.abs(cur.yaw))}° to the ${cur.yaw >= 0 ? 'right' : 'left'}: keep turning it to her left, until it is 45° past the middle.`)
     if (stage === 'Lie back' && cur.dropS !== null) {
       if (cur.dropS > 2.5) why('Briskly: a slow lie-back may not provoke it.')
       else if (cur.ext < 15) feel('Flat, but her head is level with the couch: let it drop a little further over the end.')
@@ -253,7 +271,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
   const lede: Record<string, string> = {
     Explain: 'Tell her what you are about to do.',
     Position: 'Drag her down the couch until her shoulders reach the head end.',
-    Turn: epley ? 'Hold her head and turn it through 90° to the left, keeping it hanging back over the end.' : 'Hold her head with both hands and turn it 45° to her right.',
+    Turn: epley ? 'You are at her head, looking down at her face: her left is your left. Drag her head through 90° to her left, keeping it hanging back over the end.' : 'Hold her head with both hands and turn it 45° to her right.',
     'Lie back': 'Holding her head, lie her back briskly; keep going so her head drops about 20° below the couch.',
     Watch: 'Watch her eyes on the goggle screen, for at least 30 seconds.',
     Interpret: 'What did you see?',
@@ -274,7 +292,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
         <span>MRS CHAU</span>
         <span />
         <span>
-          {stage === 'Watch' ? `⏱ ${Math.round(run.watchedS)} S` : epley && stage === 'Hold' ? hold(0) : epley && stage === 'Turn' ? hold(1) : epley && stage === 'Roll' ? hold(2) : run.lie > 0.95 ? `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'} · ${Math.round(run.ext)}° DOWN` : `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'}`}
+          {stage === 'Watch' ? `⏱ ${Math.round(run.watchedS)} S` : epley && stage === 'Hold' ? hold(0) : epley && stage === 'Turn' ? <>{`HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'} · `}{hold(1)}</> : epley && stage === 'Roll' ? hold(2) : run.lie > 0.95 ? `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'} · ${Math.round(run.ext)}° DOWN` : `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'}`}
         </span>
       </div>
       <StepStrip titles={titles} index={checked ? titles.length - 1 : index} />

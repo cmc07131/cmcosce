@@ -360,9 +360,12 @@ export class ExamRoom {
       this.wantPos.set(0.12, 1.12 + 0.12 * far, 1.25 * far)
       this.wantLook.set(0.06, 0.86, 0)
     } else if (this.view === 'above') {
-      // Standing at the head end, looking down at her face.
-      this.wantPos.set(-0.55, 1.55 + 0.2 * far, 0.18)
-      this.wantLook.set(0.12, 0.75, 0)
+      // Standing at the head end, looking down into her upturned face (upside down to you): her left is your left,
+      // and the nose sweeps straight across the screen as the head turns.
+      const hx = this.pose.hipX - 0.6
+      const d = this.camera.aspect < 1 ? 1.3 : 1
+      this.wantPos.set(hx - 0.5 * d, 0.8 + 0.58 * d, 0)
+      this.wantLook.set(hx + 0.04, 0.72, 0)
     } else if (this.view === 'left') {
       // From her left side, as she rolls toward you.
       this.wantPos.set(0.3, 1.25 + 0.18 * far, -1.05 * far)
