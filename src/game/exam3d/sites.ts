@@ -194,3 +194,42 @@ export function siteLabel(id: string): string {
   if (!s) return id
   return `the ${s.side === 'R' ? 'right ' : s.side === 'L' ? 'left ' : ''}${s.def.label}`
 }
+
+/** Parts of the body a tap opens: what you can examine there, nearest first. Sided regions get Right / Left. */
+const REGIONS: { label: string; sites: string[] }[] = [
+  { label: 'head and face', sites: ['head', 'eye', 'forehead', 'temple', 'supraorbital', 'cheek', 'mouth', 'jaw', 'ear', 'mastoid'] },
+  { label: 'neck', sites: ['neck', 'supraclavicular', 'trapezius'] },
+  { label: 'chest', sites: ['chest', 'sternum'] },
+  { label: 'abdomen', sites: ['umbilicus', 'epigastrium', 'ruq', 'iliac', 'flank', 'suprapubic'] },
+  { label: 'back', sites: ['spine', 'thoracic', 'paraspinal', 'sacrum', 'perianal'] },
+  { label: 'shoulder', sites: ['shoulder', 'acromion', 'acjoint', 'clavicle', 'scjoint', 'tuberosity', 'bicipital'] },
+  { label: 'upper arm and elbow', sites: ['arm', 'badge', 'elbow'] },
+  { label: 'forearm and wrist', sites: ['forearm', 'wrist'] },
+  { label: 'hand', sites: ['hand', 'palm', 'nails', 'pulp', 'thumb', 'web', 'ring', 'ringpulp'] },
+  { label: 'hip and groin', sites: ['hip', 'groin', 'asis'] },
+  { label: 'thigh', sites: ['thigh', 'innerthigh'] },
+  { label: 'knee', sites: ['knee', 'medialjoint', 'lateraljoint', 'tibialtub', 'fibula', 'popliteal'] },
+  { label: 'lower leg', sites: ['shin', 'calf'] },
+  { label: 'ankle and foot', sites: ['lateralmalleolus', 'medialmalleolus', 'foot', 'dp', 'pt', 'navicular', 'fifthmt', 'toes', 'sole', 'heel'] },
+  { label: 'under the drape', sites: ['vulva', 'cervix', 'adnexa', 'scrotum', 'testis'] },
+]
+
+/** The part of the body a site belongs to, and every site there (on the same side), as ids. */
+export function regionOf(id: string, exists: (id: string) => boolean = () => true): { label: string; sites: string[] } | null {
+  const s = siteOf(id)
+  if (!s) return null
+  const base = id.replace(/-(R|L)$/, '')
+  const region = REGIONS.find((r) => r.sites.includes(base))
+  if (!region) return null
+  const side = s.side
+  const sites = region.sites
+    .flatMap((b) => (SITES[b]?.sided ? (side ? [`${b}-${side}`] : [`${b}-R`, `${b}-L`]) : [b]))
+    .filter(exists)
+  const sideWord = side === 'R' ? 'Right ' : side === 'L' ? 'Left ' : ''
+  return { label: sideWord ? `${sideWord}${region.label}` : region.label.charAt(0).toUpperCase() + region.label.slice(1), sites }
+}
+
+/** A site's name on a button: "radial pulse", without the side. */
+export function spotLabel(id: string): string {
+  return siteOf(id)?.def.label ?? id
+}

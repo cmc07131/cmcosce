@@ -12,7 +12,7 @@ import { SITES, SITE_IDS, siteOf, type JointRef } from './sites'
  */
 
 export type Posture = 'supine' | 'sitting' | 'edge' | 'standing' | 'walking' | 'heel-toe' | 'roll-R' | 'roll-L' | 'knees-up' | 'bent' | 'one-leg-R' | 'one-leg-L'
-export type View = 'whole' | 'head' | 'chest' | 'abdomen' | 'hands' | 'legs' | 'feet' | 'back'
+export type View = 'whole' | 'head' | 'chest' | 'abdomen' | 'hands' | 'legs' | 'feet' | 'back' | 'focus'
 
 /** What is wrong with her that shows: for the motions she makes when asked or touched. */
 export type Signs = {
@@ -131,6 +131,8 @@ export class ExamScene {
   eyes: Eyes = { torsion: 0, vertical: 0, horizontal: 0, closed: 0, squint: 0, distress: 0 }
   signs: Signs
   view: View = 'whole'
+  /** The landmark the camera closes in on in the `focus` view. */
+  private focusSite: string | null = null
   private camPos = v(1.9, 1.7, 2.6)
   private camLook = v(0.9, 0.9, 0)
   private wantPos = this.camPos.clone()
@@ -659,7 +661,7 @@ export class ExamScene {
   /* ------------------------------------------------------------------ where you touch */
 
   /** The landmark under a screen point, if the ray meets her body near one; or null. */
-  pick(clientX: number, clientY: number): { site: string | null; point: THREE.Vector3 } | null {
+  pick(clientX: number, clientY: number, loose = false): { site: string | null; point: THREE.Vector3 } | null {
     const R = this.rig
     if (!R) return null
     const rect = this.renderer.domElement.getBoundingClientRect()
@@ -682,7 +684,7 @@ export class ExamScene {
         best = id
       }
     }
-    return { site: bestD <= (onDrape ? 4 : 1.6) ? best : null, point: hit.point.clone() }
+    return { site: loose || bestD <= (onDrape ? 4 : 1.6) ? best : null, point: hit.point.clone() }
   }
 
   /** A site's position on screen (CSS pixels), for labels and markers. */
@@ -691,6 +693,10 @@ export class ExamScene {
     const p = point.clone().project(this.camera)
     const rect = this.renderer.domElement.getBoundingClientRect()
     return { x: rect.left + ((p.x + 1) / 2) * rect.width, y: rect.top + ((1 - p.y) / 2) * rect.height, behind: p.z > 1 }
+  }
+
+  hasSite(id: string) {
+    return this.anchors.has(id)
   }
 
   siteWorld(id: string) {
@@ -766,12 +772,19 @@ export class ExamScene {
     this.view = view
   }
 
+  /** Close in on a landmark, from the side it faces. */
+  focus(site: string) {
+    this.focusSite = site
+    this.view = 'focus'
+  }
+
   private aimCamera() {
     const R = this.rig
     if (!R) return
     const far = this.camera.aspect < 1 ? 1.4 : 1
     const H = R.height
     const at = (o: THREE.Object3D) => o.getWorldPosition(v(0, 0, 0))
+    const at0 = at
     const F = v(0, 0, 1).applyQuaternion(this.body.quaternion)
     const mid = (a: THREE.Vector3, b: THREE.Vector3) => a.clone().add(b).multiplyScalar(0.5)
     const toward = (front: number, dir: THREE.Vector3) => F.clone().multiplyScalar(front).add(dir).normalize()
@@ -779,6 +792,15 @@ export class ExamScene {
     let dir: THREE.Vector3
     let dist: number
     switch (this.view) {
+      case 'focus': {
+        const at = this.focusSite ? this.siteWorld(this.focusSite) : null
+        target = at ?? mid(at0(R.hips), at0(R.head))
+        // From outside the body toward the spot, leaning toward the examiner's side and up.
+        const centre = mid(at0(R.hips), at0(R.chest))
+        dir = target.clone().sub(centre).setY(0).normalize().multiplyScalar(0.6).add(v(0.1, 0.55, 0.6)).normalize()
+        dist = 0.62
+        break
+      }
       case 'head':
         target = mid(at(R.eye.L), at(R.eye.R))
         dir = toward(0.75, v(0.1, 0.15, 0.35))

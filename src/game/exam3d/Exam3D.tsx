@@ -10,12 +10,12 @@ import { CORE_TOOLS, SAYS, sayOf, toolById, TOOLS, type SayDef } from './catalog
 import { Illustration, illustrationFor, type IllustrationKind } from './Illustration'
 import { advance, freshProgress, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, type Limb, type Posture, type View } from './scene'
-import { siteLabel, siteOf } from './sites'
+import { regionOf, siteLabel, siteOf, spotLabel } from './sites'
 import { bowel, doppler, fork, heartbeat, percussNote } from './sounds'
 
 /**
- * The physical examination, done on a 3D patient: pick a tool, then look, feel, press, percuss, listen, move a limb
- * or ask them to do something. Each exam item's `do` line says what performs it; done, it scores exactly as picking it
+ * The physical examination, done on a 3D patient: tap the part of the body, then choose exactly where and what to do
+ * there (look, feel, press, percuss, listen, a tool from the kit, move the joint), or talk to them. Each exam item's `do` line says what performs it; done, it scores exactly as picking it
  * from the list did. Nothing is listed or ordered for you: what you find depends on what you do, and where.
  */
 
@@ -77,9 +77,6 @@ const MOTION_OF: Record<string, number> = {
 const TOUCH = new Set(['feel', 'press', 'percuss', 'listen', 'move', 'hammer', 'orange', 'pin', 'cotton', 'calipers', 'doppler', 'scanner', 'speculum', 'swab', 'tape', 'glucometer'])
 /** Where a painful stimulus is given (for an unconscious patient's response). */
 const PAIN_SITES = /^(trapezius|supraorbital|nails|pulp|sternum)/
-/** How long to keep a finger down for a hold tool (seconds). */
-const HOLD_S: Record<string, number> = { press: 0.7, listen: 1.1, doppler: 1.1, scanner: 1 }
-
 const JOINT_RANGE: Record<string, [number, number]> = {
   knee: [0, 140],
   hipflex: [-10, 130],
@@ -105,17 +102,14 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const scene = useRef<ExamScene | null>(null)
   const progress = useRef(new Map<string, Progress>())
   const flags = useRef({ touched: false, gloved: false })
-  const press = useRef<{ x: number; y: number; t: number; moved: boolean; drag?: { limb: Limb; site: string; start: Record<string, number> } } | null>(null)
   const timers = useRef<number[]>([])
-  const [tool, setTool] = useState('look')
-  const [side, setSide] = useState<'R' | 'L'>('R')
-  const [askOpen, setAskOpen] = useState(false)
+  const [panel, setPanel] = useState<{ kind: 'region'; label: string; spots: string[]; spot: string } | { kind: 'talk' } | null>(null)
+  const [moving, setMoving] = useState<{ limb: Limb; start: Record<string, number>; value: number } | null>(null)
   const [view, setView] = useState<View>('whole')
   const [loading, setLoading] = useState(true)
   const [credit, setCredit] = useState<Credit | null>(null)
-  const [note, setNote] = useState<Note>({ text: `${name} is on the couch. Pick a tool, then use it on them. Ask them to move or change position with ASK.`, tone: 'hint' })
+  const [note, setNote] = useState<Note>({ text: `${name} is on the couch. Tap the part of the body you want to examine, or talk to them.`, tone: 'hint' })
   const [illus, setIllus] = useState<{ kind: IllustrationKind; text: string } | null>(null)
-  const [holding, setHolding] = useState<{ x: number; y: number; need: number; t0: number } | null>(null)
   const [found, setFound] = useState<string[]>([])
   const done = new Set([...spent, ...found])
 
@@ -146,7 +140,8 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   useButtons(30, true, (btn) => {
     if (btn !== 'b') return
     sfx.back()
-    onClose?.()
+    if (panel) setPanel(null)
+    else onClose?.()
   })
 
   const later = (seconds: number, run: () => void) => timers.current.push(window.setTimeout(run, seconds * 1000))
@@ -216,11 +211,11 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   /* ---------------------------------------------------------------- instructions */
 
-  function ask(def: SayDef) {
+  function ask(def: SayDef, side: 'R' | 'L' = 'R') {
     const s = scene.current
     if (!s) return
     const id = def.sided ? `${def.id}-${side}` : def.id
-    setAskOpen(false)
+    setPanel(null)
     sfx.select()
     const unconscious = s.signs.unconscious
     if (!unconscious) {
@@ -237,110 +232,83 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     handle({ tool: 'say', say: id })
   }
 
-  /* ---------------------------------------------------------------- hands on */
+  /* ---------------------------------------------------------------- hands on: tap the body, then choose */
 
-  const toolDef = toolById(tool)
+  // A tap on the body opens that part of it: where exactly, and what to do there. No aiming, no holding, no dragging.
+  const tapAt = useRef<{ x: number; y: number } | null>(null)
 
   function down(e: React.PointerEvent) {
-    const s = scene.current
-    if (!s || loading || !toolDef || toolDef.use === 'menu' || toolDef.use === 'self') return
-    try {
-      ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
-    } catch {
-      /* fine */
-    }
-    const p = { x: e.clientX, y: e.clientY, t: performance.now(), moved: false } as NonNullable<typeof press.current>
-    if (toolDef.use === 'drag') {
-      const at = s.pick(e.clientX, e.clientY)
-      const limb = s.limbAt(at?.site ?? null)
-      if (!limb || !at?.site) {
-        setNote({ text: 'Take hold of a limb — a hand, a forearm, an arm, a foot, a leg — or the head, then move it.', tone: 'hint' })
-        return
-      }
-      p.drag = { limb, site: at.site, start: s.angles() }
-      setNote({ text: `Holding ${siteLabel(at.site)}.`, tone: 'normal' })
-    }
-    if (toolDef.use === 'hold') setHolding({ x: e.clientX, y: e.clientY, need: HOLD_S[tool] ?? 0.8, t0: performance.now() })
-    press.current = p
-  }
-
-  function move(e: React.PointerEvent) {
-    const s = scene.current
-    const p = press.current
-    if (!s || !p) return
-    if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 12) p.moved = true
-    const d = p.drag
-    if (!d) return
-    // The limb follows your finger: how far the point you hold moves on screen for a few degrees.
-    const step = 6
-    const a = s.siteWorld(d.site)
-    const before = a ? s.screenOf(a) : null
-    const after = s.probe(d.limb, step, d.site)
-    if (!before || !after) return
-    const vx = after.x - before.x
-    const vy = after.y - before.y
-    const len2 = Math.max(vx * vx + vy * vy, 64)
-    const dx = e.clientX - p.x
-    const dy = e.clientY - p.y
-    p.x = e.clientX
-    p.y = e.clientY
-    const range = JOINT_RANGE[d.limb.key.replace(/-(R|L)$/, '')] ?? [-90, 90]
-    const next = Math.max(range[0], Math.min(range[1], s.angle(d.limb.key) + ((dx * vx + dy * vy) / len2) * step))
-    s.setHeld(d.limb, next)
+    tapAt.current = { x: e.clientX, y: e.clientY }
   }
 
   function up(e: React.PointerEvent) {
     const s = scene.current
-    const p = press.current
-    press.current = null
-    setHolding(null)
-    if (!s || !p || !toolDef) return
-    if (p.drag) {
-      // Every joint the drag moved through a real range counts: lifting the knee flexes the hip and the knee.
-      const { limb, start, site } = p.drag
-      const now = s.angles()
-      const side = limb.joint.match(/-(R|L)$/)?.[1]
-      const moves: string[] = []
-      if (Math.abs((now[limb.key] ?? 0) - (start[limb.key] ?? 0)) >= 15) moves.push(`${limb.joint}:${limb.dof}`)
-      if (side && limb.kneeWithHip && Math.abs((now[`knee-${side}`] ?? 0) - (start[`knee-${side}`] ?? 0)) >= 15) moves.push(`knee-${side}:flex`)
-      if (moves.length === 0) setNote({ text: 'Move it further: through its range.', tone: 'hint' })
-      for (const m of moves) handle({ tool: 'move', move: m, site })
+    const t = tapAt.current
+    tapAt.current = null
+    if (!s || loading || !t || Math.hypot(e.clientX - t.x, e.clientY - t.y) > 14) return
+    const at = s.pick(e.clientX, e.clientY, true)
+    if (!at?.site) {
+      setPanel(null)
+      setNote({ text: 'Tap the part of the body you want to examine.', tone: 'hint' })
       return
     }
-    if (p.moved) return
-    const held = (performance.now() - p.t) / 1000
-    if (toolDef.use === 'hold' && held < (HOLD_S[tool] ?? 0.8)) {
-      setNote({ text: tool === 'listen' ? 'Keep the stethoscope there a moment to listen.' : 'Hold it there a moment.', tone: 'hint' })
-      return
-    }
-    const at = s.pick(e.clientX, e.clientY)
-    if (!at) {
-      setNote({ text: `Use the ${toolDef.label.toLowerCase()} on ${name.split(' ')[0] === 'The' ? 'the patient' : name}.`, tone: 'hint' })
-      return
-    }
-    if (!at.site) {
-      setNote({ text: 'Closer to a landmark: nothing to find just there.', tone: 'hint' })
-      return
-    }
-    if (tool === 'press' && PAIN_SITES.test(at.site)) s.stimulus()
-    handle({ tool, site: at.site }, at.point)
+    openRegion(at.site)
   }
 
-  function pickTool(id: string) {
-    const t = toolById(id)
-    if (!t) return
+  function openRegion(site: string) {
+    const s = scene.current
+    if (!s) return
+    const r = regionOf(site, (id) => s.hasSite(id))
+    if (!r) return
     sfx.cursor()
-    if (t.use === 'menu') {
-      setAskOpen((o) => !o)
-      return
-    }
-    setAskOpen(false)
-    if (t.use === 'self') {
-      handle({ tool: id })
-      return
-    }
-    setTool(id)
-    if (id === 'move') setNote({ text: 'Take hold of a limb or the head and move it.', tone: 'hint' })
+    setMoving(null)
+    setPanel({ kind: 'region', label: r.label, spots: r.sites, spot: site })
+    s.focus(site)
+    setView('focus')
+  }
+
+  function act(toolId: string) {
+    const s = scene.current
+    if (!s || panel?.kind !== 'region') return
+    sfx.select()
+    const site = panel.spot
+    if (toolId === 'press' && PAIN_SITES.test(site)) s.stimulus()
+    handle({ tool: toolId, site }, s.siteWorld(site) ?? undefined)
+  }
+
+  function startMove() {
+    const s = scene.current
+    if (!s || panel?.kind !== 'region') return
+    const limb = s.limbAt(panel.spot)
+    if (!limb) return
+    setMoving({ limb, start: s.angles(), value: Math.round(s.angle(limb.key)) })
+  }
+
+  function slide(value: number) {
+    const s = scene.current
+    if (!s || !moving) return
+    s.setHeld(moving.limb, value)
+    setMoving({ ...moving, value })
+  }
+
+  /** Let go of the slider: every joint moved through a real range counts (lifting the knee flexes hip and knee). */
+  function finishMove() {
+    const s = scene.current
+    if (!s || !moving || panel?.kind !== 'region') return
+    const { limb, start } = moving
+    const now = s.angles()
+    const side = limb.joint.match(/-(R|L)$/)?.[1]
+    const moves: string[] = []
+    if (Math.abs((now[limb.key] ?? 0) - (start[limb.key] ?? 0)) >= 15) moves.push(`${limb.joint}:${limb.dof}`)
+    if (side && limb.kneeWithHip && Math.abs((now[`knee-${side}`] ?? 0) - (start[`knee-${side}`] ?? 0)) >= 15) moves.push(`knee-${side}:flex`)
+    if (moves.length === 0) setNote({ text: 'Move it further: through its range.', tone: 'hint' })
+    for (const m of moves) handle({ tool: 'move', move: m, site: panel.spot })
+    setMoving({ limb, start: s.angles(), value: Math.round(s.angle(limb.key)) })
+  }
+
+  function gloves() {
+    sfx.select()
+    handle({ tool: 'gloves' })
   }
 
   function setViewTo(v: View) {
@@ -350,9 +318,13 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   const groups = useMemo(() => [...new Set(SAYS.map((s) => s.group))], [])
   // Development: drive the examination from tests without picking on the canvas.
-  if (import.meta.env.DEV) Object.assign(window, { __examDo: handle })
+  if (import.meta.env.DEV) Object.assign(window, { __examDo: handle, __examOpen: openRegion })
   const total = items.filter((i) => !i.option.isTrap).length
   const got = items.filter((i) => !i.option.isTrap && done.has(i.option.id)).length
+  const handsOn = tools.filter((t) => !['say', 'move', 'gloves'].includes(t.id))
+  const limbHere = panel?.kind === 'region' ? (scene.current?.limbAt(panel.spot) ?? null) : null
+  const range = moving ? (JOINT_RANGE[moving.limb.key.replace(/-(R|L)$/, '')] ?? [-90, 90]) : [0, 0]
+  const big = 'min-h-[44px] rounded-md border-2 px-2 py-1.5 text-left text-[15px] leading-tight'
 
   return (
     <div className="battle absolute inset-0 z-40 flex flex-col" data-testid="exam3d">
@@ -371,22 +343,22 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
             FOUND {got}/{total}
           </span>
         </div>
-        <div className="relative mx-3 min-h-[240px] flex-[1_1_52%] overflow-hidden rounded-md border-[3px] border-[#181820] bg-[#dfe5ea]" style={{ touchAction: 'none' }}>
-          <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} />
+        <div className="relative mx-3 min-h-[220px] flex-[1_1_46%] overflow-hidden rounded-md border-[3px] border-[#181820] bg-[#dfe5ea]" style={{ touchAction: 'none' }}>
+          <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerUp={up} />
           {loading && <p className="absolute inset-0 grid place-items-center font-[Press_Start_2P,monospace] text-[8px] text-[#40404c]">Bringing {name} in…</p>}
           <div className="absolute left-1 top-1 flex max-w-[calc(100%-8px)] flex-wrap gap-1" onPointerDown={(e) => e.stopPropagation()}>
             {VIEWS.map((v) => (
-              <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border px-1 py-0.5 font-[Press_Start_2P,monospace] text-[6px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-white' : 'border-[#5a6470]/60 bg-white/85 text-[#40404c]'}`}>
+              <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-white' : 'border-[#5a6470]/60 bg-white/90 text-[#30303c]'}`}>
                 {v.label}
               </button>
             ))}
           </div>
-          {holding && <HoldRing {...holding} />}
           {illus && (
             <div className="absolute bottom-6 right-1 w-[46%]" onPointerDown={(e) => e.stopPropagation()} onClick={() => setIllus(null)}>
               <Illustration kind={illus.kind} finding={illus.text} />
             </div>
           )}
+          {!panel && !loading && <p className="pointer-events-none absolute bottom-1 left-2 rounded bg-white/85 px-1.5 py-0.5 text-[12px] text-[#30303c]">Tap the body to examine it</p>}
           {credit &&
             (credit.href ? (
               <a href={credit.href} target="_blank" rel="noreferrer" className="absolute bottom-1 right-1 text-[8px] text-[#5a6470] opacity-70" onPointerDown={(e) => e.stopPropagation()}>
@@ -397,51 +369,127 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
             ))}
         </div>
 
-        <div className="mx-3 mt-2 flex gap-1 overflow-x-auto pb-1" role="toolbar" aria-label="Examination tools" data-testid="exam3d-tools">
-          {tools.map((t) => (
-            <button key={t.id} type="button" data-testid={`exam3d-tool-${t.id}`} aria-pressed={t.use === 'menu' ? askOpen : tool === t.id} onClick={() => pickTool(t.id)} className={`flex min-w-[46px] flex-none flex-col items-center rounded border-2 px-1 py-1 ${(t.use === 'menu' ? askOpen : tool === t.id) ? 'border-[#181820] bg-[#ffe9a8]' : 'border-[#5a6470]/50 bg-white'}`}>
-              <span className="text-[16px] leading-none" aria-hidden>
-                {t.icon}
-              </span>
-              <span className="mt-0.5 font-[Press_Start_2P,monospace] text-[5px] leading-tight text-[#303040]">{t.label.toUpperCase()}</span>
-            </button>
-          ))}
-        </div>
+        <p className={`mx-3 mb-0 mt-2 rounded border-2 p-2 text-[15px] leading-snug ${note.tone === 'finding' ? 'border-[#1a7a40] bg-[#e4f7e8]' : note.tone === 'warn' ? 'border-[#b8282a] bg-[#fde7e7]' : note.tone === 'hint' ? 'border-[#c0a040] bg-[#fff8d8]' : 'border-[#9aa4ad] bg-white'}`} data-testid="exam3d-note" aria-live="polite">
+          {note.text}
+        </p>
 
-        <div className="min-h-0 flex-[1_1_40%] overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
-          {askOpen ? (
-            <div data-testid="exam3d-ask">
-              <div className="mb-1 flex items-center gap-2">
-                <span className="font-[Press_Start_2P,monospace] text-[7px]">SIDE:</span>
-                {(['R', 'L'] as const).map((s) => (
-                  <button key={s} type="button" aria-pressed={side === s} onClick={() => setSide(s)} className={`rounded border px-2 py-0.5 font-[Press_Start_2P,monospace] text-[7px] ${side === s ? 'border-[#181820] bg-[#181820] text-white' : 'border-[#5a6470] bg-white'}`}>
-                    {s === 'R' ? 'RIGHT' : 'LEFT'}
-                  </button>
-                ))}
+        <div className="min-h-0 flex-[1_1_44%] overflow-auto px-3 pb-3 pt-2" style={{ scrollbarGutter: 'stable' }}>
+          {panel?.kind === 'region' && (
+            <div data-testid="exam3d-region">
+              <div className="mb-1 flex items-center justify-between">
+                <b className="font-[Press_Start_2P,monospace] text-[9px]">{panel.label.toUpperCase()}</b>
+                <button type="button" className="rounded border-2 border-[#5a6470] bg-white px-2 py-1 text-[13px]" data-testid="exam3d-region-close" onClick={() => (setPanel(null), setMoving(null))}>
+                  ✕ Close
+                </button>
               </div>
-              {groups.map((g) => (
-                <div key={g} className="mb-1">
-                  <p className="m-0 font-[Press_Start_2P,monospace] text-[6px] text-[#8a5a00]">{g.toUpperCase()}</p>
-                  <div className="flex flex-wrap gap-1">
-                    {SAYS.filter((s) => s.group === g).map((s) => (
-                      <button key={s.id} type="button" data-testid={`exam3d-say-${s.id}`} onClick={() => ask(s)} className="tap io-mini">
-                        {s.label}
-                        {s.sided ? ` (${side === 'R' ? 'right' : 'left'})` : ''}
+              {panel.spots.length > 1 && (
+                <>
+                  <p className="m-0 mb-1 font-[Press_Start_2P,monospace] text-[7px] text-[#8a5a00]">WHERE</p>
+                  <div className="mb-2 flex flex-wrap gap-1.5">
+                    {panel.spots.map((id) => (
+                      <button key={id} type="button" data-testid={`exam3d-spot-${id}`} aria-pressed={panel.spot === id} onClick={() => (setPanel({ ...panel, spot: id }), scene.current?.focus(id), setMoving(null))} className={`${big} ${panel.spot === id ? 'border-[#181820] bg-[#ffe9a8]' : 'border-[#9aa4ad] bg-white'}`}>
+                        {spotLabel(id)}
                       </button>
                     ))}
+                  </div>
+                </>
+              )}
+              <p className="m-0 mb-1 font-[Press_Start_2P,monospace] text-[7px] text-[#8a5a00]">DO · {spotLabel(panel.spot).toUpperCase()}</p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {handsOn.map((t) => (
+                  <button key={t.id} type="button" data-testid={`exam3d-do-${t.id}`} onClick={() => act(t.id)} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white`}>
+                    <span className="text-[20px] leading-none" aria-hidden>
+                      {t.icon}
+                    </span>
+                    {t.label}
+                  </button>
+                ))}
+                {limbHere && !moving && (
+                  <button type="button" data-testid="exam3d-do-move" onClick={startMove} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white`}>
+                    <span className="text-[20px] leading-none" aria-hidden>
+                      🤲
+                    </span>
+                    Move this joint
+                  </button>
+                )}
+              </div>
+              {moving && (
+                <div className="mt-2 rounded-md border-2 border-[#181820] bg-[#fff8d8] p-2" data-testid="exam3d-move">
+                  <p className="m-0 text-[15px]">
+                    {moving.limb.kneeWithHip ? (
+                      <>
+                        Lift the knee: knee bent <b>{Math.round(scene.current?.angle(moving.limb.key.replace('hipflex', 'knee')) ?? 0)}°</b>, hip <b>{moving.value}°</b>
+                      </>
+                    ) : (
+                      <>
+                        {jointName(moving.limb.key)}: <b>{moving.value}°</b>
+                      </>
+                    )}
+                  </p>
+                  <input type="range" className="mt-1 h-10 w-full" min={range[0]} max={range[1]} value={moving.value} data-testid="exam3d-slider" onChange={(e) => slide(Number(e.target.value))} onPointerUp={finishMove} onKeyUp={finishMove} />
+                  <button type="button" className={`${big} mt-1 w-full border-[#5a6470] bg-white`} onClick={() => setMoving(null)}>
+                    Let go
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {panel?.kind === 'talk' && (
+            <div data-testid="exam3d-ask">
+              <div className="mb-1 flex items-center justify-between">
+                <b className="font-[Press_Start_2P,monospace] text-[9px]">TALK TO {name.toUpperCase()}</b>
+                <button type="button" className="rounded border-2 border-[#5a6470] bg-white px-2 py-1 text-[13px]" onClick={() => setPanel(null)}>
+                  ✕ Close
+                </button>
+              </div>
+              {groups.map((g) => (
+                <div key={g} className="mb-2">
+                  <p className="m-0 mb-1 font-[Press_Start_2P,monospace] text-[7px] text-[#8a5a00]">{g.toUpperCase()}</p>
+                  <div className="flex flex-col gap-1.5">
+                    {SAYS.filter((s) => s.group === g).map((s) =>
+                      s.sided ? (
+                        <div key={s.id} className="flex items-stretch gap-1.5">
+                          <span className="flex-1 self-center text-[15px] leading-tight">“{s.label}”</span>
+                          {(['R', 'L'] as const).map((side) => (
+                            <button key={side} type="button" data-testid={`exam3d-say-${s.id}-${side}`} onClick={() => ask(s, side)} className={`${big} border-[#5a6470] bg-white text-center`}>
+                              {side === 'R' ? 'Right' : 'Left'}
+                            </button>
+                          ))}
+                        </div>
+                      ) : (
+                        <button key={s.id} type="button" data-testid={`exam3d-say-${s.id}`} onClick={() => ask(s)} className={`${big} border-[#5a6470] bg-white`}>
+                          “{s.label}”
+                        </button>
+                      ),
+                    )}
                   </div>
                 </div>
               ))}
             </div>
-          ) : (
-            <>
-              <p className={`exam3d-note m-0 rounded border-2 p-2 text-[15px] leading-snug ${note.tone === 'finding' ? 'border-[#1a7a40] bg-[#e4f7e8]' : note.tone === 'warn' ? 'border-[#b8282a] bg-[#fde7e7]' : note.tone === 'hint' ? 'border-[#c0a040] bg-[#fff8d8]' : 'border-[#9aa4ad] bg-white'}`} data-testid="exam3d-note" aria-live="polite">
-                {note.text}
-              </p>
-              <p className="mt-1 text-[11px] leading-snug text-[#50505c]">
-                {toolDef?.use === 'hold' ? `${toolDef.label}: keep your finger on the spot.` : toolDef?.use === 'drag' ? 'Move: drag a limb through its range.' : toolDef ? `${toolDef.label}: tap where you want to use it.` : ''}
-              </p>
-            </>
+          )}
+
+          {!panel && (
+            <div className="grid grid-cols-2 gap-1.5">
+              <button type="button" data-testid="exam3d-talk" onClick={() => (sfx.cursor(), setPanel({ kind: 'talk' }))} className={`${big} col-span-2 flex items-center gap-2 border-[#181820] bg-[#ffe9a8]`}>
+                <span className="text-[20px]" aria-hidden>
+                  💬
+                </span>
+                Talk to the patient, or ask them to move
+              </button>
+              <button type="button" data-testid="exam3d-gloves" onClick={gloves} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white`}>
+                <span className="text-[20px]" aria-hidden>
+                  🧤
+                </span>
+                Wash hands, gloves
+              </button>
+              <button type="button" onClick={() => setViewTo('whole')} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white`}>
+                <span className="text-[20px]" aria-hidden>
+                  🧍
+                </span>
+                Whole patient
+              </button>
+            </div>
           )}
           <button type="button" className="tap mt-2 w-full" data-testid="exam3d-done" onClick={onClose}>
             DONE EXAMINING
@@ -452,19 +500,20 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   )
 }
 
-/** A ring that fills while a hold tool is kept on the spot. */
-function HoldRing({ x, y, need, t0 }: { x: number; y: number; need: number; t0: number }) {
-  const [k, setK] = useState(0)
-  useEffect(() => {
-    const id = window.setInterval(() => setK(Math.min(1, (performance.now() - t0) / 1000 / need)), 50)
-    return () => window.clearInterval(id)
-  }, [need, t0])
-  return (
-    <svg className="pointer-events-none fixed z-50" style={{ left: x - 22, top: y - 22 }} width="44" height="44" viewBox="0 0 44 44" aria-hidden>
-      <circle cx="22" cy="22" r="18" fill="none" stroke="#ffffff99" strokeWidth="4" />
-      <circle cx="22" cy="22" r="18" fill="none" stroke={k >= 1 ? '#58f878' : '#ffd34d'} strokeWidth="4" strokeDasharray={`${113 * k} 113`} transform="rotate(-90 22 22)" />
-    </svg>
-  )
+/** A joint as the slider names it. */
+function jointName(key: string): string {
+  const side = key.endsWith('-R') ? 'Right ' : key.endsWith('-L') ? 'Left ' : ''
+  const base = key.replace(/-(R|L)$/, '')
+  const name: Record<string, string> = {
+    knee: 'knee bend',
+    hipflex: 'hip flexion',
+    hiprot: 'hip rotation (in −, out +)',
+    shoulderabd: 'shoulder abduction',
+    shoulderrot: 'shoulder rotation (in −, out +)',
+    elbow: 'elbow bend',
+    neckyaw: 'head turn',
+  }
+  return `${side}${name[base] ?? base}`
 }
 
 /** Part of something longer (one pulse of eight): say what you did, not yet what it means. */
