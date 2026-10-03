@@ -31,6 +31,11 @@
       "inBed": true
     }
   ],
+  "body": {
+    "posture": "supine",
+    "gait": "antalgic-R",
+    "trendelenburg": "R"
+  },
   "steps": [
     {
       "id": "exam",
@@ -43,43 +48,50 @@
           {
             "t": "Gait",
             "r": "Antalgic gait on the right.",
-            "mark": "Observes gait"
+            "mark": "Observes gait",
+            "do": "say walk"
           },
           {
             "t": "Trendelenburg test standing on the right leg",
             "r": "Pelvis drops on the left: positive on the right.",
-            "mark": "Performs the Trendelenburg test"
+            "mark": "Performs the Trendelenburg test",
+            "do": "say one-leg-R"
           },
           {
             "t": "Measure true and apparent leg lengths",
             "r": "True lengths equal; apparent shortening on the right from pelvic tilt.",
-            "mark": "Measures true and apparent leg length"
+            "mark": "Measures true and apparent leg length",
+            "do": "tape asis-R+asis-L+medialmalleolus-R+medialmalleolus-L"
           }
         ],
         "Feel": [
           {
             "t": "Greater trochanter and groin",
             "r": "Groin tenderness; trochanter not tender.",
-            "mark": "Palpates trochanter and groin"
+            "mark": "Palpates trochanter and groin",
+            "do": "feel hip-R & feel groin-R"
           }
         ],
         "Move": [
           {
             "t": "Flexion and rotations with the hip at 90°",
             "r": "Flexion 90°, internal rotation 5° and painful, external rotation 20°.",
-            "mark": "Tests rotations; finds loss of internal rotation"
+            "mark": "Tests rotations; finds loss of internal rotation",
+            "do": "move hip-R:flex & move hip-R:rot @hipflex-R=70..110"
           },
           {
             "t": "Thomas test",
             "r": "Right thigh lifts off the couch: 15° fixed flexion deformity.",
-            "mark": "Performs the Thomas test"
+            "mark": "Performs the Thomas test",
+            "do": "move hip-L:flex @supine,hipflex-L=100..140"
           }
         ],
         "Complete": [
           {
             "t": "Examine the lumbar spine and knee; pulses and sensation",
             "r": "Normal.",
-            "mark": "Examines the joint above and below and neurovascular status"
+            "mark": "Examines the joint above and below and neurovascular status",
+            "do": "feel spine,knee-R,dp-R,pt-R"
           }
         ]
       }

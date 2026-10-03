@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react'
 import { localizePack } from '~/engine/lang'
 import { currentPhase, dueEvents, eventOngoing, hintFor, nextHint, stepsDone } from '~/engine/judge'
 import { readoutText, type Action, type Pack } from '~/engine/schema'
@@ -7,7 +7,11 @@ import { hasOutput, monitored, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
 import { press, useButtons } from './input'
 import { OverlaySheet, targetName } from './Overlay'
+import { examIn3d } from './exam3d/model'
 import { PerformStage } from './Perform'
+
+/** The physical examination on a 3D patient (three.js): loaded only when a station's exam is written for it. */
+const Exam3D = lazy(() => import('./exam3d/Exam3D'))
 import { Screen, type ScreenHandle, type Walk } from './Screen'
 import { useSettings } from './settings'
 import { sfx } from './sfx'
@@ -218,6 +222,8 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   }, [hydrated, entered, ended, errand, errands, nurseId, pack, store])
 
   const paused = overlay !== null || performing !== null || menu !== false || approaching
+  const overlayAction = overlay?.kind === 'action' ? pack.actions.find((a) => a.id === overlay.actionId) : undefined
+  const exam3d = examIn3d(overlayAction) ? overlayAction : undefined
 
   useButtons(0, hydrated && !ended && !paused, (btn) => {
     if (btn === 'a') {
@@ -467,6 +473,18 @@ export function PlayView({ pack: source }: { pack: Pack }) {
             onClose={() => store().clearMsg()}
             onTyping={setTyping}
           />
+          {exam3d && overlay?.kind === 'action' && (
+            <Suspense fallback={<p className="absolute inset-0 z-40 grid place-items-center bg-[#f4f1e8] font-[Press_Start_2P,monospace] text-[8px]">Setting up the couch…</p>}>
+              <Exam3D
+                pack={pack}
+                action={exam3d}
+                title={targetName(pack, overlay.targetId)}
+                spent={spent[exam3d.id] ?? []}
+                onClose={() => store().closeOverlay()}
+                onOption={(optionId) => store().pickOption(pack, exam3d.id, optionId)}
+              />
+            </Suspense>
+          )}
           {performing && (
             <PerformStage
               key={`${performing.actionId}-${performing.spendId}`}
@@ -481,7 +499,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
           OSCE GYM <span>·</span> <b>{pack.title.toUpperCase()}</b>
         </p>
       </div>
-      {!performing && <Controller />}
+      {!performing && !exam3d && <Controller />}
       <p className="keys-help">Arrows/WASD move · Z/Enter = A · X/Esc = B · M = START · Shift = SELECT</p>
     </div>
   )

@@ -43,6 +43,10 @@
       "role": "nurse"
     }
   ],
+  "body": {
+    "posture": "supine",
+    "drape": true
+  },
   "steps": [
     {
       "id": "history",
@@ -93,22 +97,26 @@
           {
             "t": "Obtain consent; chaperone present",
             "r": "Agreed; Nurse Chaperone present.",
-            "mark": "Consent and chaperone for an intimate examination"
+            "mark": "Consent and chaperone for an intimate examination",
+            "do": "say consent & say chaperone"
           },
           {
             "t": "Look at the lie of both testes",
             "r": "Right testis high with a horizontal lie.",
-            "mark": "Finds a high-riding, horizontal testis"
+            "mark": "Finds a high-riding, horizontal testis",
+            "do": "look scrotum,testis"
           },
           {
             "t": "Palpate",
             "r": "Right testis swollen and exquisitely tender throughout.",
-            "mark": "Palpates gently"
+            "mark": "Palpates gently",
+            "do": "feel testis,scrotum @gloved"
           },
           {
             "t": "Cremasteric reflex",
             "r": "Absent on the right, present on the left.",
-            "mark": "Tests the cremasteric reflex"
+            "mark": "Tests the cremasteric reflex",
+            "do": "feel innerthigh | pin innerthigh | cotton innerthigh"
           }
         ],
         "Abdomen": [
@@ -116,7 +124,8 @@
             "t": "Abdomen and inguinal canals",
             "r": "Soft, no hernia.",
             "mark": "Examines the abdomen and hernial orifices",
-            "anim": "abdomen"
+            "anim": "abdomen",
+            "do": "feel abdomen,groin"
           }
         ]
       }

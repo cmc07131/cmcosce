@@ -31,6 +31,10 @@
       "inBed": false
     }
   ],
+  "body": {
+    "posture": "edge",
+    "palsy": "L"
+  },
   "steps": [
     {
       "id": "exam",
@@ -44,58 +48,68 @@
             "t": "Visual acuity, fields, pupils",
             "r": "6/6 both eyes, full fields, pupils equal and reactive.",
             "mark": "Tests CN II",
-            "anim": "pupils"
+            "anim": "pupils",
+            "do": "chart eye & say fields & torch eye"
           },
           {
             "t": "Eye movements (H pattern), ptosis, nystagmus",
             "r": "Full, no diplopia, no nystagmus, no ptosis.",
-            "mark": "Tests CN III, IV, VI"
+            "mark": "Tests CN III, IV, VI",
+            "do": "say follow-finger"
           },
           {
             "t": "Facial sensation in three divisions; jaw clench",
             "r": "Normal; masseters strong.",
-            "mark": "Tests CN V"
+            "mark": "Tests CN V",
+            "do": "cotton forehead,cheek,jaw & say clench-jaw | pin forehead,cheek,jaw & say clench-jaw"
           }
         ],
         "VII": [
           {
             "t": "Raise your eyebrows",
             "r": "Left forehead does not wrinkle.",
-            "mark": "Tests forehead: involved (lower motor neurone)"
+            "mark": "Tests forehead: involved (lower motor neurone)",
+            "do": "say raise-eyebrows"
           },
           {
             "t": "Close your eyes tightly",
             "r": "Left eye cannot close; the eye rolls up (Bell's phenomenon).",
-            "mark": "Tests eye closure"
+            "mark": "Tests eye closure",
+            "do": "say close-eyes"
           },
           {
             "t": "Show your teeth; puff your cheeks",
             "r": "Left mouth droops; air escapes on the left.",
-            "mark": "Tests lower face"
+            "mark": "Tests lower face",
+            "do": "say show-teeth & say puff-cheeks"
           },
           {
             "t": "Look in the ear canal and mouth",
             "r": "No vesicles. Parotid normal.",
-            "mark": "Looks for vesicles (Ramsay Hunt) and parotid mass"
+            "mark": "Looks for vesicles (Ramsay Hunt) and parotid mass",
+            "do": "otoscope ear | look ear,mouth | torch mouth"
           }
         ],
         "VIII–XII": [
           {
             "t": "Hearing (whisper), Rinne and Weber",
             "r": "Normal hearing; mild hyperacusis on the left.",
-            "mark": "Tests CN VIII"
+            "mark": "Tests CN VIII",
+            "do": "say whisper | fork mastoid,forehead,ear"
           },
           {
             "t": "Palate, tongue, shoulder shrug",
             "r": "Normal.",
-            "mark": "Tests CN IX–XII"
+            "mark": "Tests CN IX–XII",
+            "do": "say open-mouth & say shrug"
           }
         ],
         "Limbs": [
           {
             "t": "Quick limb screen: pronator drift, power",
             "r": "Normal.",
-            "mark": "Excludes limb weakness (stroke)"
+            "mark": "Excludes limb weakness (stroke)",
+            "do": "say arms-out"
           }
         ]
       }

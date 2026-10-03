@@ -6,6 +6,7 @@ import { DrugCart } from './DrugCart'
 import { Film, FilmButton } from './imaging/Film'
 import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel, seededShuffle } from './panels'
 import { NavItem, Win, useCursor } from './ui'
+import { examIn3d } from './exam3d/model'
 
 export function targetName(pack: Pack, id: string) {
   const npc = pack.cast.find((row) => row.id === id)
@@ -131,6 +132,8 @@ function Body({
   const used = new Set(spent[action.id] ?? [])
   const panel = { pack, action, title, spent: spent[action.id] ?? [], onClose, onOption: (id: string) => onOption(action.id, id) }
 
+  // An examination on the 3D patient runs full screen from PlayView.
+  if (examIn3d(action)) return null
   if (action.kind === 'history' || action.kind === 'exam' || action.kind === 'order') return <GroupPanel {...panel} />
   if (action.kind === 'steps') return <StepsPanel {...panel} />
   if (action.kind === 'dialogue' || action.kind === 'viva') return <TurnPanel {...panel} />

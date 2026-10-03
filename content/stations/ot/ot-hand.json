@@ -38,6 +38,9 @@
       "inBed": false
     }
   ],
+  "body": {
+    "posture": "edge"
+  },
   "steps": [
     {
       "id": "history",
@@ -91,35 +94,41 @@
           {
             "t": "Resting posture of the fingers (cascade)",
             "r": "The ring finger lies straighter than the others.",
-            "mark": "Observes the resting cascade"
+            "mark": "Observes the resting cascade",
+            "do": "look hand-R,palm-R,ring-R"
           },
           {
             "t": "The wound",
             "r": "A 1.5 cm transverse laceration over the volar middle phalanx (zone 2), ulnar side.",
-            "mark": "Describes the wound and zone"
+            "mark": "Describes the wound and zone",
+            "do": "look ring-R,ringpulp-R"
           }
         ],
         "Tendons": [
           {
             "t": "FDP: hold the PIP straight, ask her to bend the fingertip",
             "r": "Cannot flex the DIP joint.",
-            "mark": "Tests FDP in isolation"
+            "mark": "Tests FDP in isolation",
+            "do": "feel ring-R > say bend-fingertip"
           },
           {
             "t": "FDS: hold the other fingers straight, ask her to bend the finger",
             "r": "Can flex the PIP joint.",
-            "mark": "Tests FDS in isolation"
+            "mark": "Tests FDS in isolation",
+            "do": "feel hand-R,nails-R > say bend-finger"
           }
         ],
         "Nerves": [
           {
             "t": "Two-point discrimination on each side of the pulp",
             "r": "Radial side 4 mm. Ulnar side 12 mm and reduced light touch.",
-            "mark": "Tests digital nerves with two-point discrimination"
+            "mark": "Tests digital nerves with two-point discrimination",
+            "do": "calipers ringpulp-R"
           },
           {
             "t": "Median, ulnar, radial nerve function",
-            "r": "Normal."
+            "r": "Normal.",
+            "do": "say thumbs-up & say opposition & say cross-fingers"
           }
         ],
         "Circulation": [
@@ -127,7 +136,8 @@
             "t": "Capillary refill and colour of the pulp",
             "r": "Pink, refill under 2 s.",
             "mark": "Checks digital circulation",
-            "anim": "glucose"
+            "anim": "glucose",
+            "do": "press ringpulp-R,pulp-R | look ringpulp-R"
           }
         ]
       }

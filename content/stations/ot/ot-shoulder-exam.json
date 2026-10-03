@@ -31,6 +31,9 @@
       "inBed": false
     }
   ],
+  "body": {
+    "posture": "edge"
+  },
   "steps": [
     {
       "id": "exam",
@@ -43,62 +46,72 @@
           {
             "t": "Introduce, consent, offer analgesia, expose both shoulders",
             "r": "Ready, sitting upright, both shoulders exposed.",
-            "mark": "Introduces, consents and exposes both shoulders"
+            "mark": "Introduces, consents and exposes both shoulders",
+            "do": "say consent & say expose"
           }
         ],
         "Look": [
           {
             "t": "Inspect front, side and back; wall push for winging",
             "r": "Symmetrical, no wasting, no winging.",
-            "mark": "Inspects from all sides including winging"
+            "mark": "Inspects from all sides including winging",
+            "do": "look shoulder-R,shoulder-L & look back,thoracic | look shoulder-R & say wall-push"
           }
         ],
         "Feel": [
           {
             "t": "SC joint, clavicle, AC joint, acromion, greater tuberosity, bicipital groove",
             "r": "Tender just below the anterolateral acromion. AC joint not tender.",
-            "mark": "Palpates bony landmarks systematically"
+            "mark": "Palpates bony landmarks systematically",
+            "do": "feel tuberosity-R & feel acjoint-R & feel scjoint-R,clavicle-R,acromion-R,bicipital-R"
           }
         ],
         "Move": [
           {
             "t": "Active abduction",
             "r": "Pain between 70° and 120° of abduction, eases above that.",
-            "mark": "Identifies a painful arc"
+            "mark": "Identifies a painful arc",
+            "do": "say raise-arm-R"
           },
           {
             "t": "Passive external rotation",
             "r": "Full and painless — not frozen shoulder.",
-            "mark": "Checks passive external rotation"
+            "mark": "Checks passive external rotation",
+            "do": "move shoulder-R:rot @elbow-R=60..120"
           }
         ],
         "Special tests": [
           {
             "t": "Empty can (Jobe) test",
             "r": "Painful but strength preserved.",
-            "mark": "Tests supraspinatus"
+            "mark": "Tests supraspinatus",
+            "do": "say empty-can-R"
           },
           {
             "t": "Resisted external rotation; lift-off test",
             "r": "Strong and painless.",
-            "mark": "Tests infraspinatus and subscapularis"
+            "mark": "Tests infraspinatus and subscapularis",
+            "do": "say push-out-R & say lift-off-R"
           },
           {
             "t": "Neer and Hawkins–Kennedy tests",
             "r": "Both reproduce her pain.",
-            "mark": "Performs impingement tests"
+            "mark": "Performs impingement tests",
+            "do": "move shoulder-R:abd @shoulderrot-R=-90..-20 & move shoulder-R:rot @shoulderabd-R=70..110,shoulderrot-R=-90..-15"
           },
           {
             "t": "Apprehension test",
             "r": "No apprehension.",
-            "mark": "Tests instability"
+            "mark": "Tests instability",
+            "do": "move shoulder-R:rot @shoulderabd-R=70..110,shoulderrot-R=40..90"
           }
         ],
         "Complete": [
           {
             "t": "Neck movements; sensation over the badge area; pulses",
             "r": "Neck normal; sensation normal.",
-            "mark": "Examines the neck and neurovascular status"
+            "mark": "Examines the neck and neurovascular status",
+            "do": "move neck & cotton badge-R | move neck & pin badge-R"
           }
         ]
       }

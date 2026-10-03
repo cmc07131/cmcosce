@@ -31,6 +31,12 @@
       "inBed": true
     }
   ],
+  "body": {
+    "posture": "supine",
+    "ataxia": "R",
+    "nystagmus": "R",
+    "gait": "ataxic"
+  },
   "steps": [
     {
       "id": "exam",
@@ -43,15 +49,14 @@
           {
             "t": "Speech: say 'British constitution'",
             "r": "Slurred, staccato speech.",
-            "mark": "Assesses speech (dysarthria)"
+            "mark": "Assesses speech (dysarthria)",
+            "do": "say say-phrase"
           },
           {
             "t": "Eye movements and nystagmus",
             "r": "Horizontal nystagmus, fast phase to the right, worse looking right.",
             "mark": "Looks for nystagmus",
-            "perform": "exam",
-            "pose": "eyes:right",
-            "performHint": "Pen about 50 cm away. Head still, trace an H, and pause at each side. Stop short of the extreme of gaze."
+            "do": "say follow-finger"
           }
         ],
         "Arms": [
@@ -59,43 +64,47 @@
             "t": "Finger–nose test",
             "r": "Right: intention tremor and past-pointing. Left normal.",
             "mark": "Finger–nose test: right intention tremor",
-            "perform": "exam",
-            "pose": "finger-nose:right",
-            "performHint": "Demonstrate first. Hold your finger at the full stretch of his arm, move it between touches, and test both arms."
+            "do": "say finger-nose-R & say finger-nose-L"
           },
           {
             "t": "Rapid alternating movements",
             "r": "Clumsy on the right (dysdiadochokinesia).",
-            "mark": "Tests for dysdiadochokinesia"
+            "mark": "Tests for dysdiadochokinesia",
+            "do": "say rapid-alternating"
           },
           {
             "t": "Tone",
             "r": "Reduced on the right.",
-            "mark": "Assesses tone"
+            "mark": "Assesses tone",
+            "do": "move elbow-R,elbow-L,knee-R,knee-L"
           }
         ],
         "Legs": [
           {
             "t": "Heel–shin test",
             "r": "Right heel wavers down the shin.",
-            "mark": "Heel–shin test"
+            "mark": "Heel–shin test",
+            "do": "say heel-shin-R & say heel-shin-L"
           },
           {
             "t": "Sit him up unsupported (truncal ataxia)",
             "r": "Leans to the right; needs support.",
-            "mark": "Assesses truncal ataxia safely"
+            "mark": "Assesses truncal ataxia safely",
+            "do": "say sit-up,sit-edge"
           },
           {
             "t": "Make him walk heel-to-toe across the room alone",
             "trap": true,
-            "r": "He can't sit unsupported — walking him risks a fall. Test gait only when safe."
+            "r": "He can't sit unsupported — walking him risks a fall. Test gait only when safe.",
+            "do": "say walk-heel-toe,walk"
           }
         ],
         "Other": [
           {
             "t": "Limb power and sensation; other cranial nerves",
             "r": "Power normal; no facial or sensory loss.",
-            "mark": "Screens for other deficits"
+            "mark": "Screens for other deficits",
+            "do": "say squeeze-fingers | pin hand,foot,cheek | cotton hand,foot,cheek"
           }
         ]
       }

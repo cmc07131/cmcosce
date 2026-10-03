@@ -56,6 +56,8 @@ export type Rig = {
   hand: Pair
   /** Index finger, first bone: where the nails and pulps are. */
   finger: Partial<Pair>
+  /** Ring finger, first bone. */
+  ring: Partial<Pair>
   thumb: Partial<Pair>
   thigh: Pair
   calf: Pair
@@ -70,6 +72,8 @@ export type Rig = {
   hipAbove: number
   /** Standing height, top of the head to the soles. */
   height: number
+  /** Height of the hip joint above the soles, standing. */
+  legLength: number
   /** Every mesh of the body, for picking where a finger lands. */
   meshes: THREE.Mesh[]
   face(e: Eyes): void
@@ -195,6 +199,7 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
     forearm: pair('Forearm'),
     hand: pair('Hand'),
     finger: pair('Finger1'),
+    ring: pair('Finger3'),
     thumb: pair('Finger0'),
     thigh: pair('Thigh'),
     calf: pair('Calf'),
@@ -205,6 +210,7 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
     eyeDepth: 0,
     hipAbove: 0.11,
     height: 1.7,
+    legLength: 0.9,
     meshes,
     face: (e) => {
       const shut = e.shut ?? { L: 0, R: 0 }
@@ -318,6 +324,7 @@ export async function loadVrm(url: string): Promise<Rig> {
     forearm: pair('leftLowerArm', 'rightLowerArm'),
     hand: pair('leftHand', 'rightHand'),
     finger: { L: opt('leftIndexProximal'), R: opt('rightIndexProximal') } as Partial<Pair>,
+    ring: { L: opt('leftRingProximal'), R: opt('rightRingProximal') } as Partial<Pair>,
     thumb: { L: opt('leftThumbProximal') ?? opt('leftThumbMetacarpal'), R: opt('rightThumbProximal') ?? opt('rightThumbMetacarpal') } as Partial<Pair>,
     thigh: pair('leftUpperLeg', 'rightUpperLeg'),
     calf: pair('leftLowerLeg', 'rightLowerLeg'),
@@ -328,6 +335,7 @@ export async function loadVrm(url: string): Promise<Rig> {
     eyeDepth: 0,
     hipAbove: 0.1,
     height: 1.7,
+    legLength: 0.9,
     meshes,
     face: (e) => {
       if (!em) return
@@ -385,6 +393,7 @@ function measure(rig: Rig, placeNose: boolean) {
   const top = hit(at(rig.head).add(new THREE.Vector3(0, 0.6, 0)), new THREE.Vector3(0, -1, 0))
   const sole = Math.min(at(rig.foot.L).y, at(rig.foot.R).y) - 0.08
   if (top) rig.height = top.point.y - sole
+  rig.legLength = at(rig.hips).y - sole
   rig.hipAbove = (0.11 * rig.height) / 1.72
 
   // The skin between the eyes, and the nose tip ahead of the eyeballs.

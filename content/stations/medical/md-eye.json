@@ -31,6 +31,9 @@
       "inBed": false
     }
   ],
+  "body": {
+    "posture": "edge"
+  },
   "steps": [
     {
       "id": "exam",
@@ -43,31 +46,36 @@
           {
             "t": "Snellen chart at 6 m, each eye",
             "r": "Right 6/9, left 6/9.",
-            "mark": "Measures visual acuity in each eye"
+            "mark": "Measures visual acuity in each eye",
+            "do": "chart eye-R & chart eye-L"
           },
           {
             "t": "Pinhole",
             "r": "Both improve to 6/6 — refractive error only.",
-            "mark": "Uses a pinhole to correct refractive error"
+            "mark": "Uses a pinhole to correct refractive error",
+            "do": "pinhole eye"
           }
         ],
         "Pupils and movements": [
           {
             "t": "Direct, consensual, swinging light test",
             "r": "Equal, reactive, no RAPD.",
-            "mark": "Tests pupils including RAPD"
+            "mark": "Tests pupils including RAPD",
+            "do": "torch eye-R & torch eye-L"
           },
           {
             "t": "Eye movements",
             "r": "Full, no diplopia or nystagmus.",
-            "mark": "Tests eye movements"
+            "mark": "Tests eye movements",
+            "do": "say follow-finger"
           }
         ],
         "Fields": [
           {
             "t": "Confrontation fields, each eye separately, all quadrants",
             "r": "Both eyes miss the right half of the field: right homonymous hemianopia.",
-            "mark": "Finds a right homonymous hemianopia"
+            "mark": "Finds a right homonymous hemianopia",
+            "do": "say fields"
           }
         ],
         "Fundus": [
@@ -75,7 +83,8 @@
             "t": "Fundoscopy: red reflex, disc, vessels, macula",
             "r": "Normal discs and vessels.",
             "img": "photo:fundus-normal",
-            "mark": "Fundoscopy normal"
+            "mark": "Fundoscopy normal",
+            "do": "ophthalmoscope eye"
           }
         ]
       }

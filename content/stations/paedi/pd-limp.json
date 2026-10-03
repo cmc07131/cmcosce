@@ -43,6 +43,10 @@
       "role": "woman"
     }
   ],
+  "body": {
+    "posture": "supine",
+    "gait": "antalgic-L"
+  },
   "steps": [
     {
       "id": "exam",
@@ -55,42 +59,49 @@
           {
             "t": "Gait",
             "r": "Antalgic gait with the left foot turned out.",
-            "mark": "Observes gait"
+            "mark": "Observes gait",
+            "do": "say walk"
           },
           {
             "t": "Leg lengths and rotation lying",
             "r": "Left leg externally rotated and ~1 cm short.",
-            "mark": "Notes rotation and shortening"
+            "mark": "Notes rotation and shortening",
+            "do": "look legs,foot @supine | tape asis-L+medialmalleolus-L+asis-R+medialmalleolus-R"
           }
         ],
         "Knee": [
           {
             "t": "Left knee",
             "r": "Normal: no effusion, full range, non-tender.",
-            "mark": "Examines the knee"
+            "mark": "Examines the knee",
+            "do": "feel knee-L | move knee-L"
           }
         ],
         "Hip": [
           {
             "t": "Hip internal rotation",
             "r": "Left internal rotation markedly reduced and painful.",
-            "mark": "Examines the hip: loss of internal rotation"
+            "mark": "Examines the hip: loss of internal rotation",
+            "do": "move hip-L:rot @hipflex-L=60..110"
           },
           {
             "t": "Flex the left hip",
             "r": "The thigh swings into external rotation as it flexes (Drehmann sign).",
-            "mark": "Elicits Drehmann sign"
+            "mark": "Elicits Drehmann sign",
+            "do": "move hip-L:flex"
           },
           {
             "t": "Right hip",
-            "r": "Normal."
+            "r": "Normal.",
+            "do": "move hip-R | feel hip-R,groin-R"
           }
         ],
         "Other": [
           {
             "t": "Temperature, spine, skin, abdomen",
             "r": "Afebrile, no rash, spine and abdomen normal.",
-            "mark": "Excludes infection and other causes"
+            "mark": "Excludes infection and other causes",
+            "do": "feel abdomen | look back | feel spine"
           }
         ]
       }

@@ -9,6 +9,7 @@ import {
 } from '~/engine/judge'
 import { clearSession, freshSession, readSession, writeSession } from '~/engine/session'
 import { SAVE_VERSION, timeLimitOf, type Action, type ActionOption, type Fault, type Pack, type PerformKind, type Session } from '~/engine/schema'
+import { examIn3d } from './exam3d/model'
 
 export type Overlay =
   | { kind: 'chooser'; targetId: string }
@@ -714,7 +715,8 @@ function commit(
       : result.reply
         ? spokenLine(pack, result.reply)
         : cur.msg,
-    overlay: result.close || !workLeft || result.endStation ? null : cur.overlay,
+    // A list closes when nothing is left on it; a 3D examination stays until you close it, so you read the last finding.
+    overlay: result.close || (!workLeft && !examIn3d(action)) || result.endStation ? null : cur.overlay,
   })
 }
 

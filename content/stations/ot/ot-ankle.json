@@ -38,6 +38,10 @@
       "inBed": true
     }
   ],
+  "body": {
+    "posture": "supine",
+    "gait": "antalgic-L"
+  },
   "steps": [
     {
       "id": "exam",
@@ -50,47 +54,55 @@
           {
             "t": "Swelling, bruising, deformity",
             "r": "Swelling and bruising over the lateral malleolus. No deformity.",
-            "mark": "Inspects both ankles"
+            "mark": "Inspects both ankles",
+            "do": "look ankle-L"
           }
         ],
         "Ottawa points": [
           {
             "t": "Posterior edge and tip of the lateral malleolus (distal 6 cm)",
             "r": "Tender over the posterior edge.",
-            "mark": "Palpates the lateral malleolus posterior edge"
+            "mark": "Palpates the lateral malleolus posterior edge",
+            "do": "feel lateralmalleolus-L"
           },
           {
             "t": "Posterior edge and tip of the medial malleolus",
             "r": "Not tender. No medial swelling.",
-            "mark": "Palpates the medial malleolus"
+            "mark": "Palpates the medial malleolus",
+            "do": "feel medialmalleolus-L,pt-L"
           },
           {
             "t": "Base of the 5th metatarsal and the navicular",
             "r": "Not tender.",
-            "mark": "Palpates the foot Ottawa points"
+            "mark": "Palpates the foot Ottawa points",
+            "do": "feel fifthmt-L & feel navicular-L"
           },
           {
             "t": "Can you walk four steps?",
             "r": "Only with a lot of help.",
-            "mark": "Assesses weight-bearing"
+            "mark": "Assesses weight-bearing",
+            "do": "say walk"
           }
         ],
         "Other": [
           {
             "t": "Proximal fibula",
             "r": "Not tender.",
-            "mark": "Checks the proximal fibula (Maisonneuve)"
+            "mark": "Checks the proximal fibula (Maisonneuve)",
+            "do": "feel fibula-L"
           },
           {
             "t": "Squeeze the calf (Simmonds/Thompson test)",
             "r": "Foot plantarflexes normally — Achilles intact.",
-            "mark": "Tests the Achilles tendon"
+            "mark": "Tests the Achilles tendon",
+            "do": "press calf-L"
           },
           {
             "t": "Pulses and sensation",
             "r": "Normal.",
             "mark": "Neurovascular assessment",
-            "anim": "pulse"
+            "anim": "pulse",
+            "do": "feel dp-L,pt-L & cotton foot-L,toes-L | feel dp-L,pt-L & pin foot-L,toes-L"
           }
         ]
       }

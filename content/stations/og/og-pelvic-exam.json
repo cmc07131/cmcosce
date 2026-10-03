@@ -42,6 +42,10 @@
       "role": "nurse"
     }
   ],
+  "body": {
+    "posture": "supine",
+    "drape": true
+  },
   "steps": [
     {
       "id": "consent",
@@ -106,50 +110,59 @@
           {
             "t": "Wash hands, gloves, warm and lubricate the speculum; position (knees bent, ankles together, knees apart)",
             "r": "Ready.",
-            "mark": "Hand hygiene, gloves and positioning"
+            "mark": "Hand hygiene, gloves and positioning",
+            "do": "gloves & say knees-up"
           },
           {
             "t": "Palpate the abdomen first",
             "r": "Tender in both iliac fossae, no guarding.",
-            "mark": "Examines the abdomen first"
+            "mark": "Examines the abdomen first",
+            "do": "feel abdomen"
           }
         ],
         "Speculum": [
           {
             "t": "Inspect the vulva",
             "r": "Normal vulva, some yellow discharge at the introitus.",
-            "mark": "Inspects the vulva"
+            "mark": "Inspects the vulva",
+            "do": "look vulva"
           },
           {
             "t": "Insert the closed speculum, rotate, open, visualise the cervix",
             "r": "Cervix inflamed, bleeds on contact, mucopurulent discharge from the os.",
-            "mark": "Visualises the cervix correctly"
+            "mark": "Visualises the cervix correctly",
+            "do": "speculum vulva,cervix @knees-up"
           },
           {
             "t": "Swabs: endocervical NAAT (chlamydia/gonorrhoea) and high vaginal swab",
             "r": "Taken.",
-            "mark": "Takes the appropriate swabs"
+            "mark": "Takes the appropriate swabs",
+            "do": "swab cervix,vulva"
           },
           {
             "t": "Withdraw the speculum",
             "r": "Closed as it comes out past the cervix.",
-            "mark": "Closes the speculum before withdrawal"
+            "mark": "Closes the speculum before withdrawal",
+            "do": "speculum vulva,cervix > speculum vulva,cervix"
           }
         ],
         "Bimanual": [
           {
             "t": "Move the cervix gently side to side",
             "r": "Cervical motion tenderness.",
-            "mark": "Tests for cervical motion tenderness"
+            "mark": "Tests for cervical motion tenderness",
+            "do": "feel cervix @gloved"
           },
           {
             "t": "Uterus: size, position, tenderness",
-            "r": "Anteverted, normal size, mildly tender."
+            "r": "Anteverted, normal size, mildly tender.",
+            "do": "feel cervix & feel suprapubic"
           },
           {
             "t": "Both adnexa",
             "r": "Tender on both sides, no mass.",
-            "mark": "Examines both adnexa"
+            "mark": "Examines both adnexa",
+            "do": "feel adnexa-R+adnexa-L"
           }
         ]
       }

@@ -33,9 +33,28 @@ const performFields = {
   performHint: z.string().optional(),
 }
 
+/**
+ * The 3D examination: how the patient starts, and what is wrong with them that shows when they move or are touched
+ * (see game/exam3d/scene.ts).
+ */
+export const bodySchema = z.object({
+  posture: z.enum(['supine', 'sitting', 'edge', 'standing']).optional(),
+  /** The pelvis is draped (intimate examinations): findings there show in a drawn close-up. */
+  drape: z.boolean().optional(),
+  ataxia: z.enum(['R', 'L']).optional(),
+  gait: z.enum(['antalgic-R', 'antalgic-L', 'ataxic', 'normal']).optional(),
+  palsy: z.enum(['R', 'L']).optional(),
+  nystagmus: z.enum(['R', 'L']).optional(),
+  unconscious: z.boolean().optional(),
+  posturing: z.enum(['decorticate', 'decerebrate', 'localises']).optional(),
+  trendelenburg: z.enum(['R', 'L']).optional(),
+})
+
 const optionSchema = z.object({
   id: z.string(),
   label: z.string(),
+  /** 3D examination: what you do to the patient that performs this (see game/exam3d/model.ts). */
+  do: z.string().optional(),
   /** The nurse fetches this from the drug cart or the kit trolley and gives it at the bedside. */
   fetch: z.enum(['cart', 'trolley']).optional(),
   /** Spoken Cantonese for patient conversations; shown instead of label/detail when the patient language is Chinese. */
@@ -251,6 +270,7 @@ export const packSchema = z.object({
     }),
   ),
   vitals: vitalsSchema.optional(),
+  body: bodySchema.optional(),
   badge: z.object({
     id: z.string(),
     name: z.string(),

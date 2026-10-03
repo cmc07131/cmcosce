@@ -38,6 +38,10 @@
       "inBed": true
     }
   ],
+  "body": {
+    "posture": "supine",
+    "gait": "antalgic-R"
+  },
   "steps": [
     {
       "id": "intro",
@@ -68,60 +72,70 @@
           {
             "t": "Gait (if able) and standing alignment",
             "r": "Antalgic gait; can take 4 steps with difficulty.",
-            "mark": "Observes gait and weight-bearing"
+            "mark": "Observes gait and weight-bearing",
+            "do": "say walk,stand"
           },
           {
             "t": "Swelling, bruising, wasting, scars",
             "r": "Tense swelling of the right knee, no bruising, no scars.",
-            "mark": "Inspects for swelling and deformity"
+            "mark": "Inspects for swelling and deformity",
+            "do": "look knee-R"
           }
         ],
         "Feel": [
           {
             "t": "Temperature and effusion (patellar tap)",
             "r": "Warm; large effusion with a positive patellar tap.",
-            "mark": "Assesses temperature and effusion"
+            "mark": "Assesses temperature and effusion",
+            "do": "feel knee-R & press knee-R"
           },
           {
             "t": "Joint lines, collateral ligaments, patella, tibial tuberosity, fibular head",
             "r": "Mild lateral joint line tenderness. No bony tenderness at the patella or fibular head.",
-            "mark": "Palpates joint lines and bony landmarks (Ottawa)"
+            "mark": "Palpates joint lines and bony landmarks (Ottawa)",
+            "do": "feel medialjoint-R & feel lateraljoint-R & feel tibialtub-R,fibula-R"
           }
         ],
         "Move": [
           {
             "t": "Active flexion and extension; straight-leg raise",
             "r": "Flexes to 80° (limited by swelling). Straight-leg raise intact — extensor mechanism intact.",
-            "mark": "Assesses movement and the extensor mechanism"
+            "mark": "Assesses movement and the extensor mechanism",
+            "do": "say bend-knee-R & say lift-leg-R"
           }
         ],
         "Special tests": [
           {
             "t": "Lachman test (knee at 20–30°)",
             "r": "Increased anterior translation with a soft end-point compared with the left.",
-            "mark": "Performs Lachman: positive (ACL)"
+            "mark": "Performs Lachman: positive (ACL)",
+            "do": "feel shin-R,tibialtub-R @knee-R=15..35"
           },
           {
             "t": "Posterior sag and posterior drawer",
             "r": "No sag, firm end-point.",
-            "mark": "Tests the PCL"
+            "mark": "Tests the PCL",
+            "do": "press tibialtub-R,shin-R,knee-R @knee-R=70..110 | look knee-R @knee-R=70..110"
           },
           {
             "t": "Valgus and varus stress at 0° and 30°",
             "r": "Stable.",
-            "mark": "Tests collateral ligaments"
+            "mark": "Tests collateral ligaments",
+            "do": "press medialjoint-R,lateraljoint-R,knee-R @knee-R=0..10 & press medialjoint-R,lateraljoint-R,knee-R @knee-R=20..40"
           },
           {
             "t": "McMurray test forcefully despite pain",
             "trap": true,
-            "r": "Painful and unreliable acutely; can worsen a meniscal tear. Leave it or be gentle."
+            "r": "Painful and unreliable acutely; can worsen a meniscal tear. Leave it or be gentle.",
+            "do": "move hip-R:rot @knee-R=90..140"
           }
         ],
         "Complete": [
           {
             "t": "Distal pulses and sensation; examine the hip and the other knee",
             "r": "Pulses and sensation normal; hip normal.",
-            "mark": "Neurovascular check and joint above"
+            "mark": "Neurovascular check and joint above",
+            "do": "feel dp-R,pt-R | feel hip-R,groin-R | look knee-L"
           }
         ]
       }

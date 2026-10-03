@@ -1,5 +1,6 @@
 import { z } from 'zod'
-import { performKinds, vitalsSchema, type Action, type ActionOption, type Pack } from './schema'
+import { checkDo } from '../game/exam3d/model'
+import { bodySchema, performKinds, vitalsSchema, type Action, type ActionOption, type Pack } from './schema'
 
 /**
  * A station script: the compact form every new station is written in. `compileStation` turns it into a
@@ -33,6 +34,8 @@ const optSchema = z.object({
   n: z.number().int().positive().optional(),
   end: z.boolean().optional(),
   perform: z.enum(performKinds).optional(),
+  /** 3D examination: what you do to the patient that performs this, e.g. `feel iliac-R > feel ruq-R` (see game/exam3d/model.ts). */
+  do: z.string().optional(),
   /** Perform detail, e.g. an exam test and the lesion side: "eyes:right". */
   pose: z.string().optional(),
   performHint: z.string().optional(),
@@ -128,6 +131,8 @@ export const stationSchema = z.object({
         untreated: z.string().optional(),
       }))
     .optional(),
+  /** The 3D examination: the patient's starting position and the signs they show (see game/exam3d/scene.ts). */
+  body: bodySchema.optional(),
   review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing', 'unverified']), text: z.string() })).optional(),
   cast: z
     .array(
@@ -378,6 +383,7 @@ export function compileStation(station: Station): Pack {
       mood: o.mood,
       order: o.n,
       perform: o.perform,
+      do: o.do,
       fetch: o.fetch,
       labelZh: o.tz,
       detailZh: spoken(speaker, o.rz),
@@ -450,6 +456,11 @@ export function compileStation(station: Station): Pack {
     actions.push({ id: 'monitor', kind: 'monitor', targetIds: ['monitor'], hint: 'Look at the monitor.', prompt: 'Monitor' })
   }
 
+  // A 3D examination line that names a tool, site or instruction that does not exist would never be performed.
+  for (const step of station.steps)
+    for (const o of Object.values(step.groups ?? {}).flat())
+      if (o.do) for (const problem of checkDo(o.do)) throw new Error(`${station.id}: "${o.t}": ${problem}`)
+
   // Ending early would strand the steps after it (usually the viva) and their marks.
   station.steps.forEach((step, i) => {
     const ends = step.end || (step.opts ?? []).some((o) => o.end)
@@ -511,6 +522,7 @@ export function compileStation(station: Station): Pack {
       failNote: rule.fail,
     })),
     vitals: station.vitals,
+    body: station.body,
     badge: { id: station.id, name: station.badge.name, emoji: station.badge.emoji, flavor: station.badge.flavor },
   }
 }

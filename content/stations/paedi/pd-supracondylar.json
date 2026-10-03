@@ -48,6 +48,9 @@
       "role": "woman"
     }
   ],
+  "body": {
+    "posture": "edge"
+  },
   "steps": [
     {
       "id": "xray",
@@ -78,36 +81,42 @@
             "t": "Radial pulse and hand perfusion",
             "r": "Radial pulse present; hand pink, CRT under 2 s.",
             "mark": "Assesses pulse and perfusion",
-            "anim": "pulse"
+            "anim": "pulse",
+            "do": "feel wrist-L & press pulp-L,nails-L"
           }
         ],
         "Nerves": [
           {
             "t": "Radial: thumbs up / wrist extension; sensation dorsal first web space",
             "r": "Normal.",
-            "mark": "Tests the radial nerve"
+            "mark": "Tests the radial nerve",
+            "do": "say thumbs-up & cotton web-L | say thumbs-up & pin web-L"
           },
           {
             "t": "Median: thumb opposition, sensation index pulp",
             "r": "Normal.",
-            "mark": "Tests the median nerve"
+            "mark": "Tests the median nerve",
+            "do": "say opposition & cotton pulp-L | say opposition & pin pulp-L"
           },
           {
             "t": "Anterior interosseous: make an 'OK' sign",
             "r": "Makes a flat pinch instead of a circle — weak FPL and FDP index.",
-            "mark": "Tests the AIN and finds a palsy"
+            "mark": "Tests the AIN and finds a palsy",
+            "do": "say ok-sign"
           },
           {
             "t": "Ulnar: finger abduction ('crossed fingers'), little finger sensation",
             "r": "Normal.",
-            "mark": "Tests the ulnar nerve"
+            "mark": "Tests the ulnar nerve",
+            "do": "say cross-fingers"
           }
         ],
         "Compartment": [
           {
             "t": "Passive finger extension; forearm tension",
             "r": "No pain on passive stretch; forearm soft.",
-            "mark": "Checks for compartment syndrome"
+            "mark": "Checks for compartment syndrome",
+            "do": "press nails-L,pulp-L & feel forearm-L"
           }
         ]
       }

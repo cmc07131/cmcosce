@@ -36,6 +36,10 @@
       "role": "nurse"
     }
   ],
+  "body": {
+    "posture": "supine",
+    "drape": true
+  },
   "steps": [
     {
       "id": "exam",
@@ -48,41 +52,48 @@
           {
             "t": "Look and feel the spine",
             "r": "Loss of lumbar lordosis, paraspinal spasm, no midline step or bony tenderness.",
-            "mark": "Inspects and palpates the spine"
+            "mark": "Inspects and palpates the spine",
+            "do": "look back & feel back"
           },
           {
             "t": "Forward flexion",
-            "r": "Limited by pain."
+            "r": "Limited by pain.",
+            "do": "say bend-forward"
           }
         ],
         "Nerve root": [
           {
             "t": "Straight-leg raise each side",
             "r": "Positive at 40° on both sides.",
-            "mark": "Performs straight-leg raise bilaterally"
+            "mark": "Performs straight-leg raise bilaterally",
+            "do": "move hip-R:flex @knee-R=0..15 & move hip-L:flex @knee-L=0..15 | say lift-leg-R & say lift-leg-L"
           },
           {
             "t": "Power, sensation, reflexes (L2–S1)",
             "r": "Weak ankle plantarflexion bilaterally (S1), absent ankle jerks both sides, reduced sensation lateral feet.",
-            "mark": "Examines lower limb neurology"
+            "mark": "Examines lower limb neurology",
+            "do": "hammer heel,calf & pin foot,shin,thigh | hammer heel,calf & cotton foot,shin,thigh"
           }
         ],
         "Saddle": [
           {
             "t": "Perianal pinprick sensation",
             "r": "Reduced perianal sensation.",
-            "mark": "Tests saddle/perianal sensation"
+            "mark": "Tests saddle/perianal sensation",
+            "do": "pin perianal"
           },
           {
             "t": "Digital rectal examination for anal tone, with consent and a chaperone",
             "r": "Reduced resting tone; weak voluntary squeeze.",
-            "mark": "Assesses anal tone with consent and chaperone"
+            "mark": "Assesses anal tone with consent and chaperone",
+            "do": "say chaperone > feel perianal @gloved"
           },
           {
             "t": "Post-void bladder scan",
             "r": "Residual 650 mL.",
             "mark": "Measures post-void residual",
-            "anim": "abdomen"
+            "anim": "abdomen",
+            "do": "scanner suprapubic"
           }
         ]
       }

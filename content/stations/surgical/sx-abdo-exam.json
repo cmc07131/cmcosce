@@ -31,6 +31,9 @@
       "inBed": true
     }
   ],
+  "body": {
+    "posture": "supine"
+  },
   "steps": [
     {
       "id": "exam",
@@ -43,53 +46,62 @@
           {
             "t": "Hands: nails, palms, flap",
             "r": "Leuconychia, palmar erythema, Dupuytren's contracture; no flap.",
-            "mark": "Examines the hands for liver stigmata"
+            "mark": "Examines the hands for liver stigmata",
+            "do": "look hands | say hands-out"
           },
           {
             "t": "Eyes, face, neck",
             "r": "Icteric sclerae; left supraclavicular fossa normal.",
-            "mark": "Looks for jaundice and Virchow's node"
+            "mark": "Looks for jaundice and Virchow's node",
+            "do": "look eye,face | feel supraclavicular"
           },
           {
             "t": "Chest",
             "r": "Five spider naevi; gynaecomastia.",
             "mark": "Finds spider naevi and gynaecomastia",
-            "anim": "auscultate"
+            "anim": "auscultate",
+            "do": "look chest"
           }
         ],
         "Abdomen": [
           {
             "t": "Inspect",
             "r": "Distended with dilated periumbilical veins, everted umbilicus.",
-            "mark": "Inspects: distension and caput medusae"
+            "mark": "Inspects: distension and caput medusae",
+            "do": "look abdomen"
           },
           {
             "t": "Palpate the liver from the right iliac fossa upwards with breathing",
             "r": "Liver edge 3 cm below the costal margin, firm, irregular.",
             "mark": "Palpates the liver correctly",
-            "anim": "auscultate"
+            "anim": "auscultate",
+            "do": "feel iliac-R > feel ruq-R"
           },
           {
             "t": "Palpate the spleen from the right iliac fossa toward the left costal margin",
             "r": "Spleen tip 4 cm below the left costal margin, moves with breathing, notch felt.",
-            "mark": "Palpates the spleen correctly"
+            "mark": "Palpates the spleen correctly",
+            "do": "feel iliac-R > feel ruq-L"
           },
           {
             "t": "Shifting dullness",
             "r": "Dullness in the flanks shifts when he rolls to his right: ascites.",
-            "mark": "Demonstrates shifting dullness"
+            "mark": "Demonstrates shifting dullness",
+            "do": "percuss flank > say roll-R,roll-L > percuss flank"
           },
           {
             "t": "Auscultate",
             "r": "Bowel sounds normal; no bruits.",
-            "anim": "auscultate"
+            "anim": "auscultate",
+            "do": "listen abdomen"
           }
         ],
         "Complete": [
           {
             "t": "Legs; offer hernial orifices, genitalia, PR",
             "r": "Pitting oedema to mid-shin.",
-            "mark": "Completes the examination"
+            "mark": "Completes the examination",
+            "do": "press shin | look legs | feel groin"
           }
         ]
       }

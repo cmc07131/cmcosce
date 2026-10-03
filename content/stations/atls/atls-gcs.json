@@ -50,6 +50,11 @@
       "role": "nurse"
     }
   ],
+  "body": {
+    "posture": "supine",
+    "unconscious": true,
+    "posturing": "decorticate"
+  },
   "steps": [
     {
       "id": "check",
@@ -81,47 +86,55 @@
           {
             "t": "Observe before touching him",
             "r": "Eyes closed. No spontaneous movement.",
-            "mark": "Observes before stimulating"
+            "mark": "Observes before stimulating",
+            "do": "look patient @untouched"
           },
           {
             "t": "Speak to him loudly: 'Mr Tang, open your eyes'",
             "r": "No eye opening to voice.",
-            "mark": "Uses a spoken stimulus first"
+            "mark": "Uses a spoken stimulus first",
+            "do": "say open-eyes"
           },
           {
             "t": "Fingertip pressure on the nail bed for 10 seconds",
             "r": "His eyes open briefly: E2.",
-            "mark": "Uses a standard peripheral pressure stimulus"
+            "mark": "Uses a standard peripheral pressure stimulus",
+            "do": "press nails,pulp"
           },
           {
             "t": "Rub his sternum hard with your knuckles",
             "trap": true,
-            "r": "Sternal rub bruises and is not a standardised stimulus. Use trapezius pinch or supraorbital pressure."
+            "r": "Sternal rub bruises and is not a standardised stimulus. Use trapezius pinch or supraorbital pressure.",
+            "do": "press sternum"
           }
         ],
         "Verbal": [
           {
             "t": "Ask his name, where he is, the month",
             "r": "Moans. No words: V2 (sounds).",
-            "mark": "Assesses orientation and scores verbal as V2"
+            "mark": "Assesses orientation and scores verbal as V2",
+            "do": "say orientation"
           }
         ],
         "Motor": [
           {
             "t": "Ask him to squeeze your fingers and let go",
-            "r": "No response to command."
+            "r": "No response to command.",
+            "do": "say squeeze-fingers"
           },
           {
             "t": "Trapezius pinch (central stimulus)",
             "r": "Both arms flex slowly across his chest, wrists and fingers curled; legs extend and feet point.",
             "img": "photo:posture-decorticate",
-            "mark": "Uses a central stimulus and sees abnormal flexion (M3)"
+            "mark": "Uses a central stimulus and sees abnormal flexion (M3)",
+            "do": "press trapezius,supraorbital"
           },
           {
             "t": "Reassess motor after 10 minutes",
             "r": "Now both arms straighten and turn inward, wrists flexed, legs extended, neck arched.",
             "img": "photo:posture-decerebrate",
-            "mark": "Repeats the assessment and finds extension (M2)"
+            "mark": "Repeats the assessment and finds extension (M2)",
+            "do": "press trapezius,supraorbital > press trapezius,supraorbital,nails"
           }
         ],
         "Pupils": [
@@ -129,24 +142,28 @@
             "t": "Pupil size and reaction to light",
             "r": "Right 6 mm, unreactive. Left 3 mm, brisk.",
             "mark": "Checks pupils: right fixed and dilated",
-            "anim": "pupils"
+            "anim": "pupils",
+            "do": "torch eye"
           }
         ],
         "Other": [
           {
             "t": "Look at the head",
             "r": "Boggy swelling over the right temple.",
-            "mark": "Looks for the site of the head injury"
+            "mark": "Looks for the site of the head injury",
+            "do": "look head,temple"
           },
           {
             "t": "Plantar responses",
-            "r": "Both upgoing."
+            "r": "Both upgoing.",
+            "do": "orange sole"
           },
           {
             "t": "Capillary glucose",
             "r": "5.9 mmol/L.",
             "mark": "Excludes hypoglycaemia",
-            "anim": "glucose"
+            "anim": "glucose",
+            "do": "glucometer pulp,nails"
           }
         ]
       }

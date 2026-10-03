@@ -36,6 +36,9 @@
       "inBed": true
     }
   ],
+  "body": {
+    "posture": "supine"
+  },
   "steps": [
     {
       "id": "exam",
@@ -48,40 +51,47 @@
           {
             "t": "Colour of both legs",
             "r": "Right foot and calf pale and mottled (blanches with pressure).",
-            "mark": "Inspects colour and mottling"
+            "mark": "Inspects colour and mottling",
+            "do": "look legs,foot"
           },
           {
             "t": "Temperature, feeling up both legs",
             "r": "Right leg cold below the mid-thigh.",
-            "mark": "Compares temperature and finds the level"
+            "mark": "Compares temperature and finds the level",
+            "do": "feel shin-R,calf-R,foot-R,thigh-R & feel shin-L,calf-L,foot-L,thigh-L"
           },
           {
             "t": "Capillary refill",
             "r": "Right toes > 5 seconds; left 2 seconds.",
-            "anim": "glucose"
+            "anim": "glucose",
+            "do": "press toes,nails"
           }
         ],
         "Pulses": [
           {
             "t": "Femoral, popliteal, dorsalis pedis, posterior tibial — both sides",
             "r": "Right femoral present; right popliteal and foot pulses absent. Left all present.",
-            "mark": "Palpates all pulses on both sides"
+            "mark": "Palpates all pulses on both sides",
+            "do": "feel groin-R+groin-L+popliteal-R+popliteal-L+dp-R+dp-L+pt-R+pt-L"
           },
           {
             "t": "Handheld Doppler",
             "r": "No arterial signal at the right ankle; venous signal present.",
-            "mark": "Uses Doppler for arterial and venous signals"
+            "mark": "Uses Doppler for arterial and venous signals",
+            "do": "doppler dp-R,pt-R"
           }
         ],
         "Neuro": [
           {
             "t": "Sensation and toe/ankle movement",
             "r": "Reduced light touch over the right foot; weak toe dorsiflexion.",
-            "mark": "Assesses sensory and motor deficit (threatened limb)"
+            "mark": "Assesses sensory and motor deficit (threatened limb)",
+            "do": "cotton foot-R,toes-R & say toes | pin foot-R,toes-R & say toes"
           },
           {
             "t": "Calf tenderness",
-            "r": "Right calf soft, not tender."
+            "r": "Right calf soft, not tender.",
+            "do": "feel calf-R"
           }
         ],
         "Heart": [
@@ -89,7 +99,8 @@
             "t": "Pulse rhythm",
             "r": "Irregularly irregular.",
             "img": "ecg:af",
-            "mark": "Identifies AF as an embolic source"
+            "mark": "Identifies AF as an embolic source",
+            "do": "feel wrist"
           }
         ]
       }
