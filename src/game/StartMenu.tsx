@@ -1,12 +1,14 @@
 import { useRef, useState } from 'react'
 import { examinerClause, itemLabel } from '~/engine/judge'
 import type { Pack } from '~/engine/schema'
+import { removeCustomModel, saveCustomModel } from './positional/customModel'
+import type { AvatarId } from './positional/scene3d'
 import { useSettings } from './settings'
 import { NavItem, Win, useCursor } from './ui'
 
-type Page = 'root' | 'bag' | 'marks' | 'leave'
+type Page = 'root' | 'bag' | 'marks' | 'leave' | 'patient'
 
-/** Gold START menu: bag, notes, hint, marks, options, leave. */
+/** Gold START menu: bag, notes, hint, marks, options (including who plays the 3D patient), leave. */
 export function StartMenu({
   pack,
   inventory,
@@ -45,6 +47,11 @@ export function StartMenu({
   const difficulty = useSettings((s) => s.difficulty)
   const toggleDifficulty = useSettings((s) => s.toggleDifficulty)
   const cycleCoach = useSettings((s) => s.cycleCoach)
+  const patientModel = useSettings((s) => s.patientModel)
+  const customModelName = useSettings((s) => s.customModelName)
+  const setPatientModel = useSettings((s) => s.setPatientModel)
+  const file = useRef<HTMLInputElement>(null)
+  const [modelNote, setModelNote] = useState<string | null>(null)
   const cursor = useCursor(root, {
     priority: 20,
     onBack: () => {
@@ -57,6 +64,34 @@ export function StartMenu({
     setPage(next)
     window.requestAnimationFrame(() => cursor.reset())
   }
+
+  /** The player's own VRM: checked, then kept in this browser only. */
+  async function loadMine(event: React.ChangeEvent<HTMLInputElement>) {
+    const chosen = event.target.files?.[0]
+    event.target.value = ''
+    if (!chosen) return
+    setModelNote('Reading your model…')
+    try {
+      const model = await saveCustomModel(chosen)
+      setPatientModel('custom', model.name)
+      setModelNote(`${model.name} now plays the patient.`)
+    } catch (error) {
+      setModelNote(error instanceof Error ? error.message : 'That model could not be read.')
+    }
+  }
+
+  async function removeMine() {
+    await removeCustomModel()
+    setPatientModel(patientModel === 'custom' ? 'realistic' : patientModel, null)
+    setModelNote('Your model is gone from this device.')
+  }
+
+  const modelItem = (id: AvatarId, label: string) => (
+    <NavItem testId={`model-${id}`} tone={patientModel === id ? 'done' : undefined} onClick={() => (setPatientModel(id), setModelNote(null))}>
+      {label}
+      {patientModel === id ? ' ◀' : ''}
+    </NavItem>
+  )
 
   return (
     <div className="absolute inset-0 z-40 flex justify-end bg-black/20 p-2" data-testid="start-menu" onClick={onClose}>
@@ -83,6 +118,9 @@ export function StartMenu({
             </NavItem>
             <NavItem testId="menu-names" onClick={toggleLabels}>NAMES {labels ? 'ON' : 'OFF'}</NavItem>
             <NavItem testId="menu-lang" onClick={toggleLang}>PATIENT: {patientLang === 'zh' ? '中文' : 'ENGLISH'}</NavItem>
+            <NavItem testId="menu-patient-model" onClick={() => go('patient')}>
+              3D PATIENT: {patientModel === 'custom' ? 'MINE' : patientModel === 'anime' ? 'ANIME' : 'REALISTIC'}
+            </NavItem>
             <NavItem testId="hud-leave" onClick={() => go('leave')}>LEAVE</NavItem>
             <NavItem testId="menu-exit" onClick={onClose}>EXIT</NavItem>
           </Win>
@@ -106,6 +144,30 @@ export function StartMenu({
                   <b>{mark.id}</b> {examinerClause(mark.label)}
                 </p>
               ))}
+            <NavItem onClick={() => go('root')}>BACK</NavItem>
+          </Win>
+        )}
+        {page === 'patient' && (
+          <Win title="3D PATIENT" className="menu-col w-[260px] max-w-full overflow-auto">
+            <p className="menu-note">Who plays the patient in the 3D procedures.</p>
+            {modelItem('realistic', 'REALISTIC')}
+            {modelItem('anime', 'ANIME')}
+            {customModelName && modelItem('custom', `MINE: ${customModelName.toUpperCase()}`)}
+            <NavItem testId="model-load" onClick={() => file.current?.click()}>
+              {customModelName ? 'LOAD ANOTHER OF MINE…' : 'LOAD MY OWN MODEL…'}
+            </NavItem>
+            {customModelName && (
+              <NavItem testId="model-remove" onClick={removeMine}>
+                REMOVE MINE
+              </NavItem>
+            )}
+            <p className="menu-note">Your own model (.vrm, or a VRoid .xroid) stays in this browser on this device. It is never uploaded.</p>
+            {modelNote && (
+              <p className="menu-note" data-testid="model-note">
+                {modelNote}
+              </p>
+            )}
+            <input ref={file} type="file" accept=".vrm,.xroid,.glb" hidden data-testid="model-file" onChange={loadMine} />
             <NavItem onClick={() => go('root')}>BACK</NavItem>
           </Win>
         )}

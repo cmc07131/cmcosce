@@ -4,7 +4,7 @@ import { CheckCard, benchMarks } from '../bench/kit'
 import type { BenchResult, PerformJob } from '../store'
 import { buzz, sfx } from '../sfx'
 import { useSettings } from '../settings'
-import { AVATARS, ExamRoom, type AvatarId, type Joint, type Pose, type View } from './scene3d'
+import { ExamRoom, type Credit, type Joint, type Pose, type View } from './scene3d'
 import { EPLEY_MARKS, HALLPIKE_MARKS, epleyRows, freshPos, hallpikeRows, headOverEnd, nystagmus, provoking, type Dx, type PosRun } from './model'
 
 /**
@@ -27,7 +27,8 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
   const [checked, setChecked] = useState(false)
   const [loading, setLoading] = useState(true)
   const [says, setSays] = useState<string | null>(null)
-  const avatar = useSettings((s) => s.avatar)
+  const patientModel = useSettings((s) => s.patientModel)
+  const [credit, setCredit] = useState<Credit | null>(null)
   const host = useRef<HTMLDivElement>(null)
   const room = useRef<ExamRoom | null>(null)
   const grab = useRef<Grab | null>(null)
@@ -41,10 +42,13 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
   useEffect(() => {
     if (!host.current) return
     useSettings.getState().load()
-    const r = new ExamRoom(host.current, useSettings.getState().avatar)
+    const r = new ExamRoom(host.current, useSettings.getState().patientModel)
     room.current = r
     if (import.meta.env.DEV) Object.assign(window, { __room: r, __posRun: runRef })
-    r.ready.then(() => setLoading(false))
+    r.ready.then(() => {
+      setLoading(false)
+      setCredit(r.credit)
+    })
     const ro = new ResizeObserver(() => r.resize())
     ro.observe(host.current)
     r.onFrame = (dt) => frame(r, dt)
@@ -55,16 +59,19 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     }
   }, [])
 
-  /** Swap who plays her; the pose and every timer carry on. */
-  function cast(id: AvatarId) {
+  // A change of patient model in the settings recasts her; the pose and every timer carry on.
+  // (Read from the store: on the first render the hook may still hold the default, before saved settings load.)
+  useEffect(() => {
     const r = room.current
-    useSettings.getState().setAvatar(id)
-    if (!r || r.avatar === id) return
+    const want = useSettings.getState().patientModel
+    if (!r || r.avatar === want) return
     setLoading(true)
-    r.setAvatar(id).then(() => {
-      if (r.avatar === id) setLoading(false)
+    r.setAvatar(want).then(() => {
+      if (r.avatar !== want) return
+      setLoading(false)
+      setCredit(r.credit)
     })
-  }
+  }, [patientModel])
 
   const say = (key: string, line: string) => {
     if (sim.current.said.has(key)) return
@@ -327,18 +334,14 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
                 <span className="absolute left-1 top-1 font-[Press_Start_2P,monospace] text-[6px] text-[#58f878]">VIDEO GOGGLES · REC</span>
               </div>
             )}
-            <div className="absolute right-1 top-1 flex gap-1" role="group" aria-label="Who plays the patient" onPointerDown={(e) => e.stopPropagation()}>
-              {AVATARS.map((a) => (
-                <button key={a.id} type="button" aria-pressed={avatar === a.id} data-testid={`pos3d-avatar-${a.id}`} onClick={() => cast(a.id)} className={`rounded border px-1.5 py-0.5 font-[Press_Start_2P,monospace] text-[6px] leading-none ${avatar === a.id ? 'border-[#181820] bg-[#181820] text-white' : 'border-[#5a6470]/60 bg-white/80 text-[#40404c]'}`}>
-                  {a.label.toUpperCase()}
-                </button>
+            {credit &&
+              (credit.href ? (
+                <a href={credit.href} target="_blank" rel="noreferrer" className="absolute bottom-1 right-1 text-[8px] text-[#5a6470] opacity-70" onPointerDown={(e) => e.stopPropagation()}>
+                  {credit.text}
+                </a>
+              ) : (
+                <span className="pointer-events-none absolute bottom-1 right-1 text-[8px] text-[#5a6470] opacity-70">{credit.text}</span>
               ))}
-            </div>
-            {AVATARS.filter((a) => a.id === avatar).map((a) => (
-              <a key={a.id} href={a.licence} target="_blank" rel="noreferrer" className="absolute bottom-1 right-1 text-[8px] text-[#5a6470] opacity-70" onPointerDown={(e) => e.stopPropagation()}>
-                {a.credit}
-              </a>
-            ))}
             {says && <p className="pointer-events-none absolute bottom-2 left-2 right-2 rounded bg-white/90 p-2 text-[11px] leading-snug text-[#202028] shadow">{says}</p>}
           </div>
           <div className="min-h-0 flex-[1_1_45%] overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>

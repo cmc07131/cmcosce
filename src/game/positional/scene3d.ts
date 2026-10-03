@@ -4,11 +4,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
 import { VRMLoaderPlugin, VRMUtils, type VRM, type VRMHumanBoneName } from '@pixiv/three-vrm'
+import { readCustomModel } from './customModel'
 
 /**
  * The 3D examination room for the Dix–Hallpike and Epley: a lit clinic, an examination couch, and Mrs Chau posed
- * procedurally from a handful of numbers. She can be played by a realistic avatar (Microsoft Rocketbox, MIT) or an
- * anime one (VRoid AvatarSample_B, pixiv's sample-model terms); a `Rig` maps either skeleton onto the same joints.
+ * procedurally from a handful of numbers. She can be played by a realistic avatar (Microsoft Rocketbox, MIT), an
+ * anime one (VRoid AvatarSample_B, pixiv's sample-model terms), or the player's own VRM from their device; a `Rig`
+ * maps any of these skeletons onto the same joints.
  *
  * World: metres, Y up. The couch runs along +X; its head end is at x = 0. The patient's right side faces +Z, toward
  * the default camera.
@@ -32,7 +34,10 @@ const DEG = Math.PI / 180
 /** Hip joint to neck joint of the realistic avatar: every avatar is scaled to it, so the head clears the couch end at the same place. */
 const TORSO = 0.535
 
-export type AvatarId = 'realistic' | 'anime'
+/** `custom`: the player's own VRM, kept on their device (see customModel.ts). */
+export type AvatarId = 'realistic' | 'anime' | 'custom'
+export type Credit = { text: string; href?: string }
+/** The models that ship with the app. */
 export const AVATARS: { id: AvatarId; label: string; credit: string; licence: string }[] = [
   { id: 'realistic', label: 'Realistic', credit: '3D avatar © Microsoft Rocketbox (MIT)', licence: '/models/patient/LICENSE-Rocketbox.md' },
   { id: 'anime', label: 'Anime', credit: '3D avatar: VRoid AvatarSample_B © pixiv', licence: '/models/vroid-b/LICENSE-VRoid.md' },
@@ -84,6 +89,8 @@ export class ExamRoom {
   private bind = new Map<THREE.Object3D, THREE.Quaternion>()
   private loadToken = 0
   avatar: AvatarId | null = null
+  /** The credit line for whoever plays her now: the MIT notice, pixiv's, or the player's own. */
+  credit: Credit | null = null
   private camPos = new THREE.Vector3(1.6, 1.55, 2.3)
   private camLook = new THREE.Vector3(0.7, 0.9, 0)
   private wantPos = this.camPos.clone()
@@ -204,9 +211,9 @@ export class ExamRoom {
     if (id === this.avatar) return this.ready
     this.avatar = id
     const token = ++this.loadToken
-    const load = id === 'anime' ? this.loadVrm('/models/vroid-b/AvatarSample_B.vrm') : this.loadRocketbox()
-    this.ready = load.then((rig) => {
+    this.ready = this.loadAvatar(id).then(({ rig, credit }) => {
       if (this.disposed || token !== this.loadToken) return rig.dispose()
+      this.credit = credit
       if (this.rig) {
         this.body.remove(this.rig.root)
         this.rig.dispose()
@@ -220,6 +227,26 @@ export class ExamRoom {
       rig.settle()
     })
     return this.ready
+  }
+
+  /** The player's own model comes from this device; if it is missing or will not load, the realistic patient stands in. */
+  private async loadAvatar(id: AvatarId): Promise<{ rig: Rig; credit: Credit }> {
+    if (id === 'custom') {
+      const own = await readCustomModel()
+      if (own) {
+        const url = URL.createObjectURL(new Blob([own.bytes], { type: 'model/gltf-binary' }))
+        try {
+          return { rig: await this.loadVrm(url), credit: { text: own.credit } }
+        } catch {
+          // A file that will not load: fall through to the realistic patient.
+        } finally {
+          URL.revokeObjectURL(url)
+        }
+      }
+    }
+    const a = AVATARS.find((x) => x.id === id) ?? AVATARS[0]
+    const rig = a.id === 'anime' ? await this.loadVrm('/models/vroid-b/AvatarSample_B.vrm') : await this.loadRocketbox()
+    return { rig, credit: { text: a.credit, href: a.licence } }
   }
 
   private async loadRocketbox(): Promise<Rig> {

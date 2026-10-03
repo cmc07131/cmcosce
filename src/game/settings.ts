@@ -10,14 +10,14 @@ export type Coach = 'guided' | 'objectives' | 'off'
 /** `hard`: harder presentations (the TCA patient arrives fitting). */
 export type Difficulty = 'normal' | 'hard'
 
-type Stored = { sound: boolean; labels: boolean; patientLang: PatientLang; coach: Coach; difficulty: Difficulty; avatar: AvatarId }
+type Stored = { sound: boolean; labels: boolean; patientLang: PatientLang; coach: Coach; difficulty: Difficulty; patientModel: AvatarId; customModelName: string | null }
 
 /**
  * `labels` shows NPC name tags on the map. Kit labels always show. Patients speak Cantonese by default.
- * `coach` is guided by default: the phase, and the next action in the perfect script. `avatar`: who plays the patient
- * in the 3D benches.
+ * `coach` is guided by default: the phase, and the next action in the perfect script. `patientModel`: who plays the
+ * patient in the 3D benches, realistic by default; `customModelName` names the player's own model kept on this device.
  */
-const defaults: Stored = { sound: false, labels: false, patientLang: 'zh', coach: 'guided', difficulty: 'normal', avatar: 'anime' }
+const defaults: Stored = { sound: false, labels: false, patientLang: 'zh', coach: 'guided', difficulty: 'normal', patientModel: 'realistic', customModelName: null }
 
 function read(): Stored {
   try {
@@ -48,13 +48,13 @@ type SettingsState = Stored & {
   toggleLang: () => void
   cycleCoach: () => void
   toggleDifficulty: () => void
-  setAvatar: (avatar: AvatarId) => void
+  setPatientModel: (patientModel: AvatarId, customModelName?: string | null) => void
 }
 
 /** Sound is off until the player turns it on. Loaded on the client only, so SSR renders the defaults. */
 export const useSettings = create<SettingsState>((set, get) => {
   const save = (patch: Partial<Stored>) => {
-    const next: Stored = { sound: get().sound, labels: get().labels, patientLang: get().patientLang, coach: get().coach, difficulty: get().difficulty, avatar: get().avatar, ...patch }
+    const next: Stored = { sound: get().sound, labels: get().labels, patientLang: get().patientLang, coach: get().coach, difficulty: get().difficulty, patientModel: get().patientModel, customModelName: get().customModelName, ...patch }
     write(next)
     set(next)
   }
@@ -69,7 +69,7 @@ export const useSettings = create<SettingsState>((set, get) => {
     toggleLabels: () => save({ labels: !get().labels }),
     toggleLang: () => save({ patientLang: get().patientLang === 'zh' ? 'en' : 'zh' }),
     toggleDifficulty: () => save({ difficulty: get().difficulty === 'normal' ? 'hard' : 'normal' }),
-    setAvatar: (avatar) => save({ avatar }),
+    setPatientModel: (patientModel, customModelName) => save(customModelName === undefined ? { patientModel } : { patientModel, customModelName }),
     cycleCoach: () => save({ coach: get().coach === 'guided' ? 'objectives' : get().coach === 'objectives' ? 'off' : 'guided' }),
   }
 })
