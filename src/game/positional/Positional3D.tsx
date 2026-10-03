@@ -155,7 +155,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     if (stage === 'Position') g.kind = 'slide'
     else if (stage === 'Roll') {
       g.kind = 'roll'
-      if (!near(r, 'shoulder', e.clientX, e.clientY, 130)) return feel('Take hold of her right shoulder and hip, and roll her toward you.')
+      if (!near(r, 'shoulder', e.clientX, e.clientY, 150) && !near(r, 'chest', e.clientX, e.clientY, 150)) return feel('Take hold of her right shoulder and hip, and pull her toward you.')
     }
     else if (stage === 'Sit up') g.kind = 'sit'
     else if (stage === 'Lie back') g.kind = 'drop'
@@ -230,7 +230,9 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
       }
     }
     if (g.kind === 'roll') {
-      const roll = clamp(cur.roll + follow(r, dx, dy, 'roll', -0.08, 'shoulder'), -1, 0)
+      // You stand on her left and pull her right side over toward you: down the screen, 160 px for the whole roll.
+      // (Her shoulder itself barely moves on screen from here: it swings up and then straight at you.)
+      const roll = clamp(cur.roll - dy / 160, -1, 0)
       upd({ roll })
       if (roll <= -0.85 && !cur.rolled) {
         upd({ rolled: true })
@@ -258,6 +260,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     const stage = stageRef.current
     if (stage === 'Position') feel(headOverEnd(cur) ? 'Her shoulders are at the end of the couch: lying back, her head will hang over it.' : 'She is still too far up the couch.')
     if (stage === 'Turn' && !epley) feel(`Her head turned ${Math.round(Math.abs(cur.yaw))}° to the ${cur.yaw >= 0 ? 'right' : 'left'}.`)
+    if (stage === 'Roll' && !cur.rolled) feel(`Rolled ${Math.round(-cur.roll * 90)}° toward you: keep pulling, right over onto her left side.`)
     if (stage === 'Turn' && epley && !cur.turned) feel(`Her head is ${Math.round(Math.abs(cur.yaw))}° to the ${cur.yaw >= 0 ? 'right' : 'left'}: keep turning it to her left, until it is 45° past the middle.`)
     if (stage === 'Lie back' && cur.dropS !== null) {
       if (cur.dropS > 2.5) why('Briskly: a slow lie-back may not provoke it.')
@@ -290,7 +293,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     Watch: 'Watch her eyes on the goggle screen, for at least 30 seconds.',
     Interpret: 'What did you see?',
     Hold: 'Positive right Hallpike. Hold her here for 30 seconds.',
-    Roll: 'Roll her onto her left side: pull her right shoulder over toward you. Her head turns with her until her nose points to the floor.',
+    Roll: 'You are on her left. Take her right shoulder and pull her toward you (drag down) until she is on her left side. Her head turns with her until her nose points to the floor.',
     'Sit up': 'Bring her up to sitting: drag her head up, slowly.',
     Retest: 'Repeat the right Dix–Hallpike.',
   }
@@ -306,7 +309,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
         <span>MRS CHAU</span>
         <span />
         <span>
-          {stage === 'Watch' ? `⏱ ${Math.round(run.watchedS)} S` : epley && stage === 'Hold' ? hold(0) : epley && stage === 'Turn' ? <>{`HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'} · `}{hold(1)}</> : epley && stage === 'Roll' ? hold(2) : run.lie > 0.95 ? `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'} · ${Math.round(run.ext)}° DOWN` : `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'}`}
+          {stage === 'Watch' ? `⏱ ${Math.round(run.watchedS)} S` : epley && stage === 'Hold' ? hold(0) : epley && stage === 'Turn' ? <>{`HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'} · `}{hold(1)}</> : epley && stage === 'Roll' ? <>{`ROLL ${Math.round(-run.roll * 90)}° · `}{hold(2)}</> : run.lie > 0.95 ? `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'} · ${Math.round(run.ext)}° DOWN` : `HEAD ${Math.round(Math.abs(run.yaw))}° ${run.yaw >= 0 ? 'R' : 'L'}`}
         </span>
       </div>
       <StepStrip titles={titles} index={checked ? titles.length - 1 : index} />
