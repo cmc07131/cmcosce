@@ -275,17 +275,34 @@ export function PlayView({ pack: source }: { pack: Pack }) {
             {(objective || next) && (
               <div className="objective" data-testid="objective" aria-live="polite">
                 {objective && (
-                  <>
-                    <b>
-                      {objective.index + 1}/{objective.total} {objective.title.toUpperCase()}
-                    </b>
-                    <span>{objective.goal}</span>
-                  </>
+                  <div className="objective-card">
+                    <div className="objective-head">
+                      <b>
+                        STEP {objective.index + 1}/{objective.total}
+                      </b>
+                      <span className="objective-title">{objective.title.toUpperCase()}</span>
+                      <span className="objective-pips" aria-hidden="true">
+                        {Array.from({ length: objective.total }, (_, i) => (
+                          <i key={i} data-on={i <= objective.index || undefined} />
+                        ))}
+                      </span>
+                    </div>
+                    <p className="objective-goal">{objective.goal}</p>
+                  </div>
                 )}
                 {next && (
-                  <span className="objective-next" data-testid="guide-next">
-                    NEXT ▶ {next.kind === 'do' ? `${targetName(pack, next.targetId)}: ${next.option}` : 'Watch the patient and the monitor.'}
-                  </span>
+                  <div className="objective-next" data-testid="guide-next">
+                    <b>NEXT</b>
+                    <span>
+                      {next.kind === 'do' ? (
+                        <>
+                          <em>{targetName(pack, next.targetId)}:</em> {next.option}
+                        </>
+                      ) : (
+                        'Watch the patient and the monitor.'
+                      )}
+                    </span>
+                  </div>
                 )}
               </div>
             )}
@@ -430,6 +447,10 @@ export function PlayView({ pack: source }: { pack: Pack }) {
                 onHint={() => {
                   setMenu(false)
                   store().note(`HINT: ${hintFor(pack, earnedMarks)}`)
+                }}
+                onRestart={() => {
+                  setMenu(false)
+                  store().rerun(pack)
                 }}
                 onLeave={() => {
                   setMenu(false)

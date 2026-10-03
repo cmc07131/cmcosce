@@ -6,9 +6,12 @@ import type { AvatarId } from './positional/scene3d'
 import { useSettings } from './settings'
 import { NavItem, Win, useCursor } from './ui'
 
-type Page = 'root' | 'bag' | 'marks' | 'leave' | 'patient'
+type Page = 'root' | 'bag' | 'marks' | 'leave' | 'patient' | 'settings' | 'restart'
 
-/** Gold START menu: bag, notes, hint, marks, options (including who plays the 3D patient), leave. */
+/**
+ * Gold START menu, in three groups: the station (bag, notes, hint, marks); who plays the 3D patient, and the settings;
+ * restart, leave, close.
+ */
 export function StartMenu({
   pack,
   inventory,
@@ -19,6 +22,7 @@ export function StartMenu({
   onClose,
   onNotes,
   onHint,
+  onRestart,
   onLeave,
 }: {
   pack: Pack
@@ -33,6 +37,8 @@ export function StartMenu({
   onClose: () => void
   onNotes: () => void
   onHint: () => void
+  /** Start the station again from the door: a fresh clock and no marks. */
+  onRestart: () => void
   onLeave: () => void
 }) {
   const [page, setPage] = useState<Page>(initialPage)
@@ -97,7 +103,7 @@ export function StartMenu({
     <div className="absolute inset-0 z-40 flex justify-end bg-black/20 p-2" data-testid="start-menu" onClick={onClose}>
       <div ref={root} className="flex max-h-full min-w-0 flex-col" onClick={(event) => event.stopPropagation()}>
         {page === 'root' && (
-          <Win className="menu-col w-[172px]">
+          <Win className="menu-col w-[188px]">
             {onReady && (
               <NavItem testId="menu-ready" onClick={onReady}>
                 READY FOR QUESTIONS
@@ -106,23 +112,18 @@ export function StartMenu({
             <NavItem testId="menu-bag" onClick={() => go('bag')}>BAG</NavItem>
             <NavItem testId="hud-stem" onClick={onNotes}>NOTES</NavItem>
             <NavItem testId="hud-hint" onClick={onHint}>HINT</NavItem>
-            <NavItem testId="menu-marks" onClick={() => go('marks')}>MARKS</NavItem>
-            <NavItem testId="menu-sound" onClick={toggleSound}>SOUND {sound ? 'ON' : 'OFF'}</NavItem>
-            {pack.events?.some((e) => e.level) && (
-              <NavItem testId="menu-difficulty" onClick={toggleDifficulty}>
-                DIFFICULTY: {difficulty === 'hard' ? 'HARD' : 'NORMAL'}
-              </NavItem>
-            )}
-            <NavItem testId="menu-coach" onClick={cycleCoach}>
-              COACH: {coach === 'guided' ? 'GUIDED' : coach === 'objectives' ? 'OBJECTIVES' : 'OFF'}
+            <NavItem testId="menu-marks" onClick={() => go('marks')}>
+              MARKS {earnedMarks.length}/{pack.marks.length}
             </NavItem>
-            <NavItem testId="menu-names" onClick={toggleLabels}>NAMES {labels ? 'ON' : 'OFF'}</NavItem>
-            <NavItem testId="menu-lang" onClick={toggleLang}>PATIENT: {patientLang === 'zh' ? '中文' : 'ENGLISH'}</NavItem>
+            <div className="nav-gap" />
             <NavItem testId="menu-patient-model" onClick={() => go('patient')}>
               3D PATIENT: {patientModel === 'custom' ? 'MINE' : patientModel === 'anime' ? 'ANIME' : 'REALISTIC'}
             </NavItem>
-            <NavItem testId="hud-leave" onClick={() => go('leave')}>LEAVE</NavItem>
-            <NavItem testId="menu-exit" onClick={onClose}>EXIT</NavItem>
+            <NavItem testId="menu-settings" onClick={() => go('settings')}>SETTINGS</NavItem>
+            <div className="nav-gap" />
+            <NavItem testId="menu-restart" onClick={() => go('restart')}>RESTART STATION</NavItem>
+            <NavItem testId="hud-leave" onClick={() => go('leave')}>LEAVE STATION</NavItem>
+            <NavItem testId="menu-exit" onClick={onClose}>CLOSE</NavItem>
           </Win>
         )}
         {page === 'bag' && (
@@ -169,6 +170,30 @@ export function StartMenu({
             )}
             <input ref={file} type="file" accept=".vrm,.xroid,.glb" hidden data-testid="model-file" onChange={loadMine} />
             <NavItem onClick={() => go('root')}>BACK</NavItem>
+          </Win>
+        )}
+        {page === 'settings' && (
+          <Win title="SETTINGS" className="menu-col w-[220px] max-w-full">
+            <NavItem testId="menu-sound" onClick={toggleSound}>SOUND: {sound ? 'ON' : 'OFF'}</NavItem>
+            {pack.events?.some((e) => e.level) && (
+              <NavItem testId="menu-difficulty" onClick={toggleDifficulty}>
+                DIFFICULTY: {difficulty === 'hard' ? 'HARD' : 'NORMAL'}
+              </NavItem>
+            )}
+            <NavItem testId="menu-coach" onClick={cycleCoach}>
+              COACH: {coach === 'guided' ? 'GUIDED' : coach === 'objectives' ? 'OBJECTIVES' : 'OFF'}
+            </NavItem>
+            <p className="menu-note">Guided shows the step and what to do next; objectives, the step only; off, like the exam.</p>
+            <NavItem testId="menu-names" onClick={toggleLabels}>NAME TAGS: {labels ? 'ON' : 'OFF'}</NavItem>
+            <NavItem testId="menu-lang" onClick={toggleLang}>PATIENT SPEAKS: {patientLang === 'zh' ? '中文' : 'ENGLISH'}</NavItem>
+            <NavItem onClick={() => go('root')}>BACK</NavItem>
+          </Win>
+        )}
+        {page === 'restart' && (
+          <Win title="Restart this station?" className="menu-col w-[240px]">
+            <p className="menu-note">The clock, your marks and everything done so far are reset. You start again at the door.</p>
+            <NavItem testId="restart-yes" onClick={onRestart}>YES, RESTART</NavItem>
+            <NavItem testId="restart-no" onClick={() => go('root')}>NO</NavItem>
           </Win>
         )}
         {page === 'leave' && (

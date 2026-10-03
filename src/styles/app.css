@@ -497,6 +497,12 @@ button {
   color: #4a8a4a;
 }
 
+/* Between groups of a menu: a solid rule under a little space. */
+.nav-gap {
+  height: 6px;
+  border-bottom: 2px solid #b8b8c8;
+}
+
 .nav-need {
   display: block;
   font-size: 7px;
@@ -622,42 +628,107 @@ button {
   box-shadow: none;
 }
 
-/* The current phase of the station, under the HUD. Practice mode; START turns it off. */
+/*
+ * Practice mode, under the HUD: the current phase of the station (a cream card), and in guided mode the next thing to
+ * do (a green strip of its own). START > SETTINGS > COACH turns them off. VT323 needs ~18px to read comfortably.
+ */
 .objective {
   position: relative;
   flex: none;
-  margin: 34px 6px 2px;
+  margin: 34px 6px 4px;
   z-index: 19;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 4px 7px;
+  gap: 4px;
   pointer-events: none;
+}
+
+.objective-card,
+.objective-next {
   color: var(--ink);
-  background: #fff8d8;
   border: 2px solid var(--ink);
   border-radius: 4px;
+}
+
+.objective-card {
+  padding: 5px 8px 6px;
+  background: #fff8d8;
   box-shadow: inset 0 -2px 0 #e0d098;
 }
 
-.objective b {
+.objective-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-pixel);
-  font-size: 7px;
-  letter-spacing: 0.04em;
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.objective-head b {
+  flex: none;
+  font-weight: 400;
   color: #8a5a00;
 }
 
-.objective span {
-  font-family: var(--font-body);
-  font-size: 11px;
-  line-height: 1.3;
+.objective-title {
+  flex: 1;
+  min-width: 0;
 }
 
-.objective .objective-next {
+.objective-pips {
+  flex: none;
+  display: flex;
+  gap: 3px;
+}
+
+.objective-pips i {
+  width: 6px;
+  height: 6px;
+  border: 1px solid #8a5a00;
+}
+
+.objective-pips i[data-on] {
+  background: #8a5a00;
+}
+
+.objective-goal {
+  margin: 3px 0 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.05;
+}
+
+.objective-next {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 4px 8px 5px;
+  background: #dcf6df;
+  box-shadow: inset 0 -2px 0 #a8d8b0;
+}
+
+.objective-next b {
+  flex: none;
+  margin-top: 2px;
+  padding: 3px 4px 2px;
   font-family: var(--font-pixel);
-  font-size: 7px;
-  line-height: 1.5;
-  color: #1a6a38;
+  font-size: 8px;
+  font-weight: 400;
+  color: #fff;
+  background: #1a7a40;
+  border-radius: 2px;
+}
+
+.objective-next span {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.05;
+}
+
+.objective-next em {
+  font-style: normal;
+  color: #12602f;
 }
 
 /* Guided mode: a bouncing arrow over where to go next. */
