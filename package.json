@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource/press-start-2p": "^5.2.6",
     "@fontsource/vt323": "^5.2.6",
+    "@pixiv/three-vrm": "^3.5.5",
     "@tanstack/react-router": "^1.168.57",
     "@tanstack/react-start": "^1.168.60",
     "nitro": "^3.0.260903-beta",

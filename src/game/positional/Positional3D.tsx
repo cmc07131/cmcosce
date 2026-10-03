@@ -3,7 +3,8 @@ import { NextButton, NoteLine, StepStrip, useBench } from '../bench/core'
 import { CheckCard, benchMarks } from '../bench/kit'
 import type { BenchResult, PerformJob } from '../store'
 import { buzz, sfx } from '../sfx'
-import { ExamRoom, type Pose, type View } from './scene3d'
+import { useSettings } from '../settings'
+import { AVATARS, ExamRoom, type AvatarId, type Joint, type Pose, type View } from './scene3d'
 import { EPLEY_MARKS, HALLPIKE_MARKS, epleyRows, freshPos, hallpikeRows, headOverEnd, nystagmus, provoking, type Dx, type PosRun } from './model'
 
 /**
@@ -26,6 +27,7 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
   const [checked, setChecked] = useState(false)
   const [loading, setLoading] = useState(true)
   const [says, setSays] = useState<string | null>(null)
+  const avatar = useSettings((s) => s.avatar)
   const host = useRef<HTMLDivElement>(null)
   const room = useRef<ExamRoom | null>(null)
   const grab = useRef<Grab | null>(null)
@@ -38,7 +40,8 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
 
   useEffect(() => {
     if (!host.current) return
-    const r = new ExamRoom(host.current)
+    useSettings.getState().load()
+    const r = new ExamRoom(host.current, useSettings.getState().avatar)
     room.current = r
     if (import.meta.env.DEV) Object.assign(window, { __room: r, __posRun: runRef })
     r.ready.then(() => setLoading(false))
@@ -51,6 +54,17 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
       room.current = null
     }
   }, [])
+
+  /** Swap who plays her; the pose and every timer carry on. */
+  function cast(id: AvatarId) {
+    const r = room.current
+    useSettings.getState().setAvatar(id)
+    if (!r || r.avatar === id) return
+    setLoading(true)
+    r.setAvatar(id).then(() => {
+      if (r.avatar === id) setLoading(false)
+    })
+  }
 
   const say = (key: string, line: string) => {
     if (sim.current.said.has(key)) return
@@ -121,9 +135,9 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     r.applyPose()
   }
 
-  function near(r: ExamRoom, bone: string, x: number, y: number, px = 110) {
+  function near(r: ExamRoom, joint: Joint, x: number, y: number, px = 110) {
     sync(r)
-    const p = r.screenOfBone(bone)
+    const p = r.screenOfJoint(joint)
     return !!p && Math.hypot(p.x - x, p.y - y) <= px
   }
 
@@ -141,12 +155,12 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
     if (stage === 'Position') g.kind = 'slide'
     else if (stage === 'Roll') {
       g.kind = 'roll'
-      if (!near(r, 'Bip01_R_UpperArm', e.clientX, e.clientY, 130)) return feel('Take hold of her right shoulder and hip, and roll her toward you.')
+      if (!near(r, 'shoulder', e.clientX, e.clientY, 130)) return feel('Take hold of her right shoulder and hip, and roll her toward you.')
     }
     else if (stage === 'Sit up') g.kind = 'sit'
     else if (stage === 'Lie back') g.kind = 'drop'
     else if (stage !== 'Turn') return
-    if ((g.kind === 'head' || g.kind === 'drop' || g.kind === 'sit') && !near(r, 'Bip01_Head', e.clientX, e.clientY)) return feel('Put your hands on her head: hold it either side.')
+    if ((g.kind === 'head' || g.kind === 'drop' || g.kind === 'sit') && !near(r, 'head', e.clientX, e.clientY)) return feel('Put your hands on her head: hold it either side.')
     grab.current = g
     sfx.cursor()
   }
@@ -310,9 +324,18 @@ export default function Positional3D({ job, coach, onDone }: { job: PerformJob; 
                 <span className="absolute left-1 top-1 font-[Press_Start_2P,monospace] text-[6px] text-[#58f878]">VIDEO GOGGLES · REC</span>
               </div>
             )}
-            <a href="/models/patient/LICENSE-Rocketbox.md" target="_blank" rel="noreferrer" className="absolute bottom-1 right-1 text-[8px] text-[#5a6470] opacity-70" onPointerDown={(e) => e.stopPropagation()}>
-              3D avatar © Microsoft Rocketbox (MIT)
-            </a>
+            <div className="absolute right-1 top-1 flex gap-1" role="group" aria-label="Who plays the patient" onPointerDown={(e) => e.stopPropagation()}>
+              {AVATARS.map((a) => (
+                <button key={a.id} type="button" aria-pressed={avatar === a.id} data-testid={`pos3d-avatar-${a.id}`} onClick={() => cast(a.id)} className={`rounded border px-1.5 py-0.5 font-[Press_Start_2P,monospace] text-[6px] leading-none ${avatar === a.id ? 'border-[#181820] bg-[#181820] text-white' : 'border-[#5a6470]/60 bg-white/80 text-[#40404c]'}`}>
+                  {a.label.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            {AVATARS.filter((a) => a.id === avatar).map((a) => (
+              <a key={a.id} href={a.licence} target="_blank" rel="noreferrer" className="absolute bottom-1 right-1 text-[8px] text-[#5a6470] opacity-70" onPointerDown={(e) => e.stopPropagation()}>
+                {a.credit}
+              </a>
+            ))}
             {says && <p className="pointer-events-none absolute bottom-2 left-2 right-2 rounded bg-white/90 p-2 text-[11px] leading-snug text-[#202028] shadow">{says}</p>}
           </div>
           <div className="min-h-0 flex-[1_1_45%] overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
