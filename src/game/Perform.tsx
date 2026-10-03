@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
+import { Suspense, useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { HandSprite } from './HandSprite'
 import { CicoProcedure } from './cico/CicoProcedure'
 import { CordProcedure } from './cord/CordProcedure'
@@ -39,7 +39,9 @@ export function PerformStage({
   if (Procedure) {
     return (
       <BattleFrame job={job} onCancel={onCancel}>
-        <Procedure job={job} coach onDone={onDone} />
+        <Suspense fallback={<p className="io-lede p-3">Setting up the room…</p>}>
+          <Procedure job={job} coach onDone={onDone} />
+        </Suspense>
       </BattleFrame>
     )
   }

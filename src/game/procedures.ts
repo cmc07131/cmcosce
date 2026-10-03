@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react'
+import { lazy, type ComponentType } from 'react'
 import type { PerformKind } from '~/engine/schema'
 import type { BenchResult, PerformJob } from './store'
 import { CollesProcedure } from './colles/CollesProcedure'
@@ -19,7 +19,6 @@ import { ElbowProcedure } from './elbow/ElbowProcedure'
 import { ValsalvaProcedure } from './valsalva/ValsalvaProcedure'
 import { NewbornProcedure } from './newborn/NewbornProcedure'
 import { CprProcedure } from './cpr/CprProcedure'
-import { PositionalProcedure } from './positional/PositionalProcedure'
 import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
@@ -51,5 +50,6 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   valsalva: ValsalvaProcedure,
   newborn: NewbornProcedure,
   cpr: CprProcedure,
-  positional: PositionalProcedure,
+  // 3D: three.js and the patient model load only when this bench opens.
+  positional: lazy(() => import('./positional/Positional3D')),
 }
