@@ -297,6 +297,11 @@ export class ExamScene {
     this.motion = { id, t: 0, dur }
   }
 
+  /** Uncover parts of the body (0 covered … 1 bare): trunk, arms, legs and feet. */
+  expose(parts: { trunk: number; arms: number; legs: number }) {
+    this.rig?.expose(parts)
+  }
+
   /** A painful stimulus: she responds as her signs say. */
   stimulus() {
     this.stimT = 0
@@ -770,12 +775,26 @@ export class ExamScene {
 
   setView(view: View) {
     this.view = view
+    this.orbit = { yaw: 0, pitch: 0, zoom: 1 }
   }
 
   /** Close in on a landmark, from the side it faces. */
   focus(site: string) {
     this.focusSite = site
     this.view = 'focus'
+    this.orbit = { yaw: 0, pitch: 0, zoom: 1 }
+  }
+
+  /** Your own turn of the camera around what it looks at: drag sideways to go round, up and down to look from above. */
+  private orbit = { yaw: 0, pitch: 0, zoom: 1 }
+
+  orbitBy(dx: number, dy: number) {
+    this.orbit.yaw -= dx * 0.009
+    this.orbit.pitch = Math.max(-0.8, Math.min(1.1, this.orbit.pitch + dy * 0.006))
+  }
+
+  zoomBy(factor: number) {
+    this.orbit.zoom = Math.max(0.4, Math.min(2.4, this.orbit.zoom * factor))
   }
 
   private aimCamera() {
@@ -848,6 +867,14 @@ export class ExamScene {
           dist = 0.62 * H + 0.55
         }
     }
+    // Your orbit: round the vertical through the target, then up or down (never through the floor).
+    dir.normalize().applyAxisAngle(v(0, 1, 0), this.orbit.yaw)
+    const side = v(0, 1, 0).cross(dir)
+    if (side.lengthSq() > 1e-6) {
+      const lifted = dir.clone().applyAxisAngle(side.normalize(), -this.orbit.pitch)
+      if (lifted.y < 0.97 && lifted.y > -0.35) dir.copy(lifted)
+    }
+    dist *= this.orbit.zoom
     // Never from below the floor or behind the wall.
     if (dir.y < -0.2) dir.y = -0.2
     this.wantLook.copy(target)

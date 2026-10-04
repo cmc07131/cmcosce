@@ -8,6 +8,7 @@ import { useSettings } from '../settings'
 import { buzz, sfx } from '../sfx'
 import { CORE_TOOLS, SAYS, sayOf, toolById, TOOLS, type SayDef } from './catalog'
 import { Illustration, illustrationFor, type IllustrationKind } from './Illustration'
+import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from './hints'
 import { advance, freshProgress, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, type Limb, type Posture, type View } from './scene'
 import { regionOf, siteLabel, siteOf, spotLabel } from './sites'
@@ -103,7 +104,11 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const progress = useRef(new Map<string, Progress>())
   const flags = useRef({ touched: false, gloved: false })
   const timers = useRef<number[]>([])
-  const [panel, setPanel] = useState<{ kind: 'region'; label: string; spots: string[]; spot: string } | { kind: 'talk' } | null>(null)
+  const [panel, setPanel] = useState<{ kind: 'region'; label: string; spots: string[]; spot: string } | { kind: 'talk' } | { kind: 'expose' } | null>(null)
+  const [bare, setBare] = useState({ trunk: false, arms: false, legs: false })
+  /** Practice help: which item the hint is about (counted among those not yet found), and the button to press. */
+  const [hint, setHint] = useState<number | null>(null)
+  const [glowId, setGlowId] = useState<string | null>(null)
   const [moving, setMoving] = useState<{ limb: Limb; start: Record<string, number>; value: number } | null>(null)
   const [view, setView] = useState<View>('whole')
   const [loading, setLoading] = useState(true)
@@ -141,6 +146,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     if (btn !== 'b') return
     sfx.back()
     if (panel) setPanel(null)
+    else if (hint !== null) setHint(null)
     else onClose?.()
   })
 
@@ -234,18 +240,50 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   /* ---------------------------------------------------------------- hands on: tap the body, then choose */
 
-  // A tap on the body opens that part of it: where exactly, and what to do there. No aiming, no holding, no dragging.
-  const tapAt = useRef<{ x: number; y: number } | null>(null)
+  // A tap on the body opens that part of it: where exactly, and what to do there. Drag to turn the camera round her;
+  // pinch (or scroll) to zoom.
+  const pointers = useRef(new Map<number, { x: number; y: number }>())
+  const gesture = useRef<{ x0: number; y0: number; x: number; y: number; moved: boolean; pinch: number } | null>(null)
 
   function down(e: React.PointerEvent) {
-    tapAt.current = { x: e.clientX, y: e.clientY }
+    try {
+      ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    } catch {
+      /* fine */
+    }
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY })
+    const pts = [...pointers.current.values()]
+    if (pts.length === 1) gesture.current = { x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY, moved: false, pinch: 0 }
+    else if (gesture.current && pts.length === 2) {
+      gesture.current.moved = true
+      gesture.current.pinch = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)
+    }
+  }
+
+  function move(e: React.PointerEvent) {
+    const s = scene.current
+    const g = gesture.current
+    if (!s || !g || !pointers.current.has(e.pointerId)) return
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY })
+    const pts = [...pointers.current.values()]
+    if (pts.length >= 2) {
+      const d = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)
+      if (g.pinch > 0 && d > 0) s.zoomBy(g.pinch / d)
+      g.pinch = d
+      return
+    }
+    if (Math.hypot(e.clientX - g.x0, e.clientY - g.y0) > 8) g.moved = true
+    if (g.moved) s.orbitBy(e.clientX - g.x, e.clientY - g.y)
+    g.x = e.clientX
+    g.y = e.clientY
   }
 
   function up(e: React.PointerEvent) {
     const s = scene.current
-    const t = tapAt.current
-    tapAt.current = null
-    if (!s || loading || !t || Math.hypot(e.clientX - t.x, e.clientY - t.y) > 14) return
+    const g = gesture.current
+    pointers.current.delete(e.pointerId)
+    if (pointers.current.size === 0) gesture.current = null
+    if (!s || loading || !g || g.moved) return
     const at = s.pick(e.clientX, e.clientY, true)
     if (!at?.site) {
       setPanel(null)
@@ -262,6 +300,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     if (!r) return
     sfx.cursor()
     setMoving(null)
+    setGlowId(null)
     setPanel({ kind: 'region', label: r.label, spots: r.sites, spot: site })
     s.focus(site)
     setView('focus')
@@ -271,6 +310,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     const s = scene.current
     if (!s || panel?.kind !== 'region') return
     sfx.select()
+    setGlowId(null)
     const site = panel.spot
     if (toolId === 'press' && PAIN_SITES.test(site)) s.stimulus()
     handle({ tool: toolId, site }, s.siteWorld(site) ?? undefined)
@@ -279,6 +319,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   function startMove() {
     const s = scene.current
     if (!s || panel?.kind !== 'region') return
+    setGlowId(null)
     const limb = s.limbAt(panel.spot)
     if (!limb) return
     setMoving({ limb, start: s.angles(), value: Math.round(s.angle(limb.key)) })
@@ -308,8 +349,89 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   function gloves() {
     sfx.select()
+    setGlowId(null)
     handle({ tool: 'gloves' })
   }
+
+  /** Uncover (or cover) a part of the body. The first time, it is asking them to undress for you. */
+  function toggleBare(part: 'trunk' | 'arms' | 'legs' | 'none') {
+    const next = part === 'none' ? { trunk: false, arms: false, legs: false } : { ...bare, [part]: !bare[part] }
+    setBare(next)
+    scene.current?.expose({ trunk: next.trunk ? 1 : 0, arms: next.arms ? 1 : 0, legs: next.legs ? 1 : 0 })
+    sfx.select()
+    setGlowId(null)
+    if (part !== 'none' && next[part]) handle({ tool: 'say', say: 'expose' })
+    else setNote({ text: part === 'none' ? 'Covered up again.' : 'Covered.', tone: 'normal' })
+  }
+
+  /* ---------------------------------------------------------------- practice help */
+
+  const left = items.filter((i) => !i.option.isTrap && !done.has(i.option.id))
+  const hinted = hint === null || left.length === 0 ? null : left[hint % left.length]
+  const hintAct = hinted ? nextAct(hinted.plan, progress.current.get(hinted.option.id) ?? freshProgress(hinted.plan)) : null
+
+  function showHint() {
+    sfx.cursor()
+    setHint((h) => (h === null ? 0 : h))
+  }
+
+  /** Where a joint is moved from: a spot whose drag changes that angle. */
+  function spotForJoint(key: string): string | null {
+    const s = scene.current
+    if (!s) return null
+    const side = key.match(/-(R|L)$/)?.[1] ?? ''
+    const base = key.replace(/-(R|L)$/, '')
+    const tries: Record<string, string[]> = { knee: ['knee', 'shin'], hipflex: ['thigh', 'foot', 'knee'], hiprot: ['foot'], shoulderabd: ['arm'], shoulderrot: ['hand'], elbow: ['forearm', 'hand'], neckyaw: ['head'] }
+    for (const b of tries[base] ?? []) {
+      const id = side ? `${b}-${side}` : b
+      const limb = s.hasSite(id) ? s.limbAt(id) : null
+      if (limb && (limb.key === key || (limb.kneeWithHip && base === 'knee'))) return id
+    }
+    return null
+  }
+
+  /** "Take me there": the step that has to come first, opened, with its button lit. */
+  function takeMeThere() {
+    const s = scene.current
+    if (!s || !hintAct) return
+    const state = { posture: s.posture, joints: s.angles(), flags: [...(flags.current.touched ? [] : ['untouched']), ...(flags.current.gloved ? ['gloved'] : [])] }
+    const need = unmet(hintAct, state)
+    const glow = (id: string, open?: () => void) => {
+      open?.()
+      window.setTimeout(() => setGlowId(id), 30)
+    }
+    const posture = need.find((c) => SAY_FOR_POSTURE[c])
+    if (posture) return glow(`exam3d-say-${SAY_FOR_POSTURE[posture]}`, () => setPanel({ kind: 'talk' }))
+    if (need.includes('gloved')) return glow('exam3d-gloves', () => setPanel(null))
+    const joint = need.find((c) => c.includes('='))
+    if (joint) {
+      const spot = spotForJoint(joint.split('=')[0])
+      if (spot) return glow('exam3d-do-move', () => openRegion(spot))
+    }
+    if (hintAct.tool === 'say') return glow(`exam3d-say-${hintAct.targets[0]}`, () => setPanel({ kind: 'talk' }))
+    if (hintAct.tool === 'gloves') return glow('exam3d-gloves', () => setPanel(null))
+    if (hintAct.tool === 'move') {
+      const m = (hintAct.targets[0] ?? '').match(/^(\w+)(?:-(R|L))?(?::(\w+))?$/)
+      const key = m ? `${m[1] === 'hip' ? (m[3] === 'rot' ? 'hiprot' : 'hipflex') : m[1] === 'shoulder' ? (m[3] === 'rot' ? 'shoulderrot' : 'shoulderabd') : m[1] === 'neck' ? 'neckyaw' : m[1]}${m[2] ? `-${m[2]}` : ''}` : ''
+      const spot = spotForJoint(key)
+      if (spot) return glow('exam3d-do-move', () => openRegion(spot))
+      return
+    }
+    const spot = sitesFor(hintAct, (id) => s.hasSite(id))[0]
+    if (spot) glow(`exam3d-do-${hintAct.tool}`, () => openRegion(spot))
+  }
+
+  function reveal() {
+    if (!hinted) return
+    setNote({ text: `${hinted.option.label} — ${hinted.option.detail ?? ''}`, tone: 'hint' })
+  }
+
+  // Bring the lit button into view.
+  useEffect(() => {
+    if (glowId) document.querySelector(`[data-testid="${glowId}"]`)?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' })
+  }, [glowId, panel])
+
+  const glowing = (id: string) => (glowId === id ? ' ring-4 ring-[#ff8a00] animate-pulse' : '')
 
   function setViewTo(v: View) {
     setView(v)
@@ -344,9 +466,9 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
           </span>
         </div>
         <div className="relative mx-3 min-h-[220px] flex-[1_1_46%] overflow-hidden rounded-md border-[3px] border-[#181820] bg-[#dfe5ea]" style={{ touchAction: 'none' }}>
-          <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerUp={up} />
+          <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={(e) => scene.current?.zoomBy(e.deltaY > 0 ? 1.1 : 0.9)} />
           {loading && <p className="absolute inset-0 grid place-items-center font-[Press_Start_2P,monospace] text-[8px] text-[#40404c]">Bringing {name} in…</p>}
-          <div className="absolute left-1 top-1 flex max-w-[calc(100%-8px)] flex-wrap gap-1" onPointerDown={(e) => e.stopPropagation()}>
+          <div className="absolute left-1 top-1 flex max-w-[calc(100%-84px)] flex-wrap gap-1" onPointerDown={(e) => e.stopPropagation()}>
             {VIEWS.map((v) => (
               <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-white' : 'border-[#5a6470]/60 bg-white/90 text-[#30303c]'}`}>
                 {v.label}
@@ -358,7 +480,10 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
               <Illustration kind={illus.kind} finding={illus.text} />
             </div>
           )}
-          {!panel && !loading && <p className="pointer-events-none absolute bottom-1 left-2 rounded bg-white/85 px-1.5 py-0.5 text-[12px] text-[#30303c]">Tap the body to examine it</p>}
+          {!panel && !loading && <p className="pointer-events-none absolute bottom-1 left-2 rounded bg-white/85 px-1.5 py-0.5 text-[12px] text-[#30303c]">Tap the body to examine · drag to turn · pinch to zoom</p>}
+          <button type="button" data-testid="exam3d-hint" onPointerDown={(e) => e.stopPropagation()} onClick={showHint} className="absolute right-1 top-1 rounded-md border-2 border-[#181820] bg-[#ffe9a8] px-2 py-1 text-[14px] leading-none">
+            💡 Hint
+          </button>
           {credit &&
             (credit.href ? (
               <a href={credit.href} target="_blank" rel="noreferrer" className="absolute bottom-1 right-1 text-[8px] text-[#5a6470] opacity-70" onPointerDown={(e) => e.stopPropagation()}>
@@ -374,6 +499,44 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
         </p>
 
         <div className="min-h-0 flex-[1_1_44%] overflow-auto px-3 pb-3 pt-2" style={{ scrollbarGutter: 'stable' }}>
+          {hint !== null && (
+            <div className="mb-2 rounded-md border-2 border-[#c0a040] bg-[#fff8d8] p-2" data-testid="exam3d-hintcard">
+              {hinted && hintAct ? (
+                <>
+                  <p className="m-0 font-[Press_Start_2P,monospace] text-[7px] text-[#8a5a00]">NEXT TO FIND</p>
+                  <p className="m-0 mt-1 text-[15px] leading-snug">
+                    <b>{hinted.option.label}</b>
+                  </p>
+                  <p className="m-0 mt-1 text-[15px] leading-snug" data-testid="exam3d-hint-how">
+                    {actWords(hintAct)}
+                  </p>
+                  {(() => {
+                    const s = scene.current
+                    const need = s ? unmet(hintAct, { posture: s.posture, joints: s.angles(), flags: flags.current.gloved ? ['gloved'] : [] }) : []
+                    return need.length > 0 ? <p className="m-0 mt-1 text-[13px] text-[#8a5a00]">First: {need.map(condWords).join(', ')}.</p> : null
+                  })()}
+                  <div className="mt-2 grid grid-cols-2 gap-1.5">
+                    <button type="button" data-testid="exam3d-hint-go" onClick={takeMeThere} className={`${big} border-[#181820] bg-white`}>
+                      👉 Take me there
+                    </button>
+                    <button type="button" data-testid="exam3d-hint-reveal" onClick={reveal} className={`${big} border-[#5a6470] bg-white`}>
+                      🔎 Reveal the finding
+                    </button>
+                    <button type="button" onClick={() => (setHint((h) => (h ?? 0) + 1), setGlowId(null))} className={`${big} border-[#5a6470] bg-white`}>
+                      ⏭ Next hint
+                    </button>
+                    <button type="button" onClick={() => (setHint(null), setGlowId(null))} className={`${big} border-[#5a6470] bg-white`}>
+                      ✕ Hide
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <p className="m-0 text-[15px]">
+                  Everything is found. Tap DONE EXAMINING. <button type="button" className="underline" onClick={() => setHint(null)}>Hide</button>
+                </p>
+              )}
+            </div>
+          )}
           {panel?.kind === 'region' && (
             <div data-testid="exam3d-region">
               <div className="mb-1 flex items-center justify-between">
@@ -397,7 +560,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
               <p className="m-0 mb-1 font-[Press_Start_2P,monospace] text-[7px] text-[#8a5a00]">DO · {spotLabel(panel.spot).toUpperCase()}</p>
               <div className="grid grid-cols-2 gap-1.5">
                 {handsOn.map((t) => (
-                  <button key={t.id} type="button" data-testid={`exam3d-do-${t.id}`} onClick={() => act(t.id)} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white`}>
+                  <button key={t.id} type="button" data-testid={`exam3d-do-${t.id}`} onClick={() => act(t.id)} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white${glowing(`exam3d-do-${t.id}`)}`}>
                     <span className="text-[20px] leading-none" aria-hidden>
                       {t.icon}
                     </span>
@@ -405,7 +568,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
                   </button>
                 ))}
                 {limbHere && !moving && (
-                  <button type="button" data-testid="exam3d-do-move" onClick={startMove} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white`}>
+                  <button type="button" data-testid="exam3d-do-move" onClick={startMove} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white${glowing('exam3d-do-move')}`}>
                     <span className="text-[20px] leading-none" aria-hidden>
                       🤲
                     </span>
@@ -452,13 +615,13 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
                         <div key={s.id} className="flex items-stretch gap-1.5">
                           <span className="flex-1 self-center text-[15px] leading-tight">“{s.label}”</span>
                           {(['R', 'L'] as const).map((side) => (
-                            <button key={side} type="button" data-testid={`exam3d-say-${s.id}-${side}`} onClick={() => ask(s, side)} className={`${big} border-[#5a6470] bg-white text-center`}>
+                            <button key={side} type="button" data-testid={`exam3d-say-${s.id}-${side}`} onClick={() => (setGlowId(null), ask(s, side))} className={`${big} border-[#5a6470] bg-white text-center${glowing(`exam3d-say-${s.id}-${side}`)}`}>
                               {side === 'R' ? 'Right' : 'Left'}
                             </button>
                           ))}
                         </div>
                       ) : (
-                        <button key={s.id} type="button" data-testid={`exam3d-say-${s.id}`} onClick={() => ask(s)} className={`${big} border-[#5a6470] bg-white`}>
+                        <button key={s.id} type="button" data-testid={`exam3d-say-${s.id}`} onClick={() => (setGlowId(null), ask(s))} className={`${big} border-[#5a6470] bg-white${glowing(`exam3d-say-${s.id}`)}`}>
                           “{s.label}”
                         </button>
                       ),
@@ -466,6 +629,34 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {panel?.kind === 'expose' && (
+            <div data-testid="exam3d-exposepanel">
+              <div className="mb-1 flex items-center justify-between">
+                <b className="font-[Press_Start_2P,monospace] text-[9px]">EXPOSE</b>
+                <button type="button" className="rounded border-2 border-[#5a6470] bg-white px-2 py-1 text-[13px]" onClick={() => setPanel(null)}>
+                  ✕ Close
+                </button>
+              </div>
+              <div className="grid grid-cols-1 gap-1.5">
+                {(
+                  [
+                    ['trunk', 'Chest and abdomen'],
+                    ['arms', 'Arms'],
+                    ['legs', 'Legs and feet'],
+                  ] as const
+                ).map(([part, label]) => (
+                  <button key={part} type="button" data-testid={`exam3d-bare-${part}`} aria-pressed={bare[part]} onClick={() => toggleBare(part)} className={`${big} ${bare[part] ? 'border-[#181820] bg-[#ffe9a8]' : 'border-[#5a6470] bg-white'}`}>
+                    {bare[part] ? '✓ ' : ''}
+                    {label}
+                  </button>
+                ))}
+                <button type="button" onClick={() => toggleBare('none')} className={`${big} border-[#5a6470] bg-white`}>
+                  Cover everything up
+                </button>
+              </div>
             </div>
           )}
 
@@ -477,7 +668,13 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
                 </span>
                 Talk to the patient, or ask them to move
               </button>
-              <button type="button" data-testid="exam3d-gloves" onClick={gloves} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white`}>
+              <button type="button" data-testid="exam3d-expose" onClick={() => (sfx.cursor(), setPanel({ kind: 'expose' }))} className={`${big} col-span-2 flex items-center gap-2 border-[#5a6470] bg-white`}>
+                <span className="text-[20px]" aria-hidden>
+                  👕
+                </span>
+                Expose the patient (with a sheet for dignity)
+              </button>
+              <button type="button" data-testid="exam3d-gloves" onClick={gloves} className={`${big} flex items-center gap-2 border-[#5a6470] bg-white${glowing('exam3d-gloves')}`}>
                 <span className="text-[20px]" aria-hidden>
                   🧤
                 </span>

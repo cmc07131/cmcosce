@@ -49,3 +49,17 @@ test('exam3d: either way does it; joint movements; the tools a station needs', (
   assert.ok(!run('move knee-R:flex', [{ tool: 'move', move: 'hip-R:flex', state: lying }]))
   assert.deepEqual(toolsOf([parseDo('look hands | say hands-out'), parseDo('percuss flanks > feel liver')]).sort(), ['feel', 'look', 'percuss', 'say'])
 })
+
+test('exam3d: hints say the next act in words, and what must come first', async () => {
+  const { actWords, nextAct, unmet } = await import('./hints')
+  const plan = parseDo('feel wrist-L & press pulp-L,nails-L')
+  let progress = freshProgress(plan)
+  assert.equal(actWords(nextAct(plan, progress)!), 'Feel: the left radial pulse')
+  ;({ progress } = advance(plan, progress, ev('feel', 'wrist-L')))
+  assert.equal(actWords(nextAct(plan, progress)!), 'Press: the left fingertip pulp or the left nails')
+  assert.equal(actWords(parseDo("say ok-sign")[0][0][0]), "Ask: “Make an 'OK' sign”")
+  const lachman = parseDo('feel shin-R @knee-R=15..35')[0][0][0]
+  assert.equal(actWords(lachman), 'Feel: the right shin (with the right knee bent 15–35°)')
+  assert.deepEqual(unmet(lachman, lying), ['knee-R=15..35'])
+  assert.equal(actWords(parseDo('look hands')[0][0][0]), 'Look: the hands')
+})

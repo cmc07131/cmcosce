@@ -77,6 +77,11 @@ export type Rig = {
   /** Every mesh of the body, for picking where a finger lands. */
   meshes: THREE.Mesh[]
   face(e: Eyes): void
+  /**
+   * Uncover parts of the body (0 covered … 1 bare). On the realistic models the clothes there take her skin tone;
+   * VRM models keep their clothes (their bodies are not modelled underneath).
+   */
+  expose(parts: { trunk: number; arms: number; legs: number }): void
   /** After posing, each frame: hair and clothes that swing; material animation. */
   tick(dt: number): void
   /** Let swinging parts come to rest in the current pose. */
@@ -163,6 +168,7 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
   obj.updateMatrixWorld(true)
 
   const face = skin as THREE.SkinnedMesh | null
+  const exposure = exposable(meshes)
   const shape = (re: RegExp) => Object.entries(face?.morphTargetDictionary ?? {}).find(([k]) => re.test(k))?.[1]
   const S = {
     blinkL: shape(/EyeBlinkLeft/),
@@ -232,12 +238,100 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
       set(S.cheeks, e.cheeks ?? 0)
       set(S.jaw, e.mouth ?? 0)
     },
+    expose: (parts) => exposure.set(parts.trunk, parts.arms, parts.legs),
     tick: () => {},
     settle: () => {},
     dispose: () => disposeTree(obj),
   }
   measure(rig, false)
   return rig
+}
+
+/**
+ * Let the clothes on a Rocketbox body give way to skin, part by part: each vertex is tagged by the bone that moves it
+ * most (trunk, arms, legs and feet; hands, head and neck are skin already), and the body material blends its colour to
+ * a skin tone sampled from the patient's own face where that part is uncovered.
+ */
+function exposable(meshes: THREE.Mesh[]) {
+  const on = new THREE.Vector3(0, 0, 0)
+  const tone = new THREE.Color('#d9a68a')
+  const region = (name: string) =>
+    /Pelvis|Spine|Clavicle/.test(name) ? 1 : /UpperArm|Forearm/.test(name) ? 2 : /Thigh|Calf|Foot|Toe/.test(name) ? 3 : 0
+  for (const mesh of meshes) {
+    const m = mesh as THREE.SkinnedMesh
+    if (!m.isSkinnedMesh) continue
+    const idx = m.geometry.attributes.skinIndex
+    const wgt = m.geometry.attributes.skinWeight
+    const tags = new Float32Array(idx.count)
+    for (let i = 0; i < idx.count; i++) {
+      let best = 0
+      let bestW = -1
+      for (let k = 0; k < 4; k++) {
+        const w = wgt.getComponent(i, k)
+        if (w > bestW) {
+          bestW = w
+          best = idx.getComponent(i, k)
+        }
+      }
+      tags[i] = region(m.skeleton.bones[best]?.name ?? '')
+    }
+    m.geometry.setAttribute('exposeRegion', new THREE.BufferAttribute(tags, 1))
+    for (const mat of (Array.isArray(m.material) ? m.material : [m.material]) as THREE.MeshStandardMaterial[]) {
+      if (!/body/i.test(mat.name)) continue
+      // Her skin tone, from the face texture once it has loaded (the middle of the cheek).
+      const head = (Array.isArray(m.material) ? m.material : [m.material]).find((x) => /head/i.test(x.name)) as THREE.MeshStandardMaterial | undefined
+      sampleSkin(head?.map ?? null, tone)
+      mat.onBeforeCompile = (shader) => {
+        shader.uniforms.exposeOn = { value: on }
+        shader.uniforms.skinTone = { value: tone }
+        shader.vertexShader = shader.vertexShader
+          .replace('#include <common>', '#include <common>\nattribute float exposeRegion;\nuniform vec3 exposeOn;\nvarying float vExpose;')
+          .replace(
+            '#include <begin_vertex>',
+            '#include <begin_vertex>\nvExpose = exposeRegion < 0.5 ? 0.0 : exposeRegion < 1.5 ? exposeOn.x : exposeRegion < 2.5 ? exposeOn.y : exposeOn.z;',
+          )
+        shader.fragmentShader = shader.fragmentShader
+          .replace('#include <common>', '#include <common>\nuniform vec3 skinTone;\nvarying float vExpose;')
+          .replace('#include <map_fragment>', '#include <map_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, skinTone, vExpose);')
+      }
+      mat.needsUpdate = true
+    }
+  }
+  return { set: (trunk: number, arms: number, legs: number) => on.set(trunk, arms, legs) }
+}
+
+/** The colour of the middle of the cheek on a face texture, once its image is there (linear, as shaders want it). */
+function sampleSkin(map: THREE.Texture | null, into: THREE.Color) {
+  const read = () => {
+    const img = map?.image as (CanvasImageSource & { width: number; height: number }) | undefined
+    if (!img?.width) return false
+    try {
+      const c = document.createElement('canvas')
+      c.width = c.height = 8
+      const g = c.getContext('2d')
+      if (!g) return true
+      // Rocketbox face maps: the cheek sits a little below and to the side of the centre.
+      g.drawImage(img, img.width * 0.3, img.height * 0.52, img.width * 0.08, img.height * 0.08, 0, 0, 8, 8)
+      const d = g.getImageData(0, 0, 8, 8).data
+      let r = 0
+      let gr = 0
+      let b = 0
+      for (let i = 0; i < d.length; i += 4) {
+        r += d[i]
+        gr += d[i + 1]
+        b += d[i + 2]
+      }
+      const n = d.length / 4
+      into.setRGB(r / n / 255, gr / n / 255, b / n / 255, THREE.SRGBColorSpace)
+    } catch {
+      // A tainted canvas or no 2D context: keep the default tone.
+    }
+    return true
+  }
+  if (!read()) {
+    const id = window.setInterval(() => read() && window.clearInterval(id), 300)
+    window.setTimeout(() => window.clearInterval(id), 15000)
+  }
 }
 
 /** Physically based skin, cloth and hair from Rocketbox's Phong materials. */
@@ -355,6 +449,7 @@ export async function loadVrm(url: string): Promise<Rig> {
     },
     // What `vrm.update` does, less the humanoid and look-at updates, which would undo the posing: constraints, hair,
     // and the materials (MToon only hands its alpha cut-off to the shader here; without it, cut-out hair goes black).
+    expose: () => {},
     tick: (dt) => {
       vrm.nodeConstraintManager?.update()
       vrm.springBoneManager?.update(dt)
