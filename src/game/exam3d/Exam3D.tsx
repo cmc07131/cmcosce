@@ -11,7 +11,7 @@ import { Illustration, illustrationFor, type IllustrationKind } from './Illustra
 import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from './hints'
 import { eventOf, offerOf, type Offer } from './manoeuvres'
 import { advance, freshProgress, matches, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
-import { ExamScene, type Limb, type Posture, type View } from './scene'
+import { ExamScene, HANDS, type Limb, type Posture, type View } from './scene'
 import { regionOf, siteLabel, siteOf, spotLabel } from './sites'
 import { bowel, doppler, fork, heartbeat, percussNote } from './sounds'
 
@@ -144,7 +144,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     const look = body.drape ? 'realistic' : useSettings.getState().patientModel
     const s = new ExamScene(host.current, kind, look, body.posture ?? 'supine', body)
     scene.current = s
-    if (import.meta.env.DEV) Object.assign(window, { __exam: s })
+    if (import.meta.env.DEV) Object.assign(window, { __exam: s, __hands: HANDS })
     s.ready.then(() => {
       for (const [key, deg] of Object.entries(body.holds ?? {})) {
         s.held[key] = deg
