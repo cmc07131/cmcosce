@@ -48,6 +48,19 @@ export const bodySchema = z.object({
   unconscious: z.boolean().optional(),
   posturing: z.enum(['decorticate', 'decerebrate', 'localises']).optional(),
   trendelenburg: z.enum(['R', 'L']).optional(),
+  /** Anterior interosseous nerve palsy on this side: the OK sign is a flat pinch. */
+  ain: z.enum(['R', 'L']).optional(),
+  /** Bending this elbow up kinks the artery: the hand goes pale. */
+  kinkOnFlex: z.enum(['R', 'L']).optional(),
+  /** Bruises seen once the skin there is exposed (site ids). */
+  bruise: z.array(z.string()).optional(),
+  /**
+   * A focused examination: only these manoeuvres are offered, each animated (see game/exam3d/manoeuvres.ts):
+   * `pulse@wrist-L`, `ok-sign`… Taps elsewhere on the body are not part of the examination.
+   */
+  focus: z.array(z.string()).optional(),
+  /** Joint angles the patient holds (degrees), e.g. a painful elbow kept bent: `{ "elbow-L": 70 }`. */
+  holds: z.record(z.string(), z.number()).optional(),
 })
 
 const optionSchema = z.object({

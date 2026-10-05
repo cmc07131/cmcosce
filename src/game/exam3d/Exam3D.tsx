@@ -9,7 +9,8 @@ import { buzz, sfx } from '../sfx'
 import { CORE_TOOLS, SAYS, sayOf, toolById, TOOLS, type SayDef } from './catalog'
 import { Illustration, illustrationFor, type IllustrationKind } from './Illustration'
 import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from './hints'
-import { advance, freshProgress, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
+import { eventOf, offerOf, type Offer } from './manoeuvres'
+import { advance, freshProgress, matches, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, type Limb, type Posture, type View } from './scene'
 import { regionOf, siteLabel, siteOf, spotLabel } from './sites'
 import { bowel, doppler, fork, heartbeat, percussNote } from './sounds'
@@ -23,6 +24,13 @@ import { bowel, doppler, fork, heartbeat, percussNote } from './sounds'
 type Props = { pack: Pack; action: Action; title: string; spent: string[]; onClose?: () => void; onOption: (optionId: string) => void }
 
 type Note = { text: string; tone: 'finding' | 'normal' | 'warn' | 'hint' }
+
+/** A focused examination looks only at the arms and hands. */
+const FOCUS_VIEWS: { id: View; label: string }[] = [
+  { id: 'focus', label: 'ARM' },
+  { id: 'hands', label: 'HANDS' },
+  { id: 'whole', label: 'PATIENT' },
+]
 
 const VIEWS: { id: View; label: string }[] = [
   { id: 'whole', label: 'WHOLE' },
@@ -94,6 +102,10 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const kind = patientKind({ role: patient?.role, name: patient?.displayName })
   const name = patient?.displayName ?? 'The patient'
   const body = pack.body ?? {}
+  // A focused examination: only these manoeuvres, each shown being done; the rest of the body is not part of it.
+  const offers = useMemo(() => (body.focus ?? []).map(offerOf).filter((o): o is Offer => !!o), [body.focus])
+  const focused = offers.length > 0
+  const focusSide: 'R' | 'L' = body.ain ?? body.kinkOnFlex ?? (offers.find((o) => o.site)?.site?.endsWith('-R') ? 'R' : 'L')
   const tools = useMemo(() => {
     const need = new Set([...CORE_TOOLS, ...toolsOf(items.map((i) => i.plan))])
     return TOOLS.filter((t) => need.has(t.id))
@@ -109,11 +121,18 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   /** Practice help: which item the hint is about (counted among those not yet found), and the button to press. */
   const [hint, setHint] = useState<number | null>(null)
   const [glowId, setGlowId] = useState<string | null>(null)
+  /** A manoeuvre being shown: nothing else until it is done. */
+  const [busy, setBusy] = useState(false)
   const [moving, setMoving] = useState<{ limb: Limb; start: Record<string, number>; value: number } | null>(null)
   const [view, setView] = useState<View>('whole')
   const [loading, setLoading] = useState(true)
   const [credit, setCredit] = useState<Credit | null>(null)
-  const [note, setNote] = useState<Note>({ text: `${name} is on the couch. Tap the part of the body you want to examine, or talk to them.`, tone: 'hint' })
+  const [note, setNote] = useState<Note>({
+    text: focused
+      ? `${name} is holding his injured ${focusSide === 'L' ? 'left' : 'right'} arm still. Tap the arm or either hand to examine it.`
+      : `${name} is on the couch. Tap the part of the body you want to examine, or talk to them.`,
+    tone: 'hint',
+  })
   const [illus, setIllus] = useState<{ kind: IllustrationKind; text: string } | null>(null)
   const [found, setFound] = useState<string[]>([])
   const done = new Set([...spent, ...found])
@@ -127,6 +146,16 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     scene.current = s
     if (import.meta.env.DEV) Object.assign(window, { __exam: s })
     s.ready.then(() => {
+      for (const [key, deg] of Object.entries(body.holds ?? {})) {
+        s.held[key] = deg
+        const side = key.match(/^elbow-(R|L)$/)?.[1] as 'R' | 'L' | undefined
+        if (side) s.restElbow[side] = deg
+      }
+      // A focused examination starts on the injured arm.
+      if (focused) {
+        s.focus(`forearm-${focusSide}`)
+        setView('focus')
+      }
       setLoading(false)
       setCredit(s.credit)
     })
@@ -197,7 +226,15 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     } else {
       // Part of something longer. Asked to do something, they respond as the case says (their palsy shows the first
       // time); hands on, you are told what you did, and what it means once the whole manoeuvre is done.
-      const text = partial && ev.tool === 'say' ? partial.option.detail || acknowledge(ev, s.signs.unconscious) : partial ? acknowledge(ev, s.signs.unconscious) : normal(ev, s.signs.unconscious)
+      // Done again: the same finding as before, never the generic answer (which a palsy would contradict).
+      const again = partial ? null : items.find((it) => done.has(it.option.id) && it.plan.flat(2).some((act) => matches(act, event)))
+      const text = again
+        ? again.option.detail || again.option.label
+        : partial && ev.tool === 'say'
+          ? partial.option.detail || acknowledge(ev, s.signs.unconscious)
+          : partial
+            ? acknowledge(ev, s.signs.unconscious)
+            : normal(ev, s.signs.unconscious)
       setNote({ text, tone: 'normal' })
       const drawn = draped(site)
       if (drawn) setIllus({ kind: drawn, text: '' })
@@ -290,8 +327,47 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       setNote({ text: 'Tap the part of the body you want to examine.', tone: 'hint' })
       return
     }
+    if (focused && offersIn(at.site).length === 0) {
+      setNote({ text: 'Not part of this examination: stay with the injured arm and the hand.', tone: 'hint' })
+      return
+    }
     openRegion(at.site)
   }
+
+  /** The manoeuvres offered in the part of the body a site belongs to (asking him to move the hand goes with the hand). */
+  function offersIn(site: string): Offer[] {
+    const s = scene.current
+    const r = s ? regionOf(site, (id) => s.hasSite(id)) : null
+    if (!r) return []
+    const here = offers.filter((o) => o.site && r.sites.includes(o.site))
+    const hand = /hand/i.test(r.label) && site.endsWith(`-${focusSide}`)
+    return hand ? [...here, ...offers.filter((o) => !o.site)] : here
+  }
+
+  /** Do a manoeuvre: watch it done, then the finding. */
+  function perform(o: Offer) {
+    const s = scene.current
+    if (!s || busy) return
+    sfx.select()
+    setGlowId(null)
+    const side = (o.site?.match(/-(R|L)$/)?.[1] as 'R' | 'L' | undefined) ?? focusSide
+    const at = o.site ?? `hand-${side}`
+    s.focus(at)
+    // Close enough to see the fingers at work.
+    s.zoomBy(0.6)
+    setView('focus')
+    const dur = s.perform(o.def.anim, o.site, side)
+    setBusy(true)
+    setNote({ text: `${o.def.label.replace(/^“|”$/g, '')}…`, tone: 'normal' })
+    // An answer to a request comes as they do it; a finding with your hands, once you have felt it.
+    const when = o.def.say ? dur * 0.6 : dur - 0.3
+    later(when, () => {
+      setBusy(false)
+      // A ring where your hands were; nothing to mark for something he does himself.
+      handle(eventOf(o), o.def.say ? undefined : (s.siteWorld(at) ?? undefined))
+    })
+  }
+
 
   function openRegion(site: string) {
     const s = scene.current
@@ -395,6 +471,14 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     const s = scene.current
     if (!s || !hintAct) return
     const state = { posture: s.posture, joints: s.angles(), flags: [...(flags.current.touched ? [] : ['untouched']), ...(flags.current.gloved ? ['gloved'] : [])] }
+    if (focused) {
+      const o = offers.find((x) => matches({ ...hintAct, conds: [] }, { ...eventOf(x), state }))
+      if (!o) return
+      if (o.site) openRegion(o.site)
+      else setPanel({ kind: 'talk' })
+      window.setTimeout(() => setGlowId(`exam3d-m-${o.key}`), 30)
+      return
+    }
     const need = unmet(hintAct, state)
     const glow = (id: string, open?: () => void) => {
       open?.()
@@ -435,7 +519,8 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   function setViewTo(v: View) {
     setView(v)
-    scene.current?.setView(v)
+    if (v === 'focus' && focused) scene.current?.focus(`forearm-${focusSide}`)
+    else scene.current?.setView(v)
   }
 
   const groups = useMemo(() => [...new Set(SAYS.map((s) => s.group))], [])
@@ -469,8 +554,8 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
           <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={(e) => scene.current?.zoomBy(e.deltaY > 0 ? 1.1 : 0.9)} />
           {loading && <p className="absolute inset-0 grid place-items-center font-[Press_Start_2P,monospace] text-[8px] text-[#40404c]">Bringing {name} in…</p>}
           <div className="absolute left-1 top-1 flex max-w-[calc(100%-84px)] flex-wrap gap-1" onPointerDown={(e) => e.stopPropagation()}>
-            {VIEWS.map((v) => (
-              <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-white' : 'border-[#5a6470]/60 bg-white/90 text-[#30303c]'}`}>
+            {(focused ? FOCUS_VIEWS : VIEWS).map((v) => (
+              <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-[#ffffff]' : 'border-[#5a6470]/60 bg-white/90 text-[#30303c]'}`}>
                 {v.label}
               </button>
             ))}
@@ -537,7 +622,35 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
               )}
             </div>
           )}
-          {panel?.kind === 'region' && (
+          {focused && panel?.kind === 'region' && (
+            <div data-testid="exam3d-region">
+              <div className="mb-1 flex items-center justify-between">
+                <b className="font-[Press_Start_2P,monospace] text-[9px]">{panel.label.toUpperCase()}</b>
+                <button type="button" className="rounded border-2 border-[#5a6470] bg-white px-2 py-1 text-[13px]" data-testid="exam3d-region-close" onClick={() => setPanel(null)}>
+                  ✕ Close
+                </button>
+              </div>
+              {(['Look', 'Feel', 'Move', 'Ask'] as const).map((g) => {
+                const list = offersIn(panel.spot).filter((o) => o.def.group === g)
+                if (!list.length) return null
+                return (
+                  <div key={g} className="mb-2">
+                    <p className="m-0 mb-1 font-[Press_Start_2P,monospace] text-[7px] text-[#8a5a00]">{g.toUpperCase()}</p>
+                    <div className="flex flex-col gap-1.5">
+                      {list.map((o) => (
+                        <button key={o.key} type="button" disabled={busy} data-testid={`exam3d-m-${o.key}`} onClick={() => perform(o)} className={`${big} border-[#5a6470] bg-white disabled:opacity-50${glowing(`exam3d-m-${o.key}`)}`}>
+                          {o.def.label}
+                          {o.site && list.filter((x) => x.def === o.def).length > 1 ? ` — ${spotLabel(o.site)}` : ''}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          {!focused && panel?.kind === 'region' && (
             <div data-testid="exam3d-region">
               <div className="mb-1 flex items-center justify-between">
                 <b className="font-[Press_Start_2P,monospace] text-[9px]">{panel.label.toUpperCase()}</b>
@@ -598,7 +711,27 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
             </div>
           )}
 
-          {panel?.kind === 'talk' && (
+          {focused && panel?.kind === 'talk' && (
+            <div data-testid="exam3d-ask">
+              <div className="mb-1 flex items-center justify-between">
+                <b className="font-[Press_Start_2P,monospace] text-[9px]">ASK {name.toUpperCase()} TO…</b>
+                <button type="button" className="rounded border-2 border-[#5a6470] bg-white px-2 py-1 text-[13px]" onClick={() => setPanel(null)}>
+                  ✕ Close
+                </button>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {offers
+                  .filter((o) => !o.site)
+                  .map((o) => (
+                    <button key={o.key} type="button" disabled={busy} data-testid={`exam3d-m-${o.key}`} onClick={() => perform(o)} className={`${big} border-[#5a6470] bg-white disabled:opacity-50${glowing(`exam3d-m-${o.key}`)}`}>
+                      {o.def.label}
+                    </button>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {!focused && panel?.kind === 'talk' && (
             <div data-testid="exam3d-ask">
               <div className="mb-1 flex items-center justify-between">
                 <b className="font-[Press_Start_2P,monospace] text-[9px]">TALK TO {name.toUpperCase()}</b>
@@ -660,7 +793,18 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
             </div>
           )}
 
-          {!panel && (
+          {focused && !panel && (
+            <div className="grid grid-cols-1 gap-1.5">
+              <button type="button" data-testid="exam3d-talk" onClick={() => (sfx.cursor(), setPanel({ kind: 'talk' }))} className={`${big} flex items-center gap-2 border-[#181820] bg-[#ffe9a8]`}>
+                <span className="text-[20px]" aria-hidden>
+                  💬
+                </span>
+                Ask {name} to move his hand
+              </button>
+            </div>
+          )}
+
+          {!focused && !panel && (
             <div className="grid grid-cols-2 gap-1.5">
               <button type="button" data-testid="exam3d-talk" onClick={() => (sfx.cursor(), setPanel({ kind: 'talk' }))} className={`${big} col-span-2 flex items-center gap-2 border-[#181820] bg-[#ffe9a8]`}>
                 <span className="text-[20px]" aria-hidden>

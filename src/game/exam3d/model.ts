@@ -99,7 +99,7 @@ export function advance(plan: Plan, progress: Progress, ev: ExamEvent): { progre
 const POSTURES = ['supine', 'sitting', 'edge', 'standing', 'walking', 'heel-toe', 'roll-R', 'roll-L', 'knees-up', 'bent', 'one-leg-R', 'one-leg-L']
 const FLAGS = ['untouched', 'gloved']
 const JOINT_KEYS = /^(knee|hipflex|hipabd|hiprot|shoulderflex|shoulderabd|shoulderrot|elbow|wrist|ankle)-(R|L)$|^(neckyaw|neckpitch|trunk)$/
-const MOVES = /^((knee|hip|shoulder|elbow)-(R|L))(:(flex|rot|abd))?$|^neck(:yaw)?$/
+const MOVES = /^((knee|hip|shoulder|elbow)-(R|L))(:(flex|ext|rot|abd))?$|^neck(:yaw)?$/
 
 /** What is wrong with a `do` line: tools, sites, instructions, movements or conditions that do not exist. */
 export function checkDo(line: string): string[] {

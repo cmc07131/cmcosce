@@ -1,5 +1,7 @@
 import { z } from 'zod'
+import { offerOf } from '../game/exam3d/manoeuvres'
 import { checkDo } from '../game/exam3d/model'
+import { SITE_IDS } from '../game/exam3d/sites'
 import { bodySchema, performKinds, vitalsSchema, type Action, type ActionOption, type Pack } from './schema'
 
 /**
@@ -456,6 +458,12 @@ export function compileStation(station: Station): Pack {
     actions.push({ id: 'monitor', kind: 'monitor', targetIds: ['monitor'], hint: 'Look at the monitor.', prompt: 'Monitor' })
   }
 
+  // A focused examination offers only real manoeuvres at real places.
+  for (const entry of station.body?.focus ?? []) {
+    const o = offerOf(entry)
+    if (!o) throw new Error(`${station.id}: focus "${entry}" is not a manoeuvre`)
+    if (o.site && !SITE_IDS.includes(o.site)) throw new Error(`${station.id}: focus "${entry}" names no site "${o.site}"`)
+  }
   // A 3D examination line that names a tool, site or instruction that does not exist would never be performed.
   for (const step of station.steps)
     for (const o of Object.values(step.groups ?? {}).flat())

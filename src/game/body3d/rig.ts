@@ -58,6 +58,10 @@ export type Rig = {
   finger: Partial<Pair>
   /** Ring finger, first bone. */
   ring: Partial<Pair>
+  /** Each hand's digits, thumb to little finger, each its bones from the knuckle out. */
+  digits: Record<Side, THREE.Object3D[][]>
+  /** Each hand bone's rotation in the body frame, in the bind pose (for finding the palm when posed). */
+  handBind: Record<Side, THREE.Quaternion>
   thumb: Partial<Pair>
   thigh: Pair
   calf: Pair
@@ -82,6 +86,8 @@ export type Rig = {
    * VRM models keep their clothes (their bodies are not modelled underneath).
    */
   expose(parts: { trunk: number; arms: number; legs: number }): void
+  /** Blanch the skin (0 … 1): the fingertips (a capillary refill press) or the whole hand (no blood getting there). */
+  pale(p: { fingersL: number; handL: number; fingersR: number; handR: number }): void
   /** After posing, each frame: hair and clothes that swing; material animation. */
   tick(dt: number): void
   /** Let swinging parts come to rest in the current pose. */
@@ -206,6 +212,11 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
     hand: pair('Hand'),
     finger: pair('Finger1'),
     ring: pair('Finger3'),
+    digits: {
+      L: [0, 1, 2, 3, 4].map((d) => [`Bip01_L_Finger${d}`, `Bip01_L_Finger${d}1`, `Bip01_L_Finger${d}2`].map((n) => bones[n]).filter(Boolean)),
+      R: [0, 1, 2, 3, 4].map((d) => [`Bip01_R_Finger${d}`, `Bip01_R_Finger${d}1`, `Bip01_R_Finger${d}2`].map((n) => bones[n]).filter(Boolean)),
+    },
+    handBind: { L: bones.Bip01_L_Hand.getWorldQuaternion(new THREE.Quaternion()), R: bones.Bip01_R_Hand.getWorldQuaternion(new THREE.Quaternion()) },
     thumb: pair('Finger0'),
     thigh: pair('Thigh'),
     calf: pair('Calf'),
@@ -239,6 +250,7 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
       set(S.jaw, e.mouth ?? 0)
     },
     expose: (parts) => exposure.set(parts.trunk, parts.arms, parts.legs),
+    pale: (p) => exposure.pale(p),
     tick: () => {},
     settle: () => {},
     dispose: () => disposeTree(obj),
@@ -254,9 +266,11 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
  */
 function exposable(meshes: THREE.Mesh[]) {
   const on = new THREE.Vector3(0, 0, 0)
+  const pallor = new THREE.Vector4(0, 0, 0, 0)
+  const paleTone = new THREE.Color('#f1e7e2')
   const tone = new THREE.Color('#d9a68a')
   const region = (name: string) =>
-    /Pelvis|Spine|Clavicle/.test(name) ? 1 : /UpperArm|Forearm/.test(name) ? 2 : /Thigh|Calf|Foot|Toe/.test(name) ? 3 : 0
+    /Pelvis|Spine|Clavicle/.test(name) ? 1 : /UpperArm|Forearm/.test(name) ? 2 : /Thigh|Calf|Foot|Toe/.test(name) ? 3 : /L_Finger/.test(name) ? 4 : /L_Hand/.test(name) ? 5 : /R_Finger/.test(name) ? 6 : /R_Hand/.test(name) ? 7 : 0
   for (const mesh of meshes) {
     const m = mesh as THREE.SkinnedMesh
     if (!m.isSkinnedMesh) continue
@@ -283,21 +297,27 @@ function exposable(meshes: THREE.Mesh[]) {
       sampleSkin(head?.map ?? null, tone)
       mat.onBeforeCompile = (shader) => {
         shader.uniforms.exposeOn = { value: on }
+        shader.uniforms.pallor = { value: pallor }
+        shader.uniforms.paleTone = { value: paleTone }
         shader.uniforms.skinTone = { value: tone }
         shader.vertexShader = shader.vertexShader
-          .replace('#include <common>', '#include <common>\nattribute float exposeRegion;\nuniform vec3 exposeOn;\nvarying float vExpose;')
+          .replace('#include <common>', '#include <common>\nattribute float exposeRegion;\nuniform vec3 exposeOn;\nuniform vec4 pallor;\nvarying float vExpose;\nvarying float vPale;')
           .replace(
             '#include <begin_vertex>',
-            '#include <begin_vertex>\nvExpose = exposeRegion < 0.5 ? 0.0 : exposeRegion < 1.5 ? exposeOn.x : exposeRegion < 2.5 ? exposeOn.y : exposeOn.z;',
+            '#include <begin_vertex>\nvExpose = exposeRegion < 0.5 ? 0.0 : exposeRegion < 1.5 ? exposeOn.x : exposeRegion < 2.5 ? exposeOn.y : exposeRegion < 3.5 ? exposeOn.z : 0.0;\nvPale = exposeRegion < 3.5 ? 0.0 : exposeRegion < 4.5 ? pallor.x : exposeRegion < 5.5 ? pallor.y : exposeRegion < 6.5 ? pallor.z : pallor.w;',
           )
         shader.fragmentShader = shader.fragmentShader
-          .replace('#include <common>', '#include <common>\nuniform vec3 skinTone;\nvarying float vExpose;')
-          .replace('#include <map_fragment>', '#include <map_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, skinTone, vExpose);')
+          .replace('#include <common>', '#include <common>\nuniform vec3 skinTone;\nuniform vec3 paleTone;\nvarying float vExpose;\nvarying float vPale;')
+          .replace('#include <map_fragment>', '#include <map_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, skinTone, vExpose);\ndiffuseColor.rgb = mix(diffuseColor.rgb, paleTone, vPale);')
       }
       mat.needsUpdate = true
     }
   }
-  return { set: (trunk: number, arms: number, legs: number) => on.set(trunk, arms, legs) }
+  return {
+    set: (trunk: number, arms: number, legs: number) => on.set(trunk, arms, legs),
+    // A pale hand still has a fingertip: the fingers blanch at least as much as the hand.
+    pale: (p: { fingersL: number; handL: number; fingersR: number; handR: number }) => pallor.set(Math.max(p.fingersL, p.handL), p.handL, Math.max(p.fingersR, p.handR), p.handR),
+  }
 }
 
 /** The colour of the middle of the cheek on a face texture, once its image is there (linear, as shaders want it). */
@@ -419,6 +439,11 @@ export async function loadVrm(url: string): Promise<Rig> {
     hand: pair('leftHand', 'rightHand'),
     finger: { L: opt('leftIndexProximal'), R: opt('rightIndexProximal') } as Partial<Pair>,
     ring: { L: opt('leftRingProximal'), R: opt('rightRingProximal') } as Partial<Pair>,
+    digits: {
+      L: vrmDigits('left', opt),
+      R: vrmDigits('right', opt),
+    },
+    handBind: { L: raw('leftHand').getWorldQuaternion(new THREE.Quaternion()), R: raw('rightHand').getWorldQuaternion(new THREE.Quaternion()) },
     thumb: { L: opt('leftThumbProximal') ?? opt('leftThumbMetacarpal'), R: opt('rightThumbProximal') ?? opt('rightThumbMetacarpal') } as Partial<Pair>,
     thigh: pair('leftUpperLeg', 'rightUpperLeg'),
     calf: pair('leftLowerLeg', 'rightLowerLeg'),
@@ -450,6 +475,7 @@ export async function loadVrm(url: string): Promise<Rig> {
     // What `vrm.update` does, less the humanoid and look-at updates, which would undo the posing: constraints, hair,
     // and the materials (MToon only hands its alpha cut-off to the shader here; without it, cut-out hair goes black).
     expose: () => {},
+    pale: () => {},
     tick: (dt) => {
       vrm.nodeConstraintManager?.update()
       vrm.springBoneManager?.update(dt)
@@ -463,6 +489,13 @@ export async function loadVrm(url: string): Promise<Rig> {
   }
   measure(rig, true)
   return rig
+}
+
+/** A VRM hand's digits, thumb to little finger (VRM 1 names; three-vrm maps VRM 0 thumbs onto them). */
+function vrmDigits(side: 'left' | 'right', opt: (n: VRMHumanBoneName) => THREE.Object3D | undefined): THREE.Object3D[][] {
+  const thumb = (['ThumbMetacarpal', 'ThumbProximal', 'ThumbDistal'] as const).map((n) => opt(`${side}${n}` as VRMHumanBoneName))
+  const finger = (f: string) => (['Proximal', 'Intermediate', 'Distal'] as const).map((n) => opt(`${side}${f}${n}` as VRMHumanBoneName))
+  return [thumb, finger('Index'), finger('Middle'), finger('Ring'), finger('Little')].map((d) => d.filter((b): b is THREE.Object3D => !!b))
 }
 
 /* ------------------------------------------------------------------ measuring the body */

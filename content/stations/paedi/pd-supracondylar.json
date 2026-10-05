@@ -3,38 +3,82 @@
   "gym": "paedi",
   "title": "Supracondylar fracture",
   "type": "exam",
-  "time": 420,
-  "stem": "Paediatric area. Ming, 7, fell from the monkey bars onto an outstretched left hand. His elbow is swollen and he won't move it. Interpret the X-ray, assess neurovascular status, and discuss management.",
+  "time": 480,
+  "stem": "Paediatric area. Ming, 7, fell from the monkey bars onto his outstretched left hand an hour ago. He is holding his elbow and won't let anyone move it. His mother is with him. Vital signs are normal for his age. Assess and manage.",
   "phases": [
     {
-      "title": "X-ray",
-      "goal": "Read the lateral film.",
+      "title": "Opener",
+      "goal": "Introduce yourself, consent, and the key questions.",
       "steps": [
-        "xray"
+        "opener"
+      ]
+    },
+    {
+      "title": "Analgesia",
+      "goal": "Pain relief before anything moves; the elbow stays where it is comfortable.",
+      "steps": [
+        "analgesia"
       ]
     },
     {
       "title": "Neurovascular",
-      "goal": "Pulse, perfusion, and each nerve.",
+      "goal": "Skin, then pulse, colour, warmth, refill; radial, median, AIN, ulnar; compartments.",
       "steps": [
         "nv"
       ]
     },
     {
+      "title": "X-ray",
+      "goal": "AP and lateral in comfort; read and grade it.",
+      "steps": [
+        "xray"
+      ]
+    },
+    {
+      "title": "Findings",
+      "goal": "State the neurovascular status.",
+      "steps": [
+        "findings"
+      ]
+    },
+    {
       "title": "Plan",
-      "goal": "Analgesia, splint, orthopaedics, and warning signs.",
+      "goal": "Orthopaedics, nil by mouth, slab no more than 90°, repeat checks, document.",
       "steps": [
         "plan"
+      ]
+    },
+    {
+      "title": "Mother",
+      "goal": "Explain, and tell her what to watch for.",
+      "steps": [
+        "close"
       ]
     }
   ],
   "review": [
     {
       "tag": "differs",
-      "text": "Compartment syndrome threshold. Your notes use an absolute compartment pressure of 25 mmHg. The usual threshold is the delta pressure: diastolic pressure minus compartment pressure under 30 mmHg. The clinical signs (pain out of proportion, pain on passive finger extension) come first."
+      "text": "Case. Your script is a Gartland III with a pink pulseless hand. This station keeps a Gartland II with a radial pulse and an AIN palsy, as you chose. So the 'pink pulseless is not white ischaemic' mark becomes 'states the hand is perfused with a pulse'. The other marks follow your blueprint."
+    },
+    {
+      "tag": "differs",
+      "text": "Gartland II management varies: some units cast an undisplaced-looking II without wiring. Here it is angulated with a nerve palsy, so the station expects urgent orthopaedic review for reduction and pinning, and does not accept fracture clinic."
+    },
+    {
+      "tag": "unverified",
+      "text": "BOAST 11 (October 2020) standard numbers (1, 2, 3, 4, 8) are quoted from your script. I could not re-check them against the document here."
+    },
+    {
+      "tag": "missing",
+      "text": "No public HA analgesia chart: the station says weight-based intranasal fentanyl without a dose. Add your department's dose if you want it scored."
+    },
+    {
+      "tag": "differs",
+      "text": "Compartment syndrome threshold. Your notes use an absolute compartment pressure of 25 mmHg. The usual threshold is the delta pressure: diastolic pressure minus compartment pressure under 30 mmHg. The clinical signs (escalating pain, pain on passive finger extension) come first."
     }
   ],
-  "notes": "Checked against BOAST 'Supracondylar fractures of the humerus in children' (2020) and the Gartland classification.\n\nX-ray: lateral view — posterior fat pad (always abnormal), elevated anterior fat pad ('sail'), anterior humeral line should pass through the middle third of the capitellum (passes anterior to it in an extension-type fracture), radiocapitellar line intact. Ossification centres CRITOE (capitellum ~1, radial head ~3, internal/medial epicondyle ~5, trochlea ~7, olecranon ~9, external/lateral epicondyle ~11 years). Gartland I undisplaced (above-elbow backslab at 90° or less, collar and cuff); II angulated with an intact posterior cortex; III completely displaced — closed reduction and K-wiring (BOAST: within 12–24 h, urgent if neurovascular compromise).\n\nNeurovascular examination and documentation of radial, median (and anterior interosseous — 'OK' sign, FPL and FDP index), and ulnar nerves, and radial pulse and perfusion. The pink pulseless hand needs urgent orthopaedic/vascular input; the white pulseless hand is an emergency (reduce and explore). Compartment syndrome: pain out of proportion, pain on passive finger extension — early; avoid tight flexion and circumferential casts.\n\nYour notes match this (they use a 25 mmHg compartment pressure question; the delta pressure — diastolic minus compartment under 30 mmHg — is the usual threshold).",
+  "notes": "Checked against BOAST 11 'Supracondylar fractures of the humerus in children' (October 2020) and the Gartland classification.\n\nX-ray: lateral view — posterior fat pad (always abnormal), elevated anterior fat pad ('sail'), anterior humeral line should pass through the middle third of the capitellum (passes anterior to it in an extension-type fracture), radiocapitellar line intact. Ossification centres CRITOE (capitellum ~1, radial head ~3, internal/medial epicondyle ~5, trochlea ~7, olecranon ~9, external/lateral epicondyle ~11 years). Gartland I undisplaced (above-elbow backslab at 90° or less, collar and cuff); II angulated with an intact posterior cortex; III completely displaced — closed reduction and K-wiring (BOAST: within 12–24 h, urgent if neurovascular compromise).\n\nNeurovascular examination and documentation of radial, median (and anterior interosseous — 'OK' sign, FPL and FDP index), and ulnar nerves, and radial pulse and perfusion. The pink pulseless hand needs urgent orthopaedic/vascular input; the white pulseless hand is an emergency (reduce and explore). Compartment syndrome: pain out of proportion, pain on passive finger extension — early; avoid tight flexion and circumferential casts.\n\nYour notes match this (they use a 25 mmHg compartment pressure question; the delta pressure — diastolic minus compartment under 30 mmHg — is the usual threshold).\n\nPerfect script (essential marks): introduce, identify, consent; allergies, last meal, tetanus, mechanism, head injury; weight-based analgesia before moving, elbow in comfort; antecubital skin; colour, warmth, refill, radial pulse, both sides; radial, median, AIN, ulnar; passive stretch and compartments; AP and lateral in comfort, Gartland grade; state NV status; urgent orthopaedics, nil by mouth; slab in comfort at 90° or less, elevate, repeat NV observations; document before reduction; explain, AIN prognosis, compartment safety net. Instant fail: hyperflexing the elbow; fracture clinic for a displaced fracture; no vascular exam.",
   "cast": [
     {
       "id": "patient",
@@ -46,108 +90,346 @@
       "id": "mother",
       "name": "Mother",
       "role": "woman"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Chan",
+      "role": "nurse"
     }
   ],
   "body": {
-    "posture": "edge"
+    "posture": "edge",
+    "ain": "L",
+    "kinkOnFlex": "L",
+    "bruise": [
+      "antecubital-L"
+    ],
+    "holds": {
+      "elbow-L": 70,
+      "shoulderflex-L": 20
+    },
+    "focus": [
+      "inspect@antecubital-L",
+      "colour@hand-L",
+      "colour@hand-R",
+      "warmth@hand-L",
+      "warmth@hand-R",
+      "crt@nails-L",
+      "crt@nails-R",
+      "pulse@wrist-L",
+      "pulse@wrist-R",
+      "touch@web-L",
+      "touch@pulp-L",
+      "touch@littlepulp-L",
+      "thumbs-up",
+      "opposition",
+      "ok-sign",
+      "cross-fingers",
+      "spread-fingers",
+      "stretch@pulp-L",
+      "compartments@forearm-L",
+      "bend-elbow@antecubital-L",
+      "straighten-elbow@antecubital-L"
+    ]
   },
   "steps": [
     {
-      "id": "xray",
-      "kind": "order",
-      "to": "trolley",
-      "label": "X-ray",
-      "hint": "Fat pads, anterior humeral line, radiocapitellar line, fracture.",
-      "groups": {
-        "X-ray": [
-          {
-            "t": "Left elbow lateral",
-            "r": "Posterior fat pad and raised anterior 'sail'. Supracondylar fracture; the anterior humeral line passes in front of the capitellum; posterior cortex intact but the distal fragment is angulated back (Gartland II).",
-            "img": "xr:elbow-supracondylar",
-            "mark": "Identifies fat pads, anterior humeral line and grades the fracture"
-          }
-        ]
-      }
+      "id": "opener",
+      "kind": "say",
+      "to": "mother",
+      "label": "Talk to his mother",
+      "hint": "Who you are, who he is, permission; allergies, last meal, tetanus, how he fell, head injury.",
+      "opts": [
+        {
+          "t": "Introduce yourself, check his name and that she is his mother, and ask to examine him",
+          "tz": "你好，我係急症室醫生。你係佢媽媽？佢叫咩名？我想幫佢止痛，再睇吓隻手，可以嗎？",
+          "r": "Yes, I'm his mum. He's Ming. Please, he's in so much pain.",
+          "rz": "係，我係佢媽媽，佢叫明仔。醫生，佢好痛呀。",
+          "mark": "Introduces self, identifies the child, consent to examine"
+        },
+        {
+          "t": "Any allergies? When did he last eat or drink? Is his tetanus up to date?",
+          "tz": "佢有冇藥物敏感？最後幾點食嘢飲嘢？打齊針未？",
+          "r": "No allergies. He had lunch at twelve. All his injections are up to date.",
+          "rz": "冇敏感。佢十二點食咗晏晝。啲針都打齊晒。",
+          "mark": "Asks allergies, last meal and tetanus"
+        },
+        {
+          "t": "How exactly did he fall? Did he hit his head?",
+          "tz": "佢點樣跌㗎？有冇撞親個頭？",
+          "r": "He fell off the monkey bars onto his hand. He didn't hit his head and cried straight away.",
+          "rz": "佢喺攀架跌落嚟，用隻手撐住。冇撞到頭，即刻喊咗出嚟。",
+          "mark": "Asks the mechanism and about head injury"
+        },
+        {
+          "t": "Let me straighten his arm so I can have a proper look",
+          "tz": "等我拉直佢隻手睇清楚啲。",
+          "trap": true,
+          "r": "He screams. Never force a painful elbow straight: give analgesia and keep it in the position of comfort."
+        }
+      ]
+    },
+    {
+      "id": "analgesia",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Talk to the nurse",
+      "hint": "Weight-based analgesia now, before anything is moved; keep the elbow where it is comfortable.",
+      "lang": "en",
+      "opts": [
+        {
+          "t": "Weigh him and give weight-based analgesia now (intranasal fentanyl), before anyone moves the arm",
+          "r": "22 kg. Intranasal fentanyl given; he settles a little.",
+          "mark": "Analgesia before manipulation"
+        },
+        {
+          "t": "Support the arm in the position he finds comfortable; nobody forces it straight or bent",
+          "r": "Supported on a pillow, elbow resting at about 70°.",
+          "mark": "Keeps the elbow in comfort; does not force flexion"
+        },
+        {
+          "t": "Oral paracetamol and wait to see if that helps",
+          "trap": true,
+          "r": "Not enough for a displaced fracture in a child in severe pain."
+        }
+      ]
     },
     {
       "id": "nv",
       "kind": "exam",
       "to": "patient",
       "label": "Neurovascular examination",
-      "hint": "Pulse, perfusion, radial, median, AIN, ulnar; compartment signs.",
+      "hint": "Skin at the front of the elbow; colour, warmth, refill and radial pulse on both sides; radial, median, AIN and ulnar nerves; passive finger stretch and the forearm.",
       "groups": {
+        "Skin": [
+          {
+            "t": "Front of the elbow: open wound, pucker, bruising",
+            "r": "Skin intact: no puncture, no pucker. Swollen elbow with a small bruise at the front: treat the skin as threatened until orthopaedics review.",
+            "mark": "Inspects the antecubital skin for an open wound or pucker",
+            "do": "look antecubital-L"
+          }
+        ],
         "Vascular": [
           {
-            "t": "Radial pulse and hand perfusion",
-            "r": "Radial pulse present; hand pink, CRT under 2 s.",
-            "mark": "Assesses pulse and perfusion",
-            "anim": "pulse",
-            "do": "feel wrist-L & press pulp-L,nails-L"
+            "t": "Colour and warmth, compared with the other hand",
+            "r": "Both hands pink and warm, the same on each side.",
+            "mark": "Colour and warmth, compares sides",
+            "do": "look hand-L & look hand-R & feel hand-L & feel hand-R"
+          },
+          {
+            "t": "Capillary refill",
+            "r": "Capillary refill 1 second.",
+            "mark": "Checks capillary refill",
+            "do": "press nails-L"
+          },
+          {
+            "t": "Radial pulse",
+            "r": "Radial pulse present and strong, the same as the right.",
+            "mark": "Feels the radial pulse",
+            "do": "feel wrist-L"
           }
         ],
         "Nerves": [
           {
-            "t": "Radial: thumbs up / wrist extension; sensation dorsal first web space",
-            "r": "Normal.",
-            "mark": "Tests the radial nerve",
-            "do": "say thumbs-up & cotton web-L | say thumbs-up & pin web-L"
+            "t": "Radial nerve, motor: thumbs up and wrist back",
+            "r": "Thumbs up and wrist extension: normal.",
+            "mark": "Tests radial nerve motor",
+            "do": "say thumbs-up"
           },
           {
-            "t": "Median: thumb opposition, sensation index pulp",
-            "r": "Normal.",
-            "mark": "Tests the median nerve",
-            "do": "say opposition & cotton pulp-L | say opposition & pin pulp-L"
+            "t": "Radial nerve, sensation: back of the first web space",
+            "r": "Feels the cotton wool on the back of the first web space.",
+            "mark": "Tests radial nerve sensation",
+            "do": "cotton web-L"
           },
           {
-            "t": "Anterior interosseous: make an 'OK' sign",
-            "r": "Makes a flat pinch instead of a circle — weak FPL and FDP index.",
+            "t": "Median nerve, motor: thumb to little finger",
+            "r": "Opposes the thumb to the little finger: normal.",
+            "mark": "Tests median nerve motor",
+            "do": "say opposition"
+          },
+          {
+            "t": "Median nerve, sensation: index fingertip",
+            "r": "Feels the cotton wool on the index fingertip.",
+            "mark": "Tests median nerve sensation",
+            "do": "cotton pulp-L"
+          },
+          {
+            "t": "Anterior interosseous nerve: make an 'OK' sign",
+            "r": "A flat pinch, not a round O: he cannot bend the tip of the thumb or the index finger. Anterior interosseous nerve palsy (sensation is spared).",
             "mark": "Tests the AIN and finds a palsy",
             "do": "say ok-sign"
           },
           {
-            "t": "Ulnar: finger abduction ('crossed fingers'), little finger sensation",
-            "r": "Normal.",
-            "mark": "Tests the ulnar nerve",
-            "do": "say cross-fingers"
+            "t": "Ulnar nerve, motor: cross the fingers or spread them",
+            "r": "Crosses and spreads the fingers: normal.",
+            "mark": "Tests ulnar nerve motor",
+            "do": "say cross-fingers | say spread-fingers"
+          },
+          {
+            "t": "Ulnar nerve, sensation: little finger",
+            "r": "Feels the cotton wool on the little finger.",
+            "mark": "Tests ulnar nerve sensation",
+            "do": "cotton littlepulp-L"
           }
         ],
         "Compartment": [
           {
-            "t": "Passive finger extension; forearm tension",
-            "r": "No pain on passive stretch; forearm soft.",
+            "t": "Passive finger extension; forearm compartments",
+            "r": "No pain on passive finger extension; forearm soft.",
             "mark": "Checks for compartment syndrome",
-            "do": "press nails-L,pulp-L & feel forearm-L"
+            "do": "stretch pulp-L & feel forearm-L"
+          }
+        ],
+        "Do not": [
+          {
+            "t": "Bend the elbow up fully",
+            "trap": "critical",
+            "r": "He screams, and the hand goes pale as the artery kinks over the fracture. Never hyperflex a supracondylar fracture: back to the position of comfort, and recheck the hand.",
+            "do": "move elbow-L:flex"
+          },
+          {
+            "t": "Straighten the elbow",
+            "trap": true,
+            "r": "He screams. Forcing it straight can injure the nerve and the artery: leave it where it is comfortable.",
+            "do": "move elbow-L:ext"
           }
         ]
       }
     },
     {
-      "id": "plan",
+      "id": "xray",
+      "kind": "order",
+      "to": "trolley",
+      "label": "X-ray",
+      "hint": "AP and lateral of the elbow in the position of comfort; fat pads, anterior humeral line, posterior cortex.",
+      "groups": {
+        "X-ray": [
+          {
+            "t": "Left elbow AP and lateral, in the position of comfort",
+            "r": "Posterior fat pad and a raised anterior 'sail'. Supracondylar fracture; the anterior humeral line passes in front of the capitellum; posterior cortex intact, distal fragment angulated back: extension Gartland II.",
+            "img": "xr:elbow-supracondylar",
+            "mark": [
+              "Requests AP and lateral without forcing flexion",
+              "Reads the film and grades it Gartland II"
+            ]
+          },
+          {
+            "t": "Lateral with the elbow bent to 90° for a true view",
+            "trap": true,
+            "r": "Forcing 90° hurts and risks the artery and nerves. Take the films in the position of comfort, even if short of 90°."
+          },
+          {
+            "t": "Forearm views",
+            "r": "Forearm not tender: not needed this time."
+          }
+        ]
+      }
+    },
+    {
+      "id": "findings",
       "kind": "say",
-      "to": "mother",
-      "label": "Plan",
-      "hint": "Analgesia, backslab not tight, elevate, orthopaedics for reduction and wiring, AIN palsy usually recovers.",
+      "to": "examiner",
+      "label": "Findings",
+      "hint": "Perfused or not; pulse; each nerve; the skin.",
       "opts": [
         {
-          "t": "Pain relief (intranasal fentanyl), a backslab with the elbow not over-flexed, elevation",
-          "tz": "我哋會用鼻噴止痛藥俾佢止痛，再用石膏托固定，手踭唔會屈得太盡，同埋舉高隻手。",
-          "mark": "Analgesia, backslab and elevation"
+          "t": "The hand is pink and warm, refill 1 second, radial pulse present: perfused, no vascular compromise",
+          "mark": "States the hand is perfused with a pulse"
         },
         {
-          "t": "Orthopaedics for reduction and wiring; the nerve weakness usually recovers over weeks to months",
-          "tz": "骨科醫生會幫佢將骨駁返正，再用鋼針固定；佢手指嗰啲神經冇力，通常幾個禮拜至幾個月會好返。",
-          "mark": "Refers for reduction; explains AIN palsy prognosis"
+          "t": "Radial, median sensation and ulnar intact; anterior interosseous nerve palsy",
+          "mark": "States each nerve including the AIN palsy"
         },
         {
-          "t": "Watch for severe pain, numbness, pale or cold fingers — tell the nurse at once",
-          "tz": "如果佢好痛、手指麻痺、變白或者凍冰冰，要即刻話俾護士知。",
-          "mark": "Explains compartment syndrome warning signs"
+          "t": "Skin intact with anterior bruising; no pain on passive stretch",
+          "mark": "States the skin and compartment findings"
+        },
+        {
+          "t": "Neurovascularly intact",
+          "trap": true,
+          "r": "Not so: the OK sign shows an anterior interosseous nerve palsy. Sensation is spared, so it is easily missed."
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "phone",
+      "label": "Phone orthopaedics",
+      "hint": "Urgent orthopaedics for reduction and pinning; nil by mouth; slab in comfort no more than 90°; repeat checks; document first.",
+      "lang": "en",
+      "opts": [
+        {
+          "t": "Orthopaedic registrar: displaced Gartland II with an AIN palsy, pink with a pulse; please review urgently for reduction and pinning today",
+          "r": "Coming down. Keep him nil by mouth.",
+          "mark": "Urgent orthopaedic referral"
+        },
+        {
+          "t": "Nil by mouth",
+          "r": "Nurse puts a nil-by-mouth sign up.",
+          "mark": "Nil by mouth"
+        },
+        {
+          "t": "Above-elbow backslab in comfort, no more than 90°; sling, elevate; neurovascular observations every hour",
+          "r": "Slab on, elbow at about 70°; hand still pink, pulse present.",
+          "mark": "Backslab in comfort at 90° or less, elevate, repeat neurovascular checks"
+        },
+        {
+          "t": "Document the skin, pulse, refill and each nerve, including the AIN palsy, before any reduction",
+          "r": "Documented, with times.",
+          "mark": "Documents the neurovascular status before reduction"
         },
         {
           "t": "A tight full cast with the elbow fully bent",
-          "tz": "打一個緊啲嘅全手石膏，手踭屈到盡。",
           "trap": "critical",
-          "r": "Hyperflexion and tight casts risk compartment syndrome and vascular compromise."
+          "r": "Hyperflexion and a tight cast risk kinking the artery and compartment syndrome."
+        },
+        {
+          "t": "Collar and cuff, home, fracture clinic next week",
+          "trap": "critical",
+          "r": "A displaced fracture with a nerve palsy needs orthopaedics today, not fracture clinic."
+        },
+        {
+          "t": "Reduce it here in ED under sedation",
+          "trap": true,
+          "r": "Not in ED: reduction and pinning in theatre, by orthopaedics."
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "kind": "say",
+      "to": "mother",
+      "label": "Explain to his mother",
+      "hint": "What is broken; the nerve; the operation; what to watch for.",
+      "opts": [
+        {
+          "t": "The bone just above the elbow is broken and tilted; the bone doctors will straighten it and hold it with pins today",
+          "tz": "佢手踭上面嗰條骨斷咗，仲歪咗。骨科醫生今日會幫佢將骨駁返正，再用鋼針固定。",
+          "r": "Today? Will he need an operation?",
+          "rz": "今日？要做手術？",
+          "mark": "Explains the fracture and the plan"
+        },
+        {
+          "t": "The hand has good blood flow. One nerve that bends his thumb and finger tip is weak; most of these recover over weeks to months",
+          "tz": "佢隻手血液循環好好。有條控制拇指同食指尾節嘅神經有啲冇力，大部分幾個禮拜到幾個月會好返。",
+          "r": "So it should get better by itself?",
+          "rz": "即係會自己好返？",
+          "mark": "Explains the AIN palsy and its prognosis"
+        },
+        {
+          "t": "Tell the nurse at once if the pain gets worse, the fingers go pale or blue, he can't move them, or it hurts to straighten them",
+          "tz": "如果佢愈嚟愈痛、手指變白或者變藍、郁唔到，或者拉直手指好痛，即刻話俾護士知。",
+          "r": "I'll watch him.",
+          "rz": "我會睇住佢。",
+          "mark": "Compartment syndrome safety net"
+        },
+        {
+          "t": "The nerve will definitely be back to normal",
+          "tz": "條神經實會好返㗎。",
+          "trap": true,
+          "r": "Most recover, but you can't promise it."
         }
       ]
     },
@@ -194,12 +476,30 @@
           ]
         },
         {
-          "q": "Early sign of compartment syndrome?",
-          "a": "Pain on passive finger extension",
+          "q": "Earliest sign of compartment syndrome in a child?",
+          "a": "Escalating pain, and pain on passive finger extension",
           "wrong": [
-            "An absent radial pulse at the wrist, early on",
-            "Pallor and coldness of the whole hand",
+            "An absent radial pulse",
+            "Pallor of the whole hand",
             "Paralysis of the fingers"
+          ]
+        },
+        {
+          "q": "Why not flex the elbow past 90° in a backslab?",
+          "a": "It can kink the brachial artery and raise compartment pressure",
+          "wrong": [
+            "It makes the X-ray harder to read",
+            "It stretches the ulnar nerve only",
+            "It is uncomfortable but harmless"
+          ]
+        },
+        {
+          "q": "Pink pulseless hand (perfused) after a displaced supracondylar fracture?",
+          "a": "Urgent reduction and pinning, then recheck; explore only if still poorly perfused",
+          "wrong": [
+            "Immediate arterial exploration before reduction",
+            "Angiogram before reduction",
+            "Backslab and fracture clinic"
           ]
         }
       ]
@@ -208,7 +508,7 @@
   "badge": {
     "name": "Fat Pad",
     "emoji": "🐒",
-    "flavor": "Posterior fat pad, check AIN with an 'OK', don't cast it tight."
+    "flavor": "Comfort, not 90°. An 'OK' for the AIN. Never cast it tight."
   },
   "cards": [
     {
@@ -236,13 +536,13 @@
     {
       "q": "Pink pulseless hand after supracondylar fracture needs…",
       "options": [
-        "Urgent orthopaedic and vascular input",
+        "Urgent reduction and pinning, then recheck the hand",
+        "Immediate arterial exploration before reduction",
         "Discharge with a collar and cuff and fracture clinic review",
-        "Physiotherapy to regain movement",
-        "Oral analgesia and elevation only"
+        "Angiogram before anything else"
       ],
-      "why": "White pulseless hand is an emergency.",
-      "source": "BOAST 2020"
+      "why": "Most kinked arteries recover with reduction; explore if still poorly perfused. White pulseless: emergency theatre.",
+      "source": "BOAST 11"
     },
     {
       "q": "Gartland I treatment?",
@@ -276,6 +576,18 @@
       ],
       "why": "From malreduction.",
       "source": "Paediatric orthopaedics"
+    },
+    {
+      "q": "Which four nerve functions do you document before reduction?",
+      "options": [
+        "Radial, median, anterior interosseous, ulnar",
+        "Radial, axillary, musculocutaneous, ulnar",
+        "Median and ulnar only",
+        "Radial and median only"
+      ],
+      "why": "Pulse and refill as well.",
+      "source": "BOAST 11"
     }
-  ]
+  ],
+  "read": 60
 }

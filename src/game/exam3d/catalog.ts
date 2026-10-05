@@ -20,6 +20,7 @@ export const TOOLS: ToolDef[] = [
   { id: 'percuss', label: 'Percuss', icon: '🥁', use: 'tap', normal: 'Percussion over {site}: normal note.' },
   { id: 'listen', label: 'Listen', icon: '🩺', use: 'hold', normal: 'Nothing abnormal heard over {site}.' },
   { id: 'move', label: 'Move', icon: '🤲', use: 'drag', normal: 'Moves freely.' },
+  { id: 'stretch', label: 'Passive stretch', icon: '🤚', use: 'tap', normal: 'No pain on passive stretch.' },
   { id: 'say', label: 'Ask', icon: '💬', use: 'menu', normal: '' },
   { id: 'gloves', label: 'Gloves', icon: '🧤', use: 'self', normal: 'Hands washed; gloves on.' },
   { id: 'torch', label: 'Pen torch', icon: '🔦', use: 'tap', normal: 'Nothing abnormal in the light.' },
@@ -113,6 +114,8 @@ export const SAYS: SayDef[] = [
   { id: 'ok-sign', label: "Make an 'OK' sign", group: 'Arms and hands', reply: 'A round O.' },
   { id: 'cross-fingers', label: 'Cross your fingers; spread them against me', group: 'Arms and hands', reply: 'Normal.' },
   { id: 'opposition', label: 'Touch your thumb to your little finger', group: 'Arms and hands', reply: 'Normal opposition.' },
+  { id: 'spread-fingers', label: 'Spread your fingers wide', group: 'Arms and hands', reply: 'Spreads them fully.' },
+  { id: 'make-fist', label: 'Make a fist', group: 'Arms and hands', reply: 'Makes a full fist.' },
 ]
 
 /** Every instruction id, with -R and -L for the sided ones. */

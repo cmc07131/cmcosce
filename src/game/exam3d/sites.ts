@@ -22,6 +22,7 @@ export type JointRef =
   | 'hand'
   | 'finger'
   | 'ring'
+  | 'little'
   | 'thumb'
   | 'thigh'
   | 'calf'
@@ -102,6 +103,7 @@ export const SITES: Record<string, SiteDef> = {
   badge: { label: 'regimental badge area', j: 'upperArm', to: 'forearm', t: 0.38, dir: U, r: 0.03, sided: true },
   arm: { label: 'upper arm', j: 'upperArm', to: 'forearm', t: 0.55, dir: U, r: 0.05, sided: true },
   elbow: { label: 'elbow', j: 'forearm', dir: B, r: 0.035, sided: true },
+  antecubital: { label: 'front of the elbow', j: 'forearm', to: 'hand', t: 0.04, dir: F, r: 0.03, sided: true },
   forearm: { label: 'forearm', j: 'forearm', to: 'hand', t: 0.5, dir: D, r: 0.045, sided: true },
   wrist: { label: 'radial pulse', j: 'hand', to: 'forearm', t: 0.12, dir: [0, -0.7, 0.7], r: 0.02, sided: true },
   hand: { label: 'back of the hand', j: 'hand', to: 'finger', t: 0.55, dir: U, r: 0.035, sided: true },
@@ -110,6 +112,7 @@ export const SITES: Record<string, SiteDef> = {
   pulp: { label: 'fingertip pulp', j: 'hand', to: 'finger', t: 2.05, dir: D, r: 0.02, sided: true },
   ring: { label: 'ring finger', j: 'hand', to: 'ring', t: 1.6, dir: D, r: 0.02, sided: true },
   ringpulp: { label: 'ring finger pulp', j: 'hand', to: 'ring', t: 2.0, dir: D, r: 0.016, sided: true },
+  littlepulp: { label: 'little finger pulp', j: 'hand', to: 'little', t: 1.9, dir: D, r: 0.016, sided: true },
   thumb: { label: 'thumb', j: 'thumb', to: 'hand', t: -0.6, dir: U, r: 0.02, sided: true },
   web: { label: 'first web space', j: 'hand', to: 'thumb', t: 0.7, dir: U, r: 0.016, sided: true },
 
@@ -203,9 +206,9 @@ const REGIONS: { label: string; sites: string[] }[] = [
   { label: 'abdomen', sites: ['umbilicus', 'epigastrium', 'ruq', 'iliac', 'flank', 'suprapubic'] },
   { label: 'back', sites: ['spine', 'thoracic', 'paraspinal', 'sacrum', 'perianal'] },
   { label: 'shoulder', sites: ['shoulder', 'acromion', 'acjoint', 'clavicle', 'scjoint', 'tuberosity', 'bicipital'] },
-  { label: 'upper arm and elbow', sites: ['arm', 'badge', 'elbow'] },
+  { label: 'upper arm and elbow', sites: ['arm', 'badge', 'elbow', 'antecubital'] },
   { label: 'forearm and wrist', sites: ['forearm', 'wrist'] },
-  { label: 'hand', sites: ['hand', 'palm', 'nails', 'pulp', 'thumb', 'web', 'ring', 'ringpulp'] },
+  { label: 'hand', sites: ['hand', 'palm', 'nails', 'pulp', 'thumb', 'web', 'ring', 'ringpulp', 'littlepulp'] },
   { label: 'hip and groin', sites: ['hip', 'groin', 'asis'] },
   { label: 'thigh', sites: ['thigh', 'innerthigh'] },
   { label: 'knee', sites: ['knee', 'medialjoint', 'lateraljoint', 'tibialtub', 'fibula', 'popliteal'] },

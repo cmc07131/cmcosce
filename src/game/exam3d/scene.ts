@@ -2,6 +2,8 @@ import * as THREE from 'three'
 import { castPatient, type AvatarId, type PatientKind } from '../body3d/cast'
 import { DEG, aim, poseEyes, turn, type Credit, type Eyes, type Rig, type Side } from '../body3d/rig'
 import { COUCH, buildCouch, buildRoom, createRenderer } from '../body3d/stage'
+import { ExaminerHand, type Contact, type Grip } from './examiner'
+import type { Anim } from './manoeuvres'
 import { SITES, SITE_IDS, siteOf, type JointRef } from './sites'
 
 /**
@@ -31,6 +33,34 @@ export type Signs = {
   trendelenburg?: Side
   /** The pelvis is under a drape (intimate examinations). */
   drape?: boolean
+  /** Anterior interosseous nerve palsy on this side: the OK sign is a flat pinch. */
+  ain?: Side
+  /** Bending this elbow up kinks the artery: the hand goes pale. */
+  kinkOnFlex?: Side
+  /** Bruises seen once the skin there is exposed (site ids). */
+  bruise?: string[]
+}
+
+/** A hand shape: each finger's knuckle, middle and end joint flexion and its spread (toward the little finger); the
+ * thumb's sweep across the palm and its two joints; the wrist (positive: bent back). Degrees. */
+type HandShape = { f: [number, number, number, number][]; t: [number, number, number]; wrist?: number }
+const FIST: HandShape['f'] = [
+  [85, 95, 60, 0],
+  [85, 95, 60, 0],
+  [85, 95, 60, 0],
+  [85, 95, 60, 0],
+]
+const HANDS: Record<string, HandShape> = {
+  relaxed: { f: [[15, 20, 10, 0], [15, 22, 10, 0], [18, 24, 10, 0], [20, 25, 12, 0]], t: [10, 10, 10] },
+  fist: { f: FIST, t: [35, 35, 30] },
+  'thumbs-up': { f: FIST, t: [-15, 0, 0], wrist: 40 },
+  ok: { f: [[40, 70, 55, 0], [10, 10, 5, 2], [10, 10, 5, 4], [10, 10, 5, 8]], t: [45, 30, 40] },
+  // Anterior interosseous palsy: no flexion at the index end joint or the thumb's: a flat pinch, not a circle.
+  'ok-palsy': { f: [[55, 70, 0, 0], [10, 10, 5, 2], [10, 10, 5, 4], [10, 10, 5, 8]], t: [45, 25, 0] },
+  cross: { f: [[10, 10, 5, -4], [20, 12, 5, -22], [75, 85, 55, 0], [75, 85, 55, 0]], t: [35, 30, 25] },
+  opposition: { f: [[15, 15, 5, 0], [15, 15, 5, 0], [25, 25, 10, 0], [45, 45, 25, 6]], t: [75, 35, 20] },
+  spread: { f: [[5, 5, 0, -16], [5, 5, 0, -5], [5, 5, 0, 7], [5, 5, 0, 18]], t: [-20, 0, 0] },
+  extended: { f: [[-12, -4, 0, 0], [-12, -4, 0, 0], [-12, -4, 0, 0], [-12, -4, 0, 0]], t: [0, 0, 0] },
 }
 
 type Joints = Record<string, number>
@@ -143,6 +173,17 @@ export class ExamScene {
   private finger: THREE.Mesh
   private drape: THREE.Mesh | null = null
   private marks: { mesh: THREE.Mesh; t: number }[] = []
+  /** Each landmark's outward direction, in its bone's frame. */
+  private normals = new Map<string, THREE.Vector3>()
+  /** Hand shapes: which, and how far into it (0 relaxed … 1). */
+  private hands: Record<Side, { name: string; w: number; want: number }> = { L: { name: 'relaxed', w: 0, want: 0 }, R: { name: 'relaxed', w: 0, want: 0 } }
+  /** A manoeuvre being shown. */
+  private act: { anim: Anim; site: string | null; side: Side; t: number; dur: number; lift0: number } | null = null
+  private examiner: ExaminerHand
+  private paleNow = { fingersL: 0, handL: 0, fingersR: 0, handR: 0 }
+  private bruises: THREE.Mesh[] = []
+  /** Seconds a capillary refill takes to come back, by side. */
+  refill: Record<Side, number> = { L: 1.2, R: 1.2 }
   ready: Promise<void>
   onFrame: ((dt: number) => void) | null = null
 
@@ -164,6 +205,7 @@ export class ExamScene {
     this.finger = new THREE.Mesh(new THREE.CapsuleGeometry(0.008, 0.05, 6, 12), new THREE.MeshStandardMaterial({ color: '#e8b89a', roughness: 0.6 }))
     this.finger.visible = false
     this.scene.add(this.finger)
+    this.examiner = new ExaminerHand(this.scene)
     this.ready = castPatient(kind, look).then(({ rig, credit }) => {
       if (this.disposed) return rig.dispose()
       this.rig = rig
@@ -173,6 +215,7 @@ export class ExamScene {
       this.bind = new Map(rig.bones.map((b) => [b, b.quaternion.clone()]))
       this.body.add(rig.root)
       if (signs.drape) this.addDrape(rig)
+      for (const id of signs.bruise ?? []) this.addBruise(id)
       this.applyPose()
       this.body.updateMatrixWorld(true)
       rig.settle()
@@ -200,6 +243,8 @@ export class ExamScene {
         return rig[j]
       case 'ring':
         return rig.ring[side] ?? rig.finger[side]
+      case 'little':
+        return rig.digits[side][4]?.[0] ?? rig.ring[side] ?? rig.finger[side]
       case 'finger':
       case 'thumb':
       case 'toe':
@@ -253,6 +298,7 @@ export class ExamScene {
       bone.add(anchor)
       anchor.position.copy(bone.worldToLocal(point.clone()))
       this.anchors.set(id, anchor)
+      this.normals.set(id, (hit?.face?.normal ? hit.face.normal.clone().transformDirection(hit.object.matrixWorld) : dir.clone()).applyQuaternion(bone.getWorldQuaternion(new THREE.Quaternion()).invert()).normalize())
     }
   }
 
@@ -300,6 +346,203 @@ export class ExamScene {
   /** Uncover parts of the body (0 covered … 1 bare): trunk, arms, legs and feet. */
   expose(parts: { trunk: number; arms: number; legs: number }) {
     this.rig?.expose(parts)
+  }
+
+  /** Show a manoeuvre being done; returns how long it takes (seconds). */
+  perform(anim: Anim, site: string | null, side: Side): number {
+    const dur: Record<string, number> = { inspect: 2.2, look: 1.6, warmth: 2.6, crt: 3.6, pulse: 3.2, doppler: 3.2, touch: 2.4, pin: 2.4, squeeze: 2.8, stretch: 3.2, 'elbow-flex': 3.4, 'elbow-straighten': 2.6 }
+    const d = anim.startsWith('pose:') ? 3.4 : (dur[anim] ?? 2)
+    this.act = { anim, site, side, t: 0, dur: d, lift0: this.held[`shoulderflex-${side}`] ?? this.angle(`shoulderflex-${side}`) }
+    if (anim === 'inspect') {
+      this.rig?.expose({ trunk: 0, arms: 1, legs: 0 })
+      for (const b of this.bruises) b.visible = true
+    }
+    if (anim.startsWith('pose:')) {
+      const name = anim.slice(5)
+      this.hands[side] = { name: name === 'ok' && this.signs.ain === side ? 'ok-palsy' : name, w: this.hands[side].name === name ? this.hands[side].w : 0, want: 1 }
+    }
+    if (anim === 'stretch') this.hands[side] = { name: 'extended', w: 0, want: 1 }
+    return d
+  }
+
+  get acting() {
+    return this.act !== null
+  }
+
+  private addBruise(id: string) {
+    const a = this.anchors.get(id)
+    const n = this.normals.get(id)
+    if (!a || !n) return
+    const tex = (() => {
+      const c = document.createElement('canvas')
+      c.width = c.height = 64
+      const g = c.getContext('2d')
+      if (g) {
+        const grd = g.createRadialGradient(32, 32, 4, 32, 32, 30)
+        grd.addColorStop(0, 'rgba(92,40,96,0.85)')
+        grd.addColorStop(0.55, 'rgba(120,60,110,0.55)')
+        grd.addColorStop(1, 'rgba(150,110,90,0)')
+        g.fillStyle = grd
+        g.fillRect(0, 0, 64, 64)
+      }
+      return new THREE.CanvasTexture(c)
+    })()
+    const m = new THREE.Mesh(new THREE.CircleGeometry(0.022 * this.scale, 20), new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -4 }))
+    a.add(m)
+    m.scale.setScalar(1 / a.getWorldScale(v(0, 0, 0)).x)
+    m.position.copy(n.clone().multiplyScalar(0.002 / a.getWorldScale(v(0, 0, 0)).x))
+    m.quaternion.setFromUnitVectors(v(0, 0, 1), n)
+    m.visible = false
+    this.bruises.push(m)
+  }
+
+  /** The shown manoeuvre, frame by frame: the examiner's hand in and out, the skin's colour, the joint that moves. */
+  private updateAct(dt: number) {
+    const R = this.rig
+    const a = this.act
+    // Hand shapes ease in and out.
+    for (const side of SIDES) {
+      const h = this.hands[side]
+      h.w += Math.sign(h.want - h.w) * Math.min(Math.abs(h.want - h.w), dt * 3.5)
+    }
+    let pale = { fingersL: 0, handL: 0, fingersR: 0, handR: 0 }
+    if (R && a) {
+      a.t += dt
+      const k = a.t / a.dur
+      const into = Math.min(1, a.t / 0.45)
+      const out = Math.min(1, Math.max(0, (a.dur - a.t) / 0.45))
+      const gap = 0.14 * (1 - Math.min(into, out))
+      const site = a.site
+      const point = site ? this.siteWorld(site) : null
+      const nLocal = site ? this.normals.get(site) : null
+      const anchor = site ? this.anchors.get(site) : null
+      const normal = nLocal && anchor ? nLocal.clone().applyQuaternion(anchor.parent!.getWorldQuaternion(new THREE.Quaternion())).normalize() : v(0, 1, 0)
+      const along = R.hand[a.side].getWorldPosition(v(0, 0, 0)).sub(R.forearm[a.side].getWorldPosition(v(0, 0, 0))).normalize()
+      const show = (grip: Grip, contact: Contact, extra = 0) => {
+        this.examiner.setGrip(grip)
+        if (point) this.examiner.place(point, normal, along, contact, gap + extra)
+      }
+      switch (a.anim) {
+        case 'pulse':
+          show('two-fingers', 'fingertips')
+          break
+        case 'doppler':
+          show('doppler', 'tool')
+          break
+        case 'crt': {
+          show('thumb', 'thumb', a.t > a.dur - 1.6 ? 0.03 : 0)
+          // Pressed white for the press, then the colour comes back over the refill time.
+          const pressEnd = a.dur - 1.6
+          const blanch = a.t < 0.45 ? 0 : a.t < pressEnd ? Math.min(1, (a.t - 0.45) / 0.5) : Math.max(0, 1 - (a.t - pressEnd) / this.refill[a.side])
+          if (a.side === 'L') pale.fingersL = blanch
+          else pale.fingersR = blanch
+          break
+        }
+        case 'warmth':
+          if (point) point.addScaledVector(along, 0.03 * Math.sin(k * Math.PI * 2))
+          show('back', 'back')
+          break
+        case 'touch':
+          show('cotton', 'tool', 0.012 * Math.max(0, Math.sin(k * Math.PI * 4)))
+          break
+        case 'pin':
+          show('neurotip', 'tool', 0.012 * Math.max(0, Math.sin(k * Math.PI * 4)))
+          break
+        case 'squeeze':
+          show('cup', 'palm', -0.004 * Math.max(0, Math.sin(k * Math.PI * 4)))
+          break
+        case 'stretch':
+          show('flat', 'palm')
+          break
+        case 'elbow-flex': {
+          const up = k < 0.45 ? smooth(k / 0.45) : k < 0.7 ? 1 : 1 - smooth((k - 0.7) / 0.3)
+          this.held[`elbow-${a.side}`] = this.restElbow[a.side] + (135 - this.restElbow[a.side]) * up
+          this.eyes.distress = up
+          break
+        }
+        case 'elbow-straighten': {
+          const down = Math.sin(Math.PI * Math.min(1, k))
+          this.held[`elbow-${a.side}`] = this.restElbow[a.side] - (this.restElbow[a.side] - 35) * down * 0.8
+          this.eyes.distress = down
+          this.eyes.squint = down * 0.6
+          break
+        }
+        default:
+          // Asked to do something with the hand, he lifts it up in front to show you.
+          if (a.anim.startsWith('pose:')) this.held[`shoulderflex-${a.side}`] = a.lift0 + (55 - a.lift0) * smooth(Math.min(into, out))
+          this.examiner.hide()
+      }
+      if (!['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch'].includes(a.anim)) this.examiner.hide()
+      if (a.t >= a.dur) {
+        this.examiner.hide()
+        if (a.anim.startsWith('pose:') || a.anim === 'stretch') this.hands[a.side].want = 0
+        if (a.anim.startsWith('pose:')) this.held[`shoulderflex-${a.side}`] = a.lift0
+        if (a.anim.startsWith('elbow')) {
+          this.held[`elbow-${a.side}`] = this.restElbow[a.side]
+          this.eyes.distress = 0
+          this.eyes.squint = 0
+        }
+        this.act = null
+      }
+    }
+    // A bent elbow that kinks the artery: the hand goes pale while it is bent.
+    const kink = this.signs.kinkOnFlex
+    if (kink) {
+      const bend = this.angle(`elbow-${kink}`)
+      const white = Math.max(0, Math.min(1, (bend - 100) / 25))
+      if (kink === 'L') pale.handL = Math.max(pale.handL, white)
+      else pale.handR = Math.max(pale.handR, white)
+    }
+    pale = {
+      fingersL: lerp(this.paleNow.fingersL, pale.fingersL, Math.min(1, dt * 8)),
+      handL: lerp(this.paleNow.handL, pale.handL, Math.min(1, dt * 3)),
+      fingersR: lerp(this.paleNow.fingersR, pale.fingersR, Math.min(1, dt * 8)),
+      handR: lerp(this.paleNow.handR, pale.handR, Math.min(1, dt * 3)),
+    }
+    this.paleNow = pale
+    R?.pale(pale)
+  }
+
+  /** Where the elbows rest (degrees), for putting them back after a manoeuvre. */
+  restElbow: Record<Side, number> = { L: 70, R: 70 }
+
+  /** Bend each finger of a hand into its shape for this frame. */
+  private poseFingers(R: Rig, side: Side) {
+    const h = this.hands[side]
+    const relaxed = HANDS.relaxed
+    const shape = HANDS[h.name] ?? relaxed
+    const w = smooth(Math.max(0, Math.min(1, h.w)))
+    const digits = R.digits[side]
+    if (!digits.length) return
+    const rel = R.hand[side].getWorldQuaternion(new THREE.Quaternion()).multiply(this.body.quaternion.clone().multiply(R.handBind[side]).invert())
+    const world = (x: number, y: number, z: number) => v(x, y, z).applyQuaternion(this.body.quaternion).applyQuaternion(rel).normalize()
+    // Bind: arms out, palms down, thumbs forward.
+    const palm = world(0, -1, 0)
+    const along = world(side === 'L' ? 1 : -1, 0, 0)
+    const ulnar = world(0, 0, -1)
+    const radial = world(0, 0, 1)
+    const turnAbout = (bone: THREE.Object3D, axis: THREE.Vector3, deg: number) => {
+      if (Math.abs(deg) > 0.01) turn(bone, new THREE.Quaternion().setFromAxisAngle(axis, deg * DEG))
+    }
+    for (let d = 1; d < 5; d++) {
+      const bones = digits[d]
+      if (!bones?.length) continue
+      const want = shape.f[d - 1]
+      const base = relaxed.f[d - 1]
+      const ang = want.map((x, i) => lerp(base[i], x, w))
+      turnAbout(bones[0], along.clone().cross(ulnar).normalize(), ang[3])
+      bones.forEach((b, i) => turnAbout(b, along.clone().cross(palm).normalize(), ang[i]))
+    }
+    const thumb = digits[0]
+    if (thumb?.length) {
+      const t = relaxed.t.map((x, i) => lerp(x, shape.t[i], w))
+      turnAbout(thumb[0], radial.clone().cross(palm).normalize(), t[0])
+      thumb.slice(1).forEach((b, i) => {
+        const child = thumb[i + 2]
+        const dir = child ? child.getWorldPosition(v(0, 0, 0)).sub(b.getWorldPosition(v(0, 0, 0))).normalize() : along
+        turnAbout(b, dir.clone().cross(palm).normalize(), t[i + 1])
+      })
+    }
   }
 
   /** A painful stimulus: she responds as her signs say. */
@@ -439,6 +682,12 @@ export class ExamScene {
           j.shrug = 12 * env
           break
       }
+    }
+    // A hand shape can bend the wrist back (thumbs up).
+    for (const s of SIDES) {
+      const h = this.hands[s]
+      const wrist = HANDS[h.name]?.wrist
+      if (wrist) j[`wrist-${s}`] = lerp(j[`wrist-${s}`] ?? 0, wrist, smooth(Math.max(0, Math.min(1, h.w))))
     }
     // A painful stimulus, unconscious: the arms flex across the chest, or extend and turn in; the legs extend.
     if (this.stimT >= 0 && S.posturing && S.posturing !== 'localises') {
@@ -642,6 +891,7 @@ export class ExamScene {
       }
     }
 
+    for (const s of SIDES) this.poseFingers(R, s)
     poseEyes(R, this.bind, this.body, this.faceAt())
   }
 
@@ -910,6 +1160,7 @@ export class ExamScene {
       if (this.stimT > 6) this.stimT = -1
     }
     this.onFrame?.(dt)
+    this.updateAct(dt)
     this.applyPose()
     if (this.rig) {
       this.body.updateMatrixWorld(true)
