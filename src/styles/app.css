@@ -503,6 +503,20 @@ button {
   border-bottom: 2px solid #b8b8c8;
 }
 
+/* A station the author has personally reviewed. */
+.reviewed-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 4px 1px;
+  border-radius: 3px;
+  background: var(--color-mint);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
 .nav-need {
   display: block;
   font-size: 7px;

@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { packCatalog, packInfo } from '~/engine/loadPacks'
 import { WORLD } from '~/world/data'
 import { useProgress } from '~/world/progress'
+import { isReviewed } from '~/world/reviewed'
 import { NavItem, Win, useCursor } from '~/game/ui'
 
 export const Route = createFileRoute('/gym')({
@@ -55,6 +56,7 @@ function GymPage() {
                   </span>
                   {done ? '✓ ' : ''}
                   {pack.title}
+                  {isReviewed(pack.packId) && <span className="reviewed-tag">REVIEWED</span>}
                   <span className="nav-need">
                     {type.label} · {Math.round(pack.timeLimitSec / 60)} MIN
                   </span>

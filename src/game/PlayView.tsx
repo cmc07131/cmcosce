@@ -13,6 +13,7 @@ import { PerformStage } from './Perform'
 /** The physical examination on a 3D patient (three.js): loaded only when a station's exam is written for it. */
 const Exam3D = lazy(() => import('./exam3d/Exam3D'))
 import { Screen, type ScreenHandle, type Walk } from './Screen'
+import { isReviewed } from '~/world/reviewed'
 import { useSettings } from './settings'
 import { sfx } from './sfx'
 import { StartMenu } from './StartMenu'
@@ -497,6 +498,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
         </div>
         <p className="bezel-label">
           OSCE GYM <span>·</span> <b>{pack.title.toUpperCase()}</b>
+          {isReviewed(pack.packId) && <span className="reviewed-tag">REVIEWED</span>}
         </p>
       </div>
       {!performing && !exam3d && <Controller />}

@@ -52,6 +52,8 @@ export type ScreenHandle = {
 }
 
 const STEP_MS = 190
+/** Staff on an errand walk briskly: waiting for them is not the exam. */
+const NPC_STEP_MS = 110
 
 type Visual = { x: number; y: number; facing: Dir; frame: number; bob: number }
 type Glide = { sx: number; sy: number; tx: number; ty: number; facing: Dir; t: number; stride: number }
@@ -467,7 +469,7 @@ export const Screen = forwardRef<
     w.to = null
     w.t = 0
     w.path = best ?? []
-    w.deadline = performance.now() + w.path.length * STEP_MS * 1.25 + 1500
+    w.deadline = performance.now() + w.path.length * NPC_STEP_MS + 1500
   }
 
   function arriveAt(npcId: string, w: Walker) {
@@ -487,7 +489,7 @@ export const Screen = forwardRef<
     setTagTiles({ ...npcTile.current })
     cb.current.onWalkStop?.(w.token, w.index, npcId)
     // A short pause to pick up or hand over; none when coming to talk or going home.
-    w.pauseUntil = performance.now() + (stop.startsWith('@') ? 0 : 800)
+    w.pauseUntil = performance.now() + (stop.startsWith('@') ? 0 : 400)
     w.path = []
     w.to = null
     w.index += 0.5 // marks "arrived, waiting"; the next whole index is planned after the pause
@@ -518,7 +520,7 @@ export const Screen = forwardRef<
         w.t = 0
         npcVis.current[npcId] = { ...npcVis.current[npcId], facing: facingBetween(w.from, next) }
       }
-      w.t += dt / (STEP_MS * 1.25)
+      w.t += dt / NPC_STEP_MS
       const t = Math.min(1, w.t)
       npcVis.current[npcId] = { x: w.from.x + (w.to.x - w.from.x) * t, y: w.from.y + (w.to.y - w.from.y) * t, facing: npcVis.current[npcId].facing }
       if (t >= 1) {

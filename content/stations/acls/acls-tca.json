@@ -754,15 +754,11 @@
       "to": "examiner",
       "label": "Your plan",
       "ask": "Tell me where she goes and how you would have managed her if she had been well.",
-      "hint": "Disposition, the well-patient pathway, and documentation.",
+      "hint": "Disposition and the well-patient pathway.",
       "opts": [
         {
           "t": "She goes to ICU. Had she been alert with a normal ECG, I would monitor for 6 hours from ingestion, then refer to psychiatry.",
           "mark": "ICU; an alert patient with a normal ECG is monitored 6 hours, then psychiatry"
-        },
-        {
-          "t": "I document the times, and the ECGs before and after bicarbonate.",
-          "mark": "Documents times and the pre- and post-bicarbonate ECGs"
         },
         {
           "t": "Physostigmine once she is on ICU to wake her up",

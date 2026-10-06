@@ -12,6 +12,7 @@ import { fastRuq } from '../game/imaging/ultrasound'
 import { faultsFor, usePlay } from '../game/store'
 import { currentPhase, dueEvents, nextHint, untreatedEvents } from './judge'
 import { worldSchema } from '../world/model'
+import { REVIEWED } from '../world/reviewed'
 import { BENCH_SCENES, packSchema } from './schema'
 import { compileStation, stationCards, stationSchema, type Station } from './station'
 import { hasOutput, vitalsAt } from './vitals'
@@ -397,4 +398,12 @@ test('every station has phases, and every step outside the examiner’s end belo
       assert.ok(phased.has(s.id), `${st.id}: step ${s.id} is in no phase`)
     }
   }
+})
+
+test('reviewed: every station marked as reviewed exists', () => {
+  const ids = new Set([
+    ...files.map((f) => JSON.parse(readFileSync(f, 'utf8')).id as string),
+    ...readdirSync(join(process.cwd(), 'content', 'packs')),
+  ])
+  for (const id of REVIEWED) assert.ok(ids.has(id), `reviewed: no station "${id}"`)
 })

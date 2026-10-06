@@ -1,6 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { packInfo } from '~/engine/loadPacks'
+import { isReviewed } from './reviewed'
 import type { Pos } from '~/engine/schema'
 import { Controller } from '~/game/Controller'
 import { press, useButtons } from '~/game/input'
@@ -237,6 +238,7 @@ function GymWindow({ gym, onClose, onPlay }: { gym: Gym; onClose: () => void; on
               <NavItem key={id} testId={`gym-station-${id}`} tone={cleared.includes(id) ? 'done' : undefined} onClick={() => onPlay(id)}>
                 {cleared.includes(id) ? '✓ ' : ''}
                 {pack?.title ?? id}
+                {isReviewed(id) && <span className="reviewed-tag">REVIEWED</span>}
                 <span className="nav-need">{cleared.includes(id) ? 'CLEARED' : 'NOT DONE YET'}</span>
               </NavItem>
             )
