@@ -231,7 +231,7 @@ export type NextHint = { kind: 'do'; actionId: string; targetId: string; option:
 
 /**
  * Guided mode: the next thing to do in the perfect script. Walks the phases (or the script order) and returns
- * the first scoring option not yet used whose moment has come. Examiner steps are left to the examiner. When
+ * the first scoring option not yet used whose moment has come. Steps the examiner prompts are left to them. When
  * everything left is waiting on the patient (a seizure, VT), it says to watch.
  */
 export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: string[]): NextHint | null {
@@ -239,7 +239,8 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
   let waiting = false
   for (const id of order) {
     const a = pack.actions.find((x) => x.id === id)
-    if (!a || a.kind === 'viva' || a.kind === 'monitor' || a.targetIds.includes('examiner')) continue
+    // The examiner's own end (what they prompt, and the viva) waits for them; a report you take to them does not.
+    if (!a || a.kind === 'viva' || a.kind === 'monitor' || (a.ask && a.targetIds.includes('examiner'))) continue
     const used = new Set(spent[a.id] ?? [])
     const turnDone = new Set((a.options ?? []).filter((o) => used.has(o.id)).map((o) => o.group))
     for (const o of a.options ?? []) {

@@ -407,3 +407,16 @@ test('reviewed: every station marked as reviewed exists', () => {
   ])
   for (const id of REVIEWED) assert.ok(ids.has(id), `reviewed: no station "${id}"`)
 })
+
+test('a report you take to the examiner comes before the examiner comes over for the viva', () => {
+  const st = stationSchema.parse(JSON.parse(readFileSync(join(process.cwd(), 'content', 'stations', 'paedi', 'pd-supracondylar.json'), 'utf8')))
+  const pack = compileStation(st)
+  // Everything done except the findings report (and the examiner's own end).
+  const spent: Record<string, string[]> = {}
+  for (const a of pack.actions) {
+    if (a.id === 'findings' || a.kind === 'viva') continue
+    spent[a.id] = [...(a.options ?? []).map((o) => o.id), ...(a.findings ?? []).map((f) => f.id)]
+  }
+  const hint = nextHint(pack, spent, [])
+  assert.equal(hint?.kind === 'do' ? hint.actionId : hint?.kind, 'findings')
+})
