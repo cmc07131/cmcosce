@@ -61,6 +61,8 @@ export const bodySchema = z.object({
   focus: z.array(z.string()).optional(),
   /** Joint angles the patient holds (degrees), e.g. a painful elbow kept bent: `{ "elbow-L": 70 }`. */
   holds: z.record(z.string(), z.number()).optional(),
+  /** What each focus manoeuvre shows on its own (e.g. one hand of a both-hands item), keyed by its focus entry. */
+  findings: z.record(z.string(), z.string()).optional(),
 })
 
 const optionSchema = z.object({

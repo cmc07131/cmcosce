@@ -9,7 +9,7 @@ import { buzz, sfx } from '../sfx'
 import { CORE_TOOLS, SAYS, sayOf, toolById, TOOLS, type SayDef } from './catalog'
 import { Illustration, illustrationFor, type IllustrationKind } from './Illustration'
 import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from './hints'
-import { eventOf, offerOf, type Offer } from './manoeuvres'
+import { GROUPS as FRAMEWORK, eventOf, offerOf, type Offer } from './manoeuvres'
 import { advance, freshProgress, matches, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, HANDS, type Limb, type Posture, type View } from './scene'
 import { regionOf, siteLabel, siteOf, spotLabel } from './sites'
@@ -183,9 +183,10 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   /* ---------------------------------------------------------------- one thing done to the patient */
 
-  function handle(ev: Omit<ExamEvent, 'state'>, point?: Vector3) {
+  /** Take an event; true if it completed an item. */
+  function handle(ev: Omit<ExamEvent, 'state'>, point?: Vector3): boolean {
     const s = scene.current
-    if (!s) return
+    if (!s) return false
     const state = { posture: s.posture, joints: s.angles(), flags: [...(flags.current.touched ? [] : ['untouched']), ...(flags.current.gloved ? ['gloved'] : [])] }
     const event: ExamEvent = { ...ev, state }
     if (TOUCH.has(ev.tool)) flags.current.touched = true
@@ -241,6 +242,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       sound(ev.tool, site, '')
     }
     if (point) s.mark(point, hit ? (hit.option.isTrap ? '#ff5a5a' : '#58f878') : '#ffd34d')
+    return !!hit
   }
 
   function sound(t: string, site: string | null, finding: string) {
@@ -344,6 +346,39 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     return hand ? [...here, ...offers.filter((o) => !o.site)] : here
   }
 
+  /** Which one this is, when the same manoeuvre is offered elsewhere: the side, the spot, or both. */
+  function offerWhere(o: Offer, list: Offer[]) {
+    if (!o.site) return ''
+    const same = list.filter((x) => x.def === o.def && x.site)
+    if (same.length < 2) return ''
+    const sideOf = (id: string) => (id.endsWith('-L') ? 'left' : id.endsWith('-R') ? 'right' : '')
+    const sides = new Set(same.map((x) => sideOf(x.site!)))
+    const spots = new Set(same.map((x) => spotLabel(x.site!)))
+    const parts = [sides.size > 1 ? sideOf(o.site) : '', spots.size > 1 ? spotLabel(o.site) : ''].filter(Boolean)
+    return parts.length ? ` — ${parts.join(' ')}` : ''
+  }
+
+  /** Manoeuvres under the framework's headings: look, feel, move, neurovascular. */
+  function framework(list: Offer[]) {
+    return FRAMEWORK.map(({ id, title }) => {
+      const here = list.filter((o) => o.def.group === id)
+      if (!here.length) return null
+      return (
+        <div key={id} className="mb-2">
+          <p className="m-0 mb-1 font-[Press_Start_2P,monospace] text-[8px] text-[#8a5a00]">{title}</p>
+          <div className="flex flex-col gap-1.5">
+            {here.map((o) => (
+              <button key={o.key} type="button" disabled={busy} data-testid={`exam3d-m-${o.key}`} onClick={() => perform(o)} className={`rounded-md border-2 px-3 py-2 text-left text-[14px] leading-snug shadow-[0_2px_0_rgba(0,0,0,0.25)] border-[#5a6470] bg-white disabled:opacity-50${glowing(`exam3d-m-${o.key}`)}`}>
+                {o.def.label}
+                {offerWhere(o, list)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )
+    })
+  }
+
   /** Do a manoeuvre: watch it done, then the finding. */
   function perform(o: Offer) {
     const s = scene.current
@@ -363,8 +398,10 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     const when = o.def.say ? dur * 0.6 : dur - 0.3
     later(when, () => {
       setBusy(false)
-      // A ring where your hands were; nothing to mark for something he does himself.
-      handle(eventOf(o), o.def.say ? undefined : (s.siteWorld(at) ?? undefined))
+      // The animation shows what you did: no ring to mark it.
+      // Not an item by itself (one hand of two): what this manoeuvre found.
+      const own = body.findings?.[o.key]
+      if (!handle(eventOf(o)) && own) setNote({ text: own, tone: 'normal' })
     })
   }
 
@@ -474,9 +511,11 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     if (focused) {
       const o = offers.find((x) => matches({ ...hintAct, conds: [] }, { ...eventOf(x), state }))
       if (!o) return
-      if (o.site) openRegion(o.site)
-      else setPanel({ kind: 'talk' })
-      window.setTimeout(() => setGlowId(`exam3d-m-${o.key}`), 30)
+      setPanel(null)
+      window.setTimeout(() => {
+        setGlowId(`exam3d-m-${o.key}`)
+        document.querySelector(`[data-testid="exam3d-m-${o.key}"]`)?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+      }, 30)
       return
     }
     const need = unmet(hintAct, state)
@@ -630,23 +669,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
                   ✕ Close
                 </button>
               </div>
-              {(['Look', 'Feel', 'Move', 'Ask'] as const).map((g) => {
-                const list = offersIn(panel.spot).filter((o) => o.def.group === g)
-                if (!list.length) return null
-                return (
-                  <div key={g} className="mb-2">
-                    <p className="m-0 mb-1 font-[Press_Start_2P,monospace] text-[7px] text-[#8a5a00]">{g.toUpperCase()}</p>
-                    <div className="flex flex-col gap-1.5">
-                      {list.map((o) => (
-                        <button key={o.key} type="button" disabled={busy} data-testid={`exam3d-m-${o.key}`} onClick={() => perform(o)} className={`${big} border-[#5a6470] bg-white disabled:opacity-50${glowing(`exam3d-m-${o.key}`)}`}>
-                          {o.def.label}
-                          {o.site && list.filter((x) => x.def === o.def).length > 1 ? ` — ${spotLabel(o.site)}` : ''}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )
-              })}
+              {framework(offersIn(panel.spot))}
             </div>
           )}
 
@@ -708,26 +731,6 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
                   </button>
                 </div>
               )}
-            </div>
-          )}
-
-          {focused && panel?.kind === 'talk' && (
-            <div data-testid="exam3d-ask">
-              <div className="mb-1 flex items-center justify-between">
-                <b className="font-[Press_Start_2P,monospace] text-[9px]">ASK {name.toUpperCase()} TO…</b>
-                <button type="button" className="rounded border-2 border-[#5a6470] bg-white px-2 py-1 text-[13px]" onClick={() => setPanel(null)}>
-                  ✕ Close
-                </button>
-              </div>
-              <div className="flex flex-col gap-1.5">
-                {offers
-                  .filter((o) => !o.site)
-                  .map((o) => (
-                    <button key={o.key} type="button" disabled={busy} data-testid={`exam3d-m-${o.key}`} onClick={() => perform(o)} className={`${big} border-[#5a6470] bg-white disabled:opacity-50${glowing(`exam3d-m-${o.key}`)}`}>
-                      {o.def.label}
-                    </button>
-                  ))}
-              </div>
             </div>
           )}
 
@@ -793,16 +796,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
             </div>
           )}
 
-          {focused && !panel && (
-            <div className="grid grid-cols-1 gap-1.5">
-              <button type="button" data-testid="exam3d-talk" onClick={() => (sfx.cursor(), setPanel({ kind: 'talk' }))} className={`${big} flex items-center gap-2 border-[#181820] bg-[#ffe9a8]`}>
-                <span className="text-[20px]" aria-hidden>
-                  💬
-                </span>
-                Ask {name} to move his hand
-              </button>
-            </div>
-          )}
+          {focused && !panel && <div data-testid="exam3d-framework">{framework(offers)}</div>}
 
           {!focused && !panel && (
             <div className="grid grid-cols-2 gap-1.5">

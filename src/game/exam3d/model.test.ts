@@ -56,7 +56,7 @@ test('exam3d: hints say the next act in words, and what must come first', async 
   let progress = freshProgress(plan)
   assert.equal(actWords(nextAct(plan, progress)!), 'Feel: the left radial pulse')
   ;({ progress } = advance(plan, progress, ev('feel', 'wrist-L')))
-  assert.equal(actWords(nextAct(plan, progress)!), 'Press: the left fingertip pulp or the left nails')
+  assert.equal(actWords(nextAct(plan, progress)!), 'Press: the left index fingertip or the left nails')
   assert.equal(actWords(parseDo("say ok-sign")[0][0][0]), "Ask: “Make an 'OK' sign”")
   const lachman = parseDo('feel shin-R @knee-R=15..35')[0][0][0]
   assert.equal(actWords(lachman), 'Feel: the right shin (with the right knee bent 15–35°)')

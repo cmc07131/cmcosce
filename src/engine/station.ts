@@ -459,6 +459,8 @@ export function compileStation(station: Station): Pack {
   }
 
   // A focused examination offers only real manoeuvres at real places.
+  for (const key of Object.keys(station.body?.findings ?? {}))
+    if (!(station.body?.focus ?? []).includes(key)) throw new Error(`${station.id}: finding for "${key}", which is not in the focus list`)
   for (const entry of station.body?.focus ?? []) {
     const o = offerOf(entry)
     if (!o) throw new Error(`${station.id}: focus "${entry}" is not a manoeuvre`)

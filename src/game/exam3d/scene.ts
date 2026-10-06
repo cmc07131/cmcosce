@@ -4,7 +4,7 @@ import { DEG, aim, poseEyes, turn, type Credit, type Eyes, type Rig, type Side }
 import { COUCH, buildCouch, buildRoom, createRenderer } from '../body3d/stage'
 import { ExaminerHand, type Contact, type Grip } from './examiner'
 import type { Anim } from './manoeuvres'
-import { SITES, SITE_IDS, siteOf, type JointRef } from './sites'
+import { SITES, SITE_IDS, siteOf, type DigitRef, type JointRef } from './sites'
 
 /**
  * The 3D examination: the patient on the couch (or sitting on its edge, standing, walking), posed from anatomical
@@ -52,6 +52,9 @@ const FIST: HandShape['f'] = [
   [85, 95, 60, 0],
   [85, 95, 60, 0],
 ]
+/** Manoeuvres done with the examiner's hand. */
+const HANDS_ON = new Set<string>(['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch'])
+
 export const HANDS: Record<string, HandShape> = {
   relaxed: { f: [[15, 20, 10, 0], [15, 22, 10, 0], [18, 24, 10, 0], [20, 25, 12, 0]], t: [10, 10, 10] },
   fist: { f: FIST, t: [35, 35, 30] },
@@ -236,6 +239,11 @@ export class ExamScene {
   /* ------------------------------------------------------------------ landmarks */
 
   private jointOf(rig: Rig, j: JointRef, side: Side): THREE.Object3D | undefined {
+    const digit = j.match(/^(thumb|index|middle|ring|little)(1|2|3|Tip)$/)
+    if (digit) {
+      const bones = rig.digits[side][['thumb', 'index', 'middle', 'ring', 'little'].indexOf(digit[1])]
+      return bones?.[digit[2] === 'Tip' ? 2 : Number(digit[2]) - 1] ?? rig.finger[side]
+    }
     switch (j) {
       case 'eyes':
       case 'head':
@@ -257,13 +265,22 @@ export class ExamScene {
       case 'clavicle':
         return rig[j][side]
       default:
-        return rig[j][side]
+        return rig[j as Exclude<JointRef, DigitRef | 'eyes' | 'eye' | 'head' | 'hips' | 'spine' | 'chest' | 'neck' | 'ring' | 'little'>][side]
     }
   }
 
   /** Where a joint reference is, in the bind pose (the rig not yet parented: its own frame). */
   private pointOf(rig: Rig, j: JointRef, side: Side) {
     if (j === 'eyes') return rig.eye.L.getWorldPosition(v(0, 0, 0)).add(rig.eye.R.getWorldPosition(v(0, 0, 0))).multiplyScalar(0.5)
+    // A fingertip: past the end bone by most of its length.
+    const tip = j.match(/^(thumb|index|middle|ring|little)Tip$/)
+    if (tip) {
+      const bones = rig.digits[side][['thumb', 'index', 'middle', 'ring', 'little'].indexOf(tip[1])]
+      if (bones?.length === 3) {
+        const end = bones[2].getWorldPosition(v(0, 0, 0))
+        return end.clone().add(end.clone().sub(bones[1].getWorldPosition(v(0, 0, 0))).multiplyScalar(0.85))
+      }
+    }
     return this.jointOf(rig, j, side)?.getWorldPosition(v(0, 0, 0)) ?? null
   }
 
@@ -297,7 +314,9 @@ export class ExamScene {
           const mat = (h.object as THREE.Mesh).material
           return !(Array.isArray(mat) ? mat[h.face?.materialIndex ?? 0] : mat)?.transparent
         })
-      const hit = hits.sort((a, b) => a.point.distanceTo(at) - b.point.distanceTo(at))[0]
+      // Prefer the surface on the side the spot faces (a fingertip's pad, not its nail).
+      const facing = hits.filter((h) => h.point.clone().sub(at).dot(dir) > -0.002 * k)
+      const hit = (facing.length ? facing : hits).sort((a, b) => a.point.distanceTo(at) - b.point.distanceTo(at))[0]
       const point = hit ? hit.point : at
       const anchor = new THREE.Object3D()
       anchor.name = id
@@ -359,7 +378,8 @@ export class ExamScene {
     const dur: Record<string, number> = { inspect: 2.2, look: 1.6, warmth: 2.6, crt: 3.6, pulse: 3.2, doppler: 3.2, touch: 2.4, pin: 2.4, squeeze: 2.8, stretch: 3.2, 'elbow-flex': 3.4, 'elbow-straighten': 2.6 }
     const d = anim.startsWith('pose:') ? 3.4 : (dur[anim] ?? 2)
     this.act = { anim, site, side, t: 0, dur: d, lift0: this.held[`shoulderflex-${side}`] ?? this.angle(`shoulderflex-${side}`) }
-    if (anim === 'inspect') {
+    // Looking, or laying hands on the arm: the sleeves rolled up.
+    if (anim === 'inspect' || HANDS_ON.has(anim)) {
       this.rig?.expose({ trunk: 0, arms: 1, legs: 0 })
       for (const b of this.bruises) b.visible = true
     }
@@ -418,15 +438,16 @@ export class ExamScene {
       const into = Math.min(1, a.t / 0.45)
       const out = Math.min(1, Math.max(0, (a.dur - a.t) / 0.45))
       const gap = 0.14 * (1 - Math.min(into, out))
-      const site = a.site
-      const point = site ? this.siteWorld(site) : null
-      const nLocal = site ? this.normals.get(site) : null
-      const anchor = site ? this.anchors.get(site) : null
-      const normal = nLocal && anchor ? nLocal.clone().applyQuaternion(anchor.parent!.getWorldQuaternion(new THREE.Quaternion())).normalize() : v(0, 1, 0)
-      const along = R.hand[a.side].getWorldPosition(v(0, 0, 0)).sub(R.forearm[a.side].getWorldPosition(v(0, 0, 0))).normalize()
-      const show = (grip: Grip, contact: Contact, extra = 0) => {
-        this.examiner.setGrip(grip)
-        if (point) this.examiner.place(point, normal, along, contact, gap + extra)
+      // Hands on: the examiner's hand, placed once the body is posed (see `placeExaminer`); his arm is lifted off his lap
+      // and the hand turned so the spot faces you.
+      this.touching = null
+      const show = (grip: Grip, contact: Contact, extra = 0, stroke = 0) => {
+        this.touching = { grip, contact, gap: gap + extra, stroke }
+      }
+      const env = smooth(Math.min(into, out))
+      if (HANDS_ON.has(a.anim) && a.site) {
+        this.held[`shoulderflex-${a.side}`] = a.lift0 + (40 - a.lift0) * env
+        this.present = { side: a.side, site: a.site, w: env }
       }
       switch (a.anim) {
         case 'pulse':
@@ -436,7 +457,7 @@ export class ExamScene {
           show('doppler', 'tool')
           break
         case 'crt': {
-          show('thumb', 'thumb', a.t > a.dur - 1.6 ? 0.03 : 0)
+          show('press', 'index', a.t > a.dur - 1.6 ? 0.03 : 0)
           // Pressed white for the press, then the colour comes back over the refill time.
           const pressEnd = a.dur - 1.6
           const blanch = a.t < 0.45 ? 0 : a.t < pressEnd ? Math.min(1, (a.t - 0.45) / 0.5) : Math.max(0, 1 - (a.t - pressEnd) / this.refill[a.side])
@@ -445,8 +466,7 @@ export class ExamScene {
           break
         }
         case 'warmth':
-          if (point) point.addScaledVector(along, 0.03 * Math.sin(k * Math.PI * 2))
-          show('back', 'back')
+          show('back', 'back', 0, 0.03 * Math.sin(k * Math.PI * 2))
           break
         case 'touch':
           show('cotton', 'tool', 0.012 * Math.max(0, Math.sin(k * Math.PI * 4)))
@@ -475,14 +495,13 @@ export class ExamScene {
         }
         default:
           // Asked to do something with the hand, he lifts it up in front to show you.
-          if (a.anim.startsWith('pose:')) this.held[`shoulderflex-${a.side}`] = a.lift0 + (55 - a.lift0) * smooth(Math.min(into, out))
-          this.examiner.hide()
+          if (a.anim.startsWith('pose:')) this.held[`shoulderflex-${a.side}`] = a.lift0 + (55 - a.lift0) * env
       }
-      if (!['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch'].includes(a.anim)) this.examiner.hide()
       if (a.t >= a.dur) {
-        this.examiner.hide()
+        this.touching = null
+        this.present = null
         if (a.anim.startsWith('pose:') || a.anim === 'stretch') this.hands[a.side].want = 0
-        if (a.anim.startsWith('pose:')) this.held[`shoulderflex-${a.side}`] = a.lift0
+        if (a.anim.startsWith('pose:') || HANDS_ON.has(a.anim)) this.held[`shoulderflex-${a.side}`] = a.lift0
         if (a.anim.startsWith('elbow')) {
           this.held[`elbow-${a.side}`] = this.restElbow[a.side]
           this.eyes.distress = 0
@@ -507,6 +526,78 @@ export class ExamScene {
     }
     this.paleNow = pale
     R?.pale(pale)
+  }
+
+  /** The examiner's hand this frame: its grip, what touches, how far off the skin; a stroke along the limb (warmth). */
+  private touching: { grip: Grip; contact: Contact; gap: number; stroke: number } | null = null
+  /** The spot being examined, turned toward you (`w`: how far, easing in and out). */
+  private present: { side: Side; site: string; w: number } | null = null
+  /** Where the examiner's hand touches, and the way the skin faces there: the camera looks along it. */
+  private contact: { at: THREE.Vector3; n: THREE.Vector3; along: THREE.Vector3; profile: boolean } | null = null
+
+  /** A spot's position and outward direction now. */
+  private spotNow(site: string) {
+    const at = this.siteWorld(site)
+    const n = this.normals.get(site)
+    const anchor = this.anchors.get(site)
+    if (!at || !n || !anchor?.parent) return null
+    return { at, n: n.clone().applyQuaternion(anchor.parent.getWorldQuaternion(new THREE.Quaternion())).normalize() }
+  }
+
+  /** The examiner's hand, on the posed body. */
+  private placeExaminer() {
+    const R = this.rig
+    const a = this.act
+    const t = this.touching
+    this.contact = null
+    const spot0 = a?.site ? this.spotNow(a.site) : null
+    if (!R || !a || !t || !spot0) {
+      this.examiner.hide()
+      return
+    }
+    const elbow = R.forearm[a.side].getWorldPosition(v(0, 0, 0))
+    const wrist = R.hand[a.side].getWorldPosition(v(0, 0, 0))
+    const axis = wrist.clone().sub(elbow).normalize()
+    let spot = spot0
+    let along = axis.clone()
+    if (a.anim === 'squeeze') {
+      // The forearm held from above: the palm on top, the fingers wrapping round it.
+      const mid = elbow.clone().lerp(wrist, 0.55)
+      const up = v(0, 1, 0).sub(axis.clone().multiplyScalar(axis.y)).normalize()
+      const r = Math.max(0.015, spot0.at.clone().sub(elbow).cross(axis).length())
+      spot = { at: mid.addScaledVector(up, r), n: up }
+      along = axis.clone().cross(up).multiplyScalar(a.side === 'L' ? 1 : -1)
+    }
+    // Stretching the fingers back: the hand laid along them from the palm side, not on the very tips.
+    const back = a.anim === 'stretch' ? -0.03 * this.scale : 0
+    const at = spot.at.clone().addScaledVector(axis, t.stroke + back)
+    this.examiner.setGrip(t.grip)
+    this.examiner.place(at, spot.n, along, t.contact, t.gap)
+    this.contact = { at: spot.at, n: spot.n, along, profile: a.anim === 'stretch' }
+  }
+
+  /** Turn the hand about the forearm (at most a quarter turn) so the spot being examined faces you. */
+  private presentSpot(R: Rig) {
+    const p = this.present
+    if (!p || p.w <= 0) return
+    // Only spots on the hand turn with it.
+    let o: THREE.Object3D | null = this.anchors.get(p.site)?.parent ?? null
+    while (o && o !== R.hand[p.side]) o = o.parent
+    if (!o) return
+    const spot = this.spotNow(p.site)
+    if (!spot) return
+    const axis = R.hand[p.side].getWorldPosition(v(0, 0, 0)).sub(R.forearm[p.side].getWorldPosition(v(0, 0, 0))).normalize()
+    const outward = v(p.side === 'L' ? 1 : -1, 0, 0).applyQuaternion(this.body.quaternion)
+    const forward = v(0, 0, 1).applyQuaternion(this.body.quaternion)
+    const want = forward.multiplyScalar(0.7).add(v(0, 0.8, 0)).add(outward.multiplyScalar(0.3))
+    const flat = (d: THREE.Vector3) => d.sub(axis.clone().multiplyScalar(d.dot(axis)))
+    const a = flat(spot.n.clone())
+    const b = flat(want)
+    if (a.lengthSq() < 1e-6 || b.lengthSq() < 1e-6) return
+    a.normalize()
+    b.normalize()
+    const ang = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, Math.atan2(a.clone().cross(b).dot(axis), a.dot(b))))
+    turn(R.hand[p.side], new THREE.Quaternion().setFromAxisAngle(axis, ang * p.w))
   }
 
   /** A hand shape being shown to you: where it is (see `HandShape.face`). */
@@ -963,6 +1054,7 @@ export class ExamScene {
     }
 
     for (const s of SIDES) this.poseFingers(R, s)
+    this.presentSpot(R)
     poseEyes(R, this.bind, this.body, this.faceAt())
   }
 
@@ -1133,6 +1225,17 @@ export class ExamScene {
     let dist: number
     switch (this.view) {
       case 'focus': {
+        // Hands on: from beside the contact, square to the examiner's arm (looking down it would hide the contact).
+        if (this.contact) {
+          const c = this.contact
+          const side = c.along.clone().cross(c.n).normalize()
+          if (side.dot(F) < 0) side.negate()
+          target = c.at.clone()
+          // Fingers pushed back into extension read best side on.
+          dir = c.profile ? side.add(c.n.clone().multiplyScalar(0.3)).add(v(0, 0.15, 0)) : c.n.clone().add(side.multiplyScalar(0.75)).add(v(0, 0.2, 0))
+          dist = 0.5
+          break
+        }
         // Showing you his hand: square on to the shape he is making.
         const shown = this.act?.anim.startsWith('pose:') ? this.handLook[this.act.side] : null
         if (shown) {
@@ -1245,6 +1348,7 @@ export class ExamScene {
       this.body.updateMatrixWorld(true)
       this.rig.tick(dt)
     }
+    this.placeExaminer()
     this.aimCamera()
     const k = 1 - Math.exp(-dt * 4)
     this.camPos.lerp(this.wantPos, k)

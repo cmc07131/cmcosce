@@ -28,6 +28,10 @@ export type JointRef =
   | 'calf'
   | 'foot'
   | 'toe'
+  | DigitRef
+
+/** A finger's bones, from the knuckle (1) to the end (3), and its tip: `index3`, `littleTip`. */
+export type DigitRef = `${'thumb' | 'index' | 'middle' | 'ring' | 'little'}${1 | 2 | 3 | 'Tip'}`
 
 export type SiteDef = {
   label: string
@@ -108,13 +112,14 @@ export const SITES: Record<string, SiteDef> = {
   wrist: { label: 'radial pulse', j: 'hand', to: 'forearm', t: 0.12, dir: [0, -0.7, 0.7], r: 0.02, sided: true },
   hand: { label: 'back of the hand', j: 'hand', to: 'finger', t: 0.55, dir: U, r: 0.035, sided: true },
   palm: { label: 'palm', j: 'hand', to: 'finger', t: 0.5, dir: D, r: 0.035, sided: true },
-  nails: { label: 'nails', j: 'hand', to: 'finger', t: 2.05, dir: U, r: 0.03, sided: true },
-  pulp: { label: 'fingertip pulp', j: 'hand', to: 'finger', t: 2.05, dir: D, r: 0.02, sided: true },
-  ring: { label: 'ring finger', j: 'hand', to: 'ring', t: 1.6, dir: D, r: 0.02, sided: true },
-  ringpulp: { label: 'ring finger pulp', j: 'hand', to: 'ring', t: 2.0, dir: D, r: 0.016, sided: true },
-  littlepulp: { label: 'little finger pulp', j: 'hand', to: 'little', t: 1.9, dir: D, r: 0.016, sided: true },
+  // Fingertips ride on their own end bones, so they follow the fingers wherever they bend.
+  nails: { label: 'nails', j: 'middle3', to: 'middleTip', t: 0.45, dir: U, r: 0.03, sided: true },
+  pulp: { label: 'index fingertip', j: 'index3', to: 'indexTip', t: 0.55, dir: D, r: 0.02, sided: true },
+  ring: { label: 'ring finger', j: 'ring2', to: 'ring3', t: 0.4, dir: D, r: 0.02, sided: true },
+  ringpulp: { label: 'ring finger pulp', j: 'ring3', to: 'ringTip', t: 0.55, dir: D, r: 0.016, sided: true },
+  littlepulp: { label: 'little finger pulp', j: 'little3', to: 'littleTip', t: 0.55, dir: D, r: 0.016, sided: true },
   thumb: { label: 'thumb', j: 'thumb', to: 'hand', t: -0.6, dir: U, r: 0.02, sided: true },
-  web: { label: 'first web space', j: 'hand', to: 'thumb', t: 0.7, dir: U, r: 0.016, sided: true },
+  web: { label: 'first web space', j: 'index1', to: 'thumb2', t: 0.45, dir: U, r: 0.016, sided: true },
 
   // Hip and leg (bind: standing).
   asis: { label: 'ASIS', j: 'hips', off: [-0.105, 0.06, 0], dir: F, r: 0.022, sided: true },

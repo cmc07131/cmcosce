@@ -114,23 +114,33 @@
       "colour@hand-R",
       "warmth@hand-L",
       "warmth@hand-R",
-      "crt@nails-L",
-      "crt@nails-R",
+      "compartments@forearm-L",
+      "stretch@pulp-L",
+      "bend-elbow@antecubital-L",
+      "straighten-elbow@antecubital-L",
       "pulse@wrist-L",
       "pulse@wrist-R",
-      "touch@web-L",
-      "touch@pulp-L",
-      "touch@littlepulp-L",
+      "crt@nails-L",
+      "crt@nails-R",
       "thumbs-up",
+      "touch@web-L",
       "opposition",
+      "touch@pulp-L",
       "ok-sign",
       "cross-fingers",
       "spread-fingers",
-      "stretch@pulp-L",
-      "compartments@forearm-L",
-      "bend-elbow@antecubital-L",
-      "straighten-elbow@antecubital-L"
-    ]
+      "touch@littlepulp-L"
+    ],
+    "findings": {
+      "colour@hand-L": "Left hand pink.",
+      "colour@hand-R": "Right hand pink.",
+      "warmth@hand-L": "Left hand warm.",
+      "warmth@hand-R": "Right hand warm.",
+      "pulse@wrist-R": "Right radial pulse present and strong.",
+      "crt@nails-R": "Capillary refill 1 second on the right.",
+      "stretch@pulp-L": "No pain when his fingers are passively extended.",
+      "compartments@forearm-L": "Forearm soft, not tense; not tender to squeeze."
+    }
   },
   "steps": [
     {
