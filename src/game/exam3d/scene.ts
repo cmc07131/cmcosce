@@ -45,7 +45,7 @@ export type Signs = {
  * thumb's sweep across the palm and its two joints, and `tx` its swing out to the thumb side; `turn`: the forearm
  * turns the thumb side up; `ext`: the wrist bends back; `face`: what he turns toward you to show it (the ring
  * his thumb and index make, his palm, or the back of his hand). Degrees. */
-type HandShape = { f: [number, number, number, number][]; t: [number, number, number]; tx?: number; turn?: 'up'; ext?: number; face?: 'ring' | 'palm' | 'back' }
+type HandShape = { f: [number, number, number, number][]; t: [number, number, number]; tx?: number; turn?: 'up'; ext?: number; lift?: number; face?: 'ring' | 'palm' | 'back' }
 const FIST: HandShape['f'] = [
   [85, 95, 60, 0],
   [85, 95, 60, 0],
@@ -58,8 +58,9 @@ const HANDS_ON = new Set<string>(['pulse', 'doppler', 'crt', 'warmth', 'touch', 
 export const HANDS: Record<string, HandShape> = {
   relaxed: { f: [[15, 20, 10, 0], [15, 22, 10, 0], [18, 24, 10, 0], [20, 25, 12, 0]], t: [10, 10, 10] },
   fist: { f: FIST, t: [35, 35, 30] },
-  // Angles below were tuned by measuring the bones: the thumb straight up from the fist; the O closed tip to tip.
-  'thumbs-up': { f: FIST, t: [-75, -5, -10], tx: -15, turn: 'up', ext: 35 },
+  // Angles below were tuned by measuring the bones: the thumb up from the fist within its natural range (the forearm
+  // level, turned thumb side up); the O closed tip to tip.
+  'thumbs-up': { f: FIST, t: [-40, -20, 5], tx: 18, turn: 'up', ext: 35, lift: 30 },
   ok: { f: [[44, 43, 50, 0], [10, 10, 5, 2], [10, 10, 5, 4], [10, 10, 5, 8]], t: [40, 57, 40], tx: -46, face: 'ring' },
   // Anterior interosseous palsy: the index end joint and the thumb's stay straight (a little over), so the pads meet
   // flat, the tips overshoot, and the hole is half the size: a pinch, not an O.
@@ -495,7 +496,7 @@ export class ExamScene {
         }
         default:
           // Asked to do something with the hand, he lifts it up in front to show you.
-          if (a.anim.startsWith('pose:')) this.held[`shoulderflex-${a.side}`] = a.lift0 + (55 - a.lift0) * env
+          if (a.anim.startsWith('pose:')) this.held[`shoulderflex-${a.side}`] = a.lift0 + ((HANDS[this.hands[a.side].name]?.lift ?? 55) - a.lift0) * env
       }
       if (a.t >= a.dur) {
         this.touching = null
@@ -597,7 +598,33 @@ export class ExamScene {
     a.normalize()
     b.normalize()
     const ang = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, Math.atan2(a.clone().cross(b).dot(axis), a.dot(b))))
-    turn(R.hand[p.side], new THREE.Quaternion().setFromAxisAngle(axis, ang * p.w))
+    this.roll(R, p.side, axis, ang * p.w)
+  }
+
+  /** The forearm's axis, elbow to wrist. */
+  private forearmAxis(R: Rig, side: Side) {
+    return R.hand[side].getWorldPosition(v(0, 0, 0)).sub(R.forearm[side].getWorldPosition(v(0, 0, 0))).normalize()
+  }
+
+  /**
+   * The hand's own frame, from its bones (the bind pose's idea of the palm is tilted on some models): along (wrist to
+   * the middle knuckle), radial (little knuckle to index knuckle), back (the dorsum). `palmish` only settles the side.
+   */
+  private handFrame(R: Rig, side: Side, palmish: THREE.Vector3) {
+    const d = R.digits[side]
+    const pos = (o: THREE.Object3D) => o.getWorldPosition(v(0, 0, 0))
+    const along = pos(d[2][0]).sub(pos(R.hand[side])).normalize()
+    const radial = pos(d[1][0]).sub(pos(d[4]?.[0] ?? d[3][0]))
+    radial.sub(along.clone().multiplyScalar(radial.dot(along))).normalize()
+    const back = along.clone().cross(radial).normalize()
+    if (back.dot(palmish) > 0) back.negate()
+    return { along, radial, back }
+  }
+
+  /** Turn the hand about the forearm as the forearm really does: most of it along the forearm, the rest at the wrist. */
+  private roll(R: Rig, side: Side, axis: THREE.Vector3, ang: number) {
+    turn(R.forearm[side], new THREE.Quaternion().setFromAxisAngle(axis, ang * 0.6))
+    turn(R.hand[side], new THREE.Quaternion().setFromAxisAngle(axis, ang * 0.4))
   }
 
   /** A hand shape being shown to you: where it is (see `HandShape.face`). */
@@ -621,22 +648,22 @@ export class ExamScene {
     }
     let world = frame()
     const out = side === 'L' ? 1 : -1
-    // The forearm turns so the thumb side is up (a thumbs up), then the wrist bends back.
+    // The forearm turns so the thumb side is up (a thumbs up), then the wrist bends back toward the back of the hand.
     if (shape.turn) {
-      const a = world(out, 0, 0)
-      const flat = (d: THREE.Vector3) => d.sub(a.clone().multiplyScalar(d.dot(a)))
-      const r = flat(world(0, 0, 1))
+      const f = this.forearmAxis(R, side)
+      const flat = (d: THREE.Vector3) => d.sub(f.clone().multiplyScalar(d.dot(f)))
+      const r = flat(this.handFrame(R, side, world(0, -1, 0)).radial)
       const u = flat(v(0, 1, 0))
       if (r.lengthSq() > 1e-4 && u.lengthSq() > 1e-4) {
         r.normalize()
         u.normalize()
-        turn(R.hand[side], new THREE.Quaternion().setFromAxisAngle(a, Math.atan2(r.clone().cross(u).dot(a), r.dot(u)) * w))
+        this.roll(R, side, f, Math.atan2(r.clone().cross(u).dot(f), r.dot(u)) * w)
         world = frame()
       }
     }
     if (shape.ext) {
-      const a = world(out, 0, 0)
-      turn(R.hand[side], new THREE.Quaternion().setFromAxisAngle(world(0, -1, 0).cross(a).normalize(), shape.ext * DEG * w))
+      const h = this.handFrame(R, side, world(0, -1, 0))
+      turn(R.hand[side], new THREE.Quaternion().setFromAxisAngle(h.along.clone().cross(h.back).normalize(), shape.ext * DEG * w))
       world = frame()
     }
     const palm = world(0, -1, 0)
@@ -701,7 +728,7 @@ export class ExamScene {
     // A ring looks the same from either side: take the nearer.
     if (shape.face === 'ring' && Math.abs(ang) > Math.PI / 2) ang -= Math.sign(ang) * Math.PI
     ang = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, ang))
-    turn(R.hand[side], new THREE.Quaternion().setFromAxisAngle(axis, ang * w))
+    this.roll(R, side, axis, ang * w)
     // What the camera looks along: the shape's own facing (a ring, toward the side it was turned to).
     n.normalize().applyAxisAngle(axis, ang * w)
     if (n.dot(want) < 0) n.negate()
