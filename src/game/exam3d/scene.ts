@@ -44,8 +44,8 @@ export type Signs = {
 /** A hand shape: each finger's knuckle, middle and end joint flexion and its spread (toward the little finger); the
  * thumb's sweep across the palm and its two joints, and `tx` its swing out to the thumb side; `turn`: the forearm
  * turns the thumb side up; `ext`: the wrist bends back; `face`: what he turns toward you to show it (the ring
- * his thumb and index make, or his palm). Degrees. */
-type HandShape = { f: [number, number, number, number][]; t: [number, number, number]; tx?: number; turn?: 'up'; ext?: number; face?: 'ring' | 'palm' }
+ * his thumb and index make, his palm, or the back of his hand). Degrees. */
+type HandShape = { f: [number, number, number, number][]; t: [number, number, number]; tx?: number; turn?: 'up'; ext?: number; face?: 'ring' | 'palm' | 'back' }
 const FIST: HandShape['f'] = [
   [85, 95, 60, 0],
   [85, 95, 60, 0],
@@ -61,7 +61,8 @@ export const HANDS: Record<string, HandShape> = {
   // Anterior interosseous palsy: the index end joint and the thumb's stay straight (a little over), so the pads meet
   // flat, the tips overshoot, and the hole is half the size: a pinch, not an O.
   'ok-palsy': { f: [[65, 60, -10, 0], [10, 10, 5, 2], [10, 10, 5, 4], [10, 10, 5, 8]], t: [35, 42, -8], tx: -40, face: 'ring' },
-  cross: { f: [[10, 10, 5, -4], [20, 12, 5, -22], [75, 85, 55, 0], [75, 85, 55, 0]], t: [35, 30, 25] },
+  // Both straight; the middle finger swings over the back of the index to its thumb side, crossing at its middle joint.
+  cross: { f: [[0, 2, 5, 45], [-25, -10, 5, -39], [75, 85, 55, 0], [75, 85, 55, 0]], t: [52, -10, 0], tx: 47, face: 'back' },
   // The thumb tip on the little fingertip.
   opposition: { f: [[15, 15, 5, 0], [15, 15, 5, 0], [25, 25, 10, 0], [47, 35, 28, 6]], t: [75, 23, 22], tx: 20, face: 'palm' },
   spread: { f: [[5, 5, 0, -16], [5, 5, 0, -5], [5, 5, 0, 7], [5, 5, 0, 18]], t: [-20, 0, 0] },
@@ -509,7 +510,7 @@ export class ExamScene {
   }
 
   /** A hand shape being shown to you: where it is (see `HandShape.face`). */
-  private handLook: Record<Side, THREE.Vector3 | null> = { L: null, R: null }
+  private handLook: Record<Side, { at: THREE.Vector3; n: THREE.Vector3 } | null> = { L: null, R: null }
 
   /** Where the elbows rest (degrees), for putting them back after a manoeuvre. */
   restElbow: Record<Side, number> = { L: 70, R: 70 }
@@ -575,14 +576,19 @@ export class ExamScene {
         turnAbout(b, dir.clone().cross(palm).normalize(), t[i + 1])
       })
     }
-    // Showing you: he turns the hand about the forearm (never more than a quarter turn) so the shape faces the camera.
+    // Showing you: he turns the hand about the forearm (never more than a quarter turn) so the shape faces out to his
+    // side (the back of the hand: up), and the camera then looks square at it.
     const pos = (o: THREE.Object3D) => o.getWorldPosition(v(0, 0, 0))
-    const centre = pos(R.hand[side]).lerp(pos(digits[2][0]), 1.2)
-    this.handLook[side] = shape.face && w > 0.05 ? centre : null
-    if (!shape.face || !thumb?.length || !digits[1]?.length) return
+    this.handLook[side] = null
+    if (!shape.face || w < 0.05 || !thumb?.length || !digits[1]?.length) return
     let n: THREE.Vector3
-    if (shape.face === 'palm') n = palm.clone()
-    else {
+    if (shape.face !== 'ring') {
+      // The plane of the hand, from its bones: across the knuckles and from the wrist to the middle knuckle.
+      const across = pos(digits[1][0]).sub(pos(digits[4]?.[0] ?? digits[3][0]))
+      const hand = v(0, 0, 0).crossVectors(pos(digits[2][0]).sub(pos(R.hand[side])), across).normalize()
+      if (hand.dot(palm) < 0) hand.negate()
+      n = shape.face === 'palm' ? hand : hand.negate()
+    } else {
       // The ring: thumb and index from their middle bones to their tips, as a polygon; its normal.
       const tip = (b: THREE.Object3D[]) => pos(b[2]).add(v(1, 0, 0).applyQuaternion(b[2].getWorldQuaternion(new THREE.Quaternion())).multiplyScalar(pos(b[2]).distanceTo(pos(b[1])) * 0.8))
       const ring = [pos(thumb[1]), pos(thumb[2]), tip(thumb), tip(digits[1]), pos(digits[1][2]), pos(digits[1][1])]
@@ -592,8 +598,11 @@ export class ExamScene {
     }
     const axis = pos(R.hand[side]).sub(pos(R.forearm[side])).normalize()
     const flat = (d: THREE.Vector3) => d.sub(axis.clone().multiplyScalar(d.dot(axis)))
-    const a = flat(n)
-    const b = flat(this.camPos.clone().sub(centre))
+    const a = flat(n.clone())
+    const outward = v(side === 'L' ? 1 : -1, 0, 0).applyQuaternion(this.body.quaternion)
+    const forward = v(0, 0, 1).applyQuaternion(this.body.quaternion)
+    const want = shape.face === 'back' ? outward.multiplyScalar(0.4).add(forward.multiplyScalar(0.3)).add(v(0, 1, 0)) : outward.add(forward.multiplyScalar(0.35)).add(v(0, 0.3, 0))
+    const b = flat(want.clone())
     if (a.lengthSq() < 1e-8 || b.lengthSq() < 1e-8) return
     a.normalize()
     b.normalize()
@@ -602,6 +611,10 @@ export class ExamScene {
     if (shape.face === 'ring' && Math.abs(ang) > Math.PI / 2) ang -= Math.sign(ang) * Math.PI
     ang = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, ang))
     turn(R.hand[side], new THREE.Quaternion().setFromAxisAngle(axis, ang * w))
+    // What the camera looks along: the shape's own facing (a ring, toward the side it was turned to).
+    n.normalize().applyAxisAngle(axis, ang * w)
+    if (n.dot(want) < 0) n.negate()
+    this.handLook[side] = { at: pos(R.hand[side]).lerp(pos(digits[2][0]), 1.2), n }
   }
 
   /** A painful stimulus: she responds as her signs say. */
@@ -741,6 +754,11 @@ export class ExamScene {
           j.shrug = 12 * env
           break
       }
+    }
+    // A hand held up to show you a sign is straight at the wrist.
+    for (const s of SIDES) {
+      const h = this.hands[s]
+      if (HANDS[h.name]?.face) j[`wrist-${s}`] = lerp(j[`wrist-${s}`] ?? 0, 0, smooth(Math.max(0, Math.min(1, h.w))))
     }
     // A painful stimulus, unconscious: the arms flex across the chest, or extend and turn in; the legs extend.
     if (this.stimT >= 0 && S.posturing && S.posturing !== 'localises') {
@@ -1115,16 +1133,12 @@ export class ExamScene {
     let dist: number
     switch (this.view) {
       case 'focus': {
-        // Showing you his hand: from his side, square across the forearm (he turns the hand to face you).
+        // Showing you his hand: square on to the shape he is making.
         const shown = this.act?.anim.startsWith('pose:') ? this.handLook[this.act.side] : null
-        if (shown && this.act) {
-          const side = this.act.side
-          const axis = at0(R.hand[side]).sub(at0(R.forearm[side])).normalize()
-          const out = v(side === 'L' ? 1 : -1, 0, 0).applyQuaternion(this.body.quaternion)
-          target = shown.clone()
-          dir = out.add(F.clone().multiplyScalar(0.35)).add(v(0, 0.3, 0))
-          dir.sub(axis.multiplyScalar(dir.dot(axis)))
-          dist = 0.42
+        if (shown) {
+          target = shown.at.clone()
+          dir = shown.n.clone()
+          dist = 0.55
           break
         }
         const at = this.focusSite ? this.siteWorld(this.focusSite) : null
