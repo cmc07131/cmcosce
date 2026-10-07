@@ -7,8 +7,8 @@
   "stem": "Paediatric resus. A 5-year-old boy (about 18 kg) with known asthma has been wheezy for two days and much worse tonight. He is sitting forward, too breathless to talk, and becoming quiet. HR 170, RR 44, SpO2 88% in air. His father is with him.",
   "phases": [
     {
-      "title": "Assess",
-      "goal": "Monitoring on, then assess him yourself: how severe is this?",
+      "title": "Recognise",
+      "goal": "Monitoring, oxygen, his weight; how severe is this?",
       "steps": [
         "monitoring",
         "assess"
@@ -22,8 +22,17 @@
       ]
     },
     {
+      "title": "Help and his father",
+      "goal": "Call PICU and the anaesthetist; a quick history; answer his father honestly.",
+      "steps": [
+        "call",
+        "history",
+        "dad"
+      ]
+    },
+    {
       "title": "IV treatment",
-      "goal": "Access, then an IV steroid and magnesium, correctly given.",
+      "goal": "Access and a gas, then an IV steroid and magnesium.",
       "steps": [
         "access",
         "iv-drugs"
@@ -31,16 +40,10 @@
     },
     {
       "title": "Escalate",
-      "goal": "Watch him. Not responding? The next drug, and PICU.",
+      "goal": "Not responding: IV salbutamol; the plan if he tires.",
       "steps": [
-        "escalate"
-      ]
-    },
-    {
-      "title": "His father",
-      "goal": "Explain what a quiet chest means.",
-      "steps": [
-        "dad"
+        "escalate",
+        "plan"
       ]
     }
   ],
@@ -48,7 +51,7 @@
     {
       "id": "silent",
       "after": "monitored",
-      "delayS": 45,
+      "delayS": 60,
       "unless": "neb",
       "scene": "silent",
       "say": "His chest has gone quiet. SpO2 82% and he is drowsy.",
@@ -71,9 +74,13 @@
     {
       "tag": "outdated",
       "text": "Subcutaneous adrenaline. Your notes include it. It is not part of BTS acute asthma management; keep adrenaline for anaphylaxis."
+    },
+    {
+      "tag": "differs",
+      "text": "Magnesium. BTS: 40 mg/kg (max 2 g) over 20 minutes; AHA PALS: 25–50 mg/kg over 15–30 minutes. The script's 40 mg/kg fits both."
     }
   ],
-  "notes": "Checked against BTS/SIGN British guideline on the management of asthma (2019; acute section retained in the 2024 BTS/NICE/SIGN update), RCUK paediatric life support and APLS.\n\nLife-threatening features (children): SpO2 under 92%, silent chest, poor respiratory effort, altered consciousness, agitation, exhaustion, cyanosis, hypotension; PEF under 33% if measurable.\n\nTreatment: high-flow oxygen to SpO2 94–98%; nebulised salbutamol (2.5 mg under 5 years, 5 mg 5 years and over) driven by oxygen, back-to-back; nebulised ipratropium 250 microgram every 20–30 minutes for the first 2 hours; steroids (oral prednisolone 1–2 mg/kg, max 40 mg, or IV hydrocortisone 4 mg/kg); IV magnesium sulfate 40 mg/kg (max 2 g) over 20 minutes; IV salbutamol 15 microgram/kg over 10 minutes if not responding; then PICU (aminophylline, infusions, ventilation). Your notes' doses match this, except: ipratropium 125 microgram under 5 years (BTS uses 250 microgram for 2–12 years), and subcutaneous adrenaline, which is not part of BTS acute asthma management (keep adrenaline for anaphylaxis).\n\nIntubation is hazardous: experienced operator, ketamine, then low rate, long expiratory time, permissive hypercapnia (your ventilation notes are correct).\n\nNo routine chest X-ray unless pneumothorax, consolidation or life-threatening features not responding; no routine antibiotics.",
+  "notes": "Checked against BTS/SIGN British guideline on the management of asthma (2019; acute section retained in the 2024 BTS/NICE/SIGN update), RCUK paediatric life support and APLS.\n\nLife-threatening features (children): SpO2 under 92%, silent chest, poor respiratory effort, altered consciousness, agitation, exhaustion, cyanosis, hypotension; PEF under 33% if measurable.\n\nTreatment: high-flow oxygen to SpO2 94–98%; nebulised salbutamol (2.5 mg under 5 years, 5 mg 5 years and over) driven by oxygen, back-to-back; nebulised ipratropium 250 microgram every 20–30 minutes for the first 2 hours; steroids (oral prednisolone 1–2 mg/kg, max 40 mg, or IV hydrocortisone 4 mg/kg); IV magnesium sulfate 40 mg/kg (max 2 g) over 20 minutes; IV salbutamol 15 microgram/kg over 10 minutes if not responding; then PICU (aminophylline, infusions, ventilation). Your notes' doses match this, except: ipratropium 125 microgram under 5 years (BTS uses 250 microgram for 2–12 years), and subcutaneous adrenaline, which is not part of BTS acute asthma management (keep adrenaline for anaphylaxis).\n\nIntubation is hazardous: experienced operator, ketamine, then low rate, long expiratory time, permissive hypercapnia (your ventilation notes are correct).\n\nNo routine chest X-ray unless pneumothorax, consolidation or life-threatening features not responding; no routine antibiotics.\n\nPerfect script checked against a BTS/SIGN checklist, an AHA PALS respiratory checklist, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (wrong nebuliser and IV doses, sedation, an X-ray first, the reassuring answer to his father). Added: oxygen (the station had none), his weight aloud, life-threatening asthma named, early PICU and anaesthetist, a history from his father in Cantonese, the gas read, and the plan if he tires including ventilation. The silent-chest event now waits 60 s after monitoring (was 45 s), long enough for the assessment.",
   "cast": [
     {
       "id": "patient",
@@ -105,6 +112,13 @@
       "neb"
     ],
     "effects": [
+      {
+        "scene": "o2",
+        "add": {
+          "spo2": 3
+        },
+        "overS": 30
+      },
       {
         "scene": "silent",
         "add": {
@@ -147,53 +161,52 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring",
-      "hint": "Ask the nurse to put the patient on the monitor.",
+      "hint": "Monitor, oxygen, his weight.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG leads, NIBP and SpO2.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2. He's 5: (5 + 4) × 2, about 18 kg.",
           "fetch": "trolley",
           "scene": "monitored",
-          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+          "mark": "Monitoring; estimates the weight (18 kg)"
+        },
+        {
+          "t": "High-flow oxygen, 15 L via a non-rebreather, aiming for 94 to 98%.",
+          "fetch": "trolley",
+          "scene": "o2",
+          "mark": "High-flow oxygen to SpO2 94–98%"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
       "kind": "exam",
       "to": "patient",
       "label": "Assess",
-      "hint": "Severity: speech, work of breathing, chest, saturation, conscious level.",
+      "hint": "Severity: speech, work of breathing, chest, conscious level, saturation.",
       "groups": {
         "Severity": [
           {
             "t": "Talking? Work of breathing",
-            "r": "Cannot talk. Using accessory muscles, subcostal recession, tiring.",
-            "mark": "Assesses speech and work of breathing",
-            "anim": "auscultate"
+            "r": "Cannot talk. Accessory muscles, subcostal recession, tiring.",
+            "mark": "Assesses speech and work of breathing"
           },
           {
             "t": "Listen to the chest",
-            "r": "Very quiet chest, hardly any wheeze.",
-            "mark": "Recognises a silent chest",
-            "anim": "auscultate"
+            "anim": "auscultate",
+            "r": "Very quiet on both sides, hardly any wheeze: a silent chest.",
+            "mark": "Recognises a silent chest"
           },
           {
             "t": "Conscious level and colour",
+            "anim": "pupils",
             "r": "Drowsy, pale, lips dusky.",
-            "mark": "Recognises altered consciousness",
-            "anim": "pupils"
+            "mark": "Recognises altered consciousness"
           },
           {
-            "t": "SpO2 in air",
-            "r": "88%.",
-            "mark": "SpO2 under 92%: life-threatening"
-          }
-        ],
-        "History": [
-          {
-            "t": "Ask the father: usual inhalers, previous ICU admissions",
-            "r": "Blue and brown inhalers, not always used. Once admitted to PICU last year.",
-            "mark": "Asks about previous PICU admission (risk factor)"
+            "t": "Saturation and heart rate",
+            "r": "SpO2 88% before the oxygen; HR 170. \"Life-threatening asthma.\"",
+            "mark": "Names life-threatening asthma (SpO2 under 92%, silent chest, drowsy)"
           }
         ]
       }
@@ -203,7 +216,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Oxygen-driven nebulisers, back to back.",
+      "hint": "Oxygen-driven: salbutamol 5 mg (he is 5) back to back, with ipratropium 250 micrograms.",
       "confirm": "Give",
       "opts": [
         {
@@ -212,23 +225,7 @@
           "dose": "5 mg nebulised, oxygen-driven, back to back",
           "fetch": "cart",
           "scene": "neb",
-          "mark": "Back-to-back salbutamol with ipratropium, oxygen-driven"
-        },
-        {
-          "t": "Salbutamol nebules 2.5 mg nebulised",
-          "drug": "Salbutamol nebules",
-          "dose": "2.5 mg nebulised",
-          "fetch": "cart",
-          "trap": true,
-          "r": "That is the under-5 dose. He is 5: 5 mg."
-        },
-        {
-          "t": "Salbutamol nebules 20 mg nebulised",
-          "drug": "Salbutamol nebules",
-          "dose": "20 mg nebulised",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much for a child: 5 mg, repeated back to back."
+          "mark": "Back-to-back salbutamol 5 mg, oxygen-driven"
         },
         {
           "t": "Ipratropium nebules 250 microgram nebulised with the salbutamol",
@@ -236,117 +233,47 @@
           "dose": "250 microgram nebulised with the salbutamol",
           "fetch": "cart",
           "mark": "Nebulised ipratropium 250 microgram"
-        },
-        {
-          "t": "Ipratropium nebules 2 mg nebulised",
-          "drug": "Ipratropium nebules",
-          "dose": "2 mg nebulised",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much: 250 microgram every 20–30 minutes for the first 2 hours."
-        },
-        {
-          "trap": "critical",
-          "r": "Sedation in life-threatening asthma can stop his breathing.",
-          "t": "Midazolam 0.1 mg/kg IV to settle him on the mask",
-          "drug": "Midazolam",
-          "dose": "0.1 mg/kg IV to settle him on the mask",
-          "fetch": "cart"
         }
       ]
     },
     {
-      "id": "access",
+      "id": "call",
       "kind": "say",
       "to": "nurse",
-      "label": "Nurse",
-      "hint": "IV access, bloods and a gas.",
+      "label": "Call for help",
+      "lang": "en",
+      "hint": "Senior, PICU and an anaesthetist now; no sedation.",
       "opts": [
         {
-          "t": "IV access; bloods and a gas",
-          "mark": "IV access and gas"
+          "t": "Please call my senior, PICU and the anaesthetist now: he's tiring with a silent chest.",
+          "mark": "Escalates early: senior, PICU, anaesthetist"
         },
         {
-          "t": "Chest X-ray before starting treatment",
-          "trap": true,
-          "r": "Treat first. X-ray only for suspected pneumothorax or failure to respond."
+          "t": "No sedation for him: it can stop his breathing.",
+          "mark": "Avoids sedation"
         }
       ]
     },
     {
-      "id": "iv-drugs",
-      "kind": "pick",
-      "to": "cart",
-      "label": "Drug cart",
-      "hint": "He cannot swallow: IV steroid, then magnesium.",
-      "confirm": "Give",
+      "id": "history",
+      "kind": "say",
+      "to": "father",
+      "label": "Ask his father",
+      "hint": "His inhalers, previous PICU admissions, allergies.",
       "opts": [
         {
-          "t": "Hydrocortisone 4 mg/kg (72 mg) IV",
-          "drug": "Hydrocortisone",
-          "dose": "4 mg/kg (72 mg) IV",
-          "fetch": "cart",
-          "mark": "Systemic steroid"
+          "t": "What inhalers does he use, and has he ever been in intensive care for his asthma?",
+          "tz": "佢平時用咩吸入器？以前有冇因為哮喘入過深切治療部？",
+          "r": "The blue and brown ones, but not always. He was in PICU last year.",
+          "rz": "藍色同啡色嗰兩支，但唔係次次有用。佢舊年入過兒童深切治療部。",
+          "mark": "Asks about treatment and previous PICU admission (risk factor)"
         },
         {
-          "t": "Hydrocortisone 20 mg/kg IV",
-          "drug": "Hydrocortisone",
-          "dose": "20 mg/kg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much: 4 mg/kg (72 mg)."
-        },
-        {
-          "t": "Magnesium sulfate 40 mg/kg (720 mg) IV over 20 minutes",
-          "drug": "Magnesium sulfate",
-          "dose": "40 mg/kg (720 mg) IV over 20 minutes",
-          "fetch": "cart",
-          "scene": "mag",
-          "mark": "IV magnesium 40 mg/kg over 20 min"
-        },
-        {
-          "t": "Magnesium sulfate 40 mg/kg as a rapid push",
-          "drug": "Magnesium sulfate",
-          "dose": "40 mg/kg as a rapid push",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Given fast it drops the blood pressure: over 20 minutes."
-        },
-        {
-          "t": "Magnesium sulfate 4 g IV",
-          "drug": "Magnesium sulfate",
-          "dose": "4 g IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Far too much for 18 kg: 40 mg/kg, maximum 2 g."
-        }
-      ]
-    },
-    {
-      "id": "escalate",
-      "kind": "pick",
-      "to": "cart",
-      "label": "Drug cart",
-      "hint": "Not responding: IV salbutamol, and call PICU.",
-      "confirm": "Give",
-      "opts": [
-        {
-          "t": "Salbutamol IV 15 microgram/kg (270 microgram) IV over 10 minutes",
-          "drug": "Salbutamol IV",
-          "dose": "15 microgram/kg (270 microgram) IV over 10 minutes",
-          "fetch": "cart",
-          "when": "not-responding",
-          "early": "Give the magnesium time.",
-          "scene": "ivsalb",
-          "mark": "IV salbutamol bolus and PICU referral"
-        },
-        {
-          "t": "Salbutamol IV 150 microgram/kg IV bolus",
-          "drug": "Salbutamol IV",
-          "dose": "150 microgram/kg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Ten times too much: 15 microgram/kg over 10 minutes."
+          "t": "Any allergies to medicines?",
+          "tz": "佢有冇對任何藥物敏感？",
+          "r": "None.",
+          "rz": "冇。",
+          "mark": "Checks drug allergies"
         }
       ]
     },
@@ -369,15 +296,93 @@
               "r": "Oh… OK, I'll hold his hand.",
               "mood": -3,
               "mark": "Explains the silent chest honestly; keeps the parent involved"
-            },
-            {
-              "t": "Yes, that's much better.",
-              "tz": "係呀，好好多喇。",
-              "rz": "好嘢，係咪就快可以返屋企？",
-              "r": "Great, can we go home soon?",
-              "mood": 1
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "access",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Nurse",
+      "hint": "IV access, a gas; an X-ray only for a reason.",
+      "opts": [
+        {
+          "t": "IV access, and a blood gas: a normal or rising CO2 means he's tiring.",
+          "mark": "IV access and gas; interprets CO2"
+        },
+        {
+          "t": "A chest X-ray only if he doesn't respond or I suspect a pneumothorax.",
+          "mark": "X-ray only for a pneumothorax or no response"
+        }
+      ],
+      "lang": "en"
+    },
+    {
+      "id": "iv-drugs",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "He cannot swallow: IV hydrocortisone, then magnesium over 20 minutes.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Hydrocortisone 4 mg/kg (72 mg) IV",
+          "drug": "Hydrocortisone",
+          "dose": "4 mg/kg (72 mg) IV",
+          "fetch": "cart",
+          "mark": "Systemic steroid: hydrocortisone 4 mg/kg"
+        },
+        {
+          "t": "Magnesium sulfate 40 mg/kg (720 mg) IV over 20 minutes",
+          "drug": "Magnesium sulfate",
+          "dose": "40 mg/kg (720 mg) IV over 20 minutes",
+          "fetch": "cart",
+          "scene": "mag",
+          "mark": "IV magnesium 40 mg/kg over 20 min"
+        }
+      ]
+    },
+    {
+      "id": "escalate",
+      "kind": "pick",
+      "to": "cart",
+      "label": "Drug cart",
+      "hint": "Not responding after the magnesium: IV salbutamol 15 micrograms/kg over 10 minutes.",
+      "confirm": "Give",
+      "opts": [
+        {
+          "t": "Salbutamol IV 15 microgram/kg (270 microgram) IV over 10 minutes",
+          "drug": "Salbutamol IV",
+          "dose": "15 microgram/kg (270 microgram) IV over 10 minutes",
+          "fetch": "cart",
+          "when": "not-responding",
+          "early": "Give the magnesium time.",
+          "scene": "ivsalb",
+          "mark": "IV salbutamol 15 microgram/kg over 10 minutes"
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "nurse",
+      "label": "The plan if he tires",
+      "lang": "en",
+      "hint": "PICU: infusions, aminophylline; intubation by the most experienced, then how to ventilate.",
+      "opts": [
+        {
+          "t": "Then a salbutamol infusion, and aminophylline in PICU.",
+          "when": "ivsalb",
+          "early": "After the IV salbutamol.",
+          "mark": "Next: salbutamol infusion, aminophylline, PICU"
+        },
+        {
+          "t": "If he needs intubating: the most experienced person, with ketamine; then a low rate and a long expiratory time, accepting a high CO2: permissive hypercapnia.",
+          "when": "ivsalb",
+          "early": "After the IV salbutamol.",
+          "mark": "Intubation plan: experienced operator, ketamine, low rate, long expiration, permissive hypercapnia"
         }
       ]
     },
@@ -519,6 +524,72 @@
       ],
       "why": "Bronchodilating properties.",
       "source": "APLS"
+    }
+  ],
+  "keywords": [
+    "18 kg",
+    "high-flow oxygen",
+    "94 to 98%",
+    "silent chest",
+    "life-threatening asthma",
+    "salbutamol 5 mg",
+    "oxygen-driven",
+    "back to back",
+    "ipratropium 250 micrograms",
+    "PICU",
+    "anaesthetist",
+    "no sedation",
+    "blood gas",
+    "rising CO2",
+    "hydrocortisone 4 mg per kg",
+    "magnesium sulfate 40 mg per kg",
+    "over 20 minutes",
+    "IV salbutamol 15 micrograms per kg",
+    "aminophylline",
+    "ketamine",
+    "permissive hypercapnia"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2. He's 5: (5 + 4) × 2, about 18 kg. High-flow oxygen, 15 litres via a non-rebreather, aiming for 94 to 98%."
+    },
+    {
+      "at": "0:15",
+      "say": "He can't talk; accessory muscles, recession, tiring. The chest is very quiet on both sides: a silent chest. Drowsy, pale, dusky lips. SpO2 88%: this is life-threatening asthma."
+    },
+    {
+      "at": "0:35",
+      "say": "Salbutamol 5 mg nebulised, oxygen-driven, back to back, with ipratropium 250 micrograms."
+    },
+    {
+      "at": "0:50",
+      "say": "Please call my senior, PICU and the anaesthetist now: he's tiring with a silent chest. No sedation for him: it can stop his breathing."
+    },
+    {
+      "at": "1:05",
+      "say": "What inhalers does he use, and has he ever been in intensive care for his asthma? Any allergies to medicines?",
+      "do": "Blue and brown inhalers, not always used; PICU last year; no allergies."
+    },
+    {
+      "at": "1:25",
+      "say": "When a chest goes quiet it can mean very little air is moving. He needs strong treatment now. Stay by him and keep him calm."
+    },
+    {
+      "at": "1:40",
+      "say": "IV access, and a blood gas: a normal or rising CO2 means he's tiring. A chest X-ray only if he doesn't respond or I suspect a pneumothorax."
+    },
+    {
+      "at": "2:00",
+      "say": "Hydrocortisone 4 mg per kg, 72 mg IV. Magnesium sulfate 40 mg per kg, 720 mg IV over 20 minutes."
+    },
+    {
+      "at": "2:30",
+      "say": "Still very tight after the magnesium: IV salbutamol 15 micrograms per kg, 270 micrograms over 10 minutes."
+    },
+    {
+      "at": "2:50",
+      "say": "Then a salbutamol infusion, and aminophylline in PICU. If he needs intubating: the most experienced person, with ketamine; then a low rate and a long expiratory time, accepting a high CO2: permissive hypercapnia."
     }
   ]
 }

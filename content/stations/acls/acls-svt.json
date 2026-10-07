@@ -8,22 +8,29 @@
   "phases": [
     {
       "title": "Assess",
-      "goal": "Monitoring on; any adverse features? Read the ECG.",
+      "goal": "Monitoring on; any adverse features? A quick history; read the ECG.",
       "steps": [
         "monitoring",
         "assess"
       ]
     },
     {
+      "title": "Plan",
+      "goal": "Say the plan.",
+      "steps": [
+        "plan"
+      ]
+    },
+    {
       "title": "Vagal manoeuvre",
-      "goal": "Try the modified Valsalva first, properly.",
+      "goal": "The modified Valsalva, properly.",
       "steps": [
         "vagal"
       ]
     },
     {
       "title": "Adenosine",
-      "goal": "Set up, warn her, record the strip, then adenosine from the drug cart — and escalate if it fails.",
+      "goal": "Proximal access, warn her, a strip, then adenosine; 12 mg if 6 mg fails.",
       "steps": [
         "adeno-prep",
         "warn",
@@ -33,15 +40,24 @@
     },
     {
       "title": "After",
-      "goal": "A 12-lead in sinus rhythm: what does it show, and what does she need?",
+      "goal": "A 12-lead in sinus rhythm and bloods; explain, refer, safety-net.",
       "steps": [
         "after",
         "advice"
       ]
     }
   ],
-  "review": [],
-  "notes": "Checked against RCUK tachycardia algorithm (2021; unchanged 2025), ESC 2019 SVT guidelines and the REVERT trial (Lancet 2015).\n\nStable regular narrow complex tachycardia: vagal manoeuvres first — the modified Valsalva (REVERT): semi-recumbent, blow into a 10 mL syringe (≈40 mmHg) for 15 seconds, then lie flat with legs raised to 45° for 15 seconds; about 43% convert versus 17% with standard Valsalva. Carotid sinus massage only without bruits or cerebrovascular history (avoid in older patients).\n\nAdenosine: 6 mg rapid IV bolus into a large proximal vein with a 20 mL saline flush, under continuous ECG recording; if unsuccessful 12 mg, then 18 mg (RCUK; AHA uses 6 then 12). Warn the patient about brief chest discomfort, flushing and a sense of doom. Caution in severe asthma (verapamil is an alternative). Reduce the dose (start 3 mg) with dipyridamole, carbamazepine, heart transplant or a central line.\n\nAfter conversion, look for pre-excitation (short PR, delta wave): WPW needs cardiology referral for ablation, and AV-node blockers must be avoided if she ever presents with pre-excited AF.\n\nYour SVT notes list adult DC cardioversion energies from AHA (100 J for narrow complex); that applies only if unstable.",
+  "review": [
+    {
+      "tag": "differs",
+      "text": "Adenosine. AHA (Hong Kong ACLS): 6 mg, then 12 mg. RCUK: 6, 12, then 18 mg. The script stops at 12 mg because she converts."
+    },
+    {
+      "tag": "differs",
+      "text": "Unstable narrow complex tachycardia. AHA: synchronised 50–100 J. RCUK: 70–120 J. The script only names synchronised cardioversion."
+    }
+  ],
+  "notes": "Checked against RCUK tachycardia algorithm (2021; unchanged 2025), ESC 2019 SVT guidelines and the REVERT trial (Lancet 2015).\n\nStable regular narrow complex tachycardia: vagal manoeuvres first — the modified Valsalva (REVERT): semi-recumbent, blow into a 10 mL syringe (≈40 mmHg) for 15 seconds, then lie flat with legs raised to 45° for 15 seconds; about 43% convert versus 17% with standard Valsalva. Carotid sinus massage only without bruits or cerebrovascular history (avoid in older patients).\n\nAdenosine: 6 mg rapid IV bolus into a large proximal vein with a 20 mL saline flush, under continuous ECG recording; if unsuccessful 12 mg, then 18 mg (RCUK; AHA uses 6 then 12). Warn the patient about brief chest discomfort, flushing and a sense of doom. Caution in severe asthma (verapamil is an alternative). Reduce the dose (start 3 mg) with dipyridamole, carbamazepine, heart transplant or a central line.\n\nAfter conversion, look for pre-excitation (short PR, delta wave): WPW needs cardiology referral for ablation, and AV-node blockers must be avoided if she ever presents with pre-excited AF.\n\nYour SVT notes list adult DC cardioversion energies from AHA (100 J for narrow complex); that applies only if unstable.\n\nPerfect script checked against an AHA tachycardia checklist, the RCUK algorithm, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (slow or low-dose adenosine, verapamil). Added: adverse features named, the plan aloud with cardioversion if unstable, bloods, AV-node blockers avoided, and the safety-net. Adenosine follows AHA (6 then 12 mg).",
   "cast": [
     {
       "id": "patient",
@@ -79,44 +95,64 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring",
-      "hint": "Ask the nurse to put the patient on the monitor.",
+      "hint": "Monitor; a quick ABCDE.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Hello Ms Ip, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
       "kind": "exam",
       "to": "patient",
       "label": "Assess",
-      "hint": "ABCDE, adverse features, 12-lead.",
+      "hint": "Adverse features, a quick history, the 12-lead.",
       "groups": {
         "ABCDE": [
           {
-            "t": "Adverse features",
-            "r": "No shock, no syncope, no chest pain, no heart failure.",
-            "mark": "Confirms no adverse features"
+            "t": "Any chest pain, breathlessness, dizziness or fainting?",
+            "anim": "pulse",
+            "r": "No chest pain, not breathless, not dizzy, no fainting. BP 112/70, warm. \"No adverse features: she's stable.\"",
+            "mark": "Checks for adverse features: shock, syncope, ischaemia, heart failure"
           },
           {
-            "t": "History: previous episodes, asthma, drugs",
+            "t": "Had this before? Any asthma, heart problems or regular medicines?",
             "r": "Two brief episodes before that stopped on their own. No asthma. No regular medicines.",
-            "mark": "Asks about asthma and interacting drugs"
+            "mark": "Asks about previous episodes, asthma and interacting drugs"
           }
         ],
         "ECG": [
           {
             "t": "12-lead ECG",
-            "r": "Regular narrow complex tachycardia at 190, no visible P waves.",
             "img": "ecg:svt",
+            "r": "Regular narrow complex tachycardia at 190, no visible P waves. \"Probably AVNRT.\"",
             "mark": "Identifies regular narrow complex tachycardia"
           }
         ]
       }
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "nurse",
+      "label": "The plan",
+      "lang": "en",
+      "hint": "Stable regular narrow complex: vagal, then adenosine; cardioversion if she becomes unstable.",
+      "opts": [
+        {
+          "t": "She's stable with a regular narrow complex tachycardia, likely SVT: vagal manoeuvres first, then adenosine.",
+          "mark": "States the plan: vagal manoeuvres, then adenosine"
+        },
+        {
+          "t": "If she becomes unstable: synchronised cardioversion under sedation.",
+          "mark": "Plans synchronised cardioversion if unstable"
+        }
+      ]
     },
     {
       "id": "vagal",
@@ -150,7 +186,7 @@
       "confirm": "Take these",
       "opts": [
         {
-          "t": "Cannula in the antecubital fossa; 3-way tap with a 20 mL saline flush",
+          "t": "Cannula in the antecubital fossa; three-way tap with a 20 mL saline flush",
           "mark": "Large proximal vein and flush"
         }
       ]
@@ -163,11 +199,11 @@
       "hint": "Warn her what adenosine feels like.",
       "opts": [
         {
-          "t": "Warn her: brief chest tightness, flushing, a feeling of doom",
-          "mark": "Warns about adenosine's effects",
-          "tz": "我會打一支藥令個心跳暫停一兩秒，你會覺得心口好翳、面熱、好似好驚，但係好快就會過。",
+          "t": "This medicine stops your heart for a second or two to reset it. You may feel chest tightness, flushing and a sense of doom, but it passes in seconds.",
+          "tz": "我會打一支藥令個心跳暫停一兩秒，等佢重新跳返正常。你會覺得心口好翳、面熱、好似好驚，但係幾秒就會過。",
           "r": "OK. I'm ready.",
-          "rz": "好，我準備好喇。"
+          "rz": "好，我準備好喇。",
+          "mark": "Warns about adenosine's effects"
         }
       ]
     },
@@ -179,17 +215,18 @@
       "hint": "Record the rhythm through the push.",
       "opts": [
         {
-          "t": "Record a rhythm strip through the push.",
-          "mark": "6 mg rapid bolus with flush, recording"
+          "t": "Record a continuous rhythm strip through the push.",
+          "mark": "Records a rhythm strip during adenosine"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "adenosine",
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Rapid push into a proximal vein, flushed straight after; escalate if it fails.",
+      "hint": "6 mg rapid push into the proximal vein, flushed straight after; then 12 mg.",
       "confirm": "Give",
       "opts": [
         {
@@ -198,7 +235,7 @@
           "dose": "6 mg rapid IV push, then flush",
           "fetch": "cart",
           "scene": "adeno6",
-          "r": "The monitor pauses for two seconds… then SVT again at 190.",
+          "r": "The monitor pauses for two seconds, then SVT again at 190.",
           "mark": "Adenosine 6 mg rapid push with flush"
         },
         {
@@ -209,23 +246,8 @@
           "when": "adeno6",
           "early": "Start with 6 mg.",
           "scene": "converted",
+          "r": "A pause, then sinus rhythm at 82.",
           "mark": "Escalates to 12 mg"
-        },
-        {
-          "trap": true,
-          "r": "Adenosine's half-life is seconds; it must be a rapid bolus into a large vein.",
-          "t": "Adenosine 6 mg slowly over a minute",
-          "drug": "Adenosine",
-          "dose": "6 mg slowly over a minute",
-          "fetch": "cart"
-        },
-        {
-          "t": "Adenosine 3 mg rapid IV push",
-          "drug": "Adenosine",
-          "dose": "3 mg rapid IV push",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little here: 3 mg is for a central line, dipyridamole or a heart transplant. Start with 6 mg."
         }
       ]
     },
@@ -239,15 +261,20 @@
         "ECG": [
           {
             "t": "12-lead ECG in sinus rhythm",
-            "r": "Short PR interval with a slurred upstroke (delta wave) and a slightly broad QRS: pre-excitation.",
             "img": "ecg:wpw",
+            "when": "converted",
+            "early": "Once she is back in sinus rhythm.",
+            "r": "Short PR interval with a slurred upstroke (delta wave) and a slightly broad QRS: pre-excitation.",
             "mark": "Recognises pre-excitation (WPW) after conversion"
           }
         ],
         "Bloods": [
           {
-            "t": "K, Mg, TSH",
-            "r": "Normal."
+            "t": "Potassium, magnesium and thyroid function",
+            "r": "Normal.",
+            "mark": "Checks electrolytes and thyroid function",
+            "when": "converted",
+            "early": "Once she is back in sinus rhythm."
           }
         ]
       }
@@ -257,23 +284,28 @@
       "kind": "say",
       "to": "patient",
       "label": "Talk to Ms Ip",
-      "hint": "Explain, teach the manoeuvre, refer to cardiology for ablation.",
+      "hint": "Explain WPW; cardiology for ablation; no AV-node blockers; teach the manoeuvre and safety-net.",
       "opts": [
         {
-          "t": "Explain WPW; cardiology referral for an electrophysiology study and ablation",
-          "tz": "你心電圖見到有一條額外嘅電線路，叫 WPW，所以心跳會突然好快。我會轉介你去心臟科，做電生理檢查，可能可以用導管燒斷條額外線路。",
-          "mark": "Refers WPW to cardiology"
+          "t": "Your ECG shows an extra electrical pathway in the heart, called WPW, which causes these fast rhythms. I'll refer you to cardiology for a study and possibly ablation.",
+          "tz": "你心電圖見到心臟有一條額外嘅電線路，叫 WPW，所以心跳會突然好快。我會轉介你去心臟科，做電生理檢查，可能可以用導管燒斷條額外線路。",
+          "when": "converted",
+          "early": "Once she is back in sinus rhythm.",
+          "mark": "Explains WPW; refers to cardiology for an EP study and ablation"
         },
         {
-          "t": "Teach her the modified Valsalva for future episodes; return if it fails or she feels faint",
-          "tz": "我教你一個方法：用力谷氣十五秒，然後即刻瞓低、對腳舉高。下次再心跳快可以試吓；如果唔得，或者覺得就嚟暈，就要即刻返嚟。",
-          "mark": "Safety-netting and self-management"
+          "t": "Until then, no tablets that slow the heart's junction, like verapamil or digoxin: with this pathway they can be dangerous.",
+          "tz": "喺睇心臟科之前，唔好食減慢心跳傳導嘅藥，例如 verapamil 或者 digoxin，因為有呢條線路會好危險。",
+          "when": "converted",
+          "early": "Once she is back in sinus rhythm.",
+          "mark": "Avoids AV-node blockers with pre-excitation"
         },
         {
-          "t": "Start regular verapamil to prevent episodes",
-          "tz": "我開 verapamil 俾你日日食，預防再發作。",
-          "trap": true,
-          "r": "AV-node blockers can be dangerous with pre-excitation if AF develops."
+          "t": "If it happens again: blow hard for 15 seconds, then lie flat with your legs raised. Come back if it doesn't stop or you feel faint.",
+          "tz": "如果再發作：用力谷氣十五秒，然後即刻瞓低、對腳舉高。如果停唔到，或者覺得就嚟暈，就要即刻返嚟。",
+          "when": "converted",
+          "early": "Once she is back in sinus rhythm.",
+          "mark": "Teaches the modified Valsalva; safety-netting"
         }
       ]
     },
@@ -284,8 +316,8 @@
       "label": "Examiner",
       "qs": [
         {
-          "q": "RCUK adenosine sequence?",
-          "a": "6 mg, then 12 mg, then 18 mg",
+          "q": "Adenosine sequence (AHA; RCUK adds a third dose)?",
+          "a": "6 mg, then 12 mg (RCUK: then 18 mg)",
           "wrong": [
             "3 mg, then 6 mg, then 9 mg",
             "12 mg, then 12 mg, then 12 mg",
@@ -426,6 +458,82 @@
       ],
       "why": "Adverse features mean electricity.",
       "source": "RCUK"
+    }
+  ],
+  "keywords": [
+    "adverse features",
+    "stable",
+    "regular narrow complex tachycardia",
+    "SVT",
+    "vagal manoeuvres",
+    "modified Valsalva",
+    "synchronised cardioversion",
+    "antecubital fossa",
+    "20 mL saline flush",
+    "sense of doom",
+    "rhythm strip",
+    "adenosine 6 mg",
+    "rapid",
+    "12 mg",
+    "pre-excitation",
+    "delta wave",
+    "WPW",
+    "ablation",
+    "verapamil"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello Ms Ip, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2."
+    },
+    {
+      "at": "0:10",
+      "say": "Any chest pain, breathlessness, dizziness or fainting?",
+      "do": "None; BP 112/70: no adverse features, she's stable."
+    },
+    {
+      "at": "0:25",
+      "say": "Had this before? Any asthma, heart problems or regular medicines? 12-lead ECG, please.",
+      "do": "Regular narrow complex tachycardia at 190, no P waves."
+    },
+    {
+      "at": "0:45",
+      "say": "She's stable with a regular narrow complex tachycardia, likely SVT: vagal manoeuvres first, then adenosine. If she becomes unstable: synchronised cardioversion under sedation."
+    },
+    {
+      "at": "1:00",
+      "say": "Modified Valsalva, with a rhythm strip running. Ms Ip, sitting up at 45 degrees, blow into this syringe hard enough to move the plunger, for 15 seconds; then we'll lie you flat and lift your legs. Now: flat, legs up to 45 degrees for 15 seconds. Look at the strip.",
+      "do": "Back at 45°; strain 15 s; flat with legs raised 15 s; strip: still 190."
+    },
+    {
+      "at": "1:40",
+      "say": "Cannula in the antecubital fossa, with a three-way tap and a 20 mL saline flush."
+    },
+    {
+      "at": "1:55",
+      "say": "This medicine stops your heart for a second or two to reset it. You may feel chest tightness, flushing and a sense of doom, but it passes in seconds."
+    },
+    {
+      "at": "2:10",
+      "say": "Record a continuous rhythm strip through the push. Adenosine 6 mg rapid IV push, then flush.",
+      "do": "A two-second pause, then SVT again."
+    },
+    {
+      "at": "2:30",
+      "say": "Adenosine 12 mg rapid IV push, then flush.",
+      "do": "Sinus rhythm at 82."
+    },
+    {
+      "at": "2:45",
+      "say": "12-lead ECG in sinus rhythm: short PR and a delta wave: pre-excitation, WPW. Potassium, magnesium and thyroid function."
+    },
+    {
+      "at": "3:05",
+      "say": "Your ECG shows an extra electrical pathway in the heart, called WPW. I'll refer you to cardiology for a study and possibly ablation. Until then, no verapamil or digoxin: with this pathway they can be dangerous."
+    },
+    {
+      "at": "3:30",
+      "say": "If it happens again: blow hard for 15 seconds, then lie flat with your legs raised. Come back if it doesn't stop or you feel faint."
     }
   ]
 }

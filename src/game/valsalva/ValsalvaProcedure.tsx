@@ -178,36 +178,21 @@ export function ValsalvaProcedure({ job, coach, onDone }: { job: PerformJob; coa
                 </HoldButton>
               )}
               {index === 3 && (
-                <>
-                  <button
-                    type="button"
-                    className="tap io-mini"
-                    data-testid="valsalva-check-rhythm"
-                    onClick={() => {
-                      upd({ checked: true })
-                      if (reverts(runRef.current)) {
-                        buzz(60)
-                        feel('A pause on the strip, then sinus rhythm at 88. She feels it stop.')
-                      } else if (converted(runRef.current)) feel('A brief slowing on the strip… then back to 190. Well done, but it has not worked: adenosine next.')
-                      else physical('Still a narrow regular tachycardia at 190.')
-                    }}
-                  >
-                    LOOK AT THE STRIP
-                  </button>
-                  <button
-                    type="button"
-                    className="tap io-mini"
-                    data-testid="valsalva-carotid"
-                    onClick={() => {
-                      upd({ carotid: true })
-                      buzz([60, 40, 60])
-                      physical('You press on both sides of her neck at once. She goes grey and faint.')
-                      why('Never both carotids together. Carotid sinus massage is one side only, and not in older patients with bruits.')
-                    }}
-                  >
-                    PRESS ON BOTH CAROTIDS
-                  </button>
-                </>
+                <button
+                  type="button"
+                  className="tap io-mini"
+                  data-testid="valsalva-check-rhythm"
+                  onClick={() => {
+                    upd({ checked: true })
+                    if (reverts(runRef.current)) {
+                      buzz(60)
+                      feel('A pause on the strip, then sinus rhythm at 88. She feels it stop.')
+                    } else if (converted(runRef.current)) feel('A brief slowing on the strip… then back to 190. Well done, but it has not worked: adenosine next.')
+                    else physical('Still a narrow regular tachycardia at 190.')
+                  }}
+                >
+                  LOOK AT THE STRIP
+                </button>
               )}
             </div>
             <NextButton onClick={next} testId="valsalva-next">
