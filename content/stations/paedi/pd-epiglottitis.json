@@ -15,9 +15,10 @@
     },
     {
       "title": "Call and prepare",
-      "goal": "The most senior airway team, the kit, oxygen without a fight.",
+      "goal": "The most senior airway team, the kit, oxygen without a fight; her father.",
       "steps": [
-        "call"
+        "call",
+        "father"
       ]
     },
     {
@@ -29,7 +30,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against APLS, RCH Melbourne guidance on acute upper airway obstruction, and the Hib immunisation literature.\n\nEpiglottitis (Hib in unvaccinated children; streptococci and staphylococci now): sudden high fever, toxic, drooling, muffled voice, tripod posture, soft stridor, little cough. The airway can obstruct completely at any moment. Do not lie the child down, examine the throat, cannulate, or do anything that upsets her; keep her with her parent, give oxygen without distress, and call the most senior anaesthetist and ENT surgeon for intubation in theatre (gas induction, with a surgical airway ready). Only after the airway is secured: cannula, blood cultures, IV ceftriaxone. Nebulised adrenaline may buy time. A lateral neck X-ray (thumb sign) is only for an uncertain, stable child and must never delay airway management. Notify public health for Hib; rifampicin prophylaxis for household contacts.\n\nYour notes list epiglottitis as a Paedi gym topic and in the stridor differential (toxic, drooling, high fever) — this matches.",
+  "notes": "Checked against APLS, RCH Melbourne guidance on acute upper airway obstruction, and the Hib immunisation literature.\n\nEpiglottitis (Hib in unvaccinated children; streptococci and staphylococci now): sudden high fever, toxic, drooling, muffled voice, tripod posture, soft stridor, little cough. The airway can obstruct completely at any moment. Do not lie the child down, examine the throat, cannulate, or do anything that upsets her; keep her with her parent, give oxygen without distress, and call the most senior anaesthetist and ENT surgeon for intubation in theatre (gas induction, with a surgical airway ready). Only after the airway is secured: cannula, blood cultures, IV ceftriaxone. Nebulised adrenaline may buy time. A lateral neck X-ray (thumb sign) is only for an uncertain, stable child and must never delay airway management. Notify public health for Hib; rifampicin prophylaxis for household contacts.\n\nYour notes list epiglottitis as a Paedi gym topic and in the stridor differential (toxic, drooling, high fever) — this matches.\n\nPerfect script checked against APLS and NICE CKS, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (lying her flat, throat exam, cannulation, radiology). Added the diagnosis aloud and her father kept calm.",
   "cast": [
     {
       "id": "patient",
@@ -58,13 +59,6 @@
     "rhythm": "sinus-tachy",
     "effects": [
       {
-        "scene": "upset",
-        "set": {
-          "spo2": 82,
-          "hr": 170
-        }
-      },
-      {
         "scene": "o2",
         "add": {
           "spo2": 3
@@ -91,25 +85,19 @@
       "groups": {
         "Observe": [
           {
-            "t": "Posture and drooling",
+            "t": "Look at her posture: is she drooling?",
             "r": "Sitting forward on her father's lap, neck extended, mouth open, drooling.",
             "mark": "Recognises tripod posture and drooling"
           },
           {
-            "t": "Voice and cough",
+            "t": "Listen to her voice: any barking cough?",
             "r": "Muffled 'hot potato' voice; no barking cough.",
             "mark": "Notes muffled voice without barking cough"
           },
           {
-            "t": "Toxic appearance",
-            "r": "Flushed, anxious, very unwell.",
+            "t": "Does she look toxic?",
+            "r": "Flushed, anxious, very unwell. \"Unvaccinated, toxic, drooling, muffled voice: this is epiglottitis until proven otherwise.\"",
             "mark": "Recognises a toxic child"
-          },
-          {
-            "t": "Lie her flat and look at the throat with a torch",
-            "trap": "critical",
-            "r": "Lying flat and throat examination can cause complete obstruction.",
-            "scene": "upset"
           }
         ]
       }
@@ -144,17 +132,22 @@
           "t": "Keep her upright with her father; minimise interventions",
           "need": true,
           "mark": "Keeps the child calm and upright"
-        },
+        }
+      ]
+    },
+    {
+      "id": "father",
+      "kind": "say",
+      "to": "father",
+      "label": "Talk to her father",
+      "hint": "Keep her calm; what is happening.",
+      "opts": [
         {
-          "t": "IV cannula and bloods now",
-          "trap": "critical",
-          "r": "Distress may cause obstruction. Cannulate after the airway is secured.",
-          "scene": "upset"
-        },
-        {
-          "t": "Lateral neck X-ray in the radiology department",
-          "trap": "critical",
-          "r": "Never send a child with suspected epiglottitis away from airway expertise."
+          "t": "Please keep her sitting up on your lap, just as she is. Her throat is very swollen, so we won't put anything in her mouth or use needles yet. The airway specialists are coming to put a breathing tube in safely in theatre.",
+          "tz": "請你抱住佢坐直，好似而家咁就得。佢喉嚨好腫，所以我哋暫時唔會放任何嘢入佢口，亦都唔會打針。氣道專科醫生而家過嚟，會喺手術室安全咁幫佢插喉。",
+          "r": "Okay. I'll keep her still.",
+          "rz": "好，我會抱實佢。",
+          "mark": "Explains to the parent and keeps the child calm"
         }
       ]
     },
@@ -166,12 +159,12 @@
       "hint": "Cultures, ceftriaxone, PICU, public health, contacts.",
       "opts": [
         {
-          "t": "After gas induction and intubation: blood cultures, IV ceftriaxone 80 mg/kg, PICU",
+          "t": "After gas induction and intubation in theatre: blood cultures, IV ceftriaxone 80 mg/kg, and PICU.",
           "scene": "airway",
           "mark": "Antibiotics and cultures after the airway is secure"
         },
         {
-          "t": "Notify public health; rifampicin for household contacts (Hib); catch-up vaccination",
+          "t": "Notify public health; rifampicin for household contacts; catch-up vaccination.",
           "mark": "Public health and contact prophylaxis"
         }
       ]
@@ -303,5 +296,47 @@
       "why": "Check immunisation status.",
       "source": "CHP HK"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Look at her posture: is she drooling? Listen to her voice: any barking cough? Does she look toxic? Unvaccinated, toxic, drooling, muffled voice: this is epiglottitis until proven otherwise.",
+      "do": "Sitting forward on her father's lap, neck extended, mouth open, drooling. Muffled 'hot potato' voice; no barking cough. Flushed, anxious, very unwell. \"Unvaccinated, toxic, drooling, muffled voice: this is epiglottitis until proven otherwise.\""
+    },
+    {
+      "at": "0:20",
+      "say": "Most senior anaesthetist and ENT surgeon to resus now; theatre alerted. Difficult airway kit, smaller tubes, needle/surgical airway kit ready. Oxygen held near her face by her father, no mask forced."
+    },
+    {
+      "at": "0:40",
+      "say": "Keep her upright with her father; minimise interventions."
+    },
+    {
+      "at": "1:00",
+      "say": "Please keep her sitting up on your lap, just as she is. Her throat is very swollen, so we won't put anything in her mouth or use needles yet. The airway specialists are coming to put a breathing tube in safely in theatre.",
+      "do": "Okay. I'll keep her still."
+    },
+    {
+      "at": "1:20",
+      "say": "After gas induction and intubation in theatre: blood cultures, IV ceftriaxone 80 mg/kg, and PICU. Notify public health; rifampicin for household contacts; catch-up vaccination."
+    }
+  ],
+  "keywords": [
+    "drooling",
+    "muffled",
+    "toxic",
+    "epiglottitis",
+    "senior anaesthetist",
+    "ENT",
+    "surgical airway",
+    "oxygen",
+    "upright",
+    "won't put anything in her mouth",
+    "gas induction",
+    "theatre",
+    "ceftriaxone",
+    "PICU",
+    "public health",
+    "rifampicin"
   ]
 }

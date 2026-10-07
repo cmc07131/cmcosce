@@ -17,12 +17,13 @@
       "title": "Explain and advise",
       "goal": "What it was, what it means, and what to do next time.",
       "steps": [
-        "counsel"
+        "counsel",
+        "close"
       ]
     }
   ],
   "review": [],
-  "notes": "Checked against the NICE CKS (Febrile seizure, 2023), AAP 2011 clinical practice guideline on simple febrile seizures, and RCPCH guidance.\n\nSimple febrile seizure: age 6 months to 5 years, generalised, under 15 minutes, not recurring within 24 hours, complete recovery within an hour, with fever and no CNS infection. Complex: focal, over 15 minutes, recurrent within 24 hours, or incomplete recovery — needs more assessment. Look for the cause of the fever and for signs of meningitis (a lower threshold for LP in infants under 12 months, those pretreated with antibiotics, or with incomplete immunisation). Simple febrile seizures need no EEG or imaging and do not cause brain damage. Recurrence about 30% (higher if first under 18 months, family history, low fever at seizure, short fever before seizure); risk of later epilepsy about 1–2% (slightly above the population). Antipyretics make the child comfortable but do not prevent recurrence. Seizure first aid: recovery position, time it, nothing in the mouth; call an ambulance if over 5 minutes; buccal midazolam only if prescribed for prolonged seizures.\n\nYour notes list paediatric seizure as a topic; nothing conflicts.",
+  "notes": "Checked against the NICE CKS (Febrile seizure, 2023), AAP 2011 clinical practice guideline on simple febrile seizures, and RCPCH guidance.\n\nSimple febrile seizure: age 6 months to 5 years, generalised, under 15 minutes, not recurring within 24 hours, complete recovery within an hour, with fever and no CNS infection. Complex: focal, over 15 minutes, recurrent within 24 hours, or incomplete recovery — needs more assessment. Look for the cause of the fever and for signs of meningitis (a lower threshold for LP in infants under 12 months, those pretreated with antibiotics, or with incomplete immunisation). Simple febrile seizures need no EEG or imaging and do not cause brain damage. Recurrence about 30% (higher if first under 18 months, family history, low fever at seizure, short fever before seizure); risk of later epilepsy about 1–2% (slightly above the population). Antipyretics make the child comfortable but do not prevent recurrence. Seizure first aid: recovery position, time it, nothing in the mouth; call an ambulance if over 5 minutes; buccal midazolam only if prescribed for prolonged seizures.\n\nYour notes list paediatric seizure as a topic; nothing conflicts.\n\nPerfect script checked against NICE CKS febrile seizure, an HKCEM-style scheme and a keyword scheme. Removed the dismissive and incorrect replies. Added safety-netting.",
   "cast": [
     {
       "id": "mother",
@@ -102,13 +103,6 @@
               "r": "Is it epilepsy?",
               "mood": -3,
               "mark": "Acknowledges fear and explains febrile convulsions and no brain damage"
-            },
-            {
-              "t": "Calm down, it's nothing.",
-              "tz": "冷靜啲啦，冇嘢㗎。",
-              "rz": "冇嘢？！",
-              "r": "Nothing?!",
-              "mood": 3
             }
           ]
         },
@@ -123,13 +117,6 @@
               "r": "What should we do if it happens again?",
               "mood": -2,
               "mark": "Explains recurrence and epilepsy risk"
-            },
-            {
-              "t": "Yes, probably epilepsy.",
-              "tz": "係，應該係癲癇症。",
-              "rz": "唔係啩……",
-              "r": "Oh no.",
-              "mood": 3
             }
           ]
         },
@@ -144,15 +131,24 @@
               "r": "Thank you, that's really helpful.",
               "mood": -3,
               "mark": "Seizure first aid and correct advice on antipyretics"
-            },
-            {
-              "t": "Give paracetamol every 4 hours around the clock to prevent fits.",
-              "tz": "每四個鐘俾佢食一次退燒藥，日夜都食，預防抽筋。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "kind": "say",
+      "to": "mother",
+      "label": "Before you go home",
+      "hint": "When to come back; the fever itself.",
+      "opts": [
+        {
+          "t": "Come back straight away if he has another fit, a fit over 5 minutes, a rash that doesn't fade, a stiff neck, or he's very drowsy. Fluids and comfort for the fever.",
+          "tz": "如果佢再抽筋、抽超過五分鐘、出咗啲撳唔褪色嘅疹、條頸硬，或者好眼瞓，就要即刻返嚟。發燒就俾多啲水佢飲，令佢舒服啲。",
+          "r": "We will. Thank you.",
+          "rz": "我哋會。多謝你。",
+          "mark": "Safety-netting for meningitis and prolonged seizures"
         }
       ]
     },
@@ -282,5 +278,54 @@
       "why": "Slightly above the baseline ~0.5–1%.",
       "source": "AAP 2011"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "What did the seizure look like, and how long did it last? Did it affect one side more? Another seizure since? Vaccinations, family history of seizures.",
+      "do": "His whole body stiffened then jerked for about 2 minutes. Sleepy for 20 minutes, then fine. Both sides the same. Only one. Up to date. His father had fits with fevers as a toddler."
+    },
+    {
+      "at": "0:20",
+      "say": "Rash, neck stiffness, vomiting, drowsiness now?",
+      "do": "No, he's playing."
+    },
+    {
+      "at": "0:40",
+      "say": "That must have been terrifying. This was a febrile convulsion — a fit triggered by a fever. It happens in about 1 in 30 young children and doesn't cause brain damage.",
+      "do": "Is it epilepsy?"
+    },
+    {
+      "at": "1:00",
+      "say": "It's not epilepsy. About 1 in 3 children have another with a future fever, usually before age 5. The chance of later epilepsy is only slightly higher than other children.",
+      "do": "What should we do if it happens again?"
+    },
+    {
+      "at": "1:20",
+      "say": "Lay him on his side on a safe surface, time it, put nothing in his mouth. If it lasts over 5 minutes, call an ambulance. Paracetamol or ibuprofen make him comfortable but don't prevent fits, so don't wake him at night for them.",
+      "do": "Thank you, that's really helpful."
+    },
+    {
+      "at": "1:40",
+      "say": "Come back straight away if he has another fit, a fit over 5 minutes, a rash that doesn't fade, a stiff neck, or he's very drowsy. Fluids and comfort for the fever.",
+      "do": "We will. Thank you."
+    }
+  ],
+  "keywords": [
+    "how long",
+    "one side",
+    "vaccinations",
+    "family history",
+    "neck stiffness",
+    "febrile convulsion",
+    "brain damage",
+    "not epilepsy",
+    "1 in 3",
+    "on his side",
+    "nothing in his mouth",
+    "5 minutes",
+    "ambulance",
+    "don't prevent fits",
+    "come back"
   ]
 }

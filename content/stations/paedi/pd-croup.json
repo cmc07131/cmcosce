@@ -23,15 +23,16 @@
     },
     {
       "title": "Treat",
-      "goal": "From the drug cart at his dose, then how long to watch him.",
+      "goal": "From the drug cart at his dose; how long to watch; talk to his mother.",
       "steps": [
         "treat",
-        "observe"
+        "observe",
+        "explain"
       ]
     }
   ],
   "review": [],
-  "notes": "Checked against the NICE CKS (Croup, 2023), the Alberta/TOP croup guideline, RCH Melbourne guideline, and the Westley croup score.\n\nCroup: parainfluenza commonest; 6 months to 3 years; barking cough, hoarse voice, inspiratory stridor, worse at night. Keep the child calm on the parent's lap; don't examine the throat; avoid distress (it worsens obstruction). Severity (Westley: stridor, recessions, air entry, cyanosis, conscious level): mild — stridor only when upset; moderate — stridor at rest with recession; severe — agitation or lethargy, marked recession, hypoxia.\n\nTreatment: a single oral dose of dexamethasone 0.15 mg/kg for all severities (0.3–0.6 mg/kg in some guidelines for severe; prednisolone 1–2 mg/kg if unavailable; nebulised budesonide 2 mg if vomiting). Nebulised adrenaline 1:1000, 0.5 mL/kg (max 5 mL) for moderate–severe; effect in 10–30 minutes, lasting about 2 hours, so observe for at least 2–4 hours after. Oxygen if SpO2 is low. Severe or not improving: senior/anaesthetic and ENT help, heliox, intubation with a smaller tube. No routine X-ray or antibiotics. Differentials: epiglottitis, bacterial tracheitis, foreign body, anaphylaxis, retropharyngeal abscess.\n\nYour notes match this.",
+  "notes": "Checked against the NICE CKS (Croup, 2023), the Alberta/TOP croup guideline, RCH Melbourne guideline, and the Westley croup score.\n\nCroup: parainfluenza commonest; 6 months to 3 years; barking cough, hoarse voice, inspiratory stridor, worse at night. Keep the child calm on the parent's lap; don't examine the throat; avoid distress (it worsens obstruction). Severity (Westley: stridor, recessions, air entry, cyanosis, conscious level): mild — stridor only when upset; moderate — stridor at rest with recession; severe — agitation or lethargy, marked recession, hypoxia.\n\nTreatment: a single oral dose of dexamethasone 0.15 mg/kg for all severities (0.3–0.6 mg/kg in some guidelines for severe; prednisolone 1–2 mg/kg if unavailable; nebulised budesonide 2 mg if vomiting). Nebulised adrenaline 1:1000, 0.5 mL/kg (max 5 mL) for moderate–severe; effect in 10–30 minutes, lasting about 2 hours, so observe for at least 2–4 hours after. Oxygen if SpO2 is low. Severe or not improving: senior/anaesthetic and ENT help, heliox, intubation with a smaller tube. No routine X-ray or antibiotics. Differentials: epiglottitis, bacterial tracheitis, foreign body, anaphylaxis, retropharyngeal abscess.\n\nYour notes match this.\n\nPerfect script checked against NICE CKS croup and APLS, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (throat exam, tenfold doses, antibiotics, X-ray). Added escalation and an explanation with discharge criteria.",
   "cast": [
     {
       "id": "patient",
@@ -128,12 +129,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "SpO2 probe on gently while he stays on his mother’s lap.",
+          "t": "Just the SpO2 probe, gently, while he stays on his mother's lap. Don't upset him.",
           "fetch": "trolley",
           "scene": "monitored",
-          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+          "mark": "Gentle SpO2 monitoring on the parent's lap"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "exam",
@@ -144,31 +146,26 @@
       "groups": {
         "Observe": [
           {
-            "t": "Listen: stridor at rest or only when upset?",
+            "t": "Listen from here: stridor at rest, or only when he's upset?",
             "r": "Soft inspiratory stridor at rest.",
             "mark": "Assesses stridor at rest"
           },
           {
-            "t": "Recession and work of breathing",
+            "t": "Look at his recession and work of breathing",
             "r": "Moderate subcostal and suprasternal recession.",
             "mark": "Assesses recession",
             "anim": "auscultate"
           },
           {
-            "t": "Colour and alertness",
+            "t": "His colour and how alert he is",
             "r": "Pink, alert, interactive.",
             "mark": "Assesses conscious level and colour"
-          },
-          {
-            "t": "Look in his throat with a tongue depressor",
-            "trap": "critical",
-            "r": "Throat examination can precipitate complete obstruction if this is epiglottitis. Don't."
           }
         ],
         "Severity": [
           {
-            "t": "Westley score",
-            "r": "Stridor at rest 2, moderate recession 2, air entry normal 0: score 4 — moderate croup.",
+            "t": "Westley score: stridor at rest 2, recession 2, air entry normal 0: 4, moderate croup",
+            "r": "Moderate croup: a steroid and nebulised adrenaline.",
             "mark": "Grades severity (moderate)"
           }
         ]
@@ -192,14 +189,6 @@
           "dose": "0.15 mg/kg (1.65 mg for 11 kg)"
         },
         {
-          "t": "Dexamethasone (oral) 1.5 mg/kg (16.5 mg)",
-          "drug": "Dexamethasone (oral)",
-          "dose": "1.5 mg/kg (16.5 mg)",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Ten times too much: 0.15 mg/kg (some use up to 0.6 mg/kg for severe croup)."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "scene": "adrenaline",
@@ -207,22 +196,6 @@
           "t": "Adrenaline 1 mg/mL (1:1000) nebulised 0.5 mL/kg (max 5 mL), mother holding the mask",
           "drug": "Adrenaline 1 mg/mL (1:1000) nebulised",
           "dose": "0.5 mL/kg (max 5 mL), mother holding the mask"
-        },
-        {
-          "t": "Adrenaline 1 mg/mL (1:1000) nebulised 0.05 mL/kg",
-          "drug": "Adrenaline 1 mg/mL (1:1000) nebulised",
-          "dose": "0.05 mL/kg",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Ten times too little: 0.5 mL/kg of 1:1000, maximum 5 mL."
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Croup is viral; antibiotics don't help.",
-          "t": "Amoxicillin 125 mg orally three times a day",
-          "drug": "Amoxicillin",
-          "dose": "125 mg orally three times a day"
         }
       ]
     },
@@ -234,14 +207,34 @@
       "hint": "After adrenaline: how long, and what not to do.",
       "opts": [
         {
-          "t": "Observe at least 2–4 hours after adrenaline",
+          "t": "Watch him for at least 2 to 4 hours after the adrenaline: it wears off in about 2 hours.",
           "need": true,
           "mark": "Observes for rebound after adrenaline"
         },
         {
-          "t": "Neck X-ray to confirm",
-          "trap": true,
-          "r": "Croup is a clinical diagnosis; X-ray only if atypical."
+          "t": "No X-ray and no antibiotics: croup is a clinical, viral diagnosis.",
+          "mark": "Avoids routine X-ray and antibiotics"
+        },
+        {
+          "t": "If he worsens: a senior, the anaesthetist and ENT.",
+          "mark": "Escalation plan if severe"
+        }
+      ],
+      "lang": "en"
+    },
+    {
+      "id": "explain",
+      "kind": "say",
+      "to": "mother",
+      "label": "Talk to his mother",
+      "hint": "What croup is; when he can go home; when to come back.",
+      "opts": [
+        {
+          "t": "It's croup: a virus swelling his windpipe, which makes the barking cough and noisy breathing. The medicines reduce the swelling. Once he's settled with no noisy breathing at rest, he can go home. Come back at once if the noisy breathing returns at rest, he struggles to breathe, turns blue or is very drowsy.",
+          "tz": "佢係哮吼，即係病毒令氣管腫咗，所以咳到好似狗吠，呼吸有聲。啲藥會幫佢消腫。等佢安定落嚟、靜止時冇呼吸聲，就可以返屋企。如果靜止時又有呼吸聲、好辛苦、嘴唇變藍或者好眼瞓，要即刻返嚟。",
+          "r": "Okay, thank you, doctor.",
+          "rz": "好，多謝醫生。",
+          "mark": "Explains croup, discharge criteria and when to return"
         }
       ]
     },
@@ -372,5 +365,63 @@
       "why": "Keep the child calm.",
       "source": "APLS"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "When did the noisy breathing start? Any cold before? Drooling, can't swallow, very high fever? Any choking on food or a toy before it started?",
+      "do": "Runny nose for 2 days, then barky cough tonight. No drooling, drinking milk, mild fever. No."
+    },
+    {
+      "at": "0:20",
+      "say": "Vaccinations, previous episodes, prematurity.",
+      "do": "Fully vaccinated. Term baby. First time."
+    },
+    {
+      "at": "0:40",
+      "say": "Just the SpO2 probe, gently, while he stays on his mother's lap. Don't upset him."
+    },
+    {
+      "at": "1:00",
+      "say": "Listen from here: stridor at rest, or only when he's upset? Look at his recession and work of breathing. His colour and how alert he is.",
+      "do": "Soft inspiratory stridor at rest. Moderate subcostal and suprasternal recession. Pink, alert, interactive."
+    },
+    {
+      "at": "1:20",
+      "say": "Westley score: stridor at rest 2, recession 2, air entry normal 0: 4, moderate croup.",
+      "do": "Moderate croup: a steroid and nebulised adrenaline."
+    },
+    {
+      "at": "1:40",
+      "say": "Dexamethasone (oral) 0.15 mg/kg (1.65 mg for 11 kg). Adrenaline 1 mg/mL (1:1000) nebulised 0.5 mL/kg (max 5 mL), mother holding the mask."
+    },
+    {
+      "at": "2:00",
+      "say": "Watch him for at least 2 to 4 hours after the adrenaline: it wears off in about 2 hours. No X-ray and no antibiotics: croup is a clinical, viral diagnosis. If he worsens: a senior, the anaesthetist and ENT."
+    },
+    {
+      "at": "2:20",
+      "say": "It's croup: a virus swelling his windpipe, which makes the barking cough and noisy breathing. The medicines reduce the swelling. Once he's settled with no noisy breathing at rest, he can go home. Come back at once if the noisy breathing returns at rest, he struggles to breathe, turns blue or is very drowsy.",
+      "do": "Okay, thank you, doctor."
+    }
+  ],
+  "keywords": [
+    "noisy breathing",
+    "drooling",
+    "choking",
+    "vaccinations",
+    "mother's lap",
+    "stridor at rest",
+    "recession",
+    "Westley",
+    "moderate croup",
+    "dexamethasone",
+    "0.15 mg/kg",
+    "adrenaline",
+    "0.5 mL/kg",
+    "2 to 4 hours",
+    "no X-ray",
+    "croup",
+    "come back"
   ]
 }
