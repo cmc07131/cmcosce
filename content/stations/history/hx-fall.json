@@ -34,7 +34,7 @@
       "text": "The World Falls Guidelines (2022) add a frailty assessment and prefer case-finding with risk stratification to a single risk score. Your template otherwise matches."
     }
   ],
-  "notes": "Checked against NICE CG161 (Falls in older people, 2013; new NG249 falls guideline 2025 draft/publication noted), the World Falls Guidelines (Age and Ageing 2022), and NICE CG124 (hip fracture).\n\nA fall is a symptom: find why he fell (syncope, arrhythmia, postural hypotension, stroke, infection, hypoglycaemia, medicines, alcohol, trip), what he injured (hip fracture, head injury — anticoagulants lower the CT threshold), and what the long lie caused (rhabdomyolysis, pressure injury, hypothermia, dehydration, AKI). Then a multifactorial risk assessment: previous falls, gait and mobility, medication review (sedatives, antihypertensives), vision, cognition, continence, home hazards, fear of falling, bone health.\n\nYour template and marking scheme match this well. The World Falls Guidelines add frailty assessment and prefer 'opportunistic case-finding' and risk stratification over single scores.",
+  "notes": "Checked against NICE CG161 (Falls in older people, 2013; new NG249 falls guideline 2025 draft/publication noted), the World Falls Guidelines (Age and Ageing 2022), and NICE CG124 (hip fracture).\n\nA fall is a symptom: find why he fell (syncope, arrhythmia, postural hypotension, stroke, infection, hypoglycaemia, medicines, alcohol, trip), what he injured (hip fracture, head injury — anticoagulants lower the CT threshold), and what the long lie caused (rhabdomyolysis, pressure injury, hypothermia, dehydration, AKI). Then a multifactorial risk assessment: previous falls, gait and mobility, medication review (sedatives, antihypertensives), vision, cognition, continence, home hazards, fear of falling, bone health.\n\nYour template and marking scheme match this well. The World Falls Guidelines add frailty assessment and prefer 'opportunistic case-finding' and risk stratification over single scores.\n\nPerfect script checked against NICE CG161 falls and NICE CG124 hip fracture, an HKCEM-style scheme and a keyword scheme. Seizure, injury and vision/memory questions now score.",
   "cast": [
     {
       "id": "patient",
@@ -88,7 +88,8 @@
             "t": "Any tongue biting, wet yourself, jerking?",
             "tz": "有冇咬到條脷、失禁，或者手腳抽搐？",
             "rz": "冇。",
-            "r": "No."
+            "r": "No.",
+            "mark": "Asks about seizure features"
           }
         ],
         "After": [
@@ -103,7 +104,8 @@
             "t": "Any other pain, weakness, confusion since?",
             "tz": "之後有冇其他地方痛、冇力，或者混亂？",
             "rz": "淨係髖關節。同埋想嘔。",
-            "r": "Just the hip. And I feel sick."
+            "r": "Just the hip. And I feel sick.",
+            "mark": "Asks about other injuries and confusion"
           }
         ],
         "Background": [
@@ -139,7 +141,8 @@
             "t": "Eyesight, memory, alcohol",
             "tz": "你眼睛、記性點？有冇飲酒？",
             "rz": "左眼有白內障。記性還可以。夜晚飲一杯威士忌。",
-            "r": "Cataract in my left eye. Memory OK. A glass of whisky at night."
+            "r": "Cataract in my left eye. Memory OK. A glass of whisky at night.",
+            "mark": "Asks about vision, memory and alcohol"
           }
         ]
       }
@@ -195,19 +198,19 @@
       "hint": "Treat the injury, the cause and the consequences; multifactorial falls assessment.",
       "opts": [
         {
-          "t": "Fascia iliaca block and paracetamol; orthopaedics for surgery within 36 hours",
+          "t": "A fascia iliaca block and paracetamol; orthopaedics for surgery within 36 hours.",
           "mark": "Analgesia (nerve block) and hip fracture pathway"
         },
         {
-          "t": "IV fluids for AKI and rhabdomyolysis; monitor urine output",
+          "t": "IV fluids for the AKI and rhabdomyolysis from the long lie; monitor his urine output.",
           "mark": "Treats the consequences of the long lie"
         },
         {
-          "t": "Postural hypotension: review doxazosin, diuretic, sleeping tablets",
+          "t": "Postural hypotension: review the doxazosin, the diuretic and the sleeping tablets.",
           "mark": "Medication review for falls risk"
         },
         {
-          "t": "Geriatric and therapy assessment: falls, bone health, home safety, alarm",
+          "t": "Geriatric and therapy assessment: falls, bone health, home safety and a personal alarm.",
           "mark": "Multifactorial falls assessment and bone health"
         }
       ]
@@ -338,5 +341,66 @@
       "why": "Secondary fracture prevention.",
       "source": "NICE"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Are you in pain? Can I get you something? What were you doing when you fell? Any warning — dizziness, palpitations, chest pain?",
+      "do": "My left hip is killing me. Yes please. Getting up from the toilet at night to go to the kitchen for water. I felt light-headed when I stood up, then I was on the floor."
+    },
+    {
+      "at": "0:20",
+      "say": "Did you black out? Did you hit your head? Any tongue biting, wet yourself, jerking? Could you get up? How long were you on the floor?",
+      "do": "I don't think so. I didn't hit my head. No. Couldn't get up. About 6 hours until my son came."
+    },
+    {
+      "at": "0:40",
+      "say": "Any other pain, weakness, confusion since? Previous falls? Medical conditions and medicines.",
+      "do": "Just the hip. And I feel sick. Twice this year. High blood pressure, prostate. Amlodipine, doxazosin, a water tablet, and sleeping tablets."
+    },
+    {
+      "at": "1:00",
+      "say": "Blood thinners? Who do you live with? How do you get around? Help at home? Eyesight, memory, alcohol.",
+      "do": "No. Alone since my wife died. Walk with a stick. Son visits daily. Cataract in my left eye. Memory OK. A glass of whisky at night."
+    },
+    {
+      "at": "1:20",
+      "say": "Lying and standing blood pressure. 12-lead ECG. Capillary glucose, temperature.",
+      "do": "154/80 lying, 118/66 standing with dizziness. Sinus rhythm, first-degree block. 6.4; 35.9 °C."
+    },
+    {
+      "at": "1:40",
+      "say": "FBC, U&E, CK, bone profile. Left hip X-ray.",
+      "do": "Creatinine 140 (baseline 90), CK 3100. Displaced intracapsular neck of femur fracture."
+    },
+    {
+      "at": "2:00",
+      "say": "A fascia iliaca block and paracetamol; orthopaedics for surgery within 36 hours. IV fluids for the AKI and rhabdomyolysis from the long lie; monitor his urine output. Postural hypotension: review the doxazosin, the diuretic and the sleeping tablets."
+    },
+    {
+      "at": "2:20",
+      "say": "Geriatric and therapy assessment: falls, bone health, home safety and a personal alarm."
+    }
+  ],
+  "keywords": [
+    "pain",
+    "what were you doing",
+    "dizziness",
+    "black out",
+    "hit your head",
+    "how long",
+    "previous falls",
+    "medicines",
+    "blood thinners",
+    "live",
+    "lying and standing",
+    "ECG",
+    "CK",
+    "hip X-ray",
+    "fascia iliaca",
+    "36 hours",
+    "rhabdomyolysis",
+    "postural hypotension",
+    "bone health"
   ]
 }

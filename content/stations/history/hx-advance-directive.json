@@ -34,7 +34,7 @@
       "text": "The new law. Your notes list 'advanced directive' as a topic only. Hong Kong's Advance Decision on Life-sustaining Treatment Ordinance (in force 31 July 2026) gives advance medical directives and DNACPR orders legal effect, including outside hospital. Family cannot refuse treatment on an adult's behalf; they tell you the patient's wishes. Check the Hospital Authority's current forms."
     }
   ],
-  "notes": "Checked against Hong Kong's Advance Decision on Life-sustaining Treatment Ordinance (passed November 2024, in force 31 July 2026), the Hospital Authority guidance on advance directives and DNACPR, and the Hong Kong Medical Council Code.\n\nThe Ordinance gives legal effect to advance medical directives (AMDs) made by a mentally capable adult with an advanced, irreversible disease, meeting statutory formalities, and to DNACPR orders made by registered medical practitioners; DNACPR orders now also apply outside hospital, and rescuers act on them. The maker can revoke an AMD at any time. Clinicians are protected when they give life-sustaining treatment without notice of a valid AMD, or withhold it in the honest and reasonable belief that one is valid and applicable.\n\nFamily members cannot make or refuse treatment decisions on behalf of an adult who lacks capacity (unless appointed under a legal mechanism); they are consulted about the patient's values and wishes, and the doctor decides in the patient's best interests. Check the document: is it an AMD by the patient herself, is it valid (formalities, capacity at the time), and is it applicable to this situation? A DNACPR decision does not mean 'no treatment': antibiotics, oxygen, fluids and comfort continue unless also refused.\n\nYour notes list 'advanced directive' as a topic without detail. The Ordinance's details (forms, witnesses) should be checked against the HA's current forms.",
+  "notes": "Checked against Hong Kong's Advance Decision on Life-sustaining Treatment Ordinance (passed November 2024, in force 31 July 2026), the Hospital Authority guidance on advance directives and DNACPR, and the Hong Kong Medical Council Code.\n\nThe Ordinance gives legal effect to advance medical directives (AMDs) made by a mentally capable adult with an advanced, irreversible disease, meeting statutory formalities, and to DNACPR orders made by registered medical practitioners; DNACPR orders now also apply outside hospital, and rescuers act on them. The maker can revoke an AMD at any time. Clinicians are protected when they give life-sustaining treatment without notice of a valid AMD, or withhold it in the honest and reasonable belief that one is valid and applicable.\n\nFamily members cannot make or refuse treatment decisions on behalf of an adult who lacks capacity (unless appointed under a legal mechanism); they are consulted about the patient's values and wishes, and the doctor decides in the patient's best interests. Check the document: is it an AMD by the patient herself, is it valid (formalities, capacity at the time), and is it applicable to this situation? A DNACPR decision does not mean 'no treatment': antibiotics, oxygen, fluids and comfort continue unless also refused.\n\nYour notes list 'advanced directive' as a topic without detail. The Ordinance's details (forms, witnesses) should be checked against the HA's current forms.\n\nPerfect script checked against the HA Guidance on Advance Directives and GMC end-of-life guidance, an HKCEM-style communication scheme and a keyword scheme. Removed the wrong replies and the stop-all-treatment option.",
   "cast": [
     {
       "id": "daughter",
@@ -121,13 +121,6 @@
               "r": "Thank you… that's what she wanted.",
               "mood": -3,
               "mark": "Explains that DNACPR does not mean withdrawing other treatment"
-            },
-            {
-              "t": "Yes, nothing more to do.",
-              "tz": "係，冇嘢可以再做。",
-              "rz": "我唔係咁嘅意思！",
-              "r": "That's not what I meant!",
-              "mood": 3
             }
           ]
         },
@@ -142,13 +135,6 @@
               "r": "Please would you? He'll listen to you.",
               "mood": -2,
               "mark": "Explains that family cannot override a valid AMD; offers to talk to the brother"
-            },
-            {
-              "t": "Then we'll do CPR to keep him happy.",
-              "tz": "咁為咗令佢開心，我哋就做心肺復甦啦。",
-              "rz": "但係佢唔想咁㗎！",
-              "r": "But she didn't want that!",
-              "mood": 3
             }
           ]
         },
@@ -163,13 +149,6 @@
               "r": "Can I stay tonight?",
               "mood": -1,
               "mark": "Gives honest prognosis and invites the family to stay"
-            },
-            {
-              "t": "She'll be fine.",
-              "tz": "佢會冇事嘅。",
-              "rz": "真係？",
-              "r": "Really?",
-              "mood": 1
             }
           ]
         }
@@ -183,19 +162,15 @@
       "hint": "Document the decision, complete the DNACPR form, a ceiling of care, comfort measures.",
       "opts": [
         {
-          "t": "Copy the directive into the notes; complete the DNACPR form; ward ceiling: no ICU, no intubation",
+          "t": "Copy the advance directive into the notes; complete the DNACPR form; ceiling of care on the ward: no ICU, no intubation.",
           "mark": "Documents the AMD and DNACPR decision clearly"
         },
         {
-          "t": "Continue antibiotics, oxygen, fluids; analgesia and mouth care; palliative care review",
+          "t": "Continue the antibiotics, oxygen and fluids; analgesia and mouth care; a palliative care review.",
           "mark": "Continues appropriate treatment and comfort care"
-        },
-        {
-          "t": "Stop all treatment including antibiotics",
-          "trap": true,
-          "r": "The directive refused CPR and ventilation, not antibiotics or comfort."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "viva",
@@ -323,5 +298,49 @@
       "why": "In the manner the Ordinance specifies.",
       "source": "HK Ordinance"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "What is in the folder? What does it say? Was she well enough to understand it when she signed?",
+      "do": "An advance directive my mother signed two years ago, before the dementia got bad. Her GP and a friend witnessed it. No CPR, no breathing machine, if she's in the final stage of an illness. She still wanted comfort care. Yes, the GP wrote that she understood."
+    },
+    {
+      "at": "0:20",
+      "say": "What was your mother like? What mattered to her? Has anything changed since, has she ever said otherwise?",
+      "do": "She hated hospitals. She said she wanted to die peacefully, not with machines. No, she said it again last year."
+    },
+    {
+      "at": "0:40",
+      "say": "No — we'll keep treating the pneumonia with antibiotics, oxygen and fluids, and make sure she's comfortable. What your mother refused was CPR and a breathing machine, and her directive is valid and applies now, so we will respect it.",
+      "do": "Thank you… that's what she wanted."
+    },
+    {
+      "at": "1:00",
+      "say": "I understand he's worried. Family can't override a valid advance directive — it's your mother's own decision. I'm happy to speak to him by phone to explain.",
+      "do": "Please would you? He'll listen to you."
+    },
+    {
+      "at": "1:20",
+      "say": "She's very unwell. She may improve with antibiotics, but she might die in the next few days. We'll keep you updated and you can stay with her.",
+      "do": "Can I stay tonight?"
+    },
+    {
+      "at": "1:40",
+      "say": "Copy the advance directive into the notes; complete the DNACPR form; ceiling of care on the ward: no ICU, no intubation. Continue the antibiotics, oxygen and fluids; analgesia and mouth care; a palliative care review."
+    }
+  ],
+  "keywords": [
+    "advance directive",
+    "what mattered",
+    "antibiotics",
+    "comfortable",
+    "CPR",
+    "valid",
+    "few days",
+    "stay with her",
+    "DNACPR",
+    "ceiling of care",
+    "palliative care"
   ]
 }

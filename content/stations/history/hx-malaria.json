@@ -34,7 +34,7 @@
       "text": "Antimalarial drugs. Your notes list quinine, doxycycline and chloroquine. Severe falciparum malaria is now treated with IV artesunate (quinine is second-line), and uncomplicated falciparum with an artemisinin combination such as artemether–lumefantrine. Chloroquine is for non-falciparum malaria, followed by primaquine for vivax and ovale after a G6PD test."
     }
   ],
-  "notes": "Checked against UKHSA guidelines for malaria prevention and treatment (UK malaria treatment guidelines, 2016 with updates), WHO Guidelines for malaria (2023–2025), the CHP (Hong Kong) guidance, and the RCEM/BIA approach to the febrile returning traveller.\n\nMalaria must be excluded in any fever within 1 year of travel to an endemic area (most falciparum within 3 months). Tests: thick and thin films (three sets over 48–72 hours if negative) plus a rapid antigen test; parasitaemia; FBC (thrombocytopenia), U&E, LFT, glucose, lactate, gas. Severe falciparum malaria: impaired consciousness or seizures, respiratory distress/acidosis, shock, AKI, hypoglycaemia, jaundice, severe anaemia, bleeding, parasitaemia 2% or more (UK threshold; WHO uses 10% in high-transmission settings): treat with IV artesunate. Uncomplicated falciparum: artemether–lumefantrine (or atovaquone–proguanil). Non-falciparum: chloroquine (or artemisinin combination), then primaquine for vivax/ovale after G6PD testing.\n\nYour notes list quinine, doxycycline and chloroquine as the anti-malarial drugs; current first-line for severe falciparum is IV artesunate (quinine is a second-line alternative) and for uncomplicated falciparum an artemisinin combination. The rest of your history and investigation list matches.\n\nThis case: backpacking in rural Sierra Leone, no prophylaxis, thrombocytopenia and a 3% falciparum parasitaemia — severe malaria.",
+  "notes": "Checked against UKHSA guidelines for malaria prevention and treatment (UK malaria treatment guidelines, 2016 with updates), WHO Guidelines for malaria (2023–2025), the CHP (Hong Kong) guidance, and the RCEM/BIA approach to the febrile returning traveller.\n\nMalaria must be excluded in any fever within 1 year of travel to an endemic area (most falciparum within 3 months). Tests: thick and thin films (three sets over 48–72 hours if negative) plus a rapid antigen test; parasitaemia; FBC (thrombocytopenia), U&E, LFT, glucose, lactate, gas. Severe falciparum malaria: impaired consciousness or seizures, respiratory distress/acidosis, shock, AKI, hypoglycaemia, jaundice, severe anaemia, bleeding, parasitaemia 2% or more (UK threshold; WHO uses 10% in high-transmission settings): treat with IV artesunate. Uncomplicated falciparum: artemether–lumefantrine (or atovaquone–proguanil). Non-falciparum: chloroquine (or artemisinin combination), then primaquine for vivax/ovale after G6PD testing.\n\nYour notes list quinine, doxycycline and chloroquine as the anti-malarial drugs; current first-line for severe falciparum is IV artesunate (quinine is a second-line alternative) and for uncomplicated falciparum an artemisinin combination. The rest of your history and investigation list matches.\n\nThis case: backpacking in rural Sierra Leone, no prophylaxis, thrombocytopenia and a 3% falciparum parasitaemia — severe malaria.\n\nPerfect script checked against UK malaria treatment guidelines and CHP guidance, an HKCEM-style scheme and a keyword scheme. Removed chloroquine-and-discharge and the wait-for-three-films options.",
   "cast": [
     {
       "id": "patient",
@@ -116,7 +116,8 @@
             "t": "Occupation, cluster, contacts at home",
             "tz": "做咩工作？身邊有冇人一樣病？屋企有邊個？",
             "rz": "做寫字樓。同女朋友住，佢冇事。",
-            "r": "Office worker. Lives with his girlfriend, who is well."
+            "r": "Office worker. Lives with his girlfriend, who is well.",
+            "mark": "Asks occupation and contacts"
           }
         ]
       }
@@ -136,7 +137,8 @@
           },
           {
             "t": "Conscious level",
-            "r": "GCS 15, orientated."
+            "r": "GCS 15, orientated.",
+            "mark": "Checks conscious level (cerebral malaria)"
           }
         ],
         "Bloods": [
@@ -167,26 +169,16 @@
       "hint": "Differential, severity, treatment, notification.",
       "opts": [
         {
-          "t": "Differential: falciparum malaria, dengue, typhoid, rickettsial infection, leptospirosis, HIV seroconversion; common infections too",
+          "t": "The differential: falciparum malaria first, then dengue, typhoid, rickettsial infection, leptospirosis and HIV seroconversion, as well as common infections.",
           "mark": "Gives a structured differential"
         },
         {
-          "t": "Severe malaria: parasitaemia 2% or more (UK) with jaundice → admit, IV artesunate",
+          "t": "This is severe malaria: parasitaemia of 2% or more with jaundice, so he's admitted for IV artesunate.",
           "mark": "Recognises severe malaria and treats with IV artesunate"
         },
         {
-          "t": "Infectious diseases consultant; notify the Centre for Health Protection",
+          "t": "The infectious diseases consultant, and notify the Centre for Health Protection.",
           "mark": "Refers and notifies"
-        },
-        {
-          "t": "Oral chloroquine and discharge",
-          "trap": "critical",
-          "r": "West African falciparum is chloroquine-resistant, and he has severe disease."
-        },
-        {
-          "t": "Wait for three negative films over 3 days before thinking of malaria",
-          "trap": true,
-          "r": "The first film is already positive; treat now."
         }
       ]
     },
@@ -317,5 +309,55 @@
       "source": "WHO; SEAQUAMAT/AQUAMAT",
       "note": "Older notes list quinine first."
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Tell me about the fever. Other symptoms: cough, diarrhoea, urine, rash, confusion? Have you travelled recently? Where exactly and when?",
+      "do": "Started 5 days ago. Comes in waves with shaking chills and sweats, every day now. Headache, joint aches, some nausea. No cough, no rash, no diarrhoea. My urine is darker. Backpacking in Sierra Leone, three weeks, rural villages. Came back 10 days ago."
+    },
+    {
+      "at": "0:20",
+      "say": "Did you take malaria tablets? Mosquito nets? Vaccines before travel? Fresh water swimming, animal contact, sexual contact, sick contacts?",
+      "do": "I didn't take any tablets. Lots of mosquito bites. Yellow fever and typhoid injections. Swam in a river once. No sexual contacts. No one else ill that I know."
+    },
+    {
+      "at": "0:40",
+      "say": "Did you visit anywhere with Ebola or Lassa outbreaks, or care for sick people? Past medical history, medicines, allergies. Occupation, cluster, contacts at home.",
+      "do": "No healthcare work, no funerals, no sick people. Healthy. No medicines. No allergies. Office worker. Lives with his girlfriend, who is well."
+    },
+    {
+      "at": "1:00",
+      "say": "Jaundice, pallor, rash, lymph nodes, liver and spleen. Conscious level. Thick and thin blood films and a malaria rapid antigen test.",
+      "do": "Mildly icteric. Spleen tip palpable. No rash. GCS 15, orientated. P. falciparum, parasitaemia 3%."
+    },
+    {
+      "at": "1:20",
+      "say": "FBC, U&E, LFT, glucose, lactate, gas. Blood cultures, dengue serology/NS1, HIV test.",
+      "do": "Platelets 54, Hb 112, creatinine 110, bilirubin 58, glucose 4.2, lactate 2.8. Sent."
+    },
+    {
+      "at": "1:40",
+      "say": "The differential: falciparum malaria first, then dengue, typhoid, rickettsial infection, leptospirosis and HIV seroconversion, as well as common infections. This is severe malaria: parasitaemia of 2% or more with jaundice, so he's admitted for IV artesunate. The infectious diseases consultant, and notify the Centre for Health Protection."
+    }
+  ],
+  "keywords": [
+    "fever",
+    "travelled",
+    "malaria tablets",
+    "mosquito",
+    "vaccines",
+    "fresh water",
+    "Ebola",
+    "jaundice",
+    "spleen",
+    "thick and thin blood films",
+    "rapid antigen",
+    "blood cultures",
+    "dengue",
+    "falciparum",
+    "severe malaria",
+    "IV artesunate",
+    "Centre for Health Protection"
   ]
 }

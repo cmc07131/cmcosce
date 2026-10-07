@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the SPIKES protocol (Baile et al., The Oncologist 2000), GMC guidance on decision making and consent (2020), and the Hong Kong Medical Council Code of Professional Conduct.\n\nSPIKES: Setting (private room, sit down, no interruptions, the patient's chosen companion, tissues), Perception (what do you understand so far?), Invitation (how much detail would you like?), Knowledge (a warning shot, then plain words, small chunks, no jargon, check understanding), Emotions (acknowledge, allow silence, empathic statements), Strategy and Summary (next steps, oncology and palliative care referral, symptom control, who to contact, a follow-up plan). Honesty without destroying hope; do not give precise survival figures unless asked, and then give ranges.\n\nIn Hong Kong families sometimes ask doctors to withhold a diagnosis; the competent patient has the right to know, and here he has asked. Your notes list 'Break bad news – CA' without a script; nothing conflicts.",
+  "notes": "Checked against the SPIKES protocol (Baile et al., The Oncologist 2000), GMC guidance on decision making and consent (2020), and the Hong Kong Medical Council Code of Professional Conduct.\n\nSPIKES: Setting (private room, sit down, no interruptions, the patient's chosen companion, tissues), Perception (what do you understand so far?), Invitation (how much detail would you like?), Knowledge (a warning shot, then plain words, small chunks, no jargon, check understanding), Emotions (acknowledge, allow silence, empathic statements), Strategy and Summary (next steps, oncology and palliative care referral, symptom control, who to contact, a follow-up plan). Honesty without destroying hope; do not give precise survival figures unless asked, and then give ranges.\n\nIn Hong Kong families sometimes ask doctors to withhold a diagnosis; the competent patient has the right to know, and here he has asked. Your notes list 'Break bad news – CA' without a script; nothing conflicts.\n\nPerfect script checked against the SPIKES protocol, an HKCEM-style communication scheme and a keyword scheme. Removed the corridor option and the blunt, jargon and evasive replies.",
   "cast": [
     {
       "id": "patient",
@@ -58,12 +58,12 @@
       "confirm": "Ready",
       "opts": [
         {
-          "t": "Quiet private room; everyone sitting",
+          "t": "A quiet private room, with everyone sitting",
           "need": true,
           "mark": "Private setting, seated"
         },
         {
-          "t": "Hand my phone to a colleague — no interruptions",
+          "t": "My phone to a colleague: no interruptions",
           "need": true,
           "mark": "Avoids interruptions"
         },
@@ -71,11 +71,6 @@
           "t": "Nurse Ng joins us for support",
           "need": true,
           "mark": "Brings a nurse for continuing support"
-        },
-        {
-          "t": "Tell him in the corridor on the way to the ward",
-          "trap": true,
-          "r": "No privacy, no time, no chance to react."
         }
       ]
     },
@@ -98,13 +93,6 @@
               "r": "They said my yellow skin might be from the gallbladder… a blockage?",
               "mood": -1,
               "mark": "Explores his perception first"
-            },
-            {
-              "t": "Yes, you have pancreatic cancer with liver metastases.",
-              "tz": "係，你有胰臟癌，已經擴散到肝。",
-              "rz": "乜話？！就咁講？",
-              "r": "What?! Just like that?",
-              "mood": 4
             }
           ]
         },
@@ -119,13 +107,6 @@
               "r": "Tell me everything. My wife too.",
               "mood": -1,
               "mark": "Asks how much information he wants"
-            },
-            {
-              "t": "Let's not worry about details.",
-              "tz": "唔好理啲細節住。",
-              "rz": "但係我想知。",
-              "r": "But I want to know.",
-              "mood": 2
             }
           ]
         },
@@ -140,13 +121,6 @@
               "r": "[Silence. His wife takes his hand.] …Cancer?",
               "mood": 1,
               "mark": "Gives a warning shot, then the news in plain language"
-            },
-            {
-              "t": "There is a hypodense lesion in the pancreatic head with hepatic metastatic deposits.",
-              "tz": "胰頭有一個 hypodense lesion，肝臟有轉移。",
-              "rz": "你講嘅嘢我完全唔明。",
-              "r": "I don't understand any of that.",
-              "mood": 3
             }
           ]
         },
@@ -161,13 +135,6 @@
               "r": "[Tearful] What can you do then?",
               "mood": -2,
               "mark": "Acknowledges emotion, allows silence, answers honestly"
-            },
-            {
-              "t": "No. Next question?",
-              "tz": "唔得。下一條問題？",
-              "rz": "你點可以咁冷血？",
-              "r": "How can you be so cold?",
-              "mood": 3
             }
           ]
         },
@@ -182,20 +149,6 @@
               "r": "…Months. OK. Thank you for being honest.",
               "mood": -1,
               "mark": "Answers prognosis honestly with a range, not a number"
-            },
-            {
-              "t": "Exactly 4 months.",
-              "tz": "啱啱好四個月。",
-              "rz": "你點會知㗎？",
-              "r": "How can you know that?",
-              "mood": 2
-            },
-            {
-              "t": "Don't think about that — stay positive!",
-              "tz": "唔好諗咁多——要樂觀啲！",
-              "rz": "唔該你唔好避開我條問題。",
-              "r": "Please don't avoid the question.",
-              "mood": 2
             }
           ]
         },
@@ -210,13 +163,6 @@
               "r": "My wife and I need to think. Thank you, doctor.",
               "mood": -2,
               "mark": "Gives a plan, referral and follow-up, and invites questions"
-            },
-            {
-              "t": "Nothing more can be done.",
-              "tz": "冇嘢可以再做喇。",
-              "rz": "（崩潰）",
-              "r": "[Breaks down]",
-              "mood": 3
             }
           ]
         }
@@ -241,13 +187,6 @@
               "r": "…All right. As long as you're kind to him.",
               "mood": -3,
               "mark": "Respects the patient's autonomy while supporting the family"
-            },
-            {
-              "t": "Of course, I'll tell you and keep him in the dark.",
-              "tz": "冇問題，我會話俾你知，瞞住佢。",
-              "rz": "多謝你。",
-              "r": "Thank you.",
-              "mood": -1
             }
           ]
         }
@@ -379,5 +318,61 @@
       "why": "Strategy and summary.",
       "source": "SPIKES"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "A quiet private room, with everyone sitting. My phone to a colleague: no interruptions. Nurse Ng joins us for support."
+    },
+    {
+      "at": "0:20",
+      "say": "They have. Before I explain, can you tell me what you understand so far about why we did the scan?",
+      "do": "They said my yellow skin might be from the gallbladder… a blockage?"
+    },
+    {
+      "at": "0:40",
+      "say": "How much detail would you like me to go into? Some people want everything, some just the main points.",
+      "do": "Tell me everything. My wife too."
+    },
+    {
+      "at": "1:00",
+      "say": "I'm afraid the results are not what we hoped. [pause] The scan shows a growth in the pancreas, which is blocking the bile duct. It looks like a cancer, and it has spread to the liver.",
+      "do": "[Silence. His wife takes his hand.] …Cancer?"
+    },
+    {
+      "at": "1:20",
+      "say": "[Pause] This must be a terrible shock. [Silence] The surgeons have looked carefully; because it has spread, an operation would not cure it. But there is a lot we can do.",
+      "do": "[Tearful] What can you do then?"
+    },
+    {
+      "at": "1:40",
+      "say": "That's hard to say for any one person. It's likely to be months rather than years, but the oncology team can tell you more once they know how you respond to treatment.",
+      "do": "…Months. OK. Thank you for being honest."
+    },
+    {
+      "at": "2:00",
+      "say": "A stent can relieve the jaundice and itch; the oncologists will discuss chemotherapy; the palliative care team will help with symptoms. I'll see you on the ward tomorrow. What questions do you have?",
+      "do": "My wife and I need to think. Thank you, doctor."
+    },
+    {
+      "at": "2:20",
+      "say": "I understand you want to protect him. He has asked to be told himself, so I'll keep being honest with him — gently. With his permission, we can include you in every conversation.",
+      "do": "…All right. As long as you're kind to him."
+    }
+  ],
+  "keywords": [
+    "private room",
+    "no interruptions",
+    "what you understand",
+    "how much detail",
+    "not what we hoped",
+    "cancer",
+    "shock",
+    "operation",
+    "months rather than years",
+    "stent",
+    "chemotherapy",
+    "palliative care",
+    "honest"
   ]
 }

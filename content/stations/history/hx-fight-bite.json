@@ -34,7 +34,7 @@
       "text": "X-ray the hand (tooth fragment, metacarpal head fracture, air in the joint) and refer early to the hand surgeons for exploration and washout: most fight bites over the knuckle reach the joint or tendon."
     }
   ],
-  "notes": "Checked against NICE NG184 (Human and animal bites: antimicrobial prescribing, 2020), BSSH hand surgery guidance, and CHP / UKHSA guidance on blood-borne virus exposure.\n\nA laceration over a metacarpophalangeal joint after a punch is a human bite until proven otherwise. Teeth penetrate the extensor tendon and joint capsule with the fist clenched; when the hand opens, the tendon slides and hides the tract. Oral flora (streptococci, Staphylococcus aureus, Eikenella corrodens, anaerobes) cause septic arthritis, tenosynovitis and osteomyelitis.\n\nManage: X-ray (tooth fragment, fracture of the metacarpal head, air in the joint); irrigate; do not close primarily; co-amoxiclav prophylaxis (NICE: for human bites that break the skin and draw blood) — doxycycline plus metronidazole if penicillin-allergic; tetanus; blood-borne virus risk assessment (HBV vaccination, HCV and HIV testing; PEP rarely indicated unless the source is known high risk with blood in saliva). Refer to hand surgeons for exploration and washout if the joint or tendon may be involved (most fight bites over the MCP joint), or if presenting late or infected.\n\nYour notes match this; they could add the X-ray and early hand surgery referral for exploration.",
+  "notes": "Checked against NICE NG184 (Human and animal bites: antimicrobial prescribing, 2020), BSSH hand surgery guidance, and CHP / UKHSA guidance on blood-borne virus exposure.\n\nA laceration over a metacarpophalangeal joint after a punch is a human bite until proven otherwise. Teeth penetrate the extensor tendon and joint capsule with the fist clenched; when the hand opens, the tendon slides and hides the tract. Oral flora (streptococci, Staphylococcus aureus, Eikenella corrodens, anaerobes) cause septic arthritis, tenosynovitis and osteomyelitis.\n\nManage: X-ray (tooth fragment, fracture of the metacarpal head, air in the joint); irrigate; do not close primarily; co-amoxiclav prophylaxis (NICE: for human bites that break the skin and draw blood) — doxycycline plus metronidazole if penicillin-allergic; tetanus; blood-borne virus risk assessment (HBV vaccination, HCV and HIV testing; PEP rarely indicated unless the source is known high risk with blood in saliva). Refer to hand surgeons for exploration and washout if the joint or tendon may be involved (most fight bites over the MCP joint), or if presenting late or infected.\n\nYour notes match this; they could add the X-ray and early hand surgery referral for exploration.\n\nPerfect script checked against BSSH and NICE CKS human bites, an HKCEM-style scheme and a keyword scheme. Removed the stitch-it, your-choice and no-risk replies; hepatitis B vaccination scores.",
   "cast": [
     {
       "id": "patient",
@@ -109,7 +109,8 @@
             "t": "Hepatitis B vaccination?",
             "tz": "有冇打過乙型肝炎疫苗？",
             "rz": "有，細個打過。",
-            "r": "Yes, as a kid."
+            "r": "Yes, as a kid.",
+            "mark": "Asks hepatitis B vaccination"
           }
         ]
       }
@@ -162,13 +163,6 @@
               "r": "An operation? For this?",
               "mood": 0,
               "mark": "Explains the risk of joint infection and the plan"
-            },
-            {
-              "t": "Sure, three stitches.",
-              "tz": "冇問題，縫三針。",
-              "rz": "好嘢。",
-              "r": "Great.",
-              "mood": -1
             }
           ]
         },
@@ -183,13 +177,6 @@
               "r": "OK… makes sense.",
               "mood": -2,
               "mark": "Appropriate antibiotics for penicillin allergy and tetanus"
-            },
-            {
-              "t": "Your choice.",
-              "tz": "你自己揀。",
-              "rz": "咁唔要。",
-              "r": "Then no.",
-              "mood": 1
             }
           ]
         },
@@ -204,13 +191,6 @@
               "r": "Thanks for explaining.",
               "mood": -2,
               "mark": "Counsels on blood-borne virus risk and testing"
-            },
-            {
-              "t": "No risk at all.",
-              "tz": "完全冇風險。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         }
@@ -342,5 +322,60 @@
       "why": "Tetanus-prone wound.",
       "source": "UKHSA Green Book"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "How exactly did you hurt your hand? When? Pain, swelling, redness, fever, can you move your fingers?",
+      "do": "Punched a guy in the mouth. Hit his teeth. About 6 hours ago. Throbbing, bit swollen. Hurts to straighten my middle finger."
+    },
+    {
+      "at": "0:20",
+      "say": "Which is your writing hand? What do you do for work? Tetanus vaccination? Allergies, diabetes, immune problems?",
+      "do": "Right-handed. I'm a chef. No idea — over 10 years ago. Penicillin gives me a rash. Otherwise healthy."
+    },
+    {
+      "at": "0:40",
+      "say": "Was the other man bleeding from the mouth? Do you know anything about him? Hepatitis B vaccination?",
+      "do": "His lip was bleeding. Don't know him. Yes, as a kid."
+    },
+    {
+      "at": "1:00",
+      "say": "Look at the wound with the fist clenched and open. Test extensor tendon and joint. Hand X-ray.",
+      "do": "A 6 mm laceration over the 3rd MCP joint; with the fist clenched it lines up with a hole in the extensor hood. Pain on extension against resistance; pain on passive movement of the MCP joint. No fracture, no foreign body. A small bubble of air in the 3rd MCP joint."
+    },
+    {
+      "at": "1:20",
+      "say": "It looks small, but teeth have gone into the knuckle joint. Mouth bacteria cause serious infection that can destroy the joint. We won't stitch it; you need antibiotics and the hand surgeons to wash out the joint.",
+      "do": "An operation? For this?"
+    },
+    {
+      "at": "1:40",
+      "say": "As a chef your hand is your living. A washout now avoids a stiff, infected finger later. Because you're allergic to penicillin, we'll use doxycycline and metronidazole, and give a tetanus booster.",
+      "do": "OK… makes sense."
+    },
+    {
+      "at": "2:00",
+      "say": "There's a small risk of hepatitis and HIV from blood in saliva. You're protected against hepatitis B; we'll take baseline blood tests today and repeat them later. HIV medicines aren't usually needed for this type of exposure.",
+      "do": "Thanks for explaining."
+    }
+  ],
+  "keywords": [
+    "how exactly",
+    "when",
+    "move your fingers",
+    "writing hand",
+    "tetanus",
+    "allergies",
+    "bleeding from the mouth",
+    "hepatitis B",
+    "fist clenched",
+    "tendon",
+    "X-ray",
+    "joint",
+    "won't stitch",
+    "washout",
+    "doxycycline",
+    "HIV"
   ]
 }

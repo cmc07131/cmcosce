@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE NG10 (Violence and aggression, 2015), the Hong Kong Mental Health Ordinance (Cap 136), common-law duty of care, and Hospital Authority policy on restraint.\n\nConflict resolution: safety first (a nurse or security present, an exit, sit at an angle), introduce yourself, let her speak, acknowledge her feelings (without accepting abuse), explain simply what happened and why he is being looked after, explain the legal and medical basis, involve her in the plan, offer support (medical social worker), set limits calmly if she becomes threatening, and document.\n\nLegal basis: a person who lacks capacity because of intoxication or acute illness can be treated and restrained in their best interests under the common law of necessity, using the least restrictive, proportionate measures, reviewed frequently. If a mental disorder is suspected, the Mental Health Ordinance provides for detention for observation (Section 31, Forms 1–3) or an application to a Magistrate/District Judge. The mother cannot remove an adult who lacks capacity when he is a danger to himself or others.\n\nYour notes list these points (quiet room, empathy, safety of patient, others and mother, the plan, psychiatry, MSW, documentation) — this matches.",
+  "notes": "Checked against NICE NG10 (Violence and aggression, 2015), the Hong Kong Mental Health Ordinance (Cap 136), common-law duty of care, and Hospital Authority policy on restraint.\n\nConflict resolution: safety first (a nurse or security present, an exit, sit at an angle), introduce yourself, let her speak, acknowledge her feelings (without accepting abuse), explain simply what happened and why he is being looked after, explain the legal and medical basis, involve her in the plan, offer support (medical social worker), set limits calmly if she becomes threatening, and document.\n\nLegal basis: a person who lacks capacity because of intoxication or acute illness can be treated and restrained in their best interests under the common law of necessity, using the least restrictive, proportionate measures, reviewed frequently. If a mental disorder is suspected, the Mental Health Ordinance provides for detention for observation (Section 31, Forms 1–3) or an application to a Magistrate/District Judge. The mother cannot remove an adult who lacks capacity when he is a danger to himself or others.\n\nYour notes list these points (quiet room, empathy, safety of patient, others and mother, the plan, psychiatry, MSW, documentation) — this matches.\n\nPerfect script checked against a de-escalation checklist and the HA restraint policy, an HKCEM-style communication scheme and a keyword scheme. Removed the threatening, dismissive and unsafe replies.",
   "cast": [
     {
       "id": "mother",
@@ -44,15 +44,11 @@
       "hint": "Safety: a nurse with you, security aware, position near the door.",
       "opts": [
         {
-          "t": "Nurse Ip comes with me; security aware nearby; I'll sit near the door",
+          "t": "Nurse Ip, please come with me; security aware and nearby. I'll sit near the door.",
           "mark": "Plans for personal safety"
-        },
-        {
-          "t": "Go in alone and stand over her",
-          "trap": true,
-          "r": "Standing over someone escalates; always have a colleague and an exit."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "talk",
@@ -73,13 +69,6 @@
               "r": "He's not a criminal! He's my baby!",
               "mood": -2,
               "mark": "Introduces self, acknowledges emotion, invites her to speak"
-            },
-            {
-              "t": "Calm down or security will remove you.",
-              "tz": "你冷靜啲，唔係我叫保安請你出去。",
-              "rz": "你唔好恐嚇我！",
-              "r": "Don't you threaten me!",
-              "mood": 1
             }
           ]
         },
@@ -94,13 +83,6 @@
               "r": "Drugs? He promised me he stopped…",
               "mood": -2,
               "mark": "Explains what happened honestly and why restraint is used"
-            },
-            {
-              "t": "He's violent, that's all you need to know.",
-              "tz": "佢有暴力傾向，你知呢樣就夠。",
-              "rz": "你竟然咁講！",
-              "r": "How dare you!",
-              "mood": 1
             }
           ]
         },
@@ -115,13 +97,6 @@
               "r": "…Will you let me sit with him?",
               "mood": -3,
               "mark": "Explains the legal and medical basis and the plan"
-            },
-            {
-              "t": "Take him then, sign here.",
-              "tz": "咁你帶佢走啦，喺度簽名。",
-              "rz": "好。",
-              "r": "Fine.",
-              "mood": -1
             }
           ]
         },
@@ -136,13 +111,6 @@
               "r": "Thank you… sorry for shouting.",
               "mood": -3,
               "mark": "Involves her, offers social work support, documents"
-            },
-            {
-              "t": "No visitors.",
-              "tz": "唔准探病。",
-              "rz": "我要投訴。",
-              "r": "I'm complaining.",
-              "mood": 2
             }
           ]
         }
@@ -276,5 +244,45 @@
       "source": "ACEP 2023",
       "note": "Your notes use 'excited delirium syndrome'."
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Nurse Ip, please come with me; security aware and nearby. I'll sit near the door."
+    },
+    {
+      "at": "0:20",
+      "say": "I'm Dr Chan, the doctor looking after your son. I can see you're very upset — anyone would be seeing their child like this. Please tell me what worries you most.",
+      "do": "He's not a criminal! He's my baby!"
+    },
+    {
+      "at": "0:40",
+      "say": "We're not treating him as a criminal. When he arrived he'd taken drugs and was trying to hurt people with a knife. We gave him medicine to calm him, and the straps are there only to keep him and the staff safe while it wears off.",
+      "do": "Drugs? He promised me he stopped…"
+    },
+    {
+      "at": "1:00",
+      "say": "I understand you want him home. Right now the drugs mean he can't make safe decisions, and he could harm himself or others; the law allows us to care for him until he's safe. We check him every 15 minutes and remove the straps as soon as it's safe. The psychiatrist will see him today.",
+      "do": "…Will you let me sit with him?"
+    },
+    {
+      "at": "1:20",
+      "say": "Yes, when it's safe. I'll also ask our social worker to talk with you — this must be very hard. I'll write down everything we've discussed.",
+      "do": "Thank you… sorry for shouting."
+    }
+  ],
+  "keywords": [
+    "Nurse Ip",
+    "security",
+    "near the door",
+    "Dr Chan",
+    "very upset",
+    "not treating him as a criminal",
+    "drugs",
+    "calm him",
+    "can't make safe decisions",
+    "the law",
+    "social worker",
+    "write down"
   ]
 }

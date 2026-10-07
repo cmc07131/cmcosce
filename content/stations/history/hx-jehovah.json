@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Hong Kong Medical Council Code of Professional Conduct (consent), Hospital Authority guidance on patients who refuse blood, GMC guidance on consent (2020), and the Association of Anaesthetists guidance on Jehovah's Witnesses (2018).\n\nA competent adult may refuse any treatment, including life-saving blood, for any reason. Confirm capacity, give clear information about the risks (including death), explore which products he accepts (many Witnesses accept fractions such as albumin, clotting factors, cell salvage in continuity, EPO, tranexamic acid, IV iron — individual conscience), check for an advance directive / 'No Blood' card, offer a private conversation away from family or elders (to ensure the decision is voluntary), involve the Hospital Liaison Committee if he wishes, document, and maximise every blood-sparing measure: early endoscopy, tranexamic acid (in GI bleeding, HALT-IT showed no benefit, so not routine), PPI, IV iron, EPO, minimise sampling, early surgery or embolisation.\n\nChildren: parents cannot refuse life-saving treatment for a child; seek legal authority (in HK, via the court / Protection of Children and Juveniles Ordinance). Gillick competence (UK) — whether a young person under 16 can consent; refusal by a young person may still be overridden in their best interests. Your notes summarise Gillick and JW beliefs correctly.",
+  "notes": "Checked against the Hong Kong Medical Council Code of Professional Conduct (consent), Hospital Authority guidance on patients who refuse blood, GMC guidance on consent (2020), and the Association of Anaesthetists guidance on Jehovah's Witnesses (2018).\n\nA competent adult may refuse any treatment, including life-saving blood, for any reason. Confirm capacity, give clear information about the risks (including death), explore which products he accepts (many Witnesses accept fractions such as albumin, clotting factors, cell salvage in continuity, EPO, tranexamic acid, IV iron — individual conscience), check for an advance directive / 'No Blood' card, offer a private conversation away from family or elders (to ensure the decision is voluntary), involve the Hospital Liaison Committee if he wishes, document, and maximise every blood-sparing measure: early endoscopy, tranexamic acid (in GI bleeding, HALT-IT showed no benefit, so not routine), PPI, IV iron, EPO, minimise sampling, early surgery or embolisation.\n\nChildren: parents cannot refuse life-saving treatment for a child; seek legal authority (in HK, via the court / Protection of Children and Juveniles Ordinance). Gillick competence (UK) — whether a young person under 16 can consent; refusal by a young person may still be overridden in their best interests. Your notes summarise Gillick and JW beliefs correctly.\n\nPerfect script checked against the HA guideline on Jehovah's Witnesses and GMC consent guidance, an HKCEM-style scheme and a keyword scheme. Removed the mocking, false-reassurance and coercive replies, and the transfuse-when-unconscious option.",
   "cast": [
     {
       "id": "patient",
@@ -65,13 +65,6 @@
               "r": "Yes, please.",
               "mood": -2,
               "mark": "Respects his beliefs and offers information"
-            },
-            {
-              "t": "That's ridiculous, you'll die.",
-              "tz": "咁好荒謬，你會死㗎。",
-              "rz": "唔該你唔好嘲笑我嘅信仰。",
-              "r": "Please don't mock my faith.",
-              "mood": 3
             }
           ]
         },
@@ -86,13 +79,6 @@
               "r": "I understand I might die. I still refuse whole blood.",
               "mood": -1,
               "mark": "Explains the risk including death and checks understanding (capacity)"
-            },
-            {
-              "t": "You'll be fine without blood.",
-              "tz": "唔輸血你都會冇事嘅。",
-              "rz": "真係？",
-              "r": "Really?",
-              "mood": 0
             }
           ]
         },
@@ -107,13 +93,6 @@
               "r": "I accept albumin and clotting factors. Here's my card.",
               "mood": -2,
               "mark": "Explores acceptable products and any advance directive"
-            },
-            {
-              "t": "OK, we'll do nothing then.",
-              "tz": "咁我哋乜都唔做喇。",
-              "rz": "我冇話乜都唔做。",
-              "r": "I didn't say do nothing.",
-              "mood": 2
             }
           ]
         },
@@ -128,13 +107,6 @@
               "r": "…Yes. It is my own decision.",
               "mood": -1,
               "mark": "Ensures the decision is voluntary"
-            },
-            {
-              "t": "Let's get them in to decide.",
-              "tz": "叫佢哋入嚟一齊決定啦。",
-              "rz": "呢個係我嘅決定。",
-              "r": "It's my decision.",
-              "mood": 1
             }
           ]
         }
@@ -149,7 +121,7 @@
       "confirm": "Do these",
       "opts": [
         {
-          "t": "Urgent endoscopy; surgeon and IR aware early",
+          "t": "Urgent endoscopy; the surgeon and IR aware early",
           "need": true,
           "mark": "Early definitive haemorrhage control"
         },
@@ -160,20 +132,15 @@
           "mark": "Blood-sparing treatments"
         },
         {
-          "t": "Paediatric blood tubes to minimise sampling",
+          "t": "Paediatric blood tubes to keep sampling to a minimum",
           "fetch": "trolley",
           "need": true,
           "mark": "Minimises iatrogenic blood loss"
         },
         {
-          "t": "Document his refusal, capacity, what he accepts, and the card; inform the team",
+          "t": "Document his refusal, his capacity, what he accepts, and his card; tell the whole team",
           "need": true,
           "mark": "Documents clearly"
-        },
-        {
-          "t": "Transfuse him once he loses consciousness",
-          "trap": "critical",
-          "r": "A valid refusal made while capable remains binding when he loses capacity."
         }
       ]
     },
@@ -303,5 +270,51 @@
       "why": "Clear records protect patient and team.",
       "source": "HA guidance"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Thank you for telling me — I'll respect your beliefs. Can I explain what's happening, so your decision is fully informed?",
+      "do": "Yes, please."
+    },
+    {
+      "at": "0:20",
+      "say": "Your blood count is very low, about half of normal. Without blood, if the bleeding continues you could have a heart attack, organ damage, or die. Can you tell me what you understand about the risk?",
+      "do": "I understand I might die. I still refuse whole blood."
+    },
+    {
+      "at": "0:40",
+      "say": "Are there things you would accept — for example clotting factors, albumin, or blood recycled during surgery? Do you carry an advance decision card?",
+      "do": "I accept albumin and clotting factors. Here's my card."
+    },
+    {
+      "at": "1:00",
+      "say": "Would you like to talk with me alone for a minute first, so I know this is entirely your own decision?",
+      "do": "…Yes. It is my own decision."
+    },
+    {
+      "at": "1:20",
+      "say": "Urgent endoscopy; the surgeon and IR aware early. IV PPI after endoscopy; IV iron; consider erythropoietin. Paediatric blood tubes to keep sampling to a minimum."
+    },
+    {
+      "at": "1:40",
+      "say": "Document his refusal, his capacity, what he accepts, and his card; tell the whole team."
+    }
+  ],
+  "keywords": [
+    "respect your beliefs",
+    "fully informed",
+    "die",
+    "clotting factors",
+    "albumin",
+    "advance decision card",
+    "alone",
+    "own decision",
+    "endoscopy",
+    "IV iron",
+    "erythropoietin",
+    "paediatric blood tubes",
+    "document",
+    "capacity"
   ]
 }

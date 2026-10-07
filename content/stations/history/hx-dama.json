@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the GMC and Hong Kong Medical Council guidance on consent and capacity, the Hospital Authority DAMA policy, and ESC 2023 ACS guidelines.\n\nCapacity is decision-specific and presumed in adults. A person has capacity if they can understand, retain, use and weigh the relevant information, and communicate a decision. An unwise decision is not proof of incapacity. If capacitous, a patient may refuse treatment; the doctor's job is to explore the reasons (fear, money, childcare, work), negotiate alternatives, explain risks clearly, document, and leave the door open (safety-net, medication, follow-up, a written summary). The DAMA form documents the discussion; refusing to sign it does not stop him leaving and must not delay care.\n\nIf he lacked capacity (for example from hypoxia, intoxication or delirium), treatment in his best interests (and common-law necessity) applies. Hong Kong's Mental Health Ordinance is for mental disorder, not for chest pain.\n\nNSTEMI with dynamic ECG changes needs admission, antiplatelets, anticoagulation and early angiography (within 24 hours for high risk).\n\nYour notes list DAMA as a topic without detail.",
+  "notes": "Checked against the GMC and Hong Kong Medical Council guidance on consent and capacity, the Hospital Authority DAMA policy, and ESC 2023 ACS guidelines.\n\nCapacity is decision-specific and presumed in adults. A person has capacity if they can understand, retain, use and weigh the relevant information, and communicate a decision. An unwise decision is not proof of incapacity. If capacitous, a patient may refuse treatment; the doctor's job is to explore the reasons (fear, money, childcare, work), negotiate alternatives, explain risks clearly, document, and leave the door open (safety-net, medication, follow-up, a written summary). The DAMA form documents the discussion; refusing to sign it does not stop him leaving and must not delay care.\n\nIf he lacked capacity (for example from hypoxia, intoxication or delirium), treatment in his best interests (and common-law necessity) applies. Hong Kong's Mental Health Ordinance is for mental disorder, not for chest pain.\n\nNSTEMI with dynamic ECG changes needs admission, antiplatelets, anticoagulation and early angiography (within 24 hours for high risk).\n\nYour notes list DAMA as a topic without detail.\n\nPerfect script checked against GMC consent and capacity guidance and the HA DAMA policy, an HKCEM-style communication scheme and a keyword scheme. Removed the coercive and jargon replies and the never-come-back and detention options.",
   "cast": [
     {
       "id": "patient",
@@ -55,13 +55,6 @@
               "r": "If I miss it, I lose the business. My family depends on it.",
               "mood": -2,
               "mark": "Explores the reasons for leaving"
-            },
-            {
-              "t": "You can't leave. Sit down.",
-              "tz": "你唔可以走。坐低。",
-              "rz": "你唔可以留住我！",
-              "r": "You can't keep me here!",
-              "mood": 3
             }
           ]
         },
@@ -76,13 +69,6 @@
               "r": "A heart attack? But the pain's gone…",
               "mood": -1,
               "mark": "Explains the diagnosis and specific risks in plain language"
-            },
-            {
-              "t": "Your troponin is up and there's TWI in the anterior leads.",
-              "tz": "你嘅 troponin 升咗，anterior leads 有 TWI。",
-              "rz": "我唔知你講乜。我走喇。",
-              "r": "I don't know what that means. I'm going.",
-              "mood": 2
             }
           ]
         },
@@ -97,13 +83,6 @@
               "r": "It could get worse… I could have a bigger heart attack or even die.",
               "mood": -1,
               "mark": "Checks understanding and ability to weigh information (capacity)"
-            },
-            {
-              "t": "Just trust me.",
-              "tz": "你信我啦。",
-              "rz": "嗯……",
-              "r": "Hmm.",
-              "mood": 1
             }
           ]
         },
@@ -118,13 +97,6 @@
               "r": "…I suppose my partner could go. OK, I'll stay.",
               "mood": -3,
               "mark": "Negotiates practical alternatives"
-            },
-            {
-              "t": "No. Your choice: stay or go.",
-              "tz": "唔得。你自己揀：留低定走。",
-              "rz": "咁我走喇。",
-              "r": "Then I'm going.",
-              "mood": 3
             }
           ]
         }
@@ -139,26 +111,16 @@
       "hint": "Capacitous refusal: respect it, reduce harm, document, open door.",
       "opts": [
         {
-          "t": "He has capacity: respect his decision, but keep trying to persuade",
+          "t": "He has capacity, so I respect his decision, but I keep trying to persuade him.",
           "mark": "Respects a capacitous refusal"
         },
         {
-          "t": "Harm reduction: aspirin, GTN spray, written summary, cardiology clinic, return immediately with pain",
+          "t": "Harm reduction: aspirin, a GTN spray, a written summary, a cardiology clinic, and come back immediately with any pain.",
           "mark": "Offers harm reduction and safety-netting"
         },
         {
-          "t": "Document capacity, the risks explained, alternatives offered, and his words; DAMA form (not required to sign)",
+          "t": "I document his capacity, the risks explained, the alternatives offered and his own words; a DAMA form, which he isn't required to sign.",
           "mark": "Documents thoroughly"
-        },
-        {
-          "t": "Tell him he can never come back if he leaves",
-          "trap": true,
-          "r": "Always leave the door open."
-        },
-        {
-          "t": "Detain him under the Mental Health Ordinance",
-          "trap": "critical",
-          "r": "He has no mental disorder and has capacity. Detention would be unlawful."
         }
       ]
     },
@@ -288,5 +250,45 @@
       "why": "Not for physical illness in a capacitous adult.",
       "source": "HK Cap 136"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "I can see this contract matters a lot. Can you tell me more about what's worrying you about staying?",
+      "do": "If I miss it, I lose the business. My family depends on it."
+    },
+    {
+      "at": "0:20",
+      "say": "Your blood test and ECG show strain on the heart muscle — a type of heart attack. The risk is that it could get worse suddenly in the next few days, including a dangerous heart rhythm or death. Treatment in hospital lowers that risk a lot.",
+      "do": "A heart attack? But the pain's gone…"
+    },
+    {
+      "at": "0:40",
+      "say": "Can you tell me in your own words what could happen if you go home?",
+      "do": "It could get worse… I could have a bigger heart attack or even die."
+    },
+    {
+      "at": "1:00",
+      "say": "Could your partner or lawyer sign tonight, or could we arrange a video call from the ward? Our social worker can help with the letter to your client.",
+      "do": "…I suppose my partner could go. OK, I'll stay."
+    },
+    {
+      "at": "1:20",
+      "say": "He has capacity, so I respect his decision, but I keep trying to persuade him. Harm reduction: aspirin, a GTN spray, a written summary, a cardiology clinic, and come back immediately with any pain. I document his capacity, the risks explained, the alternatives offered and his own words; a DAMA form, which he isn't required to sign."
+    }
+  ],
+  "keywords": [
+    "what's worrying you",
+    "heart attack",
+    "in your own words",
+    "partner",
+    "video call",
+    "social worker",
+    "capacity",
+    "aspirin",
+    "GTN",
+    "come back",
+    "document",
+    "DAMA form"
   ]
 }
