@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Ottawa ankle and foot rules (Stiell 1992–1994), BOAST 'Management of ankle fractures' (2016) and NICE CKS (sprains).\n\nOttawa ankle rule: X-ray if pain in the malleolar zone and any of: bone tenderness along the posterior edge or tip of the lateral malleolus (distal 6 cm), or of the medial malleolus, or inability to bear weight (4 steps) immediately and in the ED. Foot rule: pain in the midfoot and tenderness at the base of the 5th metatarsal or the navicular, or inability to bear weight. Sensitivity near 100%; applies to adults (and children over 5 with care).\n\nAlso examine the proximal fibula (Maisonneuve), the Achilles tendon (Simmonds/Thompson test), and neurovascular status. Weber classification by the fibular fracture level relative to the syndesmosis: A below (usually stable), B at the level (stability depends on the medial side — medial tenderness, medial clear space widening), C above (unstable). A stable Weber B can be treated in a boot and weight-bearing as tolerated (BOAST/CROSSBAT), while talar shift needs orthopaedic fixation.\n\nYour notes list 'Ankle and Ottawa rules' without detail.",
+  "notes": "Checked against the Ottawa ankle and foot rules (Stiell 1992–1994), BOAST 'Management of ankle fractures' (2016) and NICE CKS (sprains).\n\nOttawa ankle rule: X-ray if pain in the malleolar zone and any of: bone tenderness along the posterior edge or tip of the lateral malleolus (distal 6 cm), or of the medial malleolus, or inability to bear weight (4 steps) immediately and in the ED. Foot rule: pain in the midfoot and tenderness at the base of the 5th metatarsal or the navicular, or inability to bear weight. Sensitivity near 100%; applies to adults (and children over 5 with care).\n\nAlso examine the proximal fibula (Maisonneuve), the Achilles tendon (Simmonds/Thompson test), and neurovascular status. Weber classification by the fibular fracture level relative to the syndesmosis: A below (usually stable), B at the level (stability depends on the medial side — medial tenderness, medial clear space widening), C above (unstable). A stable Weber B can be treated in a boot and weight-bearing as tolerated (BOAST/CROSSBAT), while talar shift needs orthopaedic fixation.\n\nYour notes list 'Ankle and Ottawa rules' without detail.\n\nPerfect script checked against the Ottawa ankle rules and BOAST, an HKCEM-style scheme and a keyword scheme. Removed the full-plaster option.",
   "cast": [
     {
       "id": "patient",
@@ -52,7 +52,7 @@
       "groups": {
         "Look": [
           {
-            "t": "Swelling, bruising, deformity",
+            "t": "Look at both ankles: swelling, bruising, deformity",
             "r": "Swelling and bruising over the lateral malleolus. No deformity.",
             "mark": "Inspects both ankles",
             "do": "look ankle-L"
@@ -60,19 +60,19 @@
         ],
         "Ottawa points": [
           {
-            "t": "Posterior edge and tip of the lateral malleolus (distal 6 cm)",
+            "t": "Ottawa points: the posterior edge and tip of the lateral malleolus, the distal 6 cm",
             "r": "Tender over the posterior edge.",
             "mark": "Palpates the lateral malleolus posterior edge",
             "do": "feel lateralmalleolus-L"
           },
           {
-            "t": "Posterior edge and tip of the medial malleolus",
+            "t": "The posterior edge and tip of the medial malleolus",
             "r": "Not tender. No medial swelling.",
             "mark": "Palpates the medial malleolus",
             "do": "feel medialmalleolus-L,pt-L"
           },
           {
-            "t": "Base of the 5th metatarsal and the navicular",
+            "t": "The base of the 5th metatarsal and the navicular",
             "r": "Not tender.",
             "mark": "Palpates the foot Ottawa points",
             "do": "feel fifthmt-L & feel navicular-L"
@@ -86,19 +86,19 @@
         ],
         "Other": [
           {
-            "t": "Proximal fibula",
+            "t": "Feel the proximal fibula",
             "r": "Not tender.",
             "mark": "Checks the proximal fibula (Maisonneuve)",
             "do": "feel fibula-L"
           },
           {
-            "t": "Squeeze the calf (Simmonds/Thompson test)",
+            "t": "Squeeze the calf: Simmonds' test",
             "r": "Foot plantarflexes normally — Achilles intact.",
             "mark": "Tests the Achilles tendon",
             "do": "press calf-L"
           },
           {
-            "t": "Pulses and sensation",
+            "t": "Foot pulses and sensation",
             "r": "Normal.",
             "mark": "Neurovascular assessment",
             "anim": "pulse",
@@ -116,8 +116,8 @@
       "groups": {
         "X-ray": [
           {
-            "t": "Ankle X-ray (AP, mortise, lateral)",
-            "r": "Oblique fracture of the distal fibula at the level of the syndesmosis (Weber B). Medial clear space normal, talus not shifted.",
+            "t": "Ottawa positive: ankle X-ray, AP, mortise and lateral",
+            "r": "Oblique fracture of the distal fibula at the level of the syndesmosis (Weber B). Medial clear space normal, talus not shifted. \"A stable Weber B: no talar shift.\"",
             "img": "xr:ankle-weber-b",
             "mark": "Identifies a Weber B fracture and checks talar shift"
           }
@@ -140,12 +140,6 @@
           "t": "Elevate, move the toes, come back for severe pain, numbness or calf swelling (clot risk)",
           "tz": "隻腳要墊高，郁吓啲腳趾。如果好痛、麻痺，或者小腿腫，就要即刻返嚟，因為有機會係血栓。",
           "mark": "Safety-netting including VTE"
-        },
-        {
-          "t": "Non-weight-bearing in a full plaster for 6 weeks",
-          "tz": "要打全腳石膏，六個禮拜唔可以落地。",
-          "trap": true,
-          "r": "A stable Weber B does well in a boot with early weight-bearing."
         }
       ]
     },
@@ -275,5 +269,50 @@
       "why": "Maisonneuve fracture.",
       "source": "BOAST"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Look at both ankles: swelling, bruising, deformity. Ottawa points: the posterior edge and tip of the lateral malleolus, the distal 6 cm. The posterior edge and tip of the medial malleolus.",
+      "do": "Swelling and bruising over the lateral malleolus. No deformity. Tender over the posterior edge. Not tender. No medial swelling."
+    },
+    {
+      "at": "0:20",
+      "say": "The base of the 5th metatarsal and the navicular. Can you walk four steps? Feel the proximal fibula.",
+      "do": "Not tender. Only with a lot of help. Not tender."
+    },
+    {
+      "at": "0:40",
+      "say": "Squeeze the calf: Simmonds' test. Foot pulses and sensation.",
+      "do": "Foot plantarflexes normally — Achilles intact. Normal."
+    },
+    {
+      "at": "1:00",
+      "say": "Ottawa positive: ankle X-ray, AP, mortise and lateral. A stable Weber B: no talar shift.",
+      "do": "Oblique fracture of the distal fibula at the level of the syndesmosis (Weber B). Medial clear space normal, talus not shifted. \"A stable Weber B: no talar shift.\""
+    },
+    {
+      "at": "1:20",
+      "say": "A break of the outer ankle bone, but the joint is lined up and stable. A walking boot, weight-bear as comfortable, pain relief, fracture clinic in a week, and a repeat X-ray. Elevate, move the toes, come back for severe pain, numbness or calf swelling (clot risk)."
+    }
+  ],
+  "keywords": [
+    "both ankles",
+    "Ottawa",
+    "lateral malleolus",
+    "medial malleolus",
+    "5th metatarsal",
+    "navicular",
+    "four steps",
+    "proximal fibula",
+    "Simmonds",
+    "pulses",
+    "mortise",
+    "Weber B",
+    "talar shift",
+    "walking boot",
+    "weight-bear",
+    "fracture clinic",
+    "calf swelling"
   ]
 }

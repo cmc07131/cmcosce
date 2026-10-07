@@ -38,7 +38,7 @@
       "text": "Cast. Your notes suggest a long-arm cast first. A moulded below-elbow backslab is standard ED practice for a Colles fracture."
     }
   ],
-  "notes": "Checked against BOAST 'Management of distal radial fractures' (2017), AAOS 2020 guideline, and NICE NG38 (non-complex fractures).\n\nColles: extra-articular distal radius fracture with dorsal angulation, dorsal displacement, radial shortening ('dinner fork'). Check median nerve and EPL (thumb extension) before and after. Anaesthesia: haematoma block (1% lidocaine up to 10 mL, into the fracture haematoma from the dorsum, confirmed by aspirating blood) or Bier's block (IV regional; prilocaine, needs trained staff and a double cuff) or sedation. Reduction: traction with counter-traction to disimpact, then the distal fragment pushed volarly and into ulnar deviation. Below-elbow moulded backslab (three-point moulding); elevate. Repeat X-ray. Acceptable alignment (AAOS/BOAST): radial shortening 3 mm or less, dorsal tilt 10° or less, intra-articular step 2 mm or less; the older patient's function matters more than the film.\n\nYour notes: acceptable radial shortening '5 mm or less' and dorsal angulation '<5°' (in one place) or '<10° dorsally' (in another); current thresholds are 3 mm and 10°. Your notes also suggest a long-arm cast first; a moulded below-elbow backslab is standard in UK/HK ED practice for Colles. The block and sedation steps match.",
+  "notes": "Checked against BOAST 'Management of distal radial fractures' (2017), AAOS 2020 guideline, and NICE NG38 (non-complex fractures).\n\nColles: extra-articular distal radius fracture with dorsal angulation, dorsal displacement, radial shortening ('dinner fork'). Check median nerve and EPL (thumb extension) before and after. Anaesthesia: haematoma block (1% lidocaine up to 10 mL, into the fracture haematoma from the dorsum, confirmed by aspirating blood) or Bier's block (IV regional; prilocaine, needs trained staff and a double cuff) or sedation. Reduction: traction with counter-traction to disimpact, then the distal fragment pushed volarly and into ulnar deviation. Below-elbow moulded backslab (three-point moulding); elevate. Repeat X-ray. Acceptable alignment (AAOS/BOAST): radial shortening 3 mm or less, dorsal tilt 10° or less, intra-articular step 2 mm or less; the older patient's function matters more than the film.\n\nYour notes: acceptable radial shortening '5 mm or less' and dorsal angulation '<5°' (in one place) or '<10° dorsally' (in another); current thresholds are 3 mm and 10°. Your notes also suggest a long-arm cast first; a moulded below-elbow backslab is standard in UK/HK ED practice for Colles. The block and sedation steps match.\n\nPerfect script checked against BOAST distal radius and AAOS, an HKCEM-style scheme and a keyword scheme. Spoken bench narration added.",
   "cast": [
     {
       "id": "patient",
@@ -63,7 +63,7 @@
         "X-ray": [
           {
             "t": "Right wrist PA and lateral",
-            "r": "Extra-articular distal radius fracture 2 cm from the joint with dorsal angulation and displacement, radial shortening; ulnar styloid fracture.",
+            "r": "Extra-articular distal radius fracture 2 cm from the joint with dorsal angulation and displacement, radial shortening; ulnar styloid fracture. \"An extra-articular distal radius fracture with dorsal angulation, displacement and radial shortening: a displaced Colles fracture. It needs reducing.\"",
             "img": "xr:wrist-colles",
             "mark": "Describes a displaced extra-articular (Colles) fracture"
           }
@@ -109,12 +109,12 @@
       "hint": "Elevation, finger exercises, cast care, warning signs, fracture clinic.",
       "opts": [
         {
-          "t": "Elevate, move your fingers, keep the plaster dry; come back at once for severe pain, numb or blue fingers; fracture clinic in 1 week with an X-ray",
+          "t": "Keep it raised and move your fingers; keep the plaster dry. Come back at once for severe pain, numbness or blue fingers. Fracture clinic in 1 week with an X-ray.",
           "tz": "隻手要舉高，郁吓啲手指，石膏要保持乾爽。如果好痛、手指麻痺或者變藍，要即刻返嚟。一個禮拜後去骨科門診，照 X 光。",
           "mark": "Discharge advice with warning signs and follow-up"
         },
         {
-          "t": "Bone health assessment (fragility fracture)",
+          "t": "A wrist fracture from a simple fall can mean thin bones, so we'll arrange a bone health check.",
           "tz": "你跌一跌就斷骨，可能有骨質疏鬆，我哋會安排檢查你嘅骨骼健康。",
           "mark": "Considers osteoporosis assessment"
         }
@@ -246,5 +246,39 @@
       "why": "Secondary fracture prevention.",
       "source": "NICE"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Right wrist PA and lateral. An extra-articular distal radius fracture with dorsal angulation, displacement and radial shortening: a displaced Colles fracture. It needs reducing.",
+      "do": "Extra-articular distal radius fracture 2 cm from the joint with dorsal angulation and displacement, radial shortening; ulnar styloid fracture. \"An extra-articular distal radius fracture with dorsal angulation, displacement and radial shortening: a displaced Colles fracture. It needs reducing.\""
+    },
+    {
+      "at": "0:20",
+      "say": "Check the hand first: median nerve sensation and thumb opposition, EPL thumb extension, circulation and skin. Clean the skin. 1% lidocaine, up to 10 mL, into the radial fracture from the dorsum; aspirate blood to confirm I'm in the haematoma. Wait for the block, and test it. My assistant gives counter-traction at the elbow; I pull to disimpact, then push the distal fragment volar and into ulnar deviation. Backslab on while I hold the reduction, three-point moulding until it sets. Then check the hand again and repeat the X-ray."
+    },
+    {
+      "at": "0:40",
+      "say": "Keep it raised and move your fingers; keep the plaster dry. Come back at once for severe pain, numbness or blue fingers. Fracture clinic in 1 week with an X-ray. A wrist fracture from a simple fall can mean thin bones, so we'll arrange a bone health check."
+    }
+  ],
+  "keywords": [
+    "dorsal angulation",
+    "shortening",
+    "Colles",
+    "median nerve",
+    "EPL",
+    "lidocaine",
+    "aspirate",
+    "counter-traction",
+    "disimpact",
+    "volar",
+    "ulnar deviation",
+    "backslab",
+    "three-point moulding",
+    "repeat the X-ray",
+    "raised",
+    "fracture clinic",
+    "bone health"
   ]
 }

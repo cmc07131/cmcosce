@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE NG59 (Low back pain and sciatica, 2016, updated 2020), the GIRFT national pathway for suspected cauda equina syndrome (2023), and BASS guidance.\n\nCauda equina syndrome (CES) red flags: bilateral sciatica, saddle or perianal sensory change, bladder dysfunction (retention, altered sensation, loss of desire to void), bowel dysfunction, sexual dysfunction, progressive neurological deficit. Examination: look, feel, move the lumbar spine; straight-leg raise and femoral stretch; lower limb neurology (myotomes, dermatomes, reflexes); perianal sensation and anal tone (digital rectal examination with consent and a chaperone; GIRFT emphasises perianal pinprick sensation); post-void residual bladder scan (residual over 200 mL is concerning). Suspected CES: emergency MRI of the whole lumbar spine (within 4 hours in GIRFT pathway) and spinal surgical referral; decompression within 48 hours of onset (or sooner for incomplete CES) improves outcome.\n\nYour notes list the LS spine exam headings and mention 'incomplete cauda equina syndrome, urinary retention' under HKCEM past topics; nothing conflicts.",
+  "notes": "Checked against NICE NG59 (Low back pain and sciatica, 2016, updated 2020), the GIRFT national pathway for suspected cauda equina syndrome (2023), and BASS guidance.\n\nCauda equina syndrome (CES) red flags: bilateral sciatica, saddle or perianal sensory change, bladder dysfunction (retention, altered sensation, loss of desire to void), bowel dysfunction, sexual dysfunction, progressive neurological deficit. Examination: look, feel, move the lumbar spine; straight-leg raise and femoral stretch; lower limb neurology (myotomes, dermatomes, reflexes); perianal sensation and anal tone (digital rectal examination with consent and a chaperone; GIRFT emphasises perianal pinprick sensation); post-void residual bladder scan (residual over 200 mL is concerning). Suspected CES: emergency MRI of the whole lumbar spine (within 4 hours in GIRFT pathway) and spinal surgical referral; decompression within 48 hours of onset (or sooner for incomplete CES) improves outcome.\n\nYour notes list the LS spine exam headings and mention 'incomplete cauda equina syndrome, urinary retention' under HKCEM past topics; nothing conflicts.\n\nPerfect script checked against the GIRFT/BASS cauda equina pathway, an HKCEM-style scheme and a keyword scheme. Removed the discharge option; lumbar movement scores.",
   "cast": [
     {
       "id": "patient",
@@ -50,26 +50,27 @@
       "groups": {
         "Spine": [
           {
-            "t": "Look and feel the spine",
+            "t": "Look at and feel the spine",
             "r": "Loss of lumbar lordosis, paraspinal spasm, no midline step or bony tenderness.",
             "mark": "Inspects and palpates the spine",
             "do": "look back & feel back"
           },
           {
-            "t": "Forward flexion",
+            "t": "Bend forward as far as you can",
             "r": "Limited by pain.",
-            "do": "say bend-forward"
+            "do": "say bend-forward",
+            "mark": "Assesses lumbar movement"
           }
         ],
         "Nerve root": [
           {
-            "t": "Straight-leg raise each side",
+            "t": "Straight-leg raise, each side",
             "r": "Positive at 40° on both sides.",
             "mark": "Performs straight-leg raise bilaterally",
             "do": "move hip-R:flex @knee-R=0..15 & move hip-L:flex @knee-L=0..15 | say lift-leg-R & say lift-leg-L"
           },
           {
-            "t": "Power, sensation, reflexes (L2–S1)",
+            "t": "Power, sensation and reflexes from L2 to S1",
             "r": "Weak ankle plantarflexion bilaterally (S1), absent ankle jerks both sides, reduced sensation lateral feet.",
             "mark": "Examines lower limb neurology",
             "do": "hammer heel,calf & pin foot,shin,thigh | hammer heel,calf & cotton foot,shin,thigh"
@@ -83,14 +84,14 @@
             "do": "pin perianal"
           },
           {
-            "t": "Digital rectal examination for anal tone, with consent and a chaperone",
+            "t": "With your consent and a chaperone: a rectal examination for anal tone",
             "r": "Reduced resting tone; weak voluntary squeeze.",
             "mark": "Assesses anal tone with consent and chaperone",
             "do": "say chaperone > feel perianal @gloved"
           },
           {
-            "t": "Post-void bladder scan",
-            "r": "Residual 650 mL.",
+            "t": "A post-void bladder scan",
+            "r": "Residual 650 mL. \"Retention: suspected cauda equina syndrome.\"",
             "mark": "Measures post-void residual",
             "anim": "abdomen",
             "do": "scanner suprapubic"
@@ -107,21 +108,16 @@
       "hint": "Suspected CES: emergency MRI, spinal team, catheter.",
       "opts": [
         {
-          "t": "Suspected cauda equina syndrome with retention (CES-R)",
+          "t": "Bilateral sciatica, saddle anaesthesia, reduced anal tone and painless retention of 650 mL: suspected cauda equina syndrome with retention, CES-R.",
           "mark": "Recognises cauda equina syndrome"
         },
         {
-          "t": "Emergency MRI lumbar spine now; urgent spinal surgery referral",
+          "t": "Emergency MRI of the whole lumbar spine now, and urgent spinal surgery referral for decompression.",
           "mark": "Emergency MRI and spinal referral"
         },
         {
-          "t": "Urinary catheter; analgesia; document neurology and timings",
+          "t": "A urinary catheter, analgesia, and document the neurology with times.",
           "mark": "Catheter, analgesia and documentation"
-        },
-        {
-          "t": "Discharge with NSAIDs and GP review",
-          "trap": "critical",
-          "r": "Retention with saddle anaesthesia is a surgical emergency."
         }
       ]
     },
@@ -251,5 +247,43 @@
       "why": "Pain radiating below the knee at 30–70°.",
       "source": "Clinical examination"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Look at and feel the spine. Bend forward as far as you can. Straight-leg raise, each side.",
+      "do": "Loss of lumbar lordosis, paraspinal spasm, no midline step or bony tenderness. Limited by pain. Positive at 40° on both sides."
+    },
+    {
+      "at": "0:20",
+      "say": "Power, sensation and reflexes from L2 to S1. Perianal pinprick sensation. With your consent and a chaperone: a rectal examination for anal tone.",
+      "do": "Weak ankle plantarflexion bilaterally (S1), absent ankle jerks both sides, reduced sensation lateral feet. Reduced perianal sensation. Reduced resting tone; weak voluntary squeeze."
+    },
+    {
+      "at": "0:40",
+      "say": "A post-void bladder scan. Retention: suspected cauda equina syndrome.",
+      "do": "Residual 650 mL. \"Retention: suspected cauda equina syndrome.\""
+    },
+    {
+      "at": "1:00",
+      "say": "Bilateral sciatica, saddle anaesthesia, reduced anal tone and painless retention of 650 mL: suspected cauda equina syndrome with retention, CES-R. Emergency MRI of the whole lumbar spine now, and urgent spinal surgery referral for decompression. A urinary catheter, analgesia, and document the neurology with times."
+    }
+  ],
+  "keywords": [
+    "spine",
+    "bend forward",
+    "straight-leg raise",
+    "L2 to S1",
+    "perianal",
+    "chaperone",
+    "anal tone",
+    "bladder scan",
+    "bilateral sciatica",
+    "saddle anaesthesia",
+    "cauda equina syndrome",
+    "emergency MRI",
+    "spinal surgery",
+    "catheter",
+    "document"
   ]
 }
