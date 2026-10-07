@@ -34,7 +34,7 @@
       "text": "Hong Kong names. The station uses METHANE, CSCATTT and generic ED roles. The Hospital Authority uses its own Major Incident Control Centre and colour-coded response levels; check your cluster's current contingency plan for the exact names."
     }
   ],
-  "notes": "Checked against the UK NHS Emergency Preparedness, Resilience and Response framework (EPRR 2022), Major Incident Medical Management and Support (MIMMS, 3rd ed.), JESIP principles (METHANE), and WHO hospital emergency response checklist (2011).\n\nMETHANE: Major incident declared/standby; Exact location; Type of incident; Hazards; Access; Number and severity of casualties; Emergency services present and required. CSCATTT: Command and control, Safety, Communication, Assessment, Triage, Treatment, Transport. ED response: activate the hospital major incident plan (cascade call-out), ED commander (consultant) and nurse coordinator with action cards, clear the ED (discharge/admit current patients), senior triage officer at the entrance, pre-assigned teams for red bays, major incident packs and numbering/ID system, blood bank/lab/radiology/theatres/ICU alerted, relatives' reception area, media liaison via hospital command, staff welfare and rotation, stand-down and debrief. Planning and training: hazard/risk assessment, written plan with action cards, surge capacity (beds, staff, supplies), communication (backup radios), exercises — tabletop, live/full-scale, and communication tests, then debrief and updating the plan (lessons identified → learned).\n\nYour notes list 'planning and training' as a topic only. The Hong Kong HA uses its own Major Incident Control Centre and colour-coded response levels; check your cluster's current contingency plan for the exact names.",
+  "notes": "Checked against the UK NHS Emergency Preparedness, Resilience and Response framework (EPRR 2022), Major Incident Medical Management and Support (MIMMS, 3rd ed.), JESIP principles (METHANE), and WHO hospital emergency response checklist (2011).\n\nMETHANE: Major incident declared/standby; Exact location; Type of incident; Hazards; Access; Number and severity of casualties; Emergency services present and required. CSCATTT: Command and control, Safety, Communication, Assessment, Triage, Treatment, Transport. ED response: activate the hospital major incident plan (cascade call-out), ED commander (consultant) and nurse coordinator with action cards, clear the ED (discharge/admit current patients), senior triage officer at the entrance, pre-assigned teams for red bays, major incident packs and numbering/ID system, blood bank/lab/radiology/theatres/ICU alerted, relatives' reception area, media liaison via hospital command, staff welfare and rotation, stand-down and debrief. Planning and training: hazard/risk assessment, written plan with action cards, surge capacity (beds, staff, supplies), communication (backup radios), exercises — tabletop, live/full-scale, and communication tests, then debrief and updating the plan (lessons identified → learned).\n\nYour notes list 'planning and training' as a topic only. The Hong Kong HA uses its own Major Incident Control Centre and colour-coded response levels; check your cluster's current contingency plan for the exact names.\n\nPerfect script checked against MIMMS and the HA major incident plan, an HKCEM-style scheme and a keyword scheme. Removed going to the scene and the improvise/read-once replies; METHANE spoken letter by letter.",
   "cast": [
     {
       "id": "nurse",
@@ -51,37 +51,37 @@
       "hint": "Write down METHANE.",
       "opts": [
         {
-          "t": "M — Major incident declared or on standby?",
+          "t": "METHANE. M: Major incident declared or on standby?",
           "n": 1,
           "mark": "M: declared or standby"
         },
         {
-          "t": "E — Exact location",
+          "t": "E: Exact location",
           "n": 2,
           "mark": "E: exact location"
         },
         {
-          "t": "T — Type of incident",
+          "t": "T: Type of incident",
           "n": 3,
           "mark": "T: type"
         },
         {
-          "t": "H — Hazards (fire, chemicals)",
+          "t": "H: Hazards (fire, chemicals)",
           "n": 4,
           "mark": "H: hazards"
         },
         {
-          "t": "A — Access routes",
+          "t": "A: Access routes",
           "n": 5,
           "mark": "A: access"
         },
         {
-          "t": "N — Number and severity of casualties",
+          "t": "N: Number and severity of casualties",
           "n": 6,
           "mark": "N: number and severity"
         },
         {
-          "t": "E — Emergency services present and required",
+          "t": "E: Emergency services present and required",
           "n": 7,
           "mark": "E: emergency services"
         }
@@ -129,11 +129,6 @@
           "t": "Relatives' reception area; media through hospital command only",
           "need": true,
           "mark": "Relatives and media handled"
-        },
-        {
-          "t": "Go to the scene yourself with the ED team",
-          "trap": true,
-          "r": "The ED commander runs the department; site medical teams are pre-designated."
         }
       ]
     },
@@ -153,11 +148,6 @@
               "r": "Makes sense.",
               "mood": -1,
               "mark": "Plan with risk assessment, action cards and surge capacity"
-            },
-            {
-              "t": "We'll improvise when it happens.",
-              "r": "Hmm.",
-              "mood": 2
             }
           ]
         },
@@ -169,11 +159,6 @@
               "r": "I'll schedule a tabletop next month.",
               "mood": -1,
               "mark": "Exercise types and debrief"
-            },
-            {
-              "t": "Read the plan once a year.",
-              "r": "OK.",
-              "mood": 1
             }
           ]
         }
@@ -305,5 +290,60 @@
       "why": "Clarity under stress.",
       "source": "MIMMS"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "METHANE. M: Major incident declared or on standby? E: Exact location. T: Type of incident."
+    },
+    {
+      "at": "0:20",
+      "say": "H: Hazards (fire, chemicals). A: Access routes. N: Number and severity of casualties."
+    },
+    {
+      "at": "0:40",
+      "say": "E: Emergency services present and required."
+    },
+    {
+      "at": "1:00",
+      "say": "Activate the hospital major incident plan; call-out cascade. ED commander and nurse coordinator with action cards. Clear the ED: discharge or admit current patients."
+    },
+    {
+      "at": "1:20",
+      "say": "Senior triage officer at the entrance. Pre-assigned teams to red bays; major incident packs and ID numbers. Alert blood bank, radiology, theatres, ICU."
+    },
+    {
+      "at": "1:40",
+      "say": "Relatives' reception area; media through hospital command only."
+    },
+    {
+      "at": "2:00",
+      "say": "A written plan based on local risks, with action cards for each role, and surge plans for beds, staff and supplies",
+      "do": "Makes sense."
+    },
+    {
+      "at": "2:20",
+      "say": "Regular exercises: tabletop, communication tests, and live full-scale drills; debrief and update the plan",
+      "do": "I'll schedule a tabletop next month."
+    }
+  ],
+  "keywords": [
+    "METHANE",
+    "declared",
+    "exact location",
+    "hazards",
+    "access",
+    "number",
+    "major incident plan",
+    "action cards",
+    "clear the ED",
+    "senior triage officer",
+    "blood bank",
+    "relatives",
+    "media",
+    "surge",
+    "tabletop",
+    "drills",
+    "debrief"
   ]
 }

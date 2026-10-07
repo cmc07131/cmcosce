@@ -47,7 +47,7 @@
       "text": "Reintubation in the ambulance. Your notes say it is not recommended. Better: ventilate with a bag-mask or supraglottic airway first, and reintubate only if needed and safe, with the vehicle stopped."
     }
   ],
-  "notes": "Checked against the Association of Anaesthetists interhospital transfer guideline (2019), the Intensive Care Society transfer guidance (2019), NICE NG128 stroke (2019, updated 2022), AHA/ASA spontaneous ICH guideline (2022), and ATLS 10th.\n\nPreparation (your 8 points match): communication (patient/family, receiving team, transport team, ambulance), documentation, consent, equipment/kit (monitoring, suction, oxygen with reserve, drugs pre-drawn and labelled), pre-transport assessment and stabilisation (secure airway if GCS ≤8, falling GCS, or airway at risk; two IV lines; tubes and lines secured), appropriate escort (critical → doctor plus nurse). ICH specifics: SBP target 130–140 within an hour if presenting within 6 hours with SBP 150–220 (NICE; AHA 140, avoid under 130), reverse anticoagulation, head up 30°, glucose normal, treat seizures. Deterioration uses your REST approach (Recognise, Evaluate, Support, Transport); for the intubated patient, DOPES.\n\nDifferences from your notes: (1) needle decompression — your notes say 2nd ICS midclavicular; ATLS 10th recommends the 4th/5th ICS just anterior to the mid-axillary line in adults (2nd ICS MCL for children). (2) 'Reintubation not recommended' in the ambulance: better to say ventilate with a bag-mask or supraglottic airway first and reintubate only if needed and safe (stop the vehicle).",
+  "notes": "Checked against the Association of Anaesthetists interhospital transfer guideline (2019), the Intensive Care Society transfer guidance (2019), NICE NG128 stroke (2019, updated 2022), AHA/ASA spontaneous ICH guideline (2022), and ATLS 10th.\n\nPreparation (your 8 points match): communication (patient/family, receiving team, transport team, ambulance), documentation, consent, equipment/kit (monitoring, suction, oxygen with reserve, drugs pre-drawn and labelled), pre-transport assessment and stabilisation (secure airway if GCS ≤8, falling GCS, or airway at risk; two IV lines; tubes and lines secured), appropriate escort (critical → doctor plus nurse). ICH specifics: SBP target 130–140 within an hour if presenting within 6 hours with SBP 150–220 (NICE; AHA 140, avoid under 130), reverse anticoagulation, head up 30°, glucose normal, treat seizures. Deterioration uses your REST approach (Recognise, Evaluate, Support, Transport); for the intubated patient, DOPES.\n\nDifferences from your notes: (1) needle decompression — your notes say 2nd ICS midclavicular; ATLS 10th recommends the 4th/5th ICS just anterior to the mid-axillary line in adults (2nd ICS MCL for children). (2) 'Reintubation not recommended' in the ambulance: better to say ventilate with a bag-mask or supraglottic airway first and reintubate only if needed and safe (stop the vehicle).\n\nPerfect script checked against the ICS/AAGBI transfer guidance and AHA 2022 ICH, an HKCEM-style scheme and a keyword scheme. Removed over-lowering the BP and sending him with a porter; ACCEPT-style preparation spoken.",
   "cast": [
     {
       "id": "patient",
@@ -127,7 +127,7 @@
         "Imaging": [
           {
             "t": "CT head",
-            "r": "Hyperdense haematoma in the right basal ganglia/thalamus with blood in the lateral ventricle.",
+            "r": "Hyperdense haematoma in the right basal ganglia/thalamus with blood in the lateral ventricle. \"A right deep intracerebral haemorrhage with intraventricular extension.\"",
             "img": "ct:ich-r",
             "mark": "Describes the right deep ICH with intraventricular extension"
           }
@@ -162,14 +162,6 @@
           "t": "Labetalol 10–20 mg IV boluses to a systolic of 130–140",
           "drug": "Labetalol",
           "dose": "10–20 mg IV boluses to a systolic of 130–140"
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Avoid SBP under 130; risks cerebral hypoperfusion.",
-          "t": "Labetalol boluses to a systolic of 100, quickly",
-          "drug": "Labetalol",
-          "dose": "boluses to a systolic of 100, quickly"
         }
       ]
     },
@@ -181,7 +173,7 @@
       "hint": "The airway plan for the journey.",
       "opts": [
         {
-          "t": "Airway: GCS 11 and protecting — no intubation now, but escort able to intubate; RSI drugs pre-drawn and labelled",
+          "t": "Airway: GCS 11 and protecting it, so no intubation now; but his escort must be able to intubate, with RSI drugs pre-drawn and labelled.",
           "need": true,
           "mark": "Airway decision with contingency"
         }
@@ -195,29 +187,24 @@
       "hint": "Communication, documentation, consent, equipment, pre-transport check, escort level.",
       "opts": [
         {
-          "t": "Communicate: family, receiving neurosurgeon, transport team, ambulance; ETA agreed",
+          "t": "Communication: his family, the receiving neurosurgeon, the transport team and the ambulance; ETA agreed.",
           "mark": "Communication with all parties"
         },
         {
-          "t": "Document condition, treatment, vital signs and plan; copy of CT and notes",
+          "t": "Documentation: his condition, treatment, vital signs and plan; a copy of the CT and the notes.",
           "mark": "Documentation"
         },
         {
-          "t": "Explain risks and benefits to family; consent",
+          "t": "The risks and benefits explained to his family, and their agreement.",
           "mark": "Consent"
         },
         {
-          "t": "Transport kit: monitor, suction, oxygen enough for twice the journey, drugs",
+          "t": "Transport kit: monitor, suction, oxygen for twice the journey, and drugs.",
           "mark": "Equipment and oxygen reserve"
         },
         {
-          "t": "Critical patient: escorted by a doctor and a nurse",
+          "t": "A critical transfer: a doctor and a nurse escort him.",
           "mark": "Appropriate escort level"
-        },
-        {
-          "t": "Send him with the porter; he is talking",
-          "trap": "critical",
-          "r": "GCS 11 with ICH is critical and may deteriorate."
         }
       ]
     },
@@ -261,7 +248,7 @@
       "groups": {
         "DOPES": [
           {
-            "t": "Disconnect; bag with 100% oxygen",
+            "t": "The ventilator alarms: DOPES. Disconnect; bag with 100% oxygen",
             "r": "Easy to bag. Saturation climbs.",
             "scene": "desat",
             "mark": "Disconnects and hand-ventilates"
@@ -416,5 +403,66 @@
       "why": "Brief hyperventilation only for herniation.",
       "source": "BTF"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "CT head. Clotting, FBC, glucose, U&E. Anticoagulant history. A right deep intracerebral haemorrhage with intraventricular extension.",
+      "do": "Hyperdense haematoma in the right basal ganglia/thalamus with blood in the lateral ventricle. \"A right deep intracerebral haemorrhage with intraventricular extension.\" INR 1.0, platelets 210, glucose 7.1. No anticoagulants."
+    },
+    {
+      "at": "0:20",
+      "say": "Labetalol 10–20 mg IV boluses to a systolic of 130–140."
+    },
+    {
+      "at": "0:40",
+      "say": "Airway: GCS 11 and protecting it, so no intubation now; but his escort must be able to intubate, with RSI drugs pre-drawn and labelled."
+    },
+    {
+      "at": "1:00",
+      "say": "Communication: his family, the receiving neurosurgeon, the transport team and the ambulance; ETA agreed. Documentation: his condition, treatment, vital signs and plan; a copy of the CT and the notes. The risks and benefits explained to his family, and their agreement."
+    },
+    {
+      "at": "1:20",
+      "say": "Transport kit: monitor, suction, oxygen for twice the journey, and drugs. A critical transfer: a doctor and a nurse escort him."
+    },
+    {
+      "at": "1:40",
+      "say": "Recognise: GCS 7, right pupil dilated, HR falling. Evaluate: airway, breathing, glucose. Support: stop the ambulance; RSI with pre-drawn drugs; ETCO2 4.5–5."
+    },
+    {
+      "at": "2:00",
+      "say": "Transport: inform the receiving team; consider hypertonic saline or mannitol per neurosurgeon."
+    },
+    {
+      "at": "2:20",
+      "say": "The ventilator alarms: DOPES. Disconnect; bag with 100% oxygen. Displacement: tube mark, ETCO2 trace, bilateral air entry. Obstruction: pass a suction catheter.",
+      "do": "Easy to bag. Saturation climbs. Tube at 22 cm, trace present, equal air entry. Thick secretions cleared."
+    },
+    {
+      "at": "2:40",
+      "say": "Pneumothorax: chest rise, trachea. Equipment: oxygen supply, circuit, ventilator.",
+      "do": "Symmetrical. Cylinder 60% full; circuit intact."
+    }
+  ],
+  "keywords": [
+    "CT head",
+    "intracerebral haemorrhage",
+    "clotting",
+    "anticoagulant",
+    "labetalol",
+    "130–140",
+    "RSI drugs",
+    "communication",
+    "neurosurgeon",
+    "document",
+    "family",
+    "oxygen for twice the journey",
+    "doctor and a nurse",
+    "pupil",
+    "stop the ambulance",
+    "ETCO2",
+    "hypertonic saline",
+    "DOPES"
   ]
 }

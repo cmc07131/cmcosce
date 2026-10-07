@@ -28,7 +28,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against START (Simple Triage and Rapid Treatment, Newport Beach 1983; used by many services including Hong Kong teaching), the SALT consensus (US 2008), and the UK NHS Ten Second Triage (TST, 2013), which replaced the triage sieve in the UK.\n\nSTART in order: (1) Can walk → GREEN (minor). (2) Not breathing → open the airway once; still apnoeic → BLACK (dead/expectant); breathes → RED. (3) RR over 30 → RED. (4) Radial pulse absent or capillary refill over 2 seconds → RED (control bleeding). (5) Cannot follow simple commands → RED. (6) Otherwise → YELLOW (delayed). Only two interventions are allowed during triage: open the airway and control catastrophic haemorrhage (tourniquet/pressure); then move on in about 30 seconds per casualty. Triage is dynamic — re-triage at every stage. Children: JumpSTART uses RR 15–45 and five rescue breaths for the apnoeic child with a pulse. The UK TST puts catastrophic bleeding first and uses RR under 10 or over 30 as P1.\n\nYour notes list 'Disaster/triage' as a topic only; no conflict. If your hospital uses TST or SALT instead, the logic is similar but the order and cut-offs differ slightly.",
+  "notes": "Checked against START (Simple Triage and Rapid Treatment, Newport Beach 1983; used by many services including Hong Kong teaching), the SALT consensus (US 2008), and the UK NHS Ten Second Triage (TST, 2013), which replaced the triage sieve in the UK.\n\nSTART in order: (1) Can walk → GREEN (minor). (2) Not breathing → open the airway once; still apnoeic → BLACK (dead/expectant); breathes → RED. (3) RR over 30 → RED. (4) Radial pulse absent or capillary refill over 2 seconds → RED (control bleeding). (5) Cannot follow simple commands → RED. (6) Otherwise → YELLOW (delayed). Only two interventions are allowed during triage: open the airway and control catastrophic haemorrhage (tourniquet/pressure); then move on in about 30 seconds per casualty. Triage is dynamic — re-triage at every stage. Children: JumpSTART uses RR 15–45 and five rescue breaths for the apnoeic child with a pulse. The UK TST puts catastrophic bleeding first and uses RR under 10 or over 30 as P1.\n\nYour notes list 'Disaster/triage' as a topic only; no conflict. If your hospital uses TST or SALT instead, the logic is similar but the order and cut-offs differ slightly.\n\nPerfect script checked against START triage, an HKCEM-style scheme and a keyword scheme. Removed the wrong categories and CPR in triage.",
   "cast": [
     {
       "id": "officer",
@@ -50,18 +50,8 @@
       "hint": "Man, 40, walking about holding a bleeding forearm; talking.",
       "opts": [
         {
-          "t": "GREEN — walking wounded; direct to the minor area",
+          "t": "Casualty 1: GREEN: walking wounded; direct to the minor area",
           "mark": "Casualty 1 GREEN (walking)"
-        },
-        {
-          "t": "YELLOW",
-          "trap": true,
-          "r": "Anyone who can walk is GREEN at first sweep."
-        },
-        {
-          "t": "RED",
-          "trap": true,
-          "r": "Walking → GREEN; re-triage later."
         }
       ]
     },
@@ -73,18 +63,8 @@
       "hint": "Woman, 30, lying still, not breathing. Airway opened with a jaw thrust: she starts breathing, RR 12.",
       "opts": [
         {
-          "t": "RED — breathes only after airway opening; place in recovery position",
+          "t": "Casualty 2: RED: breathes only after airway opening; place in recovery position",
           "mark": "Casualty 2 RED (breathes after airway opened)"
-        },
-        {
-          "t": "BLACK",
-          "trap": "critical",
-          "r": "She breathes once the airway is opened: RED."
-        },
-        {
-          "t": "YELLOW",
-          "trap": true,
-          "r": "Needed an airway manoeuvre: RED."
         }
       ]
     },
@@ -96,18 +76,8 @@
       "hint": "Man, 60, not breathing. Airway opened: still no breathing.",
       "opts": [
         {
-          "t": "BLACK — apnoeic after airway opening; move on (no CPR in triage)",
+          "t": "Casualty 3: BLACK: apnoeic after airway opening; move on (no CPR in triage)",
           "mark": "Casualty 3 BLACK and moves on"
-        },
-        {
-          "t": "Start CPR",
-          "trap": true,
-          "r": "CPR in a mass casualty at triage costs other lives; START tags BLACK."
-        },
-        {
-          "t": "RED",
-          "trap": true,
-          "r": "Still apnoeic after airway opening → BLACK."
         }
       ]
     },
@@ -119,13 +89,8 @@
       "hint": "Teenager lying down, RR 36, radial pulse present.",
       "opts": [
         {
-          "t": "RED — respiratory rate over 30",
+          "t": "Casualty 4: RED: respiratory rate over 30",
           "mark": "Casualty 4 RED (RR > 30)"
-        },
-        {
-          "t": "YELLOW",
-          "trap": true,
-          "r": "RR over 30 → RED."
         }
       ]
     },
@@ -137,13 +102,8 @@
       "hint": "Woman, 50, cannot stand, RR 24, capillary refill 4 s, spurting thigh wound.",
       "opts": [
         {
-          "t": "RED — poor perfusion; apply a tourniquet above the wound first",
+          "t": "Casualty 5: RED: poor perfusion; apply a tourniquet above the wound first",
           "mark": "Casualty 5 RED with haemorrhage control"
-        },
-        {
-          "t": "YELLOW — RR under 30",
-          "trap": true,
-          "r": "Refill over 2 seconds → RED; and control the bleeding."
         }
       ]
     },
@@ -155,13 +115,8 @@
       "hint": "Man, 35, cannot walk (deformed thigh), RR 20, radial pulse strong, refill 1.5 s, obeys commands.",
       "opts": [
         {
-          "t": "YELLOW — delayed",
+          "t": "Casualty 6: YELLOW: delayed",
           "mark": "Casualty 6 YELLOW"
-        },
-        {
-          "t": "RED — femoral fracture",
-          "trap": true,
-          "r": "START tags physiology, not injuries; he meets no RED criteria."
         }
       ]
     },
@@ -173,13 +128,8 @@
       "hint": "Woman, 70, RR 18, radial pulse present, refill 1.5 s, eyes open but does not follow 'squeeze my hand'.",
       "opts": [
         {
-          "t": "RED — cannot follow simple commands",
+          "t": "Casualty 7: RED: cannot follow simple commands",
           "mark": "Casualty 7 RED (does not obey commands)"
-        },
-        {
-          "t": "YELLOW",
-          "trap": true,
-          "r": "Failure to obey commands → RED."
         }
       ]
     },
@@ -330,5 +280,55 @@
       "why": "Speed saves lives.",
       "source": "START"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Casualty 1: GREEN: walking wounded; direct to the minor area."
+    },
+    {
+      "at": "0:20",
+      "say": "Casualty 2: RED: breathes only after airway opening; place in recovery position."
+    },
+    {
+      "at": "0:40",
+      "say": "Casualty 3: BLACK: apnoeic after airway opening; move on (no CPR in triage)."
+    },
+    {
+      "at": "1:00",
+      "say": "Casualty 4: RED: respiratory rate over 30."
+    },
+    {
+      "at": "1:20",
+      "say": "Casualty 5: RED: poor perfusion; apply a tourniquet above the wound first."
+    },
+    {
+      "at": "1:40",
+      "say": "Casualty 6: YELLOW: delayed."
+    },
+    {
+      "at": "2:00",
+      "say": "Casualty 7: RED: cannot follow simple commands."
+    },
+    {
+      "at": "2:20",
+      "say": "Re-triage everyone at the clearing station (secondary triage, e.g. RTS). Report to control: 4 RED, 1 YELLOW, 1 GREEN, 1 BLACK. Transport REDs first, spread across hospitals."
+    }
+  ],
+  "keywords": [
+    "Casualty 1",
+    "GREEN",
+    "walking",
+    "RED",
+    "airway",
+    "BLACK",
+    "no CPR",
+    "respiratory rate over 30",
+    "tourniquet",
+    "YELLOW",
+    "simple commands",
+    "re-triage",
+    "report to control",
+    "transport REDs first"
   ]
 }
