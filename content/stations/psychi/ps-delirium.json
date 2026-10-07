@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE CG103 (Delirium, updated 2023), the 4AT (www.the4AT.com), the MMSE (copyright PAR; use a licensed form) and the Abbreviated Mental Test.\n\nDelirium: acute onset, fluctuating course, inattention, and altered awareness or disorganised thinking (CAM). The 4AT (Alertness, AMT4, Attention — months backwards, Acute change or fluctuating course) is quick and needs no training; 4 or more suggests delirium. Hypoactive delirium is common and missed. Look for causes (PINCHME: Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment; plus retention, hypoxia, electrolytes, alcohol withdrawal, stroke). Treat the cause; reorientation, glasses and hearing aids, family presence, sleep; avoid restraint; antipsychotics (low-dose haloperidol) only for severe distress or danger, and not in Parkinson's or Lewy body dementia.\n\nDementia: insidious, progressive, attention preserved early; MMSE/MoCA help but are not diagnostic in acute illness. Your notes on delirium versus dementia, CAM and the MMSE match; the MMSE normal cut-off depends on education (your notes: 25 or more with over 7 years of schooling). Visual hallucinations suggest delirium, drugs or Lewy body disease.",
+  "notes": "Checked against NICE CG103 (Delirium, updated 2023), the 4AT (www.the4AT.com), the MMSE (copyright PAR; use a licensed form) and the Abbreviated Mental Test.\n\nDelirium: acute onset, fluctuating course, inattention, and altered awareness or disorganised thinking (CAM). The 4AT (Alertness, AMT4, Attention — months backwards, Acute change or fluctuating course) is quick and needs no training; 4 or more suggests delirium. Hypoactive delirium is common and missed. Look for causes (PINCHME: Pain, Infection, Nutrition, Constipation, Hydration, Medication, Environment; plus retention, hypoxia, electrolytes, alcohol withdrawal, stroke). Treat the cause; reorientation, glasses and hearing aids, family presence, sleep; avoid restraint; antipsychotics (low-dose haloperidol) only for severe distress or danger, and not in Parkinson's or Lewy body dementia.\n\nDementia: insidious, progressive, attention preserved early; MMSE/MoCA help but are not diagnostic in acute illness. Your notes on delirium versus dementia, CAM and the MMSE match; the MMSE normal cut-off depends on education (your notes: 25 or more with over 7 years of schooling). Visual hallucinations suggest delirium, drugs or Lewy body disease.\n\nPerfect script checked against the 4AT and NICE CG103 delirium, an HKCEM-style scheme and a keyword scheme. Removed IM haloperidol; the 4AT total and the cause said aloud.",
   "cast": [
     {
       "id": "patient",
@@ -117,7 +117,7 @@
           },
           {
             "t": "Acute change or fluctuating course",
-            "r": "Yes, from the daughter (4 points). Total 11: likely delirium.",
+            "r": "Yes, from the daughter (4 points). Total 11. \"A 4AT of 11: likely delirium.\"",
             "mark": "Scores acute change; 4AT total suggests delirium"
           }
         ],
@@ -129,7 +129,7 @@
           },
           {
             "t": "Bladder scan",
-            "r": "650 mL residual.",
+            "r": "650 mL residual. \"Urinary retention.\"",
             "mark": "Checks for urinary retention"
           }
         ]
@@ -145,29 +145,24 @@
       "confirm": "Plan",
       "opts": [
         {
-          "t": "Catheterise for retention; urine culture; blood cultures and bloods",
+          "t": "Catheterise for the retention; a urine culture, blood cultures and bloods",
           "need": true,
           "mark": "Relieves retention and investigates infection"
         },
         {
-          "t": "Stop oxybutynin (anticholinergic)",
+          "t": "Stop the oxybutynin: it's anticholinergic",
           "need": true,
           "mark": "Stops the anticholinergic"
         },
         {
-          "t": "Treat UTI; laxatives; fluids",
+          "t": "Treat the UTI; laxatives for the constipation; fluids",
           "need": true,
           "mark": "Treats infection, constipation, hydration"
         },
         {
-          "t": "Reorientation, glasses and hearing aids, daughter present, sleep, avoid moving beds",
+          "t": "Reorientation, her glasses and hearing aids, her daughter with her, sleep, and no moving beds",
           "need": true,
           "mark": "Non-drug delirium measures"
-        },
-        {
-          "t": "Haloperidol 5 mg IM to stop the hallucinations",
-          "trap": true,
-          "r": "Antipsychotics only for severe distress or danger, at low dose, after non-drug measures."
         }
       ]
     },
@@ -297,5 +292,53 @@
       "why": "Always check the bladder.",
       "source": "NICE CG103"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "What is she normally like? When did this start? Is it the same all day? Any fever, cough, passing urine more, pain, constipation?",
+      "do": "Sharp! Lives with me, does the shopping, plays mahjong. Two days ago, suddenly. Worse at night; some hours she's almost normal. Going to the toilet a lot, smells strong. Hasn't opened her bowels for 4 days."
+    },
+    {
+      "at": "0:20",
+      "say": "Any new medicines? Falls or head injury? Alcohol?",
+      "do": "The GP started a bladder tablet (oxybutynin) last week. No falls. No alcohol."
+    },
+    {
+      "at": "0:40",
+      "say": "Alertness. AMT4: age, date of birth, place, year. Attention: months of the year backwards.",
+      "do": "Drowsy but rousable to voice — abnormal (4 points). Knows her birth date only — 2 or more errors (2 points). Stops at October (fewer than 7) (1 point)."
+    },
+    {
+      "at": "1:00",
+      "say": "Acute change or fluctuating course. Observations and examine. Bladder scan. A 4AT of 11: likely delirium. Urinary retention.",
+      "do": "Yes, from the daughter (4 points). Total 11. \"A 4AT of 11: likely delirium.\" Temp 38.1, HR 104. Suprapubic tenderness, palpable bladder. Chest clear. No focal neurology. 650 mL residual. \"Urinary retention.\""
+    },
+    {
+      "at": "1:20",
+      "say": "Catheterise for the retention; a urine culture, blood cultures and bloods. Stop the oxybutynin: it's anticholinergic. Treat the UTI; laxatives for the constipation; fluids."
+    },
+    {
+      "at": "1:40",
+      "say": "Reorientation, her glasses and hearing aids, her daughter with her, sleep, and no moving beds."
+    }
+  ],
+  "keywords": [
+    "normally",
+    "fever",
+    "constipation",
+    "new medicines",
+    "falls",
+    "alertness",
+    "AMT4",
+    "months of the year backwards",
+    "4AT",
+    "delirium",
+    "bladder scan",
+    "retention",
+    "catheterise",
+    "oxybutynin",
+    "UTI",
+    "reorientation"
   ]
 }

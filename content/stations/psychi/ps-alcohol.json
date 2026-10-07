@@ -49,7 +49,7 @@
       "text": "Thiamine dose. Your notes give thiamine 100 mg IV. For suspected Wernicke's encephalopathy, UK practice uses high-dose parenteral thiamine (Pabrinex, 2 pairs three times a day for 3–5 days). 'Thiamine before glucose' is sensible, but never delay treating hypoglycaemia for it."
     }
   ],
-  "notes": "Checked against NICE CG100 (Alcohol-use disorders: physical complications, 2010, updated 2017), NICE CG115, and the CIWA-Ar.\n\nWithdrawal: tremor, sweating, anxiety, tachycardia (6–24 h); seizures (12–48 h); delirium tremens (48–72 h): confusion, hallucinations (often visual or tactile), autonomic instability; mortality without treatment. Treat with a benzodiazepine (chlordiazepoxide or diazepam) by a symptom-triggered regimen guided by CIWA-Ar, or a fixed-dose reducing regimen; lorazepam if liver failure. Delirium tremens: IV/oral benzodiazepine titrated; haloperidol only as an adjunct; phenobarbital in refractory cases.\n\nWernicke's encephalopathy (confusion, ataxia, ophthalmoplegia — the triad is incomplete in most): give parenteral thiamine (Pabrinex) before glucose where possible, high dose (e.g. 2 pairs of Pabrinex three times daily for 3–5 days if suspected; prophylactic 1 pair daily if at risk). Check glucose, electrolytes (magnesium, phosphate, potassium), and look for head injury, sepsis, GI bleeding and pancreatitis.\n\nYour notes: thiamine 100 mg IV — UK practice uses Pabrinex doses higher than that for suspected Wernicke's; 'always thiamine before glucose' is sensible but never delay treating hypoglycaemia. CAGE and CIWA-Ar descriptions match.",
+  "notes": "Checked against NICE CG100 (Alcohol-use disorders: physical complications, 2010, updated 2017), NICE CG115, and the CIWA-Ar.\n\nWithdrawal: tremor, sweating, anxiety, tachycardia (6–24 h); seizures (12–48 h); delirium tremens (48–72 h): confusion, hallucinations (often visual or tactile), autonomic instability; mortality without treatment. Treat with a benzodiazepine (chlordiazepoxide or diazepam) by a symptom-triggered regimen guided by CIWA-Ar, or a fixed-dose reducing regimen; lorazepam if liver failure. Delirium tremens: IV/oral benzodiazepine titrated; haloperidol only as an adjunct; phenobarbital in refractory cases.\n\nWernicke's encephalopathy (confusion, ataxia, ophthalmoplegia — the triad is incomplete in most): give parenteral thiamine (Pabrinex) before glucose where possible, high dose (e.g. 2 pairs of Pabrinex three times daily for 3–5 days if suspected; prophylactic 1 pair daily if at risk). Check glucose, electrolytes (magnesium, phosphate, potassium), and look for head injury, sepsis, GI bleeding and pancreatitis.\n\nYour notes: thiamine 100 mg IV — UK practice uses Pabrinex doses higher than that for suspected Wernicke's; 'always thiamine before glucose' is sensible but never delay treating hypoglycaemia. CAGE and CIWA-Ar descriptions match.\n\nPerfect script checked against NICE CG100 alcohol withdrawal, an HKCEM-style scheme and a keyword scheme. Removed oral thiamine and discharge, an IV diazepam bolus, and haloperidol alone; Wernicke's named aloud.",
   "cast": [
     {
       "id": "patient",
@@ -94,12 +94,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG, NIBP and SpO2.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2, and a capillary glucose.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "history",
@@ -127,7 +128,8 @@
             "t": "Any other drugs, sleeping tablets?",
             "tz": "有冇用其他藥物，或者食安眠藥？",
             "rz": "冇。",
-            "r": "No."
+            "r": "No.",
+            "mark": "Asks other drugs and sedatives"
           }
         ],
         "Now": [
@@ -168,19 +170,21 @@
           },
           {
             "t": "Gait",
-            "r": "Wide-based and unsteady.",
+            "r": "Wide-based and unsteady. \"Confusion, nystagmus and ataxia: Wernicke's encephalopathy, with delirium tremens.\"",
             "mark": "Assesses ataxia"
           },
           {
             "t": "Tremor",
-            "r": "Coarse tremor of outstretched hands."
+            "r": "Coarse tremor of outstretched hands.",
+            "mark": "Notes the tremor"
           }
         ],
         "General": [
           {
             "t": "Liver, stigmata, head",
             "r": "Spider naevi, liver edge 3 cm. Old bruise on the occiput.",
-            "anim": "abdomen"
+            "anim": "abdomen",
+            "mark": "Looks for liver disease and head injury"
           }
         ]
       }
@@ -203,36 +207,12 @@
         },
         {
           "fetch": "cart",
-          "trap": "critical",
-          "r": "He has delirium tremens and possible Wernicke's: admit, parenteral thiamine, benzodiazepines.",
-          "t": "Thiamine (oral) 100 mg, and discharge",
-          "drug": "Thiamine (oral)",
-          "dose": "100 mg, and discharge"
-        },
-        {
-          "fetch": "cart",
           "need": true,
           "scene": "benzo",
           "mark": "Benzodiazepine titrated to symptoms",
           "t": "Diazepam 10–20 mg orally, titrated to CIWA-Ar",
           "drug": "Diazepam",
           "dose": "10–20 mg orally, titrated to CIWA-Ar"
-        },
-        {
-          "t": "Diazepam 100 mg IV bolus",
-          "drug": "Diazepam",
-          "dose": "100 mg IV bolus",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "A huge IV bolus can stop him breathing: titrate 10–20 mg to CIWA-Ar."
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Antipsychotics lower the seizure threshold and don't treat withdrawal; benzodiazepines first.",
-          "t": "Haloperidol 5 mg IM alone for the hallucinations",
-          "drug": "Haloperidol",
-          "dose": "5 mg IM alone for the hallucinations"
         }
       ]
     },
@@ -244,14 +224,18 @@
       "hint": "Bloods and imaging.",
       "opts": [
         {
-          "t": "Bloods: glucose, Mg, phosphate, K, LFT, FBC, lipase",
+          "t": "Bloods: glucose, magnesium, phosphate, potassium, LFTs, FBC and lipase.",
           "need": true,
           "mark": "Checks glucose and electrolytes"
         },
         {
-          "t": "CT head (head injury in an alcohol-dependent patient)",
+          "t": "A CT head: he fell and hit his head, and he's alcohol-dependent.",
           "need": true,
           "mark": "Imaging for head injury"
+        },
+        {
+          "t": "He's admitted: delirium tremens and Wernicke's, with CIWA-Ar monitoring.",
+          "mark": "Admits for delirium tremens and Wernicke's"
         }
       ]
     },
@@ -381,5 +365,56 @@
       "why": "Also phosphate and potassium.",
       "source": "NICE CG100"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2, and a capillary glucose."
+    },
+    {
+      "at": "0:20",
+      "say": "How much do you drink, and when was your last drink? Have you had fits or DTs when stopping before? Any other drugs, sleeping tablets?",
+      "do": "A bottle of whisky a day for years. Last drink yesterday morning. I had a fit last time I stopped. No."
+    },
+    {
+      "at": "0:40",
+      "say": "What are you seeing? Any vomiting blood, belly pain, falls or head injury?",
+      "do": "Spiders crawling on the wall and on my arms. No blood. Fell last week, hit my head."
+    },
+    {
+      "at": "1:00",
+      "say": "Orientation and attention. Eye movements. Gait. Confusion, nystagmus and ataxia: Wernicke's encephalopathy, with delirium tremens.",
+      "do": "Disorientated to date and place, inattentive. Horizontal nystagmus, weak lateral gaze. Wide-based and unsteady. \"Confusion, nystagmus and ataxia: Wernicke's encephalopathy, with delirium tremens.\""
+    },
+    {
+      "at": "1:20",
+      "say": "Tremor. Liver, stigmata, head.",
+      "do": "Coarse tremor of outstretched hands. Spider naevi, liver edge 3 cm. Old bruise on the occiput."
+    },
+    {
+      "at": "1:40",
+      "say": "Pabrinex (high-dose thiamine) 2 pairs IV three times a day. Diazepam 10–20 mg orally, titrated to CIWA-Ar."
+    },
+    {
+      "at": "2:00",
+      "say": "Bloods: glucose, magnesium, phosphate, potassium, LFTs, FBC and lipase. A CT head: he fell and hit his head, and he's alcohol-dependent. He's admitted: delirium tremens and Wernicke's, with CIWA-Ar monitoring."
+    }
+  ],
+  "keywords": [
+    "how much",
+    "last drink",
+    "fits",
+    "head injury",
+    "orientation",
+    "eye movements",
+    "gait",
+    "Wernicke's",
+    "delirium tremens",
+    "Pabrinex",
+    "diazepam",
+    "CIWA-Ar",
+    "magnesium",
+    "CT head",
+    "admitted"
   ]
 }

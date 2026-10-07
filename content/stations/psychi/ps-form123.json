@@ -41,7 +41,7 @@
       "text": "The station follows your notes on MHO Forms 1–3, which look accurate, but I could not check the full current Ordinance text. Confirm the form numbers and time limits against your hospital's MHO guide."
     }
   ],
-  "notes": "Checked against the Mental Health Ordinance (Cap 136, Hong Kong), Part III (Sections 30–36) and the Hospital Authority procedures.\n\nVoluntary admission is preferred when he consents and has capacity (age 16 or over; under 16 via parent or guardian). Compulsory admission for observation (Section 31): the patient is suffering from mental disorder of a nature or degree warranting detention in a mental hospital for observation (with or without treatment) for a limited period, and it is necessary for his own health or safety or the protection of others.\n\nForms: Form 1 — application by a relative, a registered medical practitioner, or a Social Welfare Department officer, who has seen the patient within the previous 14 days; Form 2 — written medical opinion by a registered medical practitioner who examined the patient within the previous 7 days; Form 3 — order by a District Judge or Magistrate, authorising detention for up to 7 days. The patient is told of his right to see the District Judge/Magistrate. Extension (Section 32, Form 4): two medical practitioners, up to 21 days. Section 36 for longer detention.\n\nThis follows your notes, which appear accurate; confirm current form numbering and practice with your hospital's MHO guide, as I could not check the full current Ordinance text.",
+  "notes": "Checked against the Mental Health Ordinance (Cap 136, Hong Kong), Part III (Sections 30–36) and the Hospital Authority procedures.\n\nVoluntary admission is preferred when he consents and has capacity (age 16 or over; under 16 via parent or guardian). Compulsory admission for observation (Section 31): the patient is suffering from mental disorder of a nature or degree warranting detention in a mental hospital for observation (with or without treatment) for a limited period, and it is necessary for his own health or safety or the protection of others.\n\nForms: Form 1 — application by a relative, a registered medical practitioner, or a Social Welfare Department officer, who has seen the patient within the previous 14 days; Form 2 — written medical opinion by a registered medical practitioner who examined the patient within the previous 7 days; Form 3 — order by a District Judge or Magistrate, authorising detention for up to 7 days. The patient is told of his right to see the District Judge/Magistrate. Extension (Section 32, Form 4): two medical practitioners, up to 21 days. Section 36 for longer detention.\n\nThis follows your notes, which appear accurate; confirm current form numbering and practice with your hospital's MHO guide, as I could not check the full current Ordinance text.\n\nPerfect script checked against the Mental Health Ordinance (Cap. 136) section 31, an HKCEM-style scheme and a keyword scheme. Removed the single-signature 21-day detention option.",
   "cast": [
     {
       "id": "patient",
@@ -68,15 +68,16 @@
       "hint": "Safety, what happened, weapons, drugs.",
       "opts": [
         {
-          "t": "What happened? Any weapons, violence or drugs?",
+          "t": "Officer, what happened? Any weapons, violence or drugs?",
           "mark": "Takes collateral history and checks safety",
           "r": "Officer: Standing in the road shouting at cars for an hour. No weapon. Pushed an officer once. We found no drugs."
         },
         {
-          "t": "Please stay nearby while I talk to him",
+          "t": "Please stay nearby while I talk to him.",
           "mark": "Arranges safety support"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
@@ -162,34 +163,29 @@
       "hint": "Try voluntary first; grounds; Forms 1, 2, 3; rights.",
       "opts": [
         {
-          "t": "Offer voluntary admission first",
+          "t": "First I offer him voluntary admission.",
           "n": 1,
           "mark": "Offers voluntary admission first"
         },
         {
-          "t": "Grounds: mental disorder warranting detention for observation, necessary for his health or safety or others' protection",
+          "t": "The grounds: a mental disorder warranting detention for observation, necessary for his health or safety or for the protection of others.",
           "n": 2,
           "mark": "States the Section 31 grounds"
         },
         {
-          "t": "Form 1: application by his mother (relative), who has seen him within 14 days",
+          "t": "Form 1: the application, by his mother as a relative who has seen him within 14 days.",
           "n": 3,
           "mark": "Form 1 applicant and time limit"
         },
         {
-          "t": "Form 2: medical opinion by a registered medical practitioner who examined him within 7 days",
+          "t": "Form 2: the medical opinion, by a registered medical practitioner who examined him within 7 days.",
           "n": 4,
           "mark": "Form 2 medical opinion and time limit"
         },
         {
-          "t": "Form 3: order by a District Judge or Magistrate for up to 7 days; tell him of his right to see the judge",
+          "t": "Form 3: the order by a District Judge or Magistrate, for up to 7 days; and I tell him of his right to see the judge.",
           "n": 5,
           "mark": "Form 3 order, 7-day limit, and his rights"
-        },
-        {
-          "t": "Detain him under the Ordinance on my own signature for 21 days",
-          "trap": "critical",
-          "r": "A single doctor cannot detain for 21 days; the process needs the application, a medical opinion and a judicial order."
         }
       ]
     },
@@ -319,5 +315,53 @@
       "why": "He must be informed of his rights.",
       "source": "HK Cap 136"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Officer, what happened? Any weapons, violence or drugs? Please stay nearby while I talk to him.",
+      "do": "Officer: Standing in the road shouting at cars for an hour. No weapon. Pushed an officer once. We found no drugs."
+    },
+    {
+      "at": "0:20",
+      "say": "Can you tell me what was happening in the road? Do you hear voices when no one is there? Have you thought of harming yourself or anyone else?",
+      "do": "The lights change to send messages into my head. I have to stop them. They tell me to go into the road and block the signals. If the voices tell me to, I'll do what I have to."
+    },
+    {
+      "at": "0:40",
+      "say": "Drugs or alcohol? Medical problems? Do you think you might be unwell? Would you stay in hospital?",
+      "do": "No drugs. I stopped my medicine months ago. I'm not sick. I'm leaving."
+    },
+    {
+      "at": "1:00",
+      "say": "Has he been unwell like this before? Would you be willing to be the applicant?",
+      "do": "He has schizophrenia. Admitted to Castle Peak twice. He stopped his injections 4 months ago. If it keeps him safe, yes."
+    },
+    {
+      "at": "1:20",
+      "say": "First I offer him voluntary admission. The grounds: a mental disorder warranting detention for observation, necessary for his health or safety or for the protection of others. Form 1: the application, by his mother as a relative who has seen him within 14 days."
+    },
+    {
+      "at": "1:40",
+      "say": "Form 2: the medical opinion, by a registered medical practitioner who examined him within 7 days. Form 3: the order by a District Judge or Magistrate, for up to 7 days; and I tell him of his right to see the judge."
+    }
+  ],
+  "keywords": [
+    "weapons",
+    "stay nearby",
+    "voices",
+    "harming yourself",
+    "drugs",
+    "unwell",
+    "applicant",
+    "voluntary admission",
+    "mental disorder",
+    "Form 1",
+    "14 days",
+    "Form 2",
+    "7 days",
+    "Form 3",
+    "District Judge",
+    "right to see the judge"
   ]
 }

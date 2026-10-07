@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE CG185 (Bipolar disorder, 2014, updated 2023) and the ED approach to mania.\n\nMania: elevated or irritable mood, decreased need for sleep, pressured speech, flight of ideas, grandiosity (may be delusional), distractibility, disinhibition, risky behaviour (spending, sex, driving), for at least a week (or any duration if hospitalised). Exclude organic causes: thyrotoxicosis, steroids, stimulants, antidepressants, head injury, delirium, and pregnancy (affects drug choice).\n\nED management: safety, a calm low-stimulus environment, de-escalation; if needed, rapid tranquillisation (oral first: e.g. lorazepam or an antipsychotic; IM options per NICE NG10). Refer to psychiatry; admission (voluntary or under the MHO) for risk. Acute treatment: an antipsychotic (haloperidol, olanzapine, quetiapine or risperidone); stop antidepressants. Lithium and valproate need specialist decisions; valproate must be avoided in women of childbearing potential unless the Pregnancy Prevention Programme is met.\n\nYour notes list 'manic patient' as a topic and have MSE features of mania (pressured speech, flight of ideas, bizarre clothing); nothing conflicts.",
+  "notes": "Checked against NICE CG185 (Bipolar disorder, 2014, updated 2023) and the ED approach to mania.\n\nMania: elevated or irritable mood, decreased need for sleep, pressured speech, flight of ideas, grandiosity (may be delusional), distractibility, disinhibition, risky behaviour (spending, sex, driving), for at least a week (or any duration if hospitalised). Exclude organic causes: thyrotoxicosis, steroids, stimulants, antidepressants, head injury, delirium, and pregnancy (affects drug choice).\n\nED management: safety, a calm low-stimulus environment, de-escalation; if needed, rapid tranquillisation (oral first: e.g. lorazepam or an antipsychotic; IM options per NICE NG10). Refer to psychiatry; admission (voluntary or under the MHO) for risk. Acute treatment: an antipsychotic (haloperidol, olanzapine, quetiapine or risperidone); stop antidepressants. Lithium and valproate need specialist decisions; valproate must be avoided in women of childbearing potential unless the Pregnancy Prevention Programme is met.\n\nYour notes list 'manic patient' as a topic and have MSE features of mania (pressured speech, flight of ideas, bizarre clothing); nothing conflicts.\n\nPerfect script checked against NICE CG185 bipolar disorder, an HKCEM-style scheme and a keyword scheme. Removed valproate in the ED (a woman of childbearing potential); mania named aloud.",
   "cast": [
     {
       "id": "patient",
@@ -85,7 +85,8 @@
             "t": "Thyroid problems or head injury?",
             "tz": "佢有冇甲狀腺問題，或者撞傷過個頭？",
             "rz": "冇。",
-            "r": "No."
+            "r": "No.",
+            "mark": "Asks thyroid disease and head injury"
           }
         ]
       }
@@ -127,7 +128,7 @@
           },
           {
             "t": "Do you think anything is wrong?",
-            "r": "Nothing! You're jealous.",
+            "r": "Nothing! You're jealous. \"Elevated mood, pressured speech, flight of ideas, grandiosity, no insight: mania.\"",
             "mark": "Assesses insight"
           }
         ]
@@ -143,34 +144,29 @@
       "confirm": "Plan",
       "opts": [
         {
-          "t": "Screen for organic causes: TFT, glucose, urine drug screen, pregnancy test, bloods",
+          "t": "Screen for organic causes: thyroid function, glucose, a urine drug screen, a pregnancy test and bloods",
           "need": true,
           "mark": "Organic screen including TFT, drugs and pregnancy test"
         },
         {
-          "t": "Quiet, low-stimulus room; de-escalation",
+          "t": "A quiet, low-stimulus room; de-escalation",
           "need": true,
           "mark": "Low-stimulus environment and de-escalation"
         },
         {
-          "t": "Stop the antidepressant",
+          "t": "Stop the antidepressant: it can trigger mania",
           "need": true,
           "mark": "Stops the antidepressant"
         },
         {
-          "t": "Offer an oral antipsychotic (e.g. olanzapine)",
+          "t": "Offer an oral antipsychotic, such as olanzapine",
           "need": true,
           "mark": "Antipsychotic for acute mania"
         },
         {
-          "t": "Urgent psychiatry; admission (voluntary, or MHO if she refuses and risk is high)",
+          "t": "Urgent psychiatry and admission: voluntary, or under the MHO if she refuses and the risk is high",
           "need": true,
           "mark": "Urgent psychiatry and admission plan"
-        },
-        {
-          "t": "Start sodium valproate in the ED",
-          "trap": true,
-          "r": "Valproate is avoided in women of childbearing potential unless the Pregnancy Prevention Programme applies; leave mood stabilisers to psychiatry."
         }
       ]
     },
@@ -300,5 +296,53 @@
       "why": "Changes drug choices.",
       "source": "NICE CG185"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "What has changed, and since when? Any risky behaviour? Has she had depression or anything similar before?",
+      "do": "Ten days ago she became very energetic, talking non-stop, barely sleeping for 4 nights. Spent our savings. Drove at 150 km/h. Quit her job by email. She was very low after our daughter was born two years ago."
+    },
+    {
+      "at": "0:20",
+      "say": "Medicines, steroids, drugs, alcohol? Could she be pregnant? Thyroid problems or head injury?",
+      "do": "Her GP started an antidepressant a month ago. No drugs. We're not trying for a baby. No."
+    },
+    {
+      "at": "0:40",
+      "say": "Appearance and behaviour. Speech. How are you feeling?",
+      "do": "Bright make-up, many rings, restless, standing up, laughing loudly. Rapid, loud, hard to interrupt (pressured). Fantastic! Better than ever! I'm going to run Hong Kong!"
+    },
+    {
+      "at": "1:00",
+      "say": "Thought form. Any thoughts of harm to yourself or others? Do you think anything is wrong? Elevated mood, pressured speech, flight of ideas, grandiosity, no insight: mania.",
+      "do": "Jumps from shoes to politics to the stars with rhyming links. Why would I? I'm unstoppable. Anyone who blocks me will regret it. Nothing! You're jealous. \"Elevated mood, pressured speech, flight of ideas, grandiosity, no insight: mania.\""
+    },
+    {
+      "at": "1:20",
+      "say": "Screen for organic causes: thyroid function, glucose, a urine drug screen, a pregnancy test and bloods. A quiet, low-stimulus room; de-escalation. Stop the antidepressant: it can trigger mania."
+    },
+    {
+      "at": "1:40",
+      "say": "Offer an oral antipsychotic, such as olanzapine. Urgent psychiatry and admission: voluntary, or under the MHO if she refuses and the risk is high."
+    }
+  ],
+  "keywords": [
+    "since when",
+    "risky behaviour",
+    "depression",
+    "antidepressant",
+    "pregnant",
+    "thyroid",
+    "appearance",
+    "speech",
+    "how are you feeling",
+    "flight of ideas",
+    "harm",
+    "mania",
+    "organic causes",
+    "low-stimulus",
+    "olanzapine",
+    "MHO"
   ]
 }
