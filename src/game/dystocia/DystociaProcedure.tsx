@@ -144,15 +144,9 @@ function Internal({ svgRef, hand, elbow, swept }: { svgRef?: Ref<SVGSVGElement>;
 /* ---------------------------------------------------------------- stages */
 
 function Traction({ upd, feel, physical, why }: Pick<Stage, 'upd' | 'feel' | 'physical' | 'why'>) {
-  const [angle, setAngle] = useState<'axial' | 'down'>('axial')
+  const angle = 'axial' as 'axial' | 'down'
   return (
     <div className="io-choices mt-2">
-      <button type="button" className="tap io-mini" data-on={angle === 'axial' || undefined} onClick={() => setAngle('axial')}>
-        IN LINE WITH THE SPINE
-      </button>
-      <button type="button" className="tap io-mini" data-on={angle === 'down' || undefined} onClick={() => setAngle('down')}>
-        DOWNWARD, HARD
-      </button>
       <button
         type="button"
         className="tap io-mini"
@@ -209,20 +203,6 @@ function McRobertsStage({ run, runRef, upd, feel, physical, why, next }: Stage) 
         <Side svgRef={svg} flex={run.hipFlex} />
       </TouchPad>
       <Traction upd={upd} feel={feel} physical={physical} why={why} />
-      <div className="io-choices mt-2">
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="dystocia-episiotomy"
-          onClick={() => {
-            upd({ episiotomy: true })
-            physical('You cut a large episiotomy. The shoulder is still stuck: it is caught on bone.')
-            why('Shoulder dystocia is a bony problem. An episiotomy only helps make room for your hand.')
-          }}
-        >
-          LARGE EPISIOTOMY FIRST
-        </button>
-      </div>
       <NextButton onClick={next} testId="dystocia-next">
         Suprapubic
       </NextButton>

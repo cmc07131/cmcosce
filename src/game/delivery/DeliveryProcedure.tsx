@@ -189,19 +189,6 @@ function HeadStage({ run, runRef, upd, feel, physical, why, next, stage }: BStag
             <button type="button" className="tap io-mini" data-on={run.cord === 'slipped' || undefined} data-testid="birth-slip" onClick={() => (upd({ cord: 'slipped' }), feel('The loose loop eased over the head.'))}>
               SLIP IT OVER THE HEAD
             </button>
-            <button
-              type="button"
-              className="tap io-mini"
-              data-on={run.cord === 'cut' || undefined}
-              data-testid="birth-cut"
-              onClick={() => {
-                upd({ cord: 'cut' })
-                physical('Clamped and cut: the baby is now on her own supply before she is out.')
-                why('A loose cord slips over the head. Cutting before delivery is a last resort for a tight cord.')
-              }}
-            >
-              CLAMP AND CUT IT NOW
-            </button>
           </>
         )}
         {stage === 2 && (
@@ -237,18 +224,6 @@ function BabyStage({ run, runRef, upd, feel, physical, why, next }: BStage) {
       <div className="io-choices mt-2">
         <button type="button" className="tap io-mini" data-on={run.skin || undefined} data-testid="birth-skin" onClick={() => (upd({ skin: true }), feel('Skin to skin on mum’s chest, a dry towel and a hat over her.'))}>
           SKIN TO SKIN
-        </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="birth-suction"
-          onClick={() => {
-            upd({ suctioned: true })
-            physical('You suction her mouth and nose. Her heart rate dips.')
-            why('No routine suction for a baby who is crying: it can cause bradycardia.')
-          }}
-        >
-          SUCTION MOUTH AND NOSE
         </button>
         <button type="button" className="tap io-mini" data-testid="birth-wait30" disabled={run.clampedAt !== null} onClick={() => (upd((r) => ({ secondsSinceBirth: r.secondsSinceBirth + 30 })), feel('Thirty seconds: she is pink and crying on mum, the cord still pulsing.'))}>
           LET 30 SECONDS PASS

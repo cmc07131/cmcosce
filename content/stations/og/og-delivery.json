@@ -34,7 +34,7 @@
       "text": "Routine oxytocic. Your notes choose Syntometrine. NICE recommends oxytocin 10 IU IM for the third stage: fewer side effects (vomiting, hypertension). Your point that Syntometrine is contraindicated in pre-eclampsia stands."
     }
   ],
-  "notes": "Checked against NICE NG235 (Intrapartum care, 2023) and RCOG guidance.\n\nPrepare two teams (mother, baby), PPE, warm towels. Controlled delivery of the head: flex it with the palm and guard the perineum; ask her to pant rather than push as the head crowns. Feel for a nuchal cord (slip it over the head if loose; 'somersault' delivery if tight — clamping and cutting before delivery is a last resort). Wait for restitution; deliver the anterior shoulder with gentle downward traction with the next contraction, then the posterior shoulder upwards. Baby dried and placed skin to skin; delayed cord clamping for at least 60 seconds in a well baby (NICE). Routine suctioning is not recommended.\n\nThird stage (NICE): active management — oxytocin 10 IU IM after the birth of the anterior shoulder or after the baby, deferred cord clamping, then controlled cord traction after signs of separation (gush of blood, cord lengthening, fundus rises and becomes globular), guarding the uterus above the pubis to avoid inversion. Check the placenta and membranes are complete, check for tears, and estimate blood loss. Prolonged third stage (NICE NG235): not completed within 30 minutes with active management, or 60 minutes with physiological management. Your notes' 30 minutes is correct for active management.\n\nYour notes choose Syntometrine for routine use; NICE recommends oxytocin 10 IU IM (fewer side effects: vomiting, hypertension). Syntometrine is contraindicated in pre-eclampsia, as your notes say.",
+  "notes": "Checked against NICE NG235 (Intrapartum care, 2023) and RCOG guidance.\n\nPrepare two teams (mother, baby), PPE, warm towels. Controlled delivery of the head: flex it with the palm and guard the perineum; ask her to pant rather than push as the head crowns. Feel for a nuchal cord (slip it over the head if loose; 'somersault' delivery if tight — clamping and cutting before delivery is a last resort). Wait for restitution; deliver the anterior shoulder with gentle downward traction with the next contraction, then the posterior shoulder upwards. Baby dried and placed skin to skin; delayed cord clamping for at least 60 seconds in a well baby (NICE). Routine suctioning is not recommended.\n\nThird stage (NICE): active management — oxytocin 10 IU IM after the birth of the anterior shoulder or after the baby, deferred cord clamping, then controlled cord traction after signs of separation (gush of blood, cord lengthening, fundus rises and becomes globular), guarding the uterus above the pubis to avoid inversion. Check the placenta and membranes are complete, check for tears, and estimate blood loss. Prolonged third stage (NICE NG235): not completed within 30 minutes with active management, or 60 minutes with physiological management. Your notes' 30 minutes is correct for active management.\n\nYour notes choose Syntometrine for routine use; NICE recommends oxytocin 10 IU IM (fewer side effects: vomiting, hypertension). Syntometrine is contraindicated in pre-eclampsia, as your notes say.\n\nPerfect script checked against NICE NG235 intrapartum care, an HKCEM-style scheme and a keyword scheme. The bench loses its clamp-and-cut-now and routine-suction buttons; narrated.",
   "cast": [
     {
       "id": "patient",
@@ -254,5 +254,40 @@
       "why": "Palpate before the third-stage drug.",
       "source": "Obstetric practice"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Call obstetrics and neonatology; one team for mother, one for baby. PPE; sterile delivery pack with two clamps and scissors. Warm towels, hat, resuscitaire on."
+    },
+    {
+      "at": "0:20",
+      "say": "Oxytocin 10 IU drawn up for the third stage."
+    },
+    {
+      "at": "0:40",
+      "say": "Palm on the head to keep it flexed, the other hand guarding the perineum; as it crowns, 'pant, don't push'. Feel for a cord: a loose loop slips over the head. Wait for restitution. With the next contraction, gentle downward axial traction for the anterior shoulder, then upward for the posterior. Baby dried, warm, skin to skin with mum; wait at least 60 seconds before clamping the cord."
+    },
+    {
+      "at": "1:00",
+      "say": "Feel the abdomen: no second twin; oxytocin 10 IU IM. Wait for separation: a gush of blood, the cord lengthening, the fundus rising. Controlled cord traction with my other hand guarding the uterus above the pubis. Check the placenta, membranes and three cord vessels; the fundus firm; tears; blood loss."
+    }
+  ],
+  "keywords": [
+    "delivery pack",
+    "warm towels",
+    "oxytocin 10 IU",
+    "pant",
+    "cord",
+    "restitution",
+    "anterior shoulder",
+    "skin to skin",
+    "60 seconds",
+    "second twin",
+    "separation",
+    "controlled cord traction",
+    "guarding the uterus",
+    "membranes",
+    "tears"
   ]
 }

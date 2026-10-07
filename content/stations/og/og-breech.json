@@ -34,7 +34,7 @@
       "text": "Footling and incomplete breech. Your notes call them 'unsafe for vaginal delivery'. That is true when planning a birth, but in the ED, if birth is imminent, the baby is still delivered vaginally while obstetrics are on the way, with the same hands-off principles."
     }
   ],
-  "notes": "Checked against RCOG Green-top Guideline 20b (Management of breech presentation, 2017) and ALSO.\n\nPrinciple: 'hands off the breech'. Let the breech deliver spontaneously with maternal effort; do not pull. Only touch when needed: legs may need flexing out (Pinard) if the breech hangs; keep the fetal back anterior (sacrum anterior). Loop of cord: do not pull. When the scapulae are visible, deliver the arms: if they are not delivered spontaneously, Løvset's manoeuvre (rotate the body 180° holding the pelvis to bring each arm under the pubic arch). Let the body hang to encourage head flexion, then deliver the head with Mauriceau–Smellie–Veit (fingers on the malar bones to flex the head, other hand on the occiput) or forceps. Neonatal team present. Anticipate cord compression and head entrapment.\n\nYour notes say footling and incomplete breech are 'unsafe for vaginal delivery'. That is true for planned delivery, but in the ED if birth is imminent the baby still has to be delivered vaginally while waiting for obstetrics; the same hands-off principles apply.",
+  "notes": "Checked against RCOG Green-top Guideline 20b (Management of breech presentation, 2017) and ALSO.\n\nPrinciple: 'hands off the breech'. Let the breech deliver spontaneously with maternal effort; do not pull. Only touch when needed: legs may need flexing out (Pinard) if the breech hangs; keep the fetal back anterior (sacrum anterior). Loop of cord: do not pull. When the scapulae are visible, deliver the arms: if they are not delivered spontaneously, Løvset's manoeuvre (rotate the body 180° holding the pelvis to bring each arm under the pubic arch). Let the body hang to encourage head flexion, then deliver the head with Mauriceau–Smellie–Veit (fingers on the malar bones to flex the head, other hand on the occiput) or forceps. Neonatal team present. Anticipate cord compression and head entrapment.\n\nYour notes say footling and incomplete breech are 'unsafe for vaginal delivery'. That is true for planned delivery, but in the ED if birth is imminent the baby still has to be delivered vaginally while waiting for obstetrics; the same hands-off principles apply.\n\nPerfect script checked against RCOG Green-top 20b, an HKCEM-style scheme and a keyword scheme. The bench loses its pull-the-legs, hold-the-abdomen and lift-too-early buttons; narrated.",
   "cast": [
     {
       "id": "patient",
@@ -56,18 +56,19 @@
       "hint": "Help, neonatal team, warm towels, position, consent.",
       "opts": [
         {
-          "t": "Obstetric and neonatal teams; resuscitaire warmed",
+          "t": "Obstetric and neonatal teams now, please; resuscitaire warmed.",
           "mark": "Calls obstetrics and neonatology"
         },
         {
-          "t": "Explain to the mother; bottom at the edge of the bed, legs supported (lithotomy)",
+          "t": "Mrs Kwan, your baby is coming bottom first. I'll help you to the edge of the bed with your legs supported.",
           "mark": "Positions the mother for breech delivery"
         },
         {
-          "t": "Encourage her to push with contractions; I will keep my hands off",
+          "t": "Push with each contraction; I'll keep my hands off and let the baby come.",
           "mark": "Hands-off approach explained"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "deliver",
@@ -100,15 +101,16 @@
       "hint": "Neonatal assessment, third stage, documentation.",
       "opts": [
         {
-          "t": "Baby to the neonatal team; active third stage with oxytocin 10 IU IM",
+          "t": "Baby to the neonatal team; active third stage with oxytocin 10 IU IM.",
           "fetch": "cart",
           "mark": "Neonatal handover and third stage"
         },
         {
-          "t": "Check hips later (breech is a risk factor for hip dysplasia)",
+          "t": "A hip ultrasound for the baby later: breech is a risk factor for hip dysplasia.",
           "mark": "Mentions hip ultrasound follow-up"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "viva",
@@ -236,5 +238,33 @@
       "why": "Cord prolapse risk.",
       "source": "RCOG GTG 20b"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Obstetric and neonatal teams now, please; resuscitaire warmed. Mrs Kwan, your baby is coming bottom first. I'll help you to the edge of the bed with your legs supported. Push with each contraction; I'll keep my hands off and let the baby come."
+    },
+    {
+      "at": "0:20",
+      "say": "Hands off the breech: she pushes, the buttocks and legs deliver. The back stays anterior; a warm towel round the body, holding the bony pelvis. The scapulae appear with the arms up: Løvset's, turning the body 180 degrees one way, then back, to bring each arm under the pubic arch. Let the body hang until the hairline shows. Then Mauriceau–Smellie–Veit: fingers on the cheekbones to flex the head, the other hand on the occiput, and lift slowly."
+    },
+    {
+      "at": "0:40",
+      "say": "Baby to the neonatal team; active third stage with oxytocin 10 IU IM. A hip ultrasound for the baby later: breech is a risk factor for hip dysplasia."
+    }
+  ],
+  "keywords": [
+    "obstetric",
+    "neonatal",
+    "edge of the bed",
+    "hands off",
+    "back stays anterior",
+    "bony pelvis",
+    "Løvset",
+    "hang",
+    "hairline",
+    "Mauriceau–Smellie–Veit",
+    "oxytocin 10 IU",
+    "hip"
   ]
 }

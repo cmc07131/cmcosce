@@ -139,19 +139,6 @@ function HandsOffStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
         >
           “PUSH WITH THIS CONTRACTION”
         </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="breech-pull"
-          onClick={() => {
-            upd({ pulledLegs: true })
-            buzz([60, 40, 60])
-            physical('You pull on the legs. The arms fly up beside the head.')
-            why('Never pull a breech: traction extends the arms and the head. Let her push it out.')
-          }}
-        >
-          PULL ON THE LEGS
-        </button>
       </div>
       <p className="io-small">{s >= 4 ? 'Delivered to the scapulae.' : 'Watch, and wait.'}</p>
       <NextButton onClick={next} testId="breech-next">
@@ -207,19 +194,6 @@ function ArmsStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
         <button type="button" className="tap io-mini" data-on={run.grip === 'pelvis' || undefined} data-testid="breech-grip-pelvis" onClick={() => (upd({ grip: 'pelvis' }), feel('Thumbs on the sacrum, fingers over the iliac crests: the bony pelvis.'))}>
           HOLD THE BONY PELVIS
         </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-on={run.grip === 'abdomen' || undefined}
-          data-testid="breech-grip-abdomen"
-          onClick={() => {
-            upd({ grip: 'abdomen' })
-            physical('Your hands squeeze round the soft abdomen.')
-            why('The liver and spleen are under your thumbs. Hold the bony pelvis.')
-          }}
-        >
-          HOLD ROUND THE ABDOMEN
-        </button>
       </div>
       <TouchPad
         svg={svg}
@@ -264,18 +238,6 @@ function HangStage({ run, upd, feel, physical, why, next }: Stage) {
       <div className="io-choices mt-2">
         <button type="button" className="tap io-mini" data-testid="breech-wait" onClick={() => (upd((r) => ({ hungS: r.hungS + 1 })), feel(run.hungS + 1 >= 3 ? 'The nape of the neck and the hairline appear under the pubis.' : 'The body hangs; the head flexes into the pelvis.'))}>
           WAIT A FEW SECONDS ({run.hungS})
-        </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="breech-lift"
-          onClick={() => {
-            upd({ heldUp: true })
-            physical('You lift the body straight up over her abdomen. The head extends.')
-            why('Lifting too early hyperextends the neck. Let it hang until the hairline shows.')
-          }}
-        >
-          LIFT THE BODY UP NOW
         </button>
       </div>
       <NextButton onClick={next} testId="breech-next">

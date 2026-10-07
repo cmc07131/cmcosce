@@ -34,7 +34,7 @@
       "text": "Episiotomy. HELPERR puts it in every sequence. RCOG uses it only to make room for internal manoeuvres, not in every case."
     }
   ],
-  "notes": "Checked against RCOG Green-top Guideline 42 (Shoulder dystocia, 2012, reviewed) and the ALSO (HELPERR) course.\n\nRecognise: the 'turtle sign' (the head retracts against the perineum) and failure of routine axial traction. State 'shoulder dystocia' aloud, call for help, note the time the head delivered. Avoid excessive or downward traction, fundal pressure and pulling on the neck.\n\nFirst: McRoberts (hyperflex the hips, thighs to the abdomen) with suprapubic pressure over the posterior aspect of the anterior shoulder (continuous, then rocking) — resolves most cases. Then internal manoeuvres or delivery of the posterior arm (RCOG gives no fixed order); rotational manoeuvres: Rubin II (behind the anterior shoulder), Woods' screw (in front of the posterior shoulder), reverse Woods'. All-fours (Gaskin) is an alternative, especially without an epidural. Third-line: deliberate clavicle fracture, Zavanelli (cephalic replacement), symphysiotomy.\n\nYour notes use HELPERR, which matches ALSO. Difference: episiotomy is not needed in every case; RCOG uses it only to make room for internal manoeuvres. Document times and manoeuvres; debrief; paediatric review for brachial plexus injury.",
+  "notes": "Checked against RCOG Green-top Guideline 42 (Shoulder dystocia, 2012, reviewed) and the ALSO (HELPERR) course.\n\nRecognise: the 'turtle sign' (the head retracts against the perineum) and failure of routine axial traction. State 'shoulder dystocia' aloud, call for help, note the time the head delivered. Avoid excessive or downward traction, fundal pressure and pulling on the neck.\n\nFirst: McRoberts (hyperflex the hips, thighs to the abdomen) with suprapubic pressure over the posterior aspect of the anterior shoulder (continuous, then rocking) — resolves most cases. Then internal manoeuvres or delivery of the posterior arm (RCOG gives no fixed order); rotational manoeuvres: Rubin II (behind the anterior shoulder), Woods' screw (in front of the posterior shoulder), reverse Woods'. All-fours (Gaskin) is an alternative, especially without an epidural. Third-line: deliberate clavicle fracture, Zavanelli (cephalic replacement), symphysiotomy.\n\nYour notes use HELPERR, which matches ALSO. Difference: episiotomy is not needed in every case; RCOG uses it only to make room for internal manoeuvres. Document times and manoeuvres; debrief; paediatric review for brachial plexus injury.\n\nPerfect script checked against RCOG Green-top 42, an HKCEM-style scheme and a keyword scheme. Removed pulling and fundal pressure; the bench loses its downward-traction and routine-episiotomy choices; narrated.",
   "cast": [
     {
       "id": "patient",
@@ -56,22 +56,12 @@
       "hint": "Name it, call for help, note the time, stop pushing.",
       "opts": [
         {
-          "t": "'This is a shoulder dystocia.' Call obstetrics, neonatology and anaesthetics; note the time of head delivery",
+          "t": "This is a shoulder dystocia. Call obstetrics, neonatology and anaesthetics, please, and note the time the head delivered.",
           "mark": "States shoulder dystocia, calls for help, notes the time"
         },
         {
-          "t": "Ask her to stop pushing for now",
+          "t": "Stop pushing for now, please.",
           "mark": "Stops maternal pushing during manoeuvres"
-        },
-        {
-          "t": "Pull harder on the head",
-          "trap": "critical",
-          "r": "Excessive traction causes brachial plexus injury."
-        },
-        {
-          "t": "Push on the top of the uterus",
-          "trap": "critical",
-          "r": "Fundal pressure worsens impaction and risks uterine rupture."
         }
       ]
     },
@@ -106,15 +96,15 @@
       "hint": "Watch for PPH and tears; document; baby review; debrief.",
       "opts": [
         {
-          "t": "Anticipate PPH and perineal tears; active third stage",
+          "t": "Expect a PPH and perineal tears: an active third stage.",
           "mark": "Anticipates maternal complications"
         },
         {
-          "t": "Document times, manoeuvres, who was present, which shoulder was anterior",
+          "t": "Document the times, the manoeuvres, who was present, and which shoulder was anterior.",
           "mark": "Documents contemporaneously"
         },
         {
-          "t": "Paediatric review for brachial plexus injury and fractures; debrief the parents",
+          "t": "Paediatric review for brachial plexus injury and fractures; debrief the parents.",
           "mark": "Neonatal review and parent debrief"
         }
       ]
@@ -246,5 +236,35 @@
       "why": "Clinical and medicolegal importance.",
       "source": "RCOG GTG 42"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "This is a shoulder dystocia. Call obstetrics, neonatology and anaesthetics, please, and note the time the head delivered. Stop pushing for now, please."
+    },
+    {
+      "at": "0:20",
+      "say": "Bed flat, one helper on each leg: McRoberts, thighs hyperflexed to her abdomen. Suprapubic pressure from the side of the baby's back, continuous then rocking, with gentle axial traction only. Still stuck: my hand in, deliver the posterior arm, or rotate: Rubin II behind the anterior shoulder, Woods' screw in front of the posterior shoulder. Delivered: baby to the resuscitaire."
+    },
+    {
+      "at": "0:40",
+      "say": "Expect a PPH and perineal tears: an active third stage. Document the times, the manoeuvres, who was present, and which shoulder was anterior. Paediatric review for brachial plexus injury and fractures; debrief the parents."
+    }
+  ],
+  "keywords": [
+    "shoulder dystocia",
+    "call obstetrics",
+    "time",
+    "stop pushing",
+    "McRoberts",
+    "suprapubic pressure",
+    "axial traction",
+    "posterior arm",
+    "Rubin",
+    "Woods",
+    "PPH",
+    "document",
+    "brachial plexus",
+    "debrief"
   ]
 }
