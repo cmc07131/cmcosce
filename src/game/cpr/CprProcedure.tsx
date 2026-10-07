@@ -217,16 +217,6 @@ export function CprProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
               </svg>
             </TouchPad>
             <div className="io-choices mt-2">
-              {pose === 'drowning' && step === 'Airway' && (
-                <>
-                  <button type="button" className="tap io-mini" data-testid="cpr-thrusts" onClick={() => (upd({ thrusts: true }), buzz(40), physical('Abdominal thrusts: more vomit, no water.'), why('Do not try to drain the lungs: it wastes time and brings up stomach contents.'))}>
-                    ABDOMINAL THRUSTS TO EMPTY THE LUNGS
-                  </button>
-                  <button type="button" className="tap io-mini" data-testid="cpr-collar" onClick={() => (upd({ collar: true }), why('A pool dive injury is possible, but airway and breaths come first; manual stabilisation if you suspect it.'))}>
-                    RIGID COLLAR BEFORE ANYTHING ELSE
-                  </button>
-                </>
-              )}
               {pose === 'drowning' && step === 'Rescue breaths' &&
                 breathButton(`SQUEEZE: RESCUE BREATH (${run.rescue.length})`, () => {
                   upd((r) => ({ rescue: [...r.rescue, performance.now()] }))

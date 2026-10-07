@@ -4,12 +4,13 @@
   "title": "Drowning",
   "type": "resus",
   "time": 420,
-  "stem": "Resus 2. A 16-year-old boy was pulled from a public pool after an unknown time under water. The lifeguard started CPR. He arrives with CPR in progress; the monitor shows asystole. Temperature 35.0 °C.",
+  "stem": "Resus 2. A 16-year-old boy was pulled from a public pool after an unknown time under water. The lifeguard started CPR. He arrives with CPR in progress; the monitor shows asystole. Temperature 35.5 °C.",
   "phases": [
     {
-      "title": "History",
-      "goal": "What does the lifeguard know?",
+      "title": "Take over",
+      "goal": "Lead the team; what does the lifeguard know?",
       "steps": [
+        "lead",
         "history"
       ]
     },
@@ -51,14 +52,14 @@
   "review": [
     {
       "tag": "differs",
-      "text": "Initial rescue breaths. Your notes give 2, or 3–5. ERC and RCUK give 5 before compressions (AHA gives 2). The station scores 5."
+      "text": "Initial rescue breaths. ERC and RCUK: 5 before compressions. AHA (Hong Kong BLS) says to start with ventilation, giving 2 breaths in the standard sequence. Five breaths satisfy both; your notes say 2 or 3–5."
     },
     {
       "tag": "outdated",
-      "text": "After ROSC. Your notes say 'therapeutic hypothermia'. Current guidance is fever prevention: keep a comatose patient at 37.5 °C or below for 36–72 hours, and do not actively rewarm mild hypothermia (32–36 °C)."
+      "text": "After ROSC. Your notes say 'therapeutic hypothermia'. Current guidance (AHA 2025, ERC–ESICM 2025) prevents fever, 37.5 °C or less, and does not actively rewarm mild hypothermia."
     }
   ],
-  "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2025 ALS and ERC–ESICM 2025 post-resuscitation care, and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, actively prevent fever: 37.5 °C or less for 36–72 hours in a comatose patient (ERC–ESICM / RCUK 2025; 2021 used 37.7 °C). Your notes say 'therapeutic hypothermia'; current guidance moved from routine cooling to 32–36 °C toward fever prevention, and does not actively rewarm mild hypothermia (32–36 °C).\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.",
+  "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2025 ALS and ERC–ESICM 2025 post-resuscitation care, and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, actively prevent fever: 37.5 °C or less for 36–72 hours in a comatose patient (ERC–ESICM / RCUK 2025; 2021 used 37.7 °C). Your notes say 'therapeutic hypothermia'; current guidance moved from routine cooling to 32–36 °C toward fever prevention, and does not actively rewarm mild hypothermia (32–36 °C).\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.\n\nPerfect script checked against the ERC drowning algorithm, an AHA post-arrest checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (wrong drugs and doses, routine cooling, routine antibiotics, discharge) and the CPR bench's abdominal-thrust and collar-first buttons. Added: taking over the team, post-arrest targets. The temperature is now 35.5 °C so the adrenaline interval is unambiguous.",
   "cast": [
     {
       "id": "patient",
@@ -82,7 +83,7 @@
     "dbp": 0,
     "spo2": 0,
     "rr": 0,
-    "temp": 35.0,
+    "temp": 35.5,
     "rhythm": "asystole",
     "effects": [
       {
@@ -107,6 +108,20 @@
     ]
   },
   "steps": [
+    {
+      "id": "lead",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Take over",
+      "lang": "en",
+      "hint": "Lead; keep CPR going; monitor, suction, warming.",
+      "opts": [
+        {
+          "t": "I'm leading. Keep the CPR going. Pads and the monitor on, suction ready, the airway trolley, and a core temperature probe with a warm-air blanket.",
+          "mark": "Leads the team: monitor, suction, airway kit, temperature"
+        }
+      ]
+    },
     {
       "id": "history",
       "kind": "history",
@@ -170,17 +185,18 @@
       "hint": "IV or IO access.",
       "opts": [
         {
-          "t": "IV or IO access now.",
+          "t": "IV or IO access now, please.",
           "mark": "IV or IO access"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "adrenaline",
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Non-shockable: adrenaline now (temperature 35 °C).",
+      "hint": "Non-shockable: adrenaline now; at 35.5 °C the usual interval.",
       "confirm": "Give",
       "opts": [
         {
@@ -192,22 +208,6 @@
           "early": "Check the rhythm first.",
           "scene": "adrenaline",
           "mark": "Adrenaline at the right interval for his temperature"
-        },
-        {
-          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 0.1 mg IV",
-          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
-          "dose": "0.1 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 1 mg IV/IO every 3–5 minutes."
-        },
-        {
-          "t": "Amiodarone 300 mg IV",
-          "drug": "Amiodarone",
-          "dose": "300 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Asystole is non-shockable: amiodarone is for VF/pulseless VT after the third shock."
         }
       ]
     },
@@ -237,7 +237,7 @@
       "hint": "After the adrenaline and the next cycle.",
       "opts": [
         {
-          "t": "Next rhythm check: organised rhythm with a pulse",
+          "t": "Rhythm check: an organised rhythm with a femoral pulse: ROSC.",
           "scene": "rosc",
           "mark": "Recognises ROSC",
           "r": "Sinus tachycardia 118 with a palpable femoral pulse.",
@@ -281,20 +281,19 @@
       "hint": "Temperature and the stomach.",
       "opts": [
         {
-          "t": "Prevent fever: 37.5 °C or less for 36–72 hours",
+          "t": "Prevent fever: keep him at 37.5 °C or less for 36 to 72 hours; don't actively rewarm a mild hypothermia.",
+          "when": "rosc",
+          "early": "After ROSC.",
           "mark": "Post-arrest temperature control (prevent fever)"
         },
         {
-          "t": "Keep him at 32 °C for 24 hours routinely",
-          "trap": true,
-          "r": "Current post-arrest guidance prevents fever rather than routinely cooling to 32–36."
-        },
-        {
-          "t": "Start IV antibiotics routinely for pool water",
-          "trap": true,
-          "r": "Only for grossly contaminated water or signs of infection."
+          "t": "Post-arrest targets: SpO2 92 to 98%, normal CO2, MAP at least 65, and glucose control.",
+          "when": "rosc",
+          "early": "After ROSC.",
+          "mark": "Post-arrest oxygen, CO2, pressure and glucose targets"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "ngt",
@@ -338,7 +337,8 @@
           },
           {
             "t": "Glucose",
-            "r": "11.2 mmol/L."
+            "r": "11.2 mmol/L.",
+            "mark": "Checks glucose"
           }
         ]
       }
@@ -351,14 +351,9 @@
       "hint": "Paediatric or adult ICU; talk to the family.",
       "opts": [
         {
-          "t": "ICU: 16, drowning, 15 min CPR, ROSC, ventilated on PEEP 10, FiO2 1.0",
+          "t": "ICU: Ka-ho, 16, drowned in a pool, about 15 minutes of CPR, asystole, ROSC after adrenaline. Intubated and ventilated on PEEP 10 and FiO2 1.0. He needs a bed.",
           "mark": "Refers to ICU with a clear summary",
           "r": "ICU: Coming down now."
-        },
-        {
-          "t": "Discharge after 6 hours if he wakes",
-          "trap": "critical",
-          "r": "He needed CPR and is ventilated. ICU."
         }
       ]
     },
@@ -490,6 +485,73 @@
       ],
       "why": "Aspiration and surfactant loss cause ARDS-like changes.",
       "source": "ERC 2021"
+    }
+  ],
+  "keywords": [
+    "leading",
+    "suction",
+    "core temperature",
+    "diving",
+    "hypoxic arrest",
+    "five rescue breaths",
+    "30:2",
+    "asystole",
+    "non-shockable",
+    "IV or IO",
+    "adrenaline 1 mg",
+    "every 3 to 5 minutes",
+    "no abdominal thrusts",
+    "intubate early",
+    "capnography",
+    "ROSC",
+    "PEEP",
+    "6 to 8 mL per kg",
+    "prevent fever",
+    "37.5",
+    "MAP at least 65",
+    "nasogastric tube",
+    "aspiration",
+    "ICU"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "I'm leading. Keep the CPR going. Pads and the monitor on, suction ready, the airway trolley, and a core temperature probe with a warm-air blanket."
+    },
+    {
+      "at": "0:10",
+      "say": "How long was he under? Did he dive in or hit anything? What did you do and when?",
+      "do": "About 5 minutes at the bottom of the deep end; no diving, no marks; rescue breaths and CPR at once, about 15 minutes."
+    },
+    {
+      "at": "0:30",
+      "say": "This is a hypoxic arrest. No diving or injury, so no spinal precautions. Suction the airway, open it, and five rescue breaths with bag-mask and oxygen; then 30:2. No abdominal thrusts to drain water.",
+      "do": "Suction; five breaths; compressions; rhythm: asystole, non-shockable."
+    },
+    {
+      "at": "1:10",
+      "say": "Asystole: non-shockable. IV or IO access now. Adrenaline 1 mg IV now, then every 3 to 5 minutes: at 35.5 degrees, the usual interval."
+    },
+    {
+      "at": "1:30",
+      "say": "Intubate early: tube through the cords, cuff up, waveform capnography. Rhythm check: an organised rhythm with a femoral pulse: ROSC."
+    },
+    {
+      "at": "2:00",
+      "say": "Ventilator: volume control, 6 to 8 mL per kg, a rate for normocapnia, PEEP 8 to 10 for the drowned lungs, FiO2 1.0 and titrate."
+    },
+    {
+      "at": "2:20",
+      "say": "Prevent fever: keep him at 37.5 °C or less for 36 to 72 hours; don't actively rewarm a mild hypothermia. Post-arrest targets: SpO2 92 to 98%, normal CO2, MAP at least 65, and glucose control. A nasogastric tube to decompress the stomach."
+    },
+    {
+      "at": "2:45",
+      "say": "Chest X-ray, arterial gas, 12-lead ECG and glucose.",
+      "do": "Aspiration and non-cardiogenic oedema; pH 7.08, lactate 9; sinus tachycardia, normal QTc; glucose 11.2."
+    },
+    {
+      "at": "3:05",
+      "say": "ICU: Ka-ho, 16, drowned in a pool, about 15 minutes of CPR, asystole, ROSC after adrenaline. Intubated and ventilated on PEEP 10 and FiO2 1.0. He needs a bed."
     }
   ]
 }

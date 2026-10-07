@@ -37,7 +37,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Glasgow Coma Scale teaching (Teasdale et al., Lancet Neurol 2014; glasgowcomascale.org), NICE NG232 (Head injury, 2023) and ATLS 11th edition.\n\nThe 2014 approach: check for factors that interfere (intubation, sedation, dysphasia, injury), observe first, then stimulate: spoken, then physical. Physical stimuli: fingertip (nail-bed) pressure peripherally, trapezius pinch or supraorbital notch pressure centrally. Sternal rub is not recommended (bruising, poorly standardised). Report each component (E, V, M), not just the total; score as 'NT' if a component cannot be tested, for example V when intubated.\n\nMotor: 6 obeys, 5 localises (hand crosses above the clavicle toward the stimulus), 4 normal flexion (withdrawal), 3 abnormal flexion (decorticate: slow, stereotyped, arm across the chest, wrist flexed), 2 extension (decerebrate: arm straightens and turns in), 1 none. Use the best response of either arm.\n\nDecorticate posturing points to a lesion above the red nucleus (hemispheres, internal capsule, thalamus). Decerebrate posturing points to midbrain or upper pons compression, below the red nucleus: worse. A change from flexion to extension, a falling GCS or a new unequal pupil means herniation.\n\nYour notes list decerebrate and decorticate under ATLS without detail; nothing conflicts.",
+  "notes": "Checked against the Glasgow Coma Scale teaching (Teasdale et al., Lancet Neurol 2014; glasgowcomascale.org), NICE NG232 (Head injury, 2023) and ATLS 11th edition.\n\nThe 2014 approach: check for factors that interfere (intubation, sedation, dysphasia, injury), observe first, then stimulate: spoken, then physical. Physical stimuli: fingertip (nail-bed) pressure peripherally, trapezius pinch or supraorbital notch pressure centrally. Sternal rub is not recommended (bruising, poorly standardised). Report each component (E, V, M), not just the total; score as 'NT' if a component cannot be tested, for example V when intubated.\n\nMotor: 6 obeys, 5 localises (hand crosses above the clavicle toward the stimulus), 4 normal flexion (withdrawal), 3 abnormal flexion (decorticate: slow, stereotyped, arm across the chest, wrist flexed), 2 extension (decerebrate: arm straightens and turns in), 1 none. Use the best response of either arm.\n\nDecorticate posturing points to a lesion above the red nucleus (hemispheres, internal capsule, thalamus). Decerebrate posturing points to midbrain or upper pons compression, below the red nucleus: worse. A change from flexion to extension, a falling GCS or a new unequal pupil means herniation.\n\nYour notes list decerebrate and decorticate under ATLS without detail; nothing conflicts.\n\nPerfect script checked against the GCS 2014 structured approach, an ATLS checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (sternal rub, calling flexion localising, lumbar puncture, observing). Added: command first and plantars scored, plantars and glucose in the report.",
   "cast": [
     {
       "id": "patient",
@@ -73,7 +73,8 @@
           "mark": "Asks the previous GCS to judge the trend",
           "r": "Nurse Ma: GCS 12 on arrival 20 minutes ago."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "gcs",
@@ -97,15 +98,9 @@
           },
           {
             "t": "Fingertip pressure on the nail bed for 10 seconds",
-            "r": "His eyes open briefly: E2.",
+            "r": "His eyes open briefly to pressure: E2.",
             "mark": "Uses a standard peripheral pressure stimulus",
             "do": "press nails,pulp"
-          },
-          {
-            "t": "Rub his sternum hard with your knuckles",
-            "trap": true,
-            "r": "Sternal rub bruises and is not a standardised stimulus. Use trapezius pinch or supraorbital pressure.",
-            "do": "press sternum"
           }
         ],
         "Verbal": [
@@ -120,7 +115,8 @@
           {
             "t": "Ask him to squeeze your fingers and let go",
             "r": "No response to command.",
-            "do": "say squeeze-fingers"
+            "do": "say squeeze-fingers",
+            "mark": "Tests motor to command first"
           },
           {
             "t": "Trapezius pinch (central stimulus)",
@@ -156,7 +152,8 @@
           {
             "t": "Plantar responses",
             "r": "Both upgoing.",
-            "do": "orange sole"
+            "do": "orange sole",
+            "mark": "Checks plantar responses"
           },
           {
             "t": "Capillary glucose",
@@ -176,23 +173,23 @@
       "hint": "Report components and the total, the posture and what it means, and the pupils.",
       "opts": [
         {
-          "t": "GCS E2 V2 M3 = 7, down from 12",
+          "t": "GCS E2 V2 M3: 7, down from 12 on arrival.",
           "mark": "Reports by component with the total and the trend"
         },
         {
-          "t": "Abnormal flexion (decorticate), now extension (decerebrate): M2, GCS 6",
+          "t": "He had abnormal flexion, decorticate; now extension, decerebrate: M2, so GCS 6. That's deterioration.",
           "mark": "Recognises the change from flexion to extension as deterioration"
         },
         {
-          "t": "Right fixed, dilated pupil: right-sided mass lesion with uncal herniation",
+          "t": "A right fixed, dilated pupil with a right temporal injury: a right-sided mass lesion with uncal herniation.",
           "mark": "Interprets the fixed pupil as ipsilateral herniation"
         },
         {
-          "t": "GCS 7, he localises",
-          "trap": true,
-          "r": "A slow flexion of the arm across the chest is abnormal flexion (M3), not localising (M5)."
+          "t": "Both plantars upgoing; glucose 5.9.",
+          "mark": "Reports plantars and glucose"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "act",
@@ -203,7 +200,7 @@
       "confirm": "Do these",
       "opts": [
         {
-          "t": "Call the anaesthetist and prepare to intubate (GCS 8 or less)",
+          "t": "Call the anaesthetist and prepare to intubate: GCS 8 or less",
           "need": true,
           "mark": "Secures the airway: GCS 8 or less"
         },
@@ -214,7 +211,7 @@
           "mark": "Hyperosmolar therapy for herniation"
         },
         {
-          "t": "Head up 30 degrees, avoid hypoxia and hypotension",
+          "t": "Head up 30 degrees; avoid hypoxia and hypotension",
           "need": true,
           "mark": "Neuroprotective measures"
         },
@@ -222,16 +219,6 @@
           "t": "Urgent CT head and C-spine; call neurosurgery",
           "need": true,
           "mark": "Urgent CT and neurosurgical referral"
-        },
-        {
-          "t": "Lumbar puncture to exclude meningitis",
-          "trap": "critical",
-          "r": "A fixed pupil means a mass effect; lumbar puncture can cause coning."
-        },
-        {
-          "t": "Observe and repeat GCS in an hour",
-          "trap": "critical",
-          "r": "He is herniating. This is an emergency."
         }
       ]
     },
@@ -392,6 +379,59 @@
       ],
       "why": "Subdural blood spreads under the dura across sutures; extradural blood is limited by them.",
       "source": "ATLS 11th edition"
+    }
+  ],
+  "keywords": [
+    "sedatives",
+    "on arrival",
+    "observe",
+    "spoken stimulus",
+    "fingertip pressure",
+    "trapezius pinch",
+    "E2 V2 M3",
+    "abnormal flexion",
+    "decorticate",
+    "extension",
+    "decerebrate",
+    "fixed, dilated pupil",
+    "uncal herniation",
+    "GCS 8 or less",
+    "hypertonic saline",
+    "head up 30 degrees",
+    "CT head",
+    "neurosurgery",
+    "acute subdural"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Before I score him: any sedatives, opioids or alcohol? Any intubation? What was his GCS on arrival?",
+      "do": "No drugs; smells of alcohol but was talking at first; GCS 12 on arrival, his previous GCS."
+    },
+    {
+      "at": "0:15",
+      "say": "I observe first: eyes closed, no spontaneous movement. Spoken stimulus: 'Mr Tang, open your eyes.' Nothing. Fingertip pressure on the nail bed for 10 seconds: eyes open briefly: E2."
+    },
+    {
+      "at": "0:40",
+      "say": "Name, place, month? He moans, no words: V2. 'Squeeze my fingers': nothing. Trapezius pinch: both arms flex slowly across the chest, wrists curled: abnormal flexion, decorticate: M3."
+    },
+    {
+      "at": "1:05",
+      "say": "Pupils: right 6 mm and unreactive, left 3 mm and brisk. Boggy swelling over the right temple. Plantars both upgoing. Glucose 5.9."
+    },
+    {
+      "at": "1:25",
+      "say": "GCS E2 V2 M3: 7, down from 12 on arrival. A right fixed, dilated pupil with a right temporal injury: a right-sided mass lesion with uncal herniation."
+    },
+    {
+      "at": "1:45",
+      "say": "Reassessing: both arms now straighten and turn in: extension, decerebrate: M2, so GCS 6. That's deterioration."
+    },
+    {
+      "at": "2:00",
+      "say": "Call the anaesthetist and prepare to intubate: GCS 8 or less. Hypertonic saline 3% or mannitol 20% now. Head up 30 degrees; avoid hypoxia and hypotension. Urgent CT head and C-spine; call neurosurgery.",
+      "do": "CT: right acute subdural haematoma with midline shift."
     }
   ]
 }
