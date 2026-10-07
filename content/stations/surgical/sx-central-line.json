@@ -24,12 +24,13 @@
       "title": "Check understanding",
       "goal": "What if it goes wrong?",
       "steps": [
-        "check"
+        "check",
+        "close"
       ]
     }
   ],
   "review": [],
-  "notes": "Checked against NICE TA49 (ultrasound guidance for central venous access), the Association of Anaesthetists 2016 safe vascular access guideline, and the NHS 'Safety Standards for Invasive Procedures' (NatSSIPs 2023).\n\nIndications: vasopressors, poor peripheral access, CVP/ScvO2, irritant drugs. Relative contraindications: overlying infection, thrombosis, coagulopathy (weigh up), contralateral pneumothorax. Steps: consent (or best interests), NatSSIPs checklist and time-out, full barrier precautions (cap, mask, sterile gown and gloves, full-length drape), 2% chlorhexidine in 70% alcohol allowed to dry, head-down tilt, real-time ultrasound (identify the IJV lateral to the carotid, compressible, non-pulsatile; confirm needle tip in the vein), Seldinger technique (needle, wire never let go, confirm the wire in the vein on ultrasound, nick, dilate, catheter to about 15 cm on the right), aspirate and flush every lumen, secure, dressing, chest X-ray (tip at the cavo-atrial junction, no pneumothorax), document, and count the wire out. Complications: arterial puncture/cannulation (do not dilate an artery — leave the catheter and call vascular), pneumothorax, air embolism (head down, occlude hubs), arrhythmia (withdraw wire), lost guidewire, infection, thrombosis.\n\nYour notes (checklist, ultrasound, Seldinger mnemonic, complications, depth 15–16 cm right) match this.",
+  "notes": "Checked against NICE TA49 (ultrasound guidance for central venous access), the Association of Anaesthetists 2016 safe vascular access guideline, and the NHS 'Safety Standards for Invasive Procedures' (NatSSIPs 2023).\n\nIndications: vasopressors, poor peripheral access, CVP/ScvO2, irritant drugs. Relative contraindications: overlying infection, thrombosis, coagulopathy (weigh up), contralateral pneumothorax. Steps: consent (or best interests), NatSSIPs checklist and time-out, full barrier precautions (cap, mask, sterile gown and gloves, full-length drape), 2% chlorhexidine in 70% alcohol allowed to dry, head-down tilt, real-time ultrasound (identify the IJV lateral to the carotid, compressible, non-pulsatile; confirm needle tip in the vein), Seldinger technique (needle, wire never let go, confirm the wire in the vein on ultrasound, nick, dilate, catheter to about 15 cm on the right), aspirate and flush every lumen, secure, dressing, chest X-ray (tip at the cavo-atrial junction, no pneumothorax), document, and count the wire out. Complications: arterial puncture/cannulation (do not dilate an artery — leave the catheter and call vascular), pneumothorax, air embolism (head down, occlude hubs), arrhythmia (withdraw wire), lost guidewire, infection, thrombosis.\n\nYour notes (checklist, ultrasound, Seldinger mnemonic, complications, depth 15–16 cm right) match this.\n\nPerfect script checked against NICE TA49 and NatSSIPs, an HKCEM-style scheme and a keyword scheme. Removed the landmark option and unhelpful replies; added a close.",
   "cast": [
     {
       "id": "junior",
@@ -54,11 +55,6 @@
               "r": "Hitting the carotid.",
               "mood": -2,
               "mark": "Sets objectives and explores concerns"
-            },
-            {
-              "t": "Just watch closely.",
-              "r": "OK.",
-              "mood": 1
             }
           ]
         }
@@ -110,11 +106,6 @@
           "t": "Chest X-ray: tip at the cavo-atrial junction, no pneumothorax; document",
           "n": 8,
           "mark": "Confirms position and documents"
-        },
-        {
-          "t": "Landmark technique without ultrasound to save time",
-          "trap": "critical",
-          "r": "NICE recommends ultrasound guidance; it cuts arterial puncture and pneumothorax."
         }
       ]
     },
@@ -131,14 +122,30 @@
           "opts": [
             {
               "t": "What do you think you should do?",
-              "r": "Leave the catheter in, don't pull it, call vascular?",
+              "r": "Leave the catheter in, don't pull it, and call vascular. Then you'd confirm with a gas or a transduced trace.",
               "mood": -2,
               "mark": "Checks understanding of arterial cannulation"
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Close",
+      "hint": "Feedback and the plan.",
+      "mood": 2,
+      "turns": [
+        {
+          "line": "Thanks. Anything else?",
+          "opts": [
             {
-              "t": "Pull it out and press hard.",
-              "r": "OK.",
-              "mood": 1
+              "t": "You'll do the next one under my supervision. Remember: ultrasound always, never let go of the wire, count it out, and an X-ray before using the line.",
+              "r": "Got it.",
+              "mood": -1,
+              "mark": "Summarises key points and agrees supervised practice"
             }
           ]
         }
@@ -270,5 +277,53 @@
       "why": "Compress to confirm.",
       "source": "Anatomy"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Great start. By the end you'll know each step and the safety checks, and practise on the manikin. What worries you most?",
+      "do": "Hitting the carotid."
+    },
+    {
+      "at": "0:20",
+      "say": "Consent or best-interests decision; NatSSIPs checklist and time-out. Head-down tilt, head turned slightly left; ultrasound IJV lateral to carotid, compressible. Full barrier precautions; chlorhexidine 2%/alcohol, allow to dry; full drape."
+    },
+    {
+      "at": "0:40",
+      "say": "Local anaesthetic; needle under real-time ultrasound into the vein; dark non-pulsatile blood. Pass the wire, never letting go; confirm it in the vein on ultrasound. Nick the skin, dilate briefly, railroad the catheter to ~15 cm."
+    },
+    {
+      "at": "1:00",
+      "say": "Remove the wire and count it out; aspirate and flush all lumens; secure and dress. Chest X-ray: tip at the cavo-atrial junction, no pneumothorax; document."
+    },
+    {
+      "at": "1:20",
+      "say": "What do you think you should do?",
+      "do": "Leave the catheter in, don't pull it, and call vascular. Then you'd confirm with a gas or a transduced trace."
+    },
+    {
+      "at": "1:40",
+      "say": "You'll do the next one under my supervision. Remember: ultrasound always, never let go of the wire, count it out, and an X-ray before using the line.",
+      "do": "Got it."
+    }
+  ],
+  "keywords": [
+    "worries",
+    "consent",
+    "checklist",
+    "head-down",
+    "ultrasound",
+    "compressible",
+    "barrier precautions",
+    "chlorhexidine",
+    "real-time",
+    "never letting go",
+    "dilate",
+    "15 cm",
+    "count it out",
+    "flush",
+    "cavo-atrial junction",
+    "pneumothorax",
+    "never let go of the wire"
   ]
 }

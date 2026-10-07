@@ -202,18 +202,10 @@ function InciseStage({ run, upd, feel, physical, why, next }: Stage) {
   const svg = useRef<SVGSVGElement>(null)
   const start = useRef<Pt | null>(null)
   const [line, setLine] = useState<{ from: Pt; to: Pt } | null>(run.incision)
-  const [deep, setDeep] = useState(false)
+  const deep = false
   return (
     <>
-      <p className="io-lede">Choose your depth, then draw the incision with the scalpel across the mark.</p>
-      <div className="io-choices">
-        <button type="button" className="tap io-mini" data-on={!deep || undefined} data-testid="cutdown-skin" onClick={() => setDeep(false)}>
-          THROUGH THE SKIN ONLY
-        </button>
-        <button type="button" className="tap io-mini" data-on={deep || undefined} data-testid="cutdown-deep" onClick={() => setDeep(true)}>
-          ONE DEEP CUT DOWN TO BONE
-        </button>
-      </div>
+      <p className="io-lede">Draw a transverse incision through the skin with the scalpel, across the mark.</p>
       <TouchPad
         svg={svg}
         aspect="200 / 150"

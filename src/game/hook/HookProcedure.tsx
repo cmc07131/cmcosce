@@ -141,19 +141,6 @@ function PrepareStage({ run, upd, feel, physical, why, next }: Stage) {
         <button type="button" className="tap io-mini" data-on={run.eyes || undefined} data-testid="hook-eyes" onClick={() => (upd({ eyes: true }), feel('Glasses on: you, the student, and the patient.'))}>
           {run.eyes ? 'EYE PROTECTION ✓' : 'EYE PROTECTION FOR EVERYONE'}
         </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="hook-yank"
-          onClick={() => {
-            upd(backOut(run))
-            buzz([60, 40, 60])
-            physical('You pull it straight back. The barb catches and rips a ragged hole in the pulp.')
-            why('A barbed hook does not come out the way it went in. Advance and cut, or the string-yank technique.')
-          }}
-        >
-          PULL IT STRAIGHT BACK OUT
-        </button>
       </div>
       <NextButton onClick={next} testId="hook-next">
         Advance

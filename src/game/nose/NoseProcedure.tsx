@@ -285,23 +285,6 @@ function LookStage({ run, runRef, upd, feel, physical, why, next, cautery }: Sta
       >
         <Nostril run={run} svgRef={svg} />
       </TouchPad>
-      {cautery && (
-        <div className="io-choices mt-2">
-          <button
-            type="button"
-            className="tap io-mini"
-            data-testid="nose-both"
-            onClick={() => {
-              upd({ bothSides: true })
-              buzz(40)
-              physical('You cauterise the right side of the septum as well.')
-              why('Cautery on both sides of the septum at once risks a perforation. One side only.')
-            }}
-          >
-            CAUTERISE THE OTHER SIDE OF THE SEPTUM TOO
-          </button>
-        </div>
-      )}
       <NextButton onClick={next} testId="nose-next">
         {cautery ? 'Pack' : 'Cautery'}
       </NextButton>

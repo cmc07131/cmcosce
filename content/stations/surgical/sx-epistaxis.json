@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the ENT UK/ British Rhinological Society epistaxis guideline (2017 consensus) and NICE CKS.\n\nFirst aid: sit up, lean forward, firm pressure on the soft part of the nose for 10–15 minutes, ice to the mouth; assess ABC and haemodynamics, check anticoagulants and bloods (FBC; clotting if on warfarin). Examine with a headlight and speculum after suction; apply topical vasoconstrictor/anaesthetic (co-phenylcaine). If a bleeding point is seen anteriorly (Little's area): silver nitrate cautery (one side of the septum only, 10 seconds, not on active bleeding). If not controlled: anterior packing (nasal tampon such as Merocel or Rapid Rhino inserted along the floor of the nose, parallel to the hard palate) and ENT referral. Posterior bleed (continuing bleeding into the pharynx despite anterior packing): Foley catheter (12–14 F) passed to the nasopharynx, inflated with water and pulled forward, plus anterior packing; admit under ENT. Tranexamic acid (topical or oral) may be used. Anticoagulants: withhold with specialist input, do not routinely reverse unless life-threatening. Do not pack with a suspected base-of-skull fracture. Antibiotics are not routinely needed for anterior packs.\n\nYour notes match this well (Merocel technique, co-phenylcaine, Foley for posterior bleeds).",
+  "notes": "Checked against the ENT UK/ British Rhinological Society epistaxis guideline (2017 consensus) and NICE CKS.\n\nFirst aid: sit up, lean forward, firm pressure on the soft part of the nose for 10–15 minutes, ice to the mouth; assess ABC and haemodynamics, check anticoagulants and bloods (FBC; clotting if on warfarin). Examine with a headlight and speculum after suction; apply topical vasoconstrictor/anaesthetic (co-phenylcaine). If a bleeding point is seen anteriorly (Little's area): silver nitrate cautery (one side of the septum only, 10 seconds, not on active bleeding). If not controlled: anterior packing (nasal tampon such as Merocel or Rapid Rhino inserted along the floor of the nose, parallel to the hard palate) and ENT referral. Posterior bleed (continuing bleeding into the pharynx despite anterior packing): Foley catheter (12–14 F) passed to the nasopharynx, inflated with water and pulled forward, plus anterior packing; admit under ENT. Tranexamic acid (topical or oral) may be used. Anticoagulants: withhold with specialist input, do not routinely reverse unless life-threatening. Do not pack with a suspected base-of-skull fracture. Antibiotics are not routinely needed for anterior packs.\n\nYour notes match this well (Merocel technique, co-phenylcaine, Foley for posterior bleeds).\n\nPerfect script checked against ENT UK epistaxis guidance, an HKCEM-style scheme and a keyword scheme. Removed the bench's cauterise-both-sides button; narrated.",
   "cast": [
     {
       "id": "patient",
@@ -73,15 +73,15 @@
       "hint": "ENT review, admission if packed and elderly/anticoagulated; posterior bleed plan; anticoagulant decision.",
       "opts": [
         {
-          "t": "ENT: packed left epistaxis on apixaban — admission and pack removal in 24–48 h",
+          "t": "ENT: Mr Lui, 68, a left anterior epistaxis on apixaban, packed. He needs admission, and pack removal in 24 to 48 hours.",
           "mark": "ENT referral and admission"
         },
         {
-          "t": "Withhold apixaban with haematology/cardiology input; no routine reversal",
+          "t": "Withhold the apixaban with haematology or cardiology input; no routine reversal.",
           "mark": "Appropriate anticoagulant decision"
         },
         {
-          "t": "If posterior bleeding persists: Foley catheter posterior pack plus anterior pack",
+          "t": "If it bleeds posteriorly: a Foley catheter posterior pack plus an anterior pack.",
           "mark": "Knows posterior packing"
         }
       ]
@@ -212,5 +212,30 @@
       "why": "Weigh thrombotic risk.",
       "source": "ENT UK"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Sit forward, pinch the soft part of the nose for 10 to 15 minutes, ice in the mouth. Pulse and blood pressure, FBC; he's on apixaban. Headlight, suction, co-phenylcaine spray, speculum: a bleeding point in Little's area. Silver nitrate, ringing the vessel, one side of the septum only, 10 seconds. It keeps bleeding, so I explain and pack: a nasal tampon along the floor of the nose, parallel to the hard palate, not upwards; expand it with water. Check the throat for posterior bleeding. Tape the string and document."
+    },
+    {
+      "at": "0:20",
+      "say": "ENT: Mr Lui, 68, a left anterior epistaxis on apixaban, packed. He needs admission, and pack removal in 24 to 48 hours. Withhold the apixaban with haematology or cardiology input; no routine reversal. If it bleeds posteriorly: a Foley catheter posterior pack plus an anterior pack."
+    }
+  ],
+  "keywords": [
+    "sit forward",
+    "soft part",
+    "apixaban",
+    "co-phenylcaine",
+    "Little's area",
+    "silver nitrate",
+    "one side",
+    "floor of the nose",
+    "posterior bleeding",
+    "ENT",
+    "24 to 48 hours",
+    "no routine reversal",
+    "Foley"
   ]
 }

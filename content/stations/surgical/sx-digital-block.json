@@ -15,7 +15,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against RCEM/BSSH guidance and the evidence on adrenaline in digital blocks (Lalonde 2005; Cochrane 2015).\n\nAnatomy: two palmar (volar) and two dorsal digital nerves run at the 2, 4, 8 and 10 o'clock positions of each finger; palmar nerves supply most of the fingertip and nail bed. Techniques: ring (web-space) block injecting into both web spaces dorsally then advancing volarly (about 1–2 mL each side, plus a dorsal wheal), or a single palmar subcutaneous (transthecal-adjacent) injection at the base of the finger. Use 1% or 2% lidocaine plain (or with adrenaline — now shown safe in healthy digits; avoid in peripheral vascular disease or Raynaud's), maximum about 5–6 mL total per digit to avoid pressure ischaemia. Check allergies, neurovascular status before, aspirate before injecting, wait 5–10 minutes, test sensation. Avoid a circumferential ring of anaesthetic at the base and a finger tourniquet left on.\n\nYour notes list digital nerve block as a topic without detail.",
+  "notes": "Checked against RCEM/BSSH guidance and the evidence on adrenaline in digital blocks (Lalonde 2005; Cochrane 2015).\n\nAnatomy: two palmar (volar) and two dorsal digital nerves run at the 2, 4, 8 and 10 o'clock positions of each finger; palmar nerves supply most of the fingertip and nail bed. Techniques: ring (web-space) block injecting into both web spaces dorsally then advancing volarly (about 1–2 mL each side, plus a dorsal wheal), or a single palmar subcutaneous (transthecal-adjacent) injection at the base of the finger. Use 1% or 2% lidocaine plain (or with adrenaline — now shown safe in healthy digits; avoid in peripheral vascular disease or Raynaud's), maximum about 5–6 mL total per digit to avoid pressure ischaemia. Check allergies, neurovascular status before, aspirate before injecting, wait 5–10 minutes, test sensation. Avoid a circumferential ring of anaesthetic at the base and a finger tourniquet left on.\n\nYour notes list digital nerve block as a topic without detail.\n\nPerfect script checked against standard digital block technique, an HKCEM-style scheme and a keyword scheme. The bench narrated.",
   "cast": [
     {
       "id": "patient",
@@ -177,5 +177,24 @@
       "why": "Risk of ischaemia.",
       "source": "Cochrane 2015"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Consent; any allergy to local anaesthetic; any Raynaud's or vascular disease. Baseline: sensation on both sides of the fingertip and refill. Plain 1% lidocaine. Clean. At the base of the finger, dorsal web space on one side: a wheal, aspirate, then advance palmar and inject, about 1 to 2 mL each, both sides, under 5 mL in total. Wait 5 to 10 minutes, then test the fingertip."
+    }
+  ],
+  "keywords": [
+    "consent",
+    "allergy",
+    "Raynaud's",
+    "baseline",
+    "lidocaine",
+    "aspirate",
+    "palmar",
+    "both sides",
+    "under 5 mL",
+    "wait",
+    "test"
   ]
 }

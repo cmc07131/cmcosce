@@ -20,7 +20,7 @@
       "text": "Venous cut-down itself. Now that IO needles and ultrasound-guided lines are available, cut-down is rarely done in the ED; it is a fallback when those fail. Know the saphenous vein landmark (1–2 cm anterior and superior to the medial malleolus) and the steps."
     }
   ],
-  "notes": "Checked against ATLS (venous cut-down appendix) and standard procedural texts.\n\nNowadays IO access and ultrasound-guided peripheral or central lines are preferred; cut-down remains an option when these fail. Site: the great (long) saphenous vein, 1–2 cm anterior and superior to the medial malleolus (alternative: basilic vein at the elbow). Steps: aseptic prep, local anaesthetic if conscious, a transverse full-thickness skin incision (about 2.5 cm), blunt dissection with curved haemostats to isolate the vein (avoid the saphenous nerve), pass two ligatures under it, tie the distal ligature (leave long for traction), make a small transverse venotomy, dilate, insert the cannula or IV catheter and tie the proximal ligature around it, connect fluids, close the skin, dressing. Complications: infection, haematoma, phlebitis, nerve injury, arterial transection. Your notes list venous cut-down as a topic without detail.",
+  "notes": "Checked against ATLS (venous cut-down appendix) and standard procedural texts.\n\nNowadays IO access and ultrasound-guided peripheral or central lines are preferred; cut-down remains an option when these fail. Site: the great (long) saphenous vein, 1–2 cm anterior and superior to the medial malleolus (alternative: basilic vein at the elbow). Steps: aseptic prep, local anaesthetic if conscious, a transverse full-thickness skin incision (about 2.5 cm), blunt dissection with curved haemostats to isolate the vein (avoid the saphenous nerve), pass two ligatures under it, tie the distal ligature (leave long for traction), make a small transverse venotomy, dilate, insert the cannula or IV catheter and tie the proximal ligature around it, connect fluids, close the skin, dressing. Complications: infection, haematoma, phlebitis, nerve injury, arterial transection. Your notes list venous cut-down as a topic without detail.\n\nPerfect script checked against ATLS, an HKCEM-style scheme and a keyword scheme. The bench's depth choice is gone: the incision is through the skin only.",
   "cast": [
     {
       "id": "patient",
@@ -41,7 +41,7 @@
         {
           "t": "Saphenous cut-down",
           "perform": "cutdown",
-          "performHint": "Do it with your hands. The vein and the nerve look alike in a hurry.",
+          "performHint": "Do it with your hands. The vein and the nerve lie together: find the vein.",
           "mark": [
             "Correct landmark for the great saphenous vein",
             "Asepsis, anaesthesia and tourniquet",
@@ -181,5 +181,24 @@
       "why": "Humeral head gives higher flow.",
       "source": "ATLS / manufacturer"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "The great saphenous vein: 1 to 2 cm anterior and superior to the medial malleolus. Clean, drape, local anaesthetic, a tourniquet above. A transverse incision through the skin only. Blunt dissection with curved haemostats to lift the vein clear of the saphenous nerve. Two ligatures under it; tie the distal one. A small transverse venotomy, the cannula in toward the heart, tie the proximal ligature round it. Tourniquet off, fluids running, close the skin and dress."
+    }
+  ],
+  "keywords": [
+    "great saphenous vein",
+    "medial malleolus",
+    "tourniquet",
+    "transverse",
+    "skin only",
+    "blunt dissection",
+    "saphenous nerve",
+    "ligatures",
+    "venotomy",
+    "toward the heart",
+    "fluids"
   ]
 }

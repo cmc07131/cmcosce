@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against standard wilderness and emergency medicine technique (Tintinalli; Wilderness Medical Society) and NICE/local antibiotic guidance.\n\nAssessment: type of hook (barbs, number of barbs, treble hook), depth, location (eye, joint, tendon, neurovascular structures need specialist removal), time, fresh or salt water (Vibrio in salt water, Aeromonas in fresh), tetanus status, allergies. Anaesthesia: local infiltration or digital block. Techniques: retrograde (small barbless or superficial hooks), string-yank (quick, little tissue damage, good for moderately embedded hooks; not for hooks in mobile tissue such as the ear lobe), needle cover (an 18 G needle sheathes the barb), advance-and-cut (push the point through the skin, cut the barb off with wire cutters, back the hook out — or cut the shank and push through; most reliable for deeply embedded hooks, but creates a second wound). Protect eyes when cutting. Clean, irrigate, dress; antibiotics are not routine for clean wounds (consider for high-risk wounds or hands/feet per local policy; ciprofloxacin or doxycycline cover for Vibrio after sea water); tetanus.\n\nYour notes list the push-through and string techniques, history points, tetanus and antibiotics — this matches.",
+  "notes": "Checked against standard wilderness and emergency medicine technique (Tintinalli; Wilderness Medical Society) and NICE/local antibiotic guidance.\n\nAssessment: type of hook (barbs, number of barbs, treble hook), depth, location (eye, joint, tendon, neurovascular structures need specialist removal), time, fresh or salt water (Vibrio in salt water, Aeromonas in fresh), tetanus status, allergies. Anaesthesia: local infiltration or digital block. Techniques: retrograde (small barbless or superficial hooks), string-yank (quick, little tissue damage, good for moderately embedded hooks; not for hooks in mobile tissue such as the ear lobe), needle cover (an 18 G needle sheathes the barb), advance-and-cut (push the point through the skin, cut the barb off with wire cutters, back the hook out — or cut the shank and push through; most reliable for deeply embedded hooks, but creates a second wound). Protect eyes when cutting. Clean, irrigate, dress; antibiotics are not routine for clean wounds (consider for high-risk wounds or hands/feet per local policy; ciprofloxacin or doxycycline cover for Vibrio after sea water); tetanus.\n\nYour notes list the push-through and string techniques, history points, tetanus and antibiotics — this matches.\n\nPerfect script checked against standard fish hook removal techniques, an HKCEM-style scheme and a keyword scheme. Removed the yank-straight-out reply and the bench's button.",
   "cast": [
     {
       "id": "junior",
@@ -47,11 +47,6 @@
               "r": "How deep, how many barbs, where it is… and tetanus?",
               "mood": -2,
               "mark": "Engages the learner with questions"
-            },
-            {
-              "t": "Yes, just yank it.",
-              "r": "OK!",
-              "mood": 1
             }
           ]
         }
@@ -207,5 +202,29 @@
       "why": "Metal fragments fly.",
       "source": "Tintinalli"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Let's think first: what would you want to know about the hook and the patient before choosing a method?",
+      "do": "How deep, how many barbs, where it is… and tetanus?"
+    },
+    {
+      "at": "0:20",
+      "say": "Look at the hook: one barb, in the pulp, away from joints and tendons. Ask about the water, tetanus and allergies. A digital block. Eye protection for everyone. Grip the shank, advance the point out through the skin, cut the barb off with wire cutters, then back the hook out the way it went in. Check the hook is intact; irrigate and dress; tetanus; antibiotics only for a high-risk wound."
+    }
+  ],
+  "keywords": [
+    "before choosing a method",
+    "one barb",
+    "water",
+    "tetanus",
+    "digital block",
+    "eye protection",
+    "advance",
+    "cut the barb",
+    "back the hook out",
+    "intact",
+    "irrigate"
   ]
 }
