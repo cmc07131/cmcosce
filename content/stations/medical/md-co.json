@@ -20,7 +20,7 @@
       "text": "Contraindication to hyperbaric oxygen. Your notes leave out untreated pneumothorax, the main absolute contraindication. Drug cautions: bleomycin, doxorubicin, cisplatin, disulfiram."
     }
   ],
-  "notes": "Checked against TOXBASE, the Undersea and Hyperbaric Medical Society indications, the Cochrane review of hyperbaric oxygen for CO poisoning (2011) and Weaver et al. (NEJM 2002).\n\nCO binds haemoglobin (~240 times more than oxygen), shifts the dissociation curve left, and poisons cytochrome oxidase. Treatment: 100% oxygen (half-life of COHb about 5 hours in air, 60–90 minutes on 100%, about 20–30 minutes at 2.5–3 ATA). Hyperbaric oxygen is considered for loss of consciousness, neurological signs, COHb over 25% (over 15–20% in pregnancy), cardiac ischaemia or severe acidosis, aiming to reduce delayed neurological sequelae; evidence is mixed (Weaver 2002 positive; Cochrane 2011 inconclusive). Risks: ear and sinus barotrauma (myringotomy in intubated patients), pulmonary barotrauma, oxygen toxicity seizures, claustrophobia, transfer risks. Absolute contraindication: untreated pneumothorax. Relative/drug contraindications: bleomycin exposure, doxorubicin, cisplatin, disulfiram.\n\nDeliberate self-poisoning: psychiatric assessment once recovered; screen for co-ingestion (paracetamol, alcohol); check others at the scene.\n\nYour notes match on indications, complications, preparation and procedure; they omit untreated pneumothorax, the main absolute contraindication.",
+  "notes": "Checked against TOXBASE, the Undersea and Hyperbaric Medical Society indications, the Cochrane review of hyperbaric oxygen for CO poisoning (2011) and Weaver et al. (NEJM 2002).\n\nCO binds haemoglobin (~240 times more than oxygen), shifts the dissociation curve left, and poisons cytochrome oxidase. Treatment: 100% oxygen (half-life of COHb about 5 hours in air, 60–90 minutes on 100%, about 20–30 minutes at 2.5–3 ATA). Hyperbaric oxygen is considered for loss of consciousness, neurological signs, COHb over 25% (over 15–20% in pregnancy), cardiac ischaemia or severe acidosis, aiming to reduce delayed neurological sequelae; evidence is mixed (Weaver 2002 positive; Cochrane 2011 inconclusive). Risks: ear and sinus barotrauma (myringotomy in intubated patients), pulmonary barotrauma, oxygen toxicity seizures, claustrophobia, transfer risks. Absolute contraindication: untreated pneumothorax. Relative/drug contraindications: bleomycin exposure, doxorubicin, cisplatin, disulfiram.\n\nDeliberate self-poisoning: psychiatric assessment once recovered; screen for co-ingestion (paracetamol, alcohol); check others at the scene.\n\nYour notes match on indications, complications, preparation and procedure; they omit untreated pneumothorax, the main absolute contraindication.\n\nPerfect script checked against a breaking-news/SPIKES checklist, TOXBASE and UHMS indications, an HKCEM-style scheme and a keyword scheme. Removed the blunt, false-reassurance and dismissive replies.",
   "cast": [
     {
       "id": "mother",
@@ -48,13 +48,6 @@
               "r": "[Crying] Will she live?",
               "mood": -2,
               "mark": "Explains what happened and why she was intubated"
-            },
-            {
-              "t": "She tried to kill herself.",
-              "tz": "佢想自殺。",
-              "rz": "唔會嘅……唔會嘅……",
-              "r": "No… no…",
-              "mood": 3
             }
           ]
         },
@@ -69,13 +62,6 @@
               "r": "A chamber? Is it dangerous?",
               "mood": -1,
               "mark": "Explains prognosis and the rationale for HBOT, including delayed sequelae"
-            },
-            {
-              "t": "Yes, she'll be fine.",
-              "tz": "係，佢會冇事嘅。",
-              "rz": "真係？",
-              "r": "Really?",
-              "mood": 0
             }
           ]
         },
@@ -90,13 +76,6 @@
               "r": "OK. What do you need from me?",
               "mood": -2,
               "mark": "Explains risks and preparation (myringotomy) and the procedure"
-            },
-            {
-              "t": "No risks.",
-              "tz": "完全冇風險。",
-              "rz": "嗯……",
-              "r": "Hmm.",
-              "mood": 1
             }
           ]
         },
@@ -111,12 +90,6 @@
               "r": "No chemo. She had depression last year — sertraline.",
               "mood": -1,
               "mark": "Asks about contraindications and co-ingestion"
-            },
-            {
-              "t": "Nothing, just wait outside.",
-              "tz": "冇嘢，你喺出面等啦。",
-              "r": "…",
-              "mood": 2
             }
           ]
         },
@@ -131,12 +104,6 @@
               "r": "Thank you, doctor.",
               "mood": -2,
               "mark": "Plans psychiatric assessment and supports the family"
-            },
-            {
-              "t": "That's not our concern.",
-              "tz": "呢啲唔關我哋事。",
-              "r": "!",
-              "mood": 3
             }
           ]
         }
@@ -267,6 +234,55 @@
       ],
       "why": "Self-harm care.",
       "source": "NICE NG225"
+    }
+  ],
+  "keywords": [
+    "Dr Lee",
+    "sit down",
+    "carbon monoxide",
+    "breathing tube",
+    "pure oxygen",
+    "seriously ill",
+    "brain",
+    "weeks later",
+    "pressure chamber",
+    "hyperbaric oxygen",
+    "ears",
+    "eardrums",
+    "seizures",
+    "chemotherapy",
+    "collapsed lung",
+    "disulfiram",
+    "other medicines",
+    "mental health team",
+    "social worker",
+    "update you"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "I'm Dr Lee, looking after your daughter. Please sit down. She was found in a room with burning charcoal; she breathed in carbon monoxide gas, which stops blood carrying oxygen. She was very drowsy, so we put a breathing tube in to protect her airway and give her pure oxygen.",
+      "do": "[Crying] Will she live?"
+    },
+    {
+      "at": "0:30",
+      "say": "She is seriously ill but her heart and blood pressure are stable. The main worry is damage to the brain, which can appear days or weeks later. We'd like to give her oxygen in a pressure chamber — hyperbaric oxygen — which may reduce that risk.",
+      "do": "A chamber? Is it dangerous?"
+    },
+    {
+      "at": "1:00",
+      "say": "It's generally safe. The pressure can hurt the ears, so an ENT doctor will make tiny holes in her eardrums that heal later. Rarely it can cause seizures from oxygen, or lung injury. A doctor and nurse will be with her throughout; usually 1–3 sessions of about 90 minutes.",
+      "do": "OK. What do you need from me?"
+    },
+    {
+      "at": "1:30",
+      "say": "Has she ever had chemotherapy, lung problems like a collapsed lung, or take medicines like disulfiram? And did she have any other medicines at home she might have taken?",
+      "do": "No chemo. She had depression last year — sertraline."
+    },
+    {
+      "at": "2:00",
+      "say": "Thank you for telling me. Once she's awake, the mental health team will see her. I'll ask our social worker to support you, and I'll update you as soon as anything changes.",
+      "do": "Thank you, doctor."
     }
   ]
 }

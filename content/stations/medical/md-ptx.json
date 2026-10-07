@@ -22,9 +22,10 @@
     },
     {
       "title": "Teach the plan",
-      "goal": "BTS 2023: symptoms and high-risk features, not size.",
+      "goal": "BTS 2023: symptoms and high-risk features, not size; then teach-back.",
       "steps": [
-        "plan"
+        "plan",
+        "close"
       ]
     }
   ],
@@ -34,7 +35,7 @@
       "text": "Size-based management. Your notes use BTS 2010: observe if under 2 cm and asymptomatic, aspirate if over 2 cm. BTS 2023 decides by symptoms, high-risk features and the patient's priorities: a minimally symptomatic primary pneumothorax can be managed conservatively whatever its size; a symptomatic one gets an ambulatory device or needle aspiration, and a drain if these fail."
     }
   ],
-  "notes": "Checked against the British Thoracic Society Guideline for Pleural Disease (2023).\n\nBTS 2023 changed management from size-based to symptom-based. Primary spontaneous pneumothorax (PSP): if minimally symptomatic and the patient agrees, conservative management (outpatient review) is an option regardless of size; if symptomatic (and high-risk features absent), consider ambulatory devices or needle aspiration; chest drain if these fail. High-risk characteristics: haemodynamic compromise, significant hypoxia, bilateral, underlying lung disease (secondary pneumothorax), age over 50 with smoking, haemopneumothorax. Secondary pneumothorax: usually admission and a drain or aspiration. Size is measured at the hilum (inter-pleural distance); 2 cm roughly equals 50% volume but now matters less than symptoms. Needle aspiration site: 2nd intercostal space mid-clavicular line, or 4th–5th space in the safe triangle. Advice: stop smoking, no diving ever unless definitive surgery, no flying until resolved on X-ray (airlines often ask for 1–2 weeks after resolution).\n\nYour notes use the older BTS 2010 approach: observe if under 2 cm and asymptomatic, aspirate if over 2 cm. BTS 2023 manages by symptoms and patient priorities instead. The aspiration technique and discharge advice in your notes match.",
+  "notes": "Checked against the British Thoracic Society Guideline for Pleural Disease (2023).\n\nBTS 2023 changed management from size-based to symptom-based. Primary spontaneous pneumothorax (PSP): if minimally symptomatic and the patient agrees, conservative management (outpatient review) is an option regardless of size; if symptomatic (and high-risk features absent), consider ambulatory devices or needle aspiration; chest drain if these fail. High-risk characteristics: haemodynamic compromise, significant hypoxia, bilateral, underlying lung disease (secondary pneumothorax), age over 50 with smoking, haemopneumothorax. Secondary pneumothorax: usually admission and a drain or aspiration. Size is measured at the hilum (inter-pleural distance); 2 cm roughly equals 50% volume but now matters less than symptoms. Needle aspiration site: 2nd intercostal space mid-clavicular line, or 4th–5th space in the safe triangle. Advice: stop smoking, no diving ever unless definitive surgery, no flying until resolved on X-ray (airlines often ask for 1–2 weeks after resolution).\n\nYour notes use the older BTS 2010 approach: observe if under 2 cm and asymptomatic, aspirate if over 2 cm. BTS 2023 manages by symptoms and patient priorities instead. The aspiration technique and discharge advice in your notes match.\n\nPerfect script checked against BTS 2023, a teaching checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options and unhelpful replies; added a teach-back close.",
   "cast": [
     {
       "id": "junior",
@@ -59,11 +60,6 @@
               "r": "Under 2 cm observe, over 2 cm aspirate — is that right?",
               "mood": -2,
               "mark": "Assesses the learner's knowledge"
-            },
-            {
-              "t": "No, wrong. Watch me.",
-              "r": "Oh.",
-              "mood": 3
             }
           ]
         },
@@ -75,11 +71,6 @@
               "r": "Oh! So what are the high-risk features?",
               "mood": -2,
               "mark": "Teaches the BTS 2023 symptom-based approach"
-            },
-            {
-              "t": "Yes, exactly.",
-              "r": "Great.",
-              "mood": 0
             }
           ]
         }
@@ -133,11 +124,27 @@
           "t": "Advice: stop smoking, no flying until resolved, never dive unless definitive surgery; return if breathless",
           "n": 5,
           "mark": "Safety advice on smoking, flying and diving"
-        },
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Check and close",
+      "hint": "Teach-back; what will they do now.",
+      "mood": 2,
+      "turns": [
         {
-          "t": "Large pneumothorax: always a large-bore drain",
-          "trap": true,
-          "r": "Size alone no longer dictates a drain (BTS 2023)."
+          "line": "So what do I do with him?",
+          "opts": [
+            {
+              "t": "You tell me: what decides the plan now, and what will you offer him?",
+              "r": "Symptoms and high-risk features, not size. He's minimally symptomatic, so conservative with review in 2 to 4 days, or aspiration if he wants it. And no flying, no diving, stop smoking.",
+              "mood": -2,
+              "mark": "Checks understanding by teach-back"
+            }
+          ]
         }
       ]
     },
@@ -267,6 +274,57 @@
       ],
       "why": "Size now matters less than symptoms.",
       "source": "BTS"
+    }
+  ],
+  "keywords": [
+    "what do you already know",
+    "BTS 2010",
+    "2023",
+    "symptoms, not size",
+    "high-risk features",
+    "visceral pleural line",
+    "at the hilum",
+    "secondary",
+    "his priorities",
+    "conservative",
+    "needle aspiration",
+    "ambulatory device",
+    "chest drain",
+    "stop smoking",
+    "no flying",
+    "never dive",
+    "teach-back"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Good spot. Let's make a plan together: what do you already know about managing a primary pneumothorax?",
+      "do": "Under 2 cm observe, over 2 cm aspirate."
+    },
+    {
+      "at": "0:15",
+      "say": "That was BTS 2010. The 2023 guideline treats by symptoms, not size: if he's minimally symptomatic and has no high-risk features, conservative outpatient care is an option even for a large one."
+    },
+    {
+      "at": "0:35",
+      "say": "The film: a visceral pleural line with no lung markings beyond it, a 3 cm rim measured at the hilum, no mediastinal shift."
+    },
+    {
+      "at": "0:50",
+      "say": "First, high-risk features: unstable, hypoxic, bilateral, underlying lung disease making it secondary, over 50 and a smoker, or a haemopneumothorax. He has none."
+    },
+    {
+      "at": "1:05",
+      "say": "Then: is he symptomatic, and what are his priorities? Minimal symptoms: conservative, review in 2 to 4 days with a repeat film. Symptomatic: needle aspiration or an ambulatory device; a chest drain if they fail."
+    },
+    {
+      "at": "1:25",
+      "say": "Advice: stop smoking, no flying until it's resolved on the film, never dive unless he has definitive surgery, and come back if he's breathless."
+    },
+    {
+      "at": "1:40",
+      "say": "Teach-back: you tell me: what decides the plan now, and what will you offer him?",
+      "do": "Symptoms and high-risk features, not size; conservative or aspiration; flying, diving, smoking."
     }
   ]
 }

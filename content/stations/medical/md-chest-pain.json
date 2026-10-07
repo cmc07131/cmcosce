@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against ESC 2023 ACS guidelines (0/1-hour high-sensitivity troponin algorithm), NICE CG95 (Recent-onset chest pain, updated 2016) and the HEART score (Six 2008; Backus 2013).\n\nHistory: character, site, radiation, onset and trigger, duration, relief, associated symptoms (sweating, breathlessness, syncope), risk factors, and red flags for other lethal causes — aortic dissection (tearing, back, pulse deficit), PE (pleuritic, haemoptysis, DVT risk), pneumothorax, oesophageal rupture (after vomiting), pericarditis, tamponade.\n\nECG within 10 minutes. High-sensitivity troponin at 0 and 1 hour (or 0 and 3 h, depending on assay): rule-out, observe, or rule-in zones. HEART score (History, ECG, Age, Risk factors, Troponin): 0–3 low risk, discharge with outpatient follow-up; 4–6 intermediate; 7–10 high. Stable angina features get outpatient CT coronary angiography (NICE). Aspirin 300 mg if ACS is suspected.\n\nYour notes' chest pain history (site, onset, radiation, exertion, associated symptoms, risk factors, drugs including cocaine/PDE5 inhibitors, differentials by system) matches.",
+  "notes": "Checked against ESC 2023 ACS guidelines (0/1-hour high-sensitivity troponin algorithm), NICE CG95 (Recent-onset chest pain, updated 2016) and the HEART score (Six 2008; Backus 2013).\n\nHistory: character, site, radiation, onset and trigger, duration, relief, associated symptoms (sweating, breathlessness, syncope), risk factors, and red flags for other lethal causes — aortic dissection (tearing, back, pulse deficit), PE (pleuritic, haemoptysis, DVT risk), pneumothorax, oesophageal rupture (after vomiting), pericarditis, tamponade.\n\nECG within 10 minutes. High-sensitivity troponin at 0 and 1 hour (or 0 and 3 h, depending on assay): rule-out, observe, or rule-in zones. HEART score (History, ECG, Age, Risk factors, Troponin): 0–3 low risk, discharge with outpatient follow-up; 4–6 intermediate; 7–10 high. Stable angina features get outpatient CT coronary angiography (NICE). Aspirin 300 mg if ACS is suspected.\n\nYour notes' chest pain history (site, onset, radiation, exertion, associated symptoms, risk factors, drugs including cocaine/PDE5 inhibitors, differentials by system) matches.\n\nPerfect script checked against ESC 2023 ACS, NICE CG95, an HKCEM-style scheme and a keyword scheme. Removed the discharge option; the HEART score is now totalled aloud.",
   "cast": [
     {
       "id": "patient",
@@ -113,7 +113,7 @@
         "ECG": [
           {
             "t": "12-lead ECG",
-            "r": "Sinus rhythm, no ST elevation or depression.",
+            "r": "Sinus rhythm, no ST elevation or depression. \"No STEMI.\"",
             "img": "ecg:sinus",
             "mark": "Reviews the ECG within 10 minutes"
           }
@@ -126,7 +126,7 @@
           },
           {
             "t": "hs-troponin at 1 hour",
-            "r": "31 ng/L — a significant rise.",
+            "r": "31 ng/L: a significant rise. \"Rule-in.\"",
             "mark": "Repeat troponin at 1 hour"
           }
         ]
@@ -141,21 +141,20 @@
       "hint": "Rising troponin with typical history: NSTEMI. Treat and admit.",
       "opts": [
         {
-          "t": "Typical angina with a significant troponin rise: NSTEMI",
+          "t": "Typical cardiac pain with a significant hs-troponin rise, 14 to 31 in an hour, and no ST elevation: this is an NSTEMI.",
           "mark": "Diagnoses NSTEMI from the delta troponin"
         },
         {
-          "t": "Aspirin 300 mg, anticoagulation (fondaparinux/heparin), second antiplatelet per cardiology, admit to CCU; angiography within 24 hours if high risk",
-          "mark": "ACS treatment and admission"
-        },
-        {
-          "t": "HEART score is high (history 2, ECG 0, age 1, risks 2, troponin 1–2)",
+          "t": "The HEART score is high risk: history 2, ECG 0, age 1, risk factors 2, troponin 2: 7.",
           "mark": "Applies the HEART score"
         },
         {
-          "t": "Pain has gone, discharge with GP follow-up",
-          "trap": "critical",
-          "r": "Troponin rise with typical pain: ACS. Pain-free does not mean safe."
+          "t": "Aspirin 300 mg, fondaparinux or heparin, a second antiplatelet per cardiology; admit to CCU; angiography within 24 hours as he's high risk.",
+          "mark": "ACS treatment and admission"
+        },
+        {
+          "t": "I'll explain to him that this was a small heart attack and he needs to stay in.",
+          "mark": "Explains to the patient"
         }
       ]
     },
@@ -284,6 +283,64 @@
       ],
       "why": "Pain eases sitting forward.",
       "source": "ESC pericardial guideline"
+    }
+  ],
+  "keywords": [
+    "central",
+    "radiation",
+    "exertion",
+    "sweating",
+    "crescendo",
+    "tearing",
+    "dissection",
+    "PE",
+    "risk factors",
+    "Viagra",
+    "cocaine",
+    "ECG within 10 minutes",
+    "no STEMI",
+    "hs-troponin",
+    "0 and 1 hour",
+    "significant rise",
+    "NSTEMI",
+    "HEART score",
+    "aspirin 300 mg",
+    "CCU",
+    "angiography within 24 hours"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Where is the pain and what is it like? What were you doing? What eased it, and how long did it last?",
+      "do": "Central tight band, radiation to the left arm; on exertion, four flights of stairs; eased after 30 minutes' rest."
+    },
+    {
+      "at": "0:20",
+      "say": "Any sweating, breathlessness, nausea or fainting? Has it happened before?",
+      "do": "Sweaty and breathless; twice last week, a crescendo pattern."
+    },
+    {
+      "at": "0:35",
+      "say": "Any tearing pain into the back? Sharp pain on breathing? Coughing blood? Leg swelling?",
+      "do": "No: no features of dissection, PE or pneumothorax."
+    },
+    {
+      "at": "0:50",
+      "say": "Smoking, diabetes, blood pressure, cholesterol, family history? Medicines, Viagra, cocaine or other drugs, allergies?",
+      "do": "Ex-smoker, hypertension, cholesterol; brother's bypass at 50: several risk factors. Amlodipine; no allergies."
+    },
+    {
+      "at": "1:15",
+      "say": "ECG within 10 minutes: sinus rhythm, no ST changes: no STEMI. hs-troponin at 0 and 1 hour.",
+      "do": "14 then 31 ng/L: a significant rise."
+    },
+    {
+      "at": "1:35",
+      "say": "Typical cardiac pain with a significant hs-troponin rise, 14 to 31 in an hour, and no ST elevation: this is an NSTEMI. The HEART score is high risk: history 2, ECG 0, age 1, risk factors 2, troponin 2: 7."
+    },
+    {
+      "at": "1:55",
+      "say": "Aspirin 300 mg, fondaparinux or heparin, a second antiplatelet per cardiology; admit to CCU; angiography within 24 hours as he's high risk. I'll explain to him that this was a small heart attack and he needs to stay in."
     }
   ]
 }
