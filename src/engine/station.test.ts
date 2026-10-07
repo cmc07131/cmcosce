@@ -487,7 +487,7 @@ test('close-ups read their findings: side, reaction, refill, tenderness, the met
 test('the guide never sends you back to an earlier phase', () => {
   const backs: string[] = []
   // Found by this test; fixed as each is rebuilt around its perfect script (then removed from here).
-  const KNOWN = new Set(['og-eclampsia'])
+  const KNOWN = new Set<string>([])
   for (const file of files) {
     const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
     if (!st.phases?.length || KNOWN.has(st.id)) continue

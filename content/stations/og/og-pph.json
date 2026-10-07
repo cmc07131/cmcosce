@@ -82,7 +82,7 @@
       "text": "The E-MOTIVE approach (WHO 2023): measure blood loss to detect PPH early, then give the first-response bundle together (uterine massage, oxytocics, tranexamic acid, IV fluids, examination and escalation)."
     }
   ],
-  "notes": "Checked against RCOG Green-top Guideline 52 (Postpartum haemorrhage), the WOMAN trial (tranexamic acid), WHO 2023 recommendations and the E-MOTIVE bundle (NEJM 2023), and NICE NG235 (Intrapartum care, 2023).\n\nMajor PPH: over 1000 mL or signs of shock. Call for help (senior obstetrician, anaesthetist, midwife), activate the major haemorrhage protocol, two large-bore cannulae, bloods (FBC, coagulation, fibrinogen, crossmatch 4 units), warmed fluids limited to about 2 L crystalloid before blood (RCOG), O-negative if needed. Tranexamic acid 1 g IV within 3 hours of birth, second 1 g after 30 minutes if bleeding continues (WOMAN). Your notes omit tranexamic acid; it is scored here.\n\nThe 4 Ts: Tone (commonest), Trauma, Tissue, Thrombin. Tone: rub up a contraction (fundal massage), bimanual compression, empty the bladder; oxytocin 5 IU slow IV (may repeat), ergometrine 0.5 mg IV/IM (not in hypertension), oxytocin infusion 40 IU in 500 mL at 125 mL/h, carboprost 250 microgram IM every 15 minutes (max 8 doses; caution in asthma), misoprostol 800 microgram sublingual; then balloon tamponade and surgery. Check the placenta is complete and look for tears.\n\nYour notes' structure matches this; they start with a 1 L Hartmann's bolus, which is acceptable in the RCOG limit. E-MOTIVE adds early detection by measured blood loss and a bundle given together (massage, oxytocics, tranexamic acid, fluids, examination and escalation).",
+  "notes": "Checked against RCOG Green-top Guideline 52 (Postpartum haemorrhage), the WOMAN trial (tranexamic acid), WHO 2023 recommendations and the E-MOTIVE bundle (NEJM 2023), and NICE NG235 (Intrapartum care, 2023).\n\nMajor PPH: over 1000 mL or signs of shock. Call for help (senior obstetrician, anaesthetist, midwife), activate the major haemorrhage protocol, two large-bore cannulae, bloods (FBC, coagulation, fibrinogen, crossmatch 4 units), warmed fluids limited to about 2 L crystalloid before blood (RCOG), O-negative if needed. Tranexamic acid 1 g IV within 3 hours of birth, second 1 g after 30 minutes if bleeding continues (WOMAN). Your notes omit tranexamic acid; it is scored here.\n\nThe 4 Ts: Tone (commonest), Trauma, Tissue, Thrombin. Tone: rub up a contraction (fundal massage), bimanual compression, empty the bladder; oxytocin 5 IU slow IV (may repeat), ergometrine 0.5 mg IV/IM (not in hypertension), oxytocin infusion 40 IU in 500 mL at 125 mL/h, carboprost 250 microgram IM every 15 minutes (max 8 doses; caution in asthma), misoprostol 800 microgram sublingual; then balloon tamponade and surgery. Check the placenta is complete and look for tears.\n\nYour notes' structure matches this; they start with a 1 L Hartmann's bolus, which is acceptable in the RCOG limit. E-MOTIVE adds early detection by measured blood loss and a bundle given together (massage, oxytocics, tranexamic acid, fluids, examination and escalation).\n\nPerfect script checked against RCOG Green-top 52, WHO E-MOTIVE and the WOMAN trial, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (fast oxytocin, 4 g TXA, ergometrine in hypertension, IV carboprost, 6 L saline).",
   "cast": [
     {
       "id": "patient",
@@ -185,12 +185,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
@@ -201,7 +202,7 @@
       "groups": {
         "History": [
           {
-            "t": "Placenta complete? Any tears? Risk factors?",
+            "t": "Was the placenta complete? Any tears? Any risk factors?",
             "r": "Midwife: placenta looked complete. Long labour, big baby (4.3 kg). No known bleeding disorder.",
             "mark": "Takes a focused history for the 4 Ts"
           }
@@ -209,13 +210,15 @@
         "Abdomen": [
           {
             "t": "Palpate the fundus",
-            "r": "Soft, boggy uterus at the umbilicus; blood gushes when you press.",
-            "mark": "Finds an atonic uterus"
+            "r": "Soft, boggy uterus at the umbilicus; blood gushes when you press. \"Tone: an atonic uterus.\"",
+            "mark": "Finds an atonic uterus",
+            "anim": "abdomen"
           },
           {
-            "t": "Bladder",
+            "t": "Feel for the bladder",
             "r": "Palpable full bladder.",
-            "anim": "abdomen"
+            "anim": "abdomen",
+            "mark": "Finds a full bladder"
           }
         ],
         "Perineum": [
@@ -241,7 +244,7 @@
             "anim": "abdomen"
           },
           {
-            "t": "Urinary catheter to empty the bladder",
+            "t": "A urinary catheter to empty the bladder",
             "mark": "Empties the bladder"
           }
         ]
@@ -264,14 +267,6 @@
           "mark": "Oxytocin 5 IU slow IV"
         },
         {
-          "t": "Oxytocin 10 IU rapid IV push",
-          "drug": "Oxytocin",
-          "dose": "10 IU rapid IV push",
-          "fetch": "cart",
-          "trap": true,
-          "r": "A fast bolus drops the blood pressure: 5 IU slowly."
-        },
-        {
           "t": "Tranexamic acid 1 g IV over 10 minutes",
           "drug": "Tranexamic acid",
           "dose": "1 g IV over 10 minutes",
@@ -279,27 +274,11 @@
           "mark": "Tranexamic acid within 3 hours of birth"
         },
         {
-          "t": "Tranexamic acid 4 g IV",
-          "drug": "Tranexamic acid",
-          "dose": "4 g IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much: 1 g, and a second 1 g after 30 minutes if bleeding continues."
-        },
-        {
           "t": "Ergometrine 0.5 mg IV (BP is not high)",
           "drug": "Ergometrine",
           "dose": "0.5 mg IV (BP is not high)",
           "fetch": "cart",
           "mark": "Ergometrine, checking there is no hypertension"
-        },
-        {
-          "trap": "critical",
-          "r": "Ergometrine is contraindicated in hypertension and pre-eclampsia.",
-          "t": "Ergometrine 0.5 mg despite a BP of 170/110",
-          "drug": "Ergometrine",
-          "dose": "0.5 mg despite a BP of 170/110",
-          "fetch": "cart"
         },
         {
           "t": "Oxytocin infusion 40 IU in 500 mL at 125 mL/h",
@@ -327,14 +306,6 @@
           "when": "still-bleeding",
           "early": "Give the first-line drugs time.",
           "mark": "Bimanual compression and second-line uterotonic"
-        },
-        {
-          "t": "Carboprost 250 microgram IV",
-          "drug": "Carboprost",
-          "dose": "250 microgram IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Never IV: 250 microgram IM (or intramyometrial), every 15 minutes, up to 8 doses."
         }
       ]
     },
@@ -353,14 +324,6 @@
           "t": "Hartmann's (warmed) up to 2 L while blood comes",
           "drug": "Hartmann's (warmed)",
           "dose": "up to 2 L while blood comes"
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Dilutional coagulopathy. Blood and products early.",
-          "t": "0.9% saline 6 L until the pressure normalises",
-          "drug": "0.9% saline",
-          "dose": "6 L until the pressure normalises"
         }
       ]
     },
@@ -372,17 +335,18 @@
       "hint": "Red cells and plasma per the protocol; fibrinogen.",
       "opts": [
         {
-          "t": "Red cells and plasma now they are here, per the protocol.",
+          "t": "The blood's here: red cells and plasma per the protocol.",
           "when": "blood-here",
           "early": "The blood is not here yet.",
           "scene": "blood",
           "mark": "Blood products per the major haemorrhage protocol"
         },
         {
-          "t": "Fibrinogen above 2 g/L: cryoprecipitate or fibrinogen concentrate if lower",
+          "t": "Keep her fibrinogen above 2 g/L: cryoprecipitate or fibrinogen concentrate if it's lower.",
           "mark": "Targets fibrinogen"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "escalate",
@@ -392,7 +356,7 @@
       "hint": "Theatre: examination under anaesthesia, balloon tamponade, surgery or radiology.",
       "opts": [
         {
-          "t": "Obstetrician: to theatre for examination, balloon tamponade, then compression suture or interventional radiology if needed",
+          "t": "Obstetrician: still bleeding despite uterotonics. To theatre for examination under anaesthesia, balloon tamponade, then a compression suture or interventional radiology.",
           "mark": "Escalates to surgical and radiological options"
         }
       ]
@@ -536,5 +500,76 @@
       "why": "Also allows urine output monitoring.",
       "source": "RCOG GTG 52"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Obstetric emergency call: senior obstetrician, anaesthetist, midwife. Activate the major haemorrhage protocol; O-negative available. Two large-bore cannulae; FBC, clotting, fibrinogen, crossmatch 4 units, gas."
+    },
+    {
+      "at": "0:20",
+      "say": "Weigh the pads and sheet to measure blood loss. Lie her flat, oxygen, keep her warm."
+    },
+    {
+      "at": "0:40",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2."
+    },
+    {
+      "at": "1:00",
+      "say": "Was the placenta complete? Any tears? Any risk factors? Palpate the fundus. Feel for the bladder. Tone: an atonic uterus.",
+      "do": "Midwife: placenta looked complete. Long labour, big baby (4.3 kg). No known bleeding disorder. Soft, boggy uterus at the umbilicus; blood gushes when you press. \"Tone: an atonic uterus.\" Palpable full bladder."
+    },
+    {
+      "at": "1:20",
+      "say": "Inspect the perineum and vagina.",
+      "do": "Small first-degree tear, not bleeding much."
+    },
+    {
+      "at": "1:40",
+      "say": "Fundal massage to rub up a contraction. A urinary catheter to empty the bladder."
+    },
+    {
+      "at": "2:00",
+      "say": "Oxytocin 5 IU slow IV. Tranexamic acid 1 g IV over 10 minutes. Ergometrine 0.5 mg IV (BP is not high)."
+    },
+    {
+      "at": "2:20",
+      "say": "Oxytocin infusion 40 IU in 500 mL at 125 mL/h."
+    },
+    {
+      "at": "2:40",
+      "say": "Carboprost 250 microgram IM (bimanual compression meanwhile)."
+    },
+    {
+      "at": "3:00",
+      "say": "Hartmann's (warmed) up to 2 L while blood comes.",
+      "do": "Midwife Kong: Blood running through the warmer."
+    },
+    {
+      "at": "3:20",
+      "say": "The blood's here: red cells and plasma per the protocol. Keep her fibrinogen above 2 g/L: cryoprecipitate or fibrinogen concentrate if it's lower."
+    },
+    {
+      "at": "3:40",
+      "say": "Obstetrician: still bleeding despite uterotonics. To theatre for examination under anaesthesia, balloon tamponade, then a compression suture or interventional radiology."
+    }
+  ],
+  "keywords": [
+    "obstetric emergency",
+    "major haemorrhage protocol",
+    "fibrinogen",
+    "crossmatch",
+    "weigh the pads",
+    "placenta",
+    "atonic",
+    "bladder",
+    "fundal massage",
+    "oxytocin 5 IU",
+    "tranexamic acid 1 g",
+    "ergometrine",
+    "carboprost 250 microgram",
+    "bimanual compression",
+    "2 L",
+    "balloon tamponade"
   ]
 }

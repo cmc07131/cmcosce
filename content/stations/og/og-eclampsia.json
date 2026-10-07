@@ -51,7 +51,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE NG133 (Hypertension in pregnancy, 2019, updated 2023), RCOG and the Magpie/Collaborative Eclampsia trials.\n\nEclampsia: seizures with pre-eclampsia. Call for help (obstetrics, anaesthetics, midwife, neonatology), left lateral position, airway and oxygen. Magnesium sulfate is the anticonvulsant of choice: 4 g IV over 5–15 minutes, then 1 g/h for 24 hours after the last seizure or birth; a recurrent seizure: a further 2–4 g over 5–15 minutes. Benzodiazepines are second-line (only if magnesium is not immediately available or seizures continue).\n\nMonitor for magnesium toxicity: loss of patellar reflexes first, then respiratory depression, then cardiac arrest. Check reflexes, respiratory rate and urine output; antidote calcium gluconate 10% 10 mL IV over 10 minutes.\n\nSevere hypertension (160/110 or more): labetalol (oral or IV), nifedipine, or IV hydralazine. Aim for 135/85 or below. Stabilise the mother before delivering the baby. Fluid restriction (about 80 mL/h) because of the risk of pulmonary oedema.\n\nYour notes link to an external page for eclampsia; nothing to compare.",
+  "notes": "Checked against NICE NG133 (Hypertension in pregnancy, 2019, updated 2023), RCOG and the Magpie/Collaborative Eclampsia trials.\n\nEclampsia: seizures with pre-eclampsia. Call for help (obstetrics, anaesthetics, midwife, neonatology), left lateral position, airway and oxygen. Magnesium sulfate is the anticonvulsant of choice: 4 g IV over 5–15 minutes, then 1 g/h for 24 hours after the last seizure or birth; a recurrent seizure: a further 2–4 g over 5–15 minutes. Benzodiazepines are second-line (only if magnesium is not immediately available or seizures continue).\n\nMonitor for magnesium toxicity: loss of patellar reflexes first, then respiratory depression, then cardiac arrest. Check reflexes, respiratory rate and urine output; antidote calcium gluconate 10% 10 mL IV over 10 minutes.\n\nSevere hypertension (160/110 or more): labetalol (oral or IV), nifedipine, or IV hydralazine. Aim for 135/85 or below. Stabilise the mother before delivering the baby. Fluid restriction (about 80 mL/h) because of the risk of pulmonary oedema.\n\nYour notes link to an external page for eclampsia; nothing to compare.\n\nPerfect script checked against NICE NG133 and RCOG, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (lying flat, fast or low magnesium, diazepam, a labetalol bolus, ergometrine, an immediate caesarean). The load and infusion are one prescription, so the guide no longer jumps back.",
   "cast": [
     {
       "id": "patient",
@@ -106,10 +106,11 @@
       "hint": "The obstetric emergency team.",
       "opts": [
         {
-          "t": "Obstetric emergency call: obstetrician, anaesthetist, midwife, neonatologist",
+          "t": "Obstetric emergency call, please: the obstetrician, anaesthetist, midwife and neonatologist.",
           "mark": "Calls the obstetric emergency team"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "monitoring",
@@ -119,12 +120,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG, NIBP and SpO2.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "protect",
@@ -135,19 +137,14 @@
       "groups": {
         "Airway": [
           {
-            "t": "Left lateral position; protect from injury",
+            "t": "Left lateral position; protect her from injury",
             "mark": "Left lateral position"
           },
           {
-            "t": "Airway: suction, jaw thrust; high-flow oxygen",
+            "t": "Airway: suction and a jaw thrust; high-flow oxygen",
             "scene": "o2",
             "mark": "Airway and oxygen",
             "anim": "airway"
-          },
-          {
-            "t": "Lie her flat on her back",
-            "trap": true,
-            "r": "Aortocaval compression reduces cardiac output at 35 weeks."
           }
         ]
       }
@@ -157,49 +154,19 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Magnesium is the anticonvulsant: the loading dose, then the infusion.",
+      "hint": "Magnesium is the anticonvulsant: 4 g load over 5–15 minutes, then 1 g/h for 24 hours.",
       "confirm": "Give",
       "opts": [
         {
-          "t": "Magnesium sulfate 4 g IV over 5–15 minutes",
+          "t": "Magnesium sulfate 4 g IV over 5–15 minutes, then 1 g/h for 24 hours",
           "drug": "Magnesium sulfate",
-          "dose": "4 g IV over 5–15 minutes",
+          "dose": "4 g IV over 5–15 minutes, then 1 g/h for 24 hours",
           "fetch": "cart",
           "scene": "magnesium",
-          "mark": "Magnesium loading dose 4 g"
-        },
-        {
-          "t": "Magnesium sulfate 4 g IV push over 30 seconds",
-          "drug": "Magnesium sulfate",
-          "dose": "4 g IV push over 30 seconds",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too fast: respiratory depression and arrhythmia. Over 5–15 minutes."
-        },
-        {
-          "t": "Magnesium sulfate 1 g IV loading dose",
-          "drug": "Magnesium sulfate",
-          "dose": "1 g IV loading dose",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little to load: 4 g, then 1 g/h."
-        },
-        {
-          "t": "Magnesium sulfate infusion 1 g/h for 24 hours",
-          "drug": "Magnesium sulfate",
-          "dose": "infusion 1 g/h for 24 hours",
-          "fetch": "cart",
-          "when": "magnesium",
-          "early": "Load first.",
-          "mark": "Magnesium maintenance 1 g/h"
-        },
-        {
-          "trap": true,
-          "r": "Magnesium is superior to diazepam and phenytoin for eclampsia.",
-          "t": "Diazepam 10 mg IV first-line, no magnesium",
-          "drug": "Diazepam",
-          "dose": "10 mg IV first-line, no magnesium",
-          "fetch": "cart"
+          "mark": [
+            "Magnesium loading dose 4 g",
+            "Magnesium maintenance 1 g/h"
+          ]
         }
       ]
     },
@@ -219,22 +186,6 @@
           "t": "Labetalol 20 mg IV, repeat or escalate (hydralazine if asthmatic)",
           "drug": "Labetalol",
           "dose": "20 mg IV, repeat or escalate (hydralazine if asthmatic)"
-        },
-        {
-          "t": "Labetalol 200 mg IV bolus",
-          "drug": "Labetalol",
-          "dose": "200 mg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once: 20 mg IV, then 40, 80, or an infusion."
-        },
-        {
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Ergometrine is contraindicated in pre-eclampsia: severe hypertension and stroke.",
-          "t": "Ergometrine 0.5 mg IM for the third stage",
-          "drug": "Ergometrine",
-          "dose": "0.5 mg IM for the third stage"
         }
       ]
     },
@@ -246,11 +197,12 @@
       "hint": "Fluid restriction and urine output.",
       "opts": [
         {
-          "t": "Restrict fluids to about 80 mL/h; catheter and hourly urine output",
+          "t": "Restrict her fluids to about 80 mL an hour; a catheter and hourly urine output.",
           "fetch": "trolley",
           "mark": "Fluid restriction and urine output"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "monitor",
@@ -274,13 +226,13 @@
         "Bloods": [
           {
             "t": "FBC, U&E, LFT, urate, clotting, urine protein:creatinine",
-            "r": "Platelets 88, ALT 190, creatinine 98. Protein:creatinine 150.",
+            "r": "Platelets 88, ALT 190, creatinine 98. Protein:creatinine 150. \"Low platelets and raised ALT: possible HELLP.\"",
             "mark": "Bloods for HELLP and renal involvement"
           }
         ],
         "Fetus": [
           {
-            "t": "Fetal heart / CTG once she is stable",
+            "t": "Now she's stable: the fetal heart, CTG",
             "r": "Baseline 150, reduced variability, recovering.",
             "mark": "Assesses the fetus after the mother is stable"
           }
@@ -295,13 +247,12 @@
       "hint": "Stabilise, then deliver; HDU.",
       "opts": [
         {
-          "t": "Stabilise first, then delivery planned by obstetrics; HDU care",
+          "t": "Obstetrics: Mrs Poon, 24, 35 weeks, eclampsia. Magnesium loaded and running, labetalol given, platelets 88. Stabilise first, then delivery planned by you; HDU care.",
           "mark": "Stabilise the mother before delivery"
         },
         {
-          "t": "Immediate caesarean while she is still fitting",
-          "trap": "critical",
-          "r": "Stabilise first: stop the seizure, control the BP."
+          "t": "If she fits again: a further 2 g of magnesium over 5 minutes. If there's toxicity: calcium gluconate 10%, 10 mL IV.",
+          "mark": "Knows the recurrent-seizure dose and the antidote"
         }
       ]
     },
@@ -431,5 +382,63 @@
       "why": "Maternal stabilisation first.",
       "source": "RCOG / NICE NG133"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Obstetric emergency call, please: the obstetrician, anaesthetist, midwife and neonatologist."
+    },
+    {
+      "at": "0:20",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2."
+    },
+    {
+      "at": "0:40",
+      "say": "Left lateral position; protect her from injury. Airway: suction and a jaw thrust; high-flow oxygen."
+    },
+    {
+      "at": "1:00",
+      "say": "Magnesium sulfate 4 g IV over 5–15 minutes, then 1 g/h for 24 hours."
+    },
+    {
+      "at": "1:20",
+      "say": "Labetalol 20 mg IV, repeat or escalate (hydralazine if asthmatic)."
+    },
+    {
+      "at": "1:40",
+      "say": "Restrict her fluids to about 80 mL an hour; a catheter and hourly urine output."
+    },
+    {
+      "at": "2:00",
+      "say": "Patellar reflexes. Respiratory rate and SpO2. FBC, U&E, LFT, urate, clotting, urine protein:creatinine. Low platelets and raised ALT: possible HELLP.",
+      "do": "Present. RR 18, SpO2 97%. Platelets 88, ALT 190, creatinine 98. Protein:creatinine 150. \"Low platelets and raised ALT: possible HELLP.\""
+    },
+    {
+      "at": "2:20",
+      "say": "Now she's stable: the fetal heart, CTG.",
+      "do": "Baseline 150, reduced variability, recovering."
+    },
+    {
+      "at": "2:40",
+      "say": "Obstetrics: Mrs Poon, 24, 35 weeks, eclampsia. Magnesium loaded and running, labetalol given, platelets 88. Stabilise first, then delivery planned by you; HDU care. If she fits again: a further 2 g of magnesium over 5 minutes. If there's toxicity: calcium gluconate 10%, 10 mL IV."
+    }
+  ],
+  "keywords": [
+    "obstetric emergency",
+    "left lateral",
+    "airway",
+    "oxygen",
+    "magnesium sulfate 4 g",
+    "1 g/h",
+    "labetalol 20 mg",
+    "80 mL",
+    "urine output",
+    "patellar reflexes",
+    "HELLP",
+    "CTG",
+    "stabilise first",
+    "HDU",
+    "2 g",
+    "calcium gluconate"
   ]
 }
