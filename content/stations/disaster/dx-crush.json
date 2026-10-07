@@ -32,7 +32,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the International Society of Nephrology/ERBP recommendations for crush victims in mass disasters (Sever 2012), ATLS 10th (crush syndrome/rhabdomyolysis), and UK Resuscitation Council hyperkalaemia guidance (2023).\n\nKey points: fluids should start before extrication (0.9% saline 1 L/h, then adjusted — about 3–6 L/day is common; in the ED aim for urine output around 200–300 mL/h with a catheter, watching for overload). Hyperkalaemia and arrhythmia appear on release: monitor, ECG, calcium, insulin–glucose, salbutamol, dialysis. Avoid potassium-containing fluids (Hartmann's) early. Bicarbonate and mannitol: no proven benefit — use only if specific indications (sever pH, adequate urine flow for mannitol). Check CK, myoglobinuria (dipstick blood positive, no red cells), calcium, phosphate, gas, lactate. Compartment syndrome: measure/assess; fasciotomy only for true compartment syndrome with ischaemia, not routinely (infection risk in crush). Tourniquet before release is not routinely recommended. Refer to renal for dialysis early.\n\nYour notes mention crush injury only as a suxamethonium contraindication — correct (hyperkalaemia).",
+  "notes": "Checked against the International Society of Nephrology/ERBP recommendations for crush victims in mass disasters (Sever 2012), ATLS 10th (crush syndrome/rhabdomyolysis), and UK Resuscitation Council hyperkalaemia guidance (2023).\n\nKey points: fluids should start before extrication (0.9% saline 1 L/h, then adjusted — about 3–6 L/day is common; in the ED aim for urine output around 200–300 mL/h with a catheter, watching for overload). Hyperkalaemia and arrhythmia appear on release: monitor, ECG, calcium, insulin–glucose, salbutamol, dialysis. Avoid potassium-containing fluids (Hartmann's) early. Bicarbonate and mannitol: no proven benefit — use only if specific indications (sever pH, adequate urine flow for mannitol). Check CK, myoglobinuria (dipstick blood positive, no red cells), calcium, phosphate, gas, lactate. Compartment syndrome: measure/assess; fasciotomy only for true compartment syndrome with ischaemia, not routinely (infection risk in crush). Tourniquet before release is not routinely recommended. Refer to renal for dialysis early.\n\nYour notes mention crush injury only as a suxamethonium contraindication — correct (hyperkalaemia).\n\nPerfect script checked against the ISN crush syndrome recommendations and UKKA hyperkalaemia guidance, an HKCEM-style scheme and a keyword scheme. Removed the wrong doses, Hartmann's, suxamethonium and routine fasciotomy.",
   "cast": [
     {
       "id": "patient",
@@ -131,7 +131,7 @@
         "Now": [
           {
             "t": "12-lead ECG",
-            "r": "Tall peaked T waves, wide QRS, flattened P waves.",
+            "r": "Tall peaked T waves, wide QRS, flattened P waves. \"Hyperkalaemia with ECG changes.\"",
             "img": "ecg:hyperk-severe",
             "mark": "Recognises hyperkalaemic ECG"
           },
@@ -149,7 +149,7 @@
           },
           {
             "t": "Urine dipstick and microscopy",
-            "r": "Dark urine; blood 3+ on dipstick, no red cells: myoglobinuria.",
+            "r": "Dark urine; blood 3+ on dipstick, no red cells: myoglobinuria. \"Rhabdomyolysis: crush syndrome.\"",
             "mark": "Detects myoglobinuria"
           }
         ]
@@ -173,14 +173,6 @@
           "dose": "30 mL IV over 5–10 minutes"
         },
         {
-          "t": "Calcium gluconate 10% 5 mL IV",
-          "drug": "Calcium gluconate 10%",
-          "dose": "5 mL IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 30 mL of 10% gluconate."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "scene": "insulin",
@@ -190,14 +182,6 @@
           "dose": "10 units soluble insulin + 25 g glucose IV"
         },
         {
-          "t": "Insulin with glucose 10 units soluble insulin alone",
-          "drug": "Insulin with glucose",
-          "dose": "10 units soluble insulin alone",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Without glucose he will become hypoglycaemic: 10 units with 25 g glucose."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "scene": "fluids",
@@ -205,22 +189,6 @@
           "t": "0.9% saline 1 L/h, then titrate to urine output",
           "drug": "0.9% saline",
           "dose": "1 L/h, then titrate to urine output"
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Contains potassium; use saline early.",
-          "t": "Hartmann's 2 L fast",
-          "drug": "Hartmann's",
-          "dose": "2 L fast"
-        },
-        {
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Raises potassium further in crush; use rocuronium.",
-          "t": "Suxamethonium 1.5 mg/kg IV if he needs intubation",
-          "drug": "Suxamethonium",
-          "dose": "1.5 mg/kg IV if he needs intubation"
         }
       ]
     },
@@ -270,17 +238,12 @@
       "hint": "Renal for dialysis; orthopaedics for compartment pressures; ICU.",
       "opts": [
         {
-          "t": "Renal: crush syndrome, K 7.4, rising creatinine — early dialysis",
+          "t": "Renal: Mr Kwok, crush syndrome, potassium 7.4 with ECG changes and a rising creatinine. He may need early dialysis.",
           "mark": "Early renal referral"
         },
         {
-          "t": "Orthopaedics: possible compartment syndrome right calf — measure pressures; fasciotomy only if confirmed",
+          "t": "Orthopaedics: a possible compartment syndrome of the right calf. Please measure pressures; fasciotomy only if confirmed.",
           "mark": "Orthopaedic referral with selective fasciotomy"
-        },
-        {
-          "t": "Fasciotomy of both legs now for everyone with crush",
-          "trap": true,
-          "r": "Routine fasciotomy in crush raises infection risk; only for confirmed compartment syndrome."
         }
       ]
     },
@@ -410,5 +373,57 @@
       "why": "Stabilises the myocardium.",
       "source": "UK RC 2023"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "How long was he trapped, and what was crushed? Fluids given before release? Has he passed urine?",
+      "do": "About 6 hours; both thighs and calves under concrete. The medical team started 1 L of saline before we lifted the slab. Not since."
+    },
+    {
+      "at": "0:20",
+      "say": "12-lead ECG. Venous gas. CK, U&E, calcium, phosphate. Hyperkalaemia with ECG changes.",
+      "do": "Tall peaked T waves, wide QRS, flattened P waves. \"Hyperkalaemia with ECG changes.\" K 7.4, pH 7.24, lactate 4.2, iCa 0.98. CK 48,000, creatinine 168."
+    },
+    {
+      "at": "0:40",
+      "say": "Urine dipstick and microscopy. Rhabdomyolysis: crush syndrome.",
+      "do": "Dark urine; blood 3+ on dipstick, no red cells: myoglobinuria. \"Rhabdomyolysis: crush syndrome.\""
+    },
+    {
+      "at": "1:00",
+      "say": "Calcium gluconate 10% 30 mL IV over 5–10 minutes. Insulin with glucose 10 units soluble insulin + 25 g glucose IV. 0.9% saline 1 L/h, then titrate to urine output."
+    },
+    {
+      "at": "1:20",
+      "say": "Urinary catheter; target urine 200–300 mL/h."
+    },
+    {
+      "at": "1:40",
+      "say": "Feel the compartments; passive stretch. Pulses and sensation.",
+      "do": "Both calves tense; pain on passive toe extension. Foot pulses present; reduced sensation in the first web space on the right."
+    },
+    {
+      "at": "2:00",
+      "say": "Renal: Mr Kwok, crush syndrome, potassium 7.4 with ECG changes and a rising creatinine. He may need early dialysis. Orthopaedics: a possible compartment syndrome of the right calf. Please measure pressures; fasciotomy only if confirmed."
+    }
+  ],
+  "keywords": [
+    "how long",
+    "fluids",
+    "urine",
+    "12-lead ECG",
+    "hyperkalaemia",
+    "CK",
+    "crush syndrome",
+    "calcium gluconate 10%",
+    "insulin",
+    "25 g glucose",
+    "0.9% saline",
+    "200–300 mL",
+    "compartments",
+    "passive stretch",
+    "dialysis",
+    "fasciotomy only if confirmed"
   ]
 }

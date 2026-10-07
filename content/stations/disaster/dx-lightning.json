@@ -56,7 +56,7 @@
       "text": "Why reverse triage works. Your notes say 'apnoea may self-resolve'. It is the other way round: the heart often restarts on its own, but the apnoea persists and causes a second, hypoxic arrest. That is why ventilation is vital."
     }
   ],
-  "notes": "Checked against ERC 2021 special circumstances (lightning), the Wilderness Medical Society lightning guideline (2014, updated 2021), and AHA 2020.\n\nReverse triage: in lightning incidents, patients in cardiac or respiratory arrest are treated first, because those who are moving usually survive and arrested victims have a good chance with prompt CPR and ventilation. Lightning (massive DC) often causes asystole, which may revert spontaneously, but the respiratory arrest continues longer and causes secondary hypoxic arrest — so ventilation is vital; VF also occurs. Scene: the storm is the danger (move to shelter when safe); victims carry no charge and are safe to touch. Resuscitate with standard ALS; prolonged efforts are justified. Fixed dilated pupils are unreliable (autonomic effects) and should not be used to stop resuscitation. Look for keraunoparalysis (transient limb paralysis), Lichtenberg figures, TM rupture, cataracts later, and trauma from being thrown (spinal precautions selectively). All patients with chest pain, loss of consciousness, or cardiac symptoms need an ECG and monitoring.\n\nDifferences from your notes: (1) Patient C 'walking → self-evacuate' — with chest pain after a strike he needs an ECG and monitoring; tag GREEN at scene but do not self-discharge. (2) 'BLACK if prolonged arrest + fixed pupils' — pupils are unreliable after lightning. (3) The rationale 'apnoea may self-resolve' is reversed: the heart often restarts; the apnoea persists.",
+  "notes": "Checked against ERC 2021 special circumstances (lightning), the Wilderness Medical Society lightning guideline (2014, updated 2021), and AHA 2020.\n\nReverse triage: in lightning incidents, patients in cardiac or respiratory arrest are treated first, because those who are moving usually survive and arrested victims have a good chance with prompt CPR and ventilation. Lightning (massive DC) often causes asystole, which may revert spontaneously, but the respiratory arrest continues longer and causes secondary hypoxic arrest — so ventilation is vital; VF also occurs. Scene: the storm is the danger (move to shelter when safe); victims carry no charge and are safe to touch. Resuscitate with standard ALS; prolonged efforts are justified. Fixed dilated pupils are unreliable (autonomic effects) and should not be used to stop resuscitation. Look for keraunoparalysis (transient limb paralysis), Lichtenberg figures, TM rupture, cataracts later, and trauma from being thrown (spinal precautions selectively). All patients with chest pain, loss of consciousness, or cardiac symptoms need an ECG and monitoring.\n\nDifferences from your notes: (1) Patient C 'walking → self-evacuate' — with chest pain after a strike he needs an ECG and monitoring; tag GREEN at scene but do not self-discharge. (2) 'BLACK if prolonged arrest + fixed pupils' — pupils are unreliable after lightning. (3) The rationale 'apnoea may self-resolve' is reversed: the heart often restarts; the apnoea persists.\n\nPerfect script checked against the Wilderness Medical Society lightning guideline and ERC special circumstances, an HKCEM-style scheme and a keyword scheme. Removed the electrified-victim, wrong-triage and send-home options; the CPR bench narrated.",
   "cast": [
     {
       "id": "patient",
@@ -111,21 +111,16 @@
       "hint": "Storm still active; victims safe to touch; call for help with METHANE.",
       "opts": [
         {
-          "t": "Storm still active — work low, away from trees and flagpoles; move to shelter as soon as safe",
+          "t": "The storm is still active: we work low, away from trees and flagpoles, and move to shelter as soon as it's safe.",
           "mark": "Assesses ongoing lightning risk to rescuers"
         },
         {
-          "t": "Victims carry no charge — safe to touch",
+          "t": "Lightning victims carry no charge: it's safe to touch them.",
           "mark": "Knows victims are safe to touch"
         },
         {
-          "t": "Radio control: lightning strike, 3 casualties, 1 in arrest — ALS ambulances and more units",
+          "t": "Control: a lightning strike, 3 casualties, 1 in arrest. ALS ambulances and more units, please.",
           "mark": "Calls for help with casualty numbers"
-        },
-        {
-          "t": "Wait until they are no longer 'electrified'",
-          "trap": "critical",
-          "r": "Lightning victims carry no charge; delay costs the arrested patient."
         }
       ]
     },
@@ -137,18 +132,8 @@
       "hint": "The arrested patient first.",
       "opts": [
         {
-          "t": "Reverse triage: A (arrest) first; B and C are breathing and moving",
+          "t": "Reverse triage: A, in arrest, first. B and C are breathing and moving.",
           "mark": "Applies reverse triage"
-        },
-        {
-          "t": "Treat B first — she is confused and has burns",
-          "trap": "critical",
-          "r": "In lightning, those moving usually survive; the arrested patient has the most to gain."
-        },
-        {
-          "t": "Tag A BLACK — pulseless after a strike",
-          "trap": "critical",
-          "r": "Lightning arrest has a good survival with prompt CPR."
         }
       ]
     },
@@ -186,17 +171,12 @@
       "hint": "B: neuro, keraunoparalysis, spine; C: ECG and monitoring.",
       "opts": [
         {
-          "t": "B: YELLOW — GCS, limb power (keraunoparalysis), ears, spinal precautions if thrown",
+          "t": "B: YELLOW. GCS, limb power for keraunoparalysis, her ears, and spinal precautions if she was thrown.",
           "mark": "B assessed for neuro injury and trauma"
         },
         {
-          "t": "C: GREEN at scene but needs ECG and monitoring for chest pain",
+          "t": "C: GREEN at the scene, but chest pain after lightning needs an ECG and monitoring.",
           "mark": "C needs ECG despite walking"
-        },
-        {
-          "t": "C can go home — walking",
-          "trap": true,
-          "r": "Chest pain after lightning needs an ECG and monitoring."
         }
       ]
     },
@@ -208,14 +188,9 @@
       "hint": "SBAR to the ambulance crew.",
       "opts": [
         {
-          "t": "SBAR: 28M direct strike, VF arrest, 1 shock, ROSC at 3 min, apnoeic on bag-mask; B confused with feathering burns; C chest pain for ECG",
+          "t": "SBAR: A, 28-year-old man, direct strike, VF arrest, 1 shock, ROSC at 3 minutes, apnoeic on bag-mask. B confused with feathering burns. C chest pain for an ECG.",
           "mark": "Structured handover",
           "r": "Crew repeat back and load A first."
-        },
-        {
-          "t": "Lightning, three patients, one was dead",
-          "trap": true,
-          "r": "No times, no treatment, no plan."
         }
       ]
     },
@@ -345,5 +320,44 @@
       "why": "Blast effect.",
       "source": "WMS"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "The storm is still active: we work low, away from trees and flagpoles, and move to shelter as soon as it's safe. Lightning victims carry no charge: it's safe to touch them. Control: a lightning strike, 3 casualties, 1 in arrest. ALS ambulances and more units, please."
+    },
+    {
+      "at": "0:20",
+      "say": "Reverse triage: A, in arrest, first. B and C are breathing and moving."
+    },
+    {
+      "at": "0:40",
+      "say": "A: open the airway, rescue breaths, CPR 30:2, AED on: VF, one shock, CPR straight back on. Ventilate: the apnoea can outlast the arrest."
+    },
+    {
+      "at": "1:00",
+      "say": "B: YELLOW. GCS, limb power for keraunoparalysis, her ears, and spinal precautions if she was thrown. C: GREEN at the scene, but chest pain after lightning needs an ECG and monitoring."
+    },
+    {
+      "at": "1:20",
+      "say": "SBAR: A, 28-year-old man, direct strike, VF arrest, 1 shock, ROSC at 3 minutes, apnoeic on bag-mask. B confused with feathering burns. C chest pain for an ECG.",
+      "do": "Crew repeat back and load A first."
+    }
+  ],
+  "keywords": [
+    "storm",
+    "no charge",
+    "safe to touch",
+    "lightning strike",
+    "reverse triage",
+    "arrest",
+    "AED",
+    "VF",
+    "ventilate",
+    "keraunoparalysis",
+    "spinal precautions",
+    "ECG",
+    "SBAR",
+    "ROSC"
   ]
 }
