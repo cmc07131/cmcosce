@@ -67,7 +67,8 @@
           "tz": "陳生你好，我係急症室醫生。我會幫你清洗傷口、打麻醉，再縫埋佢；可能會有啲痛、有機會發炎同留疤。你同意嗎？",
           "r": "Yes, go ahead, doctor.",
           "rz": "得，醫生你做啦。",
-          "mark": "Introduces, explains the procedure and risks, obtains consent"
+          "mark": "Introduces, explains the procedure and risks, obtains consent",
+          "scene": "consented"
         },
         {
           "t": "How did it happen, exactly when, and was it dirty? Any glass or metal in it?",
@@ -98,10 +99,12 @@
           "mark": "Healing risks: diabetes, vascular disease, steroids, anticoagulants"
         },
         {
-          "t": "Right, let's get it stitched straight away",
-          "tz": "好，我哋即刻縫啦。",
-          "trap": true,
-          "r": "Not without his consent, and not before you know his tetanus status and allergies."
+          "t": "Thank you. I'll start the repair now",
+          "tz": "多謝你，我而家開始幫你處理傷口。",
+          "r": "Okay, doctor.",
+          "rz": "好，醫生。",
+          "when": "consented",
+          "early": "You haven't asked whether I'm happy for you to go ahead."
         }
       ]
     },

@@ -37,3 +37,11 @@ test('suture: a full repair earns every mark', () => {
   assert.deepEqual(checkSuture(r).filter((x) => x.ok).map((x) => x.key), [...SUTURE_MARKS])
   assert.ok(A.x > 0)
 })
+
+test('suture: perfect stitches without the needle holder fail, and the card says why', () => {
+  const stitches: Stitch[] = []
+  for (const arm of [0, 1] as const) for (const at of [14, 26, 38, 50]) stitches.push(judgeStitch(...across(arm, at))!)
+  const row = checkSuture({ ...freshSuture(), stitches, holder: null }).find((x) => x.key === 'interrupted')!
+  assert.ok(!row.ok)
+  assert.match(row.value, /never loaded/)
+})

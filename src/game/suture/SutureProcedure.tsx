@@ -175,7 +175,7 @@ function LocalStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
           CHLORHEXIDINE
         </button>
         <button type="button" className="tap io-mini" data-on={mode === 'needle' || undefined} data-testid="suture-mode-needle" onClick={() => setMode('needle')}>
-          1% LIDOCAINE, ORANGE NEEDLE
+          {run.lidoSharps ? 'LIDOCAINE NEEDLE: IN THE BIN' : '1% LIDOCAINE, ORANGE NEEDLE'}
         </button>
       </div>
       <TouchPad
@@ -186,6 +186,7 @@ function LocalStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
         onDown={(p) => {
           warned.current = false
           if (mode === 'clean') return void rub.rub(p)
+          if (runRef.current.lidoSharps) return void feel('That needle is already in the sharps bin.')
           if (toEdge(p) > 6 && !warned.current) {
             warned.current = true
             upd((c) => ({ throughSkin: c.throughSkin + 1 }))
@@ -198,6 +199,7 @@ function LocalStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
             rub.rub(p)
             return upd({ cleaned: rub.coverage })
           }
+          if (runRef.current.lidoSharps) return
           const seg = edgeSegment(p)
           if (seg === null) return
           const cur = runRef.current
@@ -205,7 +207,7 @@ function LocalStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
         }}
         onUp={() => {
           const cur = runRef.current
-          if (mode === 'needle' && cur.edges.length) feel(`${cur.edges.length}/${EDGE_SEGMENTS} of the edges infiltrated (${cur.lidoMl.toFixed(1)} mL); the skin blanches as it goes in.`)
+          if (mode === 'needle' && cur.edges.length && !cur.lidoSharps) feel(`${cur.edges.length}/${EDGE_SEGMENTS} of the edges infiltrated (${cur.lidoMl.toFixed(1)} mL); the skin blanches as it goes in.`)
         }}
       >
         <Wound run={run} svgRef={svg}>
@@ -215,7 +217,7 @@ function LocalStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
       {run.edges.length > 0 && (
         <SharpsTray
           items={run.lidoSharps ? [] : [{ id: 'lido', kind: 'needle' }]}
-          onBin={() => (upd({ lidoSharps: true }), sfx.select(), feel('The orange needle straight into the sharps bin, by you.'))}
+          onBin={() => (upd({ lidoSharps: true }), sfx.select(), feel(runRef.current.edges.length >= EDGE_SEGMENTS - 1 ? 'Infiltration done: the orange needle straight into the sharps bin, by you.' : 'The needle is in the bin, with part of the edge still not numb.'))}
         />
       )}
       <NextButton onClick={next} testId="suture-next">
@@ -390,6 +392,7 @@ function StitchStage({ run, upd, feel, why, physical, next, corner, lines, setLi
         className="mt-2"
         testId="suture-stitch"
         onDown={(p) => {
+          if (!run.holder) return void feel('Load the needle first: choose how you hold it.')
           start.current = p
           setDrag([p, p])
         }}

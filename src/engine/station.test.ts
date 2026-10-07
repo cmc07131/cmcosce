@@ -420,3 +420,21 @@ test('a report you take to the examiner comes before the examiner comes over for
   const hint = nextHint(pack, spent, [])
   assert.equal(hint?.kind === 'do' ? hint.actionId : hint?.kind, 'findings')
 })
+
+test('suture: "I will start now" is a fault before consent, and fine after it', () => {
+  const pack = compileStation(stationSchema.parse(JSON.parse(readFileSync(files.find((f) => f.endsWith('sx-suture.json'))!, 'utf8'))))
+  const s = () => usePlay.getState()
+  s().rerun(pack)
+  s().enterRoom()
+  const opts = pack.actions.find((a) => a.id === 'history')!.options!
+  const consent = opts.find((o) => /consent/i.test(o.label))!
+  const start = opts.find((o) => /start the repair/i.test(o.label))!
+  s().pickOption(pack, 'history', start.id)
+  assert.ok(s().faults.some((f) => /Too early/.test(f.text)), 'before consent: a fault')
+  assert.ok(!(s().spent['history'] ?? []).includes(start.id))
+  s().pickOption(pack, 'history', consent.id)
+  const before = s().faults.length
+  s().pickOption(pack, 'history', start.id)
+  assert.equal(s().faults.length, before, 'after consent: no fault')
+  assert.ok(s().spent['history'].includes(start.id))
+})
