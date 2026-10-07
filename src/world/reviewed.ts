@@ -18,6 +18,7 @@ export const REVIEWED: ReadonlySet<string> = new Set([
   'md-vertigo',
   'ot-hare',
   'pd-supracondylar',
+  'sx-suture',
 ])
 
 export const isReviewed = (id: string) => REVIEWED.has(id)
