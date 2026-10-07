@@ -54,7 +54,7 @@
       "text": "Doses. Your notes give PTU 250 mg every 4–6 hours with no loading dose, and hydrocortisone 200 mg then 100 mg every 6–8 hours. The ATA gives a PTU load of 500–1000 mg then 250 mg every 4 hours, and hydrocortisone 300 mg IV then 100 mg every 8 hours. Propranolol is 60–80 mg every 4 hours rather than 80–120 mg every 6 hours."
     }
   ],
-  "notes": "Checked against the American Thyroid Association 2016 guidelines on hyperthyroidism and thyrotoxicosis, the Japan Thyroid Association 2016 criteria, and the Burch–Wartofsky Point Scale (1993).\n\nDifferential for fever, agitation and tachycardia: sepsis/meningitis, thyroid storm, sympathomimetic or serotonergic toxicity, anticholinergic toxicity, heat stroke, NMS. A goitre and the history point to storm; the Burch–Wartofsky score (45 or more highly suggestive) supports it.\n\nTreatment (ATA): beta-blocker (propranolol 60–80 mg orally every 4 hours, or IV/esmolol if unable; caution in heart failure); thionamide — PTU 500–1000 mg load then 250 mg every 4 hours (preferred in storm because it also blocks T4→T3 conversion) or methimazole 60–80 mg/day; iodine (potassium iodide or Lugol's) at least 1 hour after the thionamide; hydrocortisone 300 mg IV load then 100 mg every 8 hours; supportive care: cooling, paracetamol (avoid aspirin — displaces thyroxine), fluids, treat the trigger, ICU. Cholestyramine for exogenous hormone (e.g. slimming products containing thyroid hormone or tiratricol).\n\nYour notes: PTU 250 mg every 4–6 hours (no loading dose), hydrocortisone 200 mg then 100 mg every 6–8 hours, propranolol 80–120 mg every 6 hours; ATA uses a PTU load of 500–1000 mg and hydrocortisone 300 mg load. The order (thionamide, then iodine an hour later), the differential, and CHP reporting of illegal slimming drugs match.",
+  "notes": "Checked against the American Thyroid Association 2016 guidelines on hyperthyroidism and thyrotoxicosis, the Japan Thyroid Association 2016 criteria, and the Burch–Wartofsky Point Scale (1993).\n\nDifferential for fever, agitation and tachycardia: sepsis/meningitis, thyroid storm, sympathomimetic or serotonergic toxicity, anticholinergic toxicity, heat stroke, NMS. A goitre and the history point to storm; the Burch–Wartofsky score (45 or more highly suggestive) supports it.\n\nTreatment (ATA): beta-blocker (propranolol 60–80 mg orally every 4 hours, or IV/esmolol if unable; caution in heart failure); thionamide — PTU 500–1000 mg load then 250 mg every 4 hours (preferred in storm because it also blocks T4→T3 conversion) or methimazole 60–80 mg/day; iodine (potassium iodide or Lugol's) at least 1 hour after the thionamide; hydrocortisone 300 mg IV load then 100 mg every 8 hours; supportive care: cooling, paracetamol (avoid aspirin — displaces thyroxine), fluids, treat the trigger, ICU. Cholestyramine for exogenous hormone (e.g. slimming products containing thyroid hormone or tiratricol).\n\nYour notes: PTU 250 mg every 4–6 hours (no loading dose), hydrocortisone 200 mg then 100 mg every 6–8 hours, propranolol 80–120 mg every 6 hours; ATA uses a PTU load of 500–1000 mg and hydrocortisone 300 mg load. The order (thionamide, then iodine an hour later), the differential, and CHP reporting of illegal slimming drugs match.\n\nPerfect script checked against the ATA 2016 guideline, a toxicology differential checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (tenfold doses, aspirin, PTU without a load, low hydrocortisone). Added: the differential and the Burch–Wartofsky score said aloud, cholestyramine, and reporting the product.",
   "cast": [
     {
       "id": "patient",
@@ -110,12 +110,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2, IV access and a core temperature.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
@@ -174,7 +175,7 @@
           },
           {
             "t": "TSH, free T4 and T3",
-            "r": "TSH < 0.01, free T4 > 100 pmol/L.",
+            "r": "TSH < 0.01, free T4 > 100 pmol/L. \"With fever 40, AF, agitation: Burch–Wartofsky well over 45: thyroid storm.\"",
             "mark": "Thyroid function"
           },
           {
@@ -197,7 +198,7 @@
           "t": "Cooling blanket, fans, tepid sponging",
           "fetch": "trolley",
           "scene": "cool",
-          "mark": "Sedation for agitation, cooling, paracetamol"
+          "mark": "Active cooling"
         }
       ]
     },
@@ -217,27 +218,11 @@
           "mark": "Benzodiazepine for agitation"
         },
         {
-          "t": "Diazepam 40 mg IV bolus",
-          "drug": "Diazepam",
-          "dose": "40 mg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once: titrate 5–10 mg."
-        },
-        {
           "t": "Paracetamol 1 g IV",
           "drug": "Paracetamol",
           "dose": "1 g IV",
           "fetch": "cart",
           "mark": "Paracetamol for the fever"
-        },
-        {
-          "trap": true,
-          "r": "Aspirin displaces thyroid hormone from binding proteins, raising free hormone.",
-          "t": "Aspirin 600 mg orally for the fever",
-          "drug": "Aspirin",
-          "dose": "600 mg orally for the fever",
-          "fetch": "cart"
         }
       ]
     },
@@ -258,14 +243,6 @@
           "mark": "Beta-blocker for adrenergic symptoms"
         },
         {
-          "t": "Propranolol 10 mg IV bolus",
-          "drug": "Propranolol",
-          "dose": "10 mg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Far too much IV at once: 1 mg IV slowly, repeated, or oral 60–80 mg."
-        },
-        {
           "t": "Propylthiouracil (PTU) 500–1000 mg load, then 250 mg every 4 hours",
           "drug": "Propylthiouracil (PTU)",
           "dose": "500–1000 mg load, then 250 mg every 4 hours",
@@ -274,27 +251,11 @@
           "mark": "Thionamide (PTU) with a loading dose"
         },
         {
-          "t": "Propylthiouracil (PTU) 250 mg every 4 hours, no load",
-          "drug": "Propylthiouracil (PTU)",
-          "dose": "250 mg every 4 hours, no load",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Load first in thyroid storm: 500–1000 mg, then 250 mg every 4 hours."
-        },
-        {
           "t": "Hydrocortisone 300 mg IV, then 100 mg every 8 hours",
           "drug": "Hydrocortisone",
           "dose": "300 mg IV, then 100 mg every 8 hours",
           "fetch": "cart",
           "mark": "Hydrocortisone"
-        },
-        {
-          "t": "Hydrocortisone 25 mg IV",
-          "drug": "Hydrocortisone",
-          "dose": "25 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 300 mg IV load, then 100 mg every 8 hours."
         },
         {
           "t": "Lugol's iodine 5 drops orally every 6 hours",
@@ -315,10 +276,19 @@
       "hint": "Fluids, potassium, ICU.",
       "opts": [
         {
-          "t": "IV fluids; correct potassium; ICU referral",
+          "t": "IV fluids, correct the potassium of 3.0, and ICU referral.",
           "mark": "Supportive care and ICU"
+        },
+        {
+          "t": "If it's exogenous hormone from the pills: cholestyramine to bind it.",
+          "mark": "Cholestyramine for exogenous thyroid hormone"
+        },
+        {
+          "t": "Report the slimming product to the Department of Health.",
+          "mark": "Reports the illegal slimming product"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "mum",
@@ -472,6 +442,78 @@
       ],
       "why": "Carbimazole embryopathy.",
       "source": "ATA 2016"
+    }
+  ],
+  "keywords": [
+    "differential",
+    "sepsis",
+    "toxidrome",
+    "goitre",
+    "bruit",
+    "fast AF",
+    "Burch–Wartofsky",
+    "thyroid storm",
+    "cooling",
+    "diazepam",
+    "paracetamol",
+    "no aspirin",
+    "propranolol",
+    "PTU",
+    "loading dose",
+    "hydrocortisone 300 mg",
+    "iodine",
+    "an hour after",
+    "cholestyramine",
+    "ICU",
+    "tiratricol",
+    "Department of Health"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2, IV access and a core temperature."
+    },
+    {
+      "at": "0:10",
+      "say": "Fever, agitation and tachycardia: the differential is sepsis or meningitis, thyroid storm, a sympathomimetic or serotonergic toxidrome, and heat stroke."
+    },
+    {
+      "at": "0:20",
+      "say": "No meningism. A smooth goitre with a bruit; lid retraction and proptosis; a fine tremor, warm sweaty palms. Pupils normal, sweating, bowel sounds present, no clonus: not another toxidrome."
+    },
+    {
+      "at": "0:45",
+      "say": "12-lead ECG, thyroid function; glucose, electrolytes, LFTs, cultures, a urine drug screen and a pregnancy test.",
+      "do": "Fast AF at 140; TSH under 0.01, free T4 over 100; K 3.0."
+    },
+    {
+      "at": "1:05",
+      "say": "Fever 40, fast AF, agitation and thyrotoxic: a Burch–Wartofsky score well over 45: this is thyroid storm."
+    },
+    {
+      "at": "1:15",
+      "say": "Active cooling: blanket, fans, tepid sponging. Diazepam 5 to 10 mg IV, titrated. Paracetamol 1 g IV; no aspirin, it frees more thyroid hormone."
+    },
+    {
+      "at": "1:35",
+      "say": "Propranolol 60 to 80 mg every 4 hours. PTU with a loading dose, 500 to 1000 mg, then 250 mg every 4 hours. Hydrocortisone 300 mg IV, then 100 mg every 8 hours."
+    },
+    {
+      "at": "1:55",
+      "say": "Iodine an hour after the PTU: Lugol's, 5 drops every 6 hours."
+    },
+    {
+      "at": "2:05",
+      "say": "IV fluids, correct the potassium of 3.0, and ICU referral. If it's exogenous hormone from the pills: cholestyramine to bind it."
+    },
+    {
+      "at": "2:20",
+      "say": "What are the slimming pills? Do you have the bottle? Any weight loss, palpitations or heat intolerance before?",
+      "do": "Bought online from Thailand, contains tiratricol; lost 8 kg in 2 months."
+    },
+    {
+      "at": "2:40",
+      "say": "Tiratricol is a thyroid hormone analogue. Report the slimming product to the Department of Health."
     }
   ]
 }
