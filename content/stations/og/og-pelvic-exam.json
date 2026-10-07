@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the GMC guidance on intimate examinations and chaperones (2024), RCOG guidance on gynaecological examinations, and BASHH/NICE guidance on pelvic inflammatory disease (PID).\n\nIntimate examination: explain why, what it involves and that she can stop at any time; obtain and record consent; offer a chaperone (and record their name, or her refusal); privacy to undress with a cover; gloves; warm and lubricate the speculum. Speculum: inspect the vulva first, insert the closed speculum along the vaginal axis (downward and backward), rotate and open to see the cervix; take swabs (endocervical NAAT for chlamydia and gonorrhoea; high vaginal swab); close before withdrawing. Bimanual: two fingers in the vagina, other hand on the abdomen; cervical motion tenderness, uterine size, position and tenderness, adnexal masses or tenderness.\n\nPID (BASHH): treat on clinical suspicion (lower abdominal pain plus cervical motion or adnexal tenderness) without waiting for swabs: ceftriaxone 1 g IM once plus doxycycline 100 mg twice daily and metronidazole 400 mg twice daily for 14 days (outpatient regimen). Admit if severely unwell, pregnant, or tubo-ovarian abscess.\n\nYour notes list 'Bimanual pelvic exam' and 'PV exam' without detail; nothing conflicts.",
+  "notes": "Checked against the GMC guidance on intimate examinations and chaperones (2024), RCOG guidance on gynaecological examinations, and BASHH/NICE guidance on pelvic inflammatory disease (PID).\n\nIntimate examination: explain why, what it involves and that she can stop at any time; obtain and record consent; offer a chaperone (and record their name, or her refusal); privacy to undress with a cover; gloves; warm and lubricate the speculum. Speculum: inspect the vulva first, insert the closed speculum along the vaginal axis (downward and backward), rotate and open to see the cervix; take swabs (endocervical NAAT for chlamydia and gonorrhoea; high vaginal swab); close before withdrawing. Bimanual: two fingers in the vagina, other hand on the abdomen; cervical motion tenderness, uterine size, position and tenderness, adnexal masses or tenderness.\n\nPID (BASHH): treat on clinical suspicion (lower abdominal pain plus cervical motion or adnexal tenderness) without waiting for swabs: ceftriaxone 1 g IM once plus doxycycline 100 mg twice daily and metronidazole 400 mg twice daily for 14 days (outpatient regimen). Admit if severely unwell, pregnant, or tubo-ovarian abscess.\n\nYour notes list 'Bimanual pelvic exam' and 'PV exam' without detail; nothing conflicts.\n\nPerfect script checked against BASHH PID guidance and GMC intimate examination guidance, an HKCEM-style scheme and a keyword scheme. Removed the dismissive replies and the wait-for-swabs option; the uterus now scores.",
   "cast": [
     {
       "id": "patient",
@@ -66,13 +66,6 @@
               "r": "OK… yes, that's fine.",
               "mood": -2,
               "mark": "Explains the examination and obtains consent"
-            },
-            {
-              "t": "Just lie back, it'll be quick.",
-              "tz": "你瞓低就得，好快㗎。",
-              "rz": "等陣，你想做乜嘢？",
-              "r": "Wait, what are you going to do?",
-              "mood": 3
             }
           ]
         },
@@ -87,13 +80,6 @@
               "r": "Thank you.",
               "mood": -2,
               "mark": "Offers a chaperone and ensures privacy"
-            },
-            {
-              "t": "No, we don't bother with that.",
-              "tz": "唔使喇，我哋唔搞呢啲。",
-              "rz": "有人喺度我會安心啲……",
-              "r": "I'd feel better with someone here…",
-              "mood": 3
             }
           ]
         }
@@ -108,7 +94,7 @@
       "groups": {
         "Prepare": [
           {
-            "t": "Wash hands, gloves, warm and lubricate the speculum; position (knees bent, ankles together, knees apart)",
+            "t": "Wash hands, gloves; warm and lubricate the speculum; knees bent, ankles together, knees apart",
             "r": "Ready.",
             "mark": "Hand hygiene, gloves and positioning",
             "do": "gloves & say knees-up"
@@ -128,19 +114,19 @@
             "do": "look vulva"
           },
           {
-            "t": "Insert the closed speculum, rotate, open, visualise the cervix",
+            "t": "Insert the closed speculum, rotate, open, and see the cervix",
             "r": "Cervix inflamed, bleeds on contact, mucopurulent discharge from the os.",
             "mark": "Visualises the cervix correctly",
             "do": "speculum vulva,cervix @knees-up"
           },
           {
-            "t": "Swabs: endocervical NAAT (chlamydia/gonorrhoea) and high vaginal swab",
+            "t": "Swabs: endocervical NAAT for chlamydia and gonorrhoea, and a high vaginal swab",
             "r": "Taken.",
             "mark": "Takes the appropriate swabs",
             "do": "swab cervix,vulva"
           },
           {
-            "t": "Withdraw the speculum",
+            "t": "Close the speculum and withdraw it",
             "r": "Closed as it comes out past the cervix.",
             "mark": "Closes the speculum before withdrawal",
             "do": "speculum vulva,cervix > speculum vulva,cervix"
@@ -148,15 +134,16 @@
         ],
         "Bimanual": [
           {
-            "t": "Move the cervix gently side to side",
+            "t": "Bimanual: move the cervix gently side to side",
             "r": "Cervical motion tenderness.",
             "mark": "Tests for cervical motion tenderness",
             "do": "feel cervix @gloved"
           },
           {
-            "t": "Uterus: size, position, tenderness",
+            "t": "The uterus: size, position, tenderness",
             "r": "Anteverted, normal size, mildly tender.",
-            "do": "feel cervix & feel suprapubic"
+            "do": "feel cervix & feel suprapubic",
+            "mark": "Assesses the uterus"
           },
           {
             "t": "Both adnexa",
@@ -176,17 +163,12 @@
       "hint": "Summarise findings, diagnosis, plan.",
       "opts": [
         {
-          "t": "Mucopurulent cervicitis, cervical motion and bilateral adnexal tenderness, negative pregnancy test: pelvic inflammatory disease",
+          "t": "Mucopurulent cervicitis, cervical motion tenderness and bilateral adnexal tenderness with a negative pregnancy test: pelvic inflammatory disease.",
           "mark": "Presents findings and a working diagnosis of PID"
         },
         {
-          "t": "Start treatment now without waiting for swabs: ceftriaxone 1 g IM, doxycycline and metronidazole for 14 days; partner notification; review in 72 hours",
+          "t": "Treat now without waiting for swabs: ceftriaxone 1 g IM, then doxycycline and metronidazole for 14 days; partner notification; review in 72 hours.",
           "mark": "Treats empirically with BASHH regimen and arranges follow-up"
-        },
-        {
-          "t": "Wait for the swab results before any antibiotics",
-          "trap": true,
-          "r": "Delayed treatment increases the risk of infertility and ectopic pregnancy."
         }
       ]
     },
@@ -316,5 +298,55 @@
       "why": "Also severe illness or failure of oral therapy.",
       "source": "BASHH"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Yes — I'd like to look at the neck of the womb with a speculum and then feel with two fingers, to find the cause of the pain. It may be uncomfortable; you can ask me to stop at any time. Is that OK?",
+      "do": "OK… yes, that's fine."
+    },
+    {
+      "at": "0:20",
+      "say": "I'd like a chaperone, Nurse Chaperone, to be present; I'll note her name. I'll leave while you undress and there's a sheet to cover you.",
+      "do": "Thank you."
+    },
+    {
+      "at": "0:40",
+      "say": "Wash hands, gloves; warm and lubricate the speculum; knees bent, ankles together, knees apart. Palpate the abdomen first. Inspect the vulva.",
+      "do": "Ready. Tender in both iliac fossae, no guarding. Normal vulva, some yellow discharge at the introitus."
+    },
+    {
+      "at": "1:00",
+      "say": "Insert the closed speculum, rotate, open, and see the cervix. Swabs: endocervical NAAT for chlamydia and gonorrhoea, and a high vaginal swab. Close the speculum and withdraw it.",
+      "do": "Cervix inflamed, bleeds on contact, mucopurulent discharge from the os. Taken. Closed as it comes out past the cervix."
+    },
+    {
+      "at": "1:20",
+      "say": "Bimanual: move the cervix gently side to side. The uterus: size, position, tenderness. Both adnexa.",
+      "do": "Cervical motion tenderness. Anteverted, normal size, mildly tender. Tender on both sides, no mass."
+    },
+    {
+      "at": "1:40",
+      "say": "Mucopurulent cervicitis, cervical motion tenderness and bilateral adnexal tenderness with a negative pregnancy test: pelvic inflammatory disease. Treat now without waiting for swabs: ceftriaxone 1 g IM, then doxycycline and metronidazole for 14 days; partner notification; review in 72 hours."
+    }
+  ],
+  "keywords": [
+    "speculum",
+    "stop at any time",
+    "chaperone",
+    "sheet",
+    "gloves",
+    "abdomen first",
+    "vulva",
+    "cervix",
+    "NAAT",
+    "chlamydia",
+    "cervical motion tenderness",
+    "adnexa",
+    "pelvic inflammatory disease",
+    "ceftriaxone 1 g",
+    "doxycycline",
+    "metronidazole",
+    "partner notification"
   ]
 }

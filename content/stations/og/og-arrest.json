@@ -52,7 +52,7 @@
       "text": "Hand position. Your notes say to do CPR 'higher on the sternum'. Current guidance uses the normal hand position and rate, with manual left uterine displacement from 20 weeks."
     }
   ],
-  "notes": "Checked against RCUK 2025 special circumstances (pregnancy, including resuscitative hysterotomy), ERC 2025 and the MBRRACE-UK reports.\n\nDifferences from standard ALS: call the obstetric and neonatal teams at once; manual left uterine displacement (or left lateral tilt) from 20 weeks; standard hand position and compression rate (earlier teaching said 'higher on the sternum'; current guidance uses the normal position); early advanced airway by an experienced operator (aspiration, difficult airway); IV access above the diaphragm; normal defibrillation energies. Resuscitative hysterotomy (perimortem caesarean) if the gestation is 20 weeks or more (fundus at or above the umbilicus) and there is no ROSC within 4 minutes, aiming for delivery by 5 minutes; done where she is, without moving her. It aids maternal resuscitation by relieving aortocaval compression.\n\nCauses: 4 Hs and 4 Ts plus obstetric causes — haemorrhage, amniotic fluid embolism, eclampsia, magnesium toxicity, peripartum cardiomyopathy, aortic dissection, pulmonary embolism, anaesthetic complications.\n\nYour notes match this (prepare at 4 minutes, deliver by 5); they say 'CPR higher in sternum', which is no longer recommended.",
+  "notes": "Checked against RCUK 2025 special circumstances (pregnancy, including resuscitative hysterotomy), ERC 2025 and the MBRRACE-UK reports.\n\nDifferences from standard ALS: call the obstetric and neonatal teams at once; manual left uterine displacement (or left lateral tilt) from 20 weeks; standard hand position and compression rate (earlier teaching said 'higher on the sternum'; current guidance uses the normal position); early advanced airway by an experienced operator (aspiration, difficult airway); IV access above the diaphragm; normal defibrillation energies. Resuscitative hysterotomy (perimortem caesarean) if the gestation is 20 weeks or more (fundus at or above the umbilicus) and there is no ROSC within 4 minutes, aiming for delivery by 5 minutes; done where she is, without moving her. It aids maternal resuscitation by relieving aortocaval compression.\n\nCauses: 4 Hs and 4 Ts plus obstetric causes — haemorrhage, amniotic fluid embolism, eclampsia, magnesium toxicity, peripartum cardiomyopathy, aortic dissection, pulmonary embolism, anaesthetic complications.\n\nYour notes match this (prepare at 4 minutes, deliver by 5); they say 'CPR higher in sternum', which is no longer recommended.\n\nPerfect script checked against RCUK/AHA maternal arrest guidance, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (no displacement, leg access, low dose, moving to theatre).",
   "cast": [
     {
       "id": "patient",
@@ -128,14 +128,9 @@
       "groups": {
         "CPR": [
           {
-            "t": "Compressions 30:2, normal hand position, while a helper pushes the uterus to her left",
+            "t": "Compressions 30:2 with the normal hand position, while a helper pushes the uterus to her left: manual left uterine displacement",
             "mark": "Manual left uterine displacement during CPR",
             "scene": "cpr"
-          },
-          {
-            "t": "Compressions with her lying flat and no displacement",
-            "trap": true,
-            "r": "Aortocaval compression makes CPR ineffective at 30 weeks."
           }
         ]
       }
@@ -145,7 +140,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Asystole: adrenaline, through access above the diaphragm.",
+      "hint": "Asystole: adrenaline 1 mg, through access above the diaphragm.",
       "confirm": "Give",
       "opts": [
         {
@@ -154,22 +149,6 @@
           "dose": "1 mg IV (arm or neck access)",
           "fetch": "cart",
           "mark": "Adrenaline early in non-shockable rhythm; access above the diaphragm"
-        },
-        {
-          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 1 mg IV into a leg vein",
-          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
-          "dose": "1 mg IV into a leg vein",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Access below the diaphragm: the gravid uterus slows the drug returning to the heart. Arms or neck."
-        },
-        {
-          "t": "Adrenaline 1 mg in 10 mL (1:10,000) 0.1 mg IV",
-          "drug": "Adrenaline 1 mg in 10 mL (1:10,000)",
-          "dose": "0.1 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 1 mg IV every 3–5 minutes."
         }
       ]
     },
@@ -199,7 +178,7 @@
       "hint": "No ROSC at 4 minutes: deliver the baby by 5, where she is.",
       "opts": [
         {
-          "t": "No ROSC at 4 minutes: resuscitative hysterotomy in resus, CPR continuing",
+          "t": "No ROSC at 4 minutes: resuscitative hysterotomy here in resus, with CPR continuing",
           "mark": "Resuscitative hysterotomy at 4 minutes without moving her",
           "n": 1,
           "when": "four-min",
@@ -211,11 +190,6 @@
           "mark": "Delivery by 5 minutes",
           "r": "Two minutes after delivery, a pulse returns.",
           "n": 2
-        },
-        {
-          "t": "Move her to theatre for the caesarean",
-          "trap": "critical",
-          "r": "Transfer wastes the minutes that matter. Do it in resus."
         }
       ]
     },
@@ -227,14 +201,15 @@
       "hint": "4 Hs and 4 Ts plus obstetric causes; ask about magnesium.",
       "opts": [
         {
-          "t": "Any magnesium infusion? If so stop it and give calcium",
+          "t": "Is she on a magnesium infusion? If so, stop it and give calcium.",
           "mark": "Considers magnesium toxicity"
         },
         {
-          "t": "Consider haemorrhage, amniotic fluid embolism, PE, eclampsia, cardiomyopathy, dissection",
+          "t": "The 4 Hs and 4 Ts, plus obstetric causes: haemorrhage, amniotic fluid embolism, PE, eclampsia, cardiomyopathy and dissection.",
           "mark": "Lists obstetric causes of arrest"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "viva",
@@ -363,5 +338,51 @@
       "why": "Moving her wastes minutes.",
       "source": "RCUK 2025"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Obstetric team, neonatal team and anaesthetist to resus now. Open the resuscitative hysterotomy kit (scalpel). Start a clock from the collapse time."
+    },
+    {
+      "at": "0:20",
+      "say": "Neonatal resuscitaire ready."
+    },
+    {
+      "at": "0:40",
+      "say": "Compressions 30:2 with the normal hand position, while a helper pushes the uterus to her left: manual left uterine displacement."
+    },
+    {
+      "at": "1:00",
+      "say": "Adrenaline 1 mg in 10 mL (1:10,000) 1 mg IV (arm or neck access)."
+    },
+    {
+      "at": "1:20",
+      "say": "Intubate: laryngoscope, tube through the cords, cuff up, capnography.",
+      "do": "Tube through the cords, cuff up. Capnography: a square trace on every breath."
+    },
+    {
+      "at": "1:40",
+      "say": "No ROSC at 4 minutes: resuscitative hysterotomy here in resus, with CPR continuing. Baby delivered by 5 minutes and handed to the neonatal team.",
+      "do": "Two minutes after delivery, a pulse returns."
+    },
+    {
+      "at": "2:00",
+      "say": "Is she on a magnesium infusion? If so, stop it and give calcium. The 4 Hs and 4 Ts, plus obstetric causes: haemorrhage, amniotic fluid embolism, PE, eclampsia, cardiomyopathy and dissection."
+    }
+  ],
+  "keywords": [
+    "obstetric team",
+    "neonatal team",
+    "hysterotomy kit",
+    "clock",
+    "manual left uterine displacement",
+    "normal hand position",
+    "adrenaline",
+    "capnography",
+    "4 minutes",
+    "5 minutes",
+    "magnesium",
+    "amniotic fluid embolism"
   ]
 }

@@ -53,7 +53,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE NG126 (Ectopic pregnancy and miscarriage, 2019, updated 2023), RCOG/AEPU guidance and ATLS principles for haemorrhage.\n\nAny woman of reproductive age with abdominal pain, bleeding or collapse needs a pregnancy test. Shock with a positive test is a ruptured ectopic until proven otherwise: resuscitate (two large-bore cannulae, crossmatch, blood early), call the gynaecology team for theatre (laparoscopy or laparotomy), and do not delay for formal ultrasound. A bedside ultrasound showing an empty uterus and free fluid supports the diagnosis. Anti-D is given to rhesus-negative women having surgery for an ectopic pregnancy (NICE). Shoulder-tip pain suggests haemoperitoneum.\n\nYour notes list the topic 'PVB early pregnancy' without detail; nothing conflicts. Stable women with a suspected ectopic go to the early pregnancy assessment unit for transvaginal ultrasound and serum hCG.",
+  "notes": "Checked against NICE NG126 (Ectopic pregnancy and miscarriage, 2019, updated 2023), RCOG/AEPU guidance and ATLS principles for haemorrhage.\n\nAny woman of reproductive age with abdominal pain, bleeding or collapse needs a pregnancy test. Shock with a positive test is a ruptured ectopic until proven otherwise: resuscitate (two large-bore cannulae, crossmatch, blood early), call the gynaecology team for theatre (laparoscopy or laparotomy), and do not delay for formal ultrasound. A bedside ultrasound showing an empty uterus and free fluid supports the diagnosis. Anti-D is given to rhesus-negative women having surgery for an ectopic pregnancy (NICE). Shoulder-tip pain suggests haemoperitoneum.\n\nYour notes list the topic 'PVB early pregnancy' without detail; nothing conflicts. Stable women with a suspected ectopic go to the early pregnancy assessment unit for transvaginal ultrasound and serum hCG.\n\nPerfect script checked against NICE NG126 and RCOG, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (clinic tomorrow, morphine bolus, high anti-D, methotrexate). Bleeding and blood group questions now score.",
   "cast": [
     {
       "id": "patient",
@@ -111,12 +111,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "history",
@@ -160,7 +161,8 @@
             "t": "How much bleeding?",
             "tz": "出血多唔多？",
             "rz": "得少少，深色嘅。",
-            "r": "Just spotting, dark."
+            "r": "Just spotting, dark.",
+            "mark": "Asks about the bleeding"
           }
         ],
         "Risks": [
@@ -175,7 +177,8 @@
             "t": "Blood group, if known",
             "tz": "你知唔知自己咩血型？",
             "rz": "我諗係 O 型 Rh 陰性。",
-            "r": "O negative, I think."
+            "r": "O negative, I think.",
+            "mark": "Asks her blood group (rhesus)"
           }
         ]
       }
@@ -200,15 +203,10 @@
           "mark": "Confirms pregnancy at the bedside"
         },
         {
-          "t": "O-negative blood; major haemorrhage protocol",
+          "t": "O-negative blood; activate the major haemorrhage protocol",
           "need": true,
           "mark": "Transfuses early",
           "scene": "mhp"
-        },
-        {
-          "t": "Send her to the early pregnancy unit for a scan tomorrow",
-          "trap": "critical",
-          "r": "She is shocked. Theatre, not tomorrow's clinic."
         }
       ]
     },
@@ -220,13 +218,14 @@
       "hint": "Give the blood when it arrives.",
       "opts": [
         {
-          "t": "Give the O-negative blood now it is here.",
+          "t": "The O-negative blood is here: give it now.",
           "when": "blood-here",
           "early": "The blood is not here yet.",
           "scene": "blood",
           "mark": "Blood, not crystalloid, for haemorrhagic shock"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "analgesia",
@@ -243,14 +242,6 @@
           "t": "Morphine 2.5–5 mg IV, titrated",
           "drug": "Morphine",
           "dose": "2.5–5 mg IV, titrated"
-        },
-        {
-          "t": "Morphine 20 mg IV bolus",
-          "drug": "Morphine",
-          "dose": "20 mg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once in shock: titrate 2.5–5 mg."
         }
       ]
     },
@@ -271,15 +262,16 @@
         ],
         "Bedside ultrasound": [
           {
-            "t": "Transabdominal ultrasound",
-            "r": "Empty uterus; free fluid in the pouch of Douglas; a left adnexal mass.",
+            "t": "Bedside transabdominal ultrasound",
+            "r": "Empty uterus; free fluid in the pouch of Douglas; a left adnexal mass. \"Shocked, pregnant, empty uterus with free fluid: a ruptured ectopic.\"",
             "img": "us:early-ectopic",
             "mark": "Ultrasound: empty uterus, free fluid, adnexal mass"
           },
           {
-            "t": "FAST right upper quadrant",
+            "t": "FAST: right upper quadrant",
             "r": "Free fluid in Morison's pouch.",
-            "img": "us:fast-ruq-pos"
+            "img": "us:fast-ruq-pos",
+            "mark": "Looks for free fluid in Morison's pouch"
           }
         ]
       }
@@ -292,7 +284,7 @@
       "hint": "Gynaecology registrar for theatre now; anti-D.",
       "opts": [
         {
-          "t": "Gynaecology: suspected ruptured ectopic, shocked, haemoperitoneum — emergency laparoscopy/laparotomy",
+          "t": "Gynaecology: Ms Leung, 29, 7 weeks pregnant, a suspected ruptured ectopic, shocked with haemoperitoneum. She needs emergency surgery now.",
           "mark": "Refers for emergency surgery",
           "r": "Gynae registrar: Theatre is ready, bring her up."
         }
@@ -311,22 +303,6 @@
           "t": "Anti-D immunoglobulin 250 IU IM",
           "drug": "Anti-D immunoglobulin",
           "dose": "250 IU IM",
-          "fetch": "cart"
-        },
-        {
-          "t": "Anti-D immunoglobulin 1500 IU IM",
-          "drug": "Anti-D immunoglobulin",
-          "dose": "1500 IU IM",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Under 12 weeks, 250 IU is enough; 1500 IU is for later sensitising events."
-        },
-        {
-          "trap": "critical",
-          "r": "Methotrexate is for stable, unruptured ectopics with low hCG. She has ruptured.",
-          "t": "Methotrexate 50 mg/m² IM, review in 4 days",
-          "drug": "Methotrexate",
-          "dose": "50 mg/m² IM, review in 4 days",
           "fetch": "cart"
         }
       ]
@@ -457,5 +433,72 @@
       "why": "The most dependent part of the pelvis.",
       "source": "Ultrasound anatomy"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2."
+    },
+    {
+      "at": "0:20",
+      "say": "When was your last period? Could you be pregnant? Any scan yet this pregnancy? Tell me about the pain.",
+      "do": "Seven weeks ago. I did a test last week — positive. No, I haven't booked yet. Sudden, sharp, left lower belly, 3 hours ago. Now all over."
+    },
+    {
+      "at": "0:40",
+      "say": "Any pain in your shoulder? How much bleeding? Previous ectopic, pelvic infection, tubal surgery, coil, IVF?",
+      "do": "Yes, my right shoulder tip hurts when I lie down. Just spotting, dark. I had chlamydia two years ago."
+    },
+    {
+      "at": "1:00",
+      "say": "Blood group, if known.",
+      "do": "O negative, I think."
+    },
+    {
+      "at": "1:20",
+      "say": "Two large-bore cannulae; FBC, crossmatch 4 units, clotting, group and antibodies. Urine pregnancy test now (and serum hCG). O-negative blood; activate the major haemorrhage protocol."
+    },
+    {
+      "at": "1:40",
+      "say": "The O-negative blood is here: give it now."
+    },
+    {
+      "at": "2:00",
+      "say": "Morphine 2.5–5 mg IV, titrated."
+    },
+    {
+      "at": "2:20",
+      "say": "Palpate the abdomen. Bedside transabdominal ultrasound. FAST: right upper quadrant. Shocked, pregnant, empty uterus with free fluid: a ruptured ectopic.",
+      "do": "Distended, generalised tenderness and guarding, worst in the left iliac fossa. Empty uterus; free fluid in the pouch of Douglas; a left adnexal mass. \"Shocked, pregnant, empty uterus with free fluid: a ruptured ectopic.\" Free fluid in Morison's pouch."
+    },
+    {
+      "at": "2:40",
+      "say": "Gynaecology: Ms Leung, 29, 7 weeks pregnant, a suspected ruptured ectopic, shocked with haemoperitoneum. She needs emergency surgery now.",
+      "do": "Gynae registrar: Theatre is ready, bring her up."
+    },
+    {
+      "at": "3:00",
+      "say": "Anti-D immunoglobulin 250 IU IM."
+    }
+  ],
+  "keywords": [
+    "monitoring",
+    "last period",
+    "scan",
+    "pain",
+    "shoulder",
+    "previous ectopic",
+    "blood group",
+    "large-bore",
+    "crossmatch",
+    "pregnancy test",
+    "O-negative",
+    "major haemorrhage protocol",
+    "morphine",
+    "ultrasound",
+    "free fluid",
+    "ruptured ectopic",
+    "emergency surgery",
+    "anti-D"
   ]
 }
