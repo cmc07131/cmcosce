@@ -4,47 +4,52 @@
   "title": "Haemorrhagic shock: trauma team leader",
   "type": "resus",
   "time": 480,
-  "stem": "Resus 1. A 17-year-old girl was the front-seat passenger in a car hit on her side at speed. She has a tender abdomen with a seatbelt mark. The ambulance reports HR 128, BP 88/50, RR 24, SpO2 97%, GCS 15. You are the trauma team leader; the nurse and a junior doctor are with you.",
+  "stem": "Resus 1. A trauma call is coming in: a 17-year-old girl, front-seat passenger in a car hit on her side at speed. Seatbelt mark across the abdomen. Ambulance: HR 128, BP 88/50, RR 24, SpO2 97%, GCS 15. You are the trauma team leader; Nurse Cheng and Dr Ng are with you. Lead the resuscitation.",
   "phases": [
     {
       "title": "Pre-brief",
-      "goal": "Lead: the team, roles, PPE, blood and ultrasound. Monitoring on; the handover.",
+      "goal": "Before she arrives: trauma call, introductions, roles, PPE, expectations, blood and ultrasound ready, how the team will talk.",
       "steps": [
-        "brief",
-        "monitoring",
-        "handover"
+        "brief"
+      ]
+    },
+    {
+      "title": "Handover and monitoring",
+      "goal": "A hands-off ATMIST handover; monitoring and oxygen on.",
+      "steps": [
+        "handover",
+        "monitoring"
       ]
     },
     {
       "title": "Primary survey",
-      "goal": "Examine her yourself: where is she bleeding?",
+      "goal": "xABCDE, each finding called out: where is she bleeding?",
       "steps": [
         "survey"
       ]
     },
     {
       "title": "Resuscitate",
-      "goal": "Access, bloods, the major haemorrhage protocol, and the drugs from the cart.",
+      "goal": "Access and bloods, the massive transfusion protocol, tranexamic acid, analgesia.",
       "steps": [
         "resus",
         "drugs"
       ]
     },
     {
-      "title": "Waiting for blood",
-      "goal": "Bridge carefully from the cart, state your target and its exception, and give the blood when it arrives.",
+      "title": "Damage control resuscitation",
+      "goal": "Name it; permissive hypotension and its head-injury exception; bridge carefully; haemostatic resuscitation when the blood arrives; the lethal triad.",
       "steps": [
-        "bridge-fluid",
-        "bridge"
+        "dcr",
+        "bridge-fluid"
       ]
     },
     {
-      "title": "Decide",
-      "goal": "Adjuncts, then who operates? Summarise and hand over.",
+      "title": "Adjuncts and decision",
+      "goal": "eFAST and films; reassess; refer for damage control laparotomy.",
       "steps": [
         "fast",
-        "decide",
-        "summary"
+        "decide"
       ]
     }
   ],
@@ -69,9 +74,17 @@
     {
       "tag": "missing",
       "text": "Shock classes. ATLS 10th added base deficit to the table: class II −2 to −6, class III −6 to −10, class IV below −10 mmol/L."
+    },
+    {
+      "tag": "unverified",
+      "text": "ATLS 11th edition specifics (xABCDE as the order) are quoted from memory; I could not check the manual here."
+    },
+    {
+      "tag": "missing",
+      "text": "No HA massive transfusion protocol document was available: the script says 'activate the massive transfusion protocol' without HA pack contents or activation numbers. Add your hospital's if you want them said."
     }
   ],
-  "notes": "Checked against ATLS 11th edition (xABCDE, shock classes with base deficit), NICE NG39 (major trauma, 2016, reviewed), CRASH-2, and RCEM trauma team leader guidance.\n\nYour notes cover this scenario well. Differences:\n• Initial fluid: your notes say a 1–2 L crystalloid bolus. ATLS now limits crystalloid to 1 L at most and moves early to blood in a balanced ratio; NICE advises blood products, not crystalloid, in active bleeding.\n• While blood is on its way: do not withhold volume from a crashing patient, and do not flood her either. Give warmed crystalloid in 250 mL boluses, reassessing after each, only to keep a radial pulse and mentation, then switch to blood the moment it arrives. Activate the major haemorrhage protocol early so the wait is short.\n• PERMISSIVE HYPOTENSION: aim for a systolic of 80–90 mmHg (palpable radial pulse, talking) until the bleeding is controlled. A higher pressure pops clots and more fluid dilutes clotting factors.\n• EXCEPTION — TRAUMATIC BRAIN INJURY: no permissive hypotension. Hypotension roughly doubles mortality after TBI. Keep systolic ≥110 mmHg (aged 15–49 or over 70) or ≥100 mmHg (aged 50–69), MAP ≥80 (ATLS 10th–11th, Brain Trauma Foundation). In combined bleeding and head injury, give blood (and crystalloid while waiting) to hold that pressure, and control the bleeding fast.\n• Vasopressors are not a substitute for volume in haemorrhagic shock.\n• Shock classes: ATLS 10th added base deficit (class II −2 to −6, class III −6 to −10, class IV below −10). Heart-rate cut-offs in your table are close enough.\n• TXA: 1 g over 10 minutes, then 1 g over 8 hours, within 3 hours — as in your notes.\n\nA seatbelt sign raises the risk of hollow viscus, mesenteric and lumbar spine (Chance) injuries. A positive FAST in an unstable patient means laparotomy; stable or responding patients can have CT. Ask for a pregnancy test in any female of reproductive age.\n\nTeam leader behaviours scored: pre-brief, roles, closed-loop communication, summarising aloud, and deciding on disposition.",
+  "notes": "Checked against ATLS 11th edition (xABCDE, shock classes with base deficit), NICE NG39 (major trauma, 2016, reviewed), CRASH-2, and RCEM trauma team leader guidance.\n\nYour notes cover this scenario well. Differences:\n• Initial fluid: your notes say a 1–2 L crystalloid bolus. ATLS now limits crystalloid to 1 L at most and moves early to blood in a balanced ratio; NICE advises blood products, not crystalloid, in active bleeding.\n• While blood is on its way: do not withhold volume from a crashing patient, and do not flood her either. Give warmed crystalloid in 250 mL boluses, reassessing after each, only to keep a radial pulse and mentation, then switch to blood the moment it arrives. Activate the major haemorrhage protocol early so the wait is short.\n• PERMISSIVE HYPOTENSION: aim for a systolic of 80–90 mmHg (palpable radial pulse, talking) until the bleeding is controlled. A higher pressure pops clots and more fluid dilutes clotting factors.\n• EXCEPTION — TRAUMATIC BRAIN INJURY: no permissive hypotension. Hypotension roughly doubles mortality after TBI. Keep systolic ≥110 mmHg (aged 15–49 or over 70) or ≥100 mmHg (aged 50–69), MAP ≥80 (ATLS 10th–11th, Brain Trauma Foundation). In combined bleeding and head injury, give blood (and crystalloid while waiting) to hold that pressure, and control the bleeding fast.\n• Vasopressors are not a substitute for volume in haemorrhagic shock.\n• Shock classes: ATLS 10th added base deficit (class II −2 to −6, class III −6 to −10, class IV below −10). Heart-rate cut-offs in your table are close enough.\n• TXA: 1 g over 10 minutes, then 1 g over 8 hours, within 3 hours — as in your notes.\n\nA seatbelt sign raises the risk of hollow viscus, mesenteric and lumbar spine (Chance) injuries. A positive FAST in an unstable patient means laparotomy; stable or responding patients can have CT. Ask for a pregnancy test in any female of reproductive age.\n\nTeam leader behaviours scored: pre-brief, roles, closed-loop communication, summarising aloud, and deciding on disposition.\n\nPerfect script and its key words were checked against four independent mark schemes (HKCEM-style, RCEM team leader, ATLS checklist, and a keyword-based scheme). Added from that check: damage control resuscitation and haemostatic resuscitation named; the lethal triad and calcium (European guideline on management of major bleeding after trauma, 2023: monitor and maintain ionised calcium during massive transfusion); crystalloid limited to 1 L; warmer/rapid infuser; oxygen; closed-loop and hands-off leadership; reassessment as a transient responder; SBAR referral for damage control laparotomy; theatre, anaesthesia and ICU; secondary and tertiary surveys; the Chance fracture risk; family and documentation.",
   "cast": [
     {
       "id": "patient",
@@ -138,55 +151,45 @@
       "kind": "pick",
       "to": "nurse",
       "label": "Pre-brief the team",
-      "hint": "Trauma call, introductions, roles, PPE, blood and FAST ready, what you expect.",
+      "hint": "Trauma call; introductions, I lead; roles; PPE; what we expect; blood, warmer and ultrasound; closed-loop.",
       "confirm": "Brief",
       "opts": [
         {
-          "t": "Put out a trauma call",
+          "t": "Put out a trauma team activation",
           "need": true,
           "mark": "Activates the trauma team"
         },
         {
-          "t": "Introductions and experience; I lead",
+          "t": "Introductions, names and experience; I am the trauma team leader and will stay hands-off",
           "need": true,
-          "mark": "Introductions and confirms experience"
+          "mark": "Introduces the team and declares the team leader"
         },
         {
-          "t": "Roles: Dr Ng airway and C-spine, Nurse Cheng access and drugs, scribe times",
+          "t": "Roles: Dr Ng, airway and C-spine; Nurse Cheng, access, bloods and drugs; a scribe to record times",
           "need": true,
-          "mark": "Allocates roles"
+          "mark": "Allocates roles, including a scribe"
         },
         {
-          "t": "PPE for everyone",
+          "t": "Full PPE for everyone",
           "fetch": "trolley",
           "need": true,
           "mark": "Team PPE"
         },
         {
-          "t": "O-negative blood and ultrasound in the bay",
-          "fetch": "trolley",
+          "t": "Expect intra-abdominal haemorrhage from the seatbelt injury, likely the spleen",
           "need": true,
-          "mark": "Blood and ultrasound ready"
+          "mark": "Shares the expected injury (shared mental model)"
         },
         {
-          "t": "Expect abdominal bleeding from the seatbelt injury",
-          "need": true,
-          "mark": "Shares a mental model: likely abdominal haemorrhage"
-        }
-      ]
-    },
-    {
-      "id": "monitoring",
-      "kind": "say",
-      "to": "nurse",
-      "label": "Monitoring",
-      "hint": "Ask the nurse to put the patient on the monitor.",
-      "opts": [
-        {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "O-negative blood, a fluid warmer or rapid infuser, and the ultrasound for an eFAST in the bay; warn the blood bank",
           "fetch": "trolley",
-          "scene": "monitored",
-          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+          "need": true,
+          "mark": "Prepares blood, warmer and ultrasound; warns the blood bank"
+        },
+        {
+          "t": "Closed-loop communication: repeat back every instruction; I'll summarise at intervals",
+          "need": true,
+          "mark": "Sets closed-loop communication"
         }
       ]
     },
@@ -195,7 +198,7 @@
       "kind": "history",
       "to": "medic",
       "label": "Paramedic handover",
-      "hint": "Hands-off handover: age, time, mechanism, injuries, signs, treatment.",
+      "hint": "Hands-off handover (ATMIST): age, time, mechanism, injuries, signs, treatment.",
       "groups": {
         "ATMIST": [
           {
@@ -227,58 +230,83 @@
       }
     },
     {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring and oxygen",
+      "lang": "en",
+      "hint": "Monitor, oxygen; transfer with spinal precautions.",
+      "opts": [
+        {
+          "t": "Monitoring: ECG, NIBP every 3 minutes, SpO2",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Puts her on continuous monitoring"
+        },
+        {
+          "t": "High-flow oxygen, 15 L via a non-rebreather mask",
+          "fetch": "trolley",
+          "mark": "Gives high-flow oxygen",
+          "r": "Nurse Cheng: Oxygen on, 15 litres."
+        }
+      ]
+    },
+    {
       "id": "survey",
       "kind": "exam",
       "to": "patient",
       "label": "Primary survey",
-      "hint": "xABCDE, findings called out to the scribe.",
+      "hint": "xABCDE: say each finding out loud for the scribe.",
       "groups": {
         "x A B": [
           {
-            "t": "External bleeding",
-            "r": "None."
+            "t": "Catastrophic external haemorrhage",
+            "r": "\"No catastrophic external haemorrhage.\"",
+            "mark": "Checks for catastrophic external haemorrhage first"
           },
           {
-            "t": "Airway and C-spine",
-            "r": "Talking, patent. Collar on.",
+            "t": "Airway with C-spine",
+            "r": "Talking, airway patent. \"Airway patent; maintain spinal motion restriction.\"",
             "mark": "Airway with spinal motion restriction",
             "anim": "airway"
           },
           {
-            "t": "Chest",
-            "r": "Tender left lower ribs. Equal air entry. RR 24.",
-            "mark": "Breathing assessed",
+            "t": "Breathing",
+            "r": "RR 24, trachea central, equal air entry, tender left lower ribs. \"Possible left rib fractures; no tension pneumothorax or massive haemothorax.\"",
+            "mark": "Breathing: excludes tension pneumothorax and massive haemothorax",
             "anim": "auscultate"
           }
         ],
         "C": [
           {
-            "t": "Pulse, pressure, capillary refill",
-            "r": "HR 128, BP 88/50, cool, CRT 4 s. Anxious.",
-            "mark": "Recognises class III shock",
-            "anim": "glucose"
+            "t": "Pulse, pressure, skin, capillary refill",
+            "r": "HR 128, BP 88/50, cool, CRT 4 s, anxious. \"This is class III haemorrhagic shock: about 30 to 40 percent of her blood volume.\"",
+            "mark": "Names class III haemorrhagic shock",
+            "anim": "pulse"
           },
           {
             "t": "Abdomen",
-            "r": "Seatbelt sign. Tender and guarding in the left upper quadrant; left shoulder-tip pain.",
-            "mark": "Abdominal signs: left upper quadrant tenderness, Kehr's sign",
+            "r": "Seatbelt sign; tender and guarding in the left upper quadrant; left shoulder-tip pain. \"Kehr's sign: likely splenic injury.\"",
+            "mark": "Abdomen: left upper quadrant signs and Kehr's sign",
             "anim": "abdomen"
           },
           {
             "t": "Pelvis and long bones",
-            "r": "Pelvis not tender to gentle pressure. Femurs normal."
+            "r": "Pelvis not tender to gentle pressure (not sprung); femurs normal. \"Not the pelvis or the long bones.\"",
+            "mark": "Looks for the other sources: pelvis and long bones"
           }
         ],
         "D E": [
           {
             "t": "GCS, pupils, glucose",
-            "r": "GCS 15, pupils normal, glucose 6.5.",
-            "anim": "glucose"
+            "r": "GCS 15, pupils equal and reactive, glucose 6.5. \"No evidence of a head injury.\"",
+            "mark": "Disability: GCS, pupils and glucose; no head injury",
+            "anim": "pupils"
           },
           {
-            "t": "Expose and warm",
-            "r": "No other injuries. Temperature 36.1. Blankets on.",
-            "mark": "Exposes and keeps warm",
+            "t": "Expose, then warm",
+            "r": "No other injuries. Temperature 36.1. Warm blankets on. \"Keep her warm.\"",
+            "mark": "Exposes fully, then prevents hypothermia",
             "anim": "abdomen"
           }
         ]
@@ -289,19 +317,20 @@
       "kind": "say",
       "to": "nurse",
       "label": "Resuscitate",
-      "hint": "Access, bloods with crossmatch and pregnancy test, major haemorrhage protocol, TXA, analgesia.",
+      "lang": "en",
+      "hint": "Two large-bore cannulae and bloods (crossmatch, gas, calcium, pregnancy test); the massive transfusion protocol.",
       "opts": [
         {
-          "t": "Second large-bore cannula; bloods, crossmatch, gas, lactate, and a pregnancy test",
+          "t": "Two large-bore cannulae; bloods: FBC, clotting, crossmatch, venous gas with lactate and base deficit, ionised calcium, and a pregnancy test",
           "fetch": "trolley",
-          "mark": "Access and bloods including crossmatch and pregnancy test",
-          "r": "Nurse Cheng: Done. Gas: pH 7.26, base deficit −8, lactate 4.6, Hb 96. hCG negative."
+          "mark": "Two large-bore cannulae; bloods with crossmatch, gas, calcium and pregnancy test",
+          "r": "Nurse Cheng: Done. Gas: pH 7.26, base deficit −8, lactate 4.6, Hb 96, ionised calcium 1.08. hCG negative."
         },
         {
-          "t": "Activate the major haemorrhage protocol; O-negative to the bay",
-          "mark": "Activates the major haemorrhage protocol early",
-          "r": "Nurse Cheng: Blood bank says the O-negative is 10 minutes away. BP 80/46 now.",
-          "scene": "mhp"
+          "t": "Activate the massive transfusion protocol now",
+          "scene": "mhp",
+          "mark": "Activates the massive transfusion protocol early",
+          "r": "Nurse Cheng: Massive transfusion protocol activated. O-negative is 10 minutes away. BP 80/46 now."
         }
       ]
     },
@@ -310,38 +339,63 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Tranexamic acid and analgesia.",
+      "hint": "Tranexamic acid within 3 hours; titrated analgesia.",
       "confirm": "Give",
       "opts": [
         {
           "fetch": "cart",
-          "mark": "Gives tranexamic acid",
-          "t": "Tranexamic acid 1 g IV over 10 minutes",
+          "mark": "Gives tranexamic acid 1 g within 3 hours of injury",
+          "t": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours",
           "drug": "Tranexamic acid",
-          "dose": "1 g IV over 10 minutes"
-        },
-        {
-          "t": "Tranexamic acid 2 g IV push",
-          "drug": "Tranexamic acid",
-          "dose": "2 g IV push",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Given fast it drops the pressure: 1 g over 10 minutes, then 1 g over 8 hours."
+          "dose": "1 g IV over 10 minutes, then 1 g over 8 hours"
         },
         {
           "fetch": "cart",
-          "mark": "Analgesia",
+          "mark": "Titrated IV analgesia",
           "t": "Fentanyl 25–50 microgram IV, titrated",
           "drug": "Fentanyl",
           "dose": "25–50 microgram IV, titrated"
+        }
+      ]
+    },
+    {
+      "id": "dcr",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Damage control resuscitation",
+      "lang": "en",
+      "hint": "Say it: damage control resuscitation. Permissive hypotension (80–90), the head-injury exception, haemostatic resuscitation 1:1:1, the lethal triad and calcium; reassess.",
+      "opts": [
+        {
+          "t": "This is damage control resuscitation: permissive hypotension, haemostatic resuscitation and early haemorrhage control",
+          "mark": "Names damage control resuscitation and its parts"
         },
         {
-          "t": "Fentanyl 200 microgram IV bolus",
-          "drug": "Fentanyl",
-          "dose": "200 microgram IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once in shock: small titrated doses."
+          "t": "Permissive hypotension: target a systolic of 80–90, a radial pulse and her talking, until the bleeding is controlled",
+          "mark": "Permissive hypotension: systolic 80–90 until haemorrhage control"
+        },
+        {
+          "t": "No head injury, so that is safe; with a brain injury I would keep the systolic at 110 or more",
+          "mark": "States the head-injury exception"
+        },
+        {
+          "t": "The O-negative is here: haemostatic resuscitation, 1:1:1 plasma, platelets and red cells, through the warmer",
+          "scene": "blood",
+          "when": "blood-here",
+          "early": "The blood is not here yet.",
+          "mark": "Haemostatic resuscitation: balanced 1:1:1 through a warmer",
+          "r": "Nurse Cheng: Blood running through the warmer."
+        },
+        {
+          "t": "Prevent the lethal triad: keep her warm, correct acidosis by restoring perfusion, and give calcium during transfusion",
+          "mark": "Prevents the lethal triad and replaces calcium"
+        },
+        {
+          "t": "Reassess after each unit: how is she responding?",
+          "when": "blood",
+          "early": "Give the blood first, then reassess.",
+          "mark": "Reassesses: identifies a transient responder",
+          "r": "Nurse Cheng: After 2 units BP came up to 98/60, now drifting back to 84/50, HR 124. \"She is a transient responder.\""
         }
       ]
     },
@@ -350,63 +404,17 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "While the blood comes: small warmed boluses, only to a radial pulse.",
+      "hint": "While the blood comes: warmed 250 mL boluses only to a radial pulse; crystalloid 1 L at most.",
       "confirm": "Give",
       "opts": [
         {
           "fetch": "cart",
           "scene": "bridge",
-          "mark": "Bridges with small warmed crystalloid boluses while blood is on its way",
+          "mark": "Bridges with warmed 250 mL boluses, crystalloid 1 L at most",
           "r": "Nurse Cheng: 250 mL in. Radial pulse is back and she is answering. BP 86/50.",
-          "t": "Crystalloid (warmed) 250 mL bolus, then reassess",
+          "t": "Warmed crystalloid 250 mL bolus, then reassess (1 L at most)",
           "drug": "Crystalloid (warmed)",
-          "dose": "250 mL bolus, then reassess"
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Crystalloid dilutes clotting. Blood first in active bleeding.",
-          "t": "Crystalloid (warmed) 2 L wide open",
-          "drug": "Crystalloid (warmed)",
-          "dose": "2 L wide open"
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Vasopressors in haemorrhage hide the bleeding and cut tissue perfusion further. Volume and haemorrhage control first.",
-          "t": "Noradrenaline infusion to a normal pressure",
-          "drug": "Noradrenaline",
-          "dose": "infusion to a normal pressure"
-        }
-      ]
-    },
-    {
-      "id": "bridge",
-      "kind": "say",
-      "to": "nurse",
-      "label": "Waiting for blood",
-      "hint": "Blood is 10 minutes away and she is worsening. Don't withhold volume, don't flood her: small warmed boluses to a radial pulse, PERMISSIVE HYPOTENSION (systolic 80–90). Exception: head injury — keep the pressure up.",
-      "opts": [
-        {
-          "t": "Permissive hypotension: aim for a systolic of 80–90 until the bleeding is controlled",
-          "mark": "Permissive hypotension (systolic 80–90) until haemorrhage control"
-        },
-        {
-          "t": "No head injury (GCS 15, no head signs), so permissive hypotension is safe; with a brain injury I would keep the systolic at 110 or more (MAP 80 or more)",
-          "mark": "States the head injury exception: no permissive hypotension in TBI"
-        },
-        {
-          "t": "The O-negative has arrived: run it through the warmer, then 1:1:1",
-          "scene": "blood",
-          "mark": "Starts blood the moment it arrives",
-          "r": "Nurse Cheng: Blood running through the warmer.",
-          "when": "blood-here",
-          "early": "The blood is not here yet."
-        },
-        {
-          "t": "Give nothing until the blood arrives",
-          "trap": "critical",
-          "r": "She is peri-arrest. Withholding all volume risks cardiac arrest; small warmed boluses bridge the gap."
+          "dose": "250 mL bolus, then reassess (1 L at most)"
         }
       ]
     },
@@ -415,25 +423,26 @@
       "kind": "order",
       "to": "trolley",
       "label": "Adjuncts",
-      "hint": "FAST, chest and pelvic films in the bay.",
+      "hint": "eFAST, chest and pelvic films in the bay.",
       "groups": {
         "Bedside": [
           {
-            "t": "FAST",
-            "r": "Free fluid in Morison's pouch and the splenorenal space. No pericardial fluid.",
+            "t": "eFAST",
+            "r": "Free fluid in Morison's pouch and the splenorenal space; no pericardial fluid; lung sliding both sides. \"eFAST positive.\"",
             "img": "us:fast-ruq-pos",
-            "mark": "FAST: free intraperitoneal fluid"
+            "mark": "eFAST: free intraperitoneal fluid"
           },
           {
             "t": "Chest X-ray",
-            "r": "Left lower rib fractures, no pneumothorax.",
+            "r": "Left lower rib fractures, no pneumothorax, no haemothorax.",
             "img": "xr:cxr-normal",
             "mark": "Chest X-ray"
           },
           {
             "t": "Pelvic X-ray",
             "r": "Normal.",
-            "img": "xr:pelvis-normal"
+            "img": "xr:pelvis-normal",
+            "mark": "Pelvic X-ray"
           }
         ]
       }
@@ -443,22 +452,18 @@
       "kind": "say",
       "to": "phone",
       "label": "Phone",
-      "hint": "Transient responder with a positive FAST: surgeon for laparotomy (or IR if she responds fully).",
+      "lang": "en",
+      "hint": "SBAR to the surgeon: unstable, eFAST positive, transient responder: damage control laparotomy. Theatre, anaesthesia, ICU.",
       "opts": [
         {
-          "t": "General surgeon: FAST positive, transient responder after 2 units — laparotomy",
-          "mark": "Calls the surgeon for laparotomy",
-          "r": "Surgeon: I'm coming down. Theatre is being prepared."
+          "t": "Surgeon, SBAR: 17, side impact, class III haemorrhagic shock, eFAST positive, transient responder after 2 units and TXA: please come for an emergency damage control laparotomy",
+          "mark": "SBAR referral for damage control laparotomy",
+          "r": "Surgeon: I'm coming down now."
         },
         {
-          "t": "CT abdomen now to grade the spleen",
-          "trap": "critical",
-          "r": "She is only transiently responding. Unstable patients with a positive FAST go to theatre."
-        },
-        {
-          "t": "Admit to the ward for serial examination",
-          "trap": "critical",
-          "r": "She is bleeding now."
+          "t": "Theatre, the anaesthetist and an ICU bed: an unstable patient for laparotomy",
+          "mark": "Mobilises theatre, anaesthesia and ICU",
+          "r": "Theatre is being prepared; the anaesthetist is on the way."
         }
       ]
     },
@@ -466,19 +471,22 @@
       "id": "summary",
       "kind": "handover",
       "to": "examiner",
-      "ask": "The surgeon has arrived. Summarise for the team and hand over.",
       "label": "Summarise and hand over",
-      "hint": "Summarise aloud to the team, then hand over to the surgeon.",
+      "ask": "The surgeon has arrived. Summarise for the team and hand over.",
+      "hint": "Summarise aloud; the plan after theatre; spinal care; family; documentation.",
       "opts": [
         {
-          "t": "Summary: 17, side impact, class III shock, positive FAST, left rib fractures, transient responder after 2 units and TXA, for laparotomy",
-          "mark": "Summarises aloud and hands over clearly",
-          "r": "The surgeon repeats it back and takes her to theatre."
+          "t": "Summary: 17, side impact, class III haemorrhagic shock, eFAST positive, left rib fractures; massive transfusion protocol, TXA and 2 units; a transient responder: for damage control laparotomy",
+          "mark": "Summarises aloud and hands over",
+          "r": "The surgeon repeats it back."
         },
         {
-          "t": "Surgeons are here, she's theirs now",
-          "trap": true,
-          "r": "No summary means lost information."
+          "t": "Secondary survey once the bleeding is controlled, and a tertiary survey later; spinal precautions continue: the seatbelt sign raises the risk of a Chance fracture and bowel injury",
+          "mark": "Plans the secondary and tertiary survey; spinal precautions"
+        },
+        {
+          "t": "I'll update her family, and the scribe's record has the times of every drug and unit",
+          "mark": "Informs the family; documentation with times"
         }
       ]
     },
@@ -488,6 +496,15 @@
       "to": "examiner",
       "label": "Examiner",
       "qs": [
+        {
+          "q": "Damage control resuscitation comprises…",
+          "a": "Permissive hypotension, haemostatic resuscitation and early haemorrhage control",
+          "wrong": [
+            "Aggressive crystalloid to a normal pressure, then early CT and surgery",
+            "Vasopressors to a normal pressure, with plasma given only after the CT",
+            "Two litres of warmed crystalloid, then blood once the CT has been reported"
+          ]
+        },
         {
           "q": "Class III haemorrhage (ATLS) means blood loss of…",
           "a": "31–40%",
@@ -673,6 +690,155 @@
       ],
       "why": "Pregnancy alters physiology and management.",
       "source": "ATLS 11th edition"
+    },
+    {
+      "q": "The 'lethal diamond' adds which to the lethal triad?",
+      "options": [
+        "Hypocalcaemia",
+        "Hyperkalaemia",
+        "Hypoglycaemia",
+        "Hypernatraemia"
+      ],
+      "why": "Hypothermia, acidosis, coagulopathy, and hypocalcaemia (citrate in transfused blood binds calcium).",
+      "source": "European guideline on bleeding after trauma (2023)"
+    }
+  ],
+  "keywords": [
+    "trauma team activation",
+    "team leader",
+    "hands-off",
+    "shared mental model",
+    "closed-loop communication",
+    "ATMIST",
+    "xABCDE",
+    "catastrophic external haemorrhage",
+    "spinal motion restriction",
+    "class III haemorrhagic shock",
+    "Kehr's sign",
+    "massive transfusion protocol",
+    "tranexamic acid",
+    "damage control resuscitation",
+    "permissive hypotension",
+    "haemostatic resuscitation",
+    "1:1:1",
+    "lethal triad",
+    "calcium",
+    "transient responder",
+    "eFAST",
+    "damage control laparotomy",
+    "secondary survey",
+    "tertiary survey",
+    "Chance fracture"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello everyone, I'm Dr __, the emergency physician. I'll be the trauma team leader and I'll stay hands-off. Could we go round with names and experience?"
+    },
+    {
+      "at": "0:15",
+      "say": "Please put out a full trauma team activation."
+    },
+    {
+      "at": "0:20",
+      "say": "Roles: Dr Ng, airway and cervical spine. Nurse Cheng, IV access, bloods and drugs. Could someone scribe and record the times. Everyone in full PPE, please."
+    },
+    {
+      "at": "0:40",
+      "say": "Our shared mental model: we're expecting a 17-year-old girl from a side-impact crash with a seatbelt sign and hypotension. My main concern is intra-abdominal haemorrhage, most likely the spleen. Please have O-negative blood, a fluid warmer or rapid infuser and the ultrasound for an eFAST ready, and warn the blood bank."
+    },
+    {
+      "at": "1:00",
+      "say": "We'll use closed-loop communication: please repeat back each instruction. I'll summarise at intervals."
+    },
+    {
+      "at": "1:10",
+      "say": "Paramedic, a hands-off handover please: ATMIST.",
+      "do": "Age 17; injured 25 minutes ago; side impact at 70 km/h, belted, door intrusion; seatbelt bruise, left upper quadrant and left chest pain; HR 110 to 128, BP 104/70 to 88/50; oxygen, one cannula, 250 mL saline, collar."
+    },
+    {
+      "at": "1:40",
+      "say": "Monitoring on: ECG, blood pressure every 3 minutes and SpO2. High-flow oxygen, 15 litres via a non-rebreather."
+    },
+    {
+      "at": "1:50",
+      "say": "Primary survey, xABCDE. No catastrophic external haemorrhage. Airway patent, she's talking; maintain spinal motion restriction.",
+      "do": "Look at the airway; talk to her."
+    },
+    {
+      "at": "2:05",
+      "say": "Breathing: respiratory rate 24, trachea central, equal air entry, tender left lower ribs. Possible rib fractures; no tension pneumothorax or massive haemothorax.",
+      "do": "Look, feel, percuss and listen to the chest."
+    },
+    {
+      "at": "2:25",
+      "say": "Circulation: heart rate 128, BP 88/50, cool peripheries, capillary refill 4 seconds and anxious. This is class III haemorrhagic shock, about 30 to 40 percent of her blood volume.",
+      "do": "Pulse, pressure, skin, capillary refill."
+    },
+    {
+      "at": "2:45",
+      "say": "Sources of bleeding: chest, abdomen, pelvis, long bones and the floor. Seatbelt sign, left upper quadrant tenderness and guarding, and left shoulder-tip pain: Kehr's sign, likely a splenic injury. Pelvis not tender; I won't spring it. Long bones normal.",
+      "do": "Palpate the abdomen; gentle pressure on the pelvis; the femurs."
+    },
+    {
+      "at": "3:05",
+      "say": "Nurse Cheng: two large-bore cannulae; bloods for FBC, clotting, crossmatch, a venous gas with lactate and base deficit, ionised calcium, and a pregnancy test. Please activate the massive transfusion protocol now.",
+      "do": "Gas: pH 7.26, base deficit −8, lactate 4.6; hCG negative. Blood 10 minutes away; BP 80/46."
+    },
+    {
+      "at": "3:30",
+      "say": "Tranexamic acid 1 gram IV over 10 minutes now, within 3 hours of injury, then 1 gram over 8 hours. Fentanyl 25 to 50 micrograms IV, titrated, for pain."
+    },
+    {
+      "at": "3:45",
+      "say": "Disability: GCS 15, pupils equal and reactive, glucose 6.5. No evidence of a head injury. Exposure: no other injuries; temperature 36.1; warm blankets on.",
+      "do": "GCS, pupils, glucose; expose fully, then cover."
+    },
+    {
+      "at": "4:05",
+      "say": "This is damage control resuscitation: permissive hypotension, haemostatic resuscitation and early haemorrhage control."
+    },
+    {
+      "at": "4:15",
+      "say": "Permissive hypotension: we're aiming for a systolic of 80 to 90, a radial pulse and her talking, until the bleeding is controlled. There's no head injury; if there were, I'd keep the systolic at 110 or more."
+    },
+    {
+      "at": "4:30",
+      "say": "Until the blood arrives, warmed crystalloid in 250 mL boluses, reassessing after each, and no more than a litre in total.",
+      "do": "250 mL in: radial pulse back, BP 86/50."
+    },
+    {
+      "at": "4:50",
+      "say": "The O-negative is here: haemostatic resuscitation, 1:1:1 plasma, platelets and red cells, through the warmer. Prevent the lethal triad: keep her warm, restore perfusion against the acidosis, and give calcium during transfusion."
+    },
+    {
+      "at": "5:10",
+      "say": "eFAST please, and a chest and pelvic X-ray in the bay.",
+      "do": "eFAST: free fluid in Morison's pouch and the splenorenal space; no pericardial fluid. Chest: left lower rib fractures, no pneumothorax. Pelvis: normal."
+    },
+    {
+      "at": "5:40",
+      "say": "Reassessing after 2 units: the pressure came up to 98/60 and is drifting back to 84/50. She is a transient responder with a positive eFAST: she needs a laparotomy, not a CT."
+    },
+    {
+      "at": "6:00",
+      "say": "Surgeon, this is Dr __, trauma team leader. A 17-year-old, side-impact crash, in class III haemorrhagic shock. eFAST positive with left upper quadrant signs and left rib fractures. Massive transfusion protocol running, TXA given, transient responder after 2 units. Please come now for an emergency damage control laparotomy."
+    },
+    {
+      "at": "6:30",
+      "say": "Please alert theatre, the anaesthetist and ICU."
+    },
+    {
+      "at": "6:45",
+      "say": "Summary for the team: 17-year-old, side impact, class III haemorrhagic shock, eFAST positive, left rib fractures, transient responder after 2 units and TXA, going for damage control laparotomy."
+    },
+    {
+      "at": "7:10",
+      "say": "Secondary survey once the bleeding is controlled, and a tertiary survey later. Spinal precautions continue: the seatbelt sign raises the risk of a Chance fracture and bowel or mesenteric injury."
+    },
+    {
+      "at": "7:30",
+      "say": "I'll update her family, and the scribe's record has the time of every drug and unit."
     }
   ]
 }

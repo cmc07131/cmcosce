@@ -37,6 +37,9 @@ const performFields = {
  * The 3D examination: how the patient starts, and what is wrong with them that shows when they move or are touched
  * (see game/exam3d/scene.ts).
  */
+/** One beat of a station's perfect script: when, what you say, what you do (and find). */
+export const scriptBeat = z.object({ at: z.string().optional(), say: z.string().optional(), do: z.string().optional() })
+
 export const bodySchema = z.object({
   posture: z.enum(['supine', 'sitting', 'edge', 'standing']).optional(),
   /** The pelvis is draped (intimate examinations): findings there show in a drawn close-up. */
@@ -286,6 +289,9 @@ export const packSchema = z.object({
   ),
   vitals: vitalsSchema.optional(),
   body: bodySchema.optional(),
+  /** The perfect script to say in the exam, and the key words an examiner listens for (see station.ts). */
+  script: z.array(scriptBeat).optional(),
+  keywords: z.array(z.string()).optional(),
   badge: z.object({
     id: z.string(),
     name: z.string(),

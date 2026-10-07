@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { judgeSequence, untreatedEvents } from '~/engine/judge'
 import { loadPack } from '~/engine/loadPacks'
 import { readSession } from '~/engine/session'
@@ -62,7 +62,20 @@ function DebriefPage() {
         </p>
       </Win>
       <Win className="min-h-0 flex-1 overflow-auto">
-        <h2 className="win-title">MARK SCHEME</h2>
+        {pack.script && pack.script.length > 0 && (
+          <div data-testid="perfect-script">
+            <h2 className="win-title">PERFECT SCRIPT</h2>
+            <p className="menu-note">Say this in the exam. The highlighted words are what the examiner listens for.</p>
+            {pack.script.map((beat, i) => (
+              <div key={i} className="script-beat">
+                {beat.at && <span className="script-at">{beat.at}</span>}
+                {beat.say && <p className="script-say">“{withKeywords(beat.say, pack.keywords ?? [])}”</p>}
+                {beat.do && <p className="script-do">{withKeywords(beat.do, pack.keywords ?? [])}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+        <h2 className={`win-title${pack.script?.length ? ' mt-4' : ''}`}>MARK SCHEME</h2>
         <p className="menu-note">Tap a line to tick or untick it yourself.</p>
         {pack.marks.map((mark) => {
           const on = checked.includes(mark.id)
@@ -109,4 +122,12 @@ function DebriefPage() {
       </Win>
     </div>
   )
+}
+
+/** The script line with the examiner's key words in bold. */
+function withKeywords(text: string, keywords: string[]): ReactNode {
+  if (!keywords.length) return text
+  const escaped = [...keywords].sort((a, b) => b.length - a.length).map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  const re = new RegExp(`(${escaped.join('|')})`, 'gi')
+  return text.split(re).map((part, i) => (i % 2 === 1 ? <b key={i} className="script-key">{part}</b> : part))
 }

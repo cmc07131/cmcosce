@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { offerOf } from '../game/exam3d/manoeuvres'
 import { checkDo } from '../game/exam3d/model'
 import { SITE_IDS } from '../game/exam3d/sites'
-import { bodySchema, performKinds, vitalsSchema, type Action, type ActionOption, type Pack } from './schema'
+import { bodySchema, performKinds, scriptBeat, vitalsSchema, type Action, type ActionOption, type Pack } from './schema'
 
 /**
  * A station script: the compact form every new station is written in. `compileStation` turns it into a
@@ -135,6 +135,14 @@ export const stationSchema = z.object({
     .optional(),
   /** The 3D examination: the patient's starting position and the signs they show (see game/exam3d/scene.ts). */
   body: bodySchema.optional(),
+  /**
+   * The perfect script: what a passing candidate says and does, beat by beat, timed. It is written to pass any
+   * reasonable mark scheme: the examiner's key words said in so many words, in the order of the standard frameworks.
+   * Shown at the end of the station, to recite.
+   */
+  script: z.array(scriptBeat).optional(),
+  /** The key words an examiner listens for; highlighted in the script. */
+  keywords: z.array(z.string()).optional(),
   review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing', 'unverified']), text: z.string() })).optional(),
   cast: z
     .array(
@@ -533,6 +541,8 @@ export function compileStation(station: Station): Pack {
     })),
     vitals: station.vitals,
     body: station.body,
+    script: station.script,
+    keywords: station.keywords,
     badge: { id: station.id, name: station.badge.name, emoji: station.badge.emoji, flavor: station.badge.flavor },
   }
 }

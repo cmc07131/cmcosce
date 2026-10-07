@@ -201,10 +201,16 @@ function Body({
   return <TalkList action={action} title={title} used={used} inventory={inventory} pack={pack} onClose={onClose} onOption={onOption} />
 }
 
-/** Choices in a per-run order: the script's order (right answers first, the trap last) must not show. */
+/**
+ * Choices in a per-run order when a trap hides among them (the script's order must not give it away). With no trap,
+ * every line is part of the perfect script: they stay in its order, so the player learns the flow.
+ */
 function useShuffled(action: Action) {
   const seed = usePlay((s) => s.seed)
-  return useMemo(() => seededShuffle(action.options ?? [], seed, action.id), [action, seed])
+  return useMemo(() => {
+    const options = action.options ?? []
+    return options.some((o) => o.isTrap) ? seededShuffle(options, seed, action.id) : options
+  }, [action, seed])
 }
 
 function TalkList({

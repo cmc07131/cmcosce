@@ -438,3 +438,12 @@ test('suture: "I will start now" is a fault before consent, and fine after it', 
   assert.equal(s().faults.length, before, 'after consent: no fault')
   assert.ok(s().spent['history'].includes(start.id))
 })
+
+test('perfect scripts: every key word is said somewhere in the script', () => {
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    if (!st.script) continue
+    const said = st.script.map((b) => `${b.say ?? ''} ${b.do ?? ''}`).join(' ').toLowerCase()
+    for (const k of st.keywords ?? []) assert.ok(said.includes(k.toLowerCase()), `${st.id}: key word "${k}" is never said in the script`)
+  }
+})
