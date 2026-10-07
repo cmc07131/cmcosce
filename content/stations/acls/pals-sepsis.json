@@ -8,7 +8,7 @@
   "phases": [
     {
       "title": "ABCDE",
-      "goal": "Monitoring on, then assess him yourself, A to E, including the rash and a glucose.",
+      "goal": "Monitoring and his weight; assess him A to E, including the rash and a glucose.",
       "steps": [
         "monitoring",
         "assess"
@@ -16,7 +16,7 @@
     },
     {
       "title": "Resuscitate",
-      "goal": "Oxygen, access, cultures, the antibiotic and a bolus for his weight — and his glucose.",
+      "goal": "Oxygen, access, cultures, ceftriaxone within the hour, 10 mL/kg, glucose; no LP now.",
       "steps": [
         "o2",
         "access",
@@ -27,15 +27,16 @@
     },
     {
       "title": "Reassess",
-      "goal": "Reassess after each bolus. Fluid-refractory? The next step.",
+      "goal": "After each bolus; fluid-refractory at 40 mL/kg: adrenaline infusion.",
       "steps": [
+        "reassess",
         "bolus2",
         "inotrope"
       ]
     },
     {
       "title": "Talk and call",
-      "goal": "His mother, PICU and public health.",
+      "goal": "His mother, PICU and an anaesthetist, public health.",
       "steps": [
         "mum",
         "call"
@@ -66,9 +67,13 @@
     {
       "tag": "differs",
       "text": "Antibiotic. Your notes give cefuroxime 50 mg/kg. For meningococcal sepsis, NICE uses ceftriaxone 80 mg/kg IV within 1 hour (cefotaxime in neonates; add amoxicillin under 3 months)."
+    },
+    {
+      "tag": "differs",
+      "text": "Bolus size. AHA PALS allows 10–20 mL/kg boluses; RCUK/NICE use 10 mL/kg. The script uses 10 mL/kg and reassesses after each, which every scheme accepts."
     }
   ],
-  "notes": "Checked against RCUK 2025 paediatric life support, NICE NG51 (Suspected sepsis, updated 2024), NICE CG102 (Bacterial meningitis and meningococcal disease in under 16s), and the Surviving Sepsis Campaign paediatric guidelines (2020).\n\nWeight: APLS (age in months ÷ 2) + 4 = 8 kg.\n\nFluid: 10 mL/kg boluses of balanced crystalloid (or 0.9% saline) over 5–10 minutes, reassessing after each for response and overload (crackles, hepatomegaly, rising work of breathing); after 40–60 mL/kg, start inotropes (adrenaline, which can run peripherally or IO at low concentration) and involve PICU. Your notes' WETFLAGS and sepsis sections use 20 mL/kg boluses; RCUK/ERC 2021 onwards and NICE use 10 mL/kg, so 20 mL/kg is not scored.\n\nAccess: IV, and IO if IV fails in 90 seconds (or immediately in shock).\n\nAntibiotics within 1 hour: ceftriaxone 80 mg/kg IV (NICE; cefotaxime in neonates or with calcium infusions; add amoxicillin under 3 months). Your notes list cefuroxime 50 mg/kg; that is not first-line for meningococcal sepsis.\n\nGlucose: correct hypoglycaemia with 10% glucose 2 mL/kg (as in your notes). Check calcium. Notify public health; prophylaxis for close contacts.",
+  "notes": "Checked against RCUK 2025 paediatric life support, NICE NG51 (Suspected sepsis, updated 2024), NICE CG102 (Bacterial meningitis and meningococcal disease in under 16s), and the Surviving Sepsis Campaign paediatric guidelines (2020).\n\nWeight: APLS (age in months ÷ 2) + 4 = 8 kg.\n\nFluid: 10 mL/kg boluses of balanced crystalloid (or 0.9% saline) over 5–10 minutes, reassessing after each for response and overload (crackles, hepatomegaly, rising work of breathing); after 40–60 mL/kg, start inotropes (adrenaline, which can run peripherally or IO at low concentration) and involve PICU. Your notes' WETFLAGS and sepsis sections use 20 mL/kg boluses; RCUK/ERC 2021 onwards and NICE use 10 mL/kg, so 20 mL/kg is not scored.\n\nAccess: IV, and IO if IV fails in 90 seconds (or immediately in shock).\n\nAntibiotics within 1 hour: ceftriaxone 80 mg/kg IV (NICE; cefotaxime in neonates or with calcium infusions; add amoxicillin under 3 months). Your notes list cefuroxime 50 mg/kg; that is not first-line for meningococcal sepsis.\n\nGlucose: correct hypoglycaemia with 10% glucose 2 mL/kg (as in your notes). Check calcium. Notify public health; prophylaxis for close contacts.\n\nPerfect script checked against an RCUK/NICE paediatric sepsis checklist, an AHA PALS septic shock checklist, an HKCEM-style scheme and a keyword scheme. Added: weight said aloud, the diagnosis named, no LP stated with its reason, reassessment for overload, glucose rechecked, an anaesthetist for intubation, contact prophylaxis. The circulation check now plays the pulse close-up (it played the glucose meter).",
   "cast": [
     {
       "id": "patient",
@@ -153,10 +158,10 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2. He's 8 months old: (8 ÷ 2) + 4, about 8 kg.",
           "fetch": "trolley",
           "scene": "monitored",
-          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+          "mark": "Monitoring; estimates the weight (8 kg)"
         }
       ]
     },
@@ -178,13 +183,13 @@
         "C": [
           {
             "t": "Heart rate, capillary refill, pulses, BP",
-            "r": "HR 195, CRT 5 s centrally, weak peripheral pulses, BP 62/30. Mottled legs.",
+            "r": "HR 195, CRT 5 s centrally, weak peripheral pulses, BP 62/30. Mottled legs. \"Decompensated shock.\"",
             "mark": "Recognises decompensated shock",
-            "anim": "glucose"
+            "anim": "pulse"
           },
           {
             "t": "Liver edge",
-            "r": "1 cm below the costal margin (baseline before fluids).",
+            "r": "1 cm below the costal margin. \"A baseline before fluids.\"",
             "mark": "Checks liver size before fluids",
             "anim": "abdomen"
           }
@@ -198,13 +203,13 @@
           },
           {
             "t": "Look at the rash; glass test",
-            "r": "Purpuric, non-blanching spots on the legs and trunk; they stay visible under the glass.",
+            "r": "Purpuric, non-blanching spots on the legs and trunk; they stay visible under the glass. \"A non-blanching purpuric rash: meningococcal septic shock.\"",
             "img": "photo:purpura",
-            "mark": "Identifies a non-blanching purpuric rash"
+            "mark": "Identifies a non-blanching purpuric rash: names meningococcal septic shock"
           },
           {
             "t": "Capillary glucose",
-            "r": "2.6 mmol/L.",
+            "r": "2.6 mmol/L. \"Hypoglycaemia.\"",
             "mark": "Checks glucose and finds hypoglycaemia",
             "anim": "glucose"
           }
@@ -220,7 +225,7 @@
       "confirm": "Take these",
       "opts": [
         {
-          "t": "High-flow oxygen by non-rebreather",
+          "t": "High-flow oxygen, 15 L via a non-rebreather",
           "scene": "o2",
           "mark": "High-flow oxygen",
           "fetch": "trolley"
@@ -232,20 +237,19 @@
       "kind": "say",
       "to": "nurse",
       "label": "Nurse",
-      "hint": "Access fast; bloods before the antibiotic.",
+      "hint": "IV, IO if not in within 90 seconds; bloods and cultures without delaying the antibiotic; no lumbar puncture now.",
       "opts": [
         {
-          "t": "IV attempt; IO in the proximal tibia if not in within 90 seconds",
+          "t": "IV access; if it isn't in within 90 seconds, IO in the proximal tibia.",
           "mark": "Rapid vascular access, IO if IV fails"
         },
         {
-          "t": "Blood culture, gas, glucose, FBC, CRP, clotting, U&E, meningococcal PCR",
+          "t": "Blood cultures, a gas with glucose and calcium, FBC, CRP, clotting, U&E and meningococcal PCR, without delaying the antibiotic.",
           "mark": "Cultures and bloods before antibiotics (without delaying them)"
         },
         {
-          "t": "Lumbar puncture before antibiotics",
-          "trap": "critical",
-          "r": "He is shocked with a full fontanelle: LP is contraindicated and must never delay antibiotics."
+          "t": "No lumbar puncture now: he's shocked with a full fontanelle.",
+          "mark": "Defers lumbar puncture: shocked, raised-pressure signs"
         }
       ]
     },
@@ -263,22 +267,6 @@
           "dose": "80 mg/kg (640 mg) IV/IO",
           "fetch": "cart",
           "mark": "Ceftriaxone 80 mg/kg within the first hour"
-        },
-        {
-          "t": "Ceftriaxone 25 mg/kg (200 mg) IV",
-          "drug": "Ceftriaxone",
-          "dose": "25 mg/kg (200 mg) IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little for meningococcal sepsis: 80 mg/kg."
-        },
-        {
-          "t": "Cefuroxime 50 mg/kg IV",
-          "drug": "Cefuroxime",
-          "dose": "50 mg/kg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Not first-line for meningococcal sepsis: ceftriaxone 80 mg/kg."
         }
       ]
     },
@@ -297,22 +285,6 @@
           "fetch": "cart",
           "scene": "bolus1",
           "mark": "10 mL/kg bolus with reassessment"
-        },
-        {
-          "trap": true,
-          "r": "Current guidance uses 10 mL/kg with reassessment after each; overload is harmful.",
-          "t": "Crystalloid 20 mL/kg (160 mL) as fast as possible",
-          "drug": "Crystalloid",
-          "dose": "20 mL/kg (160 mL) as fast as possible",
-          "fetch": "cart"
-        },
-        {
-          "t": "Crystalloid 5 mL/kg (40 mL)",
-          "drug": "Crystalloid",
-          "dose": "5 mL/kg (40 mL)",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 10 mL/kg boluses, reassessing after each."
         }
       ]
     },
@@ -331,14 +303,24 @@
           "fetch": "cart",
           "scene": "glucose",
           "mark": "Treats hypoglycaemia with 2 mL/kg 10% glucose"
+        }
+      ]
+    },
+    {
+      "id": "reassess",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Reassess",
+      "lang": "en",
+      "hint": "After each bolus: heart rate, refill, liver, chest; recheck the glucose.",
+      "opts": [
+        {
+          "t": "Reassess after each bolus: heart rate, capillary refill, the liver edge and the chest for overload.",
+          "mark": "Reassesses after each bolus, including for fluid overload"
         },
         {
-          "t": "Glucose 50% 16 mL IV",
-          "drug": "Glucose 50%",
-          "dose": "16 mL IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Hypertonic 50% glucose damages infant veins: 10% glucose 2 mL/kg."
+          "t": "Recheck his glucose after the dextrose.",
+          "mark": "Rechecks glucose"
         }
       ]
     },
@@ -379,14 +361,6 @@
           "early": "Not until he has had 40 mL/kg.",
           "scene": "inotrope",
           "mark": "Inotrope after 40–60 mL/kg; PICU"
-        },
-        {
-          "t": "Adrenaline 0.1 mg/mL (1:10,000) 1 mg IV bolus",
-          "drug": "Adrenaline 0.1 mg/mL (1:10,000)",
-          "dose": "1 mg IV bolus",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "A cardiac-arrest dose into a beating heart: an infusion, 0.05–0.1 microgram/kg/min."
         }
       ]
     },
@@ -409,13 +383,6 @@
               "r": "OK… please help him.",
               "mood": -3,
               "mark": "Explains honestly and simply; lets the parent stay"
-            },
-            {
-              "t": "Please wait outside.",
-              "tz": "唔該你出去等。",
-              "rz": "唔要！我唔會走！",
-              "r": "No! I'm not leaving him!",
-              "mood": 3
             }
           ]
         }
@@ -426,15 +393,15 @@
       "kind": "say",
       "to": "phone",
       "label": "Phone",
-      "hint": "PICU/retrieval, and public health.",
+      "hint": "PICU and retrieval with a clear summary; airway plan; public health and prophylaxis.",
       "opts": [
         {
-          "t": "PICU and retrieval: 8 kg infant, meningococcal septic shock, 40 mL/kg, adrenaline running",
-          "mark": "Refers to PICU/retrieval with a clear summary"
+          "t": "PICU and retrieval: an 8 kg infant with meningococcal septic shock, fluid-refractory after 40 mL/kg, adrenaline running, glucose corrected. He'll need intubation: please bring an anaesthetist.",
+          "mark": "Refers to PICU/retrieval with a clear summary; plans the airway"
         },
         {
-          "t": "Notify public health for contact prophylaxis",
-          "mark": "Notifies public health"
+          "t": "Notify public health: his close contacts and family need antibiotic prophylaxis.",
+          "mark": "Notifies public health; contact prophylaxis"
         }
       ]
     },
@@ -565,6 +532,74 @@
       ],
       "why": "Can run peripherally/IO at low concentration until central access.",
       "source": "Surviving Sepsis Campaign paediatrics 2020"
+    }
+  ],
+  "keywords": [
+    "8 kg",
+    "decompensated shock",
+    "non-blanching purpuric rash",
+    "meningococcal septic shock",
+    "high-flow oxygen",
+    "IO",
+    "90 seconds",
+    "blood cultures",
+    "ceftriaxone 80 mg per kg",
+    "within the first hour",
+    "no lumbar puncture",
+    "10 mL per kg",
+    "reassess after each bolus",
+    "fluid overload",
+    "hypoglycaemia",
+    "2 mL per kg of 10% glucose",
+    "40 mL per kg",
+    "adrenaline infusion",
+    "PICU",
+    "intubation",
+    "public health",
+    "prophylaxis"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2. He's 8 months old: about 8 kg. High-flow oxygen, 15 litres via a non-rebreather."
+    },
+    {
+      "at": "0:15",
+      "say": "Airway patent; RR 52 with mild recession, chest clear. Heart rate 195, capillary refill 5 seconds centrally, weak pulses, BP 62/30, mottled: decompensated shock. Liver 1 cm below the costal margin: a baseline before fluids."
+    },
+    {
+      "at": "0:40",
+      "say": "He responds to pain only, the fontanelle is full and he's floppy. He has a non-blanching purpuric rash: it stays under the glass. This is meningococcal septic shock. Glucose, please.",
+      "do": "Glucose 2.6: hypoglycaemia."
+    },
+    {
+      "at": "1:00",
+      "say": "IV access; if it isn't in within 90 seconds, IO in the proximal tibia. Blood cultures, a gas with glucose and calcium, FBC, CRP, clotting, U&E and meningococcal PCR, without delaying the antibiotic. No lumbar puncture now: he's shocked with a full fontanelle."
+    },
+    {
+      "at": "1:30",
+      "say": "Ceftriaxone 80 mg per kg, 640 mg, IV or IO, within the first hour. A fluid bolus of 10 mL per kg, 80 mL, over 5 to 10 minutes. And 2 mL per kg of 10% glucose for the hypoglycaemia."
+    },
+    {
+      "at": "2:00",
+      "say": "Reassess after each bolus: heart rate, capillary refill, the liver edge and the chest for overload. Recheck his glucose after the dextrose."
+    },
+    {
+      "at": "2:30",
+      "say": "Still shocked: a second and third 10 mL per kg bolus, checking for fluid overload each time.",
+      "do": "After 40 mL per kg: still HR 180, CRT 4 seconds, cool to the knees."
+    },
+    {
+      "at": "3:00",
+      "say": "Fluid-refractory at 40 mL per kg: an adrenaline infusion, 0.05 to 0.1 micrograms per kg per minute, which can run peripherally or IO."
+    },
+    {
+      "at": "3:20",
+      "say": "He's very unwell with a serious blood infection. We're giving antibiotics and fluids now, and the intensive care team is coming. You can stay with him."
+    },
+    {
+      "at": "3:40",
+      "say": "PICU and retrieval: an 8 kg infant with meningococcal septic shock, fluid-refractory after 40 mL per kg, adrenaline running, glucose corrected. He'll need intubation: please bring an anaesthetist. Notify public health: his close contacts and family need antibiotic prophylaxis."
     }
   ]
 }
