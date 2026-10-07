@@ -167,37 +167,6 @@ export function TrachProcedure({ job, coach, onDone }: { job: PerformJob; coach:
               </svg>
             </TouchPad>
             <div className="io-choices mt-2">
-              {index <= 1 && (
-                <>
-                  <button
-                    type="button"
-                    className="tap io-mini"
-                    data-testid="trach-bag"
-                    onClick={() => {
-                      const cur = runRef.current
-                      if (patent(cur)) return feel('Gentle breaths through the tube: the chest rises, a square capnograph trace.')
-                      upd({ baggedHard: cur.baggedHard + 1 })
-                      physical('Rock hard. No chest movement; air hisses out round the stoma and the neck swells.')
-                      why('Never bag hard through a blocked tube: find and clear the block first.')
-                    }}
-                  >
-                    BAG THROUGH THE TUBE
-                  </button>
-                  <button
-                    type="button"
-                    className="tap io-mini"
-                    data-testid="trach-pull"
-                    onClick={() => {
-                      upd({ pulledTube: true })
-                      buzz([60, 40, 60])
-                      physical('You pull the whole tube out. The 3-week-old stoma starts to close.')
-                      why('First the valve and the inner cannula: the commonest block is inside it. Removing the tube is later in the algorithm.')
-                    }}
-                  >
-                    PULL THE WHOLE TUBE OUT
-                  </button>
-                </>
-              )}
               {index === 3 && (
                 <>
                   <button type="button" className="tap io-mini" data-on={run.replaced || undefined} data-testid="trach-replace" onClick={() => (upd({ replaced: true, innerOut: false }), feel('A clean inner cannula clicked in.'))}>

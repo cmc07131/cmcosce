@@ -36,7 +36,7 @@
       "text": "Chest incisions. Your notes join them 'at the sternum and pubis'. The standard chest escharotomy joins the two anterior axillary incisions along the costal margin (a 'shield'). An abdominal extension is added only if the abdomen is burned and tight too."
     }
   ],
-  "notes": "Checked against ATLS 11th edition, British Burn Association guidance on escharotomy, and ANZBA EMSB principles.\n\nFull-thickness eschar is inelastic. As tissue swells under a circumferential eschar, the chest cannot expand (high airway pressures, hypercapnia, falling saturation) and limbs become ischaemic (loss of Doppler signal, cool, delayed capillary refill; pain and paraesthesia in an awake patient).\n\nBefore blaming the eschar in a ventilated patient, run DOPES: Displacement of the tube, Obstruction (secretions, soot), Pneumothorax, Equipment, Stacking of breaths.\n\nChest: bilateral incisions in the anterior axillary lines from the clavicle to the costal margin, joined by a transverse incision along the costal margin to make a 'shield' that moves with breathing. Your notes say to join them 'at the sternum and pubis'; the standard join for the chest is subcostal (an abdominal extension is added only when the abdomen is also burned and tight).\n\nLimbs: mid-medial and mid-lateral lines along the whole length of the eschar, avoiding the ulnar nerve behind the medial epicondyle and the common peroneal nerve at the fibular head. Hands: dorsal incisions between the metacarpals; fingers: mid-lateral, away from the pinch surfaces.\n\nDepth: through the eschar into subcutaneous fat until the edges gape, not through fascia. Electrical injury damages muscle under the skin and may need a fasciotomy; that is a surgical procedure. Your notes' indications, timing (usually within 6 hours) and contraindications match this.",
+  "notes": "Checked against ATLS 11th edition, British Burn Association guidance on escharotomy, and ANZBA EMSB principles.\n\nFull-thickness eschar is inelastic. As tissue swells under a circumferential eschar, the chest cannot expand (high airway pressures, hypercapnia, falling saturation) and limbs become ischaemic (loss of Doppler signal, cool, delayed capillary refill; pain and paraesthesia in an awake patient).\n\nBefore blaming the eschar in a ventilated patient, run DOPES: Displacement of the tube, Obstruction (secretions, soot), Pneumothorax, Equipment, Stacking of breaths.\n\nChest: bilateral incisions in the anterior axillary lines from the clavicle to the costal margin, joined by a transverse incision along the costal margin to make a 'shield' that moves with breathing. Your notes say to join them 'at the sternum and pubis'; the standard join for the chest is subcostal (an abdominal extension is added only when the abdomen is also burned and tight).\n\nLimbs: mid-medial and mid-lateral lines along the whole length of the eschar, avoiding the ulnar nerve behind the medial epicondyle and the common peroneal nerve at the fibular head. Hands: dorsal incisions between the metacarpals; fingers: mid-lateral, away from the pinch surfaces.\n\nDepth: through the eschar into subcutaneous fat until the edges gape, not through fascia. Electrical injury damages muscle under the skin and may need a fasciotomy; that is a surgical procedure. Your notes' indications, timing (usually within 6 hours) and contraindications match this.\n\nPerfect script checked against an ATLS/EMSB checklist, BBA escharotomy guidance, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (raising the pressure limit, paralysing, a tenfold dose, not telling the burns centre) and the bench's 'through fascia into muscle' button. Added: DOPES summarised aloud, the ventilator reading scored.",
   "cast": [
     {
       "id": "patient",
@@ -108,7 +108,7 @@
         "Chest": [
           {
             "t": "Look at chest movement",
-            "r": "Barely moves. Full-thickness, leathery eschar all the way round.",
+            "r": "Barely moves. Full-thickness, leathery eschar all the way round. \"A circumferential chest eschar.\"",
             "img": "photo:chest-eschar",
             "mark": "Finds a circumferential full-thickness chest eschar"
           },
@@ -126,7 +126,8 @@
           },
           {
             "t": "Ventilator readings",
-            "r": "Peak pressure 44 cmH2O (was 24). Tidal volume falling. No breath stacking."
+            "r": "Peak pressure 44 cmH2O (was 24). Tidal volume falling. No breath stacking.",
+            "mark": "Reads the ventilator: high peak pressure, no breath stacking"
           }
         ],
         "Right arm": [
@@ -147,20 +148,15 @@
       "hint": "Say the indication and do it now; tell the burns centre.",
       "opts": [
         {
-          "t": "Circumferential chest eschar restricting ventilation: chest escharotomy now, then the right arm",
+          "t": "DOPES is clear: the tube is in and patent, no pneumothorax, the problem stays off the ventilator, no stacking. It's the circumferential chest eschar restricting ventilation.",
+          "mark": "Summarises DOPES and names the cause"
+        },
+        {
+          "t": "Chest escharotomy now, at the bedside, then the right arm for the ischaemic hand.",
           "mark": "States the indication and prioritises the chest"
-        },
-        {
-          "t": "Increase the ventilator pressure limit and wait for the burns centre",
-          "trap": "critical",
-          "r": "More pressure against a rigid shell causes barotrauma and he keeps desaturating. Release it."
-        },
-        {
-          "t": "Paralyse him to improve compliance and leave it",
-          "trap": true,
-          "r": "The stiffness is the eschar, not the muscles."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "analgesia",
@@ -176,14 +172,6 @@
           "dose": "1 microgram/kg (70 microgram) IV",
           "fetch": "cart",
           "mark": "Analgesia and sedation (the edges are sensate)"
-        },
-        {
-          "t": "Fentanyl 1 mg IV",
-          "drug": "Fentanyl",
-          "dose": "1 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Ten times too much: about 1 microgram/kg, titrated."
         }
       ]
     },
@@ -220,14 +208,9 @@
       "hint": "Tell the burns centre what you did and why.",
       "opts": [
         {
-          "t": "Burns centre: chest and right arm escharotomy done for ventilation and ischaemia; pressures and pulses improved",
+          "t": "Burns centre: Mr Siu's chest and right arm escharotomies are done, for ventilation and an ischaemic hand. Airway pressure is down and the Doppler signals are back.",
           "mark": "Informs the burns centre",
           "r": "Burns registrar: Thank you. Keep elevating the arm; transfer as planned."
-        },
-        {
-          "t": "Say nothing; they will see it",
-          "trap": true,
-          "r": "The receiving team need to know what was cut and why."
         }
       ]
     },
@@ -381,6 +364,57 @@
       ],
       "why": "Ischaemia under a constricting eschar needs release.",
       "source": "ATLS 11th edition"
+    }
+  ],
+  "keywords": [
+    "DOPES",
+    "displacement",
+    "obstruction",
+    "pneumothorax",
+    "equipment",
+    "stacking",
+    "circumferential",
+    "eschar",
+    "chest escharotomy",
+    "fentanyl",
+    "anterior axillary lines",
+    "costal margin",
+    "into fat",
+    "diathermy",
+    "mid-medial and mid-lateral",
+    "ulnar nerve",
+    "Doppler",
+    "burns centre"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "DOPES. Displacement: the tube is at 23 cm with a square capnography trace. Obstruction: a suction catheter passes easily. Pneumothorax: equal air entry and lung sliding on both sides. Equipment: off the ventilator he's still very stiff to bag. Stacking: none; peak pressure 44, up from 24."
+    },
+    {
+      "at": "0:35",
+      "say": "The chest barely moves: a circumferential, full-thickness eschar. The right hand: no Doppler signal, cool, refill 5 seconds: an ischaemic limb under a circumferential eschar."
+    },
+    {
+      "at": "0:50",
+      "say": "DOPES is clear: the tube is in and patent, no pneumothorax, the problem stays off the ventilator, no stacking. It's the circumferential chest eschar restricting ventilation. Chest escharotomy now, at the bedside, then the right arm for the ischaemic hand."
+    },
+    {
+      "at": "1:05",
+      "say": "Fentanyl 1 microgram per kg, 70 micrograms, before I cut: the edges are sensate."
+    },
+    {
+      "at": "1:15",
+      "say": "Sterile prep and diathermy. Mark both anterior axillary lines, clavicle to costal margin, joined along the costal margin: a shield. Cut through the eschar into fat until the edges gape.",
+      "do": "Pressure falls, saturation climbs."
+    },
+    {
+      "at": "1:50",
+      "say": "Haemostasis with diathermy, dressing. Reassess ventilation. Then the right arm: mid-medial and mid-lateral lines along the whole eschar, avoiding the ulnar nerve behind the medial epicondyle. Doppler signals back."
+    },
+    {
+      "at": "2:20",
+      "say": "Burns centre: Mr Siu's chest and right arm escharotomies are done, for ventilation and an ischaemic hand. Airway pressure is down and the Doppler signals are back."
     }
   ]
 }

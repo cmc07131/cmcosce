@@ -207,9 +207,6 @@ function ChestStage({ run, runRef, upd, feel, physical, why, next, strokes, setS
           <button type="button" className="tap io-mini" data-on={depth === 'fat' || undefined} data-testid="eschar-depth-fat" onClick={() => setDepth('fat')}>
             THROUGH THE ESCHAR INTO FAT
           </button>
-          <button type="button" className="tap io-mini" data-on={depth === 'muscle' || undefined} data-testid="eschar-depth-muscle" onClick={() => setDepth('muscle')}>
-            ON THROUGH FASCIA INTO MUSCLE
-          </button>
         </div>
       )}
       <TouchPad

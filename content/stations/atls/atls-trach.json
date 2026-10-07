@@ -23,9 +23,10 @@
     },
     {
       "title": "Is it patent?",
-      "goal": "Work through the tracheostomy yourself, in order.",
+      "goal": "Work through the tracheostomy yourself, in order; then keep it clear.",
       "steps": [
-        "ntsp"
+        "ntsp",
+        "after"
       ]
     },
     {
@@ -37,7 +38,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the National Tracheostomy Safety Project (NTSP) emergency algorithms (UK, 2012 with later updates) and current HK hospital practice.\n\nFirst, is it a tracheostomy (upper airway still connects to the lungs) or a laryngectomy (a neck breather, no connection)? The bed-head sign tells you. With a tracheostomy you can oxygenate from both the face and the stoma, and intubate orally if needed; with a laryngectomy only the stoma works.\n\nNTSP sequence: call for help (airway expert); look, listen and feel at the mouth and the tracheostomy; high-flow oxygen to both the face and the stoma; waveform capnography on the tracheostomy. Is it patent? Remove the speaking valve or cap; remove the inner cannula; pass a suction catheter. If the catheter will not pass, deflate the cuff. If he is still not improving, remove the tracheostomy tube. Then: breathing? Oxygen to face and stoma. Not breathing? Start CPR and ventilate via the mouth (occlude the stoma) or via the stoma with a paediatric mask or supraglottic airway. Secondary: oral intubation with an uncut tube advanced beyond the stoma, or a small tube (6.0) or bougie via the stoma.\n\nYour tracheostomy notes follow this order; they add confirming placement with capnography, auscultation and fibreoptic view, which is correct. For bleeding (possible tracheo-innominate fistula), your notes are also correct: over-inflate the cuff, compress through the stoma against the sternum, and do not remove the tube until the airway is secured below the bleed.",
+  "notes": "Checked against the National Tracheostomy Safety Project (NTSP) emergency algorithms (UK, 2012 with later updates) and current HK hospital practice.\n\nFirst, is it a tracheostomy (upper airway still connects to the lungs) or a laryngectomy (a neck breather, no connection)? The bed-head sign tells you. With a tracheostomy you can oxygenate from both the face and the stoma, and intubate orally if needed; with a laryngectomy only the stoma works.\n\nNTSP sequence: call for help (airway expert); look, listen and feel at the mouth and the tracheostomy; high-flow oxygen to both the face and the stoma; waveform capnography on the tracheostomy. Is it patent? Remove the speaking valve or cap; remove the inner cannula; pass a suction catheter. If the catheter will not pass, deflate the cuff. If he is still not improving, remove the tracheostomy tube. Then: breathing? Oxygen to face and stoma. Not breathing? Start CPR and ventilate via the mouth (occlude the stoma) or via the stoma with a paediatric mask or supraglottic airway. Secondary: oral intubation with an uncut tube advanced beyond the stoma, or a small tube (6.0) or bougie via the stoma.\n\nYour tracheostomy notes follow this order; they add confirming placement with capnography, auscultation and fibreoptic view, which is correct. For bleeding (possible tracheo-innominate fistula), your notes are also correct: over-inflate the cuff, compress through the stoma against the sternum, and do not remove the tube until the airway is secured below the bleed.\n\nPerfect script checked against the NTSP algorithm, an ATLS/DAS airway checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (face-mask oxygen only, mouth oxygen after laryngectomy) and the bench's 'bag hard' and 'pull the whole tube out' buttons. Added: care once patent and a tracheostomy review.",
   "cast": [
     {
       "id": "patient",
@@ -87,12 +88,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG, NIBP and SpO2.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
@@ -128,21 +130,16 @@
       "hint": "Call for help and give oxygen to both the face and the stoma.",
       "opts": [
         {
-          "t": "Call the airway team (anaesthetist and ENT) now",
+          "t": "Call the airway team now, please: the anaesthetist and ENT.",
           "mark": "Calls for airway help early"
         },
         {
-          "t": "High-flow oxygen to the face and the stoma",
+          "t": "High-flow oxygen to both the face and the tracheostomy.",
           "fetch": "trolley",
           "mark": "Oxygen to both face and stoma"
-        },
-        {
-          "t": "Oxygen only by face mask",
-          "fetch": "trolley",
-          "trap": true,
-          "r": "He breathes mostly through the tracheostomy. Oxygen goes to both."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "ntsp",
@@ -167,6 +164,28 @@
       ]
     },
     {
+      "id": "after",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Once patent",
+      "lang": "en",
+      "hint": "Humidify, clean, monitor, review.",
+      "opts": [
+        {
+          "t": "It's patent now and his saturation is rising. Humidified oxygen, regular suction and inner cannula cleaning, capnography on the tracheostomy.",
+          "when": "patent",
+          "early": "Once the tracheostomy is patent.",
+          "mark": "Humidification, suction and capnography after clearing"
+        },
+        {
+          "t": "ICU outreach and ENT to review the tracheostomy before he goes back to the ward.",
+          "when": "patent",
+          "early": "Once the tracheostomy is patent.",
+          "mark": "Arranges a tracheostomy review"
+        }
+      ]
+    },
+    {
       "id": "plan-b",
       "kind": "say",
       "to": "examiner",
@@ -175,21 +194,16 @@
       "hint": "Deflate the cuff; then remove the tube; oxygenate face and stoma; secondary airway options.",
       "opts": [
         {
-          "t": "Deflate the cuff; if still no better, remove the tracheostomy tube",
+          "t": "Deflate the cuff. If he's still no better, remove the tracheostomy tube.",
           "mark": "Knows the next steps: deflate the cuff, then remove the tube"
         },
         {
-          "t": "If not breathing: CPR; ventilate by mouth (cover the stoma) or via the stoma with a small mask or LMA",
+          "t": "If he's not breathing: CPR; ventilate by mouth with the stoma covered, or via the stoma with a small mask or LMA.",
           "mark": "Knows the rescue ventilation routes"
         },
         {
-          "t": "Oral intubation with an uncut tube past the stoma, or a size 6.0 through the stoma",
+          "t": "Then oral intubation with an uncut tube advanced past the stoma, or a size 6.0 tube through the stoma.",
           "mark": "Knows the secondary airway options"
-        },
-        {
-          "t": "Oxygen by mouth works just the same after a laryngectomy",
-          "trap": "critical",
-          "r": "A laryngectomy patient has no connection between mouth and lungs. Stoma only."
         }
       ]
     },
@@ -331,6 +345,49 @@
       ],
       "why": "The cuff must sit below the stoma.",
       "source": "NTSP"
+    }
+  ],
+  "keywords": [
+    "bed-head sign",
+    "not a laryngectomy",
+    "look, listen and feel",
+    "waveform capnography",
+    "airway team",
+    "face and the tracheostomy",
+    "speaking valve",
+    "inner cannula",
+    "suction catheter",
+    "humidified",
+    "deflate the cuff",
+    "remove the tracheostomy tube",
+    "stoma covered",
+    "uncut tube"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2. The bed-head sign: a tracheostomy, not a laryngectomy, so the upper airway is patent; cuffed tube with an inner cannula."
+    },
+    {
+      "at": "0:15",
+      "say": "Look, listen and feel at the mouth and the tracheostomy: little airflow at the stoma, some at the mouth, chest heaving. Waveform capnography on the tracheostomy: a weak trace."
+    },
+    {
+      "at": "0:30",
+      "say": "Call the airway team now, please: the anaesthetist and ENT. High-flow oxygen to both the face and the tracheostomy."
+    },
+    {
+      "at": "0:45",
+      "say": "Is it patent? Speaking valve off. Inner cannula out: crusted with secretions. Pass a suction catheter: it goes down easily. A clean inner cannula in, and humidify.",
+      "do": "Saturation rising."
+    },
+    {
+      "at": "1:20",
+      "say": "It's patent now and his saturation is rising. Humidified oxygen, regular suction and inner cannula cleaning, capnography on the tracheostomy. ICU outreach and ENT to review the tracheostomy before he goes back to the ward."
+    },
+    {
+      "at": "1:40",
+      "say": "If suction had failed: deflate the cuff. If he's still no better, remove the tracheostomy tube. If he's not breathing: CPR; ventilate by mouth with the stoma covered, or via the stoma with a small mask or LMA. Then oral intubation with an uncut tube advanced past the stoma, or a size 6.0 tube through the stoma."
     }
   ]
 }
