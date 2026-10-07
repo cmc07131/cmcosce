@@ -42,7 +42,7 @@
       "text": "Aspirin and oxygen. Your notes (from a 2018 tutorial) give aspirin 160 mg and oxygen if SpO2 is under 94%. ESC 2023 gives aspirin 150–300 mg, and oxygen only if SpO2 is under 90%."
     }
   ],
-  "notes": "Checked against the ESC 2023 guidelines for acute coronary syndromes and the Hong Kong Hospital Authority STEMI pathway.\n\nReperfusion: primary PCI if it can be done within 120 minutes of diagnosis; otherwise fibrinolysis within 10 minutes of diagnosis (tenecteplase weight-based, half dose if 75 years or over), then transfer to a PCI centre: rescue PCI if it fails (less than 50% ST resolution at 60–90 minutes), angiography within 2–24 hours if it works (pharmaco-invasive strategy, outcomes similar to primary PCI in STREAM). Adjuncts: aspirin 150–300 mg, clopidogrel 300 mg (75 mg if 75 or older), enoxaparin or unfractionated heparin. Oxygen only if SpO2 is under 90%. Absolute contraindications include previous ICH or stroke of unknown origin, ischaemic stroke in 6 months, CNS lesion, recent major trauma/surgery/head injury (1 month), GI bleeding in 1 month, known bleeding disorder, aortic dissection, non-compressible punctures in 24 hours.\n\nYour notes (based on a 2018 NTWC tutorial) give aspirin 160 mg and oxygen if SpO2 under 94%; ESC 2023 uses 150–300 mg and under 90%. The rest (history, contraindications, and the argument that delaying for PCI transfer is worse) matches.",
+  "notes": "Checked against the ESC 2023 guidelines for acute coronary syndromes and the Hong Kong Hospital Authority STEMI pathway.\n\nReperfusion: primary PCI if it can be done within 120 minutes of diagnosis; otherwise fibrinolysis within 10 minutes of diagnosis (tenecteplase weight-based, half dose if 75 years or over), then transfer to a PCI centre: rescue PCI if it fails (less than 50% ST resolution at 60–90 minutes), angiography within 2–24 hours if it works (pharmaco-invasive strategy, outcomes similar to primary PCI in STREAM). Adjuncts: aspirin 150–300 mg, clopidogrel 300 mg (75 mg if 75 or older), enoxaparin or unfractionated heparin. Oxygen only if SpO2 is under 90%. Absolute contraindications include previous ICH or stroke of unknown origin, ischaemic stroke in 6 months, CNS lesion, recent major trauma/surgery/head injury (1 month), GI bleeding in 1 month, known bleeding disorder, aortic dissection, non-compressible punctures in 24 hours.\n\nYour notes (based on a 2018 NTWC tutorial) give aspirin 160 mg and oxygen if SpO2 under 94%; ESC 2023 uses 150–300 mg and under 90%. The rest (history, contraindications, and the argument that delaying for PCI transfer is worse) matches.\n\nPerfect script checked against AHA 2025 ACS and ESC 2023 STEMI guidance, an HKCEM-style scheme and a keyword scheme. Removed the wrong doses and the jargon, trust-me and send-him replies.",
   "cast": [
     {
       "id": "patient",
@@ -132,7 +132,7 @@
         "ECG": [
           {
             "t": "12-lead ECG",
-            "r": "ST elevation V1–V4 with reciprocal inferior depression: acute anterior STEMI.",
+            "r": "ST elevation V1–V4 with reciprocal inferior depression. \"An acute anterior STEMI.\"",
             "img": "ecg:stemi-anterior",
             "mark": "Diagnoses anterior STEMI"
           }
@@ -163,28 +163,12 @@
           "dose": "300 mg chewed"
         },
         {
-          "t": "Aspirin 75 mg",
-          "drug": "Aspirin",
-          "dose": "75 mg",
-          "fetch": "cart",
-          "trap": true,
-          "r": "The loading dose is 150–300 mg."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "mark": "Clopidogrel with fibrinolysis",
           "t": "Clopidogrel 300 mg (75 mg if 75 or older)",
           "drug": "Clopidogrel",
           "dose": "300 mg (75 mg if 75 or older)"
-        },
-        {
-          "t": "Clopidogrel 600 mg",
-          "drug": "Clopidogrel",
-          "dose": "600 mg",
-          "fetch": "cart",
-          "trap": true,
-          "r": "With fibrinolysis the load is 300 mg (75 mg if 75 or older); 600 mg is for primary PCI."
         },
         {
           "fetch": "cart",
@@ -195,18 +179,10 @@
           "dose": "30 mg IV bolus, then 1 mg/kg SC (under 75)"
         },
         {
-          "t": "Enoxaparin 1.5 mg/kg IV bolus",
-          "drug": "Enoxaparin",
-          "dose": "1.5 mg/kg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "With tenecteplase: 30 mg IV, then 1 mg/kg SC 12-hourly (no IV bolus if 75 or over)."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "mark": "Analgesia",
-          "t": "GTN and morphine GTN 400 microgram SL; morphine 2.5–5 mg IV, titrated",
+          "t": "GTN 400 micrograms sublingual; morphine 2.5–5 mg IV, titrated",
           "drug": "GTN and morphine",
           "dose": "GTN 400 microgram SL; morphine 2.5–5 mg IV, titrated"
         }
@@ -231,13 +207,6 @@
               "r": "How?",
               "mood": -1,
               "mark": "Explains STEMI simply"
-            },
-            {
-              "t": "Anterior STEMI.",
-              "tz": "Anterior STEMI。",
-              "rz": "吓？",
-              "r": "Eh?",
-              "mood": 2
             }
           ]
         },
@@ -252,13 +221,6 @@
               "r": "I'd rather go to the big hospital for the balloon.",
               "mood": 0,
               "mark": "Explains fibrinolysis benefits and risks with numbers"
-            },
-            {
-              "t": "Trust me, it's fine.",
-              "tz": "信我啦，冇事嘅。",
-              "rz": "有咩風險？",
-              "r": "What are the risks?",
-              "mood": 2
             }
           ]
         },
@@ -274,13 +236,6 @@
               "mood": -3,
               "mark": "Explains the pharmaco-invasive strategy and time dependence",
               "scene": "consented"
-            },
-            {
-              "t": "Fine, we'll send you.",
-              "tz": "好，咁送你過去。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         }
@@ -302,14 +257,6 @@
           "when": "consented",
           "early": "Discuss it with him first.",
           "mark": "Tenecteplase at the weight-based dose once he agrees"
-        },
-        {
-          "t": "Tenecteplase 100 mg IV bolus",
-          "drug": "Tenecteplase",
-          "dose": "100 mg IV bolus",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Double the maximum: 0.5 mg/kg, no more than 50 mg (half dose if 75 or over)."
         }
       ]
     },
@@ -440,5 +387,68 @@
       "why": "Left anterior descending artery.",
       "source": "ECG basics"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Tell me about the pain. Smoking, diabetes, BP, cholesterol, family history. Any previous stroke, brain bleed or brain tumour?",
+      "do": "Crushing in the middle of my chest, to my left arm, started 2 hours ago walking up a hill. Sweating, feel sick. Smoker, 30 a day. High cholesterol. Father had a heart attack at 55. No."
+    },
+    {
+      "at": "0:20",
+      "say": "Any recent bleeding, stomach ulcer, surgery or head injury? Tearing pain through to the back? Blood thinners, Viagra, allergies?",
+      "do": "No. No, it's in the front. None."
+    },
+    {
+      "at": "0:40",
+      "say": "12-lead ECG. FBC, clotting, U&E, troponin, glucose, lipids. An acute anterior STEMI.",
+      "do": "ST elevation V1–V4 with reciprocal inferior depression. \"An acute anterior STEMI.\" Sent."
+    },
+    {
+      "at": "1:00",
+      "say": "Aspirin 300 mg chewed. Clopidogrel 300 mg (75 mg if 75 or older). Enoxaparin 30 mg IV bolus, then 1 mg/kg SC (under 75)."
+    },
+    {
+      "at": "1:20",
+      "say": "GTN and morphine GTN 400 microgram SL; morphine 2.5–5 mg IV, titrated."
+    },
+    {
+      "at": "1:40",
+      "say": "You're having a heart attack: an artery to the heart is blocked by a clot. We need to open it quickly to save heart muscle.",
+      "do": "How?"
+    },
+    {
+      "at": "2:00",
+      "say": "The fastest way here is an injection that dissolves the clot. It works in most people. The main risk is bleeding — serious bleeding in about 1 in 20, and bleeding in the brain in about 1 in 100.",
+      "do": "I'd rather go to the big hospital for the balloon."
+    },
+    {
+      "at": "2:20",
+      "say": "The balloon is best only if it can be done within 2 hours; the journey alone is 2½. Every minute counts — 'time is muscle'. We'll give the injection now and then transfer you for an angiogram within 24 hours anyway.",
+      "do": "OK, go ahead."
+    },
+    {
+      "at": "2:40",
+      "say": "Tenecteplase weight-based single IV bolus (0.5 mg/kg, maximum 50 mg)."
+    }
+  ],
+  "keywords": [
+    "pain",
+    "smoking",
+    "stroke",
+    "bleeding",
+    "tearing",
+    "Viagra",
+    "anterior STEMI",
+    "aspirin 300 mg",
+    "clopidogrel 300 mg",
+    "enoxaparin 30 mg",
+    "heart attack",
+    "clot",
+    "bleeding",
+    "within 2 hours",
+    "time is muscle",
+    "tenecteplase",
+    "0.5 mg/kg"
   ]
 }

@@ -34,7 +34,7 @@
       "text": "Post-exposure prophylaxis. Your notes give VZIG 125 units per 10 kg (US dosing). UKHSA (since 2019) gives oral aciclovir 800 mg four times a day from day 7 to 14 after exposure first, keeping VZIG for those who cannot take it. HK practice may still use VZIG within 10 days: follow local guidance."
     }
   ],
-  "notes": "Checked against RCOG Green-top Guideline 13 (Chickenpox in pregnancy, 2015), the UKHSA Green Book chapter 34 and UKHSA guidance on post-exposure prophylaxis (updated 2019 onward), and the Hong Kong Centre for Health Protection guidance.\n\nSignificant exposure: household contact, face-to-face for 5 minutes, or 15 minutes in the same room with chickenpox or exposed shingles. Check immunity: a clear history of chickenpox is usually enough; if uncertain, urgent VZV IgG.\n\nPost-exposure prophylaxis for non-immune pregnant women: UKHSA (since 2019) recommends oral aciclovir 800 mg four times daily from day 7 to day 14 after exposure as first line, with VZIG reserved for those who cannot take aciclovir; HK practice may still use VZIG within 10 days — follow local guidance. She is infectious from 8 to 28 days after exposure (to 21 days without VZIG) and should avoid other pregnant women and neonates.\n\nIf chickenpox develops: oral aciclovir within 24 hours of the rash if 20 weeks or more (consider before 20 weeks); urgent review for chest symptoms, neurological symptoms, haemorrhagic rash or dense rash (pneumonia risk about 10%). Fetal varicella syndrome risk is about 1–2% before 20 weeks; neonatal varicella if maternal infection is within about 5 days before to 2 days after delivery.\n\nYour notes use VZIG 125 units per 10 kg (US dosing, max 625) as PEP; UK guidance now uses aciclovir first. The rest of your notes (exposure definition, risks, measles PEP with immunoglobulin within 6 days) matches.",
+  "notes": "Checked against RCOG Green-top Guideline 13 (Chickenpox in pregnancy, 2015), the UKHSA Green Book chapter 34 and UKHSA guidance on post-exposure prophylaxis (updated 2019 onward), and the Hong Kong Centre for Health Protection guidance.\n\nSignificant exposure: household contact, face-to-face for 5 minutes, or 15 minutes in the same room with chickenpox or exposed shingles. Check immunity: a clear history of chickenpox is usually enough; if uncertain, urgent VZV IgG.\n\nPost-exposure prophylaxis for non-immune pregnant women: UKHSA (since 2019) recommends oral aciclovir 800 mg four times daily from day 7 to day 14 after exposure as first line, with VZIG reserved for those who cannot take aciclovir; HK practice may still use VZIG within 10 days — follow local guidance. She is infectious from 8 to 28 days after exposure (to 21 days without VZIG) and should avoid other pregnant women and neonates.\n\nIf chickenpox develops: oral aciclovir within 24 hours of the rash if 20 weeks or more (consider before 20 weeks); urgent review for chest symptoms, neurological symptoms, haemorrhagic rash or dense rash (pneumonia risk about 10%). Fetal varicella syndrome risk is about 1–2% before 20 weeks; neonatal varicella if maternal infection is within about 5 days before to 2 days after delivery.\n\nYour notes use VZIG 125 units per 10 kg (US dosing, max 625) as PEP; UK guidance now uses aciclovir first. The rest of your notes (exposure definition, risks, measles PEP with immunoglobulin within 6 days) matches.\n\nPerfect script checked against RCOG Green-top 13 and UKHSA VZV guidance, an HKCEM-style scheme and a keyword scheme. Removed the frightening and nothing-to-do replies; the contact's illness question scores.",
   "cast": [
     {
       "id": "patient",
@@ -63,7 +63,8 @@
             "t": "Has he got chickenpox or shingles?",
             "tz": "佢係出水痘定生蛇？",
             "rz": "水痘——成身都係。",
-            "r": "Chickenpox — spots everywhere."
+            "r": "Chickenpox — spots everywhere.",
+            "mark": "Confirms chickenpox, not shingles, in the contact"
           }
         ],
         "Immunity": [
@@ -128,13 +129,6 @@
               "r": "How?",
               "mood": -3,
               "mark": "Explains fetal risk honestly with numbers"
-            },
-            {
-              "t": "Yes, probably.",
-              "tz": "會，好大機會。",
-              "rz": "（喊）",
-              "r": "[Cries]",
-              "mood": 3
             }
           ]
         },
@@ -149,13 +143,6 @@
               "r": "OK.",
               "mood": -2,
               "mark": "Offers post-exposure prophylaxis per current guidance"
-            },
-            {
-              "t": "There's nothing we can do.",
-              "tz": "我哋乜都做唔到。",
-              "rz": "真係乜都冇？",
-              "r": "Nothing at all?",
-              "mood": 2
             }
           ]
         },
@@ -170,13 +157,6 @@
               "r": "Thank you, that's clear.",
               "mood": -2,
               "mark": "Advises on infectious period and safety-nets"
-            },
-            {
-              "t": "No need.",
-              "tz": "唔使。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         }
@@ -309,5 +289,52 @@
       "why": "MMR is contraindicated in pregnancy.",
       "source": "UKHSA"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "When did you see your nephew, and for how long? Has he got chickenpox or shingles? Have you ever had chickenpox or the vaccine?",
+      "do": "Saturday, 4 days ago, the whole afternoon playing indoors. His spots came out the next morning. Chickenpox — spots everywhere. My mother isn't sure. I don't think so."
+    },
+    {
+      "at": "0:20",
+      "say": "Any rash, fever, cough or breathlessness? How is the pregnancy going? Any other health problems, smoking?",
+      "do": "No, I feel fine. All normal so far. I don't smoke."
+    },
+    {
+      "at": "0:40",
+      "say": "Urgent VZV IgG.",
+      "do": "VZV IgG negative: not immune."
+    },
+    {
+      "at": "1:00",
+      "say": "Most babies are fine. If you did catch chickenpox before 20 weeks, the chance of the baby being affected is about 1 to 2 in 100. We can reduce your chance of catching it.",
+      "do": "How?"
+    },
+    {
+      "at": "1:20",
+      "say": "Antiviral tablets (aciclovir) from day 7 to day 14 after the contact, which lower the chance of chickenpox. Some hospitals use an antibody injection instead; we'll follow the obstetric team's advice.",
+      "do": "OK."
+    },
+    {
+      "at": "1:40",
+      "say": "You could be infectious from 8 to 28 days after the contact, so avoid other pregnant women and newborn babies then. If you get a rash, call us at once — not the waiting room — so we can start treatment within 24 hours. Come immediately with any cough, breathlessness or headache.",
+      "do": "Thank you, that's clear."
+    }
+  ],
+  "keywords": [
+    "when did you see",
+    "chickenpox",
+    "vaccine",
+    "rash",
+    "pregnancy",
+    "VZV IgG",
+    "1 to 2 in 100",
+    "aciclovir",
+    "day 7 to day 14",
+    "8 to 28 days",
+    "pregnant women",
+    "newborn",
+    "rash, call us"
   ]
 }

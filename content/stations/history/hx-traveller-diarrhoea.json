@@ -27,7 +27,7 @@
       "text": "When to give antibiotics. Your notes avoid them unless the patient is high risk. ISTM decides by severity: loperamide for mild to moderate illness; azithromycin for severe illness or dysentery (preferred after South-East Asia because of quinolone resistance)."
     }
   ],
-  "notes": "Checked against the International Society of Travel Medicine (ISTM) 2017 guideline on travellers' diarrhoea, NICE CKS (gastroenteritis), and UKHSA.\n\nDefinition: three or more unformed stools in 24 hours with at least one of abdominal cramps, nausea, vomiting, fever, tenesmus or blood. Commonest cause: enterotoxigenic E. coli; in South-East Asia Campylobacter is common and often fluoroquinolone-resistant. Dysentery (blood, fever) suggests Shigella, Campylobacter, Salmonella or amoebiasis.\n\nManagement: oral rehydration for all; loperamide for mild–moderate diarrhoea without fever or blood; antibiotics for severe or dysenteric illness — azithromycin (single 1 g dose or 500 mg daily for 3 days) is preferred for travel to South-East Asia because of quinolone resistance. Stool culture for fever, blood, severe or prolonged illness. Exclude malaria in fever after a malarial area, and consider typhoid.\n\nYour notes cover the history, pathogens, definition and management; they say to avoid antibiotics unless high risk, while ISTM uses severity (not risk group) to decide. Minor difference.",
+  "notes": "Checked against the International Society of Travel Medicine (ISTM) 2017 guideline on travellers' diarrhoea, NICE CKS (gastroenteritis), and UKHSA.\n\nDefinition: three or more unformed stools in 24 hours with at least one of abdominal cramps, nausea, vomiting, fever, tenesmus or blood. Commonest cause: enterotoxigenic E. coli; in South-East Asia Campylobacter is common and often fluoroquinolone-resistant. Dysentery (blood, fever) suggests Shigella, Campylobacter, Salmonella or amoebiasis.\n\nManagement: oral rehydration for all; loperamide for mild–moderate diarrhoea without fever or blood; antibiotics for severe or dysenteric illness — azithromycin (single 1 g dose or 500 mg daily for 3 days) is preferred for travel to South-East Asia because of quinolone resistance. Stool culture for fever, blood, severe or prolonged illness. Exclude malaria in fever after a malarial area, and consider typhoid.\n\nYour notes cover the history, pathogens, definition and management; they say to avoid antibiotics unless high risk, while ISTM uses severity (not risk group) to decide. Minor difference.\n\nPerfect script checked against CDC Yellow Book and NICE CKS, an HKCEM-style scheme and a keyword scheme. Removed the dismissive, ciprofloxacin-for-a-week and cancel-it replies; the vaccine question scores.",
   "cast": [
     {
       "id": "patient",
@@ -109,7 +109,8 @@
             "t": "Vaccines before travel?",
             "tz": "去之前打過咩針？",
             "rz": "甲型肝炎同傷寒。",
-            "r": "Hepatitis A and typhoid."
+            "r": "Hepatitis A and typhoid.",
+            "mark": "Asks pre-travel vaccines"
           }
         ],
         "Background": [
@@ -149,13 +150,6 @@
               "r": "Do I need antibiotics?",
               "mood": -1,
               "mark": "Explains the likely diagnosis simply"
-            },
-            {
-              "t": "Gastro. Go home.",
-              "tz": "腸胃炎。返屋企啦。",
-              "rz": "就咁？",
-              "r": "That's it?",
-              "mood": 2
             }
           ]
         },
@@ -170,13 +164,6 @@
               "r": "And the meeting?",
               "mood": -2,
               "mark": "Rehydration, stool sample, azithromycin for moderate–severe illness"
-            },
-            {
-              "t": "Ciprofloxacin for a week.",
-              "tz": "食一個禮拜 ciprofloxacin。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         },
@@ -191,13 +178,6 @@
               "r": "Thanks, that's clear.",
               "mood": -2,
               "mark": "Hygiene and safety-netting advice; checks understanding"
-            },
-            {
-              "t": "Cancel it.",
-              "tz": "取消佢啦。",
-              "rz": "嗯……",
-              "r": "Hmm.",
-              "mood": 1
             }
           ]
         }
@@ -329,5 +309,58 @@
       "why": "Guides targeted treatment.",
       "source": "NICE CKS"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Are you in pain now? Would you like something for it? What are the stools like, and how often? Any blood or mucus?",
+      "do": "Cramps come and go. Yes please. Watery, about 8 times a day. No blood. Some mucus."
+    },
+    {
+      "at": "0:20",
+      "say": "Fever, vomiting, dizziness on standing, passing urine? Where did you go and for how long? What kind of accommodation? Street food, ice, salads, tap water?",
+      "do": "Felt hot. Vomited twice yesterday. Slightly dizzy. Passing a little dark urine. Two weeks, Bangkok and the islands. Hostels. Lots of street food, ice in drinks."
+    },
+    {
+      "at": "0:40",
+      "say": "Anyone else unwell? Any mosquito bites or malaria tablets? Other risks — swimming, sex, drugs? Vaccines before travel?",
+      "do": "My friend had a bad stomach too. Some bites, no tablets. Beach swimming. No other risks. Hepatitis A and typhoid."
+    },
+    {
+      "at": "1:00",
+      "say": "Past medical history, medicines, allergies. What are you most worried about?",
+      "do": "Healthy, no medicines, no allergies. I've got an important meeting on Friday."
+    },
+    {
+      "at": "1:20",
+      "say": "Most likely traveller's diarrhoea — a gut infection from food or water, usually E. coli or Campylobacter. It usually settles in 3 to 5 days.",
+      "do": "Do I need antibiotics?"
+    },
+    {
+      "at": "1:40",
+      "say": "You've had fever and it's affecting your day, so a single dose of azithromycin is reasonable — it works better than ciprofloxacin for infections from Thailand. Plenty of oral rehydration fluid, and we'll send a stool sample.",
+      "do": "And the meeting?"
+    },
+    {
+      "at": "2:00",
+      "say": "You'll probably be much better by Friday. Wash your hands well and don't prepare food for others. Come back if you see blood, get a high fever, can't keep fluids down, or feel faint.",
+      "do": "Thanks, that's clear."
+    }
+  ],
+  "keywords": [
+    "pain",
+    "stools",
+    "blood",
+    "dizziness",
+    "where did you go",
+    "street food",
+    "anyone else",
+    "malaria",
+    "vaccines",
+    "worried",
+    "traveller's diarrhoea",
+    "azithromycin",
+    "wash your hands",
+    "come back"
   ]
 }

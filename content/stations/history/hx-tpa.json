@@ -49,7 +49,7 @@
       "text": "Contraindications. Your list includes the older ECASS-III exclusions after 3 hours (age over 80, diabetes with a previous stroke, NIHSS over 25). AHA 2019 no longer treats these as absolute."
     }
   ],
-  "notes": "Checked against the European Stroke Organisation guidelines (ESO 2021 on IV thrombolysis; ESO 2023 expedited recommendation on tenecteplase), AHA/ASA 2019 acute ischaemic stroke guideline (with 2026 update where relevant), NICE NG128 (updated 2022/2023), and Hong Kong Hospital Authority stroke thrombolysis practice.\n\nIV thrombolysis for disabling ischaemic stroke within 4.5 hours of onset (or last known well): alteplase 0.9 mg/kg (max 90 mg, 10% bolus, rest over 1 hour) or tenecteplase 0.25 mg/kg single bolus (max 25 mg), now an equal or preferred option in ESO and NICE. Beyond 4.5 hours or wake-up stroke: selected patients with imaging mismatch. Large vessel occlusion (CT angiogram): mechanical thrombectomy up to 6 hours, and up to 24 hours with imaging selection. BP must be under 185/110 before and 180/105 for 24 hours after.\n\nBenefit: about 10 more patients per 100 treated within 3 hours have little or no disability, fewer at 3–4.5 hours; symptomatic ICH about 6% versus 1% (NINDS-era figures; lower in modern registries).\n\nYour notes use a 3-hour window and the NINDS numbers; the window is now 4.5 hours, tenecteplase is an accepted alternative, and CT angiography for thrombectomy should be part of the plan. Your contraindication lists (older ECASS-III warnings after 3 hours: age over 80, diabetes with prior stroke, NIHSS over 25) are no longer absolute in AHA 2019.",
+  "notes": "Checked against the European Stroke Organisation guidelines (ESO 2021 on IV thrombolysis; ESO 2023 expedited recommendation on tenecteplase), AHA/ASA 2019 acute ischaemic stroke guideline (with 2026 update where relevant), NICE NG128 (updated 2022/2023), and Hong Kong Hospital Authority stroke thrombolysis practice.\n\nIV thrombolysis for disabling ischaemic stroke within 4.5 hours of onset (or last known well): alteplase 0.9 mg/kg (max 90 mg, 10% bolus, rest over 1 hour) or tenecteplase 0.25 mg/kg single bolus (max 25 mg), now an equal or preferred option in ESO and NICE. Beyond 4.5 hours or wake-up stroke: selected patients with imaging mismatch. Large vessel occlusion (CT angiogram): mechanical thrombectomy up to 6 hours, and up to 24 hours with imaging selection. BP must be under 185/110 before and 180/105 for 24 hours after.\n\nBenefit: about 10 more patients per 100 treated within 3 hours have little or no disability, fewer at 3–4.5 hours; symptomatic ICH about 6% versus 1% (NINDS-era figures; lower in modern registries).\n\nYour notes use a 3-hour window and the NINDS numbers; the window is now 4.5 hours, tenecteplase is an accepted alternative, and CT angiography for thrombectomy should be part of the plan. Your contraindication lists (older ECASS-III warnings after 3 hours: age over 80, diabetes with prior stroke, NIHSS over 25) are no longer absolute in AHA 2019.\n\nPerfect script checked against AHA/ASA 2019 and NICE NG128 stroke thrombolysis, an HKCEM-style scheme and a keyword scheme. Removed the wrong doses, aspirin and the jargon, no-risk and wait-until-tomorrow replies; the headache question scores.",
   "cast": [
     {
       "id": "patient",
@@ -126,7 +126,8 @@
             "t": "Sudden severe headache before this?",
             "tz": "呢次之前有冇突然好劇烈頭痛？",
             "rz": "冇頭痛。",
-            "r": "No headache."
+            "r": "No headache.",
+            "mark": "Asks about a sudden severe headache (SAH)"
           }
         ],
         "Other": [
@@ -155,22 +156,6 @@
           "t": "Labetalol 10 mg IV over 1–2 minutes",
           "drug": "Labetalol",
           "dose": "10 mg IV over 1–2 minutes"
-        },
-        {
-          "t": "Labetalol 100 mg IV bolus",
-          "drug": "Labetalol",
-          "dose": "100 mg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once: 10 mg IV over 1–2 minutes, repeated, to under 185/110."
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "No antiplatelets for 24 hours after thrombolysis.",
-          "t": "Aspirin 300 mg now",
-          "drug": "Aspirin",
-          "dose": "300 mg now"
         }
       ]
     },
@@ -193,13 +178,6 @@
               "r": "Can you fix it?",
               "mood": -1,
               "mark": "Explains the diagnosis in plain language"
-            },
-            {
-              "t": "Right MCA infarct.",
-              "tz": "Right MCA infarct。",
-              "rz": "乜話？",
-              "r": "What?",
-              "mood": 2
             }
           ]
         },
@@ -214,13 +192,6 @@
               "r": "That's a big risk…",
               "mood": 0,
               "mark": "Explains benefits and risks with numbers"
-            },
-            {
-              "t": "It's a magic drug with no side effects.",
-              "tz": "呢隻係神藥，完全冇副作用。",
-              "rz": "真係？",
-              "r": "Really?",
-              "mood": 1
             }
           ]
         },
@@ -236,13 +207,6 @@
               "mood": -2,
               "mark": "Explains time dependence and supports her decision",
               "scene": "consented"
-            },
-            {
-              "t": "Sure, tomorrow is fine.",
-              "tz": "冇問題，聽日都得。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         }
@@ -267,14 +231,6 @@
           ],
           "early": "Consent and a BP under 185/110 first.",
           "mark": "Alteplase at 0.9 mg/kg once consented and the BP is controlled"
-        },
-        {
-          "t": "Alteplase 0.9 mg/kg, all as a bolus",
-          "drug": "Alteplase",
-          "dose": "0.9 mg/kg, all as a bolus",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Only 10% goes as a bolus; the rest runs over an hour."
         }
       ]
     },
@@ -405,5 +361,57 @@
       "why": "Age and diabetes are no longer absolute exclusions.",
       "source": "AHA/ASA 2019"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "When exactly did this start? When were you last normal? Do you take blood thinners? Any recent bleeding, surgery, head injury or stroke?",
+      "do": "At 07:40, at breakfast. I was fine a second before. No. Just blood pressure tablets — I sometimes forget them. No."
+    },
+    {
+      "at": "0:20",
+      "say": "Ever had a brain bleed, aneurysm or brain tumour? Sudden severe headache before this? Allergies? Function before today?",
+      "do": "No. No headache. No allergies. Fully independent, still working."
+    },
+    {
+      "at": "0:40",
+      "say": "Labetalol 10 mg IV over 1–2 minutes."
+    },
+    {
+      "at": "1:00",
+      "say": "You've had a stroke — a clot blocking blood flow to part of the brain. The scan shows no bleeding.",
+      "do": "Can you fix it?"
+    },
+    {
+      "at": "1:20",
+      "say": "There's a clot-dissolving drug. Given within 4½ hours, about 1 extra person in every 10 treated recovers with little or no disability. The main risk is bleeding in the brain — about 6 in 100 — which can be serious or fatal.",
+      "do": "That's a big risk…"
+    },
+    {
+      "at": "1:40",
+      "say": "I understand. The benefit falls every minute, and after 4½ hours it isn't given. Overall, many more people are helped than harmed. What would you like to do?",
+      "do": "OK. Let's do it."
+    },
+    {
+      "at": "2:00",
+      "say": "Alteplase 0.9 mg/kg (max 90 mg): 10% as a bolus, the rest over 1 hour."
+    }
+  ],
+  "keywords": [
+    "when exactly",
+    "last normal",
+    "blood thinners",
+    "bleeding",
+    "brain bleed",
+    "headache",
+    "function",
+    "labetalol",
+    "stroke",
+    "no bleeding",
+    "4½ hours",
+    "1 extra person in every 10",
+    "benefit falls every minute",
+    "alteplase",
+    "10% as a bolus"
   ]
 }
