@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against standard neurological examination and ESO/AHA stroke guidance on posterior circulation stroke.\n\nCerebellar signs (DANISH): Dysdiadochokinesia, Ataxia (gait, truncal), Nystagmus, Intention tremor and past-pointing, Slurred (scanning) speech, Hypotonia (and pendular reflexes). Also heel–shin, tandem gait, Romberg (positive in sensory or vestibular ataxia, not typically in pure cerebellar disease — a cerebellar patient is unsteady with eyes open too). Signs are ipsilateral to a cerebellar hemisphere lesion; midline (vermis) lesions give truncal ataxia.\n\nSudden cerebellar signs with vascular risk factors: cerebellar infarct or haemorrhage — emergency CT and CT angiography (MRI DWI is more sensitive for posterior strokes), stroke team (thrombolysis/thrombectomy for basilar occlusion), and neurosurgery for cerebellar haemorrhage over 3 cm or hydrocephalus — the posterior fossa is small and swelling compresses the brainstem.\n\nYour notes list the full cerebellar examination and causes (unilateral: vascular, tumour, MS; bilateral: alcohol, phenytoin, Wernicke's, MS, Miller Fisher, paraneoplastic) — this matches.",
+  "notes": "Checked against standard neurological examination and ESO/AHA stroke guidance on posterior circulation stroke.\n\nCerebellar signs (DANISH): Dysdiadochokinesia, Ataxia (gait, truncal), Nystagmus, Intention tremor and past-pointing, Slurred (scanning) speech, Hypotonia (and pendular reflexes). Also heel–shin, tandem gait, Romberg (positive in sensory or vestibular ataxia, not typically in pure cerebellar disease — a cerebellar patient is unsteady with eyes open too). Signs are ipsilateral to a cerebellar hemisphere lesion; midline (vermis) lesions give truncal ataxia.\n\nSudden cerebellar signs with vascular risk factors: cerebellar infarct or haemorrhage — emergency CT and CT angiography (MRI DWI is more sensitive for posterior strokes), stroke team (thrombolysis/thrombectomy for basilar occlusion), and neurosurgery for cerebellar haemorrhage over 3 cm or hydrocephalus — the posterior fossa is small and swelling compresses the brainstem.\n\nYour notes list the full cerebellar examination and causes (unilateral: vascular, tumour, MS; bilateral: alcohol, phenytoin, Wernicke's, MS, Miller Fisher, paraneoplastic) — this matches.\n\nPerfect script checked against the DANISH cerebellar examination and stroke pathway, an HKCEM-style scheme and a keyword scheme. Removed the unsafe gait test and the labyrinthitis option.",
   "cast": [
     {
       "id": "patient",
@@ -91,12 +91,6 @@
             "r": "Leans to the right; needs support.",
             "mark": "Assesses truncal ataxia safely",
             "do": "say sit-up,sit-edge"
-          },
-          {
-            "t": "Make him walk heel-to-toe across the room alone",
-            "trap": true,
-            "r": "He can't sit unsupported — walking him risks a fall. Test gait only when safe.",
-            "do": "say walk-heel-toe,walk"
           }
         ],
         "Other": [
@@ -118,21 +112,16 @@
       "hint": "Right cerebellar syndrome, sudden onset: stroke pathway, CT/CTA, neurosurgery if haemorrhage.",
       "opts": [
         {
-          "t": "Right cerebellar signs of sudden onset in a vascular patient: right cerebellar stroke until proven otherwise",
+          "t": "Right-sided cerebellar signs of sudden onset in a vascular patient: dysarthria, nystagmus, intention tremor, dysdiadochokinesia, heel–shin ataxia and truncal ataxia. A right cerebellar stroke until proven otherwise.",
           "mark": "Localises to the right cerebellum and suspects stroke"
         },
         {
-          "t": "Stroke team; urgent CT head and CT angiogram (basilar/vertebral)",
+          "t": "Stroke team now; urgent CT head and CT angiogram of the basilar and vertebral arteries.",
           "mark": "Urgent imaging and stroke activation"
         },
         {
-          "t": "If haemorrhage > 3 cm or hydrocephalus: neurosurgery; monitor GCS closely",
+          "t": "If it's a haemorrhage over 3 cm or there's hydrocephalus: neurosurgery. Close GCS monitoring.",
           "mark": "Recognises the posterior fossa emergency"
-        },
-        {
-          "t": "Probably labyrinthitis — antiemetic and home",
-          "trap": "critical",
-          "r": "Limb ataxia and dysarthria are central signs."
         }
       ]
     },
@@ -262,5 +251,40 @@
       "why": "Parkinsonian tremor is at rest.",
       "source": "Neurology"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Speech: say 'British constitution'. Eye movements and nystagmus. Finger–nose test.",
+      "do": "Slurred, staccato speech. Horizontal nystagmus, fast phase to the right, worse looking right. Right: intention tremor and past-pointing. Left normal."
+    },
+    {
+      "at": "0:20",
+      "say": "Rapid alternating movements. Tone. Heel–shin test.",
+      "do": "Clumsy on the right (dysdiadochokinesia). Reduced on the right. Right heel wavers down the shin."
+    },
+    {
+      "at": "0:40",
+      "say": "Sit him up unsupported (truncal ataxia). Limb power and sensation; other cranial nerves.",
+      "do": "Leans to the right; needs support. Power normal; no facial or sensory loss."
+    },
+    {
+      "at": "1:00",
+      "say": "Right-sided cerebellar signs of sudden onset in a vascular patient: dysarthria, nystagmus, intention tremor, dysdiadochokinesia, heel–shin ataxia and truncal ataxia. A right cerebellar stroke until proven otherwise. Stroke team now; urgent CT head and CT angiogram of the basilar and vertebral arteries. If it's a haemorrhage over 3 cm or there's hydrocephalus: neurosurgery. Close GCS monitoring."
+    }
+  ],
+  "keywords": [
+    "British constitution",
+    "nystagmus",
+    "finger–nose",
+    "rapid alternating",
+    "tone",
+    "heel–shin",
+    "truncal ataxia",
+    "right cerebellar stroke",
+    "stroke team",
+    "CT angiogram",
+    "neurosurgery",
+    "hydrocephalus"
   ]
 }

@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE CKS (Bell's palsy), the Sullivan et al. NEJM 2007 trial (prednisolone within 72 h), and standard cranial nerve examination.\n\nExamine II–XII systematically: II (acuity, fields, pupils, fundi), III/IV/VI (eye movements, diplopia, nystagmus, ptosis), V (sensation in three divisions, masseter, corneal reflex), VII (raise eyebrows, close eyes tightly, show teeth, puff cheeks), VIII (whisper, Rinne and Weber), IX/X (palate, gag if needed), XI (shrug and head turn), XII (tongue).\n\nLower motor neurone facial palsy involves the forehead (cannot raise the eyebrow); upper motor neurone (stroke) spares the forehead because of bilateral cortical innervation. Bell's palsy is a diagnosis of exclusion: check for vesicles in the ear or palate (Ramsay Hunt), parotid mass, other cranial nerve or limb signs, hearing loss, and trauma. Treatment: prednisolone 50 mg daily for 10 days (or 60 mg 5 days then taper) within 72 hours; antivirals not routinely (consider with severe palsy / Ramsay Hunt); eye protection (lubricants, tape at night) — the key complication is corneal exposure. Refer if no improvement at 3 weeks or atypical features.\n\nYour notes list cranial nerves as a topic without detail.",
+  "notes": "Checked against NICE CKS (Bell's palsy), the Sullivan et al. NEJM 2007 trial (prednisolone within 72 h), and standard cranial nerve examination.\n\nExamine II–XII systematically: II (acuity, fields, pupils, fundi), III/IV/VI (eye movements, diplopia, nystagmus, ptosis), V (sensation in three divisions, masseter, corneal reflex), VII (raise eyebrows, close eyes tightly, show teeth, puff cheeks), VIII (whisper, Rinne and Weber), IX/X (palate, gag if needed), XI (shrug and head turn), XII (tongue).\n\nLower motor neurone facial palsy involves the forehead (cannot raise the eyebrow); upper motor neurone (stroke) spares the forehead because of bilateral cortical innervation. Bell's palsy is a diagnosis of exclusion: check for vesicles in the ear or palate (Ramsay Hunt), parotid mass, other cranial nerve or limb signs, hearing loss, and trauma. Treatment: prednisolone 50 mg daily for 10 days (or 60 mg 5 days then taper) within 72 hours; antivirals not routinely (consider with severe palsy / Ramsay Hunt); eye protection (lubricants, tape at night) — the key complication is corneal exposure. Refer if no improvement at 3 weeks or atypical features.\n\nYour notes list cranial nerves as a topic without detail.\n\nPerfect script checked against NICE CKS Bell's palsy, an HKCEM-style scheme and a keyword scheme. Removed the aciclovir-alone option; each examination step is a spoken line.",
   "cast": [
     {
       "id": "patient",
@@ -45,20 +45,20 @@
       "groups": {
         "II–VI": [
           {
-            "t": "Visual acuity, fields, pupils",
+            "t": "CN II: visual acuity, fields and pupils",
             "r": "6/6 both eyes, full fields, pupils equal and reactive.",
             "mark": "Tests CN II",
             "anim": "pupils",
             "do": "chart eye & say fields & torch eye"
           },
           {
-            "t": "Eye movements (H pattern), ptosis, nystagmus",
+            "t": "CN III, IV and VI: follow my finger in an H; any double vision? Ptosis or nystagmus?",
             "r": "Full, no diplopia, no nystagmus, no ptosis.",
             "mark": "Tests CN III, IV, VI",
             "do": "say follow-finger"
           },
           {
-            "t": "Facial sensation in three divisions; jaw clench",
+            "t": "CN V: sensation in all three divisions, then clench your jaw",
             "r": "Normal; masseters strong.",
             "mark": "Tests CN V",
             "do": "cotton forehead,cheek,jaw & say clench-jaw | pin forehead,cheek,jaw & say clench-jaw"
@@ -66,25 +66,25 @@
         ],
         "VII": [
           {
-            "t": "Raise your eyebrows",
+            "t": "CN VII: raise your eyebrows",
             "r": "Left forehead does not wrinkle.",
             "mark": "Tests forehead: involved (lower motor neurone)",
             "do": "say raise-eyebrows"
           },
           {
-            "t": "Close your eyes tightly",
+            "t": "Close your eyes tightly; don't let me open them",
             "r": "Left eye cannot close; the eye rolls up (Bell's phenomenon).",
             "mark": "Tests eye closure",
             "do": "say close-eyes"
           },
           {
-            "t": "Show your teeth; puff your cheeks",
+            "t": "Show me your teeth; puff out your cheeks",
             "r": "Left mouth droops; air escapes on the left.",
             "mark": "Tests lower face",
             "do": "say show-teeth & say puff-cheeks"
           },
           {
-            "t": "Look in the ear canal and mouth",
+            "t": "I'll look in the ear canal and mouth for vesicles, and feel the parotid",
             "r": "No vesicles. Parotid normal.",
             "mark": "Looks for vesicles (Ramsay Hunt) and parotid mass",
             "do": "otoscope ear | look ear,mouth | torch mouth"
@@ -92,13 +92,13 @@
         ],
         "VIII–XII": [
           {
-            "t": "Hearing (whisper), Rinne and Weber",
+            "t": "CN VIII: whispered numbers, then Rinne and Weber",
             "r": "Normal hearing; mild hyperacusis on the left.",
             "mark": "Tests CN VIII",
             "do": "say whisper | fork mastoid,forehead,ear"
           },
           {
-            "t": "Palate, tongue, shoulder shrug",
+            "t": "CN IX to XII: say 'ah', stick out your tongue, shrug your shoulders",
             "r": "Normal.",
             "mark": "Tests CN IX–XII",
             "do": "say open-mouth & say shrug"
@@ -106,7 +106,7 @@
         ],
         "Limbs": [
           {
-            "t": "Quick limb screen: pronator drift, power",
+            "t": "A quick limb screen: arms out for pronator drift, and power",
             "r": "Normal.",
             "mark": "Excludes limb weakness (stroke)",
             "do": "say arms-out"
@@ -140,12 +140,6 @@
           "t": "Most recover within 3–6 months; review if not improving at 3 weeks",
           "tz": "大部分人三至六個月內會好返。如果三個禮拜都冇改善，要返嚟覆診。",
           "mark": "Prognosis and follow-up"
-        },
-        {
-          "t": "Aciclovir alone without steroids",
-          "tz": "我淨係開抗病毒藥俾你，唔使食類固醇。",
-          "trap": true,
-          "r": "Antivirals alone are not effective; steroids are the treatment."
         }
       ]
     },
@@ -275,5 +269,53 @@
       "why": "Weak genioglossus.",
       "source": "Neurology"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "CN II: visual acuity, fields and pupils. CN III, IV and VI: follow my finger in an H; any double vision? Ptosis or nystagmus? CN V: sensation in all three divisions, then clench your jaw.",
+      "do": "6/6 both eyes, full fields, pupils equal and reactive. Full, no diplopia, no nystagmus, no ptosis. Normal; masseters strong."
+    },
+    {
+      "at": "0:20",
+      "say": "CN VII: raise your eyebrows. Close your eyes tightly; don't let me open them. Show me your teeth; puff out your cheeks.",
+      "do": "Left forehead does not wrinkle. Left eye cannot close; the eye rolls up (Bell's phenomenon). Left mouth droops; air escapes on the left."
+    },
+    {
+      "at": "0:40",
+      "say": "I'll look in the ear canal and mouth for vesicles, and feel the parotid. CN VIII: whispered numbers, then Rinne and Weber. CN IX to XII: say 'ah', stick out your tongue, shrug your shoulders.",
+      "do": "No vesicles. Parotid normal. Normal hearing; mild hyperacusis on the left. Normal."
+    },
+    {
+      "at": "1:00",
+      "say": "A quick limb screen: arms out for pronator drift, and power.",
+      "do": "Normal."
+    },
+    {
+      "at": "1:20",
+      "say": "Left lower motor neurone facial palsy with no other signs: Bell's palsy, not a stroke — the forehead is involved. Prednisolone 50 mg daily for 10 days, started within 72 hours. Eye lubricant drops by day, ointment and tape at night, sunglasses; return if the eye becomes red or painful."
+    },
+    {
+      "at": "1:40",
+      "say": "Most recover within 3–6 months; review if not improving at 3 weeks."
+    }
+  ],
+  "keywords": [
+    "CN II",
+    "H",
+    "three divisions",
+    "raise your eyebrows",
+    "close your eyes",
+    "vesicles",
+    "parotid",
+    "Rinne and Weber",
+    "pronator drift",
+    "lower motor neurone",
+    "forehead",
+    "Bell's palsy",
+    "prednisolone 50 mg",
+    "72 hours",
+    "tape",
+    "3 weeks"
   ]
 }

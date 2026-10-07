@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the AAO-HNS clinical practice guideline on BPPV (2017), and emergency approaches to the dizzy patient (TiTrATE, HINTS; Kattah 2009).\n\nChoose the test by the pattern: brief positional (triggered) episodes with no vertigo at rest → Dix–Hallpike for BPPV; continuous acute vertigo with spontaneous nystagmus (acute vestibular syndrome) → HINTS (head impulse, nystagmus, test of skew), done by a trained examiner; do not use the Dix–Hallpike in acute vestibular syndrome and do not use HINTS in episodic positional vertigo (your notes make this point well).\n\nDix–Hallpike: explain, warn about vertigo, sit with legs out so the head will hang over the end, turn the head 45° to one side, lie back quickly with the neck extended ~20° below horizontal, hold at least 30 seconds, watch for torsional upbeating nystagmus (latency a few seconds, lasts under a minute, fatigues), sit up. Positive → Epley on that side (turn the head 90° to the other side, then roll onto the side with the nose down, then sit up), each held about 30 seconds. Central features: no latency, persistent, direction-changing or vertical downbeat nystagmus without torsion, other neurology.\n\nYour notes match (including Epley and the central/peripheral table). Contraindications to positional testing: severe neck disease, carotid disease, vertebral dissection risk.",
+  "notes": "Checked against the AAO-HNS clinical practice guideline on BPPV (2017), and emergency approaches to the dizzy patient (TiTrATE, HINTS; Kattah 2009).\n\nChoose the test by the pattern: brief positional (triggered) episodes with no vertigo at rest → Dix–Hallpike for BPPV; continuous acute vertigo with spontaneous nystagmus (acute vestibular syndrome) → HINTS (head impulse, nystagmus, test of skew), done by a trained examiner; do not use the Dix–Hallpike in acute vestibular syndrome and do not use HINTS in episodic positional vertigo (your notes make this point well).\n\nDix–Hallpike: explain, warn about vertigo, sit with legs out so the head will hang over the end, turn the head 45° to one side, lie back quickly with the neck extended ~20° below horizontal, hold at least 30 seconds, watch for torsional upbeating nystagmus (latency a few seconds, lasts under a minute, fatigues), sit up. Positive → Epley on that side (turn the head 90° to the other side, then roll onto the side with the nose down, then sit up), each held about 30 seconds. Central features: no latency, persistent, direction-changing or vertical downbeat nystagmus without torsion, other neurology.\n\nYour notes match (including Epley and the central/peripheral table). Contraindications to positional testing: severe neck disease, carotid disease, vertebral dissection risk.\n\nPerfect script checked against the AAO-HNS BPPV guideline, an HKCEM-style scheme and a keyword scheme. Removed the HINTS-now option.",
   "cast": [
     {
       "id": "patient",
@@ -47,17 +47,12 @@
       "hint": "Brief positional episodes, well between: Dix–Hallpike, not HINTS.",
       "opts": [
         {
-          "t": "Episodic positional vertigo, no vertigo now: Dix–Hallpike for BPPV (HINTS is for continuous vertigo with nystagmus)",
+          "t": "Brief episodes triggered by position, well in between: that's BPPV, so the Dix–Hallpike. HINTS is for continuous vertigo with spontaneous nystagmus.",
           "mark": "Chooses the right test for the pattern"
         },
         {
-          "t": "Ask about neck problems before moving the neck",
+          "t": "Before I move your neck: any neck problems or recent neck injury?",
           "mark": "Checks contraindications (neck disease)"
-        },
-        {
-          "t": "HINTS exam on her now",
-          "trap": true,
-          "r": "HINTS is for acute continuous vertigo with spontaneous nystagmus, not episodic positional vertigo."
         }
       ]
     },
@@ -233,5 +228,39 @@
       "why": "Aligns the posterior canal.",
       "source": "AAO-HNS"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Brief episodes triggered by position, well in between: that's BPPV, so the Dix–Hallpike. HINTS is for continuous vertigo with spontaneous nystagmus."
+    },
+    {
+      "at": "0:10",
+      "say": "Before I move your neck: any neck problems or recent neck injury?",
+      "do": "None."
+    },
+    {
+      "at": "0:20",
+      "say": "I'll move you quickly back and you may feel dizzy for a moment; keep your eyes open and look at my nose. Sit with your legs out; head turned 45 degrees to the right; lie back quickly with the neck extended over the end. I'll watch your eyes for 30 seconds.",
+      "do": "After a few seconds' latency: torsional upbeating nystagmus toward the right ear, fading within a minute: a positive right Dix–Hallpike."
+    },
+    {
+      "at": "1:10",
+      "say": "Epley on the right: from this position, head turned 90 degrees to the left; roll onto the left side, nose down; then sit up. Thirty seconds in each. Then retest.",
+      "do": "No nystagmus on retesting."
+    }
+  ],
+  "keywords": [
+    "BPPV",
+    "Dix–Hallpike",
+    "HINTS",
+    "neck problems",
+    "45 degrees",
+    "lie back quickly",
+    "30 seconds",
+    "Epley",
+    "90 degrees",
+    "nose down",
+    "retest"
   ]
 }
