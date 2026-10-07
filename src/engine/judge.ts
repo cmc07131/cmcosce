@@ -236,6 +236,10 @@ export type NextHint = { kind: 'do'; actionId: string; targetId: string; option:
  */
 export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: string[]): NextHint | null {
   const order = pack.phases?.length ? pack.phases.flatMap((p) => p.steps) : pack.goldPath
+  // Something you prevented will not happen (no seizure once the bicarbonate is in): its treatment is not waited for.
+  const events = pack.events ?? []
+  const prevented = (f: string) =>
+    !scene.includes(f) && events.some((e) => e.scene === f) && events.filter((e) => e.scene === f).every((e) => e.level === 'hard' || (e.unless && scene.includes(e.unless)))
   let waiting = false
   for (const id of order) {
     const a = pack.actions.find((x) => x.id === id)
@@ -247,6 +251,7 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
       // Scoring options, and treatments for something that happens to the patient (they wait on an event).
       if (o.isTrap || used.has(o.id) || (!o.marksChecklistIds?.length && !o.when?.length)) continue
       if ((a.kind === 'dialogue') && turnDone.has(o.group)) continue
+      if ((o.when ?? []).some(prevented)) continue
       if (!(o.when ?? []).every((f) => scene.includes(f))) {
         waiting = true
         continue

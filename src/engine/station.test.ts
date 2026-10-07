@@ -498,6 +498,7 @@ test('the guide never sends you back to an earlier phase', () => {
     const pending: { flags: string[]; at: number }[] = []
     const fromEvent = new Set((pack.events ?? []).map((e) => e.scene))
     let furthest = -1
+    let finished = false
     for (let i = 0; i < 300; i++) {
       for (const p of pending.filter((x) => x.at <= i)) for (const f of p.flags) if (!scene.includes(f)) scene.push(f)
       for (const e of pack.events ?? []) {
@@ -507,7 +508,10 @@ test('the guide never sends you back to an earlier phase', () => {
         if (!pending.some((x) => x.flags.includes(e.scene))) pending.push({ flags: [e.scene], at: i + 3 })
       }
       const h = nextHint(pack, spent, scene)
-      if (!h) break
+      if (!h) {
+        finished = true
+        break
+      }
       if (h.kind === 'wait') continue
       const ph = phaseOf(h.actionId)
       const waitedOn = (pack.actions.find((x) => x.id === h.actionId)?.options ?? []).find((x) => x.label === h.option)?.when ?? []
@@ -533,6 +537,7 @@ test('the guide never sends you back to an earlier phase', () => {
       .filter((a) => a.kind !== 'viva' && a.kind !== 'monitor' && !(a.ask && a.targetIds.includes('examiner')))
       .flatMap((a) => [...(a.options ?? []).filter((o) => !o.isTrap), ...(a.findings ?? [])].flatMap((o) => o.marksChecklistIds ?? []))
     const missed = [...new Set(reachable)].filter((m) => !earned.has(m))
+    if (!finished && !backs.some((b) => b.startsWith(st.id + ':'))) backs.push(`${st.id}: the guide never finishes (it keeps waiting)`)
     if (missed.length && !backs.some((b) => b.startsWith(st.id + ':'))) backs.push(`${st.id}: the guide never reaches ${missed.map((m) => pack.marks.find((k) => k.id === m)?.label ?? m).join('; ')}`)
   }
   assert.deepEqual(backs, [])

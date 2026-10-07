@@ -25,9 +25,10 @@
     },
     {
       "title": "ECG",
-      "goal": "Read the 12-lead before any drug and treat what it shows, promptly. Get ready for VT. Treat anything that happens to her, then repeat the ECG.",
+      "goal": "Read the 12-lead before any drug; say the plan; bicarbonate promptly; pads on for VT. Treat anything that happens to her, then repeat the ECG.",
       "steps": [
         "ecg",
+        "plan",
         "bicarb",
         "pads",
         "seizure-tx",
@@ -84,7 +85,7 @@
       "text": "Seizure dose. Your script gives midazolam 1–2 mg IV, a sedation-sized dose. For a seizure give lorazepam 4 mg IV (0.1 mg/kg), or midazolam titrated at about 0.1 mg/kg (for example 5 mg IV, repeated), with another bicarbonate bolus."
     }
   ],
-  "notes": "Checked against TOXBASE, the Hong Kong Poison Information Centre (HKPIC) guidance, and the AACT/EAPCCT position papers on gastric lavage (2013) and activated charcoal. The station follows your perfect script.\n\nTricyclics block fast sodium channels (broad QRS, VT), alpha receptors (hypotension), muscarinic receptors (tachycardia, dilated pupils, retention, delayed gastric emptying) and cause seizures. QRS over 100 ms predicts seizures; over 160 ms predicts arrhythmias. A terminal R wave in aVR over 3 mm is another marker.\n\nOrder: call the team and read the pack; ABC with monitoring, access, gas and glucose, and say the airway is not protected (no charcoal or lavage yet); read the ECG before other drugs; sodium bicarbonate 8.4% 1–2 mmol/kg (50–100 mL in an adult) as a rapid bolus, repeated for persistent QRS widening, VT or shock, then a repeat ECG; RSI after the bicarbonate, because the apnoeic pause causes acidosis that widens the QRS; then hyperventilate to pH 7.45–7.55. Hypotension: crystalloid 500–1000 mL, then noradrenaline. VT once the pH is 7.5: lignocaine 1–1.5 mg/kg. Seizures: benzodiazepines plus more bicarbonate. Avoid amiodarone and class Ia/Ic drugs, phenytoin, flumazenil and physostigmine.\n\nDecontamination: activated charcoal 50 g via an orogastric or nasogastric tube once the airway is protected, within about an hour of a life-threatening dose. Gastric lavage is not first-line (AACT/EAPCCT): only if HKPIC and a senior agree tablets are still in the stomach. Bloods: gas, electrolytes, glucose, paracetamol; do not wait for a TCA level. Disposition: HKPIC and ICU. An alert patient with a normal ECG is monitored for 6 hours from ingestion, then referred to psychiatry.",
+  "notes": "Checked against TOXBASE, the Hong Kong Poison Information Centre (HKPIC) guidance, and the AACT/EAPCCT position papers on gastric lavage (2013) and activated charcoal. The station follows your perfect script.\n\nTricyclics block fast sodium channels (broad QRS, VT), alpha receptors (hypotension), muscarinic receptors (tachycardia, dilated pupils, retention, delayed gastric emptying) and cause seizures. QRS over 100 ms predicts seizures; over 160 ms predicts arrhythmias. A terminal R wave in aVR over 3 mm is another marker.\n\nOrder: call the team and read the pack; ABC with monitoring, access, gas and glucose, and say the airway is not protected (no charcoal or lavage yet); read the ECG before other drugs; sodium bicarbonate 8.4% 1–2 mmol/kg (50–100 mL in an adult) as a rapid bolus, repeated for persistent QRS widening, VT or shock, then a repeat ECG; RSI after the bicarbonate, because the apnoeic pause causes acidosis that widens the QRS; then hyperventilate to pH 7.45–7.55. Hypotension: crystalloid 500–1000 mL, then noradrenaline. VT once the pH is 7.5: lignocaine 1–1.5 mg/kg. Seizures: benzodiazepines plus more bicarbonate. Avoid amiodarone and class Ia/Ic drugs, phenytoin, flumazenil and physostigmine.\n\nDecontamination: activated charcoal 50 g via an orogastric or nasogastric tube once the airway is protected, within about an hour of a life-threatening dose. Gastric lavage is not first-line (AACT/EAPCCT): only if HKPIC and a senior agree tablets are still in the stomach. Bloods: gas, electrolytes, glucose, paracetamol; do not wait for a TCA level. Disposition: HKPIC and ICU. An alert patient with a normal ECG is monitored for 6 hours from ingestion, then referred to psychiatry.\n\nPerfect script checked against a TOXBASE/HKPIC-style toxicology checklist, an AHA ACLS toxicology checklist, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (wrong ECG reads, wrong drugs and doses, propofol, a lavage tube, waiting for a TCA level, physostigmine). Added a spoken plan: the bicarbonate target, the drugs to avoid, VT, hypotension and arrest (noradrenaline, prolonged CPR, lipid emulsion).",
   "cast": [
     {
       "id": "patient",
@@ -181,13 +182,8 @@
       "hint": "Announce yourself; call the resus team with airway kit, suction and the defibrillator.",
       "opts": [
         {
-          "t": "I am the AED doctor. Resus team please: airway trolley, suction, defibrillator.",
+          "t": "I'm the emergency doctor leading. Resus team, please: the airway trolley, suction and the defibrillator.",
           "mark": "Takes charge and calls the team, airway kit, suction and defibrillator"
-        },
-        {
-          "t": "Start with a full history from the husband before touching her",
-          "trap": true,
-          "r": "She is shocked, hypoxic and GCS 7. Resuscitate first; the history comes from the packet and the door note."
         }
       ]
     },
@@ -216,7 +212,7 @@
           {
             "t": "Read the empty packet",
             "anim": "packet",
-            "r": "Amitriptyline 25 mg, 60 tablets, all gone: up to 1.5 g. Her husband left her well an hour ago. GCS 7, shocked and hypoxic: life-threatening TCA poisoning.",
+            "r": "Amitriptyline 25 mg, 60 tablets, all gone: up to 1.5 g, over 20 mg/kg. Her husband left her well an hour ago. \"GCS 7, shocked and hypoxic: life-threatening TCA poisoning.\"",
             "mark": "Identifies the drug, the dose and the time: life-threatening TCA poisoning"
           }
         ]
@@ -230,13 +226,13 @@
       "hint": "Ask the nurse for monitoring, oxygen and access. Tell the team the airway is not protected.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         },
         {
-          "t": "Non-rebreather mask at 15 L/min.",
+          "t": "High-flow oxygen, 15 L via a non-rebreather.",
           "fetch": "trolley",
           "scene": "oxygen",
           "mark": "High-flow oxygen"
@@ -247,7 +243,7 @@
           "mark": "Two large-bore IVs, bloods and a gas"
         },
         {
-          "t": "Her airway is not protected. I am planning RSI. No charcoal and no lavage tube yet.",
+          "t": "Her airway is not protected: I'm planning RSI. No charcoal and no lavage until it is.",
           "mark": "States the airway is unprotected: plans RSI, no charcoal or lavage yet"
         }
       ]
@@ -312,24 +308,35 @@
       "hint": "Open the 12-lead. Rate, QRS width, aVR.",
       "opts": [
         {
-          "t": "Sinus tachycardia, QRS over 100 ms, tall terminal R in aVR: sodium-channel blockade.",
+          "t": "Sinus tachycardia, QRS about 140 ms, over 100, with a tall terminal R in aVR: sodium-channel blockade.",
           "mark": "Reads the ECG: broad QRS and tall R in aVR, sodium-channel blockade",
           "scene": "ecg-read"
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "nurse",
+      "label": "The plan",
+      "lang": "en",
+      "hint": "Name the treatment and the target; what to avoid; the plan for VT, hypotension and arrest.",
+      "opts": [
+        {
+          "t": "Sodium bicarbonate now, titrated to narrow the QRS and keep the pH 7.45 to 7.55.",
+          "mark": "States the treatment and target: bicarbonate to pH 7.45–7.55"
         },
         {
-          "t": "Broad complex tachycardia: VT. Amiodarone 300 mg.",
-          "trap": "critical",
-          "r": "P waves before every QRS: sinus tachycardia with a broad QRS. Amiodarone adds to the cardiotoxicity."
+          "t": "Avoid flumazenil, physostigmine, phenytoin and class Ia and Ic antiarrhythmics. Benzodiazepines for any seizure.",
+          "mark": "Names the drugs to avoid; benzodiazepines for seizures"
         },
         {
-          "t": "Tall tented T waves: hyperkalaemia. Calcium first.",
-          "trap": true,
-          "r": "Look again: the T waves are not peaked. The QRS is broad with a tall R in aVR — sodium-channel blockade."
+          "t": "If she goes into VT: more bicarbonate, synchronised cardioversion if unstable, then lignocaine once the pH is 7.5.",
+          "mark": "Plans for VT: bicarbonate, cardioversion, lignocaine"
         },
         {
-          "t": "Sinus tachycardia with a normal QRS. Reassuring.",
-          "trap": true,
-          "r": "The QRS is about 140 ms, with a tall terminal R in aVR. This predicts seizures and arrhythmias."
+          "t": "If she stays hypotensive after bicarbonate and fluid: noradrenaline. If she arrests: prolonged CPR, bicarbonate, and lipid emulsion on Poison Centre advice.",
+          "mark": "Plans for refractory hypotension and arrest: noradrenaline, prolonged CPR, lipid emulsion"
         }
       ]
     },
@@ -349,78 +356,6 @@
           "need": true,
           "scene": "bicarb",
           "mark": "Sodium bicarbonate 8.4% 1–2 mmol/kg rapid bolus for the broad QRS"
-        },
-        {
-          "t": "Sodium bicarbonate 8.4% 25 mL IV",
-          "drug": "Sodium bicarbonate 8.4%",
-          "dose": "25 mL IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little. 1–2 mmol/kg: 50–100 mL of 8.4% in an adult, as a rapid bolus."
-        },
-        {
-          "t": "Sodium bicarbonate 8.4% 500 mL IV over 10 minutes",
-          "drug": "Sodium bicarbonate 8.4%",
-          "dose": "500 mL IV over 10 minutes",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once: hypernatraemia and severe alkalaemia. Give 50–100 mL boluses titrated to the QRS and pH."
-        },
-        {
-          "t": "Amiodarone 300 mg IV",
-          "drug": "Amiodarone",
-          "dose": "300 mg IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Amiodarone prolongs the QT and adds to the cardiotoxicity. Bicarbonate first; lignocaine only for VT once the pH is 7.5."
-        },
-        {
-          "t": "Flumazenil 200 micrograms IV",
-          "drug": "Flumazenil",
-          "dose": "200 micrograms IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Flumazenil can precipitate seizures and arrhythmias in TCA overdose."
-        },
-        {
-          "t": "Physostigmine 1 mg IV",
-          "drug": "Physostigmine",
-          "dose": "1 mg IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Contraindicated in TCA poisoning: asystole has occurred."
-        },
-        {
-          "t": "Phenytoin 20 mg/kg IV",
-          "drug": "Phenytoin",
-          "dose": "20 mg/kg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Phenytoin blocks sodium channels too and can worsen cardiotoxicity. Benzodiazepines only."
-        },
-        {
-          "t": "Flecainide 2 mg/kg IV",
-          "drug": "Flecainide",
-          "dose": "2 mg/kg IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Class Ic: more sodium-channel block. Avoid class Ia and Ic drugs in TCA poisoning."
-        },
-        {
-          "t": "Lignocaine 1.5 mg/kg IV",
-          "drug": "Lignocaine",
-          "dose": "1.5 mg/kg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "She is not in VT. Lignocaine is for VT that persists once the pH is 7.5."
-        },
-        {
-          "t": "Noradrenaline infusion 0.1 microgram/kg/min",
-          "drug": "Noradrenaline",
-          "dose": "infusion 0.1 microgram/kg/min",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Not yet: bicarbonate and fluid first. Noradrenaline is for hypotension that persists after them."
         }
       ]
     },
@@ -444,7 +379,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "She is fitting: a benzodiazepine, and more bicarbonate.",
+      "hint": "She is fitting: lorazepam 4 mg, and more bicarbonate.",
       "confirm": "Give",
       "opts": [
         {
@@ -455,22 +390,6 @@
           "when": "seizure",
           "early": "She isn't fitting.",
           "scene": "seizure-stopped"
-        },
-        {
-          "t": "Lorazepam 0.5 mg IV",
-          "drug": "Lorazepam",
-          "dose": "0.5 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little to stop a seizure: 4 mg IV (0.1 mg/kg), repeated once if needed."
-        },
-        {
-          "t": "Lorazepam 10 mg IV",
-          "drug": "Lorazepam",
-          "dose": "10 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much in one go: 4 mg IV, repeated once if needed."
         },
         {
           "t": "Sodium bicarbonate 8.4% 100 mL (1–2 mmol/kg) rapid IV",
@@ -510,12 +429,6 @@
           "t": "Intubation kit: laryngoscope, size 7.0 tube, bougie, suction, capnography",
           "fetch": "trolley",
           "mark": "Prepares the intubation kit with capnography"
-        },
-        {
-          "t": "Large-bore lavage tube (36–40 Fr) and funnel",
-          "fetch": "trolley",
-          "trap": true,
-          "r": "Lavage is not first-line. Only if HKPIC and a senior agree tablets are still in the stomach."
         }
       ]
     },
@@ -535,35 +448,11 @@
           "mark": "Ketamine, reduced for shock"
         },
         {
-          "t": "Ketamine 200 mg IV (3 mg/kg)",
-          "drug": "Ketamine",
-          "dose": "200 mg IV (3 mg/kg)",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much for induction in a shocked patient: about 1 mg/kg."
-        },
-        {
           "t": "Rocuronium 85 mg IV (1.2 mg/kg)",
           "drug": "Rocuronium",
           "dose": "85 mg IV (1.2 mg/kg)",
           "fetch": "cart",
           "mark": "Rocuronium 1.2 mg/kg for RSI"
-        },
-        {
-          "t": "Rocuronium 20 mg IV (0.3 mg/kg)",
-          "drug": "Rocuronium",
-          "dose": "20 mg IV (0.3 mg/kg)",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little for RSI: 1.2 mg/kg for fast intubating conditions."
-        },
-        {
-          "t": "Propofol 140 mg IV (2 mg/kg)",
-          "drug": "Propofol",
-          "dose": "140 mg IV (2 mg/kg)",
-          "fetch": "cart",
-          "trap": true,
-          "r": "A full dose of propofol in a shocked patient with a BP of 90/40 risks arrest. Ketamine, reduced."
         }
       ]
     },
@@ -625,22 +514,6 @@
           "fetch": "cart",
           "scene": "fluid",
           "mark": "Crystalloid 500–1000 mL for hypotension"
-        },
-        {
-          "t": "Crystalloid 100 mL",
-          "drug": "Crystalloid",
-          "dose": "100 mL",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little to treat hypotension: 500–1000 mL, then reassess."
-        },
-        {
-          "t": "Crystalloid 3 L as fast as possible",
-          "drug": "Crystalloid",
-          "dose": "3 L as fast as possible",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much without reassessment: 500–1000 mL, then reassess; bicarbonate is the main treatment."
         }
       ]
     },
@@ -681,22 +554,6 @@
           ],
           "early": "Her airway is not protected yet.",
           "mark": "Activated charcoal 50 g via the orogastric tube"
-        },
-        {
-          "t": "Activated charcoal 10 g",
-          "drug": "Activated charcoal",
-          "dose": "10 g",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 50 g (about 1 g/kg) in an adult."
-        },
-        {
-          "t": "Activated charcoal 200 g",
-          "drug": "Activated charcoal",
-          "dose": "200 g",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much: 50 g (about 1 g/kg) in an adult."
         }
       ]
     },
@@ -723,11 +580,6 @@
         {
           "t": "Send the gas, electrolytes, glucose and a paracetamol level. We are not waiting for a TCA level.",
           "mark": "Gas, electrolytes, glucose and paracetamol; does not wait for a TCA level"
-        },
-        {
-          "t": "Send a TCA level and hold treatment until it is back",
-          "trap": true,
-          "r": "TCA levels do not guide emergency treatment. Treat the ECG and the patient."
         }
       ]
     },
@@ -739,11 +591,11 @@
       "hint": "Poison centre and ICU.",
       "opts": [
         {
-          "t": "Hong Kong Poison Information Centre (at United Christian Hospital) via the operator",
+          "t": "Hong Kong Poison Information Centre: amitriptyline, up to 1.5 g an hour ago, broad QRS treated with bicarbonate, intubated. Any further advice?",
           "mark": "Calls the Hong Kong Poison Information Centre"
         },
         {
-          "t": "ICU: intubated TCA overdose, bicarbonate given, charcoal after the tube",
+          "t": "ICU: a 40-year-old woman, intubated after an amitriptyline overdose, QRS narrowed with bicarbonate, charcoal down the orogastric tube. She needs a bed.",
           "mark": "Refers to ICU with a clear handover"
         }
       ]
@@ -757,13 +609,8 @@
       "hint": "Disposition and the well-patient pathway.",
       "opts": [
         {
-          "t": "She goes to ICU. Had she been alert with a normal ECG, I would monitor for 6 hours from ingestion, then refer to psychiatry.",
+          "t": "She goes to ICU. Had she been alert with a normal ECG, I would monitor her for at least 6 hours from ingestion with repeat ECGs, then refer to psychiatry.",
           "mark": "ICU; an alert patient with a normal ECG is monitored 6 hours, then psychiatry"
-        },
-        {
-          "t": "Physostigmine once she is on ICU to wake her up",
-          "trap": "critical",
-          "r": "Physostigmine is contraindicated in TCA poisoning: asystole has occurred."
         }
       ]
     },
@@ -985,6 +832,109 @@
       "shakeUntil": "seizure-stopped",
       "treatedBy": "seizure-stopped",
       "untreated": "She fitted and never got a benzodiazepine."
+    }
+  ],
+  "keywords": [
+    "airway trolley",
+    "defibrillator",
+    "amitriptyline",
+    "1.5 g",
+    "life-threatening TCA poisoning",
+    "anticholinergic toxidrome",
+    "airway is not protected",
+    "RSI",
+    "QRS",
+    "terminal R in aVR",
+    "sodium-channel blockade",
+    "sodium bicarbonate 8.4%",
+    "pH 7.45 to 7.55",
+    "flumazenil",
+    "physostigmine",
+    "class Ia and Ic",
+    "lignocaine",
+    "noradrenaline",
+    "lipid emulsion",
+    "pads",
+    "lorazepam",
+    "ketamine",
+    "rocuronium",
+    "capnography",
+    "hyperventilate",
+    "orogastric tube",
+    "activated charcoal 50 g",
+    "no lavage",
+    "paracetamol level",
+    "Poison Information Centre",
+    "ICU",
+    "6 hours",
+    "psychiatry"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "I'm the emergency doctor leading. Resus team, please: the airway trolley, suction and the defibrillator. Gloves and apron on."
+    },
+    {
+      "at": "0:10",
+      "say": "The packet: amitriptyline 25 mg, 60 tablets, all gone: up to 1.5 g, over 20 mg per kg, about an hour ago. GCS 7, shocked and hypoxic: this is life-threatening TCA poisoning."
+    },
+    {
+      "at": "0:25",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2. High-flow oxygen, 15 litres via a non-rebreather. Two large-bore cannulae, bloods and a venous gas. Her airway is not protected: I'm planning RSI. No charcoal and no lavage until it is."
+    },
+    {
+      "at": "0:45",
+      "say": "Airway: snoring, weak gag: not protected. Breathing: RR 10, shallow, chest clear, SpO2 90%. Circulation: pulse 120, thready, refill 3 seconds, warm and flushed. Pupils 6 mm and sluggish, GCS 7, glucose 6.1. Dry skin, a full bladder, quiet bowel sounds: an anticholinergic toxidrome."
+    },
+    {
+      "at": "1:15",
+      "say": "12-lead ECG: sinus tachycardia, QRS about 140 ms, over 100, with a tall terminal R in aVR: sodium-channel blockade."
+    },
+    {
+      "at": "1:30",
+      "say": "Sodium bicarbonate now, titrated to narrow the QRS and keep the pH 7.45 to 7.55. Avoid flumazenil, physostigmine, phenytoin and class Ia and Ic antiarrhythmics. Benzodiazepines for any seizure."
+    },
+    {
+      "at": "1:45",
+      "say": "If she goes into VT: more bicarbonate, synchronised cardioversion if unstable, then lignocaine once the pH is 7.5. If she stays hypotensive after bicarbonate and fluid: noradrenaline. If she arrests: prolonged CPR, bicarbonate, and lipid emulsion on Poison Centre advice."
+    },
+    {
+      "at": "2:05",
+      "say": "Sodium bicarbonate 8.4%, 100 mL, 1 to 2 mmol per kg, as a rapid IV bolus. Defibrillator pads on in case of VT.",
+      "do": "If she fits: lorazepam 4 mg IV and another 100 mL of bicarbonate."
+    },
+    {
+      "at": "2:30",
+      "say": "Repeat ECG: the QRS has narrowed to about 100 ms and the rate is slower. Keep the pH 7.45 to 7.55."
+    },
+    {
+      "at": "2:45",
+      "say": "RSI: laryngoscope, size 7.0 tube, bougie, suction and capnography. Ketamine 70 mg, reduced for shock, and rocuronium 85 mg. Bicarbonate is in, so I intubate now.",
+      "do": "Tube through the cords, cuff up, ETCO2 trace on every breath."
+    },
+    {
+      "at": "3:15",
+      "say": "Ventilator: volume control, 6 to 8 mL per kg, FiO2 100%, PEEP 5; a higher rate to hyperventilate and keep her alkaline."
+    },
+    {
+      "at": "3:35",
+      "say": "Still hypotensive: crystalloid 500 to 1000 mL, then reassess."
+    },
+    {
+      "at": "3:50",
+      "say": "Now the airway is safe: an orogastric tube, and activated charcoal 50 g down the orogastric tube. No lavage now: only if the Poison Centre and a senior agree tablets are still in the stomach."
+    },
+    {
+      "at": "4:10",
+      "say": "Send the gas, electrolytes, glucose and a paracetamol level. We're not waiting for a TCA level."
+    },
+    {
+      "at": "4:25",
+      "say": "Hong Kong Poison Information Centre: amitriptyline, up to 1.5 g an hour ago, broad QRS treated with bicarbonate, intubated. Any further advice? ICU: she needs a bed."
+    },
+    {
+      "at": "4:45",
+      "say": "She goes to ICU. Had she been alert with a normal ECG, I would monitor her for at least 6 hours from ingestion with repeat ECGs, then refer to psychiatry."
     }
   ]
 }
