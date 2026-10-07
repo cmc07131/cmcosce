@@ -24,9 +24,10 @@
     },
     {
       "title": "After",
-      "goal": "Imaging after the drain.",
+      "goal": "Imaging after the drain; access, antibiotics, the surgeon.",
       "steps": [
-        "after"
+        "after",
+        "next"
       ]
     }
   ],
@@ -48,7 +49,7 @@
       "text": "Needle decompression site. Your notes use the 2nd intercostal space, mid-clavicular line, with a 16–18 G cannula. ATLS 10th and 11th use the 4th/5th intercostal space just anterior to the mid-axillary line in adults, with a long cannula (at least 8 cm); the 2nd space mid-clavicular line is kept for children. In a ventilated patient, a finger thoracostomy is quicker and more reliable."
     }
   ],
-  "notes": "Checked against ATLS 10th/11th edition, BTS pleural guidance and Resuscitation Council UK traumatic cardiac arrest guidance.\n\nTension pneumothorax is a clinical diagnosis. Do not wait for an X-ray. Signs: severe respiratory distress, hypoxia, tachycardia, hypotension, reduced breath sounds and hyper-resonance on the affected side, distended neck veins (absent if hypovolaemic), and tracheal deviation away (a late, unreliable sign).\n\nATLS 10th moved needle decompression in adults from the 2nd intercostal space mid-clavicular line to the 4th/5th intercostal space just anterior to the mid-axillary line, because the chest wall is often thicker than a standard cannula at the old site. The 2nd ICS mid-clavicular line remains the site in children. Use a long (at least 8 cm) large-bore cannula. In a ventilated patient, a finger thoracostomy (open incision and finger sweep, no tube yet) is faster and more reliable. Either way, a chest drain follows.\n\nMany older notes still teach 2nd ICS mid-clavicular line for adults; this station scores the ATLS 10th/11th site.",
+  "notes": "Checked against ATLS 10th/11th edition, BTS pleural guidance and Resuscitation Council UK traumatic cardiac arrest guidance.\n\nTension pneumothorax is a clinical diagnosis. Do not wait for an X-ray. Signs: severe respiratory distress, hypoxia, tachycardia, hypotension, reduced breath sounds and hyper-resonance on the affected side, distended neck veins (absent if hypovolaemic), and tracheal deviation away (a late, unreliable sign).\n\nATLS 10th moved needle decompression in adults from the 2nd intercostal space mid-clavicular line to the 4th/5th intercostal space just anterior to the mid-axillary line, because the chest wall is often thicker than a standard cannula at the old site. The 2nd ICS mid-clavicular line remains the site in children. Use a long (at least 8 cm) large-bore cannula. In a ventilated patient, a finger thoracostomy (open incision and finger sweep, no tube yet) is faster and more reliable. Either way, a chest drain follows.\n\nMany older notes still teach 2nd ICS mid-clavicular line for adults; this station scores the ATLS 10th/11th site.\n\nPerfect script checked against an ATLS checklist, BTS pleural guidance, an HKCEM-style scheme and a keyword scheme. Removed the X-ray-first option. Added: the trauma call, obstructive shock named, access and blood, antibiotics and tetanus, and the cardiothoracic referral. Fixed 'put her on the monitor' for a male patient.",
   "cast": [
     {
       "id": "patient",
@@ -113,15 +114,20 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring",
-      "hint": "Ask the nurse to put the patient on the monitor.",
+      "hint": "Monitor and call the team.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2. Keep him on 15 L.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+        },
+        {
+          "t": "Trauma team call, please.",
+          "mark": "Calls the trauma team"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "survey",
@@ -142,7 +148,8 @@
           {
             "t": "Look at the chest",
             "r": "1.5 cm stab wound in the left 5th intercostal space, mid-clavicular line. Left side hardly moves. RR 36.",
-            "anim": "auscultate"
+            "anim": "auscultate",
+            "mark": "Looks: the wound, and the left side not moving"
           },
           {
             "t": "Feel: trachea",
@@ -168,12 +175,15 @@
           },
           {
             "t": "Pulse and skin",
-            "r": "Weak, fast. Cold and clammy.",
-            "anim": "pulse"
+            "r": "Weak, fast. Cold and clammy. \"Obstructive shock.\"",
+            "anim": "pulse",
+            "mark": "Assesses circulation: shocked"
           },
           {
             "t": "Heart sounds",
-            "r": "Audible, not muffled."
+            "r": "Audible, not muffled.",
+            "mark": "Heart sounds not muffled: tamponade less likely",
+            "anim": "auscultate"
           }
         ]
       }
@@ -186,15 +196,11 @@
       "hint": "It is a clinical diagnosis: decompress now.",
       "opts": [
         {
-          "t": "Left tension pneumothorax. Decompress now — no X-ray first",
+          "t": "This is a left tension pneumothorax: a clinical diagnosis. Decompress now; no X-ray first.",
           "mark": "Diagnoses tension clinically and treats before imaging"
-        },
-        {
-          "t": "Portable chest X-ray first to confirm",
-          "trap": "critical",
-          "r": "He will arrest waiting for the film. Tension is a clinical diagnosis."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "decompress",
@@ -242,6 +248,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "next",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Next",
+      "lang": "en",
+      "hint": "Access and blood; antibiotics for the drain; the surgeon.",
+      "opts": [
+        {
+          "t": "Two large-bore cannulae, bloods with a crossmatch and a gas; blood if he's still shocked.",
+          "when": "decompressed",
+          "early": "Decompress first.",
+          "mark": "Access, crossmatch, blood if needed"
+        },
+        {
+          "t": "Antibiotic prophylaxis for the drain after a penetrating injury, and tetanus.",
+          "when": "decompressed",
+          "early": "Decompress first.",
+          "mark": "Antibiotics and tetanus for a penetrating chest wound"
+        },
+        {
+          "t": "Cardiothoracic surgeon: a stab wound to the left chest with a tension pneumothorax, decompressed, drain in.",
+          "when": "decompressed",
+          "early": "Decompress first.",
+          "mark": "Refers to cardiothoracics"
+        }
+      ]
     },
     {
       "id": "viva",
@@ -383,6 +417,61 @@
       ],
       "why": "Distension needs venous volume.",
       "source": "ATLS 11th edition"
+    }
+  ],
+  "keywords": [
+    "trauma team",
+    "trachea deviated",
+    "hyper-resonant",
+    "absent breath sounds",
+    "distended neck veins",
+    "obstructive shock",
+    "tension pneumothorax",
+    "clinical diagnosis",
+    "no X-ray first",
+    "4th or 5th intercostal space",
+    "anterior to the mid-axillary line",
+    "long",
+    "chest drain",
+    "eFAST",
+    "crossmatch",
+    "antibiotic",
+    "cardiothoracic"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2. Keep him on 15 litres. Trauma team call, please."
+    },
+    {
+      "at": "0:10",
+      "say": "Airway: gasping short words, patent. Breathing: a stab wound in the left 5th space; the left side hardly moves; RR 36. Trachea deviated to the right. Hyper-resonant on the left with absent breath sounds."
+    },
+    {
+      "at": "0:30",
+      "say": "Circulation: distended neck veins; weak, fast pulse, cold and clammy: obstructive shock. Heart sounds not muffled."
+    },
+    {
+      "at": "0:40",
+      "say": "This is a left tension pneumothorax: a clinical diagnosis. Decompress now; no X-ray first."
+    },
+    {
+      "at": "0:50",
+      "say": "Left chest: 4th or 5th intercostal space, just anterior to the mid-axillary line. Quick skin prep. A long, large-bore cannula over the top of the rib; hiss of air; leave it in. Then a chest drain.",
+      "do": "Decompressed: BP and SpO2 rising."
+    },
+    {
+      "at": "1:30",
+      "say": "Chest X-ray after the drain, and eFAST including the pericardium.",
+      "do": "Lung re-expanded; no pericardial or abdominal fluid."
+    },
+    {
+      "at": "1:45",
+      "say": "Two large-bore cannulae, bloods with a crossmatch and a gas; blood if he's still shocked. Antibiotic prophylaxis for the drain after a penetrating injury, and tetanus."
+    },
+    {
+      "at": "2:05",
+      "say": "Cardiothoracic surgeon: a stab wound to the left chest with a tension pneumothorax, decompressed, drain in."
     }
   ]
 }

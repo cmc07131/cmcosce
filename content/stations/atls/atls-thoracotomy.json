@@ -23,8 +23,9 @@
     },
     {
       "title": "HOTT",
-      "goal": "Fix the reversible causes of a traumatic arrest at the same time.",
+      "goal": "Name it, decide on thoracotomy, and fix the reversible causes at the same time.",
       "steps": [
+        "decide",
         "hott"
       ]
     },
@@ -43,8 +44,13 @@
       ]
     }
   ],
-  "review": [],
-  "notes": "Checked against the European Resuscitation Council 2021 guidelines (traumatic cardiac arrest), Resuscitation Council UK 2021, and ATLS 11th edition.\n\nTraumatic cardiac arrest is treated by fixing its causes at the same time: HOTT (Hypovolaemia, Oxygenation, Tension pneumothorax, Tamponade). Chest compressions do not take priority over these, because compressing an empty or tamponaded heart achieves little. Adrenaline has a limited role.\n\nResuscitative thoracotomy (clamshell) in the ED is indicated for penetrating chest trauma with arrest, especially with tamponade, when the time since loss of signs of life is short (ERC: within about 10–15 minutes). Outcomes after blunt trauma arrest are poor. It is done by a trained operator; the station expects you to lead, prepare and understand the steps.\n\nPericardiocentesis is not the treatment for traumatic tamponade: the blood clots. Open the pericardium.\n\nClamshell: bilateral 4th/5th intercostal space incisions from the mid-axillary lines meeting across the sternum, sternum divided, retractor, pericardium lifted and opened longitudinally in front of the phrenic nerve, clot evacuated, cardiac wound controlled with a finger (then sutures or a Foley catheter), internal cardiac massage, descending aortic compression if needed. Ligate the internal mammary arteries after ROSC.\n\nYour notes list 'Thoracotomy' as a topic without detail; nothing conflicts.",
+  "review": [
+    {
+      "tag": "differs",
+      "text": "Time window. ERC 2021 and RCUK give about 10–15 minutes from loss of signs of life for penetrating trauma; some US guidance (EAST) allows up to 15 minutes of CPR for penetrating injury. The script says within 15 minutes."
+    }
+  ],
+  "notes": "Checked against the European Resuscitation Council 2021 guidelines (traumatic cardiac arrest), Resuscitation Council UK 2021, and ATLS 11th edition.\n\nTraumatic cardiac arrest is treated by fixing its causes at the same time: HOTT (Hypovolaemia, Oxygenation, Tension pneumothorax, Tamponade). Chest compressions do not take priority over these, because compressing an empty or tamponaded heart achieves little. Adrenaline has a limited role.\n\nResuscitative thoracotomy (clamshell) in the ED is indicated for penetrating chest trauma with arrest, especially with tamponade, when the time since loss of signs of life is short (ERC: within about 10–15 minutes). Outcomes after blunt trauma arrest are poor. It is done by a trained operator; the station expects you to lead, prepare and understand the steps.\n\nPericardiocentesis is not the treatment for traumatic tamponade: the blood clots. Open the pericardium.\n\nClamshell: bilateral 4th/5th intercostal space incisions from the mid-axillary lines meeting across the sternum, sternum divided, retractor, pericardium lifted and opened longitudinally in front of the phrenic nerve, clot evacuated, cardiac wound controlled with a finger (then sutures or a Foley catheter), internal cardiac massage, descending aortic compression if needed. Ligate the internal mammary arteries after ROSC.\n\nYour notes list 'Thoracotomy' as a topic without detail; nothing conflicts.\n\nPerfect script checked against the ERC traumatic arrest algorithm, an ATLS checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (pericardiocentesis, standard ALS only, CT after ROSC). Added: traumatic arrest and HOTT named, the indication for thoracotomy said aloud, why not a needle, blood with calcium and TXA after ROSC, and the handover questions scored.",
   "cast": [
     {
       "id": "patient",
@@ -133,13 +139,15 @@
           },
           {
             "t": "Rhythm on your monitor?",
-            "r": "Narrow complex, about 100. No pulse."
+            "r": "Narrow complex, about 100. No pulse.",
+            "mark": "Asks the rhythm"
           }
         ],
         "Injury": [
           {
             "t": "The wound?",
-            "r": "Single 2 cm stab, left of the sternum, 4th space. Kitchen knife."
+            "r": "Single 2 cm stab, left of the sternum, 4th space. Kitchen knife.",
+            "mark": "Asks about the wound"
           }
         ]
       }
@@ -160,17 +168,40 @@
           },
           {
             "t": "Subxiphoid ultrasound",
-            "r": "Black rim of fluid around the heart; the ventricles barely move.",
+            "r": "Black rim of fluid around the heart; the ventricles barely move. \"Tamponade.\"",
             "img": "us:cardiac-effusion",
             "mark": "Finds pericardial tamponade on ultrasound"
           },
           {
             "t": "Pupils",
             "r": "Mid-size, reactive.",
-            "anim": "pupils"
+            "anim": "pupils",
+            "mark": "Checks the pupils"
           }
         ]
       }
+    },
+    {
+      "id": "decide",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Decide",
+      "lang": "en",
+      "hint": "Traumatic arrest: HOTT; is a thoracotomy indicated?",
+      "opts": [
+        {
+          "t": "This is a traumatic cardiac arrest: we treat HOTT at the same time, not standard ALS. Hypovolaemia, oxygenation, tension, tamponade.",
+          "mark": "Names traumatic arrest and the HOTT approach"
+        },
+        {
+          "t": "Penetrating chest wound, signs of life lost 3 minutes ago, tamponade on ultrasound: a resuscitative thoracotomy is indicated, within 15 minutes.",
+          "mark": "States the indication for resuscitative thoracotomy"
+        },
+        {
+          "t": "No needle pericardiocentesis: traumatic tamponade is clotted blood. We open the pericardium.",
+          "mark": "Opens the pericardium rather than needling it"
+        }
+      ]
     },
     {
       "id": "hott",
@@ -199,16 +230,6 @@
           "t": "Clamshell thoracotomy for the tamponade",
           "need": true,
           "mark": "Decides on resuscitative thoracotomy for tamponade"
-        },
-        {
-          "t": "Needle pericardiocentesis",
-          "trap": true,
-          "r": "Traumatic tamponade is clotted blood. A needle rarely drains it; open the pericardium."
-        },
-        {
-          "t": "Standard ALS: compressions and adrenaline every 4 minutes, nothing else",
-          "trap": "critical",
-          "r": "Compressions on a tamponaded, empty heart do not work. Treat HOTT."
         }
       ]
     },
@@ -244,20 +265,20 @@
       "hint": "Theatre now; watch the internal mammary arteries; blood and calcium.",
       "opts": [
         {
-          "t": "Straight to theatre with the cardiothoracic surgeon",
+          "t": "Straight to theatre with the cardiothoracic surgeon, not CT.",
           "mark": "Transfers to theatre for definitive repair",
           "r": "CTS: Theatre 1 ready. Bring him now."
         },
         {
-          "t": "Clamp or tie the internal mammary arteries — they bleed once the pressure returns",
+          "t": "Clamp or tie the internal mammary arteries: they bleed once the pressure returns.",
           "mark": "Anticipates internal mammary bleeding after ROSC"
         },
         {
-          "t": "CT chest first to see the injury",
-          "trap": "critical",
-          "r": "He has just had a clamshell. Theatre, not CT."
+          "t": "Keep the blood going 1:1:1 with calcium; tranexamic acid.",
+          "mark": "Continues balanced transfusion, calcium and TXA"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "viva",
@@ -397,6 +418,62 @@
       ],
       "why": "The pressure collapses the thin-walled right heart in diastole.",
       "source": "ACEP / RCEM ultrasound"
+    }
+  ],
+  "keywords": [
+    "cardiothoracic surgeon",
+    "thoracotomy set",
+    "major haemorrhage protocol",
+    "lost his pulse",
+    "PEA",
+    "tamponade",
+    "traumatic cardiac arrest",
+    "HOTT",
+    "hypovolaemia",
+    "oxygenation",
+    "tension",
+    "within 15 minutes",
+    "no needle pericardiocentesis",
+    "finger thoracostomies",
+    "clamshell",
+    "phrenic nerve",
+    "internal mammary",
+    "theatre"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Cardiothoracic surgeon to resus now. Open the thoracotomy set: Gigli saw or heavy shears. Major haemorrhage protocol: blood through the rapid infuser. PPE with eye protection."
+    },
+    {
+      "at": "0:10",
+      "say": "When exactly did he lose his pulse? Rhythm on your monitor? The wound?",
+      "do": "Lost his pulse at 21:14, 3 minutes ago; narrow complex about 100; a single 2 cm stab left of the sternum."
+    },
+    {
+      "at": "0:25",
+      "say": "No carotid or femoral pulse; organised complexes: PEA. Subxiphoid ultrasound: fluid around the heart, ventricles barely moving: tamponade. Pupils reactive."
+    },
+    {
+      "at": "0:45",
+      "say": "This is a traumatic cardiac arrest: we treat HOTT at the same time, not standard ALS. Hypovolaemia, oxygenation, tension, tamponade."
+    },
+    {
+      "at": "0:55",
+      "say": "Penetrating chest wound, signs of life lost 3 minutes ago, tamponade on ultrasound: a resuscitative thoracotomy is indicated, within 15 minutes. No needle pericardiocentesis: traumatic tamponade is clotted blood. We open the pericardium."
+    },
+    {
+      "at": "1:10",
+      "say": "Together: blood through the rapid infuser; intubate and ventilate; bilateral finger thoracostomies; and a clamshell thoracotomy for the tamponade."
+    },
+    {
+      "at": "1:25",
+      "say": "Clamshell: incisions in both 4th or 5th spaces joined across the sternum, sternum divided, retractor in. Lift the pericardium and open it longitudinally, in front of the phrenic nerve. Clot out, finger on the hole, then sutures or a Foley as a bridge.",
+      "do": "ROSC."
+    },
+    {
+      "at": "2:10",
+      "say": "Straight to theatre with the cardiothoracic surgeon, not CT. Clamp or tie the internal mammary arteries: they bleed once the pressure returns. Keep the blood going 1:1:1 with calcium; tranexamic acid."
     }
   ]
 }
