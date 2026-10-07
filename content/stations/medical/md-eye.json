@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against RCOphth guidance, NICE NG128 (stroke and TIA), and standard eye examination.\n\nExamination: acuity with a Snellen chart at 6 m (each eye, with glasses; pinhole to correct refractive error), inspection, pupils (direct, consensual, swinging-light for RAPD), eye movements, visual fields by confrontation (each eye, each quadrant; red target for central fields), fundoscopy (red reflex, disc, vessels, macula). A homonymous hemianopia (same side in both eyes) localises behind the chiasm — optic tract, radiation or occipital cortex — usually a stroke in the posterior cerebral artery territory; acuity and fundi are normal. It needs urgent stroke assessment (CT/CTA; thrombolysis if within the window and disabling), and advice not to drive.\n\nOther patterns: monocular sudden painless loss (CRAO — cherry-red spot; CRVO — 'stormy sunset'; retinal detachment; GCA), bitemporal hemianopia (chiasm — pituitary), painful red eye with a mid-dilated pupil (acute angle-closure glaucoma).\n\nYour notes (2021 past paper: right homonymous hemianopia, normal acuity with pinhole, no RAPD, normal fundi) match this.",
+  "notes": "Checked against RCOphth guidance, NICE NG128 (stroke and TIA), and standard eye examination.\n\nExamination: acuity with a Snellen chart at 6 m (each eye, with glasses; pinhole to correct refractive error), inspection, pupils (direct, consensual, swinging-light for RAPD), eye movements, visual fields by confrontation (each eye, each quadrant; red target for central fields), fundoscopy (red reflex, disc, vessels, macula). A homonymous hemianopia (same side in both eyes) localises behind the chiasm — optic tract, radiation or occipital cortex — usually a stroke in the posterior cerebral artery territory; acuity and fundi are normal. It needs urgent stroke assessment (CT/CTA; thrombolysis if within the window and disabling), and advice not to drive.\n\nOther patterns: monocular sudden painless loss (CRAO — cherry-red spot; CRVO — 'stormy sunset'; retinal detachment; GCA), bitemporal hemianopia (chiasm — pituitary), painful red eye with a mid-dilated pupil (acute angle-closure glaucoma).\n\nYour notes (2021 past paper: right homonymous hemianopia, normal acuity with pinhole, no RAPD, normal fundi) match this.\n\nPerfect script checked against RCOphth guidance and NICE NG128, an HKCEM-style scheme and a keyword scheme. Removed the optician option.",
   "cast": [
     {
       "id": "patient",
@@ -44,13 +44,13 @@
       "groups": {
         "Acuity": [
           {
-            "t": "Snellen chart at 6 m, each eye",
+            "t": "Visual acuity with the Snellen chart at 6 metres, each eye in turn, with his glasses",
             "r": "Right 6/9, left 6/9.",
             "mark": "Measures visual acuity in each eye",
             "do": "chart eye-R & chart eye-L"
           },
           {
-            "t": "Pinhole",
+            "t": "Now through a pinhole, to correct any refractive error",
             "r": "Both improve to 6/6 — refractive error only.",
             "mark": "Uses a pinhole to correct refractive error",
             "do": "pinhole eye"
@@ -58,13 +58,13 @@
         ],
         "Pupils and movements": [
           {
-            "t": "Direct, consensual, swinging light test",
+            "t": "Pupils: direct and consensual reflexes, then the swinging light test for a relative afferent pupillary defect",
             "r": "Equal, reactive, no RAPD.",
             "mark": "Tests pupils including RAPD",
             "do": "torch eye-R & torch eye-L"
           },
           {
-            "t": "Eye movements",
+            "t": "Eye movements: follow my finger; tell me if you see double",
             "r": "Full, no diplopia or nystagmus.",
             "mark": "Tests eye movements",
             "do": "say follow-finger"
@@ -72,7 +72,7 @@
         ],
         "Fields": [
           {
-            "t": "Confrontation fields, each eye separately, all quadrants",
+            "t": "Visual fields by confrontation, each eye separately, all four quadrants",
             "r": "Both eyes miss the right half of the field: right homonymous hemianopia.",
             "mark": "Finds a right homonymous hemianopia",
             "do": "say fields"
@@ -80,7 +80,7 @@
         ],
         "Fundus": [
           {
-            "t": "Fundoscopy: red reflex, disc, vessels, macula",
+            "t": "Fundoscopy: the red reflex, the disc, the vessels and the macula",
             "r": "Normal discs and vessels.",
             "img": "photo:fundus-normal",
             "mark": "Fundoscopy normal",
@@ -98,21 +98,16 @@
       "hint": "Localise: left post-chiasmal (occipital) lesion — stroke pathway.",
       "opts": [
         {
-          "t": "Right homonymous hemianopia: left post-chiasmal lesion, likely left occipital (PCA) infarct given AF",
+          "t": "Right homonymous hemianopia with normal acuity, pupils and fundi: a left post-chiasmal lesion, likely a left occipital, PCA infarct, given his AF.",
           "mark": "Localises the lesion and suggests the cause"
         },
         {
-          "t": "Stroke team, urgent CT and CTA; thrombolysis if within 4.5 h and disabling; check anticoagulation status",
+          "t": "Stroke team now: urgent CT and CTA; thrombolysis if within 4.5 hours and disabling; check his anticoagulation.",
           "mark": "Urgent stroke pathway"
         },
         {
-          "t": "Advise not to drive; formal visual fields; secondary prevention (anticoagulation for AF)",
+          "t": "He mustn't drive; formal visual fields; secondary prevention, with anticoagulation for the AF.",
           "mark": "Driving advice and secondary prevention"
-        },
-        {
-          "t": "Refer to an optician for new glasses",
-          "trap": "critical",
-          "r": "A field defect respecting the midline in both eyes is a brain lesion, not a refraction problem."
         }
       ]
     },
@@ -242,5 +237,38 @@
       "why": "Widespread flame haemorrhages.",
       "source": "Ophthalmology"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Visual acuity with the Snellen chart at 6 metres, each eye in turn, with his glasses. Now through a pinhole, to correct any refractive error. Pupils: direct and consensual reflexes, then the swinging light test for a relative afferent pupillary defect.",
+      "do": "Right 6/9, left 6/9. Both improve to 6/6 — refractive error only. Equal, reactive, no RAPD."
+    },
+    {
+      "at": "0:20",
+      "say": "Eye movements: follow my finger; tell me if you see double. Visual fields by confrontation, each eye separately, all four quadrants. Fundoscopy: the red reflex, the disc, the vessels and the macula.",
+      "do": "Full, no diplopia or nystagmus. Both eyes miss the right half of the field: right homonymous hemianopia. Normal discs and vessels."
+    },
+    {
+      "at": "0:40",
+      "say": "Right homonymous hemianopia with normal acuity, pupils and fundi: a left post-chiasmal lesion, likely a left occipital, PCA infarct, given his AF. Stroke team now: urgent CT and CTA; thrombolysis if within 4.5 hours and disabling; check his anticoagulation. He mustn't drive; formal visual fields; secondary prevention, with anticoagulation for the AF."
+    }
+  ],
+  "keywords": [
+    "Snellen",
+    "pinhole",
+    "swinging light",
+    "relative afferent pupillary defect",
+    "eye movements",
+    "confrontation",
+    "fundoscopy",
+    "right homonymous hemianopia",
+    "post-chiasmal",
+    "occipital",
+    "stroke team",
+    "CT",
+    "thrombolysis",
+    "drive",
+    "anticoagulation"
   ]
 }

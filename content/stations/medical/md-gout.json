@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against EULAR 2016 gout recommendations, the BSR 2017 gout guideline, and NICE NG219 (Gout, 2022).\n\nAcute gout: rapid onset (maximal within 24 hours), first MTP joint (podagra), triggers (alcohol, especially beer and spirits; purine-rich food; dehydration; diuretics; acute illness), recurrent episodes, tophi. Septic arthritis must be excluded when there is fever, systemic illness, or an atypical or prosthetic joint — aspirate. Diagnosis: joint aspiration with negatively birefringent needle-shaped crystals (gold standard); serum urate may be normal during an attack.\n\nTreat the flare: NSAID (with PPI) or colchicine 500 microgram two to four times daily (low-dose regimen) or oral prednisolone 30–35 mg for 3–5 days; ice, rest. Do not stop allopurinol during a flare if already taking it; urate-lowering therapy is offered after the flare (NICE NG219 offers it to people with recurrent flares; treat-to-target urate under 360 µmol/L, or 300 with tophi), with colchicine prophylaxis. Review cardiovascular risk and diuretics.\n\nYour notes list polyarthritis and joint pain topics; nothing conflicts.",
+  "notes": "Checked against EULAR 2016 gout recommendations, the BSR 2017 gout guideline, and NICE NG219 (Gout, 2022).\n\nAcute gout: rapid onset (maximal within 24 hours), first MTP joint (podagra), triggers (alcohol, especially beer and spirits; purine-rich food; dehydration; diuretics; acute illness), recurrent episodes, tophi. Septic arthritis must be excluded when there is fever, systemic illness, or an atypical or prosthetic joint — aspirate. Diagnosis: joint aspiration with negatively birefringent needle-shaped crystals (gold standard); serum urate may be normal during an attack.\n\nTreat the flare: NSAID (with PPI) or colchicine 500 microgram two to four times daily (low-dose regimen) or oral prednisolone 30–35 mg for 3–5 days; ice, rest. Do not stop allopurinol during a flare if already taking it; urate-lowering therapy is offered after the flare (NICE NG219 offers it to people with recurrent flares; treat-to-target urate under 360 µmol/L, or 300 with tophi), with colchicine prophylaxis. Review cardiovascular risk and diuretics.\n\nYour notes list polyarthritis and joint pain topics; nothing conflicts.\n\nPerfect script checked against EULAR 2016, BSR 2017 and NICE NG219, an HKCEM-style scheme and a keyword scheme. Removed the allopurinol-now option. Added the skin check and safety-netting.",
   "cast": [
     {
       "id": "patient",
@@ -114,7 +114,8 @@
           },
           {
             "t": "Skin wounds or cellulitis",
-            "r": "No break in the skin."
+            "r": "No break in the skin.",
+            "mark": "Checks the skin for a portal of infection"
           }
         ]
       }
@@ -142,10 +143,9 @@
           "mark": "Addresses triggers, diuretics and long-term urate lowering"
         },
         {
-          "t": "Start allopurinol today at a high dose to stop this attack",
-          "tz": "我今日就開高劑量 allopurinol 俾你，止住今次發作。",
-          "trap": true,
-          "r": "Allopurinol doesn't treat the flare; start after it settles, with prophylaxis."
+          "t": "Come back straight away if you get a high fever, shivering, spreading redness, or other joints swell.",
+          "tz": "如果你發高燒、發冷震、紅腫散開，或者其他關節腫，就要即刻返嚟。",
+          "mark": "Safety-netting for septic arthritis"
         }
       ]
     },
@@ -275,5 +275,47 @@
       "why": "Ears, elbows, hands.",
       "source": "Rheumatology"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "When did it start and how fast? Any other joints? Injury? Fevers, rigors, feeling unwell?",
+      "do": "Woke at 3 a.m. with it. Worst pain ever within hours; can't bear the bedsheet. Just the toe. No injury. A bit warm, no rigors."
+    },
+    {
+      "at": "0:20",
+      "say": "Alcohol, diet, recent illness? Medicines, especially water tablets? Kidney problems, diabetes, heart disease?",
+      "do": "Seafood banquet and beer last night. Bendroflumethiazide for blood pressure. Borderline kidney function, per my GP."
+    },
+    {
+      "at": "0:40",
+      "say": "Right first MTP joint. Ears, elbows, hands for tophi. Skin wounds or cellulitis.",
+      "do": "Red, hot, swollen, exquisitely tender; shiny skin. A small chalky nodule on the right ear helix. No break in the skin."
+    },
+    {
+      "at": "1:00",
+      "say": "This looks like gout — uric acid crystals in the joint. If you had a high fever or felt very unwell, we'd take fluid from the joint to exclude infection. Naproxen with omeprazole (or colchicine 500 microgram 2–4 times a day, or prednisolone if NSAIDs unsuitable); rest and ice. Reduce beer and seafood; ask your GP about changing the water tablet and starting urate-lowering treatment after the attack."
+    },
+    {
+      "at": "1:20",
+      "say": "Come back straight away if you get a high fever, shivering, spreading redness, or other joints swell."
+    }
+  ],
+  "keywords": [
+    "how fast",
+    "other joints",
+    "fevers",
+    "alcohol",
+    "water tablets",
+    "kidney",
+    "first MTP",
+    "tophi",
+    "gout",
+    "infection",
+    "naproxen",
+    "omeprazole",
+    "colchicine",
+    "urate-lowering",
+    "come back"
   ]
 }

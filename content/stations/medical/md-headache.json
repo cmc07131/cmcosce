@@ -15,8 +15,9 @@
     },
     {
       "title": "Investigations",
-      "goal": "The right test at the right time.",
+      "goal": "Ottawa SAH rule; the right test at the right time.",
       "steps": [
+        "decide",
         "tests"
       ]
     },
@@ -34,13 +35,18 @@
       "text": "Aspirin in giant cell arteritis. Your notes mark it with '???'. BSR 2020 does not recommend routine aspirin for GCA; give high-dose steroids straight away and arrange a biopsy or ultrasound."
     }
   ],
-  "notes": "Checked against NICE NG228 (Subarachnoid haemorrhage caused by a ruptured aneurysm, 2022), the Ottawa SAH rule (Perry 2013), and Perry et al. BMJ 2011 (CT within 6 hours).\n\nThunderclap headache (peak within 1 minute) needs exclusion of SAH. Ottawa SAH rule (alert patients over 15 with non-traumatic headache peaking within an hour): investigate if age 40 or over, neck pain or stiffness, witnessed loss of consciousness, onset during exertion, thunderclap onset, or limited neck flexion. NICE NG228: non-contrast CT head within 6 hours of onset, reported by a radiologist, rules out SAH if normal (no LP needed); CT after 6 hours: if normal, lumbar puncture at least 12 hours after onset for xanthochromia. Positive: nimodipine 60 mg 4-hourly, neurosurgery, CTA, BP control, analgesia, antiemetic.\n\nOther causes of thunderclap headache: reversible cerebral vasoconstriction syndrome, cervical artery dissection, cerebral venous sinus thrombosis, pituitary apoplexy, ICH. Headache red flags include new headache over 50 (GCA), fever and neck stiffness (meningitis), papilloedema, focal signs.\n\nYour headache notes cover primary/secondary causes and GCA (steroids, biopsy, halo sign); they mark aspirin with '???' — BSR 2020 does not recommend routine aspirin for GCA.",
+  "notes": "Checked against NICE NG228 (Subarachnoid haemorrhage caused by a ruptured aneurysm, 2022), the Ottawa SAH rule (Perry 2013), and Perry et al. BMJ 2011 (CT within 6 hours).\n\nThunderclap headache (peak within 1 minute) needs exclusion of SAH. Ottawa SAH rule (alert patients over 15 with non-traumatic headache peaking within an hour): investigate if age 40 or over, neck pain or stiffness, witnessed loss of consciousness, onset during exertion, thunderclap onset, or limited neck flexion. NICE NG228: non-contrast CT head within 6 hours of onset, reported by a radiologist, rules out SAH if normal (no LP needed); CT after 6 hours: if normal, lumbar puncture at least 12 hours after onset for xanthochromia. Positive: nimodipine 60 mg 4-hourly, neurosurgery, CTA, BP control, analgesia, antiemetic.\n\nOther causes of thunderclap headache: reversible cerebral vasoconstriction syndrome, cervical artery dissection, cerebral venous sinus thrombosis, pituitary apoplexy, ICH. Headache red flags include new headache over 50 (GCA), fever and neck stiffness (meningitis), papilloedema, focal signs.\n\nYour headache notes cover primary/secondary causes and GCA (steroids, biopsy, halo sign); they mark aspirin with '???' — BSR 2020 does not recommend routine aspirin for GCA.\n\nPerfect script checked against NICE NG228 and the Ottawa SAH rule, an HKCEM-style scheme and a keyword scheme. Removed the LP-now option. Added the Ottawa rule and the CT/LP timing aloud, analgesia, a structured referral.",
   "cast": [
     {
       "id": "patient",
       "name": "Ms Chan",
       "role": "woman",
       "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Lo",
+      "role": "nurse"
     }
   ],
   "steps": [
@@ -109,6 +115,28 @@
       }
     },
     {
+      "id": "decide",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Decide",
+      "lang": "en",
+      "hint": "Ottawa SAH rule; CT within 6 hours.",
+      "opts": [
+        {
+          "t": "Thunderclap onset during exertion, neck stiffness, age over 40: the Ottawa SAH rule says investigate. A non-contrast CT head now, within 6 hours of onset.",
+          "mark": "Applies the Ottawa SAH rule; CT within 6 hours"
+        },
+        {
+          "t": "If the CT is normal within 6 hours, SAH is excluded; after 6 hours, a lumbar puncture at 12 hours for xanthochromia.",
+          "mark": "Knows the CT and LP timing rule"
+        },
+        {
+          "t": "Analgesia and an antiemetic now.",
+          "mark": "Analgesia and antiemetic"
+        }
+      ]
+    },
+    {
       "id": "tests",
       "kind": "order",
       "to": "trolley",
@@ -125,11 +153,6 @@
         ],
         "Other": [
           {
-            "t": "Lumbar puncture now",
-            "trap": true,
-            "r": "CT already shows SAH; LP is only for a normal CT beyond 6 hours, done at 12 hours."
-          },
-          {
             "t": "ECG, glucose, clotting, group and save",
             "r": "Sinus rhythm, deep T inversion in the anterior leads (neurogenic).",
             "mark": "Baseline tests including ECG"
@@ -145,18 +168,19 @@
       "hint": "Neurosurgery, CTA, nimodipine, analgesia, antiemetic, BP control, reassess GCS.",
       "opts": [
         {
-          "t": "Neurosurgery referral; CT angiography for an aneurysm",
+          "t": "Neurosurgery: Ms Chan, 41, thunderclap headache 3 hours ago, GCS 15, CT shows subarachnoid haemorrhage. CT angiography for an aneurysm.",
           "mark": "Neurosurgical referral and CTA"
         },
         {
-          "t": "Nimodipine 60 mg orally every 4 hours",
+          "t": "Nimodipine 60 mg orally every 4 hours to prevent delayed ischaemia.",
           "mark": "Nimodipine to prevent delayed ischaemia"
         },
         {
-          "t": "Analgesia, antiemetic, BP control, frequent GCS; stop the combined pill",
+          "t": "Blood pressure control, hourly GCS and pupils, stop the combined pill, and explain to her.",
           "mark": "Supportive care and monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "viva",
@@ -285,5 +309,51 @@
       "source": "BSR 2020",
       "note": "Your notes: 'Aspirin ???'."
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "How quickly did it reach its worst? What were you doing? Is it the worst headache of your life? Have you had headaches like this before?",
+      "do": "Instantly — within a few seconds. Lifting weights. Worst ever. I get migraines but never like this."
+    },
+    {
+      "at": "0:20",
+      "say": "Neck pain or stiffness? Light hurting your eyes? Did you black out? Any weakness, numbness, double vision, seizure? Blood pressure, smoking, family history of aneurysms or polycystic kidneys.",
+      "do": "My neck feels stiff. No blackout. No weakness. Smoker. My aunt died of a brain haemorrhage."
+    },
+    {
+      "at": "0:40",
+      "say": "Medicines, cocaine, pregnancy, contraception.",
+      "do": "Combined pill. No drugs."
+    },
+    {
+      "at": "1:00",
+      "say": "Thunderclap onset during exertion, neck stiffness, age over 40: the Ottawa SAH rule says investigate. A non-contrast CT head now, within 6 hours of onset. If the CT is normal within 6 hours, SAH is excluded; after 6 hours, a lumbar puncture at 12 hours for xanthochromia. Analgesia and an antiemetic now."
+    },
+    {
+      "at": "1:20",
+      "say": "Non-contrast CT head (within 6 hours of onset). ECG, glucose, clotting, group and save.",
+      "do": "Hyperdense blood in the basal cisterns and Sylvian fissures. Sinus rhythm, deep T inversion in the anterior leads (neurogenic)."
+    },
+    {
+      "at": "1:40",
+      "say": "Neurosurgery: Ms Chan, 41, thunderclap headache 3 hours ago, GCS 15, CT shows subarachnoid haemorrhage. CT angiography for an aneurysm. Nimodipine 60 mg orally every 4 hours to prevent delayed ischaemia. Blood pressure control, hourly GCS and pupils, stop the combined pill, and explain to her."
+    }
+  ],
+  "keywords": [
+    "thunderclap",
+    "exertion",
+    "worst",
+    "neck",
+    "weakness",
+    "family history",
+    "Ottawa SAH rule",
+    "within 6 hours",
+    "lumbar puncture at 12 hours",
+    "xanthochromia",
+    "subarachnoid haemorrhage",
+    "CT angiography",
+    "nimodipine 60 mg",
+    "GCS"
   ]
 }
