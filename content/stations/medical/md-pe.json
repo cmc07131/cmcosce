@@ -23,16 +23,17 @@
     },
     {
       "title": "Treat",
-      "goal": "Oxygen, anticoagulation at the right dose, and the pill.",
+      "goal": "Oxygen, anticoagulation at the right dose, risk and disposition, and talk to her.",
       "steps": [
         "oxygen",
         "anticoag",
+        "plan",
         "advice"
       ]
     }
   ],
   "review": [],
-  "notes": "Checked against NICE NG158 (Venous thromboembolic diseases, 2020, updated 2023), the ESC 2019 PE guideline, PERC (Kline 2004) and PESI/sPESI.\n\nAssess clinical probability (two-level Wells: PE likely if score over 4). PE likely: CTPA immediately (interim anticoagulation if delayed); PE unlikely: D-dimer, CTPA if positive. PERC applies only when clinical suspicion is already low (under 15%): all eight criteria negative means no D-dimer needed. Haemodynamically unstable (systolic under 90) with suspected PE: bedside echo for RV dilatation, and systemic thrombolysis (alteplase 100 mg over 2 hours, or 50 mg bolus in arrest) if confirmed or highly likely. Stable: anticoagulation with a DOAC (apixaban or rivaroxaban) or LMWH; risk stratify with sPESI and RV/troponin for outpatient management. Pregnancy: test before the combined pill question; CTPA or V/Q; LMWH.\n\nYour notes (vascular and PE summary) use Wells and D-dimer and duplex for DVT — consistent.",
+  "notes": "Checked against NICE NG158 (Venous thromboembolic diseases, 2020, updated 2023), the ESC 2019 PE guideline, PERC (Kline 2004) and PESI/sPESI.\n\nAssess clinical probability (two-level Wells: PE likely if score over 4). PE likely: CTPA immediately (interim anticoagulation if delayed); PE unlikely: D-dimer, CTPA if positive. PERC applies only when clinical suspicion is already low (under 15%): all eight criteria negative means no D-dimer needed. Haemodynamically unstable (systolic under 90) with suspected PE: bedside echo for RV dilatation, and systemic thrombolysis (alteplase 100 mg over 2 hours, or 50 mg bolus in arrest) if confirmed or highly likely. Stable: anticoagulation with a DOAC (apixaban or rivaroxaban) or LMWH; risk stratify with sPESI and RV/troponin for outpatient management. Pregnancy: test before the combined pill question; CTPA or V/Q; LMWH.\n\nYour notes (vascular and PE summary) use Wells and D-dimer and duplex for DVT — consistent.\n\nPerfect script checked against NICE NG158, ESC 2019, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (D-dimer when PE is likely, the prophylactic apixaban dose, thrombolysis). Added: risk stratification and disposition, bloods, and an explanation with safety-netting.",
   "cast": [
     {
       "id": "patient",
@@ -80,12 +81,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Hello Ms Kwok, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2, and an IV cannula with bloods.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "history",
@@ -162,8 +164,13 @@
           },
           {
             "t": "Two-level Wells score",
-            "r": "DVT signs 3, HR >100 1.5, PE most likely 3 = 7.5: PE likely.",
+            "r": "DVT signs 3, HR over 100 1.5, PE the most likely diagnosis 3: 7.5: PE likely. \"Straight to CTPA.\"",
             "mark": "Calculates Wells: PE likely"
+          },
+          {
+            "t": "Troponin, BNP, FBC, U&E, clotting",
+            "r": "Troponin mildly raised; BNP normal; renal function normal.",
+            "mark": "Bloods for risk stratification and before anticoagulation"
           }
         ],
         "Imaging": [
@@ -171,11 +178,6 @@
             "t": "CTPA",
             "r": "Filling defects in the right lower and middle lobe pulmonary arteries. RV:LV ratio 0.8.",
             "mark": "CTPA when PE likely"
-          },
-          {
-            "t": "D-dimer to decide on imaging",
-            "trap": true,
-            "r": "When PE is likely (Wells > 4), go straight to CTPA; a D-dimer does not change the plan."
           }
         ]
       }
@@ -213,22 +215,20 @@
           "t": "Apixaban 10 mg twice daily for 7 days, then 5 mg twice daily",
           "drug": "Apixaban",
           "dose": "10 mg twice daily for 7 days, then 5 mg twice daily"
-        },
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Risk and disposition",
+      "lang": "en",
+      "hint": "Stable PE: sPESI, RV and troponin; admit or not.",
+      "opts": [
         {
-          "t": "Apixaban 2.5 mg twice daily",
-          "drug": "Apixaban",
-          "dose": "2.5 mg twice daily",
-          "fetch": "cart",
-          "trap": true,
-          "r": "That is the extended-prevention dose. Treatment: 10 mg twice daily for 7 days, then 5 mg twice daily."
-        },
-        {
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "She is haemodynamically stable. Thrombolysis is for high-risk (shocked) PE.",
-          "t": "Alteplase 100 mg IV over 2 hours",
-          "drug": "Alteplase",
-          "dose": "100 mg IV over 2 hours"
+          "t": "She's haemodynamically stable, so no thrombolysis. sPESI is 1 for the heart rate, and her troponin is raised: intermediate risk. She stays in for monitoring.",
+          "mark": "Risk stratifies: stable, sPESI, troponin; admits"
         }
       ]
     },
@@ -240,12 +240,25 @@
       "hint": "The combined pill.",
       "opts": [
         {
-          "t": "Stop the combined pill; alternative contraception",
-          "need": true,
-          "mark": "Stops oestrogen-containing contraception",
-          "tz": "你要停食避孕丸，我哋會同你傾其他避孕方法。",
+          "t": "You have a clot on the lung, probably from your leg after the long flight and the pill. We'll start a blood thinner today, usually for 3 months.",
+          "tz": "你個肺有血塊，應該係坐長途機加上食避孕丸，令隻腳生咗血栓再走上去。我哋今日開始俾薄血藥你，通常食三個月。",
+          "r": "OK.",
+          "rz": "好。",
+          "mark": "Explains the diagnosis and treatment duration"
+        },
+        {
+          "t": "Stop the combined pill now; we'll talk about other contraception.",
+          "tz": "你要即刻停食避孕丸，我哋會同你傾其他避孕方法。",
           "r": "OK, I understand.",
-          "rz": "好，我明白。"
+          "rz": "好，我明白。",
+          "mark": "Stops oestrogen-containing contraception"
+        },
+        {
+          "t": "Come back at once if you get worse breathlessness, chest pain, fainting or any bleeding.",
+          "tz": "如果你更加氣促、心口痛、暈或者有任何出血，要即刻返嚟。",
+          "r": "I will.",
+          "rz": "我會。",
+          "mark": "Safety-netting: worse symptoms and bleeding"
         }
       ]
     },
@@ -374,6 +387,63 @@
       ],
       "why": "With no RV dysfunction.",
       "source": "ESC 2019"
+    }
+  ],
+  "keywords": [
+    "pleuritic",
+    "haemoptysis",
+    "calf",
+    "long flight",
+    "combined pill",
+    "right heart strain",
+    "Wells",
+    "PE likely",
+    "CTPA",
+    "pregnancy test",
+    "94 to 98%",
+    "apixaban 10 mg twice daily",
+    "haemodynamically stable",
+    "no thrombolysis",
+    "sPESI",
+    "troponin",
+    "3 months"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello Ms Kwok, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2, and an IV cannula with bloods."
+    },
+    {
+      "at": "0:10",
+      "say": "Describe the pain. Coughing blood? Fainting? Leg pain or swelling?",
+      "do": "Sharp, right-sided, pleuritic; a little haemoptysis; no fainting; left calf swollen for 2 days."
+    },
+    {
+      "at": "0:25",
+      "say": "Any recent travel, surgery, immobility, cancer or previous clots? Contraception, pregnancy, family history?",
+      "do": "A 13-hour long flight; combined pill; LMP 2 weeks ago; mother had a DVT."
+    },
+    {
+      "at": "0:45",
+      "say": "12-lead ECG, chest X-ray and a pregnancy test. Troponin, BNP, FBC, U&E and clotting.",
+      "do": "Sinus tachycardia with a right heart strain pattern; clear film; hCG negative; troponin mildly raised."
+    },
+    {
+      "at": "1:05",
+      "say": "Two-level Wells: DVT signs 3, heart rate 1.5, PE the most likely diagnosis 3: 7.5: PE likely. Straight to CTPA.",
+      "do": "Right lower and middle lobe filling defects."
+    },
+    {
+      "at": "1:25",
+      "say": "Oxygen to SpO2 94 to 98%. Apixaban 10 mg twice daily for 7 days, then 5 mg twice daily."
+    },
+    {
+      "at": "1:40",
+      "say": "She's haemodynamically stable, so no thrombolysis. sPESI is 1 for the heart rate, and her troponin is raised: intermediate risk. She stays in for monitoring."
+    },
+    {
+      "at": "1:55",
+      "say": "You have a clot on the lung, probably from your leg after the long flight and the pill. We'll start a blood thinner today, usually for 3 months. Stop the combined pill now; we'll talk about other contraception. Come back at once if you get worse breathlessness, chest pain, fainting or any bleeding."
     }
   ]
 }

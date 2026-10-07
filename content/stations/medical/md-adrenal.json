@@ -24,9 +24,10 @@
     },
     {
       "title": "Ongoing plan",
-      "goal": "The next 24 hours and before he goes home.",
+      "goal": "The next 24 hours; the sick-day rules for him.",
       "steps": [
-        "after"
+        "after",
+        "explain"
       ]
     }
   ],
@@ -43,7 +44,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Society for Endocrinology emergency guidance on adrenal crisis (2020/2023), NICE NG243 (Adrenal insufficiency, 2024) and the Endocrine Society guideline.\n\nAdrenal crisis is a life-threatening emergency: hypotension/shock, vomiting, abdominal pain, confusion, often with hyponatraemia, hyperkalaemia and hypoglycaemia. Do not wait for results: hydrocortisone 100 mg IV or IM immediately, then 200 mg over 24 hours (continuous infusion or 50 mg every 6 hours IV/IM); 0.9% saline 1 L over the first hour, then guided by response; check and treat glucose; treat the trigger (gastroenteritis, infection). Take a random cortisol and ACTH before steroid only if it does not delay treatment. Fludrocortisone is not needed while hydrocortisone is 50 mg or more per day. Afterwards: sick-day rules education, emergency card, injection kit.\n\nYour notes list Addison's disease as a topic without detail.",
+  "notes": "Checked against the Society for Endocrinology emergency guidance on adrenal crisis (2020/2023), NICE NG243 (Adrenal insufficiency, 2024) and the Endocrine Society guideline.\n\nAdrenal crisis is a life-threatening emergency: hypotension/shock, vomiting, abdominal pain, confusion, often with hyponatraemia, hyperkalaemia and hypoglycaemia. Do not wait for results: hydrocortisone 100 mg IV or IM immediately, then 200 mg over 24 hours (continuous infusion or 50 mg every 6 hours IV/IM); 0.9% saline 1 L over the first hour, then guided by response; check and treat glucose; treat the trigger (gastroenteritis, infection). Take a random cortisol and ACTH before steroid only if it does not delay treatment. Fludrocortisone is not needed while hydrocortisone is 50 mg or more per day. Afterwards: sick-day rules education, emergency card, injection kit.\n\nYour notes list Addison's disease as a topic without detail.\n\nPerfect script checked against the Society for Endocrinology emergency guidance, NICE NG243, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (waiting for cortisol, low doses, dexamethasone, slow saline). Added: the diagnosis named, an ECG, the trigger looked for, admission, and sick-day rules told to him in Cantonese.",
   "cast": [
     {
       "id": "patient",
@@ -116,12 +117,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG, NIBP and SpO2.",
+          "t": "Hello Mr Lo, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2, and two IV cannulae.",
           "fetch": "trolley",
           "scene": "monitored",
-          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring, and access"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
@@ -145,9 +147,14 @@
         "Tests": [
           {
             "t": "Venous gas and glucose",
-            "r": "Na 124, K 5.9, glucose 3.1, lactate 3.4.",
+            "r": "Na 124, K 5.9, glucose 3.1 mmol/L, lactate 3.4. \"Hyponatraemia, hyperkalaemia, hypoglycaemia: adrenal crisis.\"",
             "mark": "Finds hyponatraemia, hyperkalaemia, hypoglycaemia",
             "anim": "glucose"
+          },
+          {
+            "t": "12-lead ECG",
+            "r": "Sinus tachycardia, slightly peaked T waves.",
+            "mark": "ECG for the potassium"
           }
         ]
       }
@@ -160,15 +167,15 @@
       "hint": "Bloods, without delaying the steroid.",
       "opts": [
         {
-          "t": "Random cortisol and ACTH — only if it does not delay the hydrocortisone",
+          "t": "Random cortisol and ACTH with the cannula, only if it doesn't delay the hydrocortisone.",
           "mark": "Sends cortisol/ACTH without delaying treatment"
         },
         {
-          "t": "Wait for the cortisol result before giving steroids",
-          "trap": "critical",
-          "r": "Adrenal crisis kills within hours. Treat on suspicion."
+          "t": "FBC, CRP, cultures and a stool sample for the trigger.",
+          "mark": "Looks for the trigger"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "treat",
@@ -188,22 +195,6 @@
           "dose": "100 mg IV now"
         },
         {
-          "t": "Hydrocortisone 10 mg IV",
-          "drug": "Hydrocortisone",
-          "dose": "10 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Far too little in crisis: 100 mg IV or IM now, then 200 mg over 24 hours."
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Hydrocortisone provides glucocorticoid and mineralocorticoid effect at stress doses.",
-          "t": "Dexamethasone 4 mg IV instead",
-          "drug": "Dexamethasone",
-          "dose": "4 mg IV instead"
-        },
-        {
           "fetch": "cart",
           "need": true,
           "scene": "fluids",
@@ -213,14 +204,6 @@
           "dose": "1 L over 1 hour"
         },
         {
-          "t": "0.9% saline 250 mL over 4 hours",
-          "drug": "0.9% saline",
-          "dose": "250 mL over 4 hours",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too slow for a BP of 78/44: 1 L over the first hour, then guided by response."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "scene": "glucose",
@@ -228,14 +211,6 @@
           "t": "Glucose 10% 150–200 mL IV (15–20 g)",
           "drug": "Glucose 10%",
           "dose": "150–200 mL IV (15–20 g)"
-        },
-        {
-          "t": "Glucose 10% 20 mL IV",
-          "drug": "Glucose 10%",
-          "dose": "20 mL IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little to correct hypoglycaemia: 150–200 mL of 10% (15–20 g)."
         }
       ]
     },
@@ -247,16 +222,33 @@
       "hint": "Hydrocortisone 50 mg 6-hourly (or 200 mg/24 h), fluids, trigger, monitoring, education.",
       "opts": [
         {
-          "t": "Hydrocortisone 200 mg per 24 hours (50 mg IV every 6 hours or infusion)",
+          "t": "Hydrocortisone 200 mg over 24 hours: 50 mg every 6 hours, or an infusion. No fludrocortisone while he's on 50 mg a day or more.",
           "mark": "Continues stress-dose hydrocortisone"
         },
         {
-          "t": "Treat the gastroenteritis; monitor sodium, potassium and glucose",
+          "t": "More saline guided by his response; treat the gastroenteritis; recheck sodium, potassium and glucose.",
           "mark": "Treats the trigger and monitors electrolytes"
         },
         {
-          "t": "Before discharge: sick-day rules, injection kit and training, endocrinology follow-up",
-          "mark": "Sick-day rules and emergency kit education"
+          "t": "Admit him under the medical team with endocrinology input.",
+          "mark": "Admits with endocrinology input"
+        }
+      ],
+      "lang": "en"
+    },
+    {
+      "id": "explain",
+      "kind": "say",
+      "to": "patient",
+      "label": "Talk to Mr Lo",
+      "hint": "What happened, and the sick-day rules.",
+      "opts": [
+        {
+          "t": "Your body couldn't make enough steroid while you were sick and couldn't keep your tablets down. We've given it by injection. When you're ill with a fever, double your hydrocortisone; if you're vomiting, use your injection and come straight in. We'll give you an emergency card and a kit.",
+          "tz": "你病咗又食唔落藥，身體唔夠類固醇，所以我哋打咗針俾你。以後發燒病咗，類固醇要食雙倍；如果嘔到食唔落，就要自己打針然後即刻返嚟急症室。我哋會俾張緊急卡同一套針藥你。",
+          "r": "I didn't know I had to double it. Thank you.",
+          "rz": "我唔知原來要食雙倍。多謝醫生。",
+          "mark": "Sick-day rules, emergency card and injection kit"
         }
       ]
     },
@@ -385,6 +377,60 @@
       ],
       "why": "Guided by response.",
       "source": "NICE NG243"
+    }
+  ],
+  "keywords": [
+    "Addison's",
+    "steroid emergency card",
+    "hyperpigmentation",
+    "hyponatraemia",
+    "hyperkalaemia",
+    "hypoglycaemia",
+    "adrenal crisis",
+    "don't wait",
+    "hydrocortisone 100 mg",
+    "0.9% saline 1 L",
+    "10% glucose",
+    "200 mg over 24 hours",
+    "fludrocortisone",
+    "trigger",
+    "sick-day rules",
+    "double",
+    "injection"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello Mr Lo, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2, and two IV cannulae."
+    },
+    {
+      "at": "0:10",
+      "say": "Pigmented palmar creases and buccal mucosa: hyperpigmentation; dry mouth. His steroid emergency card: Addison's, on hydrocortisone and fludrocortisone."
+    },
+    {
+      "at": "0:25",
+      "say": "Venous gas and glucose, and a 12-lead ECG.",
+      "do": "Na 124, K 5.9, glucose 3.1; slightly peaked T waves."
+    },
+    {
+      "at": "0:35",
+      "say": "Hyponatraemia, hyperkalaemia, hypoglycaemia and shock in a man with Addison's: this is an adrenal crisis. We don't wait for results."
+    },
+    {
+      "at": "0:45",
+      "say": "Random cortisol and ACTH with the cannula, only if it doesn't delay the hydrocortisone. FBC, CRP, cultures and a stool sample for the trigger."
+    },
+    {
+      "at": "0:55",
+      "say": "Hydrocortisone 100 mg IV now. 0.9% saline 1 L over 1 hour. 10% glucose, 150 to 200 mL, for the low sugar."
+    },
+    {
+      "at": "1:20",
+      "say": "Hydrocortisone 200 mg over 24 hours: 50 mg every 6 hours, or an infusion. No fludrocortisone while he's on 50 mg a day or more. More saline guided by his response; treat the gastroenteritis; recheck sodium, potassium and glucose. Admit him under the medical team with endocrinology input."
+    },
+    {
+      "at": "1:50",
+      "say": "Your body couldn't make enough steroid while you were sick and couldn't keep your tablets down. We've given it by injection. When you're ill with a fever, double your hydrocortisone; if you're vomiting, use your injection and come straight in. These are the sick-day rules. We'll give you an emergency card and a kit."
     }
   ]
 }
