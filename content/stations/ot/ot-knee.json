@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Ottawa knee rule (Stiell 1996), BOA/BASK guidance on acute knee injury, and standard examination technique.\n\nStructure: look (gait, alignment, swelling, effusion, quadriceps wasting, scars), feel (temperature, effusion tests — patellar tap for large effusions, sweep/bulge test for small; joint line tenderness; collateral ligaments; patella), move (active and passive flexion and extension, straight-leg raise to test the extensor mechanism), special tests (Lachman — most sensitive for ACL; anterior drawer; posterior sag and drawer for PCL; valgus and varus stress at 0° and 30° for MCL and LCL; McMurray/Thessaly for menisci with caution in acute pain), and neurovascular status. Examine the hip and the other knee.\n\nAn acute haemarthrosis within hours after a twisting injury with a pop: ACL rupture (about 70%), patellar dislocation, osteochondral fracture. Ottawa knee rule for X-ray: age 55 or over, isolated patellar tenderness, fibular head tenderness, cannot flex to 90°, or cannot weight bear 4 steps immediately and in the ED. Management: RICE, analgesia, crutches, brace if needed, early physiotherapy, fracture clinic/knee clinic, MRI. A locked knee (meniscal bucket-handle) needs urgent orthopaedic review.\n\nYour notes list the knee exam headings (look, feel, move, special tests) without detail; nothing conflicts.",
+  "notes": "Checked against the Ottawa knee rule (Stiell 1996), BOA/BASK guidance on acute knee injury, and standard examination technique.\n\nStructure: look (gait, alignment, swelling, effusion, quadriceps wasting, scars), feel (temperature, effusion tests — patellar tap for large effusions, sweep/bulge test for small; joint line tenderness; collateral ligaments; patella), move (active and passive flexion and extension, straight-leg raise to test the extensor mechanism), special tests (Lachman — most sensitive for ACL; anterior drawer; posterior sag and drawer for PCL; valgus and varus stress at 0° and 30° for MCL and LCL; McMurray/Thessaly for menisci with caution in acute pain), and neurovascular status. Examine the hip and the other knee.\n\nAn acute haemarthrosis within hours after a twisting injury with a pop: ACL rupture (about 70%), patellar dislocation, osteochondral fracture. Ottawa knee rule for X-ray: age 55 or over, isolated patellar tenderness, fibular head tenderness, cannot flex to 90°, or cannot weight bear 4 steps immediately and in the ED. Management: RICE, analgesia, crutches, brace if needed, early physiotherapy, fracture clinic/knee clinic, MRI. A locked knee (meniscal bucket-handle) needs urgent orthopaedic review.\n\nYour notes list the knee exam headings (look, feel, move, special tests) without detail; nothing conflicts.\n\nPerfect script checked against standard knee examination and the Ottawa knee rule, an HKCEM-style scheme and a keyword scheme. Removed the forceful McMurray and aspirate-every-haemarthrosis options.",
   "cast": [
     {
       "id": "patient",
@@ -52,11 +52,11 @@
       "hint": "WIPER: wash hands, introduce, permission, expose both legs, reposition; offer analgesia.",
       "opts": [
         {
-          "t": "Wash hands; introduce myself; explain and get permission; ask about pain and offer analgesia",
+          "t": "Hello, I'm the emergency doctor. I've washed my hands. May I examine your knee? Are you in pain? I can give you something for it.",
           "mark": "Hand hygiene, introduction, consent, analgesia"
         },
         {
-          "t": "Expose both legs from the thighs down, lying on the couch",
+          "t": "I need to see both legs from the thighs down, lying on the couch.",
           "mark": "Adequate exposure of both legs"
         }
       ]
@@ -70,13 +70,13 @@
       "groups": {
         "Look": [
           {
-            "t": "Gait (if able) and standing alignment",
+            "t": "Walk a few steps if you can; then stand",
             "r": "Antalgic gait; can take 4 steps with difficulty.",
             "mark": "Observes gait and weight-bearing",
             "do": "say walk,stand"
           },
           {
-            "t": "Swelling, bruising, wasting, scars",
+            "t": "Look for swelling, bruising, wasting and scars",
             "r": "Tense swelling of the right knee, no bruising, no scars.",
             "mark": "Inspects for swelling and deformity",
             "do": "look knee-R"
@@ -84,13 +84,13 @@
         ],
         "Feel": [
           {
-            "t": "Temperature and effusion (patellar tap)",
+            "t": "Feel the temperature; patellar tap for an effusion",
             "r": "Warm; large effusion with a positive patellar tap.",
             "mark": "Assesses temperature and effusion",
             "do": "feel knee-R & press knee-R"
           },
           {
-            "t": "Joint lines, collateral ligaments, patella, tibial tuberosity, fibular head",
+            "t": "Feel the joint lines, collaterals, patella, tibial tuberosity and fibular head",
             "r": "Mild lateral joint line tenderness. No bony tenderness at the patella or fibular head.",
             "mark": "Palpates joint lines and bony landmarks (Ottawa)",
             "do": "feel medialjoint-R & feel lateraljoint-R & feel tibialtub-R,fibula-R"
@@ -98,7 +98,7 @@
         ],
         "Move": [
           {
-            "t": "Active flexion and extension; straight-leg raise",
+            "t": "Bend and straighten your knee; now lift your straight leg",
             "r": "Flexes to 80° (limited by swelling). Straight-leg raise intact — extensor mechanism intact.",
             "mark": "Assesses movement and the extensor mechanism",
             "do": "say bend-knee-R & say lift-leg-R"
@@ -106,8 +106,8 @@
         ],
         "Special tests": [
           {
-            "t": "Lachman test (knee at 20–30°)",
-            "r": "Increased anterior translation with a soft end-point compared with the left.",
+            "t": "Lachman test, knee at 20 to 30 degrees",
+            "r": "Increased anterior translation with a soft end-point compared with the left. \"A positive Lachman: ACL.\"",
             "mark": "Performs Lachman: positive (ACL)",
             "do": "feel shin-R,tibialtub-R @knee-R=15..35"
           },
@@ -118,21 +118,15 @@
             "do": "press tibialtub-R,shin-R,knee-R @knee-R=70..110 | look knee-R @knee-R=70..110"
           },
           {
-            "t": "Valgus and varus stress at 0° and 30°",
+            "t": "Valgus and varus stress at 0 and 30 degrees",
             "r": "Stable.",
             "mark": "Tests collateral ligaments",
             "do": "press medialjoint-R,lateraljoint-R,knee-R @knee-R=0..10 & press medialjoint-R,lateraljoint-R,knee-R @knee-R=20..40"
-          },
-          {
-            "t": "McMurray test forcefully despite pain",
-            "trap": true,
-            "r": "Painful and unreliable acutely; can worsen a meniscal tear. Leave it or be gentle.",
-            "do": "move hip-R:rot @knee-R=90..140"
           }
         ],
         "Complete": [
           {
-            "t": "Distal pulses and sensation; examine the hip and the other knee",
+            "t": "To complete: distal pulses and sensation, the hip, and the other knee",
             "r": "Pulses and sensation normal; hip normal.",
             "mark": "Neurovascular check and joint above",
             "do": "feel dp-R,pt-R | feel hip-R,groin-R | look knee-L"
@@ -149,21 +143,16 @@
       "hint": "Haemarthrosis with a positive Lachman: likely ACL rupture. Ottawa rule for X-ray. Plan.",
       "opts": [
         {
-          "t": "Acute haemarthrosis with a positive Lachman: likely ACL rupture; consider meniscal injury",
+          "t": "An acute haemarthrosis with a positive Lachman: likely an ACL rupture; consider a meniscal injury.",
           "mark": "Gives the likely diagnosis"
         },
         {
-          "t": "Ottawa knee rule: cannot flex to 90° → knee X-ray to exclude fracture (e.g. Segond fracture)",
+          "t": "Ottawa knee rule: he can't flex to 90 degrees, so a knee X-ray to exclude a fracture, such as a Segond fracture.",
           "mark": "Applies the Ottawa knee rule"
         },
         {
-          "t": "Analgesia, ice, crutches, early physiotherapy, knee clinic and MRI",
+          "t": "Analgesia, ice, crutches, early physiotherapy, knee clinic and an MRI.",
           "mark": "Appropriate management and follow-up"
-        },
-        {
-          "t": "Aspirate every haemarthrosis in the ED",
-          "trap": true,
-          "r": "Not routine; aspirate only if very tense or to exclude sepsis."
         }
       ]
     },
@@ -293,5 +282,48 @@
       "why": "The patellar tap detects larger effusions.",
       "source": "Clinical examination"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello, I'm the emergency doctor. I've washed my hands. May I examine your knee? Are you in pain? I can give you something for it. I need to see both legs from the thighs down, lying on the couch."
+    },
+    {
+      "at": "0:20",
+      "say": "Walk a few steps if you can; then stand. Look for swelling, bruising, wasting and scars. Feel the temperature; patellar tap for an effusion.",
+      "do": "Antalgic gait; can take 4 steps with difficulty. Tense swelling of the right knee, no bruising, no scars. Warm; large effusion with a positive patellar tap."
+    },
+    {
+      "at": "0:40",
+      "say": "Feel the joint lines, collaterals, patella, tibial tuberosity and fibular head. Bend and straighten your knee; now lift your straight leg. Lachman test, knee at 20 to 30 degrees. A positive Lachman: ACL.",
+      "do": "Mild lateral joint line tenderness. No bony tenderness at the patella or fibular head. Flexes to 80° (limited by swelling). Straight-leg raise intact — extensor mechanism intact. Increased anterior translation with a soft end-point compared with the left. \"A positive Lachman: ACL.\""
+    },
+    {
+      "at": "1:00",
+      "say": "Posterior sag and posterior drawer. Valgus and varus stress at 0 and 30 degrees. To complete: distal pulses and sensation, the hip, and the other knee.",
+      "do": "No sag, firm end-point. Stable. Pulses and sensation normal; hip normal."
+    },
+    {
+      "at": "1:20",
+      "say": "An acute haemarthrosis with a positive Lachman: likely an ACL rupture; consider a meniscal injury. Ottawa knee rule: he can't flex to 90 degrees, so a knee X-ray to exclude a fracture, such as a Segond fracture. Analgesia, ice, crutches, early physiotherapy, knee clinic and an MRI."
+    }
+  ],
+  "keywords": [
+    "washed my hands",
+    "both legs",
+    "patellar tap",
+    "joint lines",
+    "straight leg",
+    "Lachman",
+    "posterior drawer",
+    "valgus",
+    "pulses",
+    "haemarthrosis",
+    "ACL rupture",
+    "Ottawa knee rule",
+    "Segond",
+    "crutches",
+    "physiotherapy",
+    "MRI"
   ]
 }

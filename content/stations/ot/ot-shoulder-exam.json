@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against BESS/BOA guidance on subacromial shoulder pain (2021) and standard examination technique.\n\nLook (front, side, back: asymmetry, wasting of supraspinatus/infraspinatus, winging, swelling), feel (SC joint, clavicle, AC joint, coracoid, acromion, greater tuberosity, bicipital groove, spine of scapula), move (active then passive: flexion, extension, abduction with painful arc 60–120° in subacromial pain; external rotation — loss of passive external rotation suggests frozen shoulder or OA; internal rotation), special tests: supraspinatus (empty can/Jobe), infraspinatus/teres minor (resisted external rotation), subscapularis (lift-off, belly press), impingement (Neer, Hawkins–Kennedy), biceps (Speed's), AC joint (scarf test), instability (apprehension/relocation, sulcus). Examine the neck and neurovascular status (axillary nerve).\n\nSubacromial pain is managed with analgesia, activity modification and physiotherapy; injections for persisting symptoms; imaging if trauma, weakness (cuff tear) or no improvement. An acute traumatic cuff tear with weakness needs early (within weeks) orthopaedic referral. Your shoulder notes are thorough and match this.",
+  "notes": "Checked against BESS/BOA guidance on subacromial shoulder pain (2021) and standard examination technique.\n\nLook (front, side, back: asymmetry, wasting of supraspinatus/infraspinatus, winging, swelling), feel (SC joint, clavicle, AC joint, coracoid, acromion, greater tuberosity, bicipital groove, spine of scapula), move (active then passive: flexion, extension, abduction with painful arc 60–120° in subacromial pain; external rotation — loss of passive external rotation suggests frozen shoulder or OA; internal rotation), special tests: supraspinatus (empty can/Jobe), infraspinatus/teres minor (resisted external rotation), subscapularis (lift-off, belly press), impingement (Neer, Hawkins–Kennedy), biceps (Speed's), AC joint (scarf test), instability (apprehension/relocation, sulcus). Examine the neck and neurovascular status (axillary nerve).\n\nSubacromial pain is managed with analgesia, activity modification and physiotherapy; injections for persisting symptoms; imaging if trauma, weakness (cuff tear) or no improvement. An acute traumatic cuff tear with weakness needs early (within weeks) orthopaedic referral. Your shoulder notes are thorough and match this.\n\nPerfect script checked against standard shoulder examination and BESS guidance, an HKCEM-style scheme and a keyword scheme. Removed the MRI-tonight option.",
   "cast": [
     {
       "id": "patient",
@@ -44,7 +44,7 @@
       "groups": {
         "Start": [
           {
-            "t": "Introduce, consent, offer analgesia, expose both shoulders",
+            "t": "Hello, I'm the emergency doctor. May I examine your shoulder? Any pain now? Could you undress to show both shoulders?",
             "r": "Ready, sitting upright, both shoulders exposed.",
             "mark": "Introduces, consents and exposes both shoulders",
             "do": "say consent & say expose"
@@ -52,7 +52,7 @@
         ],
         "Look": [
           {
-            "t": "Inspect front, side and back; wall push for winging",
+            "t": "Look from the front, side and back; push against the wall for winging",
             "r": "Symmetrical, no wasting, no winging.",
             "mark": "Inspects from all sides including winging",
             "do": "look shoulder-R,shoulder-L & look back,thoracic | look shoulder-R & say wall-push"
@@ -60,7 +60,7 @@
         ],
         "Feel": [
           {
-            "t": "SC joint, clavicle, AC joint, acromion, greater tuberosity, bicipital groove",
+            "t": "Feel the SC joint, clavicle, AC joint, acromion, greater tuberosity and bicipital groove",
             "r": "Tender just below the anterolateral acromion. AC joint not tender.",
             "mark": "Palpates bony landmarks systematically",
             "do": "feel tuberosity-R & feel acjoint-R & feel scjoint-R,clavicle-R,acromion-R,bicipital-R"
@@ -68,13 +68,13 @@
         ],
         "Move": [
           {
-            "t": "Active abduction",
+            "t": "Lift your arm out to the side",
             "r": "Pain between 70° and 120° of abduction, eases above that.",
             "mark": "Identifies a painful arc",
             "do": "say raise-arm-R"
           },
           {
-            "t": "Passive external rotation",
+            "t": "I'll turn your arm outwards: passive external rotation",
             "r": "Full and painless — not frozen shoulder.",
             "mark": "Checks passive external rotation",
             "do": "move shoulder-R:rot @elbow-R=60..120"
@@ -82,7 +82,7 @@
         ],
         "Special tests": [
           {
-            "t": "Empty can (Jobe) test",
+            "t": "Empty can test",
             "r": "Painful but strength preserved.",
             "mark": "Tests supraspinatus",
             "do": "say empty-can-R"
@@ -108,7 +108,7 @@
         ],
         "Complete": [
           {
-            "t": "Neck movements; sensation over the badge area; pulses",
+            "t": "To complete: neck movements, sensation over the regimental badge area, and pulses",
             "r": "Neck normal; sensation normal.",
             "mark": "Examines the neck and neurovascular status",
             "do": "move neck & cotton badge-R | move neck & pin badge-R"
@@ -125,17 +125,12 @@
       "hint": "Subacromial pain (impingement/cuff tendinopathy), cuff strength intact; conservative plan.",
       "opts": [
         {
-          "t": "Subacromial pain / rotator cuff tendinopathy: painful arc, positive Neer and Hawkins, strength intact",
+          "t": "Subacromial pain, rotator cuff tendinopathy: a painful arc, positive Neer and Hawkins tests, and cuff strength intact.",
           "mark": "Gives the diagnosis supported by findings"
         },
         {
-          "t": "X-ray not needed without trauma or red flags; analgesia, relative rest from overhead activity, physiotherapy; review if not improving",
+          "t": "No X-ray without trauma or red flags. Analgesia, relative rest from overhead activity and physiotherapy; review if she isn't improving.",
           "mark": "Conservative management and follow-up"
-        },
-        {
-          "t": "Urgent MRI and orthopaedic surgery tonight",
-          "trap": true,
-          "r": "Strength is intact; conservative management first."
         }
       ]
     },
@@ -265,5 +260,47 @@
       "why": "Resisted forward flexion with a supinated arm.",
       "source": "Clinical examination"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello, I'm the emergency doctor. May I examine your shoulder? Any pain now? Could you undress to show both shoulders? Look from the front, side and back; push against the wall for winging. Feel the SC joint, clavicle, AC joint, acromion, greater tuberosity and bicipital groove.",
+      "do": "Ready, sitting upright, both shoulders exposed. Symmetrical, no wasting, no winging. Tender just below the anterolateral acromion. AC joint not tender."
+    },
+    {
+      "at": "0:20",
+      "say": "Lift your arm out to the side. I'll turn your arm outwards: passive external rotation. Empty can test.",
+      "do": "Pain between 70° and 120° of abduction, eases above that. Full and painless — not frozen shoulder. Painful but strength preserved."
+    },
+    {
+      "at": "0:40",
+      "say": "Resisted external rotation; lift-off test. Neer and Hawkins–Kennedy tests. Apprehension test.",
+      "do": "Strong and painless. Both reproduce her pain. No apprehension."
+    },
+    {
+      "at": "1:00",
+      "say": "To complete: neck movements, sensation over the regimental badge area, and pulses.",
+      "do": "Neck normal; sensation normal."
+    },
+    {
+      "at": "1:20",
+      "say": "Subacromial pain, rotator cuff tendinopathy: a painful arc, positive Neer and Hawkins tests, and cuff strength intact. No X-ray without trauma or red flags. Analgesia, relative rest from overhead activity and physiotherapy; review if she isn't improving."
+    }
+  ],
+  "keywords": [
+    "both shoulders",
+    "winging",
+    "AC joint",
+    "painful arc",
+    "passive external rotation",
+    "empty can",
+    "lift-off",
+    "Neer",
+    "Hawkins",
+    "apprehension",
+    "badge",
+    "subacromial",
+    "rotator cuff",
+    "physiotherapy"
   ]
 }

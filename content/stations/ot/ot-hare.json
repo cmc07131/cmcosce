@@ -24,7 +24,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against manufacturer guidance for the Hare traction splint, JRCALC, and BOAST guidance on femoral shaft fractures.\n\nIndication: isolated closed mid-shaft femoral fracture — traction reduces pain, muscle spasm and bleeding, and improves alignment. Contraindications: pelvic fracture, hip injury, knee injury or proximal tibial fracture, ankle or foot injury on the same leg, partial amputation, and (relative) open fracture with exposed bone ends. Give analgesia first (IV opioid and/or a femoral nerve or fascia iliaca block). Check pulses, motor and sensory function before and after.\n\nSteps: measure against the uninjured leg (ischial tuberosity to about 20 cm beyond the heel); open and position the support straps; apply the ankle hitch; take manual traction; slide the splint under the leg with the ring against the ischial tuberosity; secure the ischial strap; attach the hitch to the traction hook; wind the ratchet to mechanical traction (about 10% of body weight, up to 7 kg / 15 lb, or until pain eases and the leg length is similar); release manual traction; fasten the leg straps (avoiding the knee and fracture); raise the stand; re-check neurovascular status.\n\nYour notes match this, including the 10% body weight up to 7 kg guide.",
+  "notes": "Checked against manufacturer guidance for the Hare traction splint, JRCALC, and BOAST guidance on femoral shaft fractures.\n\nIndication: isolated closed mid-shaft femoral fracture — traction reduces pain, muscle spasm and bleeding, and improves alignment. Contraindications: pelvic fracture, hip injury, knee injury or proximal tibial fracture, ankle or foot injury on the same leg, partial amputation, and (relative) open fracture with exposed bone ends. Give analgesia first (IV opioid and/or a femoral nerve or fascia iliaca block). Check pulses, motor and sensory function before and after.\n\nSteps: measure against the uninjured leg (ischial tuberosity to about 20 cm beyond the heel); open and position the support straps; apply the ankle hitch; take manual traction; slide the splint under the leg with the ring against the ischial tuberosity; secure the ischial strap; attach the hitch to the traction hook; wind the ratchet to mechanical traction (about 10% of body weight, up to 7 kg / 15 lb, or until pain eases and the leg length is similar); release manual traction; fasten the leg straps (avoiding the knee and fracture); raise the stand; re-check neurovascular status.\n\nYour notes match this, including the 10% body weight up to 7 kg guide.\n\nPerfect script checked against the Hare manufacturer's guidance and PHTLS, an HKCEM-style scheme and a keyword scheme. The flow you reviewed is kept; wrong options removed and one analgesic scored, so the guide asks for one.",
   "cast": [
     {
       "id": "patient",
@@ -76,12 +76,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "consent",
@@ -96,12 +97,6 @@
           "r": "Mr Lo: \"Yes… anything to stop this pain.\"",
           "rz": "好……只要唔痛，點都得。",
           "mark": "Explains and consents"
-        },
-        {
-          "t": "Hold still, we're going to straighten your leg now.",
-          "tz": "唔好郁，我哋而家幫你拉直條腳。",
-          "trap": true,
-          "r": "Mr Lo: \"Wait, what are you doing?!\" No explanation and no consent."
         }
       ]
     },
@@ -122,44 +117,12 @@
           "mark": "Gives analgesia first"
         },
         {
-          "t": "Fentanyl 10 microgram/kg (650 microgram) IV",
-          "drug": "Fentanyl",
-          "dose": "10 microgram/kg (650 microgram) IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Ten times too much: apnoea. 1 microgram/kg, titrated to effect."
-        },
-        {
-          "t": "Morphine 0.1 mg/kg (6.5 mg) IV, titrated",
-          "drug": "Morphine",
-          "dose": "0.1 mg/kg (6.5 mg) IV, titrated",
-          "fetch": "cart",
-          "scene": "analgesia",
-          "mark": "Gives analgesia first"
-        },
-        {
-          "t": "Morphine 1 mg/kg (65 mg) IV",
-          "drug": "Morphine",
-          "dose": "1 mg/kg (65 mg) IV",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Ten times too much: 0.1 mg/kg IV, titrated in small doses."
-        },
-        {
           "t": "Levobupivacaine 0.25% 30 mL (75 mg) for an ultrasound-guided fascia iliaca block",
           "drug": "Levobupivacaine 0.25%",
           "dose": "30 mL (75 mg) for an ultrasound-guided fascia iliaca block",
           "fetch": "cart",
           "scene": "block",
           "r": "Good, but it takes 15–20 minutes to work: give an IV opioid now as well."
-        },
-        {
-          "t": "Levobupivacaine 0.5% 40 mL (200 mg) for a fascia iliaca block",
-          "drug": "Levobupivacaine 0.5%",
-          "dose": "40 mL (200 mg) for a fascia iliaca block",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "200 mg is about 3 mg/kg: over the 2 mg/kg maximum. Use 0.25% for volume."
         }
       ]
     },
@@ -175,7 +138,7 @@
           "t": "Apply the Hare traction splint",
           "perform": "hare",
           "scene": "splinted",
-          "performHint": "Do every step with your hands. Mr Lo, his leg and his foot react to what you do; nothing stops a mistake.",
+          "performHint": "Do every step with your hands. Mr Lo, his leg and his foot respond to what you do.",
           "mark": [
             "Neurovascular check before",
             "Excludes contraindications",
@@ -330,5 +293,39 @@
       "why": "Foot drop.",
       "source": "Anatomy"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2."
+    },
+    {
+      "at": "0:20",
+      "say": "Mr Lo, your thigh bone is broken. I'll give you strong painkiller first, then put on a splint that gently pulls the leg straight. That eases the pain and the bleeding. Is that OK?",
+      "do": "Mr Lo: \"Yes… anything to stop this pain.\""
+    },
+    {
+      "at": "0:40",
+      "say": "Fentanyl 1 microgram/kg (65 microgram) IV, titrated. Levobupivacaine 0.25% 30 mL (75 mg) for an ultrasound-guided fascia iliaca block.",
+      "do": "Good, but it takes 15–20 minutes to work: give an IV opioid now as well."
+    },
+    {
+      "at": "1:00",
+      "say": "Check the foot first: pulses, sensation and movement. No pelvic, hip, knee or ankle injury on this side. Measure on the good leg, ischial tuberosity to 20 cm beyond the heel. Straps opened and placed. Ankle hitch on. Nurse Tung holds manual traction; the splint slides under, the ring against the ischial tuberosity; ischial strap done. Hitch to the hook, wind to about 10% of body weight, 6 to 7 kg, until the pain eases. Leg straps, avoiding the knee and the fracture. Stand up. Then the foot again: pulses, sensation and movement."
+    }
+  ],
+  "keywords": [
+    "monitoring",
+    "thigh bone is broken",
+    "painkiller",
+    "fentanyl",
+    "pulses",
+    "measure",
+    "ankle hitch",
+    "manual traction",
+    "ischial tuberosity",
+    "10% of body weight",
+    "straps",
+    "the foot again"
   ]
 }

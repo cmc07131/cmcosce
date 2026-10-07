@@ -37,7 +37,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against RCEM/RCoA 'Safe sedation of adults in the ED' (2012, RCEM 2019 update), and evidence on reduction techniques (Cunningham, external rotation, FARES, Spaso, Milch, Kocher).\n\nSafety: resus bay, two clinicians (a sedationist separate from the person reducing), monitoring (SpO2, ECG, NIBP, capnography), oxygen, suction, airway kit, reversal agents. Neurovascular check before (axillary nerve badge sensation and deltoid; radial, median, ulnar motor; radial pulse) and after. Sedation: titrate, e.g. midazolam 0.02–0.1 mg/kg with fentanyl 0.5–1 microgram/kg, or propofol, or ketamine 1–2 mg/kg; aim for deep enough relaxation (your notes use the modified Ramsay score 4–5). Many dislocations reduce without sedation (Cunningham, external rotation), which avoids sedation risk.\n\nKocher's method carries a higher risk of fracture and nerve injury (your notes say so). After reduction: X-ray, sling, recovery observation until the discharge criteria are met, written advice. Your notes on doses, techniques and signs of reduction match this.",
+  "notes": "Checked against RCEM/RCoA 'Safe sedation of adults in the ED' (2012, RCEM 2019 update), and evidence on reduction techniques (Cunningham, external rotation, FARES, Spaso, Milch, Kocher).\n\nSafety: resus bay, two clinicians (a sedationist separate from the person reducing), monitoring (SpO2, ECG, NIBP, capnography), oxygen, suction, airway kit, reversal agents. Neurovascular check before (axillary nerve badge sensation and deltoid; radial, median, ulnar motor; radial pulse) and after. Sedation: titrate, e.g. midazolam 0.02–0.1 mg/kg with fentanyl 0.5–1 microgram/kg, or propofol, or ketamine 1–2 mg/kg; aim for deep enough relaxation (your notes use the modified Ramsay score 4–5). Many dislocations reduce without sedation (Cunningham, external rotation), which avoids sedation risk.\n\nKocher's method carries a higher risk of fracture and nerve injury (your notes say so). After reduction: X-ray, sling, recovery observation until the discharge criteria are met, written advice. Your notes on doses, techniques and signs of reduction match this.\n\nPerfect script checked against the RCEM/ICM procedural sedation guidance, an HKCEM-style scheme and a keyword scheme. Removed the tenfold doses; the benches narrated.",
   "cast": [
     {
       "id": "patient",
@@ -136,7 +136,7 @@
           "fetch": "cart",
           "need": true,
           "mark": "Reversal agents available",
-          "t": "Naloxone and flumazenil naloxone 400 microgram and flumazenil 200 microgram, drawn up and labelled",
+          "t": "Naloxone 400 micrograms and flumazenil 200 micrograms, drawn up and labelled",
           "drug": "Naloxone and flumazenil",
           "dose": "naloxone 400 microgram and flumazenil 200 microgram, drawn up and labelled"
         }
@@ -179,28 +179,12 @@
           "mark": "Titrated sedation and analgesia"
         },
         {
-          "t": "Fentanyl 10 microgram/kg IV",
-          "drug": "Fentanyl",
-          "dose": "10 microgram/kg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Ten times too much: 1 microgram/kg, then titrate the sedative."
-        },
-        {
           "t": "Midazolam 1–2 mg IV, titrated in small doses",
           "drug": "Midazolam",
           "dose": "1–2 mg IV, titrated in small doses",
           "fetch": "cart",
           "scene": "sedated",
           "mark": "Titrates midazolam in small doses"
-        },
-        {
-          "t": "Midazolam 10 mg IV bolus",
-          "drug": "Midazolam",
-          "dose": "10 mg IV bolus",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Too much at once, especially with fentanyl: 1–2 mg doses to effect."
         }
       ]
     },
@@ -366,5 +350,48 @@
       "why": "Target for reduction per your notes.",
       "source": "Ramsay scale"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "SpO2, ECG, NIBP and capnography on. Oxygen, suction, bag-valve-mask and airway adjuncts at the bedside. IV cannula in the other arm."
+    },
+    {
+      "at": "0:20",
+      "say": "Dr Kwan runs the sedation; I do the reduction."
+    },
+    {
+      "at": "0:40",
+      "say": "Naloxone and flumazenil naloxone 400 microgram and flumazenil 200 microgram, drawn up and labelled."
+    },
+    {
+      "at": "1:00",
+      "say": "Before anyone touches the shoulder: sensation over the badge area for the axillary nerve; wrist and finger extension, thumb opposition, finger spread; the radial pulse."
+    },
+    {
+      "at": "1:20",
+      "say": "Fentanyl 1 microgram/kg (70 microgram) IV. Midazolam 1–2 mg IV, titrated in small doses."
+    },
+    {
+      "at": "1:40",
+      "say": "Is he sedated enough? Dr Kwan on the airway. Slow external rotation with the elbow at his side, holding the rotation, then gentle abduction: a clunk, and the shoulder contour returns. Then the nerves again, a sling, a check X-ray, and recovery observation."
+    }
+  ],
+  "keywords": [
+    "capnography",
+    "airway",
+    "IV cannula",
+    "sedation",
+    "naloxone",
+    "flumazenil",
+    "badge",
+    "axillary nerve",
+    "radial pulse",
+    "fentanyl",
+    "midazolam",
+    "external rotation",
+    "sling",
+    "X-ray",
+    "recovery"
   ]
 }
