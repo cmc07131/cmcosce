@@ -8,37 +8,49 @@
   "phases": [
     {
       "title": "Prepare",
-      "goal": "The resuscitaire: warmth, a clock, the right pressures and gas, suction, a saturation probe.",
+      "goal": "Warmth, a clock, the bag in air, airways, a pre-ductal probe.",
       "steps": [
         "prep"
       ]
     },
     {
       "title": "Resuscitate",
-      "goal": "Dry and assess, open the airway, inflation breaths, and fix the airway if the chest does not move.",
+      "goal": "Dry and assess, open the airway, inflation breaths, fix the airway if the chest does not move, ventilate.",
       "steps": [
         "resus"
       ]
     },
     {
-      "title": "Brief the team",
-      "goal": "What if the heart rate stays low?",
+      "title": "After",
+      "goal": "SpO2 targets, warmth and glucose, handover.",
       "steps": [
-        "team"
+        "after"
+      ]
+    },
+    {
+      "title": "Brief and tell",
+      "goal": "What if the heart rate had stayed low? Then her mother.",
+      "steps": [
+        "team",
+        "explain"
       ]
     }
   ],
   "review": [
     {
       "tag": "differs",
-      "text": "Adrenaline dose and interval. Your notes follow AHA (0.01 mg/kg IV). RCUK 2025 gives 20 microgram/kg IV, repeated every 4 minutes."
+      "text": "Ventilation rate. AHA/NRP (Hong Kong neonatal courses) and your notes: 40–60 breaths a minute; RCUK: 5 inflation breaths, then 30 a minute. The bench teaches the inflation breaths and accepts 30–60 a minute."
+    },
+    {
+      "tag": "differs",
+      "text": "Adrenaline. AHA: 0.01–0.03 mg/kg IV every 3–5 minutes; RCUK 2025: 20 microgram/kg every 4 minutes. The script says 20 micrograms per kg (0.02 mg/kg) every 3 to 5 minutes, inside both."
     },
     {
       "tag": "outdated",
-      "text": "Sodium bicarbonate is no longer recommended in newborn resuscitation (RCUK/ERC 2025), and skin colour (as in the APGAR) carries less weight in the initial assessment."
+      "text": "Sodium bicarbonate is no longer recommended in newborn resuscitation, and skin colour carries less weight in the first assessment."
     }
   ],
-  "notes": "Checked against Resuscitation Council UK Newborn Life Support 2025 (ERC 2025 NLS) and ILCOR 2025.\n\nSequence: start a clock; dry and wrap (plastic bag without drying if under 32 weeks), keep warm; assess tone, breathing and heart rate (2025 puts less weight on skin colour); open the airway in a neutral position. If not breathing: 5 inflation breaths (2–3 seconds each; 30 cmH2O term, 25 cmH2O preterm) in air for 32 weeks and over; reassess heart rate. If no chest movement: airway manoeuvres (two-person jaw thrust, suction under direct vision, supraglottic airway or intubation — 2025 encourages earlier supraglottic airway and videolaryngoscopy), repeat inflation breaths. Once the chest moves, ventilation breaths 30/min for 30 seconds. If the heart rate stays under 60 after 30 seconds of effective ventilation: chest compressions 3:1 (90 compressions and 30 breaths per minute) with 100% oxygen; reassess every 30 seconds. Drugs via umbilical venous catheter or IO: adrenaline 20 microgram/kg IV, repeated every 4 minutes (2025 standardised interval); consider 10 mL/kg volume and glucose. Sodium bicarbonate is no longer recommended (2025). Naloxone is not recommended.\n\nYour notes follow the AHA 2020 neonatal algorithm (MR SOPA, PPV 40–60/min, SpO2 targets, adrenaline 0.01 mg/kg IV) and the UK 5 inflation breaths; both are close to RCUK. Differences: RCUK adrenaline 20 microgram/kg IV every 4 minutes; APGAR colour de-emphasised; bicarbonate removed.",
+  "notes": "Checked against Resuscitation Council UK Newborn Life Support 2025 (ERC 2025 NLS) and ILCOR 2025.\n\nSequence: start a clock; dry and wrap (plastic bag without drying if under 32 weeks), keep warm; assess tone, breathing and heart rate (2025 puts less weight on skin colour); open the airway in a neutral position. If not breathing: 5 inflation breaths (2–3 seconds each; 30 cmH2O term, 25 cmH2O preterm) in air for 32 weeks and over; reassess heart rate. If no chest movement: airway manoeuvres (two-person jaw thrust, suction under direct vision, supraglottic airway or intubation — 2025 encourages earlier supraglottic airway and videolaryngoscopy), repeat inflation breaths. Once the chest moves, ventilation breaths 30/min for 30 seconds. If the heart rate stays under 60 after 30 seconds of effective ventilation: chest compressions 3:1 (90 compressions and 30 breaths per minute) with 100% oxygen; reassess every 30 seconds. Drugs via umbilical venous catheter or IO: adrenaline 20 microgram/kg IV, repeated every 4 minutes (2025 standardised interval); consider 10 mL/kg volume and glucose. Sodium bicarbonate is no longer recommended (2025). Naloxone is not recommended.\n\nYour notes follow the AHA 2020 neonatal algorithm (MR SOPA, PPV 40–60/min, SpO2 targets, adrenaline 0.01 mg/kg IV) and the UK 5 inflation breaths; both are close to RCUK. Differences: RCUK adrenaline 20 microgram/kg IV every 4 minutes; APGAR colour de-emphasised; bicarbonate removed.\n\nPerfect script checked against an AHA/NRP checklist, the RCUK NLS algorithm, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (100% oxygen first, bicarbonate) and the bench's two wrong-move buttons (hanging the baby, early compressions). Added: early help, MR SOPA named, SpO2 targets, warmth and glucose after, a handover, and an update to the mother. The bench accepts 30–60 ventilation breaths a minute (RCUK and AHA).",
   "cast": [
     {
       "id": "patient",
@@ -54,6 +66,11 @@
       "id": "junior",
       "name": "Dr So",
       "role": "junior"
+    },
+    {
+      "id": "mother",
+      "name": "Mother",
+      "role": "woman"
     }
   ],
   "vitals": {
@@ -88,7 +105,7 @@
       "kind": "pick",
       "to": "trolley",
       "label": "Resuscitaire",
-      "hint": "Warm, dry towels, hat, bag-valve-mask with correct mask, suction, SpO2 probe, clock.",
+      "hint": "Warmth, a clock, the bag set in air, suction and airways, a probe for the right wrist.",
       "confirm": "Check",
       "opts": [
         {
@@ -106,25 +123,20 @@
           "t": "Bag or T-piece set to 30/5 cmH2O, term-size mask, air (21%)",
           "fetch": "trolley",
           "need": true,
-          "mark": "Ventilation device with correct pressures and air"
+          "mark": "Ventilation device with correct pressures, in air"
         },
         {
-          "t": "Suction, supraglottic airway size 1, laryngoscope",
+          "t": "Suction, supraglottic airway size 1, laryngoscope and tubes",
           "fetch": "trolley",
           "need": true,
           "mark": "Airway adjuncts ready"
         },
         {
-          "t": "Pulse oximeter probe for the right wrist",
+          "t": "Pulse oximeter probe for the right wrist (pre-ductal)",
           "fetch": "trolley",
           "need": true,
-          "mark": "Pre-ductal oximetry",
-          "scene": "monitored"
-        },
-        {
-          "t": "100% oxygen for the first breaths",
-          "trap": true,
-          "r": "Start in air for 32 weeks and over; oxygen only if compressions are needed or saturations stay low."
+          "scene": "monitored",
+          "mark": "Pre-ductal oximetry"
         }
       ]
     },
@@ -139,7 +151,7 @@
         {
           "t": "Resuscitate",
           "perform": "newborn",
-          "performHint": "Do it with your hands. Ventilation is everything in a newborn.",
+          "performHint": "Do it with your hands. Dry, assess, airway, five inflation breaths, fix the airway if the chest does not move, then ventilate. Ventilation is everything in a newborn.",
           "mark": [
             "Dries, wraps and stimulates",
             "Assesses tone, breathing and heart rate",
@@ -154,6 +166,34 @@
       ]
     },
     {
+      "id": "after",
+      "kind": "say",
+      "to": "nurse",
+      "label": "After she breathes",
+      "lang": "en",
+      "hint": "SpO2 targets, temperature, glucose, handover.",
+      "opts": [
+        {
+          "t": "Heart rate over 100 and breathing: support her breathing as needed and keep the pre-ductal SpO2 on target: 60% at 1 minute rising to 85 to 95% by 10 minutes.",
+          "when": "breathing",
+          "early": "Once she is breathing.",
+          "mark": "Reassesses; titrates oxygen to pre-ductal SpO2 targets"
+        },
+        {
+          "t": "Keep her warm, 36.5 to 37.5 degrees, and check her glucose.",
+          "when": "breathing",
+          "early": "Once she is breathing.",
+          "mark": "Normothermia and glucose"
+        },
+        {
+          "t": "Handover to the paediatric team: term baby, born apnoeic and floppy with a heart rate of 55; five inflation breaths with a jaw thrust, then ventilation; heart rate now over 100 and breathing. For the neonatal unit.",
+          "when": "breathing",
+          "early": "Once she is breathing.",
+          "mark": "Structured handover; admits to the neonatal unit"
+        }
+      ]
+    },
+    {
       "id": "team",
       "kind": "say",
       "to": "junior",
@@ -161,17 +201,30 @@
       "hint": "What if the heart rate had stayed under 60?",
       "opts": [
         {
-          "t": "If HR stays under 60 after 30 seconds of good ventilation: compressions 3:1 with 100% oxygen, reassess every 30 s",
-          "mark": "Knows the compression ratio and trigger"
+          "t": "If the heart rate stays under 60 after 30 seconds of ventilation that moves the chest: secure the airway, then compressions 3:1, 90 compressions and 30 breaths a minute, in 100% oxygen; reassess every 30 seconds.",
+          "mark": "Knows the compression trigger, ratio and oxygen"
         },
         {
-          "t": "Then umbilical venous catheter: adrenaline 20 microgram/kg every 4 minutes; consider 10 mL/kg volume",
-          "mark": "Knows drug dose and route"
-        },
+          "t": "Then an umbilical venous catheter: adrenaline 20 micrograms per kg, that's 0.02 mg/kg, every 3 to 5 minutes; and 10 mL/kg of saline if there's been blood loss.",
+          "mark": "Knows drug dose, route and volume"
+        }
+      ]
+    },
+    {
+      "id": "explain",
+      "kind": "say",
+      "to": "mother",
+      "label": "Tell her mother",
+      "hint": "What happened; she is breathing; the neonatal unit.",
+      "opts": [
         {
-          "t": "Sodium bicarbonate for acidosis",
-          "trap": true,
-          "r": "No longer recommended (2025)."
+          "t": "Your baby didn't breathe on her own at first, so we helped her breathe with a mask. She's breathing now and her heart rate is good. The baby doctors will look after her on the neonatal unit, and you can see her soon.",
+          "tz": "BB 啱啱出世嗰陣冇自己呼吸，所以我哋用面罩幫佢呼吸。佢而家自己識呼吸，心跳都好好。初生嬰兒科醫生會喺嬰兒深切治療部照顧佢，你好快可以見到佢。",
+          "r": "Thank you, doctor. Is she going to be okay?",
+          "rz": "多謝醫生。佢會唔會冇事？",
+          "when": "breathing",
+          "early": "Once she is breathing.",
+          "mark": "Updates the mother"
         }
       ]
     },
@@ -201,7 +254,7 @@
         },
         {
           "q": "Indication for chest compressions?",
-          "a": "HR <60 after 30 s of good ventilation",
+          "a": "HR under 60 after 30 s of ventilation that moves the chest",
           "wrong": [
             "HR under 100 at birth, before any breaths",
             "Any central cyanosis at 5 minutes",
@@ -209,8 +262,8 @@
           ]
         },
         {
-          "q": "Newborn IV adrenaline dose (RCUK)?",
-          "a": "20 microgram/kg",
+          "q": "Newborn IV adrenaline dose?",
+          "a": "0.01–0.03 mg/kg (20 microgram/kg)",
           "wrong": [
             "1 mg (adult dose)",
             "10 mg/kg",
@@ -300,6 +353,82 @@
       ],
       "why": "Pre-ductal saturations guide oxygen.",
       "source": "RCUK NLS 2025"
+    }
+  ],
+  "keywords": [
+    "paediatric team",
+    "clock",
+    "warm",
+    "air",
+    "30 cmH2O",
+    "pre-ductal",
+    "right wrist",
+    "dry",
+    "stimulate",
+    "tone",
+    "heart rate",
+    "neutral position",
+    "five inflation breaths",
+    "2 to 3 seconds",
+    "chest rise",
+    "MR SOPA",
+    "two-person jaw thrust",
+    "ventilation breaths",
+    "pre-ductal SpO2",
+    "3:1",
+    "100% oxygen",
+    "umbilical venous catheter",
+    "adrenaline 20 micrograms per kg"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Start the clock. Heater on, warm towels and a hat. Bag set to 30 over 5 cmH2O with a term mask, in air. Suction, a size 1 supraglottic airway and a laryngoscope. Saturation probe on the right wrist: pre-ductal."
+    },
+    {
+      "at": "0:20",
+      "say": "Dry her, take away the wet towel, wrap her and put the hat on; stimulate her.",
+      "do": "Rub dry, wrap, hat, flick the soles."
+    },
+    {
+      "at": "0:35",
+      "say": "Tone: floppy. Breathing: none. Heart rate with the stethoscope: about 55.",
+      "do": "Lift a limb; look; listen."
+    },
+    {
+      "at": "0:45",
+      "say": "Head in the neutral position, chin supported. Five inflation breaths, 2 to 3 seconds each, at 30 cmH2O. Watching for chest rise.",
+      "do": "No chest rise."
+    },
+    {
+      "at": "1:05",
+      "say": "No chest rise: MR SOPA. Mask and reposition; a two-person jaw thrust; suction if needed, open the mouth, more pressure, then an alternative airway. Five more inflation breaths.",
+      "do": "Two-person jaw thrust: the chest rises."
+    },
+    {
+      "at": "1:30",
+      "say": "The chest is moving: ventilation breaths for 30 seconds, then reassess the heart rate.",
+      "do": "Heart rate 120 and rising; gasping, then crying."
+    },
+    {
+      "at": "2:10",
+      "say": "Heart rate over 100 and breathing: support her breathing as needed and keep the pre-ductal SpO2 on target: 60% at 1 minute rising to 85 to 95% by 10 minutes. Keep her warm, 36.5 to 37.5 degrees, and check her glucose."
+    },
+    {
+      "at": "2:35",
+      "say": "Handover to the paediatric team: term baby, born apnoeic and floppy with a heart rate of 55; five inflation breaths with a jaw thrust, then ventilation; heart rate now over 100 and breathing. For the neonatal unit."
+    },
+    {
+      "at": "3:00",
+      "say": "If the heart rate stays under 60 after 30 seconds of ventilation that moves the chest: secure the airway, then compressions 3:1, 90 compressions and 30 breaths a minute, in 100% oxygen; reassess every 30 seconds."
+    },
+    {
+      "at": "3:20",
+      "say": "Then an umbilical venous catheter: adrenaline 20 micrograms per kg, that's 0.02 mg/kg, every 3 to 5 minutes; and 10 mL/kg of saline if there's been blood loss."
+    },
+    {
+      "at": "3:40",
+      "say": "Your baby didn't breathe on her own at first, so we helped her breathe with a mask. She's breathing now and her heart rate is good. The baby doctors will look after her on the neonatal unit."
     }
   ]
 }

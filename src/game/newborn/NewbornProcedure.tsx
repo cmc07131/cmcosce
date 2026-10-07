@@ -54,7 +54,7 @@ export function newbornRows(r: NewbornRun): CheckRow[] {
     { key: 'airway', label: 'Airway', value: `Head ${Math.abs(r.headAngle) <= 10 ? 'neutral' : r.headAngle > 0 ? 'flexed' : 'over-extended'}${r.chin ? ', chin supported' : ''}`, range: 'Head neutral; chin support or jaw thrust', ok: neutral(r) && r.chin, why: 'A newborn’s big occiput flexes the neck; over-extension kinks the soft trachea.' },
     { key: 'inflate', label: 'Inflation breaths', value: `${goodInflations(r, false)} of 2–3 s`, range: 'Five inflation breaths, 2–3 seconds each, 30 cmH2O', ok: goodInflations(r, false) >= 5, why: 'Long inflations open fluid-filled lungs.' },
     { key: 'correct', label: 'No chest rise', value: r.jaw2 ? `Two-person jaw thrust, ${goodInflations(r, true)} more inflations, chest moving` : 'Not corrected', range: 'Check the head and mask; two-person jaw thrust; repeat the inflations', ok: r.jaw2 && goodInflations(r, true) >= 5 && r.moved, why: 'Without chest movement nothing else works: compressions on an unventilated baby are useless.' },
-    { key: 'ventilate', label: 'Ventilation breaths', value: rate === null ? 'Not given' : `${r.ventTimes.length} breaths at about ${Math.round(rate)}/min`, range: 'About 30 a minute for 30 seconds once the chest moves', ok: rate !== null && rate >= 22 && rate <= 40 && r.ventTimes.length >= 12, why: 'Too fast and the lungs do not empty; too slow and she stays hypoxic.' },
+    { key: 'ventilate', label: 'Ventilation breaths', value: rate === null ? 'Not given' : `${r.ventTimes.length} breaths at about ${Math.round(rate)}/min`, range: '30 a minute (RCUK) to 40–60 (AHA) for 30 seconds once the chest moves', ok: rate !== null && rate >= 22 && rate <= 65 && r.ventTimes.length >= 12, why: 'Too fast and the lungs do not empty; too slow and she stays hypoxic.' },
     { key: 'reassess', label: 'Reassess', value: r.compressedEarly ? 'Compressions started at a HR of 55, before ventilating' : r.upsideDown ? 'Hung upside down' : r.reassessed ? 'HR over 100, gasping' : 'Not reassessed', range: 'Heart rate and breathing after 30 seconds of ventilation', ok: r.reassessed && !r.compressedEarly && !r.upsideDown, why: 'Compressions only if the heart rate stays under 60 after 30 seconds of effective ventilation.', critical: r.compressedEarly || r.upsideDown },
   ]
 }
@@ -184,25 +184,7 @@ export function NewbornProcedure({ job, coach, onDone }: { job: PerformJob; coac
                   <button type="button" className="tap io-mini" data-on={run.stimulated || undefined} data-testid="newborn-stim" onClick={() => (upd({ stimulated: true }), feel('You rub her back and flick her soles. Nothing.'))}>
                     STIMULATE
                   </button>
-                  <button type="button" className="tap io-mini" data-testid="newborn-hang" onClick={() => (upd({ upsideDown: true }), buzz(40), physical('You hold her upside down by the ankles.'), why('Never hang a baby upside down: it drains nothing and risks injury.'))}>
-                    HANG HER UPSIDE DOWN TO DRAIN
-                  </button>
                 </>
-              )}
-              {index === 1 && (
-                <button
-                  type="button"
-                  className="tap io-mini"
-                  data-testid="newborn-compress"
-                  onClick={() => {
-                    upd({ compressedEarly: true })
-                    buzz([60, 40, 60])
-                    physical('You start chest compressions on an unventilated baby.')
-                    why('A heart rate of 55 in a newborn is hypoxic: ventilate first. Compressions only after 30 seconds of effective ventilation.')
-                  }}
-                >
-                  START CHEST COMPRESSIONS
-                </button>
               )}
               {index === 2 && (
                 <button type="button" className="tap io-mini" data-on={run.chin || undefined} data-testid="newborn-chin" onClick={() => (upd({ chin: true }), feel('A finger under the bony chin, lifting it.'))}>
