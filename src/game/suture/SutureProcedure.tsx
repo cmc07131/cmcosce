@@ -372,19 +372,6 @@ function StitchStage({ run, upd, feel, why, physical, next, corner, lines, setLi
         <button type="button" className="tap io-mini" data-on={run.holder === 'instrument' || undefined} data-testid="suture-holder" onClick={() => (upd({ holder: 'instrument' }), feel('Needle loaded in the needle holder, two-thirds back from the tip; forceps in the other hand.'))}>
           LOAD WITH THE NEEDLE HOLDER
         </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-on={run.holder === 'fingers' || undefined}
-          data-testid="suture-fingers"
-          onClick={() => {
-            upd({ holder: 'fingers' })
-            physical('You pick the needle up with your fingers.')
-            why('Never touch a suture needle with your fingers: instruments only.')
-          }}
-        >
-          PICK IT UP WITH YOUR FINGERS
-        </button>
       </div>
       <TouchPad
         svg={svg}

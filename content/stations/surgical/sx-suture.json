@@ -45,7 +45,7 @@
       "text": "Tetanus. A booster is not decided only by '>10 years since the last dose'. UKHSA: a tetanus-prone wound (soil, manure, over 6 hours, devitalised tissue) needs a booster if the patient is not fully immunised, and immunoglobulin too if the wound is high-risk."
     }
   ],
-  "notes": "Checked against RCEM/BSSH wound care principles, the UKHSA Green Book tetanus chapter (2023 update), and standard suturing technique.\n\nAssess: mechanism, time, contamination, foreign body, tendon/nerve/vessel injury, tetanus status, diabetes/peripheral vascular disease (pretibial wounds in older patients heal poorly — consider steri-strips for thin skin). Prepare: aseptic field, irrigation with saline, local anaesthetic (1% lidocaine, max 3 mg/kg plain or 7 mg/kg with adrenaline; your notes use 4 mg/kg, the US figure), explore, debride non-viable tissue. Flap: the half-buried horizontal mattress (corner) stitch at the tip preserves blood supply; simple interrupted sutures elsewhere (vertical mattress where eversion is needed). 4-0 non-absorbable monofilament on the leg; removal at 10–14 days for the lower leg (7–10 days for other limb sites). Non-adherent dressing. Tetanus: a tetanus-prone wound (soil, manure, delay over 6 hours, devitalised tissue) needs a booster if not fully immunised or last dose over 10 years ago, and immunoglobulin for high-risk wounds in someone not fully immunised (UKHSA) — not simply '>10 years since last dose'.\n\nYour notes cover the procedure, handling of sharps and instruments, and complications, matching this.",
+  "notes": "Checked against RCEM/BSSH wound care principles, the UKHSA Green Book tetanus chapter (2023 update), and standard suturing technique.\n\nAssess: mechanism, time, contamination, foreign body, tendon/nerve/vessel injury, tetanus status, diabetes/peripheral vascular disease (pretibial wounds in older patients heal poorly — consider steri-strips for thin skin). Prepare: aseptic field, irrigation with saline, local anaesthetic (1% lidocaine, max 3 mg/kg plain or 7 mg/kg with adrenaline; your notes use 4 mg/kg, the US figure), explore, debride non-viable tissue. Flap: the half-buried horizontal mattress (corner) stitch at the tip preserves blood supply; simple interrupted sutures elsewhere (vertical mattress where eversion is needed). 4-0 non-absorbable monofilament on the leg; removal at 10–14 days for the lower leg (7–10 days for other limb sites). Non-adherent dressing. Tetanus: a tetanus-prone wound (soil, manure, delay over 6 hours, devitalised tissue) needs a booster if not fully immunised or last dose over 10 years ago, and immunoglobulin for high-risk wounds in someone not fully immunised (UKHSA) — not simply '>10 years since last dose'.\n\nYour notes cover the procedure, handling of sharps and instruments, and complications, matching this.\n\nPerfect script checked against the RCEM wound guidance and UKHSA tetanus guidance, an HKCEM-style scheme and a keyword scheme. The flow you reviewed is kept; the silk option and the bench's pick-up-with-fingers button are removed. Surgical gym complete.",
   "cast": [
     {
       "id": "patient",
@@ -63,7 +63,7 @@
       "hint": "Introduce, explain and consent; how and when, contamination; tetanus; allergies; diabetes, circulation, steroids, blood thinners.",
       "opts": [
         {
-          "t": "Introduce yourself, check his name, explain the repair (clean, numb, stitch) and its risks (pain, infection, scar), and ask for consent",
+          "t": "Hello Mr Chan, I'm the emergency doctor. I'd like to clean the wound, numb it and stitch it. It may hurt a little, and there's a small risk of infection and a scar. Do I have your consent to go ahead?",
           "tz": "陳生你好，我係急症室醫生。我會幫你清洗傷口、打麻醉，再縫埋佢；可能會有啲痛、有機會發炎同留疤。你同意嗎？",
           "r": "Yes, go ahead, doctor.",
           "rz": "得，醫生你做啦。",
@@ -140,11 +140,6 @@
           "t": "Non-adherent dressing; sharps bin at hand",
           "need": true,
           "mark": "Dressing and sharps safety"
-        },
-        {
-          "t": "3-0 silk",
-          "trap": true,
-          "r": "Multifilament silk carries more infection and tissue reaction; use monofilament."
         }
       ]
     },
@@ -159,7 +154,7 @@
         {
           "t": "Repair the flap",
           "perform": "suture",
-          "performHint": "Do it with your hands. Every bite is judged; nothing stops a bad one.",
+          "performHint": "Do it with your hands. Every bite is judged as you place it.",
           "mark": [
             "Neurovascular status: flap tip refill, foot pulses and sensation",
             "Local infiltration through the wound edges",
@@ -180,17 +175,17 @@
       "hint": "Tetanus, suture removal time, wound care, infection signs.",
       "opts": [
         {
-          "t": "Tetanus: last dose 15 years ago and a dirty wound → booster (and immunoglobulin if high-risk and not fully immunised)",
+          "t": "Your last tetanus was 15 years ago and the wound was dirty, so a booster today.",
           "tz": "你上次打破傷風針係十五年前，個傷口又污糟，所以今日要打多支加強針。",
           "mark": "Tetanus assessment"
         },
         {
-          "t": "Remove sutures at 10–14 days (lower leg); keep dry for 48 hours; elevate the leg",
+          "t": "The stitches come out in 10 to 14 days on the lower leg. Keep it dry for 48 hours and keep the leg raised.",
           "tz": "小腿嘅線要十至十四日先拆；頭兩日唔好整濕；隻腳要墊高。",
           "mark": "Suture removal timing and wound care"
         },
         {
-          "t": "Return for redness, pus, fever or increasing pain",
+          "t": "Come back if it gets red, oozes pus, you get a fever, or the pain increases.",
           "tz": "如果傷口紅腫、有膿、發燒，或者越嚟越痛，就要返嚟。",
           "mark": "Infection advice"
         }
@@ -323,5 +318,51 @@
       "why": "Sutures tear fragile skin.",
       "source": "BAD / RCEM"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello Mr Chan, I'm the emergency doctor. I'd like to clean the wound, numb it and stitch it. It may hurt a little, and there's a small risk of infection and a scar. Do I have your consent to go ahead? How did it happen, exactly when, and was it dirty? Any glass or metal in it? When was your last tetanus injection?",
+      "do": "Yes, go ahead, doctor. A sheet of metal on site caught my shin about three hours ago. It was dusty there. About 15 years ago, I think."
+    },
+    {
+      "at": "0:20",
+      "say": "Any allergies: to local anaesthetic, antiseptic, plasters or any medicine? Any diabetes, poor circulation, steroids or blood thinners? Do you smoke? Thank you. I'll start the repair now.",
+      "do": "No allergies. None of those. I smoke a few a day. Okay, doctor."
+    },
+    {
+      "at": "0:40",
+      "say": "Suture pack, sterile gloves, drape, chlorhexidine. Normal saline and syringe for irrigation. 1% lidocaine, 10 mL syringe, orange needle."
+    },
+    {
+      "at": "1:00",
+      "say": "4-0 non-absorbable monofilament (nylon). Non-adherent dressing; sharps bin at hand."
+    },
+    {
+      "at": "1:20",
+      "say": "Check the flap tip refill, foot pulses and sensation first. 1% lidocaine through the wound edges, under 3 mg per kg; needle straight to the sharps bin. Test it's numb, irrigate with saline, lift the flap and explore for foreign bodies, trim dead tissue. Needle in the needle holder. A corner stitch at the flap tip: skin, through the tip, skin. Then simple interrupted stitches, square to the edge, equal bites on each side, evenly spaced. Sharps to the bin, non-adherent dressing."
+    },
+    {
+      "at": "1:40",
+      "say": "Your last tetanus was 15 years ago and the wound was dirty, so a booster today. The stitches come out in 10 to 14 days on the lower leg. Keep it dry for 48 hours and keep the leg raised. Come back if it gets red, oozes pus, you get a fever, or the pain increases."
+    }
+  ],
+  "keywords": [
+    "consent",
+    "how did it happen",
+    "tetanus",
+    "allergies",
+    "diabetes",
+    "blood thinners",
+    "chlorhexidine",
+    "irrigation",
+    "lidocaine",
+    "4-0",
+    "sharps",
+    "corner stitch",
+    "interrupted",
+    "booster",
+    "10 to 14 days",
+    "red"
   ]
 }
