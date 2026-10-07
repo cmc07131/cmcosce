@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE NG232 (Head injury, 2023), the PECARN rule, the Hong Kong Hospital Authority paediatric sedation guideline, and AAP/AAPD 2019 sedation guidance.\n\nCT head within 1 hour for a child with GCS under 15 at 2 hours, suspected skull fracture or tense fontanelle, signs of basal skull fracture, focal deficit, seizure; or, with two or more of: loss of consciousness over 5 minutes, abnormal drowsiness, three or more vomits, dangerous mechanism (NICE NG232 lowered some thresholds). A boggy temporal haematoma in a young child is a high-risk sign (PECARN).\n\nSedation: consider non-drug measures first (parent present, distraction, swaddling). HA guideline options for non-painful imaging: IV midazolam 0.05–0.1 mg/kg titrated (children 3 years and over), intranasal dexmedetomidine 2–3 microgram/kg, or chloral hydrate under 3 years. Risks: respiratory depression, airway obstruction, desaturation, hypotension, paradoxical agitation, vomiting. Monitoring: pulse oximetry, ECG, BP, capnography; a dedicated person watching the child; resuscitation equipment and reversal (flumazenil 0.01 mg/kg). Fasting is not required when the procedure is urgent. Recovery until back to baseline.\n\nYour notes match the HA guideline closely. The concern with sedation in head injury: a falling GCS may be masked, so the team watches closely and the CT is done promptly.",
+  "notes": "Checked against NICE NG232 (Head injury, 2023), the PECARN rule, the Hong Kong Hospital Authority paediatric sedation guideline, and AAP/AAPD 2019 sedation guidance.\n\nCT head within 1 hour for a child with GCS under 15 at 2 hours, suspected skull fracture or tense fontanelle, signs of basal skull fracture, focal deficit, seizure; or, with two or more of: loss of consciousness over 5 minutes, abnormal drowsiness, three or more vomits, dangerous mechanism (NICE NG232 lowered some thresholds). A boggy temporal haematoma in a young child is a high-risk sign (PECARN).\n\nSedation: consider non-drug measures first (parent present, distraction, swaddling). HA guideline options for non-painful imaging: IV midazolam 0.05–0.1 mg/kg titrated (children 3 years and over), intranasal dexmedetomidine 2–3 microgram/kg, or chloral hydrate under 3 years. Risks: respiratory depression, airway obstruction, desaturation, hypotension, paradoxical agitation, vomiting. Monitoring: pulse oximetry, ECG, BP, capnography; a dedicated person watching the child; resuscitation equipment and reversal (flumazenil 0.01 mg/kg). Fasting is not required when the procedure is urgent. Recovery until back to baseline.\n\nYour notes match the HA guideline closely. The concern with sedation in head injury: a falling GCS may be masked, so the team watches closely and the CT is done promptly.\n\nPerfect script checked against NICE CG112 sedation in under-19s and NICE NG232, an HKCEM-style scheme and a keyword scheme. Removed the routine-for-everyone, knock-her-out, no-risk and wait-outside replies.",
   "cast": [
     {
       "id": "father",
@@ -70,7 +70,8 @@
             "t": "Has she had sedation or an anaesthetic before?",
             "tz": "佢以前有冇用過鎮靜劑或者全身麻醉？",
             "rz": "從來冇。",
-            "r": "Never."
+            "r": "Never.",
+            "mark": "Asks about previous sedation or anaesthetic"
           }
         ]
       }
@@ -94,13 +95,6 @@
               "r": "OK… but she won't lie still.",
               "mood": -3,
               "mark": "Explains the indication for CT and weighs radiation risk"
-            },
-            {
-              "t": "It's routine for everyone.",
-              "tz": "個個都照㗎，例行公事啫。",
-              "rz": "咁點解佢要照？",
-              "r": "Then why does she need it?",
-              "mood": 2
             }
           ]
         },
@@ -115,13 +109,6 @@
               "r": "Is that safe for a little girl?",
               "mood": -1,
               "mark": "Offers non-drug measures and explains the sedation"
-            },
-            {
-              "t": "We'll knock her out.",
-              "tz": "我哋會整暈佢。",
-              "rz": "乜話？！",
-              "r": "What?!",
-              "mood": 3
             }
           ]
         },
@@ -136,13 +123,6 @@
               "r": "Yes. Can I stay with her?",
               "mood": -2,
               "mark": "Explains risks, monitoring and reversal; obtains consent"
-            },
-            {
-              "t": "No risks at all.",
-              "tz": "完全冇風險。",
-              "rz": "真係？",
-              "r": "Really?",
-              "mood": 0
             }
           ]
         },
@@ -157,12 +137,6 @@
               "r": "Thank you, doctor.",
               "mood": -2,
               "mark": "Involves the parent and explains recovery"
-            },
-            {
-              "t": "No, parents wait outside.",
-              "tz": "唔得，家長要喺出面等。",
-              "r": "…",
-              "mood": 2
             }
           ]
         }
@@ -294,5 +268,49 @@
       "why": "Also GCS <15 at 2 h, basal skull signs, seizure, focal deficit.",
       "source": "NICE NG232"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Allergies? Medical problems? Heart or lung disease? Does she snore or have breathing problems at night? When did she last eat and drink?",
+      "do": "None. No. Lunch at 12, a drink at 2. It's 4 now."
+    },
+    {
+      "at": "0:20",
+      "say": "Has she had sedation or an anaesthetic before?",
+      "do": "Never."
+    },
+    {
+      "at": "0:40",
+      "say": "I understand your worry. She's more drowsy than we'd expect, has vomited twice and has swelling over the temple, which can go with a skull fracture or bleeding. The scan uses a small radiation dose, and missing a bleed would be far more serious.",
+      "do": "OK… but she won't lie still."
+    },
+    {
+      "at": "1:00",
+      "say": "We'll try with you holding her hand first. If that doesn't work, a small dose of a sedative (midazolam) through the drip will make her sleepy for the scan.",
+      "do": "Is that safe for a little girl?"
+    },
+    {
+      "at": "1:20",
+      "say": "It's generally very safe. The main risk is that it can slow her breathing, which we watch for all the time with monitors and a nurse by her side; we have medicines to reverse it. She might be grumpy or vomit afterwards. Do you have any questions? Are you happy for us to go ahead?",
+      "do": "Yes. Can I stay with her?"
+    },
+    {
+      "at": "1:40",
+      "say": "Yes, until she's asleep, and straight after. She'll stay with us until she's fully awake.",
+      "do": "Thank you, doctor."
+    }
+  ],
+  "keywords": [
+    "allergies",
+    "snore",
+    "last eat and drink",
+    "sedation",
+    "skull fracture",
+    "bleeding",
+    "holding her hand",
+    "midazolam",
+    "slow her breathing",
+    "monitors"
   ]
 }

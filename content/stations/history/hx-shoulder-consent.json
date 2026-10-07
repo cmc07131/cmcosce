@@ -31,7 +31,7 @@
       "text": "Immobilisation. Your notes suggest 3–6 weeks in an immobiliser and avoiding abduction and external rotation. Current practice uses a sling for comfort for 1–3 weeks with early physiotherapy, and early referral to a shoulder surgeon for young, active patients (high recurrence)."
     }
   ],
-  "notes": "Checked against the RCEM/RCoA guideline on safe sedation of adults in the ED (2012; RCEM 2019 update), ASA 2018 moderate sedation guideline, the Montgomery ruling (2015) on consent, and BESS/BOA guidance on first-time anterior shoulder dislocation.\n\nConsent must cover the diagnosis, the proposed procedure and why, material risks (what a reasonable person would want to know, and what this patient would want to know), alternatives (including no treatment and other reduction methods — some can be reduced without sedation, e.g. Cunningham or external rotation; intra-articular lidocaine), and what happens next. Sedation risks: respiratory depression, airway obstruction, hypotension, vomiting and aspiration, allergy, rare cardiac arrest; the sedationist is separate from the person reducing; full monitoring and capnography; fasting is not required for ED sedation when urgent. Reduction risks: failure (needing GA), fracture (especially greater tuberosity or humeral neck), axillary nerve or vessel injury, recurrence.\n\nAged 18 or over, he consents for himself; you do not need to 'inform parents' as your notes suggest (that applies to under-18s in HK). Follow-up: post-reduction X-ray and neurovascular check, a sling for comfort (1–3 weeks), early physiotherapy; young, active patients have a high recurrence risk (up to 80–90% under 20) and should be referred to a shoulder surgeon early. Your notes suggest 3–6 weeks in an immobiliser and avoiding abduction and external rotation; current practice favours shorter immobilisation with early physio.",
+  "notes": "Checked against the RCEM/RCoA guideline on safe sedation of adults in the ED (2012; RCEM 2019 update), ASA 2018 moderate sedation guideline, the Montgomery ruling (2015) on consent, and BESS/BOA guidance on first-time anterior shoulder dislocation.\n\nConsent must cover the diagnosis, the proposed procedure and why, material risks (what a reasonable person would want to know, and what this patient would want to know), alternatives (including no treatment and other reduction methods — some can be reduced without sedation, e.g. Cunningham or external rotation; intra-articular lidocaine), and what happens next. Sedation risks: respiratory depression, airway obstruction, hypotension, vomiting and aspiration, allergy, rare cardiac arrest; the sedationist is separate from the person reducing; full monitoring and capnography; fasting is not required for ED sedation when urgent. Reduction risks: failure (needing GA), fracture (especially greater tuberosity or humeral neck), axillary nerve or vessel injury, recurrence.\n\nAged 18 or over, he consents for himself; you do not need to 'inform parents' as your notes suggest (that applies to under-18s in HK). Follow-up: post-reduction X-ray and neurovascular check, a sling for comfort (1–3 weeks), early physiotherapy; young, active patients have a high recurrence risk (up to 80–90% under 20) and should be referred to a shoulder surgeon early. Your notes suggest 3–6 weeks in an immobiliser and avoiding abduction and external rotation; current practice favours shorter immobilisation with early physio.\n\nPerfect script checked against GMC consent guidance and RCEM sedation guidance, an HKCEM-style scheme and a keyword scheme. Removed the jargon, frightening, no-risk and sign-here replies.",
   "cast": [
     {
       "id": "patient",
@@ -51,7 +51,7 @@
         "X-ray": [
           {
             "t": "Right shoulder AP",
-            "r": "The humeral head lies medial and inferior to the glenoid, below the coracoid: anterior (subcoracoid) dislocation. No fracture seen.",
+            "r": "The humeral head lies medial and inferior to the glenoid, below the coracoid: anterior (subcoracoid) dislocation. No fracture seen. \"An anterior dislocation, no fracture.\"",
             "img": "xr:shoulder-anterior",
             "mark": "Describes anterior subcoracoid dislocation, no fracture"
           }
@@ -77,13 +77,6 @@
               "r": "Thanks. How do you put it back?",
               "mood": -2,
               "mark": "Explains the diagnosis simply and offers analgesia"
-            },
-            {
-              "t": "Anterior glenohumeral dislocation.",
-              "tz": "Anterior glenohumeral dislocation。",
-              "rz": "吓？",
-              "r": "Eh?",
-              "mood": 2
             }
           ]
         },
@@ -98,13 +91,6 @@
               "r": "Is the sedation dangerous?",
               "mood": -1,
               "mark": "Explains the procedure and alternatives"
-            },
-            {
-              "t": "We pull hard until it clunks.",
-              "tz": "我哋會用力拉，拉到「咔」一聲。",
-              "rz": "聽落好恐怖。",
-              "r": "That sounds awful.",
-              "mood": 2
             }
           ]
         },
@@ -119,13 +105,6 @@
               "r": "And the shoulder itself?",
               "mood": -1,
               "mark": "Explains sedation risks"
-            },
-            {
-              "t": "Totally safe, no risks.",
-              "tz": "完全安全，冇風險。",
-              "rz": "好嘢。",
-              "r": "Great.",
-              "mood": 0
             }
           ]
         },
@@ -140,13 +119,6 @@
               "r": "It might not work, might break, might happen again. Yes, go ahead.",
               "mood": -2,
               "mark": "Explains reduction risks, checks understanding and obtains consent"
-            },
-            {
-              "t": "Sign here please.",
-              "tz": "唔該喺度簽名。",
-              "rz": "我簽緊啲咩？",
-              "r": "What am I signing?",
-              "mood": 2
             }
           ]
         },
@@ -161,13 +133,6 @@
               "r": "Makes sense.",
               "mood": -2,
               "mark": "Explains follow-up, recurrence risk and referral"
-            },
-            {
-              "t": "Nothing, just go home.",
-              "tz": "冇嘢，返屋企就得。",
-              "rz": "好……",
-              "r": "OK…",
-              "mood": 1
             }
           ]
         }
@@ -299,5 +264,52 @@
       "why": "High recurrence.",
       "source": "BESS/BOA"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Right shoulder AP. An anterior dislocation, no fracture.",
+      "do": "The humeral head lies medial and inferior to the glenoid, below the coracoid: anterior (subcoracoid) dislocation. No fracture seen. \"An anterior dislocation, no fracture.\""
+    },
+    {
+      "at": "0:20",
+      "say": "The ball of your shoulder has come out of the socket, to the front. We need to put it back. First, let's get you some pain relief.",
+      "do": "Thanks. How do you put it back?"
+    },
+    {
+      "at": "0:40",
+      "say": "We give you a sedative through a drip so you're very sleepy and relaxed, then gently manoeuvre the arm back in. One doctor looks after the sedation and your breathing, another does the shoulder. Some shoulders go back without sedation using gentle techniques — we can try that first if you prefer.",
+      "do": "Is the sedation dangerous?"
+    },
+    {
+      "at": "1:00",
+      "say": "It's generally very safe. It can slow your breathing, drop your blood pressure or make you vomit; we monitor you closely and can support your breathing if needed. Serious harm is very rare.",
+      "do": "And the shoulder itself?"
+    },
+    {
+      "at": "1:20",
+      "say": "It may not go back (then we'd do it in theatre), there's a small chance of a fracture or nerve injury, and it can dislocate again. Can you tell me back what we've discussed? Are you happy to go ahead?",
+      "do": "It might not work, might break, might happen again. Yes, go ahead."
+    },
+    {
+      "at": "1:40",
+      "say": "An X-ray to check it's back, a check of the nerves, a sling for comfort for a week or two, and early physiotherapy. Because you're young and play sport, the chance of it happening again is high, so I'll refer you to the shoulder surgeons.",
+      "do": "Makes sense."
+    }
+  ],
+  "keywords": [
+    "anterior dislocation",
+    "out of the socket",
+    "pain relief",
+    "sedative",
+    "one doctor",
+    "slow your breathing",
+    "fracture",
+    "nerve",
+    "dislocate again",
+    "tell me back",
+    "X-ray",
+    "sling",
+    "physiotherapy"
   ]
 }

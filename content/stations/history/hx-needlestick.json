@@ -42,7 +42,7 @@
       "text": "HBIG dose. Your notes give 0.06 mL/kg, the US dose. UK practice gives 500 IU."
     }
   ],
-  "notes": "Checked against the Hong Kong Scientific Committee on AIDS and STI / Centre for Health Protection recommendations on management of occupational exposure to HBV, HCV and HIV, the UK BHIVA/BASHH PEP guideline (2021), and UKHSA guidance.\n\nImmediate: encourage bleeding, wash with soap and running water; do not scrub or suck; irrigate mucosa.\n\nRisk per percutaneous exposure to a positive source: HBV about 6–30% (if non-immune; depends on HBeAg), HCV about 1.8% (lower in recent series, ~0.2–0.5%), HIV about 0.3%. Higher with hollow-bore needles, deep injury, visible blood, a needle from a vein or artery, and high source viral load.\n\nHBV: check the recipient's vaccination and anti-HBs; known responder (≥10 mIU/mL) needs nothing; non-responder or unknown with a positive source needs HBIG plus vaccine. HCV: no PEP; baseline and follow-up testing (HCV RNA at 6 weeks, antibody at 12–24 weeks). HIV PEP: start as soon as possible, ideally within hours, not after 72 hours, for 28 days. UK BHIVA/BASHH 2021 advise against PEP if the source is on ART with a confirmed undetectable viral load; HK guidance takes a similar risk-based approach — discuss with the on-call infectious disease physician.\n\nYour notes: 'PEP for 28 weeks' should be 28 days; your second scenario recommends PEP when the source is HIV-positive with an undetectable viral load, which current UK guidance does not; HBIG 0.06 mL/kg is the US dose (UK uses 500 IU). The rest matches.\n\nThis station: source is known HCV-positive, HIV and HBV unknown; the source consents to testing.",
+  "notes": "Checked against the Hong Kong Scientific Committee on AIDS and STI / Centre for Health Protection recommendations on management of occupational exposure to HBV, HCV and HIV, the UK BHIVA/BASHH PEP guideline (2021), and UKHSA guidance.\n\nImmediate: encourage bleeding, wash with soap and running water; do not scrub or suck; irrigate mucosa.\n\nRisk per percutaneous exposure to a positive source: HBV about 6–30% (if non-immune; depends on HBeAg), HCV about 1.8% (lower in recent series, ~0.2–0.5%), HIV about 0.3%. Higher with hollow-bore needles, deep injury, visible blood, a needle from a vein or artery, and high source viral load.\n\nHBV: check the recipient's vaccination and anti-HBs; known responder (≥10 mIU/mL) needs nothing; non-responder or unknown with a positive source needs HBIG plus vaccine. HCV: no PEP; baseline and follow-up testing (HCV RNA at 6 weeks, antibody at 12–24 weeks). HIV PEP: start as soon as possible, ideally within hours, not after 72 hours, for 28 days. UK BHIVA/BASHH 2021 advise against PEP if the source is on ART with a confirmed undetectable viral load; HK guidance takes a similar risk-based approach — discuss with the on-call infectious disease physician.\n\nYour notes: 'PEP for 28 weeks' should be 28 days; your second scenario recommends PEP when the source is HIV-positive with an undetectable viral load, which current UK guidance does not; HBIG 0.06 mL/kg is the US dose (UK uses 500 IU). The rest matches.\n\nThis station: source is known HCV-positive, HIV and HBV unknown; the source consents to testing.\n\nPerfect script checked against the HK DH Scientific Committee guidance on blood-borne virus exposure and UKHSA, an HKCEM-style scheme and a keyword scheme. Removed HBIG, HCV 'PEP' and the frightening and blaming replies.",
   "cast": [
     {
       "id": "patient",
@@ -116,39 +116,29 @@
       "confirm": "Do these",
       "opts": [
         {
-          "t": "Wash again with soap and running water; no scrubbing or antiseptic",
+          "t": "Wash it again with soap and running water; no scrubbing, no antiseptic",
           "need": true,
           "mark": "Correct first aid"
         },
         {
-          "t": "Baseline bloods from her: HBsAg, anti-HBs, anti-HCV, HIV, with consent; store serum",
+          "t": "Your baseline bloods, with consent: HBsAg, anti-HBs, anti-HCV and HIV; serum stored",
           "need": true,
           "mark": "Baseline recipient testing with consent"
         },
         {
-          "t": "Ask the ward to consent and test the source for HIV, HBV, HCV RNA urgently",
+          "t": "The ward to consent and test the source urgently for HIV, hepatitis B and hepatitis C RNA",
           "need": true,
           "mark": "Source testing with the source's consent"
         },
         {
-          "t": "Discuss HIV PEP now with the ID physician while the source result is awaited",
+          "t": "HIV PEP discussed now with the ID physician, while the source result is awaited",
           "need": true,
           "mark": "Considers HIV PEP promptly, pending source results"
         },
         {
-          "t": "Occupational health follow-up; incident report; off shift tonight",
+          "t": "Occupational health follow-up, an incident report, and off shift tonight",
           "need": true,
           "mark": "Occupational health, incident report, off duty"
-        },
-        {
-          "t": "HBV immunoglobulin now",
-          "trap": true,
-          "r": "She is a known responder (anti-HBs 150): no HBV prophylaxis needed."
-        },
-        {
-          "t": "Start treatment for hepatitis C immediately as PEP",
-          "trap": true,
-          "r": "There is no HCV PEP; test and follow up, treat early if she seroconverts."
         }
       ]
     },
@@ -168,11 +158,6 @@
               "r": "OK… that helps a bit.",
               "mood": -3,
               "mark": "Explains transmission risks with numbers"
-            },
-            {
-              "t": "Probably, it was deep.",
-              "r": "Oh no…",
-              "mood": 3
             }
           ]
         },
@@ -184,11 +169,6 @@
               "r": "And can I tell my husband?",
               "mood": -2,
               "mark": "Advises precautions and follow-up schedule"
-            },
-            {
-              "t": "Nothing, carry on as normal.",
-              "r": "Are you sure?",
-              "mood": 1
             }
           ]
         },
@@ -200,11 +180,6 @@
               "r": "Thank you.",
               "mood": -2,
               "mark": "Supports without blame and arranges cover"
-            },
-            {
-              "t": "Yes, that was careless.",
-              "r": "[Cries]",
-              "mood": 3
             }
           ]
         }
@@ -336,5 +311,63 @@
       "why": "Your notes say 28 weeks — a typo.",
       "source": "BHIVA/BASHH 2021"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "What happened, and when? What kind of needle? Was there blood in it? How deep? Were you wearing gloves?",
+      "do": "Forty minutes ago. I was recapping — I know, I shouldn't — and it went into my left index finger. A hollow blood-taking needle, just used in a vein. There was blood in it. Quite deep, it bled. Gloves on."
+    },
+    {
+      "at": "0:20",
+      "say": "What did you do straight after? Hepatitis B vaccination and antibody level? Any illness, medicines, pregnancy or breastfeeding?",
+      "do": "I squeezed it and washed it with alcohol swabs. Three doses in nursing school. My antibody was checked once — 150. Healthy. Not pregnant. On the pill."
+    },
+    {
+      "at": "0:40",
+      "say": "What do we know about the patient?",
+      "do": "A 50-year-old man with hepatitis C. Past drug use. HIV status unknown."
+    },
+    {
+      "at": "1:00",
+      "say": "Wash it again with soap and running water; no scrubbing, no antiseptic. Your baseline bloods, with consent: HBsAg, anti-HBs, anti-HCV and HIV; serum stored. The ward to consent and test the source urgently for HIV, hepatitis B and hepatitis C RNA."
+    },
+    {
+      "at": "1:20",
+      "say": "HIV PEP discussed now with the ID physician, while the source result is awaited. Occupational health follow-up, an incident report, and off shift tonight."
+    },
+    {
+      "at": "1:40",
+      "say": "The risk is low. For hepatitis C it's about 1 in 50 or less; for HIV, if he had it, about 1 in 300. You're protected against hepatitis B. We'll test him and you, and we have treatments if anything shows up.",
+      "do": "OK… that helps a bit."
+    },
+    {
+      "at": "2:00",
+      "say": "Use condoms, don't donate blood, organs or breast milk until follow-up is clear, and come to occupational health tomorrow. The tests are at 6 weeks and 3–6 months.",
+      "do": "And can I tell my husband?"
+    },
+    {
+      "at": "2:20",
+      "say": "These injuries happen to many of us. The important thing is you came straight away. Sister Yu will cover the rest of your shift.",
+      "do": "Thank you."
+    }
+  ],
+  "keywords": [
+    "what happened",
+    "blood",
+    "gloves",
+    "hepatitis B",
+    "antibody",
+    "pregnancy",
+    "source",
+    "soap and running water",
+    "baseline",
+    "consent",
+    "HIV PEP",
+    "occupational health",
+    "incident report",
+    "1 in 300",
+    "condoms",
+    "6 weeks"
   ]
 }

@@ -38,7 +38,7 @@
       "text": "Treatment detail for thyrotoxic periodic paralysis: small doses of potassium only (for example 10 mmol/h), because it shifts back out of cells and can cause rebound hyperkalaemia; propranolol treats the cause and the paralysis."
     }
   ],
-  "notes": "Checked against endocrine and neurology references on thyrotoxic periodic paralysis (TPP; common in young East Asian men) and the ED approach to acute flaccid weakness (cord compression, Guillain–Barré, myasthenia, stroke, electrolyte disorders).\n\nTPP: sudden proximal weakness, often after carbohydrate-rich meals, alcohol or rest after exercise, with hypokalaemia from intracellular shift (not total-body deficit) caused by thyrotoxicosis. Treat carefully: small doses of potassium (e.g. 10 mmol/h IV or oral) because of rebound hyperkalaemia when the shift reverses; non-selective beta-blocker (propranolol) treats the cause and the paralysis; then treat the thyrotoxicosis. Monitor ECG and potassium.\n\nYour notes present a 70-year-old with 'hypokalaemic periodic paralysis (age-related or thyrotoxic triggers)'. Primary periodic paralysis usually starts in youth; in an older patient think more of diuretics, GI losses, or other causes. The rest matches. Red flags for cord compression (back pain, sensory level, sphincter disturbance) must be screened in every case.",
+  "notes": "Checked against endocrine and neurology references on thyrotoxic periodic paralysis (TPP; common in young East Asian men) and the ED approach to acute flaccid weakness (cord compression, Guillain–Barré, myasthenia, stroke, electrolyte disorders).\n\nTPP: sudden proximal weakness, often after carbohydrate-rich meals, alcohol or rest after exercise, with hypokalaemia from intracellular shift (not total-body deficit) caused by thyrotoxicosis. Treat carefully: small doses of potassium (e.g. 10 mmol/h IV or oral) because of rebound hyperkalaemia when the shift reverses; non-selective beta-blocker (propranolol) treats the cause and the paralysis; then treat the thyrotoxicosis. Monitor ECG and potassium.\n\nYour notes present a 70-year-old with 'hypokalaemic periodic paralysis (age-related or thyrotoxic triggers)'. Primary periodic paralysis usually starts in youth; in an older patient think more of diuretics, GI losses, or other causes. The rest matches. Red flags for cord compression (back pain, sensory level, sphincter disturbance) must be screened in every case.\n\nPerfect script checked against endocrine emergency guidance on thyrotoxic periodic paralysis, an HKCEM-style scheme and a keyword scheme. Removed the aggressive potassium option; the rebound risk is said aloud.",
   "cast": [
     {
       "id": "patient",
@@ -166,21 +166,16 @@
       "hint": "Diagnosis, careful potassium, propranolol, monitoring, endocrinology.",
       "opts": [
         {
-          "t": "Thyrotoxic periodic paralysis; differentials: GBS, cord compression, myasthenia, other hypokalaemia",
+          "t": "Thyrotoxic periodic paralysis: potassium 1.9 with thyrotoxic features. The differential: Guillain–Barré, cord compression, myasthenia, and other causes of hypokalaemia.",
           "mark": "States the diagnosis and differentials"
         },
         {
-          "t": "Cautious potassium replacement (small doses) with cardiac monitoring and repeat K every 1–2 h",
+          "t": "Cautious potassium replacement in small doses, with cardiac monitoring and a repeat potassium every 1 to 2 hours: it shifts back out as the attack ends.",
           "mark": "Cautious potassium replacement with monitoring"
         },
         {
-          "t": "Propranolol to reverse the shift; endocrinology referral for Graves' treatment",
+          "t": "Propranolol to reverse the shift, and endocrinology for his Graves' disease.",
           "mark": "Non-selective beta-blocker and endocrine referral"
-        },
-        {
-          "t": "Potassium 40 mmol/h until normal",
-          "trap": "critical",
-          "r": "The potassium shifts back out as the attack ends: aggressive replacement causes rebound hyperkalaemia."
         }
       ]
     },
@@ -310,5 +305,49 @@
       "why": "Attacks stop once euthyroid.",
       "source": "Endocrine references"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "When did it start and how has it changed? Which parts are weak — legs, arms, face, breathing, swallowing? Any numbness or tingling?",
+      "do": "Woke up at 6 like this. Getting a little better now. Both legs, mostly thighs. Arms a bit. Breathing and swallowing fine. No numbness."
+    },
+    {
+      "at": "0:20",
+      "say": "Back pain, injury, problems passing urine or opening bowels? Recent diarrhoea or infection? What did you do last night?",
+      "do": "No back pain, no injury, bladder and bowel normal. No. Big dinner — rice, noodles, dessert — and several beers."
+    },
+    {
+      "at": "0:40",
+      "say": "Has this happened before? Weight loss, palpitations, sweating, heat intolerance, tremor? Medicines, family history, alcohol, drugs.",
+      "do": "Once last year, milder, went away by itself. Lost 5 kg in 3 months, feel hot, heart races sometimes. No medicines. Uncle had thyroid problems. No drugs."
+    },
+    {
+      "at": "1:00",
+      "say": "Venous gas with potassium. 12-lead ECG. TSH and free T4, CK, magnesium, phosphate.",
+      "do": "K 1.9 mmol/L. Sinus tachycardia 108, flattened T waves, prominent U waves. TSH < 0.01, free T4 48 pmol/L."
+    },
+    {
+      "at": "1:20",
+      "say": "Thyrotoxic periodic paralysis: potassium 1.9 with thyrotoxic features. The differential: Guillain–Barré, cord compression, myasthenia, and other causes of hypokalaemia. Cautious potassium replacement in small doses, with cardiac monitoring and a repeat potassium every 1 to 2 hours: it shifts back out as the attack ends. Propranolol to reverse the shift, and endocrinology for his Graves' disease."
+    }
+  ],
+  "keywords": [
+    "when did it start",
+    "breathing",
+    "numbness",
+    "back pain",
+    "diarrhoea",
+    "last night",
+    "before",
+    "weight loss",
+    "family history",
+    "potassium",
+    "TSH",
+    "thyrotoxic periodic paralysis",
+    "Guillain–Barré",
+    "small doses",
+    "cardiac monitoring",
+    "propranolol"
   ]
 }
