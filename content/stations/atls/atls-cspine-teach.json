@@ -34,7 +34,7 @@
       "text": "Collars for everyone. Your notes put a rigid collar on every trauma patient at risk of neck injury. Current guidance uses 'spinal motion restriction': manual in-line stabilisation, blocks and minimal handling are the core, and a collar is one option. Leave it off an alert patient who walked or climbed out themselves, and loosen or remove it if it causes distress, airway problems or raised ICP."
     }
   ],
-  "notes": "Checked against the Canadian C-spine Rule (Stiell 2001, 2003), NEXUS (Hoffman 2000), NICE NG41 (Spinal injury: assessment and initial management, 2016) and NICE NG232 (head injury imaging), and the Faculty of Pre-Hospital Care consensus on spinal motion restriction (2018).\n\nCollar: measure from the angle of the jaw to the top of the trapezius with your fingers, set or choose the collar to that height (measured from the sizing post to the bottom of the rigid plastic), slide the back under the neck while someone holds manual in-line stabilisation, bring the front up under the chin, fasten, and check the fit. Blocks and tape complete immobilisation. Current consensus favours minimal handling and 'spinal motion restriction': collars can raise ICP, cause pressure sores and aspiration, and are no longer routine in every patient (for example, the self-extricating, ambulant patient). Your notes' indications and complications are correct. The difference: your notes put a rigid collar on every trauma patient at risk of a neck injury. Current guidance (ATLS 10th 'spinal motion restriction'; Faculty of Pre-Hospital Care consensus 2018) still protects the spine in these patients, but a collar is now one option, not automatic. Manual in-line stabilisation, head blocks and minimal handling are the core. A collar is not needed for an alert, ambulant patient who walked or climbed out themselves, and can be loosened or removed if it causes distress, airway problems or raised ICP. NICE NG41 still uses collars for patients who meet its immobilisation criteria, so a collar is never 'wrong'. Just don't say it is mandatory for everyone.\n\nClearance: in an alert (GCS 15), stable, sober adult, apply the Canadian C-spine Rule. High risk (age 65 or over, dangerous mechanism, or paraesthesia in the limbs) → image. Otherwise, any low-risk factor (simple rear-end collision, sitting up in the ED, ambulatory at any time, delayed onset of neck pain, no midline tenderness) allows range-of-motion testing: can rotate 45° left and right → cleared. NEXUS is an alternative (no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury). CT is the first-line imaging in adults (NICE). Your notes match this.",
+  "notes": "Checked against the Canadian C-spine Rule (Stiell 2001, 2003), NEXUS (Hoffman 2000), NICE NG41 (Spinal injury: assessment and initial management, 2016) and NICE NG232 (head injury imaging), and the Faculty of Pre-Hospital Care consensus on spinal motion restriction (2018).\n\nCollar: measure from the angle of the jaw to the top of the trapezius with your fingers, set or choose the collar to that height (measured from the sizing post to the bottom of the rigid plastic), slide the back under the neck while someone holds manual in-line stabilisation, bring the front up under the chin, fasten, and check the fit. Blocks and tape complete immobilisation. Current consensus favours minimal handling and 'spinal motion restriction': collars can raise ICP, cause pressure sores and aspiration, and are no longer routine in every patient (for example, the self-extricating, ambulant patient). Your notes' indications and complications are correct. The difference: your notes put a rigid collar on every trauma patient at risk of a neck injury. Current guidance (ATLS 10th 'spinal motion restriction'; Faculty of Pre-Hospital Care consensus 2018) still protects the spine in these patients, but a collar is now one option, not automatic. Manual in-line stabilisation, head blocks and minimal handling are the core. A collar is not needed for an alert, ambulant patient who walked or climbed out themselves, and can be loosened or removed if it causes distress, airway problems or raised ICP. NICE NG41 still uses collars for patients who meet its immobilisation criteria, so a collar is never 'wrong'. Just don't say it is mandatory for everyone.\n\nClearance: in an alert (GCS 15), stable, sober adult, apply the Canadian C-spine Rule. High risk (age 65 or over, dangerous mechanism, or paraesthesia in the limbs) → image. Otherwise, any low-risk factor (simple rear-end collision, sitting up in the ED, ambulatory at any time, delayed onset of neck pain, no midline tenderness) allows range-of-motion testing: can rotate 45° left and right → cleared. NEXUS is an alternative (no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury). CT is the first-line imaging in adults (NICE). Your notes match this.\n\nPerfect script checked against the Canadian C-spine Rule, NICE NG41, an HKCEM-style teaching scheme and a keyword scheme. Removed the tight-collar option and the unhelpful replies; added spinal motion restriction to the script.",
   "cast": [
     {
       "id": "junior",
@@ -59,11 +59,6 @@
               "r": "I know NEXUS a bit. Never fitted a collar.",
               "mood": -2,
               "mark": "Sets objectives and assesses prior knowledge"
-            },
-            {
-              "t": "It's easy. Watch.",
-              "r": "OK…",
-              "mood": 2
             }
           ]
         }
@@ -110,11 +105,6 @@
           "t": "Add blocks and tape (head first, then chin)",
           "n": 7,
           "mark": "Blocks and tape"
-        },
-        {
-          "t": "Pull the collar on tight so it can't move",
-          "trap": true,
-          "r": "Too tight obstructs venous return (raises ICP) and the airway."
         }
       ]
     },
@@ -130,15 +120,10 @@
           "line": "Case 1: 35-year-old, rear-ended at a traffic light, walking at the scene, GCS 15, no midline tenderness, sitting up. Clear?",
           "opts": [
             {
-              "t": "No high-risk factor, low-risk factors present, so test rotation: 45° both ways → cleared, no imaging",
+              "t": "No high-risk factor. Low-risk factors present: walking at the scene, sitting up, no midline tenderness. So test rotation: 45 degrees both ways: cleared, no imaging.",
               "r": "So the rotation test is the last step.",
               "mood": -2,
               "mark": "Applies the CCR correctly in a low-risk case"
-            },
-            {
-              "t": "CT for everyone in a car crash",
-              "r": "Isn't that a lot of radiation?",
-              "mood": 2
             }
           ]
         },
@@ -146,15 +131,10 @@
           "line": "Case 2: 72-year-old, fell from standing, neck pain, GCS 15. Clear?",
           "opts": [
             {
-              "t": "Age 65 or over is high risk → CT C-spine, no rotation test",
+              "t": "Age 65 or over is a high-risk factor: CT C-spine, no rotation test.",
               "r": "Age alone is enough.",
               "mood": -2,
               "mark": "Recognises a high-risk factor mandating imaging"
-            },
-            {
-              "t": "Ask her to rotate her neck — if she can, clear",
-              "r": "But she's over 65?",
-              "mood": 2
             }
           ]
         },
@@ -162,15 +142,10 @@
           "line": "So what do I remember?",
           "opts": [
             {
-              "t": "You tell me the three CCR steps.",
+              "t": "You tell me the three steps of the Canadian C-spine Rule.",
               "r": "High risk → image; low risk → test rotation; can rotate → clear.",
               "mood": -2,
               "mark": "Checks understanding by teach-back"
-            },
-            {
-              "t": "Just follow the flowchart on the wall.",
-              "r": "OK.",
-              "mood": 1
             }
           ]
         }
@@ -301,6 +276,56 @@
       ],
       "why": "Collars have harms; the self-extricating, ambulant patient may not need one.",
       "source": "Faculty of Pre-Hospital Care consensus 2018"
+    }
+  ],
+  "keywords": [
+    "objectives",
+    "manual in-line stabilisation",
+    "jewellery",
+    "angle of the jaw",
+    "trapezius",
+    "sizing post",
+    "chin piece",
+    "blocks and tape",
+    "spinal motion restriction",
+    "Canadian C-spine Rule",
+    "high-risk factor",
+    "low-risk factors",
+    "rotation",
+    "45 degrees",
+    "65 or over",
+    "CT C-spine"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Today: fit a collar correctly, and use the Canadian C-spine Rule on two cases. Those are our objectives. What do you know so far?",
+      "do": "A bit of NEXUS; never fitted a collar."
+    },
+    {
+      "at": "0:15",
+      "say": "Someone holds manual in-line stabilisation throughout. Earrings and necklaces off: jewellery first. Measure with your fingers from the angle of the jaw to the top of the trapezius."
+    },
+    {
+      "at": "0:35",
+      "say": "Set the collar to that height, from the sizing post to the bottom of the rigid plastic. Slide the back under the neck, bring the front up under the chin, fasten. Check the fit: chin in the chin piece, no gap, airway and pulses accessible. Blocks and tape: head first, then chin."
+    },
+    {
+      "at": "1:05",
+      "say": "A collar is one part of spinal motion restriction, not routine for everyone: leave it off an alert patient who walked out, and loosen it if it causes distress or raised pressure."
+    },
+    {
+      "at": "1:20",
+      "say": "Case 1: no high-risk factor. Low-risk factors present: walking at the scene, sitting up, no midline tenderness. So test rotation: 45 degrees both ways: cleared, no imaging."
+    },
+    {
+      "at": "1:40",
+      "say": "Case 2: age 65 or over is a high-risk factor: CT C-spine, no rotation test."
+    },
+    {
+      "at": "1:50",
+      "say": "You tell me the three steps of the Canadian C-spine Rule.",
+      "do": "High risk: image. Low risk: test rotation. Can rotate: clear."
     }
   ]
 }

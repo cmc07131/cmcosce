@@ -39,7 +39,7 @@
       "text": "Age cut-off in children. Your notes' 12 years matches ATLS. The APA/DAS paediatric guideline uses a needle (cannula) technique from 1 to 8 years, allows a scalpel technique above about 8 years, and calls ENT for a tracheostomy under 1 year. Safe exam answer: needle under 12, surgical from 12, with 8–12 as the grey zone."
     }
   ],
-  "notes": "Checked against the Difficult Airway Society 2025 guideline (front-of-neck access) and the Peyton four-step approach to skills teaching.\n\nContent: indication is can't intubate, can't oxygenate (CICO). DAS scalpel–bougie–tube: a size 10 scalpel, a bougie with a coudé tip, and a lubricated cuffed 6.0 tube. DAS 2025 makes a vertical midline skin incision (up to 8 cm, bottom to top) and finger blunt dissection to the membrane the default in every adult, then a transverse stab through the membrane with the cutting edge toward you, rotate the blade 90° so the sharp edge points to the feet, pull the blade toward you, slide the bougie along it, railroad the tube, inflate the cuff, confirm with capnography.\n\nYour notes teach the older standard technique: a number 11 blade, a tracheal hook and a Trousseau dilator, and a 4–6 mm tube or tracheostomy tube. That is a recognised open technique but not the DAS emergency method; the station scores DAS and accepts the older method as 'other techniques'.\n\nBlade: DAS specifies a size 10 (broad, curved) blade. Its width makes one stab wide enough for the bougie and a 6.0 tube, and the blade guides the bougie in. A size 11 (narrow, pointed) blade is not the DAS kit: the hole is often too small and needs extending, and the point more easily injures the back wall of the trachea. In the exam, say size 10. In real life, if only an 11 is available, still do the procedure, but widen the incision before passing the bougie.\n\nChildren (cut-offs differ by guideline): ATLS 10th says do not do a surgical cricothyroidotomy under 12 years; use needle cricothyroidotomy. The APA/DAS paediatric CICO guideline (children 1–8 years) uses cannula (needle) cricothyroidotomy, then an ENT scalpel or tracheostomy approach if that fails; over 8 years the membrane is usually big enough for a scalpel technique. Under 1 year, needle access is very difficult, so call ENT early for a tracheostomy. Your notes' 12 years matches ATLS. Safe exam answer: under 12, needle; 12 and over, surgical, with the 8–12 range as the grey zone where APA allows a scalpel technique. Complications and the SHORT mnemonic in your notes are correct.\n\nTeaching method: set objectives, assess prior knowledge, then Peyton's four steps (demonstrate silently at real speed; demonstrate with explanation; learner talks you through; learner performs), feedback, check understanding, summary and plan.",
+  "notes": "Checked against the Difficult Airway Society 2025 guideline (front-of-neck access) and the Peyton four-step approach to skills teaching.\n\nContent: indication is can't intubate, can't oxygenate (CICO). DAS scalpel–bougie–tube: a size 10 scalpel, a bougie with a coudé tip, and a lubricated cuffed 6.0 tube. DAS 2025 makes a vertical midline skin incision (up to 8 cm, bottom to top) and finger blunt dissection to the membrane the default in every adult, then a transverse stab through the membrane with the cutting edge toward you, rotate the blade 90° so the sharp edge points to the feet, pull the blade toward you, slide the bougie along it, railroad the tube, inflate the cuff, confirm with capnography.\n\nYour notes teach the older standard technique: a number 11 blade, a tracheal hook and a Trousseau dilator, and a 4–6 mm tube or tracheostomy tube. That is a recognised open technique but not the DAS emergency method; the station scores DAS and accepts the older method as 'other techniques'.\n\nBlade: DAS specifies a size 10 (broad, curved) blade. Its width makes one stab wide enough for the bougie and a 6.0 tube, and the blade guides the bougie in. A size 11 (narrow, pointed) blade is not the DAS kit: the hole is often too small and needs extending, and the point more easily injures the back wall of the trachea. In the exam, say size 10. In real life, if only an 11 is available, still do the procedure, but widen the incision before passing the bougie.\n\nChildren (cut-offs differ by guideline): ATLS 10th says do not do a surgical cricothyroidotomy under 12 years; use needle cricothyroidotomy. The APA/DAS paediatric CICO guideline (children 1–8 years) uses cannula (needle) cricothyroidotomy, then an ENT scalpel or tracheostomy approach if that fails; over 8 years the membrane is usually big enough for a scalpel technique. Under 1 year, needle access is very difficult, so call ENT early for a tracheostomy. Your notes' 12 years matches ATLS. Safe exam answer: under 12, needle; 12 and over, surgical, with the 8–12 range as the grey zone where APA allows a scalpel technique. Complications and the SHORT mnemonic in your notes are correct.\n\nTeaching method: set objectives, assess prior knowledge, then Peyton's four steps (demonstrate silently at real speed; demonstrate with explanation; learner talks you through; learner performs), feedback, check understanding, summary and plan.\n\nPerfect script checked against DAS 2025 FONA, a Peyton teaching checklist, an HKCEM-style scheme and a keyword scheme. Removed the lecture-first and high-incision options and the unhelpful teaching replies.",
   "cast": [
     {
       "id": "junior",
@@ -64,11 +64,6 @@
               "r": "Great, yes.",
               "mood": -2,
               "mark": "Introduces self and sets a clear learning objective"
-            },
-            {
-              "t": "Right, let's just start cutting.",
-              "r": "Um, OK…",
-              "mood": 2
             }
           ]
         },
@@ -76,15 +71,10 @@
           "line": "I've only read about it.",
           "opts": [
             {
-              "t": "What do you know already — when would you do one?",
+              "t": "What do you know already: when would you do one?",
               "r": "When you can't intubate and can't oxygenate?",
               "mood": -1,
               "mark": "Assesses prior knowledge"
-            },
-            {
-              "t": "Reading is useless. Watch me.",
-              "r": "…",
-              "mood": 2
             }
           ]
         }
@@ -116,11 +106,6 @@
           "t": "Dr Wan performs it, talking through each step",
           "n": 4,
           "mark": "Peyton step 4: learner performs"
-        },
-        {
-          "t": "Give a 20-minute lecture on airway anatomy first",
-          "trap": true,
-          "r": "It eats the whole session. Keep theory short and hands-on."
         }
       ]
     },
@@ -165,11 +150,6 @@
           "t": "Railroad the tube, inflate the cuff, confirm with capnography, secure",
           "n": 7,
           "mark": "Tube, cuff, capnography"
-        },
-        {
-          "t": "Incise the upper edge of the membrane close to the thyroid cartilage",
-          "trap": true,
-          "r": "Stay in the lower membrane: the cricothyroid arteries and the cords are above."
         }
       ]
     },
@@ -189,11 +169,6 @@
               "r": "I hesitated with the bougie.",
               "mood": -1,
               "mark": "Invites self-assessment first"
-            },
-            {
-              "t": "Fine.",
-              "r": "OK…",
-              "mood": 1
             }
           ]
         },
@@ -205,11 +180,6 @@
               "r": "Got it.",
               "mood": -1,
               "mark": "Specific, balanced feedback"
-            },
-            {
-              "t": "That was bad.",
-              "r": "…",
-              "mood": 2
             }
           ]
         },
@@ -217,15 +187,10 @@
           "line": "What else should I know?",
           "opts": [
             {
-              "t": "Tell me the three things you'll remember; other methods are needle cricothyroidotomy (children) and the older hook-and-dilator technique. Practise on the trainer weekly.",
+              "t": "Tell me the three things you'll remember. Other methods: needle cricothyroidotomy in children, and the older hook-and-dilator technique. Practise on the trainer every week.",
               "r": "Handshake, vertical cut, blade stays until the bougie's in.",
               "mood": -1,
               "mark": "Checks understanding, mentions other techniques, and agrees a plan"
-            },
-            {
-              "t": "Nothing, you're done.",
-              "r": "OK.",
-              "mood": 1
             }
           ]
         }
@@ -359,6 +324,63 @@
       ],
       "why": "Self-assessment first (Pendleton / ask–tell–ask).",
       "source": "Medical education feedback models"
+    }
+  ],
+  "keywords": [
+    "learning objective",
+    "can't intubate, can't oxygenate",
+    "Peyton",
+    "silent demonstration",
+    "scalpel–bougie–tube",
+    "size 10 scalpel",
+    "cuffed 6.0 tube",
+    "laryngeal handshake",
+    "vertical midline incision",
+    "finger dissection",
+    "transverse stab",
+    "rotate the blade",
+    "bougie",
+    "capnography",
+    "needle cricothyroidotomy"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hi, I'm the ED registrar. In ten minutes, you'll be able to do a scalpel–bougie–tube on the trainer: that's our learning objective. What do you know already: when would you do one?",
+      "do": "Can't intubate, can't oxygenate."
+    },
+    {
+      "at": "0:20",
+      "say": "Right: can't intubate, can't oxygenate. I'll teach it in Peyton's four steps. First, a silent demonstration at real speed."
+    },
+    {
+      "at": "0:40",
+      "say": "Now slowly. Kit: a size 10 scalpel, a bougie, and a lubricated cuffed 6.0 tube; neck extended; I stand on the patient's left. Laryngeal handshake: thyroid cartilage, the membrane, the cricoid."
+    },
+    {
+      "at": "1:05",
+      "say": "A vertical midline incision, bottom to top; finger dissection down to the membrane. A transverse stab through the membrane, cutting edge toward me. Rotate the blade 90 degrees so the sharp edge points to the feet, and pull it toward me."
+    },
+    {
+      "at": "1:30",
+      "say": "Slide the bougie along the blade 10 to 15 cm into the trachea; blade out. Railroad the tube, inflate the cuff, confirm with capnography, secure it."
+    },
+    {
+      "at": "1:50",
+      "say": "Step three: you talk me through it while I do it. Step four: you do it, talking through each step."
+    },
+    {
+      "at": "2:20",
+      "say": "How do you think it went?",
+      "do": "Hesitated with the bougie."
+    },
+    {
+      "at": "2:30",
+      "say": "Your landmarks were excellent. Next time keep the blade in until the bougie is past it: it holds the hole open."
+    },
+    {
+      "at": "2:45",
+      "say": "Tell me the three things you'll remember. Other methods: needle cricothyroidotomy in children, and the older hook-and-dilator technique. Practise on the trainer every week."
     }
   ]
 }

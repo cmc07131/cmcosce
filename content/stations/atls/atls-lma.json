@@ -62,7 +62,7 @@
       "text": "Combitube. Your notes list it as the retroglottic device and as a difficult-airway adjunct. It is now rarely used in emergency departments; second-generation supraglottic airways have replaced it. Know it only to recognise it."
     }
   ],
-  "notes": "Checked against the Difficult Airway Society guidelines (DAS 2025 unanticipated difficult intubation; emergency airway checklist) and manufacturers' instructions for the i-gel and intubating LMA (Fastrach).\n\nDAS plan B: after failed intubation (maximum three attempts, a fourth by a more experienced operator), declare it, call for help, oxygenate by mask, and insert a second-generation supraglottic airway (with a gastric drain channel, e.g. i-gel or LMA ProSeal/Supreme): maximum three attempts. Then stop and think: wake the patient, intubate through the SGA with a fibrescope, proceed on the SGA, or front-of-neck access.\n\ni-gel sizing by weight: 3 for 30–60 kg, 4 for 50–90 kg, 5 for over 90 kg. No cuff to inflate. Lubricate the back and sides, hold along the bite block, insert along the hard palate with the cuff outlet facing the chin until definite resistance; confirm with capnography and chest movement; pass a gastric tube through the drain channel.\n\nThe intubating LMA (Fastrach) appears in the viva: rigid handle, epiglottic elevating bar, its own tube, sizes 3 (30–50 kg), 4 (50–70 kg), 5 (70–100 kg), and the Chandy manoeuvre.",
+  "notes": "Checked against the Difficult Airway Society guidelines (DAS 2025 unanticipated difficult intubation; emergency airway checklist) and manufacturers' instructions for the i-gel and intubating LMA (Fastrach).\n\nDAS plan B: after failed intubation (maximum three attempts, a fourth by a more experienced operator), declare it, call for help, oxygenate by mask, and insert a second-generation supraglottic airway (with a gastric drain channel, e.g. i-gel or LMA ProSeal/Supreme): maximum three attempts. Then stop and think: wake the patient, intubate through the SGA with a fibrescope, proceed on the SGA, or front-of-neck access.\n\ni-gel sizing by weight: 3 for 30–60 kg, 4 for 50–90 kg, 5 for over 90 kg. No cuff to inflate. Lubricate the back and sides, hold along the bite block, insert along the hard palate with the cuff outlet facing the chin until definite resistance; confirm with capnography and chest movement; pass a gastric tube through the drain channel.\n\nThe intubating LMA (Fastrach) appears in the viva: rigid handle, epiglottic elevating bar, its own tube, sizes 3 (30–50 kg), 4 (50–70 kg), 5 (70–100 kg), and the Chandy manoeuvre.\n\nPerfect script checked against DAS 2025 plan B, an HKCEM-style scheme and a keyword scheme. Removed the 'one more laryngoscopy' option and the unhelpful teaching replies.",
   "cast": [
     {
       "id": "patient",
@@ -85,21 +85,16 @@
       "hint": "Declare it, call for help, oxygenate by mask, go to plan B.",
       "opts": [
         {
-          "t": "Declare failed intubation aloud; call for help",
+          "t": "This is a failed intubation. I need help now.",
           "mark": "Declares failed intubation and calls for help"
         },
         {
-          "t": "Two-person mask ventilation with an oropharyngeal airway while the device is prepared",
+          "t": "Two-person mask ventilation with an oropharyngeal airway while the device is prepared.",
           "mark": "Maintains oxygenation between attempts"
         },
         {
-          "t": "Plan B: second-generation supraglottic airway, maximum three attempts",
+          "t": "Plan B: a second-generation supraglottic airway, maximum three attempts.",
           "mark": "Moves to plan B with an attempt limit"
-        },
-        {
-          "t": "One more laryngoscopy, then another",
-          "trap": "critical",
-          "r": "Repeated attempts swell the airway and turn 'can't intubate' into 'can't oxygenate'."
         }
       ]
     },
@@ -139,15 +134,10 @@
           "line": "What is that device? I've only seen the tubes.",
           "opts": [
             {
-              "t": "What do you already know about airway devices?",
+              "t": "Before I explain: what do you already know about airway devices?",
               "r": "Just bag-mask and intubation.",
               "mood": -1,
               "mark": "Checks the learner's existing knowledge"
-            },
-            {
-              "t": "No time now, just watch.",
-              "r": "Oh… OK.",
-              "mood": 2
             }
           ]
         },
@@ -155,15 +145,10 @@
           "line": "So why not just try intubating again?",
           "opts": [
             {
-              "t": "Repeated attempts cause swelling; the supraglottic device oxygenates while we stop and think.",
+              "t": "Repeated laryngoscopy causes swelling and turns 'can't intubate' into 'can't oxygenate'. This device has a gastric drain channel and a better seal: it oxygenates him while we stop and think.",
               "r": "That makes sense.",
               "mood": -1,
               "mark": "Explains the rationale for plan B"
-            },
-            {
-              "t": "Because the book says so.",
-              "r": "Right…",
-              "mood": 1
             }
           ]
         },
@@ -171,15 +156,10 @@
           "line": "Any questions I should ask?",
           "opts": [
             {
-              "t": "What would you do if it didn't ventilate?",
+              "t": "Let me check: what would you do if it didn't ventilate?",
               "r": "Call for help… and the front-of-neck kit?",
               "mood": -1,
               "mark": "Checks understanding with a question"
-            },
-            {
-              "t": "No, that's everything.",
-              "r": "OK.",
-              "mood": 1
             }
           ]
         }
@@ -310,6 +290,48 @@
       ],
       "why": "The Combitube's distal cuff sits beyond the glottis, usually in the oesophagus.",
       "source": "Airway device classification"
+    }
+  ],
+  "keywords": [
+    "failed intubation",
+    "help",
+    "two-person mask ventilation",
+    "oropharyngeal airway",
+    "plan B",
+    "second-generation",
+    "maximum three attempts",
+    "size 4",
+    "lubricate",
+    "hard palate",
+    "resistance",
+    "capnography",
+    "gastric drain channel",
+    "stop and think",
+    "front-of-neck"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "This is a failed intubation. I need help now. Two-person mask ventilation with an oropharyngeal airway while the device is prepared. Plan B: a second-generation supraglottic airway, maximum three attempts."
+    },
+    {
+      "at": "0:20",
+      "say": "An i-gel size 4 for 70 kg. Lubricate the back and sides. Sniffing position. Hold it along the bite block, cuff outlet toward the chin, and glide it along the hard palate until definite resistance.",
+      "do": "Insert."
+    },
+    {
+      "at": "0:50",
+      "say": "Confirm: capnography trace and the chest rising. A gastric tube down the drain channel to decompress the stomach. Tape it in place."
+    },
+    {
+      "at": "1:10",
+      "say": "Before I explain: what do you already know about airway devices?",
+      "do": "Only bag-mask and intubation."
+    },
+    {
+      "at": "1:20",
+      "say": "Repeated laryngoscopy causes swelling and turns 'can't intubate' into 'can't oxygenate'. This device has a gastric drain channel and a better seal: it oxygenates him while we stop and think. Let me check: what would you do if it didn't ventilate?",
+      "do": "Call for help and go to front-of-neck access."
     }
   ]
 }
