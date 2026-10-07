@@ -19,6 +19,7 @@
       "goal": "Terlipressin and antibiotics from the cart now; restrictive transfusion when the blood arrives.",
       "steps": [
         "drugs",
+        "avoid",
         "blood"
       ]
     },
@@ -51,7 +52,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE CG141 (Acute upper GI bleeding, 2012, updated 2016), the BSG/UK variceal bleeding guideline (2015; BSG 2023 decompensated cirrhosis), Baveno VII (2022), and the HALT-IT trial (2020).\n\nResuscitate: two large-bore cannulae, bloods (FBC, U&E, LFT, clotting, crossmatch), major haemorrhage protocol if needed, restrictive transfusion (Hb threshold 70–80 g/L, target 70–90; higher in cardiovascular disease) — over-transfusion raises portal pressure. Protect the airway (intubate before endoscopy if confused or vomiting heavily). Risk scores: Glasgow–Blatchford before endoscopy (0 can be discharged); Rockall after.\n\nSuspected variceal bleed: terlipressin 2 mg IV every 4 hours (1 mg if under 50 kg or once bleeding controlled) and prophylactic antibiotics (e.g. ceftriaxone 1 g daily) at presentation; endoscopy within 12 hours of resuscitation (band ligation for oesophageal varices, cyanoacrylate for gastric); balloon tamponade (Sengstaken–Blakemore/Minnesota) as a bridge for uncontrolled bleeding; TIPS for refractory bleeding. Non-variceal: PPI after endoscopy (not before, per NICE), endoscopy within 24 hours. Do not give tranexamic acid (HALT-IT: no benefit, more VTE). Correct coagulopathy only if actively bleeding with specific deficits; lactulose for encephalopathy.\n\nYour notes list 'massive GIB' and 'UGIB + VF' as topics without detail.",
+  "notes": "Checked against NICE CG141 (Acute upper GI bleeding, 2012, updated 2016), the BSG/UK variceal bleeding guideline (2015; BSG 2023 decompensated cirrhosis), Baveno VII (2022), and the HALT-IT trial (2020).\n\nResuscitate: two large-bore cannulae, bloods (FBC, U&E, LFT, clotting, crossmatch), major haemorrhage protocol if needed, restrictive transfusion (Hb threshold 70–80 g/L, target 70–90; higher in cardiovascular disease) — over-transfusion raises portal pressure. Protect the airway (intubate before endoscopy if confused or vomiting heavily). Risk scores: Glasgow–Blatchford before endoscopy (0 can be discharged); Rockall after.\n\nSuspected variceal bleed: terlipressin 2 mg IV every 4 hours (1 mg if under 50 kg or once bleeding controlled) and prophylactic antibiotics (e.g. ceftriaxone 1 g daily) at presentation; endoscopy within 12 hours of resuscitation (band ligation for oesophageal varices, cyanoacrylate for gastric); balloon tamponade (Sengstaken–Blakemore/Minnesota) as a bridge for uncontrolled bleeding; TIPS for refractory bleeding. Non-variceal: PPI after endoscopy (not before, per NICE), endoscopy within 24 hours. Do not give tranexamic acid (HALT-IT: no benefit, more VTE). Correct coagulopathy only if actively bleeding with specific deficits; lactulose for encephalopathy.\n\nYour notes list 'massive GIB' and 'UGIB + VF' as topics without detail.\n\nPerfect script checked against BSG/NICE CG141 and Baveno VII, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (Hb 140, wrong doses, TXA, PPI); the reasons said aloud instead.",
   "cast": [
     {
       "id": "patient",
@@ -117,12 +118,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG, NIBP and SpO2.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "resus",
@@ -133,7 +135,7 @@
       "confirm": "Now",
       "opts": [
         {
-          "t": "Two large-bore cannulae; FBC, U&E, LFT, clotting, crossmatch 6 units, gas",
+          "t": "Two large-bore cannulae; FBC, U&E, LFT, clotting, crossmatch 6 units, and a gas",
           "fetch": "trolley",
           "need": true,
           "mark": "Access and bloods including crossmatch"
@@ -141,19 +143,28 @@
         {
           "t": "Major haemorrhage protocol; crossmatched blood to the bay",
           "need": true,
-          "mark": "Transfuses to a restrictive target",
+          "mark": "Activates the major haemorrhage protocol",
           "scene": "mhp"
         },
         {
-          "t": "Airway: suction; anaesthetist to intubate before endoscopy given confusion",
+          "t": "Airway: suction; the anaesthetist to intubate before endoscopy, as he's confused",
           "fetch": "trolley",
           "need": true,
           "mark": "Airway protection before endoscopy"
-        },
+        }
+      ]
+    },
+    {
+      "id": "avoid",
+      "kind": "say",
+      "to": "nurse",
+      "label": "What not to give",
+      "lang": "en",
+      "hint": "Tranexamic acid and PPI.",
+      "opts": [
         {
-          "t": "Transfuse to Hb 140 to be safe",
-          "trap": true,
-          "r": "Over-transfusion raises portal pressure and rebleeding in variceal bleeds."
+          "t": "No tranexamic acid: no benefit in GI bleeding and more clots. No PPI before endoscopy for a variceal bleed.",
+          "mark": "Avoids tranexamic acid and pre-endoscopy PPI"
         }
       ]
     },
@@ -165,13 +176,14 @@
       "hint": "Restrictive transfusion when the blood arrives.",
       "opts": [
         {
-          "t": "Transfuse red cells to Hb 70–90 now the blood is here.",
+          "t": "The blood's here: transfuse red cells to a restrictive target, Hb 70 to 90; over-transfusing raises the portal pressure.",
           "when": "blood-here",
           "early": "The blood is not here yet.",
           "scene": "blood",
           "mark": "Restrictive transfusion to Hb 70–90"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "drugs",
@@ -191,44 +203,12 @@
           "dose": "2 mg IV (then every 4 hours)"
         },
         {
-          "t": "Terlipressin 0.2 mg IV",
-          "drug": "Terlipressin",
-          "dose": "0.2 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Ten times too little: 2 mg IV every 4 hours (1 mg if under 50 kg)."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "mark": "Prophylactic antibiotics in cirrhosis",
           "t": "Ceftriaxone 1 g IV",
           "drug": "Ceftriaxone",
           "dose": "1 g IV"
-        },
-        {
-          "t": "Ceftriaxone 80 mg/kg IV",
-          "drug": "Ceftriaxone",
-          "dose": "80 mg/kg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "That is the paediatric meningitis dose. 1 g IV daily as prophylaxis in cirrhosis."
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "HALT-IT showed no benefit and more thrombotic events in GI bleeding.",
-          "t": "Tranexamic acid 1 g IV",
-          "drug": "Tranexamic acid",
-          "dose": "1 g IV"
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "NICE: PPIs after endoscopy for non-variceal bleeding, not before.",
-          "t": "Omeprazole 80 mg IV before endoscopy",
-          "drug": "Omeprazole",
-          "dose": "80 mg IV before endoscopy"
         }
       ]
     },
@@ -247,7 +227,7 @@
           },
           {
             "t": "Glasgow–Blatchford score",
-            "r": "High (urea, Hb, SBP, pulse, melaena, liver disease): 16.",
+            "r": "High (urea, Hb, SBP, pulse, melaena, liver disease): 16. \"High risk: he needs endoscopy.\"",
             "mark": "Calculates a pre-endoscopy risk score"
           }
         ]
@@ -261,11 +241,11 @@
       "hint": "Emergency endoscopy after resuscitation; balloon tamponade/TIPS if uncontrolled.",
       "opts": [
         {
-          "t": "GI/endoscopy: variceal bleed in cirrhosis, unstable — emergency endoscopy for band ligation after resuscitation and intubation",
+          "t": "Endoscopy: Mr Chow, 55, cirrhotic, a suspected variceal bleed, unstable. Terlipressin and ceftriaxone given. Emergency endoscopy for band ligation once he's resuscitated and intubated.",
           "mark": "Arranges emergency endoscopy"
         },
         {
-          "t": "If bleeding cannot be controlled: balloon tamponade as a bridge and TIPS",
+          "t": "If the bleeding can't be controlled: balloon tamponade as a bridge, then TIPS.",
           "mark": "Knows rescue options"
         }
       ]
@@ -396,5 +376,52 @@
       "why": "Within 24 h for others.",
       "source": "NICE CG141"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2."
+    },
+    {
+      "at": "0:20",
+      "say": "Two large-bore cannulae; FBC, U&E, LFT, clotting, crossmatch 6 units, and a gas. Major haemorrhage protocol; crossmatched blood to the bay. Airway: suction; the anaesthetist to intubate before endoscopy, as he's confused."
+    },
+    {
+      "at": "0:40",
+      "say": "Terlipressin 2 mg IV (then every 4 hours). Ceftriaxone 1 g IV."
+    },
+    {
+      "at": "1:00",
+      "say": "No tranexamic acid: no benefit in GI bleeding and more clots. No PPI before endoscopy for a variceal bleed."
+    },
+    {
+      "at": "1:20",
+      "say": "The blood's here: transfuse red cells to a restrictive target, Hb 70 to 90; over-transfusing raises the portal pressure."
+    },
+    {
+      "at": "1:40",
+      "say": "Bloods. Glasgow–Blatchford score. High risk: he needs endoscopy.",
+      "do": "Hb 68, urea 18, INR 1.9, platelets 72, bilirubin 58. High (urea, Hb, SBP, pulse, melaena, liver disease): 16. \"High risk: he needs endoscopy.\""
+    },
+    {
+      "at": "2:00",
+      "say": "Endoscopy: Mr Chow, 55, cirrhotic, a suspected variceal bleed, unstable. Terlipressin and ceftriaxone given. Emergency endoscopy for band ligation once he's resuscitated and intubated. If the bleeding can't be controlled: balloon tamponade as a bridge, then TIPS."
+    }
+  ],
+  "keywords": [
+    "large-bore",
+    "crossmatch",
+    "major haemorrhage protocol",
+    "intubate before endoscopy",
+    "terlipressin 2 mg",
+    "ceftriaxone 1 g",
+    "no tranexamic acid",
+    "restrictive",
+    "Hb 70 to 90",
+    "Glasgow–Blatchford",
+    "variceal",
+    "band ligation",
+    "balloon tamponade",
+    "TIPS"
   ]
 }

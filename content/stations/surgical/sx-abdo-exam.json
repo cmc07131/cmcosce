@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against standard abdominal examination technique and BSG/EASL guidance on decompensated cirrhosis and ascites.\n\nSequence: introduce, consent, position flat with one pillow, expose (nipples to knees with dignity); general inspection; hands (clubbing, leuconychia, palmar erythema, Dupuytren's, asterixis); arms (bruising, scratch marks); face and eyes (jaundice, pallor, xanthelasma, parotid swelling); neck (Virchow's node); chest (spider naevi, gynaecomastia); abdomen inspection (distension, caput medusae, scars); palpation (light, deep, liver from the right iliac fossa up with breathing, spleen from the right iliac fossa toward the left costal margin, kidneys ballotable); percussion (liver span, splenic dullness, shifting dullness for ascites); auscultation (bowel sounds, bruits); complete with hernial orifices, external genitalia and PR (offer), legs (oedema).\n\nHepatomegaly and splenomegaly with ascites and stigmata suggest cirrhosis with portal hypertension. Spleen vs kidney: the spleen has a notch, moves down and medially with inspiration, you cannot get above it, dull to percussion. Ascites: diagnostic tap (cell count for SBP — neutrophils > 250/mm³, albumin for SAAG, culture), salt restriction, spironolactone ± furosemide, large-volume paracentesis with albumin. Your notes list hepatosplenomegaly as a Surgical gym topic without detail.",
+  "notes": "Checked against standard abdominal examination technique and BSG/EASL guidance on decompensated cirrhosis and ascites.\n\nSequence: introduce, consent, position flat with one pillow, expose (nipples to knees with dignity); general inspection; hands (clubbing, leuconychia, palmar erythema, Dupuytren's, asterixis); arms (bruising, scratch marks); face and eyes (jaundice, pallor, xanthelasma, parotid swelling); neck (Virchow's node); chest (spider naevi, gynaecomastia); abdomen inspection (distension, caput medusae, scars); palpation (light, deep, liver from the right iliac fossa up with breathing, spleen from the right iliac fossa toward the left costal margin, kidneys ballotable); percussion (liver span, splenic dullness, shifting dullness for ascites); auscultation (bowel sounds, bruits); complete with hernial orifices, external genitalia and PR (offer), legs (oedema).\n\nHepatomegaly and splenomegaly with ascites and stigmata suggest cirrhosis with portal hypertension. Spleen vs kidney: the spleen has a notch, moves down and medially with inspiration, you cannot get above it, dull to percussion. Ascites: diagnostic tap (cell count for SBP — neutrophils > 250/mm³, albumin for SAAG, culture), salt restriction, spironolactone ± furosemide, large-volume paracentesis with albumin. Your notes list hepatosplenomegaly as a Surgical gym topic without detail.\n\nPerfect script checked against standard abdominal examination and BSG ascites guidance, an HKCEM-style scheme and a keyword scheme. Removed the spleen trap; the liver and spleen close-ups now show palpation.",
   "cast": [
     {
       "id": "patient",
@@ -44,44 +44,44 @@
       "groups": {
         "Peripheries": [
           {
-            "t": "Hands: nails, palms, flap",
+            "t": "Hands: nails, palms; hold your arms out for a flap",
             "r": "Leuconychia, palmar erythema, Dupuytren's contracture; no flap.",
             "mark": "Examines the hands for liver stigmata",
             "do": "look hands | say hands-out"
           },
           {
-            "t": "Eyes, face, neck",
+            "t": "Eyes, face and neck",
             "r": "Icteric sclerae; left supraclavicular fossa normal.",
             "mark": "Looks for jaundice and Virchow's node",
             "do": "look eye,face | feel supraclavicular"
           },
           {
-            "t": "Chest",
+            "t": "The chest",
             "r": "Five spider naevi; gynaecomastia.",
             "mark": "Finds spider naevi and gynaecomastia",
-            "anim": "auscultate",
             "do": "look chest"
           }
         ],
         "Abdomen": [
           {
-            "t": "Inspect",
+            "t": "Inspect the abdomen",
             "r": "Distended with dilated periumbilical veins, everted umbilicus.",
             "mark": "Inspects: distension and caput medusae",
             "do": "look abdomen"
           },
           {
-            "t": "Palpate the liver from the right iliac fossa upwards with breathing",
+            "t": "Palpate the liver from the right iliac fossa upwards with his breathing",
             "r": "Liver edge 3 cm below the costal margin, firm, irregular.",
             "mark": "Palpates the liver correctly",
-            "anim": "auscultate",
+            "anim": "abdomen",
             "do": "feel iliac-R > feel ruq-R"
           },
           {
             "t": "Palpate the spleen from the right iliac fossa toward the left costal margin",
             "r": "Spleen tip 4 cm below the left costal margin, moves with breathing, notch felt.",
             "mark": "Palpates the spleen correctly",
-            "do": "feel iliac-R > feel ruq-L"
+            "do": "feel iliac-R > feel ruq-L",
+            "anim": "abdomen"
           },
           {
             "t": "Shifting dullness",
@@ -93,12 +93,13 @@
             "t": "Auscultate",
             "r": "Bowel sounds normal; no bruits.",
             "anim": "auscultate",
-            "do": "listen abdomen"
+            "do": "listen abdomen",
+            "mark": "Auscultates for bowel sounds and bruits"
           }
         ],
         "Complete": [
           {
-            "t": "Legs; offer hernial orifices, genitalia, PR",
+            "t": "To complete: the legs, and I'd offer the hernial orifices, genitalia and a rectal examination",
             "r": "Pitting oedema to mid-shin.",
             "mark": "Completes the examination",
             "do": "press shin | look legs | feel groin"
@@ -115,17 +116,12 @@
       "hint": "Summarise: chronic liver disease with portal hypertension; investigations; SBP.",
       "opts": [
         {
-          "t": "Stigmata of chronic liver disease with hepatosplenomegaly and ascites: cirrhosis with portal hypertension",
+          "t": "Stigmata of chronic liver disease, with hepatosplenomegaly and ascites: cirrhosis with portal hypertension.",
           "mark": "Presents a coherent summary and diagnosis"
         },
         {
-          "t": "Diagnostic ascitic tap for cell count (SBP), albumin (SAAG), culture; LFT, clotting, ultrasound",
+          "t": "A diagnostic ascitic tap for cell count, SBP, albumin for the SAAG, and culture; LFTs, clotting and an ultrasound.",
           "mark": "Investigations including diagnostic paracentesis"
-        },
-        {
-          "t": "A mass in the left upper quadrant I can get above is the spleen",
-          "trap": true,
-          "r": "You cannot get above the spleen; if you can, think kidney."
         }
       ]
     },
@@ -255,5 +251,44 @@
       "why": "Metabolic flap.",
       "source": "Hepatology"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hands: nails, palms; hold your arms out for a flap. Eyes, face and neck. The chest.",
+      "do": "Leuconychia, palmar erythema, Dupuytren's contracture; no flap. Icteric sclerae; left supraclavicular fossa normal. Five spider naevi; gynaecomastia."
+    },
+    {
+      "at": "0:20",
+      "say": "Inspect the abdomen. Palpate the liver from the right iliac fossa upwards with his breathing. Palpate the spleen from the right iliac fossa toward the left costal margin.",
+      "do": "Distended with dilated periumbilical veins, everted umbilicus. Liver edge 3 cm below the costal margin, firm, irregular. Spleen tip 4 cm below the left costal margin, moves with breathing, notch felt."
+    },
+    {
+      "at": "0:40",
+      "say": "Shifting dullness. Auscultate. To complete: the legs, and I'd offer the hernial orifices, genitalia and a rectal examination.",
+      "do": "Dullness in the flanks shifts when he rolls to his right: ascites. Bowel sounds normal; no bruits. Pitting oedema to mid-shin."
+    },
+    {
+      "at": "1:00",
+      "say": "Stigmata of chronic liver disease, with hepatosplenomegaly and ascites: cirrhosis with portal hypertension. A diagnostic ascitic tap for cell count, SBP, albumin for the SAAG, and culture; LFTs, clotting and an ultrasound."
+    }
+  ],
+  "keywords": [
+    "flap",
+    "eyes",
+    "chest",
+    "inspect",
+    "liver",
+    "spleen",
+    "shifting dullness",
+    "auscultate",
+    "hernial orifices",
+    "chronic liver disease",
+    "hepatosplenomegaly",
+    "ascites",
+    "portal hypertension",
+    "ascitic tap",
+    "SBP",
+    "SAAG"
   ]
 }

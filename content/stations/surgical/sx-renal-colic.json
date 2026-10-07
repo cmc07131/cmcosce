@@ -38,7 +38,7 @@
       "text": "Medical expulsive therapy. Your notes offer nifedipine or an alpha-blocker. Nifedipine is no longer used; give tamsulosin for distal ureteric stones under 10 mm."
     }
   ],
-  "notes": "Checked against NICE NG118 (Renal and ureteric stones, 2019), EAU Urolithiasis guideline (2024).\n\nImaging: urgent low-dose non-contrast CT KUB within 24 hours of presentation in adults (ultrasound first in pregnancy and children). Analgesia: NSAIDs (e.g. IM/PR diclofenac or IV/oral) first-line, then IV paracetamol, then opioids; no antispasmodics. Medical expulsive therapy: alpha-blocker (tamsulosin) for distal ureteric stones under 10 mm (EAU: most benefit 5–10 mm). Most stones under 5 mm pass spontaneously. Emergency referral: signs of infection with obstruction (obstructed infected kidney — urgent decompression by nephrostomy or stent; antibiotics), solitary kidney, bilateral obstruction, AKI, uncontrolled pain. Always exclude AAA in older patients with 'renal colic', and ectopic pregnancy in women.\n\nYour notes use a KUB X-ray and bedside ultrasound, and nifedipine or alpha-blockers; NICE recommends non-contrast CT (KUB X-ray alone misses many stones) and alpha-blockers rather than nifedipine. Discharge advice (fluids, strain urine, return if fever) matches.",
+  "notes": "Checked against NICE NG118 (Renal and ureteric stones, 2019), EAU Urolithiasis guideline (2024).\n\nImaging: urgent low-dose non-contrast CT KUB within 24 hours of presentation in adults (ultrasound first in pregnancy and children). Analgesia: NSAIDs (e.g. IM/PR diclofenac or IV/oral) first-line, then IV paracetamol, then opioids; no antispasmodics. Medical expulsive therapy: alpha-blocker (tamsulosin) for distal ureteric stones under 10 mm (EAU: most benefit 5–10 mm). Most stones under 5 mm pass spontaneously. Emergency referral: signs of infection with obstruction (obstructed infected kidney — urgent decompression by nephrostomy or stent; antibiotics), solitary kidney, bilateral obstruction, AKI, uncontrolled pain. Always exclude AAA in older patients with 'renal colic', and ectopic pregnancy in women.\n\nYour notes use a KUB X-ray and bedside ultrasound, and nifedipine or alpha-blockers; NICE recommends non-contrast CT (KUB X-ray alone misses many stones) and alpha-blockers rather than nifedipine. Discharge advice (fluids, strain urine, return if fever) matches.\n\nPerfect script checked against NICE NG118 and EAU, an HKCEM-style scheme and a keyword scheme. Removed the KUB-alone and Buscopan options.",
   "cast": [
     {
       "id": "patient",
@@ -57,7 +57,7 @@
       "groups": {
         "Start": [
           {
-            "t": "Offer analgesia first",
+            "t": "First, can I give you something for the pain?",
             "tz": "我哋先俾止痛藥你，好唔好？",
             "rz": "好呀——痛到頂唔順。",
             "r": "Yes please — it's unbearable.",
@@ -133,14 +133,9 @@
         ],
         "Imaging": [
           {
-            "t": "Non-contrast CT KUB",
-            "r": "6 mm stone at the left vesicoureteric junction with mild hydronephrosis.",
+            "t": "A low-dose non-contrast CT KUB",
+            "r": "6 mm stone at the left vesicoureteric junction with mild hydronephrosis. \"A 6 mm stone at the left VUJ, mild hydronephrosis, no infection.\"",
             "mark": "Non-contrast CT KUB"
-          },
-          {
-            "t": "KUB X-ray alone to diagnose",
-            "trap": true,
-            "r": "Misses radiolucent and small stones; CT is the first-line test (NICE)."
           }
         ]
       }
@@ -153,25 +148,19 @@
       "hint": "Stone diagnosis, NSAID, tamsulosin, fluids, strain urine, return advice, urology follow-up.",
       "opts": [
         {
-          "t": "A 6 mm stone near the bladder; most this size pass within weeks",
+          "t": "It's a 6 mm kidney stone near the bladder; most stones this size pass within a few weeks.",
           "tz": "你有一粒六毫米嘅石，喺近膀胱嗰度；呢個大細嘅石，大部分幾個禮拜內會自己排出嚟。",
           "mark": "Explains diagnosis and likelihood of passage"
         },
         {
-          "t": "NSAID analgesia; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone",
+          "t": "An anti-inflammatory painkiller; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone.",
           "tz": "我會開消炎止痛藥，同埋 tamsulosin 幫粒石排出嚟。飲多啲水，小便嗰陣用隔篩隔吓，搵到粒石就留低。",
           "mark": "NSAID, alpha-blocker, fluids and straining"
         },
         {
-          "t": "Return at once with fever, rigors, vomiting, or uncontrolled pain; urology follow-up and repeat imaging",
+          "t": "Come back at once with a fever, shivering, vomiting or pain we can't control. Urology will follow you up with repeat imaging.",
           "tz": "如果發燒、發冷震、嘔，或者痛到止唔到，要即刻返嚟。之後泌尿科會跟進，再照一次。",
           "mark": "Safety-netting (infected obstructed kidney) and follow-up"
-        },
-        {
-          "t": "Buscopan for the colic",
-          "tz": "我開 Buscopan 俾你止絞痛。",
-          "trap": true,
-          "r": "Antispasmodics are not recommended (NICE)."
         }
       ]
     },
@@ -302,5 +291,49 @@
       "why": "Low spontaneous passage.",
       "source": "EAU 2024"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "First, can I give you something for the pain? Where and what is the pain like? Urinary symptoms: blood, burning, frequency?",
+      "do": "Yes please — it's unbearable. Left loin, comes in waves, into my groin. Can't keep still. Pinkish urine."
+    },
+    {
+      "at": "0:20",
+      "say": "Fever or rigors? Last period; could you be pregnant? Previous stones; kidney disease; one kidney?",
+      "do": "No. LMP a week ago; not pregnant. First time. Two kidneys as far as I know."
+    },
+    {
+      "at": "0:40",
+      "say": "Medicines, allergies, asthma, stomach ulcers?",
+      "do": "None."
+    },
+    {
+      "at": "1:00",
+      "say": "Urine dipstick and pregnancy test. U&E, FBC, CRP, calcium, urate. A low-dose non-contrast CT KUB. A 6 mm stone at the left VUJ, mild hydronephrosis, no infection.",
+      "do": "Blood +++, nitrite negative; hCG negative. Creatinine 72; WCC 9. 6 mm stone at the left vesicoureteric junction with mild hydronephrosis. \"A 6 mm stone at the left VUJ, mild hydronephrosis, no infection.\""
+    },
+    {
+      "at": "1:20",
+      "say": "It's a 6 mm kidney stone near the bladder; most stones this size pass within a few weeks. An anti-inflammatory painkiller; tamsulosin to help it pass; plenty of fluids; strain your urine and keep the stone. Come back at once with a fever, shivering, vomiting or pain we can't control. Urology will follow you up with repeat imaging."
+    }
+  ],
+  "keywords": [
+    "pain",
+    "where",
+    "blood",
+    "fever",
+    "pregnant",
+    "previous stones",
+    "asthma",
+    "dipstick",
+    "pregnancy test",
+    "non-contrast CT KUB",
+    "6 mm",
+    "tamsulosin",
+    "fluids",
+    "strain",
+    "fever, shivering",
+    "urology"
   ]
 }

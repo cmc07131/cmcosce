@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against EAU paediatric urology guidance, BAUS guidance on testicular torsion, and NICE CKS (Scrotal pain and swelling).\n\nTesticular torsion is the diagnosis until excluded in any boy or young man with sudden severe testicular pain: salvage falls sharply after 6 hours. Features: sudden onset (often waking from sleep), nausea/vomiting, high-riding testis with a horizontal lie, absent cremasteric reflex, pain not relieved by elevation (negative Prehn's sign is unreliable). Do not delay for ultrasound when clinical suspicion is high — urgent urology referral for scrotal exploration (and bilateral fixation). Manual detorsion ('open the book', rotating medially to laterally) may be tried by trained clinicians if theatre is delayed. Differentials: torsion of a testicular appendage (blue dot sign, pain at the upper pole), epididymo-orchitis (gradual onset, urinary symptoms, sexually active — test for chlamydia/gonorrhoea; in older men, enteric organisms), incarcerated hernia, trauma, tumour, Henoch–Schönlein purpura.\n\nYour notes list epididymo-orchitis as a topic; the key exam point is not to label torsion as epididymo-orchitis.",
+  "notes": "Checked against EAU paediatric urology guidance, BAUS guidance on testicular torsion, and NICE CKS (Scrotal pain and swelling).\n\nTesticular torsion is the diagnosis until excluded in any boy or young man with sudden severe testicular pain: salvage falls sharply after 6 hours. Features: sudden onset (often waking from sleep), nausea/vomiting, high-riding testis with a horizontal lie, absent cremasteric reflex, pain not relieved by elevation (negative Prehn's sign is unreliable). Do not delay for ultrasound when clinical suspicion is high — urgent urology referral for scrotal exploration (and bilateral fixation). Manual detorsion ('open the book', rotating medially to laterally) may be tried by trained clinicians if theatre is delayed. Differentials: torsion of a testicular appendage (blue dot sign, pain at the upper pole), epididymo-orchitis (gradual onset, urinary symptoms, sexually active — test for chlamydia/gonorrhoea; in older men, enteric organisms), incarcerated hernia, trauma, tumour, Henoch–Schönlein purpura.\n\nYour notes list epididymo-orchitis as a topic; the key exam point is not to label torsion as epididymo-orchitis.\n\nPerfect script checked against the EAU paediatric urology guideline and BAUS, an HKCEM-style scheme and a keyword scheme. Removed the ultrasound-tomorrow and antibiotics options.",
   "cast": [
     {
       "id": "patient",
@@ -81,7 +81,8 @@
             "t": "Any injury?",
             "tz": "有冇撞傷？",
             "rz": "冇。",
-            "r": "No."
+            "r": "No.",
+            "mark": "Asks about trauma"
           }
         ]
       }
@@ -95,7 +96,7 @@
       "groups": {
         "Scrotum": [
           {
-            "t": "Obtain consent; chaperone present",
+            "t": "May I examine you? This is an intimate examination, so Nurse Chaperone will be present.",
             "r": "Agreed; Nurse Chaperone present.",
             "mark": "Consent and chaperone for an intimate examination",
             "do": "say consent & say chaperone"
@@ -107,21 +108,21 @@
             "do": "look scrotum,testis"
           },
           {
-            "t": "Palpate",
+            "t": "Palpate gently",
             "r": "Right testis swollen and exquisitely tender throughout.",
             "mark": "Palpates gently",
             "do": "feel testis,scrotum @gloved"
           },
           {
             "t": "Cremasteric reflex",
-            "r": "Absent on the right, present on the left.",
+            "r": "Absent on the right, present on the left. \"High horizontal testis, absent reflex: torsion.\"",
             "mark": "Tests the cremasteric reflex",
             "do": "feel innerthigh | pin innerthigh | cotton innerthigh"
           }
         ],
         "Abdomen": [
           {
-            "t": "Abdomen and inguinal canals",
+            "t": "The abdomen and inguinal canals",
             "r": "Soft, no hernia.",
             "mark": "Examines the abdomen and hernial orifices",
             "anim": "abdomen",
@@ -138,22 +139,12 @@
       "hint": "Torsion: urgent urology for exploration now; nil by mouth; analgesia; consent with parents.",
       "opts": [
         {
-          "t": "Urology on-call now: suspected right testicular torsion, 3 hours — emergency scrotal exploration",
+          "t": "Urology on call now: Chris, 15, suspected right testicular torsion, 3 hours from onset. He needs emergency scrotal exploration, not an ultrasound.",
           "mark": "Refers urgently for exploration"
         },
         {
-          "t": "Nil by mouth, IV analgesia, antiemetic; inform his parents and consent for bilateral fixation",
+          "t": "Nil by mouth, IV analgesia and an antiemetic; inform his parents and consent for bilateral fixation.",
           "mark": "Prepares for theatre and involves parents"
-        },
-        {
-          "t": "Book an ultrasound for the morning",
-          "trap": "critical",
-          "r": "Delay loses the testis; clinical suspicion means exploration."
-        },
-        {
-          "t": "Antibiotics for epididymo-orchitis and discharge",
-          "trap": "critical",
-          "r": "Sudden severe pain with a high horizontal testis and absent reflex is torsion."
         }
       ]
     },
@@ -283,5 +274,46 @@
       "why": "Ultrasound and tumour markers.",
       "source": "Urology"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "When exactly did it start and how? Any similar short episodes before? Burning urine, discharge, sexual activity?",
+      "do": "Woke me at 5 a.m. — suddenly, very bad. A couple of brief ones last month that went away. No."
+    },
+    {
+      "at": "0:20",
+      "say": "Any injury?",
+      "do": "No."
+    },
+    {
+      "at": "0:40",
+      "say": "May I examine you? This is an intimate examination, so Nurse Chaperone will be present. Look at the lie of both testes. Palpate gently.",
+      "do": "Agreed; Nurse Chaperone present. Right testis high with a horizontal lie. Right testis swollen and exquisitely tender throughout."
+    },
+    {
+      "at": "1:00",
+      "say": "Cremasteric reflex. The abdomen and inguinal canals. High horizontal testis, absent reflex: torsion.",
+      "do": "Absent on the right, present on the left. \"High horizontal testis, absent reflex: torsion.\" Soft, no hernia."
+    },
+    {
+      "at": "1:20",
+      "say": "Urology on call now: Chris, 15, suspected right testicular torsion, 3 hours from onset. He needs emergency scrotal exploration, not an ultrasound. Nil by mouth, IV analgesia and an antiemetic; inform his parents and consent for bilateral fixation."
+    }
+  ],
+  "keywords": [
+    "episodes before",
+    "sexual",
+    "injury",
+    "chaperone",
+    "lie",
+    "cremasteric",
+    "torsion",
+    "urology",
+    "3 hours",
+    "scrotal exploration",
+    "nil by mouth",
+    "parents",
+    "bilateral fixation"
   ]
 }
