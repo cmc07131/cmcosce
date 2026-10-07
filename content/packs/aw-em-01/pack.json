@@ -311,18 +311,6 @@
           "marksChecklistIds": [
             "MS-01"
           ]
-        },
-        {
-          "id": "one-more-vl",
-          "label": "One more look with the videolaryngoscope",
-          "detail": "SpO2 is 68% and the i-gel is dead. Another videolaryngoscopy is not front-of-neck access.",
-          "isTrap": true
-        },
-        {
-          "id": "history",
-          "label": "A quick history before anyone cuts",
-          "detail": "There is no time for a history. Oxygen stays on and you declare CICO.",
-          "isTrap": true
         }
       ]
     },
@@ -342,12 +330,6 @@
           "marksChecklistIds": [
             "MS-02"
           ]
-        },
-        {
-          "id": "wait-ent",
-          "label": "Wait for ENT to arrive before any cut",
-          "detail": "You have declared CICO. Waiting for ENT before the scalpel is a delay.",
-          "isTrap": true
         }
       ]
     },
@@ -438,18 +420,6 @@
           "marksChecklistIds": [
             "MS-06"
           ]
-        },
-        {
-          "id": "psych",
-          "label": "Psychiatry",
-          "isTrap": true,
-          "detail": "Psychiatry is not the team for a surgical airway."
-        },
-        {
-          "id": "one-more-vl",
-          "label": "Ask for another videolaryngoscope instead",
-          "isTrap": true,
-          "detail": "Another videolaryngoscope is the critical miss. You need a scalpel."
         }
       ]
     },
@@ -471,12 +441,6 @@
           "marksChecklistIds": [
             "MS-07"
           ]
-        },
-        {
-          "id": "pull",
-          "label": "Take the i-gel out and look again",
-          "detail": "You have lost the oxygen route and you still have not cut.",
-          "isTrap": true
         }
       ]
     },
@@ -496,12 +460,6 @@
           "marksChecklistIds": [
             "MS-08"
           ]
-        },
-        {
-          "id": "wear-off",
-          "label": "Let the paralysis wear off, then look",
-          "detail": "A moving larynx makes front-of-neck access harder. You need paralysis, then the scalpel.",
-          "isTrap": true
         }
       ]
     },
@@ -541,24 +499,6 @@
           "grantsItems": [
             "tube-6"
           ]
-        },
-        {
-          "id": "needle",
-          "label": "Needle cricothyroidotomy set only",
-          "isTrap": true,
-          "detail": "A scalpel is on the trolley. Needle-only is not the adult plan."
-        },
-        {
-          "id": "vl",
-          "label": "One more videolaryngoscope blade",
-          "isTrap": true,
-          "detail": "The third look is the critical miss."
-        },
-        {
-          "id": "hook",
-          "label": "Tracheal hook, and leave the bougie",
-          "isTrap": true,
-          "detail": "This card is scalpel-bougie-tube. The hook is a different kit."
         }
       ]
     },
@@ -621,32 +561,7 @@
             "MS-22"
           ],
           "perform": "cico",
-          "performHint": "Do it as you would on a real patient: position, find the larynx, cut, stab, open, bougie, tube, confirm. SpO2 keeps falling until you ventilate through the trachea. Nothing stops a mistake; the debrief shows what to fix."
-        },
-        {
-          "id": "never",
-          "label": "I am not going to cut",
-          "detail": "SpO2 is 68%. Never cutting is the critical miss.",
-          "isTrap": true
-        },
-        {
-          "id": "needle",
-          "label": "Needle only. The scalpel stays on the trolley.",
-          "detail": "The scalpel is on the trolley. Needle-only in this adult is the wrong plan.",
-          "isTrap": true
-        },
-        {
-          "id": "deep",
-          "label": "Advance the tube to 22 cm at the skin",
-          "detail": "A front-of-neck tube is short at the skin. 22 cm is an oral-tube depth.",
-          "isTrap": true
-        },
-        {
-          "id": "bag-blind",
-          "label": "Bag it. I don't need a waveform.",
-          "detail": "No ETCO2. Do not celebrate, and do not keep ventilating a tract you have not confirmed.",
-          "isTrap": true,
-          "scene": "no-etco2"
+          "performHint": "Do it as you would on a real patient: position, find the larynx, cut, stab, open, bougie, tube, confirm. SpO2 keeps falling until you ventilate through the trachea. The debrief shows what to fix."
         }
       ]
     },
@@ -668,12 +583,6 @@
           "marksChecklistIds": [
             "MS-23"
           ]
-        },
-        {
-          "id": "let-go",
-          "label": "Let go, the tie can wait",
-          "detail": "A front-of-neck tube falls out. You hold it until it is secured.",
-          "isTrap": true
         }
       ]
     },
@@ -695,12 +604,6 @@
             "MS-24"
           ],
           "endStation": true
-        },
-        {
-          "id": "family-first",
-          "label": "Phone the family before I cut",
-          "detail": "The family are told after the airway is in, not before the scalpel.",
-          "isTrap": true
         }
       ]
     },
@@ -728,18 +631,6 @@
           "marksChecklistIds": [
             "MS-21"
           ]
-        },
-        {
-          "id": "needle-adult",
-          "label": "Needle first. A scalpel is too much.",
-          "detail": "That is the adult critical miss when a scalpel is already on the trolley.",
-          "isTrap": true
-        },
-        {
-          "id": "toddler",
-          "label": "Same adult 6.0 hole in a 4-year-old",
-          "detail": "An adult surgical hole and a 6.0 is the wrong operation in a toddler. Call ENT and use the needle algorithm.",
-          "isTrap": true
         }
       ]
     }
@@ -787,5 +678,56 @@
     "name": "CICO",
     "emoji": "🫁",
     "flavor": "AW-EM-01 · Elite Four. Declare, scalpel-bougie-tube, square wave."
-  }
+  },
+  "keywords": [
+    "CICO",
+    "front-of-neck access",
+    "call for help",
+    "AED consultant",
+    "anaesthetics",
+    "ENT",
+    "ICU",
+    "100% oxygen",
+    "i-gel",
+    "rocuronium 1.2 mg/kg",
+    "number-10 scalpel",
+    "bougie",
+    "cuffed 6.0",
+    "laryngeal handshake",
+    "scalpel–bougie–tube",
+    "square ETCO2",
+    "chest X-ray",
+    "ISBAR"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "This is can't intubate, can't oxygenate. I am declaring CICO. Front-of-neck access now."
+    },
+    {
+      "at": "0:10",
+      "say": "Call for help now: CICO, surgical airway starting. The AED consultant, anaesthetics, ENT, and ICU."
+    },
+    {
+      "at": "0:25",
+      "say": "Keep 100% oxygen on the i-gel. Is he fully relaxed? If not, rocuronium 1.2 mg/kg now."
+    },
+    {
+      "at": "0:40",
+      "say": "A number-10 scalpel, a bougie and a lubricated cuffed 6.0 tube, please."
+    },
+    {
+      "at": "0:50",
+      "say": "Neck extended. Laryngeal handshake: thyroid cartilage, cricothyroid membrane. Scalpel–bougie–tube: a transverse stab through the membrane, blade turned, bougie along it, tube railroaded, cuff up.",
+      "do": "Square ETCO2 trace."
+    },
+    {
+      "at": "1:40",
+      "say": "Square ETCO2: it's in the trachea. Hold the tube and tie it. Chest X-ray. He stays paralysed and sedated."
+    },
+    {
+      "at": "2:00",
+      "say": "ISBAR: CICO after a failed RSI with facial trauma, SpO2 68%. Scalpel–bougie–tube, square ETCO2, tube held and tied. Please convert to a formal tracheostomy when stable; he needs an ICU bed."
+    }
+  ]
 }

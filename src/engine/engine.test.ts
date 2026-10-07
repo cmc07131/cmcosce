@@ -180,23 +180,24 @@ test('pacing scores milliamps and 1 mg, not IA or 0.6 as the full dose', () => {
   const monitor = pack.room.props.find((prop) => prop.id === 'monitor')
   assert.match(readoutText(monitor?.readout, []) ?? '', /CHB/)
   assert.match(readoutText(monitor?.readout, ['paced', 'pulse']) ?? '', /Pulse 70/)
-  const traps = pack.actions.flatMap((action) => action.options ?? []).filter((option) => option.isTrap)
-  assert.ok(traps.some((option) => /0\.6 mg/.test(option.label)))
-  assert.ok(traps.some((option) => /IA/.test(option.label)))
-  const scoring = pack.actions.flatMap((action) => action.options ?? []).filter((option) => !option.isTrap)
-  assert.equal(scoring.some((option) => /0\.6 mg is the full/.test(option.label)), false)
+  const options = pack.actions.flatMap((action) => action.options ?? [])
+  // No wrong options to pick; the right dose and unit are what the player says.
+  assert.equal(options.some((option) => option.isTrap), false)
+  assert.ok(options.some((option) => /Atropine 1 mg/.test(option.label)))
+  assert.equal(options.some((option) => /\bIA\b|0\.6 mg is the full/.test(option.label)), false)
+  assert.ok((pack.script ?? []).some((beat) => /milliamps/.test(beat.say ?? '')))
 })
 
-test('IO station hands the procedure to the bench and keeps its traps', () => {
+test('IO station hands the procedure to the bench, with no wrong options', () => {
   const pack = load('io-em-01')
   const insert = pack.actions.find((action) => action.id === 'insert')
   assert.equal(insert?.options?.[0]?.perform, 'io')
   assert.doesNotMatch(insert?.options?.[0]?.performHint ?? '', /blue|counter-clockwise|5 mm/i, 'the bench hint must not give the steps away')
   const screen = pack.actions.find((action) => action.id === 'screen')
   assert.match(screen?.options?.find((option) => option.id === 'clean')?.detail ?? '', /2 cm medial/)
-  const traps = pack.actions.flatMap((action) => action.options ?? []).filter((option) => option.isTrap)
-  assert.ok(traps.some((option) => /fractured/i.test(option.label)))
-  assert.ok(traps.some((option) => /first-line for every adult arrest/i.test(option.label)))
+  const options = pack.actions.flatMap((action) => action.options ?? [])
+  assert.equal(options.some((option) => option.isTrap), false)
+  assert.match(pack.actions.find((action) => action.id === 'indicate')?.options?.[0]?.detail ?? '', /try a vein first/)
 })
 
 test('IO landmark: flat bone 2 cm medial to the tuberosity, and named errors elsewhere', () => {

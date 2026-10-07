@@ -289,18 +289,6 @@
           "marksChecklistIds": [
             "MS-02"
           ]
-        },
-        {
-          "id": "shock",
-          "label": "Synchronised shock for the block",
-          "detail": "He is conscious and in a slow block. A shock is the critical miss.",
-          "isTrap": true
-        },
-        {
-          "id": "pace-arrest",
-          "label": "If there is no pulse I will just pace and skip CPR",
-          "detail": "Pulseless is CPR and ALS. TCP is not a substitute for compressions.",
-          "isTrap": true
         }
       ]
     },
@@ -321,12 +309,6 @@
           "marksChecklistIds": [
             "MS-03"
           ]
-        },
-        {
-          "id": "psych",
-          "label": "Psychiatry first",
-          "detail": "This is a slow heart and a low blood pressure. Psychiatry is not the team.",
-          "isTrap": true
         }
       ]
     },
@@ -348,12 +330,6 @@
           "marksChecklistIds": [
             "MS-04"
           ]
-        },
-        {
-          "id": "ecg-first",
-          "label": "A perfect 12-lead before any pads",
-          "detail": "BP is 72. The 12-lead comes after the first pads are on, not before.",
-          "isTrap": true
         }
       ]
     },
@@ -374,18 +350,6 @@
             "MS-05",
             "MS-06"
           ]
-        },
-        {
-          "id": "zero-six",
-          "label": "Atropine 0.6 mg is the full AHA dose",
-          "detail": "0.6 mg is one ampoule, not the AHA dose. A planned dose under 0.5 mg can slow him further.",
-          "isTrap": true
-        },
-        {
-          "id": "three-first",
-          "label": "Three atropines, then think about pads",
-          "detail": "Wide-complex complete heart block does not wait for three doses. Pads now.",
-          "isTrap": true
         }
       ]
     },
@@ -414,31 +378,7 @@
             "MS-13"
           ],
           "perform": "pacing",
-          "performHint": "Do it as you would on a real patient: prepare the chest, pads, pain relief, pace, check capture, hand over. Nothing stops a mistake; the debrief shows what to fix."
-        },
-        {
-          "id": "voltage",
-          "label": "Set the voltage to 50–100 IA",
-          "detail": "The unit is milliamps, and you titrate it. A fixed “50–100 IA” does not score.",
-          "isTrap": true
-        },
-        {
-          "id": "shock-now",
-          "label": "Stay in defib and shock the block",
-          "detail": "He is awake. A shock is the critical miss. Turn the machine to PACER.",
-          "isTrap": true
-        },
-        {
-          "id": "screen-only",
-          "label": "The screen shows QRS. I do not need a pulse.",
-          "detail": "A spike and a QRS are only electrical capture. No pulse means PEA — start compressions.",
-          "isTrap": true
-        },
-        {
-          "id": "off",
-          "label": "Turn the pacer off so he can rest",
-          "detail": "The pads and the current stay until a wire captures. Switching it off drops the rate back to 32.",
-          "isTrap": true
+          "performHint": "Do it as you would on a real patient: prepare the chest, pads, pain relief, pace, check capture, hand over. The debrief shows what to fix."
         }
       ]
     },
@@ -483,12 +423,6 @@
           "marksChecklistIds": [
             "MS-13"
           ]
-        },
-        {
-          "id": "pace-hyperk",
-          "label": "Pace the sine wave. Calcium can wait.",
-          "detail": "Pacing does not fix hyperkalaemia. Calcium first, or the pads will not capture.",
-          "isTrap": true
         }
       ]
     },
@@ -511,12 +445,6 @@
             "MS-14"
           ],
           "endStation": true
-        },
-        {
-          "id": "peel",
-          "label": "Capture is in. Peel the pads off.",
-          "detail": "TCP is a bridge. The pads stay until the transvenous wire captures.",
-          "isTrap": true
         },
         {
           "id": "max-fail",
@@ -579,5 +507,57 @@
     "name": "TCP",
     "emoji": "💓",
     "flavor": "CV-EM-02 · Gym Leader. Pads, PACER, milliamps, then a pulse."
-  }
+  },
+  "keywords": [
+    "unstable",
+    "complete heart block",
+    "do not shock",
+    "AED consultant",
+    "CCU",
+    "oxygen",
+    "glucose",
+    "atropine 1 mg",
+    "transcutaneous pacing",
+    "anterior–posterior",
+    "analgesia",
+    "demand",
+    "milliamps",
+    "capture",
+    "femoral pulse",
+    "potassium",
+    "calcium gluconate",
+    "transvenous wire",
+    "pads stay on"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello, I am Dr Chan, the emergency doctor. Your heart is very slow, so we will use a machine to help it; your chest will thump."
+    },
+    {
+      "at": "0:15",
+      "say": "This is unstable bradycardia: complete heart block. He still has a pulse: do not shock. Pads on, and atropine."
+    },
+    {
+      "at": "0:25",
+      "say": "AED consultant, cardiology and CCU now, please. High-flow oxygen, cycle the blood pressure, IV access, a finger-stick glucose; the 12-lead doesn't delay the pads."
+    },
+    {
+      "at": "0:45",
+      "say": "This is infranodal block: I won't wait for atropine to work. Atropine 1 mg IV goes in while I start transcutaneous pacing."
+    },
+    {
+      "at": "1:00",
+      "say": "Dry and clip the chest, ECG leads on, anterior–posterior pads. Small doses of analgesia. PACER, demand mode, rate 70; turn up the milliamps until capture, then confirm a femoral pulse; set 5 to 10 milliamps above the threshold.",
+      "do": "Capture at 60 mA; femoral pulse present; BP rising."
+    },
+    {
+      "at": "1:50",
+      "say": "Why is he blocked? A venous gas and potassium, troponin, a 12-lead once he's paced, and his drug list. No rate-slowing drug. If the T waves are peaked: calcium gluconate 10%, 10 mL IV now."
+    },
+    {
+      "at": "2:15",
+      "say": "CCU: unstable complete heart block, now paced at 70, 70 milliamps, femoral pulse present. He needs a transvenous wire. The pads stay on. If capture is lost: a new pad vector, adrenaline, and the wire now."
+    }
+  ]
 }

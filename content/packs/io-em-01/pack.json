@@ -242,12 +242,6 @@
           "marksChecklistIds": [
             "MS-02"
           ]
-        },
-        {
-          "id": "adrenaline-lido",
-          "label": "Lidocaine with adrenaline for the marrow",
-          "detail": "The IO lidocaine is preservative-free and adrenaline-free. Adrenaline in the marrow is the wrong drug.",
-          "isTrap": true
         }
       ]
     },
@@ -268,12 +262,6 @@
           "marksChecklistIds": [
             "MS-03"
           ]
-        },
-        {
-          "id": "always",
-          "label": "IO is first-line for every adult arrest",
-          "detail": "AHA and ERC 2025: try IV first in adult arrest. IO if the vein is not there after about two attempts.",
-          "isTrap": true
         }
       ]
     },
@@ -296,18 +284,6 @@
             "MS-04",
             "MS-05"
           ]
-        },
-        {
-          "id": "fracture",
-          "label": "The tibia is fractured. I will drill it anyway.",
-          "detail": "Do not put an IO in a fractured bone, or distal to a long-bone fracture. Use the other limb or the humerus.",
-          "isTrap": true
-        },
-        {
-          "id": "same-bone",
-          "label": "There was an IO in this tibia yesterday. Same hole.",
-          "detail": "That bone is out for 48 hours. Pick the other tibia or the humerus.",
-          "isTrap": true
         }
       ]
     },
@@ -356,18 +332,6 @@
           "marksChecklistIds": [
             "MS-11"
           ]
-        },
-        {
-          "id": "blocked",
-          "label": "It will not run. The IO has failed. No flush needed.",
-          "detail": "No flush means no flow. A firm needle that has not been flushed is not a failed IO.",
-          "isTrap": true
-        },
-        {
-          "id": "abg",
-          "label": "Run the marrow through the blood-gas machine",
-          "detail": "Marrow can damage the analyser, and the potassium may read high. Label an IO sample if you must send one. Prefer a later IV sample.",
-          "isTrap": true
         }
       ]
     },
@@ -388,18 +352,6 @@
           "marksChecklistIds": [
             "MS-12"
           ]
-        },
-        {
-          "id": "swelling",
-          "label": "The calf is swelling. Speed the infusion up.",
-          "detail": "That is extravasation. Stop. Remove the IO. Check the compartment. The next needle goes in a different bone.",
-          "isTrap": true
-        },
-        {
-          "id": "leave",
-          "label": "Leave it until the ward round next week",
-          "detail": "It is not definitive access. Plan removal and a real line.",
-          "isTrap": true
         }
       ]
     },
@@ -453,12 +405,6 @@
           "id": "tight",
           "label": "The calf is getting tight.",
           "detail": "Stop the infusion. Remove the IO. Check the compartment. New IO in a different bone. This limb is not for another attempt."
-        },
-        {
-          "id": "physis",
-          "label": "I drilled the growth plate. It is fine.",
-          "detail": "The physis is not a safe target. A child landmark sits about 1 cm below the tuberosity, on the metaphysis, away from the plate.",
-          "isTrap": true
         }
       ]
     }
@@ -504,5 +450,58 @@
     "name": "IO",
     "emoji": "🦴",
     "flavor": "IO-EM-01 · Gym Leader. Blue needle, pop, flush, then a real line."
-  }
+  },
+  "keywords": [
+    "failed IV",
+    "septic shock",
+    "rescue access",
+    "lidocaine",
+    "allergy",
+    "no fracture",
+    "proximal tibia",
+    "2 cm medial",
+    "5 mm line",
+    "flush",
+    "30 mL/kg",
+    "antibiotics",
+    "compartment syndrome",
+    "24 hours",
+    "convert",
+    "ICU"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello, I'm Dr Chan, the emergency doctor. We can't get a drip in your arm, so I'm going to put a needle into the bone below your knee. You'll feel pressure, then a push."
+    },
+    {
+      "at": "0:15",
+      "say": "AED consultant, please. Fluid, a pressure bag, antibiotics and plain 2% lidocaine. Any allergy?"
+    },
+    {
+      "at": "0:25",
+      "say": "The indication: septic shock with two failed IVs. This is rescue access."
+    },
+    {
+      "at": "0:35",
+      "say": "No fracture, no burn, no prosthesis, no recent IO, no cellulitis. The proximal tibia on the clean leg: the flat anteromedial cortex, 2 cm medial to the tuberosity."
+    },
+    {
+      "at": "0:50",
+      "say": "Clean the skin. The needle through the skin to the bone: the 5 mm line must show, so a blue 25 mm. Drill with steady pressure until the give. Driver off, stylet out, aspirate. Plain lidocaine slowly into the marrow, then a firm flush.",
+      "do": "It flows under pressure; no swelling."
+    },
+    {
+      "at": "1:40",
+      "say": "30 mL/kg in divided boluses, reassessing the lungs and blood pressure after each. Broad-spectrum antibiotics through the IO now."
+    },
+    {
+      "at": "1:55",
+      "say": "Watch the calf: tightness, pallor or rising pain means extravasation or compartment syndrome: stop and pull it. It's a bridge: 24 hours maximum, then convert to an IV or a central line."
+    },
+    {
+      "at": "2:10",
+      "say": "Access secured: a proximal tibial IO, the side and needle size stated, flushed and flowing under pressure. ICU, please. I'll stay with him."
+    }
+  ]
 }
