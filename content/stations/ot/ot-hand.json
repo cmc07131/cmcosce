@@ -136,7 +136,7 @@
             "t": "Capillary refill and colour of the pulp",
             "r": "Pink, refill under 2 s.",
             "mark": "Checks digital circulation",
-            "anim": "glucose",
+            "anim": "pulse",
             "do": "press ringpulp-R,pulp-R | look ringpulp-R"
           }
         ]

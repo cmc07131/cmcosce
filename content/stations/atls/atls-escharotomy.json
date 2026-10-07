@@ -134,7 +134,7 @@
             "t": "Pulses and capillary refill, right hand",
             "r": "No radial or ulnar Doppler signal. Hand cool, capillary refill 5 s. Full-thickness burn all round the arm.",
             "mark": "Finds an ischaemic limb under circumferential eschar",
-            "anim": "glucose"
+            "anim": "pulse"
           }
         ]
       }

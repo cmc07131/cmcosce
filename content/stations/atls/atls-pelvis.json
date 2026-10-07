@@ -257,7 +257,7 @@
           {
             "t": "Pulse, skin, capillary refill",
             "r": "Weak radial pulse 136. Cold peripheries. CRT 5 s.",
-            "anim": "glucose"
+            "anim": "pulse"
           },
           {
             "t": "Abdomen",
@@ -293,8 +293,7 @@
           {
             "t": "Expose and keep warm",
             "r": "Temperature 35.9. Warm air blanket on.",
-            "mark": "Exposes and prevents hypothermia",
-            "anim": "abdomen"
+            "mark": "Exposes and prevents hypothermia"
           },
           {
             "t": "Full log roll now to look at her back",

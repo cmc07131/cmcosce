@@ -289,7 +289,7 @@
           {
             "t": "Pulse, skin, capillary refill",
             "r": "Thready radial pulse 128. Cold, pale, clammy. Capillary refill 4 seconds.",
-            "anim": "glucose"
+            "anim": "pulse"
           },
           {
             "t": "Neck veins",
@@ -321,8 +321,7 @@
           {
             "t": "Expose, then cover to keep warm",
             "r": "No other injuries on the front. Warm blankets on. Temp 35.8.",
-            "mark": "Exposes and prevents hypothermia",
-            "anim": "abdomen"
+            "mark": "Exposes and prevents hypothermia"
           }
         ]
       }

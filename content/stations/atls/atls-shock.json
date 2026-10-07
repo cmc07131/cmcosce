@@ -307,8 +307,7 @@
           {
             "t": "Expose, then warm",
             "r": "No other injuries. Temperature 36.1. Warm blankets on. \"Keep her warm.\"",
-            "mark": "Exposes fully, then prevents hypothermia",
-            "anim": "abdomen"
+            "mark": "Exposes fully, then prevents hypothermia"
           }
         ]
       }

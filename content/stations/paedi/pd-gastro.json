@@ -122,7 +122,7 @@
             "t": "Capillary refill, peripheral pulses, temperature of hands",
             "r": "CRT 4 s, weak pulses, cool hands.",
             "mark": "Recognises clinical shock",
-            "anim": "glucose"
+            "anim": "pulse"
           },
           {
             "t": "Skin turgor",

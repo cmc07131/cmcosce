@@ -63,7 +63,7 @@
           {
             "t": "Capillary refill",
             "r": "Right toes > 5 seconds; left 2 seconds.",
-            "anim": "glucose",
+            "anim": "pulse",
             "do": "press toes,nails"
           }
         ],
