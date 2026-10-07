@@ -458,3 +458,22 @@ test('haemorrhagic shock: the guide bridges with fluid before the blood arrives'
   const hint = nextHint(pack, spent, ['monitored', 'mhp'])
   assert.equal(hint?.kind === 'do' ? hint.actionId : hint?.kind, 'bridge-fluid')
 })
+
+test('close-ups read their findings: side, reaction, refill, tenderness, the meter value', async () => {
+  const { readFinding } = await import('../game/CutIn')
+  assert.equal(readFinding('Trachea deviated to the right; absent breath sounds on the left, hyper-resonant.').quietSide, 'left')
+  assert.equal(readFinding('Equal air entry, vesicular.').quietSide, null)
+  assert.equal(readFinding('Right pupil 6 mm, fixed; left 3 mm, reactive.').fixedSide, 'right')
+  assert.equal(readFinding('Pupils equal and reactive.').fixedSide, null)
+  assert.ok(readFinding('HR 128, BP 88/50, cool, CRT 4 s.').slowRefill)
+  assert.ok(!readFinding('Radial pulse present; CRT under 2 s.').slowRefill)
+  assert.equal(readFinding('Seatbelt sign. Tender and guarding in the left upper quadrant.').tender, 'luq')
+  assert.equal(readFinding('GCS 15, pupils equal and reactive, glucose 6.5.').glucose, '6.5')
+  // Every glucose close-up in the stations shows a number.
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    for (const s of st.steps) for (const o of [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat()]) {
+      if (o.anim === 'glucose' && /glucose|mmol/i.test(o.r ?? '')) assert.ok(readFinding(o.r).glucose, `${st.id}: "${o.r}" shows no glucose value`)
+    }
+  }
+})

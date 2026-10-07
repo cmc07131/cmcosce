@@ -48,7 +48,7 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
   const groups = useMemo(() => [...new Set((action.options ?? []).map((o) => o.group ?? ''))], [action])
   const [tab, setTab] = useState(groups[0] ?? '')
   const [film, setFilm] = useState<string | null>(null)
-  const [playing, setPlaying] = useState<{ id: string; kind: CutInKind; reading?: string } | null>(null)
+  const [playing, setPlaying] = useState<{ id: string; kind: CutInKind; finding?: string } | null>(null)
   const used = new Set(spent)
   const rows = (action.options ?? []).filter((o) => (o.group ?? '') === tab)
   // Hands on first: the close-up plays, then the finding appears.
@@ -57,8 +57,8 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
     if (playing) return
     // Not indicated yet: refused at once, without playing the close-up.
     if (!o.anim || !indicated(o, scene ?? []) || !(cutInKinds as readonly string[]).includes(o.anim)) return onOption(o.id)
-    const reading = replyText(o).match(/\d+(?:\.\d+)?/)?.[0]
-    setPlaying({ id: o.id, kind: o.anim as CutInKind, reading })
+    // The close-up shows this finding: which side, how it reacts, the meter's number.
+    setPlaying({ id: o.id, kind: o.anim as CutInKind, finding: replyText(o) })
     window.setTimeout(() => {
       setPlaying(null)
       onOption(o.id)
@@ -100,7 +100,7 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
         })}
       </div>
       {film && <Film src={film} onClose={() => setFilm(null)} />}
-      {playing && <CutIn kind={playing.kind} reading={playing.reading} />}
+      {playing && <CutIn kind={playing.kind} finding={playing.finding} />}
     </Win>
   )
 }
