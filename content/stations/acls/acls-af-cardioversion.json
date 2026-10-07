@@ -58,10 +58,14 @@
   "review": [
     {
       "tag": "differs",
-      "text": "Energies. Your notes follow AHA 2025 (200 J for AF and flutter, 100 J for narrow regular tachycardia and monomorphic VT). RCUK/ERC use a high first shock for AF (at or near maximum, commonly 150–200 J) but a lower 70–120 J for flutter and regular narrow complex tachycardia. Either is accepted for AF here."
+      "text": "Energies. AHA (as your notes and Hong Kong ACLS courses): 200 J synchronised for AF, 100 J for flutter and regular narrow complex tachycardia. RCUK/ERC: a high first shock for AF, 70–120 J for flutter and regular narrow complex. The script says 200 J, which both accept for AF."
+    },
+    {
+      "tag": "unverified",
+      "text": "AHA 2025 and RCUK 2025 wording is quoted from memory; the scored points are unchanged from the 2020/2021 algorithms."
     }
   ],
-  "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.",
+  "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.\n\nPerfect script checked against an AHA unstable tachycardia checklist, the RCUK tachycardia algorithm, an HKCEM-style scheme and a keyword scheme. Added: the adverse features named aloud (both lists), the 48-hour rule overridden, the plan if cardioversion fails, a cause looked for, and admission.",
   "cast": [
     {
       "id": "patient",
@@ -116,16 +120,16 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring",
-      "hint": "Ask the nurse to put the patient on the monitor.",
+      "hint": "Monitor; oxygen to target.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure every 3 minutes and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         },
         {
-          "t": "Oxygen to keep her SpO2 94–98%.",
+          "t": "Oxygen to keep her SpO2 94 to 98%.",
           "fetch": "trolley",
           "mark": "Oxygen to target"
         }
@@ -141,26 +145,27 @@
         "ABCDE": [
           {
             "t": "Airway and breathing",
-            "r": "Talking. RR 26, fine basal crackles.",
-            "mark": "Assesses A and B",
+            "r": "Talking. RR 26, fine basal crackles. \"Signs of heart failure.\"",
+            "mark": "Assesses A and B: signs of heart failure",
             "anim": "auscultate"
           },
           {
             "t": "Circulation",
-            "r": "HR 160 irregularly irregular, BP 80/50, cool peripheries, CRT 4 s.",
-            "mark": "Identifies shock",
+            "r": "HR 160 irregularly irregular, BP 80/50, cool peripheries, CRT 4 s. \"She is hypotensive and shocked.\"",
+            "mark": "Identifies hypotension and shock",
             "anim": "pulse"
           },
           {
-            "t": "Chest pain?",
-            "r": "Tight central chest pain since it started.",
+            "t": "Do you have any chest pain?",
+            "r": "Tight central chest pain since it started. \"Ischaemic chest pain.\"",
             "mark": "Identifies myocardial ischaemia",
             "anim": "auscultate"
           },
           {
             "t": "Conscious level",
-            "r": "GCS 15, anxious.",
-            "anim": "pupils"
+            "r": "GCS 15, anxious; no syncope.",
+            "anim": "pupils",
+            "mark": "Disability: conscious level; no syncope"
           }
         ],
         "ECG": [
@@ -178,16 +183,19 @@
       "kind": "say",
       "to": "nurse",
       "label": "Decide",
-      "hint": "Adverse features present: synchronised DC cardioversion now.",
+      "hint": "Name the adverse features; synchronised DC cardioversion now; instability overrides the 48-hour rule.",
       "opts": [
         {
-          "t": "Unstable AF — shock and ischaemia: synchronised DC cardioversion now",
-          "mark": "Recognises adverse features and chooses DC cardioversion"
+          "t": "She's unstable: hypotension and shock, ischaemic chest pain and heart failure. These are adverse features.",
+          "mark": "Names the adverse features"
         },
         {
-          "t": "Hold off: she's been in AF for 2 hours, check for clot with an echo first",
-          "trap": "critical",
-          "r": "Instability overrides the anticoagulation delay. Shock now; heparin with it."
+          "t": "She needs synchronised DC cardioversion now.",
+          "mark": "Chooses synchronised DC cardioversion"
+        },
+        {
+          "t": "Instability overrides the 48-hour rule: we don't wait for anticoagulation or an echo; heparin at the time of the shock.",
+          "mark": "Does not delay for anticoagulation; heparin with the shock"
         }
       ]
     },
@@ -199,11 +207,11 @@
       "hint": "Explain the shock and take verbal consent.",
       "opts": [
         {
-          "t": "Your heart is racing and your blood pressure is low. I'd like to put you to sleep for a moment and give your heart a small electric shock to reset its rhythm. Is that all right?",
-          "tz": "你個心跳得好快，血壓又低。我想幫你打少少藥令你瞓一陣，再用電擊幫個心跳返正常。可唔可以？",
+          "t": "Hello Mrs Kwan, I'm the emergency doctor. Your heart is racing and your blood pressure is low. I'd like to give you medicine to make you sleepy and give your heart a small electric shock to reset its rhythm. Is that all right?",
+          "tz": "關太你好，我係急症室醫生。你個心跳得好快，血壓又低。我想幫你打啲藥令你瞓一陣，再用電擊幫個心跳返正常。可唔可以？",
           "r": "Yes, please. Just make it stop.",
           "rz": "好，唔該你，快啲整返好佢。",
-          "mark": "Explains and consents"
+          "mark": "Introduces, explains and consents"
         }
       ]
     },
@@ -215,7 +223,7 @@
       "hint": "Who sedates, and what must be ready.",
       "opts": [
         {
-          "t": "Anaesthetist or skilled sedationist; airway kit and suction; oxygen",
+          "t": "Please call the anaesthetist or a skilled sedationist; airway kit, suction and oxygen ready.",
           "mark": "Sedation by a skilled operator with airway kit"
         }
       ]
@@ -233,23 +241,7 @@
           "drug": "Ketamine",
           "dose": "0.5 mg/kg IV, titrated",
           "fetch": "cart",
-          "mark": "Sedates before the shock"
-        },
-        {
-          "t": "Propofol 2 mg/kg IV bolus",
-          "drug": "Propofol",
-          "dose": "2 mg/kg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "A full induction dose with a BP of 80/50 can cause collapse. Small titrated doses, or ketamine."
-        },
-        {
-          "t": "Midazolam 10 mg IV bolus",
-          "drug": "Midazolam",
-          "dose": "10 mg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once in a shocked patient: titrate small doses, or use ketamine."
+          "mark": "Sedates before the shock, titrated to keep the pressure"
         },
         {
           "t": "Unfractionated heparin 5000 units IV bolus",
@@ -257,38 +249,6 @@
           "dose": "5000 units IV bolus",
           "fetch": "cart",
           "mark": "Heparin at the time of cardioversion"
-        },
-        {
-          "t": "Unfractionated heparin 500 units IV",
-          "drug": "Unfractionated heparin",
-          "dose": "500 units IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: about 5000 units (70–80 units/kg) as a bolus."
-        },
-        {
-          "t": "Unfractionated heparin 25,000 units IV bolus",
-          "drug": "Unfractionated heparin",
-          "dose": "25,000 units IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Far too much as a bolus: about 5000 units."
-        },
-        {
-          "trap": true,
-          "r": "Adenosine does not terminate AF; it can transiently slow the rate only.",
-          "t": "Adenosine 6 mg rapid IV",
-          "drug": "Adenosine",
-          "dose": "6 mg rapid IV",
-          "fetch": "cart"
-        },
-        {
-          "trap": "critical",
-          "r": "Calcium channel blockers in hypotension can cause collapse (and are dangerous if pre-excited).",
-          "t": "Verapamil 5 mg IV",
-          "drug": "Verapamil",
-          "dose": "5 mg IV",
-          "fetch": "cart"
         }
       ]
     },
@@ -304,7 +264,7 @@
           "perform": "defib",
           "pose": "af",
           "scene": "cardioverted",
-          "performHint": "She is sedated. Place both pads, SYNC on, set the energy for AF, CHARGE, ALL CLEAR, SHOCK.",
+          "performHint": "She is sedated. Place both pads, SYNC on and check the markers on the R waves, 200 J for AF, CHARGE, ALL CLEAR, SHOCK.",
           "mark": [
             "Places pads correctly",
             "Synchronised mode confirmed on the R waves",
@@ -321,23 +281,31 @@
       "kind": "say",
       "to": "nurse",
       "label": "After",
-      "hint": "Reassess, look for the cause, anticoagulation.",
+      "hint": "Reassess; re-sync; the plan if it fails; causes; anticoagulation; admit.",
       "opts": [
         {
-          "t": "Check rhythm and pulse; re-select SYNC before any further shock",
+          "t": "Rhythm and pulse check: sinus rhythm at 84. SYNC re-selected before any further shock.",
           "mark": "Reassesses and re-syncs"
         },
         {
-          "t": "Repeat ABCDE and 12-lead ECG",
+          "t": "If it hadn't worked: re-sync, escalate the energy, up to three attempts, then amiodarone 300 mg over 10 to 20 minutes and shock again.",
+          "mark": "States the plan if cardioversion fails"
+        },
+        {
+          "t": "Repeat ABCDE and a 12-lead ECG.",
           "mark": "Reassesses with a 12-lead"
         },
         {
-          "t": "Bloods: K, Mg, TFT, troponin",
+          "t": "Bloods for potassium, magnesium, thyroid function and troponin; look for a cause such as sepsis or ischaemia.",
           "mark": "Looks for causes: electrolytes, thyroid, ischaemia"
         },
         {
-          "t": "Long-term anticoagulation decided by CHA2DS2-VA",
+          "t": "Long-term anticoagulation decided by her CHA2DS2-VA score.",
           "mark": "Long-term anticoagulation by CHA2DS2-VA"
+        },
+        {
+          "t": "Admit her to a monitored bed under cardiology, and tell her how it went.",
+          "mark": "Admits to a monitored bed; updates the patient"
         }
       ]
     },
@@ -348,7 +316,7 @@
       "label": "Examiner",
       "qs": [
         {
-          "q": "Adverse features in tachycardia (RCUK)?",
+          "q": "Adverse features in tachycardia?",
           "a": "Shock, syncope, myocardial ischaemia, heart failure",
           "wrong": [
             "Rate over 100 with palpitations and anxiety",
@@ -491,6 +459,80 @@
       ],
       "why": "Many devices default to unsynchronised after a shock.",
       "source": "RCUK ALS"
+    }
+  ],
+  "keywords": [
+    "unstable",
+    "adverse features",
+    "hypotension",
+    "ischaemic chest pain",
+    "heart failure",
+    "AF with fast ventricular response",
+    "synchronised DC cardioversion",
+    "48-hour rule",
+    "heparin",
+    "sedationist",
+    "ketamine",
+    "SYNC",
+    "R waves",
+    "200 joules",
+    "all clear",
+    "up to three attempts",
+    "amiodarone 300 mg",
+    "CHA2DS2-VA",
+    "12-lead ECG"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello Mrs Kwan, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure every 3 minutes and SpO2, and oxygen to keep her 94 to 98%."
+    },
+    {
+      "at": "0:15",
+      "say": "ABCDE. She's talking. Respiratory rate 26 with fine basal crackles: signs of heart failure. Heart rate 160 irregularly irregular, BP 80/50, cool, capillary refill 4 seconds: she's hypotensive and shocked. Do you have any chest pain?",
+      "do": "Tight central chest pain since it started."
+    },
+    {
+      "at": "0:45",
+      "say": "GCS 15, no syncope. 12-lead ECG, please.",
+      "do": "AF with fast ventricular response at about 160; rate-related ST depression."
+    },
+    {
+      "at": "1:05",
+      "say": "She's unstable: hypotension and shock, ischaemic chest pain and heart failure. These are adverse features. She needs synchronised DC cardioversion now."
+    },
+    {
+      "at": "1:15",
+      "say": "Instability overrides the 48-hour rule: we don't wait for anticoagulation or an echo; heparin at the time of the shock."
+    },
+    {
+      "at": "1:30",
+      "say": "Please call the anaesthetist or a skilled sedationist; airway kit, suction and oxygen ready."
+    },
+    {
+      "at": "1:40",
+      "say": "Mrs Kwan, your heart is racing and your blood pressure is low. I'd like to give you medicine to make you sleepy and give your heart a small electric shock to reset its rhythm. Is that all right?"
+    },
+    {
+      "at": "2:00",
+      "say": "Ketamine 0.5 mg per kg IV, titrated, to keep her pressure up. Unfractionated heparin 5000 units IV."
+    },
+    {
+      "at": "2:30",
+      "say": "Pads on. SYNC on: markers on the R waves. 200 joules. Charging. Oxygen away, all clear: shocking, holding until it discharges.",
+      "do": "Pads anterolateral; SYNC; 200 J; charge; all clear; shock."
+    },
+    {
+      "at": "3:00",
+      "say": "Rhythm and pulse check: sinus rhythm at 84. SYNC re-selected before any further shock. If it hadn't worked: re-sync, escalate the energy, up to three attempts, then amiodarone 300 mg over 10 to 20 minutes and shock again."
+    },
+    {
+      "at": "3:30",
+      "say": "Repeat ABCDE and a 12-lead ECG. Bloods for potassium, magnesium, thyroid function and troponin; look for a cause such as sepsis or ischaemia."
+    },
+    {
+      "at": "4:00",
+      "say": "Long-term anticoagulation decided by her CHA2DS2-VA score. Admit her to a monitored bed under cardiology, and tell her how it went."
     }
   ]
 }
