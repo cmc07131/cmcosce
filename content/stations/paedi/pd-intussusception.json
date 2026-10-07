@@ -23,15 +23,16 @@
     },
     {
       "title": "Manage",
-      "goal": "Access, fluid for his weight, a tube, analgesia and the surgeon.",
+      "goal": "Access, fluid for his weight, a tube, analgesia and the surgeon; his mother.",
       "steps": [
         "manage",
-        "bolus"
+        "bolus",
+        "explain"
       ]
     }
   ],
   "review": [],
-  "notes": "Checked against RCH Melbourne and RCS/BAPS guidance on intussusception, and NICE NG143 traffic-light system.\n\nIntussusception (6 months to 2 years): episodic inconsolable crying with drawing up of legs, pallor and lethargy between episodes, vomiting (becoming bilious), late 'redcurrant jelly' stool, a sausage-shaped mass in the right upper quadrant. Bilious vomiting in any infant is a surgical emergency (malrotation with volvulus until proven otherwise). Ultrasound (target/doughnut sign) is the investigation of choice. Resuscitate with 10–20 mL/kg boluses (10 mL/kg per RCUK), IV access, bloods, NG tube, analgesia, and contact the paediatric surgeon; air enema reduction by radiology with the surgical team present if stable and no peritonitis or perforation; surgery if these fail or the child is peritonitic/shocked.\n\nOther causes of vomiting in infants to consider in the history: gastroenteritis, UTI, pyloric stenosis (2–8 weeks, projectile, non-bilious, hypochloraemic alkalosis), DKA, raised ICP, NAI, sepsis. Your notes list 'paediatric vomiting' as a topic without detail.",
+  "notes": "Checked against RCH Melbourne and RCS/BAPS guidance on intussusception, and NICE NG143 traffic-light system.\n\nIntussusception (6 months to 2 years): episodic inconsolable crying with drawing up of legs, pallor and lethargy between episodes, vomiting (becoming bilious), late 'redcurrant jelly' stool, a sausage-shaped mass in the right upper quadrant. Bilious vomiting in any infant is a surgical emergency (malrotation with volvulus until proven otherwise). Ultrasound (target/doughnut sign) is the investigation of choice. Resuscitate with 10–20 mL/kg boluses (10 mL/kg per RCUK), IV access, bloods, NG tube, analgesia, and contact the paediatric surgeon; air enema reduction by radiology with the surgical team present if stable and no peritonitis or perforation; surgery if these fail or the child is peritonitic/shocked.\n\nOther causes of vomiting in infants to consider in the history: gastroenteritis, UTI, pyloric stenosis (2–8 weeks, projectile, non-bilious, hypochloraemic alkalosis), DKA, raised ICP, NAI, sepsis. Your notes list 'paediatric vomiting' as a topic without detail.\n\nPerfect script checked against APLS and RCEM paediatric guidance, an HKCEM-style scheme and a keyword scheme. Removed the discharge-as-gastroenteritis and 50 mL/kg options. Added the explanation.",
   "cast": [
     {
       "id": "mother",
@@ -106,7 +107,8 @@
             "t": "Diarrhoea before this?",
             "tz": "之前有冇肚屙？",
             "rz": "冇。",
-            "r": "No."
+            "r": "No.",
+            "mark": "Asks about preceding diarrhoea"
           }
         ],
         "Hydration": [
@@ -137,12 +139,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put him on the monitor: ECG and SpO2.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2. He's about 9 kg.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "tests",
@@ -154,7 +157,7 @@
         "Exam": [
           {
             "t": "Palpate the abdomen",
-            "r": "A sausage-shaped mass in the right upper quadrant; not peritonitic.",
+            "r": "A sausage-shaped mass in the right upper quadrant; not peritonitic. \"A sausage-shaped mass: intussusception.\"",
             "mark": "Finds a sausage-shaped mass"
           }
         ],
@@ -192,11 +195,6 @@
           "t": "Paediatric surgeon now; air enema reduction with surgeons present",
           "need": true,
           "mark": "Surgical referral and air enema"
-        },
-        {
-          "t": "Oral rehydration and discharge as gastroenteritis",
-          "trap": "critical",
-          "r": "Bilious vomiting and redcurrant stool: surgical emergency."
         }
       ]
     },
@@ -216,14 +214,22 @@
           "t": "Crystalloid 10 mL/kg (90 mL), then reassess",
           "drug": "Crystalloid",
           "dose": "10 mL/kg (90 mL), then reassess"
-        },
+        }
+      ]
+    },
+    {
+      "id": "explain",
+      "kind": "say",
+      "to": "mother",
+      "label": "Talk to his mother",
+      "hint": "What it is and what happens next.",
+      "opts": [
         {
-          "t": "Crystalloid 50 mL/kg (450 mL) fast",
-          "drug": "Crystalloid",
-          "dose": "50 mL/kg (450 mL) fast",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Far too much at once: 10 mL/kg boluses, reassessing after each."
+          "t": "Jason's bowel has telescoped into itself: that's intussusception. It causes the pain and the red jelly nappy. The surgeons and radiologists will try to push it back with air through his bottom; if that doesn't work, he'll need an operation.",
+          "tz": "阿Jason 嘅腸套咗入自己入面，叫做腸套疊，所以佢會痛同埋有紅色啫喱咁嘅大便。外科同放射科醫生會試吓由肛門打氣將段腸推返出嚟；如果唔得，佢就要做手術。",
+          "r": "Will he be okay?",
+          "rz": "佢會唔會冇事？",
+          "mark": "Explains the diagnosis and air enema to the parent"
         }
       ]
     },
@@ -353,5 +359,53 @@
       "why": "Ultrasound confirms.",
       "source": "Paediatric surgery"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "What are the crying episodes like? What colour is the vomit? What did the nappy look like?",
+      "do": "Every 15–20 minutes he screams, pulls his legs up, then goes pale and sleepy. Milk at first, now greenish. Red and jelly-like."
+    },
+    {
+      "at": "0:20",
+      "say": "Diarrhoea before this? Feeding and wet nappies. Recent illness, previous problems, vaccines.",
+      "do": "No. Refusing milk. One wet nappy since morning. A cold last week. Fully vaccinated, rotavirus included."
+    },
+    {
+      "at": "0:40",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2. He's about 9 kg."
+    },
+    {
+      "at": "1:00",
+      "say": "Palpate the abdomen. Abdominal ultrasound. A sausage-shaped mass: intussusception.",
+      "do": "A sausage-shaped mass in the right upper quadrant; not peritonitic. \"A sausage-shaped mass: intussusception.\" Target (doughnut) sign in the right upper quadrant."
+    },
+    {
+      "at": "1:20",
+      "say": "IV access; bloods including gas and group and save. Nasogastric tube on free drainage; analgesia. Paediatric surgeon now; air enema reduction with surgeons present."
+    },
+    {
+      "at": "1:40",
+      "say": "Crystalloid 10 mL/kg (90 mL), then reassess."
+    },
+    {
+      "at": "2:00",
+      "say": "Jason's bowel has telescoped into itself: that's intussusception. It causes the pain and the red jelly nappy. The surgeons and radiologists will try to push it back with air through his bottom; if that doesn't work, he'll need an operation.",
+      "do": "Will he be okay?"
+    }
+  ],
+  "keywords": [
+    "crying",
+    "colour is the vomit",
+    "jelly",
+    "wet nappies",
+    "vaccines",
+    "sausage-shaped mass",
+    "intussusception",
+    "ultrasound",
+    "nasogastric",
+    "paediatric surgeon",
+    "air enema",
+    "10 mL/kg"
   ]
 }

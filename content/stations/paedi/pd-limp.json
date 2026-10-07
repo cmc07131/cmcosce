@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against RCEM/RCPCH guidance on the limping child, the Kocher criteria (septic arthritis), and BOAST 'Slipped capital femoral epiphysis' (2021).\n\nDifferential by age: toddler (fracture — toddler's fracture, NAI, DDH, septic arthritis), 3–10 years (transient synovitis, septic arthritis, Perthes), adolescent (SUFE, overuse, tumours); at any age: infection, malignancy, NAI. Hip pathology often presents as knee pain (obturator nerve) — always examine the hip. SUFE: obese adolescent, loss of internal rotation, obligatory external rotation on hip flexion (Drehmann sign); frog-leg lateral X-ray (Klein's line fails to cut the epiphysis). Treatment: non-weight-bearing immediately and urgent orthopaedic referral for pinning; check the other hip. Septic arthritis (Kocher): non-weight-bearing, fever over 38.5, ESR over 40, WCC over 12 (probability rises with number of criteria; CRP over 20 in modified criteria) → aspirate and antibiotics.\n\nYour notes list the limping child ('referred pain from hip to knee'; HSP and NAI in the differential) — this matches.",
+  "notes": "Checked against RCEM/RCPCH guidance on the limping child, the Kocher criteria (septic arthritis), and BOAST 'Slipped capital femoral epiphysis' (2021).\n\nDifferential by age: toddler (fracture — toddler's fracture, NAI, DDH, septic arthritis), 3–10 years (transient synovitis, septic arthritis, Perthes), adolescent (SUFE, overuse, tumours); at any age: infection, malignancy, NAI. Hip pathology often presents as knee pain (obturator nerve) — always examine the hip. SUFE: obese adolescent, loss of internal rotation, obligatory external rotation on hip flexion (Drehmann sign); frog-leg lateral X-ray (Klein's line fails to cut the epiphysis). Treatment: non-weight-bearing immediately and urgent orthopaedic referral for pinning; check the other hip. Septic arthritis (Kocher): non-weight-bearing, fever over 38.5, ESR over 40, WCC over 12 (probability rises with number of criteria; CRP over 20 in modified criteria) → aspirate and antibiotics.\n\nYour notes list the limping child ('referred pain from hip to knee'; HSP and NAI in the differential) — this matches.\n\nPerfect script checked against BSCOS/RCEM limping-child guidance, an HKCEM-style scheme and a keyword scheme. Removed the knee-only film and physio options; the other hip now scores.",
   "cast": [
     {
       "id": "patient",
@@ -57,13 +57,13 @@
       "groups": {
         "Look": [
           {
-            "t": "Gait",
+            "t": "Watch him walk",
             "r": "Antalgic gait with the left foot turned out.",
             "mark": "Observes gait",
             "do": "say walk"
           },
           {
-            "t": "Leg lengths and rotation lying",
+            "t": "Lying down: leg lengths and rotation",
             "r": "Left leg externally rotated and ~1 cm short.",
             "mark": "Notes rotation and shortening",
             "do": "look legs,foot @supine | tape asis-L+medialmalleolus-L+asis-R+medialmalleolus-R"
@@ -71,7 +71,7 @@
         ],
         "Knee": [
           {
-            "t": "Left knee",
+            "t": "Examine the left knee",
             "r": "Normal: no effusion, full range, non-tender.",
             "mark": "Examines the knee",
             "do": "feel knee-L | move knee-L"
@@ -79,26 +79,27 @@
         ],
         "Hip": [
           {
-            "t": "Hip internal rotation",
+            "t": "Internal rotation of the left hip",
             "r": "Left internal rotation markedly reduced and painful.",
             "mark": "Examines the hip: loss of internal rotation",
             "do": "move hip-L:rot @hipflex-L=60..110"
           },
           {
             "t": "Flex the left hip",
-            "r": "The thigh swings into external rotation as it flexes (Drehmann sign).",
+            "r": "The thigh swings into external rotation as it flexes (Drehmann sign). \"A positive Drehmann sign: a slipped upper femoral epiphysis.\"",
             "mark": "Elicits Drehmann sign",
             "do": "move hip-L:flex"
           },
           {
-            "t": "Right hip",
+            "t": "Compare the right hip",
             "r": "Normal.",
-            "do": "move hip-R | feel hip-R,groin-R"
+            "do": "move hip-R | feel hip-R,groin-R",
+            "mark": "Examines the other hip"
           }
         ],
         "Other": [
           {
-            "t": "Temperature, spine, skin, abdomen",
+            "t": "Temperature, spine, skin and abdomen",
             "r": "Afebrile, no rash, spine and abdomen normal.",
             "mark": "Excludes infection and other causes",
             "do": "feel abdomen | look back | feel spine"
@@ -119,11 +120,6 @@
             "r": "Left femoral epiphysis displaced posteriorly and medially; Klein's line misses the epiphysis.",
             "img": "xr:hip-frog-sufe",
             "mark": "Requests frog-leg laterals and identifies SUFE"
-          },
-          {
-            "t": "Knee X-ray only",
-            "trap": true,
-            "r": "Hip pathology refers to the knee — image the hips."
           }
         ]
       }
@@ -144,12 +140,6 @@
           "t": "The other hip can slip too, so it will be checked and watched",
           "tz": "另一邊髖關節都有機會滑，所以我哋都會檢查同跟進。",
           "mark": "Mentions the contralateral hip"
-        },
-        {
-          "t": "Physio and review in 6 weeks",
-          "tz": "做物理治療，六個禮拜後覆診。",
-          "trap": "critical",
-          "r": "Further slip risks avascular necrosis. This is urgent."
         }
       ]
     },
@@ -279,5 +269,44 @@
       "why": "Caird criteria.",
       "source": "Caird 2006"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Watch him walk. Lying down: leg lengths and rotation. Examine the left knee.",
+      "do": "Antalgic gait with the left foot turned out. Left leg externally rotated and ~1 cm short. Normal: no effusion, full range, non-tender."
+    },
+    {
+      "at": "0:20",
+      "say": "Internal rotation of the left hip. Flex the left hip. Compare the right hip. A positive Drehmann sign: a slipped upper femoral epiphysis.",
+      "do": "Left internal rotation markedly reduced and painful. The thigh swings into external rotation as it flexes (Drehmann sign). \"A positive Drehmann sign: a slipped upper femoral epiphysis.\" Normal."
+    },
+    {
+      "at": "0:40",
+      "say": "Temperature, spine, skin and abdomen.",
+      "do": "Afebrile, no rash, spine and abdomen normal."
+    },
+    {
+      "at": "1:00",
+      "say": "AP pelvis and frog-leg lateral of both hips.",
+      "do": "Left femoral epiphysis displaced posteriorly and medially; Klein's line misses the epiphysis."
+    },
+    {
+      "at": "1:20",
+      "say": "The growth plate at the top of his thigh bone has slipped. He must not put weight on it — crutches or a wheelchair now — and the orthopaedic team will fix it with a pin, usually today or tomorrow. The other hip can slip too, so it will be checked and watched."
+    }
+  ],
+  "keywords": [
+    "walk",
+    "leg lengths",
+    "knee",
+    "internal rotation",
+    "Drehmann",
+    "slipped upper femoral epiphysis",
+    "right hip",
+    "frog-leg lateral",
+    "must not put weight",
+    "pin",
+    "other hip"
   ]
 }
