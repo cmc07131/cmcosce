@@ -22,9 +22,10 @@
     },
     {
       "title": "Plan",
-      "goal": "Protect her, document, investigate, report, and think of her brother.",
+      "goal": "Protect her, document, investigate, report, her brother; tell her father honestly.",
       "steps": [
-        "plan"
+        "plan",
+        "tell"
       ]
     }
   ],
@@ -34,7 +35,7 @@
       "text": "Date of the new law. Your notes say Cap. 650 takes full effect on 1 January 2026. The Mandatory Reporting of Child Abuse Ordinance came into force on 20 January 2026."
     }
   ],
-  "notes": "Checked against Hong Kong's Mandatory Reporting of Child Abuse Ordinance (Cap. 650, in force 20 January 2026), the Social Welfare Department 'Protecting Children from Maltreatment — Procedural Guide', the Protection of Children and Juveniles Ordinance (Cap. 213), and NICE CG89 (Child maltreatment).\n\nRed flags: delay in presentation, a history inconsistent with the injury or the child's development, changing stories, injury in a non-mobile child, patterns (symmetrical 'glove and stocking' immersion scalds with sharp tide-marks and sparing of flexures; cigarette burns; bruises on the ears, neck, buttocks, or with patterns; multiple fractures of different ages, metaphyseal and posterior rib fractures), other injuries, repeated attendances. Take a careful, non-judgemental history, document verbatim with times, examine fully (with a chaperone), photograph with consent, protect the child (admit as a place of safety), and involve the senior and paediatric team. Investigations: skeletal survey, CT head (under 1 year or with neurological signs), bloods (FBC, clotting, bone profile), ophthalmology for retinal haemorrhages; consider siblings.\n\nUnder Cap. 650 (from 20 January 2026) medical practitioners are mandated reporters: report serious child abuse to the Social Welfare Department or police as soon as practicable through the reporting platform. Your notes say Cap. 650 takes full effect on 1 January 2026; it came into force on 20 January 2026. The rest of your notes (FCPSU, 24-hour SWD hotline, admission under Cap. 213 section 34F if parents refuse) matches.",
+  "notes": "Checked against Hong Kong's Mandatory Reporting of Child Abuse Ordinance (Cap. 650, in force 20 January 2026), the Social Welfare Department 'Protecting Children from Maltreatment — Procedural Guide', the Protection of Children and Juveniles Ordinance (Cap. 213), and NICE CG89 (Child maltreatment).\n\nRed flags: delay in presentation, a history inconsistent with the injury or the child's development, changing stories, injury in a non-mobile child, patterns (symmetrical 'glove and stocking' immersion scalds with sharp tide-marks and sparing of flexures; cigarette burns; bruises on the ears, neck, buttocks, or with patterns; multiple fractures of different ages, metaphyseal and posterior rib fractures), other injuries, repeated attendances. Take a careful, non-judgemental history, document verbatim with times, examine fully (with a chaperone), photograph with consent, protect the child (admit as a place of safety), and involve the senior and paediatric team. Investigations: skeletal survey, CT head (under 1 year or with neurological signs), bloods (FBC, clotting, bone profile), ophthalmology for retinal haemorrhages; consider siblings.\n\nUnder Cap. 650 (from 20 January 2026) medical practitioners are mandated reporters: report serious child abuse to the Social Welfare Department or police as soon as practicable through the reporting platform. Your notes say Cap. 650 takes full effect on 1 January 2026; it came into force on 20 January 2026. The rest of your notes (FCPSU, 24-hour SWD hotline, admission under Cap. 213 section 34F if parents refuse) matches.\n\nPerfect script checked against RCPCH child protection guidance and the HK Cap. 650 ordinance, an HKCEM-style scheme and a keyword scheme. Removed the accusing and discharge options. Added an honest explanation to the father.",
   "cast": [
     {
       "id": "father",
@@ -125,19 +126,19 @@
       "groups": {
         "Burns": [
           {
-            "t": "Look at the feet",
-            "r": "Symmetrical burns to both feet up to the ankles with a sharp straight edge; soles spared; no splash marks.",
+            "t": "With a chaperone: look at both feet",
+            "r": "Symmetrical burns to both feet up to the ankles with a sharp straight edge; soles spared; no splash marks. \"An immersion, stocking pattern: it doesn't fit the story.\"",
             "mark": "Recognises an immersion ('stocking') pattern"
           }
         ],
         "Other": [
           {
-            "t": "Full skin examination",
+            "t": "A full skin examination, head to toe",
             "r": "Fingertip-shaped bruises on the upper arms.",
             "mark": "Examines fully and finds other injuries"
           },
           {
-            "t": "Fontanelle, eyes, growth chart",
+            "t": "Fontanelle, eyes and her growth chart",
             "r": "Fontanelle soft. Weight on the 3rd centile.",
             "mark": "Checks fontanelle and growth"
           }
@@ -153,7 +154,7 @@
       "confirm": "Do",
       "opts": [
         {
-          "t": "Admit as a place of safety; inform my senior and the paediatric team",
+          "t": "Admit her as a place of safety; inform my senior and the paediatric team",
           "need": true,
           "mark": "Keeps the child safe and escalates"
         },
@@ -168,7 +169,7 @@
           "mark": "Appropriate investigations"
         },
         {
-          "t": "Mandatory report to SWD/police under Cap. 650; hospital child protection coordinator",
+          "t": "Mandatory report to the Social Welfare Department or police under Cap. 650; the hospital child protection coordinator",
           "need": true,
           "mark": "Makes a mandatory report"
         },
@@ -176,16 +177,22 @@
           "t": "Consider the safety of her brother",
           "need": true,
           "mark": "Considers siblings"
-        },
+        }
+      ]
+    },
+    {
+      "id": "tell",
+      "kind": "say",
+      "to": "father",
+      "label": "Talk to her father",
+      "hint": "Honest, non-judgemental: the burns, admission, and that others will be involved.",
+      "opts": [
         {
-          "t": "Accuse the father and tell him he will be arrested",
-          "trap": true,
-          "r": "Stay non-judgemental; explain concerns honestly and that you must involve others to keep children safe."
-        },
-        {
-          "t": "Discharge with burns clinic follow-up",
-          "trap": "critical",
-          "r": "The history doesn't fit the injury; she needs protection now."
+          "t": "Kylie's burns are deep and need treatment in hospital. The pattern of the burns worries me, so, as we must for any child with injuries like this, I'm going to involve the paediatric team and the social welfare services. We'll do some tests to check for other injuries.",
+          "tz": "Kylie 嘅燙傷好深，要留院治療。啲燙傷嘅形狀令我有啲擔心，所以，好似處理任何有呢類傷勢嘅小朋友一樣，我會通知兒科同社會福利署。我哋亦會做啲檢查，睇吓有冇其他傷。",
+          "r": "Are you saying I hurt her?",
+          "rz": "你係咪話我打佢？",
+          "mark": "Explains concerns honestly and non-judgementally"
         }
       ]
     },
@@ -316,5 +323,61 @@
       "why": "Act on small unexplained injuries.",
       "source": "Paediatric safeguarding"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Can you tell me exactly what happened? When was this, and when did you notice the burns? Where were you? Who else was home?",
+      "do": "Her brother, he's 6, ran the bath and put her in. She screamed. Last night, about 8. I thought it would heal. I was in the kitchen. My girlfriend was out."
+    },
+    {
+      "at": "0:20",
+      "say": "Can she stand or climb into a bath herself? Who lives at home and who looks after her? Any previous injuries or hospital visits?",
+      "do": "She's just started walking holding on to furniture. Me, my girlfriend, her brother. My girlfriend isn't her mum. She broke her arm 3 months ago — fell off the sofa."
+    },
+    {
+      "at": "0:40",
+      "say": "Is everything OK at home? Does anyone feel unsafe?",
+      "do": "It's been stressful. Money problems."
+    },
+    {
+      "at": "1:00",
+      "say": "With a chaperone: look at both feet. A full skin examination, head to toe. Fontanelle, eyes and her growth chart. An immersion, stocking pattern: it doesn't fit the story.",
+      "do": "Symmetrical burns to both feet up to the ankles with a sharp straight edge; soles spared; no splash marks. \"An immersion, stocking pattern: it doesn't fit the story.\" Fingertip-shaped bruises on the upper arms. Fontanelle soft. Weight on the 3rd centile."
+    },
+    {
+      "at": "1:20",
+      "say": "Admit her as a place of safety; inform my senior and the paediatric team. Document exactly what was said, with times; body map and photographs with consent. Skeletal survey, CT head, FBC, clotting, bone profile, ophthalmology."
+    },
+    {
+      "at": "1:40",
+      "say": "Mandatory report to the Social Welfare Department or police under Cap. 650; the hospital child protection coordinator. Consider the safety of her brother."
+    },
+    {
+      "at": "2:00",
+      "say": "Kylie's burns are deep and need treatment in hospital. The pattern of the burns worries me, so, as we must for any child with injuries like this, I'm going to involve the paediatric team and the social welfare services. We'll do some tests to check for other injuries.",
+      "do": "Are you saying I hurt her?"
+    }
+  ],
+  "keywords": [
+    "exactly what happened",
+    "when",
+    "who else",
+    "stand",
+    "who lives at home",
+    "previous injuries",
+    "chaperone",
+    "immersion",
+    "doesn't fit the story",
+    "place of safety",
+    "senior",
+    "document",
+    "photographs",
+    "skeletal survey",
+    "CT head",
+    "ophthalmology",
+    "Cap. 650",
+    "brother",
+    "social welfare"
   ]
 }

@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Hong Kong Centre for Health Protection (scarlet fever is a notifiable disease in HK), UKHSA guidance on scarlet fever and invasive group A streptococcus (2023), and NICE CKS.\n\nScarlet fever (Streptococcus pyogenes toxin): fever, sore throat, strawberry tongue, flushed cheeks with circumoral pallor, a fine sandpaper-like rash starting on the chest and spreading, accentuated in skin creases (Pastia's lines), later peeling of fingers and toes. Throat swab to confirm where available. Treatment: phenoxymethylpenicillin for 10 days (amoxicillin is an alternative; azithromycin/clarithromycin if penicillin-allergic). Exclude from school or nursery until 24 hours after starting antibiotics. Notify in HK (CHP). Complications: otitis, sinusitis, peritonsillar abscess; rarely rheumatic fever, post-streptococcal glomerulonephritis, invasive GAS (toxic shock, necrotising fasciitis) — safety-net for worsening. Contacts: hygiene; household contacts treated if symptomatic; heightened vigilance for invasive disease, especially with concurrent chickenpox.\n\nYour notes list scarlet fever as a Paedi gym topic without detail.",
+  "notes": "Checked against the Hong Kong Centre for Health Protection (scarlet fever is a notifiable disease in HK), UKHSA guidance on scarlet fever and invasive group A streptococcus (2023), and NICE CKS.\n\nScarlet fever (Streptococcus pyogenes toxin): fever, sore throat, strawberry tongue, flushed cheeks with circumoral pallor, a fine sandpaper-like rash starting on the chest and spreading, accentuated in skin creases (Pastia's lines), later peeling of fingers and toes. Throat swab to confirm where available. Treatment: phenoxymethylpenicillin for 10 days (amoxicillin is an alternative; azithromycin/clarithromycin if penicillin-allergic). Exclude from school or nursery until 24 hours after starting antibiotics. Notify in HK (CHP). Complications: otitis, sinusitis, peritonsillar abscess; rarely rheumatic fever, post-streptococcal glomerulonephritis, invasive GAS (toxic shock, necrotising fasciitis) — safety-net for worsening. Contacts: hygiene; household contacts treated if symptomatic; heightened vigilance for invasive disease, especially with concurrent chickenpox.\n\nYour notes list scarlet fever as a Paedi gym topic without detail.\n\nPerfect script checked against CHP scarlet fever guidance and NICE CKS, an HKCEM-style scheme and a keyword scheme. Removed the wrong replies (viral rash, 3 days, no risk).",
   "cast": [
     {
       "id": "mother",
@@ -46,26 +46,26 @@
       "groups": {
         "Face": [
           {
-            "t": "Face and tongue",
-            "r": "Flushed cheeks, pale around the mouth; red bumpy 'strawberry' tongue.",
+            "t": "Her face and tongue",
+            "r": "Flushed cheeks, pale around the mouth; red bumpy 'strawberry' tongue. \"A strawberry tongue and circumoral pallor.\"",
             "img": "photo:scarlet-tongue",
             "mark": "Finds strawberry tongue and circumoral pallor"
           },
           {
-            "t": "Throat and neck nodes",
+            "t": "Her throat and neck nodes",
             "r": "Enlarged red tonsils with exudate; tender anterior cervical nodes.",
             "mark": "Examines throat and nodes"
           }
         ],
         "Skin": [
           {
-            "t": "Feel the rash; look in the elbow creases",
-            "r": "Fine rough 'sandpaper' rash on the trunk; red lines in the elbow creases.",
+            "t": "Feel the rash, and look in the elbow creases",
+            "r": "Fine rough 'sandpaper' rash on the trunk; red lines in the elbow creases. \"A sandpaper rash with Pastia's lines: scarlet fever.\"",
             "img": "photo:scarlet-rash",
             "mark": "Identifies sandpaper rash and Pastia's lines"
           },
           {
-            "t": "Hydration and general state",
+            "t": "Is she drinking? How is she in herself?",
             "r": "Drinking, alert, well hydrated.",
             "mark": "Assesses hydration and wellness"
           }
@@ -91,13 +91,6 @@
               "r": "Antibiotics for how long?",
               "mood": -2,
               "mark": "Explains the diagnosis simply"
-            },
-            {
-              "t": "Just a viral rash.",
-              "tz": "只係病毒疹啫。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         },
@@ -112,13 +105,6 @@
               "r": "And her baby brother?",
               "mood": -2,
               "mark": "Explains 10-day course, school exclusion and notification"
-            },
-            {
-              "t": "Three days of antibiotics; school tomorrow morning is fine.",
-              "tz": "食三日抗生素，聽朝就可以返學。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         },
@@ -133,13 +119,6 @@
               "r": "Thank you, I'll watch closely.",
               "mood": -2,
               "mark": "Advice for contacts and safety-netting for invasive GAS"
-            },
-            {
-              "t": "No risk to him.",
-              "tz": "佢細佬冇風險。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         }
@@ -271,5 +250,46 @@
       "why": "Check for Kawasaki features if fever lasts ≥5 days.",
       "source": "AHA Kawasaki 2017"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Her face and tongue. Her throat and neck nodes. Feel the rash, and look in the elbow creases. A strawberry tongue and circumoral pallor. A sandpaper rash with Pastia's lines: scarlet fever.",
+      "do": "Flushed cheeks, pale around the mouth; red bumpy 'strawberry' tongue. \"A strawberry tongue and circumoral pallor.\" Enlarged red tonsils with exudate; tender anterior cervical nodes. Fine rough 'sandpaper' rash on the trunk; red lines in the elbow creases. \"A sandpaper rash with Pastia's lines: scarlet fever.\""
+    },
+    {
+      "at": "0:20",
+      "say": "Is she drinking? How is she in herself?",
+      "do": "Drinking, alert, well hydrated."
+    },
+    {
+      "at": "0:40",
+      "say": "It's scarlet fever — a throat infection with streptococcus bacteria that makes a toxin, which causes the rash. It's treated easily with antibiotics.",
+      "do": "Antibiotics for how long?"
+    },
+    {
+      "at": "1:00",
+      "say": "Penicillin for the full 10 days, even when she feels better, to prevent complications. She can go back to school 24 hours after starting it. We report scarlet fever to the Department of Health.",
+      "do": "And her baby brother?"
+    },
+    {
+      "at": "1:20",
+      "say": "Wash hands well, don't share cups or towels. If he gets a fever, sore throat or rash, bring him to be seen. Bring her back at once if she's getting worse, very sleepy, not drinking, or has a painful swollen limb or a rash that looks like a burn.",
+      "do": "Thank you, I'll watch closely."
+    }
+  ],
+  "keywords": [
+    "strawberry tongue",
+    "circumoral pallor",
+    "throat",
+    "sandpaper",
+    "Pastia's lines",
+    "scarlet fever",
+    "streptococcus",
+    "10 days",
+    "24 hours",
+    "Department of Health",
+    "wash hands",
+    "worse"
   ]
 }

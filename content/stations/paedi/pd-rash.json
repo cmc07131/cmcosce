@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE CG102 (meningococcal disease), NICE NG143 (Fever in under 5s) principles, and the EULAR/PRINTO/PRES criteria for IgA vasculitis (Henoch–Schönlein purpura).\n\nA non-blanching rash in a febrile or unwell child is meningococcal disease until proven otherwise: antibiotics immediately. In a well child without fever, consider IgA vasculitis (HSP: palpable purpura on the buttocks and extensor legs, arthralgia/arthritis, abdominal pain, haematuria/proteinuria; often after an URTI), ITP (bruising and petechiae, isolated low platelets, well child), leukaemia (pallor, bone pain, lymphadenopathy, hepatosplenomegaly), trauma/NAI, and petechiae above the nipple line after coughing or vomiting.\n\nInvestigations: FBC and film, clotting, CRP, U&E, blood pressure, urinalysis (blood and protein), and blood cultures if febrile. HSP is managed supportively (analgesia); follow up with BP and urine checks for 6–12 months for nephritis; refer with abdominal pain (intussusception), significant proteinuria, hypertension or renal impairment.\n\nYour notes (a well 6-year-old with a leg rash, knee ache, recent cold, no fever) match this.",
+  "notes": "Checked against NICE CG102 (meningococcal disease), NICE NG143 (Fever in under 5s) principles, and the EULAR/PRINTO/PRES criteria for IgA vasculitis (Henoch–Schönlein purpura).\n\nA non-blanching rash in a febrile or unwell child is meningococcal disease until proven otherwise: antibiotics immediately. In a well child without fever, consider IgA vasculitis (HSP: palpable purpura on the buttocks and extensor legs, arthralgia/arthritis, abdominal pain, haematuria/proteinuria; often after an URTI), ITP (bruising and petechiae, isolated low platelets, well child), leukaemia (pallor, bone pain, lymphadenopathy, hepatosplenomegaly), trauma/NAI, and petechiae above the nipple line after coughing or vomiting.\n\nInvestigations: FBC and film, clotting, CRP, U&E, blood pressure, urinalysis (blood and protein), and blood cultures if febrile. HSP is managed supportively (analgesia); follow up with BP and urine checks for 6–12 months for nephritis; refer with abdominal pain (intussusception), significant proteinuria, hypertension or renal impairment.\n\nYour notes (a well 6-year-old with a leg rash, knee ache, recent cold, no fever) match this.\n\nPerfect script checked against NICE NG51 and IgA vasculitis guidance, an HKCEM-style scheme and a keyword scheme. Removed the false-reassurance replies.",
   "cast": [
     {
       "id": "mother",
@@ -134,13 +134,6 @@
               "r": "Oh, thank goodness. What tests?",
               "mood": -3,
               "mark": "Explains the likely diagnosis and need to examine and test"
-            },
-            {
-              "t": "It's definitely nothing.",
-              "tz": "肯定冇嘢嘅。",
-              "rz": "你都未睇，點知㗎？",
-              "r": "How can you know without looking?",
-              "mood": 2
             }
           ]
         },
@@ -155,13 +148,6 @@
               "r": "Thank you — that's clear.",
               "mood": -2,
               "mark": "Explains renal follow-up and safety-netting"
-            },
-            {
-              "t": "No risk at all.",
-              "tz": "完全冇風險。",
-              "rz": "好。",
-              "r": "OK.",
-              "mood": 0
             }
           ]
         }
@@ -293,5 +279,50 @@
       "why": "Needs urgent assessment.",
       "source": "NICE CG102"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "When did the rash start and where? Does it fade when you press a glass on it? Fever, drowsiness, vomiting, headache?",
+      "do": "Yesterday, on his legs and bottom. Raised red-purple spots. No, it stays. No fever. He's playing normally."
+    },
+    {
+      "at": "0:20",
+      "say": "Joint pain or swelling? Tummy pain, blood in stool, red or dark urine? Nosebleeds, bleeding gums, bruising, tiredness, weight loss?",
+      "do": "His right knee aches but he walks fine. Some tummy ache yesterday. Urine looks normal. No."
+    },
+    {
+      "at": "0:40",
+      "say": "Any recent illness or medicines? Birth, development, vaccinations. Who is at home? Any worries about injuries?",
+      "do": "A cough and cold 2 weeks ago. No medicines. Normal, all up to date. Me, his dad and his sister. No injuries."
+    },
+    {
+      "at": "1:00",
+      "say": "You were right to bring him. Because he has no fever and is playing normally, this looks more like Henoch–Schönlein purpura — a harmless-looking inflammation of small blood vessels after a virus. I'll examine him fully and check his blood, blood pressure and urine to be sure.",
+      "do": "Oh, thank goodness. What tests?"
+    },
+    {
+      "at": "1:20",
+      "say": "Sometimes it affects the kidneys, usually mildly, so we check his urine and blood pressure now and regularly for about 6 months. Come back straight away if he gets severe tummy pain, blood in his poo, dark urine, swelling or a fever.",
+      "do": "Thank you — that's clear."
+    }
+  ],
+  "keywords": [
+    "when did the rash start",
+    "glass",
+    "fever",
+    "joint pain",
+    "tummy pain",
+    "nosebleeds",
+    "recent illness",
+    "vaccinations",
+    "no fever",
+    "Henoch–Schönlein purpura",
+    "examine him fully",
+    "urine",
+    "blood pressure",
+    "kidneys",
+    "6 months",
+    "come back"
   ]
 }

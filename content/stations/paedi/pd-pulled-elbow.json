@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against RCEM/RCH Melbourne guidance on radial head subluxation and the Cochrane review (Krul 2017: hyperpronation more successful than supination–flexion).\n\nPulled elbow (radial head subluxation, 'nursemaid's elbow'): age 1–4, a pull on the extended pronated arm, the annular ligament slips over the radial head. The child holds the arm still, slightly flexed and pronated, with no swelling, bruising or deformity, and normal shoulder, wrist and neurovascular examination. With a typical history and examination, no X-ray is needed; image if there was a fall, swelling, bruising, deformity, or failure to reduce. Reduction without analgesia: hyperpronation (support the elbow with the thumb over the radial head and pronate the forearm firmly) is first-line; supination then flexion is the alternative. A click may be felt; the child usually uses the arm within 10–30 minutes. Advise lifting under the arms, recurrence risk until about age 5.\n\nYour notes match this, including hyperpronation first.",
+  "notes": "Checked against RCEM/RCH Melbourne guidance on radial head subluxation and the Cochrane review (Krul 2017: hyperpronation more successful than supination–flexion).\n\nPulled elbow (radial head subluxation, 'nursemaid's elbow'): age 1–4, a pull on the extended pronated arm, the annular ligament slips over the radial head. The child holds the arm still, slightly flexed and pronated, with no swelling, bruising or deformity, and normal shoulder, wrist and neurovascular examination. With a typical history and examination, no X-ray is needed; image if there was a fall, swelling, bruising, deformity, or failure to reduce. Reduction without analgesia: hyperpronation (support the elbow with the thumb over the radial head and pronate the forearm firmly) is first-line; supination then flexion is the alternative. A click may be felt; the child usually uses the arm within 10–30 minutes. Advise lifting under the arms, recurrence risk until about age 5.\n\nYour notes match this, including hyperpronation first.\n\nPerfect script checked against the Cochrane pulled-elbow review, an HKCEM-style scheme and a keyword scheme. Removed the bench's X-ray-first and plaster buttons.",
   "cast": [
     {
       "id": "patient",
@@ -53,24 +53,24 @@
       "groups": {
         "History": [
           {
-            "t": "Ask how it happened; any fall?",
+            "t": "How did it happen? Did she fall?",
             "r": "Father: I pulled her up by the hand. She didn't fall.",
             "mark": "Confirms a traction mechanism without a fall"
           }
         ],
         "Exam": [
           {
-            "t": "Look at the arm for swelling, bruising, deformity",
+            "t": "Look at the arm for swelling, bruising or deformity",
             "r": "None. Arm held pronated and slightly flexed.",
             "mark": "Excludes swelling and deformity"
           },
           {
-            "t": "Feel clavicle, shoulder, humerus, forearm, wrist",
+            "t": "Feel the clavicle, shoulder, humerus, forearm and wrist",
             "r": "Mild tenderness over the radial head only.",
             "mark": "Examines the whole limb"
           },
           {
-            "t": "Hand perfusion and finger movement",
+            "t": "Check her hand: perfusion and finger movement",
             "r": "Normal.",
             "mark": "Checks neurovascular status"
           }
@@ -88,7 +88,7 @@
         {
           "t": "Reduce",
           "perform": "elbow",
-          "performHint": "Do it with your hands. She will tell you when it clicks.",
+          "performHint": "Explain to her father; on his lap; your thumb over the radial head; then hyperpronate firmly. Watch her use it.",
           "mark": [
             "Explains to the parent",
             "Correct hold",
@@ -106,7 +106,7 @@
       "hint": "Lift under the arms, recurrence, return if not using the arm.",
       "opts": [
         {
-          "t": "Lift her under the arms, not by the hands; it can happen again until about 5; come back if she stops using the arm again",
+          "t": "Lift her under the arms, not by the hands. It can happen again until she's about 5. Come back if she stops using the arm again.",
           "tz": "抱佢嗰陣要托住佢胳肋底，唔好拉佢隻手；五歲之前都有機會再甩；如果佢再唔肯用隻手，就要返嚟。",
           "mark": "Prevention and recurrence advice"
         }
@@ -238,5 +238,37 @@
       "why": "Annular ligament strengthens.",
       "source": "RCH Melbourne"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "How did it happen? Did she fall? Look at the arm for swelling, bruising or deformity. Feel the clavicle, shoulder, humerus, forearm and wrist.",
+      "do": "Father: I pulled her up by the hand. She didn't fall. None. Arm held pronated and slightly flexed. Mild tenderness over the radial head only."
+    },
+    {
+      "at": "0:20",
+      "say": "Check her hand: perfusion and finger movement.",
+      "do": "Normal."
+    },
+    {
+      "at": "0:40",
+      "say": "It'll hurt for a second, then she should start using it again. On your lap, facing me. My thumb over the radial head; with my other hand, I turn her forearm firmly into hyperpronation. A click. Now we watch her reach for a toy."
+    },
+    {
+      "at": "1:00",
+      "say": "Lift her under the arms, not by the hands. It can happen again until she's about 5. Come back if she stops using the arm again."
+    }
+  ],
+  "keywords": [
+    "fall",
+    "swelling",
+    "clavicle",
+    "finger movement",
+    "radial head",
+    "hyperpronation",
+    "click",
+    "under the arms",
+    "about 5",
+    "come back"
   ]
 }

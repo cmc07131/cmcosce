@@ -81,9 +81,6 @@ export function ElbowProcedure({ job, coach, onDone }: { job: PerformJob; coach:
                   <button type="button" className="tap io-mini" data-on={run.thumbOnHead || undefined} data-testid="elbow-thumb" onClick={() => (upd({ thumbOnHead: true }), feel('Your hand cups her elbow, your thumb over the radial head on the outer side.'))}>
                     THUMB OVER THE RADIAL HEAD
                   </button>
-                  <button type="button" className="tap io-mini" data-testid="elbow-xray" onClick={() => (upd({ xray: true }), why('A classic history and a child who will not use the arm: no X-ray before you try.'))}>
-                    X-RAY THE ELBOW FIRST
-                  </button>
                 </div>
               </>
             )}
@@ -144,9 +141,6 @@ export function ElbowProcedure({ job, coach, onDone }: { job: PerformJob; coach:
                     }}
                   >
                     WATCH FOR 15 MINUTES
-                  </button>
-                  <button type="button" className="tap io-mini" data-testid="elbow-plaster" onClick={() => (upd({ plaster: true }), why('It is a ligament slipping, not a fracture: no plaster.'))}>
-                    PUT THE ARM IN PLASTER
                   </button>
                 </div>
               </>
