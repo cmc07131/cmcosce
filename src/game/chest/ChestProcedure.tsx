@@ -447,19 +447,6 @@ function TubeStage({ run, upd, feel, physical, why, next, fluid, side }: Stage) 
             {f} FR
           </button>
         ))}
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="chest-trocar"
-          onClick={() => {
-            upd({ trocar: true })
-            buzz([60, 40, 60])
-            physical('You push the tube in on its sharp trocar.')
-            why('Never use the trocar: it can go through lung, heart, liver or spleen. Blunt dissection and a clamp.')
-          }}
-        >
-          PUSH IT IN ON THE TROCAR
-        </button>
       </div>
       <TouchPad
         svg={svg}

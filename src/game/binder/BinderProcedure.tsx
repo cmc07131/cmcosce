@@ -121,19 +121,6 @@ function PrepareStage({ run, upd, feel, physical, why, next }: Stage) {
         <button type="button" className="tap io-mini" data-on={run.pockets || undefined} data-testid="binder-pockets" onClick={() => (upd({ pockets: true }), feel('A phone and a bunch of keys out of her pockets; her belt cut off.'))}>
           {run.pockets ? 'POCKETS EMPTY ✓' : 'EMPTY POCKETS, BELT OFF'}
         </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="binder-logroll"
-          onClick={() => {
-            upd({ logRolled: true })
-            buzz([60, 40, 60])
-            physical('You log roll her. She screams and her pressure drops.')
-            why('Avoid log rolls before the binder: each one can dislodge clot. Slide it in under the knees.')
-          }}
-        >
-          LOG ROLL HER TO GET IT UNDERNEATH
-        </button>
       </div>
       <NextButton onClick={next} testId="binder-next">
         Slide

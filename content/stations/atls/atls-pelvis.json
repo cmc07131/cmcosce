@@ -65,7 +65,7 @@
       "text": "Contraindications to a binder. Your notes list open pelvic fractures and stable fractures. An open fracture still gets a binder if the patient is bleeding (pack the wound under it); a stable fracture simply does not need one. There is no absolute contraindication."
     }
   ],
-  "notes": "Checked against ATLS 11th edition (2025), NICE NG39 (major trauma), and the BOAST guideline on pelvic and acetabular fractures.\n\nAn anteroposterior compression injury (open book) springs the symphysis apart and tears the posterior sacroiliac ligaments; the pelvic volume increases and it bleeds mostly from the presacral venous plexus (about 85%), less often from arteries (internal iliac branches). A binder closes the ring and tamponades venous bleeding.\n\nThe binder goes over the greater trochanters, not the iliac crests. Bring the feet and knees together and tie them. Do not spring the pelvis to test it, and avoid unnecessary log rolls before the binder is on.\n\nYour notes list open pelvic fractures and stable fractures as contraindications. ATLS and NICE advise a binder for suspected pelvic bleeding in shock, open fractures included (wound packing under it); stable fractures simply do not need one. Your notes are otherwise consistent: greater trochanters, no absolute contraindication, skin checks, radiolucent device.\n\nTransient responders with pelvic bleeding go to angioembolisation, or pre-peritoneal packing with external fixation, depending on the centre. Non-responders do not go to CT. REBOA zone 3 is a bridge in some centres.\n\nIn a man, blood at the meatus, a high-riding prostate or scrotal haematoma means no blind urethral catheter until the urethra is imaged.",
+  "notes": "Checked against ATLS 11th edition (2025), NICE NG39 (major trauma), and the BOAST guideline on pelvic and acetabular fractures.\n\nAn anteroposterior compression injury (open book) springs the symphysis apart and tears the posterior sacroiliac ligaments; the pelvic volume increases and it bleeds mostly from the presacral venous plexus (about 85%), less often from arteries (internal iliac branches). A binder closes the ring and tamponades venous bleeding.\n\nThe binder goes over the greater trochanters, not the iliac crests. Bring the feet and knees together and tie them. Do not spring the pelvis to test it, and avoid unnecessary log rolls before the binder is on.\n\nYour notes list open pelvic fractures and stable fractures as contraindications. ATLS and NICE advise a binder for suspected pelvic bleeding in shock, open fractures included (wound packing under it); stable fractures simply do not need one. Your notes are otherwise consistent: greater trochanters, no absolute contraindication, skin checks, radiolucent device.\n\nTransient responders with pelvic bleeding go to angioembolisation, or pre-peritoneal packing with external fixation, depending on the centre. Non-responders do not go to CT. REBOA zone 3 is a bridge in some centres.\n\nIn a man, blood at the meatus, a high-riding prostate or scrotal haematoma means no blind urethral catheter until the urethra is imaged.\n\nPerfect script checked against an ATLS checklist, NICE NG39/BOAST, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (a catheter first, springing the pelvis, a log roll, femoral access, wrong doses, vasopressors, CT while unstable, a ward admission, a thin handover) and the binder bench's log-roll button. Added: shock graded, 'don't spring' said aloud, calcium, the non-responder plan, abdomen and long bones scored.",
   "cast": [
     {
       "id": "patient",
@@ -166,12 +166,6 @@
           "fetch": "trolley",
           "need": true,
           "mark": "Prevents hypothermia"
-        },
-        {
-          "t": "Urinary catheter set to put in first",
-          "fetch": "trolley",
-          "trap": true,
-          "r": "Not before the urethra and perineum are checked, and it is not a priority in the primary survey."
         }
       ]
     },
@@ -183,12 +177,13 @@
       "hint": "Ask the nurse to put the patient on the monitor.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads, NIBP cuff and SpO2 probe.",
+          "t": "Monitoring on, please: ECG, blood pressure and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "handover",
@@ -256,31 +251,30 @@
         "Circulation": [
           {
             "t": "Pulse, skin, capillary refill",
-            "r": "Weak radial pulse 136. Cold peripheries. CRT 5 s.",
-            "anim": "pulse"
+            "r": "Weak radial pulse 136. Cold peripheries. CRT 5 s. \"Class III shock.\"",
+            "anim": "pulse",
+            "mark": "Assesses circulation: shocked"
           },
           {
             "t": "Abdomen",
             "r": "Soft. Suprapubic bruising, tender low down.",
-            "anim": "abdomen"
+            "anim": "abdomen",
+            "mark": "Examines the abdomen"
           },
           {
             "t": "Look at the pelvis and legs",
-            "r": "Both legs externally rotated, bruising over the symphysis and a labial haematoma. Leg lengths equal.",
+            "r": "Both legs externally rotated, bruising over the symphysis and a labial haematoma. Leg lengths equal. \"An open-book pelvic injury.\"",
             "mark": "Looks for pelvic signs: rotation, bruising, perineal haematoma"
           },
           {
-            "t": "Press gently once over the iliac wings",
-            "r": "She cries out. You stop: a pelvic injury is assumed and a binder goes on."
-          },
-          {
-            "t": "Spring the pelvis hard to test for instability",
-            "trap": "critical",
-            "r": "Springing a disrupted pelvis dislodges clot and restarts the bleeding."
+            "t": "Pelvis: don't spring it",
+            "r": "No springing. With this mechanism and shock, a pelvic fracture is assumed: a binder goes on now.",
+            "mark": "Does not spring the pelvis; assumes pelvic injury"
           },
           {
             "t": "Long bones",
-            "r": "Femurs intact."
+            "r": "Femurs intact.",
+            "mark": "Checks the long bones"
           }
         ],
         "D E": [
@@ -294,11 +288,6 @@
             "t": "Expose and keep warm",
             "r": "Temperature 35.9. Warm air blanket on.",
             "mark": "Exposes and prevents hypothermia"
-          },
-          {
-            "t": "Full log roll now to look at her back",
-            "trap": true,
-            "r": "Every roll moves the fracture. Minimise log rolls until the pelvis is bound and imaged."
           }
         ]
       }
@@ -335,18 +324,18 @@
       "hint": "Access above the diaphragm, bloods and crossmatch, blood 1:1:1, permissive hypotension.",
       "opts": [
         {
-          "t": "Two large-bore cannulae in the arms — not the legs",
+          "t": "Two large-bore cannulae in the arms, above the diaphragm, not the legs.",
           "fetch": "trolley",
           "mark": "Large-bore access above the diaphragm",
           "r": "Nurse Chan: Two 14 G in the antecubital fossae."
         },
         {
-          "t": "Bloods: crossmatch, FBC, clotting, fibrinogen, gas, lactate, pregnancy test",
+          "t": "Bloods: crossmatch, FBC, clotting, fibrinogen, a gas with lactate, and a pregnancy test.",
           "mark": "Bloods including crossmatch and pregnancy test",
           "r": "Nurse Chan: Sent. Gas: pH 7.22, lactate 6.0, Hb 94, hCG negative."
         },
         {
-          "t": "O-negative now, then 1:1:1 through the warmer",
+          "t": "O-negative now, then red cells, plasma and platelets 1:1:1 through the warmer.",
           "scene": "blood",
           "mark": "Early balanced blood transfusion",
           "r": "Nurse Chan: Blood running.",
@@ -354,15 +343,11 @@
           "early": "The blood is not here yet."
         },
         {
-          "t": "Aim for a systolic of 80–90 until the bleeding is controlled",
+          "t": "Permissive hypotension: aim for a systolic of 80 to 90 until the bleeding is controlled.",
           "mark": "Permissive hypotension"
-        },
-        {
-          "t": "Cannulate the femoral vein for fast access",
-          "trap": true,
-          "r": "Fluid given below a pelvic bleed may leak out of the torn veins. Go above the diaphragm."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "drugs",
@@ -380,14 +365,6 @@
           "mark": "Tranexamic acid within 3 hours"
         },
         {
-          "t": "Tranexamic acid 2 g IV push",
-          "drug": "Tranexamic acid",
-          "dose": "2 g IV push",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Given fast it drops the pressure: 1 g over 10 minutes, then 1 g over 8 hours."
-        },
-        {
           "t": "Fentanyl 25–50 microgram IV, titrated",
           "drug": "Fentanyl",
           "dose": "25–50 microgram IV, titrated",
@@ -395,20 +372,11 @@
           "mark": "Titrated analgesia"
         },
         {
-          "t": "Fentanyl 200 microgram IV bolus",
-          "drug": "Fentanyl",
-          "dose": "200 microgram IV bolus",
+          "t": "Calcium chloride 10% 10 mL IV with the blood",
+          "drug": "Calcium chloride 10%",
+          "dose": "10 mL IV with the blood",
           "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once in shock: small titrated doses."
-        },
-        {
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Vasopressors in haemorrhagic shock hide hypovolaemia and increase mortality. Replace blood.",
-          "t": "Noradrenaline infusion to a MAP of 65",
-          "drug": "Noradrenaline",
-          "dose": "infusion to a MAP of 65"
+          "mark": "Replaces calcium during massive transfusion"
         }
       ]
     },
@@ -439,13 +407,7 @@
             "mark": "eFAST negative: bleeding is pelvic or retroperitoneal"
           }
         ],
-        "Scanner": [
-          {
-            "t": "CT pelvis while still hypotensive and not responding",
-            "trap": "critical",
-            "r": "Non-responders do not go to CT. Only once she responds."
-          }
-        ]
+        "Scanner": []
       }
     },
     {
@@ -456,18 +418,13 @@
       "hint": "She responds only partly. Call for haemorrhage control: interventional radiology and orthopaedics / surgery.",
       "opts": [
         {
-          "t": "Interventional radiology: angioembolisation for pelvic bleeding in a transient responder",
+          "t": "Interventional radiology: she's a transient responder with pelvic bleeding. She needs angioembolisation.",
           "mark": "Arranges angioembolisation",
           "r": "IR consultant: Suite open in 20 minutes. CT angiogram first if she holds her pressure."
         },
         {
-          "t": "Orthopaedics and general surgery: pre-peritoneal packing and external fixation if she does not respond",
-          "mark": "Plans surgical haemorrhage control (packing, external fixation)"
-        },
-        {
-          "t": "Admit to the orthopaedic ward for traction",
-          "trap": "critical",
-          "r": "She is still bleeding. Ward care is not haemorrhage control."
+          "t": "Orthopaedics and general surgery: if she stops responding, pre-peritoneal packing and external fixation, straight to theatre, not CT.",
+          "mark": "Plans surgical haemorrhage control for a non-responder; no CT"
         }
       ]
     },
@@ -480,14 +437,9 @@
       "hint": "ATMIST to the receiving team.",
       "opts": [
         {
-          "t": "ATMIST: 45, 40 minutes ago, crush at hip height, open-book pelvis, transient responder after binder, 2 units and TXA, for IR",
+          "t": "ATMIST: Mrs Wong, 45. Crushed at hip height by a bus 40 minutes ago. Open-book pelvic fracture, eFAST negative. Was 78/40 and 136: transient responder after the binder at 10:20, 2 units 1:1:1, TXA and calcium. For IR now.",
           "mark": "Structured handover with times and plan",
           "r": "The IR team repeat it back and take her."
-        },
-        {
-          "t": "Pelvis is broken, the binder's on, she's yours",
-          "trap": true,
-          "r": "No time of injury, no treatment, no response to treatment."
         }
       ]
     },
@@ -631,6 +583,87 @@
       ],
       "why": "The other three suggest urethral injury: image the urethra first.",
       "source": "ATLS 11th edition"
+    }
+  ],
+  "keywords": [
+    "trauma team",
+    "major haemorrhage protocol",
+    "O-negative",
+    "pelvic binder",
+    "ATMIST",
+    "catastrophic haemorrhage",
+    "class III shock",
+    "don't spring",
+    "open-book",
+    "greater trochanters",
+    "feet together",
+    "above the diaphragm",
+    "1:1:1",
+    "permissive hypotension",
+    "tranexamic acid 1 g",
+    "calcium",
+    "pelvic X-ray",
+    "eFAST",
+    "transient responder",
+    "angioembolisation",
+    "pre-peritoneal packing",
+    "not CT"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Trauma team call. Team in PPE. Activate the major haemorrhage protocol: O-negative to the bedside. A pelvic binder ready on the trolley. Warmer, rapid infuser, warm air blanket."
+    },
+    {
+      "at": "0:15",
+      "say": "Monitoring on, please: ECG, blood pressure and SpO2."
+    },
+    {
+      "at": "0:20",
+      "say": "ATMIST, please: what happened? Injuries? Obs and the trend? Treatment so far?",
+      "do": "Crushed by a bus at hip height 30 minutes ago; pain in both hips; HR 110 and BP 100/60 at scene, now worse; oxygen, one cannula, 500 mL saline, morphine; no binder."
+    },
+    {
+      "at": "0:45",
+      "say": "No catastrophic haemorrhage. Airway: talking, C-spine protected. Breathing: chest clear, RR 26. Circulation: weak radial pulse 136, cold, refill 5 seconds: class III shock."
+    },
+    {
+      "at": "1:05",
+      "say": "Abdomen soft, suprapubic bruising. Legs externally rotated, bruising over the symphysis, a labial haematoma: an open-book pelvic injury. I don't spring the pelvis: I assume a fracture and bind it. Femurs intact."
+    },
+    {
+      "at": "1:25",
+      "say": "Pelvic binder now: pockets emptied, slid in under the knees, centred on the greater trochanters, feet together and tied, tightened, time recorded, then reassess.",
+      "do": "Binder on the trochanters; feet tied; pressure improving."
+    },
+    {
+      "at": "2:00",
+      "say": "GCS 15, pupils equal, glucose 8.1. Expose and keep warm: 35.9 degrees, warm air blanket."
+    },
+    {
+      "at": "2:15",
+      "say": "Two large-bore cannulae in the arms, above the diaphragm, not the legs. Bloods: crossmatch, FBC, clotting, fibrinogen, a gas with lactate, and a pregnancy test."
+    },
+    {
+      "at": "2:35",
+      "say": "O-negative now, then red cells, plasma and platelets 1:1:1 through the warmer. Permissive hypotension: aim for a systolic of 80 to 90 until the bleeding is controlled."
+    },
+    {
+      "at": "2:55",
+      "say": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours. Fentanyl 25 to 50 micrograms, titrated. Calcium chloride 10%, 10 mL, with the blood."
+    },
+    {
+      "at": "3:15",
+      "say": "Pelvic X-ray, chest X-ray and eFAST in the bay.",
+      "do": "Symphysis sprung 4 cm, SI joints widened; chest clear; eFAST negative: the bleeding is pelvic."
+    },
+    {
+      "at": "3:35",
+      "say": "Interventional radiology: she's a transient responder with pelvic bleeding. She needs angioembolisation. Orthopaedics and general surgery: if she stops responding, pre-peritoneal packing and external fixation, straight to theatre, not CT."
+    },
+    {
+      "at": "4:00",
+      "say": "ATMIST: Mrs Wong, 45. Crushed at hip height by a bus 40 minutes ago. Open-book pelvic fracture, eFAST negative. Was 78/40 and 136: transient responder after the binder at 10:20, 2 units 1:1:1, TXA and calcium. For IR now."
     }
   ]
 }
