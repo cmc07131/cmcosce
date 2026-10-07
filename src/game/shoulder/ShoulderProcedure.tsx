@@ -151,7 +151,6 @@ function SedationStage({ run, upd, feel, physical, why, next, sedated }: Stage) 
         <p className="sayit-prompt">SAY IT · TO DR KWAN</p>
         {[
           { ok: true, text: 'Dr Kwan, eyes on his airway and the capnography the whole time. Tell me if anything changes.' },
-          { ok: false, text: 'Dr Kwan, come and hold his chest down while I pull.' },
         ].map((l) => (
           <button
             key={l.text}

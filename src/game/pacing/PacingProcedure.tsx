@@ -609,15 +609,6 @@ function Capture(stage: Stage) {
       <Choices
         options={[
           {
-            label: 'FEEL THE CAROTID',
-            testId: 'pulse-carotid',
-            onClick: () => {
-              upd({ carotid: true })
-              feel('Something jumps under your fingers with every spike. The neck and chest twitch with the current; that could be muscle, not a pulse.')
-              why('Pad current makes the neck muscles jump. Feel the femoral pulse for mechanical capture.')
-            },
-          },
-          {
             label: 'FEEL THE FEMORAL',
             testId: 'pulse-femoral',
             onClick: () => {
@@ -649,13 +640,6 @@ function Comfort(stage: Stage) {
       <Stations {...stage} />
       <Choices
         options={[
-          {
-            label: 'SWITCH IT OFF SO HE CAN REST',
-            onClick: () => {
-              upd({ pacing: false, stoppedPacing: true })
-              why('The pads and the current stay on until a wire captures. Switching off drops the rate back to 32.')
-            },
-          },
         ]}
       />
       <SayIt

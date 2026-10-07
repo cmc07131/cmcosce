@@ -341,15 +341,6 @@ function PositionStep({ run, runRef, upd, feel, why, next }: Stage) {
               feel('Held along the integral bite block, cuff outlet toward the chin.')
             },
           },
-          {
-            label: 'BY THE CUFF',
-            testId: 'igel-grip-cuff',
-            on: run.grip === 'cuff',
-            onClick: () => {
-              upd({ grip: 'cuff' })
-              why('Holding the cuff squeezes it and your fingers get in the way. Hold along the bite block.')
-            },
-          },
         ]}
       />
       <NextButton onClick={next}>Insert</NextButton>
@@ -422,12 +413,6 @@ function InsertStep({ run, runRef, upd, feel, physical, why, coach, next, mask, 
             testId: 'igel-orient-chin',
             on: run.orientation === 'chin',
             onClick: () => (out && !run.seated ? upd({ orientation: 'chin' }) : physical('Take it out before you turn it.')),
-          },
-          {
-            label: 'UPSIDE DOWN, ROTATE IN',
-            testId: 'igel-orient-palate',
-            on: run.orientation === 'palate',
-            onClick: () => (out && !run.seated ? upd({ orientation: 'palate' }) : physical('Take it out before you turn it.')),
           },
           {
             label: 'TAKE IT OUT',

@@ -300,14 +300,6 @@ function Incise({ c, run, upd, feel, why, physical, next }: Stage) {
       )}
       <Choices
         options={[
-          {
-            label: 'BOTH HANDS ON THE SCALPEL',
-            onClick: () => {
-              upd({ lostLarynx: true })
-              physical('Your left hand leaves the neck. The larynx slides sideways.')
-              why('The non-dominant hand never leaves the larynx until the tube is in.')
-            },
-          },
         ]}
       />
       <NextButton onClick={next}>Stab the membrane</NextButton>
@@ -375,13 +367,11 @@ function Stab({ c, run, runRef, upd, feel, why, physical, coach, next }: Stage) 
       <Choices
         options={[
           { label: 'BLADE ACROSS THE NECK', testId: 'blade-across', on: run.bladeTransverse === true, onClick: () => upd({ bladeTransverse: true }) },
-          { label: 'BLADE ALONG THE NECK', on: run.bladeTransverse === false, onClick: () => upd({ bladeTransverse: false }) },
         ]}
       />
       <Choices
         options={[
           { label: 'EDGE TOWARD YOU', testId: 'edge-you', on: run.edgeTowardYou === true, onClick: () => upd({ edgeTowardYou: true }) },
-          { label: 'EDGE AWAY', on: run.edgeTowardYou === false, onClick: () => upd({ edgeTowardYou: false }) },
         ]}
       />
       <HoldButton testId="stab-push" onTick={push}>
@@ -420,14 +410,6 @@ function Open({ c, run, upd, feel, why, physical, coach, next }: Stage) {
         <Choices
           options={[
             { label: 'SHARP EDGE TO THE FEET', testId: 'edge-feet', on: run.edgeCaudal === true, onClick: () => upd({ edgeCaudal: true }) },
-            {
-              label: 'SHARP EDGE TO THE HEAD',
-              on: run.edgeCaudal === false,
-              onClick: () => {
-                upd({ edgeCaudal: false })
-                why('Point the sharp edge to the feet, away from the vocal cords.')
-              },
-            },
           ]}
         />
       )}
@@ -440,15 +422,6 @@ function Open({ c, run, upd, feel, why, physical, coach, next }: Stage) {
             onClick: () => {
               upd({ opened: 'lateral' })
               feel('Left hand on the scalpel now, handle upright, pulled gently toward you. The hole gapes.')
-            },
-          },
-          {
-            label: 'TAKE THE BLADE OUT',
-            on: run.opened === 'removed',
-            onClick: () => {
-              upd({ opened: 'removed' })
-              physical('The blade is out. The hole closes behind it.')
-              why('Keep the blade in and pull it toward you. The bougie slides down its far side.')
             },
           },
         ]}
@@ -515,13 +488,6 @@ function Bougie({ c, run, runRef, upd, feel, why, physical, coach, next }: Stage
                 feel('Bougie out. Finger into the hole, feel the trachea, bougie slides in under your finger.')
               },
             },
-            {
-              label: 'PUSH THROUGH IT',
-              onClick: () => {
-                upd({ forcedHoldUp: true })
-                why('An early hold-up is a false passage. Forcing it makes a bigger one.')
-              },
-            },
           ]}
         />
       )}
@@ -580,14 +546,6 @@ function Tube({ c, run, runRef, upd, feel, why, physical, coach, next }: Stage) 
               onClick: () => {
                 upd({ tubeHeldForBougie: true, bougieOut: true })
                 feel('Tube held at the skin. The bougie slides out.')
-              },
-            },
-            {
-              label: 'PULL THE BOUGIE OUT',
-              onClick: () => {
-                upd({ tubeHeldForBougie: false, bougieOut: true })
-                physical('The tube creeps out with the bougie.')
-                why('Hold the tube at the skin while the bougie comes out.')
               },
             },
           ]}
@@ -670,7 +628,6 @@ function Confirm({ c, run, upd, feel, why, physical, next, etco2, setEtco2 }: St
           options={[
             { label: 'SQUARE WAVE · IN THE TRACHEA', testId: 'read-square', onClick: () => read('square') },
             { label: 'NO TRACE · TUBE OUT, STILL CICO', testId: 'read-none', onClick: () => read('none') },
-            { label: 'CHEST MOVES · THAT IS ENOUGH', onClick: () => read('chest') },
           ]}
         />
       )}
@@ -697,14 +654,6 @@ function Confirm({ c, run, upd, feel, why, physical, next, etco2, setEtco2 }: St
             onClick: () => {
               upd({ holdUntilTied: true })
               feel('You hold the tube at the skin until it is tied and the ICU registrar takes it.')
-            },
-          },
-          {
-            label: 'LET GO · WRITE THE NOTE',
-            on: run.holdUntilTied === false,
-            onClick: () => {
-              upd({ holdUntilTied: false })
-              why('A short front-of-neck tube falls out. Hold it until it is tied and a named person takes it.')
             },
           },
         ]}

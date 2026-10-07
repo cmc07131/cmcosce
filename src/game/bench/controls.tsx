@@ -259,9 +259,9 @@ export function Dial({ label, spin }: { label: string; spin: ReturnType<typeof u
 
 export type SayOption = { text: string; ok: boolean }
 
-/** Three plausible lines; the examiner scores what you say. Order is fixed per mount. */
+/** The line to say aloud: only the right one is offered (nobody learns by picking a wrong line). */
 export function SayIt({ prompt, options, picked, onPick }: { prompt: string; options: SayOption[]; picked: boolean | null; onPick: (ok: boolean) => void }) {
-  const order = useMemo(() => [...options].sort(() => Math.random() - 0.5), [options])
+  const order = useMemo(() => options.filter((option) => option.ok), [options])
   const [chosen, setChosen] = useState<string | null>(null)
   return (
     <div className="sayit" data-testid="sayit">

@@ -215,24 +215,6 @@ function Lift({ c, run, runRef, upd, feel, why, physical, elapsed, spasm, spasmO
       {canLift && !run.elevated && <p className="io-small">Drag upward on the picture to lift the head.</p>}
       <Choices
         options={[
-          {
-            label: 'PUSH THE CORD BACK UP',
-            onClick: () => {
-              upd({ replacedCord: true })
-              spasm()
-              physical('The cord goes into spasm under your fingers. The heart drops.')
-              why('Do not replace the cord. Handling it causes spasm; lift the head off it instead.')
-            },
-          },
-          {
-            label: 'SQUEEZE THE CORD FOR A PULSE',
-            onClick: () => {
-              upd((r) => ({ handledCord: r.handledCord + 1 }))
-              spasm()
-              physical('The cord tightens and the heart slows.')
-              why('Minimal handling. The Doppler tells you about the heart; the cord does not need squeezing.')
-            },
-          },
         ]}
       />
       <NextButton onClick={next}>The cord</NextButton>
@@ -261,30 +243,12 @@ function CordCare({ c, run, upd, feel, why, physical, spasm, next }: Stage) {
                 feel('Warm saline-soaked gauze laid loosely over the loop. No squeezing.')
               },
             },
-            {
-              label: 'WRAP IT TIGHTLY',
-              onClick: () => {
-                upd({ gauze: true, gauzeTight: true })
-                spasm()
-                physical('The heart dips as the wrap tightens.')
-                why('Loose, warm and moist. A tight wrap is handling.')
-              },
-            },
           ]}
         />
       ) : (
         <Choices
           options={[
             { label: 'LEAVE IT WHERE IT IS', testId: 'leave-cord', onClick: () => feel('You leave it alone. Your hand stays on the head.') },
-            {
-              label: 'PULL IT OUT TO LOOK',
-              onClick: () => {
-                upd((r) => ({ handledCord: r.handledCord + 1 }))
-                spasm()
-                physical('Cold air and fingers: the cord goes into spasm.')
-                why('A cord inside the vagina stays inside. Handling and cold both cause spasm.')
-              },
-            },
           ]}
         />
       )}
@@ -298,8 +262,6 @@ function CordCare({ c, run, upd, feel, why, physical, spasm, next }: Stage) {
 const POSES: { pose: Pose; label: string }[] = [
   { pose: 'knee-chest', label: 'KNEE–CHEST' },
   { pose: 'lateral', label: 'LEFT LATERAL · HEAD DOWN' },
-  { pose: 'supine', label: 'FLAT ON HER BACK' },
-  { pose: 'sitting', label: 'SIT HER UP' },
 ]
 
 function Position({ run, upd, feel, why, next }: Stage) {
@@ -464,7 +426,6 @@ function Theatre({ c, run, runRef, upd, feel, why, next }: Stage) {
 const TRANSFER: { pose: Pose | 'walk'; label: string }[] = [
   { pose: 'lateral', label: 'LEFT LATERAL · HEAD DOWN · PILLOW UNDER LEFT HIP' },
   { pose: 'knee-chest', label: 'KNEE–CHEST ON THE TROLLEY' },
-  { pose: 'walk', label: 'SHE WALKS TO THEATRE' },
 ]
 
 const SAY_BLADDER: SayOption[] = [
@@ -502,14 +463,6 @@ function Transfer({ run, upd, feel, why, physical, next }: Stage) {
       <Choices
         options={[
           { label: 'MY HAND STAYS IN', testId: 'hand-stays', on: !run.handOut, onClick: () => feel('You ride on the trolley, hand in, until O&G takes over.') },
-          {
-            label: 'HAND OUT FOR THE LIFT',
-            onClick: () => {
-              upd({ handOut: true })
-              physical('The head comes back down. The Doppler slows.')
-              why('Your hand stays in until the obstetrician takes over, even in the lift.')
-            },
-          },
         ]}
       />
       {run.bladderMl > 0 && (

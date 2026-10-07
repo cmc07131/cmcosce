@@ -435,7 +435,6 @@ function ReduceStage({ run, runRef, upd, feel, physical, why, coach, next }: Sta
         <p className="sayit-prompt">SAY IT</p>
         {[
           { ok: true, text: 'Hold her upper arm with the elbow at 90° and pull back against me.' },
-          { ok: false, text: 'Hold her hand still for me.' },
         ].map((l) => (
           <button
             key={l.text}
