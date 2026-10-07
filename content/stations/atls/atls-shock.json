@@ -38,10 +38,11 @@
     },
     {
       "title": "Damage control resuscitation",
-      "goal": "Name it; permissive hypotension and its head-injury exception; bridge carefully; haemostatic resuscitation when the blood arrives; the lethal triad.",
+      "goal": "Name it; permissive hypotension and its head-injury exception; bridge with small warmed boluses; when the blood arrives, haemostatic resuscitation and the lethal triad; reassess.",
       "steps": [
         "dcr",
-        "bridge-fluid"
+        "bridge-fluid",
+        "blood"
       ]
     },
     {
@@ -155,39 +156,39 @@
       "confirm": "Brief",
       "opts": [
         {
-          "t": "Put out a trauma team activation",
+          "t": "Please put out a full trauma team activation.",
           "need": true,
           "mark": "Activates the trauma team"
         },
         {
-          "t": "Introductions, names and experience; I am the trauma team leader and will stay hands-off",
+          "t": "Hello everyone, I'm the emergency physician and the trauma team leader; I'll stay hands-off. Names and experience, please.",
           "need": true,
           "mark": "Introduces the team and declares the team leader"
         },
         {
-          "t": "Roles: Dr Ng, airway and C-spine; Nurse Cheng, access, bloods and drugs; a scribe to record times",
+          "t": "Roles: Dr Ng, airway and cervical spine. Nurse Cheng, IV access, bloods and drugs. Could someone scribe and record the times.",
           "need": true,
           "mark": "Allocates roles, including a scribe"
         },
         {
-          "t": "Full PPE for everyone",
+          "t": "Everyone in full PPE, please.",
           "fetch": "trolley",
           "need": true,
           "mark": "Team PPE"
         },
         {
-          "t": "Expect intra-abdominal haemorrhage from the seatbelt injury, likely the spleen",
+          "t": "Our shared mental model: a 17-year-old, side impact, seatbelt sign, hypotensive. I expect intra-abdominal haemorrhage, most likely the spleen.",
           "need": true,
           "mark": "Shares the expected injury (shared mental model)"
         },
         {
-          "t": "O-negative blood, a fluid warmer or rapid infuser, and the ultrasound for an eFAST in the bay; warn the blood bank",
+          "t": "Please have O-negative blood, a fluid warmer or rapid infuser and the ultrasound for an eFAST ready, and warn the blood bank.",
           "fetch": "trolley",
           "need": true,
           "mark": "Prepares blood, warmer and ultrasound; warns the blood bank"
         },
         {
-          "t": "Closed-loop communication: repeat back every instruction; I'll summarise at intervals",
+          "t": "We'll use closed-loop communication: repeat back each instruction. I'll summarise at intervals.",
           "need": true,
           "mark": "Sets closed-loop communication"
         }
@@ -202,27 +203,27 @@
       "groups": {
         "ATMIST": [
           {
-            "t": "Age and time of injury",
+            "t": "Age, and the time of injury?",
             "r": "17, 25 minutes ago.",
             "mark": "Takes age and time"
           },
           {
-            "t": "Mechanism",
+            "t": "Mechanism?",
             "r": "Side impact on her side at about 70 km/h, belted, airbags deployed. Car door intruded.",
             "mark": "Takes the mechanism"
           },
           {
-            "t": "Injuries",
+            "t": "Injuries found?",
             "r": "Seatbelt bruise across the lower abdomen, tender left upper quadrant. Left chest wall sore.",
             "mark": "Takes injuries found"
           },
           {
-            "t": "Signs",
+            "t": "Signs, and how they've changed?",
             "r": "HR 110 → 128, BP 104/70 → 88/50.",
             "mark": "Takes the trend of signs"
           },
           {
-            "t": "Treatment",
+            "t": "Treatment so far?",
             "r": "Oxygen, 18 G right arm, 250 mL saline, collar.",
             "mark": "Takes the treatment given"
           }
@@ -238,13 +239,13 @@
       "hint": "Monitor, oxygen; transfer with spinal precautions.",
       "opts": [
         {
-          "t": "Monitoring: ECG, NIBP every 3 minutes, SpO2",
+          "t": "Monitoring on, please: ECG, blood pressure every 3 minutes and SpO2.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Puts her on continuous monitoring"
         },
         {
-          "t": "High-flow oxygen, 15 L via a non-rebreather mask",
+          "t": "High-flow oxygen, 15 litres via a non-rebreather.",
           "fetch": "trolley",
           "mark": "Gives high-flow oxygen",
           "r": "Nurse Cheng: Oxygen on, 15 litres."
@@ -321,13 +322,13 @@
       "hint": "Two large-bore cannulae and bloods (crossmatch, gas, calcium, pregnancy test); the massive transfusion protocol.",
       "opts": [
         {
-          "t": "Two large-bore cannulae; bloods: FBC, clotting, crossmatch, venous gas with lactate and base deficit, ionised calcium, and a pregnancy test",
+          "t": "Nurse Cheng: two large-bore cannulae; bloods for FBC, clotting, crossmatch, a venous gas with lactate and base deficit, ionised calcium, and a pregnancy test.",
           "fetch": "trolley",
           "mark": "Two large-bore cannulae; bloods with crossmatch, gas, calcium and pregnancy test",
           "r": "Nurse Cheng: Done. Gas: pH 7.26, base deficit −8, lactate 4.6, Hb 96, ionised calcium 1.08. hCG negative."
         },
         {
-          "t": "Activate the massive transfusion protocol now",
+          "t": "Please activate the massive transfusion protocol now.",
           "scene": "mhp",
           "mark": "Activates the massive transfusion protocol early",
           "r": "Nurse Cheng: Massive transfusion protocol activated. O-negative is 10 minutes away. BP 80/46 now."
@@ -364,38 +365,19 @@
       "to": "nurse",
       "label": "Damage control resuscitation",
       "lang": "en",
-      "hint": "Say it: damage control resuscitation. Permissive hypotension (80–90), the head-injury exception, haemostatic resuscitation 1:1:1, the lethal triad and calcium; reassess.",
+      "hint": "Say it: damage control resuscitation; permissive hypotension 80–90; the head-injury exception.",
       "opts": [
         {
-          "t": "This is damage control resuscitation: permissive hypotension, haemostatic resuscitation and early haemorrhage control",
+          "t": "This is damage control resuscitation: permissive hypotension, haemostatic resuscitation and early haemorrhage control.",
           "mark": "Names damage control resuscitation and its parts"
         },
         {
-          "t": "Permissive hypotension: target a systolic of 80–90, a radial pulse and her talking, until the bleeding is controlled",
+          "t": "Permissive hypotension: we're aiming for a systolic of 80 to 90, a radial pulse and her talking, until the bleeding is controlled.",
           "mark": "Permissive hypotension: systolic 80–90 until haemorrhage control"
         },
         {
-          "t": "No head injury, so that is safe; with a brain injury I would keep the systolic at 110 or more",
+          "t": "There's no head injury; if there were, I'd keep the systolic at 110 or more.",
           "mark": "States the head-injury exception"
-        },
-        {
-          "t": "The O-negative is here: haemostatic resuscitation, 1:1:1 plasma, platelets and red cells, through the warmer",
-          "scene": "blood",
-          "when": "blood-here",
-          "early": "The blood is not here yet.",
-          "mark": "Haemostatic resuscitation: balanced 1:1:1 through a warmer",
-          "r": "Nurse Cheng: Blood running through the warmer."
-        },
-        {
-          "t": "Prevent the lethal triad: keep her warm, correct acidosis by restoring perfusion, and give calcium during transfusion",
-          "mark": "Prevents the lethal triad and replaces calcium"
-        },
-        {
-          "t": "Reassess after each unit: how is she responding?",
-          "when": "blood",
-          "early": "Give the blood first, then reassess.",
-          "mark": "Reassesses: identifies a transient responder",
-          "r": "Nurse Cheng: After 2 units BP came up to 98/60, now drifting back to 84/50, HR 124. \"She is a transient responder.\""
         }
       ]
     },
@@ -415,6 +397,37 @@
           "t": "Warmed crystalloid 250 mL bolus, then reassess (1 L at most)",
           "drug": "Crystalloid (warmed)",
           "dose": "250 mL bolus, then reassess (1 L at most)"
+        }
+      ]
+    },
+    {
+      "id": "blood",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Blood has arrived",
+      "lang": "en",
+      "hint": "Haemostatic resuscitation 1:1:1 through the warmer; prevent the lethal triad, calcium; reassess.",
+      "opts": [
+        {
+          "t": "The O-negative is here: haemostatic resuscitation, 1:1:1 plasma, platelets and red cells, through the warmer.",
+          "scene": "blood",
+          "when": "blood-here",
+          "early": "The blood is not here yet.",
+          "mark": "Haemostatic resuscitation: balanced 1:1:1 through a warmer",
+          "r": "Nurse Cheng: Blood running through the warmer."
+        },
+        {
+          "t": "Prevent the lethal triad: keep her warm, restore perfusion against the acidosis, and give calcium during transfusion.",
+          "mark": "Prevents the lethal triad and replaces calcium",
+          "when": "blood",
+          "early": "Once the blood is running."
+        },
+        {
+          "t": "Reassess after each unit, please: how is she responding?",
+          "when": "blood",
+          "early": "Give the blood first, then reassess.",
+          "mark": "Reassesses: identifies a transient responder",
+          "r": "Nurse Cheng: After 2 units BP came up to 98/60, now drifting back to 84/50, HR 124. \"She is a transient responder.\""
         }
       ]
     },
@@ -456,12 +469,12 @@
       "hint": "SBAR to the surgeon: unstable, eFAST positive, transient responder: damage control laparotomy. Theatre, anaesthesia, ICU.",
       "opts": [
         {
-          "t": "Surgeon, SBAR: 17, side impact, class III haemorrhagic shock, eFAST positive, transient responder after 2 units and TXA: please come for an emergency damage control laparotomy",
+          "t": "Surgeon, this is the trauma team leader. A 17-year-old, side-impact crash, in class III haemorrhagic shock; eFAST positive, transient responder after 2 units and TXA. Please come now for an emergency damage control laparotomy.",
           "mark": "SBAR referral for damage control laparotomy",
           "r": "Surgeon: I'm coming down now."
         },
         {
-          "t": "Theatre, the anaesthetist and an ICU bed: an unstable patient for laparotomy",
+          "t": "Please alert theatre, the anaesthetist and ICU.",
           "mark": "Mobilises theatre, anaesthesia and ICU",
           "r": "Theatre is being prepared; the anaesthetist is on the way."
         }
@@ -476,16 +489,16 @@
       "hint": "Summarise aloud; the plan after theatre; spinal care; family; documentation.",
       "opts": [
         {
-          "t": "Summary: 17, side impact, class III haemorrhagic shock, eFAST positive, left rib fractures; massive transfusion protocol, TXA and 2 units; a transient responder: for damage control laparotomy",
+          "t": "Summary for the team: 17-year-old, side impact, class III haemorrhagic shock, eFAST positive, left rib fractures, transient responder after 2 units and TXA, going for damage control laparotomy.",
           "mark": "Summarises aloud and hands over",
           "r": "The surgeon repeats it back."
         },
         {
-          "t": "Secondary survey once the bleeding is controlled, and a tertiary survey later; spinal precautions continue: the seatbelt sign raises the risk of a Chance fracture and bowel injury",
+          "t": "Secondary survey once the bleeding is controlled, and a tertiary survey later. Spinal precautions continue: the seatbelt sign raises the risk of a Chance fracture and bowel injury.",
           "mark": "Plans the secondary and tertiary survey; spinal precautions"
         },
         {
-          "t": "I'll update her family, and the scribe's record has the times of every drug and unit",
+          "t": "I'll update her family, and the scribe's record has the time of every drug and unit.",
           "mark": "Informs the family; documentation with times"
         }
       ]

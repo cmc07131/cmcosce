@@ -447,3 +447,14 @@ test('perfect scripts: every key word is said somewhere in the script', () => {
     for (const k of st.keywords ?? []) assert.ok(said.includes(k.toLowerCase()), `${st.id}: key word "${k}" is never said in the script`)
   }
 })
+
+test('haemorrhagic shock: the guide bridges with fluid before the blood arrives', () => {
+  const pack = compileStation(stationSchema.parse(JSON.parse(readFileSync(files.find((f) => f.endsWith('atls-shock.json'))!, 'utf8'))))
+  const spent: Record<string, string[]> = {}
+  for (const id of ['brief', 'handover', 'monitoring', 'survey', 'resus', 'drugs', 'dcr']) {
+    const a = pack.actions.find((x) => x.id === id)!
+    spent[id] = [...(a.options ?? []).map((o) => o.id)]
+  }
+  const hint = nextHint(pack, spent, ['monitored', 'mhp'])
+  assert.equal(hint?.kind === 'do' ? hint.actionId : hint?.kind, 'bridge-fluid')
+})

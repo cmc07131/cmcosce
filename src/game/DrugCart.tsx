@@ -75,6 +75,7 @@ export function DrugCart({
   const drugs = useMemo(() => seededShuffle([...new Set(rows.map((r) => nameOf(r.option)))], seed, 'drug-cart'), [rows, seed])
   const [drug, setDrug] = useState<string | null>(null)
   const used = (r: Row) => (spent[r.actionId] ?? []).includes(r.option.id)
+  const scripted = !rows.some((r) => r.option.isTrap)
 
   if (drug) {
     const mine = rows.filter((r) => nameOf(r.option) === drug)
@@ -88,20 +89,23 @@ export function DrugCart({
             const same = mine.filter((r) => doseOf(r.option) === dose)
             // The same dose can serve more than one moment (a first bolus, a later one): use the one that is due.
             const pick = same.find((r) => !used(r) && indicated(r.option, scene ?? [])) ?? same.find((r) => !used(r))
+            // Every dose on a trap-free cart is part of the script: one whose moment has not come waits, greyed.
+            const waiting = scripted && pick && !indicated(pick.option, scene ?? []) ? (pick.option.early ?? 'Not yet.') : null
             return (
               <NavItem
                 key={dose}
                 testId={`dose-${pick?.actionId ?? 'x'}-${pick?.option.id ?? 'x'}`}
-                disabled={!pick}
+                disabled={!pick || waiting !== null}
                 tone={pick ? undefined : 'done'}
                 onClick={() => {
-                  if (!pick) return
+                  if (!pick || waiting) return
                   onConfirm(pick.actionId, [pick.option.id])
                   onClose?.()
                 }}
               >
                 {pick ? '▸ ' : '✓ '}
                 {dose}
+                {waiting && <span className="nav-need">{waiting}</span>}
               </NavItem>
             )
           })}

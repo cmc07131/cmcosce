@@ -18,8 +18,9 @@ export type DefibSpec = { rhythm: Rhythm; sync: boolean; energy: [number, number
 
 export function defibSpec(pose?: string): DefibSpec {
   if (pose === 'vt') return { rhythm: 'vt', sync: true, energy: [120, 150], label: 'VT with a pulse', why: 'Monomorphic VT with a pulse: synchronised, 120–150 J biphasic, escalating.' }
-  if (pose === 'vf-arrest') return { rhythm: 'vf', sync: false, energy: [150, 360], label: 'VF arrest', why: 'VF: unsynchronised, at least 150 J biphasic; resume CPR at once.', refractory: true }
-  if (pose === 'vf') return { rhythm: 'vf', sync: false, energy: [150, 360], label: 'VF', why: 'VF: unsynchronised, at least 150 J biphasic.' }
+  // AHA: 120–200 J biphasic as the maker advises (or the maximum); RCUK: at least 150 J. Either passes.
+  if (pose === 'vf-arrest') return { rhythm: 'vf', sync: false, energy: [120, 360], label: 'VF arrest', why: 'VF: unsynchronised, 120–200 J biphasic (as the maker advises) or the maximum; resume CPR at once.', refractory: true }
+  if (pose === 'vf') return { rhythm: 'vf', sync: false, energy: [120, 360], label: 'VF', why: 'VF: unsynchronised, 120–200 J biphasic (as the maker advises) or the maximum.' }
   return { rhythm: 'af', sync: true, energy: [150, 200], label: 'AF with adverse features', why: 'AF: synchronised, a high first energy (150–200 J biphasic).' }
 }
 

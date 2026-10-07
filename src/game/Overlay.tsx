@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import { itemLabel, menuIsMulti, missingItems } from '~/engine/judge'
 import type { Action, Pack } from '~/engine/schema'
-import { usePlay, type Overlay as OverlayState } from './store'
+import { indicated, usePlay, type Overlay as OverlayState } from './store'
 import { DrugCart } from './DrugCart'
 import { Film, FilmButton } from './imaging/Film'
 import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel, seededShuffle } from './panels'
@@ -231,6 +231,8 @@ function TalkList({
   onOption: (actionId: string, optionId: string) => void
 }) {
   const [film, setFilm] = useState<string | null>(null)
+  const scene = usePlay((s) => s.scene) ?? []
+  const scripted = !(action.options ?? []).some((o) => o.isTrap)
   const options = useShuffled(action).filter((option) => !used.has(option.id))
   const results = (action.options ?? []).filter((option) => used.has(option.id) && option.img)
   return (
@@ -245,11 +247,13 @@ function TalkList({
         )}
         {options.map((option) => {
           const missing = [...missingItems(action.requiresItems, inventory), ...missingItems(option.requiresItems, inventory)]
+          // Every line here is part of the script (no trap among them): one whose moment has not come waits, greyed.
+          const waiting = !scripted || indicated(option, scene) ? null : (option.early ?? 'Not yet.')
           return (
             <NavItem
               key={option.id}
               testId={`option-${action.id}-${option.id}`}
-              disabled={missing.length > 0}
+              disabled={missing.length > 0 || waiting !== null}
               onClick={() => {
                 // Close straight away: the reply and what happens next play out in the room, not behind the menu.
                 onOption(action.id, option.id)
@@ -258,6 +262,7 @@ function TalkList({
             >
               {option.label}
               {missing.length > 0 && <span className="nav-need">Need {missing.map((id) => itemLabel(pack, id)).join(', ')}</span>}
+              {waiting && <span className="nav-need">{waiting}</span>}
             </NavItem>
           )
         })}

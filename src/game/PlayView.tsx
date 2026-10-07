@@ -66,6 +66,8 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const examinerId = endQueue[0]?.targetIds[0] ?? null
   const endCalled = useRef(false)
   const autoOpened = useRef(new Set<string>())
+  /** How many of an end step's lines were used when the examiner last opened it. */
+  const openedWith = useRef(new Map<string, number>())
   const [readyAsked, setReadyAsked] = useState(false)
   const [walks, setWalks] = useState<Walk[]>([])
   const examinerWalk = useRef<number | null>(null)
@@ -81,6 +83,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
     announcedDone.current = false
     endCalled.current = false
     autoOpened.current = new Set()
+    openedWith.current = new Map()
     setReadyAsked(false)
     setWalks([])
     examinerWalk.current = null
@@ -93,7 +96,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const bootEnded = useRef<string | null>(null)
 
   useEffect(() => {
-    if (import.meta.env.DEV) Object.assign(window, { __osce: { play: usePlay, press } })
+    if (import.meta.env.DEV) Object.assign(window, { __osce: { play: usePlay, press, pack, endIds, hint: () => nextHint(pack, usePlay.getState().spent, usePlay.getState().scene ?? []) } })
   }, [])
 
   useEffect(() => {
@@ -191,14 +194,22 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   // Beside the candidate, the examiner prompts each end step in turn: what they say, then the step opens.
   useEffect(() => {
     if (!examinerHere || !examinerId || ended || !idleNow) return
-    const next = endQueue.find((a) => !used(a) && !autoOpened.current.has(a.id))
+    // A prompted step stays with the examiner until every line of it is said: each pick closes the list, so they open
+    // it again (without repeating the question) as long as the last opening got an answer.
+    const said = (a: Action) => spent[a.id]?.length ?? 0
+    const allSaid = (a: Action) => (a.options ?? []).filter((o) => !o.isTrap && o.marksChecklistIds?.length).every((o) => spent[a.id]?.includes(o.id))
+    const next = endQueue.find((a) =>
+      !autoOpened.current.has(a.id) ? !used(a) || (a.kind !== 'viva' && !allSaid(a)) : a.kind !== 'viva' && !allSaid(a) && said(a) > (openedWith.current.get(a.id) ?? 0),
+    )
     if (!next) return
+    const again = autoOpened.current.has(next.id)
     const first = !endQueue.some((a) => autoOpened.current.has(a.id))
     const line = next.ask ?? (first ? 'Thank you. I have a few questions for you.' : 'Now a few questions.')
     const id = window.setTimeout(() => {
       autoOpened.current.add(next.id)
-      store().note(line, 'say', examinerId)
-      window.setTimeout(() => store().openAction(next.id, examinerId), 1100)
+      openedWith.current.set(next.id, said(next))
+      if (!again) store().note(line, 'say', examinerId)
+      window.setTimeout(() => store().openAction(next.id, examinerId), again ? 400 : 1100)
     }, 700)
     return () => window.clearTimeout(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
