@@ -8,22 +8,30 @@
   "phases": [
     {
       "title": "Assess",
-      "goal": "Monitoring on; is she compensated? Read the ECG.",
+      "goal": "Monitoring and pads; is she compensated? Glucose; read the ECG.",
       "steps": [
         "monitoring",
         "assess"
       ]
     },
     {
+      "title": "Plan and talk",
+      "goal": "Say the plan; a quick history and agreement from her father.",
+      "steps": [
+        "plan",
+        "father"
+      ]
+    },
+    {
       "title": "Vagal manoeuvre",
-      "goal": "The infant vagal manoeuvre, safely.",
+      "goal": "The infant vagal manoeuvre, with a strip running.",
       "steps": [
         "vagal"
       ]
     },
     {
       "title": "Adenosine",
-      "goal": "Set up, record the strip, adenosine for her weight from the drug cart — and escalate if it fails.",
+      "goal": "Proximal access, a strip, adenosine for her weight; a second dose if the first fails.",
       "steps": [
         "adeno-prep",
         "strip",
@@ -32,23 +40,24 @@
     },
     {
       "title": "After",
-      "goal": "What does the ECG in sinus rhythm need, and who follows her up?",
+      "goal": "The ECG in sinus rhythm, cardiology, admission; tell her father.",
       "steps": [
-        "after"
+        "after",
+        "explain"
       ]
     }
   ],
   "review": [
     {
       "tag": "differs",
-      "text": "Adenosine first dose. Your notes give 100 then 200 microgram/kg (APLS/AHA). RCUK starts at 150 microgram/kg, then 300 microgram/kg. Either sequence is accepted here."
+      "text": "Adenosine doses. AHA PALS (Hong Kong courses) and your notes: 0.1 mg/kg then 0.2 mg/kg. RCUK/APLS: 150 then 300 microgram/kg (max 500). The cart uses AHA."
     },
     {
       "tag": "differs",
-      "text": "Cardioversion escalation. Your notes go 1, then 2, then 5 J/kg with amiodarone. RCUK escalates to 4 J/kg, with amiodarone 5 mg/kg after the third attempt."
+      "text": "Cardioversion. AHA PALS: 0.5–1 J/kg, then 2 J/kg. RCUK: 1 J/kg, then 2 J/kg, then 4 J/kg, with amiodarone after the third. The script says 1 then 2 J/kg, which both accept."
     }
   ],
-  "notes": "Checked against RCUK 2025 paediatric life support (tachyarrhythmia algorithm) and APLS.\n\nIf compensated: vagal manoeuvres first (in infants, a bag of iced water applied to the face for about 15 seconds without covering the airway — the diving reflex; older children: blowing through a syringe or Valsalva). Then adenosine: RCUK 150 microgram/kg rapid IV bolus with flush, then 300 microgram/kg (APLS teaches 100 → 200 → 300 microgram/kg; max single dose 500 microgram/kg or 12 mg). If decompensated (shock, reduced consciousness): synchronised cardioversion 1 J/kg, then 2 J/kg under sedation; adenosine can be tried first only if IV access is already in and it will not delay.\n\nYour notes give adenosine 0.1 then 0.2 mg/kg (100 then 200 microgram/kg, the AHA/APLS start) and cardioversion 1 → 2 J/kg, then 5 J/kg with amiodarone 5 mg/kg; RCUK escalates to 4 J/kg with amiodarone 5 mg/kg after the third attempt. The station accepts either adenosine sequence and scores the RCUK first dose.",
+  "notes": "Checked against RCUK 2025 paediatric life support (tachyarrhythmia algorithm) and APLS.\n\nIf compensated: vagal manoeuvres first (in infants, a bag of iced water applied to the face for about 15 seconds without covering the airway — the diving reflex; older children: blowing through a syringe or Valsalva). Then adenosine: RCUK 150 microgram/kg rapid IV bolus with flush, then 300 microgram/kg (APLS teaches 100 → 200 → 300 microgram/kg; max single dose 500 microgram/kg or 12 mg). If decompensated (shock, reduced consciousness): synchronised cardioversion 1 J/kg, then 2 J/kg under sedation; adenosine can be tried first only if IV access is already in and it will not delay.\n\nYour notes give adenosine 0.1 then 0.2 mg/kg (100 then 200 microgram/kg, the AHA/APLS start) and cardioversion 1 → 2 J/kg, then 5 J/kg with amiodarone 5 mg/kg; RCUK escalates to 4 J/kg with amiodarone 5 mg/kg after the third attempt. The station accepts either adenosine sequence and scores the RCUK first dose.\n\nPerfect script checked against an AHA PALS tachycardia checklist, the RCUK/APLS algorithm, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (carotid massage, eyeball pressure, adult and low adenosine doses, verapamil). Added: pads on early, glucose, the plan said aloud including cardioversion and no verapamil, the father's history and agreement, and the update after. Adenosine now follows AHA (and your notes): 0.1 then 0.2 mg/kg.",
   "cast": [
     {
       "id": "patient",
@@ -92,81 +101,127 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring",
-      "hint": "Ask the nurse to put the patient on the monitor.",
+      "hint": "Monitor, pads ready; her weight.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads and SpO2.",
+          "t": "Monitoring on, please: ECG, SpO2 and blood pressure. She's 3 months, about 6 kg. Infant defibrillator pads on in case she deteriorates.",
           "fetch": "trolley",
           "scene": "monitored",
-          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+          "mark": "Monitoring and pads; weight 6 kg"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "assess",
       "kind": "exam",
       "to": "patient",
       "label": "Assess",
-      "hint": "Compensated or not? ECG.",
+      "hint": "Compensated or not? Glucose. Read the ECG.",
       "groups": {
         "ABC": [
           {
-            "t": "Perfusion and conscious level",
-            "r": "CRT 2 s, warm, alert and crying. BP 78/46.",
-            "mark": "Recognises compensated (stable) SVT",
-            "anim": "pupils"
+            "t": "Airway and breathing",
+            "anim": "auscultate",
+            "r": "Crying, airway clear. RR 50, chest clear, no recession. \"No heart failure.\"",
+            "mark": "Assesses A and B: no heart failure"
           },
           {
-            "t": "Liver and chest",
-            "r": "Liver edge 2 cm, chest clear.",
-            "anim": "auscultate"
+            "t": "Perfusion, pressure and the liver",
+            "anim": "pulse",
+            "r": "HR 280, CRT 2 s, warm, BP 78/46, liver edge 2 cm. \"Compensated: not shocked.\"",
+            "mark": "Recognises compensated (stable) SVT"
+          }
+        ],
+        "D": [
+          {
+            "t": "Conscious level and capillary glucose",
+            "anim": "glucose",
+            "r": "Alert and crying. Glucose 4.8 mmol/L.",
+            "mark": "Conscious level and glucose"
           }
         ],
         "ECG": [
           {
             "t": "12-lead ECG",
-            "r": "Regular narrow complex tachycardia at 280, no variation with crying, no visible P waves.",
             "img": "ecg:svt",
+            "r": "Regular narrow complex tachycardia at 280, fixed with crying, no visible P waves. \"Over 220 in an infant: SVT, not sinus tachycardia.\"",
             "mark": "Identifies SVT (fixed rate over 220 in an infant)"
           }
         ]
       }
     },
     {
+      "id": "plan",
+      "kind": "say",
+      "to": "nurse",
+      "label": "The plan",
+      "lang": "en",
+      "hint": "Stable SVT: vagal, then adenosine; the plan if she becomes shocked; no verapamil.",
+      "opts": [
+        {
+          "t": "She has SVT and she's compensated: vagal manoeuvre first, then adenosine.",
+          "mark": "States the plan: vagal manoeuvre, then adenosine"
+        },
+        {
+          "t": "If she becomes shocked: synchronised cardioversion, 1 J/kg then 2 J/kg, with sedation.",
+          "mark": "Plans synchronised cardioversion if unstable"
+        },
+        {
+          "t": "No verapamil: under one year it can cause collapse.",
+          "mark": "Avoids verapamil in infants"
+        }
+      ]
+    },
+    {
+      "id": "father",
+      "kind": "say",
+      "to": "father",
+      "label": "Talk to her father",
+      "hint": "A quick history, and what you are about to do.",
+      "opts": [
+        {
+          "t": "I'm the doctor looking after her. Was she born well? Any heart problems or medicines?",
+          "tz": "我係照顧佢嘅醫生。佢出世嗰陣係咪一切正常？有冇心臟問題或者食緊藥？",
+          "r": "Born on time, healthy. No medicine. She's never been like this.",
+          "rz": "足月出世，好健康。冇食藥。以前從來冇試過咁。",
+          "mark": "Brief history: birth, heart problems, medicines"
+        },
+        {
+          "t": "Her heart is beating far too fast. First we'll put ice-cold water on her face, which can reset it. If not, a medicine that resets the heart: she may go pale for a few seconds.",
+          "tz": "佢個心跳得太快。我哋會先用冰水敷佢塊面，有機會令心跳返正常。如果唔得，就會用一隻藥將心跳重設，佢可能會臉青幾秒。",
+          "r": "Okay. Please help her.",
+          "rz": "好，唔該你幫吓佢。",
+          "mark": "Explains to the parent and gains agreement"
+        }
+      ]
+    },
+    {
       "id": "vagal",
       "kind": "say",
       "to": "nurse",
       "label": "Vagal manoeuvre",
-      "hint": "Infant: iced water bag to the face.",
+      "hint": "The diving reflex: iced water to her face, with a strip running.",
       "opts": [
         {
-          "t": "Record a rhythm strip; bag of iced water on her face for 15 seconds, airway clear",
+          "t": "Record a rhythm strip. A bag of iced water over her face for 15 seconds, keeping her airway clear.",
           "fetch": "trolley",
-          "mark": "Uses the diving reflex for an infant",
+          "mark": "Uses the diving reflex for an infant, with a strip running",
           "r": "Nurse Fok: No change, still 280."
-        },
-        {
-          "t": "Carotid massage",
-          "trap": true,
-          "r": "Not used in infants."
-        },
-        {
-          "t": "Press on her eyeballs",
-          "trap": "critical",
-          "r": "Ocular pressure can damage the eye; it is not recommended."
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "adeno-prep",
       "kind": "pick",
       "to": "trolley",
       "label": "Trolley",
-      "hint": "A large proximal vein and a fast flush.",
+      "hint": "A large proximal vein, a three-way tap and a fast flush.",
       "confirm": "Take these",
       "opts": [
         {
-          "t": "IV cannula in a large proximal vein (antecubital); 3-way tap with a saline flush",
+          "t": "IV cannula in a large proximal vein (antecubital); three-way tap with a 5 mL saline flush",
           "mark": "Proximal access with a flush"
         }
       ]
@@ -179,74 +234,79 @@
       "hint": "Record the rhythm through the push.",
       "opts": [
         {
-          "t": "Record a rhythm strip through the push.",
+          "t": "Record a continuous rhythm strip through the push.",
           "mark": "Records a rhythm strip during adenosine"
         }
-      ]
+      ],
+      "lang": "en"
     },
     {
       "id": "adenosine",
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Dosed for 6 kg; escalate if it fails.",
+      "hint": "0.1 mg/kg (0.6 mg) rapid push with a flush; then 0.2 mg/kg (1.2 mg).",
       "confirm": "Give",
       "opts": [
         {
-          "t": "Adenosine 150 microgram/kg (0.9 mg) rapid push, then flush",
+          "t": "Adenosine 0.1 mg/kg (0.6 mg) rapid push, then flush",
           "drug": "Adenosine",
-          "dose": "150 microgram/kg (0.9 mg) rapid push, then flush",
+          "dose": "0.1 mg/kg (0.6 mg) rapid push, then flush",
           "fetch": "cart",
           "scene": "adeno1",
-          "r": "A two-second pause on the monitor… then SVT again at 280.",
-          "mark": "First adenosine dose 150 microgram/kg"
+          "r": "A two-second pause on the monitor, then SVT again at 280.",
+          "mark": "First adenosine dose 0.1 mg/kg, rapid push and flush"
         },
         {
-          "t": "Adenosine 300 microgram/kg (1.8 mg) rapid push, then flush",
+          "t": "Adenosine 0.2 mg/kg (1.2 mg) rapid push, then flush",
           "drug": "Adenosine",
-          "dose": "300 microgram/kg (1.8 mg) rapid push, then flush",
+          "dose": "0.2 mg/kg (1.2 mg) rapid push, then flush",
           "fetch": "cart",
           "when": "adeno1",
-          "early": "Start with 150 microgram/kg.",
+          "early": "Start with 0.1 mg/kg.",
           "scene": "converted",
-          "mark": "Second dose 300 microgram/kg"
-        },
-        {
-          "t": "Adenosine 6 mg rapid push",
-          "drug": "Adenosine",
-          "dose": "6 mg rapid push",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "The adult dose. For 6 kg: 150 microgram/kg (0.9 mg)."
-        },
-        {
-          "t": "Adenosine 50 microgram/kg rapid push",
-          "drug": "Adenosine",
-          "dose": "50 microgram/kg rapid push",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: start at 150 microgram/kg (RCUK)."
-        },
-        {
-          "trap": "critical",
-          "r": "Verapamil in infants can cause profound hypotension and asystole.",
-          "t": "Verapamil 0.1 mg/kg IV",
-          "drug": "Verapamil",
-          "dose": "0.1 mg/kg IV",
-          "fetch": "cart"
+          "r": "A pause, then sinus rhythm at 150.",
+          "mark": "Second dose 0.2 mg/kg"
         }
       ]
     },
     {
       "id": "after",
       "kind": "say",
-      "to": "phone",
+      "to": "nurse",
       "label": "After conversion",
-      "hint": "12-lead in sinus rhythm, paediatric cardiology.",
+      "hint": "12-lead in sinus rhythm; cardiology; admit; tell her father.",
       "opts": [
         {
-          "t": "12-lead ECG in sinus rhythm (look for pre-excitation); paediatric cardiology referral; admit",
-          "mark": "Post-conversion ECG and cardiology referral"
+          "t": "Converted: sinus rhythm at 150. A 12-lead ECG in sinus rhythm to look for pre-excitation, WPW.",
+          "when": "converted",
+          "early": "Once she is back in sinus rhythm.",
+          "mark": "Post-conversion 12-lead for pre-excitation"
+        },
+        {
+          "t": "Refer to paediatric cardiology for an echo, and admit her to a monitored bed.",
+          "when": "converted",
+          "early": "Once she is back in sinus rhythm.",
+          "mark": "Cardiology referral, echo and admission"
+        }
+      ],
+      "lang": "en"
+    },
+    {
+      "id": "explain",
+      "kind": "say",
+      "to": "father",
+      "label": "Tell her father",
+      "hint": "It worked; what happens next.",
+      "opts": [
+        {
+          "t": "Her heart is back to a normal rhythm. She'll stay in hospital on a monitor, and the heart doctors will scan her heart.",
+          "tz": "佢個心跳已經返返正常。佢要留院，用監察器睇住，心臟科醫生會幫佢照心臟超聲波。",
+          "r": "Thank you, doctor.",
+          "rz": "多謝醫生。",
+          "when": "converted",
+          "early": "Once she is back in sinus rhythm.",
+          "mark": "Updates the parent"
         }
       ]
     },
@@ -257,8 +317,8 @@
       "label": "Examiner",
       "qs": [
         {
-          "q": "First adenosine dose (RCUK) in paediatric SVT?",
-          "a": "150 microgram/kg",
+          "q": "First adenosine dose in infant SVT (AHA PALS)?",
+          "a": "0.1 mg/kg (max 6 mg), then 0.2 mg/kg (max 12 mg)",
           "wrong": [
             "6 mg regardless of weight",
             "10 microgram/kg, repeated twice",
@@ -267,7 +327,7 @@
         },
         {
           "q": "Synchronised cardioversion energy for an unstable child with SVT?",
-          "a": "1 J/kg, then 2 J/kg",
+          "a": "0.5–1 J/kg, then 2 J/kg",
           "wrong": [
             "4 J/kg, then 8 J/kg",
             "0.5 J/kg, then 1 J/kg",
@@ -389,6 +449,77 @@
       ],
       "why": "Given over 20 minutes in the perfusing patient.",
       "source": "RCUK paediatric ALS"
+    }
+  ],
+  "keywords": [
+    "6 kg",
+    "compensated",
+    "narrow complex tachycardia",
+    "over 220",
+    "SVT",
+    "vagal manoeuvre",
+    "iced water",
+    "rhythm strip",
+    "adenosine 0.1 mg per kg",
+    "rapid push",
+    "flush",
+    "0.2 mg per kg",
+    "synchronised cardioversion",
+    "1 J per kg",
+    "verapamil",
+    "pre-excitation",
+    "paediatric cardiology",
+    "echo"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Monitoring on, please: ECG, SpO2 and blood pressure. She's 3 months, about 6 kg. Infant defibrillator pads on in case she deteriorates."
+    },
+    {
+      "at": "0:15",
+      "say": "Crying, airway clear; RR 50, chest clear: no heart failure. Heart rate 280, capillary refill 2 seconds, warm, BP 78/46, liver 2 cm: compensated, not shocked. Alert. Glucose, please.",
+      "do": "4.8."
+    },
+    {
+      "at": "0:35",
+      "say": "12-lead ECG, please.",
+      "do": "Regular narrow complex tachycardia at 280, fixed, no P waves: over 220 in an infant, so SVT, not sinus tachycardia."
+    },
+    {
+      "at": "0:50",
+      "say": "She has SVT and she's compensated: vagal manoeuvre first, then adenosine. If she becomes shocked: synchronised cardioversion, 1 J per kg then 2 J per kg, with sedation. No verapamil: under one year it can cause collapse."
+    },
+    {
+      "at": "1:10",
+      "say": "Was she born well? Any heart problems or medicines? Her heart is beating far too fast. First we'll put ice-cold water on her face; if not, a medicine that resets the heart: she may go pale for a few seconds."
+    },
+    {
+      "at": "1:35",
+      "say": "Record a rhythm strip. A bag of iced water over her face for 15 seconds, keeping her airway clear.",
+      "do": "No change: still 280."
+    },
+    {
+      "at": "1:55",
+      "say": "IV cannula in a large proximal vein, the antecubital fossa, with a three-way tap and a 5 mL saline flush. Record a continuous rhythm strip through the push."
+    },
+    {
+      "at": "2:15",
+      "say": "Adenosine 0.1 mg per kg, 0.6 mg, rapid push, then flush.",
+      "do": "A brief pause, then SVT at 280 again."
+    },
+    {
+      "at": "2:35",
+      "say": "Second dose: 0.2 mg per kg, 1.2 mg, rapid push, then flush.",
+      "do": "Sinus rhythm at 150."
+    },
+    {
+      "at": "2:55",
+      "say": "A 12-lead ECG in sinus rhythm to look for pre-excitation, WPW. Refer to paediatric cardiology for an echo, and admit her to a monitored bed."
+    },
+    {
+      "at": "3:15",
+      "say": "Her heart is back to a normal rhythm. She'll stay in hospital on a monitor, and the heart doctors will scan her heart."
     }
   ]
 }

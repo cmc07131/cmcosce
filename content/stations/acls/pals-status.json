@@ -8,7 +8,7 @@
   "phases": [
     {
       "title": "Immediate care",
-      "goal": "Start the clock, monitoring, airway and oxygen, glucose, and access.",
+      "goal": "Name it and start the clock; monitor; protect her, airway and oxygen; glucose; access and bloods.",
       "steps": [
         "monitoring",
         "abc",
@@ -17,24 +17,39 @@
     },
     {
       "title": "Benzodiazepine",
-      "goal": "From the drug cart, dosed for her weight. Watch the clock: a second dose if she is still fitting.",
+      "goal": "Lorazepam for her weight. A second dose if she is still fitting 10 minutes later: two at most.",
       "steps": [
         "benzo"
       ]
     },
     {
+      "title": "While you wait",
+      "goal": "A history from her mother; call for help and draw up the second-line drug.",
+      "steps": [
+        "history",
+        "call"
+      ]
+    },
+    {
       "title": "Second line",
-      "goal": "Two doses and still fitting: the next drug.",
+      "goal": "Two doses and still fitting: levetiracetam.",
       "steps": [
         "second-line"
       ]
     },
     {
       "title": "The cause",
-      "goal": "Why is she fitting? Bloods, history, and cover for infection.",
+      "goal": "Febrile: cover meningitis and encephalitis.",
       "steps": [
-        "cause",
         "cause-drugs"
+      ]
+    },
+    {
+      "title": "After",
+      "goal": "Recovery position, breathing, the next step, admission; explain to her mother.",
+      "steps": [
+        "after",
+        "explain"
       ]
     }
   ],
@@ -71,9 +86,17 @@
     {
       "tag": "outdated",
       "text": "Second-line drug. Your notes give phenytoin only. Since EcLiPSE and ConSEPT, APLS lists levetiracetam 40 mg/kg (max 3 g) over 5 minutes as first choice or equal to phenytoin."
+    },
+    {
+      "tag": "differs",
+      "text": "Second line. APLS (used in Hong Kong paediatrics): levetiracetam 40 mg/kg or phenytoin 20 mg/kg at about 25 minutes, then the other, then RSI by 45 minutes. AHA/AES: fosphenytoin, valproate or levetiracetam. The script names levetiracetam and phenytoin, which both accept."
+    },
+    {
+      "tag": "unverified",
+      "text": "Aciclovir dose. BNFc uses 500 mg/m² for 3 months–12 years; many protocols use 20 mg/kg (280 mg here). No Hong Kong paediatric protocol was available to check."
     }
   ],
-  "notes": "Checked against the APLS algorithm for convulsive status epilepticus (APLS 7th edition, 2023 update following EcLiPSE/ConSEPT: levetiracetam as a second-line option alongside phenytoin), NICE NG217 (Epilepsies, 2022) and RCUK paediatric guidance.\n\nAt 5 minutes: first benzodiazepine — IV/IO lorazepam 0.1 mg/kg (max 4 mg), or buccal midazolam 0.3 mg/kg (max 10 mg) if no access. At 15 minutes (10 minutes later): a second benzodiazepine dose. At 25 minutes: levetiracetam 40 mg/kg (max 3 g) IV over 5 minutes, or phenytoin 20 mg/kg over 20 minutes (or phenobarbital 20 mg/kg if already on phenytoin). At 45 minutes: RSI with a senior anaesthetist. Maximum two benzodiazepine doses including pre-hospital doses.\n\nAlways check glucose early (treat under 3 mmol/L with 2 mL/kg 10% glucose) and look for the cause (fever, meningitis/encephalitis, electrolytes, trauma, toxins).\n\nYour notes: buccal midazolam max 5 mg (APLS uses 0.3 mg/kg up to 10 mg) and phenytoin as the only second-line drug; APLS now lists levetiracetam first or equally. Lorazepam 0.1 mg/kg max 4 mg and PR diazepam 0.5 mg/kg match.",
+  "notes": "Checked against the APLS algorithm for convulsive status epilepticus (APLS 7th edition, 2023 update following EcLiPSE/ConSEPT: levetiracetam as a second-line option alongside phenytoin), NICE NG217 (Epilepsies, 2022) and RCUK paediatric guidance.\n\nAt 5 minutes: first benzodiazepine — IV/IO lorazepam 0.1 mg/kg (max 4 mg), or buccal midazolam 0.3 mg/kg (max 10 mg) if no access. At 15 minutes (10 minutes later): a second benzodiazepine dose. At 25 minutes: levetiracetam 40 mg/kg (max 3 g) IV over 5 minutes, or phenytoin 20 mg/kg over 20 minutes (or phenobarbital 20 mg/kg if already on phenytoin). At 45 minutes: RSI with a senior anaesthetist. Maximum two benzodiazepine doses including pre-hospital doses.\n\nAlways check glucose early (treat under 3 mmol/L with 2 mL/kg 10% glucose) and look for the cause (fever, meningitis/encephalitis, electrolytes, trauma, toxins).\n\nYour notes: buccal midazolam max 5 mg (APLS uses 0.3 mg/kg up to 10 mg) and phenytoin as the only second-line drug; APLS now lists levetiracetam first or equally. Lorazepam 0.1 mg/kg max 4 mg and PR diazepam 0.5 mg/kg match.\n\nPerfect script checked against an APLS status epilepticus checklist, an AHA/AES checklist, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (restraint, objects in the mouth, wrong doses, a third benzodiazepine). Added: status named, weight said aloud, injury protection stated positively, a history from her mother while waiting, early escalation, aciclovir with ceftriaxone, post-seizure care and the next step, and an explanation to her mother.",
   "cast": [
     {
       "id": "patient",
@@ -125,17 +148,17 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring",
-      "hint": "Ask the nurse to put the patient on the monitor.",
+      "hint": "Name it, start the clock, monitor, her weight.",
       "opts": [
         {
-          "t": "Put her on the monitor: ECG leads and SpO2.",
-          "fetch": "trolley",
-          "scene": "monitored",
-          "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring"
+          "t": "She's been fitting for 10 minutes: this is convulsive status epilepticus. Note the time and start the clock.",
+          "mark": "Recognises status epilepticus; times the seizure"
         },
         {
-          "t": "Note the time the seizure started; start a clock",
-          "mark": "Times the seizure"
+          "t": "Monitoring on, please: ECG, SpO2 and blood pressure. She's 3: (3 + 4) × 2, about 14 kg.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Monitoring; estimates the weight (14 kg)"
         }
       ]
     },
@@ -144,32 +167,48 @@
       "kind": "exam",
       "to": "patient",
       "label": "Immediate care",
-      "hint": "Airway, oxygen, glucose.",
+      "hint": "Protect her, airway and oxygen, circulation, glucose, clues.",
       "groups": {
         "A–B": [
           {
-            "t": "Airway: jaw thrust, suction, oral airway if tolerated; high-flow oxygen",
+            "t": "Protect her from injury: clear the space, pad the sides; don't restrain her, nothing in her mouth.",
+            "mark": "Protects from injury without restraint",
+            "r": "Space cleared, cot sides padded."
+          },
+          {
+            "t": "Airway: jaw thrust, suction, an oropharyngeal airway if tolerated.",
+            "anim": "airway",
+            "mark": "Airway manoeuvres and suction",
+            "r": "Secretions suctioned; the snoring settles with a jaw thrust."
+          },
+          {
+            "t": "High-flow oxygen, 15 L via a non-rebreather.",
             "scene": "o2",
-            "mark": "Airway manoeuvres and high-flow oxygen",
-            "anim": "airway"
-          },
-          {
-            "t": "Hold her limbs down to stop the jerking",
-            "trap": true,
-            "r": "Restraint does not stop a seizure and can injure her. Protect from injury."
-          },
-          {
-            "t": "Put something in her mouth so she doesn't bite her tongue",
-            "trap": "critical",
-            "r": "It can break teeth and obstruct the airway."
+            "fetch": "trolley",
+            "mark": "High-flow oxygen",
+            "r": "Mask on. SpO2 climbing."
           }
         ],
-        "Glucose": [
+        "C": [
+          {
+            "t": "Heart rate and capillary refill",
+            "anim": "pulse",
+            "mark": "Assesses circulation",
+            "r": "HR 160, CRT 2 s, warm. \"Not shocked.\""
+          }
+        ],
+        "D–E": [
           {
             "t": "Capillary glucose",
+            "anim": "glucose",
             "mark": "Checks glucose early",
-            "r": "5.4 mmol/L.",
-            "anim": "glucose"
+            "r": "5.4 mmol/L. \"Not hypoglycaemic: no glucose needed.\""
+          },
+          {
+            "t": "Pupils, temperature, a rash or an injury",
+            "anim": "pupils",
+            "mark": "Looks for clues: pupils, fever, rash, injury",
+            "r": "Pupils equal and reactive. 38.6 °C. No rash, no sign of injury. \"Febrile.\""
           }
         ]
       }
@@ -179,11 +218,15 @@
       "kind": "say",
       "to": "nurse",
       "label": "Nurse",
-      "hint": "Access.",
+      "hint": "IV, IO if difficult; bloods with the cannula.",
       "opts": [
         {
-          "t": "IV access (IO if difficult)",
+          "t": "IV access, please; IO if it's difficult.",
           "mark": "Vascular access"
+        },
+        {
+          "t": "With the cannula: a gas with glucose, electrolytes, calcium and magnesium; FBC, CRP and a blood culture.",
+          "mark": "Sends bloods for causes"
         }
       ]
     },
@@ -192,7 +235,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "First benzodiazepine, dosed for 14 kg; a second if she is still fitting 10 minutes later.",
+      "hint": "Lorazepam 0.1 mg/kg (1.4 mg). Ten minutes later, if she is still fitting, a second dose: two at most.",
       "confirm": "Give",
       "opts": [
         {
@@ -204,30 +247,55 @@
           "mark": "First benzodiazepine at the right dose"
         },
         {
-          "t": "Lorazepam 4 mg IV",
-          "drug": "Lorazepam",
-          "dose": "4 mg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "The adult dose: 0.1 mg/kg (1.4 mg) for 14 kg."
-        },
-        {
-          "t": "Lorazepam 0.01 mg/kg (0.14 mg) IV",
-          "drug": "Lorazepam",
-          "dose": "0.01 mg/kg (0.14 mg) IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Ten times too little: 0.1 mg/kg."
-        },
-        {
           "t": "Lorazepam second dose 0.1 mg/kg (1.4 mg) IV",
           "drug": "Lorazepam",
           "dose": "second dose 0.1 mg/kg (1.4 mg) IV",
           "fetch": "cart",
           "when": "still-fitting",
-          "early": "Give the first dose 10 minutes.",
+          "early": "Ten minutes after the first dose, if she's still fitting.",
           "scene": "lz2",
-          "mark": "Second benzodiazepine after 10 minutes"
+          "mark": "Second benzodiazepine after 10 minutes; no more than two"
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "kind": "say",
+      "to": "mother",
+      "label": "Ask her mother",
+      "hint": "While you wait: medicine already given, injury, anything at home, her illness.",
+      "opts": [
+        {
+          "t": "Has she had any medicine for this today? Any head injury, or anything at home she could have taken?",
+          "tz": "佢今日有冇食過或者用過任何藥？有冇撞親個頭？屋企有冇啲咩佢可能誤食咗？",
+          "r": "No medicine, no fall. Nothing she could reach.",
+          "rz": "冇俾過藥，冇跌親。屋企冇嘢佢攞得到。",
+          "mark": "Asks about pre-hospital benzodiazepine, trauma and toxins"
+        },
+        {
+          "t": "Has she been unwell? Any seizures before, and are her vaccinations up to date?",
+          "tz": "佢之前有冇唔舒服？以前有冇抽過筋？預防針有冇齊？",
+          "r": "A cold for two days, with fever. Never had a fit before. Her vaccines are all done.",
+          "rz": "傷風咗兩日，有發燒。以前從來冇抽過筋。預防針全部打齊。",
+          "mark": "Asks about the illness, previous seizures and immunisations"
+        }
+      ]
+    },
+    {
+      "id": "call",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Call",
+      "lang": "en",
+      "hint": "Senior, anaesthetist, PICU; draw up the second-line drug.",
+      "opts": [
+        {
+          "t": "Please call my senior, the anaesthetist and PICU now: if the second-line drug fails, she'll need RSI.",
+          "mark": "Escalates early: senior, anaesthetist, PICU"
+        },
+        {
+          "t": "Draw up levetiracetam 40 mg/kg, 560 mg, so it's ready.",
+          "mark": "Prepares the second-line drug"
         }
       ]
     },
@@ -236,7 +304,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Still fitting after two benzodiazepines: a second-line drug.",
+      "hint": "Still fitting after two doses: levetiracetam 40 mg/kg over 5 minutes (or phenytoin 20 mg/kg over 20 minutes).",
       "confirm": "Give",
       "opts": [
         {
@@ -248,39 +316,6 @@
           "early": "Two benzodiazepine doses first.",
           "scene": "stopped",
           "mark": "Second-line: levetiracetam 40 mg/kg (or phenytoin 20 mg/kg)"
-        },
-        {
-          "t": "Levetiracetam 10 mg/kg IV",
-          "drug": "Levetiracetam",
-          "dose": "10 mg/kg IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 40 mg/kg (maximum 3 g)."
-        },
-        {
-          "trap": true,
-          "r": "More than two benzodiazepine doses causes respiratory depression without more benefit.",
-          "t": "Lorazepam third dose 0.1 mg/kg IV",
-          "drug": "Lorazepam",
-          "dose": "third dose 0.1 mg/kg IV",
-          "fetch": "cart"
-        }
-      ]
-    },
-    {
-      "id": "cause",
-      "kind": "say",
-      "to": "nurse",
-      "label": "Look for the cause",
-      "hint": "Bloods and history.",
-      "opts": [
-        {
-          "t": "Bloods: culture, FBC, CRP, U&E, calcium, magnesium, gas",
-          "mark": "Sends bloods for causes"
-        },
-        {
-          "t": "Ask about head injury and access to medicines at home",
-          "mark": "Asks about trauma and toxins"
         }
       ]
     },
@@ -289,7 +324,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Febrile, and meningitis or encephalitis is possible.",
+      "hint": "Febrile status: treat for meningitis and encephalitis; no lumbar puncture now.",
       "confirm": "Give",
       "opts": [
         {
@@ -297,15 +332,66 @@
           "drug": "Ceftriaxone",
           "dose": "80 mg/kg (1.1 g) IV",
           "fetch": "cart",
-          "mark": "Covers CNS infection when indicated"
+          "mark": "Covers bacterial meningitis: ceftriaxone 80 mg/kg"
         },
         {
-          "t": "Ceftriaxone 10 mg/kg IV",
-          "drug": "Ceftriaxone",
-          "dose": "10 mg/kg IV",
+          "t": "Aciclovir 20 mg/kg (280 mg) IV over 1 hour",
+          "drug": "Aciclovir",
+          "dose": "20 mg/kg (280 mg) IV over 1 hour",
           "fetch": "cart",
-          "trap": true,
-          "r": "Too little for meningitis: 80 mg/kg."
+          "mark": "Covers encephalitis: aciclovir"
+        }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "nurse",
+      "label": "After the seizure",
+      "lang": "en",
+      "hint": "She has stopped: position, watch her breathing, fever, no LP now, the next step if it recurs, admit.",
+      "opts": [
+        {
+          "t": "Seizure stopped: recovery position, and watch her airway and breathing: respiratory depression after two benzodiazepines.",
+          "when": "stopped",
+          "early": "Once the seizure has stopped.",
+          "mark": "Recovery position; watches for respiratory depression"
+        },
+        {
+          "t": "If it starts again: the other second-line drug, phenytoin 20 mg/kg over 20 minutes, then RSI with the anaesthetist.",
+          "when": "stopped",
+          "early": "Once the seizure has stopped.",
+          "mark": "States the next step if seizures continue: phenytoin, then RSI"
+        },
+        {
+          "t": "Paracetamol for the fever. No lumbar puncture now while she's post-ictal; consider it once she's stable.",
+          "when": "stopped",
+          "early": "Once the seizure has stopped.",
+          "mark": "Antipyretic; defers lumbar puncture"
+        },
+        {
+          "t": "Admit her to a high-dependency bed under paediatrics, with neuro obs.",
+          "when": "stopped",
+          "early": "Once the seizure has stopped.",
+          "mark": "Admits to a monitored bed"
+        }
+      ]
+    },
+    {
+      "id": "explain",
+      "kind": "say",
+      "to": "mother",
+      "label": "Explain to her mother",
+      "hint": "What happened, what we gave, what comes next.",
+      "opts": [
+        {
+          "t": "Mei had a long seizure, probably set off by the fever. The medicine has stopped it. We're treating her in case there's an infection of the brain, and she'll stay in hospital. She'll be sleepy for a few hours.",
+          "tz": "美美抽筋抽咗好耐，應該係發燒引起。啲藥已經止咗佢抽筋。我哋會當腦膜有感染咁先醫住，佢要留院。之後幾個鐘頭佢會比較眼瞓。",
+          "r": "Thank you, doctor. Can I stay with her?",
+          "rz": "多謝醫生。我可唔可以陪住佢？",
+          "when": "stopped",
+          "early": "Once the seizure has stopped.",
+          "mark": "Explains to the parent: seizure, treatment, admission"
         }
       ]
     },
@@ -436,6 +522,91 @@
       ],
       "why": "Risk of dental injury and obstruction.",
       "source": "First aid / APLS"
+    }
+  ],
+  "keywords": [
+    "convulsive status epilepticus",
+    "start the clock",
+    "14 kg",
+    "protect her from injury",
+    "jaw thrust",
+    "high-flow oxygen",
+    "glucose",
+    "IO",
+    "lorazepam 0.1 mg per kg",
+    "buccal midazolam 0.3 mg per kg",
+    "two benzodiazepine doses",
+    "anaesthetist",
+    "PICU",
+    "RSI",
+    "levetiracetam 40 mg per kg",
+    "phenytoin 20 mg per kg",
+    "meningitis",
+    "encephalitis",
+    "ceftriaxone",
+    "aciclovir",
+    "no lumbar puncture",
+    "recovery position",
+    "respiratory depression"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "She's been fitting for 10 minutes: this is convulsive status epilepticus. Note the time and start the clock. Monitoring on, please: ECG, SpO2 and blood pressure. She's 3: (3 + 4) × 2, about 14 kg."
+    },
+    {
+      "at": "0:15",
+      "say": "Protect her from injury: clear the space and pad the sides; don't restrain her, nothing in her mouth. Airway: jaw thrust, suction, an oropharyngeal airway if tolerated. High-flow oxygen, 15 litres via a non-rebreather."
+    },
+    {
+      "at": "0:35",
+      "say": "Heart rate 160, capillary refill 2 seconds: not shocked. Glucose, please.",
+      "do": "5.4: not hypoglycaemic."
+    },
+    {
+      "at": "0:45",
+      "say": "Pupils equal and reactive, 38.6 degrees, no rash, no injury: she's febrile."
+    },
+    {
+      "at": "0:55",
+      "say": "IV access, please; IO if it's difficult. With the cannula: a gas with glucose, electrolytes, calcium and magnesium; FBC, CRP and a blood culture."
+    },
+    {
+      "at": "1:10",
+      "say": "Lorazepam 0.1 mg per kg, 1.4 mg IV. If there were no access: buccal midazolam 0.3 mg per kg, about 4 mg."
+    },
+    {
+      "at": "1:25",
+      "say": "Has she had any medicine for this today? Any head injury, or anything at home she could have taken? Has she been unwell? Any seizures before, and are her vaccinations up to date?",
+      "do": "No medicine, no injury; a cold with fever for two days; first seizure; vaccines up to date."
+    },
+    {
+      "at": "1:50",
+      "say": "Please call my senior, the anaesthetist and PICU now: if the second-line drug fails, she'll need RSI. Draw up levetiracetam 40 mg per kg, 560 mg, so it's ready."
+    },
+    {
+      "at": "2:05",
+      "say": "Still fitting 10 minutes after the first dose: a second lorazepam, 1.4 mg. That's the limit: two benzodiazepine doses, including any given before hospital."
+    },
+    {
+      "at": "2:25",
+      "say": "Still fitting after two doses: second line. Levetiracetam 40 mg per kg, 560 mg IV over 5 minutes; phenytoin 20 mg per kg over 20 minutes is the alternative."
+    },
+    {
+      "at": "2:45",
+      "say": "Febrile status: treat for meningitis and encephalitis. Ceftriaxone 80 mg per kg, 1.1 g IV, and aciclovir 20 mg per kg, 280 mg IV over an hour."
+    },
+    {
+      "at": "3:10",
+      "say": "Seizure stopped: recovery position, and watch her airway and breathing: respiratory depression after two benzodiazepines. If it starts again: phenytoin 20 mg per kg over 20 minutes, then RSI with the anaesthetist."
+    },
+    {
+      "at": "3:30",
+      "say": "Paracetamol for the fever. No lumbar puncture now while she's post-ictal; consider it once she's stable. Admit her to a high-dependency bed under paediatrics, with neuro obs."
+    },
+    {
+      "at": "3:45",
+      "say": "Mei had a long seizure, probably set off by the fever. The medicine has stopped it. We're treating her in case there's an infection of the brain, and she'll stay in hospital. She'll be sleepy for a few hours."
     }
   ]
 }

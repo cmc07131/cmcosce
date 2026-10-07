@@ -487,7 +487,7 @@ test('close-ups read their findings: side, reaction, refill, tenderness, the met
 test('the guide never sends you back to an earlier phase', () => {
   const backs: string[] = []
   // Found by this test; fixed as each is rebuilt around its perfect script (then removed from here).
-  const KNOWN = new Set(['acls-svt', 'pals-svt', 'og-eclampsia'])
+  const KNOWN = new Set(['acls-svt', 'og-eclampsia'])
   for (const file of files) {
     const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
     if (!st.phases?.length || KNOWN.has(st.id)) continue
@@ -521,10 +521,19 @@ test('the guide never sends you back to an earlier phase', () => {
       if (!o) break
       spent[a.id] = [...(spent[a.id] ?? []), o.id]
       const flags = [...('scenesSet' in o && Array.isArray(o.scenesSet) ? o.scenesSet : []), ...('sceneFlag' in o && o.sceneFlag ? [o.sceneFlag] : [])] as string[]
-      const raw = [...(st.steps.find((s) => s.id === a.id)?.opts ?? []), ...Object.values(st.steps.find((s) => s.id === a.id)?.groups ?? {}).flat()].find((x) => x.t === h.option || (x.drug && h.option.startsWith(x.drug)))
+      const step = st.steps.find((s) => s.id === a.id)
+      const rows = [...(step?.opts ?? []), ...Object.values(step?.groups ?? {}).flat(), ...(step?.turns ?? []).flatMap((t) => t.opts ?? [])]
+      const raw = rows.find((x) => x.t === h.option) ?? rows.find((x) => x.drug && x.dose && h.option === `${x.drug} ${x.dose}`) ?? rows.find((x) => x.drug && h.option.startsWith(x.drug))
       const set = [...flags, ...(raw?.scene ? [raw.scene] : [])]
       if (set.length) pending.push({ flags: set, at: raw?.fetch ? i + 2 : i })
     }
+    // Following the guide to its end earns every mark outside the examiner's own end.
+    const earned = new Set(pack.actions.flatMap((a) => [...(a.options ?? []), ...(a.findings ?? [])].filter((o) => (spent[a.id] ?? []).includes(o.id)).flatMap((o) => o.marksChecklistIds ?? [])))
+    const reachable = pack.actions
+      .filter((a) => a.kind !== 'viva' && a.kind !== 'monitor' && !(a.ask && a.targetIds.includes('examiner')))
+      .flatMap((a) => [...(a.options ?? []).filter((o) => !o.isTrap), ...(a.findings ?? [])].flatMap((o) => o.marksChecklistIds ?? []))
+    const missed = [...new Set(reachable)].filter((m) => !earned.has(m))
+    if (missed.length && !backs.some((b) => b.startsWith(st.id + ':'))) backs.push(`${st.id}: the guide never reaches ${missed.map((m) => pack.marks.find((k) => k.id === m)?.label ?? m).join('; ')}`)
   }
   assert.deepEqual(backs, [])
 })
