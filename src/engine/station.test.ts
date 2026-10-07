@@ -477,3 +477,54 @@ test('close-ups read their findings: side, reaction, refill, tenderness, the met
     }
   }
 })
+
+/*
+ * Following the guide like a player: fetched items take effect a couple of steps later (the nurse walks), events
+ * follow their trigger a few steps later. Going back to an earlier phase is fine when something happened to the
+ * patient (a seizure, still shocked after a bolus); going back only because the nurse was still walking means a later
+ * step was offered before its moment (a ventilator before ROSC).
+ */
+test('the guide never sends you back to an earlier phase', () => {
+  const backs: string[] = []
+  // Found by this test; fixed as each is rebuilt around its perfect script (then removed from here).
+  const KNOWN = new Set(['acls-svt', 'pals-svt', 'og-eclampsia'])
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    if (!st.phases?.length || KNOWN.has(st.id)) continue
+    const pack = compileStation(st)
+    const phaseOf = (id: string) => st.phases!.findIndex((p) => p.steps.includes(id))
+    const spent: Record<string, string[]> = {}
+    const scene: string[] = []
+    const pending: { flags: string[]; at: number }[] = []
+    const fromEvent = new Set((pack.events ?? []).map((e) => e.scene))
+    let furthest = -1
+    for (let i = 0; i < 300; i++) {
+      for (const p of pending.filter((x) => x.at <= i)) for (const f of p.flags) if (!scene.includes(f)) scene.push(f)
+      for (const e of pack.events ?? []) {
+        if (e.level === 'hard' || scene.includes(e.scene)) continue
+        if (e.after && !scene.includes(e.after)) continue
+        if (e.unless && scene.includes(e.unless)) continue
+        if (!pending.some((x) => x.flags.includes(e.scene))) pending.push({ flags: [e.scene], at: i + 3 })
+      }
+      const h = nextHint(pack, spent, scene)
+      if (!h) break
+      if (h.kind === 'wait') continue
+      const ph = phaseOf(h.actionId)
+      const waitedOn = (pack.actions.find((x) => x.id === h.actionId)?.options ?? []).find((x) => x.label === h.option)?.when ?? []
+      if (ph >= 0 && ph < furthest && !waitedOn.some((f) => fromEvent.has(f))) {
+        backs.push(`${st.id}: back to "${st.phases![ph].title}" (${h.actionId}) after "${st.phases![furthest].title}"`)
+        break
+      }
+      furthest = Math.max(furthest, ph)
+      const a = pack.actions.find((x) => x.id === h.actionId)!
+      const o = (a.options ?? []).find((x) => x.label === h.option) ?? (a.findings ?? []).find((x) => x.label === h.option)
+      if (!o) break
+      spent[a.id] = [...(spent[a.id] ?? []), o.id]
+      const flags = [...('scenesSet' in o && Array.isArray(o.scenesSet) ? o.scenesSet : []), ...('sceneFlag' in o && o.sceneFlag ? [o.sceneFlag] : [])] as string[]
+      const raw = [...(st.steps.find((s) => s.id === a.id)?.opts ?? []), ...Object.values(st.steps.find((s) => s.id === a.id)?.groups ?? {}).flat()].find((x) => x.t === h.option || (x.drug && h.option.startsWith(x.drug)))
+      const set = [...flags, ...(raw?.scene ? [raw.scene] : [])]
+      if (set.length) pending.push({ flags: set, at: raw?.fetch ? i + 2 : i })
+    }
+  }
+  assert.deepEqual(backs, [])
+})

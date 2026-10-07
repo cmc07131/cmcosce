@@ -8,22 +8,24 @@
   "phases": [
     {
       "title": "Assess",
-      "goal": "Adverse features? The toxidrome? Read the ECG.",
+      "goal": "Monitor and pads; adverse features; the toxidrome; read the ECG.",
       "steps": [
+        "monitoring",
         "assess"
       ]
     },
     {
       "title": "Treat",
-      "goal": "From the drug cart: settle him, and treat the broad complexes the cocaine way. Promptly.",
+      "goal": "Say the plan; benzodiazepine and bicarbonate from the cart; repeat ECG, labs, temperature, advice.",
       "steps": [
+        "plan",
         "drugs",
         "labs"
       ]
     },
     {
       "title": "If he becomes unstable",
-      "goal": "Watch him. If he loses his pressure: cardiovert him yourself.",
+      "goal": "Synchronised cardioversion.",
       "steps": [
         "cardiovert"
       ]
@@ -50,8 +52,17 @@
       "untreated": "He became unstable and was never cardioverted."
     }
   ],
-  "review": [],
-  "notes": "Checked against TOXBASE (UK National Poisons Information Service), RCUK tachycardia algorithm (2021; unchanged in 2025) and AHA 2023 toxicology focused update.\n\nCocaine blocks noradrenaline reuptake (sympathomimetic) and sodium channels (class I effect: broad QRS, VT). First treat agitation, hyperthermia and hypertension with benzodiazepines. Broad complex arrhythmias: sodium bicarbonate 8.4% 50 mmol IV (1–2 mmol/kg), repeat as needed; correct hypoxia, acidosis and potassium. Lidocaine is an option for VT; avoid class Ia/Ic drugs. Beta-blockers are avoided in acute cocaine toxicity (unopposed alpha stimulation; AHA now considers them less harmful than thought, but they are not first-line). Adverse features (shock, syncope, ischaemia, heart failure) → synchronised cardioversion.\n\nYour notes (sympathomimetic 'confusion' station) say benzodiazepines, cooling and avoiding beta-blockers alone; this matches.\n\nAmiodarone is the standard drug for stable monomorphic VT in RCUK; with cocaine, bicarbonate first.",
+  "review": [
+    {
+      "tag": "unverified",
+      "text": "Doses (diazepam 10 mg titrated; bicarbonate 8.4% 50 mL, 1–2 mmol/kg) are from TOXBASE-style guidance quoted from memory; no HKPIC or HA protocol was available here."
+    },
+    {
+      "tag": "differs",
+      "text": "Cardioversion energy for VT: AHA 100 J synchronised; the bench also accepts 120–150 J (RCUK practice)."
+    }
+  ],
+  "notes": "Checked against TOXBASE (UK National Poisons Information Service), RCUK tachycardia algorithm (2021; unchanged in 2025) and AHA 2023 toxicology focused update.\n\nCocaine blocks noradrenaline reuptake (sympathomimetic) and sodium channels (class I effect: broad QRS, VT). First treat agitation, hyperthermia and hypertension with benzodiazepines. Broad complex arrhythmias: sodium bicarbonate 8.4% 50 mmol IV (1–2 mmol/kg), repeat as needed; correct hypoxia, acidosis and potassium. Lidocaine is an option for VT; avoid class Ia/Ic drugs. Beta-blockers are avoided in acute cocaine toxicity (unopposed alpha stimulation; AHA now considers them less harmful than thought, but they are not first-line). Adverse features (shock, syncope, ischaemia, heart failure) → synchronised cardioversion.\n\nYour notes (sympathomimetic 'confusion' station) say benzodiazepines, cooling and avoiding beta-blockers alone; this matches.\n\nAmiodarone is the standard drug for stable monomorphic VT in RCUK; with cocaine, bicarbonate first.\n\nPerfect script checked against a TOXBASE/AHA toxicology checklist, an AHA tachycardia checklist, an HKCEM-style scheme and a keyword scheme. Added: monitoring and pads, the mechanism and the drugs to avoid said aloud, a repeat ECG, CK/troponin/glucose, temperature, poison-centre advice and admission.",
   "cast": [
     {
       "id": "patient",
@@ -109,6 +120,22 @@
   },
   "steps": [
     {
+      "id": "monitoring",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "lang": "en",
+      "hint": "Monitor, access, defibrillator pads ready.",
+      "opts": [
+        {
+          "t": "Hello Mr Cheung, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2, an IV cannula, and defibrillator pads on in case he becomes unstable.",
+          "fetch": "trolley",
+          "scene": "monitored",
+          "mark": "Monitoring, IV access and pads on"
+        }
+      ]
+    },
+    {
       "id": "assess",
       "kind": "exam",
       "to": "patient",
@@ -117,14 +144,14 @@
       "groups": {
         "ABCDE": [
           {
-            "t": "Adverse features: pressure, chest pain, syncope, breathlessness",
-            "r": "BP 118/76. No chest pain now, no syncope, chest clear.",
-            "mark": "Checks for adverse features (none yet)",
+            "t": "Any chest pain, fainting or breathlessness? Pressure and chest.",
+            "r": "BP 118/76. No chest pain now, no syncope, chest clear. \"No adverse features: he's stable for now.\"",
+            "mark": "Checks for adverse features: stable for now",
             "anim": "auscultate"
           },
           {
             "t": "Toxidrome: pupils, skin, temperature, tone",
-            "r": "Dilated pupils, sweaty, 38.1 °C, tremor, agitated.",
+            "r": "Dilated pupils, sweaty, 38.1 °C, tremor, agitated. \"A sympathomimetic toxidrome from cocaine.\"",
             "mark": "Recognises a sympathomimetic toxidrome",
             "anim": "pupils"
           }
@@ -132,7 +159,7 @@
         "ECG": [
           {
             "t": "12-lead ECG",
-            "r": "Regular broad complex tachycardia at 180, QRS 160 ms: treat as VT.",
+            "r": "Regular broad complex tachycardia at 180, QRS 160 ms. \"Treat a regular broad complex tachycardia as VT.\"",
             "img": "ecg:vt",
             "mark": "Identifies regular broad complex tachycardia: treat as VT",
             "scene": "ecg-read"
@@ -141,11 +168,37 @@
       }
     },
     {
+      "id": "plan",
+      "kind": "say",
+      "to": "nurse",
+      "label": "The plan",
+      "lang": "en",
+      "hint": "Cocaine: sodium-channel blockade and sympathetic excess. Benzodiazepine, bicarbonate; avoid beta-blockers and class Ia/Ic; cardiovert if unstable.",
+      "opts": [
+        {
+          "t": "This is stable VT from cocaine: sodium-channel blockade and sympathetic excess.",
+          "mark": "Explains the mechanism: sodium-channel blockade and sympathetic excess"
+        },
+        {
+          "t": "A benzodiazepine for the agitation and hypertension, and sodium bicarbonate for the broad QRS.",
+          "mark": "States the treatment: benzodiazepine and sodium bicarbonate"
+        },
+        {
+          "t": "No beta-blockers, and no class Ia or Ic antiarrhythmics like flecainide.",
+          "mark": "Avoids beta-blockers and class Ia/Ic drugs"
+        },
+        {
+          "t": "If he becomes unstable: synchronised cardioversion under sedation.",
+          "mark": "Plans synchronised cardioversion if unstable"
+        }
+      ]
+    },
+    {
       "id": "drugs",
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Settle the agitation; sodium load for the broad complexes.",
+      "hint": "Diazepam titrated; sodium bicarbonate 8.4% 50 mL, repeated to narrow the QRS.",
       "confirm": "Give",
       "opts": [
         {
@@ -158,53 +211,13 @@
           "dose": "10 mg IV, titrated"
         },
         {
-          "t": "Diazepam 40 mg IV bolus",
-          "drug": "Diazepam",
-          "dose": "40 mg IV bolus",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too much at once: titrate 5–10 mg to effect."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "scene": "bicarb",
           "mark": "Sodium bicarbonate for cocaine-induced broad complex tachycardia",
-          "t": "Sodium bicarbonate 8.4% 50 mL (50 mmol) IV",
+          "t": "Sodium bicarbonate 8.4% 50 mL (50 mmol) IV, repeat to narrow the QRS",
           "drug": "Sodium bicarbonate 8.4%",
-          "dose": "50 mL (50 mmol) IV"
-        },
-        {
-          "t": "Sodium bicarbonate 8.4% 10 mL IV",
-          "drug": "Sodium bicarbonate 8.4%",
-          "dose": "10 mL IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little: 50–100 mL (1–2 mmol/kg), repeated to narrow the QRS."
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "Beta-blockers are avoided in acute cocaine toxicity: unopposed alpha effects can worsen hypertension and ischaemia.",
-          "t": "Metoprolol 5 mg IV",
-          "drug": "Metoprolol",
-          "dose": "5 mg IV"
-        },
-        {
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Verapamil in VT can cause collapse.",
-          "t": "Verapamil 5 mg IV",
-          "drug": "Verapamil",
-          "dose": "5 mg IV"
-        },
-        {
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "A class Ic sodium-channel blocker worsens cocaine's sodium-channel toxicity.",
-          "t": "Flecainide 2 mg/kg IV",
-          "drug": "Flecainide",
-          "dose": "2 mg/kg IV"
+          "dose": "50 mL (50 mmol) IV, repeat to narrow the QRS"
         }
       ]
     },
@@ -213,11 +226,23 @@
       "kind": "say",
       "to": "nurse",
       "label": "Nurse",
-      "hint": "Electrolytes on the gas.",
+      "hint": "Repeat ECG; gas and electrolytes; CK, troponin, glucose; temperature; advice; admit.",
       "opts": [
         {
-          "t": "Check K and Mg on a gas; correct",
-          "mark": "Checks and corrects electrolytes"
+          "t": "Repeat the 12-lead after the bicarbonate: is the QRS narrowing?",
+          "mark": "Repeats the ECG after bicarbonate"
+        },
+        {
+          "t": "A gas for pH and potassium, magnesium; correct them. CK, troponin and glucose too.",
+          "mark": "Checks and corrects electrolytes; CK, troponin, glucose"
+        },
+        {
+          "t": "Watch his temperature; active cooling if it climbs.",
+          "mark": "Temperature monitoring and cooling"
+        },
+        {
+          "t": "Advice from the Hong Kong Poison Information Centre, and admit him to a monitored bed.",
+          "mark": "Toxicology advice and admission to a monitored bed"
         }
       ]
     },
@@ -235,7 +260,7 @@
           "scene": "shock",
           "when": "unstable",
           "early": "He still has a good pressure: drugs first.",
-          "performHint": "Sedated by a skilled operator. Pads, SYNC on, 120–150 J, CHARGE, ALL CLEAR, SHOCK."
+          "performHint": "Sedated by a skilled operator. Pads, SYNC on, 100 J (AHA) or 120–150 J, CHARGE, ALL CLEAR, SHOCK."
         }
       ],
       "lang": "en"
@@ -274,12 +299,12 @@
           ]
         },
         {
-          "q": "Stable VT without toxins (RCUK): drug?",
-          "a": "Amiodarone 300 mg IV over 10–60 min",
+          "q": "Stable VT without toxins: drug?",
+          "a": "Amiodarone (AHA 150 mg over 10 min; RCUK 300 mg)",
           "wrong": [
-            "Adenosine 18 mg rapid IV push",
-            "Digoxin 500 micrograms IV",
-            "Atropine 0.5 mg IV every 3–5 minutes, up to 3 mg"
+            "Adenosine 18 mg as a rapid IV push",
+            "Digoxin 500 micrograms IV over 10 min",
+            "Atropine 0.5 mg IV every 3–5 min"
           ]
         },
         {
@@ -366,6 +391,61 @@
       ],
       "why": "Heat comes from muscle activity; paracetamol does not help.",
       "source": "TOXBASE"
+    }
+  ],
+  "keywords": [
+    "broad complex tachycardia",
+    "treat as VT",
+    "adverse features",
+    "sympathomimetic toxidrome",
+    "sodium-channel blockade",
+    "benzodiazepine",
+    "diazepam",
+    "sodium bicarbonate",
+    "narrow the QRS",
+    "beta-blockers",
+    "class Ia or Ic",
+    "synchronised cardioversion",
+    "repeat the 12-lead",
+    "CK",
+    "troponin",
+    "active cooling",
+    "Poison Information Centre"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello Mr Cheung, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2, an IV cannula, and defibrillator pads on in case he becomes unstable."
+    },
+    {
+      "at": "0:20",
+      "say": "Any chest pain, fainting or breathlessness?",
+      "do": "BP 118/76; no chest pain, no syncope, chest clear: no adverse features, stable for now."
+    },
+    {
+      "at": "0:35",
+      "say": "Dilated pupils, sweaty, 38.1 degrees, tremor and agitated: a sympathomimetic toxidrome from cocaine. 12-lead ECG, please.",
+      "do": "Regular broad complex tachycardia at 180, QRS 160 ms."
+    },
+    {
+      "at": "0:55",
+      "say": "A regular broad complex tachycardia: treat as VT. This is stable VT from cocaine: sodium-channel blockade and sympathetic excess."
+    },
+    {
+      "at": "1:10",
+      "say": "A benzodiazepine for the agitation and hypertension, and sodium bicarbonate for the broad QRS. No beta-blockers, and no class Ia or Ic antiarrhythmics like flecainide. If he becomes unstable: synchronised cardioversion under sedation."
+    },
+    {
+      "at": "1:30",
+      "say": "Diazepam 10 mg IV, titrated. Sodium bicarbonate 8.4%, 50 mL IV, and repeat it to narrow the QRS."
+    },
+    {
+      "at": "2:00",
+      "say": "Repeat the 12-lead after the bicarbonate: is the QRS narrowing? A gas for pH and potassium, and magnesium; correct them. CK, troponin and glucose too."
+    },
+    {
+      "at": "2:30",
+      "say": "Watch his temperature; active cooling if it climbs. Advice from the Hong Kong Poison Information Centre, and admit him to a monitored bed."
     }
   ]
 }

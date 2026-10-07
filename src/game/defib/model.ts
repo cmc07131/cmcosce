@@ -17,7 +17,8 @@ export const SITES = {
 export type DefibSpec = { rhythm: Rhythm; sync: boolean; energy: [number, number]; label: string; why: string; refractory?: boolean }
 
 export function defibSpec(pose?: string): DefibSpec {
-  if (pose === 'vt') return { rhythm: 'vt', sync: true, energy: [120, 150], label: 'VT with a pulse', why: 'Monomorphic VT with a pulse: synchronised, 120–150 J biphasic, escalating.' }
+  // AHA: 100 J synchronised for monomorphic VT; RCUK: 120–150 J. Either passes.
+  if (pose === 'vt') return { rhythm: 'vt', sync: true, energy: [100, 200], label: 'VT with a pulse', why: 'Monomorphic VT with a pulse: synchronised, 100 J (AHA) or 120–150 J biphasic, escalating.' }
   // AHA: 120–200 J biphasic as the maker advises (or the maximum); RCUK: at least 150 J. Either passes.
   if (pose === 'vf-arrest') return { rhythm: 'vf', sync: false, energy: [120, 360], label: 'VF arrest', why: 'VF: unsynchronised, 120–200 J biphasic (as the maker advises) or the maximum; resume CPR at once.', refractory: true }
   if (pose === 'vf') return { rhythm: 'vf', sync: false, energy: [120, 360], label: 'VF', why: 'VF: unsynchronised, 120–200 J biphasic (as the maker advises) or the maximum.' }

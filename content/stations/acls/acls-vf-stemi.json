@@ -310,7 +310,9 @@
             "Tidal volume 6–8 mL/kg",
             "Rate for normocapnia (PaCO2 4.7–6.0 kPa)",
             "Oxygen, PEEP and a pressure limit"
-          ]
+          ],
+          "when": "intubated",
+          "early": "Intubate first, after ROSC."
         }
       ],
       "lang": "en"
@@ -356,19 +358,25 @@
             "t": "12-lead ECG",
             "r": "ST elevation in II, III and aVF (III more than II) with reciprocal depression in I and aVL. \"Inferior STEMI.\"",
             "img": "ecg:stemi-inferior",
-            "mark": "Identifies inferior STEMI with reciprocal change"
+            "mark": "Identifies inferior STEMI with reciprocal change",
+            "when": "rosc",
+            "early": "After ROSC."
           },
           {
             "t": "Right-sided leads (V4R)",
             "r": "1 mm ST elevation in V4R. \"Right ventricular infarction.\"",
-            "mark": "Checks V4R: right ventricular infarction"
+            "mark": "Checks V4R: right ventricular infarction",
+            "when": "rosc",
+            "early": "After ROSC."
           }
         ],
         "Other": [
           {
             "t": "Chest X-ray",
             "r": "Tube in position, no pneumothorax.",
-            "img": "xr:cxr-ett-good"
+            "img": "xr:cxr-ett-good",
+            "when": "rosc",
+            "early": "After ROSC."
           }
         ]
       }
@@ -383,15 +391,21 @@
         {
           "t": "Cardiology: VF arrest, ROSC after three shocks, an inferior STEMI with right ventricular infarction. He needs emergency primary PCI.",
           "mark": "Activates primary PCI",
-          "r": "Cardiologist: Cath lab in 15 minutes. Give aspirin and heparin."
+          "r": "Cardiologist: Cath lab in 15 minutes. Give aspirin and heparin.",
+          "when": "rosc",
+          "early": "After ROSC."
         },
         {
           "t": "Right ventricular infarction: no nitrates, and keep him well filled.",
-          "mark": "Avoids nitrates in RV infarction"
+          "mark": "Avoids nitrates in RV infarction",
+          "when": "rosc",
+          "early": "After ROSC."
         },
         {
           "t": "And an ICU bed for after the cath lab.",
-          "mark": "Arranges ICU after PCI"
+          "mark": "Arranges ICU after PCI",
+          "when": "rosc",
+          "early": "After ROSC."
         }
       ]
     },
@@ -408,14 +422,18 @@
           "drug": "Aspirin",
           "dose": "300 mg (NG or PR)",
           "fetch": "cart",
-          "mark": "Aspirin loading dose"
+          "mark": "Aspirin loading dose",
+          "when": "rosc",
+          "early": "After ROSC."
         },
         {
           "t": "Unfractionated heparin 70–100 units/kg IV bolus",
           "drug": "Heparin (unfractionated)",
           "dose": "70–100 units/kg IV bolus",
           "fetch": "cart",
-          "mark": "Heparin for primary PCI"
+          "mark": "Heparin for primary PCI",
+          "when": "rosc",
+          "early": "After ROSC."
         }
       ]
     },
