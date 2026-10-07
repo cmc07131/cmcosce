@@ -4,8 +4,15 @@
   "title": "Suturing a flap laceration",
   "type": "skills",
   "time": 480,
-  "stem": "Procedure room. Mr Chan, 58, a construction worker, has a V-shaped flap laceration on his left shin from a metal edge 3 hours ago. Consent has been obtained. Repair it on the skin model.",
+  "stem": "Procedure room. Mr Chan, 58, a construction worker, has a V-shaped flap laceration on his left shin from a metal edge 3 hours ago. Take a brief history, get his consent, and repair it on the skin model.",
   "phases": [
+    {
+      "title": "History and consent",
+      "goal": "Brief history (mechanism, tetanus, allergies, healing risks) and informed consent.",
+      "steps": [
+        "history"
+      ]
+    },
     {
       "title": "Prepare",
       "goal": "The right kit and the right suture.",
@@ -48,6 +55,56 @@
     }
   ],
   "steps": [
+    {
+      "id": "history",
+      "kind": "say",
+      "to": "patient",
+      "label": "Talk to Mr Chan",
+      "hint": "Introduce, explain and consent; how and when, contamination; tetanus; allergies; diabetes, circulation, steroids, blood thinners.",
+      "opts": [
+        {
+          "t": "Introduce yourself, check his name, explain the repair (clean, numb, stitch) and its risks (pain, infection, scar), and ask for consent",
+          "tz": "陳生你好，我係急症室醫生。我會幫你清洗傷口、打麻醉，再縫埋佢；可能會有啲痛、有機會發炎同留疤。你同意嗎？",
+          "r": "Yes, go ahead, doctor.",
+          "rz": "得，醫生你做啦。",
+          "mark": "Introduces, explains the procedure and risks, obtains consent"
+        },
+        {
+          "t": "How did it happen, exactly when, and was it dirty? Any glass or metal in it?",
+          "tz": "點樣整親㗎？幾點鐘嘅事？傷口污唔污糟？有冇玻璃或者金屬入咗去？",
+          "r": "A sheet of metal on site caught my shin about three hours ago. It was dusty there.",
+          "rz": "喺地盤俾塊鐵皮界親，大概三個鐘頭前。嗰度好多塵。",
+          "mark": "Mechanism, time and contamination"
+        },
+        {
+          "t": "When was your last tetanus injection?",
+          "tz": "你上一次打破傷風針係幾時？",
+          "r": "About 15 years ago, I think.",
+          "rz": "我諗大概十五年前啦。",
+          "mark": "Tetanus status"
+        },
+        {
+          "t": "Any allergies: to local anaesthetic, antiseptic, plasters or any medicine?",
+          "tz": "你對麻醉藥、消毒藥水、膠布或者任何藥物有冇敏感？",
+          "r": "No allergies.",
+          "rz": "冇敏感。",
+          "mark": "Drug allergies"
+        },
+        {
+          "t": "Any diabetes, poor circulation, steroids or blood thinners? Do you smoke?",
+          "tz": "你有冇糖尿病、血液循環唔好、食緊類固醇或者薄血藥？有冇食煙？",
+          "r": "None of those. I smoke a few a day.",
+          "rz": "冇呀。我一日食幾支煙。",
+          "mark": "Healing risks: diabetes, vascular disease, steroids, anticoagulants"
+        },
+        {
+          "t": "Right, let's get it stitched straight away",
+          "tz": "好，我哋即刻縫啦。",
+          "trap": true,
+          "r": "Not without his consent, and not before you know his tetanus status and allergies."
+        }
+      ]
+    },
     {
       "id": "prep",
       "kind": "pick",
@@ -94,14 +151,14 @@
       "lang": "en",
       "to": "patient",
       "label": "Repair the flap",
-      "hint": "Flap and foot, infiltrate through the edges, test, irrigate, explore under the flap, corner stitch, interrupted sutures, sharps, dressing.",
+      "hint": "Flap tip and foot, infiltrate through the edges (needle to the bin), test, irrigate, lift and explore under the flap, corner stitch, interrupted sutures, sharps, dressing.",
       "opts": [
         {
           "t": "Repair the flap",
           "perform": "suture",
           "performHint": "Do it with your hands. Every bite is judged; nothing stops a bad one.",
           "mark": [
-            "Neurovascular and flap viability check",
+            "Neurovascular status: flap tip refill, foot pulses and sensation",
             "Local infiltration through the wound edges",
             "Confirms anaesthesia and irrigates",
             "Explores and debrides",

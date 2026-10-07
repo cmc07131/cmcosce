@@ -33,7 +33,7 @@ test('suture: a full repair earns every mark', () => {
   const stitches: Stitch[] = []
   for (const arm of [0, 1] as const) for (const at of [14, 26, 38, 50]) stitches.push(judgeStitch(...across(arm, at))!)
   assert.ok(gaps(stitches).every((g) => g.count === 4))
-  const r: SutureRun = { ...freshSuture(), flapLooked: true, distal: true, history: true, edges: Array.from({ length: 12 }, (_, i) => i), lidoMl: 5, tested: true, irrigatedMl: 150, lifted: true, foreignOut: true, tagTrimmed: true, corner: 'half-buried', cornerOk: true, holder: 'instrument', stitches, sharps: true, dressed: true }
+  const r: SutureRun = { ...freshSuture(), flapLooked: true, distal: true, history: true, edges: Array.from({ length: 12 }, (_, i) => i), lidoMl: 5, tested: true, irrigatedMl: 150, lifted: true, foreignOut: true, tagTrimmed: true, corner: 'half-buried', cornerOk: true, holder: 'instrument', stitches, sharps: true, lidoSharps: true, dressed: true }
   assert.deepEqual(checkSuture(r).filter((x) => x.ok).map((x) => x.key), [...SUTURE_MARKS])
   assert.ok(A.x > 0)
 })

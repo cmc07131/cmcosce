@@ -4,7 +4,7 @@ import { HoldButton } from '../bench/controls'
 import { CheckCard, RubTint, TouchPad, benchMarks, useRub, type Pt } from '../bench/kit'
 import type { BenchResult, PerformJob } from '../store'
 import { buzz, sfx } from '../sfx'
-import { A, B1, B2, EDGE_SEGMENTS, FOREIGN, SUTURE_MARKS, TAG, checkSuture, edgeSegment, freshSuture, inFlap, judgeCorner, judgeStitch, toEdge, type CornerKind, type Stitch, type SutureRun } from './model'
+import { A, ARMS, B1, B2, BITE, EDGE_SEGMENTS, FOREIGN, SUTURE_MARKS, TAG, TIP_ZONE, checkSuture, edgeSegment, freshSuture, inFlap, judgeCorner, judgeStitch, toEdge, type CornerKind, type Stitch, type SutureRun } from './model'
 
 const TITLES = ['Assess', 'Anaesthetise', 'Irrigate', 'Explore', 'Corner', 'Sutures', 'Finish']
 const SKIN = '#e0a888'
@@ -83,14 +83,19 @@ function Wound({ run, svgRef, corner, lines, children }: { run: SutureRun; svgRe
       {run.lifted ? (
         <g>
           <path d={`M${A.x - 8} ${A.y} L${B1.x + 6} ${B1.y + 8} L${B2.x + 6} ${B2.y - 8} Z`} fill="#8a2020" />
-          {!run.foreignOut && <rect x={FOREIGN.x - 3} y={FOREIGN.y - 2} width="6" height="4" fill="#a8b0b8" stroke="#505860" transform={`rotate(25 ${FOREIGN.x} ${FOREIGN.y})`} />}
+          {!run.foreignOut && (
+            <g transform={`rotate(25 ${FOREIGN.x} ${FOREIGN.y})`}>
+              <rect x={FOREIGN.x - 4.5} y={FOREIGN.y - 2.5} width="9" height="5" fill="#b8c0c8" stroke="#404850" strokeWidth="0.6" />
+              <path d={`M${FOREIGN.x - 3} ${FOREIGN.y - 1.5} l5 0`} stroke="#ffffff" strokeWidth="0.8" />
+            </g>
+          )}
           <path d={`M${B1.x} ${B1.y} L${B2.x} ${B2.y} L${B2.x - 22} ${B2.y - 10} L${B1.x - 22} ${B1.y + 10} Z`} fill={SKIN} stroke={SKIN_EDGE} />
         </g>
       ) : (
         <path d={`M${A.x - (run.tipTrimmed ? 10 : 2)} ${A.y} L${B1.x + 2} ${B1.y + 3} L${B2.x + 2} ${B2.y - 3} Z`} fill={SKIN} stroke={SKIN_EDGE} />
       )}
       <line x1={B1.x} y1={B1.y} x2={B2.x} y2={B2.y} stroke={SKIN_EDGE} strokeDasharray="2 3" opacity="0.6" />
-      {!run.tagTrimmed && <path d={`M${TAG.x - 6} ${TAG.y - 3} l3 4 l3 -3 l3 4 l3 -3`} stroke="#303030" strokeWidth="2" fill="none" />}
+      {!run.tagTrimmed && <path d={`M${TAG.x - 7} ${TAG.y - 2} l3.5 4.5 l3.5 -3.5 l3.5 4.5 l3.5 -3.5`} stroke="#4a4038" strokeWidth="3" strokeLinejoin="round" fill="none" />}
       {dirt > 0 &&
         [
           [118, 58],
@@ -124,14 +129,14 @@ function Wound({ run, svgRef, corner, lines, children }: { run: SutureRun; svgRe
 
 function AssessStage({ run, upd, feel, next }: Stage) {
   const svg = useRef<SVGSVGElement>(null)
-  const btn = (key: 'distal' | 'history', text: string, line: string) => (
+  const btn = (key: 'distal' | 'flapLooked', text: string, line: string) => (
     <button type="button" className="tap io-mini" data-on={run[key] || undefined} data-testid={`suture-${key}`} onClick={() => (upd({ [key]: true } as Partial<SutureRun>), feel(line))}>
       {run[key] ? `${text} ✓` : text}
     </button>
   )
   return (
     <>
-      <p className="io-lede">Look at the flap. Press its tip and watch the colour come back. Then the foot.</p>
+      <p className="io-lede">Neurovascular status before you touch it: the flap tip (colour, capillary refill) and the foot below the wound.</p>
       <TouchPad
         svg={svg}
         aspect="108 / 100"
@@ -147,8 +152,8 @@ function AssessStage({ run, upd, feel, next }: Stage) {
         <Wound run={run} svgRef={svg} />
       </TouchPad>
       <div className="io-choices mt-2">
-        {btn('distal', 'FOOT PULSES AND SENSATION', 'Dorsalis pedis and posterior tibial pulses present; sensation normal.')}
-        {btn('history', '“DIABETES? CIRCULATION? STEROIDS?”', '"None of those."')}
+        {btn('flapLooked', 'PRESS THE FLAP TIP: COLOUR AND REFILL', 'The flap is pink. Pressed at the tip it blanches and refills in under 2 seconds: alive.')}
+        {btn('distal', 'FOOT: PULSES, SENSATION, MOVEMENT', 'Dorsalis pedis and posterior tibial pulses present; sensation normal over the foot; moves the toes and ankle.')}
       </div>
       <NextButton onClick={next} testId="suture-next">
         Anaesthetise
@@ -207,6 +212,12 @@ function LocalStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
           <RubTint rub={rub} />
         </Wound>
       </TouchPad>
+      {run.edges.length > 0 && (
+        <SharpsTray
+          items={run.lidoSharps ? [] : [{ id: 'lido', kind: 'needle' }]}
+          onBin={() => (upd({ lidoSharps: true }), sfx.select(), feel('The orange needle straight into the sharps bin, by you.'))}
+        />
+      )}
       <NextButton onClick={next} testId="suture-next">
         Irrigate
       </NextButton>
@@ -257,18 +268,18 @@ function ExploreStage({ run, upd, feel, physical, why, next }: Stage) {
   const svg = useRef<SVGSVGElement>(null)
   return (
     <>
-      <p className="io-lede">Lift the flap and look under it. Remove anything that should not be there; trim only what is dead.</p>
+      <p className="io-lede">Lift the flap and look under it. Tap what should not be there to remove it, and what is dead to trim it. Keep what is alive.</p>
       <TouchPad
         svg={svg}
         aspect="108 / 100"
         testId="suture-explore"
         onDown={(p) => {
-          if (run.lifted && !run.foreignOut && Math.hypot(p.x - FOREIGN.x, p.y - FOREIGN.y) < 9) {
+          if (run.lifted && !run.foreignOut && Math.hypot(p.x - FOREIGN.x, p.y - FOREIGN.y) < 12) {
             upd({ foreignOut: true })
             sfx.select()
             return feel('Forceps: a sliver of metal from the edge that cut him. Out.')
           }
-          if (!run.tagTrimmed && Math.hypot(p.x - TAG.x, p.y - TAG.y) < 9) {
+          if (!run.tagTrimmed && Math.hypot(p.x - TAG.x, p.y - TAG.y) < 12) {
             upd({ tagTrimmed: true })
             return feel('A grey, ragged tag of skin on the lower edge: trimmed back to bleeding tissue.')
           }
@@ -278,13 +289,13 @@ function ExploreStage({ run, upd, feel, physical, why, next }: Stage) {
             physical('You cut the tip off the flap.')
             return why('The tip was pink and refilling: alive. Trim only what is dead.')
           }
-          feel(run.lifted ? 'Red, bleeding tissue; look for anything grey, black or shiny.' : 'Lift the flap to see under it.')
+          feel(run.lifted ? 'The base: healthy, bleeding muscle and fascia; no bone or tendon showing. Look for anything grey, black or shiny.' : 'Lift the flap to see under it.')
         }}
       >
         <Wound run={run} svgRef={svg} />
       </TouchPad>
       <div className="io-choices mt-2">
-        <button type="button" className="tap io-mini" data-on={run.lifted || undefined} data-testid="suture-lift" onClick={() => (upd({ lifted: !run.lifted }), feel(run.lifted ? 'The flap laid back down.' : 'Toothed forceps lift the flap gently by its edge.'))}>
+        <button type="button" className="tap io-mini" data-on={run.lifted || undefined} data-testid="suture-lift" onClick={() => (upd({ lifted: !run.lifted }), feel(run.lifted ? 'The flap laid back down.' : 'Toothed forceps lift the flap by its edge. Something glints near its base: tap it to remove it. Tap anything dead to trim it.'))}>
           {run.lifted ? 'LAY THE FLAP BACK' : 'LIFT THE FLAP WITH FORCEPS'}
         </button>
       </div>
@@ -346,12 +357,15 @@ function CornerStage({ run, upd, feel, physical, why, next, corner, setCorner }:
   )
 }
 
-function StitchStage({ run, upd, feel, why, physical, next, corner, lines, setLines }: Stage) {
+function StitchStage({ run, upd, feel, why, physical, next, corner, lines, setLines, coach }: Stage) {
   const svg = useRef<SVGSVGElement>(null)
   const start = useRef<Pt | null>(null)
+  const [drag, setDrag] = useState<[Pt, Pt] | null>(null)
+  const preview = drag ? judgeStitch(drag[0], drag[1]) : null
+  const mm = (u: number) => (u / 2).toFixed(1)
   return (
     <>
-      <p className="io-lede">Load the needle, then drag each stitch across the wound: in on one side, out the same distance on the other, square to the edge.</p>
+      <p className="io-lede">Load the needle, then drag each stitch across the wound: in on one side, out the same distance on the other, square to the edge. Aim 3.5–6 mm each side, 4–7 mm apart.</p>
       <div className="io-choices">
         <button type="button" className="tap io-mini" data-on={run.holder === 'instrument' || undefined} data-testid="suture-holder" onClick={() => (upd({ holder: 'instrument' }), feel('Needle loaded in the needle holder, two-thirds back from the tip; forceps in the other hand.'))}>
           LOAD WITH THE NEEDLE HOLDER
@@ -375,10 +389,15 @@ function StitchStage({ run, upd, feel, why, physical, next, corner, lines, setLi
         aspect="108 / 100"
         className="mt-2"
         testId="suture-stitch"
-        onDown={(p) => (start.current = p)}
+        onDown={(p) => {
+          start.current = p
+          setDrag([p, p])
+        }}
+        onMove={(p) => start.current && setDrag([start.current, p])}
         onUp={(p) => {
           const s = start.current
           start.current = null
+          setDrag(null)
           if (!s || !p || Math.hypot(p.x - s.x, p.y - s.y) < 6) return
           const st: Stitch | null = judgeStitch(s, p)
           if (!st) return feel('That does not cross the wound.')
@@ -389,8 +408,18 @@ function StitchStage({ run, upd, feel, why, physical, next, corner, lines, setLi
           else why(st.why ?? '')
         }}
       >
-        <Wound run={run} svgRef={svg} corner={corner} lines={lines} />
+        <Wound run={run} svgRef={svg} corner={corner} lines={lines}>
+          {coach && <BiteBands />}
+          {drag && <line x1={drag[0].x} y1={drag[0].y} x2={drag[1].x} y2={drag[1].y} stroke={preview?.ok ? '#1f8a3a' : '#c07a10'} strokeWidth="1.2" strokeDasharray="2 1.2" />}
+        </Wound>
       </TouchPad>
+      <p className={`m-0 mt-1.5 text-center font-[Press_Start_2P,monospace] text-[9px] leading-snug ${preview?.ok ? 'text-[#1f6a30]' : 'text-[#8a5a00]'}`} data-testid="suture-readout">
+        {preview
+          ? `BITES ${mm(preview.d1)} MM | ${mm(preview.d2)} MM · ${Math.round(90 - preview.angle)}° TO THE EDGE${preview.ok ? ' ✓' : ''}`
+          : drag
+            ? 'DRAG ACROSS THE WOUND'
+            : `${run.stitches.filter((x) => x.ok).length}/${run.stitches.length} STITCHES WELL PLACED`}
+      </p>
       <div className="io-choices mt-2">
         <button
           type="button"
@@ -414,13 +443,20 @@ function StitchStage({ run, upd, feel, why, physical, next, corner, lines, setLi
 }
 
 function FinishStage({ run, upd, feel, next }: Stage) {
+  const items = [...(run.lidoSharps ? [] : [{ id: 'lido', kind: 'needle' as const }]), ...(run.sharps ? [] : [{ id: 'suture', kind: 'suture' as const }])]
   return (
     <>
-      <p className="io-lede">Before anything else: the needle.</p>
-      <div className="io-choices">
-        <button type="button" className="tap io-mini" data-on={run.sharps || undefined} data-testid="suture-sharps" onClick={() => (upd({ sharps: true }), feel('The needle goes straight into the sharps bin, by you.'))}>
-          {run.sharps ? 'SHARPS BIN ✓' : 'NEEDLE INTO THE SHARPS BIN'}
-        </button>
+      <p className="io-lede">Before anything else: the sharps. Drag each needle from the tray into the bin.</p>
+      <SharpsTray
+        items={items}
+        onBin={(id) => {
+          sfx.select()
+          if (id === 'lido') return (upd({ lidoSharps: true }), feel('The orange needle into the sharps bin.'))
+          upd({ sharps: true })
+          feel('The suture needle, still in the needle holder, straight into the sharps bin, by you.')
+        }}
+      />
+      <div className="io-choices mt-2">
         <button type="button" className="tap io-mini" data-on={run.dressed || undefined} data-testid="suture-dress" onClick={() => (upd({ dressed: true }), feel('A non-adherent dressing and a light bandage.'))}>
           {run.dressed ? 'DRESSED ✓' : 'NON-ADHERENT DRESSING'}
         </button>
@@ -429,5 +465,88 @@ function FinishStage({ run, upd, feel, next }: Stage) {
         Done
       </NextButton>
     </>
+  )
+}
+
+/** Practice mode: where a good bite lands, each side of each arm (beyond the tip, which is the corner stitch's). */
+function BiteBands() {
+  return (
+    <g opacity="0.22" pointerEvents="none">
+      {ARMS.flatMap(([a, b], arm) => {
+        const L = Math.hypot(b.x - a.x, b.y - a.y)
+        const u = { x: (b.x - a.x) / L, y: (b.y - a.y) / L }
+        const n = { x: -u.y, y: u.x }
+        const at = (along: number, off: number) => `${a.x + u.x * along + n.x * off},${a.y + u.y * along + n.y * off}`
+        return [1, -1].map((side) => (
+          <polygon
+            key={`${arm}${side}`}
+            points={[at(TIP_ZONE, side * 7), at(L, side * 7), at(L, side * 12), at(TIP_ZONE, side * 12)].join(' ')}
+            fill="#1f8a3a"
+          />
+        ))
+      })}
+      <circle cx={A.x} cy={A.y} r={TIP_ZONE} fill="#c03030" />
+    </g>
+  )
+}
+
+type Sharp = { id: string; kind: 'needle' | 'suture' }
+
+/** A kidney tray and a yellow sharps bin: drag each used needle from the tray into the bin. */
+function SharpsTray({ items, onBin }: { items: Sharp[]; onBin: (id: string) => void }) {
+  const svg = useRef<SVGSVGElement>(null)
+  const [drag, setDrag] = useState<{ id: string; p: Pt } | null>(null)
+  const BIN = { x: 70, y: 4, w: 26, h: 32 }
+  const home = (i: number): Pt => ({ x: 14 + i * 22, y: 26 })
+  const inBin = (p: Pt) => p.x > BIN.x - 4 && p.x < BIN.x + BIN.w + 4 && p.y > BIN.y - 6 && p.y < BIN.y + BIN.h
+  const draw = (it: Sharp, p: Pt) =>
+    it.kind === 'needle' ? (
+      <g key={it.id} transform={`translate(${p.x} ${p.y}) rotate(-20)`}>
+        <rect x="-9" y="-1.6" width="6" height="3.2" rx="0.8" fill="#f08a1c" />
+        <line x1="-3" y1="0" x2="9" y2="0" stroke="#9aa4ae" strokeWidth="0.9" />
+      </g>
+    ) : (
+      <g key={it.id} transform={`translate(${p.x} ${p.y})`}>
+        <path d="M-10 4 L2 -1 M-10 6 L2 1" stroke="#7d8790" strokeWidth="1.4" />
+        <path d="M2 0 a4 4 0 1 0 6 -3" stroke="#9aa4ae" strokeWidth="0.9" fill="none" />
+        <path d="M8 -3 q6 -4 10 2" stroke="#2040c0" strokeWidth="0.6" fill="none" />
+      </g>
+    )
+  return (
+    <div className="mt-2" data-testid="suture-sharps-tray">
+      <TouchPad
+        svg={svg}
+        aspect="100 / 40"
+        testId="suture-sharps"
+        onDown={(p) => {
+          const i = items.findIndex((it, k) => Math.hypot(p.x - home(k).x, p.y - home(k).y) < 11)
+          if (i >= 0) setDrag({ id: items[i].id, p })
+        }}
+        onMove={(p) => drag && setDrag({ ...drag, p })}
+        onUp={(p) => {
+          if (drag && p && inBin(p)) onBin(drag.id)
+          setDrag(null)
+        }}
+      >
+        <svg ref={svg} viewBox="0 0 100 40" className="block h-full w-full select-none">
+          <rect x="0" y="0" width="100" height="40" fill="#eef1f4" />
+          <path d="M4 18 q26 -10 54 0 q4 12 -4 16 q-23 6 -46 0 q-8 -4 -4 -16 Z" fill="#c9d0d6" stroke="#8e98a2" strokeWidth="0.6" />
+          <rect x={BIN.x} y={BIN.y + 5} width={BIN.w} height={BIN.h - 5} rx="1.5" fill="#f2c200" stroke="#9a7a00" strokeWidth="0.6" />
+          <rect x={BIN.x - 1} y={BIN.y} width={BIN.w + 2} height="6" rx="1" fill="#d23a2a" />
+          <rect x={BIN.x + 9} y={BIN.y + 1.6} width="8" height="2" fill="#5a1a12" />
+          <text x={BIN.x + BIN.w / 2} y={BIN.y + 20} fontFamily={FONT} fontSize="3.2" textAnchor="middle" fill="#5a4300">
+            SHARPS
+          </text>
+          {items.map((it, i) => (drag?.id === it.id ? null : draw(it, home(i))))}
+          {drag && draw(items.find((it) => it.id === drag.id) ?? { id: drag.id, kind: 'needle' }, drag.p)}
+          {!items.length && (
+            <text x="30" y="27" fontFamily={FONT} fontSize="3" textAnchor="middle" fill="#46505a">
+              NOTHING SHARP LEFT
+            </text>
+          )}
+        </svg>
+      </TouchPad>
+      <p className="sheet-meta mt-1 text-center">{items.length ? 'DRAG THE NEEDLE INTO THE SHARPS BIN' : 'ALL SHARPS IN THE BIN'}</p>
+    </div>
   )
 }

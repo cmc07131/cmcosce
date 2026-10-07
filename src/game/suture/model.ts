@@ -15,8 +15,8 @@ export const ARMS = [
   [A, B1],
   [A, B2],
 ] as const
-/** Ideal bite from the edge, and spacing between stitches (3.5–6 mm and 4–7 mm). */
-export const BITE = { min: 7, max: 12 }
+/** Bite from the edge (aim 3.5–6 mm; 3–6.5 mm passes), and spacing between stitches (4–7 mm). 2 units = 1 mm. */
+export const BITE = { min: 6, max: 13 }
 export const GAP = { min: 8, max: 15 }
 /** Near the tip is the corner stitch's job. */
 export const TIP_ZONE = 10
@@ -81,8 +81,8 @@ export function judgeStitch(p: Pt, q: Pt): Stitch | null {
     if (along < TIP_ZONE) why = 'Through the flap tip: that strangles its blood supply. The tip needs a corner stitch.'
     else if (Math.min(d1, d2) < BITE.min) why = 'Too close to the edge: it will cut out.'
     else if (Math.max(d1, d2) > BITE.max) why = 'Too wide a bite: it bunches and puckers the skin.'
-    else if (Math.abs(d1 - d2) > 4) why = 'Uneven bites: the edges will sit at different heights.'
-    else if (angle > 25) why = 'Not at right angles to the wound: the edges slide past each other.'
+    else if (Math.abs(d1 - d2) > 5) why = 'Uneven bites: the edges will sit at different heights.'
+    else if (angle > 30) why = 'Not at right angles to the wound: the edges slide past each other.'
     return { arm, along, d1, d2, angle, ok: why === null, why }
   }
   return null
@@ -121,7 +121,9 @@ export type SutureRun = {
   cornerOk: boolean
   holder: 'instrument' | 'fingers' | null
   stitches: Stitch[]
+  /** The suture needle, and the lidocaine needle, in the sharps bin. */
   sharps: boolean
+  lidoSharps: boolean
   dressed: boolean
 }
 
@@ -145,6 +147,7 @@ export function freshSuture(): SutureRun {
     holder: null,
     stitches: [],
     sharps: false,
+    lidoSharps: false,
     dressed: false,
   }
 }
@@ -168,13 +171,13 @@ export function checkSuture(r: SutureRun): SutureRow[] {
   const good = r.stitches.filter((s) => s.ok).length
   const closed = g.every((x) => x.count >= 2 && x.maxGap <= GAP.max + 4)
   return [
-    { key: 'assess', label: 'Assessment', value: [r.flapLooked && 'flap pink, refills', r.distal && 'foot pulses and sensation', r.history && 'diabetes and vascular history'].filter(Boolean).join(', ') || 'None', range: 'Flap viability, distal neurovascular status, healing risk', ok: r.flapLooked && r.distal, why: 'A dusky flap or a poor foot changes the plan: pretibial skin in older people heals badly.' },
+    { key: 'assess', label: 'Neurovascular and flap', value: [r.flapLooked ? 'flap tip pressed: pink, refills' : 'flap not checked', r.distal ? 'foot: pulses, sensation, movement' : 'foot not checked'].join('; '), range: 'Both: the flap tip (colour, capillary refill) and the foot (pulses, sensation, movement)', ok: r.flapLooked && r.distal, why: 'A dusky flap or a poor foot changes the plan: pretibial skin in older people heals badly.' },
     { key: 'infiltrate', label: 'Local anaesthetic', value: `${r.edges.length}/${EDGE_SEGMENTS} of the edges, ${r.lidoMl.toFixed(1)} mL 1%${r.throughSkin ? `; ${r.throughSkin}× through intact skin` : ''}`, range: 'Through the wound edges, all the way round', ok: r.edges.length >= EDGE_SEGMENTS - 1 && r.throughSkin === 0, why: 'Going in through the cut edge hurts far less than through intact skin.' },
     { key: 'irrigate', label: 'Test and irrigate', value: `${r.tested ? (r.edges.length >= EDGE_SEGMENTS - 1 ? 'Numb when tested' : 'Tested: still sore in places') : 'Not tested'}; ${r.irrigatedMl.toFixed(0)} mL saline`, range: 'Test the anaesthesia; irrigate with 100 mL or more under pressure', ok: r.tested && r.irrigatedMl >= 100, why: 'Irrigation under pressure is what prevents infection; a few squirts do not.' },
-    { key: 'explore', label: 'Explore and debride', value: [r.foreignOut ? 'metal fragment removed' : 'foreign body missed', r.tagTrimmed ? 'dead tag trimmed' : 'dead tag left', r.tipTrimmed && 'healthy tip cut off'].filter(Boolean).join(', '), range: 'Look under the flap; trim only what is dead', ok: r.foreignOut && r.tagTrimmed && !r.tipTrimmed, why: 'A retained metal fragment from a building site guarantees infection. A pink tip is alive: keep it.' },
+    { key: 'explore', label: 'Explore and debride', value: [r.lifted ? 'flap lifted' : 'flap never lifted', r.foreignOut ? 'metal fragment removed' : 'metal fragment missed', r.tagTrimmed ? 'dead tag trimmed' : 'dead tag left', r.tipTrimmed && 'healthy tip cut off'].filter(Boolean).join(', '), range: 'Lift the flap, remove the foreign body, trim only what is dead', ok: r.foreignOut && r.tagTrimmed && !r.tipTrimmed, why: 'A retained metal fragment from a building site guarantees infection. A pink tip is alive: keep it.' },
     { key: 'corner', label: 'Corner stitch', value: r.corner === 'transfixing' ? 'Straight through the tip' : r.cornerOk ? 'Half-buried horizontal mattress' : r.corner ? 'Misplaced' : 'None', range: 'Half-buried horizontal mattress: through the dermis of the tip, skin on the other side', ok: r.cornerOk && r.corner === 'half-buried', why: 'A stitch through the full thickness of the tip strangles its blood supply.' },
     { key: 'interrupted', label: 'Interrupted sutures', value: `${r.stitches.length} placed, ${good} well; ${closed ? 'both edges closed' : 'gaps left'}${r.holder === 'fingers' ? '; needle handled by hand' : ''}`, range: 'Bites 3.5–6 mm, square to the wound, 4–7 mm apart, edges closed', ok: r.stitches.length > 0 && good >= r.stitches.length * 0.8 && closed && r.holder === 'instrument', why: 'Even, square bites evert the edges; gaps leave the wound open; fingers on a needle mean a needlestick.' },
-    { key: 'sharps', label: 'Sharps and dressing', value: `${r.sharps ? 'Needle in the bin' : 'Needle left on the tray'}, ${r.dressed ? 'dressed' : 'not dressed'}`, range: 'Needle straight to the sharps bin; non-adherent dressing', ok: r.sharps && r.dressed, why: 'The person who used the sharp disposes of it.' },
+    { key: 'sharps', label: 'Sharps and dressing', value: `lidocaine needle ${r.lidoSharps ? 'binned' : 'left out'}, suture needle ${r.sharps ? 'binned' : 'left out'}, ${r.dressed ? 'dressed' : 'not dressed'}`, range: 'Each needle into the sharps bin by you, as soon as you are done with it; non-adherent dressing', ok: r.sharps && r.lidoSharps && r.dressed, why: 'The person who used the sharp disposes of it, straight away.' },
   ]
 }
 
