@@ -45,7 +45,7 @@
       "text": "The 'geographic tongue sign' in your notes has no basis as a sign of this condition; leave it out."
     }
   ],
-  "notes": "Checked against NICE NG10 (Violence and aggression: short-term management, 2015), the HA restraint policy, and ACEP (2023) on agitation.\n\nStep up in order: de-escalation (calm, space, one person talking, exits, listen, choices, reality orientation), then oral medication offered, then rapid tranquillisation (IM lorazepam; or IM haloperidol with promethazine; or IM olanzapine — NICE; HK EDs also use IM midazolam), with physical restraint only as needed to give it, the least restrictive, proportionate, for the shortest time, never prone for long, with a doctor present, and regular observations (every 15 minutes: pulse, BP, SpO2, respiratory rate, consciousness, circulation of limbs). ECG before haloperidol when possible (QT).\n\nThink of the medical causes: hypoglycaemia, hypoxia, head injury (a graze in a drunk man is a head injury until proved otherwise), sepsis, drug withdrawal, intoxication. Once sedated: glucose, examine, CT head as indicated.\n\n'Excited delirium syndrome' in your notes is no longer an accepted diagnosis (ACEP withdrew support in 2023); describe it as hyperactive delirium with severe agitation and treat the cause. The 'geographic tongue sign' in your notes has no basis. Your de-escalation list matches.",
+  "notes": "Checked against NICE NG10 (Violence and aggression: short-term management, 2015), the HA restraint policy, and ACEP (2023) on agitation.\n\nStep up in order: de-escalation (calm, space, one person talking, exits, listen, choices, reality orientation), then oral medication offered, then rapid tranquillisation (IM lorazepam; or IM haloperidol with promethazine; or IM olanzapine — NICE; HK EDs also use IM midazolam), with physical restraint only as needed to give it, the least restrictive, proportionate, for the shortest time, never prone for long, with a doctor present, and regular observations (every 15 minutes: pulse, BP, SpO2, respiratory rate, consciousness, circulation of limbs). ECG before haloperidol when possible (QT).\n\nThink of the medical causes: hypoglycaemia, hypoxia, head injury (a graze in a drunk man is a head injury until proved otherwise), sepsis, drug withdrawal, intoxication. Once sedated: glucose, examine, CT head as indicated.\n\n'Excited delirium syndrome' in your notes is no longer an accepted diagnosis (ACEP withdrew support in 2023); describe it as hyperactive delirium with severe agitation and treat the cause. The 'geographic tongue sign' in your notes has no basis. Your de-escalation list matches.\n\nPerfect script checked against NICE NG10 violence and aggression, an HKCEM-style scheme and a keyword scheme. Removed confrontation, the wrong doses, haloperidol alone and prolonged prone restraint; hypoglycaemia named aloud.",
   "cast": [
     {
       "id": "patient",
@@ -110,13 +110,6 @@
               "r": "…Kong. Why am I in hospital?",
               "mood": -3,
               "mark": "Keeps a safe distance, introduces self, orientates calmly"
-            },
-            {
-              "t": "[Walks up close] Sit down NOW!",
-              "tz": "（行埋去好近）即刻坐低！",
-              "rz": "（揮拳）",
-              "r": "[Swings a fist]",
-              "mood": 1
             }
           ]
         },
@@ -131,13 +124,6 @@
               "r": "…My head hurts. OK… fine.",
               "mood": -3,
               "mark": "Offers a clear choice and a reason"
-            },
-            {
-              "t": "Because you're drunk.",
-              "tz": "因為你飲醉咗。",
-              "rz": "我冇醉呀！",
-              "r": "I'm NOT drunk!",
-              "mood": 2
             }
           ]
         }
@@ -153,12 +139,13 @@
         "Bedside": [
           {
             "t": "Capillary glucose",
-            "r": "2.6 mmol/L.",
+            "r": "2.6 mmol/L. \"Hypoglycaemia: that's why he's confused and aggressive.\"",
             "mark": "Checks glucose early"
           },
           {
             "t": "SpO2 and temperature",
-            "r": "95%, 36.9 °C."
+            "r": "95%, 36.9 °C.",
+            "mark": "Checks SpO2 and temperature"
           },
           {
             "t": "12-lead ECG",
@@ -187,37 +174,13 @@
           "dose": "150–200 mL IV (then thiamine)"
         },
         {
-          "t": "Glucose 10% 20 mL IV",
-          "drug": "Glucose 10%",
-          "dose": "20 mL IV",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little to correct hypoglycaemia: 150–200 mL of 10%."
-        },
-        {
           "fetch": "cart",
           "need": true,
           "scene": "sedated",
           "mark": "Rapid tranquillisation if needed, with minimal restraint",
-          "t": "Lorazepam 1–2 mg IM, minimum restraint",
+          "t": "If he's still dangerous after the glucose: lorazepam 1–2 mg IM, with the minimum restraint",
           "drug": "Lorazepam",
           "dose": "1–2 mg IM, minimum restraint"
-        },
-        {
-          "t": "Lorazepam 10 mg IM",
-          "drug": "Lorazepam",
-          "dose": "10 mg IM",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "Far too much: 1–2 mg IM, repeated if needed."
-        },
-        {
-          "fetch": "cart",
-          "trap": true,
-          "r": "NICE: combine with promethazine to reduce dystonia, and check the ECG first.",
-          "t": "Haloperidol 10 mg IM alone",
-          "drug": "Haloperidol",
-          "dose": "10 mg IM alone"
         }
       ]
     },
@@ -229,21 +192,16 @@
       "hint": "Observations every 15 min, head injury assessment, document, debrief.",
       "opts": [
         {
-          "t": "Observations every 15 minutes: pulse, BP, SpO2, RR, GCS, limb circulation",
+          "t": "Observations every 15 minutes: pulse, BP, SpO2, RR, GCS and limb circulation.",
           "mark": "Monitoring after tranquillisation"
         },
         {
-          "t": "Full examination and CT head: head injury in an intoxicated man",
+          "t": "A full examination and a CT head: a head injury in an intoxicated man.",
           "mark": "Assesses the head injury"
         },
         {
-          "t": "Document the incident, restraint time and reasons; staff debrief",
+          "t": "Document the incident, the restraint time and the reasons; a staff debrief.",
           "mark": "Documentation and debrief"
-        },
-        {
-          "t": "Keep him prone and restrained until morning",
-          "trap": "critical",
-          "r": "Prolonged prone restraint risks positional asphyxia; release as soon as safe."
         }
       ]
     },
@@ -373,5 +331,48 @@
       "why": "Intoxication masks intracranial injury.",
       "source": "NICE NG232"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "[From a safe distance, door behind me, calm voice] Sir, I'm Dr Chan. You're in the hospital. You're safe. What's your name?",
+      "do": "…Kong. Why am I in hospital?"
+    },
+    {
+      "at": "0:20",
+      "say": "You were found lying on the street and you've hurt your head. I'd like to help. Would you sit down and let us check your sugar with a small finger prick?",
+      "do": "…My head hurts. OK… fine."
+    },
+    {
+      "at": "0:40",
+      "say": "Capillary glucose. SpO2 and temperature. 12-lead ECG. Hypoglycaemia: that's why he's confused and aggressive.",
+      "do": "2.6 mmol/L. \"Hypoglycaemia: that's why he's confused and aggressive.\" 95%, 36.9 °C. Sinus tachycardia, QTc 440 ms."
+    },
+    {
+      "at": "1:00",
+      "say": "Glucose 10% 150–200 mL IV (then thiamine). Lorazepam 1–2 mg IM, minimum restraint."
+    },
+    {
+      "at": "1:20",
+      "say": "Observations every 15 minutes: pulse, BP, SpO2, RR, GCS and limb circulation. A full examination and a CT head: a head injury in an intoxicated man. Document the incident, the restraint time and the reasons; a staff debrief."
+    }
+  ],
+  "keywords": [
+    "safe distance",
+    "Dr Chan",
+    "you're safe",
+    "your name",
+    "hurt your head",
+    "sugar",
+    "capillary glucose",
+    "hypoglycaemia",
+    "ECG",
+    "thiamine",
+    "lorazepam",
+    "minimum restraint",
+    "every 15 minutes",
+    "CT head",
+    "document",
+    "debrief"
   ]
 }

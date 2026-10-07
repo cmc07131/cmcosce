@@ -34,7 +34,7 @@
       "text": "Suicide risk scales. Your notes assess risk with the SAD PERSONS score. NICE NG225 advises against using risk scales to predict suicide or to decide treatment; do a psychosocial assessment instead. The items are still useful prompts."
     }
   ],
-  "notes": "Checked against the Royal College of Psychiatrists' MSE structure, NICE NG222 (Depression in adults, 2022) and NICE NG225 (Self-harm, 2022).\n\nMSE (your ASEPTIC mnemonic): Appearance and behaviour, Speech, Emotion (mood subjective, affect objective), Perception, Thought (form and content, including suicidal and homicidal thoughts), Insight and judgement, Cognition. Present it structured, then a formulation: likely diagnosis, risk (to self, others, from others, self-neglect), and a plan.\n\nSevere depression with psychotic features (nihilistic or guilty delusions, mood-congruent hallucinations) and self-neglect needs urgent psychiatric assessment; physical causes (hypothyroidism, B12, alcohol, medication, dementia) and physical consequences (dehydration, AKI) must be checked.\n\nYour MSE notes and marking scheme match this. The SAD PERSONS score in your notes appears under 'how to assess risk'; NICE NG225 advises against using risk scales to predict suicide or decide treatment — use a psychosocial assessment instead (see the self-harm station).",
+  "notes": "Checked against the Royal College of Psychiatrists' MSE structure, NICE NG222 (Depression in adults, 2022) and NICE NG225 (Self-harm, 2022).\n\nMSE (your ASEPTIC mnemonic): Appearance and behaviour, Speech, Emotion (mood subjective, affect objective), Perception, Thought (form and content, including suicidal and homicidal thoughts), Insight and judgement, Cognition. Present it structured, then a formulation: likely diagnosis, risk (to self, others, from others, self-neglect), and a plan.\n\nSevere depression with psychotic features (nihilistic or guilty delusions, mood-congruent hallucinations) and self-neglect needs urgent psychiatric assessment; physical causes (hypothyroidism, B12, alcohol, medication, dementia) and physical consequences (dehydration, AKI) must be checked.\n\nYour MSE notes and marking scheme match this. The SAD PERSONS score in your notes appears under 'how to assess risk'; NICE NG225 advises against using risk scales to predict suicide or decide treatment — use a psychosocial assessment instead (see the self-harm station).\n\nPerfect script checked against the standard MSE and NICE CG90/CG16, an HKCEM-style scheme and a keyword scheme. Removed the discharge option.",
   "cast": [
     {
       "id": "patient",
@@ -119,14 +119,14 @@
       "groups": {
         "Appearance": [
           {
-            "t": "Observe appearance and behaviour",
+            "t": "Appearance and behaviour",
             "r": "Unkempt, unshaven, stained clothes, thin. Slumped, poor eye contact, slowed movements.",
             "mark": "Describes appearance and psychomotor retardation"
           }
         ],
         "Speech": [
           {
-            "t": "Listen to speech",
+            "t": "His speech",
             "r": "Quiet, slow, long pauses before answering, little spontaneous speech.",
             "mark": "Describes speech"
           }
@@ -138,7 +138,7 @@
             "mark": "Records subjective mood"
           },
           {
-            "t": "Observe affect",
+            "t": "His affect",
             "r": "Flat, restricted, congruent with mood.",
             "mark": "Describes affect and congruence"
           }
@@ -165,7 +165,7 @@
         "Insight": [
           {
             "t": "Do you think you're unwell? Would you accept help?",
-            "r": "I'm not ill. I'm just a bad person. There's no point.",
+            "r": "I'm not ill. I'm just a bad person. There's no point. \"No insight.\"",
             "mark": "Assesses insight"
           }
         ],
@@ -187,21 +187,16 @@
       "hint": "Structured MSE, formulation, risk, plan.",
       "opts": [
         {
-          "t": "Severe depressive episode with psychotic features (nihilistic and guilty delusions, mood-congruent voice)",
+          "t": "A severe depressive episode with psychotic features: nihilistic and guilty delusions, and a mood-congruent voice.",
           "mark": "Presents a structured MSE and diagnosis"
         },
         {
-          "t": "High risk: active suicidal ideation with a plan and access to means, self-neglect, lives alone, poor insight",
+          "t": "High risk: active suicidal ideation with a plan and access to means, self-neglect, living alone, and poor insight.",
           "mark": "States risk to self and self-neglect"
         },
         {
-          "t": "Physical checks: bloods (U&E, glucose, TFT, B12), ECG, hydration; urgent psychiatry assessment; consider MHO if he refuses",
+          "t": "Physical checks: U&E, glucose, thyroid function and B12, an ECG and his hydration; urgent psychiatry; the MHO if he refuses.",
           "mark": "Plans physical work-up, urgent psychiatry and MHO if needed"
-        },
-        {
-          "t": "Discharge with a GP letter",
-          "trap": "critical",
-          "r": "Psychotic depression with a suicide plan is a high-risk emergency."
         }
       ]
     },
@@ -331,5 +326,61 @@
       "why": "Scales predict poorly.",
       "source": "NICE NG225"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Can you tell me what's been happening? Sleep, appetite, energy, enjoyment? Have you had problems with your mood before? Any treatment?",
+      "do": "[Long pause] …Nothing matters any more. I haven't been out for weeks. Wake at 3 every morning. Not eating. No energy. Nothing I used to enjoy. After my wife died two years ago. Tablets for a while; I stopped them."
+    },
+    {
+      "at": "0:20",
+      "say": "Physical health and medicines. Alcohol or drugs? Who's around you? Work? Money?",
+      "do": "Blood pressure tablets. Haven't taken them lately. A bottle of whisky a week. Less now, can't be bothered. Live alone. Retired. My son is in Canada."
+    },
+    {
+      "at": "0:40",
+      "say": "Any trouble with the police?",
+      "do": "No."
+    },
+    {
+      "at": "1:00",
+      "say": "Appearance and behaviour. His speech. How would you describe your mood?",
+      "do": "Unkempt, unshaven, stained clothes, thin. Slumped, poor eye contact, slowed movements. Quiet, slow, long pauses before answering, little spontaneous speech. 'Empty. Black.'"
+    },
+    {
+      "at": "1:20",
+      "say": "His affect. Do you ever hear voices or see things others can't? Thought form and content: worries, guilt, beliefs.",
+      "do": "Flat, restricted, congruent with mood. Sometimes a voice says I'm worthless… it's right. Believes his insides are rotting and that he caused his wife's death."
+    },
+    {
+      "at": "1:40",
+      "say": "Have you had thoughts of ending your life? Do you think you're unwell? Would you accept help? Orientation, attention, recall. No insight.",
+      "do": "Every day. I've thought about the tablets in the drawer. I'm not ill. I'm just a bad person. There's no point. \"No insight.\" Orientated. Slow on serial 7s. Recalls 2 of 3."
+    },
+    {
+      "at": "2:00",
+      "say": "A severe depressive episode with psychotic features: nihilistic and guilty delusions, and a mood-congruent voice. High risk: active suicidal ideation with a plan and access to means, self-neglect, living alone, and poor insight. Physical checks: U&E, glucose, thyroid function and B12, an ECG and his hydration; urgent psychiatry; the MHO if he refuses."
+    }
+  ],
+  "keywords": [
+    "what's been happening",
+    "sleep",
+    "appetite",
+    "mood",
+    "alcohol",
+    "appearance",
+    "speech",
+    "affect",
+    "voices",
+    "ending your life",
+    "insight",
+    "orientation",
+    "severe depressive episode",
+    "psychotic features",
+    "suicidal ideation",
+    "plan",
+    "urgent psychiatry",
+    "MHO"
   ]
 }

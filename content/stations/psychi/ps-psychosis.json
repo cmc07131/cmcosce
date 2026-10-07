@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE CG178 (Psychosis and schizophrenia in adults, 2014) and CG155 (children and young people), and the Hong Kong EASY (Early Assessment Service for Young people with early psychosis) programme.\n\nHistory: positive symptoms (delusions, hallucinations, thought interference — insertion, withdrawal, broadcasting — passivity), negative symptoms (withdrawal, apathy, poverty of speech, blunting), disorganisation, duration, triggers, substance use (cannabis, stimulants), mood symptoms (to separate schizoaffective and psychotic mood disorders), medical causes, family history, risk (to self, others, self-neglect, vulnerability), insight. Investigations exclude organic causes (drugs, thyroid, glucose, infection; neuroimaging if atypical). Refer urgently to early intervention in psychosis (EASY in HK) — shorter duration of untreated psychosis improves outcome.\n\nYour notes list psychosis history as a topic and have MSE descriptions (auditory hallucinations → schizophrenia; tangential, blocking); nothing conflicts.",
+  "notes": "Checked against NICE CG178 (Psychosis and schizophrenia in adults, 2014) and CG155 (children and young people), and the Hong Kong EASY (Early Assessment Service for Young people with early psychosis) programme.\n\nHistory: positive symptoms (delusions, hallucinations, thought interference — insertion, withdrawal, broadcasting — passivity), negative symptoms (withdrawal, apathy, poverty of speech, blunting), disorganisation, duration, triggers, substance use (cannabis, stimulants), mood symptoms (to separate schizoaffective and psychotic mood disorders), medical causes, family history, risk (to self, others, self-neglect, vulnerability), insight. Investigations exclude organic causes (drugs, thyroid, glucose, infection; neuroimaging if atypical). Refer urgently to early intervention in psychosis (EASY in HK) — shorter duration of untreated psychosis improves outcome.\n\nYour notes list psychosis history as a topic and have MSE descriptions (auditory hallucinations → schizophrenia; tangential, blocking); nothing conflicts.\n\nPerfect script checked against NICE CG178 psychosis and the HK EASY programme, an HKCEM-style scheme and a keyword scheme. Scripts and keywords; one-line summaries spoken.",
   "cast": [
     {
       "id": "patient",
@@ -293,5 +293,54 @@
       "why": "Held despite evidence.",
       "source": "Psychiatry texts"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "How have things been at home lately? How do you know they're watching you? Do thoughts ever get put into your head or taken out, or broadcast to others?",
+      "do": "Not safe. The neighbours drill holes and listen. They know my thoughts. The red car outside means they've reported me. It's obvious. They broadcast my thoughts. Everyone on the MTR hears them."
+    },
+    {
+      "at": "0:20",
+      "say": "Do you hear voices when no one is around? How is your mood? Sleep? Cannabis, ice, alcohol?",
+      "do": "Two men talk about me: 'he's useless, he's a spy'. Scared, not sad. I sleep in the day. Cannabis most weekends last year."
+    },
+    {
+      "at": "0:40",
+      "say": "Have you thought about hurting yourself, or the neighbours? Do you think this could be an illness?",
+      "do": "Sometimes I think of ending it so they can't get me. I bought a knife for protection. No. It's real."
+    },
+    {
+      "at": "1:00",
+      "say": "How is he different from usual? Any family history of mental illness?",
+      "do": "He was a top student. Now doesn't wash, barely speaks, covers the windows with foil. Our uncle has schizophrenia."
+    },
+    {
+      "at": "1:20",
+      "say": "First-episode psychosis, likely schizophrenia: persecutory delusions, thought broadcasting, third-person voices, negative symptoms for 2 months. Differentials: substance-induced psychosis, mood disorder with psychosis, organic causes. Risk: suicidal thoughts and a knife — urgent psychiatric assessment today; remove the weapon; admission likely."
+    },
+    {
+      "at": "1:40",
+      "say": "Bloods, urine drug screen, TFT; early intervention service (EASY)."
+    }
+  ],
+  "keywords": [
+    "at home",
+    "how do you know",
+    "broadcast",
+    "voices",
+    "mood",
+    "cannabis",
+    "hurting yourself",
+    "illness",
+    "different from usual",
+    "family history",
+    "first-episode psychosis",
+    "persecutory delusions",
+    "negative symptoms",
+    "substance-induced",
+    "knife",
+    "urgent psychiatric assessment",
+    "EASY"
   ]
 }
