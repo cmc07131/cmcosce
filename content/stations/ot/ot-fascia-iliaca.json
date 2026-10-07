@@ -24,7 +24,8 @@
       "title": "The block",
       "goal": "By hand under ultrasound: the image, the anatomy, the needle under the fascia, the spread.",
       "steps": [
-        "block"
+        "block",
+        "after"
       ]
     }
   ],
@@ -34,7 +35,7 @@
       "text": "Local anaesthetic dose. Your notes give 20–30 mL of 0.5% ropivacaine or 0.25–0.5% bupivacaine. Check the total against weight: 30 mL of 0.5% is 150 mg, over 2 mg/kg in a 50 kg woman. Use a larger volume of a more dilute solution within the maximum dose, and label the patient with the drug and time."
     }
   ],
-  "notes": "Checked against NICE CG124 (Hip fracture, updated 2023), the Association of Anaesthetists / RCEM safety guideline for fascia iliaca blocks in the ED (2021), and the AAGBI guideline for local anaesthetic systemic toxicity (LAST, 2010).\n\nNICE recommends nerve blocks (fascia iliaca or femoral) for hip fracture pain in the ED, alongside paracetamol and cautious opioids. The ultrasound-guided fascia iliaca compartment block deposits a large volume of dilute local anaesthetic under the fascia iliaca, lateral to the femoral nerve, spreading to the femoral and lateral femoral cutaneous nerves (and sometimes obturator). Safety: consent, check allergies and anticoagulation, weight-based dose (e.g. levobupivacaine 0.25% up to 2 mg/kg, or 30–40 mL of a dilute solution staying within the maximum dose), monitoring, IV access, aspirate before injecting in 5 mL increments, lipid emulsion available, document, and a sign on the patient (time and drug) to avoid repeat dosing.\n\nYour notes describe a femoral nerve block with 20–30 mL ropivacaine 0.5% or bupivacaine 0.25–0.5%; check the total dose against weight (0.5% × 30 mL = 150 mg — over 2 mg/kg in a 50 kg woman). The rest (NAVEL, in-plane, hydrodissection, aspiration, LAST readiness) matches.",
+  "notes": "Checked against NICE CG124 (Hip fracture, updated 2023), the Association of Anaesthetists / RCEM safety guideline for fascia iliaca blocks in the ED (2021), and the AAGBI guideline for local anaesthetic systemic toxicity (LAST, 2010).\n\nNICE recommends nerve blocks (fascia iliaca or femoral) for hip fracture pain in the ED, alongside paracetamol and cautious opioids. The ultrasound-guided fascia iliaca compartment block deposits a large volume of dilute local anaesthetic under the fascia iliaca, lateral to the femoral nerve, spreading to the femoral and lateral femoral cutaneous nerves (and sometimes obturator). Safety: consent, check allergies and anticoagulation, weight-based dose (e.g. levobupivacaine 0.25% up to 2 mg/kg, or 30–40 mL of a dilute solution staying within the maximum dose), monitoring, IV access, aspirate before injecting in 5 mL increments, lipid emulsion available, document, and a sign on the patient (time and drug) to avoid repeat dosing.\n\nYour notes describe a femoral nerve block with 20–30 mL ropivacaine 0.5% or bupivacaine 0.25–0.5%; check the total dose against weight (0.5% × 30 mL = 150 mg — over 2 mg/kg in a 50 kg woman). The rest (NAVEL, in-plane, hydrodissection, aspiration, LAST readiness) matches.\n\nPerfect script checked against NICE CG124, the AAGBI LAST guideline and RCEM fascia iliaca guidance, an HKCEM-style scheme and a keyword scheme. Removed the toxic and too-small doses; the block narrated; LAST watch added.",
   "cast": [
     {
       "id": "patient",
@@ -77,7 +78,7 @@
       "confirm": "Checked",
       "opts": [
         {
-          "t": "Consent; allergy to local anaesthetic; anticoagulants",
+          "t": "Consent; any allergy to local anaesthetic; anticoagulants",
           "need": true,
           "mark": "Consent and pre-procedure checks"
         },
@@ -114,22 +115,6 @@
           "dose": "40 mL (100 mg)",
           "fetch": "cart",
           "mark": "Draws up a safe dose: 0.25% levobupivacaine 40 mL (100 mg)"
-        },
-        {
-          "t": "Levobupivacaine 0.5% 40 mL (200 mg)",
-          "drug": "Levobupivacaine 0.5%",
-          "dose": "40 mL (200 mg)",
-          "fetch": "cart",
-          "trap": "critical",
-          "r": "200 mg is 4 mg/kg for 50 kg: toxic. Use 0.25% for volume within 2 mg/kg."
-        },
-        {
-          "t": "Levobupivacaine 0.25% 10 mL (25 mg)",
-          "drug": "Levobupivacaine 0.25%",
-          "dose": "10 mL (25 mg)",
-          "fetch": "cart",
-          "trap": true,
-          "r": "Too little volume to spread under the fascia: about 40 mL of dilute solution."
         }
       ]
     },
@@ -154,6 +139,22 @@
             "Documentation and observation"
           ],
           "scene": "block"
+        }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "nurse",
+      "label": "After the block",
+      "lang": "en",
+      "hint": "Watch for toxicity; what to do if it happens.",
+      "opts": [
+        {
+          "t": "Observe her for at least 30 minutes for toxicity: tingling lips, tinnitus, confusion, seizures or arrhythmia. If so: stop, call for help, lipid emulsion 20%, 1.5 mL/kg.",
+          "when": "block",
+          "early": "After the block.",
+          "mark": "Observes for LAST and knows its treatment"
         }
       ]
     },
@@ -283,5 +284,45 @@
       "why": "No unsupervised walking.",
       "source": "RCEM"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Consent; any allergy to local anaesthetic; anticoagulants. Weigh her: 50 kg; maximum levobupivacaine 2 mg/kg = 100 mg. Monitoring and IV access; 20% lipid emulsion on the trolley."
+    },
+    {
+      "at": "0:20",
+      "say": "Check she hasn't had a block from the ambulance crew."
+    },
+    {
+      "at": "0:40",
+      "say": "Levobupivacaine 0.25% 40 mL (100 mg)."
+    },
+    {
+      "at": "1:00",
+      "say": "Clean the skin, sterile probe cover. Linear probe in the groin crease: lateral to medial, nerve, artery, vein: NAVEL. I find the fascia iliaca over iliopsoas, lateral to the nerve. Needle in-plane from lateral, the tip under the fascia; aspirate, then inject 5 mL at a time, aspirating between, watching the spread lift the fascia. Then a label on her wrist with the drug, dose and time, and 30 minutes of observation."
+    },
+    {
+      "at": "1:20",
+      "say": "Observe her for at least 30 minutes for toxicity: tingling lips, tinnitus, confusion, seizures or arrhythmia. If so: stop, call for help, lipid emulsion 20%, 1.5 mL/kg."
+    }
+  ],
+  "keywords": [
+    "consent",
+    "anticoagulants",
+    "2 mg/kg",
+    "100 mg",
+    "lipid emulsion",
+    "monitoring",
+    "ambulance crew",
+    "levobupivacaine 0.25%",
+    "40 mL",
+    "NAVEL",
+    "fascia iliaca",
+    "in-plane",
+    "aspirate",
+    "5 mL at a time",
+    "label",
+    "toxicity"
   ]
 }

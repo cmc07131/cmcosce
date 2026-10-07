@@ -24,12 +24,13 @@
       "title": "Counsel",
       "goal": "Why surgery, and what happens to her work.",
       "steps": [
-        "counsel"
+        "counsel",
+        "care"
       ]
     }
   ],
   "review": [],
-  "notes": "Checked against BSSH (British Society for Surgery of the Hand) standards for hand trauma (2021), BOAST 'Hand trauma' guidance, and standard examination.\n\nFlexor digitorum profundus (FDP): flexion of the DIP joint with the PIP held straight. Flexor digitorum superficialis (FDS): flexion of the PIP joint while the other fingers are held in extension (blocks FDP). Digital nerves: two-point discrimination (normal under 6 mm at the fingertip) and light touch on each side of the finger; vascular: capillary refill and colour of the pulp. Look at the resting cascade: a finger lying straight out of line suggests a flexor tendon cut. Also check the median, ulnar and radial nerves in the hand ('123' in your notes).\n\nAny suspected flexor tendon or digital nerve injury needs referral to hand surgery for exploration and repair (ideally within days; BSSH), with the wound irrigated, dressed and the hand splinted in the meantime; antibiotics are not routine for clean wounds; tetanus as indicated. Do not explore flexor tendon wounds in the ED.\n\nYour notes (PP 2024 case) match this.",
+  "notes": "Checked against BSSH (British Society for Surgery of the Hand) standards for hand trauma (2021), BOAST 'Hand trauma' guidance, and standard examination.\n\nFlexor digitorum profundus (FDP): flexion of the DIP joint with the PIP held straight. Flexor digitorum superficialis (FDS): flexion of the PIP joint while the other fingers are held in extension (blocks FDP). Digital nerves: two-point discrimination (normal under 6 mm at the fingertip) and light touch on each side of the finger; vascular: capillary refill and colour of the pulp. Look at the resting cascade: a finger lying straight out of line suggests a flexor tendon cut. Also check the median, ulnar and radial nerves in the hand ('123' in your notes).\n\nAny suspected flexor tendon or digital nerve injury needs referral to hand surgery for exploration and repair (ideally within days; BSSH), with the wound irrigated, dressed and the hand splinted in the meantime; antibiotics are not routine for clean wounds; tetanus as indicated. Do not explore flexor tendon wounds in the ED.\n\nYour notes (PP 2024 case) match this.\n\nPerfect script checked against BSSH flexor tendon guidance, an HKCEM-style scheme and a keyword scheme. Removed the 'just stitch it' and false-reassurance replies; added wound care and tetanus.",
   "cast": [
     {
       "id": "patient",
@@ -92,13 +93,13 @@
       "groups": {
         "Look": [
           {
-            "t": "Resting posture of the fingers (cascade)",
+            "t": "Look at the resting cascade of the fingers",
             "r": "The ring finger lies straighter than the others.",
             "mark": "Observes the resting cascade",
             "do": "look hand-R,palm-R,ring-R"
           },
           {
-            "t": "The wound",
+            "t": "Look at the wound",
             "r": "A 1.5 cm transverse laceration over the volar middle phalanx (zone 2), ulnar side.",
             "mark": "Describes the wound and zone",
             "do": "look ring-R,ringpulp-R"
@@ -106,13 +107,13 @@
         ],
         "Tendons": [
           {
-            "t": "FDP: hold the PIP straight, ask her to bend the fingertip",
-            "r": "Cannot flex the DIP joint.",
+            "t": "FDP: I hold the middle joint straight; bend the fingertip",
+            "r": "Cannot flex the DIP joint. \"FDP divided.\"",
             "mark": "Tests FDP in isolation",
             "do": "feel ring-R > say bend-fingertip"
           },
           {
-            "t": "FDS: hold the other fingers straight, ask her to bend the finger",
+            "t": "FDS: I hold the other fingers straight; bend this finger",
             "r": "Can flex the PIP joint.",
             "mark": "Tests FDS in isolation",
             "do": "feel hand-R,nails-R > say bend-finger"
@@ -121,14 +122,15 @@
         "Nerves": [
           {
             "t": "Two-point discrimination on each side of the pulp",
-            "r": "Radial side 4 mm. Ulnar side 12 mm and reduced light touch.",
+            "r": "Radial side 4 mm. Ulnar side 12 mm and reduced light touch. \"Ulnar digital nerve injury.\"",
             "mark": "Tests digital nerves with two-point discrimination",
             "do": "calipers ringpulp-R"
           },
           {
-            "t": "Median, ulnar, radial nerve function",
+            "t": "Median, ulnar and radial nerve function in the hand",
             "r": "Normal.",
-            "do": "say thumbs-up & say opposition & say cross-fingers"
+            "do": "say thumbs-up & say opposition & say cross-fingers",
+            "mark": "Tests the median, ulnar and radial nerves"
           }
         ],
         "Circulation": [
@@ -161,13 +163,6 @@
               "r": "An operation? But I work with my hands…",
               "mood": 0,
               "mark": "Explains tendon and nerve injury and the need for surgical repair"
-            },
-            {
-              "t": "Sure, three stitches and back to work.",
-              "tz": "冇問題，縫三針就可以返工。",
-              "rz": "好嘢。",
-              "r": "Great.",
-              "mood": -1
             }
           ]
         },
@@ -182,15 +177,24 @@
               "r": "OK, I understand.",
               "mood": -2,
               "mark": "Explains rehabilitation, time off work and safety-netting"
-            },
-            {
-              "t": "You'll be fine by tomorrow.",
-              "tz": "聽日就會好㗎喇。",
-              "rz": "真係？",
-              "r": "Really?",
-              "mood": 1
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "care",
+      "kind": "say",
+      "to": "patient",
+      "label": "Wound care today",
+      "hint": "Irrigate, dress, splint, tetanus, referral.",
+      "opts": [
+        {
+          "t": "Today: we irrigate the wound, close the skin loosely or dress it, put on a splint, and refer you to the hand surgeons. Your tetanus is up to date from childhood, but you'll get a booster as it's been over 10 years.",
+          "tz": "今日我哋會沖洗傷口，鬆鬆咁縫埋或者包紮，上夾板，再轉介手外科。你細個打齊破傷風針，但已經超過十年，所以會幫你打一針加強針。",
+          "r": "Okay.",
+          "rz": "好。",
+          "mark": "Irrigation, splint, tetanus and referral"
         }
       ]
     },
@@ -320,5 +324,66 @@
       "why": "Clean wounds, early care.",
       "source": "BSSH / NICE"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "What happened, and when? Numbness or weakness? Which hand do you write with? Your job?",
+      "do": "Slicing salmon 2 hours ago; the knife slipped into my ring finger. The side next to the little finger is numb. I can't bend the tip. Left-handed. I'm a sushi chef."
+    },
+    {
+      "at": "0:20",
+      "say": "Tetanus vaccination and allergies?",
+      "do": "Childhood vaccines in Hong Kong. No allergies."
+    },
+    {
+      "at": "0:40",
+      "say": "Look at the resting cascade of the fingers. Look at the wound. FDP: I hold the middle joint straight; bend the fingertip. FDP divided.",
+      "do": "The ring finger lies straighter than the others. A 1.5 cm transverse laceration over the volar middle phalanx (zone 2), ulnar side. Cannot flex the DIP joint. \"FDP divided.\""
+    },
+    {
+      "at": "1:00",
+      "say": "FDS: I hold the other fingers straight; bend this finger. Two-point discrimination on each side of the pulp. Median, ulnar and radial nerve function in the hand. Ulnar digital nerve injury.",
+      "do": "Can flex the PIP joint. Radial side 4 mm. Ulnar side 12 mm and reduced light touch. \"Ulnar digital nerve injury.\" Normal."
+    },
+    {
+      "at": "1:20",
+      "say": "Capillary refill and colour of the pulp.",
+      "do": "Pink, refill under 2 s."
+    },
+    {
+      "at": "1:40",
+      "say": "The cut has gone through the deep tendon that bends your fingertip and one of the finger's nerves. These need repairing by the hand surgeons, usually within a few days, to get the best function. Today we'll clean it, dress it and put on a splint.",
+      "do": "An operation? But I work with my hands…"
+    },
+    {
+      "at": "2:00",
+      "say": "That's exactly why repair matters. Afterwards you'll need hand therapy for a few months, and you'll be off work for a while — we'll give you a certificate. Keep the splint on and the dressing dry; come back if it becomes red, hot or swollen.",
+      "do": "OK, I understand."
+    },
+    {
+      "at": "2:20",
+      "say": "Today: we irrigate the wound, close the skin loosely or dress it, put on a splint, and refer you to the hand surgeons. Your tetanus is up to date from childhood, but you'll get a booster as it's been over 10 years.",
+      "do": "Okay."
+    }
+  ],
+  "keywords": [
+    "when",
+    "numbness",
+    "which hand",
+    "job",
+    "tetanus",
+    "resting cascade",
+    "wound",
+    "FDP",
+    "FDS",
+    "two-point discrimination",
+    "digital nerve",
+    "capillary refill",
+    "deep tendon",
+    "hand surgeons",
+    "splint",
+    "hand therapy",
+    "off work"
   ]
 }

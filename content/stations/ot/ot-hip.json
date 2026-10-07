@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE NG226 (Osteoarthritis, 2022) and standard hip examination.\n\nLook (gait: antalgic or Trendelenburg; standing: Trendelenburg test for abductor weakness; scars, wasting, pelvic tilt, leg length — true (ASIS to medial malleolus) versus apparent (umbilicus to medial malleolus)), feel (greater trochanter tenderness for bursitis), move (flexion, extension, abduction, adduction, internal and external rotation — internal rotation is lost first in OA), special tests (Thomas test for fixed flexion deformity; FADIR/FABER). Examine the lumbar spine and the knee (referred pain), and neurovascular status.\n\nOA is a clinical diagnosis in people 45 or over with activity-related joint pain and morning stiffness of 30 minutes or less (NICE); X-ray is not needed to diagnose it, but in the ED it helps exclude fracture or other pathology. Management: exercise, weight loss, analgesia, walking aids, and orthopaedic referral when symptoms affect quality of life despite treatment. Your notes list look (Trendelenburg, gait, leg length, Galeazzi), feel, move and Thomas test — matching.",
+  "notes": "Checked against NICE NG226 (Osteoarthritis, 2022) and standard hip examination.\n\nLook (gait: antalgic or Trendelenburg; standing: Trendelenburg test for abductor weakness; scars, wasting, pelvic tilt, leg length — true (ASIS to medial malleolus) versus apparent (umbilicus to medial malleolus)), feel (greater trochanter tenderness for bursitis), move (flexion, extension, abduction, adduction, internal and external rotation — internal rotation is lost first in OA), special tests (Thomas test for fixed flexion deformity; FADIR/FABER). Examine the lumbar spine and the knee (referred pain), and neurovascular status.\n\nOA is a clinical diagnosis in people 45 or over with activity-related joint pain and morning stiffness of 30 minutes or less (NICE); X-ray is not needed to diagnose it, but in the ED it helps exclude fracture or other pathology. Management: exercise, weight loss, analgesia, walking aids, and orthopaedic referral when symptoms affect quality of life despite treatment. Your notes list look (Trendelenburg, gait, leg length, Galeazzi), feel, move and Thomas test — matching.\n\nPerfect script checked against NICE NG226 and standard hip examination, an HKCEM-style scheme and a keyword scheme. Removed the stick-in-the-right-hand option.",
   "cast": [
     {
       "id": "patient",
@@ -46,19 +46,19 @@
       "groups": {
         "Look": [
           {
-            "t": "Gait",
+            "t": "Watch him walk",
             "r": "Antalgic gait on the right.",
             "mark": "Observes gait",
             "do": "say walk"
           },
           {
-            "t": "Trendelenburg test standing on the right leg",
+            "t": "Trendelenburg test: stand on your right leg",
             "r": "Pelvis drops on the left: positive on the right.",
             "mark": "Performs the Trendelenburg test",
             "do": "say one-leg-R"
           },
           {
-            "t": "Measure true and apparent leg lengths",
+            "t": "True and apparent leg lengths",
             "r": "True lengths equal; apparent shortening on the right from pelvic tilt.",
             "mark": "Measures true and apparent leg length",
             "do": "tape asis-R+asis-L+medialmalleolus-R+medialmalleolus-L"
@@ -66,7 +66,7 @@
         ],
         "Feel": [
           {
-            "t": "Greater trochanter and groin",
+            "t": "Feel the greater trochanter and groin",
             "r": "Groin tenderness; trochanter not tender.",
             "mark": "Palpates trochanter and groin",
             "do": "feel hip-R & feel groin-R"
@@ -74,7 +74,7 @@
         ],
         "Move": [
           {
-            "t": "Flexion and rotations with the hip at 90°",
+            "t": "Hip flexion, then rotations with the hip at 90°",
             "r": "Flexion 90°, internal rotation 5° and painful, external rotation 20°.",
             "mark": "Tests rotations; finds loss of internal rotation",
             "do": "move hip-R:flex & move hip-R:rot @hipflex-R=70..110"
@@ -88,7 +88,7 @@
         ],
         "Complete": [
           {
-            "t": "Examine the lumbar spine and knee; pulses and sensation",
+            "t": "To complete: the lumbar spine and knee, pulses and sensation",
             "r": "Normal.",
             "mark": "Examines the joint above and below and neurovascular status",
             "do": "feel spine,knee-R,dp-R,pt-R"
@@ -105,17 +105,12 @@
       "hint": "Likely right hip OA; X-ray; conservative care; referral.",
       "opts": [
         {
-          "t": "Right hip osteoarthritis: groin pain, loss of internal rotation, fixed flexion deformity, positive Trendelenburg",
+          "t": "Right hip osteoarthritis: groin pain, loss of internal rotation, a fixed flexion deformity on Thomas test, and a positive Trendelenburg.",
           "mark": "Presents findings and diagnosis"
         },
         {
-          "t": "Pelvis and hip X-ray to exclude other causes; analgesia, exercise, weight loss, walking stick in the left hand; orthopaedic referral",
+          "t": "A pelvis and hip X-ray to exclude other causes; analgesia, exercise, weight loss, a walking stick in the left hand, and orthopaedic referral.",
           "mark": "Management plan including stick in the opposite hand"
-        },
-        {
-          "t": "A stick in the right hand",
-          "trap": true,
-          "r": "A stick is held in the opposite hand to offload the painful hip."
         }
       ]
     },
@@ -245,5 +240,41 @@
       "why": "Knee heights compared with hips flexed.",
       "source": "Paediatric orthopaedics"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Watch him walk. Trendelenburg test: stand on your right leg. True and apparent leg lengths.",
+      "do": "Antalgic gait on the right. Pelvis drops on the left: positive on the right. True lengths equal; apparent shortening on the right from pelvic tilt."
+    },
+    {
+      "at": "0:20",
+      "say": "Feel the greater trochanter and groin. Hip flexion, then rotations with the hip at 90°. Thomas test.",
+      "do": "Groin tenderness; trochanter not tender. Flexion 90°, internal rotation 5° and painful, external rotation 20°. Right thigh lifts off the couch: 15° fixed flexion deformity."
+    },
+    {
+      "at": "0:40",
+      "say": "To complete: the lumbar spine and knee, pulses and sensation.",
+      "do": "Normal."
+    },
+    {
+      "at": "1:00",
+      "say": "Right hip osteoarthritis: groin pain, loss of internal rotation, a fixed flexion deformity on Thomas test, and a positive Trendelenburg. A pelvis and hip X-ray to exclude other causes; analgesia, exercise, weight loss, a walking stick in the left hand, and orthopaedic referral."
+    }
+  ],
+  "keywords": [
+    "walk",
+    "Trendelenburg",
+    "leg lengths",
+    "greater trochanter",
+    "rotations",
+    "Thomas test",
+    "lumbar spine",
+    "osteoarthritis",
+    "internal rotation",
+    "fixed flexion deformity",
+    "X-ray",
+    "stick in the left hand",
+    "orthopaedic"
   ]
 }

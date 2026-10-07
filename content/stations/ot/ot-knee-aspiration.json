@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the BSR/BOA guideline on the management of the hot swollen joint in adults (2006, reaffirmed), NICE CKS (septic arthritis), and standard aspiration technique.\n\nA hot, swollen joint is septic arthritis until proved otherwise: aspirate before antibiotics (unless it delays them in sepsis), send for Gram stain, culture, white cell count and crystals; take blood cultures. Empirical antibiotics (e.g. flucloxacillin, or per local guidance; cover gonococcus in sexually active young adults) once samples are taken; orthopaedic referral for washout. Prosthetic joints are aspirated by orthopaedics in theatre conditions. Overlying cellulitis is a contraindication at that site; anticoagulation is not an absolute contraindication.\n\nTechnique: consent, asepsis, knee extended and relaxed; lateral (or medial) approach 1 cm superior and lateral to the superolateral patella edge (or at mid-patella under its lateral border), angled under the patella; local anaesthetic to skin; aspirate with a 19–21 G needle; do not inject steroid. Your notes describe a site 2 cm lateral to the patella and 'milk the fluid', which is compatible. Crystals are not proof against sepsis: both can coexist.",
+  "notes": "Checked against the BSR/BOA guideline on the management of the hot swollen joint in adults (2006, reaffirmed), NICE CKS (septic arthritis), and standard aspiration technique.\n\nA hot, swollen joint is septic arthritis until proved otherwise: aspirate before antibiotics (unless it delays them in sepsis), send for Gram stain, culture, white cell count and crystals; take blood cultures. Empirical antibiotics (e.g. flucloxacillin, or per local guidance; cover gonococcus in sexually active young adults) once samples are taken; orthopaedic referral for washout. Prosthetic joints are aspirated by orthopaedics in theatre conditions. Overlying cellulitis is a contraindication at that site; anticoagulation is not an absolute contraindication.\n\nTechnique: consent, asepsis, knee extended and relaxed; lateral (or medial) approach 1 cm superior and lateral to the superolateral patella edge (or at mid-patella under its lateral border), angled under the patella; local anaesthetic to skin; aspirate with a 19–21 G needle; do not inject steroid. Your notes describe a site 2 cm lateral to the patella and 'milk the fluid', which is compatible. Crystals are not proof against sepsis: both can coexist.\n\nPerfect script checked against BSR/BOA septic arthritis guidance, an HKCEM-style scheme and a keyword scheme. Removed the steroid option and the bench's triamcinolone button; the aspiration narrated.",
   "cast": [
     {
       "id": "patient",
@@ -66,11 +66,6 @@
           "t": "Sterile pots for Gram stain, culture, cell count, crystals; blood culture bottles",
           "need": true,
           "mark": "Sample pots for all tests"
-        },
-        {
-          "t": "Triamcinolone to inject after aspiration",
-          "trap": "critical",
-          "r": "Never inject steroid into a possibly infected joint."
         }
       ]
     },
@@ -85,7 +80,7 @@
         {
           "t": "Aspirate the knee",
           "perform": "knee",
-          "performHint": "Do it with your hands. Mr Patel and his knee react to what you do; nothing stops a mistake.",
+          "performHint": "Do it with your hands. Mr Patel and his knee respond to what you do.",
           "mark": [
             "Consent and checks contraindications",
             "Positions and confirms effusion",
@@ -107,15 +102,15 @@
       "hint": "Blood cultures, antibiotics, orthopaedics, interpretation.",
       "opts": [
         {
-          "t": "Blood cultures, then IV antibiotics per local guidance (e.g. flucloxacillin)",
+          "t": "Blood cultures, then IV antibiotics per local guidance, such as flucloxacillin.",
           "mark": "Blood cultures and empirical IV antibiotics after sampling"
         },
         {
-          "t": "Orthopaedic referral for washout",
+          "t": "Orthopaedic referral for washout.",
           "mark": "Orthopaedic referral"
         },
         {
-          "t": "Joint fluid WCC over 50,000/µL and a positive Gram stain strongly support sepsis; crystals don't exclude it",
+          "t": "A joint fluid white count over 50,000 and a positive Gram stain strongly support sepsis; crystals don't exclude it.",
           "mark": "Interprets synovial fluid results"
         }
       ]
@@ -246,5 +241,38 @@
       "why": "Needle angled under the patella.",
       "source": "Procedural texts"
     }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Sterile gloves, drape, chlorhexidine. 1% lidocaine with orange needle for the skin. Green (21 G) or white (19 G) needle and 20 mL syringes."
+    },
+    {
+      "at": "0:20",
+      "say": "Sterile pots for Gram stain, culture, cell count, crystals; blood culture bottles."
+    },
+    {
+      "at": "0:40",
+      "say": "Consent; any blood thinners, and no cellulitis over the site. Knee straight and relaxed; I confirm the effusion with a patellar tap. Mark the site lateral to the patella, clear of any cellulitis. Clean with chlorhexidine, sterile gloves and drape, lidocaine to the skin. Green needle under the patella, aspirating as I go; milk the suprapatellar pouch. Fluid into the pots: Gram stain, culture, cell count and crystals. Dressing, and the samples to the lab urgently."
+    },
+    {
+      "at": "1:00",
+      "say": "Blood cultures, then IV antibiotics per local guidance, such as flucloxacillin. Orthopaedic referral for washout. A joint fluid white count over 50,000 and a positive Gram stain strongly support sepsis; crystals don't exclude it."
+    }
+  ],
+  "keywords": [
+    "chlorhexidine",
+    "lidocaine",
+    "21 G",
+    "Gram stain",
+    "crystals",
+    "blood culture",
+    "consent",
+    "patellar tap",
+    "cellulitis",
+    "under the patella",
+    "flucloxacillin",
+    "washout",
+    "50,000"
   ]
 }

@@ -261,19 +261,6 @@ function AspirateStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
         >
           MILK THE POUCH
         </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="knee-steroid"
-          onClick={() => {
-            upd({ steroid: true })
-            buzz([60, 40, 60])
-            physical('You inject triamcinolone into the joint.')
-            why('Never steroid into a joint that may be septic: it feeds the infection.')
-          }}
-        >
-          INJECT TRIAMCINOLONE
-        </button>
       </div>
       <NextButton onClick={next} testId="knee-next">
         Samples
