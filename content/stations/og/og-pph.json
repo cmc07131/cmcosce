@@ -562,7 +562,8 @@
     },
     {
       "at": "2:40",
-      "say": "Carboprost 250 microgram IM (bimanual compression meanwhile)."
+      "say": "Two minutes on: I feel the fundus and look at the pads. The uterus softens again and another 500 mL is on the pads: still bleeding. Bimanual compression, and carboprost 250 micrograms IM.",
+      "do": "Clock: 2 minutes after the oxytocin infusion. Reassess at the patient."
     },
     {
       "at": "3:00",

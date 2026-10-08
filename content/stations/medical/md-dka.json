@@ -525,7 +525,8 @@
     },
     {
       "at": "1:55",
-      "say": "Potassium now 4.6: potassium chloride 40 mmol in the next litre. Glucose under 14: add 10% glucose at 125 mL an hour and keep the insulin running."
+      "say": "An hour on, the hourly check: glucose 13.2, ketones 4.1, potassium 4.6. Potassium chloride 40 mmol in the next litre. Glucose under 14: add 10% glucose at 125 mL an hour and keep the insulin running.",
+      "do": "Clock: 1 hour after the insulin started. Check at the patient."
     },
     {
       "at": "2:15",

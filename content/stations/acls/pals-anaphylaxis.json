@@ -599,7 +599,8 @@
     },
     {
       "at": "2:00",
-      "say": "Reassess ABC every few minutes. She's no better at 5 minutes, so repeat the IM adrenaline, 300 micrograms."
+      "say": "Five minutes since the first dose. Reassessing her: still wheezy, SpO2 92%, BP 78/42: no better at 5 minutes, so repeat the IM adrenaline, 300 micrograms.",
+      "do": "Clock: 5 minutes after the first adrenaline. Reassess at the patient."
     },
     {
       "at": "2:20",

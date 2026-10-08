@@ -606,7 +606,8 @@
     },
     {
       "at": "2:30",
-      "say": "Still very tight after the magnesium: IV salbutamol 15 micrograms per kg, 270 micrograms over 10 minutes."
+      "say": "Twenty minutes: the magnesium is in. Reassessing him: still very tight, RR 40, quiet chest, SpO2 91%, tiring: not responding. IV salbutamol 15 micrograms per kg, 270 micrograms over 10 minutes.",
+      "do": "Clock: 20 minutes after the magnesium started. Reassess at the patient."
     },
     {
       "at": "2:50",

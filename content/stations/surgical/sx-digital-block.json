@@ -181,7 +181,15 @@
   "script": [
     {
       "at": "0:00",
-      "say": "Consent; any allergy to local anaesthetic; any Raynaud's or vascular disease. Baseline: sensation on both sides of the fingertip and refill. Plain 1% lidocaine. Clean. At the base of the finger, dorsal web space on one side: a wheal, aspirate, then advance palmar and inject, about 1 to 2 mL each, both sides, under 5 mL in total. Wait 5 to 10 minutes, then test the fingertip."
+      "say": "Consent; any allergy to local anaesthetic; any Raynaud's or vascular disease. Baseline: sensation on both sides of the fingertip and refill."
+    },
+    {
+      "at": "0:20",
+      "say": "Plain 1% lidocaine. Clean."
+    },
+    {
+      "at": "0:40",
+      "say": "At the base of the finger, dorsal web space on one side: a wheal, aspirate, then advance palmar and inject, about 1 to 2 mL each, both sides, under 5 mL in total. Wait 5 to 10 minutes, then test the fingertip."
     }
   ],
   "keywords": [

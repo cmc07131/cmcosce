@@ -105,9 +105,11 @@ test('secondary survey before elevation still scores and flags sequence', () => 
   assert.equal(verdicts.find((row) => row.id === 'elevate-before-secondary')?.status, 'caution')
 })
 
-test('psychiatry trap does not score; named teams do; partial kit still grants what was picked', () => {
-  const phone = load('gym-1').actions.find((action) => action.id === 'phone-menu')!
-  const psych = phone.options!.find((option) => option.id === 'psych')!
+test('a trap does not score; named teams do; partial kit still grants what was picked', () => {
+  // The stations have no traps now; the engine still handles one correctly (a test-made option).
+  const menu = load('gym-1').actions.find((action) => action.id === 'phone-menu')!
+  const psych = { id: 'psych', label: 'Psychiatry', detail: 'Psychiatry is not the team for cord prolapse.', isTrap: true }
+  const phone = { ...menu, options: [...menu.options!, psych] }
   const trap = applyTalkOption(phone, psych, [], (id) => id)
   assert.deepEqual(trap.grantMarks, [])
   assert.equal(trap.spend, true)
@@ -123,9 +125,11 @@ test('psychiatry trap does not score; named teams do; partial kit still grants w
   assert.equal(full.complete, true)
 })
 
-test('replace-the-cord is a trap and the cord is managed at the bench', () => {
+test('the cord is managed at the bench, with no wrong options; a trap would neither log nor score', () => {
   const cord = load('gym-1').actions.find((action) => action.id === 'cord')!
-  const trap = applyTalkOption(cord, cord.options!.find((option) => option.id === 'replace')!, [], (id) => id)
+  assert.equal(cord.options!.some((option) => option.isTrap), false)
+  const replace = { id: 'replace', label: 'Push the cord back into the uterus', detail: 'Do not replace it.', isTrap: true }
+  const trap = applyTalkOption(cord, replace, [], (id) => id)
   assert.equal(trap.log, false)
   assert.equal(trap.grantMarks.length, 0)
   const bench = cord.options!.find((option) => option.id === 'do-it')!

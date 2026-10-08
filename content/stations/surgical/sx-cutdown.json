@@ -185,7 +185,19 @@
   "script": [
     {
       "at": "0:00",
-      "say": "The great saphenous vein: 1 to 2 cm anterior and superior to the medial malleolus. Clean, drape, local anaesthetic, a tourniquet above. A transverse incision through the skin only. Blunt dissection with curved haemostats to lift the vein clear of the saphenous nerve. Two ligatures under it; tie the distal one. A small transverse venotomy, the cannula in toward the heart, tie the proximal ligature round it. Tourniquet off, fluids running, close the skin and dress."
+      "say": "The great saphenous vein: 1 to 2 cm anterior and superior to the medial malleolus. Clean, drape, local anaesthetic, a tourniquet above."
+    },
+    {
+      "at": "0:20",
+      "say": "A transverse incision through the skin only. Blunt dissection with curved haemostats to lift the vein clear of the saphenous nerve."
+    },
+    {
+      "at": "0:40",
+      "say": "Two ligatures under it; tie the distal one. A small transverse venotomy, the cannula in toward the heart, tie the proximal ligature round it."
+    },
+    {
+      "at": "1:00",
+      "say": "Tourniquet off, fluids running, close the skin and dress."
     }
   ],
   "keywords": [

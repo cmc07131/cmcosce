@@ -206,12 +206,19 @@
   "script": [
     {
       "at": "0:00",
-      "say": "Let's think first: what would you want to know about the hook and the patient before choosing a method?",
-      "do": "How deep, how many barbs, where it is… and tetanus?"
+      "say": "Let's think first: what would you want to know about the hook and the patient before choosing a method?"
     },
     {
       "at": "0:20",
-      "say": "Look at the hook: one barb, in the pulp, away from joints and tendons. Ask about the water, tetanus and allergies. A digital block. Eye protection for everyone. Grip the shank, advance the point out through the skin, cut the barb off with wire cutters, then back the hook out the way it went in. Check the hook is intact; irrigate and dress; tetanus; antibiotics only for a high-risk wound."
+      "say": "Look at the hook: one barb, in the pulp, away from joints and tendons. Ask about the water, tetanus and allergies."
+    },
+    {
+      "at": "0:40",
+      "say": "A digital block. Eye protection for everyone."
+    },
+    {
+      "at": "1:00",
+      "say": "Grip the shank, advance the point out through the skin, cut the barb off with wire cutters, then back the hook out the way it went in. Check the hook is intact; irrigate and dress; tetanus; antibiotics only for a high-risk wound."
     }
   ],
   "keywords": [

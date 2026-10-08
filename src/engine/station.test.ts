@@ -652,3 +652,16 @@ test('the guide does not ask for an alternative once its mark is earned', () => 
   const after = nextHint(pack, { intro: [english.id] }, [])
   assert.ok(!(after?.kind === 'do' && after.actionId === 'intro'), 'the Cantonese line is an alternative, not a second task')
 })
+
+test('no wrong options anywhere: stations and packs offer only the right lines (the viva keeps its distractors)', () => {
+  const wrong: string[] = []
+  const packs = readdirSync(join('content', 'packs')).map((id) => packSchema.parse(JSON.parse(readFileSync(join('content', 'packs', id, 'pack.json'), 'utf8'))))
+  const stations = files.map((file) => compileStation(stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))))
+  for (const pack of [...packs, ...stations]) {
+    for (const a of pack.actions) {
+      if (a.kind === 'viva') continue
+      for (const o of a.options ?? []) if (o.isTrap) wrong.push(`${pack.packId}/${a.id}: ${o.label.slice(0, 50)}`)
+    }
+  }
+  assert.deepEqual(wrong, [])
+})

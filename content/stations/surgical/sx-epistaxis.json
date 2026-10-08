@@ -216,11 +216,27 @@
   "script": [
     {
       "at": "0:00",
-      "say": "Sit forward, pinch the soft part of the nose for 10 to 15 minutes, ice in the mouth. Pulse and blood pressure, FBC; he's on apixaban. Headlight, suction, co-phenylcaine spray, speculum: a bleeding point in Little's area. Silver nitrate, ringing the vessel, one side of the septum only, 10 seconds. It keeps bleeding, so I explain and pack: a nasal tampon along the floor of the nose, parallel to the hard palate, not upwards; expand it with water. Check the throat for posterior bleeding. Tape the string and document."
+      "say": "Sit forward, pinch the soft part of the nose for 10 to 15 minutes, ice in the mouth. Pulse and blood pressure, FBC; he's on apixaban."
     },
     {
       "at": "0:20",
-      "say": "ENT: Mr Lui, 68, a left anterior epistaxis on apixaban, packed. He needs admission, and pack removal in 24 to 48 hours. Withhold the apixaban with haematology or cardiology input; no routine reversal. If it bleeds posteriorly: a Foley catheter posterior pack plus an anterior pack."
+      "say": "Headlight, suction, co-phenylcaine spray, speculum: a bleeding point in Little's area. Silver nitrate, ringing the vessel, one side of the septum only, 10 seconds."
+    },
+    {
+      "at": "0:40",
+      "say": "It keeps bleeding, so I explain and pack: a nasal tampon along the floor of the nose, parallel to the hard palate, not upwards; expand it with water. Check the throat for posterior bleeding."
+    },
+    {
+      "at": "1:00",
+      "say": "Tape the string and document."
+    },
+    {
+      "at": "1:20",
+      "say": "ENT: Mr Lui, 68, a left anterior epistaxis on apixaban, packed. He needs admission, and pack removal in 24 to 48 hours."
+    },
+    {
+      "at": "1:40",
+      "say": "Withhold the apixaban with haematology or cardiology input; no routine reversal. If it bleeds posteriorly: a Foley catheter posterior pack plus an anterior pack."
     }
   ],
   "keywords": [

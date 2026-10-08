@@ -306,18 +306,6 @@
           "marksChecklistIds": [
             "MS-02"
           ]
-        },
-        {
-          "id": "history-first",
-          "label": "Sit down for a full antenatal history before looking",
-          "detail": "The cord is still compressed. A three-minute history is the common fail.",
-          "isTrap": true
-        },
-        {
-          "id": "waiting",
-          "label": "This is only a show — send her to the waiting hall",
-          "detail": "Tissue at the introitus is cord until you look. The waiting hall is the wrong destination.",
-          "isTrap": true
         }
       ]
     },
@@ -337,18 +325,6 @@
           "marksChecklistIds": [
             "MS-05"
           ]
-        },
-        {
-          "id": "psych",
-          "label": "Call psychiatry",
-          "detail": "Psychiatry is not the team for cord prolapse.",
-          "isTrap": true
-        },
-        {
-          "id": "waiting",
-          "label": "Send her out for an ultrasound first",
-          "detail": "Ultrasound in the waiting hall delays delivery. Look and decompress here.",
-          "isTrap": true
         }
       ]
     },
@@ -411,18 +387,6 @@
           "marksChecklistIds": [
             "MS-10"
           ]
-        },
-        {
-          "id": "cat3",
-          "label": "Category 3 — she can wait for a slot",
-          "detail": "Cord prolapse with a live fetus is category 1. Waiting is a delay.",
-          "isTrap": true
-        },
-        {
-          "id": "ed-ot",
-          "label": "Book general ED theatre",
-          "detail": "She needs labour-ward obstetric theatre, not general ED theatre.",
-          "isTrap": true
         }
       ]
     },
@@ -478,24 +442,6 @@
           "marksChecklistIds": [
             "MS-10"
           ]
-        },
-        {
-          "id": "psych",
-          "label": "Psychiatry",
-          "isTrap": true,
-          "detail": "Psychiatry is not the team for cord prolapse."
-        },
-        {
-          "id": "waiting",
-          "label": "Send her to the waiting hall for an ultrasound",
-          "isTrap": true,
-          "detail": "That delay leaves the head on the cord."
-        },
-        {
-          "id": "ed-ot",
-          "label": "General ED theatre",
-          "isTrap": true,
-          "detail": "Destination is labour-ward obstetric theatre."
         }
       ]
     },
@@ -525,25 +471,7 @@
             "MS-17"
           ],
           "perform": "cord",
-          "performHint": "Do it as you would on a real patient: look, lift, protect the cord, position, listen, plan for theatre, transfer. The fetal heart answers every move. Nothing stops a mistake; the debrief shows what to fix."
-        },
-        {
-          "id": "replace",
-          "label": "Push the cord back into the uterus",
-          "detail": "The cord looks paler. The fetal heart falls further. Do not replace it.",
-          "isTrap": true
-        },
-        {
-          "id": "vaginal",
-          "label": "Instrumental birth here — cervix is only 4 cm",
-          "detail": "Cervix is about 4 cm. Vaginal birth in ED is for full dilatation with someone who can deliver now, not this case.",
-          "isTrap": true
-        },
-        {
-          "id": "walk",
-          "label": "Ask her to walk to theatre",
-          "detail": "Walking drops the head back onto the cord.",
-          "isTrap": true
+          "performHint": "Do it as you would on a real patient: look, lift, protect the cord, position, listen, plan for theatre, transfer. The fetal heart answers every move. The debrief shows what to fix."
         }
       ]
     },
@@ -564,18 +492,6 @@
           "marksChecklistIds": [
             "MS-18"
           ]
-        },
-        {
-          "id": "long",
-          "label": "Full booking history before you touch her",
-          "detail": "Three minutes of history with the head still on the cord.",
-          "isTrap": true
-        },
-        {
-          "id": "nurse-only",
-          "label": "Ask the nurse, not the woman",
-          "detail": "She is distressed and she can talk. Speak to her.",
-          "isTrap": true
         }
       ]
     },
@@ -596,18 +512,6 @@
           "marksChecklistIds": [
             "MS-19"
           ]
-        },
-        {
-          "id": "flat",
-          "label": "Lie her flat on her back for a full set of obs",
-          "detail": "Flat on her back puts the head back on the cord.",
-          "isTrap": true
-        },
-        {
-          "id": "delay",
-          "label": "Full maternal workup before calling anyone",
-          "detail": "ABC is a glance. It does not come before help or elevation.",
-          "isTrap": true
         }
       ]
     },
@@ -641,18 +545,6 @@
           "grantsItems": [
             "gs-fbc"
           ]
-        },
-        {
-          "id": "wait",
-          "label": "Wait for the blood results before leaving",
-          "isTrap": true,
-          "detail": "Do not delay transfer for bloods."
-        },
-        {
-          "id": "drop",
-          "label": "Take my hand out and site the cannula myself",
-          "isTrap": true,
-          "detail": "The head drops back onto the cord. Someone else sites the drip."
         }
       ]
     },
@@ -690,12 +582,6 @@
           "marksChecklistIds": [
             "MS-22"
           ]
-        },
-        {
-          "id": "written",
-          "label": "Full written consent booklet before we move",
-          "detail": "Written consent delays a category 1 caesarean. Verbal consent is enough.",
-          "isTrap": true
         }
       ]
     },
@@ -712,12 +598,6 @@
           "id": "come",
           "label": "You can come to obstetric theatre if she wants",
           "detail": "Partner: I'll come. You keep your hand in."
-        },
-        {
-          "id": "downstairs",
-          "label": "Wait downstairs, we will phone",
-          "detail": "She asked who to call. Sending the partner away without asking her is the colder version.",
-          "isTrap": true
         }
       ]
     },
@@ -737,24 +617,6 @@
           "marksChecklistIds": [
             "MS-23"
           ]
-        },
-        {
-          "id": "ed",
-          "label": "General ED theatre",
-          "detail": "ED theatre is the wrong destination.",
-          "isTrap": true
-        },
-        {
-          "id": "allfours",
-          "label": "Roll her all-fours down the corridor",
-          "detail": "Knee-chest is for the bay. The corridor and the lift are left lateral, head down.",
-          "isTrap": true
-        },
-        {
-          "id": "hand-out",
-          "label": "Take my hand out for the lift",
-          "detail": "If the hand comes out, the head drops back onto the cord.",
-          "isTrap": true
         }
       ]
     },
@@ -777,18 +639,6 @@
             "MS-25"
           ],
           "endStation": true
-        },
-        {
-          "id": "drop",
-          "label": "Take my hand out now that we have arrived",
-          "detail": "The head drops onto the cord. The hand stays until O&G takes over or the baby is out.",
-          "isTrap": true
-        },
-        {
-          "id": "essay",
-          "label": "Write a long note before anyone else touches her",
-          "detail": "Document the times, but do not delay the handover to write an essay.",
-          "isTrap": true
         }
       ]
     },
@@ -841,18 +691,6 @@
           "id": "preterm",
           "label": "What about 24–26 weeks?",
           "detail": "Consultant O&G and neonatology counsel on survival versus expectant care. You still decompress while they decide."
-        },
-        {
-          "id": "replace",
-          "label": "Replacing the cord is safer",
-          "detail": "That is the opposite of the script. The cord looks paler when you push it back.",
-          "isTrap": true
-        },
-        {
-          "id": "twohundred",
-          "label": "Fill the bladder with 200 mL now, every time",
-          "detail": "500–750 mL, and only if there is a delay. Not 200 mL, and not before a ready theatre.",
-          "isTrap": true
         }
       ]
     }
@@ -929,5 +767,62 @@
     "name": "Cord prolapse",
     "emoji": "🛟",
     "flavor": "OB-EM-01 · Gym Leader. Hand in, category 1, labour-ward theatre."
-  }
+  },
+  "keywords": [
+    "Dr Chan",
+    "HKID",
+    "chaperone",
+    "gloves",
+    "cord prolapse",
+    "call for help",
+    "O&G on-call",
+    "labour-ward theatre",
+    "anaesthetist",
+    "NICU",
+    "category 1 caesarean",
+    "do not replace the cord",
+    "warm saline gauze",
+    "elevate the presenting part",
+    "hand stays in",
+    "knee-chest",
+    "left lateral, head down",
+    "fetal heart",
+    "verbal consent",
+    "ISBAR"
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Hello, I'm Dr Chan, the emergency doctor. Can I confirm your name and HKID? This is Nurse Wong. Screen round; Nurse Wong stays as chaperone. I need to look now: this can be an emergency for the baby."
+    },
+    {
+      "at": "0:15",
+      "say": "Gloves and apron on. I can see the cord at the introitus: this is an overt cord prolapse. Call for help now: an obstetric emergency."
+    },
+    {
+      "at": "0:25",
+      "say": "The O&G on-call, labour-ward theatre, the anaesthetist, and paediatrics and NICU. Tell them: a category 1 caesarean for cord prolapse, 36 weeks, coming from AED; do not delay."
+    },
+    {
+      "at": "0:40",
+      "say": "I do not replace the cord, and I handle it as little as possible: loose warm saline gauze where it's outside. My gloved hand goes in to elevate the presenting part off the cord, and my hand stays in. Knee-chest position here in the bay. Fetal heart, please.",
+      "do": "Elevate the head; knee-chest; fetal heart 80 and rising."
+    },
+    {
+      "at": "1:20",
+      "say": "Briefly: contractions, bleeding, one baby, any placenta praevia, last meal, allergies, previous caesarean? And her ABC: talking, RR, SpO2, pulse and BP, without moving my hand. A large-bore IV, group and save and FBC, by a second pair of hands."
+    },
+    {
+      "at": "1:45",
+      "say": "The baby's cord has come down in front of the head after your waters broke. The head can squeeze the cord, so the baby can lose oxygen. I'm holding the head off the cord. You need an emergency caesarean now, and I'll come with my hand in place. For a category 1 caesarean verbal consent is enough. Any questions? Who should we call for you?"
+    },
+    {
+      "at": "2:15",
+      "say": "Nurse, we move as one unit to labour-ward theatre, not general ED theatre: left lateral, head down, my hand stays in. Bring the notes, the Doppler and oxygen, and her partner if she wants."
+    },
+    {
+      "at": "2:35",
+      "say": "ISBAR: overt cord prolapse in a 32-year-old, G2P1, 36+2, after SROM at home; singleton, no previous caesarean. I've elevated the presenting part continuously; she's stable; the fetal heart was 80. Category 1 caesarean under O&G now, paediatrics for the baby, and paired cord gases. My hand stays until O&G takes over."
+    }
+  ]
 }
