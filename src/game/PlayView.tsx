@@ -22,10 +22,13 @@ import { TextBox, type TextBoxHandle } from './TextBox'
 import { NavItem, Win, useCursor } from './ui'
 
 function formatClock(seconds: number) {
-  const safe = Math.max(0, seconds)
-  const min = Math.floor(safe / 60)
+  const safe = Math.max(0, Math.floor(seconds))
+  const hours = Math.floor(safe / 3600)
+  const min = Math.floor((safe % 3600) / 60)
   const sec = safe % 60
-  return `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+  const mmss = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+  // A case clock can run for hours (the hourly DKA check).
+  return hours ? `${hours}:${mmss}` : mmss
 }
 
 export function PlayView({ pack: source }: { pack: Pack }) {
@@ -179,8 +182,10 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   // The examiner comes when the case is really finished: nothing left in the script that can be done now, the nurse
   // has nothing in hand, and nothing is still happening to the patient. (Stations without phases: every step used.)
   const leftNow = nextHint(pack, spent, scene ?? [])
+  // Waiting for the next rhythm check is not finished: only a wait with nothing timed ahead is.
+  const waitingOnTime = leftNow?.kind === 'wait' && nextWaitedEvent(pack, spent, scene ?? [], sceneAt ?? {}, difficulty) !== null
   const readyForEnd = pack.phases?.length
-    ? leftNow?.kind !== 'do' && errands.length === 0 && !eventOngoing(pack, scene ?? [])
+    ? leftNow?.kind !== 'do' && !waitingOnTime && errands.length === 0 && !eventOngoing(pack, scene ?? [])
     : beforeEnd.done === beforeEnd.total
   const timeShort = entered && secondsLeft <= 90
   const idleNow = overlay === null && performing === null && menu === false
@@ -406,7 +411,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
               </span>
               {pack.clock && entered && (
                 <span className="hud-chip hud-case-clock" data-running={fastForward || undefined} data-testid="hud-case-clock">
-                  {pack.clock} {formatClock(elapsedOf(pack, { secondsLeft, entered, skipS }))}
+                  {pack.clock} {formatClock((pack.clockStart ?? 0) + elapsedOf(pack, { secondsLeft, entered, skipS }))}
                   {fastForward ? ' ⏩' : ''}
                 </span>
               )}

@@ -15,18 +15,12 @@
       ]
     },
     {
-      "title": "Resuscitate",
-      "goal": "A hypoxic arrest: airway, five rescue breaths, compressions, then the rhythm.",
+      "title": "Resuscitate on the clock",
+      "goal": "Five rescue breaths, CPR, the rhythm. During each 2-minute cycle: access, adrenaline, the airway. A rhythm check every 2 minutes; the clock runs on when you're done.",
       "steps": [
         "cpr",
         "access",
-        "adrenaline"
-      ]
-    },
-    {
-      "title": "Airway and rhythm",
-      "goal": "Intubate yourself, then check the rhythm again.",
-      "steps": [
+        "adrenaline",
         "intubate",
         "rhythm"
       ]
@@ -59,7 +53,7 @@
       "text": "After ROSC. Your notes say 'therapeutic hypothermia'. Current guidance (AHA 2025, ERC–ESICM 2025) prevents fever, 37.5 °C or less, and does not actively rewarm mild hypothermia."
     }
   ],
-  "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2025 ALS and ERC–ESICM 2025 post-resuscitation care, and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, actively prevent fever: 37.5 °C or less for 36–72 hours in a comatose patient (ERC–ESICM / RCUK 2025; 2021 used 37.7 °C). Your notes say 'therapeutic hypothermia'; current guidance moved from routine cooling to 32–36 °C toward fever prevention, and does not actively rewarm mild hypothermia (32–36 °C).\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.\n\nPerfect script checked against the ERC drowning algorithm, an AHA post-arrest checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (wrong drugs and doses, routine cooling, routine antibiotics, discharge) and the CPR bench's abdominal-thrust and collar-first buttons. Added: taking over the team, post-arrest targets. The temperature is now 35.5 °C so the adrenaline interval is unambiguous.",
+  "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2025 ALS and ERC–ESICM 2025 post-resuscitation care, and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, actively prevent fever: 37.5 °C or less for 36–72 hours in a comatose patient (ERC–ESICM / RCUK 2025; 2021 used 37.7 °C). Your notes say 'therapeutic hypothermia'; current guidance moved from routine cooling to 32–36 °C toward fever prevention, and does not actively rewarm mild hypothermia (32–36 °C).\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.\n\nPerfect script checked against the ERC drowning algorithm, an AHA post-arrest checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (wrong drugs and doses, routine cooling, routine antibiotics, discharge) and the CPR bench's abdominal-thrust and collar-first buttons. Added: taking over the team, post-arrest targets. The temperature is now 35.5 °C so the adrenaline interval is unambiguous.\n\nTime drives this station: a ARREST clock on the HUD. Rhythm checks come every 2 minutes of CPR as timed events; ROSC comes at a check. When everything due is done, the clock runs ahead to the next timed moment instead of making you wait it out.",
   "cast": [
     {
       "id": "patient",
@@ -224,7 +218,9 @@
             "anim": "intubate",
             "scene": "intubated",
             "r": "Tube through the cords, cuff up. Capnography: a square trace on every breath.",
-            "mark": "Early intubation with capnography"
+            "mark": "Early intubation with capnography",
+            "when": "asystole",
+            "early": "During CPR, once the first rhythm is known."
           }
         ]
       }
@@ -234,18 +230,25 @@
       "kind": "say",
       "to": "monitor",
       "label": "Rhythm check",
-      "hint": "After the adrenaline and the next cycle.",
+      "hint": "At each 2-minute check: rhythm, and a pulse if it's organised.",
       "opts": [
         {
-          "t": "Rhythm check: an organised rhythm with a femoral pulse: ROSC.",
+          "t": "Rhythm check: still asystole, non-shockable. No shock: straight back on the chest, adrenaline every 3 to 5 minutes.",
+          "when": "check2",
+          "early": "At the 2-minute rhythm check.",
+          "mark": "Non-shockable at the check: no shock, CPR resumed at once"
+        },
+        {
+          "t": "Rhythm check: an organised rhythm, and a femoral pulse: ROSC.",
           "scene": "rosc",
           "mark": "Recognises ROSC",
           "r": "Sinus tachycardia 118 with a palpable femoral pulse.",
           "when": [
+            "check3",
             "adrenaline",
             "intubated"
           ],
-          "early": "Keep going: CPR, adrenaline, the airway."
+          "early": "At the next rhythm check."
         }
       ],
       "lang": "en"
@@ -268,7 +271,9 @@
             "Tidal volume 6–8 mL/kg",
             "Rate for normocapnia",
             "Lung-protective ventilation with PEEP"
-          ]
+          ],
+          "when": "rosc",
+          "early": "After ROSC."
         }
       ],
       "lang": "en"
@@ -306,7 +311,9 @@
         {
           "t": "Nasogastric tube to decompress the stomach",
           "fetch": "trolley",
-          "mark": "Gastric decompression"
+          "mark": "Gastric decompression",
+          "when": "rosc",
+          "early": "After ROSC."
         }
       ]
     },
@@ -322,23 +329,31 @@
             "t": "Chest X-ray",
             "r": "Tube in a good position. Bilateral patchy perihilar shadowing (aspiration and non-cardiogenic oedema).",
             "img": "xr:cxr-oedema",
-            "mark": "Chest film: aspiration/oedema, tube position"
+            "mark": "Chest film: aspiration/oedema, tube position",
+            "when": "rosc",
+            "early": "After ROSC."
           },
           {
             "t": "Arterial gas",
             "r": "pH 7.08, PaCO2 7.9, PaO2 8.2 on FiO2 1.0, lactate 9.",
-            "mark": "Arterial gas"
+            "mark": "Arterial gas",
+            "when": "rosc",
+            "early": "After ROSC."
           },
           {
             "t": "12-lead ECG",
             "r": "Sinus tachycardia. QTc normal.",
             "img": "ecg:sinus-tachy",
-            "mark": "12-lead ECG (arrhythmia, long QT as a cause)"
+            "mark": "12-lead ECG (arrhythmia, long QT as a cause)",
+            "when": "rosc",
+            "early": "After ROSC."
           },
           {
             "t": "Glucose",
             "r": "11.2 mmol/L.",
-            "mark": "Checks glucose"
+            "mark": "Checks glucose",
+            "when": "rosc",
+            "early": "After ROSC."
           }
         ]
       }
@@ -353,7 +368,9 @@
         {
           "t": "ICU: Ka-ho, 16, drowned in a pool, about 15 minutes of CPR, asystole, ROSC after adrenaline. Intubated and ventilated on PEEP 10 and FiO2 1.0. He needs a bed.",
           "mark": "Refers to ICU with a clear summary",
-          "r": "ICU: Coming down now."
+          "r": "ICU: Coming down now.",
+          "when": "rosc",
+          "early": "After ROSC."
         }
       ]
     },
@@ -534,7 +551,7 @@
     },
     {
       "at": "1:30",
-      "say": "Intubate early: tube through the cords, cuff up, waveform capnography. Rhythm check: an organised rhythm with a femoral pulse: ROSC."
+      "say": "Intubate early, during CPR: tube through the cords, cuff up, waveform capnography. Two-minute rhythm check: still asystole: no shock, straight back on the chest. Next check: an organised rhythm with a femoral pulse: ROSC."
     },
     {
       "at": "2:00",
@@ -552,6 +569,24 @@
     {
       "at": "3:05",
       "say": "ICU: Ka-ho, 16, drowned in a pool, about 15 minutes of CPR, asystole, ROSC after adrenaline. Intubated and ventilated on PEEP 10 and FiO2 1.0. He needs a bed."
+    }
+  ],
+  "clock": "ARREST",
+  "clockStart": 900,
+  "events": [
+    {
+      "id": "check2",
+      "after": "asystole",
+      "delayS": 120,
+      "scene": "check2",
+      "say": "Two minutes of CPR: rhythm check. Still asystole."
+    },
+    {
+      "id": "check3",
+      "after": "check2",
+      "delayS": 120,
+      "scene": "check3",
+      "say": "Two minutes: rhythm check. An organised rhythm on the monitor."
     }
   ]
 }

@@ -294,6 +294,8 @@ export const packSchema = z.object({
   keywords: z.array(z.string()).optional(),
   /** A clinical clock on the HUD ("ARREST"): the case's own time, which runs ahead when everything due is done. */
   clock: z.string().optional(),
+  /** Where that clock starts: the case was already running (the collapse was 2 minutes before arrival). */
+  clockStart: z.number().optional(),
   badge: z.object({
     id: z.string(),
     name: z.string(),

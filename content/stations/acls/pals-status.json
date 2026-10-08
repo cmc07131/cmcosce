@@ -66,14 +66,14 @@
     {
       "id": "still-fitting",
       "after": "lz1",
-      "delayS": 20,
+      "delayS": 600,
       "scene": "still-fitting",
       "say": "Ten minutes after the lorazepam: still fitting."
     },
     {
       "id": "still-fitting-2",
       "after": "lz2",
-      "delayS": 20,
+      "delayS": 600,
       "scene": "still-fitting-2",
       "say": "Ten minutes after the second dose: still fitting."
     }
@@ -96,7 +96,7 @@
       "text": "Aciclovir dose. BNFc uses 500 mg/m² for 3 months–12 years; many protocols use 20 mg/kg (280 mg here). No Hong Kong paediatric protocol was available to check."
     }
   ],
-  "notes": "Checked against the APLS algorithm for convulsive status epilepticus (APLS 7th edition, 2023 update following EcLiPSE/ConSEPT: levetiracetam as a second-line option alongside phenytoin), NICE NG217 (Epilepsies, 2022) and RCUK paediatric guidance.\n\nAt 5 minutes: first benzodiazepine — IV/IO lorazepam 0.1 mg/kg (max 4 mg), or buccal midazolam 0.3 mg/kg (max 10 mg) if no access. At 15 minutes (10 minutes later): a second benzodiazepine dose. At 25 minutes: levetiracetam 40 mg/kg (max 3 g) IV over 5 minutes, or phenytoin 20 mg/kg over 20 minutes (or phenobarbital 20 mg/kg if already on phenytoin). At 45 minutes: RSI with a senior anaesthetist. Maximum two benzodiazepine doses including pre-hospital doses.\n\nAlways check glucose early (treat under 3 mmol/L with 2 mL/kg 10% glucose) and look for the cause (fever, meningitis/encephalitis, electrolytes, trauma, toxins).\n\nYour notes: buccal midazolam max 5 mg (APLS uses 0.3 mg/kg up to 10 mg) and phenytoin as the only second-line drug; APLS now lists levetiracetam first or equally. Lorazepam 0.1 mg/kg max 4 mg and PR diazepam 0.5 mg/kg match.\n\nPerfect script checked against an APLS status epilepticus checklist, an AHA/AES checklist, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (restraint, objects in the mouth, wrong doses, a third benzodiazepine). Added: status named, weight said aloud, injury protection stated positively, a history from her mother while waiting, early escalation, aciclovir with ceftriaxone, post-seizure care and the next step, and an explanation to her mother.",
+  "notes": "Checked against the APLS algorithm for convulsive status epilepticus (APLS 7th edition, 2023 update following EcLiPSE/ConSEPT: levetiracetam as a second-line option alongside phenytoin), NICE NG217 (Epilepsies, 2022) and RCUK paediatric guidance.\n\nAt 5 minutes: first benzodiazepine — IV/IO lorazepam 0.1 mg/kg (max 4 mg), or buccal midazolam 0.3 mg/kg (max 10 mg) if no access. At 15 minutes (10 minutes later): a second benzodiazepine dose. At 25 minutes: levetiracetam 40 mg/kg (max 3 g) IV over 5 minutes, or phenytoin 20 mg/kg over 20 minutes (or phenobarbital 20 mg/kg if already on phenytoin). At 45 minutes: RSI with a senior anaesthetist. Maximum two benzodiazepine doses including pre-hospital doses.\n\nAlways check glucose early (treat under 3 mmol/L with 2 mL/kg 10% glucose) and look for the cause (fever, meningitis/encephalitis, electrolytes, trauma, toxins).\n\nYour notes: buccal midazolam max 5 mg (APLS uses 0.3 mg/kg up to 10 mg) and phenytoin as the only second-line drug; APLS now lists levetiracetam first or equally. Lorazepam 0.1 mg/kg max 4 mg and PR diazepam 0.5 mg/kg match.\n\nPerfect script checked against an APLS status epilepticus checklist, an AHA/AES checklist, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (restraint, objects in the mouth, wrong doses, a third benzodiazepine). Added: status named, weight said aloud, injury protection stated positively, a history from her mother while waiting, early escalation, aciclovir with ceftriaxone, post-seizure care and the next step, and an explanation to her mother.\n\nTime drives this station: a SEIZURE (she has been fitting 10 minutes) clock on the HUD. Each benzodiazepine dose and the second-line drug come 10 minutes apart as timed events. When everything due is done, the clock runs ahead to the next timed moment instead of making you wait it out.",
   "cast": [
     {
       "id": "patient",
@@ -608,5 +608,7 @@
       "at": "3:45",
       "say": "Mei had a long seizure, probably set off by the fever. The medicine has stopped it. We're treating her in case there's an infection of the brain, and she'll stay in hospital. She'll be sleepy for a few hours."
     }
-  ]
+  ],
+  "clock": "SEIZURE",
+  "clockStart": 600
 }

@@ -583,3 +583,44 @@ test('VF arrest runs on the clinical clock: each shock comes due at its 2-minute
   assert.equal(sceneAt.check3 - sceneAt.shock2, 120)
   assert.ok(sceneAt.rosc >= sceneAt.check4)
 })
+
+test('clocked stations play to the end on the clinical clock: every wait has a timed moment to run ahead to', () => {
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    if (!st.clock) continue
+    const pack = compileStation(st)
+    const spent: Record<string, string[]> = {}
+    const scene: string[] = []
+    const sceneAt: Record<string, number> = {}
+    let clock = 0
+    let finished = false
+    const set = (flags: string[]) => flags.forEach((f) => scene.includes(f) || (scene.push(f), (sceneAt[f] = clock)))
+    for (let i = 0; i < 300; i++) {
+      for (const ev of dueEvents(pack, scene, sceneAt, clock, 'normal')) set([ev.scene])
+      const h = nextHint(pack, spent, scene)
+      if (!h) {
+        finished = true
+        break
+      }
+      if (h.kind === 'wait') {
+        const next = nextWaitedEvent(pack, spent, scene, sceneAt, 'normal')
+        assert.ok(next && next.dueAt > clock, `${st.id}: the guide waits at ${clock}s with nothing timed ahead`)
+        clock = next.dueAt
+        continue
+      }
+      clock += 10
+      // Waiting for the next check must not pull post-ROSC care forward: nothing after the ROSC phase before ROSC.
+      const phaseOf = (id: string) => (st.phases ?? []).findIndex((ph) => ph.steps.includes(id))
+      const roscStep = st.steps.find((s) => [...(s.opts ?? []), ...Object.values(s.groups ?? {}).flat()].some((x) => [x.scene].flat().includes('rosc')))
+      if (roscStep && !scene.includes('rosc')) assert.ok(phaseOf(h.actionId) <= phaseOf(roscStep.id), `${st.id}: ${h.actionId} is offered before ROSC`)
+      const a = pack.actions.find((x) => x.id === h.actionId)!
+      const o = (a.options ?? []).find((x) => x.label === h.option) ?? (a.findings ?? []).find((x) => x.label === h.option)!
+      spent[a.id] = [...(spent[a.id] ?? []), o.id]
+      const step = st.steps.find((s) => s.id === a.id)
+      const rows = [...(step?.opts ?? []), ...Object.values(step?.groups ?? {}).flat(), ...(step?.turns ?? []).flatMap((t) => t.opts ?? [])]
+      const raw = rows.find((x) => x.t === h.option) ?? rows.find((x) => x.drug && h.option === `${x.drug} ${x.dose}`)
+      if (raw?.scene) set([raw.scene].flat())
+    }
+    assert.ok(finished, `${st.id}: the guide never finishes on the clock`)
+  }
+})

@@ -44,7 +44,7 @@
     {
       "id": "glucose-down",
       "after": "insulin",
-      "delayS": 30,
+      "delayS": 3600,
       "scene": "glucose-down",
       "say": "Hourly check: glucose 13.2 mmol/L, ketones 4.1, potassium 4.6."
     }
@@ -55,7 +55,7 @@
       "text": "ADA 2024 versus JBDS 2023. ADA starts insulin at 0.1 unit/kg/h (with an optional bolus), adds dextrose when glucose is under about 14 mmol/L (250 mg/dL), and holds insulin if K is under 3.3. JBDS: fixed rate 0.1 unit/kg/h, no bolus, 10% glucose under 14. The script follows JBDS, which ADA also accepts."
     }
   ],
-  "notes": "Checked against the Joint British Diabetes Societies (JBDS-IP) guideline 'The management of diabetic ketoacidosis in adults' (2023 update) and ADA 2024 hyperglycaemic crises consensus.\n\nDiagnosis: ketonaemia 3.0 mmol/L or more (or significant ketonuria), glucose over 11 mmol/L or known diabetes, and bicarbonate under 15 or venous pH under 7.3 (JBDS 2023; euglycaemic DKA exists, e.g. with SGLT2 inhibitors). Severe: pH under 7.0, bicarbonate under 5, ketones over 6, K under 3.5 on admission, GCS under 12, SpO2 under 92%, systolic under 90, HR over 100 or under 60, anion gap over 16.\n\nFluids: 0.9% saline 1 L over 1 hour (if systolic under 90: 500 mL bolus over 10–15 minutes, repeat), then 1 L over 2 h, 2 h, 4 h, 4 h, 6 h (slower in the young, old, heart or renal failure). Potassium: none in the first litre usually; then 40 mmol/L if K 3.5–5.5; none if over 5.5; senior review if under 3.5. Insulin: fixed-rate IV insulin infusion 0.1 unit/kg/h (continue the patient's long-acting insulin). Add 10% glucose at 125 mL/h when glucose falls under 14 mmol/L. Targets: ketones down by 0.5 mmol/L/h, bicarbonate up 3 mmol/L/h, glucose down 3 mmol/L/h, K 4–5.5. Look for the precipitant (infection, missed insulin, MI, pregnancy). Resolution: ketones under 0.6 and pH over 7.3. Avoid bicarbonate; cerebral oedema risk in the young — watch for headache and falling GCS.\n\nYour notes list DKA as a Medical gym topic without detail.\n\nPerfect script checked against JBDS 2023, ADA 2024, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (wrong fluid rates, bicarbonate, wrong insulin, potassium push). Fixed: potassium was offered after the first litre although K was 5.8; the hourly check now reports K 4.6 first. Added: severity named, basal insulin, targets, cerebral oedema, resolution.",
+  "notes": "Checked against the Joint British Diabetes Societies (JBDS-IP) guideline 'The management of diabetic ketoacidosis in adults' (2023 update) and ADA 2024 hyperglycaemic crises consensus.\n\nDiagnosis: ketonaemia 3.0 mmol/L or more (or significant ketonuria), glucose over 11 mmol/L or known diabetes, and bicarbonate under 15 or venous pH under 7.3 (JBDS 2023; euglycaemic DKA exists, e.g. with SGLT2 inhibitors). Severe: pH under 7.0, bicarbonate under 5, ketones over 6, K under 3.5 on admission, GCS under 12, SpO2 under 92%, systolic under 90, HR over 100 or under 60, anion gap over 16.\n\nFluids: 0.9% saline 1 L over 1 hour (if systolic under 90: 500 mL bolus over 10–15 minutes, repeat), then 1 L over 2 h, 2 h, 4 h, 4 h, 6 h (slower in the young, old, heart or renal failure). Potassium: none in the first litre usually; then 40 mmol/L if K 3.5–5.5; none if over 5.5; senior review if under 3.5. Insulin: fixed-rate IV insulin infusion 0.1 unit/kg/h (continue the patient's long-acting insulin). Add 10% glucose at 125 mL/h when glucose falls under 14 mmol/L. Targets: ketones down by 0.5 mmol/L/h, bicarbonate up 3 mmol/L/h, glucose down 3 mmol/L/h, K 4–5.5. Look for the precipitant (infection, missed insulin, MI, pregnancy). Resolution: ketones under 0.6 and pH over 7.3. Avoid bicarbonate; cerebral oedema risk in the young — watch for headache and falling GCS.\n\nYour notes list DKA as a Medical gym topic without detail.\n\nPerfect script checked against JBDS 2023, ADA 2024, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (wrong fluid rates, bicarbonate, wrong insulin, potassium push). Fixed: potassium was offered after the first litre although K was 5.8; the hourly check now reports K 4.6 first. Added: severity named, basal insulin, targets, cerebral oedema, resolution.\n\nTime drives this station: a TIME clock on the HUD. The hourly check comes an hour after the insulin starts. When everything due is done, the clock runs ahead to the next timed moment instead of making you wait it out.",
   "cast": [
     {
       "id": "patient",
@@ -518,5 +518,6 @@
       "at": "2:50",
       "say": "Medical team and HDU: Miss Tsang, 19, severe DKA: pH 7.08, ketones 6.4, GCS 13, from missed insulin and a UTI. Fluids and fixed-rate insulin running. Diabetes team too, please."
     }
-  ]
+  ],
+  "clock": "TIME"
 }
