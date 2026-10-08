@@ -22,7 +22,8 @@
         "access",
         "adrenaline",
         "intubate",
-        "rhythm"
+        "rhythm",
+        "pulse"
       ]
     },
     {
@@ -53,7 +54,7 @@
       "text": "After ROSC. Your notes say 'therapeutic hypothermia'. Current guidance (AHA 2025, ERC–ESICM 2025) prevents fever, 37.5 °C or less, and does not actively rewarm mild hypothermia."
     }
   ],
-  "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2025 ALS and ERC–ESICM 2025 post-resuscitation care, and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, actively prevent fever: 37.5 °C or less for 36–72 hours in a comatose patient (ERC–ESICM / RCUK 2025; 2021 used 37.7 °C). Your notes say 'therapeutic hypothermia'; current guidance moved from routine cooling to 32–36 °C toward fever prevention, and does not actively rewarm mild hypothermia (32–36 °C).\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.\n\nPerfect script checked against the ERC drowning algorithm, an AHA post-arrest checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (wrong drugs and doses, routine cooling, routine antibiotics, discharge) and the CPR bench's abdominal-thrust and collar-first buttons. Added: taking over the team, post-arrest targets. The temperature is now 35.5 °C so the adrenaline interval is unambiguous.\n\nTime drives this station: a ARREST clock on the HUD. Rhythm checks come every 2 minutes of CPR as timed events; ROSC comes at a check. When everything due is done, the clock runs ahead to the next timed moment instead of making you wait it out.",
+  "notes": "Checked against the ERC 2021 guidelines (drowning), Resuscitation Council UK 2025 ALS and ERC–ESICM 2025 post-resuscitation care, and ILCOR.\n\nDrowning arrest is hypoxic. Open the airway and give 5 initial rescue breaths (ERC) before compressions, then 30:2. AHA gives 2 initial breaths; your notes say 2 or 3–5. The station scores the ERC 5.\n\nDo not try to drain water from the lungs (no Heimlich or abdominal thrusts): it delays ventilation and causes aspiration of vomit. Expect vomit; suction and turn only if needed. Intubate early; the lungs are stiff and need PEEP.\n\nSpinal precautions only if there is a history of diving, a high-energy mechanism or signs of injury; routine collars impede the airway. Your notes agree.\n\nHypothermia: below 30 °C withhold adrenaline and give at most 3 shocks; between 30 and 35 °C double the drug interval. Rewarm actively. After ROSC, actively prevent fever: 37.5 °C or less for 36–72 hours in a comatose patient (ERC–ESICM / RCUK 2025; 2021 used 37.7 °C). Your notes say 'therapeutic hypothermia'; current guidance moved from routine cooling to 32–36 °C toward fever prevention, and does not actively rewarm mild hypothermia (32–36 °C).\n\nSalt versus fresh water makes no clinical difference. Antibiotics only for grossly contaminated water or clinical infection.\n\nPerfect script checked against the ERC drowning algorithm, an AHA post-arrest checklist, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (wrong drugs and doses, routine cooling, routine antibiotics, discharge) and the CPR bench's abdominal-thrust and collar-first buttons. Added: taking over the team, post-arrest targets. The temperature is now 35.5 °C so the adrenaline interval is unambiguous.\n\nTime drives this station: a ARREST clock on the HUD. Rhythm checks come every 2 minutes of CPR as timed events; ROSC comes at a check. When everything due is done, the clock runs ahead to the next timed moment instead of making you wait it out.\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.",
   "cast": [
     {
       "id": "patient",
@@ -237,21 +238,33 @@
           "when": "check2",
           "early": "At the 2-minute rhythm check.",
           "mark": "Non-shockable at the check: no shock, CPR resumed at once"
-        },
-        {
-          "t": "Rhythm check: an organised rhythm, and a femoral pulse: ROSC.",
-          "scene": "rosc",
-          "mark": "Recognises ROSC",
-          "r": "Sinus tachycardia 118 with a palpable femoral pulse.",
-          "when": [
-            "check3",
-            "adrenaline",
-            "intubated"
-          ],
-          "early": "At the next rhythm check."
         }
       ],
       "lang": "en"
+    },
+    {
+      "id": "pulse",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Pulse check",
+      "hint": "An organised rhythm: feel for a pulse.",
+      "groups": {
+        "Rhythm check": [
+          {
+            "t": "An organised rhythm on the monitor: feel the femoral pulse",
+            "anim": "pulse",
+            "when": [
+              "check3",
+              "adrenaline",
+              "intubated"
+            ],
+            "early": "At the next rhythm check.",
+            "scene": "rosc",
+            "mark": "Recognises ROSC",
+            "r": "Femoral pulse present; sinus tachycardia 118. \"ROSC.\""
+          }
+        ]
+      }
     },
     {
       "id": "ventilate",

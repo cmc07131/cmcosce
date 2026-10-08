@@ -11,6 +11,7 @@
       "goal": "Monitoring and access; ABCDE; read the ECG and the gas: how dangerous is this potassium?",
       "steps": [
         "monitoring",
+        "abcde",
         "ecg"
       ]
     },
@@ -68,7 +69,7 @@
       "text": "Hospital Authority hyperkalaemia guidance was not available to check; the doses are UKKA 2023 (calcium gluconate 10% 30 mL; insulin 10 units with 25 g glucose; salbutamol 10–20 mg). Atropine dose depends on the algorithm (AHA 1 mg; RCUK 500 micrograms)."
     }
   ],
-  "notes": "Checked against the UK Kidney Association clinical practice guideline 'Treatment of acute hyperkalaemia in adults' (2023) and RCUK 2025 special circumstances.\n\nThree steps: protect the heart, shift potassium into cells, remove potassium, and monitor.\n• Protect: IV calcium if there are ECG changes — calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL over 5–10 minutes; repeat if the ECG does not improve within 5–10 minutes. It works in minutes and lasts 30–60 minutes; it does not lower potassium.\n• Shift: insulin 10 units soluble insulin with 25 g glucose (e.g. 50 mL of 50% or 250 mL of 10%) over 15 minutes; if glucose is under 7 mmol/L before treatment, follow with 10% glucose 50 mL/h for 5 hours; check glucose at 0, 15, 30, 60, 90, 120, 180, 240, 300 and 360 minutes (hypoglycaemia risk, especially in renal failure). Salbutamol 10–20 mg nebulised as an adjunct (not alone).\n• Remove: dialysis for severe hyperkalaemia in renal failure; potassium binders (sodium zirconium cyclosilicate 10 g three times daily, or patiromer).\n• Sodium bicarbonate is not routine; consider only with metabolic acidosis (and specialist advice in dialysis patients).\n\nYour notes on pacing cover hyperkalaemia in bradycardia (calcium gluconate after the potassium result); this station follows UKKA 2023 in full.\n\nPerfect script checked against a UKKA 2023 checklist, an AHA bradycardia checklist, an HKCEM-style scheme and a keyword scheme. Added: the plan named (protect, shift, remove, monitor), the glucose infusion for a pre-treatment glucose under 7, atropine and pacing if the bradycardia persists, potassium sources stopped, the cause and admission.",
+  "notes": "Checked against the UK Kidney Association clinical practice guideline 'Treatment of acute hyperkalaemia in adults' (2023) and RCUK 2025 special circumstances.\n\nThree steps: protect the heart, shift potassium into cells, remove potassium, and monitor.\n• Protect: IV calcium if there are ECG changes — calcium gluconate 10% 30 mL or calcium chloride 10% 10 mL over 5–10 minutes; repeat if the ECG does not improve within 5–10 minutes. It works in minutes and lasts 30–60 minutes; it does not lower potassium.\n• Shift: insulin 10 units soluble insulin with 25 g glucose (e.g. 50 mL of 50% or 250 mL of 10%) over 15 minutes; if glucose is under 7 mmol/L before treatment, follow with 10% glucose 50 mL/h for 5 hours; check glucose at 0, 15, 30, 60, 90, 120, 180, 240, 300 and 360 minutes (hypoglycaemia risk, especially in renal failure). Salbutamol 10–20 mg nebulised as an adjunct (not alone).\n• Remove: dialysis for severe hyperkalaemia in renal failure; potassium binders (sodium zirconium cyclosilicate 10 g three times daily, or patiromer).\n• Sodium bicarbonate is not routine; consider only with metabolic acidosis (and specialist advice in dialysis patients).\n\nYour notes on pacing cover hyperkalaemia in bradycardia (calcium gluconate after the potassium result); this station follows UKKA 2023 in full.\n\nPerfect script checked against a UKKA 2023 checklist, an AHA bradycardia checklist, an HKCEM-style scheme and a keyword scheme. Added: the plan named (protect, shift, remove, monitor), the glucose infusion for a pre-treatment glucose under 7, atropine and pacing if the bradycardia persists, potassium sources stopped, the cause and admission.\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.",
   "cast": [
     {
       "id": "patient",
@@ -131,19 +132,48 @@
       "kind": "say",
       "to": "nurse",
       "label": "Monitoring",
-      "hint": "Monitor and access; a quick ABCDE.",
+      "hint": "Monitor and access.",
       "opts": [
         {
           "t": "Hello Mr Law, I'm the emergency doctor. Monitoring on, please: ECG, blood pressure and SpO2, and an IV cannula.",
           "fetch": "trolley",
           "scene": "monitored",
           "mark": "Asks for continuous ECG, NIBP and SpO2 monitoring, and IV access"
-        },
-        {
-          "t": "ABCDE: he's talking; RR 20, SpO2 95%; heart rate 44 and BP 88/52: bradycardic and hypotensive; GCS 15.",
-          "mark": "ABCDE: recognises bradycardia with hypotension"
         }
       ]
+    },
+    {
+      "id": "abcde",
+      "kind": "exam",
+      "to": "patient",
+      "label": "ABCDE",
+      "hint": "A quick ABCDE yourself.",
+      "groups": {
+        "A–B": [
+          {
+            "t": "Airway and breathing",
+            "anim": "auscultate",
+            "r": "Talking. RR 20, SpO2 95%, chest clear.",
+            "mark": "Assesses airway and breathing"
+          }
+        ],
+        "C": [
+          {
+            "t": "Pulse, blood pressure, perfusion",
+            "anim": "pulse",
+            "r": "HR 44, regular, BP 88/52, cool hands. \"Bradycardic and hypotensive.\"",
+            "mark": "ABCDE: recognises bradycardia with hypotension"
+          }
+        ],
+        "D–E": [
+          {
+            "t": "GCS and capillary glucose",
+            "anim": "glucose",
+            "r": "GCS 15. Glucose 6.2 mmol/L. An AV fistula in the left arm.",
+            "mark": "Disability and exposure: GCS, glucose, the fistula"
+          }
+        ]
+      }
     },
     {
       "id": "ecg",

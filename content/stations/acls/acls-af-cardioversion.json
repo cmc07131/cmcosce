@@ -41,6 +41,7 @@
       "title": "After",
       "goal": "Reassess, look for the cause, and plan anticoagulation. Then the examiner.",
       "steps": [
+        "reassess",
         "after"
       ]
     }
@@ -65,7 +66,7 @@
       "text": "AHA 2025 and RCUK 2025 wording is quoted from memory; the scored points are unchanged from the 2020/2021 algorithms."
     }
   ],
-  "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.\n\nPerfect script checked against an AHA unstable tachycardia checklist, the RCUK tachycardia algorithm, an HKCEM-style scheme and a keyword scheme. Added: the adverse features named aloud (both lists), the 48-hour rule overridden, the plan if cardioversion fails, a cause looked for, and admission.",
+  "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.\n\nPerfect script checked against an AHA unstable tachycardia checklist, the RCUK tachycardia algorithm, an HKCEM-style scheme and a keyword scheme. Added: the adverse features named aloud (both lists), the 48-hour rule overridden, the plan if cardioversion fails, a cause looked for, and admission.\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.",
   "cast": [
     {
       "id": "patient",
@@ -277,6 +278,41 @@
       "lang": "en"
     },
     {
+      "id": "reassess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Reassess her",
+      "hint": "Rhythm and pulse, then ABCDE again and a 12-lead.",
+      "groups": {
+        "After the shock": [
+          {
+            "t": "The rhythm on the monitor, and her pulse",
+            "anim": "pulse",
+            "when": "cardioverted",
+            "early": "After the shock.",
+            "r": "Sinus rhythm at 84; radial pulse present; BP 118/72. \"Converted to sinus rhythm.\"",
+            "mark": "Reassesses rhythm and pulse"
+          },
+          {
+            "t": "ABCDE again",
+            "anim": "auscultate",
+            "when": "cardioverted",
+            "early": "After the shock.",
+            "r": "Rousing from sedation, airway clear; RR 18, crackles settling, SpO2 97%; warm; chest pain eased.",
+            "mark": "Repeats ABCDE"
+          },
+          {
+            "t": "12-lead ECG",
+            "when": "cardioverted",
+            "early": "After the shock.",
+            "img": "ecg:sinus",
+            "r": "Sinus rhythm 84; the ST depression has resolved.",
+            "mark": "Reassesses with a 12-lead"
+          }
+        ]
+      }
+    },
+    {
       "id": "after",
       "kind": "say",
       "to": "nurse",
@@ -284,28 +320,34 @@
       "hint": "Reassess; re-sync; the plan if it fails; causes; anticoagulation; admit.",
       "opts": [
         {
-          "t": "Rhythm and pulse check: sinus rhythm at 84. SYNC re-selected before any further shock.",
-          "mark": "Reassesses and re-syncs"
+          "t": "SYNC re-selected before any further shock.",
+          "mark": "Re-selects SYNC after the shock",
+          "when": "cardioverted",
+          "early": "After the shock."
         },
         {
           "t": "If it hadn't worked: re-sync, escalate the energy, up to three attempts, then amiodarone 300 mg over 10 to 20 minutes and shock again.",
-          "mark": "States the plan if cardioversion fails"
-        },
-        {
-          "t": "Repeat ABCDE and a 12-lead ECG.",
-          "mark": "Reassesses with a 12-lead"
+          "mark": "States the plan if cardioversion fails",
+          "when": "cardioverted",
+          "early": "After the shock."
         },
         {
           "t": "Bloods for potassium, magnesium, thyroid function and troponin; look for a cause such as sepsis or ischaemia.",
-          "mark": "Looks for causes: electrolytes, thyroid, ischaemia"
+          "mark": "Looks for causes: electrolytes, thyroid, ischaemia",
+          "when": "cardioverted",
+          "early": "After the shock."
         },
         {
           "t": "Long-term anticoagulation decided by her CHA2DS2-VA score.",
-          "mark": "Long-term anticoagulation by CHA2DS2-VA"
+          "mark": "Long-term anticoagulation by CHA2DS2-VA",
+          "when": "cardioverted",
+          "early": "After the shock."
         },
         {
           "t": "Admit her to a monitored bed under cardiology, and tell her how it went.",
-          "mark": "Admits to a monitored bed; updates the patient"
+          "mark": "Admits to a monitored bed; updates the patient",
+          "when": "cardioverted",
+          "early": "After the shock."
         }
       ]
     },

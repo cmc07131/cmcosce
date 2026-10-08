@@ -31,6 +31,7 @@
       "steps": [
         "reassess",
         "bolus2",
+        "reassess2",
         "inotrope"
       ]
     },
@@ -43,22 +44,7 @@
       ]
     }
   ],
-  "events": [
-    {
-      "id": "still-shocked",
-      "after": "bolus1",
-      "delayS": 15,
-      "scene": "still-shocked",
-      "say": "Reassessed: HR 185, CRT 4 seconds. Still shocked."
-    },
-    {
-      "id": "refractory",
-      "after": "bolus2",
-      "delayS": 15,
-      "scene": "refractory",
-      "say": "40 mL/kg in: still HR 180, CRT 4 seconds, cool to the knees."
-    }
-  ],
+  "events": [],
   "review": [
     {
       "tag": "outdated",
@@ -73,7 +59,7 @@
       "text": "Bolus size. AHA PALS allows 10–20 mL/kg boluses; RCUK/NICE use 10 mL/kg. The script uses 10 mL/kg and reassesses after each, which every scheme accepts."
     }
   ],
-  "notes": "Checked against RCUK 2025 paediatric life support, NICE NG51 (Suspected sepsis, updated 2024), NICE CG102 (Bacterial meningitis and meningococcal disease in under 16s), and the Surviving Sepsis Campaign paediatric guidelines (2020).\n\nWeight: APLS (age in months ÷ 2) + 4 = 8 kg.\n\nFluid: 10 mL/kg boluses of balanced crystalloid (or 0.9% saline) over 5–10 minutes, reassessing after each for response and overload (crackles, hepatomegaly, rising work of breathing); after 40–60 mL/kg, start inotropes (adrenaline, which can run peripherally or IO at low concentration) and involve PICU. Your notes' WETFLAGS and sepsis sections use 20 mL/kg boluses; RCUK/ERC 2021 onwards and NICE use 10 mL/kg, so 20 mL/kg is not scored.\n\nAccess: IV, and IO if IV fails in 90 seconds (or immediately in shock).\n\nAntibiotics within 1 hour: ceftriaxone 80 mg/kg IV (NICE; cefotaxime in neonates or with calcium infusions; add amoxicillin under 3 months). Your notes list cefuroxime 50 mg/kg; that is not first-line for meningococcal sepsis.\n\nGlucose: correct hypoglycaemia with 10% glucose 2 mL/kg (as in your notes). Check calcium. Notify public health; prophylaxis for close contacts.\n\nPerfect script checked against an RCUK/NICE paediatric sepsis checklist, an AHA PALS septic shock checklist, an HKCEM-style scheme and a keyword scheme. Added: weight said aloud, the diagnosis named, no LP stated with its reason, reassessment for overload, glucose rechecked, an anaesthetist for intubation, contact prophylaxis. The circulation check now plays the pulse close-up (it played the glucose meter).",
+  "notes": "Checked against RCUK 2025 paediatric life support, NICE NG51 (Suspected sepsis, updated 2024), NICE CG102 (Bacterial meningitis and meningococcal disease in under 16s), and the Surviving Sepsis Campaign paediatric guidelines (2020).\n\nWeight: APLS (age in months ÷ 2) + 4 = 8 kg.\n\nFluid: 10 mL/kg boluses of balanced crystalloid (or 0.9% saline) over 5–10 minutes, reassessing after each for response and overload (crackles, hepatomegaly, rising work of breathing); after 40–60 mL/kg, start inotropes (adrenaline, which can run peripherally or IO at low concentration) and involve PICU. Your notes' WETFLAGS and sepsis sections use 20 mL/kg boluses; RCUK/ERC 2021 onwards and NICE use 10 mL/kg, so 20 mL/kg is not scored.\n\nAccess: IV, and IO if IV fails in 90 seconds (or immediately in shock).\n\nAntibiotics within 1 hour: ceftriaxone 80 mg/kg IV (NICE; cefotaxime in neonates or with calcium infusions; add amoxicillin under 3 months). Your notes list cefuroxime 50 mg/kg; that is not first-line for meningococcal sepsis.\n\nGlucose: correct hypoglycaemia with 10% glucose 2 mL/kg (as in your notes). Check calcium. Notify public health; prophylaxis for close contacts.\n\nPerfect script checked against an RCUK/NICE paediatric sepsis checklist, an AHA PALS septic shock checklist, an HKCEM-style scheme and a keyword scheme. Added: weight said aloud, the diagnosis named, no LP stated with its reason, reassessment for overload, glucose rechecked, an anaesthetist for intubation, contact prophylaxis. The circulation check now plays the pulse close-up (it played the glucose meter).\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.",
   "cast": [
     {
       "id": "patient",
@@ -308,21 +294,33 @@
     },
     {
       "id": "reassess",
-      "kind": "say",
-      "to": "nurse",
-      "label": "Reassess",
-      "lang": "en",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Reassess him",
       "hint": "After each bolus: heart rate, refill, liver, chest; recheck the glucose.",
-      "opts": [
-        {
-          "t": "Reassess after each bolus: heart rate, capillary refill, the liver edge and the chest for overload.",
-          "mark": "Reassesses after each bolus, including for fluid overload"
-        },
-        {
-          "t": "Recheck his glucose after the dextrose.",
-          "mark": "Rechecks glucose"
-        }
-      ]
+      "groups": {
+        "After each bolus": [
+          {
+            "t": "Reassess after the bolus: heart rate, capillary refill, the liver edge and the chest",
+            "anim": "pulse",
+            "when": "bolus1",
+            "early": "After the first bolus.",
+            "scene": "still-shocked",
+            "r": "HR 185, CRT 4 s, liver unchanged, chest clear. \"Still shocked, no overload: another 10 mL/kg.\"",
+            "mark": "Reassesses after each bolus, including for fluid overload"
+          }
+        ],
+        "Glucose": [
+          {
+            "t": "Recheck his glucose",
+            "anim": "glucose",
+            "when": "glucose",
+            "early": "After the dextrose.",
+            "r": "Glucose 5.8 mmol/L.",
+            "mark": "Rechecks glucose"
+          }
+        ]
+      }
     },
     {
       "id": "bolus2",
@@ -343,6 +341,26 @@
           "mark": "Repeats boluses, checks for overload"
         }
       ]
+    },
+    {
+      "id": "reassess2",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Reassess him",
+      "hint": "After 40 mL/kg: is he fluid-refractory?",
+      "groups": {
+        "After 40 mL/kg": [
+          {
+            "t": "Reassess after 40 mL/kg",
+            "anim": "pulse",
+            "when": "bolus2",
+            "early": "After the further boluses.",
+            "scene": "refractory",
+            "r": "HR 180, CRT 4 s, cool to the knees, liver 2 cm, chest clear. \"Fluid-refractory at 40 mL/kg.\"",
+            "mark": "Recognises fluid-refractory shock"
+          }
+        ]
+      }
     },
     {
       "id": "inotrope",
@@ -382,7 +400,9 @@
               "rz": "好……求吓你救佢。",
               "r": "OK… please help him.",
               "mood": -3,
-              "mark": "Explains honestly and simply; lets the parent stay"
+              "mark": "Explains honestly and simply; lets the parent stay",
+              "when": "inotrope",
+              "early": "Once he is on the adrenaline infusion."
             }
           ]
         }
@@ -397,11 +417,15 @@
       "opts": [
         {
           "t": "PICU and retrieval: an 8 kg infant with meningococcal septic shock, fluid-refractory after 40 mL/kg, adrenaline running, glucose corrected. He'll need intubation: please bring an anaesthetist.",
-          "mark": "Refers to PICU/retrieval with a clear summary; plans the airway"
+          "mark": "Refers to PICU/retrieval with a clear summary; plans the airway",
+          "when": "inotrope",
+          "early": "Once the adrenaline infusion is running."
         },
         {
           "t": "Notify public health: his close contacts and family need antibiotic prophylaxis.",
-          "mark": "Notifies public health; contact prophylaxis"
+          "mark": "Notifies public health; contact prophylaxis",
+          "when": "inotrope",
+          "early": "Once the adrenaline infusion is running."
         }
       ]
     },

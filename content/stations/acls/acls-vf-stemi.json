@@ -8,8 +8,9 @@
   "phases": [
     {
       "title": "Arrest",
-      "goal": "Recognise it, call, start CPR, pads on.",
+      "goal": "Assess him yourself: response, breathing and pulse. Then call, start CPR, pads on.",
       "steps": [
+        "assess",
         "recognise"
       ]
     },
@@ -54,7 +55,7 @@
       "text": "AHA 2025 and RCUK/ERC 2025 details are quoted from memory; I could not check the documents here. The scored points are the same in the 2020 and 2023 versions."
     }
   ],
-  "notes": "Checked against Resuscitation Council UK 2025 adult ALS and post-resuscitation care guidelines (ERC 2025, ILCOR 2025), ESC 2023 ACS guidelines, and AHA 2025.\n\nShockable rhythm: shock as soon as possible (biphasic at least 150 J for the first shock; escalate if the device allows), resume CPR immediately for 2 minutes without a pulse check. Adrenaline 1 mg and amiodarone 300 mg after the third shock; adrenaline every 3–5 minutes (alternate loops); amiodarone 150 mg after the fifth shock (lidocaine 100 mg if amiodarone is not available). Place the apical pad directly below the armpit in the mid-axillary line; after three failed shocks consider a vector change to antero-posterior. RCUK 2025 does not recommend routine double sequential defibrillation.\n\nAirway: basic airway or supraglottic airway is acceptable; intubate only if skilled (over 95% success within two attempts, pause under 5 s). Waveform capnography for every advanced airway.\n\nPost-ROSC (RCUK/ERC–ESICM 2025): SpO2 94–98%, PaCO2 4.7–6.0 kPa, systolic over 100 or MAP 60–65 mmHg, actively prevent fever (37.5 °C or less) for 36–72 hours in comatose patients, treat seizures (levetiracetam or valproate), prognosticate at 72 hours or later. ST elevation after ROSC → emergency angiography and primary PCI.\n\nInferior STEMI: check right-sided leads (V4R) for right ventricular infarction; avoid nitrates and keep preload.\n\nYour notes point to the AHA 2025 ACLS algorithm and highlights; the RCUK/ERC sequence here matches it on the scored points (AHA also gives adrenaline after the second shock in some teaching; RCUK after the third).\n\nPerfect script (AHA ACLS, as taught in Hong Kong) checked against four mark schemes: an AHA megacode checklist, an RCUK ALS checklist, an HKCEM-style resuscitation scheme and a keyword scheme. Added from that check: roles and closed-loop at the start, charging during compressions, the Hs and Ts named in full, ETCO2 for CPR quality, V4R and the nitrate warning said aloud, ICU after PCI, heparin.\n\nTime drives this station: an ARREST clock on the HUD. Each rhythm check is a timed event 2 minutes after the last shock; every shock is given on the defibrillator. When everything due in a cycle is done, the clock runs ahead to the next check instead of making you wait it out.",
+  "notes": "Checked against Resuscitation Council UK 2025 adult ALS and post-resuscitation care guidelines (ERC 2025, ILCOR 2025), ESC 2023 ACS guidelines, and AHA 2025.\n\nShockable rhythm: shock as soon as possible (biphasic at least 150 J for the first shock; escalate if the device allows), resume CPR immediately for 2 minutes without a pulse check. Adrenaline 1 mg and amiodarone 300 mg after the third shock; adrenaline every 3–5 minutes (alternate loops); amiodarone 150 mg after the fifth shock (lidocaine 100 mg if amiodarone is not available). Place the apical pad directly below the armpit in the mid-axillary line; after three failed shocks consider a vector change to antero-posterior. RCUK 2025 does not recommend routine double sequential defibrillation.\n\nAirway: basic airway or supraglottic airway is acceptable; intubate only if skilled (over 95% success within two attempts, pause under 5 s). Waveform capnography for every advanced airway.\n\nPost-ROSC (RCUK/ERC–ESICM 2025): SpO2 94–98%, PaCO2 4.7–6.0 kPa, systolic over 100 or MAP 60–65 mmHg, actively prevent fever (37.5 °C or less) for 36–72 hours in comatose patients, treat seizures (levetiracetam or valproate), prognosticate at 72 hours or later. ST elevation after ROSC → emergency angiography and primary PCI.\n\nInferior STEMI: check right-sided leads (V4R) for right ventricular infarction; avoid nitrates and keep preload.\n\nYour notes point to the AHA 2025 ACLS algorithm and highlights; the RCUK/ERC sequence here matches it on the scored points (AHA also gives adrenaline after the second shock in some teaching; RCUK after the third).\n\nPerfect script (AHA ACLS, as taught in Hong Kong) checked against four mark schemes: an AHA megacode checklist, an RCUK ALS checklist, an HKCEM-style resuscitation scheme and a keyword scheme. Added from that check: roles and closed-loop at the start, charging during compressions, the Hs and Ts named in full, ETCO2 for CPR quality, V4R and the nitrate warning said aloud, ICU after PCI, heparin.\n\nTime drives this station: an ARREST clock on the HUD. Each rhythm check is a timed event 2 minutes after the last shock; every shock is given on the defibrillator. When everything due in a cycle is done, the clock runs ahead to the next check instead of making you wait it out.\n\nThe arrest is recognised at the patient (response, breathing and pulse, with close-ups), not by a line to the nurse.\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.",
   "cast": [
     {
       "id": "patient",
@@ -103,27 +104,58 @@
   },
   "steps": [
     {
+      "id": "assess",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Assess him",
+      "hint": "Response; breathing and a carotid pulse together, in no more than 10 seconds.",
+      "groups": {
+        "Arrest?": [
+          {
+            "t": "Mr Choi, can you hear me? Shake his shoulders and shout",
+            "mark": "Checks for a response",
+            "r": "No response."
+          },
+          {
+            "t": "Open the airway; look, listen and feel for breathing",
+            "anim": "airway",
+            "mark": "Checks breathing",
+            "r": "Not breathing normally: only an occasional agonal gasp."
+          },
+          {
+            "t": "Feel the carotid pulse at the same time, no more than 10 seconds",
+            "anim": "pulse",
+            "scene": "arrest",
+            "mark": "Confirms cardiac arrest within 10 seconds",
+            "r": "No carotid pulse in 10 seconds. \"This is a cardiac arrest.\""
+          }
+        ]
+      }
+    },
+    {
       "id": "recognise",
       "kind": "say",
       "to": "nurse",
-      "label": "Arrest",
-      "hint": "Confirm the arrest in 10 seconds; help and the defibrillator; high-quality CPR; roles.",
+      "label": "Team",
+      "hint": "Help and the defibrillator; high-quality CPR; roles.",
       "opts": [
         {
-          "t": "Mr Choi, can you hear me? Unresponsive, not breathing normally, no carotid pulse in 10 seconds: this is a cardiac arrest.",
-          "mark": "Confirms cardiac arrest within 10 seconds"
-        },
-        {
           "t": "Call the arrest team and bring the defibrillator, please.",
-          "mark": "Calls for help and the defibrillator"
+          "mark": "Calls for help and the defibrillator",
+          "when": "arrest",
+          "early": "Assess him first: response, breathing, pulse."
         },
         {
           "t": "Start high-quality CPR: 30 to 2, 5 to 6 cm deep, 100 to 120 a minute, full recoil, minimal interruptions.",
-          "mark": "Starts high-quality CPR immediately"
+          "mark": "Starts high-quality CPR immediately",
+          "when": "arrest",
+          "early": "Assess him first: response, breathing, pulse."
         },
         {
           "t": "I'll lead. Nurse Tam, pads on while compressions continue; bag-valve-mask with high-flow oxygen. Closed-loop, please.",
-          "mark": "Leads: allocates pads and airway; closed-loop communication"
+          "mark": "Leads: allocates pads and airway; closed-loop communication",
+          "when": "arrest",
+          "early": "Assess him first: response, breathing, pulse."
         }
       ]
     },
@@ -240,21 +272,23 @@
     },
     {
       "id": "rhythm",
-      "kind": "say",
-      "to": "monitor",
+      "kind": "exam",
+      "to": "patient",
       "label": "Rhythm check",
-      "hint": "At the rhythm check: an organised rhythm? Feel for a pulse.",
-      "opts": [
-        {
-          "t": "Organised rhythm at the check: carotid pulse present, and the ETCO2 has jumped. We have ROSC.",
-          "scene": "rosc",
-          "mark": "Recognises ROSC",
-          "r": "Sinus rhythm at 96 with a pulse. ETCO2 rose sharply before the check.",
-          "when": "check4",
-          "early": "At the next rhythm check."
-        }
-      ],
-      "lang": "en"
+      "hint": "At the check: an organised rhythm on the monitor? Feel for a pulse.",
+      "groups": {
+        "Rhythm check": [
+          {
+            "t": "An organised rhythm on the monitor: feel the carotid pulse",
+            "anim": "pulse",
+            "when": "check4",
+            "early": "At the next rhythm check.",
+            "scene": "rosc",
+            "mark": "Recognises ROSC",
+            "r": "Carotid pulse present; the ETCO2 jumped during this cycle. \"We have ROSC.\""
+          }
+        ]
+      }
     },
     {
       "id": "causes",
@@ -636,11 +670,12 @@
   "script": [
     {
       "at": "0:00",
-      "say": "Mr Choi, can you hear me? Unresponsive, not breathing normally, no carotid pulse in 10 seconds: this is a cardiac arrest. Call the arrest team and bring the defibrillator, please."
+      "say": "Mr Choi, can you hear me? No response. Airway open: not breathing normally, only agonal gasps. No carotid pulse in 10 seconds: this is a cardiac arrest.",
+      "do": "Shake and shout; look, listen and feel with a hand on the carotid."
     },
     {
       "at": "0:10",
-      "say": "Start high-quality CPR: 30 to 2, 5 to 6 cm deep, 100 to 120 a minute, full recoil, minimal interruptions. I'll lead. Nurse Tam, pads on while compressions continue; bag-valve-mask with high-flow oxygen. Closed-loop, please."
+      "say": "Call the arrest team and bring the defibrillator, please. Start high-quality CPR: 30 to 2, 5 to 6 cm deep, 100 to 120 a minute, full recoil, minimal interruptions. I'll lead. Nurse Tam, pads on while compressions continue; bag-valve-mask with high-flow oxygen. Closed-loop, please."
     },
     {
       "at": "0:30",

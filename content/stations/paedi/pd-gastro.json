@@ -38,7 +38,7 @@
       "text": "Fluid bolus size. Your notes (WETFLAGS) use 20 mL/kg. RCUK and NICE NG29 now use 10 mL/kg boluses, reassessing after each."
     }
   ],
-  "notes": "Checked against NICE CG84 (Diarrhoea and vomiting caused by gastroenteritis in under 5s, updated 2017/2022), RCUK paediatric life support (fluid boluses) and NICE NG29 (IV fluids in children).\n\nNICE CG84 grades: no clinical dehydration; clinical dehydration (red flags: appears unwell or deteriorating, altered responsiveness, sunken eyes, tachycardia, tachypnoea, reduced skin turgor); clinical shock (decreased consciousness, pale/mottled, cold extremities, tachycardia, tachypnoea, weak pulses, CRT over 3 s, hypotension). Shock: 10 mL/kg 0.9% saline (or balanced crystalloid) bolus over 5–10 minutes (NICE NG29 now 10 mL/kg; CG84 said 20 mL/kg), reassess, repeat; then IV rehydration: deficit (100 mL/kg if shocked at presentation, else 50 mL/kg) plus maintenance (Holliday–Segar: 100 mL/kg/day for the first 10 kg, 50 for the next 10, 20 thereafter), with 0.9% saline plus 5% glucose; check U&E and glucose. Without shock: oral rehydration solution (50 mL/kg over 4 hours plus maintenance), by NG tube if refused. Hypoglycaemia: 2 mL/kg 10% glucose. Red flags for other diagnoses: bilious vomiting, blood in stool, high fever, abdominal distension, meningism.\n\nYour notes (WETFLAGS 20 mL/kg medical fluid) differ: current RCUK/NICE NG29 use 10 mL/kg boluses.\n\nPerfect script checked against NICE CG84/NG29 and APLS, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (20 mL/kg, 50% glucose, loperamide, maintenance only, hypotonic fluid). Added reassessment and the explanation.",
+  "notes": "Checked against NICE CG84 (Diarrhoea and vomiting caused by gastroenteritis in under 5s, updated 2017/2022), RCUK paediatric life support (fluid boluses) and NICE NG29 (IV fluids in children).\n\nNICE CG84 grades: no clinical dehydration; clinical dehydration (red flags: appears unwell or deteriorating, altered responsiveness, sunken eyes, tachycardia, tachypnoea, reduced skin turgor); clinical shock (decreased consciousness, pale/mottled, cold extremities, tachycardia, tachypnoea, weak pulses, CRT over 3 s, hypotension). Shock: 10 mL/kg 0.9% saline (or balanced crystalloid) bolus over 5–10 minutes (NICE NG29 now 10 mL/kg; CG84 said 20 mL/kg), reassess, repeat; then IV rehydration: deficit (100 mL/kg if shocked at presentation, else 50 mL/kg) plus maintenance (Holliday–Segar: 100 mL/kg/day for the first 10 kg, 50 for the next 10, 20 thereafter), with 0.9% saline plus 5% glucose; check U&E and glucose. Without shock: oral rehydration solution (50 mL/kg over 4 hours plus maintenance), by NG tube if refused. Hypoglycaemia: 2 mL/kg 10% glucose. Red flags for other diagnoses: bilious vomiting, blood in stool, high fever, abdominal distension, meningism.\n\nYour notes (WETFLAGS 20 mL/kg medical fluid) differ: current RCUK/NICE NG29 use 10 mL/kg boluses.\n\nPerfect script checked against NICE CG84/NG29 and APLS, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (20 mL/kg, 50% glucose, loperamide, maintenance only, hypotonic fluid). Added reassessment and the explanation.\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.",
   "cast": [
     {
       "id": "patient",
@@ -185,25 +185,32 @@
     },
     {
       "id": "reassess",
-      "kind": "say",
-      "to": "nurse",
-      "label": "Reassess",
-      "lang": "en",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Reassess her",
       "hint": "After the bolus; recheck the glucose.",
-      "opts": [
-        {
-          "t": "Reassess after the bolus: heart rate, refill, alertness; another 10 mL/kg if she's still shocked.",
-          "when": "bolus",
-          "early": "After the bolus.",
-          "mark": "Reassesses after each bolus"
-        },
-        {
-          "t": "Recheck her glucose and the U&E.",
-          "when": "glucose",
-          "early": "After the glucose.",
-          "mark": "Rechecks glucose and electrolytes"
-        }
-      ]
+      "groups": {
+        "After the bolus": [
+          {
+            "t": "Reassess after the bolus: heart rate, refill, alertness",
+            "anim": "pulse",
+            "when": "bolus",
+            "early": "After the bolus.",
+            "r": "HR 142, CRT 3 s, more alert. \"Better, still dehydrated: no second bolus needed yet.\"",
+            "mark": "Reassesses after each bolus"
+          }
+        ],
+        "Glucose": [
+          {
+            "t": "Recheck her glucose",
+            "anim": "glucose",
+            "when": "glucose",
+            "early": "After the glucose.",
+            "r": "Glucose 6.0 mmol/L. U&E sent: Na 138, K 3.6.",
+            "mark": "Rechecks glucose and electrolytes"
+          }
+        ]
+      }
     },
     {
       "id": "rehydrate",

@@ -624,3 +624,21 @@ test('clocked stations play to the end on the clinical clock: every wait has a t
     assert.ok(finished, `${st.id}: the guide never finishes on the clock`)
   }
 })
+
+/**
+ * Bedside checks are done at the patient, with their close-ups: you assess the patient, you do not tell the nurse
+ * what you found. A line to the nurse, the monitor or a trolley that checks the response, breathing, a pulse, an
+ * ABCDE or a reassessment is the wrong place for it (plans, handovers and reports are fine).
+ */
+test('bedside checks are done at the patient, not said to the nurse', () => {
+  const bedside = /can you hear me|look,? listen|feel (for|the) .*pulse|(carotid|femoral|radial) pulse (present|absent)|no (carotid|femoral) pulse|^ABCDE:|^reassess (him|her|after)|^rhythm and pulse check|^repeat ABCDE/i
+  const wrong: string[] = []
+  for (const file of files) {
+    const st = stationSchema.parse(JSON.parse(readFileSync(file, 'utf8')))
+    for (const s of st.steps) {
+      if (!['say', 'pick'].includes(s.kind) || !['nurse', 'monitor', 'trolley', 'team'].includes(s.to ?? '')) continue
+      for (const o of s.opts ?? []) if (!o.perform && bedside.test(o.t)) wrong.push(`${st.id}/${s.id}: "${o.t.slice(0, 60)}"`)
+    }
+  }
+  assert.deepEqual(wrong, [])
+})
