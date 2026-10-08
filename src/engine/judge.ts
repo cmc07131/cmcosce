@@ -240,6 +240,11 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
   const events = pack.events ?? []
   const prevented = (f: string) =>
     !scene.includes(f) && events.some((e) => e.scene === f) && events.filter((e) => e.scene === f).every((e) => e.level === 'hard' || (e.unless && scene.includes(e.unless)))
+  // Marks already earned by something said or done: an alternative way to earn them (the same line in Cantonese,
+  // phoning instead of asking the nurse) is not asked for again.
+  const earned = new Set(
+    pack.actions.flatMap((a) => [...(a.options ?? []), ...(a.findings ?? [])].filter((o) => (spent[a.id] ?? []).includes(o.id)).flatMap((o) => o.marksChecklistIds ?? [])),
+  )
   let waiting = false
   for (const id of order) {
     const a = pack.actions.find((x) => x.id === id)
@@ -250,6 +255,7 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
     for (const o of a.options ?? []) {
       // Scoring options, and treatments for something that happens to the patient (they wait on an event).
       if (o.isTrap || used.has(o.id) || (!o.marksChecklistIds?.length && !o.when?.length)) continue
+      if (o.marksChecklistIds?.length && o.marksChecklistIds.every((m) => earned.has(m))) continue
       if ((a.kind === 'dialogue') && turnDone.has(o.group)) continue
       if ((o.when ?? []).some(prevented)) continue
       if (!(o.when ?? []).every((f) => scene.includes(f))) {
@@ -258,7 +264,7 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
       }
       return { kind: 'do', actionId: a.id, targetId: a.targetIds[0], option: o.label }
     }
-    for (const f of a.findings ?? []) if (!used.has(f.id) && f.marksChecklistIds?.length) return { kind: 'do', actionId: a.id, targetId: a.targetIds[0], option: f.label }
+    for (const f of a.findings ?? []) if (!used.has(f.id) && f.marksChecklistIds?.length && !f.marksChecklistIds.every((m) => earned.has(m))) return { kind: 'do', actionId: a.id, targetId: a.targetIds[0], option: f.label }
   }
   return waiting ? { kind: 'wait' } : null
 }

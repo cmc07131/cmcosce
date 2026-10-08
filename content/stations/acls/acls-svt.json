@@ -115,7 +115,7 @@
       "groups": {
         "ABCDE": [
           {
-            "t": "Any chest pain, breathlessness, dizziness or fainting?",
+            "t": "Her pulse and blood pressure; any chest pain, breathlessness, dizziness or fainting?",
             "anim": "pulse",
             "r": "No chest pain, not breathless, not dizzy, no fainting. BP 112/70, warm. \"No adverse features: she's stable.\"",
             "mark": "Checks for adverse features: shock, syncope, ischaemia, heart failure"

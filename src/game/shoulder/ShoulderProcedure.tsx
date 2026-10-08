@@ -251,19 +251,6 @@ function ReduceStage({ run, runRef, upd, feel, physical, why, coach, next, sedat
         >
           ABDUCT SLOWLY, HOLDING THE ROTATION
         </button>
-        <button
-          type="button"
-          className="tap io-mini"
-          data-testid="shoulder-kocher"
-          onClick={() => {
-            upd({ levered: true, reduced: true })
-            buzz([60, 40, 60])
-            physical('You lever the arm round with force. It goes in, but you felt something give.')
-            why("Kocher's leverage has a higher rate of humeral fracture and nerve injury. Gentle techniques first.")
-          }}
-        >
-          LEVER IT IN (KOCHER)
-        </button>
       </div>
       <NextButton onClick={next} testId="shoulder-next">
         After

@@ -371,7 +371,8 @@
           {
             "t": "Chest X-ray",
             "r": "Clear lungs.",
-            "img": "xr:cxr-normal"
+            "img": "xr:cxr-normal",
+            "mark": "Chest X-ray"
           },
           {
             "t": "FBC, U&E, CK, group and save, pregnancy test",

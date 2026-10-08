@@ -42,6 +42,7 @@
       "title": "Escalate",
       "goal": "Not responding: IV salbutamol; the plan if he tires.",
       "steps": [
+        "recheck",
         "escalate",
         "plan"
       ]
@@ -59,11 +60,11 @@
       "untreated": "His chest went silent and nebulisers were never started."
     },
     {
-      "id": "not-responding",
+      "id": "mag-in",
       "after": "mag",
-      "delayS": 20,
-      "scene": "not-responding",
-      "say": "Still very tight after the magnesium: SpO2 91%, tiring."
+      "delayS": 1200,
+      "scene": "mag-in",
+      "say": "Twenty minutes: the magnesium is in."
     }
   ],
   "review": [
@@ -80,7 +81,7 @@
       "text": "Magnesium. BTS: 40 mg/kg (max 2 g) over 20 minutes; AHA PALS: 25–50 mg/kg over 15–30 minutes. The script's 40 mg/kg fits both."
     }
   ],
-  "notes": "Checked against BTS/SIGN British guideline on the management of asthma (2019; acute section retained in the 2024 BTS/NICE/SIGN update), RCUK paediatric life support and APLS.\n\nLife-threatening features (children): SpO2 under 92%, silent chest, poor respiratory effort, altered consciousness, agitation, exhaustion, cyanosis, hypotension; PEF under 33% if measurable.\n\nTreatment: high-flow oxygen to SpO2 94–98%; nebulised salbutamol (2.5 mg under 5 years, 5 mg 5 years and over) driven by oxygen, back-to-back; nebulised ipratropium 250 microgram every 20–30 minutes for the first 2 hours; steroids (oral prednisolone 1–2 mg/kg, max 40 mg, or IV hydrocortisone 4 mg/kg); IV magnesium sulfate 40 mg/kg (max 2 g) over 20 minutes; IV salbutamol 15 microgram/kg over 10 minutes if not responding; then PICU (aminophylline, infusions, ventilation). Your notes' doses match this, except: ipratropium 125 microgram under 5 years (BTS uses 250 microgram for 2–12 years), and subcutaneous adrenaline, which is not part of BTS acute asthma management (keep adrenaline for anaphylaxis).\n\nIntubation is hazardous: experienced operator, ketamine, then low rate, long expiratory time, permissive hypercapnia (your ventilation notes are correct).\n\nNo routine chest X-ray unless pneumothorax, consolidation or life-threatening features not responding; no routine antibiotics.\n\nPerfect script checked against a BTS/SIGN checklist, an AHA PALS respiratory checklist, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (wrong nebuliser and IV doses, sedation, an X-ray first, the reassuring answer to his father). Added: oxygen (the station had none), his weight aloud, life-threatening asthma named, early PICU and anaesthetist, a history from his father in Cantonese, the gas read, and the plan if he tires including ventilation. The silent-chest event now waits 60 s after monitoring (was 45 s), long enough for the assessment.",
+  "notes": "Checked against BTS/SIGN British guideline on the management of asthma (2019; acute section retained in the 2024 BTS/NICE/SIGN update), RCUK paediatric life support and APLS.\n\nLife-threatening features (children): SpO2 under 92%, silent chest, poor respiratory effort, altered consciousness, agitation, exhaustion, cyanosis, hypotension; PEF under 33% if measurable.\n\nTreatment: high-flow oxygen to SpO2 94–98%; nebulised salbutamol (2.5 mg under 5 years, 5 mg 5 years and over) driven by oxygen, back-to-back; nebulised ipratropium 250 microgram every 20–30 minutes for the first 2 hours; steroids (oral prednisolone 1–2 mg/kg, max 40 mg, or IV hydrocortisone 4 mg/kg); IV magnesium sulfate 40 mg/kg (max 2 g) over 20 minutes; IV salbutamol 15 microgram/kg over 10 minutes if not responding; then PICU (aminophylline, infusions, ventilation). Your notes' doses match this, except: ipratropium 125 microgram under 5 years (BTS uses 250 microgram for 2–12 years), and subcutaneous adrenaline, which is not part of BTS acute asthma management (keep adrenaline for anaphylaxis).\n\nIntubation is hazardous: experienced operator, ketamine, then low rate, long expiratory time, permissive hypercapnia (your ventilation notes are correct).\n\nNo routine chest X-ray unless pneumothorax, consolidation or life-threatening features not responding; no routine antibiotics.\n\nPerfect script checked against a BTS/SIGN checklist, an AHA PALS respiratory checklist, an HKCEM-style scheme and a keyword scheme. Removed every wrong option (wrong nebuliser and IV doses, sedation, an X-ray first, the reassuring answer to his father). Added: oxygen (the station had none), his weight aloud, life-threatening asthma named, early PICU and anaesthetist, a history from his father in Cantonese, the gas read, and the plan if he tires including ventilation. The silent-chest event now waits 60 s after monitoring (was 45 s), long enough for the assessment.\n\nAudit: the clock runs to the reassessment; you reassess at the patient, and what you find brings the next step due.",
   "cast": [
     {
       "id": "patient",
@@ -345,6 +346,26 @@
       ]
     },
     {
+      "id": "recheck",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Reassess him",
+      "hint": "After the magnesium: work of breathing, chest, saturation.",
+      "groups": {
+        "After the magnesium": [
+          {
+            "t": "Reassess him after the magnesium: work of breathing, the chest, saturation",
+            "anim": "auscultate",
+            "when": "mag-in",
+            "early": "Once the magnesium is in.",
+            "scene": "not-responding",
+            "r": "Still very tight: RR 40, quiet chest, SpO2 91%, tiring. \"Not responding: IV salbutamol and PICU now.\"",
+            "mark": "Reassesses after the magnesium: not responding"
+          }
+        ]
+      }
+    },
+    {
       "id": "escalate",
       "kind": "pick",
       "to": "cart",
@@ -591,5 +612,6 @@
       "at": "2:50",
       "say": "Then a salbutamol infusion, and aminophylline in PICU. If he needs intubating: the most experienced person, with ketamine; then a low rate and a long expiratory time, accepting a high CO2: permissive hypercapnia."
     }
-  ]
+  ],
+  "clock": "TIME"
 }

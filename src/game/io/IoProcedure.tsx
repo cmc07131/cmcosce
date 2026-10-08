@@ -181,19 +181,20 @@ function Survey({ c, run, upd, feel, why, next }: Ctx) {
             ) : (
               <p className="io-small">{FINDING_TEXT[c.legs[side]]}</p>
             )}
-            <button
-              type="button"
-              className="tap mt-1"
-              data-testid={`use-${side}`}
-              onClick={() => {
-                const r = upd({ side })
-                if (c.legs[side] !== 'clean') why('That bone is out: fracture, infection, burn, prosthesis, or an IO in the last 48 hours. Use the other leg or the humerus.')
-                else if (!(r.exposed.left && r.exposed.right)) why('Look at both legs before you choose. The other leg might be the only clean one, or this one might hide a problem under the blanket.')
-                next()
-              }}
-            >
-              Use this tibia
-            </button>
+            {/* Both legs looked at first; then only a clean tibia is offered (nobody learns by drilling a fracture). */}
+            {run.exposed.left && run.exposed.right && c.legs[side] === 'clean' && (
+              <button
+                type="button"
+                className="tap mt-1"
+                data-testid={`use-${side}`}
+                onClick={() => {
+                  upd({ side })
+                  next()
+                }}
+              >
+                Use this tibia
+              </button>
+            )}
           </div>
         ))}
       </div>
@@ -373,8 +374,6 @@ function Position({ run, upd, feel, why, next }: Ctx) {
 
 const SAY_LANDMARK: SayOption[] = [
   { text: 'Flat anteromedial tibia, about 2 cm medial to the tuberosity. I aim 90° to the bone.', ok: true },
-  { text: 'On the tibial tuberosity, angled up toward the knee.', ok: false },
-  { text: 'Lateral to the tibial crest, 2 cm below the joint line.', ok: false },
 ]
 
 function useLegPointer(side: Side) {
@@ -628,7 +627,6 @@ function sayLine(visible: boolean): SayOption[] {
   return [
     { text: 'Tip on bone and a black 5 mm line shows above the skin. The length is enough.', ok: visible },
     { text: 'Tip on bone and no black line shows. I need a longer needle.', ok: !visible },
-    { text: 'The line does not matter with a powered driver.', ok: false },
   ]
 }
 
@@ -887,16 +885,6 @@ function Insert({ c, run, runRef, upd, feel, why, physical, coach, next }: Ctx) 
           >
             <ViseArt size={24} /> NEEDLEVISE
           </button>
-          <button
-            type="button"
-            className="tap io-mini"
-            onClick={() => {
-              upd({ styletSafe: false })
-              why('A loose stylet on the bed is a needlestick. Straight into the NeedleVISE.')
-            }}
-          >
-            LAY IT ON THE BED
-          </button>
         </div>
       )}
 
@@ -911,8 +899,6 @@ type Attached = 'empty' | 'lido' | 'saline' | null
 
 const SAY_CLOSE: SayOption[] = [
   { text: 'Proximal tibial IO, flushed, calf soft. A bridge, up to 24 hours: we convert to an IV or a central line.', ok: true },
-  { text: 'IO in. It can stay until the ward round.', ok: false },
-  { text: 'IO in. No need to flush if it is in bone.', ok: false },
 ]
 
 function Secure({ c, run, runRef, upd, feel, why, physical, next }: Ctx) {
@@ -1079,9 +1065,6 @@ function Secure({ c, run, runRef, upd, feel, why, physical, next }: Ctx) {
 
       {syringe === 'saline' && (
         <div className="grid grid-cols-2 gap-2">
-          <HoldButton testId="flush-slow" onTick={() => undefined} onEnd={() => finishFlush(false)}>
-            Hold · push gently
-          </HoldButton>
           <button type="button" className="tap hold" data-testid="flush-fast" onClick={() => finishFlush(true)}>
             Push 10 mL hard, fast
           </button>
@@ -1089,48 +1072,29 @@ function Secure({ c, run, runRef, upd, feel, why, physical, next }: Ctx) {
       )}
 
       {run.flush !== 'none' && run.calf === null && (
-        <div className="grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            className="tap mt-2"
-            data-testid="calf-ok"
-            onClick={() => {
-              upd({ calf: run.swelling ? 'carried-on' : 'soft-ok' })
-              if (run.swelling) why('Look at the calf. Tight swelling around the site is extravasation. Stop, remove the IO, and use a different bone.')
-              else feel('Calf soft. Fluid runs.')
-            }}
-          >
-            Calf soft · carry on
-          </button>
-          <button
-            type="button"
-            className="tap mt-2"
-            data-testid="calf-stop"
-            onClick={() => {
+        <button
+          type="button"
+          className="tap mt-2"
+          data-testid="calf-check"
+          onClick={() => {
+            // What you find decides what happens: a soft calf, carry on; tight swelling, stop and take it out.
+            if (run.swelling) {
               upd({ calf: 'stopped' })
-              if (!run.swelling) why('The calf was soft. A working IO was pulled.')
-              else feel('Infusion stopped. The IO has to come out.')
-            }}
-          >
-            Calf swelling · stop
-          </button>
-        </div>
+              feel('Tight swelling around the site: extravasation. Infusion stopped; the IO has to come out, and the next one goes in a different bone.')
+            } else {
+              upd({ calf: 'soft-ok' })
+              feel('Calf soft. Fluid runs.')
+            }
+          }}
+        >
+          Look at and feel the calf
+        </button>
       )}
 
       {run.calf === 'stopped' && run.removal === null && (
         <div className="grid grid-cols-2 gap-2">
           <button type="button" className="tap mt-2" data-testid="remove-straight" onClick={() => upd({ removal: 'straight' })}>
             Syringe on the hub, rotate clockwise, pull straight
-          </button>
-          <button
-            type="button"
-            className="tap mt-2"
-            onClick={() => {
-              upd({ removal: 'rocked' })
-              why('Rocking can break the needle or the bone. Rotate clockwise and pull straight.')
-            }}
-          >
-            Rock it side to side until it comes
           </button>
         </div>
       )}

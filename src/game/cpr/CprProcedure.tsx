@@ -232,9 +232,6 @@ export function CprProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
                   <button type="button" className="tap io-mini" data-testid="cpr-asystole" onClick={() => (upd({ rhythm: 'asystole' }), feel('A flat line in two leads, gain up: asystole. Non-shockable. Back on the chest; adrenaline.'))}>
                     ASYSTOLE: NON-SHOCKABLE
                   </button>
-                  <button type="button" className="tap io-mini" data-testid="cpr-vf" onClick={() => (upd({ rhythm: 'vf' }), why('That is a flat line with gain up in two leads: asystole. Do not shock it.'))}>
-                    SHOCKABLE: CHARGE
-                  </button>
                 </>
               )}
               {pose === 'lightning' && step === 'CPR' && (

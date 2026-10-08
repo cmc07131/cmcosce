@@ -45,7 +45,8 @@
       "title": "Plan",
       "goal": "Orthopaedics, nil by mouth, slab no more than 90°, repeat checks, document.",
       "steps": [
-        "plan"
+        "plan",
+        "recheck"
       ]
     },
     {
@@ -78,7 +79,7 @@
       "text": "Compartment syndrome threshold. Your notes use an absolute compartment pressure of 25 mmHg. The usual threshold is the delta pressure: diastolic pressure minus compartment pressure under 30 mmHg. The clinical signs (escalating pain, pain on passive finger extension) come first."
     }
   ],
-  "notes": "Checked against BOAST 11 'Supracondylar fractures of the humerus in children' (October 2020) and the Gartland classification.\n\nX-ray: lateral view — posterior fat pad (always abnormal), elevated anterior fat pad ('sail'), anterior humeral line should pass through the middle third of the capitellum (passes anterior to it in an extension-type fracture), radiocapitellar line intact. Ossification centres CRITOE (capitellum ~1, radial head ~3, internal/medial epicondyle ~5, trochlea ~7, olecranon ~9, external/lateral epicondyle ~11 years). Gartland I undisplaced (above-elbow backslab at 90° or less, collar and cuff); II angulated with an intact posterior cortex; III completely displaced — closed reduction and K-wiring (BOAST: within 12–24 h, urgent if neurovascular compromise).\n\nNeurovascular examination and documentation of radial, median (and anterior interosseous — 'OK' sign, FPL and FDP index), and ulnar nerves, and radial pulse and perfusion. The pink pulseless hand needs urgent orthopaedic/vascular input; the white pulseless hand is an emergency (reduce and explore). Compartment syndrome: pain out of proportion, pain on passive finger extension — early; avoid tight flexion and circumferential casts.\n\nYour notes match this (they use a 25 mmHg compartment pressure question; the delta pressure — diastolic minus compartment under 30 mmHg — is the usual threshold).\n\nPerfect script (essential marks): introduce, identify, consent; allergies, last meal, tetanus, mechanism, head injury; weight-based analgesia before moving, elbow in comfort; antecubital skin; colour, warmth, refill, radial pulse, both sides; radial, median, AIN, ulnar; passive stretch and compartments; AP and lateral in comfort, Gartland grade; state NV status; urgent orthopaedics, nil by mouth; slab in comfort at 90° or less, elevate, repeat NV observations; document before reduction; explain, AIN prognosis, compartment safety net. Instant fail: hyperflexing the elbow; fracture clinic for a displaced fracture; no vascular exam.\n\nPerfect script checked against BOAST 11, an HKCEM-style scheme and a keyword scheme. The flow you reviewed is kept; the wrong options (forcing the elbow, paracetamol only, hyperflexion, a 90° film, 'neurovascularly intact', tight cast, fracture clinic, ED reduction, promising recovery) are removed.",
+  "notes": "Checked against BOAST 11 'Supracondylar fractures of the humerus in children' (October 2020) and the Gartland classification.\n\nX-ray: lateral view — posterior fat pad (always abnormal), elevated anterior fat pad ('sail'), anterior humeral line should pass through the middle third of the capitellum (passes anterior to it in an extension-type fracture), radiocapitellar line intact. Ossification centres CRITOE (capitellum ~1, radial head ~3, internal/medial epicondyle ~5, trochlea ~7, olecranon ~9, external/lateral epicondyle ~11 years). Gartland I undisplaced (above-elbow backslab at 90° or less, collar and cuff); II angulated with an intact posterior cortex; III completely displaced — closed reduction and K-wiring (BOAST: within 12–24 h, urgent if neurovascular compromise).\n\nNeurovascular examination and documentation of radial, median (and anterior interosseous — 'OK' sign, FPL and FDP index), and ulnar nerves, and radial pulse and perfusion. The pink pulseless hand needs urgent orthopaedic/vascular input; the white pulseless hand is an emergency (reduce and explore). Compartment syndrome: pain out of proportion, pain on passive finger extension — early; avoid tight flexion and circumferential casts.\n\nYour notes match this (they use a 25 mmHg compartment pressure question; the delta pressure — diastolic minus compartment under 30 mmHg — is the usual threshold).\n\nPerfect script (essential marks): introduce, identify, consent; allergies, last meal, tetanus, mechanism, head injury; weight-based analgesia before moving, elbow in comfort; antecubital skin; colour, warmth, refill, radial pulse, both sides; radial, median, AIN, ulnar; passive stretch and compartments; AP and lateral in comfort, Gartland grade; state NV status; urgent orthopaedics, nil by mouth; slab in comfort at 90° or less, elevate, repeat NV observations; document before reduction; explain, AIN prognosis, compartment safety net. Instant fail: hyperflexing the elbow; fracture clinic for a displaced fracture; no vascular exam.\n\nPerfect script checked against BOAST 11, an HKCEM-style scheme and a keyword scheme. The flow you reviewed is kept; the wrong options (forcing the elbow, paracetamol only, hyperflexion, a 90° film, 'neurovascularly intact', tight cast, fracture clinic, ED reduction, promising recovery) are removed.\n\nAudit: the hand is rechecked at the patient after the slab, not reported back.",
   "cast": [
     {
       "id": "patient",
@@ -348,8 +349,9 @@
         },
         {
           "t": "Above-elbow backslab in comfort, no more than 90°; sling, elevate; neurovascular observations every hour",
-          "r": "Slab on, elbow at about 70°; hand still pink, pulse present.",
-          "mark": "Backslab in comfort at 90° or less, elevate, repeat neurovascular checks"
+          "r": "Slab on, elbow at about 70°.",
+          "mark": "Backslab in comfort at 90° or less, elevate, repeat neurovascular checks",
+          "scene": "slab"
         },
         {
           "t": "Document the skin, pulse, refill and each nerve, including the AIN palsy, before any reduction",
@@ -357,6 +359,26 @@
           "mark": "Documents the neurovascular status before reduction"
         }
       ]
+    },
+    {
+      "id": "recheck",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Recheck the hand",
+      "hint": "After the slab: colour, refill, pulse, the OK sign.",
+      "groups": {
+        "After the slab": [
+          {
+            "t": "Recheck the hand after the slab: colour, refill, radial pulse, the OK sign",
+            "anim": "pulse",
+            "when": "slab",
+            "early": "Once the slab is on.",
+            "mark": "Rechecks neurovascular status after the slab",
+            "r": "Pink, refill 1 second, radial pulse present; the AIN palsy unchanged. \"Neurovascular status unchanged after the slab.\"",
+            "do": "look hand-L & press nails-L & feel wrist-L & say ok-sign"
+          }
+        ]
+      }
     },
     {
       "id": "close",

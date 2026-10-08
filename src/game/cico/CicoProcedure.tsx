@@ -167,13 +167,9 @@ function Position({ run, upd, feel, why, next }: Stage) {
 
 const SAY_SLIM: SayOption[] = [
   { text: 'Thyroid cartilage, cricothyroid membrane, cricoid: midline and palpable.', ok: true },
-  { text: 'Hyoid, then the thyroid isthmus. That is where I cut.', ok: false },
-  { text: 'Two finger-breadths above the sternal notch.', ok: false },
 ]
 const SAY_OBESE: SayOption[] = [
   { text: 'I cannot feel the membrane. Vertical midline incision, then I find it with my finger.', ok: true },
-  { text: 'The membrane is not palpable, so needle cricothyroidotomy.', ok: false },
-  { text: 'I will wait for an ultrasound before I cut.', ok: false },
 ]
 
 function Larynx({ c, run, upd, feel, why, coach, next }: Stage) {
@@ -586,8 +582,6 @@ function Tube({ c, run, runRef, upd, feel, why, physical, coach, next }: Stage) 
 
 const SAY_CLOSE: SayOption[] = [
   { text: 'Front-of-neck tube in, square ETCO2. I hold it until it is tied. Chest X-ray; keep him paralysed and sedated. ENT and ICU.', ok: true },
-  { text: 'Tube in. Advance it to 22 cm and tape it.', ok: false },
-  { text: 'The chest rose, so we do not need capnography.', ok: false },
 ]
 
 function Confirm({ c, run, upd, feel, why, physical, next, etco2, setEtco2 }: Stage) {

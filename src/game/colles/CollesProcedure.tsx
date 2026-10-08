@@ -528,7 +528,7 @@ function ReduceStage({ run, runRef, upd, feel, physical, why, coach, next }: Sta
 
 function SlabStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
   const r = run
-  const slabs: Slab[] = ['dorsal-be', 'volar-be', 'above-elbow', 'full-cast']
+  const slabs: Slab[] = ['dorsal-be']
   return (
     <>
       <p className="io-lede">{r.held ? 'Your hands hold the reduction.' : 'Nobody is holding the reduction.'} Choose and lay the plaster, then mould it until it sets.</p>

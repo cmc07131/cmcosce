@@ -441,8 +441,6 @@ function InsertStep({ run, runRef, upd, feel, physical, why, coach, next, mask, 
 
 const SAY_CONFIRM: SayOption[] = [
   { text: 'Chest rising and a square capnography trace on every breath, no large leak: it is ventilating.', ok: true },
-  { text: 'The SpO2 is coming up, so it must be in.', ok: false },
-  { text: 'I can hear air at the mouth, so it is in.', ok: false },
 ]
 
 function VentilateStep({ run, upd, physical, why, next, chest, breathe, inhale }: Stage & { breathe: (s: number) => void }) {
@@ -469,19 +467,6 @@ function VentilateStep({ run, upd, physical, why, next, chest, breathe, inhale }
       >
         Hold · squeeze the bag ({run.breaths} breath{run.breaths === 1 ? '' : 's'})
       </HoldButton>
-      <Choices
-        options={[
-          {
-            label: 'INFLATE THE CUFF · 30 mL',
-            testId: 'igel-inflate',
-            onClick: () => {
-              upd({ inflateTried: true })
-              physical('There is no pilot balloon to fill.')
-              why('The i-gel cuff is a soft gel that moulds to the larynx. Nothing to inflate.')
-            },
-          },
-        ]}
-      />
       {run.breaths >= 3 && (
         <SayIt
           prompt="Tell your assistant how you know it is working."

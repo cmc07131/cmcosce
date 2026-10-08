@@ -30,18 +30,19 @@
       ]
     },
     {
-      "title": "Still bleeding?",
-      "goal": "Watch her. If she keeps bleeding: the next drug.",
+      "title": "Fluids and blood",
+      "goal": "Warm fluid while the blood comes, then blood products.",
       "steps": [
-        "second-line"
+        "fluid",
+        "blood"
       ]
     },
     {
-      "title": "Fluids and blood",
-      "goal": "A limited bridge of warm fluid, then blood products when they arrive.",
+      "title": "Still bleeding?",
+      "goal": "Reassess the fundus and the pads; if she is still bleeding, carboprost with bimanual compression; then theatre if it continues.",
       "steps": [
-        "fluid",
-        "blood",
+        "recheck",
+        "second-line",
         "escalate"
       ]
     }
@@ -55,13 +56,6 @@
       "say": "The O-negative blood has arrived."
     },
     {
-      "id": "still-bleeding",
-      "after": "tone",
-      "delayS": 20,
-      "scene": "still-bleeding",
-      "say": "Still bleeding despite the oxytocin: another 500 mL on the pads."
-    },
-    {
       "id": "worse",
       "after": "monitored",
       "delayS": 90,
@@ -70,6 +64,13 @@
       "say": "She is paler and confused. BP 74/40.",
       "treatedBy": "oxytocin",
       "untreated": "She bled on and never had a uterotonic."
+    },
+    {
+      "id": "tone-check",
+      "after": "tone",
+      "delayS": 120,
+      "scene": "tone-check",
+      "say": "Two minutes since the oxytocin infusion started."
     }
   ],
   "review": [
@@ -82,7 +83,7 @@
       "text": "The E-MOTIVE approach (WHO 2023): measure blood loss to detect PPH early, then give the first-response bundle together (uterine massage, oxytocics, tranexamic acid, IV fluids, examination and escalation)."
     }
   ],
-  "notes": "Checked against RCOG Green-top Guideline 52 (Postpartum haemorrhage), the WOMAN trial (tranexamic acid), WHO 2023 recommendations and the E-MOTIVE bundle (NEJM 2023), and NICE NG235 (Intrapartum care, 2023).\n\nMajor PPH: over 1000 mL or signs of shock. Call for help (senior obstetrician, anaesthetist, midwife), activate the major haemorrhage protocol, two large-bore cannulae, bloods (FBC, coagulation, fibrinogen, crossmatch 4 units), warmed fluids limited to about 2 L crystalloid before blood (RCOG), O-negative if needed. Tranexamic acid 1 g IV within 3 hours of birth, second 1 g after 30 minutes if bleeding continues (WOMAN). Your notes omit tranexamic acid; it is scored here.\n\nThe 4 Ts: Tone (commonest), Trauma, Tissue, Thrombin. Tone: rub up a contraction (fundal massage), bimanual compression, empty the bladder; oxytocin 5 IU slow IV (may repeat), ergometrine 0.5 mg IV/IM (not in hypertension), oxytocin infusion 40 IU in 500 mL at 125 mL/h, carboprost 250 microgram IM every 15 minutes (max 8 doses; caution in asthma), misoprostol 800 microgram sublingual; then balloon tamponade and surgery. Check the placenta is complete and look for tears.\n\nYour notes' structure matches this; they start with a 1 L Hartmann's bolus, which is acceptable in the RCOG limit. E-MOTIVE adds early detection by measured blood loss and a bundle given together (massage, oxytocics, tranexamic acid, fluids, examination and escalation).\n\nPerfect script checked against RCOG Green-top 52, WHO E-MOTIVE and the WOMAN trial, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (fast oxytocin, 4 g TXA, ergometrine in hypertension, IV carboprost, 6 L saline).",
+  "notes": "Checked against RCOG Green-top Guideline 52 (Postpartum haemorrhage), the WOMAN trial (tranexamic acid), WHO 2023 recommendations and the E-MOTIVE bundle (NEJM 2023), and NICE NG235 (Intrapartum care, 2023).\n\nMajor PPH: over 1000 mL or signs of shock. Call for help (senior obstetrician, anaesthetist, midwife), activate the major haemorrhage protocol, two large-bore cannulae, bloods (FBC, coagulation, fibrinogen, crossmatch 4 units), warmed fluids limited to about 2 L crystalloid before blood (RCOG), O-negative if needed. Tranexamic acid 1 g IV within 3 hours of birth, second 1 g after 30 minutes if bleeding continues (WOMAN). Your notes omit tranexamic acid; it is scored here.\n\nThe 4 Ts: Tone (commonest), Trauma, Tissue, Thrombin. Tone: rub up a contraction (fundal massage), bimanual compression, empty the bladder; oxytocin 5 IU slow IV (may repeat), ergometrine 0.5 mg IV/IM (not in hypertension), oxytocin infusion 40 IU in 500 mL at 125 mL/h, carboprost 250 microgram IM every 15 minutes (max 8 doses; caution in asthma), misoprostol 800 microgram sublingual; then balloon tamponade and surgery. Check the placenta is complete and look for tears.\n\nYour notes' structure matches this; they start with a 1 L Hartmann's bolus, which is acceptable in the RCOG limit. E-MOTIVE adds early detection by measured blood loss and a bundle given together (massage, oxytocics, tranexamic acid, fluids, examination and escalation).\n\nPerfect script checked against RCOG Green-top 52, WHO E-MOTIVE and the WOMAN trial, an HKCEM-style scheme and a keyword scheme. Removed the wrong options (fast oxytocin, 4 g TXA, ergometrine in hypertension, IV carboprost, 6 L saline).\n\nAudit: the clock runs to the reassessment; you reassess at the patient, and what you find brings the next step due.",
   "cast": [
     {
       "id": "patient",
@@ -291,6 +292,26 @@
       ]
     },
     {
+      "id": "recheck",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Reassess",
+      "hint": "The fundus and the pads.",
+      "groups": {
+        "After the oxytocin": [
+          {
+            "t": "Feel the fundus and look at the pads",
+            "anim": "abdomen",
+            "when": "tone-check",
+            "early": "Give the first-line drugs time.",
+            "scene": "still-bleeding",
+            "r": "The uterus softens again; another 500 mL on the pads. \"Still bleeding: bimanual compression and carboprost.\"",
+            "mark": "Reassesses tone and blood loss after the first-line drugs"
+          }
+        ]
+      }
+    },
+    {
       "id": "second-line",
       "kind": "pick",
       "to": "cart",
@@ -305,7 +326,8 @@
           "fetch": "cart",
           "when": "still-bleeding",
           "early": "Give the first-line drugs time.",
-          "mark": "Bimanual compression and second-line uterotonic"
+          "mark": "Bimanual compression and second-line uterotonic",
+          "scene": "carboprost"
         }
       ]
     },
@@ -357,7 +379,9 @@
       "opts": [
         {
           "t": "Obstetrician: still bleeding despite uterotonics. To theatre for examination under anaesthesia, balloon tamponade, then a compression suture or interventional radiology.",
-          "mark": "Escalates to surgical and radiological options"
+          "mark": "Escalates to surgical and radiological options",
+          "when": "carboprost",
+          "early": "If she keeps bleeding after carboprost."
         }
       ]
     },
@@ -571,5 +595,6 @@
     "bimanual compression",
     "2 L",
     "balloon tamponade"
-  ]
+  ],
+  "clock": "TIME"
 }

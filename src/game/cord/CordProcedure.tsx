@@ -106,8 +106,6 @@ export function CordProcedure({ seed, coach, onDone }: { seed: number; coach: bo
 
 const SAY_OVERT: SayOption[] = [
   { text: 'This is an overt cord prolapse: cord outside, in front of the presenting part. Obstetric emergency.', ok: true },
-  { text: 'Membranes have ruptured. Speculum later; no rush.', ok: false },
-  { text: 'That is a show. I will reassess in an hour.', ok: false },
 ]
 
 function Look({ c, run, upd, feel, why, next }: Stage) {
@@ -154,8 +152,6 @@ function Look({ c, run, upd, feel, why, next }: Stage) {
 
 const SAY_OCCULT: SayOption[] = [
   { text: 'Cord felt below the presenting part: this is a cord prolapse. Obstetric emergency.', ok: true },
-  { text: 'Something soft in the vagina. I will re-examine in an hour.', ok: false },
-  { text: 'That is the cervix. She is in normal labour.', ok: false },
 ]
 
 function Lift({ c, run, runRef, upd, feel, why, physical, elapsed, spasm, spasmOn, next }: Stage) {
@@ -304,8 +300,6 @@ function Heart({ run, upd, fhr, why, feel, next }: Stage) {
     const rate = Math.round((heard ?? 0) / 5) * 5
     return [
       { text: `Fetal heart about ${rate}. Still category 1: we go now.`, ok: true },
-      { text: 'The heart is fine, so we can slow down and wait for the list.', ok: false },
-      { text: 'No heart heard, so crash caesarean anyway.', ok: false },
     ]
   }, [heard])
   return (
@@ -430,8 +424,6 @@ const TRANSFER: { pose: Pose | 'walk'; label: string }[] = [
 
 const SAY_BLADDER: SayOption[] = [
   { text: 'Her bladder is full on purpose: unclamp and empty it before the knife.', ok: true },
-  { text: 'Leave the bladder full; it helps in theatre.', ok: false },
-  { text: 'Take the catheter out now.', ok: false },
 ]
 
 function Transfer({ run, upd, feel, why, physical, next }: Stage) {

@@ -642,3 +642,13 @@ test('bedside checks are done at the patient, not said to the nurse', () => {
   }
   assert.deepEqual(wrong, [])
 })
+
+test('the guide does not ask for an alternative once its mark is earned', () => {
+  const pack = packSchema.parse(JSON.parse(readFileSync(join('content', 'packs', 'cv-em-02', 'pack.json'), 'utf8')))
+  const intro = pack.actions.find((a) => a.id === 'intro')!
+  const english = intro.options!.find((o) => o.id === 'hello')!
+  const first = nextHint(pack, {}, [])
+  assert.equal(first?.kind === 'do' && first.actionId, 'intro')
+  const after = nextHint(pack, { intro: [english.id] }, [])
+  assert.ok(!(after?.kind === 'do' && after.actionId === 'intro'), 'the Cantonese line is an alternative, not a second task')
+})

@@ -122,7 +122,8 @@
           "dose": "30 mL (75 mg) for an ultrasound-guided fascia iliaca block",
           "fetch": "cart",
           "scene": "block",
-          "r": "Good, but it takes 15–20 minutes to work: give an IV opioid now as well."
+          "r": "Good, but it takes 15–20 minutes to work: give an IV opioid now as well.",
+          "mark": "Adds a fascia iliaca block for ongoing analgesia"
         }
       ]
     },

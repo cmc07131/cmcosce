@@ -273,7 +273,8 @@
           {
             "t": "Circulation: pulse, capillary refill, skin",
             "anim": "pulse",
-            "r": "Pulse 120, regular, thready. Capillary refill 3 s. Skin warm, dry and flushed."
+            "r": "Pulse 120, regular, thready. Capillary refill 3 s. Skin warm, dry and flushed.",
+            "mark": "Assesses circulation: shocked, warm and flushed"
           }
         ],
         "D": [
@@ -294,7 +295,8 @@
           {
             "t": "Expose: skin, bladder, bowel sounds",
             "anim": "abdomen",
-            "r": "Dry flushed skin, palpable bladder, quiet bowel sounds. No injuries, no other packets."
+            "r": "Dry flushed skin, palpable bladder, quiet bowel sounds. No injuries, no other packets.",
+            "mark": "Exposes: dry skin, retention, quiet bowel sounds (anticholinergic)"
           }
         ]
       }

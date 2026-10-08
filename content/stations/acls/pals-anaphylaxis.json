@@ -35,8 +35,9 @@
       "title": "Reassess",
       "goal": "Not better at 5 minutes: repeat; the plan if it is refractory.",
       "steps": [
-        "im2",
-        "reassess"
+        "reassess",
+        "recheck",
+        "im2"
       ]
     },
     {
@@ -60,11 +61,11 @@
       "untreated": "She deteriorated and never got IM adrenaline."
     },
     {
-      "id": "still-unwell",
+      "id": "five-min",
       "after": "im1",
-      "delayS": 25,
-      "scene": "still-unwell",
-      "say": "Five minutes on: still wheezy and hypotensive. BP 78/42."
+      "delayS": 300,
+      "scene": "five-min",
+      "say": "Five minutes since the first adrenaline."
     }
   ],
   "review": [
@@ -85,7 +86,7 @@
       "text": "Fluid bolus. RCUK: 10 mL/kg crystalloid in children; AHA PALS: 20 mL/kg. The station uses 10 mL/kg and reassesses."
     }
   ],
-  "notes": "Checked against the Resuscitation Council UK emergency treatment of anaphylaxis (2021, with the 2024 update on refractory anaphylaxis) and the RCUK 2025 guidelines.\n\nIM adrenaline 1:1000 (1 mg/mL) into the anterolateral thigh: under 6 months 100–150 microgram; 6 months–6 years 150 microgram; 6–12 years 300 microgram; over 12 years 500 microgram (300 microgram if small or prepubertal). Repeat after 5 minutes if not improving. After 2 IM doses with ongoing respiratory or circulatory problems: refractory anaphylaxis — low-dose IV adrenaline infusion with expert help, and fluids (10 mL/kg crystalloid in children).\n\nAntihistamines and steroids are no longer part of emergency treatment (RCUK 2021): non-sedating oral antihistamine for skin symptoms after stabilisation; steroids only for refractory reactions or ongoing asthma/shock. Your notes still list IM/IV hydrocortisone and chlorphenamine doses as routine; they are not scored here.\n\nYour notes also give the IM dose as '0.1 mL of 1:10,000' as an equivalent: 1:10,000 (0.1 mg/mL) is for IV use only. IM adrenaline must be 1:1000; mixing them up is a known cause of harm.\n\nMast cell tryptase: first sample as soon as possible after treatment, second within 1–2 hours (no later than 4), third at 24 hours or at follow-up. Observe (6–12 hours depending on severity), discharge with two adrenaline auto-injectors, training and an allergy clinic referral.\n\nPerfect script checked against the RCUK anaphylaxis algorithm, an AHA PALS checklist, an HKCEM-style scheme and a keyword scheme. Added: anaphylaxis named with its criteria, airway help early, a history from her aunt, refractory anaphylaxis, salbutamol, antihistamine and steroid placed correctly, biphasic risk, and an explanation to the family.",
+  "notes": "Checked against the Resuscitation Council UK emergency treatment of anaphylaxis (2021, with the 2024 update on refractory anaphylaxis) and the RCUK 2025 guidelines.\n\nIM adrenaline 1:1000 (1 mg/mL) into the anterolateral thigh: under 6 months 100–150 microgram; 6 months–6 years 150 microgram; 6–12 years 300 microgram; over 12 years 500 microgram (300 microgram if small or prepubertal). Repeat after 5 minutes if not improving. After 2 IM doses with ongoing respiratory or circulatory problems: refractory anaphylaxis — low-dose IV adrenaline infusion with expert help, and fluids (10 mL/kg crystalloid in children).\n\nAntihistamines and steroids are no longer part of emergency treatment (RCUK 2021): non-sedating oral antihistamine for skin symptoms after stabilisation; steroids only for refractory reactions or ongoing asthma/shock. Your notes still list IM/IV hydrocortisone and chlorphenamine doses as routine; they are not scored here.\n\nYour notes also give the IM dose as '0.1 mL of 1:10,000' as an equivalent: 1:10,000 (0.1 mg/mL) is for IV use only. IM adrenaline must be 1:1000; mixing them up is a known cause of harm.\n\nMast cell tryptase: first sample as soon as possible after treatment, second within 1–2 hours (no later than 4), third at 24 hours or at follow-up. Observe (6–12 hours depending on severity), discharge with two adrenaline auto-injectors, training and an allergy clinic referral.\n\nPerfect script checked against the RCUK anaphylaxis algorithm, an AHA PALS checklist, an HKCEM-style scheme and a keyword scheme. Added: anaphylaxis named with its criteria, airway help early, a history from her aunt, refractory anaphylaxis, salbutamol, antihistamine and steroid placed correctly, biphasic risk, and an explanation to the family.\n\nAudit: the clock runs to the reassessment; you reassess at the patient, and what you find brings the next step due.",
   "cast": [
     {
       "id": "patient",
@@ -300,6 +301,26 @@
       ]
     },
     {
+      "id": "recheck",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Reassess her",
+      "hint": "At 5 minutes: airway, breathing, circulation.",
+      "groups": {
+        "At 5 minutes": [
+          {
+            "t": "Reassess her at 5 minutes: airway, breathing, circulation",
+            "anim": "auscultate",
+            "when": "five-min",
+            "early": "Five minutes after the first dose.",
+            "scene": "still-unwell",
+            "r": "Still wheezy, SpO2 92%, BP 78/42. \"No better at 5 minutes: repeat the IM adrenaline.\"",
+            "mark": "Reassesses at 5 minutes and finds no improvement"
+          }
+        ]
+      }
+    },
+    {
       "id": "im2",
       "kind": "pick",
       "to": "cart",
@@ -328,7 +349,7 @@
       "hint": "Repeat at 5 minutes; refractory after two doses; salbutamol for wheeze; no routine antihistamine or steroid.",
       "opts": [
         {
-          "t": "Reassess ABC every few minutes. If she's no better at 5 minutes, repeat the IM adrenaline.",
+          "t": "If she's no better at 5 minutes, we repeat the IM adrenaline; reassess ABC every few minutes.",
           "mark": "Plans to repeat IM adrenaline at 5 minutes"
         },
         {
@@ -350,15 +371,21 @@
       "opts": [
         {
           "t": "Mast cell tryptase now, and again within 1 to 2 hours.",
-          "mark": "Timed mast cell tryptase samples"
+          "mark": "Timed mast cell tryptase samples",
+          "when": "im2",
+          "early": "After the second dose."
         },
         {
           "t": "She needed two doses, so she stays for at least 12 hours: there's a risk of a biphasic reaction. Admit her.",
-          "mark": "Appropriate observation for biphasic risk"
+          "mark": "Appropriate observation for biphasic risk",
+          "when": "im2",
+          "early": "After the second dose."
         },
         {
           "t": "Before home: two adrenaline auto-injectors, training, an allergy action plan, and an allergy clinic referral.",
-          "mark": "Discharge plan with auto-injectors and referral"
+          "mark": "Discharge plan with auto-injectors and referral",
+          "when": "im2",
+          "early": "After the second dose."
         }
       ]
     },
@@ -374,7 +401,9 @@
           "tz": "欣欣係出現咗過敏性休克，即係好嚴重嘅敏感反應，應該係對果仁敏感。打咗腎上腺素針而家有改善。佢要留院過夜，因為有機會再發作。",
           "r": "Thank you, doctor.",
           "rz": "多謝醫生。",
-          "mark": "Explains to the family: anaphylaxis, treatment, overnight stay"
+          "mark": "Explains to the family: anaphylaxis, treatment, overnight stay",
+          "when": "im2",
+          "early": "After the second dose."
         }
       ]
     },
@@ -588,5 +617,6 @@
       "at": "3:35",
       "say": "Yan has had anaphylaxis, a severe allergic reaction, probably to nuts. The adrenaline injections are working. She'll stay overnight, because it can come back."
     }
-  ]
+  ],
+  "clock": "TIME"
 }

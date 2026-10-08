@@ -525,8 +525,6 @@ function HitchStage({ run, runRef, upd, feel, physical, why, next }: Stage) {
 function ManualStage({ run, upd, feel, physical, why, next }: Stage) {
   const lines: { how: 'steady' | 'jerk' | 'lift'; text: string }[] = [
     { how: 'steady', text: 'Nurse Tung, hold the hitch with both hands and pull steadily in line with the leg. Keep it until I say.' },
-    { how: 'jerk', text: 'Nurse Tung, give it a good sharp pull to straighten it out.' },
-    { how: 'lift', text: 'Nurse Tung, just lift his foot up for me.' },
   ]
   const r = run
   return (

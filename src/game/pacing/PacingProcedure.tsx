@@ -342,7 +342,7 @@ function Defib({ c, run, runRef, upd, feel, why, physical, elapsed }: Stage) {
   return (
     <div className="defib" data-testid="defib">
       <div className="defib-modes">
-        {(['off', 'monitor', 'pacer', 'defib'] as const).map((m) => (
+        {(['off', 'monitor', 'pacer'] as const).map((m) => (
           <button
             key={m}
             type="button"
@@ -414,29 +414,6 @@ function Defib({ c, run, runRef, upd, feel, why, physical, elapsed }: Stage) {
         >
           {run.pacing ? 'STOP PACING' : 'START PACING'}
         </button>
-      )}
-      {run.mode === 'defib' && (
-        <div className="defib-row">
-          <b>150 J</b>
-          <button type="button" className="defib-key" data-testid="charge" onClick={() => setCharged(true)}>
-            CHARGE
-          </button>
-          <button
-            type="button"
-            className="defib-key defib-shock"
-            data-testid="shock"
-            disabled={!charged}
-            onClick={() => {
-              upd({ shocked: true })
-              setCharged(false)
-              buzz(300)
-              physical('He arches off the trolley and screams. He was awake.')
-              why('He has a pulse and is conscious. Complete heart block is paced, never shocked.')
-            }}
-          >
-            SHOCK
-          </button>
-        </div>
       )}
     </div>
   )
@@ -519,8 +496,6 @@ function DrugCart({ run, pending, order }: Stage) {
 
 const SAY_WARN: SayOption[] = [
   { text: 'This will thump your chest with every beat. I am giving you something for the pain first.', ok: true },
-  { text: 'You will not feel anything.', ok: false },
-  { text: 'We will sort the pain out once your heart is going.', ok: false },
 ]
 
 function PainRelief(stage: Stage) {
@@ -628,8 +603,6 @@ function Capture(stage: Stage) {
 
 const SAY_CLOSE: SayOption[] = [
   { text: 'Unstable complete heart block, now paced at 70 with a femoral pulse. Pads stay on until a transvenous wire captures. CCU please.', ok: true },
-  { text: 'He is captured, so we can peel the pads off for the transfer.', ok: false },
-  { text: 'Pacing is working; he does not need cardiology tonight.', ok: false },
 ]
 
 function Comfort(stage: Stage) {
