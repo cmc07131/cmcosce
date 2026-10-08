@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { DEFIB_MARKS, SITES, defibSpec, freshDefib, scoreDefib, shock, type DefibRun } from './model'
+import { DEFIB_MARKS, SITES, defibSpec, freshDefib, padSites, scoreDefib, shock, type DefibRun } from './model'
 
 const padsOn = (): DefibRun => ({ ...freshDefib(), pads: [{ x: SITES.sternal.x, y: SITES.sternal.y }, { x: SITES.apical.x, y: SITES.apical.y }] })
 
@@ -41,4 +41,15 @@ test('defib: pads on the wrong sites do not count', () => {
   const after = { ...run, ...shock(run, spec).patch }
   assert.ok(!after.converted)
   assert.ok(!scoreDefib(after, spec).earned.includes('pads'))
+})
+
+test('defib: the apical pad counts on the left mid-axillary line at nipple level, not on the breast', () => {
+  // The placement from a real run: right infraclavicular, and the chest edge at nipple level (V6).
+  assert.ok(padSites([{ x: 66, y: 58 }, { x: 165, y: 109 }]).ok)
+  // A little lower on the same line is still V6.
+  assert.ok(padSites([{ x: 72, y: 62 }, { x: 158, y: 126 }]).ok)
+  // On the left nipple: over the breast, not the apex.
+  assert.equal(padSites([{ x: 72, y: 62 }, { x: 128, y: 104 }]).ok, false)
+  // Two pads on the right of the chest do not cross the heart.
+  assert.equal(padSites([{ x: 72, y: 62 }, { x: 60, y: 120 }]).ok, false)
 })

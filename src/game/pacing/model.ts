@@ -33,9 +33,12 @@ type Spot = { x: number; y: number; r: number }
 export const FRONT: Record<'apPad' | 'alSternal' | 'alApex' | 'ra' | 'la' | 'll', Spot> = {
   /** Anterior pad of the AP pair: left lower sternal edge, over the heart. */
   apPad: { x: 122, y: 132, r: 20 },
-  /** Anterolateral pair: right infraclavicular, and left mid-axilla at the apex. */
-  alSternal: { x: 70, y: 72, r: 18 },
-  alApex: { x: 160, y: 150, r: 18 },
+  /**
+   * Anterolateral pair: right infraclavicular, and the left mid-axillary line at V6 (about nipple level; the
+   * nipples are at y 104, the mid-axillary line near x 175), clear of the breast.
+   */
+  alSternal: { x: 68, y: 62, r: 22 },
+  alApex: { x: 172, y: 116, r: 24 },
   ra: { x: 58, y: 48, r: 16 },
   la: { x: 142, y: 48, r: 16 },
   ll: { x: 142, y: 214, r: 18 },

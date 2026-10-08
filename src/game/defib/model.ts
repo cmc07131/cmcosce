@@ -7,10 +7,14 @@
 export type Rhythm = 'af' | 'vt' | 'vf'
 export type Pt = { x: number; y: number }
 
-/** Front of the chest, 200 × 200. The two antero-lateral pad sites. */
+/**
+ * Front of the chest, 200 × 200: the nipples are at y 104, the chest edge (mid-axillary line) at x ≈ 165–170.
+ * The two antero-lateral pad sites: below the right clavicle, and the left mid-axillary line at V6 (about nipple
+ * level, 5th space), clear of the breast.
+ */
 export const SITES = {
-  sternal: { x: 72, y: 62, r: 22, name: 'right infraclavicular' },
-  apical: { x: 146, y: 128, r: 22, name: 'apex, left mid-axillary line (V6)' },
+  sternal: { x: 70, y: 62, r: 26, name: 'right infraclavicular' },
+  apical: { x: 160, y: 114, r: 24, name: 'apex, left mid-axillary line (V6)' },
 } as const
 
 /** `refractory`: done right, the rhythm still does not change (the first shocks of a VF arrest). */
