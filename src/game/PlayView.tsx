@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react'
 import { localizePack } from '~/engine/lang'
-import { currentPhase, dueEvents, eventOngoing, hintFor, nextHint, stepsDone } from '~/engine/judge'
+import { currentPhase, dueEvents, eventOngoing, hintFor, nextHint, nextWaitedEvent, stepsDone } from '~/engine/judge'
 import { readoutText, type Action, type Pack } from '~/engine/schema'
 import { hasOutput, monitored, vitalsAt, vitalsLine } from '~/engine/vitals'
 import { Controller } from './Controller'
@@ -48,7 +48,10 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const performing = usePlay((s) => s.performing)
   const scene = usePlay((s) => s.scene)
   const sceneAt = usePlay((s) => s.sceneAt)
+  const skipS = usePlay((s) => s.skipS)
   const store = usePlay.getState
+  /** The clinical clock is running ahead to the next timed moment. */
+  const [fastForward, setFastForward] = useState(false)
   const labels = useSettings((s) => s.labels)
   const coach = useSettings((s) => s.coach)
   const difficulty = useSettings((s) => s.difficulty)
@@ -148,6 +151,13 @@ export function PlayView({ pack: source }: { pack: Pack }) {
     const id = window.setInterval(() => {
       const cur = store()
       for (const ev of dueEvents(pack, cur.scene ?? [], cur.sceneAt ?? {}, elapsedOf(pack, cur), difficulty)) cur.fireEvent(pack, ev.id)
+      // Everything due now is done and the next step waits on time (the 2-minute rhythm check): the clinical clock
+      // runs ahead to it, about 30 clinical seconds per tick, instead of making the candidate wait it out.
+      const idle = !cur.performing && !cur.errands.length && nextHint(pack, cur.spent, cur.scene ?? [])?.kind === 'wait'
+      const next = idle ? nextWaitedEvent(pack, cur.spent, cur.scene ?? [], cur.sceneAt ?? {}, difficulty) : null
+      const gap = next ? next.dueAt - elapsedOf(pack, cur) : 0
+      if (gap > 0) cur.skipAhead(Math.min(gap, 30))
+      setFastForward(gap > 0)
     }, 500)
     return () => window.clearInterval(id)
   }, [hydrated, entered, ended, pack, store, difficulty])
@@ -273,7 +283,7 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const clockTone = !entered ? '' : secondsLeft > 60 ? '' : secondsLeft > 20 ? 'hud-warn' : 'hud-alarm'
   const monitor = pack.room.props.find((prop) => prop.readout)
   const leadsOn = monitored(pack.vitals, scene ?? [])
-  const live = pack.vitals ? vitalsAt(pack.vitals, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered })) : null
+  const live = pack.vitals ? vitalsAt(pack.vitals, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered, skipS })) : null
   const readout = live ? (leadsOn ? vitalsLine(live) : 'NO LEADS') : monitor ? readoutText(monitor.readout, scene ?? []) : null
   const monitorBpm = live && leadsOn ? (hasOutput(live) ? Math.round(live.hr ?? 80) : 0) : undefined
   const speakerName = msg?.speakerId ? (msg.speakerId === 'player' ? 'YOU' : targetName(pack, msg.speakerId)) : msg?.tone === 'trap' ? 'NO MARK' : null
@@ -394,6 +404,12 @@ export function PlayView({ pack: source }: { pack: Pack }) {
               <span className={`hud-chip ${clockTone}`} data-testid="hud-clock">
                 ⏱{formatClock(secondsLeft)}
               </span>
+              {pack.clock && entered && (
+                <span className="hud-chip hud-case-clock" data-running={fastForward || undefined} data-testid="hud-case-clock">
+                  {pack.clock} {formatClock(elapsedOf(pack, { secondsLeft, entered, skipS }))}
+                  {fastForward ? ' ⏩' : ''}
+                </span>
+              )}
               {readout && (
                 <span className="hud-chip hud-readout" data-testid="hud-readout">
                   ♥ {readout}

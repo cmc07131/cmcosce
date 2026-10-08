@@ -292,6 +292,8 @@ export const packSchema = z.object({
   /** The perfect script to say in the exam, and the key words an examiner listens for (see station.ts). */
   script: z.array(scriptBeat).optional(),
   keywords: z.array(z.string()).optional(),
+  /** A clinical clock on the HUD ("ARREST"): the case's own time, which runs ahead when everything due is done. */
+  clock: z.string().optional(),
   badge: z.object({
     id: z.string(),
     name: z.string(),
@@ -333,6 +335,11 @@ export type Session = {
   faults: Fault[]
   /** Seconds into the station when each scene flag was first set; drives the vitals. */
   sceneAt?: Record<string, number>
+  /**
+   * Clinical seconds the case has run ahead of the exam clock: when everything due now is done, time jumps to the
+   * next thing that happens (the 2-minute rhythm check), instead of waiting it out.
+   */
+  skipS?: number
 }
 
 export const SOLID_KINDS = new Set([

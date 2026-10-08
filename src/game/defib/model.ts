@@ -18,12 +18,14 @@ export const SITES = {
 } as const
 
 /** `refractory`: done right, the rhythm still does not change (the first shocks of a VF arrest). */
-export type DefibSpec = { rhythm: Rhythm; sync: boolean; energy: [number, number]; label: string; why: string; refractory?: boolean }
+export type DefibSpec = { rhythm: Rhythm; sync: boolean; energy: [number, number]; label: string; why: string; refractory?: boolean; padsOn?: boolean }
 
 export function defibSpec(pose?: string): DefibSpec {
   // AHA: 100 J synchronised for monomorphic VT; RCUK: 120–150 J. Either passes.
   if (pose === 'vt') return { rhythm: 'vt', sync: true, energy: [100, 200], label: 'VT with a pulse', why: 'Monomorphic VT with a pulse: synchronised, 100 J (AHA) or 120–150 J biphasic, escalating.' }
   // AHA: 120–200 J biphasic as the maker advises (or the maximum); RCUK: at least 150 J. Either passes.
+  // A later shock in the same arrest: the pads are already on.
+  if (pose === 'vf-again') return { rhythm: 'vf', sync: false, energy: [120, 360], label: 'VF at the rhythm check', why: 'Still VF: unsynchronised, the same or a higher energy; resume CPR at once.', refractory: true, padsOn: true }
   if (pose === 'vf-arrest') return { rhythm: 'vf', sync: false, energy: [120, 360], label: 'VF arrest', why: 'VF: unsynchronised, 120–200 J biphasic (as the maker advises) or the maximum; resume CPR at once.', refractory: true }
   if (pose === 'vf') return { rhythm: 'vf', sync: false, energy: [120, 360], label: 'VF', why: 'VF: unsynchronised, 120–200 J biphasic (as the maker advises) or the maximum.' }
   return { rhythm: 'af', sync: true, energy: [150, 200], label: 'AF with adverse features', why: 'AF: synchronised, a high first energy (150–200 J biphasic).' }
@@ -42,8 +44,9 @@ export type DefibRun = {
   converted: boolean
 }
 
-export function freshDefib(): DefibRun {
-  return { pads: [], sync: false, energy: 150, charged: false, clearCalled: false, shocked: false, syncStalls: 0, unsafe: false, converted: false }
+export function freshDefib(spec?: DefibSpec): DefibRun {
+  const pads = spec?.padsOn ? [{ x: SITES.sternal.x, y: SITES.sternal.y }, { x: SITES.apical.x, y: SITES.apical.y }] : []
+  return { pads, sync: false, energy: spec?.padsOn ? 200 : 150, charged: false, clearCalled: false, shocked: false, syncStalls: 0, unsafe: false, converted: false }
 }
 
 export const ENERGIES = [50, 70, 100, 120, 150, 200, 300, 360]

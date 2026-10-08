@@ -230,7 +230,7 @@ export function MonitorPanel({ pack, title, onClose }: { pack: Pack; title: stri
   const sceneAt = usePlay((s) => s.sceneAt)
   const scene = usePlay((s) => s.scene)
   const v = pack.vitals
-  const now = v && monitored(v, scene ?? []) ? vitalsAt(v, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered })) : null
+  const now = v && monitored(v, scene ?? []) ? vitalsAt(v, sceneAt ?? {}, elapsedOf(pack, { secondsLeft, entered, skipS: usePlay.getState().skipS })) : null
   const canvas = useRef<HTMLCanvasElement>(null)
   const hr = now ? Math.round(now.hr ?? 80) : 80
   const spec = useMemo(() => (now ? ecgById(now.rhythm, hr) : null), [now?.rhythm, hr])

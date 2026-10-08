@@ -10,7 +10,7 @@ import { burnPercent } from '../game/imaging/photos'
 import { airwayWidth, anteriorHumeralOffset, kleinCutsEpiphysis, neck, pelvis, symphysisWidth } from '../game/imaging/skeleton'
 import { fastRuq } from '../game/imaging/ultrasound'
 import { faultsFor, usePlay } from '../game/store'
-import { currentPhase, dueEvents, nextHint, untreatedEvents } from './judge'
+import { currentPhase, dueEvents, nextHint, nextWaitedEvent, untreatedEvents } from './judge'
 import { worldSchema } from '../world/model'
 import { REVIEWED } from '../world/reviewed'
 import { BENCH_SCENES, packSchema } from './schema'
@@ -541,4 +541,45 @@ test('the guide never sends you back to an earlier phase', () => {
     if (missed.length && !backs.some((b) => b.startsWith(st.id + ':'))) backs.push(`${st.id}: the guide never reaches ${missed.map((m) => pack.marks.find((k) => k.id === m)?.label ?? m).join('; ')}`)
   }
   assert.deepEqual(backs, [])
+})
+
+/**
+ * Time drives an arrest. Following the guide on the clinical clock: shock, the jobs done during CPR, then the
+ * clock runs ahead to the 2-minute rhythm check (never more than one cycle), the next shock, the drugs in order,
+ * and ROSC at a check. Nothing is moved on by talking to the nurse.
+ */
+test('VF arrest runs on the clinical clock: each shock comes due at its 2-minute rhythm check', () => {
+  const st = stationSchema.parse(JSON.parse(readFileSync(join('content', 'stations', 'acls', 'acls-vf-stemi.json'), 'utf8')))
+  const pack = compileStation(st)
+  assert.equal(pack.clock, 'ARREST')
+  const spent: Record<string, string[]> = {}
+  const scene: string[] = []
+  const sceneAt: Record<string, number> = {}
+  let clock = 0
+  const order: string[] = []
+  const set = (flags: string[]) => flags.forEach((f) => scene.includes(f) || (scene.push(f), (sceneAt[f] = clock)))
+  for (let i = 0; i < 200; i++) {
+    for (const ev of dueEvents(pack, scene, sceneAt, clock, 'normal')) set([ev.scene])
+    const h = nextHint(pack, spent, scene)
+    if (!h) break
+    if (h.kind === 'wait') {
+      const next = nextWaitedEvent(pack, spent, scene, sceneAt, 'normal')
+      assert.ok(next, `the guide waits at ${clock}s with nothing timed to wait for`)
+      assert.ok(next.dueAt - clock <= 120, 'the clock never jumps more than one 2-minute cycle')
+      clock = next.dueAt
+      continue
+    }
+    clock += 10
+    const a = pack.actions.find((x) => x.id === h.actionId)!
+    const o = (a.options ?? []).find((x) => x.label === h.option)!
+    spent[a.id] = [...(spent[a.id] ?? []), o.id]
+    const raw = [...(st.steps.find((s) => s.id === a.id)?.opts ?? []), ...Object.values(st.steps.find((s) => s.id === a.id)?.groups ?? {}).flat()].find((x) => x.t === h.option || (x.drug && h.option === `${x.drug} ${x.dose}`))
+    if (raw?.scene) set([raw.scene].flat())
+    if (raw?.scene || /shock|Adrenaline|Amiodarone|ROSC/i.test(h.option)) order.push(raw?.scene ? [raw.scene].flat()[0] : h.option)
+  }
+  assert.deepEqual(order.filter((x) => ['shock1', 'shock2', 'adrenaline', 'shock3', 'amiodarone', 'rosc'].includes(x)), ['shock1', 'shock2', 'adrenaline', 'shock3', 'amiodarone', 'rosc'])
+  // Shocks 2 and 3 land on their checks: 2 minutes after the shock before.
+  assert.equal(sceneAt.check2 - sceneAt.shock1, 120)
+  assert.equal(sceneAt.check3 - sceneAt.shock2, 120)
+  assert.ok(sceneAt.rosc >= sceneAt.check4)
 })

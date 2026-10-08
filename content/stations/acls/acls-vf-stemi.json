@@ -8,32 +8,26 @@
   "phases": [
     {
       "title": "Arrest",
-      "goal": "Confirm it, call for help and the defibrillator, start high-quality CPR, give roles.",
+      "goal": "Recognise it, call, start CPR, pads on.",
       "steps": [
         "recognise"
       ]
     },
     {
-      "title": "Shock",
-      "goal": "Pads on during CPR; VF: shock, then straight back to CPR.",
+      "title": "Shock and CPR",
+      "goal": "Shock at each 2-minute rhythm check and back on the chest at once. During each cycle: Hs and Ts, IV and a gas, the airway, compressor swaps; adrenaline after the second shock, amiodarone after the third. The clock runs on when you're done.",
       "steps": [
         "shock1",
-        "cycle"
-      ]
-    },
-    {
-      "title": "CPR loop",
-      "goal": "Shocks at the 2-minute checks; adrenaline after the 2nd shock, amiodarone after the 3rd; airway and capnography; Hs and Ts.",
-      "steps": [
-        "arrest-drugs",
-        "airway",
+        "cycle",
         "causes",
+        "airway",
+        "arrest-drugs",
         "rhythm"
       ]
     },
     {
       "title": "Post-cardiac arrest care",
-      "goal": "Secure the airway, ventilate for normocapnia, hit the targets.",
+      "goal": "Airway, ventilator, targets.",
       "steps": [
         "intubate",
         "ventilate",
@@ -42,7 +36,7 @@
     },
     {
       "title": "The cause",
-      "goal": "12-lead ECG and V4R; primary PCI; antiplatelet and heparin; no nitrates.",
+      "goal": "The 12-lead, the cath lab, the drugs.",
       "steps": [
         "ecg",
         "cath",
@@ -60,7 +54,7 @@
       "text": "AHA 2025 and RCUK/ERC 2025 details are quoted from memory; I could not check the documents here. The scored points are the same in the 2020 and 2023 versions."
     }
   ],
-  "notes": "Checked against Resuscitation Council UK 2025 adult ALS and post-resuscitation care guidelines (ERC 2025, ILCOR 2025), ESC 2023 ACS guidelines, and AHA 2025.\n\nShockable rhythm: shock as soon as possible (biphasic at least 150 J for the first shock; escalate if the device allows), resume CPR immediately for 2 minutes without a pulse check. Adrenaline 1 mg and amiodarone 300 mg after the third shock; adrenaline every 3–5 minutes (alternate loops); amiodarone 150 mg after the fifth shock (lidocaine 100 mg if amiodarone is not available). Place the apical pad directly below the armpit in the mid-axillary line; after three failed shocks consider a vector change to antero-posterior. RCUK 2025 does not recommend routine double sequential defibrillation.\n\nAirway: basic airway or supraglottic airway is acceptable; intubate only if skilled (over 95% success within two attempts, pause under 5 s). Waveform capnography for every advanced airway.\n\nPost-ROSC (RCUK/ERC–ESICM 2025): SpO2 94–98%, PaCO2 4.7–6.0 kPa, systolic over 100 or MAP 60–65 mmHg, actively prevent fever (37.5 °C or less) for 36–72 hours in comatose patients, treat seizures (levetiracetam or valproate), prognosticate at 72 hours or later. ST elevation after ROSC → emergency angiography and primary PCI.\n\nInferior STEMI: check right-sided leads (V4R) for right ventricular infarction; avoid nitrates and keep preload.\n\nYour notes point to the AHA 2025 ACLS algorithm and highlights; the RCUK/ERC sequence here matches it on the scored points (AHA also gives adrenaline after the second shock in some teaching; RCUK after the third).\n\nPerfect script (AHA ACLS, as taught in Hong Kong) checked against four mark schemes: an AHA megacode checklist, an RCUK ALS checklist, an HKCEM-style resuscitation scheme and a keyword scheme. Added from that check: roles and closed-loop at the start, charging during compressions, the Hs and Ts named in full, ETCO2 for CPR quality, V4R and the nitrate warning said aloud, ICU after PCI, heparin.",
+  "notes": "Checked against Resuscitation Council UK 2025 adult ALS and post-resuscitation care guidelines (ERC 2025, ILCOR 2025), ESC 2023 ACS guidelines, and AHA 2025.\n\nShockable rhythm: shock as soon as possible (biphasic at least 150 J for the first shock; escalate if the device allows), resume CPR immediately for 2 minutes without a pulse check. Adrenaline 1 mg and amiodarone 300 mg after the third shock; adrenaline every 3–5 minutes (alternate loops); amiodarone 150 mg after the fifth shock (lidocaine 100 mg if amiodarone is not available). Place the apical pad directly below the armpit in the mid-axillary line; after three failed shocks consider a vector change to antero-posterior. RCUK 2025 does not recommend routine double sequential defibrillation.\n\nAirway: basic airway or supraglottic airway is acceptable; intubate only if skilled (over 95% success within two attempts, pause under 5 s). Waveform capnography for every advanced airway.\n\nPost-ROSC (RCUK/ERC–ESICM 2025): SpO2 94–98%, PaCO2 4.7–6.0 kPa, systolic over 100 or MAP 60–65 mmHg, actively prevent fever (37.5 °C or less) for 36–72 hours in comatose patients, treat seizures (levetiracetam or valproate), prognosticate at 72 hours or later. ST elevation after ROSC → emergency angiography and primary PCI.\n\nInferior STEMI: check right-sided leads (V4R) for right ventricular infarction; avoid nitrates and keep preload.\n\nYour notes point to the AHA 2025 ACLS algorithm and highlights; the RCUK/ERC sequence here matches it on the scored points (AHA also gives adrenaline after the second shock in some teaching; RCUK after the third).\n\nPerfect script (AHA ACLS, as taught in Hong Kong) checked against four mark schemes: an AHA megacode checklist, an RCUK ALS checklist, an HKCEM-style resuscitation scheme and a keyword scheme. Added from that check: roles and closed-loop at the start, charging during compressions, the Hs and Ts named in full, ETCO2 for CPR quality, V4R and the nitrate warning said aloud, ICU after PCI, heparin.\n\nTime drives this station: an ARREST clock on the HUD. Each rhythm check is a timed event 2 minutes after the last shock; every shock is given on the defibrillator. When everything due in a cycle is done, the clock runs ahead to the next check instead of making you wait it out.",
   "cast": [
     {
       "id": "patient",
@@ -138,10 +132,10 @@
       "kind": "say",
       "to": "trolley",
       "label": "Defibrillator",
-      "hint": "Pads on during CPR; VF: unsynchronised, 150 J or more; all clear.",
+      "hint": "Shock when the rhythm check shows VF: unsynchronised, 150 J or more, all clear, then straight back on the chest.",
       "opts": [
         {
-          "t": "Pads on and shock",
+          "t": "First shock: pads on during CPR",
           "perform": "defib",
           "pose": "vf-arrest",
           "scene": "shock1",
@@ -152,6 +146,26 @@
             "Safe shock with minimal pause",
             "All clear, oxygen away before the shock"
           ]
+        },
+        {
+          "t": "Second shock at the 2-minute check",
+          "perform": "defib",
+          "pose": "vf-again",
+          "scene": "shock2",
+          "when": "check2",
+          "early": "At the next rhythm check, after 2 minutes of CPR.",
+          "performHint": "Still VF. The pads are on: charge during compressions, ALL CLEAR, SHOCK, then back on the chest.",
+          "mark": "Second shock at the 2-minute check, charging during compressions"
+        },
+        {
+          "t": "Third shock at the next check",
+          "perform": "defib",
+          "pose": "vf-again",
+          "scene": "shock3",
+          "when": "check3",
+          "early": "At the next rhythm check, after 2 minutes of CPR.",
+          "performHint": "Still VF. Charge during compressions, ALL CLEAR, SHOCK, then back on the chest.",
+          "mark": "Third shock at the next check"
         }
       ],
       "lang": "en"
@@ -161,27 +175,19 @@
       "kind": "say",
       "to": "nurse",
       "label": "Team",
-      "hint": "Straight back on the chest; shocks at each 2-minute rhythm check, charging during compressions.",
+      "hint": "Straight back on the chest after every shock; swap compressors every 2 minutes.",
       "opts": [
         {
-          "t": "Shock delivered: resume CPR immediately for 2 minutes, no pulse check.",
+          "t": "Shock delivered: back on the chest now, 2 minutes of CPR, no pulse check.",
           "mark": "Resumes CPR immediately after the shock",
           "when": "shock1",
           "early": "Shock first."
         },
         {
-          "t": "Rhythm check at 2 minutes: still VF. Charge during compressions, all clear, second shock, then straight back to CPR.",
-          "mark": "Second shock at the 2-minute check, charging during compressions",
+          "t": "Swap compressors every 2 minutes; ETCO2 below 10 means we need better compressions.",
+          "mark": "Compressor swaps and ETCO2 to guide CPR quality",
           "when": "shock1",
-          "early": "Shock first.",
-          "scene": "shock2"
-        },
-        {
-          "t": "Rhythm check: still VF. Third shock, CPR straight on.",
-          "mark": "Third shock at the next check",
-          "when": "shock2",
-          "early": "After the second shock.",
-          "scene": "shock3"
+          "early": "Once CPR is under way."
         }
       ]
     },
@@ -190,13 +196,15 @@
       "kind": "pick",
       "to": "trolley",
       "label": "Trolley",
-      "hint": "An airway with waveform capnography.",
+      "hint": "During CPR: a supraglottic airway with waveform capnography.",
       "confirm": "Take these",
       "opts": [
         {
           "t": "Supraglottic airway with waveform capnography; ventilate 10 a minute with continuous compressions",
           "mark": "Advanced airway with waveform capnography",
-          "fetch": "trolley"
+          "fetch": "trolley",
+          "when": "shock1",
+          "early": "During the CPR after the first shock."
         }
       ]
     },
@@ -205,7 +213,7 @@
       "kind": "pick",
       "to": "cart",
       "label": "Drug cart",
-      "hint": "Adrenaline 1 mg after the second shock, then every 3 to 5 minutes; amiodarone 300 mg after the third.",
+      "hint": "After the second shock: adrenaline 1 mg, then every 3–5 minutes. After the third: amiodarone 300 mg.",
       "confirm": "Give",
       "opts": [
         {
@@ -214,7 +222,7 @@
           "dose": "1 mg IV, then every 3–5 minutes",
           "fetch": "cart",
           "when": "shock2",
-          "early": "After the second shock.",
+          "early": "After the second shock (AHA).",
           "scene": "adrenaline",
           "mark": "Adrenaline 1 mg after the second shock, then every 3–5 minutes"
         },
@@ -235,18 +243,15 @@
       "kind": "say",
       "to": "monitor",
       "label": "Rhythm check",
-      "hint": "After the drugs and the next cycle: rhythm, pulse, ETCO2.",
+      "hint": "At the rhythm check: an organised rhythm? Feel for a pulse.",
       "opts": [
         {
           "t": "Organised rhythm at the check: carotid pulse present, and the ETCO2 has jumped. We have ROSC.",
           "scene": "rosc",
           "mark": "Recognises ROSC",
           "r": "Sinus rhythm at 96 with a pulse. ETCO2 rose sharply before the check.",
-          "when": [
-            "adrenaline",
-            "amiodarone"
-          ],
-          "early": "Keep going: CPR, shocks at the checks, the drugs."
+          "when": "check4",
+          "early": "At the next rhythm check."
         }
       ],
       "lang": "en"
@@ -260,16 +265,16 @@
       "opts": [
         {
           "t": "Reversible causes, Hs and Ts: hypoxia, hypovolaemia, hydrogen ion, hypo- or hyperkalaemia, hypothermia; tension pneumothorax, tamponade, toxins, thrombosis. Chest pain first: coronary thrombosis is most likely.",
-          "mark": "Considers the Hs and Ts; names coronary thrombosis"
+          "mark": "Considers the Hs and Ts; names coronary thrombosis",
+          "when": "shock1",
+          "early": "During the CPR after the first shock."
         },
         {
           "t": "IV access, and a blood gas with potassium, please.",
           "mark": "Access and a gas during CPR",
-          "r": "Nurse Tam: Gas: K 4.1, pH 7.18, lactate 6."
-        },
-        {
-          "t": "Swap compressors every 2 minutes; ETCO2 below 10 means we need better compressions.",
-          "mark": "Rotates compressors; uses ETCO2 to monitor CPR quality"
+          "r": "Nurse Tam: Gas: K 4.1, pH 7.18, lactate 6.",
+          "when": "shock1",
+          "early": "During the CPR after the first shock."
         }
       ]
     },
@@ -631,67 +636,88 @@
   "script": [
     {
       "at": "0:00",
-      "say": "Mr Choi, can you hear me? Unresponsive, not breathing normally, no carotid pulse in 10 seconds: this is a cardiac arrest. Call the arrest team and bring the defibrillator."
+      "say": "Mr Choi, can you hear me? Unresponsive, not breathing normally, no carotid pulse in 10 seconds: this is a cardiac arrest. Call the arrest team and bring the defibrillator, please."
     },
     {
-      "at": "0:15",
+      "at": "0:10",
       "say": "Start high-quality CPR: 30 to 2, 5 to 6 cm deep, 100 to 120 a minute, full recoil, minimal interruptions. I'll lead. Nurse Tam, pads on while compressions continue; bag-valve-mask with high-flow oxygen. Closed-loop, please."
     },
     {
-      "at": "0:40",
+      "at": "0:30",
       "say": "Pause for a rhythm check: VF, a shockable rhythm. Continue compressions while I charge to 200 joules, unsynchronised. Oxygen away, all clear: shocking.",
-      "do": "Pads below the right clavicle and in the left mid-axillary line; SYNC off; charge during compressions; all clear; shock."
+      "do": "First shock."
+    },
+    {
+      "at": "0:40",
+      "say": "Shock delivered: back on the chest now, 2 minutes of CPR, no pulse check. Swap compressors every 2 minutes; ETCO2 below 10 means we need better compressions."
     },
     {
       "at": "1:00",
-      "say": "Shock delivered: resume CPR immediately for 2 minutes, no pulse check."
-    },
-    {
-      "at": "1:10",
-      "say": "Reversible causes, Hs and Ts: hypoxia, hypovolaemia, hydrogen ion, hypo- or hyperkalaemia, hypothermia; tension pneumothorax, tamponade, toxins, thrombosis. He had chest pain: coronary thrombosis is most likely."
+      "say": "Reversible causes, Hs and Ts: hypoxia, hypovolaemia, hydrogen ion, hypo- or hyperkalaemia, hypothermia; tension pneumothorax, tamponade, toxins, thrombosis. IV access and a blood gas with potassium, please."
     },
     {
       "at": "1:30",
-      "say": "IV access and a blood gas with potassium, please. Supraglottic airway with waveform capnography; ventilate 10 a minute with continuous compressions.",
-      "do": "Gas: K 4.1, pH 7.18, lactate 6."
-    },
-    {
-      "at": "2:00",
-      "say": "Rhythm check at 2 minutes: still VF. Charge during compressions, all clear, second shock, then straight back to CPR. Adrenaline 1 mg IV now, then every 3 to 5 minutes."
+      "say": "Supraglottic airway with waveform capnography; ventilate 10 a minute with continuous compressions."
     },
     {
       "at": "2:30",
-      "say": "Swap compressors every 2 minutes. ETCO2 below 10 means we need better compressions."
+      "say": "Rhythm check: still VF. Charge during compressions, all clear, second shock, then straight back to CPR. Adrenaline 1 mg IV now, then every 3 to 5 minutes.",
+      "do": "Second shock; adrenaline."
     },
     {
-      "at": "4:00",
-      "say": "Rhythm check: still VF. Third shock, CPR straight on. Amiodarone 300 mg IV."
+      "at": "4:30",
+      "say": "Rhythm check: still VF. Third shock, CPR straight on. Amiodarone 300 mg IV.",
+      "do": "Third shock; amiodarone."
     },
     {
-      "at": "6:00",
-      "say": "Organised rhythm at the check: carotid pulse present, and the ETCO2 has jumped. We have ROSC."
+      "at": "6:30",
+      "say": "Rhythm check: an organised rhythm. Carotid pulse present, and the ETCO2 has jumped. We have ROSC."
     },
     {
-      "at": "6:10",
+      "at": "6:45",
       "say": "He's GCS 3: I'll secure the airway with an endotracheal tube and waveform capnography, and set the ventilator for normocapnia: a controlled mode, 6 to 8 mL per kg, PaCO2 35 to 45.",
       "do": "Intubate; ventilator: controlled mode, 6–8 mL/kg, rate for normocapnia, oxygen and PEEP."
     },
     {
-      "at": "6:40",
+      "at": "7:15",
       "say": "Post-cardiac arrest care: oxygen titrated to SpO2 92 to 98%; systolic at least 90 and MAP at least 65, fluids then noradrenaline if needed; targeted temperature management at 32 to 37.5 °C for at least 24 hours, and prevent fever; glucose, an arterial line and a repeat gas."
     },
     {
-      "at": "7:10",
+      "at": "7:45",
       "say": "12-lead ECG now.",
       "do": "ST elevation in II, III and aVF with reciprocal change in I and aVL: inferior STEMI. V4R: 1 mm ST elevation: right ventricular infarction."
     },
     {
-      "at": "7:30",
+      "at": "8:05",
       "say": "Cardiology: VF arrest, ROSC after three shocks, an inferior STEMI with right ventricular infarction. He needs emergency primary PCI. Right ventricular infarction: no nitrates, keep him well filled. And an ICU bed for after the cath lab."
     },
     {
-      "at": "7:50",
+      "at": "8:25",
       "say": "Aspirin 300 mg via NG or PR, and heparin for the cath lab."
+    }
+  ],
+  "clock": "ARREST",
+  "events": [
+    {
+      "id": "check2",
+      "after": "shock1",
+      "delayS": 120,
+      "scene": "check2",
+      "say": "Two minutes of CPR: pause for a rhythm check. Still VF."
+    },
+    {
+      "id": "check3",
+      "after": "shock2",
+      "delayS": 120,
+      "scene": "check3",
+      "say": "Two minutes: rhythm check. Still VF."
+    },
+    {
+      "id": "check4",
+      "after": "shock3",
+      "delayS": 120,
+      "scene": "check4",
+      "say": "Two minutes: rhythm check. An organised rhythm on the monitor, and the ETCO2 jumped during this cycle."
     }
   ]
 }

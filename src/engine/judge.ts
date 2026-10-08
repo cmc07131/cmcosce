@@ -265,6 +265,30 @@ export function nextHint(pack: Pack, spent: Record<string, string[]>, scene: str
 
 export type Level = 'normal' | 'hard'
 
+/**
+ * When nothing is left to do now, the clinical clock runs to the next thing that happens: the earliest event that a
+ * pending action waits on (the 2-minute rhythm check before the second shock). Its due time on the clinical clock,
+ * or null if nothing is waiting on time.
+ */
+export function nextWaitedEvent(pack: Pack, spent: Record<string, string[]>, scene: string[], sceneAt: Record<string, number>, level: Level) {
+  const waitedOn = new Set<string>()
+  for (const a of pack.actions) {
+    const used = new Set(spent[a.id] ?? [])
+    for (const o of a.options ?? []) if (!o.isTrap && !used.has(o.id)) for (const f of o.when ?? []) if (!scene.includes(f)) waitedOn.add(f)
+  }
+  let best: { eventId: string; dueAt: number } | null = null
+  for (const ev of pack.events ?? []) {
+    if (!waitedOn.has(ev.scene) || scene.includes(ev.scene)) continue
+    if (ev.level && ev.level !== level) continue
+    if (ev.unless && scene.includes(ev.unless)) continue
+    const from = ev.after ? sceneAt[ev.after] : 0
+    if (from === undefined) continue
+    const dueAt = from + ev.delayS
+    if (!best || dueAt < best.dueAt) best = { eventId: ev.id, dueAt }
+  }
+  return best
+}
+
 /** Events due now: on this difficulty, their trigger set long enough ago, not prevented, not already happened. */
 export function dueEvents(pack: Pack, scene: string[], sceneAt: Record<string, number>, elapsedS: number, level: Level) {
   return (pack.events ?? []).filter((ev) => {

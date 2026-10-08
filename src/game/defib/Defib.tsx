@@ -10,14 +10,14 @@ import { DEFIB_MARKS, ENERGIES, SITES, checkDefib, defibSpec, freshDefib, padSit
  */
 export function Defib({ job, onDone }: { job: PerformJob; onDone: (r: BenchResult) => void }) {
   const spec = defibSpec(job.pose)
-  const [run, setRun] = useState<DefibRun>(freshDefib)
+  const [run, setRun] = useState<DefibRun>(() => freshDefib(spec))
   const runRef = useRef(run)
   const upd = (patch: Partial<DefibRun>) => {
     runRef.current = { ...runRef.current, ...patch }
     setRun(runRef.current)
   }
   const [t, setT] = useState(0)
-  const [note, setNote] = useState<string>('Tap the chest to place both pads.')
+  const [note, setNote] = useState<string>(spec.padsOn ? 'The pads are still on. Charge during compressions, then all clear and shock.' : 'Tap the chest to place both pads.')
   const [checked, setChecked] = useState(false)
   const done = useRef(false)
   const chest = useRef<SVGSVGElement>(null)
@@ -70,7 +70,13 @@ export function Defib({ job, onDone }: { job: PerformJob; onDone: (r: BenchResul
     done.current = true
     const r = runRef.current
     const s = scoreDefib(r, spec)
-    const marks = s.earned.map((k) => job.grantMarks[DEFIB_MARKS.indexOf(k)]).filter((m): m is string => Boolean(m))
+    // One mark (a later shock in the same arrest): earned when the whole shock is right.
+    const marks =
+      job.grantMarks.length === 1
+        ? s.earned.length === DEFIB_MARKS.length
+          ? [...job.grantMarks]
+          : []
+        : s.earned.map((k) => job.grantMarks[DEFIB_MARKS.indexOf(k)]).filter((m): m is string => Boolean(m))
     onDone({
       marks,
       faults: s.faults,

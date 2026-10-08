@@ -89,6 +89,8 @@ type PlayState = Session & {
   deliverErrand: (pack: Pack, token: number) => void
   /** The case changes by itself (a seizure, VT): set the event's scene and announce it. */
   fireEvent: (pack: Pack, eventId: string) => void
+  /** The clinical clock runs ahead (everything due is done; the next thing happens later). */
+  skipAhead: (seconds: number) => void
   overlay: Overlay | null
   msg: Msg | null
   toasts: Toast[]
@@ -136,6 +138,7 @@ function persist(state: Session) {
     seed: state.seed,
     faults: state.faults ?? [],
     sceneAt: state.sceneAt ?? {},
+    skipS: state.skipS ?? 0,
   }
   writeSession(session)
 }
@@ -250,6 +253,7 @@ export const usePlay = create<PlayState>((set, get) => ({
 
   takeErrand: (token) => set({ errands: get().errands.filter((e) => e.token !== token) }),
 
+  skipAhead: (seconds) => set({ skipS: (get().skipS ?? 0) + seconds }),
   fireEvent: (pack, eventId) => {
     const ev = pack.events?.find((e) => e.id === eventId)
     const cur = get()
@@ -591,12 +595,16 @@ function slice(state: PlayState): Session {
     seed: state.seed,
     faults: state.faults ?? [],
     sceneAt: state.sceneAt ?? {},
+    skipS: state.skipS ?? 0,
   }
 }
 
-/** Seconds since the candidate walked in, on the station clock. */
-export function elapsedOf(pack: Pack, state: Pick<Session, 'secondsLeft' | 'entered'>) {
-  return state.entered ? Math.max(0, timeLimitOf(pack) - state.secondsLeft) : 0
+/**
+ * Seconds into the case on the clinical clock: the exam clock since the candidate walked in, plus any time that
+ * jumped ahead once everything due had been done.
+ */
+export function elapsedOf(pack: Pack, state: Pick<Session, 'secondsLeft' | 'entered'> & { skipS?: number }) {
+  return state.entered ? Math.max(0, timeLimitOf(pack) - state.secondsLeft) + (state.skipS ?? 0) : 0
 }
 
 /**

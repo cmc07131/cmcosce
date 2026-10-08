@@ -143,6 +143,8 @@ export const stationSchema = z.object({
   script: z.array(scriptBeat).optional(),
   /** The key words an examiner listens for; highlighted in the script. */
   keywords: z.array(z.string()).optional(),
+  /** Show a clinical clock with this label ("ARREST"); timed events then read as clinical times. */
+  clock: z.string().optional(),
   review: z.array(z.object({ tag: z.enum(['differs', 'outdated', 'rarely used', 'missing', 'unverified']), text: z.string() })).optional(),
   cast: z
     .array(
@@ -542,6 +544,7 @@ export function compileStation(station: Station): Pack {
     vitals: station.vitals,
     body: station.body,
     script: station.script,
+    clock: station.clock,
     keywords: station.keywords,
     badge: { id: station.id, name: station.badge.name, emoji: station.badge.emoji, flavor: station.badge.flavor },
   }
