@@ -9,10 +9,10 @@ import { buzz, sfx } from '../sfx'
 import { CORE_TOOLS, SAYS, sayOf, toolById, TOOLS, type SayDef } from './catalog'
 import { Illustration, illustrationFor, type IllustrationKind } from './Illustration'
 import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from './hints'
-import { GROUPS as FRAMEWORK, eventOf, offerOf, type Offer } from './manoeuvres'
+import { GROUPS as FRAMEWORK, eventOf, offerLabel, offerOf, type Offer } from './manoeuvres'
 import { advance, freshProgress, matches, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, HANDS, type Limb, type Posture, type View } from './scene'
-import { regionOf, siteLabel, siteOf, spotLabel } from './sites'
+import { onLeg, regionOf, siteLabel, siteOf, spotLabel } from './sites'
 import { bowel, doppler, fork, heartbeat, percussNote } from './sounds'
 
 /**
@@ -25,10 +25,15 @@ type Props = { pack: Pack; action: Action; title: string; spent: string[]; onClo
 
 type Note = { text: string; tone: 'finding' | 'normal' | 'warn' | 'hint' }
 
-/** A focused examination looks only at the arms and hands. */
-const FOCUS_VIEWS: { id: View; label: string }[] = [
+/** A focused examination looks only at the injured limb: an arm and the hands, or a knee and both legs. */
+const ARM_VIEWS: { id: View; label: string }[] = [
   { id: 'focus', label: 'ARM' },
   { id: 'hands', label: 'HANDS' },
+  { id: 'whole', label: 'PATIENT' },
+]
+const KNEE_VIEWS: { id: View; label: string }[] = [
+  { id: 'focus', label: 'KNEE' },
+  { id: 'legs', label: 'LEGS' },
   { id: 'whole', label: 'PATIENT' },
 ]
 
@@ -105,7 +110,12 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   // A focused examination: only these manoeuvres, each shown being done; the rest of the body is not part of it.
   const offers = useMemo(() => (body.focus ?? []).map(offerOf).filter((o): o is Offer => !!o), [body.focus])
   const focused = offers.length > 0
-  const focusSide: 'R' | 'L' = body.ain ?? body.kinkOnFlex ?? (offers.find((o) => o.site)?.site?.endsWith('-R') ? 'R' : 'L')
+  const focusSide: 'R' | 'L' = body.ain ?? body.kinkOnFlex ?? body.effusion ?? (offers.find((o) => o.site)?.site?.endsWith('-R') ? 'R' : 'L')
+  // The limb it is about, and where the camera comes back to: the forearm, or the knee.
+  const legFocus = offers.some((o) => o.site && onLeg(o.site))
+  const home = legFocus ? `knee-${focusSide}` : `forearm-${focusSide}`
+  const sideWord = focusSide === 'L' ? 'left' : 'right'
+  const their = kind === 'woman' ? 'her' : 'his'
   const tools = useMemo(() => {
     const need = new Set([...CORE_TOOLS, ...toolsOf(items.map((i) => i.plan))])
     return TOOLS.filter((t) => need.has(t.id))
@@ -128,9 +138,11 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const [loading, setLoading] = useState(true)
   const [credit, setCredit] = useState<Credit | null>(null)
   const [note, setNote] = useState<Note>({
-    text: focused
-      ? `${name} is holding his injured ${focusSide === 'L' ? 'left' : 'right'} arm still. Tap the arm or either hand to examine it.`
-      : `${name} is on the couch. Tap the part of the body you want to examine, or talk to them.`,
+    text: !focused
+      ? `${name} is on the couch. Tap the part of the body you want to examine, or talk to them.`
+      : legFocus
+        ? `${name} is lying on the couch, both legs bare. Examine ${their} ${sideWord} knee: choose below, or tap the knee.`
+        : `${name} is holding ${their} injured ${sideWord} arm still. Tap the arm or either hand to examine it.`,
     tone: 'hint',
   })
   const [illus, setIllus] = useState<{ kind: IllustrationKind; text: string } | null>(null)
@@ -146,14 +158,16 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     scene.current = s
     if (import.meta.env.DEV) Object.assign(window, { __exam: s, __hands: HANDS })
     s.ready.then(() => {
+      // How the patient keeps the injured limb, whatever position they are in.
       for (const [key, deg] of Object.entries(body.holds ?? {})) {
-        s.held[key] = deg
+        s.rests[key] = deg
         const side = key.match(/^elbow-(R|L)$/)?.[1] as 'R' | 'L' | undefined
         if (side) s.restElbow[side] = deg
       }
-      // A focused examination starts on the injured arm.
+      // A focused examination starts on the injured limb; legs to be examined are bare from the start.
       if (focused) {
-        s.focus(`forearm-${focusSide}`)
+        if (legFocus) s.expose({ trunk: 0, arms: 0, legs: 1 })
+        s.focus(home)
         setView('focus')
       }
       setLoading(false)
@@ -330,23 +344,27 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       return
     }
     if (focused && offersIn(at.site).length === 0) {
-      setNote({ text: 'Not part of this examination: stay with the injured arm and the hand.', tone: 'hint' })
+      setNote({ text: legFocus ? 'Not part of this examination: stay with the legs.' : 'Not part of this examination: stay with the injured arm and the hand.', tone: 'hint' })
       return
     }
     openRegion(at.site)
   }
 
-  /** The manoeuvres offered in the part of the body a site belongs to (asking him to move the hand goes with the hand). */
+  /**
+   * The manoeuvres offered in the part of the body a site belongs to. Asking for something without a place goes with
+   * the hand (a hand shape) or the knee (walking).
+   */
   function offersIn(site: string): Offer[] {
     const s = scene.current
     const r = s ? regionOf(site, (id) => s.hasSite(id)) : null
     if (!r) return []
     const here = offers.filter((o) => o.site && r.sites.includes(o.site))
-    const hand = /hand/i.test(r.label) && site.endsWith(`-${focusSide}`)
-    return hand ? [...here, ...offers.filter((o) => !o.site)] : here
+    const asks = legFocus ? r.sites.includes(home) : /hand/i.test(r.label) && site.endsWith(`-${focusSide}`)
+    return asks ? [...here, ...offers.filter((o) => !o.site)] : here
   }
 
-  /** Which one this is, when the same manoeuvre is offered elsewhere: the side, the spot, or both. */
+  /** Which one this is, when the same manoeuvre is offered elsewhere: the side, the spot, or both (unless its label
+   * already names the spot). */
   function offerWhere(o: Offer, list: Offer[]) {
     if (!o.site) return ''
     const same = list.filter((x) => x.def === o.def && x.site)
@@ -354,7 +372,8 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     const sideOf = (id: string) => (id.endsWith('-L') ? 'left' : id.endsWith('-R') ? 'right' : '')
     const sides = new Set(same.map((x) => sideOf(x.site!)))
     const spots = new Set(same.map((x) => spotLabel(x.site!)))
-    const parts = [sides.size > 1 ? sideOf(o.site) : '', spots.size > 1 ? spotLabel(o.site) : ''].filter(Boolean)
+    const named = o.def.label.includes('{spot}')
+    const parts = [sides.size > 1 ? sideOf(o.site) : '', spots.size > 1 && !named ? spotLabel(o.site) : ''].filter(Boolean)
     return parts.length ? ` — ${parts.join(' ')}` : ''
   }
 
@@ -369,7 +388,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
           <div className="flex flex-col gap-1.5">
             {here.map((o) => (
               <button key={o.key} type="button" disabled={busy} data-testid={`exam3d-m-${o.key}`} onClick={() => perform(o)} className={`rounded-md border-2 px-3 py-2 text-left text-[14px] leading-snug shadow-[0_2px_0_rgba(0,0,0,0.25)] border-[#5a6470] bg-white disabled:opacity-50${glowing(`exam3d-m-${o.key}`)}`}>
-                {o.def.label}
+                {offerLabel(o)}
                 {offerWhere(o, list)}
               </button>
             ))}
@@ -386,23 +405,29 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     sfx.select()
     setGlowId(null)
     const side = (o.site?.match(/-(R|L)$/)?.[1] as 'R' | 'L' | undefined) ?? focusSide
-    const at = o.site ?? `hand-${side}`
-    s.focus(at)
-    // Close enough to see the fingers at work.
-    s.zoomBy(0.6)
-    setView('focus')
+    // Walking is watched across the room; the rest close to.
+    if (o.def.wide) {
+      s.setView('whole')
+      setView('whole')
+    } else {
+      s.focus(o.site ?? (legFocus ? home : `hand-${side}`))
+      setView('focus')
+    }
     const dur = s.perform(o.def.anim, o.site, side)
+    // Close enough to see the fingers at work (a leg test has its own shot, from the side).
+    if (!o.def.wide && !s.filmed) s.zoomBy(0.6)
     setBusy(true)
-    setNote({ text: `${o.def.label.replace(/^“|”$/g, '')}…`, tone: 'normal' })
-    // An answer to a request comes as they do it; a finding with your hands, once you have felt it.
+    setNote({ text: `${offerLabel(o).replace(/^“|”$/g, '')}…`, tone: 'normal' })
+    // An answer to a request comes as they do it; a finding with your hands, once you have felt it. Nothing else until
+    // it is done.
     const when = o.def.say ? dur * 0.6 : dur - 0.3
     later(when, () => {
-      setBusy(false)
       // The animation shows what you did: no ring to mark it.
       // Not an item by itself (one hand of two): what this manoeuvre found.
       const own = body.findings?.[o.key]
       if (!handle(eventOf(o)) && own) setNote({ text: own, tone: 'normal' })
     })
+    later(Math.max(when, dur - 0.2), () => setBusy(false))
   }
 
 
@@ -558,7 +583,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   function setViewTo(v: View) {
     setView(v)
-    if (v === 'focus' && focused) scene.current?.focus(`forearm-${focusSide}`)
+    if (v === 'focus' && focused) scene.current?.focus(home)
     else scene.current?.setView(v)
   }
 
@@ -593,7 +618,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
           <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={(e) => scene.current?.zoomBy(e.deltaY > 0 ? 1.1 : 0.9)} />
           {loading && <p className="absolute inset-0 grid place-items-center font-[Press_Start_2P,monospace] text-[8px] text-[#40404c]">Bringing {name} in…</p>}
           <div className="absolute left-1 top-1 flex max-w-[calc(100%-84px)] flex-wrap gap-1" onPointerDown={(e) => e.stopPropagation()}>
-            {(focused ? FOCUS_VIEWS : VIEWS).map((v) => (
+            {(focused ? (legFocus ? KNEE_VIEWS : ARM_VIEWS) : VIEWS).map((v) => (
               <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-[#ffffff]' : 'border-[#5a6470]/60 bg-white/90 text-[#30303c]'}`}>
                 {v.label}
               </button>

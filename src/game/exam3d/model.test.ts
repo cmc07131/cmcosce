@@ -63,3 +63,18 @@ test('exam3d: hints say the next act in words, and what must come first', async 
   assert.deepEqual(unmet(lachman, lying), ['knee-R=15..35'])
   assert.equal(actWords(parseDo('look hands')[0][0][0]), 'Look: the hands')
 })
+
+test('exam3d: a focused manoeuvre is the act its item needs: the side from its place, the joint it moves', async () => {
+  const { eventOf, offerLabel, offerOf } = await import('./manoeuvres')
+  const of = (entry: string) => offerOf(entry)!
+  assert.deepEqual(eventOf(of('bend-knee@knee-R')), { tool: 'say', say: 'bend-knee-R' })
+  assert.deepEqual(eventOf(of('ok-sign')), { tool: 'say', say: 'ok-sign' })
+  assert.deepEqual(eventOf(of('move-knee@knee-R')), { tool: 'move', move: 'knee-R:flex', site: 'knee-R' })
+  assert.deepEqual(eventOf(of('hip-roll@thigh-L')), { tool: 'move', move: 'hip-L:rot', site: 'thigh-L' })
+  assert.deepEqual(eventOf(of('bend-elbow@antecubital-L')), { tool: 'move', move: 'elbow-L:flex', site: 'antecubital-L' })
+  assert.deepEqual(eventOf(of('lachman@knee-R')), { tool: 'lachman', site: 'knee-R' })
+  assert.ok(run('say bend-knee-R & move knee-R:flex & lachman knee-R', [eventOf(of('bend-knee@knee-R')), eventOf(of('move-knee@knee-R')), eventOf(of('lachman@knee-R'))].map((e) => ({ ...e, state: lying }))))
+  assert.equal(offerLabel(of('pulse@dp-R')), 'Feel the dorsalis pedis pulse')
+  assert.equal(offerLabel(of('pulse@wrist-L')), 'Feel the radial pulse')
+  assert.equal(offerLabel(of('joint-line@lateraljoint-R')), 'Knee bent: press along the lateral joint line')
+})

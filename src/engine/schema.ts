@@ -57,6 +57,14 @@ export const bodySchema = z.object({
   kinkOnFlex: z.enum(['R', 'L']).optional(),
   /** Bruises seen once the skin there is exposed (site ids). */
   bruise: z.array(z.string()).optional(),
+  /** In shorts: bare legs from mid-thigh down, for a leg examination. */
+  shorts: z.boolean().optional(),
+  /** A knee effusion on this side (bare legs only): the knee swells and will not bend past 80°. */
+  effusion: z.enum(['R', 'L']).optional(),
+  /** A torn anterior cruciate ligament on this side: the Lachman test shows the shin sliding forward. */
+  acl: z.enum(['R', 'L']).optional(),
+  /** Places that hurt when pressed (site ids): the patient winces. */
+  tender: z.array(z.string()).optional(),
   /**
    * A focused examination: only these manoeuvres are offered, each animated (see game/exam3d/manoeuvres.ts):
    * `pulse@wrist-L`, `ok-sign`… Taps elsewhere on the body are not part of the examination.

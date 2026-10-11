@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { offerOf } from '../game/exam3d/manoeuvres'
-import { checkDo } from '../game/exam3d/model'
+import { eventOf, offerOf, type Offer } from '../game/exam3d/manoeuvres'
+import { advance, checkDo, freshProgress, parseDo } from '../game/exam3d/model'
 import { SITE_IDS } from '../game/exam3d/sites'
 import { bodySchema, performKinds, scriptBeat, vitalsSchema, type Action, type ActionOption, type Pack } from './schema'
 
@@ -478,6 +478,27 @@ export function compileStation(station: Station): Pack {
     if (!o) throw new Error(`${station.id}: focus "${entry}" is not a manoeuvre`)
     if (o.site && !SITE_IDS.includes(o.site)) throw new Error(`${station.id}: focus "${entry}" names no site "${o.site}"`)
   }
+  if (station.body?.effusion && !station.body.shorts) throw new Error(`${station.id}: an effusion shows only on bare legs (shorts)`)
+  for (const id of [...(station.body?.tender ?? []), ...(station.body?.bruise ?? [])])
+    if (!SITE_IDS.includes(id)) throw new Error(`${station.id}: body names no site "${id}"`)
+  // In a focused examination, every item can be done with the manoeuvres offered (in any order, as often as needed).
+  const offered = (station.body?.focus ?? []).map(offerOf).filter((o): o is Offer => !!o)
+  if (offered.length)
+    for (const step of station.steps)
+      for (const o of [...(step.opts ?? []), ...Object.values(step.groups ?? {}).flat()]) {
+        if (!o.do) continue
+        const plan = parseDo(o.do)
+        const state = { posture: station.body?.posture ?? 'supine', joints: {}, flags: [] }
+        let progress = freshProgress(plan)
+        let done = false
+        for (let round = 0; round < 4 && !done; round++)
+          for (const x of offered) {
+            const r = advance(plan, progress, { ...eventOf(x), state })
+            progress = r.progress
+            if ((done = r.done)) break
+          }
+        if (!done) throw new Error(`${station.id}: "${o.t}" cannot be done with the manoeuvres offered`)
+      }
   // A 3D examination line that names a tool, site or instruction that does not exist would never be performed.
   for (const step of station.steps)
     for (const o of Object.values(step.groups ?? {}).flat())

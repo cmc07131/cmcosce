@@ -21,6 +21,11 @@ export const TOOLS: ToolDef[] = [
   { id: 'listen', label: 'Listen', icon: '🩺', use: 'hold', normal: 'Nothing abnormal heard over {site}.' },
   { id: 'move', label: 'Move', icon: '🤲', use: 'drag', normal: 'Moves freely.' },
   { id: 'stretch', label: 'Passive stretch', icon: '🤚', use: 'tap', normal: 'No pain on passive stretch.' },
+  // Knee tests, each a manoeuvre of its own.
+  { id: 'patellar-tap', label: 'Patellar tap', icon: '👆', use: 'tap', normal: 'No patellar tap: no large effusion.' },
+  { id: 'lachman', label: 'Lachman test', icon: '🦵', use: 'tap', normal: 'Firm end-point; no more movement than the other side.' },
+  { id: 'drawer', label: 'Posterior sag and drawer', icon: '🦵', use: 'tap', normal: 'No sag; firm end-point.' },
+  { id: 'stress', label: 'Valgus and varus stress', icon: '↔', use: 'tap', normal: 'Stable at 0° and 30°.' },
   { id: 'say', label: 'Ask', icon: '💬', use: 'menu', normal: '' },
   { id: 'gloves', label: 'Gloves', icon: '🧤', use: 'self', normal: 'Hands washed; gloves on.' },
   { id: 'torch', label: 'Pen torch', icon: '🔦', use: 'tap', normal: 'Nothing abnormal in the light.' },

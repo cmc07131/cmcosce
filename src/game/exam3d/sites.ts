@@ -49,6 +49,8 @@ export type SiteDef = {
   sided?: boolean
   /** Under the drape: shown in a drawn close-up, never on the model. */
   draped?: boolean
+  /** Only where the examiner's hands go (a grip on the thigh): never a place you tap. */
+  grip?: boolean
 }
 
 const F: [number, number, number] = [0, 0, 1]
@@ -127,6 +129,8 @@ export const SITES: Record<string, SiteDef> = {
   thigh: { label: 'thigh', j: 'thigh', to: 'calf', t: 0.5, dir: F, r: 0.07, sided: true },
   innerthigh: { label: 'inner thigh', j: 'thigh', to: 'calf', t: 0.32, dir: MED, r: 0.04, sided: true },
   knee: { label: 'knee', j: 'calf', off: [0, 0.03, 0], dir: F, r: 0.035, sided: true },
+  // The kneecap rides in the groove of the femur: it goes with the thigh.
+  patella: { label: 'patella', j: 'thigh', to: 'calf', t: 0.93, dir: F, r: 0.022, sided: true },
   medialjoint: { label: 'medial joint line', j: 'calf', dir: MED, r: 0.02, sided: true },
   lateraljoint: { label: 'lateral joint line', j: 'calf', dir: RT, r: 0.02, sided: true },
   tibialtub: { label: 'tibial tuberosity', j: 'calf', to: 'foot', t: 0.12, dir: F, r: 0.018, sided: true },
@@ -144,6 +148,11 @@ export const SITES: Record<string, SiteDef> = {
   toes: { label: 'toes', j: 'toe', dir: U, r: 0.03, sided: true },
   sole: { label: 'sole', j: 'foot', to: 'toe', t: 0.45, dir: D, r: 0.035, sided: true },
   heel: { label: 'heel', j: 'foot', off: [0, -0.05, -0.05], dir: B, r: 0.03, sided: true },
+  // Grips: the front and outside of the lower thigh, either side of the top of the shin.
+  suprapatellar: { label: 'front of the lower thigh', j: 'thigh', to: 'calf', t: 0.8, dir: F, r: 0.03, sided: true, grip: true },
+  lateralthigh: { label: 'outside of the lower thigh', j: 'thigh', to: 'calf', t: 0.8, dir: RT, r: 0.03, sided: true, grip: true },
+  lateraltibia: { label: 'outside of the upper shin', j: 'calf', to: 'foot', t: 0.13, dir: RT, r: 0.025, sided: true, grip: true },
+  medialtibia: { label: 'inside of the upper shin', j: 'calf', to: 'foot', t: 0.13, dir: MED, r: 0.025, sided: true, grip: true },
 
   // Under the drape.
   vulva: { label: 'vulva', j: 'hips', off: [0, -0.1, 0.03], dir: F, r: 0.04, draped: true },
@@ -172,8 +181,8 @@ export const GROUPS: Record<string, string[]> = {
   'arm-L': ['arm-L', 'elbow-L', 'forearm-L', 'wrist-L', 'hand-L', 'palm-L'],
   'shoulder-R': ['shoulder-R', 'acromion-R', 'acjoint-R', 'tuberosity-R', 'bicipital-R', 'clavicle-R', 'scjoint-R'],
   'shoulder-L': ['shoulder-L', 'acromion-L', 'acjoint-L', 'tuberosity-L', 'bicipital-L', 'clavicle-L', 'scjoint-L'],
-  'knee-R*': ['knee-R', 'medialjoint-R', 'lateraljoint-R', 'tibialtub-R', 'fibula-R', 'popliteal-R'],
-  'knee-L*': ['knee-L', 'medialjoint-L', 'lateraljoint-L', 'tibialtub-L', 'fibula-L', 'popliteal-L'],
+  'knee-R*': ['knee-R', 'patella-R', 'medialjoint-R', 'lateraljoint-R', 'tibialtub-R', 'fibula-R', 'popliteal-R'],
+  'knee-L*': ['knee-L', 'patella-L', 'medialjoint-L', 'lateraljoint-L', 'tibialtub-L', 'fibula-L', 'popliteal-L'],
   'ankle-R': ['lateralmalleolus-R', 'medialmalleolus-R', 'foot-R'],
   'ankle-L': ['lateralmalleolus-L', 'medialmalleolus-L', 'foot-L'],
   back: ['spine', 'thoracic', 'paraspinal-R', 'paraspinal-L', 'sacrum'],
@@ -216,7 +225,7 @@ const REGIONS: { label: string; sites: string[] }[] = [
   { label: 'hand', sites: ['hand', 'palm', 'nails', 'pulp', 'thumb', 'web', 'ring', 'ringpulp', 'littlepulp'] },
   { label: 'hip and groin', sites: ['hip', 'groin', 'asis'] },
   { label: 'thigh', sites: ['thigh', 'innerthigh'] },
-  { label: 'knee', sites: ['knee', 'medialjoint', 'lateraljoint', 'tibialtub', 'fibula', 'popliteal'] },
+  { label: 'knee', sites: ['knee', 'patella', 'medialjoint', 'lateraljoint', 'tibialtub', 'fibula', 'popliteal'] },
   { label: 'lower leg', sites: ['shin', 'calf'] },
   { label: 'ankle and foot', sites: ['lateralmalleolus', 'medialmalleolus', 'foot', 'dp', 'pt', 'navicular', 'fifthmt', 'toes', 'sole', 'heel'] },
   { label: 'under the drape', sites: ['vulva', 'cervix', 'adnexa', 'scrotum', 'testis'] },
@@ -235,6 +244,14 @@ export function regionOf(id: string, exists: (id: string) => boolean = () => tru
     .filter(exists)
   const sideWord = side === 'R' ? 'Right ' : side === 'L' ? 'Left ' : ''
   return { label: sideWord ? `${sideWord}${region.label}` : region.label.charAt(0).toUpperCase() + region.label.slice(1), sites }
+}
+
+const LEG_BONES = new Set<JointRef>(['thigh', 'calf', 'foot', 'toe'])
+
+/** Whether a site is on a leg (it moves with the thigh, shin or foot). */
+export function onLeg(id: string): boolean {
+  const s = siteOf(id)
+  return !!s && LEG_BONES.has(s.def.j)
 }
 
 /** A site's name on a button: "radial pulse", without the side. */

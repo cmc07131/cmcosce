@@ -3,8 +3,8 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 
 /**
  * The examiner's gloved hand and white-coat sleeve, for showing how each manoeuvre is done: two fingers on a pulse, a
- * thumb on a nail bed, the backs of the fingers for warmth, a hand round the forearm, a cotton bud, a neurotip, a
- * Doppler probe.
+ * thumb on a nail bed, the backs of the fingers for warmth, a hand round the forearm or the shin, a cotton bud, a
+ * neurotip, a Doppler probe. Two-handed manoeuvres (a Lachman test) use a second, mirrored one.
  *
  * Its own frame: the wrist at the origin, fingers along +Z, palm facing -Y, thumb toward +X; the sleeve runs back
  * along -Z. `place` turns it so the chosen part meets a point on the skin from outside.
@@ -54,7 +54,8 @@ export class ExaminerHand {
   private tools: Record<'cotton' | 'neurotip' | 'doppler', { obj: THREE.Object3D; tip: THREE.Object3D }>
   grip: Grip = 'flat'
 
-  constructor(scene: THREE.Scene) {
+  /** `left`: the examiner's other hand (the same hand, mirrored). */
+  constructor(scene: THREE.Scene, left = false) {
     const palm = new THREE.Mesh(new RoundedBoxGeometry(0.084, 0.03, 0.094, 4, 0.012), GLOVE)
     palm.position.z = 0.047
     palm.castShadow = true
@@ -116,6 +117,7 @@ export class ExaminerHand {
       neurotip: tool(new THREE.MeshStandardMaterial({ color: '#f2c84b' }), 0.075, 0.0035, 0.003, new THREE.MeshStandardMaterial({ color: '#d0d4d8', metalness: 0.6 })),
       doppler: tool(new THREE.MeshStandardMaterial({ color: '#cfd5da', roughness: 0.4 }), 0.1, 0.009, 0.008, new THREE.MeshStandardMaterial({ color: '#7d8a96' })),
     }
+    if (left) this.group.scale.x = -1
     this.group.visible = false
     scene.add(this.group)
   }

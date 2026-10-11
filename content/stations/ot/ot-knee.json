@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Ottawa knee rule (Stiell 1996), BOA/BASK guidance on acute knee injury, and standard examination technique.\n\nStructure: look (gait, alignment, swelling, effusion, quadriceps wasting, scars), feel (temperature, effusion tests — patellar tap for large effusions, sweep/bulge test for small; joint line tenderness; collateral ligaments; patella), move (active and passive flexion and extension, straight-leg raise to test the extensor mechanism), special tests (Lachman — most sensitive for ACL; anterior drawer; posterior sag and drawer for PCL; valgus and varus stress at 0° and 30° for MCL and LCL; McMurray/Thessaly for menisci with caution in acute pain), and neurovascular status. Examine the hip and the other knee.\n\nAn acute haemarthrosis within hours after a twisting injury with a pop: ACL rupture (about 70%), patellar dislocation, osteochondral fracture. Ottawa knee rule for X-ray: age 55 or over, isolated patellar tenderness, fibular head tenderness, cannot flex to 90°, or cannot weight bear 4 steps immediately and in the ED. Management: RICE, analgesia, crutches, brace if needed, early physiotherapy, fracture clinic/knee clinic, MRI. A locked knee (meniscal bucket-handle) needs urgent orthopaedic review.\n\nYour notes list the knee exam headings (look, feel, move, special tests) without detail; nothing conflicts.\n\nPerfect script checked against standard knee examination and the Ottawa knee rule, an HKCEM-style scheme and a keyword scheme. Removed the forceful McMurray and aspirate-every-haemarthrosis options.",
+  "notes": "Checked against the Ottawa knee rule (Stiell 1996), BOA/BASK guidance on acute knee injury, and standard examination technique.\n\nStructure: look (gait, alignment, swelling, effusion, quadriceps wasting, scars), feel (temperature, effusion tests — patellar tap for large effusions, sweep/bulge test for small; joint line tenderness; collateral ligaments; patella), move (active and passive flexion and extension, straight-leg raise to test the extensor mechanism), special tests (Lachman — most sensitive for ACL; anterior drawer; posterior sag and drawer for PCL; valgus and varus stress at 0° and 30° for MCL and LCL; McMurray/Thessaly for menisci with caution in acute pain), and neurovascular status. Examine the hip and the other knee.\n\nAn acute haemarthrosis within hours after a twisting injury with a pop: ACL rupture (about 70%), patellar dislocation, osteochondral fracture. Ottawa knee rule for X-ray: age 55 or over, isolated patellar tenderness, fibular head tenderness, cannot flex to 90°, or cannot weight bear 4 steps immediately and in the ED. Management: RICE, analgesia, crutches, brace if needed, early physiotherapy, fracture clinic/knee clinic, MRI. A locked knee (meniscal bucket-handle) needs urgent orthopaedic review.\n\nYour notes list the knee exam headings (look, feel, move, special tests) without detail; nothing conflicts.\n\nPerfect script checked against standard knee examination and the Ottawa knee rule, an HKCEM-style scheme and a keyword scheme. Removed the forceful McMurray and aspirate-every-haemarthrosis options.\n\nRebuilt as a focused examination (2026-10-12), as the supracondylar station is: every manoeuvre is a button under its heading (look, feel, move, special tests, neurovascular, to complete), shown being done on the patient, with its finding. He lies in football shorts, both legs bare (built for the leg examination: the model's trousers are tucked away). The swelling, the bent knee he keeps, the antalgic gait, the shin sliding forward on the Lachman and his wince on the lateral joint line are on the model. Marks split into single acts: warmth, patellar tap, joint lines and bony points; active and passive movement and the straight-leg raise; pulses, and sensation with power. A passive range with no springy block rules out a locked knee (bucket-handle tear). The common peroneal nerve is checked (foot up and down), as it is at risk in knee injuries. The left Lachman is there to compare and earns nothing on its own.",
   "cast": [
     {
       "id": "patient",
@@ -40,7 +40,54 @@
   ],
   "body": {
     "posture": "supine",
-    "gait": "antalgic-R"
+    "gait": "antalgic-R",
+    "shorts": true,
+    "effusion": "R",
+    "acl": "R",
+    "tender": [
+      "lateraljoint-R"
+    ],
+    "holds": {
+      "knee-R": 12,
+      "hipflex-R": 6
+    },
+    "focus": [
+      "walk",
+      "inspect-knees@knee-R",
+      "warmth@knee-R",
+      "warmth@knee-L",
+      "patellar-tap@knee-R",
+      "joint-line@medialjoint-R",
+      "joint-line@lateraljoint-R",
+      "bone@patella-R",
+      "bone@tibialtub-R",
+      "bone@fibula-R",
+      "bend-knee@knee-R",
+      "move-knee@knee-R",
+      "slr@knee-R",
+      "lachman@knee-R",
+      "lachman@knee-L",
+      "post-drawer@knee-R",
+      "collaterals@knee-R",
+      "pulse@dp-R",
+      "pulse@pt-R",
+      "touch@foot-R",
+      "foot-up@foot-R",
+      "hip-roll@thigh-R"
+    ],
+    "findings": {
+      "warmth@knee-R": "The right knee is warm.",
+      "warmth@knee-L": "The left knee: normal temperature.",
+      "joint-line@medialjoint-R": "Medial joint line: not tender.",
+      "joint-line@lateraljoint-R": "Lateral joint line: tender; he winces.",
+      "bone@patella-R": "Patella: not tender.",
+      "bone@tibialtub-R": "Tibial tuberosity: not tender.",
+      "bone@fibula-R": "Fibular head: not tender.",
+      "lachman@knee-L": "Left knee: a few millimetres of movement, then a firm end-point. The normal side, for comparison.",
+      "pulse@dp-R": "Dorsalis pedis pulse present.",
+      "pulse@pt-R": "Posterior tibial pulse present.",
+      "touch@foot-R": "Feels light touch normally over the foot."
+    }
   },
   "steps": [
     {
@@ -66,70 +113,108 @@
       "kind": "exam",
       "to": "patient",
       "label": "Examine the knee",
-      "hint": "Look, feel, move, special tests, neurovascular, and compare with the other side.",
+      "hint": "Look (gait, both knees), feel (warmth, patellar tap, joint lines, bones), move (active, passive, straight-leg raise), the ligaments (Lachman, posterior drawer, collaterals), then the foot and the hip.",
       "groups": {
         "Look": [
           {
-            "t": "Walk a few steps if you can; then stand",
-            "r": "Antalgic gait; can take 4 steps with difficulty.",
+            "t": "Walk a few steps for me, if you can",
+            "r": "Antalgic gait: four steps, limping, keeping his weight off the right leg. \"He can weight-bear four steps.\"",
             "mark": "Observes gait and weight-bearing",
-            "do": "say walk,stand"
+            "do": "say walk"
           },
           {
-            "t": "Look for swelling, bruising, wasting and scars",
-            "r": "Tense swelling of the right knee, no bruising, no scars.",
-            "mark": "Inspects for swelling and deformity",
+            "t": "Look at both knees: swelling, bruising, wounds, wasting",
+            "r": "The right knee is swollen: the hollows beside the patella are filled and the swelling runs up above it. No bruising, wounds or scars; no quadriceps wasting. The left knee is normal.",
+            "mark": "Inspects both knees for swelling, bruising, wounds and wasting",
             "do": "look knee-R"
           }
         ],
         "Feel": [
           {
-            "t": "Feel the temperature; patellar tap for an effusion",
-            "r": "Warm; large effusion with a positive patellar tap.",
-            "mark": "Assesses temperature and effusion",
-            "do": "feel knee-R & press knee-R"
+            "t": "Feel the temperature of both knees with the back of my hand",
+            "r": "The right knee is warm compared with the left.",
+            "mark": "Feels for warmth, comparing sides",
+            "do": "feel knee-R & feel knee-L"
           },
           {
-            "t": "Feel the joint lines, collaterals, patella, tibial tuberosity and fibular head",
-            "r": "Mild lateral joint line tenderness. No bony tenderness at the patella or fibular head.",
-            "mark": "Palpates joint lines and bony landmarks (Ottawa)",
-            "do": "feel medialjoint-R & feel lateraljoint-R & feel tibialtub-R,fibula-R"
+            "t": "Patellar tap: empty the pouch above the knee, then tap the kneecap",
+            "r": "The patella taps down onto the femur: a positive patellar tap, a large effusion. Swelling within an hour of the injury: a haemarthrosis.",
+            "mark": "Patellar tap: a large effusion",
+            "do": "patellar-tap knee-R"
+          },
+          {
+            "t": "Bend the knee and feel along both joint lines",
+            "r": "Tender over the lateral joint line; the medial joint line is not tender.",
+            "mark": "Palpates the joint lines",
+            "do": "press medialjoint-R & press lateraljoint-R"
+          },
+          {
+            "t": "Press on the patella and the fibular head for bony tenderness",
+            "r": "No bony tenderness over the patella or the fibular head.",
+            "mark": "Palpates the patella and the fibular head (Ottawa knee rule)",
+            "do": "press patella-R & press fibula-R"
           }
         ],
         "Move": [
           {
-            "t": "Bend and straighten your knee; now lift your straight leg",
-            "r": "Flexes to 80° (limited by swelling). Straight-leg raise intact — extensor mechanism intact.",
-            "mark": "Assesses movement and the extensor mechanism",
-            "do": "say bend-knee-R & say lift-leg-R"
+            "t": "Bend your knee up as far as you can, then straighten it",
+            "r": "He bends it only to 80°, stopped by the tense swelling, and straightens it fully. \"He can't flex to 90 degrees.\"",
+            "mark": "Active range of movement",
+            "do": "say bend-knee-R"
+          },
+          {
+            "t": "I'll move it for you: a hand on the kneecap, bend and straighten",
+            "r": "Passively the same, 0 to 80°, painful at the end of flexion; no crepitus; no springy block to straightening, so the knee is not locked.",
+            "mark": "Passive movement: not locked",
+            "do": "move knee-R:flex"
+          },
+          {
+            "t": "Straight leg raise: keep your knee straight and lift your leg off the bed",
+            "r": "He lifts the straight leg with no lag: the extensor mechanism is intact.",
+            "mark": "Straight-leg raise: extensor mechanism intact",
+            "do": "say lift-leg-R"
           }
         ],
         "Special tests": [
           {
-            "t": "Lachman test, knee at 20 to 30 degrees",
-            "r": "Increased anterior translation with a soft end-point compared with the left. \"A positive Lachman: ACL.\"",
-            "mark": "Performs Lachman: positive (ACL)",
-            "do": "feel shin-R,tibialtub-R @knee-R=15..35"
+            "t": "Lachman test, knee at 20 to 30 degrees, compared with the other side",
+            "r": "About a centimetre of forward movement of the shin with a soft end-point, more than the left. \"A positive Lachman: ACL.\"",
+            "mark": "Lachman test: positive (ACL)",
+            "do": "lachman knee-R"
           },
           {
-            "t": "Posterior sag and posterior drawer",
-            "r": "No sag, firm end-point.",
-            "mark": "Tests the PCL",
-            "do": "press tibialtub-R,shin-R,knee-R @knee-R=70..110 | look knee-R @knee-R=70..110"
+            "t": "Posterior sag, then the posterior drawer",
+            "r": "No posterior sag; a firm end-point on the posterior drawer: the PCL is intact.",
+            "mark": "Tests the PCL: posterior sag and drawer",
+            "do": "drawer knee-R"
           },
           {
-            "t": "Valgus and varus stress at 0 and 30 degrees",
-            "r": "Stable.",
-            "mark": "Tests collateral ligaments",
-            "do": "press medialjoint-R,lateraljoint-R,knee-R @knee-R=0..10 & press medialjoint-R,lateraljoint-R,knee-R @knee-R=20..40"
+            "t": "Valgus and varus stress at 30 degrees and straight",
+            "r": "Stable to valgus and varus stress at 30° and straight: the collateral ligaments are intact.",
+            "mark": "Tests the collateral ligaments at 0° and 30°",
+            "do": "stress knee-R"
           }
         ],
-        "Complete": [
+        "Neurovascular": [
           {
-            "t": "To complete: distal pulses and sensation, the hip, and the other knee",
-            "r": "Pulses and sensation normal; hip normal.",
-            "mark": "Neurovascular check and joint above",
-            "do": "feel dp-R,pt-R | feel hip-R,groin-R | look knee-L"
+            "t": "Feel the foot pulses: dorsalis pedis and posterior tibial",
+            "r": "Dorsalis pedis and posterior tibial pulses present.",
+            "mark": "Feels the distal pulses",
+            "do": "feel dp-R & feel pt-R"
+          },
+          {
+            "t": "Light touch on the foot; pull your foot up, then push it down",
+            "r": "Light touch normal; he pulls the foot up and pushes it down strongly: the common peroneal and tibial nerves are intact.",
+            "mark": "Distal sensation and power (common peroneal nerve)",
+            "do": "cotton foot-R & say toes"
+          }
+        ],
+        "To complete": [
+          {
+            "t": "Roll the leg to examine the hip, the joint above",
+            "r": "The hip rolls freely and painlessly: the hip is normal.",
+            "mark": "Examines the joint above (the hip)",
+            "do": "move hip-R:rot"
           }
         ]
       }
@@ -290,21 +375,31 @@
     },
     {
       "at": "0:20",
-      "say": "Walk a few steps if you can; then stand. Look for swelling, bruising, wasting and scars. Feel the temperature; patellar tap for an effusion.",
-      "do": "Antalgic gait; can take 4 steps with difficulty. Tense swelling of the right knee, no bruising, no scars. Warm; large effusion with a positive patellar tap."
+      "say": "Walk a few steps for me, if you can. Look at both knees: swelling, bruising, wounds, wasting.",
+      "do": "Antalgic gait, but he can weight-bear four steps. The right knee is swollen above and beside the patella; no bruising, wounds or wasting."
     },
     {
-      "at": "0:40",
-      "say": "Feel the joint lines, collaterals, patella, tibial tuberosity and fibular head. Bend and straighten your knee; now lift your straight leg. Lachman test, knee at 20 to 30 degrees. A positive Lachman: ACL.",
-      "do": "Mild lateral joint line tenderness. No bony tenderness at the patella or fibular head. Flexes to 80° (limited by swelling). Straight-leg raise intact — extensor mechanism intact. Increased anterior translation with a soft end-point compared with the left. \"A positive Lachman: ACL.\""
+      "at": "0:50",
+      "say": "Feel the temperature of both knees with the back of my hand. Patellar tap: empty the pouch above the knee, then tap the kneecap. Bend the knee and feel along both joint lines. Press on the patella and the fibular head for bony tenderness.",
+      "do": "Warm compared with the left. A positive patellar tap: a large effusion within an hour, a haemarthrosis. Lateral joint line tender. No bony tenderness at the patella or the fibular head."
     },
     {
-      "at": "1:00",
-      "say": "Posterior sag and posterior drawer. Valgus and varus stress at 0 and 30 degrees. To complete: distal pulses and sensation, the hip, and the other knee.",
-      "do": "No sag, firm end-point. Stable. Pulses and sensation normal; hip normal."
+      "at": "2:00",
+      "say": "Bend your knee up as far as you can, then straighten it. I'll move it for you: a hand on the kneecap, bend and straighten. Straight leg raise: keep your knee straight and lift your leg off the bed.",
+      "do": "Flexes only to 80°, can't flex to 90 degrees; straightens fully; not locked. Straight leg raise with no lag: extensor mechanism intact."
     },
     {
-      "at": "1:20",
+      "at": "3:00",
+      "say": "Lachman test, knee at 20 to 30 degrees, compared with the other side. Posterior sag, then the posterior drawer. Valgus and varus stress at 30 degrees and straight.",
+      "do": "About a centimetre of forward movement with a soft end-point: a positive Lachman, ACL. No sag, firm posterior drawer. Stable to valgus and varus."
+    },
+    {
+      "at": "4:10",
+      "say": "Feel the foot pulses: dorsalis pedis and posterior tibial. Light touch on the foot; pull your foot up, then push it down. Roll the leg to examine the hip, the joint above.",
+      "do": "Pulses present; sensation and power normal. Hip normal."
+    },
+    {
+      "at": "5:00",
       "say": "An acute haemarthrosis with a positive Lachman: likely an ACL rupture; consider a meniscal injury. Ottawa knee rule: he can't flex to 90 degrees, so a knee X-ray to exclude a fracture, such as a Segond fracture. Analgesia, ice, crutches, early physiotherapy, knee clinic and an MRI."
     }
   ],

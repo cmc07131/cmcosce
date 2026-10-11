@@ -80,6 +80,8 @@ export type Rig = {
   legLength: number
   /** Every mesh of the body, for picking where a finger lands. */
   meshes: THREE.Mesh[]
+  /** The patient's skin tone (linear), for skin that is not in the model (bare legs). */
+  skin: THREE.Color
   face(e: Eyes): void
   /**
    * Uncover parts of the body (0 covered … 1 bare). On the realistic models the clothes there take her skin tone;
@@ -229,6 +231,7 @@ export async function loadRocketbox(dir: string): Promise<Rig> {
     height: 1.7,
     legLength: 0.9,
     meshes,
+    skin: exposure.tone,
     face: (e) => {
       const shut = e.shut ?? { L: 0, R: 0 }
       const brows = e.brows ?? { L: 0, R: 0 }
@@ -314,6 +317,7 @@ function exposable(meshes: THREE.Mesh[]) {
     }
   }
   return {
+    tone,
     set: (trunk: number, arms: number, legs: number) => on.set(trunk, arms, legs),
     // A pale hand still has a fingertip: the fingers blanch at least as much as the hand.
     pale: (p: { fingersL: number; handL: number; fingersR: number; handR: number }) => pallor.set(Math.max(p.fingersL, p.handL), p.handL, Math.max(p.fingersR, p.handR), p.handR),
@@ -456,6 +460,7 @@ export async function loadVrm(url: string): Promise<Rig> {
     height: 1.7,
     legLength: 0.9,
     meshes,
+    skin: new THREE.Color('#f6d7c3'),
     face: (e) => {
       if (!em) return
       const shut = e.shut ?? { L: 0, R: 0 }
