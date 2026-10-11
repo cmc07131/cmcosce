@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { legAnatomy, type Frame, type Weights as Skin } from './anatomy'
 import type { Rig, Side } from './rig'
 
 /**
@@ -7,6 +8,9 @@ import type { Rig, Side } from './rig'
  * built here, from mid-thigh to the toes, in the shape of a leg (a kneecap with a hollow either side, the tibial
  * tuberosity, the calf, the ankle bones, a foot) and skinned to the patient's own thigh, shin, foot and toe bones, so
  * it bends, rolls and slides with them. Below the hem of the shorts the trousers and shoes are tucked away inside it.
+ *
+ * Under each leg, hidden until the X-ray view is on, its anatomy (anatomy.ts), skinned to the same bones: the tibia
+ * slides on the femur in a Lachman test.
  *
  * Built once, in the bind pose (standing: up +Y, face +Z, her right -X), before the landmarks are found on the skin.
  */
@@ -108,12 +112,15 @@ function footShape(ball: number, ankleUp: number) {
 /** The bones a vertex is skinned to, and how much. */
 type Weights = [number, number][]
 
-/** Build the legs; returns the meshes (already added to the rig, and to its list of meshes for picking). */
-export function bareLegs(rig: Rig, opts: { effusion?: Side } = {}): THREE.SkinnedMesh[] {
+/**
+ * Build the legs and what is under them. The legs are added to the rig and to its list of meshes (for picking); the
+ * anatomy to the rig only, hidden.
+ */
+export function bareLegs(rig: Rig, opts: { effusion?: Side; acl?: Side } = {}): { legs: THREE.SkinnedMesh[]; anatomy: THREE.SkinnedMesh[] } {
   const base = rig.meshes.find((m) => (m as THREE.SkinnedMesh).isSkinnedMesh && (m as THREE.SkinnedMesh).skeleton.bones.includes(rig.thigh.R as THREE.Bone)) as
     | THREE.SkinnedMesh
     | undefined
-  if (!base) return []
+  if (!base) return { legs: [], anatomy: [] }
   rig.root.updateMatrixWorld(true)
   base.skeleton.update()
   const skeleton = base.skeleton
@@ -128,6 +135,7 @@ export function bareLegs(rig: Rig, opts: { effusion?: Side } = {}): THREE.Skinne
   const material = new THREE.MeshStandardMaterial({ name: 'bare-legs', roughness: 0.62, metalness: 0 })
   material.color = rig.skin
   const made: THREE.SkinnedMesh[] = []
+  const anatomy: THREE.SkinnedMesh[] = []
 
   for (const s of SIDES) {
     const H = at(rig.thigh[s])
@@ -291,12 +299,58 @@ export function bareLegs(rig: Rig, opts: { effusion?: Side } = {}): THREE.Skinne
     rig.root.add(mesh)
     mesh.bind(skeleton, bindToWorld.clone().invert())
     made.push(mesh)
+
+    // Under the skin.
+    const frameOf = (y: THREE.Vector3): Frame => {
+      const x = outward.clone().addScaledVector(y, -y.dot(outward)).normalize()
+      const z = v(0, 0, 1).addScaledVector(y, -y.z).addScaledVector(x, -x.z).normalize()
+      return { x, y, z }
+    }
+    const weightsAt = (p: THREE.Vector3): Skin => {
+      const rel = p.clone().sub(K)
+      const d = rel.dot(up) >= 0 ? rel.dot(up) : -rel.dot(down)
+      const toCalf = ease(0.035 * k, -0.03 * k, d)
+      const toFoot = ease(-shinLen + 0.03 * k, -shinLen - 0.015 * k, d)
+      return [
+        [ids.thigh, 1 - toCalf],
+        [ids.calf, toCalf * (1 - toFoot)],
+        [ids.foot, toFoot],
+      ]
+    }
+    const parts = legAnatomy(
+      { K, A, sole, thigh: frameOf(up), shin: frameOf(down.clone().negate()), fwd, across, ball, k, weightsAt, bones: ids },
+      { effusion: opts.effusion === s, torn: opts.acl === s },
+    )
+    for (const [name, part] of Object.entries(parts)) {
+      // Drawn over the see-through skin (after it), glowing a little so they stand out against it.
+      const m = new THREE.SkinnedMesh(
+        part.geo,
+        new THREE.MeshStandardMaterial({
+          name,
+          color: part.color,
+          emissive: part.color,
+          emissiveIntensity: 0.25,
+          roughness: 0.5,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: part.clear ? 0.6 : 1,
+          depthWrite: !part.clear,
+        }),
+      )
+      m.name = `xray-${name}-${s}`
+      m.renderOrder = 2
+      m.frustumCulled = false
+      m.visible = false
+      rig.root.add(m)
+      m.bind(skeleton, bindToWorld.clone().invert())
+      anatomy.push(m)
+    }
     // The shoe goes onto a line through the middle of the bare foot (the toe bone can sit beyond its toes).
     const heel = v(A.x, sole + 0.04 * k, A.z)
     tuckTrousers(rig, s, { H, K, A, F0: heel, F1: heel.clone().addScaledVector(fwd, 0.12 * k), hem: 0.42 })
   }
   rig.meshes.push(...made)
-  return made
+  return { legs: made, anatomy }
 }
 
 /**

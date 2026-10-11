@@ -12,7 +12,7 @@ import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from '
 import { GROUPS as FRAMEWORK, eventOf, offerLabel, offerOf, type Offer } from './manoeuvres'
 import { advance, freshProgress, matches, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, HANDS, type Limb, type Posture, type View } from './scene'
-import { onLeg, regionOf, siteLabel, siteOf, spotLabel } from './sites'
+import { SITES, onLeg, regionOf, siteLabel, siteOf, spotLabel } from './sites'
 import { bowel, doppler, fork, heartbeat, percussNote } from './sounds'
 
 /**
@@ -146,6 +146,14 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     tone: 'hint',
   })
   const [illus, setIllus] = useState<{ kind: IllustrationKind; text: string } | null>(null)
+  /** The X-ray view (bare legs only): see through the skin to what you are examining. */
+  const [canXray, setCanXray] = useState(false)
+  const [xray, setXray] = useState(false)
+  /** What you are examining, pinned to the spot as you do it: where, until when, and what it says. */
+  const [label, setLabel] = useState<{ title: string; sub?: string } | null>(null)
+  const labelAt = useRef<{ site: string; until: number } | null>(null)
+  const labelBox = useRef<HTMLDivElement>(null)
+  const labelText = useRef<HTMLDivElement>(null)
   const [found, setFound] = useState<string[]>([])
   const done = new Set([...spent, ...found])
 
@@ -172,7 +180,10 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       }
       setLoading(false)
       setCredit(s.credit)
+      setCanXray(s.canXray)
     })
+    // Each frame: the label follows its spot as the limb moves.
+    s.onFrame = () => placeLabel()
     const ro = new ResizeObserver(() => s.resize())
     ro.observe(host.current)
     return () => {
@@ -414,6 +425,9 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       setView('focus')
     }
     const dur = s.perform(o.def.anim, o.site, side)
+    const what = labelFor(o)
+    setLabel(what)
+    labelAt.current = what ? { site: o.site ?? (legFocus ? home : `hand-${side}`), until: performance.now() + (dur + 1.8) * 1000 } : null
     // Close enough to see the fingers at work (a leg test has its own shot, from the side).
     if (!o.def.wide && !s.filmed) s.zoomBy(0.6)
     setBusy(true)
@@ -430,6 +444,42 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     later(Math.max(when, dur - 0.2), () => setBusy(false))
   }
 
+
+  /** What a manoeuvre is about: what it tests, or the place (and what lies under it). Nothing for looking. */
+  function labelFor(o: Offer): { title: string; sub?: string } | null {
+    if (o.def.shows) return o.def.shows
+    if (!o.site || o.def.say || o.def.anim === 'inspect' || o.def.anim === 'look') return null
+    const where = spotLabel(o.site)
+    return { title: where.charAt(0).toUpperCase() + where.slice(1), sub: SITES[o.site.replace(/-(R|L)$/, '')]?.under }
+  }
+
+  /** Put the label on its spot on screen (or hide it once it is done). */
+  function placeLabel() {
+    const s = scene.current
+    const el = labelBox.current
+    const at = labelAt.current
+    if (!el) return
+    const p = s && at && performance.now() < at.until ? s.siteWorld(at.site) : null
+    const box = host.current?.getBoundingClientRect()
+    const sp = p && s ? s.screenOf(p) : null
+    if (!sp || !box || sp.behind) {
+      el.style.display = 'none'
+      return
+    }
+    const x = sp.x - box.left
+    const y = sp.y - box.top
+    el.style.display = 'block'
+    el.style.left = `${Math.max(6, Math.min(box.width - 6, x))}px`
+    el.style.top = `${Math.max(6, Math.min(box.height - 6, y))}px`
+    // The text beside the spot, on whichever side has room.
+    if (labelText.current) {
+      const right = x < box.width * 0.55
+      labelText.current.style.left = right ? '10px' : ''
+      labelText.current.style.right = right ? '' : '10px'
+      labelText.current.style.top = y < 70 ? '10px' : ''
+      labelText.current.style.bottom = y < 70 ? '' : '10px'
+    }
+  }
 
   function openRegion(site: string) {
     const s = scene.current
@@ -623,6 +673,31 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
                 {v.label}
               </button>
             ))}
+            {canXray && (
+              <button
+                type="button"
+                data-testid="exam3d-xray"
+                aria-pressed={xray}
+                onClick={() => {
+                  const on = !xray
+                  sfx.select()
+                  setXray(on)
+                  scene.current?.setXray(on)
+                }}
+                className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${xray ? 'border-[#0c3b5c] bg-[#1d6fa5] text-white' : 'border-[#1d6fa5]/70 bg-white/90 text-[#1d6fa5]'}`}
+              >
+                X-RAY
+              </button>
+            )}
+          </div>
+          <div ref={labelBox} className="pointer-events-none absolute z-10" style={{ display: 'none' }} data-testid="exam3d-label">
+            <span className="absolute -left-[6px] -top-[6px] h-3 w-3 rounded-full border-2 border-[#181820] bg-[#ffd34d]" />
+            {label && (
+              <div ref={labelText} className="absolute w-max max-w-[210px] rounded border-2 border-[#181820] bg-white/95 px-2 py-1 text-[12px] leading-snug shadow-[0_2px_0_rgba(0,0,0,0.25)]">
+                <b>{label.title}</b>
+                {label.sub && <span className="block text-[#40404c]">{label.sub}</span>}
+              </div>
+            )}
           </div>
           {illus && (
             <div className="absolute bottom-6 right-1 w-[46%]" onPointerDown={(e) => e.stopPropagation()} onClick={() => setIllus(null)}>

@@ -4,6 +4,7 @@ import { bareLegs } from '../body3d/legs'
 import { DEG, aim, poseEyes, turn, type Credit, type Eyes, type Rig, type Side } from '../body3d/rig'
 import { COUCH, buildCouch, buildRoom, createRenderer } from '../body3d/stage'
 import { ExaminerHand, type Contact, type Grip } from './examiner'
+import { antalgic } from './gait'
 import type { Anim } from './manoeuvres'
 import { SITES, SITE_IDS, onLeg, siteOf, type DigitRef, type JointRef } from './sites'
 
@@ -63,7 +64,28 @@ const FIST: HandShape['f'] = [
 ]
 /** Manoeuvres done with the examiner's hands. */
 const HANDS_ON = new Set<string>(['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch', 'patellar-tap', 'joint-line', 'bone', 'knee-passive', 'lachman', 'drawer', 'stress', 'hip-roll'])
-/** How long each manoeuvre takes to show (seconds); asking for a hand shape, 3.4. */
+/** What a manoeuvre is about, lit up in the X-ray view: by where it is done, and by what it is. */
+const LIGHTS_BY_SITE: Record<string, string[]> = {
+  medialjoint: ['medial-meniscus', 'mcl'],
+  lateraljoint: ['lateral-meniscus'],
+  patella: ['patella'],
+  fibula: ['fibula', 'nerve'],
+  tibialtub: ['tibia'],
+  dp: ['arteries'],
+  pt: ['arteries'],
+}
+const LIGHTS_BY_ANIM: Record<string, string[]> = {
+  lachman: ['acl'],
+  drawer: ['pcl'],
+  stress: ['mcl', 'lcl'],
+  'patellar-tap': ['effusion', 'patella'],
+  slr: ['patella'],
+  'foot-up': ['nerve'],
+}
+/** Manoeuvres are shown this much faster than they are timed below; a capillary refill and walking keep real time. */
+const SPEED = 1.8
+const REAL_TIME = new Set<string>(['crt', 'walk'])
+/** How long each manoeuvre takes (seconds, before `SPEED`); asking for a hand shape, 3.4. */
 const DURATION: Record<string, number> = {
   inspect: 2.2,
   look: 1.6,
@@ -77,7 +99,7 @@ const DURATION: Record<string, number> = {
   stretch: 3.2,
   'elbow-flex': 3.4,
   'elbow-straighten': 2.6,
-  walk: 9.6,
+  walk: 6.8,
   'patellar-tap': 4,
   'joint-line': 3.8,
   bone: 2.6,
@@ -203,6 +225,8 @@ export class ExamScene {
   posture: Posture
   private from: { place: Place; joints: Joints } | null = null
   private moveT = 1
+  /** How long the change of position takes (seconds). */
+  private moveDur = 1.1
   /** Joints the examiner has moved by hand: they hold until she changes position. */
   held: Joints = {}
   /** Joints she keeps so whatever position she is in (a painful knee held a little bent): `body.holds`. */
@@ -246,11 +270,14 @@ export class ExamScene {
    * A manoeuvre being shown: on a leg or not; the knee and hip angles it started from; the position to go back to
    * after walking.
    */
-  private act: { anim: Anim; site: string | null; side: Side; t: number; dur: number; lift0: number; leg: boolean; k0: number; h0: number; back?: Posture } | null = null
+  private act: { anim: Anim; site: string | null; side: Side; t: number; dur: number; speed: number; lift0: number; leg: boolean; k0: number; h0: number; back?: Posture } | null = null
   private examiner: ExaminerHand
   private examiner2: ExaminerHand
-  /** Bare legs built for a leg examination (see body3d/legs.ts). */
+  /** Bare legs built for a leg examination, and what is under their skin (see body3d/legs.ts). */
   private legs: THREE.Mesh[] = []
+  private anatomy: THREE.Mesh[] = []
+  /** The X-ray view: the skin of the bare legs see-through, the bones, ligaments and vessels under it showing. */
+  xray = false
   private paleNow = { fingersL: 0, handL: 0, fingersR: 0, handR: 0 }
   private bruises: THREE.Mesh[] = []
   /** Seconds a capillary refill takes to come back, by side. */
@@ -284,7 +311,7 @@ export class ExamScene {
       this.credit = credit
       this.scale = rig.height / 1.72
       // Bare legs first (with any swelling): the landmarks are then found on their skin.
-      if (signs.shorts) this.legs = bareLegs(rig, { effusion: signs.effusion })
+      if (signs.shorts) ({ legs: this.legs, anatomy: this.anatomy } = bareLegs(rig, { effusion: signs.effusion, acl: signs.acl }))
       this.pinSites(rig)
       this.bind = new Map(rig.bones.map((b) => [b, b.quaternion.clone()]))
       this.bindPos = new Map(rig.bones.map((b) => [b, b.position.clone()]))
@@ -423,8 +450,9 @@ export class ExamScene {
   /* ------------------------------------------------------------------ posture and asked-for movements */
 
   /** Change position (animated over a second). The joints you moved go back to rest. */
-  setPosture(p: Posture) {
+  setPosture(p: Posture, seconds = 1.1) {
     if (p === this.posture && this.moveT >= 1) return
+    this.moveDur = seconds
     this.from = { place: this.placeFor(this.posture, this.time), joints: this.jointsNow() }
     if ((p === 'walking' || p === 'heel-toe') && this.posture !== p) this.walkFrom = this.time
     this.posture = p
@@ -449,6 +477,7 @@ export class ExamScene {
     // One at a time: whatever was being shown is finished first.
     if (this.act) this.endAct()
     const d = anim.startsWith('pose:') ? 3.4 : (DURATION[anim] ?? 2)
+    const speed = REAL_TIME.has(anim) ? 1 : SPEED
     const leg = !!site && onLeg(site)
     this.act = {
       anim,
@@ -456,6 +485,7 @@ export class ExamScene {
       side,
       t: 0,
       dur: d,
+      speed,
       lift0: this.held[`shoulderflex-${side}`] ?? this.angle(`shoulderflex-${side}`),
       leg,
       k0: this.angle(`knee-${side}`),
@@ -474,10 +504,49 @@ export class ExamScene {
     // Walking: off the couch, up and down the room, and back to where she was.
     if (anim === 'walk') {
       this.act.back = this.posture
-      this.setPosture('walking')
+      this.setPosture('walking', 0.8)
     }
     this.shot = this.shotFor(anim, site, side)
-    return d
+    this.light([...(LIGHTS_BY_ANIM[anim] ?? []), ...(site ? (LIGHTS_BY_SITE[site.replace(/-(R|L)$/, '')] ?? []) : [])], side)
+    return d / speed
+  }
+
+  get canXray() {
+    return this.anatomy.length > 0
+  }
+
+  /**
+   * See through the skin of the bare legs (or not): the skin a dark glass, the anatomy drawn over it, the examiner's
+   * hands ghosted so what they press shows through.
+   */
+  setXray(on: boolean) {
+    this.xray = on
+    for (const m of this.legs) {
+      const mat = m.material as THREE.MeshStandardMaterial
+      if (!this.skinColour) this.skinColour = mat.color
+      mat.color = on ? new THREE.Color('#1b2c46') : this.skinColour
+      mat.transparent = on
+      mat.opacity = on ? 0.5 : 1
+      mat.depthWrite = !on
+      mat.needsUpdate = true
+      m.renderOrder = on ? 1 : 0
+    }
+    for (const m of this.anatomy) m.visible = on
+    this.examiner.ghost(on)
+  }
+  /** The legs' own skin colour (shared with the rig: it follows the tone read from the face). */
+  private skinColour: THREE.Color | null = null
+
+  /** Light up these structures of one leg in the X-ray view (none: all dark). */
+  private light(names: string[], side: Side) {
+    for (const m of this.anatomy) {
+      const [, name, s] = m.name.match(/^xray-(.+)-(R|L)$/) ?? []
+      const on = s === side && names.includes(name)
+      const mat = m.material as THREE.MeshStandardMaterial
+      if (on) mat.emissive.set('#ffae00')
+      else mat.emissive.copy(mat.color)
+      mat.emissiveIntensity = on ? 1 : 0.25
+    }
   }
 
   /** Finish the manoeuvre being shown: hands off, the limb back where it rests, back on the couch. */
@@ -492,7 +561,8 @@ export class ExamScene {
     if (a.anim.startsWith('elbow')) this.held[`elbow-${a.side}`] = this.restElbow[a.side]
     // The leg goes back to how she keeps it.
     if (a.leg) for (const key of ['knee', 'hipflex', 'hiprot', 'ankle']) delete this.held[`${key}-${a.side}`]
-    if (a.back) this.setPosture(a.back)
+    if (a.back) this.setPosture(a.back, 0.8)
+    this.light([], a.side)
     this.eyes.distress = 0
     this.eyes.squint = 0
     this.act = null
@@ -523,8 +593,8 @@ export class ExamScene {
         return { target: () => at(R.calf[side]), dir: fromSide(0.6, 0.2), dist: 0.85 }
       case 'lachman':
       case 'drawer':
-        // Lower, to see the shin move on the thigh.
-        return { target: () => at(R.calf[side]), dir: fromSide(0.25, 0.1), dist: 0.75 }
+        // Lower and closer, to see the shin move on the thigh.
+        return { target: () => at(R.calf[side]), dir: fromSide(0.25, 0.1), dist: 0.55 }
       case 'knee-bend':
       case 'knee-passive':
       case 'slr':
@@ -602,7 +672,7 @@ export class ExamScene {
     }
     let pale = { fingersL: 0, handL: 0, fingersR: 0, handR: 0 }
     if (R && a) {
-      a.t += dt
+      a.t += dt * a.speed
       const k = a.t / a.dur
       const into = Math.min(1, a.t / 0.45)
       const out = Math.min(1, Math.max(0, (a.dur - a.t) / 0.45))
@@ -682,8 +752,8 @@ export class ExamScene {
         }
         case 'walk':
           // Back to the couch in time to lie down before the end.
-          if (a.back && a.t >= a.dur - 1.4) {
-            this.setPosture(a.back)
+          if (a.back && a.t >= a.dur - 0.9) {
+            this.setPosture(a.back, 0.8)
             a.back = undefined
           }
           break
@@ -738,7 +808,7 @@ export class ExamScene {
           bend(lerp(a.k0, 25, ramp(0, 0.8)) + (a.k0 - 25) * ramp(4, 4.6))
           grip('suprapatellar', 'cup', 'palm', on(0.6, 4.2), 0, { left: true })
           grip('tibialtub', 'cup', 'palm', on(0.8, 4.2))
-          this.tibia[s] = (this.signs.acl === s ? 0.01 : 0.003) * pulses(1.4, 3.6, 2) * this.scale
+          this.tibia[s] = (this.signs.acl === s ? 0.013 : 0.003) * pulses(1.4, 3.6, 2) * this.scale
           break
         case 'drawer': {
           // Bent as far as he can; a look along the shin for a sag; then both hands round the top of the shin push it back.
@@ -1050,18 +1120,25 @@ export class ExamScene {
         return { quat: facing(v(0, 1, 0), v(0, 0, 1)), pos: v(1.0, COUCH.top + hipAbove * 0.85, COUCH.width / 2 - 0.08 * (H / 1.72)) }
       case 'walking':
       case 'heel-toe': {
-        // Up and down the room in front of the couch, turning at each end.
-        const lap = 7
+        // Up and down the room in front of the couch, turning at each end; limping, a few slow steps each way.
+        const sore = p === 'walking' ? this.limp() : null
+        const lap = sore ? 5.2 : 7
         const u = ((t - this.walkFrom) % lap) / lap
         const out = u < 0.5
         const k = out ? u * 2 : (1 - u) * 2
-        const x = lerp(0.35, 2.05, smooth(Math.min(1, Math.max(0, (k - 0.05) / 0.9))))
-        const bob = Math.abs(Math.sin(t * Math.PI * 1.8)) * 0.015 * (H / 1.72)
+        const x = sore ? lerp(0.65, 1.55, smooth(Math.min(1, Math.max(0, (k - 0.05) / 0.9)))) : lerp(0.35, 2.05, smooth(Math.min(1, Math.max(0, (k - 0.05) / 0.9))))
+        const bob = sore ? antalgic(t - this.walkFrom, sore).dip * 0.028 * (H / 1.72) : Math.abs(Math.sin(t * Math.PI * 1.8)) * 0.015 * (H / 1.72)
         return { quat: facing(v(0, 1, 0), v(out ? 1 : -1, 0, 0.0001)), pos: v(x, leg - bob, 1.15) }
       }
       default:
         return { quat: facing(v(0, 1, 0), v(0, 0, 1)), pos: v(1.15, leg, 1.0) }
     }
+  }
+
+  /** The sore side, if she is walking with an antalgic gait. */
+  private limp(): Side | null {
+    const g = this.signs.gait
+    return this.posture === 'walking' && g?.startsWith('antalgic') ? (g.slice(-1) as Side) : null
   }
 
   private jointsNow(): Joints {
@@ -1078,7 +1155,18 @@ export class ExamScene {
     const j = this.jointsNow()
     const t = this.time
     const S = this.signs
-    if (this.posture === 'walking' || this.posture === 'heel-toe') {
+    const sore = this.limp()
+    if (sore) {
+      // Antalgic: off the sore leg as fast as she can, the knee held bent and stiff (see gait.ts).
+      const g = antalgic(t - this.walkFrom, sore)
+      for (const s of SIDES) {
+        j[`hipflex-${s}`] = g.legs[s].hip
+        j[`knee-${s}`] = g.legs[s].knee
+        j[`ankle-${s}`] = g.legs[s].ankle
+        j[`shoulderflex-${s}`] = g.arms[s]
+      }
+      j.trunk = 4
+    } else if (this.posture === 'walking' || this.posture === 'heel-toe') {
       const w = t * Math.PI * 1.8
       for (const s of SIDES) {
         const phase = s === 'R' ? 0 : Math.PI
@@ -1192,6 +1280,9 @@ export class ExamScene {
     const S = this.signs
     if (S.unconscious && this.stimT < 0) e.closed = 1
     if (S.unconscious && this.stimT >= 0) e.closed = this.stimT < 2.5 ? 0.35 : 1
+    // A wince each time the weight goes onto the sore leg.
+    const sore = this.limp()
+    if (sore) e.distress = Math.max(e.distress, 0.75 * antalgic(this.time - this.walkFrom, sore).pain)
     const m = this.motion
     this.finger.visible = false
     if (!m) return e
@@ -1630,7 +1721,12 @@ export class ExamScene {
         dist = 1.0
         break
       default:
-        if (['standing', 'walking', 'heel-toe', 'bent', 'one-leg-R', 'one-leg-L'].includes(this.posture)) {
+        if (this.posture === 'walking') {
+          // Walking: close enough to see what the legs are doing, from the side.
+          target = at(R.hips).add(v(0, -0.05 * H, 0))
+          dir = v(0.1, 0.18, 1).normalize()
+          dist = 0.95 * H + 0.35
+        } else if (['standing', 'heel-toe', 'bent', 'one-leg-R', 'one-leg-L'].includes(this.posture)) {
           // Head to toe: the gait, the stance, the pelvis.
           target = at(R.hips).add(v(0, 0.06 * H, 0))
           dir = v(0.12, 0.22, 1).normalize()
@@ -1674,7 +1770,7 @@ export class ExamScene {
     const dt = Math.min(0.1, (now - this.last) / 1000)
     this.last = now
     this.time += dt
-    if (this.moveT < 1) this.moveT = Math.min(1, this.moveT + dt / 1.1)
+    if (this.moveT < 1) this.moveT = Math.min(1, this.moveT + dt / this.moveDur)
     if (this.motion) {
       this.motion.t += dt
       if (this.motion.t >= this.motion.dur) this.motion = null

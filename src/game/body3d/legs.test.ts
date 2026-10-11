@@ -70,7 +70,7 @@ const skinned = (m: THREE.SkinnedMesh, i: number) => m.getVertexPosition(i, new 
 
 test('bare legs: two skinned legs, in place in the bind pose, pickable', () => {
   const { rig } = standIn()
-  const legs = bareLegs(rig)
+  const { legs } = bareLegs(rig)
   assert.equal(legs.length, 2)
   assert.ok(rig.meshes.includes(legs[0]) && rig.meshes.includes(legs[1]))
   rig.root.updateMatrixWorld(true)
@@ -84,7 +84,7 @@ test('bare legs: two skinned legs, in place in the bind pose, pickable', () => {
 
 test('bare legs: the skin faces out of the leg; the sole is flat underneath', () => {
   const { rig, R, at } = standIn()
-  const [leg] = bareLegs(rig)
+  const [leg] = bareLegs(rig).legs
   const pos = leg.geometry.attributes.position as THREE.BufferAttribute
   const nor = leg.geometry.attributes.normal as THREE.BufferAttribute
   const H = at(R.thigh)
@@ -144,7 +144,7 @@ test('bare legs: below the hem the trousers and shoes are tucked inside; above i
 
 test('bare legs: they bend with the knee', () => {
   const { rig, R } = standIn()
-  const [leg] = bareLegs(rig)
+  const [leg] = bareLegs(rig).legs
   const pos = leg.geometry.attributes.position as THREE.BufferAttribute
   // The lowest vertex of the leg (in the foot).
   let low = 0
@@ -158,4 +158,62 @@ test('bare legs: they bend with the knee', () => {
   // A quarter turn about the knee: the foot comes up level with the knee, as far from it as before.
   assert.ok(Math.abs(after.y - K.y) < 0.06, `the foot is level with the knee (${after.y.toFixed(3)} vs ${K.y.toFixed(3)})`)
   assert.ok(Math.abs(after.distanceTo(K) - before.distanceTo(K)) < 0.01)
+})
+
+test('x-ray anatomy: bones, menisci, ligaments, vessels and nerve under each leg, hidden until asked for', () => {
+  const { rig } = standIn()
+  const { anatomy } = bareLegs(rig, { effusion: 'R', acl: 'R' })
+  const names = (side: 'R' | 'L') => anatomy.filter((m) => m.name.endsWith(`-${side}`)).map((m) => m.name.replace(/^xray-|-(R|L)$/g, ''))
+  const core = ['femur', 'patella', 'tibia', 'fibula', 'foot-bones', 'medial-meniscus', 'lateral-meniscus', 'pcl', 'mcl', 'lcl', 'arteries', 'nerve', 'acl']
+  assert.deepEqual(names('L').sort(), [...core].sort())
+  assert.deepEqual(names('R').sort(), [...core, 'effusion'].sort(), 'blood in the swollen knee only')
+  assert.ok(anatomy.every((m) => !m.visible), 'hidden until the X-ray view is on')
+  const colour = (n: string) => ((anatomy.find((m) => m.name === n)!.material as THREE.MeshStandardMaterial).color.getHexString())
+  assert.notEqual(colour('xray-acl-R'), colour('xray-acl-L'), 'the torn ACL looks torn')
+})
+
+test('x-ray anatomy: the bones and the knee lie inside the leg', () => {
+  const { rig, R, at } = standIn()
+  const { legs, anatomy } = bareLegs(rig)
+  const H = at(R.thigh)
+  const A = at(R.foot)
+  const skin = legs[0].geometry.attributes.position as THREE.BufferAttribute
+  const radial = (p: THREE.Vector3) => new THREE.Vector2(p.x - H.x, p.z - H.z)
+  let checked = 0
+  for (const m of anatomy.filter((x) => x.name.endsWith('-R') && !/arteries|nerve|foot/.test(x.name))) {
+    const pos = m.geometry.attributes.position as THREE.BufferAttribute
+    for (let i = 0; i < pos.count; i += 5) {
+      const p = new THREE.Vector3().fromBufferAttribute(pos, i)
+      if (p.y < A.y + 0.02) continue
+      const r = radial(p)
+      // The skin round about, in the same direction: further out.
+      let skinR = 0
+      for (let j = 0; j < skin.count; j++) {
+        const q = new THREE.Vector3().fromBufferAttribute(skin, j)
+        if (Math.abs(q.y - p.y) > 0.006) continue
+        const rq = radial(q)
+        if (rq.length() > 0 && r.length() > 0 && rq.dot(r) / (rq.length() * r.length()) > 0.95) skinR = Math.max(skinR, rq.length())
+      }
+      if (skinR === 0) continue
+      checked++
+      assert.ok(r.length() < skinR + 0.001, `${m.name} pokes through the skin at height ${p.y.toFixed(3)}`)
+    }
+  }
+  assert.ok(checked > 200, `${checked} points checked`)
+})
+
+test('x-ray anatomy: drawing the shin forward moves the tibia on the femur', () => {
+  const { rig, R } = standIn()
+  const { anatomy } = bareLegs(rig)
+  const tibia = anatomy.find((m) => m.name === 'xray-tibia-R')!
+  const femur = anatomy.find((m) => m.name === 'xray-femur-R')!
+  rig.root.updateMatrixWorld(true)
+  const t0 = skinned(tibia, 0)
+  const f0 = skinned(femur, 0)
+  // A centimetre forward at the knee (the Lachman), in the bone's parent frame (half scale: 2 units).
+  R.calf.position.z += 0.02
+  rig.root.updateMatrixWorld(true)
+  tibia.skeleton.update()
+  assert.ok(Math.abs(skinned(tibia, 0).z - t0.z - 0.01) < 1e-4, 'the tibia comes forward')
+  assert.ok(skinned(femur, 0).distanceTo(f0) < 1e-6, 'the femur stays')
 })

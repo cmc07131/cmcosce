@@ -51,6 +51,8 @@ export type SiteDef = {
   draped?: boolean
   /** Only where the examiner's hands go (a grip on the thigh): never a place you tap. */
   grip?: boolean
+  /** What lies under it, or what it tells you (shown as you examine it). */
+  under?: string
 }
 
 const F: [number, number, number] = [0, 0, 1]
@@ -111,17 +113,17 @@ export const SITES: Record<string, SiteDef> = {
   elbow: { label: 'elbow', j: 'forearm', dir: B, r: 0.035, sided: true },
   antecubital: { label: 'front of the elbow', j: 'forearm', to: 'hand', t: 0.04, dir: F, r: 0.03, sided: true },
   forearm: { label: 'forearm', j: 'forearm', to: 'hand', t: 0.5, dir: D, r: 0.045, sided: true },
-  wrist: { label: 'radial pulse', j: 'hand', to: 'forearm', t: 0.12, dir: [0, -0.7, 0.7], r: 0.02, sided: true },
+  wrist: { label: 'radial pulse', j: 'hand', to: 'forearm', t: 0.12, dir: [0, -0.7, 0.7], r: 0.02, sided: true, under: 'at the wrist, on the thumb side' },
   hand: { label: 'back of the hand', j: 'hand', to: 'finger', t: 0.55, dir: U, r: 0.035, sided: true },
   palm: { label: 'palm', j: 'hand', to: 'finger', t: 0.5, dir: D, r: 0.035, sided: true },
   // Fingertips ride on their own end bones, so they follow the fingers wherever they bend.
   nails: { label: 'nails', j: 'middle3', to: 'middleTip', t: 0.45, dir: U, r: 0.03, sided: true },
-  pulp: { label: 'index fingertip', j: 'index3', to: 'indexTip', t: 0.55, dir: D, r: 0.02, sided: true },
+  pulp: { label: 'index fingertip', j: 'index3', to: 'indexTip', t: 0.55, dir: D, r: 0.02, sided: true, under: 'the median nerve' },
   ring: { label: 'ring finger', j: 'ring2', to: 'ring3', t: 0.4, dir: D, r: 0.02, sided: true },
   ringpulp: { label: 'ring finger pulp', j: 'ring3', to: 'ringTip', t: 0.55, dir: D, r: 0.016, sided: true },
-  littlepulp: { label: 'little finger pulp', j: 'little3', to: 'littleTip', t: 0.55, dir: D, r: 0.016, sided: true },
+  littlepulp: { label: 'little finger pulp', j: 'little3', to: 'littleTip', t: 0.55, dir: D, r: 0.016, sided: true, under: 'the ulnar nerve' },
   thumb: { label: 'thumb', j: 'thumb', to: 'hand', t: -0.6, dir: U, r: 0.02, sided: true },
-  web: { label: 'first web space', j: 'index1', to: 'thumb2', t: 0.45, dir: U, r: 0.016, sided: true },
+  web: { label: 'first web space', j: 'index1', to: 'thumb2', t: 0.45, dir: U, r: 0.016, sided: true, under: 'the radial nerve (the back of it)' },
 
   // Hip and leg (bind: standing).
   asis: { label: 'ASIS', j: 'hips', off: [-0.105, 0.06, 0], dir: F, r: 0.022, sided: true },
@@ -130,21 +132,21 @@ export const SITES: Record<string, SiteDef> = {
   innerthigh: { label: 'inner thigh', j: 'thigh', to: 'calf', t: 0.32, dir: MED, r: 0.04, sided: true },
   knee: { label: 'knee', j: 'calf', off: [0, 0.03, 0], dir: F, r: 0.035, sided: true },
   // The kneecap rides in the groove of the femur: it goes with the thigh.
-  patella: { label: 'patella', j: 'thigh', to: 'calf', t: 0.93, dir: F, r: 0.022, sided: true },
-  medialjoint: { label: 'medial joint line', j: 'calf', dir: MED, r: 0.02, sided: true },
-  lateraljoint: { label: 'lateral joint line', j: 'calf', dir: RT, r: 0.02, sided: true },
-  tibialtub: { label: 'tibial tuberosity', j: 'calf', to: 'foot', t: 0.12, dir: F, r: 0.018, sided: true },
-  fibula: { label: 'fibular head', j: 'calf', to: 'foot', t: 0.09, dir: [-0.7, 0, -0.7], r: 0.02, sided: true },
+  patella: { label: 'patella', j: 'thigh', to: 'calf', t: 0.93, dir: F, r: 0.022, sided: true, under: 'tender here alone: an X-ray (Ottawa)' },
+  medialjoint: { label: 'medial joint line', j: 'calf', dir: MED, r: 0.02, sided: true, under: 'the medial meniscus beneath; the MCL crosses it' },
+  lateraljoint: { label: 'lateral joint line', j: 'calf', dir: RT, r: 0.02, sided: true, under: 'the lateral meniscus beneath' },
+  tibialtub: { label: 'tibial tuberosity', j: 'calf', to: 'foot', t: 0.12, dir: F, r: 0.018, sided: true, under: 'where the patellar tendon inserts' },
+  fibula: { label: 'fibular head', j: 'calf', to: 'foot', t: 0.09, dir: [-0.7, 0, -0.7], r: 0.02, sided: true, under: 'the LCL inserts here; the common peroneal nerve winds round its neck. Tender: an X-ray (Ottawa)' },
   popliteal: { label: 'popliteal fossa', j: 'calf', off: [0, 0.02, 0], dir: B, r: 0.03, sided: true },
   shin: { label: 'shin', j: 'calf', to: 'foot', t: 0.5, dir: F, r: 0.045, sided: true },
   calf: { label: 'calf', j: 'calf', to: 'foot', t: 0.35, dir: B, r: 0.05, sided: true },
   lateralmalleolus: { label: 'lateral malleolus', j: 'foot', off: [-0.03, 0.0, -0.015], dir: [-0.8, 0, -0.6], r: 0.02, sided: true },
   medialmalleolus: { label: 'medial malleolus', j: 'foot', off: [0.025, 0.01, -0.01], dir: [0.8, 0, -0.6], r: 0.02, sided: true },
-  pt: { label: 'posterior tibial pulse', j: 'foot', off: [0.02, -0.01, -0.035], dir: [0.6, 0, -0.8], r: 0.016, sided: true },
-  dp: { label: 'dorsalis pedis pulse', j: 'foot', to: 'toe', t: 0.45, dir: U, r: 0.017, sided: true },
+  pt: { label: 'posterior tibial pulse', j: 'foot', off: [0.02, -0.01, -0.035], dir: [0.6, 0, -0.8], r: 0.016, sided: true, under: 'behind the medial malleolus' },
+  dp: { label: 'dorsalis pedis pulse', j: 'foot', to: 'toe', t: 0.45, dir: U, r: 0.017, sided: true, under: 'on top of the foot, beside the extensor hallucis tendon' },
   navicular: { label: 'navicular', j: 'foot', to: 'toe', t: 0.35, off: [0.025, 0, 0], dir: MED, r: 0.017, sided: true },
   fifthmt: { label: 'base of the 5th metatarsal', j: 'foot', to: 'toe', t: 0.62, off: [-0.035, -0.02, 0], dir: RT, r: 0.017, sided: true },
-  foot: { label: 'foot', j: 'foot', to: 'toe', t: 0.55, dir: U, r: 0.045, sided: true },
+  foot: { label: 'foot', j: 'foot', to: 'toe', t: 0.55, dir: U, r: 0.045, sided: true, under: 'the superficial peroneal nerve supplies the top of the foot' },
   toes: { label: 'toes', j: 'toe', dir: U, r: 0.03, sided: true },
   sole: { label: 'sole', j: 'foot', to: 'toe', t: 0.45, dir: D, r: 0.035, sided: true },
   heel: { label: 'heel', j: 'foot', off: [0, -0.05, -0.05], dir: B, r: 0.03, sided: true },

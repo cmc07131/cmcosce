@@ -234,4 +234,14 @@ export class ExaminerHand {
   hide() {
     this.group.visible = false
   }
+
+  /** See-through (the X-ray view): what the hand presses on shows through it. Both hands share the materials. */
+  ghost(on: boolean) {
+    for (const m of [GLOVE, COAT]) {
+      m.transparent = on
+      m.opacity = on ? 0.3 : 1
+      m.depthWrite = !on
+      m.needsUpdate = true
+    }
+  }
 }
