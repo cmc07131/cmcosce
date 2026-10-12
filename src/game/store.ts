@@ -85,6 +85,19 @@ export function stepState(action: Action, spent: string[], scene: string[]): { d
   return { done: false, waiting: left.find((o) => o.early)?.early ?? 'Not yet.' }
 }
 
+/**
+ * Steps a chooser shows as one entry (the same act at different moments: "Reassess him" after the first bolus, after
+ * 40 mL/kg): what is open now (each option due, in step order), whether all are done, or why none is due yet.
+ */
+export function familyState(actions: Action[], spent: Record<string, string[]>, scene: string[]) {
+  const states = actions.map((a) => stepState(a, spent[a.id] ?? [], scene))
+  const open = actions.flatMap((a) =>
+    (a.options ?? []).filter((o) => !o.isTrap && !(spent[a.id] ?? []).includes(o.id) && indicated(o, scene)).map((option) => ({ action: a, option })),
+  )
+  const done = states.every((st) => st.done)
+  return { open, done, waiting: !done && !open.length ? (states.find((st) => st.waiting)?.waiting ?? null) : null }
+}
+
 /** Asked for too early: not given, not spent, a fault, and the nurse says why. */
 function tooEarly(pack: Pack, action: Action, rows: ActionOption[]) {
   const faults: Fault[] = rows.map((o) => ({ actionId: action.id, text: `Too early: "${o.label}". ${o.early ?? 'It was not indicated yet.'}` }))

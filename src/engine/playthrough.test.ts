@@ -34,8 +34,8 @@ function bestPerTurn(action: Action) {
   return [...byGroup.values()].map((rows) => rows.find((o) => !o.isTrap && o.marksChecklistIds?.length) ?? rows.find((o) => !o.isTrap) ?? rows[0])
 }
 
-/** A perfect candidate: every step in script order, every good option, no traps. */
-function play(pack: Pack, problems: string[]) {
+/** A perfect candidate: every step in script order, every good option, no traps (`before`: a look before each step). */
+function play(pack: Pack, problems: string[], before?: (id: string) => void) {
   const s = () => usePlay.getState()
   s().rerun(pack)
   s().enterRoom()
@@ -47,6 +47,7 @@ function play(pack: Pack, problems: string[]) {
       break
     }
     const good = (action.options ?? []).filter((o) => !o.isTrap)
+    before?.(id)
     if (action.kind === 'kit' || (action.kind === 'menu' && menuIsMulti(action))) {
       // One at a time, as a candidate would: each is delivered (and the case moves on) before the next.
       for (const o of good) {
@@ -102,22 +103,44 @@ test('every station can be finished with full marks, no faults, and every rule m
   assert.deepEqual(problems, [])
 })
 
-test('no two steps at the same person or place share a name (a cart or trolley is one shelf)', () => {
+test('steps at one place are named apart, unless they are one examination at different moments (shown as one)', () => {
   const clashes: string[] = []
   for (const pack of stationPacks()) {
-    const seen = new Map<string, string>()
+    const seen = new Map<string, Action>()
     for (const a of pack.actions.filter((x) => x.kind !== 'kit'))
       for (const t of a.targetIds) {
         const key = `${t}|${a.prompt || a.hint}`
-        if (seen.has(key)) clashes.push(`${pack.packId}: "${a.prompt || a.hint}" twice at ${t} (${seen.get(key)}, ${a.id})`)
-        seen.set(key, a.id)
+        const other = seen.get(key)
+        if (other && !(other.kind === 'exam' && a.kind === 'exam')) clashes.push(`${pack.packId}: "${a.prompt || a.hint}" twice at ${t} (${other.id}, ${a.id})`)
+        seen.set(key, a)
       }
   }
   assert.deepEqual(clashes, [])
 })
 
+test('one entry for the same examination at each moment: a tap always does the step the script is at', async () => {
+  const { familyState } = await import('../game/store')
+  const problems: string[] = []
+  for (const pack of stationPacks()) {
+    const families = new Map<string, Action[]>()
+    for (const a of pack.actions.filter((x) => x.kind === 'exam'))
+      for (const t of a.targetIds) families.set(`${t}|${a.prompt || a.hint}`, [...(families.get(`${t}|${a.prompt || a.hint}`) ?? []), a])
+    const merged = [...families.values()].filter((f) => f.length > 1)
+    if (!merged.length) continue
+    play(pack, problems, (id) => {
+      for (const family of merged) {
+        if (!family.some((a) => a.id === id)) continue
+        const st = usePlay.getState()
+        const next = familyState(family, st.spent, st.scene ?? []).open[0]
+        if (next?.action.id !== id) problems.push(`${pack.packId}: at ${id}, the one "${family[0].prompt}" would do ${next?.action.id ?? 'nothing'}`)
+      }
+    })
+  }
+  assert.deepEqual(problems, [])
+})
+
 test('a chooser shows each step done, open, or not yet due (and why): septic shock after the first bolus', async () => {
-  const { stepState } = await import('../game/store')
+  const { familyState } = await import('../game/store')
   const pack = stationPacks().find((p) => p.packId === 'pals-sepsis')!
   const s = () => usePlay.getState()
   s().rerun(pack)
@@ -128,12 +151,20 @@ test('a chooser shows each step done, open, or not yet due (and why): septic sho
     for (const o of action.options ?? []) (action.kind === 'kit' ? s().confirmOptions(pack, id, [o.id]) : s().pickOption(pack, id, o.id))
     drain(pack)
   }
-  const at = (id: string) => stepState(pack.actions.find((a) => a.id === id)!, s().spent[id] ?? [], s().scene ?? [])
-  assert.deepEqual(at('assess'), { done: true, waiting: null })
-  assert.deepEqual(at('reassess'), { done: false, waiting: null })
-  assert.deepEqual(at('reassess2'), { done: false, waiting: 'After the further boluses.' })
-  // Reassessed: the second bolus is due, and the later reassessment once it is in.
-  for (const o of pack.actions.find((a) => a.id === 'reassess')!.options ?? []) s().pickOption(pack, 'reassess', o.id)
-  assert.deepEqual(at('bolus2'), { done: false, waiting: null })
+  const step = (id: string) => pack.actions.find((a) => a.id === id)!
+  const reassess = () => familyState([step('reassess'), step('reassess2')], s().spent, s().scene ?? [])
+  assert.equal(familyState([step('assess')], s().spent, s().scene ?? []).done, true)
+  // One "Reassess him": after the first bolus, it finds him still shocked.
+  assert.equal(reassess().open[0]?.action.id, 'reassess')
+  s().pickOption(pack, 'reassess', reassess().open[0].option.id)
+  assert.ok(s().scene?.includes('still-shocked'))
+  // Nothing more to reassess until the further boluses are in; then the same entry finds him fluid-refractory.
+  assert.deepEqual([reassess().open.length, reassess().waiting], [0, 'After the further boluses.'])
+  assert.equal(familyState([step('bolus2')], s().spent, s().scene ?? []).open.length, 1)
+  s().confirmOptions(pack, 'bolus2', [step('bolus2').options![0].id])
+  drain(pack)
+  assert.equal(reassess().open[0]?.action.id, 'reassess2')
+  s().pickOption(pack, 'reassess2', reassess().open[0].option.id)
+  assert.ok(s().scene?.includes('refractory'))
   assert.equal(s().faults.length, 0)
 })

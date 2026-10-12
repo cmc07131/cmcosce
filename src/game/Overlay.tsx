@@ -1,12 +1,23 @@
 import { useMemo, useRef, useState } from 'react'
 import { itemLabel, menuIsMulti, missingItems } from '~/engine/judge'
 import type { Action, Pack } from '~/engine/schema'
-import { indicated, stepState, usePlay, type Overlay as OverlayState } from './store'
+import { familyState, indicated, usePlay, type Overlay as OverlayState } from './store'
+import { CutIn, cutInKinds, cutInMs, type CutInKind } from './CutIn'
 import { DrugCart } from './DrugCart'
 import { Film, FilmButton } from './imaging/Film'
-import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel, seededShuffle } from './panels'
+import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel, replyText, seededShuffle } from './panels'
 import { NavItem, Win, useCursor } from './ui'
 import { examIn3d } from './exam3d/model'
+
+/** Steps at one place, those with the same name together (the same act at different moments), in order. */
+function families(actions: Action[]): Action[][] {
+  const byName = new Map<string, Action[]>()
+  for (const a of actions) {
+    const name = a.prompt || a.hint || a.id
+    byName.set(name, [...(byName.get(name) ?? []), a])
+  }
+  return [...byName.values()]
+}
 
 export function targetName(pack: Pack, id: string) {
   const npc = pack.cast.find((row) => row.id === id)
@@ -79,6 +90,8 @@ function Body({
   entered,
 }: Omit<Props, 'onClose'> & { onClose?: () => void }) {
   const scene = usePlay((s) => s.scene) ?? []
+  /** A check done straight from the chooser: its close-up playing. */
+  const [playing, setPlaying] = useState<{ kind: CutInKind; finding: string; caption: string } | null>(null)
   if (overlay.kind === 'stem') {
     return (
       <Win title="DOOR NOTE" onClose={onClose} className="sheet">
@@ -108,25 +121,49 @@ function Body({
     return (
       <Win title={targetName(pack, overlay.targetId)} onClose={onClose} className="sheet">
         <div className="sheet-scroll">
-          {actions.map((action) => {
-            const missing = missingItems(action.requiresItems, inventory)
-            const state = stepState(action, spent[action.id] ?? [], scene)
+          {families(actions).map((family) => {
+            const first = family[0]
+            const missing = missingItems(first.requiresItems, inventory)
+            const state = familyState(family, spent, scene)
+            // Reassessing (the same check at each moment), or an examination of one check: done in one tap, the
+            // close-up, then what you find now.
+            const direct = family.every((a) => a.kind === 'exam' && !examIn3d(a)) && (family.length > 1 || (first.options ?? []).length === 1)
+            const open = () => {
+              const next = state.open[0]
+              if (direct && next) {
+                const kind = next.option.anim as CutInKind | undefined
+                const finish = () => {
+                  setPlaying(null)
+                  onOption(next.action.id, next.option.id)
+                  onClose?.()
+                }
+                if (kind && (cutInKinds as readonly string[]).includes(kind)) {
+                  setPlaying({ kind, finding: replyText(next.option), caption: next.option.label })
+                  window.setTimeout(finish, cutInMs(kind))
+                } else finish()
+                return
+              }
+              // Otherwise into the step (the first not yet done; once all are, the last, to read it again).
+              const into = state.done ? family[family.length - 1] : (family.find((a) => !familyState([a], spent, scene).done) ?? first)
+              onAction(into.id, overlay.targetId)
+            }
             return (
               <NavItem
-                key={action.id}
-                testId={`action-${action.id}`}
+                key={first.id}
+                testId={`action-${first.id}`}
                 tone={state.done ? 'done' : undefined}
-                disabled={missing.length > 0 || state.waiting !== null}
-                onClick={() => onAction(action.id, overlay.targetId)}
+                disabled={missing.length > 0 || state.waiting !== null || playing !== null}
+                onClick={open}
               >
                 {state.done ? '✓ ' : ''}
-                {action.prompt || action.hint}
+                {first.prompt || first.hint}
                 {missing.length > 0 && <span className="nav-need">Need {missing.map((id) => itemLabel(pack, id)).join(', ')}</span>}
                 {missing.length === 0 && state.waiting && <span className="nav-need">{state.waiting}</span>}
               </NavItem>
             )
           })}
         </div>
+        {playing && <CutIn kind={playing.kind} finding={playing.finding} caption={playing.caption} />}
       </Win>
     )
   }

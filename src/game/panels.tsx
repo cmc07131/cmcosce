@@ -27,7 +27,7 @@ export function seededShuffle<T>(list: T[], seed: number, salt: string): T[] {
 }
 
 /** The reply without its "Speaker:" prefix, for showing under the question. */
-function replyText(option: ActionOption) {
+export function replyText(option: ActionOption) {
   return (option.detail ?? '').replace(/^[^:]{1,24}:\s*/, '')
 }
 
@@ -48,7 +48,7 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
   const groups = useMemo(() => [...new Set((action.options ?? []).map((o) => o.group ?? ''))], [action])
   const [tab, setTab] = useState(groups[0] ?? '')
   const [film, setFilm] = useState<string | null>(null)
-  const [playing, setPlaying] = useState<{ id: string; kind: CutInKind; finding?: string } | null>(null)
+  const [playing, setPlaying] = useState<{ id: string; kind: CutInKind; finding?: string; caption?: string } | null>(null)
   const used = new Set(spent)
   const rows = (action.options ?? []).filter((o) => (o.group ?? '') === tab)
   // Hands on first: the close-up plays, then the finding appears.
@@ -58,7 +58,7 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
     // Not indicated yet: refused at once, without playing the close-up.
     if (!o.anim || !indicated(o, scene ?? []) || !(cutInKinds as readonly string[]).includes(o.anim)) return onOption(o.id)
     // The close-up shows this finding: which side, how it reacts, the meter's number.
-    setPlaying({ id: o.id, kind: o.anim as CutInKind, finding: replyText(o) })
+    setPlaying({ id: o.id, kind: o.anim as CutInKind, finding: replyText(o), caption: o.label })
     window.setTimeout(() => {
       setPlaying(null)
       onOption(o.id)
@@ -104,7 +104,7 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
         })}
       </div>
       {film && <Film src={film} onClose={() => setFilm(null)} />}
-      {playing && <CutIn kind={playing.kind} finding={playing.finding} />}
+      {playing && <CutIn kind={playing.kind} finding={playing.finding} caption={playing.caption} />}
     </Win>
   )
 }

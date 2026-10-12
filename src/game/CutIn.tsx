@@ -22,7 +22,7 @@ const CAPTIONS: Record<CutInKind, string> = {
   packet: 'Reading the packet…',
   airway: 'Look, listen and feel…',
   auscultate: 'Listening: right and left, upper and lower…',
-  pulse: 'Radial pulse… then capillary refill…',
+  pulse: 'Pulse… then capillary refill…',
   pupils: 'Torch into each eye: direct and consensual…',
   glucose: 'Finger-prick glucose…',
   abdomen: 'Feeling each quadrant, watching the face…',
@@ -334,7 +334,8 @@ function Airway({ f }: { f: CutInFinding }) {
 }
 
 /** `finding`: the finding this examination shows (read for side, reaction, rate, tenderness, the meter value). */
-export function CutIn({ kind, finding }: { kind: CutInKind; finding?: string }) {
+/** `caption`: what is being checked, in the station's words (an infant's brachial pulse, a carotid at a rhythm check). */
+export function CutIn({ kind, finding, caption }: { kind: CutInKind; finding?: string; caption?: string }) {
   if (kind === 'intubate') return <IntubateSequence />
   const f = readFinding(finding)
   return (
@@ -377,7 +378,7 @@ export function CutIn({ kind, finding }: { kind: CutInKind; finding?: string }) 
         {kind === 'glucose' && <Glucose f={f} />}
         {kind === 'abdomen' && <Abdomen f={f} />}
       </svg>
-      <p className="cut-in-cap">{CAPTIONS[kind]}</p>
+      <p className="cut-in-cap">{caption ? `${caption.replace(/[.…]+$/, '')}…` : CAPTIONS[kind]}</p>
     </div>
   )
 }
