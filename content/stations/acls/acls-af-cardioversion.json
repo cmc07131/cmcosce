@@ -42,6 +42,7 @@
       "goal": "Reassess, look for the cause, and plan anticoagulation. Then the examiner.",
       "steps": [
         "reassess",
+        "ecg2",
         "after"
       ]
     }
@@ -66,7 +67,7 @@
       "text": "AHA 2025 and RCUK 2025 wording is quoted from memory; the scored points are unchanged from the 2020/2021 algorithms."
     }
   ],
-  "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.\n\nPerfect script checked against an AHA unstable tachycardia checklist, the RCUK tachycardia algorithm, an HKCEM-style scheme and a keyword scheme. Added: the adverse features named aloud (both lists), the 48-hour rule overridden, the plan if cardioversion fails, a cause looked for, and admission.\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.",
+  "notes": "Checked against Resuscitation Council UK 2025 (tachycardia algorithm; 2021 algorithm unchanged in principle), ESC 2024 AF guidelines and AHA 2025 ACLS.\n\nAdverse features (RCUK): shock, syncope, myocardial ischaemia, severe heart failure. Any of these in a tachyarrhythmia → synchronised DC cardioversion, up to 3 attempts, under sedation or anaesthesia by someone skilled; then amiodarone 300 mg IV over 10–20 minutes and repeat the shock; then 900 mg over 24 hours.\n\nEnergy for AF: your notes use AHA 2025 (200 J biphasic for AF and flutter, 100 J for narrow regular and monomorphic VT; escalate). ERC/RCUK suggest a high initial energy for AF (at or near maximum, commonly 150–200 J), and 70–120 J for regular narrow complex tachycardia and flutter. The station accepts a high initial energy for AF and scores sync mode, safety and re-sync.\n\nHaemodynamic instability overrides the usual 48-hour anticoagulation rule: give heparin at the time of cardioversion if it does not delay it. Never shock unsynchronised for AF: a shock on the T wave can cause VF. Adenosine has no role in AF. Rate-control calcium channel blockers or beta-blockers are dangerous in hypotension.\n\nPerfect script checked against an AHA unstable tachycardia checklist, the RCUK tachycardia algorithm, an HKCEM-style scheme and a keyword scheme. Added: the adverse features named aloud (both lists), the 48-hour rule overridden, the plan if cardioversion fails, a cause looked for, and admission.\n\nBedside checks (pulse, ABCDE, reassessment) are done at the patient, with close-ups, not said to the nurse.\n\nReassessing is one act: one \"Reassess her\" at the patient finds what is true at that moment (a different act, a glucose or a 12-lead, is its own step).",
   "cast": [
     {
       "id": "patient",
@@ -282,7 +283,7 @@
       "kind": "exam",
       "to": "patient",
       "label": "Reassess her",
-      "hint": "Rhythm and pulse, then ABCDE again and a 12-lead.",
+      "hint": "After the shock: the rhythm and her pulse, then ABCDE again.",
       "groups": {
         "After the shock": [
           {
@@ -300,9 +301,20 @@
             "early": "After the shock.",
             "r": "Rousing from sedation, airway clear; RR 18, crackles settling, SpO2 97%; warm; chest pain eased.",
             "mark": "Repeats ABCDE"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "id": "ecg2",
+      "kind": "exam",
+      "to": "patient",
+      "label": "Repeat the 12-lead ECG",
+      "hint": "After the shock.",
+      "groups": {
+        "12-lead": [
           {
-            "t": "12-lead ECG",
+            "t": "Repeat the 12-lead ECG",
             "when": "cardioverted",
             "early": "After the shock.",
             "img": "ecg:sinus",

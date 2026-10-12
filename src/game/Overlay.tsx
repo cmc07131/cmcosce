@@ -125,20 +125,22 @@ function Body({
             const first = family[0]
             const missing = missingItems(first.requiresItems, inventory)
             const state = familyState(family, spent, scene)
-            // Reassessing (the same check at each moment), or an examination of one check: done in one tap, the
-            // close-up, then what you find now.
-            const direct = family.every((a) => a.kind === 'exam' && !examIn3d(a)) && (family.length > 1 || (first.options ?? []).length === 1)
+            // Reassessing (re-checks, each due at a moment), or an examination of one check: done in one tap, the
+            // close-up, then everything found now.
+            const recheck = family.every((a) => (a.options ?? []).length > 0 && (a.options ?? []).every((o) => (o.when ?? []).length > 0))
+            const direct = family.every((a) => a.kind === 'exam' && !examIn3d(a)) && (recheck || (family.length === 1 && (first.options ?? []).length === 1))
             const open = () => {
               const next = state.open[0]
               if (direct && next) {
                 const kind = next.option.anim as CutInKind | undefined
                 const finish = () => {
                   setPlaying(null)
-                  onOption(next.action.id, next.option.id)
+                  for (const { action, option } of state.open) onOption(action.id, option.id)
+                  if (state.open.length > 1) usePlay.getState().note(state.open.map(({ option }) => replyText(option)).join(' '), 'info')
                   onClose?.()
                 }
                 if (kind && (cutInKinds as readonly string[]).includes(kind)) {
-                  setPlaying({ kind, finding: replyText(next.option), caption: next.option.label })
+                  setPlaying({ kind, finding: state.open.map(({ option }) => replyText(option)).join(' '), caption: state.open.map(({ option }) => option.label).join('; ') })
                   window.setTimeout(finish, cutInMs(kind))
                 } else finish()
                 return

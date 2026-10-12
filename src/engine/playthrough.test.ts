@@ -131,8 +131,8 @@ test('one entry for the same examination at each moment: a tap always does the s
       for (const family of merged) {
         if (!family.some((a) => a.id === id)) continue
         const st = usePlay.getState()
-        const next = familyState(family, st.spent, st.scene ?? []).open[0]
-        if (next?.action.id !== id) problems.push(`${pack.packId}: at ${id}, the one "${family[0].prompt}" would do ${next?.action.id ?? 'nothing'}`)
+        const open = familyState(family, st.spent, st.scene ?? []).open
+        if (!open.some((o) => o.action.id === id)) problems.push(`${pack.packId}: at ${id}, the one "${family[0].prompt}" would do ${open[0]?.action.id ?? 'nothing'}`)
       }
     })
   }
