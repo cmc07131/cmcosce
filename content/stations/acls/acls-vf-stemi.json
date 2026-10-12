@@ -136,7 +136,7 @@
       "id": "recognise",
       "kind": "say",
       "to": "nurse",
-      "label": "Team",
+      "label": "Team: call, CPR, pads",
       "hint": "Help and the defibrillator; high-quality CPR; roles.",
       "opts": [
         {
@@ -206,7 +206,7 @@
       "id": "cycle",
       "kind": "say",
       "to": "nurse",
-      "label": "Team",
+      "label": "Team: after each shock",
       "hint": "Straight back on the chest after every shock; swap compressors every 2 minutes.",
       "opts": [
         {

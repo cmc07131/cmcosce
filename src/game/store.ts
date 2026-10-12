@@ -72,6 +72,19 @@ export function indicated(o: ActionOption, scene: string[]) {
   return (o.when ?? []).every((flag) => scene.includes(flag))
 }
 
+/**
+ * A step as the chooser shows it: done (everything in it found or said), or not yet (nothing in it is due: why), or
+ * open. Only for steps with no trap in them, where every line is part of the script.
+ */
+export function stepState(action: Action, spent: string[], scene: string[]): { done: boolean; waiting: string | null } {
+  const rows = action.options ?? []
+  if (!rows.length || rows.some((o) => o.isTrap)) return { done: false, waiting: null }
+  const left = rows.filter((o) => !spent.includes(o.id))
+  if (!left.length) return { done: true, waiting: null }
+  if (left.some((o) => indicated(o, scene))) return { done: false, waiting: null }
+  return { done: false, waiting: left.find((o) => o.early)?.early ?? 'Not yet.' }
+}
+
 /** Asked for too early: not given, not spent, a fault, and the nurse says why. */
 function tooEarly(pack: Pack, action: Action, rows: ActionOption[]) {
   const faults: Fault[] = rows.map((o) => ({ actionId: action.id, text: `Too early: "${o.label}". ${o.early ?? 'It was not indicated yet.'}` }))

@@ -296,7 +296,7 @@
       "id": "reassess",
       "kind": "exam",
       "to": "patient",
-      "label": "Reassess him",
+      "label": "Reassess after the first bolus",
       "hint": "After each bolus: heart rate, refill, liver, chest; recheck the glucose.",
       "groups": {
         "After each bolus": [
@@ -346,7 +346,7 @@
       "id": "reassess2",
       "kind": "exam",
       "to": "patient",
-      "label": "Reassess him",
+      "label": "Reassess after 40 mL/kg",
       "hint": "After 40 mL/kg: is he fluid-refractory?",
       "groups": {
         "After 40 mL/kg": [

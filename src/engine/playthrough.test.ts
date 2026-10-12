@@ -101,3 +101,39 @@ test('every station can be finished with full marks, no faults, and every rule m
   }
   assert.deepEqual(problems, [])
 })
+
+test('no two steps at the same person or place share a name (a cart or trolley is one shelf)', () => {
+  const clashes: string[] = []
+  for (const pack of stationPacks()) {
+    const seen = new Map<string, string>()
+    for (const a of pack.actions.filter((x) => x.kind !== 'kit'))
+      for (const t of a.targetIds) {
+        const key = `${t}|${a.prompt || a.hint}`
+        if (seen.has(key)) clashes.push(`${pack.packId}: "${a.prompt || a.hint}" twice at ${t} (${seen.get(key)}, ${a.id})`)
+        seen.set(key, a.id)
+      }
+  }
+  assert.deepEqual(clashes, [])
+})
+
+test('a chooser shows each step done, open, or not yet due (and why): septic shock after the first bolus', async () => {
+  const { stepState } = await import('../game/store')
+  const pack = stationPacks().find((p) => p.packId === 'pals-sepsis')!
+  const s = () => usePlay.getState()
+  s().rerun(pack)
+  s().enterRoom()
+  for (const id of pack.goldPath) {
+    if (id === 'reassess') break
+    const action = pack.actions.find((a) => a.id === id)!
+    for (const o of action.options ?? []) (action.kind === 'kit' ? s().confirmOptions(pack, id, [o.id]) : s().pickOption(pack, id, o.id))
+    drain(pack)
+  }
+  const at = (id: string) => stepState(pack.actions.find((a) => a.id === id)!, s().spent[id] ?? [], s().scene ?? [])
+  assert.deepEqual(at('assess'), { done: true, waiting: null })
+  assert.deepEqual(at('reassess'), { done: false, waiting: null })
+  assert.deepEqual(at('reassess2'), { done: false, waiting: 'After the further boluses.' })
+  // Reassessed: the second bolus is due, and the later reassessment once it is in.
+  for (const o of pack.actions.find((a) => a.id === 'reassess')!.options ?? []) s().pickOption(pack, 'reassess', o.id)
+  assert.deepEqual(at('bolus2'), { done: false, waiting: null })
+  assert.equal(s().faults.length, 0)
+})

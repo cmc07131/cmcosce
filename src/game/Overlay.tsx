@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import { itemLabel, menuIsMulti, missingItems } from '~/engine/judge'
 import type { Action, Pack } from '~/engine/schema'
-import { indicated, usePlay, type Overlay as OverlayState } from './store'
+import { indicated, stepState, usePlay, type Overlay as OverlayState } from './store'
 import { DrugCart } from './DrugCart'
 import { Film, FilmButton } from './imaging/Film'
 import { GroupPanel, MonitorPanel, StepsPanel, TurnPanel, seededShuffle } from './panels'
@@ -78,6 +78,7 @@ function Body({
   onEnter,
   entered,
 }: Omit<Props, 'onClose'> & { onClose?: () => void }) {
+  const scene = usePlay((s) => s.scene) ?? []
   if (overlay.kind === 'stem') {
     return (
       <Win title="DOOR NOTE" onClose={onClose} className="sheet">
@@ -109,15 +110,19 @@ function Body({
         <div className="sheet-scroll">
           {actions.map((action) => {
             const missing = missingItems(action.requiresItems, inventory)
+            const state = stepState(action, spent[action.id] ?? [], scene)
             return (
               <NavItem
                 key={action.id}
                 testId={`action-${action.id}`}
-                disabled={missing.length > 0}
+                tone={state.done ? 'done' : undefined}
+                disabled={missing.length > 0 || state.waiting !== null}
                 onClick={() => onAction(action.id, overlay.targetId)}
               >
+                {state.done ? '✓ ' : ''}
                 {action.prompt || action.hint}
                 {missing.length > 0 && <span className="nav-need">Need {missing.map((id) => itemLabel(pack, id)).join(', ')}</span>}
+                {missing.length === 0 && state.waiting && <span className="nav-need">{state.waiting}</span>}
               </NavItem>
             )
           })}

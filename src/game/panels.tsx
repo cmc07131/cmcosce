@@ -65,6 +65,8 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
     }, cutInMs(o.anim as CutInKind))
   }
   const verb = action.kind === 'history' ? 'Ask' : action.kind === 'exam' ? 'Examine' : 'Order'
+  // On a trap-free step every line is in the script: one whose moment has not come waits, greyed, saying when.
+  const scripted = !(action.options ?? []).some((o) => o.isTrap)
   return (
     <Win title={title} onClose={onClose} className="sheet">
       {action.prompt && <p className="sheet-prompt">{action.prompt}</p>}
@@ -83,11 +85,13 @@ export function GroupPanel({ action, title, spent, onClose, onOption }: PanelPro
       <div className="sheet-scroll">
         {rows.map((o) => {
           const done = used.has(o.id)
+          const waiting = !done && scripted && !indicated(o, scene ?? []) ? (o.early ?? 'Not yet.') : null
           return (
             <div key={o.id} className="qa" data-done={done || undefined}>
-              <NavItem testId={`option-${action.id}-${o.id}`} tone={done ? 'done' : undefined} disabled={done} onClick={() => examine(o)}>
+              <NavItem testId={`option-${action.id}-${o.id}`} tone={done ? 'done' : undefined} disabled={done || waiting !== null} onClick={() => examine(o)}>
                 <span className="check">{done ? '✓' : '▸'}</span>
                 {o.label}
+                {waiting && <span className="nav-need">{waiting}</span>}
               </NavItem>
               {done && (
                 <p className="qa-answer" data-trap={o.isTrap || undefined}>
