@@ -42,6 +42,14 @@ export const scriptBeat = z.object({ at: z.string().optional(), say: z.string().
 
 export const bodySchema = z.object({
   posture: z.enum(['supine', 'sitting', 'edge', 'standing']).optional(),
+  /** Who is examined, by name, when it is not the station's patient (a manikin, the learner). */
+  who: z.string().optional(),
+  /** A plastic manikin, not a person. */
+  manikin: z.boolean().optional(),
+  /** What you see as the examination opens ("The manikin lies on the table…"). */
+  intro: z.string().optional(),
+  /** A cervical collar, head blocks and tape to fit, and earrings to take off first. */
+  collar: z.boolean().optional(),
   /** The pelvis is draped (intimate examinations): findings there show in a drawn close-up. */
   drape: z.boolean().optional(),
   ataxia: z.enum(['R', 'L']).optional(),
@@ -130,6 +138,8 @@ const actionSchema = z.object({
   startMood: z.number().optional(),
   /** Shown at the top of the panel: the wound, the X-ray you were handed. */
   img: z.string().optional(),
+  /** A 3D examination of its own: who is examined, how they lie, what is offered (over the station's `body`). */
+  body: bodySchema.optional(),
   findings: z
     .array(
       z.object({

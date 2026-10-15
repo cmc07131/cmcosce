@@ -33,10 +33,25 @@ export type Anim =
   | 'stress'
   | 'foot-up'
   | 'hip-roll'
+  // The cervical collar, and clearing the neck.
+  | 'mils'
+  | 'jewellery'
+  | 'measure'
+  | 'size'
+  | 'collar-back'
+  | 'collar-front'
+  | 'fit'
+  | 'blocks'
+  | 'collar-all'
+  | 'midline'
+  | 'rotate-head'
   | `pose:${string}`
 
-/** The framework: look, feel, move; the special tests; the neurovascular checks; what completes it. */
-export type Group = 'Look' | 'Feel' | 'Move' | 'Special' | 'Neuro' | 'Complete'
+/**
+ * The framework: look, feel, move; the special tests; the neurovascular checks; what completes it. A procedure taught
+ * has its own headings (Peyton's four steps): any other heading is shown as written.
+ */
+export type Group = string
 export const GROUPS: { id: Group; title: string }[] = [
   { id: 'Look', title: 'LOOK' },
   { id: 'Feel', title: 'FEEL' },
@@ -45,6 +60,12 @@ export const GROUPS: { id: Group; title: string }[] = [
   { id: 'Neuro', title: 'NEUROVASCULAR' },
   { id: 'Complete', title: 'TO COMPLETE' },
 ]
+
+/** The headings of the manoeuvres offered, in the order they first come. */
+export function headings(offers: Offer[]): { id: Group; title: string }[] {
+  const ids = [...new Set(offers.map((o) => o.def.group))]
+  return ids.map((id) => GROUPS.find((g) => g.id === id) ?? { id, title: id.toUpperCase() })
+}
 
 export type ManoeuvreDef = {
   /** On its button; `{spot}` is the place it is done ("Feel the {spot}": "Feel the dorsalis pedis pulse"). */
@@ -63,6 +84,8 @@ export type ManoeuvreDef = {
   wide?: boolean
   /** What it tests, shown at the spot as it is done (otherwise the place, and what lies under it). */
   shows?: { title: string; sub?: string }
+  /** A drawn close-up shown while it is done (sizing the collar). */
+  inset?: 'collar-size'
 }
 
 export const MANOEUVRES: Record<string, ManoeuvreDef> = {
@@ -119,6 +142,53 @@ export const MANOEUVRES: Record<string, ManoeuvreDef> = {
   collaterals: { label: 'Valgus and varus stress, at 30° and straight', tool: 'stress', anim: 'stress', group: 'Special', shows: { title: 'Valgus and varus stress', sub: 'the MCL and the LCL: does the joint open?' } },
   'foot-up': { label: '“Pull your foot up, then push it down”', say: 'toes', anim: 'foot-up', group: 'Neuro', shows: { title: 'Foot up and down', sub: 'up: the deep peroneal nerve (from the common peroneal); down: the tibial' } },
   'hip-roll': { label: 'Roll the leg to and fro: the hip', move: 'rot', joint: 'hip', anim: 'hip-roll', group: 'Complete', shows: { title: 'Log roll', sub: 'the hip, the joint above: knee pain can come from it' } },
+
+  // Teaching the collar by Peyton's four steps, on a manikin; then the learner does it.
+  'collar-demo': {
+    label: 'Fit the collar at real speed, without talking',
+    tool: 'demo',
+    anim: 'collar-all',
+    group: 'Step 1: demonstrate',
+    shows: { title: 'Peyton step 1', sub: 'the whole skill at real speed, in silence: what good looks like' },
+  },
+  mils: { label: 'Manual in-line stabilisation: hold the head, and keep holding', tool: 'mils', anim: 'mils', group: 'Step 2: explain each step', shows: { title: 'In-line stabilisation', sub: 'held from the head end until blocks and tape are on' } },
+  jewellery: { label: 'Earrings and necklace off', tool: 'jewellery', anim: 'jewellery', group: 'Step 2: explain each step', shows: { title: 'Jewellery off', sub: 'nothing caught under the collar' } },
+  measure: { label: 'Measure with your fingers: top of the trapezius to the angle of the jaw', tool: 'measure', anim: 'measure', group: 'Step 2: explain each step', shows: { title: 'Measure the neck', sub: 'fingers flat, from the top of the shoulder to the angle of the jaw' } },
+  size: {
+    label: 'Size the collar: the same fingers, sizing post to the bottom of the rigid plastic',
+    tool: 'size',
+    anim: 'size',
+    group: 'Step 2: explain each step',
+    shows: { title: 'Size the collar', sub: 'set it, and lock it' },
+    inset: 'collar-size',
+  },
+  'collar-back': { label: 'Slide the back of the collar under the neck', tool: 'collar', anim: 'collar-back', group: 'Step 2: explain each step', shows: { title: 'The back first', sub: 'slid flat under the neck, the head not moved' } },
+  'collar-front': { label: 'Bring the front up under the chin; fasten it to the back', tool: 'collar', anim: 'collar-front', group: 'Step 2: explain each step', shows: { title: 'The front', sub: 'the chin into the chin piece, then fasten' } },
+  fit: { label: 'Check the fit: chin in the chin piece, no gaps; airway and pulses free', tool: 'fit', anim: 'fit', group: 'Step 2: explain each step', shows: { title: 'Check the fit', sub: 'too big pushes the head back; too small lets it flex' } },
+  blocks: { label: 'Head blocks, then tape: the forehead first, then the chin', tool: 'blocks', anim: 'blocks', group: 'Step 2: explain each step', shows: { title: 'Blocks and tape', sub: 'only now can the hands come off' } },
+  'collar-narrate': {
+    label: 'Dr Lau talks you through each step while you do it',
+    tool: 'narrate',
+    anim: 'collar-all',
+    group: 'Step 3: the learner talks you through it',
+    shows: { title: 'Peyton step 3', sub: 'he says each step before you do it: he has it in order' },
+  },
+  'collar-learner': {
+    label: 'Dr Lau fits the collar, talking it through',
+    tool: 'learner',
+    anim: 'collar-all',
+    group: 'Step 4: the learner does it',
+    shows: { title: 'Peyton step 4', sub: 'he does it; you watch, and say nothing until he has finished' },
+  },
+  // Clearing the neck: what you feel and what you ask.
+  midline: { label: 'Feel down the middle of the back of the neck, one spinous process at a time', tool: 'press', anim: 'midline', group: 'Show the examination', shows: { title: 'Posterior midline', sub: 'tender here: image (and no movement test)' } },
+  'rotate-head': {
+    label: '“Turn your head to the left, then to the right, as far as you can”',
+    say: 'rotate-head',
+    anim: 'rotate-head',
+    group: 'Show the examination',
+    shows: { title: 'Active rotation', sub: '45° to each side: the last step of the Canadian C-spine Rule' },
+  },
 }
 
 export type Offer = { key: string; def: ManoeuvreDef; site: string | null }

@@ -1,3 +1,4 @@
+import { Board } from './Board'
 import { useEffect, useRef } from 'react'
 import { ecgById } from '../ecg/atlas'
 import { Ecg12 } from '../ecg/Ecg12'
@@ -36,6 +37,7 @@ export function FilmBody({ src }: { src: string }) {
     if (!spec) return <p className="menu-note">No ECG named {src}.</p>
     return <Ecg12 spec={spec} />
   }
+  if (src.startsWith('board:')) return <Board id={src.slice(6)} />
   return <Picture src={src} />
 }
 

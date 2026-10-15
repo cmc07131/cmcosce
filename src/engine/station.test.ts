@@ -5,6 +5,7 @@ import { test } from 'node:test'
 import { ecgById } from '../game/ecg/atlas'
 import { chest, tracheaX } from '../game/imaging/chest'
 import { edhArc, head, onInner, SUTURES } from '../game/imaging/head'
+import { boardById } from '../game/imaging/Board'
 import { imageEntry } from '../game/imaging/library'
 import { burnPercent } from '../game/imaging/photos'
 import { airwayWidth, anteriorHumeralOffset, kleinCutsEpiphysis, neck, pelvis, symphysisWidth } from '../game/imaging/skeleton'
@@ -210,7 +211,7 @@ test('station scripts: each compiles, validates, and holds its own weight', () =
       ...st.steps.flatMap((s) => [s.img, ...(s.opts ?? []).map((o) => o.img), ...Object.values(s.groups ?? {}).flat().map((o) => o.img), ...(s.qs ?? []).map((q) => q.img), ...(s.turns ?? []).flatMap((t) => t.opts.map((o) => o.img))]),
     ].filter((r): r is string => Boolean(r))
     for (const ref of refs) {
-      const ok = ref.startsWith('ecg:') ? Boolean(ecgById(ref.slice(4))) : Boolean(imageEntry(ref))
+      const ok = ref.startsWith('ecg:') ? Boolean(ecgById(ref.slice(4))) : ref.startsWith('board:') ? Boolean(boardById(ref.slice(6))) : Boolean(imageEntry(ref))
       assert.ok(ok, `${st.id}: no image ${ref}`)
     }
     if (st.vitals?.rhythm) assert.ok(ecgById(st.vitals.rhythm), `${st.id}: rhythm ${st.vitals.rhythm}`)

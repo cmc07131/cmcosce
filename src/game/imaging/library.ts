@@ -2,6 +2,7 @@ import { chest } from './chest'
 import { type Field, Pixels } from './field'
 import { head } from './head'
 import { burnChart, chestEschar, chickenpox, fightBite, fundus, posture, purpura, scarletRash, scarletTongue, zoster, type BurnRegion } from './photos'
+import { boardById } from './Board'
 import { ankle, cspine, elbow, hip, neck, pelvis, shoulder, sufe, wrist } from './skeleton'
 import { cardiac, earlyPregnancy, fastPelvis, fastRuq, intussusception } from './ultrasound'
 
@@ -114,5 +115,6 @@ export function imageEntry(ref: string): Entry | null {
 
 export function imageTitle(ref: string) {
   if (ref.startsWith('ecg:')) return '12-lead ECG'
+  if (ref.startsWith('board:')) return boardById(ref.slice(6))?.title ?? 'Whiteboard'
   return imageEntry(ref)?.title ?? 'Image'
 }

@@ -9,7 +9,6 @@ export const REVIEWED: ReadonlySet<string> = new Set([
   'aw-em-01',
   // Airway and trauma.
   'atls-crico-teach',
-  'atls-cspine-teach',
   'atls-lma',
   // Resuscitation.
   'acls-tca',

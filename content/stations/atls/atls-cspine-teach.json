@@ -8,23 +8,33 @@
   "phases": [
     {
       "title": "Set the scene",
-      "goal": "Objectives and what they know already.",
+      "goal": "Introduce yourself, the objectives, what Dr Lau knows already, and a plan.",
       "steps": [
         "open"
       ]
     },
     {
-      "title": "The collar",
-      "goal": "Fit the collar on the manikin, step by step.",
+      "title": "Teach",
+      "goal": "The collar by Peyton's steps; the rule at the whiteboard; the examination shown on Dr Lau.",
       "steps": [
-        "collar"
+        "collar",
+        "rule",
+        "demo"
       ]
     },
     {
-      "title": "Two cases",
-      "goal": "The Canadian C-spine Rule on two patients.",
+      "title": "Apply",
+      "goal": "Dr Lau fits the collar himself, then works through two cases.",
       "steps": [
+        "learner",
         "cases"
+      ]
+    },
+    {
+      "title": "Close",
+      "goal": "His view first, specific feedback, a teach-back, resources, questions.",
+      "steps": [
+        "close"
       ]
     }
   ],
@@ -34,7 +44,7 @@
       "text": "Collars for everyone. Your notes put a rigid collar on every trauma patient at risk of neck injury. Current guidance uses 'spinal motion restriction': manual in-line stabilisation, blocks and minimal handling are the core, and a collar is one option. Leave it off an alert patient who walked or climbed out themselves, and loosen or remove it if it causes distress, airway problems or raised ICP."
     }
   ],
-  "notes": "Checked against the Canadian C-spine Rule (Stiell 2001, 2003), NEXUS (Hoffman 2000), NICE NG41 (Spinal injury: assessment and initial management, 2016) and NICE NG232 (head injury imaging), and the Faculty of Pre-Hospital Care consensus on spinal motion restriction (2018).\n\nCollar: measure from the angle of the jaw to the top of the trapezius with your fingers, set or choose the collar to that height (measured from the sizing post to the bottom of the rigid plastic), slide the back under the neck while someone holds manual in-line stabilisation, bring the front up under the chin, fasten, and check the fit. Blocks and tape complete immobilisation. Current consensus favours minimal handling and 'spinal motion restriction': collars can raise ICP, cause pressure sores and aspiration, and are no longer routine in every patient (for example, the self-extricating, ambulant patient). Your notes' indications and complications are correct. The difference: your notes put a rigid collar on every trauma patient at risk of a neck injury. Current guidance (ATLS 10th 'spinal motion restriction'; Faculty of Pre-Hospital Care consensus 2018) still protects the spine in these patients, but a collar is now one option, not automatic. Manual in-line stabilisation, head blocks and minimal handling are the core. A collar is not needed for an alert, ambulant patient who walked or climbed out themselves, and can be loosened or removed if it causes distress, airway problems or raised ICP. NICE NG41 still uses collars for patients who meet its immobilisation criteria, so a collar is never 'wrong'. Just don't say it is mandatory for everyone.\n\nClearance: in an alert (GCS 15), stable, sober adult, apply the Canadian C-spine Rule. High risk (age 65 or over, dangerous mechanism, or paraesthesia in the limbs) → image. Otherwise, any low-risk factor (simple rear-end collision, sitting up in the ED, ambulatory at any time, delayed onset of neck pain, no midline tenderness) allows range-of-motion testing: can rotate 45° left and right → cleared. NEXUS is an alternative (no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury). CT is the first-line imaging in adults (NICE). Your notes match this.\n\nPerfect script checked against the Canadian C-spine Rule, NICE NG41, an HKCEM-style teaching scheme and a keyword scheme. Removed the tight-collar option and the unhelpful replies; added spinal motion restriction to the script.",
+  "notes": "Checked against the Canadian C-spine Rule (Stiell 2001, 2003), NEXUS (Hoffman 2000), NICE NG41 (Spinal injury: assessment and initial management, 2016) and NICE NG232 (head injury imaging), and the Faculty of Pre-Hospital Care consensus on spinal motion restriction (2018).\n\nCollar: measure from the angle of the jaw to the top of the trapezius with your fingers, set or choose the collar to that height (measured from the sizing post to the bottom of the rigid plastic), slide the back under the neck while someone holds manual in-line stabilisation, bring the front up under the chin, fasten, and check the fit. Blocks and tape complete immobilisation. Current consensus favours minimal handling and 'spinal motion restriction': collars can raise ICP, cause pressure sores and aspiration, and are no longer routine in every patient (for example, the self-extricating, ambulant patient). Your notes' indications and complications are correct. The difference: your notes put a rigid collar on every trauma patient at risk of a neck injury. Current guidance (ATLS 10th 'spinal motion restriction'; Faculty of Pre-Hospital Care consensus 2018) still protects the spine in these patients, but a collar is now one option, not automatic. Manual in-line stabilisation, head blocks and minimal handling are the core. A collar is not needed for an alert, ambulant patient who walked or climbed out themselves, and can be loosened or removed if it causes distress, airway problems or raised ICP. NICE NG41 still uses collars for patients who meet its immobilisation criteria, so a collar is never 'wrong'. Just don't say it is mandatory for everyone.\n\nClearance: in an alert (GCS 15), stable, sober adult, apply the Canadian C-spine Rule. High risk (age 65 or over, dangerous mechanism, or paraesthesia in the limbs) → image. Otherwise, any low-risk factor (simple rear-end collision, sitting up in the ED, ambulatory at any time, delayed onset of neck pain, no midline tenderness) allows range-of-motion testing: can rotate 45° left and right → cleared. NEXUS is an alternative (no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury). CT is the first-line imaging in adults (NICE). Your notes match this.\n\nTeaching structure (2026-10-15, rebuilt on the user's review: \"first the learning objectives, then what the student knows, then teach, then apply\"): set the scene (introduce, two objectives, explore prior knowledge, tailor and outline the plan); teach (the collar by Peyton's four steps: demonstrate at real speed in silence, deconstruct with explanation, the learner talks the teacher through it; the rule at the whiteboard, linked to the NEXUS he knows; the bedside examination shown on Dr Lau: posterior midline first, then active rotation); apply (Peyton step 4: Dr Lau fits the collar while you watch; two cases in which he reasons and you question and confirm); close (self-assessment first, specific balanced feedback, teach-back, resources, questions, a next step). Everything hands-on is shown in 3D: the collar on a manikin step by step (in-line stabilisation from the head end throughout, earrings out, finger measurement, sizing in a drawn close-up, back then front, fit, blocks and tape), and the examination on Dr Lau with an arc showing 45 degrees.\n\nPerfect script checked against the Canadian C-spine Rule, NICE NG41, a Peyton four-step checklist, an HKCEM-style set-dialogue-closure teaching scheme and a keyword scheme.",
   "cast": [
     {
       "id": "junior",
@@ -48,17 +58,50 @@
       "kind": "dialogue",
       "to": "junior",
       "label": "Talk to Dr Lau",
-      "hint": "Introduce, set objectives, find out what they know.",
+      "hint": "Set the scene: introduce yourself, the objectives, what he knows already, then a plan.",
       "mood": 4,
       "turns": [
         {
           "line": "Thanks for this. I get nervous about necks.",
           "opts": [
             {
-              "t": "Today: fit a collar correctly, and use the Canadian C-spine Rule on two cases. What do you know so far?",
-              "r": "I know NEXUS a bit. Never fitted a collar.",
-              "mood": -2,
-              "mark": "Sets objectives and assesses prior knowledge"
+              "t": "Hi Dr Lau, I'm the ED registrar. We have about ten minutes and nobody needs us: shall we do this at the manikin?",
+              "r": "Yes, I'm free.",
+              "mood": -1,
+              "mark": "Introduces themself, builds rapport and sets the scene"
+            }
+          ]
+        },
+        {
+          "line": "What are we going to cover?",
+          "opts": [
+            {
+              "t": "Two objectives. By the end you'll be able to fit a cervical collar correctly, and use the Canadian C-spine Rule to decide whose neck can be cleared without imaging.",
+              "r": "Sounds good.",
+              "mood": -1,
+              "mark": "Sets clear learning objectives"
+            }
+          ]
+        },
+        {
+          "line": "Where do you want me to start?",
+          "opts": [
+            {
+              "t": "First tell me what you know already: have you fitted a collar, and how do you decide who needs imaging?",
+              "r": "I've read about NEXUS, but I've never fitted a collar, and I'm never sure when the collar can come off.",
+              "mood": -1,
+              "mark": "Explores the learner's prior knowledge"
+            }
+          ]
+        },
+        {
+          "line": "Is that a problem?",
+          "opts": [
+            {
+              "t": "Not at all: that's a good start. You'll see the collar done, then step by step, then you'll fit it yourself. Then we'll build on NEXUS with the Canadian rule, and you'll apply it to two patients.",
+              "r": "Great.",
+              "mood": -1,
+              "mark": "Tailors the session to the learner and outlines a plan"
             }
           ]
         }
@@ -66,86 +109,294 @@
     },
     {
       "id": "collar",
-      "kind": "steps",
+      "kind": "exam",
       "to": "table-ix",
-      "label": "Fit the collar (on the manikin)",
-      "hint": "In-line stabilisation, measure, size, apply, check, blocks and tape.",
+      "label": "Teach the collar (Peyton's steps)",
+      "hint": "Show it at real speed in silence; then each step, explained; then he talks you through it.",
+      "body": {
+        "posture": "supine",
+        "who": "The manikin",
+        "manikin": true,
+        "collar": true,
+        "intro": "The manikin lies flat on the table, earrings in; a collar and head blocks beside it. Dr Lau watches. Teach it Peyton's way: choose below.",
+        "focus": [
+          "collar-demo@neck",
+          "mils@neck",
+          "jewellery@ear-R",
+          "measure@neckside-R",
+          "size@neck",
+          "collar-back@cspine",
+          "collar-front@neck",
+          "fit@chin",
+          "blocks@head",
+          "collar-narrate@neck"
+        ]
+      },
+      "groups": {
+        "Step 1: demonstrate": [
+          {
+            "t": "Watch first: I'll fit it at real speed, without talking.",
+            "r": "In-line stabilisation, earrings off, measured, sized, back, front, checked, blocks and tape: done in under a minute.",
+            "mark": "Peyton step 1: demonstrates at real speed, in silence",
+            "do": "demo neck"
+          }
+        ],
+        "Step 2: explain each step": [
+          {
+            "t": "Now step by step. First, manual in-line stabilisation: someone holds the head from the head end, and keeps holding it until the blocks and tape are on.",
+            "r": "The head is held in line from the head end.",
+            "mark": "Manual in-line stabilisation, held throughout",
+            "do": "mils neck"
+          },
+          {
+            "t": "Jewellery off: earrings and necklaces, so nothing is caught under the collar.",
+            "r": "Earrings out.",
+            "mark": "Removes jewellery first",
+            "do": "jewellery ear-R"
+          },
+          {
+            "t": "Measure with your fingers flat, from the top of the trapezius up to the angle of the jaw. Here it's three fingers.",
+            "r": "Three fingers from the trapezius to the angle of the jaw.",
+            "mark": "Measures the neck: trapezius to the angle of the jaw",
+            "do": "measure neckside-R"
+          },
+          {
+            "t": "Set the collar to the same three fingers, from the sizing post to the bottom of the rigid plastic, and lock it.",
+            "r": "Sized to three fingers and locked.",
+            "mark": "Sizes the collar to the measurement",
+            "do": "size neck"
+          },
+          {
+            "t": "Slide the back of the collar flat under the neck, without moving the head.",
+            "r": "The back is under the neck; the head has not moved.",
+            "mark": "Slides the back under the neck",
+            "do": "collar cspine"
+          },
+          {
+            "t": "Bring the front up the chest until the chin sits in the chin piece, then fasten it to the back.",
+            "r": "The chin is in the chin piece; fastened.",
+            "mark": "Brings the front up under the chin and fastens it",
+            "do": "collar neck"
+          },
+          {
+            "t": "Check the fit: chin in the chin piece, no gaps, the airway and the pulses still accessible.",
+            "r": "A good fit: no gaps, the airway hole in the midline.",
+            "mark": "Checks the fit",
+            "do": "fit chin"
+          },
+          {
+            "t": "Then blocks and tape: head blocks, then tape across the forehead first, then the chin. Only now can the hands come off.",
+            "r": "Blocks on; taped forehead, then chin; in-line stabilisation released.",
+            "mark": "Blocks and tape, forehead then chin, before letting go",
+            "do": "blocks head"
+          }
+        ],
+        "Step 3: the learner talks you through it": [
+          {
+            "t": "Now you talk me through each step, and I'll do exactly what you say.",
+            "r": "Dr Lau: \"Hold the head in line. Earrings off. Three fingers, trapezius to jaw. Set the collar and lock it. Back, then front. Check the fit. Blocks, tape the forehead, then the chin.\" All in order.",
+            "mark": "Peyton step 3: the learner talks the teacher through it",
+            "do": "narrate neck"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rule",
+      "kind": "say",
+      "to": "board",
+      "label": "Teach the rule at the whiteboard",
+      "img": "board:ccr",
+      "hint": "Why a collar at all; the three questions, drawn; then link it to the NEXUS he knows.",
       "opts": [
         {
-          "t": "Someone holds manual in-line stabilisation throughout",
-          "n": 1,
-          "mark": "Manual in-line stabilisation during fitting"
+          "t": "First, the collar is only one part of spinal motion restriction: in-line stabilisation, blocks and minimal handling matter most. Leave the collar off an alert patient who walked out of the car, and loosen it if it causes distress or raised pressure.",
+          "mark": "Spinal motion restriction: who needs a collar, and its harms"
         },
         {
-          "t": "Remove earrings and necklaces",
-          "n": 2,
-          "mark": "Removes jewellery first"
+          "t": "The Canadian C-spine Rule is for alert, stable adults, GCS 15, with a possible neck injury. It asks three questions, in order.",
+          "mark": "States who the rule applies to"
         },
         {
-          "t": "Measure with fingers from the angle of the jaw to the top of the trapezius",
-          "n": 3,
-          "mark": "Measures the neck correctly"
+          "t": "One: any high-risk factor? Age 65 or over, a dangerous mechanism such as a fall from a metre or five stairs, or tingling in the limbs. If yes, image: CT C-spine.",
+          "mark": "High-risk factors mean imaging"
         },
         {
-          "t": "Set the collar to that height: sizing post to the bottom of the rigid plastic",
-          "n": 4,
-          "mark": "Sizes the collar to the measurement"
+          "t": "Two: any of the low-risk factors that make it safe to test movement? A simple rear-end collision, sitting up in the department, walking at any time, neck pain that came on later, or no midline tenderness. If none, image.",
+          "mark": "Low-risk factors make it safe to assess movement"
         },
         {
-          "t": "Slide the back under the neck, bring the front up under the chin, fasten",
-          "n": 5,
-          "mark": "Applies and fastens"
+          "t": "Three: active rotation. Can they turn the head 45 degrees to the left and to the right? If yes, the neck is cleared clinically: no imaging, collar off. If not, image.",
+          "mark": "Active rotation 45° each way clears the neck"
         },
         {
-          "t": "Check the fit: chin in the chin piece, no gap, airway and pulses accessible",
-          "n": 6,
-          "mark": "Checks fit"
-        },
-        {
-          "t": "Add blocks and tape (head first, then chin)",
-          "n": 7,
-          "mark": "Blocks and tape"
+          "t": "You know NEXUS: no midline tenderness, not intoxicated, normally alert, no focal deficit, no painful distracting injury. The Canadian rule is the more sensitive and the more specific of the two.",
+          "mark": "Links the new rule to what the learner knows (NEXUS)"
         }
       ]
+    },
+    {
+      "id": "demo",
+      "kind": "exam",
+      "to": "junior",
+      "label": "Show the examination on Dr Lau",
+      "hint": "Feel the midline first; only then ask him to turn his head.",
+      "body": {
+        "posture": "edge",
+        "who": "Dr Lau",
+        "intro": "Dr Lau sits on the edge of the couch so you can show the examination on him.",
+        "focus": [
+          "midline@cspine",
+          "rotate-head"
+        ]
+      },
+      "groups": {
+        "Show the examination": [
+          {
+            "t": "First feel down the middle of the back of the neck, every spinous process: tenderness there means image, and no movement test.",
+            "r": "No midline tenderness.",
+            "mark": "Shows palpation of the posterior midline",
+            "do": "press cspine"
+          },
+          {
+            "t": "Only then: turn your head to the left, then to the right, as far as you can.",
+            "r": "45 degrees to each side, no pain: that is a pass.",
+            "mark": "Shows active rotation to 45° each way",
+            "do": "say rotate-head"
+          }
+        ]
+      }
+    },
+    {
+      "id": "learner",
+      "kind": "exam",
+      "to": "table-ix",
+      "label": "Dr Lau fits the collar (Peyton step 4)",
+      "hint": "He does it; you watch, and feed back at the end.",
+      "body": {
+        "posture": "supine",
+        "who": "The manikin",
+        "manikin": true,
+        "collar": true,
+        "intro": "Dr Lau's turn: he fits the collar on the manikin while you watch.",
+        "focus": [
+          "collar-learner@neck"
+        ]
+      },
+      "groups": {
+        "Step 4: the learner does it": [
+          {
+            "t": "Your turn: fit it on the manikin, talking me through it. I'll watch.",
+            "r": "Dr Lau keeps in-line stabilisation, takes the earrings off, measures three fingers, sizes and locks the collar, back then front, checks the fit, then blocks and tape: forehead, then chin. All correct.",
+            "mark": "Peyton step 4: the learner performs while the teacher observes",
+            "do": "learner neck"
+          }
+        ]
+      }
     },
     {
       "id": "cases",
       "kind": "dialogue",
       "to": "junior",
-      "label": "Two quick cases",
-      "hint": "Apply the Canadian C-spine Rule aloud with Dr Lau.",
+      "label": "Apply the rule: two cases",
+      "hint": "He reasons; you ask the questions and confirm.",
       "mood": 4,
       "turns": [
         {
-          "line": "Case 1: 35-year-old, rear-ended at a traffic light, walking at the scene, GCS 15, no midline tenderness, sitting up. Clear?",
+          "line": "Can I try one?",
           "opts": [
             {
-              "t": "No high-risk factor. Low-risk factors present: walking at the scene, sitting up, no midline tenderness. So test rotation: 45 degrees both ways: cleared, no imaging.",
-              "r": "So the rotation test is the last step.",
-              "mood": -2,
-              "mark": "Applies the CCR correctly in a low-risk case"
+              "t": "Case one: a 35-year-old, rear-ended at traffic lights, walked about at the scene, now sitting up in the department, GCS 15, sore neck. You talk me through it.",
+              "r": "No high-risk factor: he's 35, a simple rear-end, no tingling. Low-risk factors: the rear-end, walking, sitting up. So I feel his neck: no midline tenderness. He turns 45 degrees each way: cleared, no imaging.",
+              "mood": -1,
+              "mark": "Has the learner apply the rule to a low-risk case"
             }
           ]
         },
         {
-          "line": "Case 2: 72-year-old, fell from standing, neck pain, GCS 15. Clear?",
+          "line": "Was that right?",
           "opts": [
             {
-              "t": "Age 65 or over is a high-risk factor: CT C-spine, no rotation test.",
-              "r": "Age alone is enough.",
-              "mood": -2,
-              "mark": "Recognises a high-risk factor mandating imaging"
+              "t": "Spot on. And if he couldn't turn 45 degrees?",
+              "r": "Then he's not cleared: CT his neck.",
+              "mood": -1,
+              "mark": "Probes understanding with a follow-up question"
             }
           ]
         },
         {
-          "line": "So what do I remember?",
+          "line": "And the next one?",
           "opts": [
             {
-              "t": "You tell me the three steps of the Canadian C-spine Rule.",
-              "r": "High risk → image; low risk → test rotation; can rotate → clear.",
-              "mood": -2,
+              "t": "Case two: a 72-year-old who tripped and fell from standing, neck pain, GCS 15, no midline tenderness.",
+              "r": "She's 72: that's high risk on its own. Spinal motion restriction and a CT C-spine, and I don't test her movement at all.",
+              "mood": -1,
+              "mark": "The learner identifies a high-risk factor and does not test movement"
+            }
+          ]
+        },
+        {
+          "line": "Even with no tenderness?",
+          "opts": [
+            {
+              "t": "Exactly: age 65 or over alone means imaging, whatever the examination shows.",
+              "r": "Got it.",
+              "mood": -1,
+              "mark": "Confirms and reinforces the key point"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "kind": "dialogue",
+      "to": "junior",
+      "label": "Close the session",
+      "hint": "His view first, then specific feedback, a teach-back, resources and questions.",
+      "mood": 3,
+      "turns": [
+        {
+          "line": "Is that everything?",
+          "opts": [
+            {
+              "t": "Nearly. Before we finish: how do you think that went?",
+              "r": "The collar was easier than I thought. The low-risk list is the bit I'm not sure about.",
+              "mood": -1,
+              "mark": "Invites the learner's self-assessment first"
+            }
+          ]
+        },
+        {
+          "line": "The low-risk list is the bit I'm not sure about.",
+          "opts": [
+            {
+              "t": "You kept the in-line stabilisation the whole time, and your sizing was spot on. For the low-risk factors, ask yourself: is it safe to ask him to move?",
+              "r": "That helps.",
+              "mood": -1,
+              "mark": "Gives specific, balanced feedback"
+            }
+          ]
+        },
+        {
+          "line": "What should I take away?",
+          "opts": [
+            {
+              "t": "You tell me: the three questions of the rule.",
+              "r": "A high-risk factor: image. No low-risk factor: image. Can't turn 45 degrees: image. Otherwise the neck is cleared.",
+              "mood": -1,
               "mark": "Checks understanding by teach-back"
+            }
+          ]
+        },
+        {
+          "line": "Where can I read more?",
+          "opts": [
+            {
+              "t": "Stiell's original paper from 2001, and NICE guideline NG41. Any questions? Next time we're on together, you clear a neck and I'll watch.",
+              "r": "No questions. Thanks!",
+              "mood": -1,
+              "mark": "Gives resources, invites questions and agrees a next step"
             }
           ]
         }
@@ -280,6 +531,7 @@
   ],
   "keywords": [
     "objectives",
+    "what you know already",
     "manual in-line stabilisation",
     "jewellery",
     "angle of the jaw",
@@ -294,38 +546,53 @@
     "rotation",
     "45 degrees",
     "65 or over",
-    "CT C-spine"
+    "CT C-spine",
+    "NEXUS",
+    "how do you think that went"
   ],
   "script": [
     {
       "at": "0:00",
-      "say": "Today: fit a collar correctly, and use the Canadian C-spine Rule on two cases. Those are our objectives. What do you know so far?",
-      "do": "A bit of NEXUS; never fitted a collar."
+      "say": "Hi Dr Lau, I'm the ED registrar. We have about ten minutes and nobody needs us: shall we do this at the manikin? Two objectives. By the end you'll be able to fit a cervical collar correctly, and use the Canadian C-spine Rule to decide whose neck can be cleared without imaging. First tell me what you know already: have you fitted a collar, and how do you decide who needs imaging? Not at all: that's a good start. You'll see the collar done, then step by step, then you'll fit it yourself. Then we'll build on NEXUS with the Canadian rule, and you'll apply it to two patients.",
+      "do": "Dr Lau has read about NEXUS but never fitted a collar."
     },
     {
-      "at": "0:15",
-      "say": "Someone holds manual in-line stabilisation throughout. Earrings and necklaces off: jewellery first. Measure with your fingers from the angle of the jaw to the top of the trapezius."
+      "at": "0:50",
+      "say": "Watch first: I'll fit it at real speed, without talking.",
+      "do": "The whole fit at real speed, in silence."
     },
     {
-      "at": "0:35",
-      "say": "Set the collar to that height, from the sizing post to the bottom of the rigid plastic. Slide the back under the neck, bring the front up under the chin, fasten. Check the fit: chin in the chin piece, no gap, airway and pulses accessible. Blocks and tape: head first, then chin."
+      "at": "1:10",
+      "say": "Now step by step. First, manual in-line stabilisation: someone holds the head from the head end, and keeps holding it until the blocks and tape are on. Jewellery off: earrings and necklaces, so nothing is caught under the collar. Measure with your fingers flat, from the top of the trapezius up to the angle of the jaw. Here it's three fingers. Set the collar to the same three fingers, from the sizing post to the bottom of the rigid plastic, and lock it. Slide the back of the collar flat under the neck, without moving the head. Bring the front up the chest until the chin sits in the chin piece, then fasten it to the back. Check the fit: chin in the chin piece, no gaps, the airway and the pulses still accessible. Then blocks and tape: head blocks, then tape across the forehead first, then the chin. Only now can the hands come off."
     },
     {
-      "at": "1:05",
-      "say": "A collar is one part of spinal motion restriction, not routine for everyone: leave it off an alert patient who walked out, and loosen it if it causes distress or raised pressure."
+      "at": "2:30",
+      "say": "Now you talk me through each step, and I'll do exactly what you say.",
+      "do": "Dr Lau talks you through every step, in order."
     },
     {
-      "at": "1:20",
-      "say": "Case 1: no high-risk factor. Low-risk factors present: walking at the scene, sitting up, no midline tenderness. So test rotation: 45 degrees both ways: cleared, no imaging."
+      "at": "2:55",
+      "say": "First, the collar is only one part of spinal motion restriction: in-line stabilisation, blocks and minimal handling matter most. Leave the collar off an alert patient who walked out of the car, and loosen it if it causes distress or raised pressure. The Canadian C-spine Rule is for alert, stable adults, GCS 15, with a possible neck injury. It asks three questions, in order. One: any high-risk factor? Age 65 or over, a dangerous mechanism such as a fall from a metre or five stairs, or tingling in the limbs. If yes, image: CT C-spine. Two: any of the low-risk factors that make it safe to test movement? A simple rear-end collision, sitting up in the department, walking at any time, neck pain that came on later, or no midline tenderness. If none, image. Three: active rotation. Can they turn the head 45 degrees to the left and to the right? If yes, the neck is cleared clinically: no imaging, collar off. If not, image. You know NEXUS: no midline tenderness, not intoxicated, normally alert, no focal deficit, no painful distracting injury. The Canadian rule is the more sensitive and the more specific of the two."
     },
     {
-      "at": "1:40",
-      "say": "Case 2: age 65 or over is a high-risk factor: CT C-spine, no rotation test."
+      "at": "4:00",
+      "say": "First feel down the middle of the back of the neck, every spinous process: tenderness there means image, and no movement test. Only then: turn your head to the left, then to the right, as far as you can.",
+      "do": "No midline tenderness; 45 degrees to each side."
     },
     {
-      "at": "1:50",
-      "say": "You tell me the three steps of the Canadian C-spine Rule.",
-      "do": "High risk: image. Low risk: test rotation. Can rotate: clear."
+      "at": "4:25",
+      "say": "Your turn: fit it on the manikin, talking me through it. I'll watch.",
+      "do": "Dr Lau fits the collar correctly, step by step."
+    },
+    {
+      "at": "4:55",
+      "say": "Case one: a 35-year-old, rear-ended at traffic lights, walked about at the scene, now sitting up in the department, GCS 15, sore neck. You talk me through it. Spot on. And if he couldn't turn 45 degrees? Case two: a 72-year-old who tripped and fell from standing, neck pain, GCS 15, no midline tenderness. Exactly: age 65 or over alone means imaging, whatever the examination shows.",
+      "do": "Case one: cleared. Case two: age 65 or over, CT C-spine."
+    },
+    {
+      "at": "6:00",
+      "say": "Nearly. Before we finish: how do you think that went? You kept the in-line stabilisation the whole time, and your sizing was spot on. For the low-risk factors, ask yourself: is it safe to ask him to move? You tell me: the three questions of the rule. Stiell's original paper from 2001, and NICE guideline NG41. Any questions? Next time we're on together, you clear a neck and I'll watch.",
+      "do": "His teach-back: high risk, image; no low-risk factor, image; can't rotate, image; otherwise clear."
     }
   ]
 }

@@ -9,7 +9,7 @@ import { buzz, sfx } from '../sfx'
 import { CORE_TOOLS, SAYS, sayOf, toolById, TOOLS, type SayDef } from './catalog'
 import { Illustration, illustrationFor, type IllustrationKind } from './Illustration'
 import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from './hints'
-import { GROUPS as FRAMEWORK, eventOf, offerLabel, offerOf, type Offer } from './manoeuvres'
+import { eventOf, headings, offerLabel, offerOf, type Offer } from './manoeuvres'
 import { advance, freshProgress, matches, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, HANDS, type Limb, type Posture, type View } from './scene'
 import { SITES, onLeg, regionOf, siteLabel, siteOf, spotLabel } from './sites'
@@ -30,6 +30,10 @@ const ARM_VIEWS: { id: View; label: string }[] = [
   { id: 'focus', label: 'ARM' },
   { id: 'hands', label: 'HANDS' },
   { id: 'whole', label: 'PATIENT' },
+]
+const NECK_VIEWS: { id: View; label: string }[] = [
+  { id: 'focus', label: 'NECK' },
+  { id: 'whole', label: 'WHOLE' },
 ]
 const KNEE_VIEWS: { id: View; label: string }[] = [
   { id: 'focus', label: 'KNEE' },
@@ -105,15 +109,18 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const items = useMemo(() => (action.options ?? []).filter((o) => o.do).map((o) => ({ option: o, plan: parseDo(o.do!) as Plan })), [action])
   const patient = pack.cast.find((c) => c.id === 'patient') ?? pack.cast.find((c) => !['examiner', 'nurse', 'junior'].includes(c.role))
   const kind = patientKind({ role: patient?.role, name: patient?.displayName })
-  const name = patient?.displayName ?? 'The patient'
-  const body = pack.body ?? {}
+  // The step's own patient and manoeuvres (a manikin to fit a collar on, the learner to examine), over the station's.
+  const body = useMemo(() => ({ ...(pack.body ?? {}), ...(action.body ?? {}) }), [pack.body, action.body])
+  const name = body.who ?? patient?.displayName ?? 'The patient'
   // A focused examination: only these manoeuvres, each shown being done; the rest of the body is not part of it.
   const offers = useMemo(() => (body.focus ?? []).map(offerOf).filter((o): o is Offer => !!o), [body.focus])
   const focused = offers.length > 0
   const focusSide: 'R' | 'L' = body.ain ?? body.kinkOnFlex ?? body.effusion ?? (offers.find((o) => o.site)?.site?.endsWith('-R') ? 'R' : 'L')
   // The limb it is about, and where the camera comes back to: the forearm, or the knee.
   const legFocus = offers.some((o) => o.site && onLeg(o.site))
-  const home = legFocus ? `knee-${focusSide}` : `forearm-${focusSide}`
+  // The neck: a collar to fit, a neck to clear.
+  const neckFocus = !legFocus && offers.some((o) => o.site && /^(neck|neckside|cspine|chin|ear)(-|$)/.test(o.site))
+  const home = legFocus ? `knee-${focusSide}` : neckFocus ? 'neck' : `forearm-${focusSide}`
   const sideWord = focusSide === 'L' ? 'left' : 'right'
   const their = kind === 'woman' ? 'her' : 'his'
   const tools = useMemo(() => {
@@ -140,7 +147,9 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const [note, setNote] = useState<Note>({
     text: !focused
       ? `${name} is on the couch. Tap the part of the body you want to examine, or talk to them.`
-      : legFocus
+      : body.intro
+        ? body.intro
+        : legFocus
         ? `${name} is lying on the couch, both legs bare. Examine ${their} ${sideWord} knee: choose below, or tap the knee.`
         : `${name} is holding ${their} injured ${sideWord} arm still. Tap the arm or either hand to examine it.`,
     tone: 'hint',
@@ -161,7 +170,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     if (!host.current) return
     useSettings.getState().load()
     // Intimate examinations (under a drape) always have the realistic patient, whatever the 3D PATIENT setting.
-    const look = body.drape ? 'realistic' : useSettings.getState().patientModel
+    const look = body.drape || body.manikin ? 'realistic' : useSettings.getState().patientModel
     const s = new ExamScene(host.current, kind, look, body.posture ?? 'supine', body)
     scene.current = s
     if (import.meta.env.DEV) Object.assign(window, { __exam: s, __hands: HANDS })
@@ -390,7 +399,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
 
   /** Manoeuvres under the framework's headings: look, feel, move, neurovascular. */
   function framework(list: Offer[]) {
-    return FRAMEWORK.map(({ id, title }) => {
+    return headings(list).map(({ id, title }) => {
       const here = list.filter((o) => o.def.group === id)
       if (!here.length) return null
       return (
@@ -421,13 +430,18 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       s.setView('whole')
       setView('whole')
     } else {
-      s.focus(o.site ?? (legFocus ? home : `hand-${side}`))
+      s.focus(o.site ?? (legFocus || neckFocus ? home : `hand-${side}`))
       setView('focus')
     }
     const dur = s.perform(o.def.anim, o.site, side)
     const what = labelFor(o)
     setLabel(what)
-    labelAt.current = what ? { site: o.site ?? (legFocus ? home : `hand-${side}`), until: performance.now() + (dur + 1.8) * 1000 } : null
+    labelAt.current = what ? { site: o.site ?? (legFocus || neckFocus ? home : `hand-${side}`), until: performance.now() + (dur + 1.8) * 1000 } : null
+    // A drawn close-up of what the 3D cannot show well (the collar's sizing).
+    if (o.def.inset) {
+      setIllus({ kind: o.def.inset, text: '' })
+      later(dur + 1.5, () => setIllus((cur) => (cur?.kind === o.def.inset ? null : cur)))
+    }
     // Close enough to see the fingers at work (a leg test has its own shot, from the side).
     if (!o.def.wide && !s.filmed) s.zoomBy(0.6)
     setBusy(true)
@@ -668,7 +682,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
           <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={(e) => scene.current?.zoomBy(e.deltaY > 0 ? 1.1 : 0.9)} />
           {loading && <p className="absolute inset-0 grid place-items-center font-[Press_Start_2P,monospace] text-[8px] text-[#40404c]">Bringing {name} in…</p>}
           <div className="absolute left-1 top-1 flex max-w-[calc(100%-84px)] flex-wrap gap-1" onPointerDown={(e) => e.stopPropagation()}>
-            {(focused ? (legFocus ? KNEE_VIEWS : ARM_VIEWS) : VIEWS).map((v) => (
+            {(focused ? (legFocus ? KNEE_VIEWS : neckFocus ? NECK_VIEWS : ARM_VIEWS) : VIEWS).map((v) => (
               <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-[#ffffff]' : 'border-[#5a6470]/60 bg-white/90 text-[#30303c]'}`}>
                 {v.label}
               </button>

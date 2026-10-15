@@ -72,6 +72,8 @@ const stepSchema = z.object({
   lang: z.literal('en').optional(),
   opts: z.array(optSchema).optional(),
   groups: z.record(z.string(), z.array(optSchema)).optional(),
+  /** A 3D examination step's own patient, position and manoeuvres (over the station's `body`). */
+  body: bodySchema.optional(),
   mood: z.number().optional(),
   /** `lz`: the other person's line in spoken Cantonese. */
   turns: z.array(z.object({ line: z.string(), lz: z.string().optional(), opts: z.array(optSchema) })).optional(),
@@ -420,6 +422,7 @@ export function compileStation(station: Station): Pack {
       hint: step.hint ?? step.label,
       prompt: step.label,
       img: step.img,
+      body: step.body,
       endStation: step.end,
       ask: step.ask,
     }
@@ -470,21 +473,23 @@ export function compileStation(station: Station): Pack {
     actions.push({ id: 'monitor', kind: 'monitor', targetIds: ['monitor'], hint: 'Look at the monitor.', prompt: 'Monitor' })
   }
 
-  // A focused examination offers only real manoeuvres at real places.
-  for (const key of Object.keys(station.body?.findings ?? {}))
-    if (!(station.body?.focus ?? []).includes(key)) throw new Error(`${station.id}: finding for "${key}", which is not in the focus list`)
-  for (const entry of station.body?.focus ?? []) {
-    const o = offerOf(entry)
-    if (!o) throw new Error(`${station.id}: focus "${entry}" is not a manoeuvre`)
-    if (o.site && !SITE_IDS.includes(o.site)) throw new Error(`${station.id}: focus "${entry}" names no site "${o.site}"`)
+  // A focused examination offers only real manoeuvres at real places (the station's, and any step's own).
+  for (const body of [station.body, ...station.steps.map((s) => s.body)]) {
+    for (const key of Object.keys(body?.findings ?? {}))
+      if (!(body?.focus ?? []).includes(key)) throw new Error(`${station.id}: finding for "${key}", which is not in the focus list`)
+    for (const entry of body?.focus ?? []) {
+      const o = offerOf(entry)
+      if (!o) throw new Error(`${station.id}: focus "${entry}" is not a manoeuvre`)
+      if (o.site && !SITE_IDS.includes(o.site)) throw new Error(`${station.id}: focus "${entry}" names no site "${o.site}"`)
+    }
   }
   if (station.body?.effusion && !station.body.shorts) throw new Error(`${station.id}: an effusion shows only on bare legs (shorts)`)
   for (const id of [...(station.body?.tender ?? []), ...(station.body?.bruise ?? [])])
     if (!SITE_IDS.includes(id)) throw new Error(`${station.id}: body names no site "${id}"`)
   // In a focused examination, every item can be done with the manoeuvres offered (in any order, as often as needed).
-  const offered = (station.body?.focus ?? []).map(offerOf).filter((o): o is Offer => !!o)
-  if (offered.length)
-    for (const step of station.steps)
+  for (const step of station.steps) {
+    const offered = (step.body?.focus ?? station.body?.focus ?? []).map(offerOf).filter((o): o is Offer => !!o)
+    if (offered.length)
       for (const o of [...(step.opts ?? []), ...Object.values(step.groups ?? {}).flat()]) {
         if (!o.do) continue
         const plan = parseDo(o.do)
@@ -499,6 +504,7 @@ export function compileStation(station: Station): Pack {
           }
         if (!done) throw new Error(`${station.id}: "${o.t}" cannot be done with the manoeuvres offered`)
       }
+  }
   // A 3D examination line that names a tool, site or instruction that does not exist would never be performed.
   for (const step of station.steps)
     for (const o of Object.values(step.groups ?? {}).flat())

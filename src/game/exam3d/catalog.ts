@@ -26,6 +26,17 @@ export const TOOLS: ToolDef[] = [
   { id: 'lachman', label: 'Lachman test', icon: '🦵', use: 'tap', normal: 'Firm end-point; no more movement than the other side.' },
   { id: 'drawer', label: 'Posterior sag and drawer', icon: '🦵', use: 'tap', normal: 'No sag; firm end-point.' },
   { id: 'stress', label: 'Valgus and varus stress', icon: '↔', use: 'tap', normal: 'Stable at 0° and 30°.' },
+  // The cervical collar, step by step (and taught: demonstrated, talked through, done by the learner).
+  { id: 'mils', label: 'In-line stabilisation', icon: '🤲', use: 'tap', normal: 'Head held in line.' },
+  { id: 'jewellery', label: 'Remove jewellery', icon: '💍', use: 'tap', normal: 'Nothing to remove.' },
+  { id: 'measure', label: 'Measure the neck', icon: '✋', use: 'tap', normal: 'Measured.' },
+  { id: 'size', label: 'Size the collar', icon: '📏', use: 'tap', normal: 'Sized.' },
+  { id: 'collar', label: 'Collar', icon: '🦺', use: 'tap', normal: 'In place.' },
+  { id: 'fit', label: 'Check the fit', icon: '👌', use: 'tap', normal: 'A good fit.' },
+  { id: 'blocks', label: 'Blocks and tape', icon: '🧱', use: 'tap', normal: 'Secured.' },
+  { id: 'demo', label: 'Demonstrate', icon: '▶', use: 'tap', normal: 'Shown.' },
+  { id: 'narrate', label: 'Learner talks you through', icon: '🗣', use: 'tap', normal: 'Talked through.' },
+  { id: 'learner', label: 'Learner does it', icon: '🧑‍⚕️', use: 'tap', normal: 'Done by the learner.' },
   { id: 'say', label: 'Ask', icon: '💬', use: 'menu', normal: '' },
   { id: 'gloves', label: 'Gloves', icon: '🧤', use: 'self', normal: 'Hands washed; gloves on.' },
   { id: 'torch', label: 'Pen torch', icon: '🔦', use: 'tap', normal: 'Nothing abnormal in the light.' },
@@ -101,6 +112,7 @@ export const SAYS: SayDef[] = [
   { id: 'open-mouth', label: "Open your mouth, say 'ah', stick out your tongue", group: 'Face and eyes', reply: 'Palate rises in the middle; tongue central.' },
   { id: 'clench-jaw', label: 'Clench your teeth', group: 'Face and eyes', reply: 'Masseters bulge equally.' },
   { id: 'shrug', label: 'Shrug your shoulders against me', group: 'Face and eyes', reply: 'Strong shrug.' },
+  { id: 'rotate-head', label: 'Turn your head to the left, then to the right', group: 'Face and eyes', reply: 'Turns 45° each way.' },
 
   // Arms and hands.
   { id: 'squeeze-fingers', label: 'Squeeze my fingers, then let go', group: 'Arms and hands', reply: 'Squeezes and lets go.' },

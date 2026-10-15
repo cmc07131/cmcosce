@@ -4,7 +4,7 @@
  * finding's words (inflamed, discharge, tender, high, horizontal, swollen…).
  */
 
-export type IllustrationKind = 'vulva' | 'cervix' | 'bimanual' | 'scrotum' | 'perianal'
+export type IllustrationKind = 'vulva' | 'cervix' | 'bimanual' | 'scrotum' | 'perianal' | 'collar-size'
 
 export function illustrationFor(site: string): IllustrationKind | null {
   const base = site.replace(/-(R|L)$/, '')
@@ -77,6 +77,26 @@ export function Illustration({ kind, finding }: { kind: IllustrationKind; findin
             <text x="114" y="104" fontSize="8" fill={ink}>L</text>
           </g>
         )}
+        {kind === 'collar-size' && (
+          <g>
+            {/* The front of the collar, side on: rigid plastic over a foam edge; the sizing post; three fingers between
+                the post and the bottom of the rigid plastic. */}
+            <path d="M14 40 Q80 24 146 40 L146 82 Q80 70 14 82 Z" fill="#ddd5c0" stroke={ink} strokeWidth="1.5" />
+            <path d="M14 82 Q80 70 146 82 L146 90 Q80 78 14 90 Z" fill="#39424c" stroke={ink} strokeWidth="1" />
+            <rect x="57" y="37" width="7" height="7" rx="1.5" fill="#202428" />
+            {[0, 1, 2].map((i) => (
+              <g key={i}>
+                <rect x="66" y={45 + i * 9.3} width="48" height="8.6" rx="4.3" fill="#e8b494" stroke={ink} strokeWidth="1" />
+                <rect x="105" y={46.5 + i * 9.3} width="7" height="5.6" rx="2" fill="#f4d9cc" stroke={ink} strokeWidth="0.6" />
+              </g>
+            ))}
+            <line x1="60.5" y1="44" x2="60.5" y2="73" stroke="#c0392b" strokeWidth="1" strokeDasharray="2 2" />
+            <text x="18" y="22" fontSize="8" fill={ink}>sizing post</text>
+            <line x1="45" y1="24" x2="58" y2="37" stroke={ink} strokeWidth="0.8" />
+            <text x="118" y="60" fontSize="8" fill={ink}>3 fingers</text>
+            <text x="20" y="104" fontSize="7.5" fill={ink}>to the bottom of the rigid plastic</text>
+          </g>
+        )}
         {kind === 'perianal' && (
           <g>
             <ellipse cx="80" cy="55" rx="58" ry="40" fill="#e3b49e" stroke={ink} strokeWidth="1.5" />
@@ -85,7 +105,7 @@ export function Illustration({ kind, finding }: { kind: IllustrationKind; findin
           </g>
         )}
       </svg>
-      <figcaption className="px-1 pb-0.5 text-[10px] leading-tight text-[#40404c]">Drawn close-up · under the drape</figcaption>
+      <figcaption className="px-1 pb-0.5 text-[10px] leading-tight text-[#40404c]">{kind === 'collar-size' ? 'Drawn close-up · sizing the collar' : 'Drawn close-up · under the drape'}</figcaption>
     </figure>
   )
 }

@@ -73,12 +73,15 @@ export const SITES: Record<string, SiteDef> = {
   supraorbital: { label: 'supraorbital ridge', j: 'eye', off: [0, 0.022, 0], dir: F, r: 0.014, sided: true },
   cheek: { label: 'cheek', j: 'eyes', off: [-0.035, -0.035, 0], dir: F, r: 0.025, sided: true },
   mouth: { label: 'mouth', j: 'eyes', off: [0, -0.068, 0], dir: F, r: 0.025 },
+  chin: { label: 'chin', j: 'eyes', off: [0, -0.105, 0.01], dir: F, r: 0.02 },
   jaw: { label: 'jaw (masseter)', j: 'eyes', off: [-0.055, -0.06, -0.05], dir: RT, r: 0.025, sided: true },
   ear: { label: 'ear', j: 'eyes', off: [-0.075, -0.012, -0.08], dir: RT, r: 0.025, sided: true },
   mastoid: { label: 'mastoid', j: 'eyes', off: [-0.068, -0.045, -0.1], dir: RT, r: 0.016, sided: true },
 
   // Neck and chest.
   neck: { label: 'neck', j: 'neck', off: [0, 0.04, 0], dir: F, r: 0.04 },
+  neckside: { label: 'side of the neck', j: 'neck', off: [-0.03, 0.025, 0.005], dir: RT, r: 0.025, sided: true },
+  cspine: { label: 'back of the neck, in the midline', j: 'neck', off: [0, 0.03, 0], dir: B, r: 0.03, under: 'the spinous processes, from the base of the skull to C7' },
   trapezius: { label: 'trapezius', j: 'neck', off: [-0.085, -0.02, -0.03], dir: U, r: 0.035, sided: true },
   supraclavicular: { label: 'supraclavicular fossa', j: 'neck', off: [-0.055, -0.045, 0.02], dir: F, r: 0.022, sided: true },
   sternum: { label: 'sternum', j: 'chest', off: [0, 0.02, 0], dir: F, r: 0.035 },
@@ -216,8 +219,8 @@ export function siteLabel(id: string): string {
 
 /** Parts of the body a tap opens: what you can examine there, nearest first. Sided regions get Right / Left. */
 const REGIONS: { label: string; sites: string[] }[] = [
-  { label: 'head and face', sites: ['head', 'eye', 'forehead', 'temple', 'supraorbital', 'cheek', 'mouth', 'jaw', 'ear', 'mastoid'] },
-  { label: 'neck', sites: ['neck', 'supraclavicular', 'trapezius'] },
+  { label: 'head and face', sites: ['head', 'eye', 'forehead', 'temple', 'supraorbital', 'cheek', 'mouth', 'chin', 'jaw', 'ear', 'mastoid'] },
+  { label: 'neck', sites: ['neck', 'neckside', 'cspine', 'supraclavicular', 'trapezius'] },
   { label: 'chest', sites: ['chest', 'sternum'] },
   { label: 'abdomen', sites: ['umbilicus', 'epigastrium', 'ruq', 'iliac', 'flank', 'suprapubic'] },
   { label: 'back', sites: ['spine', 'thoracic', 'paraspinal', 'sacrum', 'perianal'] },
