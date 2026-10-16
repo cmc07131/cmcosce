@@ -388,13 +388,35 @@
       "targetIds": [
         "drug-cart"
       ],
-      "hint": "Drugs are drawn up and given by the nurse. Say the drug, the dose, and the route.",
+      "hint": "Tell the nurse the drug, the dose and the route; she draws it up and gives it at the bedside.",
       "prompt": "Drug cart",
       "options": [
         {
-          "id": "look",
-          "label": "Look in the drawers",
-          "detail": "Atropine, calcium gluconate 10%, fentanyl, ketamine, midazolam. You do not draw up here: tell the nurse the drug, the dose, and the route, and she gives it."
+          "id": "atropine-1mg",
+          "label": "Atropine 1 mg IV, please.",
+          "detail": "Nurse: Atropine 1 mg IV. Drawing it up now. You keep going with the pads: he will not wait for it.",
+          "fetch": "cart",
+          "marksChecklistIds": [
+            "MS-05"
+          ]
+        },
+        {
+          "id": "fentanyl",
+          "label": "Fentanyl 25 micrograms IV, please, before we pace.",
+          "detail": "Nurse: Fentanyl 25 micrograms IV, small for his pressure. Drawing it up now.",
+          "fetch": "cart",
+          "marksChecklistIds": [
+            "MS-12"
+          ]
+        },
+        {
+          "id": "calcium-30",
+          "label": "The T waves are peaked: calcium gluconate 10%, 30 mL IV, please.",
+          "detail": "Nurse: Calcium gluconate 10%, 30 mL IV over a few minutes. Drawing it up now.",
+          "fetch": "cart",
+          "marksChecklistIds": [
+            "MS-13"
+          ]
         }
       ]
     },
@@ -419,7 +441,7 @@
         {
           "id": "calcium",
           "label": "If the T waves are peaked: calcium now. Pacing will not fix it.",
-          "detail": "You: This may be hyperkalaemia. Calcium gluconate 10 millilitres of 10 percent IV now. Pacing fails until the membrane is stabilised.",
+          "detail": "You: This may be hyperkalaemia. Calcium gluconate 10%, 30 millilitres IV now (or calcium chloride 10%, 10 millilitres). Pacing fails until the membrane is stabilised.",
           "marksChecklistIds": [
             "MS-13"
           ]
@@ -553,7 +575,7 @@
     },
     {
       "at": "1:50",
-      "say": "Why is he blocked? A venous gas and potassium, troponin, a 12-lead once he's paced, and his drug list. No rate-slowing drug. If the T waves are peaked: calcium gluconate 10%, 10 mL IV now."
+      "say": "Why is he blocked? A venous gas and potassium, troponin, a 12-lead once he's paced, and his drug list. No rate-slowing drug. If the T waves are peaked: calcium gluconate 10%, 30 mL IV now."
     },
     {
       "at": "2:15",

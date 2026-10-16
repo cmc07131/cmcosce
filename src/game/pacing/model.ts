@@ -8,18 +8,19 @@ import type { Fault, Scored } from '../io/score'
  */
 
 export type PaceCase = {
-  /** Output that captures with good pad contact and the potassium sorted, mA. */
+  /** Output that captures with good pad contact, anterior–posterior pads and the potassium sorted: 50–70 mA (most adults
+   * capture at about 40–100 mA). */
   threshold: number
   sweaty: boolean
   hairy: boolean
-  /** Peaked T waves on the first trace; capture needs 30 mA more until calcium. The gas after pacing shows K+ 7.4. */
+  /** Peaked T waves on the first trace; capture needs 20 mA more until calcium. The gas after pacing shows K+ 7.4. */
   hyperK: boolean
 }
 
 export function paceCaseFor(seed: number): PaceCase {
   const r = rng(seed ^ 0xbeef)
   return {
-    threshold: 50 + Math.floor(r() * 5) * 10,
+    threshold: 50 + Math.floor(r() * 3) * 10,
     sweaty: r() < 0.45,
     hairy: r() < 0.3,
     hyperK: r() < 0.2,
@@ -152,13 +153,17 @@ export function padPairing(run: PaceRun): 'ap' | 'al' | 'none' {
   return 'none'
 }
 
-/** Current needed to capture right now. Poor contact and the lateral vector cost current; high potassium blocks capture. */
+/**
+ * Current needed to capture right now. Poor contact, the lateral vector and a high potassium each cost about 20 mA more:
+ * even with all three, capture comes by 130 mA, within the pacer's range (a need for more than about 100 mA is rare,
+ * and a reason to look for one of them).
+ */
 export function captureThreshold(run: PaceRun, c: PaceCase) {
   const pairing = padPairing(run)
   if (pairing === 'none') return Infinity
   const poorContact = (c.sweaty && !run.dried) || (c.hairy && !run.clipped)
-  const potassium = c.hyperK && !run.calcium ? 30 : 0
-  return c.threshold + (poorContact ? 40 : 0) + (pairing === 'al' ? 10 : 0) + potassium
+  const potassium = c.hyperK && !run.calcium ? 20 : 0
+  return c.threshold + (poorContact ? 20 : 0) + (pairing === 'al' ? 20 : 0) + potassium
 }
 
 /* ---------------------------------------------------------------- drugs, ordered through the nurse */
@@ -173,16 +178,14 @@ export const CART: Record<Drug, { name: string; doses: string[]; right: string[]
   atropine: { name: 'Atropine', doses: ['0.3 mg', '0.6 mg', '1 mg'], right: ['0.6 mg', '1 mg'] },
   calcium: { name: 'Calcium gluconate 10%', doses: ['10 mL', '30 mL'], right: ['30 mL'] },
   fentanyl: { name: 'Fentanyl', doses: ['25 micrograms', '50 micrograms', '100 micrograms'], right: ['25 micrograms', '50 micrograms'] },
-  ketamine: { name: 'Ketamine', doses: ['20 mg', '100 mg'], right: ['20 mg'] },
-  midazolam: { name: 'Midazolam', doses: ['5 mg'], right: [] },
+  ketamine: { name: 'Ketamine', doses: ['10 mg', '20 mg'], right: ['10 mg', '20 mg'] },
+  midazolam: { name: 'Midazolam', doses: ['0.5 mg', '1 mg'], right: ['0.5 mg', '1 mg'] },
 }
 
 export const DOSE_NOTE: Partial<Record<string, string>> = {
   'atropine 0.3 mg': 'Atropine under 0.5 mg can slow the heart further. Give 0.6–1 mg.',
   'calcium 10 mL': 'Calcium gluconate 10 mL is too little for hyperkalaemia. Give 30 mL of 10% (or 10 mL of calcium chloride).',
   'fentanyl 100 micrograms': 'Fentanyl 100 micrograms in a man whose pressure was in the 70s risks dropping it. 25–50 micrograms.',
-  'ketamine 100 mg': 'Ketamine 100 mg is an induction dose. For pacing pain, about 0.25 mg/kg: 20 mg.',
-  'midazolam 5 mg': 'Midazolam 5 mg drops the pressure in a man with a systolic in the 70s. A small opioid or ketamine instead.',
 }
 
 /** What a delivered order changes. Wrong doses still act; the scorer says why they were wrong. */
@@ -270,7 +273,7 @@ export function scorePacing(run: PaceRun, c: PaceCase): Scored {
   const intime = comfort && (run.pacingStartedAtS === null || (comfort.atS ?? 0) <= run.pacingStartedAtS + ANALGESIA_GRACE_S)
   if (!run.analgesia) fault('No analgesia. Pacing at this current hurts.')
   else if (comfort && !intime) fault('Analgesia came after pacing had started hurting. Order it before, or as, you start pacing; do not delay the pads for it.')
-  if (comfort && intime && !run.stoppedPacing && !run.midazolam) marks.push('MS-12')
+  if (comfort && intime && !run.stoppedPacing) marks.push('MS-12')
 
   if (c.hyperK && run.orders.some((o) => o.drug === 'calcium' && doseRight(o))) marks.push('MS-13')
   if (run.saidClose === false) fault('The handover line was wrong. Pads stay on until a transvenous wire captures.')

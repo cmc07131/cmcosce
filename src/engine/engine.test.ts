@@ -415,10 +415,10 @@ function goodPace(): PaceRun {
 
 test('pacing: contact, pad vector, and potassium set the capture threshold', () => {
   assert.equal(captureThreshold(goodPace(), PACE), 60)
-  assert.equal(captureThreshold({ ...goodPace(), dried: false }, PACE), 100)
-  assert.equal(captureThreshold({ ...goodPace(), padsFront: ['alSternal', 'alApex'], padBack: null }, PACE), 70)
+  assert.equal(captureThreshold({ ...goodPace(), dried: false }, PACE), 80)
+  assert.equal(captureThreshold({ ...goodPace(), padsFront: ['alSternal', 'alApex'], padBack: null }, PACE), 80)
   assert.equal(captureThreshold({ ...goodPace(), padBack: 'rightScapula' }, PACE), Infinity)
-  assert.equal(captureThreshold(goodPace(), { ...PACE, hyperK: true }), 90)
+  assert.equal(captureThreshold(goodPace(), { ...PACE, hyperK: true }), 80)
   assert.equal(captureThreshold({ ...goodPace(), calcium: true }, { ...PACE, hyperK: true }), 60)
 })
 
