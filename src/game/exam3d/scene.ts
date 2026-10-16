@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { castPatient, type AvatarId, type PatientKind } from '../body3d/cast'
-import { buildCollar, type CollarKit } from '../body3d/collar'
+import { CollarKit } from '../body3d/collar'
+import { COLLAR_OFF, COLLAR_ON, type CollarPose } from '../body3d/stifneck'
 import { bareLegs } from '../body3d/legs'
 import { DEG, aim, poseEyes, turn, type Credit, type Eyes, type Rig, type Side } from '../body3d/rig'
 import { COUCH, buildCouch, buildRoom, createRenderer } from '../body3d/stage'
@@ -118,27 +119,60 @@ const DURATION: Record<string, number> = {
   'hip-roll': 3.8,
   mils: 1.6,
   jewellery: 2,
-  measure: 2.2,
-  size: 2.4,
-  'collar-back': 2.2,
-  'collar-front': 2.4,
-  fit: 2,
-  blocks: 3.4,
-  'collar-all': 10,
+  measure: 2.4,
+  size: 4.6,
+  'collar-back': 4.8,
+  'collar-front': 5.4,
+  fit: 2.4,
+  blocks: 5.6,
+  'collar-all': 24,
   midline: 3,
   'rotate-head': 4.4,
 }
 
 /** The collar's steps in order: each shown from where the ones before it leave it. */
 const COLLAR_STEPS = ['mils', 'jewellery', 'measure', 'size', 'collar-back', 'collar-front', 'fit', 'blocks'] as const
-/** How far on each part of the collar is (0 … 1), and the earrings (1: in). */
-type KitState = { mils: number; earrings: number; back: number; front: number; straps: number; blockR: number; blockL: number; tapeF: number; tapeC: number }
-const KIT_OFF: KitState = { mils: 0, earrings: 1, back: 0, front: 0, straps: 0, blockR: 0, blockL: 0, tapeF: 0, tapeC: 0 }
+type CollarStep = (typeof COLLAR_STEPS)[number]
+/** Each step's slot in the whole fit shown start to finish (seconds, before `SPEED`). */
+const COLLAR_SLOTS: [CollarStep, number, number][] = [
+  ['mils', 0, 1.2],
+  ['jewellery', 1.2, 2.8],
+  ['measure', 2.8, 4.6],
+  ['size', 4.6, 8.4],
+  ['collar-back', 8.4, 12.4],
+  ['collar-front', 12.4, 17],
+  ['fit', 17, 18.8],
+  ['blocks', 18.8, 23.6],
+]
+/**
+ * How far on each part is (0 … 1): hands holding the head in line; each earring (1: in); the collar, stage by stage;
+ * the head blocks; the tape over the forehead and over the chin support.
+ */
+type KitState = { mils: number; earR: number; earL: number; collar: CollarPose; blockR: number; blockL: number; tapeF: number; tapeC: number }
+const KIT_OFF: KitState = { mils: 0, earR: 1, earL: 1, collar: { ...COLLAR_OFF }, blockR: 0, blockL: 0, tapeF: 0, tapeC: 0 }
 /** Where the collar is when this step begins: every step before it done. */
-function kitBefore(step: (typeof COLLAR_STEPS)[number]): KitState {
+function kitBefore(step: CollarStep): KitState {
   const i = COLLAR_STEPS.indexOf(step)
-  const done = (name: (typeof COLLAR_STEPS)[number]) => (COLLAR_STEPS.indexOf(name) < i ? 1 : 0)
-  return { mils: done('mils'), earrings: 1 - done('jewellery'), back: done('collar-back'), front: done('collar-front'), straps: done('collar-front'), blockR: 0, blockL: 0, tapeF: 0, tapeC: 0 }
+  const done = (name: CollarStep) => (COLLAR_STEPS.indexOf(name) < i ? 1 : 0)
+  const sized = done('size')
+  const back = done('collar-back')
+  const front = done('collar-front')
+  return {
+    mils: done('mils'),
+    earR: 1 - done('jewellery'),
+    earL: 1 - done('jewellery'),
+    collar: { out: sized, preform: sized, approach: back, feed: back, wrap: front, fasten: front },
+    blockR: 0,
+    blockL: 0,
+    tapeF: 0,
+    tapeC: 0,
+  }
+}
+/** Where a hand goes and how it lies: a point, the way the surface there faces, the way the fingers point. */
+type Spot = { at: THREE.Vector3; n: THREE.Vector3; along: THREE.Vector3 }
+/** Part of the way from one spot to another. */
+function between(a: Spot, b: Spot, f: number): Spot {
+  return { at: a.at.clone().lerp(b.at, f), n: a.n.clone().lerp(b.n, f).normalize(), along: a.along.clone().lerp(b.along, f).normalize() }
 }
 
 /**
@@ -159,6 +193,8 @@ type Touch = {
   at?: THREE.Vector3
   n?: THREE.Vector3
   along?: [number, number, number]
+  /** Where the hand goes, worked out once the body is posed (a hand on the collar as it goes on). */
+  spot?: () => Spot | null
 }
 
 export const HANDS: Record<string, HandShape> = {
@@ -322,6 +358,8 @@ export class ExamScene {
   /** The collar and what goes with it, and how far on it is. */
   private kit: CollarKit | null = null
   private kitState: KitState = { ...KIT_OFF }
+  /** Which step of a whole collar fit is being filmed (to move the camera when the next begins). */
+  private slotShown: CollarStep | null = null
   /** The arc that shows how far the head turns (45° each way). */
   private arc: THREE.Line | null = null
   /** Bare legs built for a leg examination, and what is under their skin (see body3d/legs.ts). */
@@ -369,7 +407,7 @@ export class ExamScene {
       this.bindPos = new Map(rig.bones.map((b) => [b, b.position.clone()]))
       this.body.add(rig.root)
       if (signs.drape) this.addDrape(rig)
-      if (signs.collar) this.kit = buildCollar(rig)
+      if (signs.collar) this.kit = new CollarKit(rig, this.scene)
       if (signs.manikin) this.plastic(rig)
       for (const id of signs.bruise ?? []) this.addBruise(id)
       this.applyPose()
@@ -600,37 +638,23 @@ export class ExamScene {
     }
   }
 
-  /** Each part of the collar where its progress puts it: coming in from where it comes from, or in place. */
+  /** Each part where its progress puts it: the collar bent to its stage, the earrings, the blocks and the tape. */
   private applyKit() {
     const kit = this.kit
     if (!kit) return
     const st = this.kitState
     const k = this.scale
-    const e = (x: number) => smooth(Math.max(0, Math.min(1, x)))
-    const place = (o: THREE.Object3D, p: number, from: [number, number, number], tilt = 0) => {
-      o.visible = p > 0.01
-      const r = 1 - e(p)
-      o.position.set(from[0] * r * k, from[1] * r * k, from[2] * r * k)
-      o.rotation.set(tilt * r, 0, 0)
-    }
-    // The back slides in flat from her right; the front comes up from her chest, hinging under the chin.
-    place(kit.back, st.back, [-0.3, 0, -0.02])
-    place(kit.front, st.front, [0, -0.12, 0.12], 0.7)
-    kit.straps.visible = st.straps > 0.5
-    place(kit.blocks.R, st.blockR, [-0.18, 0, 0])
-    place(kit.blocks.L, st.blockL, [0.18, 0, 0])
-    // Tape is laid on from her right side across to her left.
-    for (const [o, p] of [
-      [kit.tape.forehead, st.tapeF],
-      [kit.tape.chin, st.tapeC],
-    ] as const) {
-      o.visible = p > 0.01
-      o.scale.set(Math.max(0.001, e(p)), 1, 1)
-    }
+    this.body.updateMatrixWorld(true)
+    kit.collar.setCouch(COUCH.top)
+    kit.collar.update(st.collar)
+    kit.collar.sync()
     kit.earrings.forEach((o, i) => {
-      o.visible = st.earrings > 0.02
-      o.position.set((i === 0 ? -1 : 1) * 0.04 * (1 - st.earrings) * k, -0.02 * (1 - st.earrings) * k, 0)
+      const left = i === 1
+      const w = left ? st.earL : st.earR
+      o.visible = w > 0.02
+      o.position.set((left ? 1 : -1) * 0.04 * (1 - w) * k, -0.02 * (1 - w) * k, 0)
     })
+    kit.place(st, COUCH.top + 0.004, this.body.quaternion)
   }
 
   /** Light up these structures of one leg in the X-ray view (none: all dark). */
@@ -661,8 +685,8 @@ export class ExamScene {
     if (a.anim === 'rotate-head') delete this.held.neckyaw
     if (this.arc) this.arc.visible = false
     // A whole fit shown: everything on, the hands off.
-    if (a.anim === 'collar-all') this.kitState = { mils: 0, earrings: 0, back: 1, front: 1, straps: 1, blockR: 1, blockL: 1, tapeF: 1, tapeC: 1 }
-    else if ((COLLAR_STEPS as readonly string[]).includes(a.anim)) this.finishStep(a.anim as (typeof COLLAR_STEPS)[number])
+    if (a.anim === 'collar-all') this.kitState = { mils: 0, earR: 0, earL: 0, collar: { ...COLLAR_ON }, blockR: 1, blockL: 1, tapeF: 1, tapeC: 1 }
+    else if ((COLLAR_STEPS as readonly string[]).includes(a.anim)) this.finishStep(a.anim as CollarStep)
     this.light([], a.side)
     this.eyes.distress = 0
     this.eyes.squint = 0
@@ -718,9 +742,12 @@ export class ExamScene {
     }
   }
 
-  /** The neck and the head: the collar watched from above her right shoulder, the hands at the head from beyond it;
-   * the back of the neck from behind; the head turning from in front. */
-  private neckShot(anim: Anim) {
+  /**
+   * The neck and the head: the head from above (hands holding it, earrings, blocks and tape); the neck from her right
+   * as the collar is measured, goes behind and comes round; the collar in the hands while it is sized; the back of the
+   * neck from behind; the head turning from in front.
+   */
+  private neckShot(anim: Anim): { target: () => THREE.Vector3 | null; dir: THREE.Vector3; dist: number } | null {
     const R = this.rig
     if (!R) return null
     const q = this.body.quaternion
@@ -728,20 +755,31 @@ export class ExamScene {
     const F = v(0, 0, 1).applyQuaternion(q)
     const RT = v(-1, 0, 0).applyQuaternion(q)
     const at = (o: THREE.Object3D) => o.getWorldPosition(v(0, 0, 0))
+    const neck = () => at(R.neck).lerp(at(R.head), 0.5)
     switch (anim) {
-      // The head from above (hands holding it, earrings, blocks and tape); the neck side on (the collar going on).
       case 'mils':
       case 'jewellery':
-      case 'blocks':
         return { target: () => at(R.head).lerp(at(R.neck), 0.4), dir: RT.clone().multiplyScalar(0.2).addScaledVector(F, 1).addScaledVector(U, 0.3), dist: 0.8 }
+      case 'blocks':
+        return { target: () => at(R.head).lerp(at(R.neck), 0.3), dir: RT.clone().multiplyScalar(0.45).addScaledVector(F, 1).addScaledVector(U, 0.2), dist: 0.85 }
       case 'measure':
-      case 'size':
+        return { target: neck, dir: RT.clone().addScaledVector(F, 0.5).addScaledVector(U, 0.15), dist: 0.7 }
+      case 'size': {
+        const kit = this.kit
+        // Square on to its plastic face, held up in the hands.
+        return { target: () => (kit ? kit.collar.grip(118, 0.45).at : neck()), dir: RT.clone().multiplyScalar(0.78).addScaledVector(F, 0.62).addScaledVector(U, 0.05), dist: 0.52 }
+      }
       case 'collar-back':
+        // From above her left shoulder (your arms come from the other side): the collar held open round the neck, the
+        // rear panel going in under it and the tail showing on this side.
+        return { target: neck, dir: RT.clone().multiplyScalar(-0.75).addScaledVector(F, 1).addScaledVector(U, -0.3), dist: 0.8 }
       case 'collar-front':
+        // From the foot end, above the chest: the front coming round under the chin, the tail fastened on her left.
+        return { target: neck, dir: RT.clone().multiplyScalar(-0.3).addScaledVector(F, 1).addScaledVector(U, -0.85), dist: 0.75 }
       case 'fit':
-        return { target: () => at(R.neck).lerp(at(R.head), 0.5), dir: RT.clone().addScaledVector(F, 0.5).addScaledVector(U, 0.15), dist: 0.75 }
+        return { target: neck, dir: RT.clone().multiplyScalar(-0.45).addScaledVector(F, 1).addScaledVector(U, 0.1), dist: 0.6 }
       case 'collar-all':
-        return { target: () => at(R.neck).lerp(at(R.head), 0.5), dir: RT.clone().addScaledVector(F, 0.7).addScaledVector(U, 0.2), dist: 0.9 }
+        return this.neckShot('measure')
       case 'midline':
         return { target: () => at(R.neck).lerp(at(R.head), 0.4), dir: F.clone().negate().addScaledVector(RT, 0.55).addScaledVector(U, 0.25), dist: 0.6 }
       case 'rotate-head':
@@ -752,12 +790,13 @@ export class ExamScene {
   }
 
   /** A collar step done: its part on (the blocks and tape, and the hands come off). */
-  private finishStep(step: (typeof COLLAR_STEPS)[number]) {
-    const st = { ...kitBefore(step) }
+  private finishStep(step: CollarStep) {
+    const st = kitBefore(step)
     if (step === 'mils') st.mils = 1
-    if (step === 'jewellery') st.earrings = 0
-    if (step === 'collar-back') st.back = 1
-    if (step === 'collar-front') Object.assign(st, { front: 1, straps: 1 })
+    if (step === 'jewellery') Object.assign(st, { earR: 0, earL: 0 })
+    if (step === 'size') Object.assign(st.collar, { out: 1, preform: 1 })
+    if (step === 'collar-back') Object.assign(st.collar, { approach: 1, feed: 1 })
+    if (step === 'collar-front') Object.assign(st.collar, { wrap: 1, fasten: 1 })
     if (step === 'blocks') Object.assign(st, { blockR: 1, blockL: 1, tapeF: 1, tapeC: 1, mils: 0 })
     this.kitState = st
   }
@@ -1003,18 +1042,12 @@ export class ExamScene {
           this.collarStep(a.anim, a.t, a.dur)
           break
         case 'collar-all': {
-          // The whole fit, start to finish: each step in its slot.
-          const slots: [(typeof COLLAR_STEPS)[number], number, number][] = [
-            ['mils', 0, 0.8],
-            ['jewellery', 0.8, 1.8],
-            ['measure', 1.8, 2.9],
-            ['size', 2.9, 3.4],
-            ['collar-back', 3.4, 4.7],
-            ['collar-front', 4.7, 6.1],
-            ['fit', 6.1, 6.9],
-            ['blocks', 6.9, 9.6],
-          ]
-          const slot = slots.find(([, t0, t1]) => a.t >= t0 && a.t < t1) ?? slots[slots.length - 1]
+          // The whole fit, start to finish: each step in its slot, filmed as that step is.
+          const slot = COLLAR_SLOTS.find(([, t0, t1]) => a.t >= t0 && a.t < t1) ?? COLLAR_SLOTS[COLLAR_SLOTS.length - 1]
+          if (this.slotShown !== slot[0]) {
+            this.slotShown = slot[0]
+            this.shot = this.neckShot(slot[0])
+          }
           this.collarStep(slot[0], Math.min(slot[2] - slot[1], a.t - slot[1]), slot[2] - slot[1])
           break
         }
@@ -1037,15 +1070,29 @@ export class ExamScene {
       }
       if (a.t >= a.dur) this.endAct()
     }
-    // Someone holds the head in line (from the head end) until the blocks and tape are on.
+    // Someone holds the head in line (from the head end) until the blocks and tape are on: palms over the sides of the
+    // head above the ears (the lobes left free); as each block comes in, that hand moves onto its top and holds it there.
     const hold = this.kitState.mils
-    if (R && this.kit && hold > 0.02)
+    const kit = this.kit
+    if (R && kit && hold > 0.02)
       for (const [i, s] of [
         [2, 'R'],
         [3, 'L'],
-      ] as const)
-        // Palms over the sides of the head above the ears, the lobes left free.
-        this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - smooth(Math.min(1, hold))), stroke: 0, site: `temple-${s}`, hand: i, along: [-1, 0, 0] })
+      ] as const) {
+        const f = smooth(Math.max(0, Math.min(1, ((s === 'R' ? this.kitState.blockR : this.kitState.blockL) - 0.45) / 0.45)))
+        const toFeet = v(0, -1, 0).applyQuaternion(this.body.quaternion)
+        const temple = (): Spot | null => {
+          const spot = this.spotNow(`temple-${s}`)
+          return spot && { at: spot.at, n: spot.n, along: toFeet.clone() }
+        }
+        const spot = (): Spot | null => {
+          const a = temple()
+          const top = kit.blockSpot(s, 'top')
+          if (!a || f <= 0 || !top) return a
+          return between(a, { at: top.at, n: top.n, along: toFeet.clone() }, f)
+        }
+        this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - smooth(Math.min(1, hold))) + 0.025 * Math.sin(Math.PI * f), stroke: 0, site: `temple-${s}`, hand: i, spot })
+      }
     // A bent elbow that kinks the artery: the hand goes pale while it is bent.
     const kink = this.signs.kinkOnFlex
     if (kink) {
@@ -1068,60 +1115,261 @@ export class ExamScene {
    * One step of fitting the collar, `t` seconds into its `dur`: the parts before it already on, its own part coming on,
    * your hands doing it.
    */
-  private collarStep(step: (typeof COLLAR_STEPS)[number], t: number, dur: number) {
+  private collarStep(step: CollarStep, t: number, dur: number) {
     const kit = this.kit
     if (!kit) return
-    const st = { ...kitBefore(step) }
+    const st = kitBefore(step)
+    const c = st.collar
     const p = Math.max(0, Math.min(1, t / dur))
     const into = (a: number, b: number) => smooth(Math.max(0, Math.min(1, (p - a) / (b - a))))
-    const hold = smooth(Math.max(0, Math.min(1, p / 0.2, (1 - p) / 0.2)))
-    const at = (o: THREE.Object3D, local: THREE.Vector3) => o.localToWorld(local.clone())
+    /** A hand on between `a` and `b` (fractions of the step), easing on and off over `e`. */
+    const on = (a: number, b: number, e = 0.07) => smooth(Math.max(0, Math.min(1, (p - a) / e, (b - p) / e)))
+    /** `n` presses between `a` and `b` (0 … 1 each). */
+    const presses = (a: number, b: number, n: number) => (p < a || p > b ? 0 : (0.5 - 0.5 * Math.cos(((p - a) / (b - a)) * Math.PI * 2 * n)) ** 2)
     const q = this.body.quaternion
-    const RT = v(-1, 0, 0).applyQuaternion(q)
-    const F = v(0, 0, 1).applyQuaternion(q)
+    const toFeet = v(0, -1, 0).applyQuaternion(q)
+    /** A place on the collar: the plastic (or the foam) at `s` round it and `v` up it, the fingers that way along it. */
+    const band = (s: number, vv: number, way: 'along' | 'back' | 'up' | 'down', plastic = true) => (): Spot => {
+      const g = kit.collar.grip(s, vv, plastic)
+      return { at: g.at, n: g.n, along: way === 'along' ? g.along : way === 'back' ? g.along.negate() : way === 'up' ? g.up : g.up.negate() }
+    }
+    /** A hand at a spot, `w` of the way on; gliding to another spot as `f` goes from 0 to 1, lifted a little on the way. */
+    const hand = (i: number, w: number, a: () => Spot | null, grip: Grip = 'flat', contact: Contact = 'palm', extra = 0, b?: () => Spot | null, f = 0) => {
+      if (w <= 0.02) return
+      const spot = () => {
+        const s0 = a()
+        const s1 = b?.()
+        return s0 && s1 && f > 0 ? between(s0, s1, f) : s0
+      }
+      this.touches.push({ grip, contact, gap: 0.14 * (1 - w) + extra + 0.03 * Math.sin(Math.PI * f), stroke: 0, site: 'neck', hand: i, spot })
+    }
+    /** A hand resting at each key's spot from its time on, gliding there over `glide` before it (the grip changing half way). */
+    type Key = [number, () => Spot | null, Grip, Contact]
+    const route = (i: number, w: number, keys: Key[], glide = 0.07, extra = 0) => {
+      let j = 0
+      while (j + 1 < keys.length && p >= keys[j + 1][0]) j++
+      const next = keys[j + 1]
+      const f = next ? smooth(Math.max(0, Math.min(1, (p - (next[0] - glide)) / glide))) : 0
+      const now = next && f > 0.5 ? next : keys[j]
+      hand(i, w, keys[j][1], now[2], now[3], extra, next?.[1], f)
+    }
     switch (step) {
       case 'mils':
         st.mils = into(0, 0.6)
         break
       case 'jewellery':
-        // A pinch at each lobe: the earrings come out.
-        st.earrings = 1 - into(0.35, 0.65)
-        this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - hold), stroke: 0, site: 'ear-R', along: [-1, 0, 0] })
+        // A pinch at each lobe: the earrings come out, her right then her left.
+        st.earR = 1 - into(0.24, 0.4)
+        st.earL = 1 - into(0.68, 0.84)
+        if (on(0.04, 0.5) > 0.02) this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - on(0.04, 0.5)), stroke: 0, site: 'ear-R', along: [-1, 0, 0] })
+        if (on(0.5, 0.96) > 0.02) this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - on(0.5, 0.96)), stroke: 0, site: 'ear-L', hand: 1, along: [-1, 0, 0] })
         break
-      case 'measure':
-        // Fingers flat on the side of the neck: the little finger on the top of the shoulder, counting up to the jaw.
-        this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - hold), stroke: 0, site: 'neckside-R', along: [0, 1, 0] })
+      case 'measure': {
+        // Fingers flat on the side of the neck, stacked from the top of the shoulder up to the line of the chin.
+        const w = on(0.04, 0.96, 0.15)
+        if (w > 0.02) this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: 'neckside-R', along: [0, 1, 0] })
         break
+      }
       case 'size':
+        // Out of the packet and held flat; the same fingers on it from the edge of the plastic to the size window; the
+        // lock tab pressed each side; then bent round into shape.
+        c.out = into(0, 0.12)
+        c.preform = into(0.74, 0.96)
+        hand(1, on(0, 1.1), band(316, 0.5, 'along'))
+        route(
+          0,
+          on(0.14, 1.1),
+          [
+            [0, band(112, 0.2, 'back'), 'flat', 'palm'],
+            [0.52, band(104, 0.68, 'along'), 'press', 'index'],
+            [0.66, band(14, 0.68, 'along'), 'press', 'index'],
+            [0.8, band(100, 0.5, 'along'), 'flat', 'palm'],
+          ],
+          0.07,
+          0.004 * (presses(0.53, 0.6, 1) + presses(0.67, 0.74, 1)),
+        )
         break
-      case 'collar-back':
-        st.back = into(0.1, 0.85)
-        this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - hold), stroke: 0, site: 'neck', at: at(kit.back, kit.grips.back), n: RT, along: [0, 0, 1] })
+      case 'collar-back': {
+        // Opened out and brought down beside the neck, tail first; the rear panel slid flat along the couch behind it
+        // (the hand pushing it in) until the tail shows on her other side. The other hand keeps the front up.
+        c.approach = into(0, 0.3)
+        c.feed = into(0.32, 0.92)
+        const front = c.feed > 0 ? 385 - (385 - 190) * smooth(c.feed) : 385
+        hand(1, on(0, 1.1), band(62, 0.5, 'along'))
+        hand(0, on(0, 1.1), band(Math.max(120, front - 85), 0.5, 'back'))
         break
+      }
       case 'collar-front':
-        st.front = into(0.05, 0.75)
-        st.straps = p > 0.85 ? 1 : 0
-        this.touches.push({ grip: 'cup', contact: 'palm', gap: 0.14 * (1 - hold), stroke: 0, site: 'chin', at: at(kit.front, kit.grips.front), n: F, along: [-1, 0, 0] })
+        // The chin support brought round and up under the chin, the side held in to the neck; then the front held in
+        // place while the tail is pulled round over it and pressed down.
+        c.wrap = into(0.02, 0.5)
+        c.fasten = into(0.62, 0.88)
+        route(1, on(0, 1.1), [
+          [0, band(98, 0.55, 'along'), 'flat', 'palm'],
+          [0.61, band(381, 0.5, 'along'), 'press', 'index'],
+        ], 0.09)
+        route(0, on(0, 1.1), [
+          [0, band(128, 0.62, 'back'), 'flat', 'palm'],
+          [0.58, band(96, 0.45, 'along'), 'flat', 'palm'],
+        ], 0.09)
         break
       case 'fit':
-        this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - hold) + 0.006 * (1 - (0.5 - 0.5 * Math.cos(p * Math.PI * 4)) ** 2), stroke: 0, site: 'chin', at: at(kit.front, kit.grips.front), n: F, along: [-1, 0, 0] })
+        // A finger on the chin support (the chin sits in it), then along the jaw line: no gaps; the airway hole clear.
+        route(
+          0,
+          on(0.04, 1.1),
+          [
+            [0, band(50, 0.92, 'along'), 'press', 'index'],
+            [0.58, band(98, 0.86, 'along'), 'press', 'index'],
+          ],
+          0.12,
+          0.004 * (presses(0.1, 0.4, 2) + presses(0.62, 0.92, 2)),
+        )
         break
       case 'blocks': {
-        // A block in from each side, then tape: the forehead, then the chin; and only then do the hands come off.
-        st.blockR = into(0.05, 0.35)
-        st.blockL = into(0.05, 0.35)
-        st.tapeF = into(0.4, 0.65)
-        st.tapeC = into(0.65, 0.88)
-        st.mils = 1 - into(0.88, 1)
-        const w = smooth(Math.max(0, Math.min(1, p / 0.08, (0.4 - p) / 0.08)))
-        if (w > 0.02) {
-          this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: 'ear-R', at: at(kit.blocks.R, kit.grips.blockR), n: RT, along: [-1, 0, 0] })
-          this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: 'ear-L', at: at(kit.blocks.L, kit.grips.blockL), n: RT.clone().negate(), along: [-1, 0, 0], left: true })
+        // A block slid in along the couch each side; the hands at the head move onto them. Then tape: across the
+        // forehead from block to block, then across the chin support; and only then do the hands come off.
+        st.blockR = into(0.03, 0.28)
+        st.blockL = into(0.1, 0.35)
+        st.tapeF = into(0.42, 0.66)
+        st.tapeC = into(0.7, 0.92)
+        st.mils = 1 - into(0.94, 1)
+        const block = (side: 'R' | 'L') => (): Spot | null => {
+          const b = kit.blockSpot(side, 'out')
+          return b && { at: b.at, n: b.n, along: toFeet.clone() }
         }
+        const tape = (which: 'forehead' | 'chin') => (): Spot | null => {
+          const e = kit.ends[which]
+          if (!e) return null
+          // Fingers along the tape, never pointing up much: the arm stays above the head and off the couch.
+          const along = e.along.clone()
+          along.y = Math.min(along.y, 0.2)
+          return { at: e.at, n: e.n, along: along.normalize() }
+        }
+        hand(0, on(0, 0.32), block('R'))
+        hand(1, on(0.06, 0.39), block('L'))
+        if (p > 0.36 && p < 0.69) hand(0, on(0.36, 0.69, 0.05), tape('forehead'), 'press', 'index')
+        if (p >= 0.69) hand(0, on(0.67, 0.95, 0.05), tape('chin'), 'press', 'index')
         break
       }
     }
     this.kitState = st
+  }
+
+  /**
+   * The way the fingers point for a hand on a spot: away from the shoulder the arm comes from (you stand at her right
+   * side; the assistant holding the head at the head end), squared to the surface; as asked if that leaves no way.
+   */
+  private reach(i: number, spot: Spot) {
+    const R = this.rig
+    if (!R) return spot.along
+    const q = this.body.quaternion
+    const U = v(0, 1, 0).applyQuaternion(q)
+    const F = v(0, 0, 1).applyQuaternion(q)
+    const RT = v(-1, 0, 0).applyQuaternion(q)
+    const k = this.scale
+    const neck = R.neck.getWorldPosition(v(0, 0, 0))
+    // Reaching to her far side, you lean over her chest: the arm comes from lower down the body and higher up.
+    const far = i < 2 && spot.at.clone().sub(neck).dot(RT) < -0.02 * k
+    const shoulder =
+      i >= 2
+        ? neck.addScaledVector(U, 0.62 * k).addScaledVector(F, 0.42 * k).addScaledVector(RT, (i === 2 ? 0.18 : -0.18) * k)
+        : neck
+            .addScaledVector(RT, (far ? 0.3 : 0.5) * k)
+            .addScaledVector(F, (far ? 0.62 : 0.5) * k)
+            .addScaledVector(U, ((i === 0 ? -0.2 : 0.12) - (far ? 0.3 : 0)) * k)
+    const away = spot.at.clone().sub(shoulder)
+    away.addScaledVector(spot.n, -away.dot(spot.n))
+    if (away.lengthSq() < 1e-6) return spot.along
+    // Mostly away from the shoulder; a little of the way asked (how the hand holds what it holds).
+    return away.normalize().multiplyScalar(0.8).addScaledVector(spot.along, 0.2).normalize()
+  }
+
+  /**
+   * How far each part of a hand (and its sleeve, if asked) is inside something: the neck and head, the collar on them,
+   * the blocks, the couch. The deepest, and which way is out of it.
+   */
+  private clash(hand: ExaminerHand, sleeve: boolean) {
+    const kit = this.kit
+    let worst = 0
+    let total = 0
+    let way = v(0, 1, 0)
+    if (!kit) return { worst, total, way }
+    for (const { p, r } of hand.probes(sleeve)) {
+      let d = 0
+      let out = way
+      const a = kit.collar.depthIn(p, r)
+      if (a.depth > d) {
+        d = a.depth
+        out = a.out
+      }
+      const b = kit.blockDepth(p, r)
+      if (b.depth > d) {
+        d = b.depth
+        out = b.out
+      }
+      if (p.x > 0 && p.x < COUCH.length && Math.abs(p.z) < COUCH.width / 2 && COUCH.top + 0.003 + r - p.y > d) {
+        d = COUCH.top + 0.003 + r - p.y
+        out = v(0, 1, 0)
+      }
+      total += d
+      if (d > worst) {
+        worst = d
+        way = out
+      }
+    }
+    return { worst, total, way }
+  }
+
+  /** How each hand last sat, from the way its arm comes: turned about the spot, its fingers tilted off it, lifted. */
+  private turned: { yaw: number; pitch: number; lift: number }[] = [0, 1, 2, 3].map(() => ({ yaw: 0, pitch: 0, lift: 0 }))
+
+  /**
+   * Put a hand on a spot the way a real one would go: its fingers pointing away from the shoulder its arm comes from,
+   * flat on the surface; or turned about the spot, or its fingers tilted off the surface (the heel of the hand still on
+   * it), as little as it takes for the hand and its sleeve to clear the patient, the collar, the blocks and the couch.
+   * Then lifted off anything it still touches.
+   */
+  private settle(hand: ExaminerHand, i: number, spot: Spot, contact: Contact, gap: number) {
+    const pref = this.reach(i, spot)
+    const last = this.turned[i]
+    const k = this.scale
+    const pose = (yaw: number, pitch: number, lift: number) => {
+      const along = pref.clone().applyAxisAngle(spot.n, yaw)
+      const n = spot.n.clone().multiplyScalar(Math.cos(pitch)).addScaledVector(along, -Math.sin(pitch))
+      along.multiplyScalar(Math.cos(pitch)).addScaledVector(spot.n, Math.sin(pitch))
+      hand.place(spot.at.clone().addScaledVector(spot.n, lift), n, along, contact, gap)
+    }
+    // Every way to try, the least change first (an unclashing one ends the search); at most so many a frame.
+    const tries: { yaw: number; pitch: number; lift: number; cost: number }[] = []
+    for (const yd of [0, 25, -25, 50, -50, 80, -80, 115, -115, 150, -150, 180])
+      for (const pd of [0, 15, 30])
+        for (const ld of [0, 0.02, 0.045]) {
+          const yaw = (yd * Math.PI) / 180
+          const pitch = (pd * Math.PI) / 180
+          const lift = ld * k
+          tries.push({ yaw, pitch, lift, cost: Math.abs(yd) / 180 + (pd / 30) * 0.3 + (ld / 0.045) * 0.5 + (Math.abs(yaw - last.yaw) + Math.abs(pitch - last.pitch) + Math.abs(lift - last.lift) * 10) * 0.15 })
+        }
+    tries.sort((a, b) => a.cost - b.cost)
+    let best = { ...last, cost: Infinity }
+    let tried = 0
+    for (const t of tries) {
+      if (t.cost >= best.cost || tried++ > 40) break
+      pose(t.yaw, t.pitch, t.lift)
+      const cost = t.cost + this.clash(hand, true).total * 50
+      if (cost < best.cost) best = { ...t, cost }
+    }
+    // Move only part of the way each frame toward it (no flicking).
+    const step = (from: number, to: number, most: number) => from + Math.max(-most, Math.min(most, to - from))
+    this.turned[i] = { yaw: step(last.yaw, best.yaw, 0.2), pitch: step(last.pitch, best.pitch, 0.15), lift: step(last.lift, best.lift, 0.006) }
+    pose(this.turned[i].yaw, this.turned[i].pitch, this.turned[i].lift)
+    for (let k = 0; k < 6; k++) {
+      const c = this.clash(hand, false)
+      if (c.worst < 0.0005) break
+      // Out the way it was put on (off what it holds), unless that does not take it out of what it is in.
+      const n = spot.n.dot(c.way) > 0.3 ? spot.n : c.way
+      hand.shift(n.clone().multiplyScalar(c.worst + 0.0005))
+    }
   }
 
   /** An arc over the head from 45° one way to 45° the other, and a line showing which way the face points now. */
@@ -1177,17 +1425,28 @@ export class ExamScene {
     const F = v(0, 0, 1).applyQuaternion(q)
     const LT = v(1, 0, 0).applyQuaternion(q)
     for (const t of R ? this.touches : []) {
+      const hand = all[t.hand ?? (t.left ? 1 : 0)]
+      if (!R || placed.has(hand)) continue
+      if (t.spot) {
+        // Somewhere worked out now the body is posed (on the collar as it goes on): the hand kept out of what it holds.
+        const spot = t.spot()
+        if (!spot) continue
+        placed.add(hand)
+        hand.setGrip(t.grip)
+        this.settle(hand, t.hand ?? 0, spot, t.contact, t.gap)
+        continue
+      }
       const found = this.spotNow(t.site)
       const spot0 = t.at && t.n ? { at: t.at, n: t.n.clone().normalize() } : found
-      const hand = all[t.hand ?? (t.left ? 1 : 0)]
-      if (!R || !spot0 || placed.has(hand)) continue
+      if (!spot0) continue
       placed.add(hand)
       hand.setGrip(t.grip)
       if (t.along) {
         // Fingers the way asked (in the body's frame), squared to the skin; a stroke runs that way.
         const along = U.clone().multiplyScalar(t.along[0]).addScaledVector(F, t.along[1]).addScaledVector(LT, t.along[2]).normalize()
         const at = spot0.at.clone().addScaledVector(along, t.stroke)
-        hand.place(at, spot0.n, along, t.contact, t.gap)
+        if (this.kit) this.settle(hand, t.hand ?? (t.left ? 1 : 0), { at, n: spot0.n, along }, t.contact, t.gap)
+        else hand.place(at, spot0.n, along, t.contact, t.gap)
         if (!this.contact && !this.shot) this.contact = { at: spot0.at, n: spot0.n, along, profile: false }
         continue
       }
@@ -2107,6 +2366,7 @@ export class ExamScene {
   dispose() {
     this.disposed = true
     cancelAnimationFrame(this.frame)
+    this.kit?.dispose()
     this.rig?.dispose()
     this.renderer.dispose()
     this.renderer.domElement.remove()

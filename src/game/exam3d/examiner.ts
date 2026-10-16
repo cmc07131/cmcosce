@@ -26,7 +26,7 @@ function bone(len: number, r: number, mat: THREE.Material = GLOVE) {
 }
 
 /** A finger of three segments; each joint bends toward the palm (-Y). The pad marker sits under the tip. */
-type Digit = { joints: THREE.Group[]; pad: THREE.Object3D }
+type Digit = { joints: THREE.Group[]; pad: THREE.Object3D; lens: [number, number, number]; r: number }
 function finger(lens: [number, number, number], r: number): Digit {
   const joints = lens.map((len, i) => {
     const j = new THREE.Group()
@@ -41,7 +41,7 @@ function finger(lens: [number, number, number], r: number): Digit {
   const pad = new THREE.Object3D()
   pad.position.set(0, -r * 0.75, lens[2] * 0.75)
   joints[2].add(pad)
-  return { joints, pad }
+  return { joints, pad, lens, r }
 }
 
 export class ExaminerHand {
@@ -233,6 +233,31 @@ export class ExaminerHand {
 
   hide() {
     this.group.visible = false
+  }
+
+  /**
+   * Balls that fill the hand, in the world (each a centre and how far it reaches): along each finger and the thumb, over
+   * the palm and the back of the hand, the wrist. For keeping the hand out of what it holds.
+   */
+  probes(sleeve = false): { p: THREE.Vector3; r: number }[] {
+    this.group.updateMatrixWorld(true)
+    const out: { p: THREE.Vector3; r: number }[] = []
+    for (const d of [...this.fingers, this.thumb])
+      d.joints.forEach((j, i) => {
+        for (const f of [0, 0.5, 1]) out.push({ p: new THREE.Vector3(0, 0, d.lens[i] * f).applyMatrix4(j.matrixWorld), r: d.r * (i === 2 ? 0.9 : 1) })
+      })
+    for (const x of [-0.034, 0, 0.034])
+      for (const z of [0.012, 0.047, 0.082]) for (const y of [-0.006, 0.006]) out.push({ p: new THREE.Vector3(x, y, z).applyMatrix4(this.group.matrixWorld), r: 0.009 })
+    out.push({ p: new THREE.Vector3(0, 0, -0.012).applyMatrix4(this.group.matrixWorld), r: 0.03 })
+    // The coat sleeve, down the forearm.
+    if (sleeve) for (const z of [-0.07, -0.15, -0.23, -0.31]) out.push({ p: new THREE.Vector3(0, 0, z).applyMatrix4(this.group.matrixWorld), r: 0.046 })
+    return out
+  }
+
+  /** Move the whole hand by this much (to take it out of something it went into). */
+  shift(by: THREE.Vector3) {
+    this.group.position.add(by)
+    this.group.updateMatrixWorld(true)
   }
 
   /** See-through (the X-ray view): what the hand presses on shows through it. Both hands share the materials. */
