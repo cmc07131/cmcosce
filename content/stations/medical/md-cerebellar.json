@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against standard neurological examination and ESO/AHA stroke guidance on posterior circulation stroke.\n\nCerebellar signs (DANISH): Dysdiadochokinesia, Ataxia (gait, truncal), Nystagmus, Intention tremor and past-pointing, Slurred (scanning) speech, Hypotonia (and pendular reflexes). Also heel–shin, tandem gait, Romberg (positive in sensory or vestibular ataxia, not typically in pure cerebellar disease — a cerebellar patient is unsteady with eyes open too). Signs are ipsilateral to a cerebellar hemisphere lesion; midline (vermis) lesions give truncal ataxia.\n\nSudden cerebellar signs with vascular risk factors: cerebellar infarct or haemorrhage — emergency CT and CT angiography (MRI DWI is more sensitive for posterior strokes), stroke team (thrombolysis/thrombectomy for basilar occlusion), and neurosurgery for cerebellar haemorrhage over 3 cm or hydrocephalus — the posterior fossa is small and swelling compresses the brainstem.\n\nYour notes list the full cerebellar examination and causes (unilateral: vascular, tumour, MS; bilateral: alcohol, phenytoin, Wernicke's, MS, Miller Fisher, paraneoplastic) — this matches.\n\nPerfect script checked against the DANISH cerebellar examination and stroke pathway, an HKCEM-style scheme and a keyword scheme. Removed the unsafe gait test and the labyrinthitis option.",
+  "notes": "Checked against standard neurological examination and ESO/AHA stroke guidance on posterior circulation stroke.\n\nCerebellar signs (DANISH): Dysdiadochokinesia, Ataxia (gait, truncal), Nystagmus, Intention tremor and past-pointing, Slurred (scanning) speech, Hypotonia (and pendular reflexes). Also heel–shin, tandem gait, Romberg (positive in sensory or vestibular ataxia, not typically in pure cerebellar disease — a cerebellar patient is unsteady with eyes open too). Signs are ipsilateral to a cerebellar hemisphere lesion; midline (vermis) lesions give truncal ataxia.\n\nSudden cerebellar signs with vascular risk factors: cerebellar infarct or haemorrhage — emergency CT and CT angiography (MRI DWI is more sensitive for posterior strokes), stroke team (thrombolysis/thrombectomy for basilar occlusion), and neurosurgery for cerebellar haemorrhage over 3 cm or hydrocephalus — the posterior fossa is small and swelling compresses the brainstem.\n\nYour notes list the full cerebellar examination and causes (unilateral: vascular, tumour, MS; bilateral: alcohol, phenytoin, Wernicke's, MS, Miller Fisher, paraneoplastic) — this matches.\n\nPerfect script checked against the DANISH cerebellar examination and stroke pathway, an HKCEM-style scheme and a keyword scheme. Gait is not tested: he cannot sit unsupported, so walking him is unsafe; the plan says when it would be.\n\nA focused 3D examination: each manoeuvre is shown being done, the right-sided signs on the patient (intention tremor and past-pointing, dysdiadochokinesia, a floppy right arm, the heel slipping off the shin, nystagmus beating to the right, leaning to the right when sat up).",
   "cast": [
     {
       "id": "patient",
@@ -33,9 +33,36 @@
   ],
   "body": {
     "posture": "supine",
+    "region": "neuro",
     "ataxia": "R",
     "nystagmus": "R",
-    "gait": "ataxic"
+    "intro": "Mr Man lies in bed, pale, a vomit bowl beside him. Examine his cerebellar system: choose below.",
+    "focus": [
+      "speech",
+      "follow-finger",
+      "finger-nose@pulp-R",
+      "finger-nose@pulp-L",
+      "rapid-alternating",
+      "tone-arm@forearm-R",
+      "tone-arm@forearm-L",
+      "heel-shin@heel-R",
+      "heel-shin@heel-L",
+      "tone-leg@thigh-R",
+      "sit-unsupported",
+      "grip",
+      "sensation@hand-R"
+    ],
+    "findings": {
+      "finger-nose@pulp-R": "Right: the finger shakes more the nearer it gets to yours, and overshoots: intention tremor and past-pointing.",
+      "finger-nose@pulp-L": "Left: smooth and accurate.",
+      "tone-arm@forearm-R": "Right arm: floppy; the hand flops about at the wrist.",
+      "tone-arm@forearm-L": "Left arm: normal tone.",
+      "heel-shin@heel-R": "Right heel: wobbles from side to side and slips off the shin.",
+      "heel-shin@heel-L": "Left heel: runs smoothly down the shin.",
+      "tone-leg@thigh-R": "Right leg: floppy as it rolls.",
+      "grip": "Grip strong and equal on both sides.",
+      "sensation@hand-R": "Sharp touch felt normally."
+    }
   },
   "steps": [
     {
@@ -43,62 +70,64 @@
       "kind": "exam",
       "to": "patient",
       "label": "Examine",
-      "hint": "Speech, eyes, arms (finger–nose, rapid alternating), legs (heel–shin), gait (if safe).",
+      "hint": "Speech and eyes; arms (finger–nose, rapid alternating, tone); legs (heel–shin, tone); sitting balance; then power and sensation.",
       "groups": {
-        "Head": [
+        "Speech and eyes": [
           {
-            "t": "Speech: say 'British constitution'",
-            "r": "Slurred, staccato speech.",
+            "t": "Speech: say 'British constitution' for me.",
+            "r": "\"Bri… tish… con… sti… tu… tion\": slurred and broken into syllables, staccato: a cerebellar dysarthria.",
             "mark": "Assesses speech (dysarthria)",
             "do": "say say-phrase"
           },
           {
-            "t": "Eye movements and nystagmus",
-            "r": "Horizontal nystagmus, fast phase to the right, worse looking right.",
+            "t": "Eye movements: keep your head still and follow my finger.",
+            "r": "Horizontal nystagmus, the fast phase to the right, worst looking right; a beat or two looking left. No double vision.",
             "mark": "Looks for nystagmus",
             "do": "say follow-finger"
           }
         ],
         "Arms": [
           {
-            "t": "Finger–nose test",
-            "r": "Right: intention tremor and past-pointing. Left normal.",
-            "mark": "Finger–nose test: right intention tremor",
+            "t": "Finger–nose test: touch my finger, then your nose, as quickly and accurately as you can. Now the other hand.",
+            "r": "Right: the finger shakes more as it nears mine, and overshoots past it: intention tremor and past-pointing. Left: smooth and accurate.",
+            "mark": "Finger–nose test, both sides: right intention tremor",
             "do": "say finger-nose-R & say finger-nose-L"
           },
           {
-            "t": "Rapid alternating movements",
-            "r": "Clumsy on the right (dysdiadochokinesia).",
+            "t": "Rapid alternating movements: pat your thighs, front then back, as fast as you can.",
+            "r": "Left quick and even; right slow, irregular and clumsy, not turning fully over: dysdiadochokinesia on the right.",
             "mark": "Tests for dysdiadochokinesia",
             "do": "say rapid-alternating"
           },
           {
-            "t": "Tone",
-            "r": "Reduced on the right.",
+            "t": "Tone: let me bend and straighten your elbow, and roll your leg.",
+            "r": "Reduced on the right: the right hand flops about at the wrist and the leg rolls floppily. Left normal.",
             "mark": "Assesses tone",
-            "do": "move elbow-R,elbow-L,knee-R,knee-L"
+            "do": "move elbow-R | move hip-R"
           }
         ],
         "Legs": [
           {
-            "t": "Heel–shin test",
-            "r": "Right heel wavers down the shin.",
-            "mark": "Heel–shin test",
+            "t": "Heel–shin test: put your heel on the other knee, and run it down your shin. Now the other side.",
+            "r": "Right heel wobbles from side to side and slips off the shin; left smooth.",
+            "mark": "Heel–shin test, both sides",
             "do": "say heel-shin-R & say heel-shin-L"
-          },
-          {
-            "t": "Sit him up unsupported (truncal ataxia)",
-            "r": "Leans to the right; needs support.",
-            "mark": "Assesses truncal ataxia safely",
-            "do": "say sit-up,sit-edge"
           }
         ],
-        "Other": [
+        "Trunk": [
           {
-            "t": "Limb power and sensation; other cranial nerves",
-            "r": "Power normal; no facial or sensory loss.",
-            "mark": "Screens for other deficits",
-            "do": "say squeeze-fingers | pin hand,foot,cheek | cotton hand,foot,cheek"
+            "t": "Truncal ataxia: sit up and fold your arms, without holding on. I'm right here.",
+            "r": "He sways and leans over to the right, and needs my hand to stop him falling: truncal ataxia.",
+            "mark": "Assesses truncal ataxia safely",
+            "do": "say sit-up"
+          }
+        ],
+        "To complete": [
+          {
+            "t": "Power and sensation: squeeze my fingers; and can you feel this sharp?",
+            "r": "Grip strong and equal; sharp touch felt normally: no weakness or sensory loss.",
+            "mark": "Screens power and sensation",
+            "do": "say squeeze-fingers | pin hand-R"
           }
         ]
       }
@@ -109,10 +138,10 @@
       "to": "examiner",
       "ask": "Thank you. Please present your findings and your plan.",
       "label": "Present and plan",
-      "hint": "Right cerebellar syndrome, sudden onset: stroke pathway, CT/CTA, neurosurgery if haemorrhage.",
+      "hint": "Right cerebellar syndrome, sudden onset: stroke pathway, CT/CTA, neurosurgery if haemorrhage; gait only when safe.",
       "opts": [
         {
-          "t": "Right-sided cerebellar signs of sudden onset in a vascular patient: dysarthria, nystagmus, intention tremor, dysdiadochokinesia, heel–shin ataxia and truncal ataxia. A right cerebellar stroke until proven otherwise.",
+          "t": "Right-sided cerebellar signs of sudden onset in a vascular patient: dysarthria, nystagmus, intention tremor, dysdiadochokinesia, hypotonia, heel–shin ataxia and truncal ataxia. A right cerebellar stroke until proven otherwise.",
           "mark": "Localises to the right cerebellum and suspects stroke"
         },
         {
@@ -122,6 +151,10 @@
         {
           "t": "If it's a haemorrhage over 3 cm or there's hydrocephalus: neurosurgery. Close GCS monitoring.",
           "mark": "Recognises the posterior fossa emergency"
+        },
+        {
+          "t": "I haven't walked him: he can't sit without support, so it isn't safe. Gait, heel–toe walking and Romberg once he can.",
+          "mark": "Tests gait only when it is safe"
         }
       ]
     },
@@ -255,36 +288,39 @@
   "script": [
     {
       "at": "0:00",
-      "say": "Speech: say 'British constitution'. Eye movements and nystagmus. Finger–nose test.",
-      "do": "Slurred, staccato speech. Horizontal nystagmus, fast phase to the right, worse looking right. Right: intention tremor and past-pointing. Left normal."
+      "say": "Speech: say 'British constitution' for me. Eye movements: keep your head still and follow my finger.",
+      "do": "Slurred, staccato speech. Horizontal nystagmus, fast phase to the right, worst looking right."
     },
     {
-      "at": "0:20",
-      "say": "Rapid alternating movements. Tone. Heel–shin test.",
-      "do": "Clumsy on the right (dysdiadochokinesia). Reduced on the right. Right heel wavers down the shin."
+      "at": "0:25",
+      "say": "Finger–nose test: touch my finger, then your nose, as quickly and accurately as you can. Now the other hand. Rapid alternating movements: pat your thighs, front then back, as fast as you can. Tone: let me bend and straighten your elbow, and roll your leg.",
+      "do": "Right: intention tremor and past-pointing; dysdiadochokinesia; reduced tone. Left normal."
     },
     {
-      "at": "0:40",
-      "say": "Sit him up unsupported (truncal ataxia). Limb power and sensation; other cranial nerves.",
-      "do": "Leans to the right; needs support. Power normal; no facial or sensory loss."
+      "at": "1:05",
+      "say": "Heel–shin test: put your heel on the other knee, and run it down your shin. Now the other side. Truncal ataxia: sit up and fold your arms, without holding on. I'm right here. Power and sensation: squeeze my fingers; and can you feel this sharp?",
+      "do": "Right heel wobbles off the shin. Leans to the right sitting, needs support. Power and sensation normal."
     },
     {
-      "at": "1:00",
-      "say": "Right-sided cerebellar signs of sudden onset in a vascular patient: dysarthria, nystagmus, intention tremor, dysdiadochokinesia, heel–shin ataxia and truncal ataxia. A right cerebellar stroke until proven otherwise. Stroke team now; urgent CT head and CT angiogram of the basilar and vertebral arteries. If it's a haemorrhage over 3 cm or there's hydrocephalus: neurosurgery. Close GCS monitoring."
+      "at": "1:45",
+      "say": "Right-sided cerebellar signs of sudden onset in a vascular patient: dysarthria, nystagmus, intention tremor, dysdiadochokinesia, hypotonia, heel–shin ataxia and truncal ataxia. A right cerebellar stroke until proven otherwise. Stroke team now; urgent CT head and CT angiogram of the basilar and vertebral arteries. If it's a haemorrhage over 3 cm or there's hydrocephalus: neurosurgery. Close GCS monitoring. I haven't walked him: he can't sit without support, so it isn't safe. Gait, heel–toe walking and Romberg once he can."
     }
   ],
   "keywords": [
     "British constitution",
+    "follow my finger",
     "nystagmus",
-    "finger–nose",
-    "rapid alternating",
-    "tone",
-    "heel–shin",
-    "truncal ataxia",
+    "Finger–nose",
+    "Rapid alternating",
+    "Tone",
+    "Heel–shin",
+    "Truncal ataxia",
+    "hypotonia",
     "right cerebellar stroke",
     "stroke team",
     "CT angiogram",
     "neurosurgery",
-    "hydrocephalus"
+    "hydrocephalus",
+    "Romberg"
   ]
 }

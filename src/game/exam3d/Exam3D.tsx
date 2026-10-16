@@ -35,6 +35,15 @@ const NECK_VIEWS: { id: View; label: string }[] = [
   { id: 'focus', label: 'NECK' },
   { id: 'whole', label: 'WHOLE' },
 ]
+/** Where what is asked of the whole patient is labelled. */
+const NEURO_LABEL_AT: Record<string, string> = { speech: 'mouth', 'eyes-h': 'forehead', 'sit-trunk': 'sternum', 'rapid-alt': 'hand-R', grip: 'hand-R' }
+/** A neurological examination: the whole patient, head to feet. */
+const NEURO_VIEWS: { id: View; label: string }[] = [
+  { id: 'whole', label: 'WHOLE' },
+  { id: 'head', label: 'HEAD' },
+  { id: 'hands', label: 'HANDS' },
+  { id: 'legs', label: 'LEGS' },
+]
 const KNEE_VIEWS: { id: View; label: string }[] = [
   { id: 'focus', label: 'KNEE' },
   { id: 'legs', label: 'LEGS' },
@@ -116,11 +125,13 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const offers = useMemo(() => (body.focus ?? []).map(offerOf).filter((o): o is Offer => !!o), [body.focus])
   const focused = offers.length > 0
   const focusSide: 'R' | 'L' = body.ain ?? body.kinkOnFlex ?? body.effusion ?? (offers.find((o) => o.site)?.site?.endsWith('-R') ? 'R' : 'L')
-  // The limb it is about, and where the camera comes back to: the forearm, or the knee.
-  const legFocus = offers.some((o) => o.site && onLeg(o.site))
+  // A neurological examination is of the whole patient; otherwise the limb it is about, and where the camera comes back
+  // to: the forearm, or the knee.
+  const neuro = body.region === 'neuro'
+  const legFocus = !neuro && offers.some((o) => o.site && onLeg(o.site))
   // The neck: a collar to fit, a neck to clear.
-  const neckFocus = !legFocus && offers.some((o) => o.site && /^(neck|neckside|cspine|chin|ear)(-|$)/.test(o.site))
-  const home = legFocus ? `knee-${focusSide}` : neckFocus ? 'neck' : `forearm-${focusSide}`
+  const neckFocus = !neuro && !legFocus && offers.some((o) => o.site && /^(neck|neckside|cspine|chin|ear)(-|$)/.test(o.site))
+  const home = neuro ? 'head' : legFocus ? `knee-${focusSide}` : neckFocus ? 'neck' : `forearm-${focusSide}`
   const sideWord = focusSide === 'L' ? 'left' : 'right'
   const their = kind === 'woman' ? 'her' : 'his'
   const tools = useMemo(() => {
@@ -375,6 +386,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
    * the hand (a hand shape) or the knee (walking).
    */
   function offersIn(site: string): Offer[] {
+    if (neuro) return offers
     const s = scene.current
     const r = s ? regionOf(site, (id) => s.hasSite(id)) : null
     if (!r) return []
@@ -430,13 +442,16 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       s.setView('whole')
       setView('whole')
     } else {
-      s.focus(o.site ?? (legFocus || neckFocus ? home : `hand-${side}`))
+      s.focus(o.site ?? (legFocus || neckFocus || neuro ? home : `hand-${side}`))
       setView('focus')
     }
     const dur = s.perform(o.def.anim, o.site, side)
     const what = labelFor(o)
     setLabel(what)
-    labelAt.current = what ? { site: o.site ?? (legFocus || neckFocus ? home : `hand-${side}`), until: performance.now() + (dur + 1.8) * 1000 } : null
+    // Pinned where it is seen: in a neurological examination, the mouth, the eyes or the chest for what is asked of the
+    // whole patient.
+    const where = o.site ?? (neuro ? (NEURO_LABEL_AT[o.def.anim] ?? `hand-${side}`) : legFocus || neckFocus ? home : `hand-${side}`)
+    labelAt.current = what ? { site: where, until: performance.now() + (dur + 1.8) * 1000 } : null
     // A drawn close-up of what the 3D cannot show well (the collar's sizing).
     if (o.def.inset) {
       setIllus({ kind: o.def.inset, text: '' })
@@ -682,7 +697,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
           <div ref={host} className="absolute inset-0" data-testid="exam3d-canvas" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onWheel={(e) => scene.current?.zoomBy(e.deltaY > 0 ? 1.1 : 0.9)} />
           {loading && <p className="absolute inset-0 grid place-items-center font-[Press_Start_2P,monospace] text-[8px] text-[#40404c]">Bringing {name} in…</p>}
           <div className="absolute left-1 top-1 flex max-w-[calc(100%-84px)] flex-wrap gap-1" onPointerDown={(e) => e.stopPropagation()}>
-            {(focused ? (legFocus ? KNEE_VIEWS : neckFocus ? NECK_VIEWS : ARM_VIEWS) : VIEWS).map((v) => (
+            {(focused ? (neuro ? NEURO_VIEWS : legFocus ? KNEE_VIEWS : neckFocus ? NECK_VIEWS : ARM_VIEWS) : VIEWS).map((v) => (
               <button key={v.id} type="button" data-testid={`exam3d-view-${v.id}`} aria-pressed={view === v.id} onClick={() => setViewTo(v.id)} className={`rounded border-2 px-1.5 py-1 font-[Press_Start_2P,monospace] text-[7px] leading-none ${view === v.id ? 'border-[#181820] bg-[#181820] text-[#ffffff]' : 'border-[#5a6470]/60 bg-white/90 text-[#30303c]'}`}>
                 {v.label}
               </button>

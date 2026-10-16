@@ -48,6 +48,8 @@ export const bodySchema = z.object({
   manikin: z.boolean().optional(),
   /** What you see as the examination opens ("The manikin lies on the table…"). */
   intro: z.string().optional(),
+  /** A neurological examination: the whole patient, head to feet, not one limb (its views and where it starts). */
+  region: z.enum(['neuro']).optional(),
   /** A cervical collar, head blocks and tape to fit, and earrings to take off first. */
   collar: z.boolean().optional(),
   /** The pelvis is draped (intimate examinations): findings there show in a drawn close-up. */

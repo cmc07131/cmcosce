@@ -45,6 +45,16 @@ export type Anim =
   | 'collar-all'
   | 'midline'
   | 'rotate-head'
+  // The cerebellar examination.
+  | 'speech'
+  | 'eyes-h'
+  | 'finger-nose'
+  | 'rapid-alt'
+  | 'tone-arm'
+  | 'heel-shin'
+  | 'sit-trunk'
+  | 'grip'
+  | 'tone-leg'
   | `pose:${string}`
 
 /**
@@ -180,6 +190,50 @@ export const MANOEUVRES: Record<string, ManoeuvreDef> = {
     group: 'Step 4: the learner does it',
     shows: { title: 'Peyton step 4', sub: 'he does it; you watch, and say nothing until he has finished' },
   },
+  // The cerebellar examination (DANISH): speech and the eyes, the arms, the legs, the trunk; then what else is affected.
+  speech: { label: '“Say ‘British constitution’”', say: 'say-phrase', anim: 'speech', group: 'Speech and eyes', shows: { title: 'Speech', sub: 'cerebellar: slurred, staccato, scanning' } },
+  'follow-finger': {
+    label: '“Keep your head still and follow my finger”',
+    say: 'follow-finger',
+    anim: 'eyes-h',
+    group: 'Speech and eyes',
+    shows: { title: 'Eye movements and nystagmus', sub: 'an H, held at each side; cerebellar: fast phase toward the lesion' },
+  },
+  'finger-nose': {
+    label: '“Touch my finger, then your nose”',
+    say: 'finger-nose',
+    sided: true,
+    anim: 'finger-nose',
+    group: 'Arms',
+    shows: { title: 'Finger–nose test', sub: 'intention tremor nearing the target; past-pointing' },
+  },
+  'rapid-alternating': {
+    label: '“Pat your thighs, front then back, as fast as you can”',
+    say: 'rapid-alternating',
+    anim: 'rapid-alt',
+    group: 'Arms',
+    shows: { title: 'Rapid alternating movements', sub: 'slow, irregular, clumsy: dysdiadochokinesia' },
+  },
+  'tone-arm': { label: 'Tone: bend and straighten the elbow, roll the wrist', move: 'flex', anim: 'tone-arm', group: 'Arms', shows: { title: 'Tone in the arm', sub: 'floppy (hypotonia) on the side of the lesion' } },
+  'heel-shin': {
+    label: '“Put your heel on the other knee, and run it down your shin”',
+    say: 'heel-shin',
+    sided: true,
+    anim: 'heel-shin',
+    group: 'Legs',
+    shows: { title: 'Heel–shin test', sub: 'the heel wanders off the shin on the side of the lesion' },
+  },
+  'tone-leg': { label: 'Tone: roll the leg to and fro', move: 'rot', joint: 'hip', anim: 'tone-leg', group: 'Legs', shows: { title: 'Tone in the leg', sub: 'floppy (hypotonia) on the side of the lesion' } },
+  'sit-unsupported': {
+    label: '“Sit up and fold your arms, without holding on”',
+    say: 'sit-up',
+    anim: 'sit-trunk',
+    group: 'Trunk',
+    shows: { title: 'Truncal ataxia', sub: 'sways and leans toward the lesion; your hands ready to catch' },
+  },
+  grip: { label: '“Squeeze my fingers”', say: 'squeeze-fingers', anim: 'grip', group: 'To complete', shows: { title: 'Power', sub: 'normal in a pure cerebellar lesion' } },
+  sensation: { label: 'Sharp touch (neurotip)', tool: 'pin', anim: 'pin', group: 'To complete' },
+
   // Clearing the neck: what you feel and what you ask.
   midline: { label: 'Feel down the middle of the back of the neck, one spinous process at a time', tool: 'press', anim: 'midline', group: 'Show the examination', shows: { title: 'Posterior midline', sub: 'tender here: image (and no movement test)' } },
   'rotate-head': {

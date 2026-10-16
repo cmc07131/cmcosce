@@ -13,7 +13,6 @@ export const REVIEWED: ReadonlySet<string> = new Set([
   // Resuscitation.
   'acls-tca',
   // Examinations and procedures.
-  'md-cerebellar',
   'md-vertigo',
   'ot-hare',
   'pd-supracondylar',
