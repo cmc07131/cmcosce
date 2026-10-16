@@ -79,22 +79,30 @@ export function Illustration({ kind, finding }: { kind: IllustrationKind; findin
         )}
         {kind === 'collar-size' && (
           <g>
-            {/* The front of the collar, side on: rigid plastic over a foam edge; the sizing post; three fingers between
-                the post and the bottom of the rigid plastic. */}
-            <path d="M14 40 Q80 24 146 40 L146 82 Q80 70 14 82 Z" fill="#ddd5c0" stroke={ink} strokeWidth="1.5" />
-            <path d="M14 82 Q80 70 146 82 L146 90 Q80 78 14 90 Z" fill="#39424c" stroke={ink} strokeWidth="1" />
-            <rect x="57" y="37" width="7" height="7" rx="1.5" fill="#202428" />
+            {/* The side of the collar's front: the light shell, the darker panel, the size window with its red sizing
+                mark and its holes, the lock tab above; the foam edge below the hard plastic; three fingers from the
+                mark down to the bottom of the hard plastic. */}
+            <path d="M8 30 Q80 18 152 30 L152 84 Q80 74 8 84 Z" fill="#e6e4dc" stroke={ink} strokeWidth="1.5" />
+            <path d="M8 84 Q80 74 152 84 L152 92 Q80 82 8 92 Z" fill="#646a72" stroke={ink} strokeWidth="1" />
+            <path d="M20 34 Q60 27 100 30 L100 78 Q60 75 20 80 Z" fill="#5a5f66" />
+            <circle cx="40" cy="36" r="5" fill="#2f3338" stroke="#16191c" strokeWidth="0.8" />
+            <rect x="35" y="45" width="10" height="27" rx="2" fill="#cfd3d6" stroke="#16191c" strokeWidth="0.6" />
+            <rect x="35.5" y="46" width="9" height="2.6" fill="#c0392b" />
+            {[54, 60, 66].map((y) => (
+              <circle key={y} cx="40" cy={y} r="1.6" fill="#16191c" />
+            ))}
             {[0, 1, 2].map((i) => (
               <g key={i}>
-                <rect x="66" y={45 + i * 9.3} width="48" height="8.6" rx="4.3" fill="#e8b494" stroke={ink} strokeWidth="1" />
-                <rect x="105" y={46.5 + i * 9.3} width="7" height="5.6" rx="2" fill="#f4d9cc" stroke={ink} strokeWidth="0.6" />
+                <rect x="50" y={48 + i * 9.6} width="56" height="8.9" rx="4.4" fill="#e8b494" stroke={ink} strokeWidth="1" />
+                <rect x="97" y={49.5 + i * 9.6} width="7" height="5.8" rx="2" fill="#f4d9cc" stroke={ink} strokeWidth="0.6" />
               </g>
             ))}
-            <line x1="60.5" y1="44" x2="60.5" y2="73" stroke="#c0392b" strokeWidth="1" strokeDasharray="2 2" />
-            <text x="18" y="22" fontSize="8" fill={ink}>sizing post</text>
-            <line x1="45" y1="24" x2="58" y2="37" stroke={ink} strokeWidth="0.8" />
-            <text x="118" y="60" fontSize="8" fill={ink}>3 fingers</text>
-            <text x="20" y="104" fontSize="7.5" fill={ink}>to the bottom of the rigid plastic</text>
+            <line x1="47" y1="47" x2="47" y2="77" stroke="#c0392b" strokeWidth="1" strokeDasharray="2 2" />
+            <text x="58" y="14" fontSize="7.5" fill={ink}>lock tab</text>
+            <line x1="62" y1="16" x2="44" y2="33" stroke={ink} strokeWidth="0.7" />
+            <text x="4" y="107" fontSize="7.5" fill={ink}>red mark to the bottom of the hard plastic</text>
+            <text x="112" y="62" fontSize="8" fill={ink}>3 fingers</text>
+            <text x="100" y="99" fontSize="6.5" fill={ink}>foam: not counted</text>
           </g>
         )}
         {kind === 'perianal' && (

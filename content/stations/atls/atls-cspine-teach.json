@@ -44,7 +44,7 @@
       "text": "Collars for everyone. Your notes put a rigid collar on every trauma patient at risk of neck injury. Current guidance uses 'spinal motion restriction': manual in-line stabilisation, blocks and minimal handling are the core, and a collar is one option. Leave it off an alert patient who walked or climbed out themselves, and loosen or remove it if it causes distress, airway problems or raised ICP."
     }
   ],
-  "notes": "Checked against the Canadian C-spine Rule (Stiell 2001, 2003), NEXUS (Hoffman 2000), NICE NG41 (Spinal injury: assessment and initial management, 2016) and NICE NG232 (head injury imaging), and the Faculty of Pre-Hospital Care consensus on spinal motion restriction (2018).\n\nCollar: measure from the angle of the jaw to the top of the trapezius with your fingers, set or choose the collar to that height (measured from the sizing post to the bottom of the rigid plastic), slide the back under the neck while someone holds manual in-line stabilisation, bring the front up under the chin, fasten, and check the fit. Blocks and tape complete immobilisation. Current consensus favours minimal handling and 'spinal motion restriction': collars can raise ICP, cause pressure sores and aspiration, and are no longer routine in every patient (for example, the self-extricating, ambulant patient). Your notes' indications and complications are correct. The difference: your notes put a rigid collar on every trauma patient at risk of a neck injury. Current guidance (ATLS 10th 'spinal motion restriction'; Faculty of Pre-Hospital Care consensus 2018) still protects the spine in these patients, but a collar is now one option, not automatic. Manual in-line stabilisation, head blocks and minimal handling are the core. A collar is not needed for an alert, ambulant patient who walked or climbed out themselves, and can be loosened or removed if it causes distress, airway problems or raised ICP. NICE NG41 still uses collars for patients who meet its immobilisation criteria, so a collar is never 'wrong'. Just don't say it is mandatory for everyone.\n\nClearance: in an alert (GCS 15), stable, sober adult, apply the Canadian C-spine Rule. High risk (age 65 or over, dangerous mechanism, or paraesthesia in the limbs) → image. Otherwise, any low-risk factor (simple rear-end collision, sitting up in the ED, ambulatory at any time, delayed onset of neck pain, no midline tenderness) allows range-of-motion testing: can rotate 45° left and right → cleared. NEXUS is an alternative (no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury). CT is the first-line imaging in adults (NICE). Your notes match this.\n\nTeaching structure (2026-10-15, rebuilt on the user's review: \"first the learning objectives, then what the student knows, then teach, then apply\"): set the scene (introduce, two objectives, explore prior knowledge, tailor and outline the plan); teach (the collar by Peyton's four steps: demonstrate at real speed in silence, deconstruct with explanation, the learner talks the teacher through it; the rule at the whiteboard, linked to the NEXUS he knows; the bedside examination shown on Dr Lau: posterior midline first, then active rotation); apply (Peyton step 4: Dr Lau fits the collar while you watch; two cases in which he reasons and you question and confirm); close (self-assessment first, specific balanced feedback, teach-back, resources, questions, a next step). Everything hands-on is shown in 3D: the collar on a manikin step by step (in-line stabilisation from the head end throughout, earrings out, finger measurement, sizing in a drawn close-up, back then front, fit, blocks and tape), and the examination on Dr Lau with an arc showing 45 degrees.\n\nPerfect script checked against the Canadian C-spine Rule, NICE NG41, a Peyton four-step checklist, an HKCEM-style set-dialogue-closure teaching scheme and a keyword scheme.",
+  "notes": "Checked against the Canadian C-spine Rule (Stiell 2001, 2003), NEXUS (Hoffman 2000), NICE NG41 (Spinal injury: assessment and initial management, 2016) and NICE NG232 (head injury imaging), and the Faculty of Pre-Hospital Care consensus on spinal motion restriction (2018).\n\nCollar (a Laerdal Stifneck Select, after its directions for use): with the head held in line, measure in finger breadths from the top of the shoulder (the trapezius, where the collar sits) to the bottom of the chin; on the collar, match that from the sizing mark to the bottom edge of the hard plastic (not the foam); set it and the chin support to that size, press both lock tabs, and bend it into shape. Lying flat, slide the rear panel behind the neck first, into the midline; bring the chin support up under the chin; hold the front in place, pull the collar round snug, and fasten. Never adjust it on the patient; too big pushes the head back. Check the fit. Blocks and tape complete immobilisation. Current consensus favours minimal handling and 'spinal motion restriction': collars can raise ICP, cause pressure sores and aspiration, and are no longer routine in every patient (for example, the self-extricating, ambulant patient). Your notes' indications and complications are correct. The difference: your notes put a rigid collar on every trauma patient at risk of a neck injury. Current guidance (ATLS 10th 'spinal motion restriction'; Faculty of Pre-Hospital Care consensus 2018) still protects the spine in these patients, but a collar is now one option, not automatic. Manual in-line stabilisation, head blocks and minimal handling are the core. A collar is not needed for an alert, ambulant patient who walked or climbed out themselves, and can be loosened or removed if it causes distress, airway problems or raised ICP. NICE NG41 still uses collars for patients who meet its immobilisation criteria, so a collar is never 'wrong'. Just don't say it is mandatory for everyone.\n\nClearance: in an alert (GCS 15), stable, sober adult, apply the Canadian C-spine Rule. High risk (age 65 or over, dangerous mechanism, or paraesthesia in the limbs) → image. Otherwise, any low-risk factor (simple rear-end collision, sitting up in the ED, ambulatory at any time, delayed onset of neck pain, no midline tenderness) allows range-of-motion testing: can rotate 45° left and right → cleared. NEXUS is an alternative (no midline tenderness, no intoxication, normal alertness, no focal deficit, no painful distracting injury). CT is the first-line imaging in adults (NICE). Your notes match this.\n\nTeaching structure (2026-10-15, rebuilt on the user's review: \"first the learning objectives, then what the student knows, then teach, then apply\"): set the scene (introduce, two objectives, explore prior knowledge, tailor and outline the plan); teach (the collar by Peyton's four steps: demonstrate at real speed in silence, deconstruct with explanation, the learner talks the teacher through it; the rule at the whiteboard, linked to the NEXUS he knows; the bedside examination shown on Dr Lau: posterior midline first, then active rotation); apply (Peyton step 4: Dr Lau fits the collar while you watch; two cases in which he reasons and you question and confirm); close (self-assessment first, specific balanced feedback, teach-back, resources, questions, a next step). Everything hands-on is shown in 3D: the collar on a manikin step by step (in-line stabilisation from the head end throughout, earrings out, finger measurement, sizing in a drawn close-up, back then front, fit, blocks and tape), and the examination on Dr Lau with an arc showing 45 degrees.\n\nPerfect script checked against the Canadian C-spine Rule, NICE NG41, a Peyton four-step checklist, an HKCEM-style set-dialogue-closure teaching scheme and a keyword scheme.",
   "cast": [
     {
       "id": "junior",
@@ -136,7 +136,7 @@
         "Step 1: demonstrate": [
           {
             "t": "Watch first: I'll fit it at real speed, without talking.",
-            "r": "In-line stabilisation, earrings off, measured, sized, back, front, checked, blocks and tape: done in under a minute.",
+            "r": "In-line stabilisation, earrings off, measured, sized and locked, rear panel, front, checked, blocks and tape: done in under a minute.",
             "mark": "Peyton step 1: demonstrates at real speed, in silence",
             "do": "demo neck"
           }
@@ -155,32 +155,32 @@
             "do": "jewellery ear-R"
           },
           {
-            "t": "Measure with your fingers flat, from the top of the trapezius up to the angle of the jaw. Here it's three fingers.",
-            "r": "Three fingers from the trapezius to the angle of the jaw.",
-            "mark": "Measures the neck: trapezius to the angle of the jaw",
+            "t": "With the head held in line, measure with your fingers flat: from the top of the shoulder, the trapezius where the collar will sit, to the bottom of the chin. Here it's three fingers.",
+            "r": "Three fingers from the top of the shoulder to the chin.",
+            "mark": "Measures the neck: top of the shoulder to the chin, in fingers",
             "do": "measure neckside-R"
           },
           {
-            "t": "Set the collar to the same three fingers, from the sizing post to the bottom of the rigid plastic, and lock it.",
-            "r": "Sized to three fingers and locked.",
-            "mark": "Sizes the collar to the measurement",
+            "t": "On the collar, the same three fingers: from the red sizing mark in the size window down to the bottom edge of the hard plastic, not the foam. Set it to that size, press both lock tabs, then bend it into shape.",
+            "r": "Set to three fingers, locked both sides, bent into shape.",
+            "mark": "Sizes the collar to the measurement, locks it and shapes it",
             "do": "size neck"
           },
           {
-            "t": "Slide the back of the collar flat under the neck, without moving the head.",
-            "r": "The back is under the neck; the head has not moved.",
-            "mark": "Slides the back under the neck",
+            "t": "Lying flat, the rear panel goes in first: slide it behind the neck from your side, flat along the couch, until it is in the midline. The head doesn't move.",
+            "r": "The rear panel is behind the neck, in the midline, its tail showing on the far side; the head has not moved.",
+            "mark": "Slides the rear panel behind the neck first",
             "do": "collar cspine"
           },
           {
-            "t": "Bring the front up the chest until the chin sits in the chin piece, then fasten it to the back.",
-            "r": "The chin is in the chin piece; fastened.",
-            "mark": "Brings the front up under the chin and fastens it",
+            "t": "Bring the front round with the chin support under the chin. Hold the front in place, pull the tail round snug, and fasten the Velcro.",
+            "r": "The chin sits on the chin support; pulled snug and fastened.",
+            "mark": "Chin support under the chin; holds the front, pulls it snug, fastens it",
             "do": "collar neck"
           },
           {
-            "t": "Check the fit: chin in the chin piece, no gaps, the airway and the pulses still accessible.",
-            "r": "A good fit: no gaps, the airway hole in the midline.",
+            "t": "Check the fit: the chin on the chin support, no gaps, the airway opening in the midline, the pulses still accessible. Too big pushes the head back; too small lets it bend forward.",
+            "r": "A good fit: no gaps, the airway opening in the midline.",
             "mark": "Checks the fit",
             "do": "fit chin"
           },
@@ -194,7 +194,7 @@
         "Step 3: the learner talks you through it": [
           {
             "t": "Now you talk me through each step, and I'll do exactly what you say.",
-            "r": "Dr Lau: \"Hold the head in line. Earrings off. Three fingers, trapezius to jaw. Set the collar and lock it. Back, then front. Check the fit. Blocks, tape the forehead, then the chin.\" All in order.",
+            "r": "Dr Lau: \"Hold the head in line. Earrings off. Three fingers, shoulder to chin. Red mark to the bottom of the plastic, lock both sides, shape it. Rear panel behind the neck, chin support under the chin, pull it round and fasten. Check the fit. Blocks, tape the forehead, then the chin.\" All in order.",
             "mark": "Peyton step 3: the learner talks the teacher through it",
             "do": "narrate neck"
           }
@@ -287,7 +287,7 @@
         "Step 4: the learner does it": [
           {
             "t": "Your turn: fit it on the manikin, talking me through it. I'll watch.",
-            "r": "Dr Lau keeps in-line stabilisation, takes the earrings off, measures three fingers, sizes and locks the collar, back then front, checks the fit, then blocks and tape: forehead, then chin. All correct.",
+            "r": "Dr Lau keeps in-line stabilisation, takes the earrings off, measures three fingers, sizes, locks and shapes the collar, rear panel then front, checks the fit, then blocks and tape: forehead, then chin. All correct.",
             "mark": "Peyton step 4: the learner performs while the teacher observes",
             "do": "learner neck"
           }
@@ -487,13 +487,13 @@
     {
       "q": "How is a collar sized?",
       "options": [
-        "Jaw angle to trapezius, in finger breadths",
+        "Top of the shoulder to the chin, in finger breadths",
         "Chin to sternal notch, in finger breadths",
         "Neck circumference with a tape",
         "The patient's height and weight on a chart"
       ],
-      "why": "Match that distance to the rigid part of the collar.",
-      "source": "Manufacturer guidance"
+      "why": "Match it on the collar from the sizing mark to the bottom of the hard plastic (the foam does not count).",
+      "source": "Manufacturer guidance (Laerdal Stifneck Select)"
     },
     {
       "q": "First-line C-spine imaging in adults (NICE NG41)?",
@@ -534,10 +534,14 @@
     "what you know already",
     "manual in-line stabilisation",
     "jewellery",
-    "angle of the jaw",
+    "top of the shoulder",
     "trapezius",
-    "sizing post",
-    "chin piece",
+    "bottom of the chin",
+    "sizing mark",
+    "hard plastic",
+    "lock tabs",
+    "rear panel",
+    "chin support",
     "blocks and tape",
     "spinal motion restriction",
     "Canadian C-spine Rule",
@@ -563,7 +567,7 @@
     },
     {
       "at": "1:10",
-      "say": "Now step by step. First, manual in-line stabilisation: someone holds the head from the head end, and keeps holding it until the blocks and tape are on. Jewellery off: earrings and necklaces, so nothing is caught under the collar. Measure with your fingers flat, from the top of the trapezius up to the angle of the jaw. Here it's three fingers. Set the collar to the same three fingers, from the sizing post to the bottom of the rigid plastic, and lock it. Slide the back of the collar flat under the neck, without moving the head. Bring the front up the chest until the chin sits in the chin piece, then fasten it to the back. Check the fit: chin in the chin piece, no gaps, the airway and the pulses still accessible. Then blocks and tape: head blocks, then tape across the forehead first, then the chin. Only now can the hands come off."
+      "say": "Now step by step. First, manual in-line stabilisation: someone holds the head from the head end, and keeps holding it until the blocks and tape are on. Jewellery off: earrings and necklaces, so nothing is caught under the collar. With the head held in line, measure with your fingers flat: from the top of the shoulder, the trapezius where the collar will sit, to the bottom of the chin. Here it's three fingers. On the collar, the same three fingers: from the red sizing mark in the size window down to the bottom edge of the hard plastic, not the foam. Set it to that size, press both lock tabs, then bend it into shape. Lying flat, the rear panel goes in first: slide it behind the neck from your side, flat along the couch, until it is in the midline. The head doesn't move. Bring the front round with the chin support under the chin. Hold the front in place, pull the tail round snug, and fasten the Velcro. Check the fit: the chin on the chin support, no gaps, the airway opening in the midline, the pulses still accessible. Too big pushes the head back; too small lets it bend forward. Then blocks and tape: head blocks, then tape across the forehead first, then the chin. Only now can the hands come off."
     },
     {
       "at": "2:30",

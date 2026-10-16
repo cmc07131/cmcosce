@@ -500,13 +500,16 @@ export class Stifneck {
     const hole = new THREE.MeshStandardMaterial({ color: '#16191c', roughness: 0.9 })
     const tabMat = new THREE.MeshStandardMaterial({ color: '#2f3338', roughness: 0.45 })
     const windowMat = new THREE.MeshStandardMaterial({ color: '#cfd3d6', roughness: 0.3 })
+    const redMat = new THREE.MeshStandardMaterial({ color: '#c0392b', roughness: 0.5 })
     this.decals.push({ mesh: disc(0.013, new THREE.MeshStandardMaterial({ map: tex, roughness: 0.6 })), s: 90, v: 0.42, out: 0.0012, tab: false })
     for (const s of [14, 104]) {
       const tab = new THREE.Mesh(new THREE.CylinderGeometry(0.0055 * k, 0.006 * k, 0.003 * k, 20), tabMat)
       this.decals.push({ mesh: tab, s, v: 0.68, out: 0.0015, tab: true })
       const win = new THREE.Mesh(new THREE.PlaneGeometry(0.0075 * k, 0.026 * k), windowMat)
       this.decals.push({ mesh: win, s, v: 0.32, out: 0.0009, tab: false })
-      for (const v of [0.2, 0.28, 0.36, 0.44]) this.decals.push({ mesh: disc(0.0018, hole), s, v, out: 0.0013, tab: false })
+      for (const v of [0.2, 0.28, 0.36]) this.decals.push({ mesh: disc(0.0018, hole), s, v, out: 0.0013, tab: false })
+      // The red sizing mark at the top of the window: the fingers are matched from here to the bottom of the plastic.
+      this.decals.push({ mesh: new THREE.Mesh(new THREE.PlaneGeometry(0.0068 * k, 0.0024 * k), redMat), s, v: 0.44, out: 0.0013, tab: false })
     }
     for (const s of [200, 212, 248, 260]) this.decals.push({ mesh: disc(0.004, hole), s, v: 0.5, out: 0.0008, tab: false })
     for (const d of this.decals) {
