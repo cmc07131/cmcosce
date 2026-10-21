@@ -22,7 +22,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE CKS (Bell's palsy), the Sullivan et al. NEJM 2007 trial (prednisolone within 72 h), and standard cranial nerve examination.\n\nExamine II–XII systematically: II (acuity, fields, pupils, fundi), III/IV/VI (eye movements, diplopia, nystagmus, ptosis), V (sensation in three divisions, masseter, corneal reflex), VII (raise eyebrows, close eyes tightly, show teeth, puff cheeks), VIII (whisper, Rinne and Weber), IX/X (palate, gag if needed), XI (shrug and head turn), XII (tongue).\n\nLower motor neurone facial palsy involves the forehead (cannot raise the eyebrow); upper motor neurone (stroke) spares the forehead because of bilateral cortical innervation. Bell's palsy is a diagnosis of exclusion: check for vesicles in the ear or palate (Ramsay Hunt), parotid mass, other cranial nerve or limb signs, hearing loss, and trauma. Treatment: prednisolone 50 mg daily for 10 days (or 60 mg 5 days then taper) within 72 hours; antivirals not routinely (consider with severe palsy / Ramsay Hunt); eye protection (lubricants, tape at night) — the key complication is corneal exposure. Refer if no improvement at 3 weeks or atypical features.\n\nYour notes list cranial nerves as a topic without detail.\n\nPerfect script checked against NICE CKS Bell's palsy, an HKCEM-style scheme and a keyword scheme. Removed the aciclovir-alone option; each examination step is a spoken line.",
+  "notes": "Checked against NICE CKS (Bell's palsy), the Sullivan et al. NEJM 2007 trial (prednisolone within 72 h), and standard cranial nerve examination.\n\nExamine II–XII systematically: II (acuity, fields, pupils, fundi), III/IV/VI (eye movements, diplopia, nystagmus, ptosis), V (sensation in three divisions, masseter, corneal reflex), VII (raise eyebrows, close eyes tightly, show teeth, puff cheeks), VIII (whisper, Rinne and Weber), IX/X (palate, gag if needed), XI (shrug and head turn), XII (tongue).\n\nLower motor neurone facial palsy involves the forehead (cannot raise the eyebrow); upper motor neurone (stroke) spares the forehead because of bilateral cortical innervation. Bell's palsy is a diagnosis of exclusion: check for vesicles in the ear or palate (Ramsay Hunt), parotid mass, other cranial nerve or limb signs, hearing loss, and trauma. Treatment: prednisolone 50 mg daily for 10 days (or 60 mg 5 days then taper) within 72 hours; antivirals not routinely (consider with severe palsy / Ramsay Hunt); eye protection (lubricants, tape at night) — the key complication is corneal exposure. Refer if no improvement at 3 weeks or atypical features.\n\nYour notes list cranial nerves as a topic without detail.\n\nPerfect script checked against NICE CKS Bell's palsy, an HKCEM-style scheme and a keyword scheme. Removed the aciclovir-alone option; each examination step is a spoken line.\n\nA focused 3D examination: each nerve is tested on Mr Choi as it would be done (a palm over the eye for acuity, a pen torch for the pupils, your finger in an H, cotton wool, the otoscope, the tuning fork on the mastoid and the forehead, your hands on his shoulders as he shrugs). The left lower motor neurone palsy shows on the model: the forehead does not wrinkle on the left, the left eye will not close and rolls up (Bell's phenomenon), the mouth droops, air escapes on the left.",
   "cast": [
     {
       "id": "patient",
@@ -33,7 +33,44 @@
   ],
   "body": {
     "posture": "edge",
-    "palsy": "L"
+    "region": "neuro",
+    "palsy": "L",
+    "intro": "Mr Choi sits on the edge of the couch, the left side of his face slack. Examine his cranial nerves: choose below.",
+    "focus": [
+      "acuity@eye-R",
+      "fields-confront",
+      "pupils@eye-R",
+      "eye-movements",
+      "face-touch@forehead",
+      "face-touch@cheek-L",
+      "face-touch@jaw-L",
+      "clench-jaw",
+      "raise-eyebrows",
+      "close-eyes",
+      "show-teeth",
+      "puff-cheeks",
+      "otoscope@ear-L",
+      "look-mouth@mouth",
+      "parotid@jaw-L",
+      "whisper",
+      "rinne@mastoid-L",
+      "weber@forehead",
+      "say-ah",
+      "shrug-against",
+      "arms-out"
+    ],
+    "findings": {
+      "acuity@eye-R": "6/6 in each eye.",
+      "pupils@eye-R": "Pupils equal, both reacting to light, direct and consensual.",
+      "face-touch@forehead": "Feels it normally on the forehead.",
+      "face-touch@cheek-L": "Feels it normally on the left cheek.",
+      "face-touch@jaw-L": "Feels it normally over the left jaw.",
+      "otoscope@ear-L": "Left ear canal and drum normal: no vesicles.",
+      "look-mouth@mouth": "No vesicles on the palate or tongue.",
+      "parotid@jaw-L": "Parotid soft; no mass.",
+      "rinne@mastoid-L": "Rinne positive on the left: louder beside the ear.",
+      "weber@forehead": "Weber central."
+    }
   },
   "steps": [
     {

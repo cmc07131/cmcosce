@@ -36,7 +36,23 @@ const NECK_VIEWS: { id: View; label: string }[] = [
   { id: 'whole', label: 'WHOLE' },
 ]
 /** Where what is asked of the whole patient is labelled. */
-const NEURO_LABEL_AT: Record<string, string> = { speech: 'mouth', 'eyes-h': 'forehead', 'sit-trunk': 'sternum', 'rapid-alt': 'hand-R', grip: 'hand-R' }
+const NEURO_LABEL_AT: Record<string, string> = {
+  speech: 'mouth',
+  'eyes-h': 'forehead',
+  'sit-trunk': 'sternum',
+  'rapid-alt': 'hand-R',
+  grip: 'hand-R',
+  'fields-hand': 'forehead',
+  clench: 'jaw-L',
+  whisper: 'ear-L',
+  'ask:raise-eyebrows': 'forehead',
+  'ask:close-eyes': 'forehead',
+  'ask:show-teeth': 'mouth',
+  'ask:puff-cheeks': 'cheek-L',
+  'ask:open-mouth': 'mouth',
+  'ask:shrug': 'trapezius-R',
+  'ask:arms-out': 'sternum',
+}
 /** A neurological examination: the whole patient, head to feet. */
 const NEURO_VIEWS: { id: View; label: string }[] = [
   { id: 'whole', label: 'WHOLE' },

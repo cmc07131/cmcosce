@@ -10,7 +10,9 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
  * along -Z. `place` turns it so the chosen part meets a point on the skin from outside.
  */
 
-export type Grip = 'two-fingers' | 'press' | 'thumb' | 'flat' | 'back' | 'cup' | 'cotton' | 'neurotip' | 'doppler'
+export type Grip = 'two-fingers' | 'press' | 'thumb' | 'flat' | 'back' | 'cup' | 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork'
+type ToolGrip = 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork'
+const TOOL_GRIPS: ToolGrip[] = ['cotton', 'neurotip', 'doppler', 'torch', 'otoscope', 'fork']
 export type Contact = 'fingertips' | 'index' | 'thumb' | 'palm' | 'back' | 'tool'
 
 const GLOVE = new THREE.MeshStandardMaterial({ color: '#7fa8e3', roughness: 0.45, metalness: 0 })
@@ -51,7 +53,7 @@ export class ExaminerHand {
   private thumb: Digit
   private palmFace = new THREE.Object3D()
   private backFace = new THREE.Object3D()
-  private tools: Record<'cotton' | 'neurotip' | 'doppler', { obj: THREE.Object3D; tip: THREE.Object3D }>
+  private tools: Record<ToolGrip, { obj: THREE.Object3D; tip: THREE.Object3D }>
   grip: Grip = 'flat'
 
   /** `left`: the examiner's other hand (the same hand, mirrored). */
@@ -116,6 +118,22 @@ export class ExaminerHand {
       cotton: tool(new THREE.MeshStandardMaterial({ color: '#f4f1ea' }), 0.1, 0.0022, 0.0075, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1 })),
       neurotip: tool(new THREE.MeshStandardMaterial({ color: '#f2c84b' }), 0.075, 0.0035, 0.003, new THREE.MeshStandardMaterial({ color: '#d0d4d8', metalness: 0.6 })),
       doppler: tool(new THREE.MeshStandardMaterial({ color: '#cfd5da', roughness: 0.4 }), 0.1, 0.009, 0.008, new THREE.MeshStandardMaterial({ color: '#7d8a96' })),
+      // A pen torch, its bulb lit.
+      torch: tool(new THREE.MeshStandardMaterial({ color: '#3a4047', metalness: 0.6, roughness: 0.35 }), 0.12, 0.0055, 0.0055, new THREE.MeshStandardMaterial({ color: '#fff6c8', emissive: '#ffe680', emissiveIntensity: 1.2 })),
+      // An otoscope: a black handle, the head and its speculum.
+      otoscope: tool(new THREE.MeshStandardMaterial({ color: '#202428', roughness: 0.5 }), 0.1, 0.011, 0.006, new THREE.MeshStandardMaterial({ color: '#e8e8e8', roughness: 0.4 })),
+      // A tuning fork: the stem, then two prongs.
+      fork: (() => {
+        const t = tool(new THREE.MeshStandardMaterial({ color: '#b9c0c8', metalness: 0.9, roughness: 0.25 }), 0.05, 0.003, 0.006, new THREE.MeshStandardMaterial({ color: '#b9c0c8', metalness: 0.9, roughness: 0.25 }))
+        const steel = new THREE.MeshStandardMaterial({ color: '#c9d0d8', metalness: 0.9, roughness: 0.2 })
+        // The prongs stand back past your fingers (the stem's end is what touches).
+        for (const x of [-0.006, 0.006]) {
+          const prong = new THREE.Mesh(new THREE.BoxGeometry(0.003, 0.003, 0.09), steel)
+          prong.position.set(x, -0.022, -0.035)
+          t.obj.add(prong)
+        }
+        return t
+      })(),
     }
     if (left) this.group.scale.x = -1
     this.group.visible = false
@@ -172,6 +190,9 @@ export class ExaminerHand {
       case 'cotton':
       case 'neurotip':
       case 'doppler':
+      case 'torch':
+      case 'otoscope':
+      case 'fork':
         // A pinch on the stick; the other fingers tucked.
         bend(index, 0.55, 0.6, 0.3)
         bend(middle, 0.9, 1.1, 0.6)
@@ -199,7 +220,7 @@ export class ExaminerHand {
       case 'back':
         return at(this.backFace)
       case 'tool':
-        return this.grip === 'cotton' || this.grip === 'neurotip' || this.grip === 'doppler' ? at(this.tools[this.grip].tip) : at(index.pad)
+        return (TOOL_GRIPS as string[]).includes(this.grip) ? at(this.tools[this.grip as ToolGrip].tip) : at(index.pad)
       default:
         // Between the index and middle pads.
         return at(index.pad).add(at(middle.pad)).multiplyScalar(0.5)

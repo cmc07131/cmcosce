@@ -55,6 +55,19 @@ export type Anim =
   | 'sit-trunk'
   | 'grip'
   | 'tone-leg'
+  // The cranial nerves.
+  | 'acuity'
+  | 'fields-hand'
+  | 'torch-eyes'
+  | 'face-touch'
+  | 'clench'
+  | 'otoscope'
+  | 'look-mouth'
+  | 'parotid'
+  | 'whisper'
+  | 'fork'
+  | 'weber'
+  | `ask:${string}`
   | `pose:${string}`
 
 /**
@@ -233,6 +246,46 @@ export const MANOEUVRES: Record<string, ManoeuvreDef> = {
   },
   grip: { label: '“Squeeze my fingers”', say: 'squeeze-fingers', anim: 'grip', group: 'To complete', shows: { title: 'Power', sub: 'normal in a pure cerebellar lesion' } },
   sensation: { label: 'Sharp touch (neurotip)', tool: 'pin', anim: 'pin', group: 'To complete' },
+
+  // The cranial nerves, in order: II; III, IV and VI; V; VII (and where a cause shows: the ear, the mouth, the parotid);
+  // VIII; IX to XII; then a quick look at the limbs.
+  acuity: { label: 'Visual acuity: read the chart, the other eye covered', tool: 'chart', anim: 'acuity', group: 'II: vision', shows: { title: 'Visual acuity (II)', sub: 'each eye in turn, glasses on' } },
+  'fields-confront': { label: '“Look at my nose; tell me when you see my finger move”', say: 'fields', anim: 'fields-hand', group: 'II: vision', shows: { title: 'Visual fields (II)', sub: 'by confrontation, each quadrant' } },
+  pupils: { label: 'Pupils: a light into each eye', tool: 'torch', anim: 'torch-eyes', group: 'II: vision', shows: { title: 'Pupils (II, III)', sub: 'direct and consensual; swing the light for an RAPD' } },
+  'eye-movements': {
+    label: '“Keep your head still and follow my finger; any double vision?”',
+    say: 'follow-finger',
+    anim: 'eyes-h',
+    group: 'III, IV, VI: eye movements',
+    shows: { title: 'Eye movements (III, IV, VI)', sub: 'an H; ptosis, diplopia, nystagmus' },
+  },
+  'face-touch': { label: 'Light touch with cotton wool: the {spot}', tool: 'cotton', anim: 'face-touch', group: 'V: face sensation and the jaw' },
+  'clench-jaw': { label: '“Clench your teeth”', say: 'clench-jaw', anim: 'clench', group: 'V: face sensation and the jaw', shows: { title: 'Masseters (V, motor)', sub: 'feel both bulge' } },
+  'raise-eyebrows': {
+    label: '“Raise your eyebrows”',
+    say: 'raise-eyebrows',
+    anim: 'ask:raise-eyebrows',
+    group: 'VII: the face moving',
+    shows: { title: 'Forehead (VII)', sub: 'weak in a lower motor neurone lesion; spared in an upper' },
+  },
+  'close-eyes': {
+    label: '“Close your eyes tight; don’t let me open them”',
+    say: 'close-eyes',
+    anim: 'ask:close-eyes',
+    group: 'VII: the face moving',
+    shows: { title: 'Eye closure (VII)', sub: 'cannot close: the eye rolls up (Bell’s phenomenon)' },
+  },
+  'show-teeth': { label: '“Show me your teeth”', say: 'show-teeth', anim: 'ask:show-teeth', group: 'VII: the face moving', shows: { title: 'Mouth (VII)', sub: 'the corner droops on the weak side' } },
+  'puff-cheeks': { label: '“Puff out your cheeks”', say: 'puff-cheeks', anim: 'ask:puff-cheeks', group: 'VII: the face moving', shows: { title: 'Cheeks (VII)', sub: 'air escapes on the weak side' } },
+  otoscope: { label: 'Otoscope: the ear canal, for vesicles', tool: 'otoscope', anim: 'otoscope', group: 'VII: a cause to see', shows: { title: 'Ear canal', sub: 'vesicles: Ramsay Hunt syndrome' } },
+  'look-mouth': { label: 'Look in the mouth with a torch', tool: 'torch', anim: 'look-mouth', group: 'VII: a cause to see', shows: { title: 'The mouth', sub: 'vesicles on the palate: Ramsay Hunt' } },
+  parotid: { label: 'Feel the parotid, in front of the ear', tool: 'feel', anim: 'parotid', group: 'VII: a cause to see', shows: { title: 'Parotid', sub: 'a mass can compress the nerve' } },
+  whisper: { label: 'Whisper a number in each ear, rubbing the other', say: 'whisper', anim: 'whisper', group: 'VIII: hearing', shows: { title: 'Hearing (VIII)', sub: 'whispered numbers, the other ear masked' } },
+  rinne: { label: 'Rinne: the tuning fork on the mastoid, then beside the ear', tool: 'fork', anim: 'fork', group: 'VIII: hearing', shows: { title: 'Rinne test', sub: 'normal: heard louder beside the ear than on the bone' } },
+  weber: { label: 'Weber: the tuning fork on the middle of the forehead', tool: 'fork', anim: 'weber', group: 'VIII: hearing', shows: { title: 'Weber test', sub: 'normal: heard in the middle' } },
+  'say-ah': { label: '“Open wide and say ‘ah’; now stick your tongue out”', say: 'open-mouth', anim: 'ask:open-mouth', group: 'IX to XII', shows: { title: 'Palate and tongue (IX, X, XII)', sub: 'the uvula central; the tongue straight' } },
+  'shrug-against': { label: '“Shrug your shoulders; push up against my hands”', say: 'shrug', anim: 'ask:shrug', group: 'IX to XII', shows: { title: 'Trapezius (XI)', sub: 'both strong' } },
+  'arms-out': { label: '“Arms out in front, palms up, eyes closed”', say: 'arms-out', anim: 'ask:arms-out', group: 'Limbs', wide: true, shows: { title: 'Pronator drift', sub: 'a drifting arm: an upper motor neurone (stroke)' } },
 
   // Clearing the neck: what you feel and what you ask.
   midline: { label: 'Feel down the middle of the back of the neck, one spinous process at a time', tool: 'press', anim: 'midline', group: 'Show the examination', shows: { title: 'Posterior midline', sub: 'tender here: image (and no movement test)' } },
