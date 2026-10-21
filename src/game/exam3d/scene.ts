@@ -89,8 +89,10 @@ const LIGHTS_BY_ANIM: Record<string, string[]> = {
   'foot-up': ['nerve'],
 }
 /** Manoeuvres are shown this much faster than they are timed below; a capillary refill and walking keep real time. */
-const SPEED = 1.8
-const REAL_TIME = new Set<string>(['crt', 'walk', 'speech', 'eyes-h', 'finger-nose', 'rapid-alt', 'tone-arm', 'tone-leg', 'heel-shin', 'sit-trunk', 'grip', 'acuity', 'fields-hand', 'torch-eyes', 'face-touch', 'clench', 'otoscope', 'look-mouth', 'parotid', 'whisper', 'fork', 'weber'])
+const SPEED = 2.5
+/** How much faster than life the patient's own movements are shown (a finger–nose, a face moving). */
+const PATIENT_PACE = 1.35
+const REAL_TIME = new Set<string>(['crt', 'walk', 'speech', 'eyes-h', 'finger-nose', 'rapid-alt', 'tone-arm', 'tone-leg', 'heel-shin', 'sit-trunk', 'grip', 'acuity', 'pin-at', 'fields-hand', 'torch-eyes', 'face-touch', 'clench', 'otoscope', 'look-mouth', 'parotid', 'whisper', 'fork', 'weber'])
 /** How long each manoeuvre takes (seconds, before `SPEED`); asking for a hand shape, 3.4. */
 const DURATION: Record<string, number> = {
   inspect: 2.2,
@@ -143,6 +145,7 @@ const DURATION: Record<string, number> = {
   'fields-hand': 5,
   'torch-eyes': 4,
   'face-touch': 2.4,
+  'pin-at': 2.4,
   clench: 2.6,
   otoscope: 3,
   'look-mouth': 3,
@@ -220,8 +223,9 @@ type Touch = {
   along?: [number, number, number]
   /** Where the hand goes, worked out once the body is posed (a hand on the collar as it goes on). */
   spot?: () => Spot | null
-  /** Where you stand for it: beside him and a little behind, on the side of the spot (an ear, a mastoid). */
-  from?: 'behind'
+  /** Where your arm comes from: beside him and a little behind, on the side of the spot (an ear, a mastoid); or
+   * straight down from above it (a hand on the far side of someone lying down). */
+  from?: 'behind' | 'above'
 }
 
 export const HANDS: Record<string, HandShape> = {
@@ -648,7 +652,9 @@ export class ExamScene {
     if (this.act) this.endAct()
     const ask = anim.startsWith('ask:') ? anim.slice(4) : null
     const d = anim.startsWith('pose:') ? 3.4 : ask ? (ASK_FOR[ask] ?? 2.6) : (DURATION[anim] ?? 2)
-    const speed = REAL_TIME.has(anim) || ask ? 1 : SPEED
+    // A capillary refill and walking take the time they take; the patient's own movements run a little brisker than life;
+    // the rest is shown at speed.
+    const speed = anim === 'crt' || anim === 'walk' ? 1 : REAL_TIME.has(anim) || ask ? PATIENT_PACE : SPEED
     // Something asked of her (a face moving, a shrug): she does it, as she would if asked in conversation.
     if (ask) this.play(ask, d)
     const leg = !!site && onLeg(site)
@@ -1157,13 +1163,13 @@ export class ExamScene {
           const valgus = Math.max(on(0.6, 1.8), on(3.5, 4.6))
           const varus = Math.max(on(1.8, 3), on(4.6, 5.7))
           const push = -0.003 * (pulses(0.8, 1.6, 1) + pulses(2, 2.8, 1) + pulses(3.7, 4.4, 1) + pulses(4.8, 5.5, 1))
-          if (valgus >= varus) {
-            grip('lateraljoint', 'flat', 'palm', valgus, push, { left: true })
-            grip('medialmalleolus', 'cup', 'palm', valgus)
-          } else {
-            grip('medialjoint', 'flat', 'palm', varus, push, { left: true })
-            grip('lateralmalleolus', 'cup', 'palm', varus)
-          }
+          // The leg taken a little out to the side, so your hand fits between the knees; the ankle held throughout; the
+          // hand at the knee goes over the top of it from one side to the other.
+          this.held[`hipabd-${s}`] = 16 * (ramp(0, 0.6) - ramp(5.6, 6))
+          grip('ankle', 'cup', 'palm', on(0.6, 5.7))
+          if (valgus > 0.5) grip('lateraljoint', 'flat', 'palm', valgus, push, { left: true })
+          else if (varus > 0.5) grip('medialjoint', 'flat', 'palm', varus, push, { left: true })
+          else if (a.t > 0.6 && a.t < 5.7) grip('patella', 'flat', 'palm', 1, 0.07, { left: true })
           break
         }
         case 'foot-up':
@@ -1181,8 +1187,14 @@ export class ExamScene {
           // Rolled to and fro through the trousers, both hands flat on the leg; a floppy leg lets the foot flop over
           // further than the roll.
           const w = on(0, a.dur)
-          grip('thigh', 'flat', 'palm', w, 0, { left: true })
-          grip('shin', 'flat', 'palm', w)
+ if (w > 0.02)
+            for (const [i, site] of [
+              [1, 'thigh'],
+              [0, 'shin'],
+            ] as const) {
+              const sp = this.spotNow(`${site}-${s}`)
+              if (sp) this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: `${site}-${s}`, hand: i, from: 'above', spot: () => ({ at: sp.at, n: sp.n, along: sp.n.clone() }) })
+            }
           const roll = Math.sin(Math.max(0, a.t - 0.5) * Math.PI * 1.5) * (ramp(0.3, 0.8) - ramp(a.dur - 0.7, a.dur - 0.2))
           this.held[`hiprot-${s}`] = 22 * roll
           if (this.signs.ataxia === s) this.held[`ankle-${s}`] = 14 * Math.sin(Math.max(0, a.t - 0.75) * Math.PI * 1.5) * (ramp(0.3, 0.8) - ramp(a.dur - 0.7, a.dur - 0.2))
@@ -1256,10 +1268,23 @@ export class ExamScene {
           this.held[`wrist-${s}`] = (floppy ? 38 : 12) * Math.sin(Math.max(0, a.t - 0.55) * Math.PI * 1.2) * w
           // Palms down on top of her wrist and of her elbow, fingers across the arm, each arm coming from your shoulder
           // (never along the raised forearm, its sleeve down into the couch).
-          const onTop = (bone: THREE.Object3D, r: number) => (): Spot => ({ at: bone.getWorldPosition(v(0, 0, 0)).add(v(0, r * this.scale, 0)), n: v(0, 1, 0), along: v(0, 0, -1) })
+          // One hand holds his wrist from the outer side; the other rests on his upper arm just above the elbow (which
+          // stays on the bed while the forearm comes up).
+          const outward = v(s === 'R' ? -1 : 1, 0, 0).applyQuaternion(this.body.quaternion)
+          const wristSide = (): Spot => {
+            const wr = R.hand[s].getWorldPosition(v(0, 0, 0)).lerp(R.forearm[s].getWorldPosition(v(0, 0, 0)), 0.12)
+            return { at: wr.addScaledVector(outward, 0.028 * this.scale), n: outward.clone(), along: v(0, 1, 0) }
+          }
+          // The outer side of the arm just above the elbow, the fingers toward the shoulder: the forearm comes up clear of it.
+          const aboveElbow = (): Spot => {
+            const sh = R.upperArm[s].getWorldPosition(v(0, 0, 0))
+            const el = R.forearm[s].getWorldPosition(v(0, 0, 0))
+            const n = outward.clone().addScaledVector(v(0, 1, 0), 0.35).normalize()
+            return { at: sh.clone().lerp(el, 0.7).addScaledVector(n, 0.04 * this.scale), n, along: sh.sub(el).normalize() }
+          }
           if (w > 0.02) {
-            this.touches.push({ grip: 'cup', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: `wrist-${s}`, hand: 0, spot: onTop(R.hand[s], 0.028) })
-            this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: `antecubital-${s}`, hand: 1, spot: onTop(R.forearm[s], 0.04) })
+            this.touches.push({ grip: 'cup', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: `wrist-${s}`, hand: 0, from: 'above', spot: wristSide })
+            this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: `antecubital-${s}`, hand: 1, from: 'above', spot: aboveElbow })
           }
           break
         }
@@ -1319,8 +1344,14 @@ export class ExamScene {
         case 'fields-hand': {
           // Your finger held out at arm's length between you, wiggled in each quarter of her field in turn.
           const w = on(0, a.dur)
-          const quad = Math.min(3, Math.floor((a.t / a.dur) * 4))
-          const at = this.fingerPoint(quad % 2 ? 38 : -38, quad < 2 ? 24 : -24, 0.55 * this.scale)
+          // Each quarter held, then a glide to the next.
+          const u = Math.min(3.999, (a.t / a.dur) * 4)
+          const quad = Math.floor(u)
+          const glide = smooth(Math.max(0, Math.min(1, (u - quad - 0.7) / 0.3)))
+          const corner = (q: number) => ({ h: q % 2 ? 38 : -38, v: q < 2 ? 24 : -24 })
+          const c0 = corner(quad)
+          const c1 = corner(Math.min(3, quad + 1))
+          const at = this.fingerPoint(c0.h + (c1.h - c0.h) * glide, c0.v + (c1.v - c0.v) * glide, 0.55 * this.scale)
           const eyes = this.eyesAt()
           if (at && eyes && w > 0.02) {
             const head = this.headAxes()
@@ -1332,17 +1363,24 @@ export class ExamScene {
         case 'torch-eyes': {
           // A pen torch brought in from the side to each eye in turn, a hand's breadth away.
           const w = on(0, a.dur)
-          const side: Side = a.t < a.dur / 2 ? 'R' : 'L'
-          const eye = this.siteWorld(`eye-${side}`)
-          if (eye && w > 0.02) {
+          const eR = this.siteWorld('eye-R')
+          const eL = this.siteWorld('eye-L')
+          if (eR && eL && w > 0.02) {
             const head = this.headAxes()
-            const from = head.face.clone().multiplyScalar(0.9).addScaledVector(head.right, side === 'R' ? 0.45 : -0.45).normalize()
-            const at = eye.clone().addScaledVector(from, 0.09 * this.scale)
-            this.touches.push({ grip: 'torch', contact: 'tool', gap: 0.14 * (1 - w), stroke: 0, site: `eye-${side}`, spot: () => ({ at, n: from.clone(), along: head.up.clone() }) })
+            const fromR = head.face.clone().multiplyScalar(0.9).addScaledVector(head.right, 0.45).normalize()
+            const fromL = head.face.clone().multiplyScalar(0.9).addScaledVector(head.right, -0.45).normalize()
+            const atR = eR.clone().addScaledVector(fromR, 0.09 * this.scale)
+            const atL = eL.clone().addScaledVector(fromL, 0.09 * this.scale)
+            // Held at each eye; between, carried out in front of the nose and across.
+            const f = smooth(Math.max(0, Math.min(1, (a.t / a.dur - 0.42) / 0.16)))
+            const at = atR.clone().lerp(atL, f).addScaledVector(head.face, 0.1 * this.scale * Math.sin(Math.PI * f))
+            const n = fromR.clone().lerp(fromL, f).normalize()
+            this.touches.push({ grip: 'torch', contact: 'tool', gap: 0.14 * (1 - w), stroke: 0, site: f < 0.5 ? 'eye-R' : 'eye-L', spot: () => ({ at, n, along: head.up.clone() }) })
           }
           break
         }
         case 'face-touch':
+        case 'pin-at':
         case 'parotid':
         case 'otoscope': {
           // Cotton wool dabbed on the face; two fingers pressing in front of the ear; the otoscope into the ear canal.
@@ -1350,11 +1388,12 @@ export class ExamScene {
           const head = this.headAxes()
           const spot = a.site ? this.spotNow(a.site) : null
           if (spot && w > 0.02) {
-            const dab = a.anim === 'face-touch' ? 0.01 * Math.max(0, Math.sin(k * Math.PI * 4)) : 0
-            const grip: Grip = a.anim === 'face-touch' ? 'cotton' : a.anim === 'otoscope' ? 'otoscope' : 'two-fingers'
+            const dab = a.anim === 'face-touch' || a.anim === 'pin-at' ? 0.01 * Math.max(0, Math.sin(k * Math.PI * 4)) : 0
+            const grip: Grip = a.anim === 'face-touch' ? 'cotton' : a.anim === 'pin-at' ? 'neurotip' : a.anim === 'otoscope' ? 'otoscope' : 'two-fingers'
             const contact: Contact = a.anim === 'parotid' ? 'fingertips' : 'tool'
-            const ear = a.anim !== 'face-touch'
-            this.touches.push({ grip, contact, gap: 0.14 * (1 - w) + dab, stroke: 0, site: a.site!, hand: ear && a.site?.endsWith('-L') ? 1 : 0, from: ear ? 'behind' : undefined, spot: () => ({ at: spot.at, n: spot.n, along: head.up.clone() }) })
+            const ear = a.anim === 'parotid' || a.anim === 'otoscope'
+            const lying = this.posture === 'supine'
+            this.touches.push({ grip, contact, gap: 0.14 * (1 - w) + dab, stroke: 0, site: a.site!, hand: ear && a.site?.endsWith('-L') ? 1 : 0, from: ear ? 'behind' : lying ? 'above' : undefined, spot: () => ({ at: spot.at, n: spot.n, along: head.up.clone() }) })
           }
           break
         }
@@ -1428,13 +1467,23 @@ export class ExamScene {
           break
         }
         case 'grip': {
-          // Two of your fingers in each of her hands; she squeezes.
-          const w = on(0, a.dur)
-          for (const side of SIDES) this.hands[side] = { name: 'fist', w: this.hands[side].name === 'fist' ? this.hands[side].w : 0, want: a.t > 0.6 && a.t < a.dur - 0.5 ? 1 : 0 }
-          if (w > 0.02) {
-            this.touches.push({ grip: 'two-fingers', contact: 'fingertips', gap: 0.14 * (1 - w), stroke: 0, site: 'palm-R' })
-            this.touches.push({ grip: 'two-fingers', contact: 'fingertips', gap: 0.14 * (1 - w), stroke: 0, site: 'palm-L', left: true })
+          // He brings his forearms up off the bed, hands open toward you; then your two fingers go into each hand and he
+          // squeezes them; your fingers come out before his arms go down.
+          const w = on(0.5, a.dur - 0.5)
+          const up = smooth(Math.max(0, Math.min(1, a.t / 0.5, (a.dur - a.t) / 0.5)))
+          for (const side of SIDES) {
+            this.held[`elbow-${side}`] = 85 * up
+            this.held[`shoulderflex-${side}`] = 10 * up
+            this.hands[side] = { name: 'fist', w: this.hands[side].name === 'fist' ? this.hands[side].w : 0, want: a.t > 0.9 && a.t < a.dur - 1 ? 0.55 : 0 }
           }
+          if (w > 0.02)
+            for (const [i, side] of [
+              [0, 'R'],
+              [1, 'L'],
+            ] as const) {
+              const sp = this.spotNow(`palm-${side}`)
+              if (sp) this.touches.push({ grip: 'two-fingers', contact: 'fingertips', gap: 0.14 * (1 - w), stroke: 0, site: `palm-${side}`, hand: i, from: 'above', spot: () => ({ at: sp.at, n: sp.n, along: sp.n.clone() }) })
+            }
           break
         }
         case 'midline': {
@@ -1646,7 +1695,7 @@ export class ExamScene {
    * The way the fingers point for a hand on a spot: away from the shoulder the arm comes from (you stand at her right
    * side; the assistant holding the head at the head end), squared to the surface; as asked if that leaves no way.
    */
-  private reach(i: number, spot: Spot, from?: 'behind') {
+  private reach(i: number, spot: Spot, from?: 'behind' | 'above') {
     const R = this.rig
     if (!R) return spot.along
     const q = this.body.quaternion
@@ -1657,8 +1706,20 @@ export class ExamScene {
     const neck = R.neck.getWorldPosition(v(0, 0, 0))
     // Reaching to her far side, you lean over her chest: the arm comes from lower down the body and higher up.
     const far = i < 2 && spot.at.clone().sub(neck).dot(RT) < -0.02 * k
+    // Sitting up: you stand in front of him and a little to his right, your shoulder above his head.
+    if (i < 2 && !from && this.posture !== 'supine' && !this.posture.startsWith('roll')) {
+      const flatF = F.clone().setY(0).normalize()
+      const flatRT = RT.clone().setY(0).normalize()
+      const standing = neck.clone().addScaledVector(flatF, 0.5 * k).addScaledVector(flatRT, (i === 0 ? 0.32 : 0.12) * k)
+      standing.y = Math.max(neck.y + 0.28 * k, 1.42 * k)
+      const away = spot.at.clone().sub(standing)
+      away.addScaledVector(spot.n, -away.dot(spot.n))
+      if (away.lengthSq() > 1e-6) return away.normalize().multiplyScalar(0.8).addScaledVector(spot.along, 0.2).normalize()
+    }
     const behind = spot.at.clone().sub(neck).dot(RT) >= 0 ? 1 : -1
-    const shoulder = from === 'behind'
+    const shoulder = from === 'above'
+      ? spot.at.clone().addScaledVector(F, 0.6 * k).addScaledVector(RT, 0.12 * k).addScaledVector(U, -0.08 * k)
+      : from === 'behind'
       ? neck.addScaledVector(RT, behind * 0.42 * k).addScaledVector(F, -0.22 * k).addScaledVector(U, 0.25 * k)
       : i >= 2
         ? neck.addScaledVector(U, 0.62 * k).addScaledVector(F, 0.42 * k).addScaledVector(RT, (i === 2 ? 0.18 : -0.18) * k)
@@ -1682,19 +1743,33 @@ export class ExamScene {
     let worst = 0
     let total = 0
     let way = v(0, 1, 0)
-    if (!kit) return { worst, total, way }
+    const caps = this.bodyNow()
     for (const { p, r } of hand.probes(sleeve)) {
       let d = 0
       let out = way
-      const a = kit.collar.depthIn(p, r)
-      if (a.depth > d) {
-        d = a.depth
-        out = a.out
+      // Into the body: the core of a limb, the trunk, the head (a hand on the skin is clear of it).
+      for (const c of caps) {
+        const ab = c.B.clone().sub(c.A)
+        const t = Math.max(0, Math.min(1, ab.lengthSq() > 1e-9 ? p.clone().sub(c.A).dot(ab) / ab.lengthSq() : 0))
+        const near = c.A.clone().addScaledVector(ab, t)
+        const dist = p.distanceTo(near)
+        const into = c.r + (c.rB - c.r) * t + r - dist
+        if (into > d) {
+          d = into
+          out = dist > 1e-6 ? p.clone().sub(near).divideScalar(dist) : v(0, 1, 0)
+        }
       }
-      const b = kit.blockDepth(p, r)
-      if (b.depth > d) {
-        d = b.depth
-        out = b.out
+      if (kit) {
+        const a = kit.collar.depthIn(p, r)
+        if (a.depth > d) {
+          d = a.depth
+          out = a.out
+        }
+        const b = kit.blockDepth(p, r)
+        if (b.depth > d) {
+          d = b.depth
+          out = b.out
+        }
       }
       if (p.x > 0 && p.x < COUCH.length && Math.abs(p.z) < COUCH.width / 2 && COUCH.top + 0.003 + r - p.y > d) {
         d = COUCH.top + 0.003 + r - p.y
@@ -1709,6 +1784,95 @@ export class ExamScene {
     return { worst, total, way }
   }
 
+  /** The body as capsules (bone to bone, the core of the limb there) and the head as a ball: their radii, found once. */
+  private caps: { a: THREE.Object3D; b: THREE.Object3D | null; r: number; rB: number }[] | null = null
+  /** Where each capsule is now (its radius tapering from one end to the other). */
+  private bodyNow(): { A: THREE.Vector3; B: THREE.Vector3; r: number; rB: number }[] {
+    const R = this.rig
+    if (!R) return []
+    const at = (o: THREE.Object3D) => o.getWorldPosition(v(0, 0, 0))
+    const headBall = () => {
+      const eyes = this.eyesAt() ?? at(R.head)
+      return eyes.addScaledVector(this.headAxes().face, -0.06 * this.scale)
+    }
+    if (!this.caps) {
+      const segs: [THREE.Object3D, THREE.Object3D][] = []
+      for (const s of SIDES) segs.push([R.upperArm[s], R.forearm[s]], [R.forearm[s], R.hand[s]], [R.thigh[s], R.calf[s]], [R.calf[s], R.foot[s]])
+      segs.push([R.hips, R.spine], [R.spine, R.chest], [R.chest, R.neck])
+      const verts: THREE.Vector3[] = []
+      const p = v(0, 0, 0)
+      for (const m of R.meshes) {
+        if (m.name.startsWith('bare-leg')) continue
+        const sm = m as THREE.SkinnedMesh
+        const pos = m.geometry.attributes.position as THREE.BufferAttribute
+        for (let i = 0; i < pos.count; i += 3) {
+          if (sm.isSkinnedMesh) sm.getVertexPosition(i, p)
+          else p.fromBufferAttribute(pos, i)
+          verts.push(p.clone().applyMatrix4(m.matrixWorld))
+        }
+      }
+      // Each bit of skin belongs to the bone it is nearest; a fifth of a bone's skin, at each end, lies nearer its line
+      // than this: a little in from there (a hand resting on the skin is clear of it).
+      const lines = segs.map(([a, b]) => ({ A: at(a), B: at(b) }))
+      const along = (q: THREE.Vector3, l: { A: THREE.Vector3; B: THREE.Vector3 }) => {
+        const ab = l.B.clone().sub(l.A)
+        const t = q.clone().sub(l.A).dot(ab) / Math.max(1e-9, ab.lengthSq())
+        return { t, d: q.distanceTo(l.A.clone().addScaledVector(ab, Math.max(0, Math.min(1, t)))) }
+      }
+      const near: { t: number; d: number }[][] = lines.map(() => [])
+      for (const q of verts) {
+        let best = -1
+        let bd = 0.25 * this.scale
+        let bt = 0
+        lines.forEach((l, i) => {
+          const x = along(q, l)
+          if (x.d < bd) {
+            bd = x.d
+            best = i
+            bt = x.t
+          }
+        })
+        if (best >= 0) near[best].push({ t: bt, d: bd })
+      }
+      const core = (i: number, from: number, to: number) => {
+        const ds = near[i].filter((x) => x.t >= from && x.t <= to).map((x) => x.d).sort((x, y) => x - y)
+        return Math.max(0.012, (ds.length ? ds[Math.floor(ds.length * 0.2)] : 0.03) - 0.006)
+      }
+      this.caps = segs.map(([a, b], i) => ({ a, b, r: core(i, 0.1, 0.45), rB: core(i, 0.55, 0.9) }))
+      this.caps.push({ a: R.head, b: null, r: 0.068 * this.scale, rB: 0.068 * this.scale })
+    }
+    return this.caps.map((c) => (c.b ? { A: at(c.a), B: at(c.b), r: c.r, rB: c.rB } : { A: headBall(), B: headBall(), r: c.r, rB: c.rB }))
+  }
+
+  /** Lift a hand out of anything it has gone into: out the way it was put on, unless that does not take it out. */
+  private release(hand: ExaminerHand, n: THREE.Vector3) {
+    for (let k = 0; k < 6; k++) {
+      const c = this.clash(hand, false)
+      if (c.worst < 0.0005) break
+      const way = n.dot(c.way) > 0.3 ? n : c.way
+      hand.shift(way.clone().multiplyScalar(c.worst + 0.0005))
+    }
+  }
+
+  /** How each hand was turned last frame (no hand turns faster than a wrist can). */
+  private lastTurn = new Map<ExaminerHand, THREE.Quaternion>()
+  private frameDt = 1 / 30
+  /** Turn a hand no faster than about 300° a second from how it was, about the point that touches. */
+  private steady(hand: ExaminerHand) {
+    const prev = this.lastTurn.get(hand)
+    if (prev) {
+      const most = 300 * DEG * this.frameDt
+      if (prev.angleTo(hand.group.quaternion) > most) {
+        const keep = hand.contactNow()
+        const want = hand.group.quaternion.clone()
+        hand.group.quaternion.copy(prev).rotateTowards(want, most)
+        hand.group.updateMatrixWorld(true)
+        hand.shift(keep.sub(hand.contactNow()))
+      }
+    }
+    this.lastTurn.set(hand, hand.group.quaternion.clone())
+  }
+
   /** How each hand last sat, from the way its arm comes: turned about the spot, its fingers tilted off it, lifted. */
   private turned: { yaw: number; pitch: number; lift: number }[] = [0, 1, 2, 3].map(() => ({ yaw: 0, pitch: 0, lift: 0 }))
 
@@ -1718,8 +1882,11 @@ export class ExamScene {
    * it), as little as it takes for the hand and its sleeve to clear the patient, the collar, the blocks and the couch.
    * Then lifted off anything it still touches.
    */
-  private settle(hand: ExaminerHand, i: number, spot: Spot, contact: Contact, gap: number, from?: 'behind') {
-    const pref = this.reach(i, spot, from)
+  private settle(hand: ExaminerHand, i: number, spot: Spot, contact: Contact, gap: number, from?: 'behind' | 'above', prefer?: THREE.Vector3) {
+    // The way the fingers would point, turned from only as far as needed to keep the hand and sleeve out of her.
+    const pref = prefer ? prefer.clone().addScaledVector(spot.n, -prefer.dot(spot.n)).normalize() : this.reach(i, spot, from)
+    // A hand just put out goes straight to its best way; one already there turns to it.
+    const fresh = !this.lastTurn.has(hand)
     const last = this.turned[i]
     const k = this.scale
     const pose = (yaw: number, pitch: number, lift: number) => {
@@ -1749,15 +1916,9 @@ export class ExamScene {
     }
     // Move only part of the way each frame toward it (no flicking).
     const step = (from: number, to: number, most: number) => from + Math.max(-most, Math.min(most, to - from))
-    this.turned[i] = { yaw: step(last.yaw, best.yaw, 0.2), pitch: step(last.pitch, best.pitch, 0.15), lift: step(last.lift, best.lift, 0.006) }
+    this.turned[i] = fresh ? { yaw: best.yaw, pitch: best.pitch, lift: best.lift } : { yaw: step(last.yaw, best.yaw, 0.2), pitch: step(last.pitch, best.pitch, 0.15), lift: step(last.lift, best.lift, 0.006) }
     pose(this.turned[i].yaw, this.turned[i].pitch, this.turned[i].lift)
-    for (let k = 0; k < 6; k++) {
-      const c = this.clash(hand, false)
-      if (c.worst < 0.0005) break
-      // Out the way it was put on (off what it holds), unless that does not take it out of what it is in.
-      const n = spot.n.dot(c.way) > 0.3 ? spot.n : c.way
-      hand.shift(n.clone().multiplyScalar(c.worst + 0.0005))
-    }
+    this.release(hand, spot.n)
   }
 
   /** Her eyes, between the two. */
@@ -1893,7 +2054,8 @@ export class ExamScene {
    * Bring the end of a limb (a fingertip, a heel) to a point: two bones, the joint between them bending toward `pole`;
    * then the lower bone swung so the end lands on it.
    */
-  private reachLimb(root: THREE.Object3D, mid: THREE.Object3D, tipSite: string, target: THREE.Vector3, pole: THREE.Vector3) {
+  private reachLimb(root: THREE.Object3D, mid: THREE.Object3D, tipSite: string, target: THREE.Vector3, pole: THREE.Vector3, maxBend = 140, end?: THREE.Object3D) {
+    let goal = target
     for (let i = 0; i < 2; i++) {
       root.updateWorldMatrix(true, true)
       const A = root.getWorldPosition(v(0, 0, 0))
@@ -1903,8 +2065,11 @@ export class ExamScene {
       const l1 = A.distanceTo(B)
       const l2 = B.distanceTo(C)
       const to = target.clone().sub(A)
-      const d = Math.max(Math.abs(l1 - l2) + 1e-3, Math.min(l1 + l2 - 1e-3, to.length()))
+      // Bent no further than the joint goes (`maxBend`): nearer than that, the end goes as close as it can.
+      const tightest = Math.sqrt(Math.max(0, l1 * l1 + l2 * l2 - 2 * l1 * l2 * Math.cos((180 - maxBend) * DEG)))
+      const d = Math.max(Math.abs(l1 - l2) + 1e-3, tightest, Math.min(l1 + l2 - 1e-3, to.length()))
       const dir = to.normalize()
+      goal = A.clone().addScaledVector(dir, d)
       const along = (l1 * l1 + d * d - l2 * l2) / (2 * d)
       const h = Math.sqrt(Math.max(0, l1 * l1 - along * along))
       const bend = pole.clone().addScaledVector(dir, -pole.dot(dir))
@@ -1916,7 +2081,16 @@ export class ExamScene {
       const B2 = mid.getWorldPosition(v(0, 0, 0))
       const C2 = this.siteWorld(tipSite)
       if (!C2) return
-      turn(mid, new THREE.Quaternion().setFromUnitVectors(C2.sub(B2).normalize(), target.clone().sub(B2).normalize()))
+      turn(mid, new THREE.Quaternion().setFromUnitVectors(C2.sub(B2).normalize(), goal.clone().sub(B2).normalize()))
+    }
+    // The last of the way by the wrist (at most 75°): a finger brought to the nose.
+    if (end && goal.distanceTo(target) > 1e-3) {
+      end.updateWorldMatrix(true, true)
+      const W = end.getWorldPosition(v(0, 0, 0))
+      const C3 = this.siteWorld(tipSite)
+      if (!C3) return
+      const q = new THREE.Quaternion().setFromUnitVectors(C3.sub(W).normalize(), target.clone().sub(W).normalize())
+      turn(end, new THREE.Quaternion().slerp(q, Math.min(1, (75 * DEG) / Math.max(1e-6, 2 * Math.acos(Math.min(1, Math.abs(q.w)))))))
     }
   }
 
@@ -1994,7 +2168,10 @@ export class ExamScene {
         const along = U.clone().multiplyScalar(t.along[0]).addScaledVector(F, t.along[1]).addScaledVector(LT, t.along[2]).normalize()
         const at = spot0.at.clone().addScaledVector(along, t.stroke)
         if (this.kit) this.settle(hand, t.hand ?? (t.left ? 1 : 0), { at, n: spot0.n, along }, t.contact, t.gap)
-        else hand.place(at, spot0.n, along, t.contact, t.gap)
+        else {
+          hand.place(at, spot0.n, along, t.contact, t.gap)
+          this.release(hand, spot0.n)
+        }
         if (!this.contact && !this.shot) this.contact = { at: spot0.at, n: spot0.n, along, profile: false }
         continue
       }
@@ -2009,7 +2186,7 @@ export class ExamScene {
         const flank = Math.abs(spot0.n.dot(toYou)) > 0.5
         const along = t.across === false ? axis.clone() : flank ? axis.clone().negate() : across
         const at = spot0.at.clone().addScaledVector(t.across ? across : axis, t.stroke)
-        hand.place(at, spot0.n, along, t.contact, t.gap)
+        this.settle(hand, t.hand ?? (t.left ? 1 : 0), { at, n: spot0.n, along }, t.contact, t.gap, undefined, along)
         if (!this.contact && !this.shot) this.contact = { at: spot0.at, n: spot0.n, along, profile: false }
         continue
       }
@@ -2029,10 +2206,16 @@ export class ExamScene {
       // Stretching the fingers back: the hand laid along them from the palm side, not on the very tips.
       const back = a.anim === 'stretch' ? -0.03 * this.scale : 0
       const at = spot.at.clone().addScaledVector(axis, t.stroke + back)
-      hand.place(at, spot.n, along, t.contact, t.gap)
+      // Your arm from your shoulder, in front of her, not along her forearm from her elbow.
+      this.settle(hand, t.hand ?? (t.left ? 1 : 0), { at, n: spot.n, along }, t.contact, t.gap)
       if (!this.contact) this.contact = { at: spot.at, n: spot.n, along, profile: a.anim === 'stretch' }
     }
-    for (const h of all) if (!placed.has(h)) h.hide()
+    for (const h of all) {
+      if (!placed.has(h)) {
+        h.hide()
+        this.lastTurn.delete(h)
+      } else this.steady(h)
+    }
   }
 
   /** Turn the hand about the forearm (at most a quarter turn) so the spot being examined faces you. */
@@ -2602,9 +2785,9 @@ export class ExamScene {
     // A fingertip or a heel brought to where it must be (the finger–nose and heel–shin tests).
     for (const s of SIDES) {
       const arm = this.reachTo.arm[s]
-      if (arm) this.reachLimb(R.upperArm[s], R.forearm[s], `${arm.tip ?? 'pulp'}-${s}`, arm.at, arm.pole)
+      if (arm) this.reachLimb(R.upperArm[s], R.forearm[s], `${arm.tip ?? 'pulp'}-${s}`, arm.at, arm.pole, 140, R.hand[s])
       const leg = this.reachTo.leg[s]
-      if (leg) this.reachLimb(R.thigh[s], R.calf[s], `heel-${s}`, leg.at, leg.pole)
+      if (leg) this.reachLimb(R.thigh[s], R.calf[s], `heel-${s}`, leg.at, leg.pole, 135)
     }
     this.presentSpot(R)
     poseEyes(R, this.bind, this.body, this.faceAt())
@@ -2903,6 +3086,7 @@ export class ExamScene {
     if (this.disposed) return
     const now = performance.now()
     const dt = Math.min(0.1, (now - this.last) / 1000)
+    this.frameDt = Math.max(1 / 240, dt)
     this.last = now
     this.time += dt
     if (this.moveT < 1) this.moveT = Math.min(1, this.moveT + dt / this.moveDur)

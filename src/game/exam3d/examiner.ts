@@ -232,6 +232,7 @@ export class ExaminerHand {
    * running along `along`. The palm faces the skin, except for `back` (the backs of the fingers do).
    */
   place(point: THREE.Vector3, normal: THREE.Vector3, along: THREE.Vector3, contact: Contact, gap: number) {
+    this.touching = contact
     const n = normal.clone().normalize()
     const z = along.clone().sub(n.clone().multiplyScalar(along.dot(n)))
     if (z.lengthSq() < 1e-6) z.set(1, 0, 0).sub(n.clone().multiplyScalar(n.x))
@@ -254,6 +255,14 @@ export class ExaminerHand {
 
   hide() {
     this.group.visible = false
+  }
+
+  /** What touches, as last placed. */
+  private touching: Contact = 'palm'
+  /** Where the part that touches is now, in the world. */
+  contactNow() {
+    this.group.updateMatrixWorld(true)
+    return this.contactPoint(this.touching)
   }
 
   /**

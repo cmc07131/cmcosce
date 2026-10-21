@@ -60,6 +60,7 @@ export type Anim =
   | 'fields-hand'
   | 'torch-eyes'
   | 'face-touch'
+  | 'pin-at'
   | 'clench'
   | 'otoscope'
   | 'look-mouth'
@@ -245,7 +246,7 @@ export const MANOEUVRES: Record<string, ManoeuvreDef> = {
     shows: { title: 'Truncal ataxia', sub: 'sways and leans toward the lesion; your hands ready to catch' },
   },
   grip: { label: '“Squeeze my fingers”', say: 'squeeze-fingers', anim: 'grip', group: 'To complete', shows: { title: 'Power', sub: 'normal in a pure cerebellar lesion' } },
-  sensation: { label: 'Sharp touch (neurotip)', tool: 'pin', anim: 'pin', group: 'To complete' },
+  sensation: { label: 'Sharp touch (neurotip)', tool: 'pin', anim: 'pin-at', group: 'To complete' },
 
   // The cranial nerves, in order: II; III, IV and VI; V; VII (and where a cause shows: the ear, the mouth, the parotid);
   // VIII; IX to XII; then a quick look at the limbs.

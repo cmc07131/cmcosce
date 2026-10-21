@@ -6,7 +6,7 @@ import { TILE, actorSprite } from '~/game/pixel/art'
 import { grassOverlay, renderWorld } from './art'
 import { charAt, tileKind, worldSolids, type World } from './model'
 
-const STEP_MS = 180
+const STEP_MS = 110
 
 type Visual = { x: number; y: number; facing: Dir; frame: number; bob: number }
 type Glide = { sx: number; sy: number; tx: number; ty: number; facing: Dir; t: number; stride: number }

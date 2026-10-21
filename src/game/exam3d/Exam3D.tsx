@@ -9,7 +9,7 @@ import { buzz, sfx } from '../sfx'
 import { CORE_TOOLS, SAYS, sayOf, toolById, TOOLS, type SayDef } from './catalog'
 import { Illustration, illustrationFor, type IllustrationKind } from './Illustration'
 import { SAY_FOR_POSTURE, actWords, condWords, nextAct, sitesFor, unmet } from './hints'
-import { eventOf, headings, offerLabel, offerOf, type Offer } from './manoeuvres'
+import { MANOEUVRES, eventOf, headings, offerLabel, offerOf, type Offer } from './manoeuvres'
 import { advance, freshProgress, matches, parseDo, toolsOf, type ExamEvent, type Plan, type Progress } from './model'
 import { ExamScene, HANDS, type Limb, type Posture, type View } from './scene'
 import { SITES, onLeg, regionOf, siteLabel, siteOf, spotLabel } from './sites'
@@ -200,7 +200,10 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
     const look = body.drape || body.manikin ? 'realistic' : useSettings.getState().patientModel
     const s = new ExamScene(host.current, kind, look, body.posture ?? 'supine', body)
     scene.current = s
-    if (import.meta.env.DEV) Object.assign(window, { __exam: s, __hands: HANDS })
+    if (import.meta.env.DEV) {
+      Object.assign(window, { __exam: s, __hands: HANDS, __manoeuvres: MANOEUVRES })
+      void import('./devtools').then((d) => d.installDevtools(s, MANOEUVRES))
+    }
     s.ready.then(() => {
       // How the patient keeps the injured limb, whatever position they are in.
       for (const [key, deg] of Object.entries(body.holds ?? {})) {

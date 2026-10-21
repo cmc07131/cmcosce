@@ -51,9 +51,9 @@ export type ScreenHandle = {
   slap: (npcId: string) => void
 }
 
-const STEP_MS = 190
+const STEP_MS = 120
 /** Staff on an errand walk briskly: waiting for them is not the exam. */
-const NPC_STEP_MS = 110
+const NPC_STEP_MS = 85
 
 type Visual = { x: number; y: number; facing: Dir; frame: number; bob: number }
 type Glide = { sx: number; sy: number; tx: number; ty: number; facing: Dir; t: number; stride: number }
