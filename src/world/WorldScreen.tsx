@@ -3,6 +3,7 @@ import { findPath, keyOf, step } from '~/engine/grid'
 import type { Dir, Pos, Tile } from '~/engine/schema'
 import { heldDir } from '~/game/input'
 import { TILE, actorSprite } from '~/game/pixel/art'
+import { useSettings } from '~/game/settings'
 import { grassOverlay, renderWorld } from './art'
 import { charAt, tileKind, worldSolids, type World } from './model'
 
@@ -131,7 +132,7 @@ export function WorldScreen({
       const dt = Math.min(32, now - last)
       last = now
       if (!pausedRef.current && glide.current) {
-        glide.current.t += dt / STEP_MS
+        glide.current.t += (dt * useSettings.getState().walkSpeed) / STEP_MS
         const m = glide.current
         const t = Math.min(1, m.t)
         visual.current = { x: m.sx + (m.tx - m.sx) * t, y: m.sy + (m.ty - m.sy) * t, facing: m.facing, frame: t < 0.5 ? m.stride : 0, bob: t < 0.5 ? 1 : 0 }

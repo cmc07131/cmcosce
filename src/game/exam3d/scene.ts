@@ -5,6 +5,7 @@ import { COLLAR_OFF, COLLAR_ON, type CollarPose } from '../body3d/stifneck'
 import { bareLegs } from '../body3d/legs'
 import { DEG, aim, poseEyes, turn, type Credit, type Eyes, type Rig, type Side } from '../body3d/rig'
 import { COUCH, buildCouch, buildRoom, createRenderer } from '../body3d/stage'
+import { useSettings } from '../settings'
 import { ExaminerHand, type Contact, type Grip } from './examiner'
 import { antalgic } from './gait'
 import type { Anim } from './manoeuvres'
@@ -654,7 +655,9 @@ export class ExamScene {
     const d = anim.startsWith('pose:') ? 3.4 : ask ? (ASK_FOR[ask] ?? 2.6) : (DURATION[anim] ?? 2)
     // A capillary refill and walking take the time they take; the patient's own movements run a little brisker than life;
     // the rest is shown at speed.
-    const speed = anim === 'crt' || anim === 'walk' ? 1 : REAL_TIME.has(anim) || ask ? PATIENT_PACE : SPEED
+    // The player's chosen pace (settings) on top, except for the capillary refill, which is timed.
+    const pace = anim === 'crt' ? 1 : useSettings.getState().animSpeed
+    const speed = (anim === 'crt' || anim === 'walk' ? 1 : REAL_TIME.has(anim) || ask ? PATIENT_PACE : SPEED) * pace
     // Something asked of her (a face moving, a shrug): she does it, as she would if asked in conversation.
     if (ask) this.play(ask, d)
     const leg = !!site && onLeg(site)

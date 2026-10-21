@@ -5,7 +5,7 @@ import { isReviewed } from './reviewed'
 import type { Pos } from '~/engine/schema'
 import { Controller } from '~/game/Controller'
 import { press, useButtons } from '~/game/input'
-import { useSettings } from '~/game/settings'
+import { speedLabel, useSettings } from '~/game/settings'
 import { sfx } from '~/game/sfx'
 import { TextBox, type TextBoxHandle } from '~/game/TextBox'
 import { NavItem, Win, useCursor } from '~/game/ui'
@@ -301,6 +301,8 @@ function WorldMenu({ onClose, onCardex, onStations, onTitle }: { onClose: () => 
   const root = useRef<HTMLDivElement>(null)
   const sound = useSettings((s) => s.sound)
   const toggleSound = useSettings((s) => s.toggleSound)
+  const walkSpeed = useSettings((s) => s.walkSpeed)
+  const cycleWalkSpeed = useSettings((s) => s.cycleWalkSpeed)
   useCursor(root, { priority: 20, onBack: onClose })
   return (
     <div className="absolute inset-0 z-40 flex justify-end bg-black/20 p-2" data-testid="world-menu" onClick={onClose}>
@@ -309,6 +311,7 @@ function WorldMenu({ onClose, onCardex, onStations, onTitle }: { onClose: () => 
           <NavItem testId="menu-cardex" onClick={onCardex}>CARDEX</NavItem>
           <NavItem testId="menu-stations" onClick={onStations}>STATIONS</NavItem>
           <NavItem onClick={toggleSound}>SOUND {sound ? 'ON' : 'OFF'}</NavItem>
+          <NavItem testId="world-walk-speed" onClick={cycleWalkSpeed}>WALK {speedLabel(walkSpeed)}</NavItem>
           <NavItem onClick={onTitle}>TITLE</NavItem>
           <NavItem onClick={onClose}>EXIT</NavItem>
         </Win>

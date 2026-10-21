@@ -11,6 +11,7 @@ import {
 } from '~/engine/grid'
 import { readoutText, type Dir, type Pack, type Pos, type Tile } from '~/engine/schema'
 import { heldDir } from './input'
+import { useSettings } from './settings'
 import {
   FLOOR_KINDS,
   INK,
@@ -371,7 +372,7 @@ export const Screen = forwardRef<
       const dt = Math.min(32, now - last)
       last = now
       if (!pausedRef.current && glide.current) {
-        glide.current.t += dt / STEP_MS
+        glide.current.t += (dt * useSettings.getState().walkSpeed) / STEP_MS
         const m = glide.current
         const t = Math.min(1, m.t)
         visual.current = {
@@ -469,7 +470,7 @@ export const Screen = forwardRef<
     w.to = null
     w.t = 0
     w.path = best ?? []
-    w.deadline = performance.now() + w.path.length * NPC_STEP_MS + 1500
+    w.deadline = performance.now() + (w.path.length * NPC_STEP_MS) / useSettings.getState().walkSpeed + 1500
   }
 
   function arriveAt(npcId: string, w: Walker) {
@@ -520,7 +521,7 @@ export const Screen = forwardRef<
         w.t = 0
         npcVis.current[npcId] = { ...npcVis.current[npcId], facing: facingBetween(w.from, next) }
       }
-      w.t += dt / NPC_STEP_MS
+      w.t += (dt * useSettings.getState().walkSpeed) / NPC_STEP_MS
       const t = Math.min(1, w.t)
       npcVis.current[npcId] = { x: w.from.x + (w.to.x - w.from.x) * t, y: w.from.y + (w.to.y - w.from.y) * t, facing: npcVis.current[npcId].facing }
       if (t >= 1) {

@@ -3,7 +3,7 @@ import { examinerClause, itemLabel } from '~/engine/judge'
 import type { Pack } from '~/engine/schema'
 import { removeCustomModel, saveCustomModel } from './positional/customModel'
 import type { AvatarId } from './positional/scene3d'
-import { useSettings } from './settings'
+import { speedLabel, useSettings } from './settings'
 import { NavItem, Win, useCursor } from './ui'
 
 type Page = 'root' | 'bag' | 'marks' | 'leave' | 'patient' | 'settings' | 'restart'
@@ -56,6 +56,10 @@ export function StartMenu({
   const patientModel = useSettings((s) => s.patientModel)
   const customModelName = useSettings((s) => s.customModelName)
   const setPatientModel = useSettings((s) => s.setPatientModel)
+  const walkSpeed = useSettings((s) => s.walkSpeed)
+  const animSpeed = useSettings((s) => s.animSpeed)
+  const cycleWalkSpeed = useSettings((s) => s.cycleWalkSpeed)
+  const cycleAnimSpeed = useSettings((s) => s.cycleAnimSpeed)
   const file = useRef<HTMLInputElement>(null)
   const [modelNote, setModelNote] = useState<string | null>(null)
   const cursor = useCursor(root, {
@@ -184,6 +188,9 @@ export function StartMenu({
               COACH: {coach === 'guided' ? 'GUIDED' : coach === 'objectives' ? 'OBJECTIVES' : 'OFF'}
             </NavItem>
             <p className="menu-note">Guided shows the step and what to do next; objectives, the step only; off, like the exam.</p>
+            <NavItem testId="menu-walk-speed" onClick={cycleWalkSpeed}>WALK SPEED: {speedLabel(walkSpeed)}</NavItem>
+            <NavItem testId="menu-anim-speed" onClick={cycleAnimSpeed}>EXAM SPEED: {speedLabel(animSpeed)}</NavItem>
+            <p className="menu-note">Walk: you and the staff, on the map and in the room. Exam: the 3D examinations.</p>
             <NavItem testId="menu-names" onClick={toggleLabels}>NAME TAGS: {labels ? 'ON' : 'OFF'}</NavItem>
             <NavItem testId="menu-lang" onClick={toggleLang}>PATIENT SPEAKS: {patientLang === 'zh' ? '中文' : 'ENGLISH'}</NavItem>
             <NavItem onClick={() => go('root')}>BACK</NavItem>
