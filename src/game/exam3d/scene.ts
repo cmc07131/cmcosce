@@ -902,8 +902,8 @@ export class ExamScene {
         return { target: () => this.eyesAt()?.addScaledVector(U, -0.05 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(RT, 0.55).addScaledVector(U, 0.05), dist: 0.5 }
       case 'eyes-h':
         // From the foot of the bed, above: her eyes, and your finger above them moving clear of the line of sight.
-        // Sitting up: from in front, a little to his right.
-        if (this.posture !== 'supine') return { target: () => this.eyesAt()?.addScaledVector(F, 0.15 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(RT, 0.45).addScaledVector(U, 0.12), dist: 0.8 }
+        // Sitting up: from just behind your shoulder, your finger and his eyes both in view wherever it goes.
+        if (this.posture !== 'supine') return { target: () => this.eyesAt()?.addScaledVector(F, 0.22 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(RT, 0.1).addScaledVector(U, 0.04), dist: 1.15 }
         return { target: () => this.eyesAt()?.addScaledVector(F, 0.17 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(U, -0.55).addScaledVector(RT, 0.08), dist: 0.85 }
       case 'finger-nose':
         // Her face, the arm reaching up, your finger above: the right arm from her left; the left arm from the foot of
@@ -941,7 +941,8 @@ export class ExamScene {
             { target: () => this.eyesAt()?.addScaledVector(F, 0.2 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(U, 0.12).addScaledVector(RT, 0.08), dist: 1.45 }
           : { target: () => this.eyesAt()?.addScaledVector(U, -0.03 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(RT, 0.3).addScaledVector(U, 0.08), dist: 0.55 }
       case 'face-touch':
-        return { target: () => this.eyesAt()?.addScaledVector(U, -0.03 * this.scale) ?? at(R.head), dir: F.clone().multiplyScalar(0.8).addScaledVector(RT, side === 'L' ? -0.6 : 0.6).addScaledVector(U, 0.1), dist: 0.6 }
+        // From in front, turned a little toward the side being touched; your arm comes up from below.
+        return { target: () => this.eyesAt()?.addScaledVector(U, -0.03 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(RT, side === 'L' ? -0.3 : 0.3).addScaledVector(U, 0.15), dist: 0.65 }
       case 'whisper':
       case 'weber':
         return { target: () => this.eyesAt()?.addScaledVector(U, -0.02 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(U, 0.1), dist: 0.75 }
@@ -1254,11 +1255,16 @@ export class ExamScene {
           // Your index finger held up in front of her eyes, moved in an H; her eyes follow it (see faceAt).
           const w = on(0, a.dur)
           const g = gazePath(a.t, a.dur)
-          const at = this.fingerPoint(g.h, g.v, 0.38 * this.scale)
+          const upright = this.posture !== 'supine'
+          // Sitting up: your arm out in front of him, the index finger pointing up, about half a metre from his eyes.
+          const at = this.fingerPoint(g.h, g.v, (upright ? 0.5 : 0.38) * this.scale)
           const eyes = this.eyesAt()
           if (at && eyes && w > 0.02) {
             const head = this.headAxes()
-            this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - w), stroke: 0, site: 'eye-R', spot: () => ({ at, n: at.clone().sub(eyes).normalize(), along: head.up.clone() }) })
+            if (upright) {
+              const lift = 0.12 * this.scale * (1 - w)
+              this.touches.push({ grip: 'press', contact: 'index', gap: 0, stroke: 0, site: 'eye-R', hand: 0, exact: true, spot: () => ({ at: at.clone().addScaledVector(head.up, -lift), n: head.face.clone(), along: head.up.clone().addScaledVector(head.face, -0.3) }) })
+            } else this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - w), stroke: 0, site: 'eye-R', spot: () => ({ at, n: at.clone().sub(eyes).normalize(), along: head.up.clone() }) })
           }
           break
         }
@@ -1450,15 +1456,7 @@ export class ExamScene {
             this.touches.push({ grip: 'torch', contact: 'tool', gap: 0, stroke: 0, site: f < 0.5 ? 'eye-R' : 'eye-L', hand: 0, aim: { tip, dir: n.clone().negate(), arm } })
             // The light, only while it is on an eye.
             const lit = w * (1 - Math.sin(Math.PI * f))
-            this.torchLight.position.copy(tip)
-            this.torchLight.target.position.copy(pupil)
-            this.torchLight.target.updateMatrixWorld()
-            this.torchLight.intensity = 0.35 * lit
-            this.beam.visible = lit > 0.05
-            this.beam.position.copy(tip)
-            this.beam.lookAt(pupil)
-            this.beam.scale.set(1, 1, tip.distanceTo(pupil))
-            ;(this.beam.material as THREE.MeshBasicMaterial).opacity = 0.16 * lit
+            this.shine(tip, pupil, lit)
           }
           break
         }
@@ -1470,12 +1468,32 @@ export class ExamScene {
           const w = on(0, a.dur)
           const head = this.headAxes()
           const spot = a.site ? this.spotNow(a.site) : null
-          if (spot && w > 0.02) {
+          const lying = this.posture === 'supine'
+          const sideOf = (a.site?.match(/-(R|L)$/)?.[1] ?? 'R') as Side
+          const outward = head.right.clone().multiplyScalar(sideOf === 'R' ? 1 : -1)
+          if (spot && w > 0.02 && !lying && (a.anim === 'face-touch' || a.anim === 'pin-at')) {
+            // From in front: the cotton wisp (or the pin) held like a pen and dabbed on the skin, your forearm running
+            // down and back toward you, out to that side.
+            const dab = 0.01 * Math.max(0, Math.sin(k * Math.PI * 4))
+            const tip = spot.at.clone().addScaledVector(spot.n, (0.14 * (1 - w) + dab) * this.scale)
+            const arm = head.face.clone().multiplyScalar(0.6).addScaledVector(head.up, -0.75).addScaledVector(outward, a.site === 'forehead' ? 0.15 : 0.2)
+            this.touches.push({ grip: a.anim === 'face-touch' ? 'cotton' : 'neurotip', contact: 'tool', gap: 0, stroke: 0, site: a.site!, hand: 0, aim: { tip, dir: spot.n.clone().negate(), arm } })
+          } else if (spot && w > 0.02 && a.anim === 'otoscope' && !lying) {
+            // Beside him: the pinna pulled up and back by one hand from behind and above it, the otoscope held like a pen
+            // in the other, its speculum level into the ear canal, your forearm below it and toward his face.
+            const canal = spot.at.clone().addScaledVector(spot.n, (0.004 + 0.12 * (1 - w)) * this.scale)
+            const into = spot.n.clone().negate().addScaledVector(head.face, 0.15).normalize()
+            const arm = head.up.clone().multiplyScalar(-0.75).addScaledVector(head.face, 0.45).addScaledVector(outward, 0.35)
+            const near = sideOf === 'L' ? 1 : 0
+            this.touches.push({ grip: 'otoscope', contact: 'tool', gap: 0, stroke: 0, site: a.site!, hand: near, aim: { tip: canal, dir: into, arm } })
+            const helix = spot.at.clone().addScaledVector(head.up, 0.03 * this.scale).addScaledVector(head.face, -0.015 * this.scale)
+            const pull = 0.006 * this.scale * w
+            this.touches.push({ grip: 'press', contact: 'index', gap: 0, stroke: 0, site: a.site!, hand: 1 - near, exact: true, spot: () => ({ at: helix.clone().addScaledVector(head.up, pull).addScaledVector(head.face, -pull), n: spot.n.clone().addScaledVector(head.up, 0.5).normalize(), along: head.face.clone().multiplyScalar(0.6).addScaledVector(head.up, -0.6) }) })
+          } else if (spot && w > 0.02) {
             const dab = a.anim === 'face-touch' || a.anim === 'pin-at' ? 0.01 * Math.max(0, Math.sin(k * Math.PI * 4)) : 0
             const grip: Grip = a.anim === 'face-touch' ? 'cotton' : a.anim === 'pin-at' ? 'neurotip' : a.anim === 'otoscope' ? 'otoscope' : 'two-fingers'
             const contact: Contact = a.anim === 'parotid' ? 'fingertips' : 'tool'
             const ear = a.anim === 'parotid' || a.anim === 'otoscope'
-            const lying = this.posture === 'supine'
             this.touches.push({ grip, contact, gap: 0.14 * (1 - w) + dab, stroke: 0, site: a.site!, hand: ear && a.site?.endsWith('-L') ? 1 : 0, from: ear ? 'behind' : lying ? 'above' : undefined, spot: () => ({ at: spot.at, n: spot.n, along: head.up.clone() }) })
           }
           break
@@ -1483,13 +1501,30 @@ export class ExamScene {
         case 'look-mouth': {
           // Mouth wide open (see faceAt), a torch shone in from in front.
           const w = on(0, a.dur)
-          const mouth = this.siteWorld('mouth')
-          if (mouth && w > 0.02) {
-            const head = this.headAxes()
-            const from = head.face.clone().addScaledVector(head.up, -0.25).addScaledVector(head.right, 0.2).normalize()
-            const at = mouth.clone().addScaledVector(from, 0.1 * this.scale)
-            this.touches.push({ grip: 'torch', contact: 'tool', gap: 0.14 * (1 - w), stroke: 0, site: 'mouth', spot: () => ({ at, n: from.clone(), along: head.up.clone() }) })
-          }
+          this.torchInMouth(w)
+          break
+        }
+        case 'ask:open-mouth':
+          // Ah: the pen torch on the palate as he opens wide.
+          this.torchInMouth(on(0.3, a.dur))
+          break
+        case 'ask:close-eyes': {
+          // Screwed up tight, and you try to open them: your thumbs on his brows, lifting.
+          const w = on(0.6, a.dur - 0.2)
+          const head = this.headAxes()
+          if (w > 0.02)
+            for (const [i, side] of [
+              [0, 'L'],
+              [1, 'R'],
+            ] as const) {
+              const eye = this.siteWorld(`eye-${side}`)
+              if (!eye) continue
+              const lift = 0.004 * Math.max(0, Math.sin((a.t - 0.8) * Math.PI * 2))
+              const out = head.right.clone().multiplyScalar(side === 'R' ? 1 : -1)
+              // Your palms on his temples, fingers up; the thumbs come forward onto his brows and lift.
+              const temple = eye.addScaledVector(out, 0.05 * this.scale).addScaledVector(head.up, (0.035 + lift) * this.scale).addScaledVector(head.face, -0.035 * this.scale)
+              this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.12 * (1 - w) * this.scale, stroke: 0, site: `eye-${side}`, hand: i, exact: true, spot: () => ({ at: temple, n: out.clone().addScaledVector(head.face, 0.25).normalize(), along: head.up.clone().addScaledVector(head.face, -0.2) }) })
+            }
           break
         }
         case 'clench': {
@@ -1502,7 +1537,8 @@ export class ExamScene {
             ] as const) {
               const spot = this.spotNow(`jaw-${side}`)
               const head = this.headAxes()
-              if (spot) this.touches.push({ grip: 'two-fingers', contact: 'fingertips', gap: 0.14 * (1 - w), stroke: 0, site: `jaw-${side}`, hand: i, spot: () => ({ at: spot.at, n: spot.n, along: head.up.clone() }) })
+              // From in front: the pads of your fingers flat on each masseter, the fingers up toward the cheekbone.
+              if (spot) this.touches.push({ grip: 'flat', contact: 'fingertips', gap: 0.14 * (1 - w), stroke: 0, site: `jaw-${side}`, hand: 1 - i, exact: this.posture !== 'supine', spot: () => ({ at: spot.at, n: head.right.clone().multiplyScalar(side === 'R' ? 1 : -1).addScaledVector(head.face, 0.3).normalize(), along: head.up.clone().multiplyScalar(0.45).addScaledVector(head.face, -0.9) }) })
             }
           break
         }
@@ -1534,7 +1570,13 @@ export class ExamScene {
             const moved = rinne && ear ? smooth(Math.max(0, Math.min(1, (a.t - a.dur * 0.45) / 0.4))) : 0
             const at = ear && moved > 0 ? bone.at.clone().lerp(ear.at.clone().addScaledVector(ear.n, 0.025 * this.scale), moved) : bone.at
             const n = ear && moved > 0 ? bone.n.clone().lerp(ear.n, moved).normalize() : bone.n
-            this.touches.push({ grip: 'fork', contact: 'tool', gap: 0.14 * (1 - w), stroke: 0, site: a.site!, hand: rinne && side === 'L' ? 1 : 0, from: rinne ? 'behind' : undefined, spot: () => ({ at, n, along: head.up.clone() }) })
+            if (!rinne && this.posture !== 'supine') {
+              // Weber: the stem on the middle of his forehead, held from in front and to the side, clear of his eyes.
+              const tip = at.clone().addScaledVector(n, 0.14 * (1 - w) * this.scale)
+              const down = head.up.clone().multiplyScalar(-0.75).addScaledVector(n, -0.65).normalize()
+              const arm = head.right.clone().multiplyScalar(-0.8).addScaledVector(head.face, 0.4)
+              this.touches.push({ grip: 'fork', contact: 'tool', gap: 0, stroke: 0, site: a.site!, hand: 0, aim: { tip, dir: down, arm } })
+            } else this.touches.push({ grip: 'fork', contact: 'tool', gap: 0.14 * (1 - w), stroke: 0, site: a.site!, hand: rinne && side === 'L' ? 1 : 0, from: rinne ? 'behind' : undefined, spot: () => ({ at, n, along: head.up.clone() }) })
           }
           break
         }
@@ -2214,6 +2256,33 @@ export class ExamScene {
     }
   }
 
+  /** The pen torch's light from `tip` onto `target`, `lit` how strongly (0 off). */
+  private shine(tip: THREE.Vector3, target: THREE.Vector3, lit: number) {
+    this.torchLight.position.copy(tip)
+    this.torchLight.target.position.copy(target)
+    this.torchLight.target.updateMatrixWorld()
+    this.torchLight.intensity = 0.35 * lit
+    this.beam.visible = lit > 0.05
+    this.beam.position.copy(tip)
+    this.beam.lookAt(target)
+    this.beam.scale.set(1, 1, tip.distanceTo(target))
+    ;(this.beam.material as THREE.MeshBasicMaterial).opacity = 0.16 * lit
+  }
+
+  /** The pen torch shone into his open mouth from in front, a little below and to your side. */
+  private torchInMouth(w: number) {
+    const mouth = this.siteWorld('mouth')
+    if (!mouth || w <= 0.02) return
+    const head = this.headAxes()
+    const k = this.scale
+    const from = head.face.clone().multiplyScalar(0.85).addScaledVector(head.up, -0.35).addScaledVector(head.right, 0.2).normalize()
+    const inside = mouth.clone().addScaledVector(head.face, -0.03 * k)
+    const tip = mouth.clone().addScaledVector(from, (0.12 + 0.12 * (1 - w)) * k)
+    const arm = head.face.clone().multiplyScalar(0.6).addScaledVector(head.up, -0.65).addScaledVector(head.right, 0.45)
+    this.touches.push({ grip: 'torch', contact: 'tool', gap: 0, stroke: 0, site: 'mouth', hand: 0, aim: { tip, dir: inside.clone().sub(tip).normalize(), arm } })
+    this.shine(tip, inside, w)
+  }
+
   /** An arc over the head from 45° one way to 45° the other, and a line showing which way the face points now. */
   private showArc(yaw: number) {
     const R = this.rig
@@ -2720,6 +2789,11 @@ export class ExamScene {
       e.mouth = 0.32 * open
     }
     if (a?.anim === 'look-mouth') e.mouth = 0.65 * smooth(Math.min(1, a.t / 0.5, (a.dur - a.t) / 0.5))
+    // Feeling for sensation, his eyes are closed (a palsied eye will not close).
+    if ((a?.anim === 'face-touch' || a?.anim === 'pin-at') && this.posture !== 'supine') {
+      const shut = smooth(Math.max(0, Math.min(1, a.t / 0.3, (a.dur - a.t) / 0.3)))
+      e.shut = { R: shut * (S.palsy === 'R' ? 0.08 : 1), L: shut * (S.palsy === 'L' ? 0.08 : 1) }
+    }
     if (a?.anim === 'eyes-h') {
       const g = gazePath(a.t, a.dur)
       e.horizontal = g.h

@@ -102,7 +102,23 @@ export function PlayView({ pack: source }: { pack: Pack }) {
   const bootEnded = useRef<string | null>(null)
 
   useEffect(() => {
-    if (import.meta.env.DEV) Object.assign(window, { __osce: { play: usePlay, press, pack, endIds, hint: () => nextHint(pack, usePlay.getState().spent, usePlay.getState().scene ?? []) } })
+    if (import.meta.env.DEV)
+      Object.assign(window, {
+        __osce: { play: usePlay, press, pack, endIds, hint: () => nextHint(pack, usePlay.getState().spent, usePlay.getState().scene ?? []) },
+        // From the console: start again, walk in and open an action's bench on a target (the 3D exam), then wait for it.
+        __openStep: async (actionId: string, target: string) => {
+          const S = () => usePlay.getState()
+          S().closeOverlay()
+          S().rerun(pack)
+          Object.assign(window, { __exam: null })
+          await new Promise((r) => setTimeout(r, 400))
+          S().enterRoom()
+          S().openAction(actionId, target)
+          const w = window as unknown as { __exam?: { rig?: unknown } | null }
+          for (let i = 0; i < 25 && !w.__exam?.rig; i++) await new Promise((r) => setTimeout(r, 1000))
+          await new Promise((r) => setTimeout(r, 1000))
+        },
+      })
   }, [])
 
   useEffect(() => {
