@@ -169,16 +169,25 @@ export class ExaminerHand {
       torch: tool(new THREE.MeshStandardMaterial({ color: '#3a4047', metalness: 0.6, roughness: 0.35 }), 0.12, 0.0055, 0.0055, new THREE.MeshStandardMaterial({ color: '#fff6c8', emissive: '#ffe680', emissiveIntensity: 1.2 })),
       // An otoscope: a black handle, the head and its speculum.
       otoscope: tool(new THREE.MeshStandardMaterial({ color: '#202428', roughness: 0.5 }), 0.1, 0.011, 0.006, new THREE.MeshStandardMaterial({ color: '#e8e8e8', roughness: 0.4 })),
-      // A tuning fork: the stem, then two prongs.
+      // A 512 Hz tuning fork pinched by its stem between thumb and index fingertips, upright across the hand: the stem
+      // and its round foot (what touches) out on the palm side, the U and its two prongs standing up past the back of
+      // the hand.
       fork: (() => {
-        const t = tool(new THREE.MeshStandardMaterial({ color: '#b9c0c8', metalness: 0.9, roughness: 0.25 }), 0.05, 0.003, 0.006, new THREE.MeshStandardMaterial({ color: '#b9c0c8', metalness: 0.9, roughness: 0.25 }))
-        const steel = new THREE.MeshStandardMaterial({ color: '#c9d0d8', metalness: 0.9, roughness: 0.2 })
-        // The prongs stand back past your fingers (the stem's end is what touches).
-        for (const x of [-0.006, 0.006]) {
-          const prong = new THREE.Mesh(new THREE.BoxGeometry(0.003, 0.003, 0.09), steel)
-          prong.position.set(x, -0.022, -0.035)
+        const steelMat = new THREE.MeshStandardMaterial({ color: '#c3cad2', metalness: 0.9, roughness: 0.22 })
+        const t = tool(steelMat, 0.06, 0.0032, 0.0065, steelMat)
+        const stemBack = new THREE.Mesh(new THREE.CylinderGeometry(0.0032, 0.0032, 0.022, 10), steelMat)
+        stemBack.rotation.x = Math.PI / 2
+        stemBack.position.z = -0.011
+        const yoke = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.004, 0.006), steelMat)
+        yoke.position.z = -0.024
+        t.obj.add(stemBack, yoke)
+        for (const x of [-0.0075, 0.0075]) {
+          const prong = new THREE.Mesh(new THREE.BoxGeometry(0.0035, 0.0045, 0.1), steelMat)
+          prong.position.set(x, 0, -0.077)
           t.obj.add(prong)
         }
+        t.obj.position.set(0.024, -0.012, 0.145)
+        t.obj.rotation.set(Math.PI / 2, 0, 0)
         return t
       })(),
       // A 3-metre Snellen chart held by its side edge, your arm out to the side: the fingers lie across the back of it,

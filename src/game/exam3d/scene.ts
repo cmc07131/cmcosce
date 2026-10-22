@@ -1570,11 +1570,25 @@ export class ExamScene {
             const moved = rinne && ear ? smooth(Math.max(0, Math.min(1, (a.t - a.dur * 0.45) / 0.4))) : 0
             const at = ear && moved > 0 ? bone.at.clone().lerp(ear.at.clone().addScaledVector(ear.n, 0.025 * this.scale), moved) : bone.at
             const n = ear && moved > 0 ? bone.n.clone().lerp(ear.n, moved).normalize() : bone.n
-            if (!rinne && this.posture !== 'supine') {
-              // Weber: the stem on the middle of his forehead, held from in front and to the side, clear of his eyes.
-              const tip = at.clone().addScaledVector(n, 0.14 * (1 - w) * this.scale)
-              const down = head.up.clone().multiplyScalar(-0.75).addScaledVector(n, -0.65).normalize()
-              const arm = head.right.clone().multiplyScalar(-0.8).addScaledVector(head.face, 0.4)
+            const k = this.scale
+            const outward = head.right.clone().multiplyScalar(side === 'R' ? 1 : -1)
+            if (rinne && ear && this.posture !== 'supine') {
+              // Rinne, from beside and a little behind him: the foot of the stem pressed on the mastoid, the prongs
+              // pointing away from his head; then the prongs held upright beside the ear canal, a couple of
+              // centimetres out, the stem below.
+              const onBone = bone.at.clone().addScaledVector(bone.n, 0.14 * (1 - w) * k)
+              const besideEar = ear.at.clone().addScaledVector(outward, 0.03 * k).addScaledVector(head.up, -0.135 * k)
+              const tip = onBone.lerp(besideEar, moved)
+              const dir = bone.n.clone().negate().lerp(head.up.clone().negate(), moved).normalize()
+              // Your forearm comes from behind him, level, out to that side.
+              const arm = head.face.clone().multiplyScalar(-0.75).addScaledVector(outward, 0.45).addScaledVector(head.up, -0.2)
+              this.touches.push({ grip: 'fork', contact: 'tool', gap: 0, stroke: 0, site: a.site!, hand: side === 'L' ? 1 : 0, aim: { tip, dir, arm } })
+            } else if (!rinne && this.posture !== 'supine') {
+              // Weber: the foot of the stem on the middle of his forehead, the fork upright, prongs above his head,
+              // held from in front and to the side, clear of his eyes.
+              const tip = at.clone().addScaledVector(n, 0.14 * (1 - w) * k)
+              const down = head.up.clone().multiplyScalar(-0.6).addScaledVector(n, -0.8).normalize()
+              const arm = head.right.clone().multiplyScalar(-0.8).addScaledVector(head.face, 0.45)
               this.touches.push({ grip: 'fork', contact: 'tool', gap: 0, stroke: 0, site: a.site!, hand: 0, aim: { tip, dir: down, arm } })
             } else this.touches.push({ grip: 'fork', contact: 'tool', gap: 0.14 * (1 - w), stroke: 0, site: a.site!, hand: rinne && side === 'L' ? 1 : 0, from: rinne ? 'behind' : undefined, spot: () => ({ at, n, along: head.up.clone() }) })
           }
@@ -2682,9 +2696,11 @@ export class ExamScene {
       const shaky = S.ataxia === side
       switch (m.id.replace(/-(R|L)$/, '')) {
         case 'arms-out':
+          // Pronator drift: arms straight out in front at shoulder height, fully supinated (palms to the ceiling).
           both('shoulderflex', 90)
           both('elbow', 0)
           both('shoulderabd', 0)
+          both('palmup', 1)
           break
         case 'hands-out':
           both('shoulderflex', 90)
@@ -2819,6 +2835,10 @@ export class ExamScene {
         break
       case 'puff-cheeks':
         e.cheeks = env * (S.palsy ? 0.4 : 1)
+        break
+      case 'arms-out':
+        // Eyes closed so he cannot correct a drift by sight (a palsied eye will not close).
+        e.shut = per(env)
         break
       case 'open-mouth':
         e.mouth = 0.65 * env
@@ -2983,6 +3003,22 @@ export class ExamScene {
       aim(R.forearm[s], R.hand[s], fore)
       const finger = R.finger[s]
       if (finger) aim(R.hand[s], finger, hand)
+      // Turned palm up (supinated) as far as asked: about the forearm, most of it by the forearm, the rest at the wrist.
+      const palmUp = j[`palmup-${s}`] ?? 0
+      if (palmUp > 0) {
+        R.hand[s].updateWorldMatrix(true, true)
+        const palm = this.spotNow(`palm-${s}`)
+        if (palm) {
+          const flat = (d: THREE.Vector3) => d.clone().addScaledVector(fore, -d.dot(fore))
+          const a = flat(palm.n)
+          const b = flat(v(0, 1, 0))
+          if (a.lengthSq() > 1e-6 && b.lengthSq() > 1e-6) {
+            a.normalize()
+            b.normalize()
+            this.roll(R, s, fore, palmUp * Math.atan2(a.clone().cross(b).dot(fore), a.dot(b)))
+          }
+        }
+      }
       // Pat front then back: the hand turns about the forearm.
       const patT = this.motion?.id === 'rapid-alternating' ? this.motion.t : this.act?.anim === 'rapid-alt' ? this.act.t : null
       if (patT !== null) {
