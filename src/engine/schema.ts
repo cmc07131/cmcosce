@@ -54,6 +54,8 @@ export const bodySchema = z.object({
   collar: z.boolean().optional(),
   /** The pelvis is draped (intimate examinations): findings there show in a drawn close-up. */
   drape: z.boolean().optional(),
+  /** Undressed from the waist down under a sheet over the lower belly and the knees (a pelvic examination). */
+  sheet: z.boolean().optional(),
   ataxia: z.enum(['R', 'L']).optional(),
   gait: z.enum(['antalgic-R', 'antalgic-L', 'ataxic', 'normal']).optional(),
   palsy: z.enum(['R', 'L']).optional(),

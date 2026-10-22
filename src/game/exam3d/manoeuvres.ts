@@ -68,6 +68,16 @@ export type Anim =
   | 'whisper'
   | 'fork'
   | 'weber'
+  // The speculum and bimanual examination.
+  | 'gloves'
+  | 'palpate-abdo'
+  | 'inspect-vulva'
+  | 'speculum-in'
+  | 'swabs'
+  | 'speculum-out'
+  | 'cmt'
+  | 'uterus'
+  | 'adnexa'
   | `ask:${string}`
   | `pose:${string}`
 
@@ -108,8 +118,8 @@ export type ManoeuvreDef = {
   wide?: boolean
   /** What it tests, shown at the spot as it is done (otherwise the place, and what lies under it). */
   shows?: { title: string; sub?: string }
-  /** A drawn close-up shown while it is done (sizing the collar). */
-  inset?: 'collar-size'
+  /** A drawn close-up shown while it is done (sizing the collar; a cut-away of the pelvis). */
+  inset?: 'collar-size' | 'pv-speculum' | 'pv-bimanual'
 }
 
 export const MANOEUVRES: Record<string, ManoeuvreDef> = {
@@ -287,6 +297,65 @@ export const MANOEUVRES: Record<string, ManoeuvreDef> = {
   'say-ah': { label: '“Open wide and say ‘ah’; now stick your tongue out”', say: 'open-mouth', anim: 'ask:open-mouth', group: 'IX to XII', shows: { title: 'Palate and tongue (IX, X, XII)', sub: 'the uvula central; the tongue straight' } },
   'shrug-against': { label: '“Shrug your shoulders; push up against my hands”', say: 'shrug', anim: 'ask:shrug', group: 'IX to XII', shows: { title: 'Trapezius (XI)', sub: 'both strong' } },
   'arms-out': { label: '“Arms out in front, palms up, eyes closed”', say: 'arms-out', anim: 'ask:arms-out', group: 'Limbs', wide: true, shows: { title: 'Pronator drift', sub: 'a drifting arm: an upper motor neurone (stroke)' } },
+
+  // The speculum and bimanual examination, as on a pelvic model: prepare, the speculum, then two fingers and a hand.
+  gloves: { label: 'Wash hands, gloves on; warm and lubricate the speculum', tool: 'gloves', anim: 'gloves', group: 'Prepare' },
+  'knees-up': {
+    label: '“Bend your knees, heels together, and let your knees fall apart”',
+    say: 'knees-up',
+    anim: 'ask:knees-up',
+    group: 'Prepare',
+    shows: { title: 'Modified lithotomy', sub: 'the sheet over her knees; you at the foot of the couch' },
+  },
+  'palpate-abdo': { label: 'Feel the abdomen first', tool: 'feel', anim: 'palpate-abdo', group: 'Prepare', shows: { title: 'The abdomen', sub: 'before the pelvis: tenderness, guarding, a mass' } },
+  'inspect-vulva': { label: 'Inspect the vulva', tool: 'look', anim: 'inspect-vulva', group: 'Speculum', shows: { title: 'The vulva', sub: 'skin, ulcers, discharge, masses' } },
+  'speculum-in': {
+    label: 'Speculum in: closed, blades sideways, down and back; turn it handle up; open to see the cervix',
+    tool: 'speculum',
+    anim: 'speculum-in',
+    group: 'Speculum',
+    shows: { title: 'Cusco speculum', sub: 'in closed and sideways, then turned and opened' },
+    inset: 'pv-speculum',
+  },
+  swabs: {
+    label: 'Swabs: endocervical (chlamydia and gonorrhoea NAAT), then high vaginal',
+    tool: 'swab',
+    anim: 'swabs',
+    group: 'Speculum',
+    shows: { title: 'Swabs', sub: 'endocervical: into the os, turned; high vaginal: the posterior fornix' },
+    inset: 'pv-speculum',
+  },
+  'speculum-out': {
+    label: 'Unlock, draw it back past the cervix, let it close as it comes out',
+    tool: 'speculum',
+    anim: 'speculum-out',
+    group: 'Speculum',
+    shows: { title: 'Out', sub: 'closing as it comes out, never pinching the cervix' },
+  },
+  cmt: {
+    label: 'Two fingers in, palm up: move the cervix gently side to side',
+    tool: 'bimanual',
+    anim: 'cmt',
+    group: 'Bimanual',
+    shows: { title: 'Cervical motion tenderness', sub: 'pain moving the cervix: PID or an ectopic' },
+    inset: 'pv-bimanual',
+  },
+  uterus: {
+    label: 'Your other hand above the pubis: feel the uterus between your hands',
+    tool: 'bimanual',
+    anim: 'uterus',
+    group: 'Bimanual',
+    shows: { title: 'The uterus', sub: 'size, position (anteverted?), mobility, tenderness' },
+    inset: 'pv-bimanual',
+  },
+  adnexa: {
+    label: 'The {spot}: fingers in the lateral fornix, your hand in the iliac fossa',
+    tool: 'bimanual',
+    anim: 'adnexa',
+    group: 'Bimanual',
+    shows: { title: 'The adnexa', sub: 'a mass or tenderness: the tube and ovary' },
+    inset: 'pv-bimanual',
+  },
 
   // Clearing the neck: what you feel and what you ask.
   midline: { label: 'Feel down the middle of the back of the neck, one spinous process at a time', tool: 'press', anim: 'midline', group: 'Show the examination', shows: { title: 'Posterior midline', sub: 'tender here: image (and no movement test)' } },

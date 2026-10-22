@@ -10,9 +10,9 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
  * along -Z. `place` turns it so the chosen part meets a point on the skin from outside.
  */
 
-export type Grip = 'two-fingers' | 'press' | 'thumb' | 'flat' | 'back' | 'cup' | 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork' | 'chart'
-type ToolGrip = 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork' | 'chart'
-const TOOL_GRIPS: ToolGrip[] = ['cotton', 'neurotip', 'doppler', 'torch', 'otoscope', 'fork', 'chart']
+export type Grip = 'two-fingers' | 'pv' | 'press' | 'thumb' | 'flat' | 'back' | 'cup' | 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork' | 'chart' | 'swab'
+type ToolGrip = 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork' | 'chart' | 'swab'
+const TOOL_GRIPS: ToolGrip[] = ['cotton', 'neurotip', 'doppler', 'torch', 'otoscope', 'fork', 'chart', 'swab']
 
 /**
  * A 3-metre Snellen chart: rows of Sloan letters getting smaller, each row's acuity at its left. Drawn here (no
@@ -163,6 +163,8 @@ export class ExaminerHand {
     }
     this.tools = {
       cotton: tool(new THREE.MeshStandardMaterial({ color: '#f4f1ea' }), 0.1, 0.0022, 0.0075, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1 })),
+      // A long swab: a thin white shaft, a small tip (it has to reach the cervix through the speculum).
+      swab: tool(new THREE.MeshStandardMaterial({ color: '#f2f2ee' }), 0.17, 0.0018, 0.0035, new THREE.MeshStandardMaterial({ color: '#f7f3e8', roughness: 1 })),
       neurotip: tool(new THREE.MeshStandardMaterial({ color: '#f2c84b' }), 0.075, 0.0035, 0.003, new THREE.MeshStandardMaterial({ color: '#d0d4d8', metalness: 0.6 })),
       doppler: tool(new THREE.MeshStandardMaterial({ color: '#cfd5da', roughness: 0.4 }), 0.1, 0.009, 0.008, new THREE.MeshStandardMaterial({ color: '#7d8a96' })),
       // A pen torch, its bulb lit.
@@ -236,6 +238,15 @@ export class ExaminerHand {
     }
     for (const t of Object.values(this.tools)) t.obj.visible = false
     switch (grip) {
+      case 'pv':
+        // Examining fingers: index and middle straight together, ring and little folded into the palm, the thumb out
+        // of the way.
+        bend(index, 0.02, 0.02, 0.01)
+        bend(middle, 0.02, 0.02, 0.01)
+        bend(ring, 1.4, 1.6, 1.1)
+        bend(little, 1.4, 1.6, 1.1)
+        thumb(1.0, 0.1, 0.05, 0.05)
+        break
       case 'two-fingers':
         // Index and middle pads together on the pulse; the others tucked.
         bend(index, 0.25, 0.25, 0.15)
@@ -273,6 +284,7 @@ export class ExaminerHand {
         this.tools.chart.obj.visible = true
         break
       case 'cotton':
+      case 'swab':
       case 'neurotip':
       case 'doppler':
       case 'torch':
@@ -363,6 +375,24 @@ export class ExaminerHand {
     this.group.updateMatrixWorld(true)
     const at = this.contactPoint('tool')
     this.group.position.copy(tip).sub(at)
+    this.group.visible = true
+    this.group.updateMatrixWorld(true)
+  }
+
+  /**
+   * A fist round a handle (the speculum's): `at` where the handle lies in the palm, the fingers pointing `fingers`, the
+   * thumb's side of the hand toward `radial`.
+   */
+  grasp(at: THREE.Vector3, fingers: THREE.Vector3, radial: THREE.Vector3) {
+    this.touching = 'palm'
+    const z = fingers.clone().normalize()
+    const x = radial.clone().addScaledVector(z, -radial.dot(z)).normalize()
+    const y = z.clone().cross(x)
+    this.group.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(x, y, z))
+    this.group.position.set(0, 0, 0)
+    this.group.updateMatrixWorld(true)
+    const palm = new THREE.Vector3(0, -0.03, 0.06).applyMatrix4(this.group.matrixWorld)
+    this.group.position.copy(at).sub(palm)
     this.group.visible = true
     this.group.updateMatrixWorld(true)
   }

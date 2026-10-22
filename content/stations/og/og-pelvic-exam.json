@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the GMC guidance on intimate examinations and chaperones (2024), RCOG guidance on gynaecological examinations, and BASHH/NICE guidance on pelvic inflammatory disease (PID).\n\nIntimate examination: explain why, what it involves and that she can stop at any time; obtain and record consent; offer a chaperone (and record their name, or her refusal); privacy to undress with a cover; gloves; warm and lubricate the speculum. Speculum: inspect the vulva first, insert the closed speculum along the vaginal axis (downward and backward), rotate and open to see the cervix; take swabs (endocervical NAAT for chlamydia and gonorrhoea; high vaginal swab); close before withdrawing. Bimanual: two fingers in the vagina, other hand on the abdomen; cervical motion tenderness, uterine size, position and tenderness, adnexal masses or tenderness.\n\nPID (BASHH): treat on clinical suspicion (lower abdominal pain plus cervical motion or adnexal tenderness) without waiting for swabs: ceftriaxone 1 g IM once plus doxycycline 100 mg twice daily and metronidazole 400 mg twice daily for 14 days (outpatient regimen). Admit if severely unwell, pregnant, or tubo-ovarian abscess.\n\nYour notes list 'Bimanual pelvic exam' and 'PV exam' without detail; nothing conflicts.\n\nPerfect script checked against BASHH PID guidance and GMC intimate examination guidance, an HKCEM-style scheme and a keyword scheme. Removed the dismissive replies and the wait-for-swabs option; the uterus now scores.",
+  "notes": "Checked against the GMC guidance on intimate examinations and chaperones (2024), RCOG guidance on gynaecological examinations, and BASHH/NICE guidance on pelvic inflammatory disease (PID).\n\nIntimate examination: explain why, what it involves and that she can stop at any time; obtain and record consent; offer a chaperone (and record their name, or her refusal); privacy to undress with a cover; gloves; warm and lubricate the speculum. Speculum: inspect the vulva first, insert the closed speculum along the vaginal axis (downward and backward), rotate and open to see the cervix; take swabs (endocervical NAAT for chlamydia and gonorrhoea; high vaginal swab); close before withdrawing. Bimanual: two fingers in the vagina, other hand on the abdomen; cervical motion tenderness, uterine size, position and tenderness, adnexal masses or tenderness.\n\nPID (BASHH): treat on clinical suspicion (lower abdominal pain plus cervical motion or adnexal tenderness) without waiting for swabs: ceftriaxone 1 g IM once plus doxycycline 100 mg twice daily and metronidazole 400 mg twice daily for 14 days (outpatient regimen). Admit if severely unwell, pregnant, or tubo-ovarian abscess.\n\nYour notes list 'Bimanual pelvic exam' and 'PV exam' without detail; nothing conflicts.\n\nPerfect script checked against BASHH PID guidance and GMC intimate examination guidance, an HKCEM-style scheme and a keyword scheme. Removed the dismissive replies and the wait-for-swabs option; the uterus now scores.\n\nA focused 3D examination, done as in a recorded OSCE demonstration on a pelvic model: modified lithotomy under a sheet tented over the knees, you at the foot of the couch; the abdomen first; the vulva; a Cusco speculum in closed with the blades sideways, turned handle up, opened and locked; endocervical then high vaginal swabs through it; unlocked and closed as it comes out; then two fingers in, palm up, the other hand on the abdomen for the cervix, the uterus and each adnexa. What is under the sheet is shown in drawn cut-aways and close-ups, never on the model.",
   "cast": [
     {
       "id": "patient",
@@ -44,7 +44,34 @@
   ],
   "body": {
     "posture": "supine",
-    "drape": true
+    "drape": true,
+    "sheet": true,
+    "shorts": true,
+    "intro": "Ms Sin lies on the couch, undressed from the waist down under a sheet; Nurse Chaperone is with her. Examine her: choose below.",
+    "tender": [
+      "cervix",
+      "adnexa-R",
+      "adnexa-L",
+      "iliac-R",
+      "iliac-L"
+    ],
+    "focus": [
+      "gloves",
+      "knees-up",
+      "palpate-abdo@suprapubic",
+      "inspect-vulva@vulva",
+      "speculum-in@cervix",
+      "swabs@cervix",
+      "speculum-out@vulva",
+      "cmt@cervix",
+      "uterus@suprapubic",
+      "adnexa@adnexa-R",
+      "adnexa@adnexa-L"
+    ],
+    "findings": {
+      "adnexa@adnexa-R": "Right adnexa: tender, no mass.",
+      "adnexa@adnexa-L": "Left adnexa: tender, no mass."
+    }
   },
   "steps": [
     {
@@ -90,7 +117,7 @@
       "kind": "exam",
       "to": "patient",
       "label": "Examine",
-      "hint": "Abdomen first, vulva, speculum and swabs, then bimanual.",
+      "hint": "Prepare and position her; the abdomen first; the vulva, the speculum and swabs; then the bimanual.",
       "groups": {
         "Prepare": [
           {
@@ -117,19 +144,19 @@
             "t": "Insert the closed speculum, rotate, open, and see the cervix",
             "r": "Cervix inflamed, bleeds on contact, mucopurulent discharge from the os.",
             "mark": "Visualises the cervix correctly",
-            "do": "speculum vulva,cervix @knees-up"
+            "do": "speculum cervix"
           },
           {
             "t": "Swabs: endocervical NAAT for chlamydia and gonorrhoea, and a high vaginal swab",
             "r": "Taken.",
             "mark": "Takes the appropriate swabs",
-            "do": "swab cervix,vulva"
+            "do": "swab cervix"
           },
           {
             "t": "Close the speculum and withdraw it",
             "r": "Closed as it comes out past the cervix.",
             "mark": "Closes the speculum before withdrawal",
-            "do": "speculum vulva,cervix > speculum vulva,cervix"
+            "do": "speculum cervix > speculum vulva"
           }
         ],
         "Bimanual": [
@@ -137,19 +164,19 @@
             "t": "Bimanual: move the cervix gently side to side",
             "r": "Cervical motion tenderness.",
             "mark": "Tests for cervical motion tenderness",
-            "do": "feel cervix @gloved"
+            "do": "bimanual cervix"
           },
           {
             "t": "The uterus: size, position, tenderness",
             "r": "Anteverted, normal size, mildly tender.",
-            "do": "feel cervix & feel suprapubic",
+            "do": "bimanual suprapubic",
             "mark": "Assesses the uterus"
           },
           {
             "t": "Both adnexa",
             "r": "Tender on both sides, no mass.",
             "mark": "Examines both adnexa",
-            "do": "feel adnexa-R+adnexa-L"
+            "do": "bimanual adnexa-R+adnexa-L"
           }
         ]
       }

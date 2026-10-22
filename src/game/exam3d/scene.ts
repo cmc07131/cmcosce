@@ -38,6 +38,8 @@ export type Signs = {
   trendelenburg?: Side
   /** The pelvis is under a drape (intimate examinations). */
   drape?: boolean
+  /** Undressed from the waist down under a sheet over the lower belly and the knees (a pelvic examination). */
+  sheet?: boolean
   /** Anterior interosseous nerve palsy on this side: the OK sign is a flat pinch. */
   ain?: Side
   /** Bending this elbow up kinks the artery: the hand goes pale. */
@@ -96,6 +98,15 @@ const PATIENT_PACE = 1.35
 const REAL_TIME = new Set<string>(['crt', 'walk', 'speech', 'eyes-h', 'finger-nose', 'rapid-alt', 'tone-arm', 'tone-leg', 'heel-shin', 'sit-trunk', 'grip', 'acuity', 'pin-at', 'fields-hand', 'torch-eyes', 'face-touch', 'clench', 'otoscope', 'look-mouth', 'parotid', 'whisper', 'fork', 'weber'])
 /** How long each manoeuvre takes (seconds, before `SPEED`); asking for a hand shape, 3.4. */
 const DURATION: Record<string, number> = {
+  gloves: 4,
+  'palpate-abdo': 5,
+  'inspect-vulva': 3.5,
+  'speculum-in': 9,
+  swabs: 8,
+  'speculum-out': 5,
+  cmt: 5,
+  uterus: 5.5,
+  adnexa: 5.5,
   inspect: 2.2,
   look: 1.6,
   warmth: 2.6,
@@ -157,7 +168,7 @@ const DURATION: Record<string, number> = {
 }
 
 /** Asked of the patient in a focused examination (a face moving, a shrug): how long each takes, in real seconds. */
-const ASK_FOR: Record<string, number> = { 'raise-eyebrows': 2.6, 'close-eyes': 3, 'show-teeth': 2.6, 'puff-cheeks': 2.6, 'open-mouth': 3, shrug: 3, 'arms-out': 4.5, 'clench-jaw': 2.6 }
+const ASK_FOR: Record<string, number> = { 'knees-up': 2.6, 'raise-eyebrows': 2.6, 'close-eyes': 3, 'show-teeth': 2.6, 'puff-cheeks': 2.6, 'open-mouth': 3, shrug: 3, 'arms-out': 4.5, 'clench-jaw': 2.6 }
 
 /** The collar's steps in order: each shown from where the ones before it leave it. */
 const COLLAR_STEPS = ['mils', 'jewellery', 'measure', 'size', 'collar-back', 'collar-front', 'fit', 'blocks'] as const
@@ -233,6 +244,8 @@ type Touch = {
   exact?: boolean
   /** A tool pointed (the pen torch): its tip, the way it points, the way the forearm runs back from the hand. */
   aim?: { tip: THREE.Vector3; dir: THREE.Vector3; arm: THREE.Vector3 }
+  /** A fist round a handle (the speculum's): where it lies in the palm, the fingers' way, the thumb's side. */
+  grasp?: { at: THREE.Vector3; fingers: THREE.Vector3; radial: THREE.Vector3 }
 }
 
 export const HANDS: Record<string, HandShape> = {
@@ -430,6 +443,13 @@ export class ExamScene {
     new THREE.MeshBasicMaterial({ color: '#fff2c4', transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }),
   )
   private drape: THREE.Mesh | null = null
+  /** The sheet over her lower belly and knees, laid over them each frame (a pelvic examination). */
+  private sheet: THREE.Mesh | null = null
+  /** A Cusco speculum: two clear blades hinged at the handle; where it is and how far open (null: on the tray). */
+  private speculum: { group: THREE.Group; upper: THREE.Group; grip: THREE.Object3D } | null = null
+  private specPose: { base: THREE.Vector3; axis: THREE.Vector3; handle: THREE.Vector3; open: number } | null = null
+  /** In, open and locked (it stays while the swabs are taken). */
+  private specIn = false
   private marks: { mesh: THREE.Mesh; t: number }[] = []
   /** Each landmark's outward direction, in its bone's frame. */
   private normals = new Map<string, THREE.Vector3>()
@@ -506,7 +526,8 @@ export class ExamScene {
       this.bind = new Map(rig.bones.map((b) => [b, b.quaternion.clone()]))
       this.bindPos = new Map(rig.bones.map((b) => [b, b.position.clone()]))
       this.body.add(rig.root)
-      if (signs.drape) this.addDrape(rig)
+      if (signs.drape && !signs.sheet) this.addDrape(rig)
+      if (signs.sheet) this.addTrainer(rig)
       if (signs.collar) this.kit = new CollarKit(rig, this.scene)
       if (signs.manikin) this.plastic(rig)
       for (const id of signs.bruise ?? []) this.addBruise(id)
@@ -785,6 +806,8 @@ export class ExamScene {
     this.tibia = { L: 0, R: 0 }
     this.torchLight.intensity = 0
     this.beam.visible = false
+    // The speculum stays in (open and locked) after it is put in, until it is taken out.
+    if (!this.specIn) this.specPose = null
     if (a.anim.startsWith('pose:') || a.anim === 'stretch') this.hands[a.side].want = 0
     if (!a.leg && (a.anim.startsWith('pose:') || HANDS_ON.has(a.anim))) this.held[`shoulderflex-${a.side}`] = a.lift0
     if (a.anim.startsWith('elbow')) this.held[`elbow-${a.side}`] = this.restElbow[a.side]
@@ -956,6 +979,28 @@ export class ExamScene {
       case 'ask:shrug':
       case 'ask:arms-out':
         return { target: () => at(R.chest).addScaledVector(U, 0.05 * this.scale), dir: F.clone().addScaledVector(RT, 0.35).addScaledVector(U, 0.15), dist: 1.35 }
+      // A pelvic examination: from the foot of the couch, above her knees; the abdomen from her right; her knees coming
+      // up from the side.
+      case 'gloves':
+      case 'inspect-vulva':
+      case 'speculum-in':
+      case 'swabs':
+      case 'speculum-out':
+      case 'cmt':
+        return anim === 'gloves'
+          ? { target: () => this.introitus()?.addScaledVector(U, -0.3 * this.scale).addScaledVector(F, 0.25 * this.scale) ?? at(R.hips), dir: U.clone().multiplyScalar(-0.5).addScaledVector(F, 0.4).addScaledVector(RT, 0.75), dist: 1.0 }
+          : // Where you sit, at the foot of the couch between her knees, under the sheet.
+            // A little to her left of your arm, so your sleeve is side on and the work in front of it.
+            { target: () => this.introitus()?.addScaledVector(U, 0.04 * this.scale) ?? at(R.hips), dir: U.clone().multiplyScalar(-0.85).addScaledVector(F, 0.42).addScaledVector(RT, -0.55), dist: 0.6 }
+      case 'uterus':
+      case 'adnexa':
+        // From above her right side, toward her head: your hand on her lower abdomen pressing down toward the fingers
+        // inside (they are under the sheet; the cut-away shows them).
+        return { target: () => at(R.hips).addScaledVector(F, 0.1 * this.scale).addScaledVector(U, 0.05 * this.scale), dir: RT.clone().multiplyScalar(0.55).addScaledVector(F, 0.8).addScaledVector(U, 0.3), dist: 0.8 }
+      case 'palpate-abdo':
+        return { target: () => this.siteWorld('suprapubic')?.addScaledVector(U, 0.06 * this.scale) ?? at(R.hips), dir: F.clone().addScaledVector(RT, 0.7).addScaledVector(U, -0.15), dist: 0.85 }
+      case 'ask:knees-up':
+        return { target: () => at(R.hips).addScaledVector(U, -0.2 * this.scale), dir: RT.clone().addScaledVector(F, 0.7).addScaledVector(U, -0.25), dist: 1.7 }
       case 'grip':
         // Her right hand round your fingers (the left the same, beyond).
         return { target: () => this.siteWorld('palm-R') ?? at(R.hips), dir: RT.clone().addScaledVector(F, 0.9).addScaledVector(U, -0.15), dist: 0.75 }
@@ -1594,6 +1639,65 @@ export class ExamScene {
           }
           break
         }
+        case 'ask:knees-up':
+          // Knees bent, heels together, knees fallen apart: the sheet goes up over her knees with them.
+          if (a.t < 0.1 && this.posture !== 'knees-up') this.setPosture('knees-up', 1.4)
+          break
+        case 'gloves': {
+          // Hands rubbed together in front of you (the gel), then held up, gloved.
+          const w = on(0, a.dur)
+          const vul = this.siteWorld('vulva')
+          if (vul && w > 0.02) {
+            const k = this.scale
+            const q = this.body.quaternion
+            const toFeet = v(0, -1, 0).applyQuaternion(q)
+            const across = v(-1, 0, 0).applyQuaternion(q)
+            const rub = 0.015 * k * Math.sin(a.t * Math.PI * 2 * 1.6) * smooth(Math.max(0, Math.min(1, a.t / 0.6, (a.dur * 0.7 - a.t) / 0.4)))
+            const mid = vul.clone().addScaledVector(toFeet, 0.62 * k).add(v(0, 0.38 * k, 0))
+            for (const [i, sgn] of [
+              [0, 1],
+              [1, -1],
+            ] as const)
+              this.touches.push({ grip: 'flat', contact: 'palm', gap: 0, stroke: 0, site: 'vulva', hand: i, exact: true, spot: () => ({ at: mid.clone().addScaledVector(across, sgn * (0.012 * k + 0.12 * k * (1 - w))).addScaledVector(toFeet.clone().negate(), sgn * rub), n: across.clone().multiplyScalar(sgn), along: v(0, 1, 0).addScaledVector(toFeet, -0.6) }) })
+          }
+          break
+        }
+        case 'palpate-abdo': {
+          // Before she is positioned, her legs flat: a flat hand over her lower abdomen, the right iliac fossa, above
+          // the pubis, the left; gently, watching her face.
+          if (a.t < 0.1 && this.posture === 'knees-up') this.setPosture('supine', 0.9)
+          const w = on(0.3, a.dur)
+          const head = this.headAxes()
+          const sites = ['iliac-R', 'suprapubic', 'iliac-L']
+          const u = Math.min(2.999, (a.t / a.dur) * 3)
+          const i = Math.floor(u)
+          const f = smooth(Math.max(0, Math.min(1, (u - i - 0.65) / 0.35)))
+          const p0 = this.spotNow(sites[i])
+          const p1 = this.spotNow(sites[Math.min(2, i + 1)])
+          if (p0 && p1 && w > 0.02) {
+            const press = 0.006 * this.scale * Math.max(0, Math.sin((u - i) * Math.PI * 1.5))
+            const at = p0.at.clone().lerp(p1.at, f)
+            const n = p0.n.clone().lerp(p1.n, f).normalize()
+            this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.12 * (1 - w) * this.scale - press, stroke: 0, site: sites[i], hand: 0, exact: true, spot: () => ({ at, n, along: v(0, 1, 0).cross(n).cross(n).negate().addScaledVector(head.up, 0.0).normalize() }) })
+            if ((this.signs.tender ?? []).some((t) => t.startsWith('iliac'))) this.eyes.distress = 0.5 * Math.max(0, Math.sin((u - i) * Math.PI)) * (i !== 1 ? 1 : 0.4)
+          }
+          break
+        }
+        case 'inspect-vulva': {
+          // From the foot of the couch, the sheet lifted a little at her knees, a light on: you look.
+          if (a.t < 0.1 && this.posture !== 'knees-up') this.setPosture('knees-up', 1)
+          break
+        }
+        case 'speculum-in':
+        case 'swabs':
+        case 'speculum-out':
+          this.pelvicSpeculum(a.anim, a.t, a.dur)
+          break
+        case 'cmt':
+        case 'uterus':
+        case 'adnexa':
+          this.bimanual(a.anim, a.site, a.t, a.dur)
+          break
         case 'ask:shrug': {
           // Your hands flat on top of his shoulders, pushing down as he shrugs up.
           const w = on(0.2, a.dur)
@@ -2270,6 +2374,334 @@ export class ExamScene {
     }
   }
 
+  /**
+   * The sheet over her: from just above the pubis, over the thighs and the knees, open at the foot of the couch; tented
+   * over the knees when they are up (sagging between them), falling to the couch outside them. Laid over the posed body
+   * each frame, so it rises with her knees.
+   */
+  private updateSheet() {
+    const R = this.rig
+    if (!R || !this.signs.sheet) return
+    const nx = 28
+    const ny = 18
+    if (!this.sheet) {
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, nx, ny), new THREE.MeshStandardMaterial({ color: '#dbe8ee', roughness: 0.95, side: THREE.DoubleSide }))
+      mesh.castShadow = true
+      mesh.receiveShadow = true
+      mesh.frustumCulled = false
+      this.scene.add(mesh)
+      this.sheet = mesh
+    }
+    const k = this.scale
+    const at = (o: THREE.Object3D) => o.getWorldPosition(v(0, 0, 0))
+    const hip = at(R.hips)
+    const toFeet = hip.clone().sub(at(R.head)).setY(0).normalize()
+    const across = v(0, 1, 0).cross(toFeet).normalize()
+    const kR = at(R.calf.R)
+    const kL = at(R.calf.L)
+    const knees = kR.clone().add(kL).multiplyScalar(0.5)
+    const couch = COUCH.top
+    const top = hip.clone().addScaledVector(toFeet, 0.06 * k).setY(couch)
+    const len = Math.max(0.3 * k, knees.clone().setY(couch).sub(top).dot(toFeet) + 0.07 * k)
+    const belly = hip.y - couch + 0.1 * k
+    const kneeH = Math.max(belly, knees.y - couch + 0.06 * k)
+    const kneeHalf = Math.abs(kR.clone().sub(kL).dot(across)) / 2 + 0.05 * k
+    const half = kneeHalf + 0.26 * k
+    const ease = (x: number) => x * x * (3 - 2 * x)
+    const pos = this.sheet.geometry.attributes.position as THREE.BufferAttribute
+    const p = v(0, 0, 0)
+    for (let iy = 0; iy <= ny; iy++) {
+      const s = iy / ny
+      const ridge = belly + (kneeH - belly) * ease(s)
+      for (let ix = 0; ix <= nx; ix++) {
+        const t = (ix / nx) * 2 - 1
+        const x = Math.abs(t) * half
+        let h = x <= kneeHalf ? ridge - 0.1 * k * (1 - x / kneeHalf) * s * s : ridge * Math.pow(1 - ease(Math.min(1, (x - kneeHalf) / (half - kneeHalf))), 1.3)
+        h = Math.max(0.012 * k, h)
+        p.copy(top).addScaledVector(toFeet, s * len).addScaledVector(across, t * half)
+        p.y += h
+        pos.setXYZ(iy * (nx + 1) + ix, p.x, p.y, p.z)
+      }
+    }
+    pos.needsUpdate = true
+    this.sheet.geometry.computeVertexNormals()
+    this.sheet.geometry.computeBoundingSphere()
+  }
+
+  /**
+   * Her pelvis as on a pelvic examination model: smooth skin from the waist to where the bare legs begin (the models'
+   * clothes are painted on), with the introitus a plain slit at the perineum; nothing more is shown on the model.
+   * Carried by the pelvis bone.
+   */
+  private trainer: THREE.Object3D | null = null
+  private addTrainer(rig: Rig) {
+    const k = rig.height / 1.72
+    const skin = new THREE.MeshStandardMaterial({ color: rig.skin, roughness: 0.62, metalness: 0 })
+    const shell = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 28), skin)
+    shell.scale.set(0.16 * k, 0.092 * k, 0.1 * k)
+    shell.position.set(0, -0.05 * k, 0.0)
+    const slit = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 12), new THREE.MeshStandardMaterial({ color: '#7a3f3c', roughness: 0.7 }))
+    slit.scale.set(0.005 * k, 0.004 * k, 0.017 * k)
+    slit.position.set(0, -0.137 * k, 0.03 * k)
+    const group = new THREE.Group()
+    group.add(shell, slit)
+    // Placed in the bind pose (standing: up +Y, face +Z), under the pelvis bone so it moves with it.
+    rig.root.updateMatrixWorld(true)
+    const hips = rig.hips
+    const bindQ = hips.getWorldQuaternion(new THREE.Quaternion())
+    const holder = new THREE.Object3D()
+    holder.quaternion.copy(bindQ.clone().invert())
+    holder.scale.setScalar(1 / hips.getWorldScale(v(0, 0, 0)).x)
+    holder.add(group)
+    hips.add(holder)
+    group.traverse((o) => {
+      o.castShadow = true
+      o.receiveShadow = true
+    })
+    this.trainer = slit
+    // The clothes below the waist (a skirt, trousers, shoes): every triangle there taken away (folded to a point inside
+    // the shell), so nothing stretches; the shell and the bare legs are what show.
+    shell.updateMatrixWorld(true)
+    const centre = shell.getWorldPosition(v(0, 0, 0))
+    const waist = hips.getWorldPosition(v(0, 0, 0)).y + 0.03 * k
+    // Whatever lies there that is not an arm (the hands hang beside the hips in the bind pose).
+    const arms = new Set<THREE.Object3D>()
+    for (const sd of SIDES) for (const b of [rig.upperArm[sd], rig.forearm[sd], rig.hand[sd]]) b.traverse((o) => arms.add(o))
+    const p = v(0, 0, 0)
+    for (const mesh of rig.meshes) {
+      const m = mesh as THREE.SkinnedMesh
+      if (!m.isSkinnedMesh || m.name.startsWith('bare-leg')) continue
+      const idx = m.geometry.attributes.skinIndex as THREE.BufferAttribute | undefined
+      const wgt = m.geometry.attributes.skinWeight as THREE.BufferAttribute | undefined
+      const position = m.geometry.attributes.position as THREE.BufferAttribute
+      if (!idx || !wgt) continue
+      const gone: boolean[] = []
+      for (let i = 0; i < idx.count; i++) {
+        let best = -1
+        let bestW = -1
+        for (let j = 0; j < 4; j++) {
+          const w = wgt.getComponent(i, j)
+          if (w > bestW) {
+            bestW = w
+            best = idx.getComponent(i, j)
+          }
+        }
+        m.getVertexPosition(i, p)
+        p.applyMatrix4(m.matrixWorld)
+        // Everything below the waist but the arms: the bare legs (separate meshes) and the shell are what is left.
+        gone[i] = !arms.has(m.skeleton.bones[best]) && p.y <= waist
+      }
+      const index = m.geometry.index
+      if (index) {
+        const keep: number[] = []
+        for (let t = 0; t < index.count; t += 3) {
+          const a = index.getX(t)
+          const b = index.getX(t + 1)
+          const c = index.getX(t + 2)
+          if (!(gone[a] || gone[b] || gone[c])) keep.push(a, b, c)
+        }
+        if (keep.length < index.count) m.geometry.setIndex(keep)
+      } else {
+        // A list of triangles: fold each one there onto one point inside the shell.
+        const toLocal = new THREE.Matrix3().setFromMatrix4(m.matrixWorld.clone().invert())
+        let changed = false
+        for (let t = 0; t + 2 < position.count; t += 3) {
+          if (!(gone[t] || gone[t + 1] || gone[t + 2])) continue
+          for (let j = 0; j < 3; j++) {
+            m.getVertexPosition(t + j, p)
+            p.applyMatrix4(m.matrixWorld)
+            const move = centre.clone().sub(p).applyMatrix3(toLocal)
+            position.setXYZ(t + j, position.getX(t + j) + move.x, position.getY(t + j) + move.y, position.getZ(t + j) + move.z)
+          }
+          changed = true
+        }
+        if (changed) {
+          position.needsUpdate = true
+          m.geometry.computeBoundingSphere()
+          m.computeBoundingSphere()
+        }
+      }
+    }
+  }
+
+  /** The introitus (the slit on the model), where the speculum and the fingers go in. */
+  private introitus() {
+    return this.trainer?.getWorldPosition(v(0, 0, 0)) ?? this.siteWorld('vulva')
+  }
+
+  /** A Cusco speculum, built once: two clear half-tube blades hinged at the base, the handle, the thumb lever. */
+  private buildSpeculum() {
+    // Clear plastic with a blue tint, as the disposable ones are.
+    const clear = new THREE.MeshStandardMaterial({ color: '#8fc3e6', transparent: true, opacity: 0.78, roughness: 0.15, metalness: 0.05, side: THREE.DoubleSide, depthWrite: false })
+    const len = 0.105
+    const blade = (upper: boolean) => {
+      const geo = new THREE.CylinderGeometry(0.012, 0.0165, len, 18, 1, true, upper ? Math.PI / 2 : -Math.PI / 2, Math.PI)
+      geo.rotateX(Math.PI / 2)
+      geo.translate(0, 0, len / 2)
+      return new THREE.Mesh(geo, clear)
+    }
+    const group = new THREE.Group()
+    const upper = new THREE.Group()
+    upper.add(blade(true))
+    const lever = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.03, 0.005), clear)
+    lever.position.set(0, 0.028, -0.006)
+    upper.add(lever)
+    const handle = new THREE.Mesh(new THREE.BoxGeometry(0.016, 0.09, 0.007), clear)
+    handle.position.set(0, 0.058, -0.016)
+    handle.rotation.x = 0.28
+    const grip = new THREE.Object3D()
+    grip.position.set(0, 0.072, -0.02)
+    group.add(blade(false), upper, handle, grip)
+    group.visible = false
+    this.scene.add(group)
+    this.speculum = { group, upper, grip }
+  }
+
+  /** Where the speculum is this frame (set by the speculum steps; left in place, open, while the swabs are taken). */
+  private poseSpeculum() {
+    if (!this.signs.sheet) return
+    if (!this.speculum) this.buildSpeculum()
+    const sp = this.speculum!
+    const pose = this.specPose
+    sp.group.visible = !!pose
+    if (!pose) return
+    const z = pose.axis.clone().normalize()
+    const y = pose.handle.clone().addScaledVector(z, -pose.handle.dot(z)).normalize()
+    const x = y.clone().cross(z)
+    sp.group.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(x, y, z))
+    sp.group.position.copy(pose.base)
+    sp.upper.rotation.x = -pose.open * 24 * DEG
+    sp.group.updateMatrixWorld(true)
+  }
+
+  /** The way into her pelvis from the introitus: down and back, toward the sacrum (she is lying on her back). */
+  private vaginalAxis() {
+    const q = this.body.quaternion
+    const anterior = v(0, 0, 1).applyQuaternion(q)
+    const towardHead = v(0, 1, 0).applyQuaternion(q)
+    return towardHead.multiplyScalar(0.82).addScaledVector(anterior, -0.57).normalize()
+  }
+
+  /**
+   * The speculum: in closed, its blades sideways, down and back; turned handle up; opened until the cervix is seen;
+   * locked. The swabs, through it: the endocervical swab into the os and turned, then the high vaginal swab in the
+   * posterior fornix. Out: unlocked, drawn back past the cervix, closing as it comes.
+   */
+  private pelvicSpeculum(anim: Anim, t: number, dur: number) {
+    const entry = this.introitus()
+    if (!entry) return
+    if (t < 0.1 && this.posture !== 'knees-up') this.setPosture('knees-up', 1)
+    const k = this.scale
+    const q = this.body.quaternion
+    const anterior = v(0, 0, 1).applyQuaternion(q)
+    const across = v(-1, 0, 0).applyQuaternion(q)
+    const D = this.vaginalAxis()
+    const u = t / dur
+    const seg = (a: number, b: number) => smooth(Math.max(0, Math.min(1, (u - a) / (b - a))))
+    // The hinge sits just outside the introitus once it is in; the blades reach the cervix.
+    const home = entry.clone().addScaledVector(D, -0.012 * k)
+    const handleUp = anterior.clone()
+    const sideways = across.clone()
+    let depth = 1
+    let turn = 1
+    let open = 1
+    let held = true
+    if (anim === 'speculum-in') {
+      depth = seg(0.12, 0.5)
+      turn = seg(0.55, 0.7)
+      open = seg(0.72, 0.88)
+      // Your other hand parts the labia as it goes in.
+      const part = Math.min(seg(0.02, 0.12), 1 - seg(0.45, 0.55))
+      if (part > 0.02) {
+        const at = entry.clone().addScaledVector(D, -0.01 * k).addScaledVector(anterior, 0.02 * k)
+        this.touches.push({ grip: 'two-fingers', contact: 'fingertips', gap: 0.1 * (1 - part) * k, stroke: 0, site: 'vulva', hand: 1, exact: true, spot: () => ({ at, n: D.clone().negate().addScaledVector(anterior, 0.6).normalize(), along: D.clone().addScaledVector(anterior, 0.3) }) })
+      }
+      if (u > 0.95) this.specIn = true
+    } else if (anim === 'speculum-out') {
+      // Unlocked; drawn back until the blades are past the cervix, closing as it comes; out.
+      open = 1 - seg(0.15, 0.55)
+      depth = 1 - seg(0.25, 0.85)
+      held = true
+      if (u > 0.95) this.specIn = false
+    } else {
+      // The swabs: the speculum stays, open and locked; your hand off it.
+      held = false
+    }
+    const out = (1 - depth) * 0.14 * k
+    const handle = sideways.clone().lerp(handleUp, turn).normalize()
+    const base = home.clone().addScaledVector(D, -out)
+    const gone = anim === 'speculum-out' && u > 0.97
+    this.specPose = gone ? null : { base, axis: D.clone(), handle, open }
+    if (held && !gone && this.speculum) {
+      this.speculum.group.position.copy(base)
+      this.poseSpeculum()
+      const grip = this.speculum.grip.getWorldPosition(v(0, 0, 0))
+      // Your fist round the handle, the fingers toward her, the thumb's side up toward the blades.
+      this.touches.push({ grip: 'cup', contact: 'palm', gap: 0, stroke: 0, site: 'vulva', hand: 0, grasp: { at: grip, fingers: D.clone(), radial: handle.clone().negate() } })
+    }
+    if (anim === 'swabs') {
+      // Into the os and turned, out; then into the posterior fornix and turned.
+      const os = entry.clone().addScaledVector(D, 0.095 * k)
+      const fornix = entry.clone().addScaledVector(D, 0.088 * k).addScaledVector(anterior, -0.012 * k)
+      const second = seg(0.5, 0.6)
+      const target = os.clone().lerp(fornix, second)
+      const inS = Math.min(seg(0.05, 0.25), 1 - seg(0.4, 0.5)) + Math.min(seg(0.6, 0.75), 1 - seg(0.9, 1))
+      const tip = target.clone().addScaledVector(D, -(1 - Math.min(1, inS)) * 0.14 * k)
+      const arm = D.clone().negate().addScaledVector(anterior, -0.3).addScaledVector(across, 0.25)
+      const spin = Math.sin(u * Math.PI * 10) * 0.25
+      this.touches.push({ grip: 'swab', contact: 'tool', gap: 0, stroke: 0, site: 'cervix', hand: 0, aim: { tip, dir: D.clone(), arm: arm.applyAxisAngle(D, spin) } })
+    }
+    if ((this.signs.tender ?? []).includes('cervix') && anim === 'swabs') this.eyes.distress = 0.25 * Math.sin(Math.PI * Math.min(1, u * 2))
+  }
+
+  /**
+   * The bimanual: two fingers of your right hand in, palm up, the tips at the cervix; your left hand flat on her lower
+   * abdomen. The cervix moved side to side; the uterus felt between your hands (the left above the pubis pressing down
+   * toward the fingers in the anterior fornix); each adnexa between the fingers in that lateral fornix and your hand
+   * in that iliac fossa, swept down toward them.
+   */
+  private bimanual(anim: Anim, site: string | null, t: number, dur: number) {
+    const entry = this.introitus()
+    if (!entry) return
+    if (t < 0.1 && this.posture !== 'knees-up') this.setPosture('knees-up', 1)
+    // The speculum is out before your fingers go in.
+    this.specIn = false
+    this.specPose = null
+    const k = this.scale
+    const q = this.body.quaternion
+    const anterior = v(0, 0, 1).applyQuaternion(q)
+    const across = v(-1, 0, 0).applyQuaternion(q)
+    const towardHead = v(0, 1, 0).applyQuaternion(q)
+    const D = this.vaginalAxis()
+    const u = t / dur
+    const w = smooth(Math.max(0, Math.min(1, u / 0.18, (1 - u) / 0.14)))
+    const side = (site?.match(/-(R|L)$/)?.[1] ?? 'R') as Side
+    const lateral = across.clone().multiplyScalar(side === 'R' ? 1 : -1)
+    // The fingertips: at the cervix; the anterior fornix for the uterus; the lateral fornix for an adnexa.
+    let tips = entry.clone().addScaledVector(D, 0.075 * k)
+    if (anim === 'cmt') tips.addScaledVector(across, 0.01 * k * Math.sin(Math.max(0, u - 0.25) * Math.PI * 2 * 1.6) * w)
+    if (anim === 'uterus') tips.addScaledVector(anterior, 0.012 * k)
+    if (anim === 'adnexa') tips.addScaledVector(lateral, 0.022 * k).addScaledVector(anterior, 0.006 * k)
+    // In from outside.
+    tips = tips.addScaledVector(D, -(1 - w) * 0.12 * k)
+    // Palm up (toward her front) across the line of the vagina, the fingers along it.
+    const palmUp = anterior.clone().addScaledVector(D, -anterior.dot(D)).normalize()
+    this.touches.push({ grip: 'pv', contact: 'fingertips', gap: 0, stroke: 0, site: 'cervix', hand: 0, exact: true, spot: () => ({ at: tips, n: palmUp.clone().negate(), along: D.clone() }) })
+    if (anim !== 'cmt') {
+      // The other hand flat on the abdomen: above the pubis, or in the iliac fossa, sweeping down toward your fingers.
+      const spot = this.spotNow(anim === 'uterus' ? 'suprapubic' : `iliac-${side}`)
+      if (spot) {
+        const sweep = 0.03 * k * smooth(Math.max(0, Math.min(1, (u - 0.3) / 0.45)))
+        const at = spot.at.clone().addScaledVector(towardHead, 0.04 * k - sweep)
+        const press = 0.008 * k * Math.max(0, Math.sin(Math.max(0, u - 0.3) * Math.PI * 3))
+        this.touches.push({ grip: 'flat', contact: 'fingertips', gap: 0.1 * (1 - w) * k - press, stroke: 0, site: anim === 'uterus' ? 'suprapubic' : `iliac-${side}`, hand: 1, exact: true, spot: () => ({ at, n: spot.n, along: towardHead.clone().negate().addScaledVector(lateral, anim === 'adnexa' ? -0.5 : 0) }) })
+      }
+    }
+    const tender = this.signs.tender ?? []
+    const sore = anim === 'cmt' ? tender.includes('cervix') : anim === 'adnexa' ? tender.includes(`adnexa-${side}`) : tender.includes('suprapubic') || tender.includes('cervix')
+    if (sore) this.eyes.distress = (anim === 'uterus' ? 0.45 : 0.8) * w * Math.max(0, Math.sin(Math.max(0, u - 0.25) * Math.PI * 1.6))
+  }
+
   /** The pen torch's light from `tip` onto `target`, `lit` how strongly (0 off). */
   private shine(tip: THREE.Vector3, target: THREE.Vector3, lit: number) {
     this.torchLight.position.copy(tip)
@@ -2362,6 +2794,12 @@ export class ExamScene {
         placed.add(hand)
         hand.setGrip(t.grip)
         hand.aim(t.aim.tip, t.aim.dir, t.aim.arm)
+        continue
+      }
+      if (t.grasp) {
+        placed.add(hand)
+        hand.setGrip(t.grip)
+        hand.grasp(t.grasp.at, t.grasp.fingers, t.grasp.radial)
         continue
       }
       if (t.spot && t.exact) {
@@ -3357,6 +3795,8 @@ export class ExamScene {
       this.body.updateMatrixWorld(true)
       this.rig.tick(dt)
     }
+    this.updateSheet()
+    this.poseSpeculum()
     this.placeExaminer()
     this.aimCamera()
     const k = 1 - Math.exp(-dt * 4)

@@ -4,7 +4,7 @@
  * finding's words (inflamed, discharge, tender, high, horizontal, swollen…).
  */
 
-export type IllustrationKind = 'vulva' | 'cervix' | 'bimanual' | 'scrotum' | 'perianal' | 'collar-size'
+export type IllustrationKind = 'vulva' | 'cervix' | 'bimanual' | 'scrotum' | 'perianal' | 'collar-size' | 'pv-speculum' | 'pv-bimanual'
 
 export function illustrationFor(site: string): IllustrationKind | null {
   const base = site.replace(/-(R|L)$/, '')
@@ -105,6 +105,56 @@ export function Illustration({ kind, finding }: { kind: IllustrationKind; findin
             <text x="100" y="99" fontSize="6.5" fill={ink}>foam: not counted</text>
           </g>
         )}
+        {(kind === 'pv-speculum' || kind === 'pv-bimanual') && (
+          <g>
+            {/* A cut-away of her pelvis from the side as she lies: her head to the left, the front of her body up. The
+                vagina runs from the introitus (right) down and back toward the sacrum, to the cervix; the uterus tips
+                forward (anteverted) over the bladder, behind the pubic bone; the rectum below. */}
+            <path d="M6 24 Q70 14 116 28 Q130 34 134 50" fill="none" stroke={ink} strokeWidth="1.4" />
+            <path d="M6 100 Q40 102 70 96 Q110 92 150 96" fill="none" stroke={ink} strokeWidth="1.2" strokeDasharray="3 2" />
+            <path d="M22 96 Q14 70 22 44" fill="none" stroke="#e4d8bd" strokeWidth="7" strokeLinecap="round" />
+            <ellipse cx="121" cy="48" rx="6" ry="11" fill="#efe6d0" stroke={ink} strokeWidth="1" />
+            <ellipse cx="101" cy="44" rx="13" ry="8.5" fill="#f2d87e" stroke={ink} strokeWidth="1" />
+            <path d="M150 88 Q100 90 66 86 Q40 82 34 66" fill="none" stroke="#c9917a" strokeWidth="9" strokeLinecap="round" />
+            <path d="M144 72 L90 66" stroke="#d98f8a" strokeWidth="10" strokeLinecap="round" />
+            <ellipse cx="62" cy="44" rx="20" ry="11" transform="rotate(-28 62 44)" fill="#e7a7a0" stroke={ink} strokeWidth="1.3" />
+            <path d="M74 56 Q84 60 88 66" fill="none" stroke="#e7a7a0" strokeWidth="9" strokeLinecap="round" />
+            <circle cx="88" cy="66" r="4.5" fill={inflamed ? '#d9555a' : '#eaa5a0'} stroke={ink} strokeWidth="1" />
+            <g fontSize="6.5" fill={ink}>
+              <text x="92" y="35">bladder</text>
+              <text x="40" y="30">uterus</text>
+              <text x="76" y="80">cervix</text>
+              <text x="58" y="98">rectum</text>
+              <text x="124" y="66">pubis</text>
+            </g>
+            {kind === 'pv-speculum' && (
+              <g>
+                {/* The blades in, open, the cervix between their tips; the handle out, pointing up. */}
+                <path d="M146 69 L92 58 L91 63 L146 71 Z" fill="#cfe6f4" stroke="#5b8db0" strokeWidth="0.9" opacity="0.92" />
+                <path d="M146 74 L91 71 L92 76 L146 76 Z" fill="#cfe6f4" stroke="#5b8db0" strokeWidth="0.9" opacity="0.92" />
+                <path d="M147 70 L154 44" stroke="#5b8db0" strokeWidth="4" strokeLinecap="round" />
+                <text x="128" y="14" fontSize="6.5" fill={ink}>speculum: handle up</text>
+              </g>
+            )}
+            {kind === 'pv-bimanual' && (
+              <g>
+                {/* Two fingers in to the cervix; the other hand above the pubis pressing down; the uterus between. */}
+                <path d="M158 70 L92 64" stroke="#7fb0e0" strokeWidth="5" strokeLinecap="round" />
+                <path d="M158 76 L93 69" stroke="#7fb0e0" strokeWidth="5" strokeLinecap="round" />
+                <ellipse cx="160" cy="76" rx="6" ry="10" fill="#7fb0e0" />
+                <rect x="46" y="8" width="40" height="8" rx="4" fill="#7fb0e0" stroke="#4a7fb0" strokeWidth="0.8" />
+                <path d="M66 18 L64 28" stroke="#c0392b" strokeWidth="1.6" markerEnd="url(#pvArrow)" />
+                <path d="M100 66 L96 56" stroke="#c0392b" strokeWidth="1.6" markerEnd="url(#pvArrow)" />
+                <defs>
+                  <marker id="pvArrow" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M0 0 L6 3 L0 6 z" fill="#c0392b" />
+                  </marker>
+                </defs>
+                {tender && <text x="76" y="52" fill="#d42a2a" fontSize="12" fontWeight="700">✱</text>}
+              </g>
+            )}
+          </g>
+        )}
         {kind === 'perianal' && (
           <g>
             <ellipse cx="80" cy="55" rx="58" ry="40" fill="#e3b49e" stroke={ink} strokeWidth="1.5" />
@@ -113,7 +163,7 @@ export function Illustration({ kind, finding }: { kind: IllustrationKind; findin
           </g>
         )}
       </svg>
-      <figcaption className="px-1 pb-0.5 text-[10px] leading-tight text-[#40404c]">{kind === 'collar-size' ? 'Drawn close-up · sizing the collar' : 'Drawn close-up · under the drape'}</figcaption>
+      <figcaption className="px-1 pb-0.5 text-[10px] leading-tight text-[#40404c]">{kind === 'collar-size' ? 'Drawn close-up · sizing the collar' : kind === 'pv-speculum' ? 'Drawn cut-away · the speculum in' : kind === 'pv-bimanual' ? 'Drawn cut-away · the bimanual' : 'Drawn close-up · under the drape'}</figcaption>
     </figure>
   )
 }

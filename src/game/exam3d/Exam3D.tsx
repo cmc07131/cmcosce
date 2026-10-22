@@ -273,7 +273,7 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
       if (!id || !siteOf(id)?.def.draped) return null
       // What you are doing decides the view: the speculum shows the cervix; fingers on it, the bimanual.
       if (ev.tool === 'speculum' || ev.tool === 'swab') return 'cervix' as const
-      if ((ev.tool === 'feel' || ev.tool === 'press') && /^(cervix|adnexa)/.test(id)) return 'bimanual' as const
+      if ((ev.tool === 'feel' || ev.tool === 'press' || ev.tool === 'bimanual') && /^(cervix|adnexa)/.test(id)) return 'bimanual' as const
       return illustrationFor(id)
     }
     const itemDrawn = (item: (typeof items)[number] | null) => item?.plan.flat(2).flatMap((a) => a.targets).map(draped).find(Boolean) ?? null

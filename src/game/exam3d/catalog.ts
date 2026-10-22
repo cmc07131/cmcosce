@@ -56,6 +56,7 @@ export const TOOLS: ToolDef[] = [
   { id: 'scanner', label: 'Bladder scanner', icon: '📟', use: 'hold', normal: 'Nothing to scan here.' },
   { id: 'speculum', label: 'Speculum', icon: '🦆', use: 'tap', normal: 'Not where a speculum goes.' },
   { id: 'swab', label: 'Swabs', icon: '🧪', use: 'tap', normal: 'Nothing to swab here.' },
+  { id: 'bimanual', label: 'Bimanual', icon: '✌', use: 'tap', normal: 'Nothing abnormal felt.' },
 ]
 
 export const toolById = (id: string) => TOOLS.find((t) => t.id === id)
