@@ -21,6 +21,7 @@ export function installDevtools(scene: ExamScene, manoeuvres: Record<string, { a
     aimCamera: () => void
     camPos: THREE.Vector3
     camLook: THREE.Vector3
+    wantFov: number
     wantPos: THREE.Vector3
     wantLook: THREE.Vector3
     camera: THREE.PerspectiveCamera
@@ -32,6 +33,8 @@ export function installDevtools(scene: ExamScene, manoeuvres: Record<string, { a
     clash: (hand: unknown, sleeve: boolean) => { worst: number }
     rig: Record<string, Record<string, THREE.Object3D>> | null
   }
+  // React's development double-mount throws the first scene away before this loads: keep the live one.
+  if ((scene as unknown as { disposed?: boolean }).disposed) return
   w.__exam = scene
   const parse = (entry: string) => {
     const [key, site = null] = entry.split('@')
@@ -54,10 +57,20 @@ export function installDevtools(scene: ExamScene, manoeuvres: Record<string, { a
         s.aimCamera()
         s.camPos.copy(s.wantPos)
         s.camLook.copy(s.wantLook)
+        if (s.camera.fov !== s.wantFov) {
+          s.camera.fov = s.wantFov
+          s.camera.updateProjectionMatrix()
+        }
         // `__cam = [x, y, z, dist]`: look at the chest from that way (world axes) instead, to see the whole of it.
         const cam = w.__cam as number[] | undefined
         const chest = s.rig?.chest as unknown as THREE.Object3D | undefined
-        if (cam && chest) {
+        if (cam && cam.length >= 6) {
+          // `__cam = [px, py, pz, lx, ly, lz, fov?]`: a camera put at a world position looking at another.
+          s.camPos.set(cam[0], cam[1], cam[2])
+          s.camLook.set(cam[3], cam[4], cam[5])
+          s.camera.fov = cam[6] ?? 40
+          s.camera.updateProjectionMatrix()
+        } else if (cam && chest) {
           const at = chest.getWorldPosition(new THREE.Vector3())
           s.camLook.copy(at)
           s.camPos.copy(at).addScaledVector(new THREE.Vector3(cam[0], cam[1], cam[2]).normalize(), cam[3] ?? 1.6)
@@ -115,6 +128,26 @@ export function installDevtools(scene: ExamScene, manoeuvres: Record<string, { a
         while (want.length && t >= want[0] - 1e-6) grab(`${entry} ${want.shift()!.toFixed(2)}s`, shots)
       })
     }
+    grid(shots)
+    return shots.length
+  }
+  /** Frames each from its own camera: `[[cam, entry, time], ...]`, `cam` as `__cam` (or nothing for the game's own). */
+  w.__views = (list: [number[] | undefined, string, number][]) => {
+    s.renderer.setSize(420, 400, false)
+    s.camera.aspect = 420 / 400
+    s.camera.updateProjectionMatrix()
+    const shots: [string, HTMLCanvasElement][] = []
+    for (const [cam, entry, time] of list) {
+      w.__cam = cam
+      let done = false
+      run(entry, (t) => {
+        if (!done && t >= time - 1e-6) {
+          done = true
+          grab(`${entry} ${time.toFixed(2)}s`, shots)
+        }
+      })
+    }
+    w.__cam = undefined
     grid(shots)
     return shots.length
   }

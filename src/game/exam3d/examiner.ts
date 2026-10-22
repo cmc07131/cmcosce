@@ -10,9 +10,56 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
  * along -Z. `place` turns it so the chosen part meets a point on the skin from outside.
  */
 
-export type Grip = 'two-fingers' | 'press' | 'thumb' | 'flat' | 'back' | 'cup' | 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork'
-type ToolGrip = 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork'
-const TOOL_GRIPS: ToolGrip[] = ['cotton', 'neurotip', 'doppler', 'torch', 'otoscope', 'fork']
+export type Grip = 'two-fingers' | 'press' | 'thumb' | 'flat' | 'back' | 'cup' | 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork' | 'chart'
+type ToolGrip = 'cotton' | 'neurotip' | 'doppler' | 'torch' | 'otoscope' | 'fork' | 'chart'
+const TOOL_GRIPS: ToolGrip[] = ['cotton', 'neurotip', 'doppler', 'torch', 'otoscope', 'fork', 'chart']
+
+/**
+ * A 3-metre Snellen chart: rows of Sloan letters getting smaller, each row's acuity at its left. Drawn here (no
+ * picture of a real chart is used).
+ */
+function snellenTexture() {
+  const c = document.createElement('canvas')
+  c.width = 512
+  c.height = 792
+  const g = c.getContext('2d')
+  if (g) {
+    g.fillStyle = '#fbfbf7'
+    g.fillRect(0, 0, c.width, c.height)
+    // Read at 3 metres: 3/3 is 6/6.
+    const rows: [string, string, number][] = [
+      ['H', '3/30', 150],
+      ['O Z', '3/18', 92],
+      ['N C K', '3/12', 64],
+      ['Z H S V', '3/9', 48],
+      ['D K C N R', '3/6', 34],
+      ['S O V H Z D', '3/4.5', 26],
+      ['K C R H N O S', '3/3', 19],
+      ['V Z D S C K H', '3/2.5', 15],
+    ]
+    let y = 40
+    for (const [letters, label, size] of rows) {
+      y += size * 1.12
+      g.fillStyle = '#111'
+      g.font = `bold ${size}px Arial, Helvetica, sans-serif`
+      g.textAlign = 'center'
+      g.fillText(letters, 276, y)
+      g.fillStyle = '#666'
+      g.font = '15px Arial, Helvetica, sans-serif'
+      g.textAlign = 'left'
+      g.fillText(label, 12, y)
+      y += 18
+    }
+    // A thin border.
+    g.strokeStyle = '#c0392b'
+    g.lineWidth = 3
+    g.strokeRect(6, 6, c.width - 12, c.height - 12)
+  }
+  const tex = new THREE.CanvasTexture(c)
+  tex.colorSpace = THREE.SRGBColorSpace
+  tex.anisotropy = 4
+  return tex
+}
 export type Contact = 'fingertips' | 'index' | 'thumb' | 'palm' | 'back' | 'tool'
 
 const GLOVE = new THREE.MeshStandardMaterial({ color: '#7fa8e3', roughness: 0.45, metalness: 0 })
@@ -134,6 +181,29 @@ export class ExaminerHand {
         }
         return t
       })(),
+      // A 3-metre Snellen chart held by its side edge, your arm out to the side: the fingers lie across the back of it,
+      // the board running on past the fingertips; its face turned the way the palm faces (toward the patient), its top
+      // toward the back of your thumb's side (-X). The tip is its centre.
+      chart: (() => {
+        const obj = new THREE.Group()
+        const W = 0.22
+        const H = 0.34
+        // A stiff board with a dark blue back, the chart on its face.
+        const board = new THREE.Mesh(new THREE.BoxGeometry(H, 0.005, W), new THREE.MeshStandardMaterial({ color: '#34495e', roughness: 0.6 }))
+        const face = new THREE.Mesh(new THREE.PlaneGeometry(W - 0.006, H - 0.006), new THREE.MeshStandardMaterial({ map: typeof document === 'undefined' ? null : snellenTexture(), roughness: 0.8 }))
+        // The chart's right along the fingers, its top to -X, its face to -Y (away from the palm's side of the board).
+        face.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(new THREE.Vector3(0, 0, 1), new THREE.Vector3(-1, 0, 0), new THREE.Vector3(0, -1, 0)))
+        face.position.y = -0.0028
+        board.castShadow = true
+        obj.add(board, face)
+        // Its near edge under the middle of the fingers.
+        obj.position.set(0, -0.026, 0.065 + W / 2)
+        const tip = new THREE.Object3D()
+        obj.add(tip)
+        obj.visible = false
+        this.group.add(obj)
+        return { obj, tip }
+      })(),
     }
     if (left) this.group.scale.x = -1
     this.group.visible = false
@@ -186,6 +256,12 @@ export class ExaminerHand {
         // Round the forearm: fingers wrapping one side, thumb the other.
         all(0.75, 0.8, 0.45)
         thumb(0.9, 1.1, 0.3, 0.2)
+        break
+      case 'chart':
+        // Fingers flat up the back of it near its edge, the thumb alongside.
+        all(0.05, 0.05, 0.02)
+        thumb(0.25, 0.15, 0.1, 0.1)
+        this.tools.chart.obj.visible = true
         break
       case 'cotton':
       case 'neurotip':
@@ -255,6 +331,46 @@ export class ExaminerHand {
 
   hide() {
     this.group.visible = false
+  }
+
+  /**
+   * A tool in the hand pointed: its tip at `tip`, pointing `dir` (the torch's beam), and the forearm running back from
+   * the hand as near to `arm` as the grip allows.
+   */
+  aim(tip: THREE.Vector3, dir: THREE.Vector3, arm: THREE.Vector3) {
+    this.touching = 'tool'
+    const t = this.tools[this.grip as ToolGrip]
+    if (!t) return
+    // The tool's axis and the forearm's, in the hand's own frame.
+    const frame = (a: THREE.Vector3, b: THREE.Vector3) => {
+      const e1 = a.clone().normalize()
+      const e2 = b.clone().addScaledVector(e1, -b.dot(e1)).normalize()
+      return new THREE.Matrix4().makeBasis(e1, e2, e1.clone().cross(e2))
+    }
+    const local = frame(new THREE.Vector3(0, 0, 1).applyEuler(t.obj.rotation), new THREE.Vector3(0, 0, -1))
+    const world = frame(dir, arm)
+    this.group.quaternion.setFromRotationMatrix(world.multiply(local.transpose()))
+    this.group.position.set(0, 0, 0)
+    this.group.updateMatrixWorld(true)
+    const at = this.contactPoint('tool')
+    this.group.position.copy(tip).sub(at)
+    this.group.visible = true
+    this.group.updateMatrixWorld(true)
+  }
+
+  /** Hold what is in the hand (the chart) with its centre at `at`, its face turned toward `faces`, the fingers `across`. */
+  hold(at: THREE.Vector3, faces: THREE.Vector3, across: THREE.Vector3) {
+    this.touching = 'tool'
+    const y = faces.clone().normalize().negate()
+    const z = across.clone().addScaledVector(y, -across.dot(y)).normalize()
+    const x = y.clone().cross(z).normalize()
+    this.group.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(x, y, z))
+    this.group.position.set(0, 0, 0)
+    this.group.updateMatrixWorld(true)
+    const centre = this.contactPoint('tool')
+    this.group.position.copy(at).sub(centre)
+    this.group.visible = true
+    this.group.updateMatrixWorld(true)
   }
 
   /** What touches, as last placed. */

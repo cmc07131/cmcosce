@@ -142,7 +142,7 @@ const DURATION: Record<string, number> = {
   'sit-trunk': 6.6,
   grip: 2.8,
   // The cranial nerves, in real seconds.
-  acuity: 4,
+  acuity: 5.5,
   'fields-hand': 5,
   'torch-eyes': 4,
   'face-touch': 2.4,
@@ -227,6 +227,12 @@ type Touch = {
   /** Where your arm comes from: beside him and a little behind, on the side of the spot (an ear, a mastoid); or
    * straight down from above it (a hand on the far side of someone lying down). */
   from?: 'behind' | 'above'
+  /** Held up in the air (the Snellen chart): its centre, the way its face turns, the way the fingers lie across it. */
+  hold?: { at: THREE.Vector3; faces: THREE.Vector3; across: THREE.Vector3 }
+  /** Put exactly where the spot says. */
+  exact?: boolean
+  /** A tool pointed (the pen torch): its tip, the way it points, the way the forearm runs back from the hand. */
+  aim?: { tip: THREE.Vector3; dir: THREE.Vector3; arm: THREE.Vector3 }
 }
 
 export const HANDS: Record<string, HandShape> = {
@@ -397,7 +403,9 @@ export class ExamScene {
   /** When she set off walking (each lap starts by the couch). */
   private walkFrom = 0
   /** A manoeuvre filmed from a set place (from the side for a Lachman test): until the camera is moved. */
-  private shot: { target: () => THREE.Vector3 | null; dir: THREE.Vector3; dist: number } | null = null
+  private shot: { target: () => THREE.Vector3 | null; dir: THREE.Vector3; dist: number; fov?: number } | null = null
+  /** The lens this shot wants (narrow for a long shot across the room). */
+  private wantFov = 40
   /** What she is doing when asked: overrides joints and face for a while. */
   private motion: { id: string; t: number; dur: number } | null = null
   /** How long since a painful stimulus (for posturing). */
@@ -415,6 +423,12 @@ export class ExamScene {
   private frame = 0
   private disposed = false
   private finger: THREE.Mesh
+  /** The pen torch's light: a narrow spot on the eye, and the faint cone of its beam. Off until it is used. */
+  private torchLight = new THREE.SpotLight('#fff3d4', 0, 0.5, 0.16, 0.6, 2)
+  private beam = new THREE.Mesh(
+    new THREE.ConeGeometry(0.018, 1, 20, 1, true).translate(0, -0.5, 0).rotateX(-Math.PI / 2),
+    new THREE.MeshBasicMaterial({ color: '#fff2c4', transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }),
+  )
   private drape: THREE.Mesh | null = null
   private marks: { mesh: THREE.Mesh; t: number }[] = []
   /** Each landmark's outward direction, in its bone's frame. */
@@ -437,7 +451,7 @@ export class ExamScene {
    * Where a fingertip or a heel must be this frame (the finger–nose and heel–shin tests), and which way the elbow or the
    * knee points; and where each was when the test began (to go back to).
    */
-  private reachTo: { arm: Partial<Record<Side, { at: THREE.Vector3; pole: THREE.Vector3; tip?: 'palm' }>>; leg: Partial<Record<Side, { at: THREE.Vector3; pole: THREE.Vector3 }>> } = { arm: {}, leg: {} }
+  private reachTo: { arm: Partial<Record<Side, { at: THREE.Vector3; pole: THREE.Vector3; tip?: 'palm'; palm?: { faces: THREE.Vector3; fingers: THREE.Vector3 } }>>; leg: Partial<Record<Side, { at: THREE.Vector3; pole: THREE.Vector3 }>> } = { arm: {}, leg: {} }
   private reachFrom = new Map<string, THREE.Vector3>()
   /** Leaning to one side, sitting up (degrees, toward her right): truncal ataxia. */
   private lean = 0
@@ -471,6 +485,9 @@ export class ExamScene {
     buildRoom(this.scene)
     buildCouch(this.scene)
     this.scene.add(this.body)
+    // Added now (dark) so turning the torch on later does not rebuild every material.
+    this.scene.add(this.torchLight, this.torchLight.target, this.beam)
+    this.beam.visible = false
     // The examiner's finger (or pen torch) for eye movements and fields.
     this.finger = new THREE.Mesh(new THREE.CapsuleGeometry(0.008, 0.05, 6, 12), new THREE.MeshStandardMaterial({ color: '#e8b89a', roughness: 0.6 }))
     this.finger.visible = false
@@ -766,6 +783,8 @@ export class ExamScene {
     this.touches = []
     this.present = null
     this.tibia = { L: 0, R: 0 }
+    this.torchLight.intensity = 0
+    this.beam.visible = false
     if (a.anim.startsWith('pose:') || a.anim === 'stretch') this.hands[a.side].want = 0
     if (!a.leg && (a.anim.startsWith('pose:') || HANDS_ON.has(a.anim))) this.held[`shoulderflex-${a.side}`] = a.lift0
     if (a.anim.startsWith('elbow')) this.held[`elbow-${a.side}`] = this.restElbow[a.side]
@@ -845,7 +864,7 @@ export class ExamScene {
    * as the collar is measured, goes behind and comes round; the collar in the hands while it is sized; the back of the
    * neck from behind; the head turning from in front.
    */
-  private neckShot(anim: Anim, side: Side = 'R'): { target: () => THREE.Vector3 | null; dir: THREE.Vector3; dist: number } | null {
+  private neckShot(anim: Anim, side: Side = 'R'): { target: () => THREE.Vector3 | null; dir: THREE.Vector3; dist: number; fov?: number } | null {
     const R = this.rig
     if (!R) return null
     const q = this.body.quaternion
@@ -903,7 +922,11 @@ export class ExamScene {
       case 'sit-trunk':
         return { target: () => at(R.chest), dir: v(1, 0.35, 0.4), dist: 1.6 }
       // The cranial nerves: the face from in front and a little to his right (your side); the left ear from his left.
-      case 'acuity':
+      case 'acuity': {
+        // From behind you, over your shoulder: the chart in your hand near, him reading it 3 metres away.
+        const fwd = F.clone().setY(0).normalize()
+        return { target: () => this.eyesAt()?.addScaledVector(fwd, 0.35 * this.scale).add(v(0, -0.12 * this.scale, 0)) ?? at(R.head), dir: fwd.clone().add(v(0, 0.06, 0)).addScaledVector(RT, -0.03), dist: 4.1, fov: 26 }
+      }
       case 'fields-hand':
       case 'torch-eyes':
       case 'clench':
@@ -914,7 +937,8 @@ export class ExamScene {
       case 'ask:puff-cheeks':
       case 'ask:open-mouth':
         return anim === 'fields-hand'
-          ? { target: () => this.eyesAt()?.addScaledVector(F, 0.25 * this.scale) ?? at(R.head), dir: RT.clone().addScaledVector(F, 0.35).addScaledVector(U, 0.15), dist: 0.95 }
+          ? // From just behind your head: your two hands either side of his face.
+            { target: () => this.eyesAt()?.addScaledVector(F, 0.2 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(U, 0.12).addScaledVector(RT, 0.08), dist: 1.45 }
           : { target: () => this.eyesAt()?.addScaledVector(U, -0.03 * this.scale) ?? at(R.head), dir: F.clone().addScaledVector(RT, 0.3).addScaledVector(U, 0.08), dist: 0.55 }
       case 'face-touch':
         return { target: () => this.eyesAt()?.addScaledVector(U, -0.03 * this.scale) ?? at(R.head), dir: F.clone().multiplyScalar(0.8).addScaledVector(RT, side === 'L' ? -0.6 : 0.6).addScaledVector(U, 0.1), dist: 0.6 }
@@ -1321,11 +1345,38 @@ export class ExamScene {
           break
         }
         case 'acuity': {
-          // The eye not being read covered with her own palm, the fingers on her forehead; then the other.
+          // You stand 3 metres in front of him holding a 3-metre Snellen chart up beside your chest; he covers one eye
+          // with the flat of his own palm (same hand, fingers up, elbow down in front of his chest) and reads down the
+          // chart with the other; then the other eye.
           const first: Side = a.site?.endsWith('-L') ? 'R' : 'L'
           const cover: Side = a.t < a.dur / 2 ? first : first === 'R' ? 'L' : 'R'
           const eye = this.siteWorld(`eye-${cover}`)
+          const eyes = this.eyesAt()
           const head = this.headAxes()
+          const q = this.body.quaternion
+          const fwd = v(0, 0, 1).applyQuaternion(q).setY(0).normalize()
+          const left = v(1, 0, 0).applyQuaternion(q).setY(0).normalize()
+          const w = on(0, a.dur)
+          if (eyes && w > 0.02)
+            this.touches.push({
+              grip: 'chart',
+              contact: 'tool',
+              gap: 0,
+              stroke: 0,
+              site: `eye-${first}`,
+              // Your right hand holds its side edge, your arm out to his left as he looks at you, at his eye height.
+              hold: { at: eyes.clone().addScaledVector(fwd, 3 * this.scale).addScaledVector(left, 0.42 * this.scale).add(v(0, (0.08 - 0.25 * (1 - w)) * this.scale, 0)), faces: fwd.clone().negate(), across: left.clone().negate() },
+            })
+          // The camera: first from behind you, the chart in your hand at your side and him across the room; then in to
+          // him, his palm over the eye as he reads.
+          if (eyes && this.view === 'focus') {
+            const k = this.scale
+            const wide = a.t < 0.36 * a.dur
+            const from = wide ? eyes.clone().addScaledVector(fwd, 3.9 * k).addScaledVector(left, 0.05 * k).add(v(0, 0.24 * k, 0)) : eyes.clone().addScaledVector(fwd, 0.85 * k).addScaledVector(left, 0.32 * k).add(v(0, 0.06 * k, 0))
+            const look = wide ? eyes.clone().addScaledVector(fwd, 1.6 * k).addScaledVector(left, 0.4 * k).add(v(0, -0.02 * k, 0)) : eyes.clone().add(v(0, -0.06 * k, 0))
+            const off = from.clone().sub(look)
+            this.shot = { target: () => look, dir: off.clone().normalize(), dist: off.length() / Math.max(0.75, k), fov: wide ? 50 : 40 }
+          }
           const key = `palm-${cover}`
           if (!this.reachFrom.has(key)) {
             const p0 = this.siteWorld(key)
@@ -1334,51 +1385,80 @@ export class ExamScene {
           const rest = this.reachFrom.get(key)
           const half = a.dur / 2
           const local = a.t < half ? a.t : a.t - half
-          const e = smooth(Math.max(0, Math.min(1, local / 0.45, (half - local) / 0.45)))
-          if (eye && rest) {
-            const out = v(cover === 'R' ? -1 : 1, 0, 0).applyQuaternion(this.body.quaternion)
-            // The palm cupped just in front of the eye.
-            const over = eye.addScaledVector(head.face, 0.035 * this.scale)
-            this.reachTo.arm[cover] = { at: rest.clone().lerp(over, e), pole: out.clone().addScaledVector(head.up, -0.6), tip: 'palm' }
+          const e = smooth(Math.max(0, Math.min(1, local / 0.5, (half - local) / 0.5)))
+          if (eye && rest && e > 0.01) {
+            const out = v(cover === 'R' ? -1 : 1, 0, 0).applyQuaternion(q)
+            // The middle of the palm just in front of the eye, cupped over it (not pressing on it).
+            const over = eye.addScaledVector(head.face, 0.028 * this.scale)
+            const fingers = head.up.clone().addScaledVector(out, -0.2).normalize()
+            // On the way up the hand turns from lying on the thigh to facing the eye.
+            const faces = head.face.clone().negate().lerp(v(0, -1, 0), 1 - e).normalize()
+            this.reachTo.arm[cover] = { at: rest.clone().lerp(over, e), pole: v(0, -1, 0).addScaledVector(head.face, 0.45).addScaledVector(out, 0.35), palm: { faces, fingers: fingers.lerp(head.face, 1 - e).normalize() } }
           }
           this.hands[cover] = { name: 'extended', w: this.hands[cover].name === 'extended' ? this.hands[cover].w : 0, want: 1 }
           break
         }
         case 'fields-hand': {
-          // Your finger held out at arm's length between you, wiggled in each quarter of her field in turn.
+          // Facing him at arm's length, both your hands held up halfway between you, one out in each half of his field;
+          // he looks at your nose. A finger wiggles in each quarter in turn: the upper two, then both hands come down
+          // and the lower two. Each hand only goes up and down.
           const w = on(0, a.dur)
-          // Each quarter held, then a glide to the next.
-          const u = Math.min(3.999, (a.t / a.dur) * 4)
-          const quad = Math.floor(u)
-          const glide = smooth(Math.max(0, Math.min(1, (u - quad - 0.7) / 0.3)))
-          const corner = (q: number) => ({ h: q % 2 ? 38 : -38, v: q < 2 ? 24 : -24 })
-          const c0 = corner(quad)
-          const c1 = corner(Math.min(3, quad + 1))
-          const at = this.fingerPoint(c0.h + (c1.h - c0.h) * glide, c0.v + (c1.v - c0.v) * glide, 0.55 * this.scale)
           const eyes = this.eyesAt()
-          if (at && eyes && w > 0.02) {
+          if (eyes && w > 0.02) {
             const head = this.headAxes()
-            const wiggle = 0.008 * this.scale * Math.sin(a.t * Math.PI * 2 * 3)
-            this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - w), stroke: 0, site: 'eye-R', spot: () => ({ at: at.clone().addScaledVector(head.up, wiggle), n: at.clone().sub(eyes).normalize(), along: head.up.clone() }) })
+            const u = Math.min(3.999, (a.t / a.dur) * 4)
+            const quad = Math.floor(u)
+            // Down from the upper quarters to the lower between the second and third.
+            const down = smooth(Math.max(0, Math.min(1, (a.t / a.dur - 0.44) / 0.12)))
+            const vert = 24 - 48 * down
+            const leftOf = v(1, 0, 0).applyQuaternion(this.body.quaternion)
+            for (const h of [-38, 38]) {
+              const at = this.fingerPoint(h, vert, 0.55 * this.scale)
+              if (!at) continue
+              // Your right hand in his left field (across from it), your left in his right.
+              const hisLeft = at.clone().sub(eyes).dot(leftOf) > 0
+              const active = (quad % 2 === 0) === (h < 0)
+              const wiggle = active ? 0.008 * this.scale * Math.sin(a.t * Math.PI * 2 * 3) : 0
+              // Fingers up, palm toward him, the forearm up from your elbow below and nearer you; raised into place.
+              const lift = 0.2 * this.scale * (1 - w)
+              this.touches.push({ grip: 'press', contact: 'index', gap: 0, stroke: 0, site: 'eye-R', hand: hisLeft ? 0 : 1, exact: true, spot: () => ({ at: at.clone().addScaledVector(head.up, wiggle - lift), n: head.face.clone(), along: head.up.clone().addScaledVector(head.face, -0.3) }) })
+            }
           }
           break
         }
         case 'torch-eyes': {
-          // A pen torch brought in from the side to each eye in turn, a hand's breadth away.
+          // He looks into the distance. The pen torch comes in from the side and a little below, a hand's breadth from
+          // the eye, and shines up into the pupil for a couple of seconds (both pupils watched); then it is carried
+          // across in front of the nose to the other eye.
           const w = on(0, a.dur)
           const eR = this.siteWorld('eye-R')
           const eL = this.siteWorld('eye-L')
           if (eR && eL && w > 0.02) {
             const head = this.headAxes()
-            const fromR = head.face.clone().multiplyScalar(0.9).addScaledVector(head.right, 0.45).normalize()
-            const fromL = head.face.clone().multiplyScalar(0.9).addScaledVector(head.right, -0.45).normalize()
-            const atR = eR.clone().addScaledVector(fromR, 0.09 * this.scale)
-            const atL = eL.clone().addScaledVector(fromL, 0.09 * this.scale)
-            // Held at each eye; between, carried out in front of the nose and across.
-            const f = smooth(Math.max(0, Math.min(1, (a.t / a.dur - 0.42) / 0.16)))
-            const at = atR.clone().lerp(atL, f).addScaledVector(head.face, 0.1 * this.scale * Math.sin(Math.PI * f))
-            const n = fromR.clone().lerp(fromL, f).normalize()
-            this.touches.push({ grip: 'torch', contact: 'tool', gap: 0.14 * (1 - w), stroke: 0, site: f < 0.5 ? 'eye-R' : 'eye-L', spot: () => ({ at, n, along: head.up.clone() }) })
+            const k = this.scale
+            // From each eye toward where the torch is held: in front, out to that side, below.
+            const way = (s: Side) => head.face.clone().multiplyScalar(0.78).addScaledVector(head.right, (s === 'R' ? 1 : -1) * 0.42).addScaledVector(head.up, -0.46).normalize()
+            const f = smooth(Math.max(0, Math.min(1, (a.t / a.dur - 0.42) / 0.18)))
+            const pupil = eR.clone().lerp(eL, f).addScaledVector(head.face, 0.012 * k)
+            // Crossing, it is carried out in front of his face, clear of the nose and chin.
+            const n = way('R').lerp(way('L'), f).addScaledVector(head.face, 0.9 * Math.sin(Math.PI * f)).normalize()
+            const reach = (0.1 + 0.12 * Math.sin(Math.PI * f) + 0.1 * (1 - w)) * k
+            // Your forearm runs back from the hand away from him, down, and out to the side of the eye being lit.
+            const back = (s: Side) => head.face.clone().multiplyScalar(0.75).addScaledVector(head.up, -0.55).addScaledVector(head.right, (s === 'R' ? 1 : -1) * 0.45)
+            const arm = back('R').lerp(back('L'), f)
+            const tip = pupil.clone().addScaledVector(n, reach)
+            this.touches.push({ grip: 'torch', contact: 'tool', gap: 0, stroke: 0, site: f < 0.5 ? 'eye-R' : 'eye-L', hand: 0, aim: { tip, dir: n.clone().negate(), arm } })
+            // The light, only while it is on an eye.
+            const lit = w * (1 - Math.sin(Math.PI * f))
+            this.torchLight.position.copy(tip)
+            this.torchLight.target.position.copy(pupil)
+            this.torchLight.target.updateMatrixWorld()
+            this.torchLight.intensity = 0.35 * lit
+            this.beam.visible = lit > 0.05
+            this.beam.position.copy(tip)
+            this.beam.lookAt(pupil)
+            this.beam.scale.set(1, 1, tip.distanceTo(pupil))
+            ;(this.beam.material as THREE.MeshBasicMaterial).opacity = 0.16 * lit
           }
           break
         }
@@ -2057,13 +2137,14 @@ export class ExamScene {
    * Bring the end of a limb (a fingertip, a heel) to a point: two bones, the joint between them bending toward `pole`;
    * then the lower bone swung so the end lands on it.
    */
-  private reachLimb(root: THREE.Object3D, mid: THREE.Object3D, tipSite: string, target: THREE.Vector3, pole: THREE.Vector3, maxBend = 140, end?: THREE.Object3D) {
+  private reachLimb(root: THREE.Object3D, mid: THREE.Object3D, tipSite: string | THREE.Object3D, target: THREE.Vector3, pole: THREE.Vector3, maxBend = 140, end?: THREE.Object3D) {
+    const tipAt = () => (typeof tipSite === 'string' ? this.siteWorld(tipSite) : tipSite.getWorldPosition(v(0, 0, 0)))
     let goal = target
     for (let i = 0; i < 2; i++) {
       root.updateWorldMatrix(true, true)
       const A = root.getWorldPosition(v(0, 0, 0))
       const B = mid.getWorldPosition(v(0, 0, 0))
-      const C = this.siteWorld(tipSite)
+      const C = tipAt()
       if (!C) return
       const l1 = A.distanceTo(B)
       const l2 = B.distanceTo(C)
@@ -2082,7 +2163,7 @@ export class ExamScene {
       turn(root, new THREE.Quaternion().setFromUnitVectors(B.sub(A).normalize(), joint.sub(A).normalize()))
       mid.updateWorldMatrix(true, true)
       const B2 = mid.getWorldPosition(v(0, 0, 0))
-      const C2 = this.siteWorld(tipSite)
+      const C2 = tipAt()
       if (!C2) return
       turn(mid, new THREE.Quaternion().setFromUnitVectors(C2.sub(B2).normalize(), goal.clone().sub(B2).normalize()))
     }
@@ -2090,10 +2171,46 @@ export class ExamScene {
     if (end && goal.distanceTo(target) > 1e-3) {
       end.updateWorldMatrix(true, true)
       const W = end.getWorldPosition(v(0, 0, 0))
-      const C3 = this.siteWorld(tipSite)
+      const C3 = tipAt()
       if (!C3) return
       const q = new THREE.Quaternion().setFromUnitVectors(C3.sub(W).normalize(), target.clone().sub(W).normalize())
       turn(end, new THREE.Quaternion().slerp(q, Math.min(1, (75 * DEG) / Math.max(1e-6, 2 * Math.acos(Math.min(1, Math.abs(q.w)))))))
+    }
+  }
+
+  /**
+   * The patient's hand put somewhere a certain way: the middle of the palm at `at`, the palm facing `faces`, the fingers
+   * pointing `fingers` (a palm over an eye). The arm reaches the wrist to where that leaves it; the turn of the hand is
+   * shared as a real one is, most by the forearm, the rest at the wrist.
+   */
+  private placeHand(R: Rig, s: Side, at: THREE.Vector3, faces: THREE.Vector3, fingers: THREE.Vector3, pole: THREE.Vector3) {
+    const f = fingers.clone().normalize()
+    const back = faces.clone().negate()
+    back.addScaledVector(f, -back.dot(f)).normalize()
+    const want = new THREE.Matrix4().makeBasis(f, back, f.clone().cross(back))
+    // The turn from how the hand is now to how it is wanted.
+    const turnNow = () => {
+      R.hand[s].updateWorldMatrix(true, true)
+      const palm = this.spotNow(`palm-${s}`)
+      if (!palm) return null
+      const cur = this.handFrame(R, s, palm.n)
+      const have = new THREE.Matrix4().makeBasis(cur.along, cur.back, cur.along.clone().cross(cur.back))
+      return { q: new THREE.Quaternion().setFromRotationMatrix(want.clone().multiply(have.transpose())), palm }
+    }
+    for (let i = 0; i < 2; i++) {
+      const t = turnNow()
+      if (!t) return
+      const wrist = R.hand[s].getWorldPosition(v(0, 0, 0))
+      const off = t.palm.at.clone().sub(wrist).applyQuaternion(t.q)
+      this.reachLimb(R.upperArm[s], R.forearm[s], R.hand[s], at.clone().sub(off), pole, 145)
+      // The twist about the forearm by the forearm (pronation and supination), then the rest at the wrist.
+      const t2 = turnNow()
+      if (!t2) return
+      const axis = this.forearmAxis(R, s)
+      const twist = 2 * Math.atan2(v(t2.q.x, t2.q.y, t2.q.z).dot(axis), t2.q.w)
+      turn(R.forearm[s], new THREE.Quaternion().setFromAxisAngle(axis, Math.max(-1.6, Math.min(1.6, twist))))
+      const t3 = turnNow()
+      if (t3) turn(R.hand[s], t3.q)
     }
   }
 
@@ -2152,6 +2269,26 @@ export class ExamScene {
     for (const t of R ? this.touches : []) {
       const hand = all[t.hand ?? (t.left ? 1 : 0)]
       if (!R || placed.has(hand)) continue
+      if (t.hold) {
+        placed.add(hand)
+        hand.setGrip(t.grip)
+        hand.hold(t.hold.at, t.hold.faces, t.hold.across)
+        continue
+      }
+      if (t.aim) {
+        placed.add(hand)
+        hand.setGrip(t.grip)
+        hand.aim(t.aim.tip, t.aim.dir, t.aim.arm)
+        continue
+      }
+      if (t.spot && t.exact) {
+        const spot = t.spot()
+        if (!spot) continue
+        placed.add(hand)
+        hand.setGrip(t.grip)
+        hand.place(spot.at, spot.n, spot.along, t.contact, t.gap)
+        continue
+      }
       if (t.spot) {
         // Somewhere worked out now the body is posed (on the collar as it goes on): the hand kept out of what it holds.
         const spot = t.spot()
@@ -2788,7 +2925,8 @@ export class ExamScene {
     // A fingertip or a heel brought to where it must be (the finger–nose and heel–shin tests).
     for (const s of SIDES) {
       const arm = this.reachTo.arm[s]
-      if (arm) this.reachLimb(R.upperArm[s], R.forearm[s], `${arm.tip ?? 'pulp'}-${s}`, arm.at, arm.pole, 140, R.hand[s])
+      if (arm?.palm) this.placeHand(R, s, arm.at, arm.palm.faces, arm.palm.fingers, arm.pole)
+      else if (arm) this.reachLimb(R.upperArm[s], R.forearm[s], `${arm.tip ?? 'pulp'}-${s}`, arm.at, arm.pole, 140, R.hand[s])
       const leg = this.reachTo.leg[s]
       if (leg) this.reachLimb(R.thigh[s], R.calf[s], `heel-${s}`, leg.at, leg.pole, 135)
     }
@@ -2961,6 +3099,7 @@ export class ExamScene {
     if (!R) return
     const far = this.camera.aspect < 1 ? 1.4 : 1
     const H = R.height
+    this.wantFov = (this.view === 'focus' && this.shot?.fov) || 40
     const at = (o: THREE.Object3D) => o.getWorldPosition(v(0, 0, 0))
     const at0 = at
     const F = v(0, 0, 1).applyQuaternion(this.body.quaternion)
@@ -3113,6 +3252,10 @@ export class ExamScene {
     const k = 1 - Math.exp(-dt * 4)
     this.camPos.lerp(this.wantPos, k)
     this.camLook.lerp(this.wantLook, k)
+    if (Math.abs(this.camera.fov - this.wantFov) > 0.05) {
+      this.camera.fov += (this.wantFov - this.camera.fov) * k
+      this.camera.updateProjectionMatrix()
+    }
     this.camera.position.copy(this.camPos)
     this.camera.lookAt(this.camLook)
     for (const m of this.marks) {
