@@ -222,7 +222,7 @@ export function Syringe({
           <rect x="26" y="22" width="10" height="12" fill={flash ?? '#d8e0e8'} stroke="#505868" />
           {/* barrel, contents */}
           <rect x={barrel.x0} y="16" width={barrel.x1 - barrel.x0} height="24" fill="#f8fbff" stroke="#505868" strokeWidth="1.5" />
-          {drug > 0 && <rect x={barrel.x0 + 1} y="17" width={mlToX(drug) - barrel.x0 - 1} height="22" fill="#cfe4ff" />}
+          {drug > 0 && <rect x={barrel.x0 + 1} y="17" width={Math.max(0, mlToX(drug) - barrel.x0 - 1)} height="22" fill="#cfe4ff" />}
           {drawn > 0 && <rect x={mlToX(drug)} y="17" width={mlToX(drug + drawn) - mlToX(drug)} height="22" fill={drawnColour} />}
           {Array.from({ length: capacity + 1 }, (_, i) => (
             <line key={i} x1={mlToX(i)} y1="16" x2={mlToX(i)} y2={i % 5 === 0 ? 24 : 20} stroke="#505868" strokeWidth="0.6" />

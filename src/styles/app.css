@@ -3055,3 +3055,84 @@ button {
   color: #606878;
   font-size: 10px;
 }
+
+/* Central line bench: blood at an open hub, scrubbing hands, a stitch, the ECG sweep. */
+.cvc-drip {
+  animation: cvc-drip 1.1s ease-in infinite;
+}
+@keyframes cvc-drip {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-1px, 14px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-1px, 18px);
+    opacity: 0;
+  }
+}
+.cvc-spurt {
+  animation: cvc-spurt 0.9s ease-out infinite;
+}
+@keyframes cvc-spurt {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(-10px, -10px) scale(1.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-16px, -4px) scale(0.6);
+    opacity: 0;
+  }
+}
+.cvc-scrub {
+  animation: cvc-scrub 0.35s ease-in-out infinite alternate;
+}
+@keyframes cvc-scrub {
+  from {
+    transform: translateX(-3px);
+  }
+  to {
+    transform: translateX(3px);
+  }
+}
+.cvc-foam {
+  animation: cvc-foam 0.7s ease-in-out infinite alternate;
+}
+@keyframes cvc-foam {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 0.95;
+  }
+}
+.cvc-stitch {
+  stroke-dasharray: 40;
+  animation: cvc-stitch 0.9s ease-in-out forwards;
+}
+@keyframes cvc-stitch {
+  from {
+    stroke-dashoffset: 40;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.cvc-ecg-run {
+  animation: cvc-ecg 3.2s linear infinite;
+}
+@keyframes cvc-ecg {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-156px);
+  }
+}

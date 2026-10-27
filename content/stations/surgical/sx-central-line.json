@@ -15,8 +15,9 @@
     },
     {
       "title": "Demonstrate",
-      "goal": "Each step with its safety check, under ultrasound.",
+      "goal": "Time-out, then the whole line on the manikin, each safety check as you do it.",
       "steps": [
+        "timeout",
         "procedure"
       ]
     },
@@ -30,7 +31,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against NICE TA49 (ultrasound guidance for central venous access), the Association of Anaesthetists 2016 safe vascular access guideline, and the NHS 'Safety Standards for Invasive Procedures' (NatSSIPs 2023).\n\nIndications: vasopressors, poor peripheral access, CVP/ScvO2, irritant drugs. Relative contraindications: overlying infection, thrombosis, coagulopathy (weigh up), contralateral pneumothorax. Steps: consent (or best interests), NatSSIPs checklist and time-out, full barrier precautions (cap, mask, sterile gown and gloves, full-length drape), 2% chlorhexidine in 70% alcohol allowed to dry, head-down tilt, real-time ultrasound (identify the IJV lateral to the carotid, compressible, non-pulsatile; confirm needle tip in the vein), Seldinger technique (needle, wire never let go, confirm the wire in the vein on ultrasound, nick, dilate, catheter to about 15 cm on the right), aspirate and flush every lumen, secure, dressing, chest X-ray (tip at the cavo-atrial junction, no pneumothorax), document, and count the wire out. Complications: arterial puncture/cannulation (do not dilate an artery — leave the catheter and call vascular), pneumothorax, air embolism (head down, occlude hubs), arrhythmia (withdraw wire), lost guidewire, infection, thrombosis.\n\nYour notes (checklist, ultrasound, Seldinger mnemonic, complications, depth 15–16 cm right) match this.\n\nPerfect script checked against NICE TA49 and NatSSIPs, an HKCEM-style scheme and a keyword scheme. Removed the landmark option and unhelpful replies; added a close.",
+  "notes": "Checked against NICE TA49 (ultrasound guidance for central venous access), the Association of Anaesthetists 2016 safe vascular access guideline, and the NHS 'Safety Standards for Invasive Procedures' (NatSSIPs 2023).\n\nIndications: vasopressors, poor peripheral access, CVP/ScvO2, irritant drugs. Relative contraindications: overlying infection, thrombosis, coagulopathy (weigh up), contralateral pneumothorax. Steps: consent (or best interests), NatSSIPs checklist and time-out, full barrier precautions (cap, mask, sterile gown and gloves, full-length drape), 2% chlorhexidine in 70% alcohol allowed to dry, head-down tilt, real-time ultrasound (identify the IJV lateral to the carotid, compressible, non-pulsatile; confirm needle tip in the vein), Seldinger technique (needle, wire never let go, confirm the wire in the vein on ultrasound, nick, dilate, catheter to about 15 cm on the right), aspirate and flush every lumen, secure, dressing, chest X-ray (tip at the cavo-atrial junction, no pneumothorax), document, and count the wire out. Complications: arterial puncture/cannulation (do not dilate an artery — leave the catheter and call vascular), pneumothorax, air embolism (head down, occlude hubs), arrhythmia (withdraw wire), lost guidewire, infection, thrombosis.\n\nYour notes (checklist, ultrasound, Seldinger mnemonic, complications, depth 15–16 cm right) match this.\n\nThe demonstration is a hands-on bench (perform: cvc), checked step by step against the MSD Manual internal jugular cannulation steps (Trendelenburg 15–20°, slight head turn, pre-flushed lumens, J-wire 10–15 cm on the right and back off with ectopics, never lose grasp of the wire, #11 stab of about 4 mm, twisting dilator, wire out of the hub before the catheter enters, at least 15 cm on the right, aspirate and flush, X-ray before use) and the short-axis dynamic needle tip positioning technique (45–60°, slide the probe until the tip disappears, advance until it reappears; wire seen in the vein before dilating). Head rotation: more turn increases carotid overlap in many patients (Sulek 1996), so only a slight turn.\n\nPerfect script checked against NICE TA49 and NatSSIPs, an HKCEM-style scheme and a keyword scheme.",
   "cast": [
     {
       "id": "junior",
@@ -61,51 +62,39 @@
       ]
     },
     {
-      "id": "procedure",
-      "kind": "steps",
+      "id": "timeout",
+      "kind": "say",
       "to": "table-ix",
-      "label": "Demonstrate",
-      "hint": "Checklist, barrier precautions, ultrasound, Seldinger, flush, secure, X-ray, count the wire.",
+      "label": "Time-out",
+      "hint": "Consent or best interests; the NatSSIPs checklist read aloud before you start.",
       "opts": [
         {
-          "t": "Consent or best-interests decision; NatSSIPs checklist and time-out",
-          "n": 1,
+          "t": "He is ventilated and cannot consent, so this is a best-interests decision, recorded. Before we scrub, the NatSSIPs checklist and time-out: right patient, right IJ, platelets and INR fine, ultrasound here, full kit, wire count one.",
           "mark": "Consent and safety checklist"
-        },
+        }
+      ]
+    },
+    {
+      "id": "procedure",
+      "kind": "say",
+      "to": "table-ix",
+      "label": "Demonstrate on the manikin",
+      "hint": "Head-down, pre-scan, full barrier, flush the lumens, track the needle tip, never let go of the wire, see it in the vein, dilate to the vein only, catheter to 15 cm, wire out and shown, flush, secure, X-ray.",
+      "opts": [
         {
-          "t": "Head-down tilt, head turned slightly left; ultrasound IJV lateral to carotid, compressible",
-          "n": 2,
-          "mark": "Positions and identifies anatomy on ultrasound"
-        },
-        {
-          "t": "Full barrier precautions; chlorhexidine 2%/alcohol, allow to dry; full drape",
-          "n": 3,
-          "mark": "Full aseptic barrier precautions"
-        },
-        {
-          "t": "Local anaesthetic; needle under real-time ultrasound into the vein; dark non-pulsatile blood",
-          "n": 4,
-          "mark": "Real-time ultrasound-guided venepuncture"
-        },
-        {
-          "t": "Pass the wire, never letting go; confirm it in the vein on ultrasound",
-          "n": 5,
-          "mark": "Wire control and ultrasound confirmation"
-        },
-        {
-          "t": "Nick the skin, dilate briefly, railroad the catheter to ~15 cm",
-          "n": 6,
-          "mark": "Dilates and inserts the catheter to the right depth"
-        },
-        {
-          "t": "Remove the wire and count it out; aspirate and flush all lumens; secure and dress",
-          "n": 7,
-          "mark": "Removes wire, flushes lumens, secures"
-        },
-        {
-          "t": "Chest X-ray: tip at the cavo-atrial junction, no pneumothorax; document",
-          "n": 8,
-          "mark": "Confirms position and documents"
+          "t": "Demonstrate the line on the manikin",
+          "perform": "cvc",
+          "performHint": "Every step by hand. Dr Hung watches; the screen and your fingers tell you where the needle and the wire are.",
+          "mark": [
+            "Positions and identifies anatomy on ultrasound",
+            "Full aseptic barrier precautions",
+            "Real-time ultrasound-guided venepuncture",
+            "Wire control and ultrasound confirmation",
+            "Dilates and inserts the catheter to the right depth",
+            "Removes wire, flushes lumens, secures",
+            "Confirms position and documents"
+          ],
+          "scene": "line"
         }
       ]
     },
@@ -286,23 +275,35 @@
     },
     {
       "at": "0:20",
-      "say": "Consent or best-interests decision; NatSSIPs checklist and time-out. Head-down tilt, head turned slightly left; ultrasound IJV lateral to carotid, compressible. Full barrier precautions; chlorhexidine 2%/alcohol, allow to dry; full drape."
+      "say": "He is ventilated and cannot consent, so this is a best-interests decision, recorded. Before we scrub, the NatSSIPs checklist and time-out: right patient, right IJ, platelets and INR fine, ultrasound here, full kit, wire count one."
     },
     {
       "at": "0:40",
-      "say": "Local anaesthetic; needle under real-time ultrasound into the vein; dark non-pulsatile blood. Pass the wire, never letting go; confirm it in the vein on ultrasound. Nick the skin, dilate briefly, railroad the catheter to ~15 cm."
+      "do": "On the manikin: bed 15° head-down, head turned slightly left. Pre-scan at the cricoid: vein centred, lateral to the carotid, compressible under the probe. Full barrier precautions: cap and mask, scrub, gown, gloves. Chlorhexidine 2% in alcohol 30 s, left to dry; full-length drape. Lumens flushed, blue and white clamped, brown open; probe in a sterile sheath."
     },
     {
-      "at": "1:00",
-      "say": "Remove the wire and count it out; aspirate and flush all lumens; secure and dress. Chest X-ray: tip at the cavo-atrial junction, no pneumothorax; document."
+      "at": "2:30",
+      "do": "Lidocaine wheal. Needle at 45° under real-time ultrasound, aspirating: slide the probe on, advance to the dot, again, until the front wall tents and dark blood fills the syringe."
     },
     {
-      "at": "1:20",
+      "at": "3:30",
+      "do": "Steady the needle, syringe off, thumb on the hub. J-wire to 15–20 cm, never letting go; back off if ectopics. Pinch the wire at the skin; needle off. Wire seen in the vein in short and long axis."
+    },
+    {
+      "at": "4:30",
+      "do": "4 mm stab at the wire, edge away. Dilate: down the wire, take the tail, twist in to the vein only, out, gauze. Catheter down the wire, wire out of the brown hub and held, catheter to 15 cm. Wire out, shown whole: count it out."
+    },
+    {
+      "at": "5:30",
+      "do": "Aspirate and flush every lumen, cap them. Stitch both wings; chlorhexidine dressing. X-ray: tip at the cavo-atrial junction, no pneumothorax. Document the wire count."
+    },
+    {
+      "at": "6:10",
       "say": "What do you think you should do?",
       "do": "Leave the catheter in, don't pull it, and call vascular. Then you'd confirm with a gas or a transduced trace."
     },
     {
-      "at": "1:40",
+      "at": "6:40",
       "say": "You'll do the next one under my supervision. Remember: ultrasound always, never let go of the wire, count it out, and an X-ray before using the line.",
       "do": "Got it."
     }

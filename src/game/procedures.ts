@@ -23,6 +23,7 @@ import { HareProcedure } from './hare/HareProcedure'
 import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
 import { UsBlockProcedure } from './usblock/UsBlockProcedure'
+import { CvcProcedure } from './cvc/CvcProcedure'
 
 export type ProcedureProps = { job: PerformJob; coach: boolean; onDone: (r: BenchResult) => void }
 
@@ -31,6 +32,7 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   hare: HareProcedure,
   colles: CollesProcedure,
   usblock: UsBlockProcedure,
+  cvc: CvcProcedure,
   knee: KneeProcedure,
   shoulder: ShoulderProcedure,
   digital: DigitalProcedure,
