@@ -141,3 +141,11 @@ test('a catheter goes no deeper than its own length', () => {
   apply(r, slide(r, -40).patch)
   assert.equal(r.catheterCm, CATH_LEN - 1)
 })
+
+test('the catheter depth is judged as read at the skin, in whole centimetres', () => {
+  const r = perfect()
+  r.catheterCm = 16.4
+  assert.equal(checkCvc(r).find((x) => x.key === 'dilate')?.ok, true)
+  r.catheterCm = 16.6
+  assert.equal(checkCvc(r).find((x) => x.key === 'dilate')?.ok, false)
+})

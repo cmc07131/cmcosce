@@ -114,10 +114,45 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
   const shared = useRef<Shared>({ probe: { x: veinXOnNeck(NECK.apexY), y: NECK.apexY } })
   const done = useRef(false)
   const body = useRef<HTMLDivElement>(null)
+  // What everything looked like as you began each step: going back puts it all back, mistakes included.
+  const snaps = useRef<{ run: CvcRun; probe: Pt }[]>([{ run: api.runRef.current, probe: shared.current.probe }])
+  const [epoch, setEpoch] = useState(0)
+  const restore = (i: number) => {
+    const snap = snaps.current[i]
+    if (!snap) return
+    api.upd({ ...snap.run })
+    shared.current.probe = snap.probe
+    setEpoch((e) => e + 1)
+  }
   const next = () => {
     sfx.select()
-    if (index < TITLES.length - 1) setIndex(index + 1)
-    else setChecked(true)
+    if (index < TITLES.length - 1) {
+      snaps.current[index + 1] = { run: api.runRef.current, probe: shared.current.probe }
+      setIndex(index + 1)
+    } else {
+      snaps.current[TITLES.length] = { run: api.runRef.current, probe: shared.current.probe }
+      setChecked(true)
+    }
+    body.current?.scrollTo({ top: 0 })
+  }
+  const back = () => {
+    sfx.back()
+    // Back keeps what you did; REDO THIS STEP is what starts a step again from scratch.
+    if (checked) {
+      setChecked(false)
+      setEpoch((e) => e + 1)
+      api.feel(`Back to the ${TITLES[TITLES.length - 1].toLowerCase()}, as you left it.`)
+    } else if (index > 0) {
+      restore(index)
+      setIndex(index - 1)
+      api.feel(`Back to the ${TITLES[index - 1].toLowerCase()}, as you left it. REDO THIS STEP starts it again.`)
+    }
+    body.current?.scrollTo({ top: 0 })
+  }
+  const redo = () => {
+    sfx.back()
+    restore(index)
+    api.feel(`${TITLES[index]}: from the start of this step again.`)
     body.current?.scrollTo({ top: 0 })
   }
   function finish() {
@@ -145,9 +180,16 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
       <StepStrip titles={TITLES} index={checked ? TITLES.length - 1 : index} />
       <div ref={body} className="min-h-0 flex-1 overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
         {checked ? (
-          <CheckCard rows={checkCvc(r)} onContinue={finish} testId="cvc-check" />
-        ) : (
           <>
+            <CheckCard rows={checkCvc(r)} onContinue={finish} testId="cvc-check" />
+            <div className="io-choices mt-2">
+              <button type="button" className="tap io-mini" data-testid="cvc-back" onClick={back}>
+                ◀ BACK TO THE X-RAY
+              </button>
+            </div>
+          </>
+        ) : (
+          <div key={`${index}-${epoch}`} className="contents">
             {index === 0 && <PositionStage {...stage} />}
             {index === 1 && <ScanStage {...stage} />}
             {index === 2 && <ScrubStage {...stage} />}
@@ -160,7 +202,15 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
             {index === 9 && <CatheterStage {...stage} />}
             {index === 10 && <SecureStage {...stage} />}
             {index === 11 && <XrayStage {...stage} />}
-          </>
+            <div className="io-choices mt-2">
+              <button type="button" className="tap io-mini" data-testid="cvc-back" disabled={index === 0} onClick={back}>
+                ◀ BACK A STEP
+              </button>
+              <button type="button" className="tap io-mini" data-testid="cvc-redo" onClick={redo}>
+                ↺ REDO THIS STEP
+              </button>
+            </div>
+          </div>
         )}
         {!checked && <NoteLine note={api.note} />}
       </div>
@@ -170,6 +220,94 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
 const toggle = <T,>(xs: T[], x: T) => (xs.includes(x) ? xs : [...xs, x])
+
+/* ================================================================ shared controls */
+
+/**
+ * A strip to drag along: right pushes toward the patient, left draws back. `cmPerWidth`: how far one full sweep
+ * moves it. More reliable on a phone than dragging along a thin wire in the picture.
+ */
+function SlidePad({ label, cmPerWidth, onDelta, onEnd, disabled, testId }: { label: string; cmPerWidth: number; onDelta: (cm: number) => void; onEnd?: () => void; disabled?: boolean; testId: string }) {
+  const last = useRef<number | null>(null)
+  const [x, setX] = useState(0.5)
+  return (
+    <div
+      className="io-figure mt-2 aspect-[200/30]"
+      style={{ touchAction: 'none', opacity: disabled ? 0.45 : 1 }}
+      data-testid={testId}
+      onPointerDown={(e) => {
+        if (disabled) return
+        e.currentTarget.setPointerCapture(e.pointerId)
+        last.current = e.clientX
+      }}
+      onPointerMove={(e) => {
+        if (last.current === null) return
+        const rect = e.currentTarget.getBoundingClientRect()
+        const dx = e.clientX - last.current
+        last.current = e.clientX
+        setX(clamp((e.clientX - rect.left) / rect.width, 0.05, 0.95))
+        onDelta((dx / rect.width) * cmPerWidth)
+      }}
+      onPointerUp={() => {
+        last.current = null
+        setX(0.5)
+        onEnd?.()
+      }}
+      onPointerCancel={() => (last.current = null)}
+    >
+      <svg viewBox="0 0 200 30" className="block h-full w-full select-none">
+        <rect width="200" height="30" fill="#e8f0f6" />
+        <rect x="8" y="17" width="184" height="6" rx="3" fill="#b8c8d8" />
+        <g transform={`translate(${8 + x * 184} 20)`}>
+          <rect x="-12" y="-7" width="24" height="14" rx="4" fill="#3a6f92" stroke="#203848" />
+          <path d="M-5 0 L-1 -3 L-1 3 Z M5 0 L1 -3 L1 3 Z" fill="#f8f8f8" />
+        </g>
+        <text x="8" y="11" fontFamily="Press Start 2P, monospace" fontSize="5" fill="#203040">
+          {label}
+        </text>
+      </svg>
+    </div>
+  )
+}
+
+/** Where your hand holds the wire. Moving it is a deliberate act, never a side effect of a drag. */
+function GripButtons({ run, upd, feel, tailName }: Pick<Stage, 'run' | 'upd' | 'feel'> & { tailName: string }) {
+  const skinFree = !run.sleeve || run.sleeve.front > SKIN_GRIP_CM + 0.4
+  const tailOk = tailFree(run.inside, run.sleeve)
+  return (
+    <div className="io-choices mt-2">
+      <button
+        type="button"
+        className="tap io-mini"
+        data-on={run.grip === 'skin' || undefined}
+        data-testid="cvc-grip-skin"
+        disabled={run.grip === 'skin' || !skinFree}
+        onClick={() => {
+          upd({ grip: 'skin' })
+          sfx.cursor()
+          feel('You pinch the wire where it leaves the skin.')
+        }}
+      >
+        {run.grip === 'skin' ? 'HOLDING AT THE SKIN ✓' : 'HOLD THE WIRE AT THE SKIN'}
+      </button>
+      <button
+        type="button"
+        className="tap io-mini"
+        data-on={run.grip === 'tail' || undefined}
+        data-testid="cvc-grip-tail"
+        disabled={run.grip === 'tail' || !tailOk}
+        onClick={() => {
+          const hub = Boolean(run.sleeve && run.sleeve.kind === 'catheter' && run.sleeve.front > 0)
+          upd((c) => ({ grip: 'tail', hubGrip: c.hubGrip || hub }))
+          sfx.cursor()
+          feel(hub ? 'The wire comes out of the brown hub: you hold it there. Now the catheter can go in.' : `You hold the wire where it comes out of the back of the ${tailName}.`)
+        }}
+      >
+        {run.grip === 'tail' ? `HOLDING ${tailName === 'catheter' ? 'AT THE BROWN HUB' : 'THE TAIL'} ✓` : tailOk ? `HOLD THE WIRE ${tailName === 'catheter' ? 'AT THE BROWN HUB' : 'AT ITS TAIL'}` : `WIRE STILL INSIDE THE ${tailName.toUpperCase()}`}
+      </button>
+    </div>
+  )
+}
 
 /* ================================================================ 1. position */
 
@@ -1126,17 +1264,11 @@ function DilateStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
             grab.current = p
             const cur = runRef.current
             const tail = wirePoint(tailAt(cur.inside))
-            const skin = wirePoint(SKIN_GRIP_CM)
-            if (Math.hypot(p.x - tail.x, p.y - tail.y) < 14 && cur.grip !== 'tail') {
-              if (!tailFree(cur.inside, cur.sleeve)) return feel('The tail is still inside the dilator. Slide it further down first.')
+            if (Math.hypot(p.x - tail.x, p.y - tail.y) < 22 && cur.grip !== 'tail' && tailFree(cur.inside, cur.sleeve)) {
+              grab.current = null
               upd({ grip: 'tail' })
               sfx.cursor()
               return feel('You hold the wire where it comes out of the back of the dilator.')
-            }
-            if (Math.hypot(p.x - skin.x, p.y - skin.y) < 12 && cur.grip !== 'skin' && (!cur.sleeve || cur.sleeve.front > SKIN_GRIP_CM)) {
-              upd({ grip: 'skin' })
-              sfx.cursor()
-              return feel('You pinch the wire at the skin again.')
             }
           }}
           onMove={(p) => {
@@ -1188,7 +1320,13 @@ function DilateStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
           )}
         </div>
       )}
-      {sleeve?.kind === 'dilator' && sleeve.front < 0 && <p className="io-small">Dilator {(-sleeve.front * 10).toFixed(0)} mm in along the track</p>}
+      {nickDone && sleeve?.kind === 'dilator' && (
+        <>
+          <SlidePad testId="cvc-dilator-pad" label={sleeve.front <= 0.05 ? '◀ DRAW IT BACK · TWIST TO GO IN' : '◀ BACK · DILATOR DOWN THE WIRE ▶'} cmPerWidth={sleeve.front > 15 ? 40 : 10} onDelta={(cm) => along(-cm)} />
+          <GripButtons run={run} upd={upd} feel={feel} tailName="dilator" />
+        </>
+      )}
+      {sleeve?.kind === 'dilator' && <p className="io-small">{sleeve.front < 0 ? `Dilator ${(-sleeve.front * 10).toFixed(0)} mm in along the track` : `Dilator tip ${sleeve.front.toFixed(0)} cm from the skin`}</p>}
       <NextButton onClick={next} testId="cvc-next">
         Catheter
       </NextButton>
@@ -1224,6 +1362,14 @@ function CatheterStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
       else feel('The catheter follows the wire through the skin, a gentle twist as it goes.')
     }
     if (now.catheterCm > 18 && before > -18) physical('Ectopics: the tip is in the atrium. Pull back.')
+  }
+
+  function depthNote() {
+    const c = runRef.current
+    if (c.sleeve && c.sleeve.front < 0 && !c.wireOut) {
+      const cm = -c.sleeve.front
+      if (cm >= CATH_OK.min && cm <= CATH_OK.max) feel(`${cm.toFixed(0)} cm at the skin: for a right IJ the tip sits near the cavo-atrial junction.`)
+    }
   }
 
   function pullWire(cm: number) {
@@ -1263,16 +1409,11 @@ function CatheterStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
           grab.current = p
           const cur = runRef.current
           const tail = wirePoint(tailAt(cur.inside))
-          const skin = wirePoint(SKIN_GRIP_CM)
-          if (!cur.wireOut && Math.hypot(p.x - tail.x, p.y - tail.y) < 14 && cur.grip !== 'tail') {
-            if (!tailFree(cur.inside, cur.sleeve)) return feel('The wire is still inside the catheter: it has not come out of the brown hub yet.')
-            upd({ grip: 'tail', hubGrip: Boolean(cur.sleeve && cur.sleeve.front > 0) || cur.hubGrip })
+          if (!cur.wireOut && cur.sleeve && Math.hypot(p.x - tail.x, p.y - tail.y) < 22 && cur.grip !== 'tail' && tailFree(cur.inside, cur.sleeve)) {
+            grab.current = null
+            upd({ grip: 'tail', hubGrip: cur.sleeve.front > 0 || cur.hubGrip })
             sfx.cursor()
             return feel('The wire comes out of the brown hub: you hold it there. Now the catheter can go in.')
-          }
-          if (!cur.wireOut && Math.hypot(p.x - skin.x, p.y - skin.y) < 12 && cur.grip !== 'skin' && (!cur.sleeve || cur.sleeve.front > SKIN_GRIP_CM)) {
-            upd({ grip: 'skin' })
-            return feel('You pinch the wire at the skin.')
           }
           if (placed && !cur.wireOut) pullGrab.current = p.x + p.y
         }}
@@ -1290,17 +1431,12 @@ function CatheterStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
             // No catheter on yet: pulling at the skin draws the wire out.
             return
           }
-          if (cur.grip === 'skin' && !tailFree(cur.inside, cur.sleeve) && d < 0 && cur.sleeve.front <= SKIN_GRIP_CM + 0.5) return pullWire(-d)
           along(-d * (cur.sleeve.front > 15 ? 4.4 : 1))
         }}
         onUp={() => {
           grab.current = null
           pullGrab.current = null
-          const c = runRef.current
-          if (c.sleeve && c.sleeve.front < 0 && !c.wireOut) {
-            const cm = -c.sleeve.front
-            if (cm >= CATH_OK.min && cm <= CATH_OK.max) feel(`${cm.toFixed(0)} cm at the skin: for a right IJ the tip sits near the cavo-atrial junction.`)
-          }
+          depthNote()
         }}
       >
         <SideView svgRef={side} needle={null} inside={run.wireOut ? 0 : run.inside} grip={run.wireOut ? undefined : run.grip} sleeve={sleeve} />
@@ -1321,6 +1457,18 @@ function CatheterStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
           </button>
         )}
       </div>
+      {sleeve && !run.wireOut && (
+        <>
+          {!placed || run.grip === 'tail' ? (
+            <SlidePad testId="cvc-cath-pad" label={placed ? '◀ BACK · CATHETER IN ▶' : '◀ BACK · CATHETER DOWN THE WIRE ▶'} cmPerWidth={sleeve.front > 15 ? 40 : 12} onDelta={(cm) => along(-cm)} onEnd={depthNote} />
+          ) : null}
+          {placed && (
+            <SlidePad testId="cvc-wire-pad" label="◀ DRAW THE WIRE OUT OF THE BROWN HUB" cmPerWidth={24} onDelta={(cm) => pullWire(-cm)} />
+          )}
+          {!placed && <GripButtons run={run} upd={upd} feel={feel} tailName="catheter" />}
+          <p className="io-small">{placed ? `Catheter ${(-sleeve.front).toFixed(0)} cm at the skin · wire ${run.inside.toFixed(0)} cm in` : `Catheter tip ${sleeve.front.toFixed(0)} cm from the skin`}</p>
+        </>
+      )}
       {run.wireOut && (
         <div className="io-figure mt-2 aspect-[200/70]" data-testid="cvc-wire-tray">
           <svg
@@ -1475,7 +1623,8 @@ function XrayStage({ run, upd, feel, why, next }: Stage) {
           aspect="1 / 1"
           testId="cvc-xray"
           onDown={(p) => {
-            if (Math.hypot(p.x - 87, p.y - tipY) < 10) {
+            if (!run.catheterPlaced) return feel('No line on this film: the catheter is not in yet. Go back and place it.')
+            if (Math.hypot(p.x - 87, p.y - tipY) < 18) {
               upd({ tipSeen: true })
               setMarks((m) => [...m.filter((x) => x.text !== 'TIP'), { x: 87, y: tipY, text: 'TIP' }])
               const z = tipZone(run.catheterCm)
@@ -1483,7 +1632,7 @@ function XrayStage({ run, upd, feel, why, next }: Stage) {
               if (z === 'atrium') return why('The tip is down in the right atrium: pull the line back to about 15 cm.')
               return why('The tip is high in the SVC: fine to use, but it is not at the junction.')
             }
-            const side = p.x < 92 ? 'right' : p.x > 108 ? 'left' : null
+            const side = p.x < 78 ? 'right' : p.x > 122 ? 'left' : null
             if (side && p.y < 175 && p.y > 40) {
               upd((c) => ({ lungsChecked: toggle(c.lungsChecked, side) }))
               setMarks((m) => (m.some((x) => x.text === side.toUpperCase()) ? m : [...m, { x: p.x, y: p.y, text: side.toUpperCase() }]))
@@ -1493,7 +1642,7 @@ function XrayStage({ run, upd, feel, why, next }: Stage) {
             feel('Find the white line of the catheter and follow it down to its end.')
           }}
         >
-          <ChestXray svgRef={svg} catheterCm={run.catheterCm} marks={marks} />
+          <ChestXray svgRef={svg} catheterCm={run.catheterPlaced ? run.catheterCm : null} marks={marks} />
         </TouchPad>
       </div>
       <div className="io-choices mt-2">

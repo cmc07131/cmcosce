@@ -417,7 +417,9 @@ export function checkCvc(r: CvcRun): CvcRow[] {
   const wireOk = r.wireIn === 'vein' && r.wireCm >= WIRE_OK.min && r.wireCm <= WIRE_OK.max
   const nickOk = r.nick !== null && !r.nick.crossed && r.nick.len >= 2 && r.nick.len <= 7
   const kitOk = LUMENS.every((l) => r.flushed.includes(l.id)) && r.clamped.includes('medial') && r.clamped.includes('proximal') && !r.clamped.includes('distal')
-  const cathOk = r.catheterCm >= CATH_OK.min && r.catheterCm <= CATH_OK.max
+  // Judged on the depth as read off the catheter at the skin: whole centimetres.
+  const cm = Math.round(r.catheterCm)
+  const cathOk = cm >= CATH_OK.min && cm <= CATH_OK.max
   const allLumens = LUMENS.every((l) => r.aspirated.includes(l.id) && r.flushedAfter.includes(l.id) && r.capped.includes(l.id))
   return [
     {

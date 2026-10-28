@@ -698,8 +698,8 @@ export function EcgStrip({ ectopy }: { ectopy: boolean }) {
 export const CXR = { carinaY: 80 }
 export const cxrTipY = (cm: number) => 40 + (cm - 5) * 6.4
 
-export function ChestXray({ svgRef, catheterCm, marks }: { svgRef?: Ref<SVGSVGElement>; catheterCm: number; marks?: { x: number; y: number; text: string }[] }) {
-  const tipY = cxrTipY(catheterCm)
+export function ChestXray({ svgRef, catheterCm, marks }: { svgRef?: Ref<SVGSVGElement>; catheterCm: number | null; marks?: { x: number; y: number; text: string }[] }) {
+  const tipY = cxrTipY(catheterCm ?? 15)
   const ribs = Array.from({ length: 8 }, (_, i) => 50 + i * 15)
   return (
     <svg ref={svgRef} viewBox="0 0 200 200" className="block h-full w-full select-none" data-testid="cvc-cxr">
@@ -726,10 +726,16 @@ export function ChestXray({ svgRef, catheterCm, marks }: { svgRef?: Ref<SVGSVGEl
       <rect x="92" y="20" width="16" height="180" fill="#7a7a7a" opacity="0.8" />
       <path d={`M97 10 L97 ${CXR.carinaY} L86 ${CXR.carinaY + 16} M103 10 L103 ${CXR.carinaY} L114 ${CXR.carinaY + 16}`} stroke="#1a1a1a" strokeWidth="3.4" fill="none" />
       <path d="M86 92 Q70 110 72 140 Q80 172 110 174 Q150 172 150 140 Q148 104 112 92 Z" fill="#c8c8c8" opacity="0.9" />
-      <path d="M86 50 L84 100" stroke="#c8c8c8" strokeWidth="8" opacity="0.8" />
-      {/* the line: from the right neck, down beside the trachea, into the SVC */}
-      <path data-testid="cvc-cxr-line" d={`M66 6 Q74 28 84 44 L86 ${Math.min(tipY, 70)} L87 ${tipY}`} stroke="#f8f8f8" strokeWidth="1.6" fill="none" />
-      <circle cx="87" cy={tipY} r="1.6" fill="#ffffff" />
+      {/* the SVC: a soft grey band along the right of the mediastinum */}
+      <path d="M86 50 L84 100" stroke="#8a8a8a" strokeWidth="8" opacity="0.6" />
+      {/* the line, radio-opaque: from the right neck, down beside the trachea, into the SVC */}
+      {catheterCm !== null && (
+        <g data-testid="cvc-cxr-line">
+          <path d={`M66 6 Q74 28 84 44 L86 ${Math.min(tipY, 70)} L87 ${tipY}`} stroke="#101010" strokeWidth="3.6" fill="none" />
+          <path d={`M66 6 Q74 28 84 44 L86 ${Math.min(tipY, 70)} L87 ${tipY}`} stroke="#ffffff" strokeWidth="2" fill="none" />
+          <circle cx="87" cy={tipY} r="2.2" fill="#ffffff" stroke="#101010" strokeWidth="0.8" />
+        </g>
+      )}
       {/* ECG leads */}
       {[
         [40, 40],
