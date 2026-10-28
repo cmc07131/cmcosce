@@ -60,7 +60,7 @@ import {
 const TITLES = ['Position', 'Pre-scan', 'Scrub', 'Prep', 'Kit', 'Needle', 'Wire', 'Confirm', 'Dilate', 'Catheter', 'Secure', 'X-ray']
 
 type Shared = { probe: Pt }
-type Stage = BenchApi<CvcRun> & { next: () => void; shared: React.MutableRefObject<Shared> }
+type Stage = BenchApi<CvcRun> & { next: () => void; goTo: (step: number) => void; shared: React.MutableRefObject<Shared> }
 
 /** Runs `fn(dt)` every 50 ms while `on`. */
 function useTicker(on: boolean, fn: (dt: number) => void) {
@@ -149,6 +149,15 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
     }
     body.current?.scrollTo({ top: 0 })
   }
+  /** Back to an earlier step as you left it. */
+  const goTo = (k: number) => {
+    if (k >= index) return
+    sfx.back()
+    restore(k + 1)
+    setIndex(k)
+    api.feel(`Back to the ${TITLES[k].toLowerCase()}, as you left it.`)
+    body.current?.scrollTo({ top: 0 })
+  }
   const redo = () => {
     sfx.back()
     restore(index)
@@ -168,7 +177,7 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
       scene: ok ? [job.scene || 'line'] : ['no-line'],
     })
   }
-  const stage: Stage = { ...api, next, shared }
+  const stage: Stage = { ...api, next, goTo, shared }
   const r = api.run
   return (
     <div className="io-bench flex min-h-0 flex-1 flex-col select-none" data-testid="cvc-bench">
@@ -266,6 +275,21 @@ function SlidePad({ label, cmPerWidth, onDelta, onEnd, disabled, testId }: { lab
           {label}
         </text>
       </svg>
+    </div>
+  )
+}
+
+const WIRE_STEP = 6
+
+/** The steps after the wire need it in the vein with the needle off it; if not, say so and offer the way back. */
+function NeedWire({ run, goTo }: Pick<Stage, 'run' | 'goTo'>) {
+  if (run.wireCm > 0 && run.needleOut) return null
+  return (
+    <div className="io-note" data-tone="bad" data-testid="cvc-need-wire">
+      <p>{run.wireCm <= 0 ? 'There is no wire in the vein yet.' : 'The needle is still on the wire. Nothing can go over the wire until the needle is off it.'}</p>
+      <button type="button" className="tap io-mini mt-2" data-testid="cvc-to-wire" onClick={() => goTo(WIRE_STEP)}>
+        ◀ BACK TO THE WIRE STEP
+      </button>
     </div>
   )
 }
@@ -875,12 +899,34 @@ function TrackCut({ depth, beam, entryX, tilt, rotation }: { depth: number; beam
 /* ================================================================ 7. wire */
 
 function WireStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
+  /** Slide the needle back `mm` over the wire. As it clears the skin something must hold the wire. */
+  function withdraw(mm: number) {
+    if (runRef.current.wireCm <= 0 || runRef.current.needleOut || needleRef.current === null || mm <= 0) return
+    const nd = Math.max(0, needleRef.current - mm)
+    needleRef.current = nd
+    setNeedleAt(nd)
+    if (nd > 0) return
+    const cur = runRef.current
+    const patch: Partial<CvcRun> = { needleOut: true, inside: insideAfterNeedle(cur) }
+    if (cur.grip !== 'skin') {
+      patch.letGo = cur.letGo + 1
+      patch.inside = (patch.inside ?? 0) + 3
+      patch.grip = 'none'
+      buzz([60, 40, 60])
+      physical('Nothing held the wire as the needle came off it: it slid 3 cm further in.')
+      why('Hold the wire at the skin before the needle clears it. Never let go of the wire.')
+    } else feel('The needle slides off the end of the wire. The wire stays, held at the skin.')
+    needleRef.current = null
+    setNeedleAt(null)
+    upd(patch)
+  }
   const svg = useRef<SVGSVGElement>(null)
   const unscrew = useSpin('ccw')
   const feed = useRef<number | null>(null)
   const grab = useRef<{ x: number; y: number } | null>(null)
   const [advancer, setAdvancer] = useState(run.wireCm > 0)
   const [needleAt, setNeedleAt] = useState<number | null>(run.needleOut ? null : run.depth)
+  const needleRef = useRef<number | null>(run.needleOut ? null : run.depth)
   const lost = useRef(false)
 
   useEffect(() => {
@@ -889,6 +935,7 @@ function WireStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
       lost.current = true
       const { patch } = moveNeedle(runRef.current, Math.max(1, runRef.current.depth - 9), runRef.current.entryX ?? 0)
       upd({ ...patch, aspirating: false })
+      needleRef.current = runRef.current.depth
       setNeedleAt(runRef.current.depth)
       physical('Twisting without a hand on the needle pulls it back: no blood comes. The tip has slipped out of the vein.')
       why('Anchor the needle with your other hand, resting on her neck, before you take the syringe off.')
@@ -917,7 +964,9 @@ function WireStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
           : !advancer
             ? 'Thumb over the hub. Then put the wire advancer into the hub.'
             : !run.needleOut
-              ? 'Feed the J-wire with your thumb: drag right along the advancer. Watch the monitor. Then take the wire at the skin and slide the needle out over it.'
+              ? run.wireCm < 12
+                ? 'Feed the J-wire with your thumb: drag right along the advancer to 15–20 cm. Watch the monitor.'
+                : 'Now hold the wire at the skin, then slide the needle out over it: drag the strip to the left.'
               : 'Needle out, wire in, and your hand never left it.'}
       </p>
       <TouchPad
@@ -949,24 +998,9 @@ function WireStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
           // Drag the needle back along its track, up and to the left.
           const along = (g.x - p.x + (g.y - p.y)) * Math.SQRT1_2
           if (along < 4) return
-          const nd = Math.max(0, (needleAt ?? 0) - along * 0.8)
-          setNeedleAt(nd)
           g.x = p.x
           g.y = p.y
-          if (nd <= 0) {
-            const cur = runRef.current
-            const patch: Partial<CvcRun> = { needleOut: true, inside: insideAfterNeedle(cur) }
-            if (cur.grip !== 'skin') {
-              patch.letGo = cur.letGo + 1
-              patch.inside = (patch.inside ?? 0) + 3
-              patch.grip = 'none'
-              buzz([60, 40, 60])
-              physical('Nothing held the wire as the needle came off it: it slid 3 cm further in.')
-              why('Pinch the wire at the skin before the needle clears it. Never let go of the wire.')
-            } else feel('The needle slides off the end of the wire. The wire stays, held at the skin.')
-            setNeedleAt(null)
-            upd(patch)
-          }
+          withdraw(along * 0.8)
         }}
         onUp={() => (grab.current = null)}
       >
@@ -1051,6 +1085,27 @@ function WireStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
           </svg>
         </div>
       )}
+      {ready && run.wireCm > 0 && !run.needleOut && (
+        <>
+          <div className="io-choices mt-2">
+            <button
+              type="button"
+              className="tap io-mini"
+              data-on={run.grip === 'skin' || undefined}
+              data-testid="cvc-grip-skin"
+              disabled={run.grip === 'skin'}
+              onClick={() => {
+                upd({ grip: 'skin' })
+                sfx.cursor()
+                feel('Your left hand moves from the needle to the wire just above the skin, pinching it.')
+              }}
+            >
+              {run.grip === 'skin' ? 'HOLDING THE WIRE AT THE SKIN ✓' : 'HOLD THE WIRE AT THE SKIN'}
+            </button>
+          </div>
+          <SlidePad testId="cvc-needle-out" label="◀ SLIDE THE NEEDLE OUT OVER THE WIRE" cmPerWidth={4} onDelta={(cm) => withdraw(-cm * 10)} />
+        </>
+      )}
       <NextButton onClick={next} testId="cvc-next">
         Confirm
       </NextButton>
@@ -1060,7 +1115,7 @@ function WireStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
 
 /* ================================================================ 8. confirm the wire */
 
-function ConfirmStage({ run, upd, feel, physical, next, shared }: Stage) {
+function ConfirmStage({ run, upd, feel, physical, next, goTo, shared }: Stage) {
   const us = useRef<SVGSVGElement>(null)
   const [long, setLong] = useState(false)
   const turning = usePlay(700)
@@ -1068,6 +1123,7 @@ function ConfirmStage({ run, upd, feel, physical, next, shared }: Stage) {
   const probeX = clamp(offsetMm(probe), -3, 3)
   return (
     <>
+      <NeedWire run={run} goTo={goTo} />
       <p className="io-lede">Before anything goes over the wire: find it on ultrasound. Tap it in the short axis; then turn the probe along the vein and tap it again.</p>
       <TouchPad
         svg={us}
@@ -1132,7 +1188,7 @@ function ConfirmStage({ run, upd, feel, physical, next, shared }: Stage) {
 
 /* ================================================================ 9. nick and dilate */
 
-function DilateStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
+function DilateStage({ run, runRef, upd, feel, why, physical, next, goTo }: Stage) {
   const nickSvg = useRef<SVGSVGElement>(null)
   const side = useRef<SVGSVGElement>(null)
   const spin = useSpin('cw')
@@ -1191,6 +1247,7 @@ function DilateStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
   const nickDone = run.nick !== null
   return (
     <>
+      <NeedWire run={run} goTo={goTo} />
       <p className="io-lede">
         {!nickDone
           ? 'Nick the skin with the #11 blade: drag from the wire outward about 4 mm, the sharp edge away from the wire.'
@@ -1292,6 +1349,7 @@ function DilateStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
               type="button"
               className="tap io-mini"
               data-testid="cvc-thread-dilator"
+              disabled={!run.needleOut || run.inside <= 0}
               onClick={() => {
                 upd({ sleeve: { kind: 'dilator', front: tailAt(run.inside) - 0.3 } })
                 feel('The tapered tip of the dilator threaded onto the end of the wire.')
@@ -1336,7 +1394,7 @@ function DilateStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
 
 /* ================================================================ 10. catheter */
 
-function CatheterStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
+function CatheterStage({ run, runRef, upd, feel, why, physical, next, goTo }: Stage) {
   const side = useRef<SVGSVGElement>(null)
   const grab = useRef<Pt | null>(null)
   const pullGrab = useRef<number | null>(null)
@@ -1392,6 +1450,7 @@ function CatheterStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
 
   return (
     <>
+      <NeedWire run={run} goTo={goTo} />
       <p className="io-lede">
         {!sleeve
           ? 'Thread the catheter tip onto the wire.'
@@ -1447,13 +1506,13 @@ function CatheterStage({ run, runRef, upd, feel, why, physical, next }: Stage) {
             type="button"
             className="tap io-mini"
             data-testid="cvc-thread-catheter"
-            disabled={run.inside <= 0}
+            disabled={run.inside <= 0 || !run.needleOut}
             onClick={() => {
               upd({ sleeve: { kind: 'catheter', front: tailAt(run.inside) - 0.3 } })
               feel('The catheter tip threaded onto the end of the wire, the brown hub at the back.')
             }}
           >
-            THREAD THE CATHETER
+            {run.needleOut && run.inside > 0 ? 'THREAD THE CATHETER' : 'NO FREE WIRE TO THREAD ONTO'}
           </button>
         )}
       </div>
