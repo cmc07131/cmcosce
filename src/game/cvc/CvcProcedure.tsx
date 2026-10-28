@@ -56,6 +56,7 @@ import {
   type Garb,
   type Lumen,
 } from './model'
+import { stepGoals, stepOk, type Goal } from './steps'
 
 const TITLES = ['Position', 'Pre-scan', 'Scrub', 'Prep', 'Kit', 'Needle', 'Wire', 'Confirm', 'Dilate', 'Catheter', 'Secure', 'X-ray']
 
@@ -117,6 +118,9 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
   // What everything looked like as you began each step: going back puts it all back, mistakes included.
   const snaps = useRef<{ run: CvcRun; probe: Pt }[]>([{ run: api.runRef.current, probe: shared.current.probe }])
   const [epoch, setEpoch] = useState(0)
+  // Next on a step with something wrong or missing opens its review: what, and how to do it right.
+  const [review, setReview] = useState(false)
+  const goalsRef = useRef<HTMLDivElement>(null)
   const restore = (i: number) => {
     const snap = snaps.current[i]
     if (!snap) return
@@ -124,7 +128,15 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
     shared.current.probe = snap.probe
     setEpoch((e) => e + 1)
   }
-  const next = () => {
+  const next = (anyway = false) => {
+    if (!anyway && !stepOk(index, api.runRef.current)) {
+      sfx.bump()
+      setReview(true)
+      window.setTimeout(() => goalsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30)
+      return
+    }
+    setReview(false)
+    if (!anyway) api.feel(`✓ ${TITLES[index]}: done right.`)
     sfx.select()
     if (index < TITLES.length - 1) {
       snaps.current[index + 1] = { run: api.runRef.current, probe: shared.current.probe }
@@ -136,6 +148,7 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
     body.current?.scrollTo({ top: 0 })
   }
   const back = () => {
+    setReview(false)
     sfx.back()
     // Back keeps what you did; REDO THIS STEP is what starts a step again from scratch.
     if (checked) {
@@ -152,6 +165,7 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
   /** Back to an earlier step as you left it. */
   const goTo = (k: number) => {
     if (k >= index) return
+    setReview(false)
     sfx.back()
     restore(k + 1)
     setIndex(k)
@@ -159,6 +173,7 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
     body.current?.scrollTo({ top: 0 })
   }
   const redo = () => {
+    setReview(false)
     sfx.back()
     restore(index)
     api.feel(`${TITLES[index]}: from the start of this step again.`)
@@ -177,7 +192,7 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
       scene: ok ? [job.scene || 'line'] : ['no-line'],
     })
   }
-  const stage: Stage = { ...api, next, goTo, shared }
+  const stage: Stage = { ...api, next: () => next(), goTo, shared }
   const r = api.run
   return (
     <div className="io-bench flex min-h-0 flex-1 flex-col select-none" data-testid="cvc-bench">
@@ -211,6 +226,9 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
             {index === 9 && <CatheterStage {...stage} />}
             {index === 10 && <SecureStage {...stage} />}
             {index === 11 && <XrayStage {...stage} />}
+            <div ref={goalsRef}>
+              <StepGoals goals={stepGoals(index, r)} review={review} onRedo={redo} onFix={() => setReview(false)} onAnyway={() => next(true)} next={TITLES[index + 1] ?? 'the check'} />
+            </div>
             <div className="io-choices mt-2">
               <button type="button" className="tap io-mini" data-testid="cvc-back" disabled={index === 0} onClick={back}>
                 ◀ BACK A STEP
@@ -229,6 +247,54 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
 const toggle = <T,>(xs: T[], x: T) => (xs.includes(x) ? xs : [...xs, x])
+
+/* ================================================================ goals of the step */
+
+/**
+ * The step's goals, ticked as you go: a wrong move shows at once with how to put it right. After a Next that
+ * found something missing, every open goal shows its guidance, and you choose: redo the step, fix it here, or
+ * carry on anyway.
+ */
+function StepGoals({ goals, review, onRedo, onFix, onAnyway, next }: { goals: Goal[]; review: boolean; onRedo: () => void; onFix: () => void; onAnyway: () => void; next: string }) {
+  const [open, setOpen] = useState<number | null>(null)
+  const left = goals.filter((x) => x.state !== 'done')
+  const failed = goals.some((x) => x.state === 'fail')
+  return (
+    <div className="cvc-goals mt-3" data-review={(review && left.length > 0) || undefined} data-testid="cvc-goals">
+      <p className="cvc-goals-head">
+        {review && left.length > 0 ? `NOT YET · ${left.length} TO PUT RIGHT` : `THIS STEP · ${goals.length - left.length}/${goals.length}`}
+      </p>
+      <ul className="hare-rows">
+        {goals.map((x, i) => {
+          const show = x.state === 'fail' || (x.state === 'todo' && (review || open === i))
+          return (
+            <li key={x.label} data-ok={x.state === 'done' || undefined} data-todo={x.state === 'todo' || undefined} onClick={() => setOpen(open === i ? null : i)}>
+              <b>
+                {x.state === 'done' ? '✓' : x.state === 'fail' ? '✗' : '○'} {x.label}
+              </b>
+              {show && x.now && <span>You: {x.now}</span>}
+              {show && <small>{x.how}</small>}
+            </li>
+          )
+        })}
+      </ul>
+      {review && left.length > 0 && (
+        <div className="io-choices mt-2">
+          <button type="button" className="tap io-mini" data-testid="cvc-review-redo" onClick={onRedo}>
+            ↺ REDO THIS STEP
+          </button>
+          <button type="button" className="tap io-mini" data-testid="cvc-review-fix" onClick={onFix}>
+            {failed ? 'TRY TO FIX IT HERE' : 'FIX IT HERE'}
+          </button>
+          <button type="button" className="tap io-mini" data-testid="cvc-review-anyway" onClick={onAnyway}>
+            CARRY ON TO {next.toUpperCase()} ▶
+          </button>
+        </div>
+      )}
+      {!review && left.length > 0 && <p className="io-small">Tap a goal to see how.</p>}
+    </div>
+  )
+}
 
 /* ================================================================ shared controls */
 

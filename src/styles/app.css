@@ -3136,3 +3136,43 @@ button {
     transform: translateX(-156px);
   }
 }
+
+/* Central line: the goals of each step. */
+.cvc-goals {
+  border: 2px solid #303848;
+  border-radius: 6px;
+  background: #f8f8f4;
+  padding: 6px 8px;
+}
+.cvc-goals[data-review] {
+  border-color: #b83838;
+  background: #fbeeee;
+  animation: cvc-shake 0.3s ease-in-out 1;
+}
+.cvc-goals-head {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  margin: 0 0 4px;
+  color: #303848;
+}
+.cvc-goals[data-review] .cvc-goals-head {
+  color: #b83838;
+}
+.cvc-goals .hare-rows li {
+  cursor: pointer;
+}
+.cvc-goals .hare-rows li[data-todo] {
+  color: #505868;
+}
+@keyframes cvc-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}

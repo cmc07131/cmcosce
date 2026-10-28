@@ -17,6 +17,7 @@ import {
   veinShape,
   type CvcRun,
 } from './model'
+import { stepGoals, stepOk } from './steps'
 
 const apply = (r: CvcRun, patch: Partial<CvcRun>) => Object.assign(r, patch)
 
@@ -148,4 +149,31 @@ test('the catheter depth is judged as read at the skin, in whole centimetres', (
   assert.equal(checkCvc(r).find((x) => x.key === 'dilate')?.ok, true)
   r.catheterCm = 16.6
   assert.equal(checkCvc(r).find((x) => x.key === 'dilate')?.ok, false)
+})
+
+
+test('each step has goals, ticked from the run, with the guidance and what you did', () => {
+  const r = freshCvc()
+  for (let i = 0; i < 12; i++) assert.ok(stepGoals(i, r).length > 0, `step ${i}`)
+  r.tilt = 25
+  const bed = stepGoals(0, r)[0]
+  assert.equal(bed.state, 'fail')
+  assert.equal(bed.now, '25° head-down')
+  r.tilt = 15
+  r.rotation = 30
+  assert.ok(stepOk(0, r))
+})
+
+test('a safe garb order passes; gloves before the gown fails', () => {
+  const r = freshCvc()
+  r.garb = ['cap', 'mask', 'scrub', 'gown', 'gloves']
+  assert.ok(stepOk(2, r))
+  r.garb = ['cap', 'mask', 'scrub', 'gloves', 'gown']
+  assert.equal(stepGoals(2, r)[1].state, 'fail')
+})
+
+test('a carotid puncture is a failed goal, not just a missing one', () => {
+  const r = freshCvc()
+  r.arterial = true
+  assert.equal(stepGoals(5, r).find((x) => x.label.includes('carotid'))?.state, 'fail')
 })
