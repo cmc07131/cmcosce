@@ -10,3 +10,6 @@ dist
 # Private source notes (large, may contain copyrighted material)
 Source/
 assets-src/
+
+# Verification runs: harness builds and evidence (screenshots, results)
+.verify/

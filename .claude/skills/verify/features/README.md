@@ -1,0 +1,8 @@
+# Features
+
+One file per feature, from the player's side.
+
+| Feature | Journey | Proves |
+| --- | --- | --- |
+| [Every bench opens](bench-smoke.md) | `journeys/smoke.mjs` | Each bench in `PROCEDURES` renders with no page error |
+| [Central line](central-line.md) | `journeys/central-line.mjs` | All 12 steps done by hand, each passing its own check, 7/7 marks |
