@@ -23,7 +23,7 @@ A Pokémon Gold–style game for passing the HKCEM OSCE. Stations are JSON (`con
 | Each central line step says what it must achieve and how, and a correct step passes its own check | `src/game/cvc/steps.ts`, `cvc.test.ts`, and the central-line journey, which fails if a review opens |
 | Benches offer no wrong-move buttons: mistakes come from doing a real action badly, never from picking a wrong button | Review only: no check yet |
 | What the bench shows matches what is in the patient (the X-ray shows a retained wire; a carotid line crosses to the left) | `cvc.test.ts` |
-| A focused 3D examination offers every manoeuvre it scores, and pressing each in turn finds every item | `scripts/verify/journeys/hip-exam.mjs` (the hip so far); `playthrough.test.ts` for the station script |
+| A focused 3D examination offers every manoeuvre it scores, and pressing each in turn finds every item | `scripts/verify/journeys/exam.mjs` (the hip and the ankle so far); `playthrough.test.ts` for the station script |
 
 When the user corrects something, fix it and add its rule here, with the check that enforces it. A rule with no check that is broken a second time gets a check in the same change.
 

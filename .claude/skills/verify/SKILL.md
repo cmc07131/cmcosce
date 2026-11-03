@@ -32,6 +32,7 @@ Checks that `node_modules` is installed, esbuild runs on this platform, and Play
 ```bash
 node scripts/verify/journeys/smoke.mjs          # every bench opens with no page error
 node scripts/verify/journeys/central-line.mjs   # the central line done right, start to finish
+node scripts/verify/journeys/exam.mjs           # the focused 3D exams (hip, ankle): every manoeuvre, every item
 ```
 
 Each prints `PASS` or `FAIL` and exits 0 or 1. Write a journey for a bench you change: copy `journeys/central-line.mjs`. `scripts/verify/lib.mjs` gives you `tap`, `drag`, `hold`, `swipe`, `twist` in a picture's own viewBox units, so coordinates come straight from the bench's SVG.

@@ -18,7 +18,7 @@ import { SITES, SITE_IDS, onLeg, siteOf, type DigitRef, type JointRef } from './
  * World as in body3d/stage: metres, Y up, the couch along +X with its head end at x = 0, the examiner's side at +Z.
  */
 
-export type Posture = 'supine' | 'sitting' | 'edge' | 'standing' | 'walking' | 'heel-toe' | 'roll-R' | 'roll-L' | 'knees-up' | 'bent' | 'one-leg-R' | 'one-leg-L'
+export type Posture = 'supine' | 'sitting' | 'edge' | 'standing' | 'walking' | 'heel-toe' | 'roll-R' | 'roll-L' | 'knees-up' | 'bent' | 'one-leg-R' | 'one-leg-L' | 'prone'
 export type View = 'whole' | 'head' | 'chest' | 'abdomen' | 'hands' | 'legs' | 'feet' | 'back' | 'focus'
 
 /** What is wrong with her that shows: for the motions she makes when asked or touched. */
@@ -58,6 +58,8 @@ export type Signs = {
   acl?: Side
   /** Places that hurt when pressed (site ids). */
   tender?: string[]
+  /** A ruptured Achilles tendon on this side: squeezing the calf does not point the foot. */
+  achilles?: Side
   /**
    * An osteoarthritic hip on this side: stiff and painful at the end of each range (flexion to 95°, internal rotation
    * 5°, external 20°, abduction 20°, adduction 15°), and a 15° fixed flexion deformity the Thomas test shows.
@@ -80,7 +82,7 @@ const FIST: HandShape['f'] = [
   [85, 95, 60, 0],
 ]
 /** Manoeuvres done with the examiner's hands. */
-const HANDS_ON = new Set<string>(['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch', 'patellar-tap', 'joint-line', 'bone', 'knee-passive', 'lachman', 'drawer', 'stress', 'hip-roll', 'leg-length', 'hip-flex', 'hip-rot', 'hip-abd', 'thomas'])
+const HANDS_ON = new Set<string>(['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch', 'patellar-tap', 'joint-line', 'bone', 'knee-passive', 'lachman', 'drawer', 'stress', 'hip-roll', 'leg-length', 'hip-flex', 'hip-rot', 'hip-abd', 'thomas', 'ottawa-edge', 'simmonds'])
 /** What a manoeuvre is about, lit up in the X-ray view: by where it is done, and by what it is. */
 const LIGHTS_BY_SITE: Record<string, string[]> = {
   medialjoint: ['medial-meniscus', 'mcl'],
@@ -103,7 +105,7 @@ const LIGHTS_BY_ANIM: Record<string, string[]> = {
 const SPEED = 2.5
 /** How much faster than life the patient's own movements are shown (a finger–nose, a face moving). */
 const PATIENT_PACE = 1.35
-const REAL_TIME = new Set<string>(['crt', 'walk', 'stand-one-leg', 'leg-length', 'speech', 'eyes-h', 'finger-nose', 'rapid-alt', 'tone-arm', 'tone-leg', 'heel-shin', 'sit-trunk', 'grip', 'acuity', 'pin-at', 'fields-hand', 'torch-eyes', 'face-touch', 'clench', 'otoscope', 'look-mouth', 'parotid', 'whisper', 'fork', 'weber'])
+const REAL_TIME = new Set<string>(['crt', 'walk', 'stand-one-leg', 'leg-length', 'simmonds', 'ottawa-edge', 'speech', 'eyes-h', 'finger-nose', 'rapid-alt', 'tone-arm', 'tone-leg', 'heel-shin', 'sit-trunk', 'grip', 'acuity', 'pin-at', 'fields-hand', 'torch-eyes', 'face-touch', 'clench', 'otoscope', 'look-mouth', 'parotid', 'whisper', 'fork', 'weber'])
 /** How long each manoeuvre takes (seconds, before `SPEED`); asking for a hand shape, 3.4. */
 const DURATION: Record<string, number> = {
   gloves: 4,
@@ -146,6 +148,9 @@ const DURATION: Record<string, number> = {
   'hip-rot': 7,
   'hip-abd': 7,
   thomas: 7,
+  // The ankle.
+  'ottawa-edge': 4.6,
+  simmonds: 9.5,
   mils: 1.6,
   jewellery: 2,
   measure: 2.4,
@@ -381,6 +386,12 @@ function rest(p: Posture): Joints {
       j.trunk = 70
       both('shoulderflex', 60)
       both('elbow', 5)
+      break
+    case 'prone':
+      // Face down, arms by the sides, the feet hanging over the end of the couch, a little pointed.
+      both('shoulderabd', 10)
+      both('elbow', 10)
+      both('ankle', 12)
       break
     case 'one-leg-R':
     case 'one-leg-L': {
@@ -708,8 +719,13 @@ export class ExamScene {
 
   /** Show a manoeuvre being done; returns how long it takes (seconds). */
   perform(anim: Anim, site: string | null, side: Side): number {
-    // One at a time: whatever was being shown is finished first.
+    // One at a time: whatever was being shown is finished first, and she is in her new position before this one is
+    // framed (on a slow device the last manoeuvre can still be catching up when the next is pressed).
     if (this.act) this.endAct()
+    if (this.moveT < 1) {
+      this.moveT = 1
+      this.applyPose()
+    }
     const ask = anim.startsWith('ask:') ? anim.slice(4) : null
     const d = anim.startsWith('pose:') ? 3.4 : ask ? (ASK_FOR[ask] ?? 2.6) : (DURATION[anim] ?? 2)
     // A capillary refill and walking take the time they take; the patient's own movements run a little brisker than life;
@@ -746,6 +762,11 @@ export class ExamScene {
     if (anim === 'walk') {
       this.act.back = this.posture
       this.setPosture('walking', 0.8)
+    }
+    // Simmonds' test: face down, the feet over the end of the couch; then back.
+    if (anim === 'simmonds') {
+      this.act.back = this.posture
+      this.setPosture('prone', 1.4)
     }
     // The Trendelenburg test: up, on this leg, then the other, then back.
     if (anim === 'stand-one-leg') {
@@ -887,6 +908,7 @@ export class ExamScene {
     if (a.back) this.setPosture(a.back, 0.8)
     if (a.anim === 'rotate-head') delete this.held.neckyaw
     if (a.anim === 'tone-leg') for (const key of [`hiprot-${a.side}`, `ankle-${a.side}`]) delete this.held[key]
+    if (a.anim === 'simmonds') delete this.held[`ankle-${a.side}`]
     if (['hip-abd', 'thomas'].includes(a.anim)) for (const s of SIDES) for (const key of ['hipabd', 'hipflex', 'knee', 'hiprot']) delete this.held[`${key}-${s}`]
     for (const piece of this.tape) piece.visible = false
     this.tapePath = null
@@ -926,6 +948,8 @@ export class ExamScene {
     const fromSide = (lift: number, toFeet: number) => RT.clone().negate().addScaledVector(F, side === 'R' ? lift + 0.35 : lift).addScaledVector(U, -toFeet)
     switch (anim) {
       case 'inspect':
+        // Both ankles: from above and to the side of the injured one, so its outer side shows (swelling, bruising).
+        if (site.includes('malleolus')) return { target: () => at(R.foot.L).add(at(R.foot.R)).multiplyScalar(0.5), dir: F.clone().addScaledVector(RT, side === 'R' ? 0.8 : -0.8).addScaledVector(U, -0.35), dist: 0.85 }
         // From the end of the couch, high enough to see both knees over the feet.
         return { target: () => at(R.calf.L).add(at(R.calf.R)).multiplyScalar(0.5), dir: U.clone().negate().multiplyScalar(0.75).addScaledVector(F, 1.3).addScaledVector(RT, 0.25), dist: 1.05 }
       case 'patellar-tap':
@@ -958,6 +982,9 @@ export class ExamScene {
         return { target: () => at(R.hips).lerp(at(R.foot.R).lerp(at(R.foot.L), 0.5), 0.5), dir: F.clone().multiplyScalar(1.1).addScaledVector(RT, 0.75).addScaledVector(U, -0.15), dist: 1.55 }
       case 'stand-one-leg':
         return null
+      case 'simmonds':
+        // From the side of the couch near its end, low: the foot hanging over the end, and whether it moves.
+        return { target: () => at(R.calf[side]).lerp(at(R.foot[side]), 0.6), dir: v(0.55, 0.25, 1), dist: 1.05 }
       default: {
         // One hand on the leg: the spot face on, from a little above and toward the feet, far enough back to see the
         // hand and what is round it.
@@ -1360,6 +1387,33 @@ export class ExamScene {
           const roll = Math.sin(Math.max(0, a.t - 0.5) * Math.PI * 1.5) * (ramp(0.3, 0.8) - ramp(a.dur - 0.7, a.dur - 0.2))
           this.held[`hiprot-${s}`] = 22 * roll
           if (this.signs.ataxia === s) this.held[`ankle-${s}`] = 14 * Math.sin(Math.max(0, a.t - 0.75) * Math.PI * 1.5) * (ramp(0.3, 0.8) - ramp(a.dur - 0.7, a.dur - 0.2))
+          break
+        }
+        case 'ottawa-edge': {
+          // A fingertip pressed firmly along the posterior edge of the malleolus, from 6 cm above its tip down to the
+          // tip, then on the tip itself: the Ottawa points.
+          const w = on(0, a.dur)
+          const down = ramp(0.4, a.dur - 0.9)
+          const press = pulses(0.4, a.dur - 0.3, 5)
+          if (a.site && w > 0.02) this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - w) + 0.008 * (1 - press), stroke: 0.06 * this.scale * (1 - down), site: a.site, along: [1, 0, 0] })
+          if (sore(a.site)) this.eyes.distress = press * ramp(1.2, 2.4)
+          break
+        }
+        case 'simmonds': {
+          // Face down, the feet over the end; both hands round the calf, squeezed twice. An intact Achilles tendon
+          // points the foot each time.
+          // Hands off, then back over in good time: on her back again before the next manoeuvre is framed.
+          const settled = ramp(1.5, 2.2) * (1 - ramp(a.dur - 3.1, a.dur - 2.7))
+          const squeeze = pulses(2.4, a.dur - 3.2, 2)
+          if (settled > 0.02) {
+            grip('calf', 'cup', 'palm', settled, 0.004 * (1 - squeeze))
+            grip('calf', 'cup', 'palm', settled, 0.004 * (1 - squeeze), { left: true, stroke: -0.05 * this.scale })
+          }
+          this.held[`ankle-${s}`] = 12 + (this.signs.achilles === s ? 0 : 26 * squeeze)
+          if (a.back && a.t >= a.dur - 2.6) {
+            this.setPosture(a.back, 1.1)
+            a.back = undefined
+          }
           break
         }
         case 'stand-one-leg':
@@ -3248,6 +3302,9 @@ export class ExamScene {
         return { quat: facing(v(-1, 0, 0), v(0, Math.cos(70 * DEG), Math.sin(70 * DEG))), pos: lying.clone().add(v(0, 0.06, -0.05)) }
       case 'roll-L':
         return { quat: facing(v(-1, 0, 0), v(0, Math.cos(70 * DEG), -Math.sin(70 * DEG))), pos: lying.clone().add(v(0, 0.06, 0.05)) }
+      case 'prone':
+        // Face down and moved toward the foot of the couch until the ankles are over its end.
+        return { quat: facing(v(-1, 0, 0), v(0, -1, 0)), pos: lying.clone().add(v(COUCH.length - (lying.x + leg) + 0.08, 0.01, 0)) }
       case 'sitting':
         return { quat: facing(v(0, 1, 0), v(1, 0, 0)), pos: v(0.4, COUCH.top + hipAbove * 0.9, 0) }
       case 'edge':

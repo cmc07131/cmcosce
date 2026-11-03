@@ -29,7 +29,7 @@
     }
   ],
   "review": [],
-  "notes": "Checked against the Ottawa ankle and foot rules (Stiell 1992–1994), BOAST 'Management of ankle fractures' (2016) and NICE CKS (sprains).\n\nOttawa ankle rule: X-ray if pain in the malleolar zone and any of: bone tenderness along the posterior edge or tip of the lateral malleolus (distal 6 cm), or of the medial malleolus, or inability to bear weight (4 steps) immediately and in the ED. Foot rule: pain in the midfoot and tenderness at the base of the 5th metatarsal or the navicular, or inability to bear weight. Sensitivity near 100%; applies to adults (and children over 5 with care).\n\nAlso examine the proximal fibula (Maisonneuve), the Achilles tendon (Simmonds/Thompson test), and neurovascular status. Weber classification by the fibular fracture level relative to the syndesmosis: A below (usually stable), B at the level (stability depends on the medial side — medial tenderness, medial clear space widening), C above (unstable). A stable Weber B can be treated in a boot and weight-bearing as tolerated (BOAST/CROSSBAT), while talar shift needs orthopaedic fixation.\n\nYour notes list 'Ankle and Ottawa rules' without detail.\n\nPerfect script checked against the Ottawa ankle rules and BOAST, an HKCEM-style scheme and a keyword scheme. Removed the full-plaster option.",
+  "notes": "Checked against the Ottawa ankle and foot rules (Stiell 1992–1994), BOAST 'Management of ankle fractures' (2016) and NICE CKS (sprains).\n\nOttawa ankle rule: X-ray if pain in the malleolar zone and any of: bone tenderness along the posterior edge or tip of the lateral malleolus (distal 6 cm), or of the medial malleolus, or inability to bear weight (4 steps) immediately and in the ED. Foot rule: pain in the midfoot and tenderness at the base of the 5th metatarsal or the navicular, or inability to bear weight. Sensitivity near 100%; applies to adults (and children over 5 with care).\n\nAlso examine the proximal fibula (Maisonneuve), the Achilles tendon (Simmonds/Thompson test), and neurovascular status. Weber classification by the fibular fracture level relative to the syndesmosis: A below (usually stable), B at the level (stability depends on the medial side — medial tenderness, medial clear space widening), C above (unstable). A stable Weber B can be treated in a boot and weight-bearing as tolerated (BOAST/CROSSBAT), while talar shift needs orthopaedic fixation.\n\nYour notes list 'Ankle and Ottawa rules' without detail.\n\nThe examination is a focused 3D examination: the Ottawa malleolar points pressed along the posterior edge of the distal 6 cm down to the tip (Stiell), the foot points, four steps; the proximal fibula; Simmonds' test with the patient prone and the feet over the end of the couch (a squeeze of the calf points the foot when the Achilles tendon is intact; NICE CKS Achilles tendon rupture); the foot pulses and sensation.\n\nPerfect script checked against the Ottawa ankle rules and BOAST, an HKCEM-style scheme and a keyword scheme.",
   "cast": [
     {
       "id": "patient",
@@ -40,7 +40,35 @@
   ],
   "body": {
     "posture": "supine",
-    "gait": "antalgic-L"
+    "shorts": true,
+    "gait": "antalgic-L",
+    "tender": [
+      "lateralmalleolus-L"
+    ],
+    "bruise": [
+      "lateralmalleolus-L"
+    ],
+    "intro": "Ms Leung is lying on the couch, both legs bare to the knee. Examine her left ankle and foot: choose below, or tap the ankle.",
+    "focus": [
+      "inspect-ankles@lateralmalleolus-L",
+      "ottawa-edge@lateralmalleolus-L",
+      "ottawa-edge@medialmalleolus-L",
+      "ottawa-foot@fifthmt-L",
+      "ottawa-foot@navicular-L",
+      "walk-four",
+      "proximal-fibula@fibula-L",
+      "simmonds@calf-L",
+      "pulse@dp-L",
+      "pulse@pt-L",
+      "touch@foot-L"
+    ],
+    "findings": {
+      "ottawa-foot@fifthmt-L": "Base of the 5th metatarsal: not tender.",
+      "ottawa-foot@navicular-L": "Navicular: not tender.",
+      "pulse@dp-L": "Dorsalis pedis pulse present.",
+      "pulse@pt-L": "Posterior tibial pulse present.",
+      "touch@foot-L": "Feels light touch normally over the foot."
+    }
   },
   "steps": [
     {
@@ -48,20 +76,20 @@
       "kind": "exam",
       "to": "patient",
       "label": "Examine",
-      "hint": "Look, feel the Ottawa points, proximal fibula, Achilles, move, weight-bearing, neurovascular.",
+      "hint": "Look; press along the posterior edge of each malleolus to the tip; the 5th metatarsal base and the navicular; four steps; the proximal fibula; Simmonds' test; pulses and sensation.",
       "groups": {
         "Look": [
           {
             "t": "Look at both ankles: swelling, bruising, deformity",
-            "r": "Swelling and bruising over the lateral malleolus. No deformity.",
+            "r": "Swelling and bruising over the left lateral malleolus. No deformity.",
             "mark": "Inspects both ankles",
             "do": "look ankle-L"
           }
         ],
         "Ottawa points": [
           {
-            "t": "Ottawa points: the posterior edge and tip of the lateral malleolus, the distal 6 cm",
-            "r": "Tender over the posterior edge.",
+            "t": "The posterior edge and tip of the lateral malleolus, the distal 6 cm",
+            "r": "Tender along the posterior edge of the lateral malleolus, a few centimetres above the tip: Ottawa positive.",
             "mark": "Palpates the lateral malleolus posterior edge",
             "do": "feel lateralmalleolus-L"
           },
@@ -69,17 +97,17 @@
             "t": "The posterior edge and tip of the medial malleolus",
             "r": "Not tender. No medial swelling.",
             "mark": "Palpates the medial malleolus",
-            "do": "feel medialmalleolus-L,pt-L"
+            "do": "feel medialmalleolus-L"
           },
           {
             "t": "The base of the 5th metatarsal and the navicular",
-            "r": "Not tender.",
+            "r": "Neither is tender: the foot rule is negative.",
             "mark": "Palpates the foot Ottawa points",
             "do": "feel fifthmt-L & feel navicular-L"
           },
           {
             "t": "Can you walk four steps?",
-            "r": "Only with a lot of help.",
+            "r": "Only with a lot of help, hopping on the right: unable to bear weight.",
             "mark": "Assesses weight-bearing",
             "do": "say walk"
           }
@@ -87,21 +115,20 @@
         "Other": [
           {
             "t": "Feel the proximal fibula",
-            "r": "Not tender.",
+            "r": "Not tender: no Maisonneuve fracture.",
             "mark": "Checks the proximal fibula (Maisonneuve)",
             "do": "feel fibula-L"
           },
           {
-            "t": "Squeeze the calf: Simmonds' test",
-            "r": "Foot plantarflexes normally — Achilles intact.",
+            "t": "Simmonds' test: squeeze the calf, prone, feet over the end of the couch",
+            "r": "The foot points each time the calf is squeezed: the Achilles tendon is intact.",
             "mark": "Tests the Achilles tendon",
             "do": "press calf-L"
           },
           {
             "t": "Foot pulses and sensation",
-            "r": "Normal.",
+            "r": "Pulses present; sensation normal.",
             "mark": "Neurovascular assessment",
-            "anim": "pulse",
             "do": "feel dp-L,pt-L & cotton foot-L,toes-L | feel dp-L,pt-L & pin foot-L,toes-L"
           }
         ]
@@ -274,17 +301,17 @@
     {
       "at": "0:00",
       "say": "Look at both ankles: swelling, bruising, deformity. Ottawa points: the posterior edge and tip of the lateral malleolus, the distal 6 cm. The posterior edge and tip of the medial malleolus.",
-      "do": "Swelling and bruising over the lateral malleolus. No deformity. Tender over the posterior edge. Not tender. No medial swelling."
+      "do": "Swelling and bruising over the lateral malleolus. No deformity. Tender along the posterior edge of the lateral malleolus. Medial malleolus not tender."
     },
     {
-      "at": "0:20",
+      "at": "0:30",
       "say": "The base of the 5th metatarsal and the navicular. Can you walk four steps? Feel the proximal fibula.",
-      "do": "Not tender. Only with a lot of help. Not tender."
+      "do": "Not tender. Only with a lot of help: unable to bear weight. Proximal fibula not tender."
     },
     {
-      "at": "0:40",
-      "say": "Squeeze the calf: Simmonds' test. Foot pulses and sensation.",
-      "do": "Foot plantarflexes normally — Achilles intact. Normal."
+      "at": "0:50",
+      "say": "Simmonds' test: lie face down, feet over the end; I squeeze the calf. Foot pulses and sensation.",
+      "do": "The foot points: Achilles intact. Pulses and sensation normal."
     },
     {
       "at": "1:00",

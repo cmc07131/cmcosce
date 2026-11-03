@@ -77,6 +77,8 @@ export const bodySchema = z.object({
   acl: z.enum(['R', 'L']).optional(),
   /** Places that hurt when pressed (site ids): the patient winces. */
   tender: z.array(z.string()).optional(),
+  /** A ruptured Achilles tendon on this side: Simmonds' test does not point the foot. */
+  achilles: z.enum(['R', 'L']).optional(),
   /** An osteoarthritic hip on this side: stiff, painful at the end of range, a 15° fixed flexion deformity. */
   hip: z.enum(['R', 'L']).optional(),
   /**

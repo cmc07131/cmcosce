@@ -10,7 +10,7 @@ Station `ot-hip` → Mr Ho → "Examine the hip". In the harness: `?exam=ot/ot-h
 
 ## Driving it with Playwright
 
-`node scripts/verify/journeys/hip-exam.mjs`. Each manoeuvre is a button `exam3d-m-<focus entry>` (e.g. `exam3d-m-thomas@hip-R`); it is disabled while the animation plays. Items found reach `window.__picked`; the station's exam options are in `window.__options`. Two screenshots per manoeuvre, 0.9 s and 2 s in.
+`node scripts/verify/journeys/exam.mjs ot/ot-hip`. Each manoeuvre is a button `exam3d-m-<focus entry>` (e.g. `exam3d-m-thomas@hip-R`); it is disabled while the animation plays. Items found reach `window.__picked`; the station's exam options are in `window.__options`. Two screenshots per manoeuvre, 0.9 s and 2 s in.
 
 ## Gotchas
 

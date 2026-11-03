@@ -1,16 +1,23 @@
 #!/usr/bin/env node
 /**
- * The hip examination (station ot-hip), a focused 3D examination: every manoeuvre pressed in order, the way a player
- * does it, each watched to the end and photographed twice on the way. Every exam item must be found.
- * node scripts/verify/journeys/hip-exam.mjs
+ * Focused 3D examinations: every manoeuvre pressed in order, the way a player does it, each watched to the end and
+ * photographed twice on the way. Every exam item must be found.
+ *   node scripts/verify/journeys/exam.mjs                 the stations below
+ *   node scripts/verify/journeys/exam.mjs ot/ot-ankle     one station (gym/id)
  */
-import { finish, launch } from '../lib.mjs'
-import { openExam } from '../lib.mjs'
+import { finish, launch, openExam } from '../lib.mjs'
 
+const STATIONS = ['ot/ot-hip', 'ot/ot-ankle']
 const h = await launch()
-const ctx = await openExam(h.url, 'ot/ot-hip', 'hip-exam')
+let all = true
+for (const station of process.argv.slice(2).length ? process.argv.slice(2) : STATIONS) all = (await run(station)) && all
+h.stop()
+process.exit(all ? 0 : 1)
+
+async function run(station) {
+const ctx = await openExam(h.url, station, `exam-${station.split('/')[1]}`)
 const { page, shot } = ctx
-let facts = {}
+let facts = { station }
 try {
   await page.waitForSelector('[data-testid^="exam3d-m-"]', { timeout: 60000 })
   await page.waitForTimeout(1500)
@@ -34,11 +41,10 @@ try {
   const picked = await page.evaluate(() => window.__picked)
   const options = await page.evaluate(() => window.__options)
   const missing = options.filter((o) => !picked.includes(o.id)).map((o) => o.label)
-  facts = { manoeuvres: keys.length, found: picked.length, of: options.length, missing, notes }
+  facts = { station, manoeuvres: keys.length, found: picked.length, of: options.length, missing, notes }
 } catch (e) {
-  facts = { crashed: String(e) }
+  facts = { station, crashed: String(e) }
   await shot('crash').catch(() => undefined)
 }
-const ok = await finish(ctx, !facts.crashed && facts.missing?.length === 0, facts)
-h.stop()
-process.exit(ok ? 0 : 1)
+return finish(ctx, !facts.crashed && facts.missing?.length === 0, facts)
+}

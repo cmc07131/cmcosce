@@ -40,6 +40,9 @@ export type Anim =
   | 'hip-rot'
   | 'hip-abd'
   | 'thomas'
+  // The ankle.
+  | 'ottawa-edge'
+  | 'simmonds'
   // The cervical collar, and clearing the neck.
   | 'mils'
   | 'jewellery'
@@ -233,6 +236,33 @@ export const MANOEUVRES: Record<string, ManoeuvreDef> = {
     anim: 'thomas',
     group: 'Special',
     shows: { title: 'Thomas test', sub: 'the lordosis flattened: if this thigh lifts off the couch, a fixed flexion deformity' },
+  },
+
+  // The ankle and foot after a twist: look; the Ottawa points; four steps; the fibula above, the Achilles behind; the foot.
+  'inspect-ankles': { label: 'Look at both ankles: swelling, bruising, deformity', tool: 'look', anim: 'inspect', group: 'Look' },
+  'ottawa-edge': {
+    label: 'Press along the posterior edge of the {spot}, from 6 cm up to the tip',
+    tool: 'press',
+    anim: 'ottawa-edge',
+    group: 'Ottawa points',
+    shows: { title: 'Ottawa ankle rule', sub: 'bone tenderness on the posterior edge or tip, the distal 6 cm: X-ray' },
+  },
+  'ottawa-foot': { label: 'Press on the {spot}', tool: 'press', anim: 'bone', group: 'Ottawa points', shows: { title: 'Ottawa foot rule', sub: 'tender at the base of the 5th metatarsal or the navicular: X-ray of the foot' } },
+  'walk-four': {
+    label: '“Can you take four steps for me?”',
+    say: 'walk',
+    anim: 'walk',
+    group: 'Ottawa points',
+    wide: true,
+    shows: { title: 'Weight-bearing', sub: 'unable to take four steps, now and straight after the injury: X-ray' },
+  },
+  'proximal-fibula': { label: 'Press on the {spot}, below the knee', tool: 'press', anim: 'bone', group: 'Above and behind', shows: { title: 'Proximal fibula', sub: 'tender: a Maisonneuve fracture high up, with a torn syndesmosis' } },
+  simmonds: {
+    label: 'Simmonds’ test: face down, feet over the end of the couch; squeeze the calf',
+    tool: 'press',
+    anim: 'simmonds',
+    group: 'Above and behind',
+    shows: { title: 'Simmonds’ test', sub: 'the foot points as the calf is squeezed: the Achilles tendon is intact' },
   },
 
   // Teaching the collar by Peyton's four steps, on a manikin; then the learner does it.
