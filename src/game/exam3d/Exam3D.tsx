@@ -147,7 +147,9 @@ export default function Exam3D({ pack, action, spent, onClose, onOption }: Props
   const legFocus = !neuro && offers.some((o) => o.site && onLeg(o.site))
   // The neck: a collar to fit, a neck to clear.
   const neckFocus = !neuro && !legFocus && offers.some((o) => o.site && /^(neck|neckside|cspine|chin|ear)(-|$)/.test(o.site))
-  const home = neuro ? 'head' : legFocus ? `knee-${focusSide}` : neckFocus ? 'neck' : `forearm-${focusSide}`
+  // A hip examination comes back to the hip, not the knee.
+  const hipFocus = legFocus && offers.some((o) => o.def.anim.startsWith('hip-') || o.def.anim === 'thomas')
+  const home = neuro ? 'head' : hipFocus ? `hip-${focusSide}` : legFocus ? `knee-${focusSide}` : neckFocus ? 'neck' : `forearm-${focusSide}`
   const sideWord = focusSide === 'L' ? 'left' : 'right'
   const their = kind === 'woman' ? 'her' : 'his'
   const tools = useMemo(() => {

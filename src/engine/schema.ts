@@ -77,6 +77,8 @@ export const bodySchema = z.object({
   acl: z.enum(['R', 'L']).optional(),
   /** Places that hurt when pressed (site ids): the patient winces. */
   tender: z.array(z.string()).optional(),
+  /** An osteoarthritic hip on this side: stiff, painful at the end of range, a 15° fixed flexion deformity. */
+  hip: z.enum(['R', 'L']).optional(),
   /**
    * A focused examination: only these manoeuvres are offered, each animated (see game/exam3d/manoeuvres.ts):
    * `pulse@wrist-L`, `ok-sign`… Taps elsewhere on the body are not part of the examination.

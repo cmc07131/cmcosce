@@ -51,6 +51,7 @@ export const TOOLS: ToolDef[] = [
   { id: 'calipers', label: 'Two-point calipers', icon: '📐', use: 'tap', normal: 'Two-point discrimination normal at {site}.' },
   { id: 'fork', label: 'Tuning fork', icon: '🎵', use: 'tap', normal: 'Hears it normally.' },
   { id: 'tape', label: 'Tape measure', icon: '📏', use: 'tap', normal: 'Measured.' },
+  { id: 'thomas', label: 'Thomas test', icon: '🦵', use: 'tap', normal: 'The thigh stays flat on the couch: no fixed flexion deformity.' },
   { id: 'doppler', label: 'Handheld Doppler', icon: '📡', use: 'hold', normal: 'Normal signal at {site}.' },
   { id: 'glucometer', label: 'Glucometer', icon: '🩸', use: 'tap', normal: 'Reading taken.' },
   { id: 'scanner', label: 'Bladder scanner', icon: '📟', use: 'hold', normal: 'Nothing to scan here.' },

@@ -53,6 +53,20 @@ export async function openBench(url, kind, journey) {
   return { browser, page, dir, log, ...helpers(page, dir) }
 }
 
+/** A station's 3D examination (`exam`: gym/id, e.g. ot/ot-hip), at phone size. */
+export async function openExam(url, exam, journey) {
+  const { chromium } = playwright()
+  const browser = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader'] })
+  const page = await browser.newPage({ viewport: { width: 400, height: 860 }, deviceScaleFactor: 2 })
+  const dir = path.join(root, '.verify/runs', `${journey}-${new Date().toISOString().replace(/[:.]/g, '-')}`)
+  mkdirSync(dir, { recursive: true })
+  const log = []
+  page.on('pageerror', (e) => log.push(`pageerror: ${e.message}`))
+  page.on('console', (m) => m.type() === 'error' && !m.text().includes('404') && log.push(`console: ${m.text()}`))
+  await page.goto(`${url}?exam=${exam}`)
+  return { browser, page, dir, log, ...helpers(page, dir) }
+}
+
 function helpers(page, dir) {
   const box = async (id) => {
     const el = page.getByTestId(id).first()

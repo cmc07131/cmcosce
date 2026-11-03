@@ -58,7 +58,15 @@ export type Signs = {
   acl?: Side
   /** Places that hurt when pressed (site ids). */
   tender?: string[]
+  /**
+   * An osteoarthritic hip on this side: stiff and painful at the end of each range (flexion to 95°, internal rotation
+   * 5°, external 20°, abduction 20°, adduction 15°), and a 15° fixed flexion deformity the Thomas test shows.
+   */
+  hip?: Side
 }
+
+/** A hip's range (degrees): normal, or osteoarthritic. */
+const HIP_RANGE = { normal: { flex: 120, ir: 40, er: 45, abd: 45, add: 30, ffd: 0 }, oa: { flex: 95, ir: 5, er: 20, abd: 20, add: 15, ffd: 15 } }
 
 /** A hand shape: each finger's knuckle, middle and end joint flexion and its spread (toward the little finger); the
  * thumb's sweep across the palm and its two joints, and `tx` its swing out to the thumb side; `turn`: the forearm
@@ -72,7 +80,7 @@ const FIST: HandShape['f'] = [
   [85, 95, 60, 0],
 ]
 /** Manoeuvres done with the examiner's hands. */
-const HANDS_ON = new Set<string>(['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch', 'patellar-tap', 'joint-line', 'bone', 'knee-passive', 'lachman', 'drawer', 'stress', 'hip-roll'])
+const HANDS_ON = new Set<string>(['pulse', 'doppler', 'crt', 'warmth', 'touch', 'pin', 'squeeze', 'stretch', 'patellar-tap', 'joint-line', 'bone', 'knee-passive', 'lachman', 'drawer', 'stress', 'hip-roll', 'leg-length', 'hip-flex', 'hip-rot', 'hip-abd', 'thomas'])
 /** What a manoeuvre is about, lit up in the X-ray view: by where it is done, and by what it is. */
 const LIGHTS_BY_SITE: Record<string, string[]> = {
   medialjoint: ['medial-meniscus', 'mcl'],
@@ -95,7 +103,7 @@ const LIGHTS_BY_ANIM: Record<string, string[]> = {
 const SPEED = 2.5
 /** How much faster than life the patient's own movements are shown (a finger–nose, a face moving). */
 const PATIENT_PACE = 1.35
-const REAL_TIME = new Set<string>(['crt', 'walk', 'speech', 'eyes-h', 'finger-nose', 'rapid-alt', 'tone-arm', 'tone-leg', 'heel-shin', 'sit-trunk', 'grip', 'acuity', 'pin-at', 'fields-hand', 'torch-eyes', 'face-touch', 'clench', 'otoscope', 'look-mouth', 'parotid', 'whisper', 'fork', 'weber'])
+const REAL_TIME = new Set<string>(['crt', 'walk', 'stand-one-leg', 'leg-length', 'speech', 'eyes-h', 'finger-nose', 'rapid-alt', 'tone-arm', 'tone-leg', 'heel-shin', 'sit-trunk', 'grip', 'acuity', 'pin-at', 'fields-hand', 'torch-eyes', 'face-touch', 'clench', 'otoscope', 'look-mouth', 'parotid', 'whisper', 'fork', 'weber'])
 /** How long each manoeuvre takes (seconds, before `SPEED`); asking for a hand shape, 3.4. */
 const DURATION: Record<string, number> = {
   gloves: 4,
@@ -131,6 +139,13 @@ const DURATION: Record<string, number> = {
   stress: 6,
   'foot-up': 3.2,
   'hip-roll': 3.8,
+  // The hip.
+  'stand-one-leg': 9,
+  'leg-length': 10,
+  'hip-flex': 5,
+  'hip-rot': 7,
+  'hip-abd': 7,
+  thomas: 7,
   mils: 1.6,
   jewellery: 2,
   measure: 2.4,
@@ -372,8 +387,9 @@ function rest(p: Posture): Joints {
       const lift = p === 'one-leg-R' ? 'L' : 'R'
       both('shoulderabd', 12)
       both('elbow', 10)
-      j[`hipflex-${lift}`] = 35
-      j[`knee-${lift}`] = 75
+      // The free knee brought forward, so the lifted foot shows from in front.
+      j[`hipflex-${lift}`] = 55
+      j[`knee-${lift}`] = 70
       break
     }
     default:
@@ -415,6 +431,11 @@ export class ExamScene {
   private bare = { trunk: 0, arms: 0, legs: 0 }
   /** When she set off walking (each lap starts by the couch). */
   private walkFrom = 0
+  /** A tape measure laid over the skin between two landmarks (leg lengths): one piece per stretch of it. */
+  private tape: THREE.Mesh[] = []
+  /** The skin under the tape now, found once per measurement. */
+  private tapePath: { key: string; pts: THREE.Vector3[] } | null = null
+  private ray = new THREE.Raycaster()
   /** A manoeuvre filmed from a set place (from the side for a Lachman test): until the camera is moved. */
   private shot: { target: () => THREE.Vector3 | null; dir: THREE.Vector3; dist: number; fov?: number } | null = null
   /** The lens this shot wants (narrow for a long shot across the room). */
@@ -459,7 +480,7 @@ export class ExamScene {
    * A manoeuvre being shown: on a leg or not; the knee and hip angles it started from; the position to go back to
    * after walking.
    */
-  private act: { anim: Anim; site: string | null; side: Side; t: number; dur: number; speed: number; lift0: number; leg: boolean; k0: number; h0: number; back?: Posture } | null = null
+  private act: { anim: Anim; site: string | null; side: Side; t: number; dur: number; speed: number; lift0: number; leg: boolean; k0: number; h0: number; back?: Posture; swapped?: boolean } | null = null
   private examiner: ExaminerHand
   private examiner2: ExaminerHand
   /** An assistant's hands (in-line stabilisation from the head end). */
@@ -726,6 +747,11 @@ export class ExamScene {
       this.act.back = this.posture
       this.setPosture('walking', 0.8)
     }
+    // The Trendelenburg test: up, on this leg, then the other, then back.
+    if (anim === 'stand-one-leg') {
+      this.act.back = this.posture
+      this.setPosture(side === 'R' ? 'one-leg-R' : 'one-leg-L', 1)
+    }
     this.shot = this.shotFor(anim, site, side)
     this.light([...(LIGHTS_BY_ANIM[anim] ?? []), ...(site ? (LIGHTS_BY_SITE[site.replace(/-(R|L)$/, '')] ?? []) : [])], side)
     return d / speed
@@ -785,6 +811,51 @@ export class ExamScene {
     kit.place(st, COUCH.top + 0.004, this.body.quaternion)
   }
 
+  /** Points along the straight line from `a` to `b`, each dropped from above onto the body's surface (skin or clothes). */
+  private overSkin(a: THREE.Vector3, b: THREE.Vector3, n = 16): THREE.Vector3[] {
+    const meshes = this.rig?.meshes ?? []
+    const down = v(0, -1, 0)
+    return Array.from({ length: n + 1 }, (_, i) => {
+      const p = a.clone().lerp(b, i / n)
+      this.ray.set(p.clone().add(v(0, 0.5, 0)), down)
+      const hit = this.ray.intersectObjects(meshes, false)[0]
+      return hit ? hit.point.clone() : p
+    })
+  }
+
+  /**
+   * A tape measure laid along `path` (world points on the skin), drawn out `reach` (0 … 1) of the way from its start,
+   * or put away. Returns where its end is.
+   */
+  private layTape(path: THREE.Vector3[], reach: number, show: boolean): THREE.Vector3 {
+    // Lifted a few millimetres, so it lies on the skin rather than in it.
+    const pts = path.map((p) => p.clone().add(v(0, 0.006, 0)))
+    const lens = pts.slice(1).map((p, i) => p.distanceTo(pts[i]))
+    let left = lens.reduce((x, y) => x + y, 0) * Math.max(0, Math.min(1, reach))
+    let end = pts[0].clone()
+    for (let i = 0; i < lens.length; i++) {
+      if (!this.tape[i]) {
+        // Round, so it reads from any angle.
+        const m = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 1, 8), new THREE.MeshStandardMaterial({ color: '#f2cf3a', roughness: 0.55, emissive: '#5a4300', emissiveIntensity: 0.4 }))
+        this.scene.add(m)
+        this.tape.push(m)
+      }
+      const piece = this.tape[i]
+      const a = pts[i]
+      const take = Math.min(left, lens[i])
+      left -= take
+      const b = a.clone().lerp(pts[i + 1], lens[i] ? take / lens[i] : 0)
+      piece.visible = show && take > 0.005
+      if (piece.visible) {
+        piece.position.copy(a).add(b).multiplyScalar(0.5)
+        piece.scale.set(1, take, 1)
+        piece.quaternion.setFromUnitVectors(v(0, 1, 0), b.clone().sub(a).normalize())
+        end = b
+      }
+    }
+    return end
+  }
+
   /** Light up these structures of one leg in the X-ray view (none: all dark). */
   private light(names: string[], side: Side) {
     for (const m of this.anatomy) {
@@ -816,6 +887,9 @@ export class ExamScene {
     if (a.back) this.setPosture(a.back, 0.8)
     if (a.anim === 'rotate-head') delete this.held.neckyaw
     if (a.anim === 'tone-leg') for (const key of [`hiprot-${a.side}`, `ankle-${a.side}`]) delete this.held[key]
+    if (['hip-abd', 'thomas'].includes(a.anim)) for (const s of SIDES) for (const key of ['hipabd', 'hipflex', 'knee', 'hiprot']) delete this.held[`${key}-${s}`]
+    for (const piece of this.tape) piece.visible = false
+    this.tapePath = null
     if (['finger-nose', 'grip', 'acuity'].includes(a.anim)) for (const s of SIDES) this.hands[s].want = 0
     if (a.anim.startsWith('ask:')) this.motion = null
     if (['rapid-alt', 'tone-arm', 'sit-trunk', 'grip'].includes(a.anim))
@@ -869,6 +943,21 @@ export class ExamScene {
         return { target: () => at(R.calf[side]).lerp(at(R.thigh[side]), 0.35), dir: fromSide(0.45, 0.1), dist: 1.4 }
       case 'foot-up':
         return { target: () => at(R.foot[side]), dir: fromSide(0.5, 0.6), dist: 0.7 }
+      // The hip: the whole leg as it moves, from her other side; the legs and the pelvis from above for the tape.
+      case 'hip-flex':
+      case 'hip-rot':
+        return { target: () => at(R.thigh[side]).lerp(at(R.calf[side]), 0.5), dir: fromSide(0.55, 0.35), dist: 1.55 }
+      case 'hip-abd':
+        // From beyond the feet, above: the leg swinging out and across, your hand on the other iliac crest.
+        return { target: () => at(R.hips).lerp(at(R.calf[side]), 0.45), dir: U.clone().negate().multiplyScalar(1.1).addScaledVector(F, 0.85), dist: 1.8 }
+      case 'thomas':
+        // From your side, low: does the straight thigh lift off the couch as the other hip comes up?
+        return { target: () => at(R.hips).lerp(at(R.calf[side]), 0.45), dir: RT.clone().multiplyScalar(side === 'R' ? 1 : -1).addScaledVector(F, 0.35).addScaledVector(U, -0.15), dist: 1.6 }
+      case 'leg-length':
+        // From your side, above: the pelvis to both ankles, the tape laid along each leg.
+        return { target: () => at(R.hips).lerp(at(R.foot.R).lerp(at(R.foot.L), 0.5), 0.5), dir: F.clone().multiplyScalar(1.1).addScaledVector(RT, 0.75).addScaledVector(U, -0.15), dist: 1.55 }
+      case 'stand-one-leg':
+        return null
       default: {
         // One hand on the leg: the spot face on, from a little above and toward the feet, far enough back to see the
         // hand and what is round it.
@@ -1271,6 +1360,105 @@ export class ExamScene {
           const roll = Math.sin(Math.max(0, a.t - 0.5) * Math.PI * 1.5) * (ramp(0.3, 0.8) - ramp(a.dur - 0.7, a.dur - 0.2))
           this.held[`hiprot-${s}`] = 22 * roll
           if (this.signs.ataxia === s) this.held[`ankle-${s}`] = 14 * Math.sin(Math.max(0, a.t - 0.75) * Math.PI * 1.5) * (ramp(0.3, 0.8) - ramp(a.dur - 0.7, a.dur - 0.2))
+          break
+        }
+        case 'stand-one-leg':
+          // Fingers on both iliac crests, she stands on this leg; then the other; then back to the couch.
+          if (a.t > a.dur * 0.45 && this.posture === `one-leg-${s}` && !a.swapped) {
+            a.swapped = true
+            this.setPosture(s === 'R' ? 'one-leg-L' : 'one-leg-R', 0.9)
+          }
+          if (a.back && a.t >= a.dur - 1) {
+            this.setPosture(a.back, 0.9)
+            a.back = undefined
+          }
+          break
+        case 'leg-length': {
+          // True lengths, ASIS to the tip of the medial malleolus, each side; then apparent, umbilicus to the malleolus.
+          const legs: [string, string][] = [
+            [`asis-R`, `medialmalleolus-R`],
+            [`asis-L`, `medialmalleolus-L`],
+            ['umbilicus', `medialmalleolus-R`],
+            ['umbilicus', `medialmalleolus-L`],
+          ]
+          const slot = a.dur / legs.length
+          const i = Math.min(legs.length - 1, Math.floor(a.t / slot))
+          const [from, to] = legs[i]
+          const t0 = i * slot
+          const reach = ramp(t0 + 0.3, t0 + slot * 0.6)
+          const w = on(t0, t0 + slot - 0.05)
+          // Over the skin, not through the thigh: the line from the bony point to the malleolus, dropped onto the body.
+          if (!this.tapePath || this.tapePath.key !== `${from}>${to}`) {
+            const p0 = this.siteWorld(from)
+            const p1 = this.siteWorld(to)
+            this.tapePath = p0 && p1 ? { key: `${from}>${to}`, pts: this.overSkin(p0, p1) } : null
+          }
+          if (this.tapePath) {
+            const end = this.layTape(this.tapePath.pts, reach, w > 0.3)
+            if (w > 0.02) {
+              // The left thumb holds the end of the tape on the bony point; the right hand runs it down the leg.
+              this.touches.push({ grip: 'press', contact: 'thumb', gap: 0.14 * (1 - w), stroke: 0, site: from, left: true })
+              // The right hand comes down with the tape and holds its end on the malleolus.
+              const at = ramp(t0 + slot * 0.35, t0 + slot * 0.6)
+              if (end && at > 0.02) this.touches.push({ grip: 'press', contact: 'index', gap: 0.14 * (1 - Math.min(w, at)), stroke: 0, site: to })
+            }
+          }
+          break
+        }
+        case 'hip-flex': {
+          // One hand under the knee, the other at the heel: the hip and knee bent up together until the hip stops.
+          const r = this.signs.hip === s ? HIP_RANGE.oa : HIP_RANGE.normal
+          const up = ramp(0.5, 2.6) - ramp(3.3, 4.6)
+          this.held[`hipflex-${s}`] = lerp(a.h0, r.flex, up)
+          this.held[`knee-${s}`] = lerp(a.k0, 110, up)
+          grip('popliteal', 'cup', 'palm', on(0, 4.8), 0, { left: true })
+          grip('heel', 'cup', 'palm', on(0, 4.8))
+          if (this.signs.hip === s) this.eyes.distress = Math.max(0, (up - 0.75) * 4)
+          break
+        }
+        case 'hip-rot': {
+          // Hip and knee to 90°; the knee steadied, the foot swung out (internal rotation), back, then in (external).
+          const r = this.signs.hip === s ? HIP_RANGE.oa : HIP_RANGE.normal
+          const up = ramp(0.3, 1.4) - ramp(5.8, 6.8)
+          this.held[`hipflex-${s}`] = lerp(a.h0, 90, up)
+          this.held[`knee-${s}`] = lerp(a.k0, 90, up)
+          const ir = ramp(1.7, 2.7) - ramp(3, 3.7)
+          const er = ramp(4, 5) - ramp(5.2, 5.8)
+          this.held[`hiprot-${s}`] = r.ir * ir - r.er * er
+          grip('knee', 'cup', 'palm', on(0.2, 6.6), 0, { left: true })
+          grip('heel', 'cup', 'palm', on(0.2, 6.6))
+          if (this.signs.hip === s) this.eyes.distress = Math.max(ir, er * 0.5)
+          break
+        }
+        case 'hip-abd': {
+          // Your left hand on the opposite iliac crest; the ankle taken out until the pelvis starts to tilt, back, then a
+          // little across the other leg.
+          const r = this.signs.hip === s ? HIP_RANGE.oa : HIP_RANGE.normal
+          const other = s === 'R' ? 'L' : 'R'
+          const out = ramp(0.8, 2.4) - ramp(3, 3.8)
+          const across = ramp(4.2, 5.4) - ramp(5.8, 6.6)
+          // Across the other leg, it rides up over it a little.
+          this.held[`hipabd-${s}`] = r.abd * out - r.add * across
+          this.held[`hipflex-${s}`] = 8 * across
+          const w = on(0.2, 6.8)
+          if (w > 0.02) this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.14 * (1 - w), stroke: 0, site: `asis-${other}`, left: true })
+          grip('lateralmalleolus', 'cup', 'palm', w)
+          if (this.signs.hip === s) this.eyes.distress = Math.max(out, across) > 0.85 ? 0.8 : 0
+          break
+        }
+        case 'thomas': {
+          // A hand palm up under the lumbar spine; the other hip bent right up, knee to the chest, to flatten the back.
+          // The thigh being tested, if it cannot straighten, lifts off the couch.
+          const r = this.signs.hip === s ? HIP_RANGE.oa : HIP_RANGE.normal
+          const other = s === 'R' ? 'L' : 'R'
+          const up = ramp(1, 3) - ramp(5.4, 6.6)
+          this.held[`hipflex-${other}`] = lerp(0, 125, up)
+          this.held[`knee-${other}`] = lerp(0, 125, up)
+          this.held[`hipflex-${s}`] = r.ffd * ramp(2, 3.2) * (1 - ramp(5.4, 6.2))
+          this.held[`knee-${s}`] = r.ffd * 0.8 * ramp(2, 3.2) * (1 - ramp(5.4, 6.2))
+          const w = on(0, 6.8)
+          if (w > 0.02) this.touches.push({ grip: 'flat', contact: 'palm', gap: 0.1 * (1 - w), stroke: 0, site: 'spine', left: true })
+          if (w > 0.02) this.touches.push({ grip: 'cup', contact: 'palm', gap: 0.14 * (1 - on(0.8, 6)), stroke: 0, site: `knee-${other}` })
           break
         }
         case 'mils':
@@ -3735,9 +3923,10 @@ export class ExamScene {
           dir = v(0.1, 0.18, 1).normalize()
           dist = 0.95 * H + 0.35
         } else if (['standing', 'heel-toe', 'bent', 'one-leg-R', 'one-leg-L'].includes(this.posture)) {
-          // Head to toe: the gait, the stance, the pelvis.
+          // Head to toe: the gait, the stance, the pelvis. On one leg, from a three-quarter view in front on the side of the
+          // lifted leg, so the lifted knee shows and so does the pelvis tilting.
           target = at(R.hips).add(v(0, 0.06 * H, 0))
-          dir = v(0.12, 0.22, 1).normalize()
+          dir = (this.posture === 'one-leg-R' ? v(-0.7, 0.2, 1) : this.posture === 'one-leg-L' ? v(0.7, 0.2, 1) : v(0.12, 0.22, 1)).normalize()
           dist = 1.15 * H + 0.45
         } else {
           target = mid(at(R.hips), at(R.head))

@@ -33,6 +33,13 @@ export type Anim =
   | 'stress'
   | 'foot-up'
   | 'hip-roll'
+  // The hip.
+  | 'stand-one-leg'
+  | 'leg-length'
+  | 'hip-flex'
+  | 'hip-rot'
+  | 'hip-abd'
+  | 'thomas'
   // The cervical collar, and clearing the neck.
   | 'mils'
   | 'jewellery'
@@ -176,6 +183,57 @@ export const MANOEUVRES: Record<string, ManoeuvreDef> = {
   collaterals: { label: 'Valgus and varus stress, at 30° and straight', tool: 'stress', anim: 'stress', group: 'Special', shows: { title: 'Valgus and varus stress', sub: 'the MCL and the LCL: does the joint open?' } },
   'foot-up': { label: '“Pull your foot up, then push it down”', say: 'toes', anim: 'foot-up', group: 'Neuro', shows: { title: 'Foot up and down', sub: 'up: the deep peroneal nerve (from the common peroneal); down: the tibial' } },
   'hip-roll': { label: 'Roll the leg to and fro: the hip', move: 'rot', joint: 'hip', anim: 'hip-roll', group: 'Complete', shows: { title: 'Log roll', sub: 'the hip, the joint above: knee pain can come from it' } },
+
+  // The hip: watch him walk and stand on each leg; look and measure; feel; move; the Thomas test.
+  'stand-one-leg': {
+    label: '“Stand on your {side} leg, then the other”: fingers on both iliac crests',
+    say: 'one-leg',
+    sided: true,
+    anim: 'stand-one-leg',
+    group: 'Look',
+    wide: true,
+    shows: { title: 'Trendelenburg test', sub: 'a drop on the lifted side: weak abductors of the standing hip' },
+  },
+  'inspect-hips': { label: 'Look at both hips and legs: scars, wasting, rotation, shortening', tool: 'look', anim: 'inspect', group: 'Look' },
+  'leg-lengths': {
+    label: 'Tape measure: true lengths (ASIS to medial malleolus), then apparent (umbilicus to medial malleolus)',
+    tool: 'tape',
+    anim: 'leg-length',
+    group: 'Look',
+    shows: { title: 'Leg lengths', sub: 'true: a short leg (the hip itself); apparent only: a tilted pelvis' },
+  },
+  'press-at': { label: 'Press on the {spot}', tool: 'press', anim: 'bone', group: 'Feel' },
+  'hip-flex': {
+    label: 'Hand under the knee, hand at the heel: bend the hip up as far as it goes',
+    move: 'flex',
+    joint: 'hip',
+    anim: 'hip-flex',
+    group: 'Move',
+    shows: { title: 'Flexion', sub: 'normal about 120°; watch the face, not just the leg' },
+  },
+  'hip-rot': {
+    label: 'Hip and knee at 90°: swing the foot out (internal rotation), then in (external)',
+    move: 'rot',
+    joint: 'hip',
+    anim: 'hip-rot',
+    group: 'Move',
+    shows: { title: 'Rotation at 90°', sub: 'foot out: internal (normal about 40°), lost first in osteoarthritis; foot in: external (about 45°)' },
+  },
+  'hip-abd': {
+    label: 'Your hand on the other iliac crest: take the leg out (abduction), then across (adduction)',
+    move: 'abd',
+    joint: 'hip',
+    anim: 'hip-abd',
+    group: 'Move',
+    shows: { title: 'Abduction and adduction', sub: 'stop when the pelvis starts to tilt: normal about 45° out, 30° across' },
+  },
+  thomas: {
+    label: 'Thomas test: a hand under the lumbar spine; bend the other hip right up',
+    tool: 'thomas',
+    anim: 'thomas',
+    group: 'Special',
+    shows: { title: 'Thomas test', sub: 'the lordosis flattened: if this thigh lifts off the couch, a fixed flexion deformity' },
+  },
 
   // Teaching the collar by Peyton's four steps, on a manikin; then the learner does it.
   'collar-demo': {
@@ -379,7 +437,8 @@ export function offerOf(entry: string): Offer | null {
 
 /** What its button says: "Feel the dorsalis pedis pulse". */
 export function offerLabel(o: Offer): string {
-  return o.def.label.replace('{spot}', o.site ? spotLabel(o.site) : 'pulse')
+  const side = o.site?.endsWith('-L') ? 'left' : 'right'
+  return o.def.label.replace('{spot}', o.site ? spotLabel(o.site) : 'pulse').replace('{side}', side)
 }
 
 /** The rules' event for doing it. */

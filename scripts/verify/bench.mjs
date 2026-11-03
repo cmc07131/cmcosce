@@ -6,7 +6,7 @@
  *   node scripts/verify/bench.mjs build           bundle every bench into .verify/bench/
  *   node scripts/verify/bench.mjs serve [port]    build, then serve it (default 8765); prints READY <url>
  *
- * Open <url>/?kind=cvc to get the central line bench. The page puts the bench's result in window.__result and
+ * Open <url>/?kind=cvc to get the central line bench, or <url>/?exam=ot/ot-hip for a station's 3D examination. The page puts the bench's result in window.__result and
  * every uncaught error in window.__errors. It uses the game's own components (src/game/procedures.ts) and its own
  * stylesheet; only Tailwind's utilities are stood in for (scripts/verify/utilities.mjs).
  */
@@ -23,18 +23,41 @@ const out = path.join(root, '.verify/bench')
 const require = createRequire(path.join(root, 'package.json'))
 
 const ENTRY = `import { createRoot } from 'react-dom/client'
-import { Suspense } from 'react'
+import { Suspense, lazy } from 'react'
 import { PROCEDURES } from '../src/game/procedures'
+import { compileStation, stationSchema } from '../src/engine/station'
+const Exam3D = lazy(() => import('../src/game/exam3d/Exam3D'))
 const w = window as any
 w.__errors = []
 w.addEventListener('error', (e: ErrorEvent) => w.__errors.push(String(e.message)))
 w.addEventListener('unhandledrejection', (e: PromiseRejectionEvent) => w.__errors.push(String(e.reason)))
-const kind = new URLSearchParams(location.search).get('kind') ?? 'cvc'
+const params = new URLSearchParams(location.search)
+const kind = params.get('kind') ?? 'cvc'
+const exam = params.get('exam')
 const Bench = (PROCEDURES as any)[kind]
 const job = { actionId: 'verify', spendId: 'verify', kind, hint: '', label: kind, reply: '', grantMarks: Array.from({ length: 12 }, (_, i) => 'm' + (i + 1)), grantItems: [], scene: 'done', endStation: false }
 w.__result = null
 w.__kinds = Object.keys(PROCEDURES)
-createRoot(document.getElementById('root')!).render(
+w.__picked = []
+const root = createRoot(document.getElementById('root')!)
+if (exam) {
+  // A station's 3D examination (?exam=ot/ot-hip): the station compiled as the game does, its exam step opened.
+  fetch('/content/stations/' + exam + '.json')
+    .then((r) => r.json())
+    .then((json) => {
+      const pack = compileStation(stationSchema.parse(json)) as any
+      const action = pack.actions.find((a: any) => a.kind === 'exam')
+      w.__options = (action?.options ?? []).map((o: any) => ({ id: o.id, label: o.label }))
+      root.render(
+        <div data-testid="verify-frame" style={{ position: 'relative', width: 400, height: 860 }}>
+          <Suspense fallback={<p>loading</p>}>
+            <Exam3D pack={pack} action={action} title={json.title} spent={[]} onClose={() => undefined} onOption={(id: string) => w.__picked.push(id)} />
+          </Suspense>
+        </div>,
+      )
+    })
+    .catch((e) => w.__errors.push(String(e)))
+} else root.render(
   Bench ? (
     <div className="battle" data-testid="verify-frame" style={{ position: 'relative', width: 400, minHeight: 900, display: 'flex', flexDirection: 'column' }}>
       <Suspense fallback={<p>loading</p>}>
@@ -74,7 +97,7 @@ function build() {
   const entry = path.join(root, '.verify/entry.tsx')
   writeFileSync(entry, ENTRY)
   const esbuild = path.join(root, 'node_modules/.bin', process.platform === 'win32' ? 'esbuild.cmd' : 'esbuild')
-  const r = spawnSync(esbuild, [entry, '--bundle', `--outfile=${path.join(out, 'bundle.js')}`, '--jsx=automatic', '--loader:.woff2=file', '--loader:.woff=file', '--define:import.meta.env.DEV=false', '--define:process.env.NODE_ENV="production"', `--alias:~=${path.join(root, 'src')}`, '--log-level=warning'], { stdio: 'inherit', shell: process.platform === 'win32' })
+  const r = spawnSync(esbuild, [entry, '--bundle', `--outfile=${path.join(out, 'bundle.js')}`, '--jsx=automatic', '--loader:.woff2=file', '--loader:.woff=file', (process.env.VERIFY_DEV ? '--define:import.meta.env.DEV=true' : '--define:import.meta.env.DEV=false'), '--define:process.env.NODE_ENV="production"', `--alias:~=${path.join(root, 'src')}`, '--log-level=warning'], { stdio: 'inherit', shell: process.platform === 'win32' })
   if (r.status !== 0) {
     console.error('BUILD FAILED')
     process.exit(1)
@@ -90,8 +113,11 @@ function serve(port) {
   createServer((req, res) => {
     const url = new URL(req.url ?? '/', 'http://x')
     const rel = url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname)
-    // The harness's own files first, then the app's public folder (3D models, images), as the app serves them.
-    const p = [path.join(out, rel), path.join(root, 'public', rel)].find((f) => (f.startsWith(out) || f.startsWith(path.join(root, 'public'))) && existsSync(f) && statSync(f).isFile())
+    // The harness's own files first, then the app's public folder (3D models, images), as the app serves them; the
+    // station scripts under /content/.
+    const p = [path.join(out, rel), path.join(root, 'public', rel), rel.startsWith('/content/') ? path.join(root, rel) : ''].find(
+      (f) => f && (f.startsWith(out) || f.startsWith(path.join(root, 'public')) || f.startsWith(path.join(root, 'content'))) && existsSync(f) && statSync(f).isFile(),
+    )
     if (!p) {
       res.writeHead(404)
       return res.end()
