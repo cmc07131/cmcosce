@@ -698,8 +698,17 @@ export function EcgStrip({ ectopy }: { ectopy: boolean }) {
 export const CXR = { carinaY: 80 }
 export const cxrTipY = (cm: number) => 40 + (cm - 5) * 6.4
 
-export function ChestXray({ svgRef, catheterCm, marks }: { svgRef?: Ref<SVGSVGElement>; catheterCm: number | null; marks?: { x: number; y: number; text: string }[] }) {
-  const tipY = cxrTipY(catheterCm ?? 15)
+/** Where the catheter tip sits on the film: down the SVC, or, from the carotid, across to the left along the aortic arch. */
+export function cxrTip(cm: number, arterial: boolean) {
+  return arterial ? { x: Math.min(118, 96 + (cm - 9) * 3.2), y: Math.min(70, 52 + (cm - 9) * 2.2) } : { x: 87, y: cxrTipY(cm) }
+}
+
+export function ChestXray({ svgRef, catheterCm, arterial = false, wireCm = 0, marks }: { svgRef?: Ref<SVGSVGElement>; catheterCm: number | null; arterial?: boolean; wireCm?: number; marks?: { x: number; y: number; text: string }[] }) {
+  const tip = cxrTip(catheterCm ?? 15, arterial)
+  const tipY = tip.y
+  const line = arterial ? `M66 6 Q74 28 84 40 Q92 46 ${tip.x} ${tip.y}` : `M66 6 Q74 28 84 44 L86 ${Math.min(tipY, 70)} L87 ${tipY}`
+  // A guidewire still in runs on past the tip, into the heart.
+  const wireBeyond = catheterCm !== null && wireCm > catheterCm ? Math.min(60, (wireCm - catheterCm) * 6.4) : 0
   const ribs = Array.from({ length: 8 }, (_, i) => 50 + i * 15)
   return (
     <svg ref={svgRef} viewBox="0 0 200 200" className="block h-full w-full select-none" data-testid="cvc-cxr">
@@ -731,9 +740,14 @@ export function ChestXray({ svgRef, catheterCm, marks }: { svgRef?: Ref<SVGSVGEl
       {/* the line, radio-opaque: from the right neck, down beside the trachea, into the SVC */}
       {catheterCm !== null && (
         <g data-testid="cvc-cxr-line">
-          <path d={`M66 6 Q74 28 84 44 L86 ${Math.min(tipY, 70)} L87 ${tipY}`} stroke="#101010" strokeWidth="3.6" fill="none" />
-          <path d={`M66 6 Q74 28 84 44 L86 ${Math.min(tipY, 70)} L87 ${tipY}`} stroke="#ffffff" strokeWidth="2" fill="none" />
-          <circle cx="87" cy={tipY} r="2.2" fill="#ffffff" stroke="#101010" strokeWidth="0.8" />
+          <path d={line} stroke="#101010" strokeWidth="3.6" fill="none" />
+          <path d={line} stroke={wireCm > 0 ? '#a8a8a8' : '#ffffff'} strokeWidth="2" fill="none" />
+          {/* a guidewire left in: denser than the catheter, a bright thread inside it as far as its own tip */}
+          {wireCm > 0 && catheterCm !== null && (
+            <path data-testid="cvc-cxr-wire-in" d={line} pathLength={1} strokeDasharray={`${Math.min(1, wireCm / catheterCm)} 2`} stroke="#ffffff" strokeWidth="0.9" fill="none" />
+          )}
+          <circle cx={tip.x} cy={tipY} r="2.2" fill="#ffffff" stroke="#101010" strokeWidth="0.8" />
+          {wireBeyond > 0 && <path data-testid="cvc-cxr-wire" d={`M${tip.x} ${tipY} Q${tip.x + 4} ${tipY + wireBeyond * 0.6} ${tip.x + 12} ${tipY + wireBeyond}`} stroke="#ffffff" strokeWidth="0.9" fill="none" />}
         </g>
       )}
       {/* ECG leads */}

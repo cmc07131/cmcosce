@@ -46,7 +46,7 @@ export function stepGoals(step: number, r: CvcRun): Goal[] {
       return [
         g('The whole field scrubbed', r.prepCoverage >= 0.8, 'Rub the chlorhexidine over all of the neck, from the jaw to below the clavicle, out to the shoulder.'),
         g(`Back and forth for 30 s (${Math.min(r.strokes, STROKES_NEEDED)}/${STROKES_NEEDED})`, r.strokes >= STROKES_NEEDED, 'Keep the sponge moving back and forth: friction for 30 seconds, not a single wipe.'),
-        g('Left to dry before draping', r.strokes > 0 && !r.drapedWet && r.drySec >= 30, 'Lift your finger and wait for the shine to go: chlorhexidine in alcohol works as it dries. Then drape.', r.drapedWet),
+        g('Left to dry before draping', r.strokes > 0 && !r.drapedWet && !r.drapedEarly && r.drySec >= 30, r.drapedEarly ? 'Prep first, drape last: the skin under a drape put on before the scrub was never cleaned. REDO THIS STEP.' : 'Lift your finger and wait for the shine to go: chlorhexidine in alcohol works as it dries. Then drape.', r.drapedWet || r.drapedEarly),
         g('Full-length drape', r.draped >= 0.95, 'Drag the drape from the head all the way down to the feet.'),
       ]
     case 4:
@@ -107,7 +107,16 @@ export function stepGoals(step: number, r: CvcRun): Goal[] {
       ]
     case 11:
       return [
-        g('Tip at the cavo-atrial junction', r.tipSeen && tipZone(r.catheterCm) === 'junction', 'Follow the white line down from the neck and tap where it ends: it should be about two vertebrae below the carina.', r.tipSeen && tipZone(r.catheterCm) !== 'junction'),
+        g(
+          'Tip at the cavo-atrial junction',
+          r.tipSeen && r.wireOut && r.wireIn === 'vein' && tipZone(r.catheterCm) === 'junction',
+          !r.wireOut
+            ? 'A guidewire left in is a never event: go back to the catheter step and draw the wire out through the brown hub.'
+            : r.wireIn === 'artery'
+              ? 'The line is in the carotid: do not use it, do not pull it; leave it in and call the vascular surgeon.'
+              : 'Follow the white line down from the neck and tap where it ends: it should be about two vertebrae below the carina.',
+          r.tipSeen && (!r.wireOut || r.wireIn === 'artery' || tipZone(r.catheterCm) !== 'junction'),
+        ),
         g('Right lung checked', r.lungsChecked.includes('right'), 'Tap the outer edge of the lung on your left (her right): markings out to the chest wall, no pneumothorax.'),
         g('Left lung checked', r.lungsChecked.includes('left'), 'Tap the outer edge of the lung on your right (her left).'),
         g('Documented', r.documented, 'Press DOCUMENT AND CONFIRM THE WIRE COUNT.'),

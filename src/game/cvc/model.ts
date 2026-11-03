@@ -236,6 +236,8 @@ export type CvcRun = NeedleRun & {
   strokes: number
   drySec: number
   drapedWet: boolean
+  /** The drape went on before the skin was prepped: the field under it was never cleaned. */
+  drapedEarly: boolean
   draped: number
   // kit
   flushed: Lumen[]
@@ -308,6 +310,7 @@ export function freshCvc(): CvcRun {
     strokes: 0,
     drySec: 0,
     drapedWet: false,
+    drapedEarly: false,
     draped: 0,
     flushed: [],
     clamped: [],
@@ -433,9 +436,9 @@ export function checkCvc(r: CvcRun): CvcRow[] {
     {
       key: 'asepsis',
       label: 'Full barrier precautions',
-      value: `${r.garb.join(' → ') || 'nothing'}; chlorhexidine ${Math.round(r.prepCoverage * 100)}% covered, ${r.strokes} strokes${r.drapedWet ? ', draped while wet' : ''}; drape ${Math.round(r.draped * 100)}%; probe ${r.probeCover ? 'in a sterile sheath' : 'bare'}`,
+      value: `${r.garb.join(' → ') || 'nothing'}; chlorhexidine ${Math.round(r.prepCoverage * 100)}% covered, ${r.strokes} strokes${r.drapedWet ? ', draped while wet' : ''}${r.drapedEarly ? ', draped before the prep' : ''}; drape ${Math.round(r.draped * 100)}%; probe ${r.probeCover ? 'in a sterile sheath' : 'bare'}`,
       range: 'Cap and mask, scrub, sterile gown, sterile gloves; 2% chlorhexidine in 70% alcohol scrubbed 30 s and left to dry; a full-length drape; the probe in a sterile sheath',
-      ok: garbOk && prepOk && !r.drapedWet && r.draped >= 0.95 && r.probeCover,
+      ok: garbOk && prepOk && !r.drapedWet && !r.drapedEarly && r.draped >= 0.95 && r.probeCover,
       why: 'Maximal barrier precautions and dry chlorhexidine are what cut line infections.',
     },
     {
@@ -477,9 +480,9 @@ export function checkCvc(r: CvcRun): CvcRow[] {
     {
       key: 'confirm',
       label: 'X-ray and record',
-      value: `${r.tipSeen ? `tip ${tipZone(r.catheterCm) === 'junction' ? 'at the cavo-atrial junction' : tipZone(r.catheterCm) === 'atrium' ? 'in the right atrium' : 'high in the SVC'}` : 'tip not looked for'}; lungs checked: ${list(r.lungsChecked)}; ${r.documented ? 'documented' : 'not documented'}`,
+      value: `${!r.tipSeen ? 'tip not looked for' : !r.wireOut ? 'the guidewire still in, running on into the heart' : r.wireIn === 'artery' ? 'the line crossing to the left along the aortic arch: in the carotid' : `tip ${tipZone(r.catheterCm) === 'junction' ? 'at the cavo-atrial junction' : tipZone(r.catheterCm) === 'atrium' ? 'in the right atrium' : 'high in the SVC'}`}; lungs checked: ${list(r.lungsChecked)}; ${r.documented ? 'documented' : 'not documented'}`,
       range: 'Tip at the cavo-atrial junction, no pneumothorax, before the line is used; record it all and the wire count',
-      ok: r.tipSeen && tipZone(r.catheterCm) === 'junction' && r.lungsChecked.length === 2 && r.documented,
+      ok: r.tipSeen && r.wireOut && r.wireIn === 'vein' && tipZone(r.catheterCm) === 'junction' && r.lungsChecked.length === 2 && r.documented,
       why: 'Noradrenaline goes in only once the X-ray shows the tip in place and no pneumothorax.',
     },
   ]

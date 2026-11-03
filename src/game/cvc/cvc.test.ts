@@ -177,3 +177,24 @@ test('a carotid puncture is a failed goal, not just a missing one', () => {
   r.arterial = true
   assert.equal(stepGoals(5, r).find((x) => x.label.includes('carotid'))?.state, 'fail')
 })
+
+test('draping before the prep fails the step and the asepsis mark', () => {
+  const r = perfect()
+  r.drapedEarly = true
+  assert.equal(stepGoals(3, r).find((x) => x.label.startsWith('Left to dry'))?.state, 'fail')
+  assert.equal(checkCvc(r).find((x) => x.key === 'asepsis')?.ok, false)
+})
+
+test('a line in the carotid is not passed on the X-ray', () => {
+  const r = perfect()
+  r.wireIn = 'artery'
+  assert.equal(stepGoals(11, r)[0].state, 'fail')
+  assert.equal(checkCvc(r).find((x) => x.key === 'confirm')?.ok, false)
+})
+
+test('a guidewire left in fails the X-ray goal', () => {
+  const r = perfect()
+  r.wireOut = false
+  assert.equal(stepGoals(11, r)[0].state, 'fail')
+  assert.match(stepGoals(11, r)[0].how, /never event/)
+})

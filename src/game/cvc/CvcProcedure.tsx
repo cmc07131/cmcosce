@@ -8,6 +8,7 @@ import {
   BedSide,
   BodyDrape,
   ChestXray,
+  cxrTip,
   EcgStrip,
   Glove,
   HeadTop,
@@ -19,7 +20,6 @@ import {
   SideView,
   US,
   UsScreen,
-  cxrTipY,
   wirePoint,
 } from './art'
 import {
@@ -664,6 +664,12 @@ function PrepStage({ run, upd, feel, why, physical, next }: Stage) {
           onDown={() => {
             if (startedDrape.current) return
             startedDrape.current = true
+            if (run.strokes === 0) {
+              upd({ drapedEarly: true })
+              physical('The drape goes over skin that has not been cleaned.')
+              why('Prep first, drape last: scrub the chlorhexidine, let it dry, then drape. REDO THIS STEP to do it in order.')
+              return
+            }
             if (run.strokes > 0 && run.drySec < DRY_SECONDS) {
               upd({ drapedWet: true })
               physical('The drape sticks to the wet chlorhexidine.')
@@ -1735,10 +1741,12 @@ function SecureStage({ run, upd, feel, why, next }: Stage) {
 
 /* ================================================================ 12. X-ray and record */
 
-function XrayStage({ run, upd, feel, why, next }: Stage) {
+function XrayStage({ run, upd, feel, why, physical, next }: Stage) {
   const svg = useRef<SVGSVGElement>(null)
   const [marks, setMarks] = useState<{ x: number; y: number; text: string }[]>([])
-  const tipY = cxrTipY(run.catheterCm)
+  const inCath = run.catheterCm > 0
+  const arterial = run.wireIn === 'artery'
+  const tip = cxrTip(run.catheterCm, arterial)
   return (
     <>
       <p className="io-lede">Before the noradrenaline goes in: tap the catheter tip on the film, then look at the edge of each lung.</p>
@@ -1748,10 +1756,18 @@ function XrayStage({ run, upd, feel, why, next }: Stage) {
           aspect="1 / 1"
           testId="cvc-xray"
           onDown={(p) => {
-            if (!run.catheterPlaced) return feel('No line on this film: the catheter is not in yet. Go back and place it.')
-            if (Math.hypot(p.x - 87, p.y - tipY) < 18) {
+            if (!inCath) return feel('No line on this film: the catheter is not in yet. Go back and place it.')
+            if (Math.hypot(p.x - tip.x, p.y - tip.y) < 18) {
               upd({ tipSeen: true })
-              setMarks((m) => [...m.filter((x) => x.text !== 'TIP'), { x: 87, y: tipY, text: 'TIP' }])
+              setMarks((m) => [...m.filter((x) => x.text !== 'TIP'), { x: tip.x, y: tip.y, text: 'TIP' }])
+              if (!run.wireOut) {
+                buzz([80, 40, 80])
+                return physical('A thin wire runs on past the catheter tip, down into the heart: the guidewire is still in. A never event. Go back to the catheter step and take it out.')
+              }
+              if (arterial) {
+                buzz([80, 40, 80])
+                return physical('The line does not run down the right of the mediastinum: it crosses to the left along the aortic arch. It is in the carotid. Do not use it or pull it: call the vascular surgeon.')
+              }
               const z = tipZone(run.catheterCm)
               if (z === 'junction') return feel('The tip lies about two vertebral bodies below the carina, where the SVC meets the right atrium. Good.')
               if (z === 'atrium') return why('The tip is down in the right atrium: pull the line back to about 15 cm.')
@@ -1767,7 +1783,7 @@ function XrayStage({ run, upd, feel, why, next }: Stage) {
             feel('Find the white line of the catheter and follow it down to its end.')
           }}
         >
-          <ChestXray svgRef={svg} catheterCm={run.catheterPlaced ? run.catheterCm : null} marks={marks} />
+          <ChestXray svgRef={svg} catheterCm={inCath ? run.catheterCm : null} arterial={arterial} wireCm={run.wireOut ? 0 : run.inside} marks={marks} />
         </TouchPad>
       </div>
       <div className="io-choices mt-2">
