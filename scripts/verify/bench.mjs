@@ -6,7 +6,7 @@
  *   node scripts/verify/bench.mjs build           bundle every bench into .verify/bench/
  *   node scripts/verify/bench.mjs serve [port]    build, then serve it (default 8765); prints READY <url>
  *
- * Open <url>/?kind=cvc to get the central line bench, or <url>/?exam=ot/ot-hip for a station's 3D examination. The page puts the bench's result in window.__result and
+ * Open <url>/?kind=cvc to get the central line bench (add &pose=third for a bench with a second pose, such as the delivery's third stage), or <url>/?exam=ot/ot-hip for a station's 3D examination. The page puts the bench's result in window.__result and
  * every uncaught error in window.__errors. It uses the game's own components (src/game/procedures.ts) and its own
  * stylesheet; only Tailwind's utilities are stood in for (scripts/verify/utilities.mjs).
  */
@@ -35,7 +35,7 @@ const params = new URLSearchParams(location.search)
 const kind = params.get('kind') ?? 'cvc'
 const exam = params.get('exam')
 const Bench = (PROCEDURES as any)[kind]
-const job = { actionId: 'verify', spendId: 'verify', kind, hint: '', label: kind, reply: '', grantMarks: Array.from({ length: 12 }, (_, i) => 'm' + (i + 1)), grantItems: [], scene: 'done', endStation: false }
+const job = { actionId: 'verify', spendId: 'verify', kind, hint: '', label: kind, reply: '', grantMarks: Array.from({ length: 12 }, (_, i) => 'm' + (i + 1)), grantItems: [], scene: 'done', endStation: false, pose: params.get('pose') ?? undefined }
 w.__result = null
 w.__kinds = Object.keys(PROCEDURES)
 w.__picked = []

@@ -17,10 +17,9 @@ import {
   type CvcRun,
 } from './model'
 
-export type GoalState = 'done' | 'todo' | 'fail'
-export type Goal = { label: string; state: GoalState; how: string; now?: string }
+import { goal as g, type Goal } from '../bench/goals'
 
-const g = (label: string, ok: boolean, how: string, failed = false, now?: string): Goal => ({ label, state: ok ? 'done' : failed ? 'fail' : 'todo', how, now })
+export type { Goal, GoalState } from '../bench/goals'
 
 export function stepGoals(step: number, r: CvcRun): Goal[] {
   switch (step) {

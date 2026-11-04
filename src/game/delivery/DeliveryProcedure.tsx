@@ -1,470 +1,834 @@
-import { useEffect, useRef, useState, type Ref } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { NextButton, NoteLine, StepStrip, useBench, type BenchApi } from '../bench/core'
-import { CheckCard, RubTint, TouchPad, benchMarks, useRub, type Pt } from '../bench/kit'
+import { Dial, HoldButton, SlidePad, TractionStrip, useSpin } from '../bench/controls'
+import { StepGoals, useStepper } from '../bench/goals'
+import { CheckCard, TouchPad, benchMarks, useRub } from '../bench/kit'
 import type { BenchResult, PerformJob } from '../store'
 import { buzz, sfx } from '../sfx'
-import { BIRTH_MARKS, THIRD_MARKS, checkBirth, checkThird, freshBirth, freshThird, separated, type BirthRun, type ThirdRun } from './model'
+import { ABDO, AbdomenView, BABY_AREA, BIRTH_VIEW, BabyView, BirthView, CORDV, CordView, LossView, PlacentaView, TearView, Toco, VULVA, VulvaView, cordCm, headCentre, uterusShape } from './art'
+import {
+  BIRTH_MARKS,
+  CLAMP_CM,
+  CLAMP_S,
+  CORD_CM,
+  EBL,
+  HEAD,
+  MEMBRANE_TURNS,
+  THIRD_MARKS,
+  cct,
+  checkBirth,
+  checkThird,
+  clampPlaced,
+  clock,
+  contraction,
+  crown,
+  eblMeasured,
+  freshBirth,
+  freshThird,
+  onCord,
+  separated,
+  traction,
+  type BirthRun,
+  type CordTool,
+  type Sign,
+  type ThirdRun,
+  type View,
+} from './model'
+import { BIRTH_TITLES, THIRD_TITLES, birthGoals, thirdGoals } from './steps'
 
-const SKIN = '#e8b494'
-const SKIN_EDGE = '#8a5238'
-const BABY = '#e0a8a0'
-const FONT = 'Press Start 2P, monospace'
-
-/** `pose: "third"`: the third stage. Otherwise the birth itself. */
+/**
+ * A normal delivery and the active third stage on the manikin, every action done by hand and drawn as it happens.
+ * `pose: "third"` opens the third stage; otherwise the birth.
+ */
 export function DeliveryProcedure({ job, coach, onDone }: { job: PerformJob; coach: boolean; onDone: (r: BenchResult) => void }) {
   return job.pose === 'third' ? <Third job={job} coach={coach} onDone={onDone} /> : <Birth job={job} coach={coach} onDone={onDone} />
 }
 
+/** Calls `cb(dt)` about 20 times a second while `on`. */
+function useTicker(on: boolean, cb: (dt: number) => void) {
+  const ref = useRef(cb)
+  ref.current = cb
+  useEffect(() => {
+    if (!on) return
+    let last = performance.now()
+    const id = window.setInterval(() => {
+      const now = performance.now()
+      ref.current(Math.min(0.1, (now - last) / 1000))
+      last = now
+    }, 50)
+    return () => window.clearInterval(id)
+  }, [on])
+}
+
+/** Say each thing once: a message for an event is shown when the event changes, not on every tick. */
+function useOnce() {
+  const last = useRef('')
+  return (key: string, fn: () => void) => {
+    if (last.current === key) return
+    last.current = key
+    fn()
+  }
+}
+
+/** The frame of a stepped bench: steps, goals, back and redo, the closing check. */
+function Frame<R>({ prefix, titles, stepper, goals, bar, check, children, note }: { prefix: string; titles: string[]; stepper: ReturnType<typeof useStepper<R>>; goals: ReturnType<typeof birthGoals>; bar: ReactNode; check: ReactNode; children: ReactNode; note: ReturnType<typeof useBench<R>>['note'] }) {
+  const { index, checked, epoch, review, setReview, next, back, redo, goalsRef } = stepper
+  return (
+    <>
+      <div className="hare-bar">{bar}</div>
+      <StepStrip titles={titles} index={checked ? titles.length - 1 : index} />
+      {checked ? (
+        <>
+          {check}
+          <div className="io-choices mt-2">
+            <button type="button" className="tap io-mini" data-testid={`${prefix}-back`} onClick={back}>
+              ◀ BACK TO {titles[titles.length - 1].toUpperCase()}
+            </button>
+          </div>
+        </>
+      ) : (
+        <div key={`${index}-${epoch}`} className="contents">
+          {children}
+          <NoteLine note={note} />
+          <NextButton onClick={() => next()} testId={`${prefix}-next`}>
+            {titles[index + 1] ?? 'Finish'}
+          </NextButton>
+          <div ref={goalsRef}>
+            <StepGoals prefix={prefix} goals={goals} review={review} onRedo={redo} onFix={() => setReview(false)} onAnyway={() => next(true)} next={titles[index + 1] ?? 'the check'} />
+          </div>
+          <div className="io-choices mt-2">
+            <button type="button" className="tap io-mini" data-testid={`${prefix}-back`} disabled={index === 0} onClick={back}>
+              ◀ BACK A STEP
+            </button>
+            <button type="button" className="tap io-mini" data-testid={`${prefix}-redo`} onClick={redo}>
+              ↺ REDO THIS STEP
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 /* ================================================================ the birth */
 
-type BStage = BenchApi<BirthRun> & { next: () => void }
-const BIRTH_TITLES = ['Crowning', 'Cord', 'Restitution', 'Shoulders', 'Baby']
+type BS = BenchApi<BirthRun>
 
 function Birth({ job, coach, onDone }: { job: PerformJob; coach: boolean; onDone: (r: BenchResult) => void }) {
   const api = useBench(freshBirth, coach)
-  const [index, setIndex] = useState(0)
-  const [checked, setChecked] = useState(false)
+  const body = useRef<HTMLDivElement>(null)
+  const stepper = useStepper(api, BIRTH_TITLES, birthGoals, body)
   const done = useRef(false)
-  const born = api.run.posterior
+  const r = api.run
   useEffect(() => {
-    if (!born) return
-    const id = window.setInterval(() => api.upd((r) => ({ secondsSinceBirth: r.secondsSinceBirth + 1 })), 1000)
+    if (!r.born) return
+    const id = window.setInterval(() => api.upd((x) => ({ since: x.since + 1 })), 1000)
     return () => window.clearInterval(id)
-  }, [born])
-  const next = () => {
-    sfx.select()
-    if (index < BIRTH_TITLES.length - 1) setIndex(index + 1)
-    else setChecked(true)
-  }
+  }, [r.born])
   function finish() {
     if (done.current) return
     done.current = true
-    const r = api.runRef.current
-    const { marks, faults } = benchMarks(checkBirth(r), BIRTH_MARKS, job.grantMarks)
-    onDone({ marks, faults, summary: born ? 'A girl, crying, skin to skin.' : 'Not delivered.', scene: born ? [job.scene || 'born'] : ['undelivered'] })
+    const run = api.runRef.current
+    const { marks, faults } = benchMarks(checkBirth(run), BIRTH_MARKS, job.grantMarks)
+    onDone({ marks, faults, summary: run.born ? 'A girl, crying, skin to skin on her mother.' : 'Not delivered.', scene: run.born ? [job.scene || 'born'] : ['undelivered'] })
   }
-  const stage: BStage = { ...api, next }
+  const status = r.born ? `BORN · ${clock(r.since)}` : r.headBorn ? 'HEAD BORN' : r.head >= HEAD.crowning ? 'CROWNING' : 'HEAD VISIBLE'
   return (
-    <div className="io-bench flex min-h-0 flex-1 flex-col" data-testid="birth-bench">
-      <div className="hare-bar">
-        <span>{born ? `BORN · ${api.run.secondsSinceBirth} S` : 'CROWNING'}</span>
-        <span />
-        <span>{api.run.clampedAt !== null ? 'CORD CLAMPED' : 'CORD INTACT'}</span>
-      </div>
-      <StepStrip titles={BIRTH_TITLES} index={checked ? BIRTH_TITLES.length - 1 : index} />
-      <div className="min-h-0 flex-1 overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
-        {checked ? (
-          <CheckCard rows={checkBirth(api.run)} onContinue={finish} testId="birth-check" />
-        ) : (
-          <>
-            {index <= 3 && <HeadStage {...stage} stage={index} />}
-            {index === 4 && <BabyStage {...stage} />}
-          </>
-        )}
-        {!checked && <NoteLine note={api.note} />}
+    <div className="io-bench flex min-h-0 flex-1 flex-col select-none" data-testid="birth-bench">
+      <div ref={body} className="min-h-0 flex-1 overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
+        <Frame
+          prefix="birth"
+          titles={BIRTH_TITLES}
+          stepper={stepper}
+          goals={birthGoals(stepper.index, r)}
+          note={api.note}
+          bar={
+            <>
+              <span>{status}</span>
+              <span />
+              <span>{r.born ? 'CORD INTACT' : 'LOA · 39 WEEKS'}</span>
+            </>
+          }
+          check={<CheckCard rows={checkBirth(r)} onContinue={finish} testId="birth-check" />}
+        >
+          {stepper.index === 0 && <HandsStage {...api} />}
+          {stepper.index === 1 && <CrowningStage {...api} />}
+          {stepper.index === 2 && <CordStage {...api} />}
+          {stepper.index === 3 && <RestitutionStage {...api} />}
+          {stepper.index === 4 && <ShouldersStage {...api} />}
+          {stepper.index === 5 && <BabyStage {...api} />}
+        </Frame>
       </div>
     </div>
   )
 }
 
-function Perineum({ run, svgRef, shoulder }: { run: BirthRun; svgRef?: Ref<SVGSVGElement>; shoulder: number }) {
-  const out = run.crowned !== null
-  const turn = run.restituted ? 1 : 0
-  return (
-    <svg ref={svgRef} viewBox="0 0 180 160" className="block h-full w-full select-none" data-testid="birth-view">
-      <rect width="180" height="160" fill="#e2e8ec" />
-      <path d="M0 0 L180 0 L180 60 Q90 80 0 60 Z" fill={SKIN} stroke={SKIN_EDGE} />
-      <path d="M40 150 Q90 120 140 150 L140 160 L40 160 Z" fill={SKIN} stroke={SKIN_EDGE} />
-      {/* the head: crowning, then out, then turned; the shoulders follow */}
-      <g transform={`translate(0 ${shoulder * 10})`}>
-        <circle cx="90" cy={out ? 96 : 78} r={out ? 26 : 20} fill={BABY} stroke={SKIN_EDGE} strokeWidth="1.5" />
-        {out && <path d={turn ? 'M106 98 l8 -2' : 'M90 112 l0 6'} stroke={SKIN_EDGE} strokeWidth="2" />}
-        {out && run.cord !== 'slipped' && run.cord !== 'cut' && <path d="M64 108 Q90 124 116 108" stroke="#c8d8f0" strokeWidth="4" fill="none" />}
-        {shoulder > 0 && <ellipse cx="90" cy="128" rx="34" ry="10" fill={BABY} stroke={SKIN_EDGE} />}
-      </g>
-      {run.palm && <ellipse cx="90" cy={out ? 70 : 62} rx="16" ry="7" fill="#c89070" stroke="#6a3a20" />}
-      {run.guard && <ellipse cx="90" cy="146" rx="22" ry="6" fill="#c89070" stroke="#6a3a20" opacity="0.85" />}
-      <g fontFamily={FONT} fontSize="4.5" fill="#40404c">
-        <text x="4" y="10" fill="#6a3a20">FROM THE FOOT · PUBIS ABOVE</text>
-        <text x="4" y="156">PERINEUM</text>
-      </g>
-    </svg>
-  )
-}
+const still = { holding: false, force: 0, feeling: false }
 
-function HeadStage({ run, runRef, upd, feel, physical, why, next, stage }: BStage & { stage: number }) {
+function HandsStage({ run, runRef, upd, feel }: BS) {
   const svg = useRef<SVGSVGElement>(null)
-  const [shoulder, setShoulder] = useState(0)
-  const grip = useRef<number | null>(null)
-  const lede = [
-    'Tap the head to keep it flexed with your palm, and the perineum to guard it. Then the contraction.',
-    'Feel round the neck for the cord.',
-    'Wait for the head to turn.',
-    'With the next contraction: drag the head gently down for the anterior shoulder, then up for the posterior.',
-  ][stage]
   return (
     <>
-      <p className="io-lede">{lede}</p>
+      <p className="io-lede">The head is at the introitus. Hands on before the next contraction: tap the perineum to guard it with a pad, then tap the head to put your palm on it.</p>
       <TouchPad
         svg={svg}
-        aspect="180 / 160"
-        className="mx-auto max-w-[280px]"
+        aspect="200 / 180"
+        className="mx-auto max-w-[300px]"
         testId="birth-work"
         onDown={(p) => {
-          const cur = runRef.current
-          if (stage === 0) {
-            if (p.y < 90 && Math.abs(p.x - 90) < 26) {
-              upd({ palm: true })
-              return feel('Your palm over the occiput, keeping the head flexed.')
-            }
-            if (p.y > 130) {
-              upd({ guard: true })
-              return feel('A pad over the perineum, your other hand supporting it.')
-            }
+          const c = headCentre(runRef.current)
+          if (p.y > BIRTH_VIEW.introitus.y + 20 && Math.abs(p.x - c.x) < 44) {
+            upd({ guard: true })
+            return feel('Your right hand cups the perineum through a pad: it will support it as it stretches.')
           }
-          if (stage === 1 && cur.crowned && Math.abs(p.y - 112) < 14) {
-            upd({ cordFelt: true })
-            return feel('A finger round the neck: a loop of cord, loose.')
-          }
-          if (stage === 3) grip.current = p.y
-        }}
-        onMove={(p) => {
-          if (stage !== 3 || grip.current === null) return
-          const cur = runRef.current
-          const dy = p.y - grip.current
-          if (!cur.restituted && !cur.shouldersEarly) {
-            upd({ shouldersEarly: true })
-            why('Wait for restitution first: the head turns to face a thigh as the shoulders rotate.')
-          }
-          if (dy > 12 && !cur.anterior) {
-            const hard = dy > 40
-            upd({ anterior: hard ? 'hard' : 'gentle' })
-            setShoulder(0.5)
-            if (hard) {
-              buzz([60, 40, 60])
-              physical('You pull down hard. The neck stretches.')
-            } else feel('Gentle downward traction: the anterior shoulder slips out under the pubis.')
-          }
-          if (dy < -12 && !cur.posterior) {
-            if (!cur.anterior) upd({ wrongOrder: true })
-            upd({ posterior: true })
-            setShoulder(1)
-            buzz(60)
-            feel('Upward now: the posterior shoulder, and the body slides out. She cries.')
+          if (Math.hypot(p.x - c.x, p.y - c.y) < 30) {
+            upd({ palm: true })
+            feel('Your left palm over the occiput, fingers spread toward the face: ready to keep the head flexed.')
           }
         }}
-        onUp={() => (grip.current = null)}
       >
-        <Perineum run={run} svgRef={svg} shoulder={shoulder} />
+        <BirthView run={run} frame={still} svgRef={svg} />
       </TouchPad>
-      <div className="io-choices mt-2">
-        {stage === 0 && (
-          <>
-            <button type="button" className="tap io-mini" data-on={run.pant || undefined} data-testid="birth-pant" onClick={() => (upd({ pant: true }), feel('"Pant, pant, little breaths: don\'t push now."'))}>
-              “PANT, DON’T PUSH”
-            </button>
-            <button
-              type="button"
-              className="tap io-mini"
-              data-testid="birth-contraction"
-              disabled={run.crowned !== null}
-              onClick={() => {
-                const cur = runRef.current
-                const controlled = cur.pant && cur.palm
-                upd({ crowned: controlled ? 'controlled' : 'rapid', tear: !controlled || !cur.guard })
-                if (controlled) feel('With the contraction the head crowns slowly under your palm and is born, face down.')
-                else {
-                  buzz(40)
-                  physical('She pushes hard and the head shoots out, tearing the perineum.')
-                  why('As the head crowns, tell her to pant, and keep it flexed and controlled.')
-                }
-              }}
-            >
-              THE CONTRACTION COMES
-            </button>
-          </>
-        )}
-        {stage === 1 && run.cordFelt && (
-          <>
-            <button type="button" className="tap io-mini" data-on={run.cord === 'slipped' || undefined} data-testid="birth-slip" onClick={() => (upd({ cord: 'slipped' }), feel('The loose loop eased over the head.'))}>
-              SLIP IT OVER THE HEAD
-            </button>
-          </>
-        )}
-        {stage === 2 && (
-          <button type="button" className="tap io-mini" data-on={run.restituted || undefined} data-testid="birth-wait" onClick={() => (upd({ restituted: true }), feel('The head turns on its own to face her right thigh.'))}>
-            WAIT AND WATCH
-          </button>
-        )}
-      </div>
-      <NextButton onClick={next} testId="birth-next">
-        {BIRTH_TITLES[stage + 1]}
-      </NextButton>
     </>
   )
 }
 
-function BabyStage({ run, runRef, upd, feel, physical, why, next }: BStage) {
+function CrowningStage({ run, runRef, upd, feel, physical, why }: BS) {
   const svg = useRef<SVGSVGElement>(null)
-  const rub = useRub({ cx: 90, cy: 80, rx: 40, ry: 50 })
+  const [t, setT] = useState(0)
+  const tRef = useRef(0)
+  const holding = useRef(false)
+  const [held, setHeld] = useState(false)
+  const once = useOnce()
+  useTicker(!run.headBorn, (dt) => {
+    tRef.current += dt
+    setT(tRef.current)
+    const cur = runRef.current
+    const { patch, event } = crown(cur, dt, contraction(tRef.current), holding.current)
+    if (Object.keys(patch).length) upd(patch)
+    if (event === 'none') return
+    const atCrown = cur.head >= HEAD.crowning
+    if (event === 'recede') once('recede', () => feel('Between contractions the head slips back a little: it is not crowning yet.'))
+    else if (event === 'advance') once(atCrown ? 'slow' : 'push', () => feel(atCrown ? 'Slowly, under your palm, she panting: the head eases out a little more.' : 'She pushes with the contraction and the head advances.'))
+    else if (event === 'crowning') once('crowning', () => feel('The head stays now, even between pushes: it is crowning.'))
+    else if (event === 'fast')
+      once('fast', () => {
+        buzz(40)
+        physical('The head is coming fast!')
+        why(cur.pant === null ? 'Tell her to pant now: pushing at crowning drives the head out and tears the perineum.' : 'Keep your palm pressing: hold KEEP IT FLEXED through the contraction.')
+      })
+    else if (event === 'born')
+      once('born', () => {
+        const r = runRef.current
+        if (r.tear === 'second') {
+          buzz([60, 40, 60])
+          physical('The head shoots out over the perineum, and it tears.')
+        } else feel('Born by extension, slowly: brow, face and chin sweep over the perineum. The head is out, face down.')
+      })
+  })
   return (
     <>
-      <p className="io-lede">Rub her dry with a warm towel, skin to skin on mum. Leave the cord for at least a minute.</p>
-      <TouchPad svg={svg} aspect="180 / 160" className="mx-auto max-w-[260px]" testId="birth-dry" onDown={(p) => rub.rub(p)} onMove={(p) => (rub.rub(p), upd({ dried: rub.coverage }))} onUp={() => runRef.current.dried >= 0.7 && feel('Dried vigorously: she cries and goes pink.')}>
-        <svg ref={svg} viewBox="0 0 180 160" className="block h-full w-full select-none" data-testid="birth-baby">
-          <rect width="180" height="160" fill="#e2e8ec" />
-          <ellipse cx="90" cy="100" rx="40" ry="44" fill={BABY} stroke={SKIN_EDGE} />
-          <circle cx="90" cy="44" r="22" fill={BABY} stroke={SKIN_EDGE} />
-          <RubTint rub={rub} colour="#ffffff" />
-          <text x="4" y="10" fontFamily={FONT} fontSize="5" fill="#40404c">
-            BABY · {run.secondsSinceBirth} S OLD
-          </text>
-        </svg>
+      <p className="io-lede">She pushes with each contraction. When the head crowns, tell her to pant, and hold your palm on the head through every contraction so it comes slowly.</p>
+      <Toco t={t} sub={run.pant !== null && run.head >= HEAD.crowning ? 'SHE PANTS' : undefined} />
+      <TouchPad svg={svg} aspect="200 / 180" className="mx-auto mt-1 max-w-[300px]" testId="birth-work">
+        <BirthView run={run} frame={{ ...still, holding: held }} svgRef={svg} />
       </TouchPad>
       <div className="io-choices mt-2">
-        <button type="button" className="tap io-mini" data-on={run.skin || undefined} data-testid="birth-skin" onClick={() => (upd({ skin: true }), feel('Skin to skin on mum’s chest, a dry towel and a hat over her.'))}>
-          SKIN TO SKIN
+        <button type="button" className="tap io-mini" data-on={run.pant !== null || undefined} data-testid="birth-pant" disabled={run.headBorn} onClick={() => runRef.current.pant === null && (upd({ pant: runRef.current.head }), feel('“Pant now, little breaths: don’t push.” She pants.'))}>
+          “PANT, DON’T PUSH”
         </button>
-        <button type="button" className="tap io-mini" data-testid="birth-wait30" disabled={run.clampedAt !== null} onClick={() => (upd((r) => ({ secondsSinceBirth: r.secondsSinceBirth + 30 })), feel('Thirty seconds: she is pink and crying on mum, the cord still pulsing.'))}>
-          LET 30 SECONDS PASS
+        <HoldButton
+          className="io-mini"
+          testId="birth-flex"
+          disabled={!run.palm || run.headBorn}
+          onTick={() => undefined}
+          onStart={() => ((holding.current = true), setHeld(true))}
+          onEnd={() => ((holding.current = false), setHeld(false))}
+        >
+          {run.palm ? 'HOLD: KEEP IT FLEXED' : 'NO PALM ON THE HEAD'}
+        </HoldButton>
+      </div>
+    </>
+  )
+}
+
+function CordStage({ run, runRef, upd, feel }: BS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const [feeling, setFeeling] = useState(false)
+  return (
+    <>
+      <p className="io-lede">Run a finger round the neck for a cord. A loose loop: ease it over the head.</p>
+      <TouchPad svg={svg} aspect="200 / 180" className="mx-auto max-w-[300px]" testId="birth-work">
+        <BirthView run={run} frame={{ ...still, feeling }} svgRef={svg} />
+      </TouchPad>
+      <div className="io-choices mt-2">
+        <HoldButton
+          className="io-mini"
+          testId="birth-feel"
+          disabled={!run.headBorn || run.felt >= 1}
+          onStart={() => setFeeling(true)}
+          onEnd={() => setFeeling(false)}
+          onTick={(dt) => {
+            const cur = runRef.current
+            if (cur.felt >= 1) return
+            const felt = Math.min(1, cur.felt + dt / 1.6)
+            upd({ felt })
+            if (felt >= 1) feel('Your finger finds a loop of cord round the neck: loose, it slides.')
+          }}
+        >
+          {run.felt >= 1 ? 'FELT: A LOOSE LOOP' : 'HOLD: FEEL ROUND THE NECK'}
+        </HoldButton>
+      </div>
+      <SlidePad
+        testId="birth-loop"
+        label={run.loop >= 1 ? 'THE CORD IS FREE' : 'EASE THE LOOP OVER THE HEAD ▶'}
+        cmPerWidth={1.4}
+        disabled={run.felt < 1 || run.loop >= 1}
+        onDelta={(d) => {
+          const cur = runRef.current
+          const loop = Math.max(0, Math.min(1, cur.loop + d))
+          upd({ loop })
+          if (loop >= 1) feel('Eased up over the occiput and off: the cord is free of the neck.')
+        }}
+      />
+    </>
+  )
+}
+
+function RestitutionStage({ run, runRef, upd, feel, why }: BS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const once = useOnce()
+  useEffect(() => feel('Hands off. Watch the head.'), [])
+  useTicker(run.headBorn && run.restitution < 1, (dt) => {
+    const restitution = Math.min(1, runRef.current.restitution + dt / 4)
+    upd({ restitution })
+    if (restitution >= 1) once('turned', () => feel('The head turns on its own to face her right thigh: the shoulders have rotated into the outlet.'))
+  })
+  return (
+    <>
+      <p className="io-lede">Hands off. The head turns back in line with the shoulders: restitution, then external rotation.</p>
+      <TouchPad svg={svg} aspect="200 / 180" className="mx-auto max-w-[300px]" testId="birth-work" onDown={() => runRef.current.restitution < 1 && why('Not yet: let it turn on its own.')}>
+        <BirthView run={run} frame={still} svgRef={svg} />
+      </TouchPad>
+      <p className="io-small mt-1" data-testid="birth-turn">
+        {run.restitution >= 1 ? 'Turned 90°: facing her right thigh.' : `Turning: ${Math.round(run.restitution * 90)}°`}
+      </p>
+    </>
+  )
+}
+
+function ShouldersStage({ run, runRef, upd, feel, physical, why }: BS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const [t, setT] = useState(0)
+  const tRef = useRef(0)
+  const [force, setForce] = useState(0)
+  const once = useOnce()
+  useTicker(!run.born, (dt) => {
+    tRef.current += dt
+    setT(tRef.current)
+  })
+  return (
+    <>
+      <p className="io-lede">Tap the head to put a hand either side of it. With a contraction, hold the strip a little down (green) for the anterior shoulder, then up for the posterior.</p>
+      <Toco t={t} />
+      <div className="mt-1 flex items-stretch justify-center gap-2">
+        <TouchPad
+          svg={svg}
+          aspect="200 / 180"
+          className="max-w-[260px] flex-1"
+          testId="birth-work"
+          onDown={(p) => {
+            const c = headCentre(runRef.current)
+            if (Math.hypot(p.x - c.x, p.y - c.y) < 36 && !runRef.current.sides) {
+              upd({ sides: true })
+              feel('A hand over each parietal bone, either side of her head: never round the neck.')
+            }
+          }}
+        >
+          <BirthView run={run} frame={{ ...still, force }} svgRef={svg} />
+        </TouchPad>
+        <TractionStrip
+          up
+          testId="birth-traction"
+          disabled={run.born}
+          onEnd={() => setForce(0)}
+          onTick={(dt, f) => {
+            setForce(f)
+            const { patch, event } = traction(runRef.current, dt, f, contraction(tRef.current))
+            if (Object.keys(patch).length) upd(patch)
+            if (event === 'none') return
+            if (event === 'early') once('early', () => (physical('The head has not turned yet.'), why('Wait for restitution: it tells you the shoulders have rotated.')))
+            else if (event === 'no-hands') once('no-hands', () => feel('Hands either side of her head first: tap the head.'))
+            else if (event === 'between') once('between', () => feel('Between contractions nothing moves: wait for the next one.'))
+            else if (event === 'hard')
+              once('hard', () => {
+                buzz([60, 40, 60])
+                physical('Too hard: the neck stretches under your hands.')
+                why('Gentle traction only, in the green: hard traction on the head stretches the brachial plexus.')
+              })
+            else if (event === 'anterior') once('anterior', () => feel('Gently down: the anterior shoulder slides out under the pubis.'))
+            else if (event === 'anterior-out' || event === 'lift-now') once('lift', () => feel('The anterior shoulder is out. Now gently up, toward her tummy.'))
+            else if (event === 'posterior-first') once('posterior-first', () => (physical('Nothing comes: the anterior shoulder is still behind the pubis.'), why('Down first for the anterior shoulder, then up for the posterior.')))
+            else if (event === 'posterior') once('posterior', () => feel('Upward: the posterior shoulder sweeps over the perineum.'))
+            else if (event === 'born')
+              once('born', () => {
+                buzz(80)
+                sfx.select()
+                feel('The body slides out into your hands. She takes a breath and cries.')
+              })
+          }}
+        />
+      </div>
+    </>
+  )
+}
+
+function BabyStage({ run, runRef, upd, feel, why }: BS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const rub = useRub(BABY_AREA, 8)
+  const dried = useRef(false)
+  return (
+    <>
+      <p className="io-lede">Onto mum’s tummy, skin to skin. Note the time. Rub her dry, swap the wet towel for a dry one and a hat, and check her.</p>
+      <TouchPad
+        svg={svg}
+        aspect="200 / 170"
+        className="mx-auto max-w-[300px]"
+        testId="birth-dry"
+        onDown={(p) => runRef.current.onMum && rub.rub(p)}
+        onMove={(p) => {
+          if (!runRef.current.onMum || runRef.current.dryTowel) return
+          rub.rub(p)
+          upd({ dried: Math.max(runRef.current.dried, rub.coverage) })
+        }}
+        onUp={() => {
+          if (runRef.current.dried >= 0.7 && !dried.current) {
+            dried.current = true
+            feel('Rubbed dry with the warm towel: she cries hard and pinks up.')
+          }
+        }}
+      >
+        <BabyView run={run} rub={rub} svgRef={svg} />
+      </TouchPad>
+      <div className="io-choices mt-2">
+        <button type="button" className="tap io-mini" data-on={run.onMum || undefined} data-testid="birth-onmum" disabled={!run.born} onClick={() => !runRef.current.onMum && (upd({ onMum: true }), feel('Straight up onto her mother’s tummy, skin to skin, a warm towel over her.'))}>
+          LIFT HER ONTO MUM
+        </button>
+        <button type="button" className="tap io-mini" data-on={run.timeCalled || undefined} data-testid="birth-time" disabled={!run.born} onClick={() => !runRef.current.timeCalled && (upd({ timeCalled: true }), feel('“Time of birth, 10:42.” The midwife writes it down.'))}>
+          CALL OUT THE TIME
         </button>
         <button
           type="button"
           className="tap io-mini"
-          data-on={run.clampedAt !== null || undefined}
-          data-testid="birth-clamp"
+          data-on={run.dryTowel || undefined}
+          data-testid="birth-towel"
+          disabled={!run.onMum || (run.dried < 0.7 && !run.dryTowel)}
+          onClick={() => !runRef.current.dryTowel && (upd({ dryTowel: true }), feel('The wet towel off; a dry warm one over her, and a hat on.'))}
+        >
+          {run.dried < 0.7 && !run.dryTowel ? 'DRY TOWEL, HAT (DRY HER FIRST)' : 'DRY TOWEL AND HAT'}
+        </button>
+        <button
+          type="button"
+          className="tap io-mini"
+          data-on={run.assessed || undefined}
+          data-testid="birth-assess"
+          disabled={!run.onMum}
           onClick={() => {
-            const s = runRef.current.secondsSinceBirth
-            upd({ clampedAt: s })
-            if (s < 60) why(`Only ${s} s: wait at least a minute before clamping a well baby.`)
-            else feel(`Clamped and cut at ${s} s.`)
+            if (runRef.current.assessed) return
+            upd({ assessed: true })
+            feel('Crying, pink centrally, flexed and moving; heart rate over 100 at the cord. Well.')
+            if (runRef.current.dried < 0.7) why('Dry her too: a wet baby gets cold fast.')
           }}
         >
-          CLAMP AND CUT THE CORD
+          CHECK HER
         </button>
       </div>
-      <NextButton onClick={next} testId="birth-next">
-        Finish
-      </NextButton>
     </>
   )
 }
 
 /* ================================================================ the third stage */
 
-type TStage = BenchApi<ThirdRun> & { next: () => void }
-const THIRD_TITLES = ['Twin', 'Separation', 'Traction', 'Placenta', 'Tone and tears']
+type TS = BenchApi<ThirdRun>
 
 function Third({ job, coach, onDone }: { job: PerformJob; coach: boolean; onDone: (r: BenchResult) => void }) {
   const api = useBench(freshThird, coach)
-  const [index, setIndex] = useState(0)
-  const [checked, setChecked] = useState(false)
+  const body = useRef<HTMLDivElement>(null)
+  const stepper = useStepper(api, THIRD_TITLES, thirdGoals, body)
   const done = useRef(false)
-  const next = () => {
-    sfx.select()
-    if (index < THIRD_TITLES.length - 1) setIndex(index + 1)
-    else setChecked(true)
-  }
+  const r = api.run
+  useEffect(() => {
+    if (stepper.checked) return
+    const id = window.setInterval(() => api.upd((x) => ({ since: x.since + 1 })), 1000)
+    return () => window.clearInterval(id)
+  }, [stepper.checked])
   function finish() {
     if (done.current) return
     done.current = true
-    const r = api.runRef.current
-    const { marks, faults } = benchMarks(checkThird(r), THIRD_MARKS, job.grantMarks)
-    onDone({ marks, faults, summary: r.placentaOut ? 'Placenta delivered complete; uterus contracted.' : 'Placenta not delivered.', scene: r.placentaOut ? [job.scene || 'placenta'] : ['retained'] })
+    const run = api.runRef.current
+    const { marks, faults } = benchMarks(checkThird(run), THIRD_MARKS, job.grantMarks)
+    onDone({ marks, faults, summary: run.out ? `Placenta delivered complete; uterus firm; EBL ${eblMeasured(run)} mL.` : 'Placenta not delivered.', scene: run.out ? [job.scene || 'placenta'] : ['retained'] })
   }
-  const stage: TStage = { ...api, next }
   return (
-    <div className="io-bench flex min-h-0 flex-1 flex-col" data-testid="third-bench">
-      <div className="hare-bar">
-        <span>THIRD STAGE · {api.run.minutes} MIN</span>
-        <span />
-        <span>{api.run.oxytocin ? 'OXYTOCIN GIVEN' : 'NO OXYTOCIN'}</span>
-      </div>
-      <StepStrip titles={THIRD_TITLES} index={checked ? THIRD_TITLES.length - 1 : index} />
-      <div className="min-h-0 flex-1 overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
-        {checked ? <CheckCard rows={checkThird(api.run)} onContinue={finish} testId="third-check" /> : <ThirdStage {...stage} stage={index} />}
-        {!checked && <NoteLine note={api.note} />}
+    <div className="io-bench flex min-h-0 flex-1 flex-col select-none" data-testid="third-bench">
+      <div ref={body} className="min-h-0 flex-1 overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
+        <Frame
+          prefix="third"
+          titles={THIRD_TITLES}
+          stepper={stepper}
+          goals={thirdGoals(stepper.index, r)}
+          note={api.note}
+          bar={
+            <>
+              <span>THIRD STAGE · {clock(r.since)}</span>
+              <span />
+              <span>{r.oxyAt !== null ? 'OXYTOCIN IN' : 'NO OXYTOCIN'}</span>
+            </>
+          }
+          check={<CheckCard rows={checkThird(r)} onContinue={finish} testId="third-check" />}
+        >
+          {stepper.index === 0 && <TwinStage {...api} />}
+          {stepper.index === 1 && <ClampStage {...api} />}
+          {stepper.index === 2 && <SeparationStage {...api} />}
+          {stepper.index === 3 && <TractionStage {...api} />}
+          {stepper.index === 4 && <PlacentaStage {...api} />}
+          {stepper.index === 5 && <ToneStage {...api} />}
+        </Frame>
       </div>
     </div>
   )
 }
 
-function ThirdView({ run, svgRef, cordLen, rub }: { run: ThirdRun; svgRef?: Ref<SVGSVGElement>; cordLen: number; rub?: ReturnType<typeof useRub> }) {
-  const up = separated(run) && run.saw.includes('uterus')
+function TwinStage({ run, runRef, upd, feel, why }: TS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const [palpating, setPalpating] = useState(false)
+  const [inject, setInject] = useState(0)
+  useTicker(inject > 0 && inject < 1, (dt) => setInject((v) => Math.min(1, v + dt)))
+  useEffect(() => {
+    if (inject >= 1) setInject(0)
+  }, [inject])
   return (
-    <svg ref={svgRef} viewBox="0 0 180 170" className="block h-full w-full select-none" data-testid="third-view">
-      <rect width="180" height="170" fill="#e2e8ec" />
-      <ellipse cx="90" cy="60" rx="70" ry="56" fill={SKIN} stroke={SKIN_EDGE} />
-      {/* the uterus: soft and broad, then firm, round and higher once it separates */}
-      <ellipse cx="90" cy={up ? 52 : 64} rx={up ? 24 : 32} ry={up ? 24 : 30} fill={up || run.rubbed >= 0.6 ? '#d89080' : '#e8b0a0'} stroke="#a05040" strokeDasharray={up ? undefined : '3 2'} />
-      {rub && <RubTint rub={rub} colour="#a05040" />}
-      <path d="M40 116 Q90 106 140 116" stroke={SKIN_EDGE} strokeWidth="2" fill="none" />
-      {run.guarded && <ellipse cx="90" cy="104" rx="18" ry="6" fill="#c89070" stroke="#6a3a20" />}
-      {/* the cord from the introitus, with its clamp */}
-      {!run.placentaOut ? (
-        <g>
-          <line x1="90" y1="130" x2="90" y2={130 + cordLen} stroke="#c8d8f0" strokeWidth="4" />
-          <rect x="84" y={126 + cordLen} width="12" height="6" fill="#606878" />
-          {run.saw.includes('gush') && <path d="M84 132 Q78 144 82 152" stroke="#b01010" strokeWidth="3" fill="none" />}
-        </g>
-      ) : (
-        <ellipse cx="90" cy="150" rx="26" ry="12" fill="#8a2030" stroke="#501018" />
-      )}
-      <g fontFamily={FONT} fontSize="4.5" fill="#40404c">
-        <text x="4" y="10">ABDOMEN AND INTROITUS</text>
-        <text x="64" y="126">PUBIS</text>
-      </g>
-    </svg>
+    <>
+      <p className="io-lede">Feel her abdomen for a second baby. Then oxytocin 10 IU IM: tap the dashed patch on her right thigh.</p>
+      <TouchPad
+        svg={svg}
+        aspect="200 / 170"
+        className="mx-auto max-w-[300px]"
+        testId="third-work"
+        onDown={(p) => {
+          const { thigh } = ABDO
+          if (((p.x - thigh.cx) / thigh.rx) ** 2 + ((p.y - thigh.cy) / thigh.ry) ** 2 > 1.3) return
+          const cur = runRef.current
+          if (cur.oxyAt !== null) return feel('The oxytocin is in.')
+          const first = cur.palpated < 1
+          upd({ oxyAt: cur.since, oxyFirst: first })
+          setInject(0.01)
+          if (first) why('Feel for a second twin before the oxytocin: it would clamp the uterus down on a baby still inside.')
+          feel('Oxytocin 10 IU into the anterolateral thigh: needle in at 90°, plunger down, out.')
+        }}
+      >
+        <AbdomenView run={run} palpating={palpating} inject={inject} twin svgRef={svg} />
+      </TouchPad>
+      <div className="io-choices mt-2">
+        <HoldButton
+          className="io-mini"
+          testId="third-palpate"
+          disabled={run.palpated >= 1}
+          onStart={() => setPalpating(true)}
+          onEnd={() => setPalpating(false)}
+          onTick={(dt) => {
+            const palpated = Math.min(1, runRef.current.palpated + dt / 2)
+            upd({ palpated })
+            if (palpated >= 1) feel('One uterus, its fundus at the umbilicus; no fetal parts, no second baby.')
+          }}
+        >
+          {run.palpated >= 1 ? 'PALPATED: NO TWIN' : 'HOLD: PALPATE THE ABDOMEN'}
+        </HoldButton>
+      </div>
+    </>
   )
 }
 
-function ThirdStage({ run, runRef, upd, feel, physical, why, next, stage }: TStage & { stage: number }) {
+const TOOLS: { id: CordTool; label: string }[] = [
+  { id: 'clamp', label: 'CORD CLAMP' },
+  { id: 'forceps', label: 'FORCEPS' },
+  { id: 'scissors', label: 'SCISSORS' },
+]
+
+function ClampStage({ run, runRef, upd, feel, physical, why }: TS) {
   const svg = useRef<SVGSVGElement>(null)
-  const grip = useRef<number | null>(null)
-  const rubbing = useRef(false)
-  const [cordLen, setCordLen] = useState(12)
-  const rub = useRub({ cx: 90, cy: 56, rx: 30, ry: 28 })
-  const lede = [
-    'Feel her abdomen for a second baby. Then the oxytocin.',
-    'Wait, and watch for the signs that it has separated.',
-    'Guard the uterus above the pubis with one hand. Then draw the cord gently down with the other.',
-    'Check what came out.',
-    'Rub up the fundus. Look for tears. How much has she lost?',
-  ][stage]
+  const [tool, setTool] = useState<CordTool>('clamp')
+  const [pulse, setPulse] = useState(0)
+  useTicker(run.cutAt === null, (dt) => setPulse((p) => (p + dt) % 10))
   return (
     <>
-      <p className="io-lede">{lede}</p>
+      <p className="io-lede">
+        Leave the cord for at least a minute after the birth ({clock(CLAMP_S.min)}). Then the cord clamp near her tummy, forceps beyond it, and cut between. Time since birth: <b data-testid="third-clock">{clock(run.since)}</b>
+      </p>
       <TouchPad
         svg={svg}
-        aspect="180 / 170"
-        className="mx-auto max-w-[280px]"
-        testId="third-work"
+        aspect={`${CORDV.w} / ${CORDV.h}`}
+        className="mx-auto max-w-[340px]"
+        testId="third-cordpad"
         onDown={(p) => {
+          if (Math.abs(p.y - CORDV.y) > 16) return
+          const cm = Math.max(0.5, Math.min(CORD_CM - 1, cordCm(p.x)))
           const cur = runRef.current
-          if (stage === 0 && p.y < 110) {
-            upd({ palpated: true })
-            return feel('One uterus, at the umbilicus, no fetal parts: no second twin.')
+          const { patch, event } = onCord(cur, tool, cm)
+          if (event === 'done') return feel('The cord is cut.')
+          upd(patch)
+          const next = runRef.current
+          if (event === 'clamp' || event === 'forceps') {
+            sfx.select()
+            if (cur.clampedAt === null && next.since < CLAMP_S.min) why(`Only ${next.since} s since the birth: a well baby keeps her cord for at least a minute.`)
+            if (cur.clampedAt === null && next.oxyAt === null) why('The oxytocin goes in before the cord is clamped.')
           }
-          if (stage === 1 && p.y < 110) {
-            if (separated(cur)) upd({ saw: cur.saw.includes('uterus') ? cur.saw : [...cur.saw, 'uterus'] })
-            return feel(separated(cur) ? 'The uterus has firmed up into a ball and risen.' : 'Still broad and soft.')
-          }
-          if (stage === 2) {
-            if (p.y > 92 && p.y < 116) {
-              upd({ guarded: true })
-              return feel('The edge of your hand above the pubis, pushing the uterus up and back.')
-            }
-            grip.current = p.y
-          }
-          if (stage === 4) {
-            rubbing.current = p.y < 110
-            if (p.y < 110) rub.rub(p)
-            else {
-              upd({ inspected: true })
-              feel('Speculum and light: a small first-degree tear, not bleeding.')
-            }
-          }
-        }}
-        onMove={(p) => {
-          if (stage === 4 && p.y < 110) {
-            rub.rub(p)
-            upd({ rubbed: rub.coverage })
-            return
-          }
-          if (stage !== 2 || grip.current === null) return
-          const cur = runRef.current
-          const dy = p.y - grip.current
-          if (dy < 8 || cur.placentaOut) return
-          if (!separated(cur)) {
-            upd({ pulledEarly: true, inversion: !cur.guarded || cur.inversion })
-            grip.current = null
-            buzz([60, 40, 60])
-            physical(cur.guarded ? 'The cord tightens but nothing comes: it has not separated.' : 'The fundus dimples down as you pull: it is starting to invert.')
-            return why('Wait for the signs of separation, and always guard the uterus.')
-          }
-          if (dy > 70) {
-            upd({ snapped: true })
-            grip.current = null
-            return physical('You pull too hard and the cord snaps.')
-          }
-          setCordLen(12 + dy * 0.5)
-          if (dy > 40) {
-            upd({ placentaOut: true })
-            grip.current = null
+          if (event === 'clamp') {
+            feel(`Cord clamp on, ${cm.toFixed(0)} cm from her tummy: click.`)
+            if (!clampPlaced(next)) why(`Put the cord clamp ${CLAMP_CM.min}–${CLAMP_CM.max} cm from her tummy.`)
+            setTool('forceps')
+          } else if (event === 'forceps') {
+            feel(`Forceps on the cord ${cm.toFixed(0)} cm out, the mother’s side.`)
+            if (next.clampAt !== null && cm <= next.clampAt + 2) why('The forceps go beyond the cord clamp, toward the mother, with room to cut between.')
+            setTool('scissors')
+          } else if (event === 'cut') feel('Cut between the clamp and the forceps. The forceps stay on the mother’s side for the traction.')
+          else if (event === 'bleed') {
             buzz(60)
-            feel(cur.guarded ? 'Steady traction, the uterus guarded: the placenta slides out, membranes twisted behind it.' : 'It comes, but you did not guard the uterus.')
+            physical('Blood wells from the cut: you cut outside the clamps.')
+          } else if (event === 'no-clamps') {
+            buzz(60)
+            physical('Cut with nothing clamped: it bleeds from both ends.')
           }
-        }}
-        onUp={() => {
-          grip.current = null
-          if (stage === 4 && rubbing.current && runRef.current.rubbed >= 0.6) feel('The fundus is firm, below the umbilicus.')
-          rubbing.current = false
         }}
       >
-        <ThirdView run={run} svgRef={svg} cordLen={cordLen} rub={stage === 4 ? rub : undefined} />
+        <CordView run={run} pulse={pulse} svgRef={svg} />
       </TouchPad>
       <div className="io-choices mt-2">
-        {stage === 0 && (
-          <button type="button" className="tap io-mini" data-on={run.oxytocin || undefined} data-testid="third-oxytocin" onClick={() => {
-              const first = !runRef.current.palpated
-              upd({ oxytocin: true, oxytocinFirst: first })
-              if (first) why('Feel for a second twin before the oxytocin: it would clamp down on a baby still inside.')
-              else feel('Oxytocin 10 IU IM into her thigh.')
-            }}>
-            OXYTOCIN 10 IU IM
+        {TOOLS.map((x) => (
+          <button key={x.id} type="button" className="tap io-mini" data-on={tool === x.id || undefined} data-testid={`third-tool-${x.id}`} disabled={run.cutAt !== null} onClick={() => (setTool(x.id), sfx.select())}>
+            {x.label}
           </button>
-        )}
-        {stage === 1 && (
-          <>
-            <button type="button" className="tap io-mini" data-testid="third-wait" onClick={() => (upd((r) => ({ minutes: r.minutes + 1 })), feel('A minute passes.'))}>
-              WAIT A MINUTE
-            </button>
-            <button
-              type="button"
-              className="tap io-mini"
-              data-testid="third-look"
-              onClick={() => {
-                const cur = runRef.current
-                if (!separated(cur)) return feel('Nothing yet: no gush, the clamp has not moved.')
-                upd({ saw: [...new Set([...cur.saw, 'gush', 'cord'] as ('gush' | 'cord')[])] })
-                setCordLen(26)
-                feel('A small gush of blood, and the clamp has moved down: the cord is lengthening.')
-              }}
-            >
-              LOOK AT THE CORD AND THE PERINEUM
-            </button>
-          </>
-        )}
-        {stage === 3 && (
-          <>
-            {(['cotyledons', 'membranes', 'vessels'] as const).map((c) => (
-              <button
-                key={c}
-                type="button"
-                className="tap io-mini"
-                data-on={run.checked.includes(c) || undefined}
-                data-testid={`third-${c}`}
-                onClick={() => {
-                  if (!run.placentaOut) return feel('It is not out yet.')
-                  upd({ checked: run.checked.includes(c) ? run.checked : [...run.checked, c] })
-                  feel({ cotyledons: 'Maternal surface: all the cotyledons there, fitting together.', membranes: 'Held up by the cord: the membranes complete, one hole.', vessels: 'The cut cord: two arteries and a vein.' }[c])
-                }}
-              >
-                {c === 'cotyledons' ? 'MATERNAL SURFACE' : c === 'membranes' ? 'MEMBRANES' : 'CORD VESSELS'}
-              </button>
-            ))}
-          </>
-        )}
-        {stage === 4 &&
-          [300, 800].map((ml) => (
-            <button key={ml} type="button" className="tap io-mini" data-on={run.ebl === ml || undefined} data-testid={`third-ebl-${ml}`} onClick={() => (upd({ ebl: ml }), feel(`Estimated blood loss ${ml} mL.`))}>
-              EBL {ml} ML
-            </button>
-          ))}
+        ))}
       </div>
-      <NextButton onClick={next} testId="third-next">
-        {THIRD_TITLES[stage + 1] ?? 'Finish'}
-      </NextButton>
+      <div className="io-choices mt-2">
+        <button type="button" className="tap io-mini" data-testid="third-wait30" disabled={run.clampedAt !== null} onClick={() => (upd((x) => ({ since: x.since + 30 })), feel('Thirty seconds: she is pink on mum, the cord still pulsing.'))}>
+          LET 30 SECONDS PASS
+        </button>
+      </div>
+    </>
+  )
+}
+
+function SeparationStage({ run, runRef, upd, feel }: TS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const sign = (s: Sign, text: string) => {
+    const cur = runRef.current
+    if (!separated(cur)) return feel('Nothing yet: no gush, the forceps have not moved, the uterus is broad and soft.')
+    if (!cur.saw.includes(s)) upd({ saw: [...cur.saw, s] })
+    sfx.select()
+    feel(text)
+  }
+  return (
+    <>
+      <p className="io-lede">Hands off the cord. Wait, and tap each sign of separation as you see it: a gush, the cord lengthening, the uterus (inset) firm and risen.</p>
+      <TouchPad
+        svg={svg}
+        aspect="200 / 170"
+        className="mx-auto max-w-[300px]"
+        testId="third-work"
+        onDown={(p) => {
+          const { inset } = VULVA
+          if (p.x >= inset.x && p.x <= inset.x + inset.w && p.y >= inset.y && p.y <= inset.y + inset.h) return sign('uterus', 'Through the abdomen: the uterus is firm, globular and has risen.')
+          const fy = VULVA.forceps.y + (separated(runRef.current) ? 12 : 0)
+          if (p.y >= fy - 6 && Math.abs(p.x - 100) < 10) return sign('lengthen', 'The forceps have moved down from the vulva: the cord is lengthening.')
+          if (p.y > 104 && p.y < 142 && p.x < 97 && p.x > 80) return sign('gush', 'A small gush of blood from the introitus.')
+        }}
+      >
+        <VulvaView run={run} force={0} svgRef={svg} />
+      </TouchPad>
+      <div className="io-choices mt-2">
+        <button type="button" className="tap io-mini" data-testid="third-wait" onClick={() => {
+          const next = upd((x) => ({ since: x.since + 60 }))
+          feel(separated(next) ? 'A minute more. Something has changed: look.' : 'A minute passes: nothing yet.')
+        }}>
+          WAIT A MINUTE
+        </button>
+      </div>
+      <p className="io-small mt-1">Seen: {run.saw.length ? run.saw.map((s) => ({ gush: 'gush', lengthen: 'cord lengthening', uterus: 'uterus firm and risen' })[s]).join(', ') : 'nothing yet'}</p>
+    </>
+  )
+}
+
+function TractionStage({ run, runRef, upd, feel, physical, why }: TS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const [force, setForce] = useState(0)
+  const spin = useSpin('cw')
+  const once = useOnce()
+  const base = useRef(run.turns)
+  useEffect(() => {
+    const cur = runRef.current
+    if (cur.descent < 1 || cur.out) return
+    const turns = base.current + spin.turns
+    const out = turns >= MEMBRANE_TURNS
+    upd({ turns, ...(out ? { out: true, outAt: cur.since } : {}) })
+    if (out) once('out', () => (sfx.select(), feel('Turned round and round, the membranes come away whole as a rope behind it. The placenta is delivered.')))
+  }, [spin.turns])
+  return (
+    <>
+      <p className="io-lede">Tap above the pubis to guard the uterus. Then hold the strip down in the green: steady, gentle traction. At the introitus, twist the membranes out.</p>
+      <div className="flex items-stretch justify-center gap-2">
+        <TouchPad
+          svg={svg}
+          aspect="200 / 170"
+          className="max-w-[260px] flex-1"
+          testId="third-work"
+          onDown={(p) => {
+            const g = VULVA.guard
+            if (((p.x - g.x) / g.rx) ** 2 + ((p.y - g.y) / (g.ry + 6)) ** 2 <= 1 && !runRef.current.guarded) {
+              upd({ guarded: true })
+              feel('The edge of your left hand above the pubis, pushing the uterus up and back: it cannot follow the cord down.')
+            }
+          }}
+        >
+          <VulvaView run={run} force={force} guardHint svgRef={svg} />
+        </TouchPad>
+        <TractionStrip
+          testId="third-traction"
+          disabled={run.descent >= 1 || run.snapped}
+          labelDown="PULL"
+          onEnd={() => setForce(0)}
+          onTick={(dt, f) => {
+            setForce(f)
+            const { patch, event } = cct(runRef.current, dt, f)
+            if (Object.keys(patch).length) upd(patch)
+            if (event === 'none') return
+            if (event === 'early') once('early', () => (physical('The cord tightens and nothing gives: it has not separated.'), why('Wait for the signs of separation before any traction.')))
+            else if (event === 'invert')
+              once('invert', () => {
+                buzz([80, 40, 80])
+                physical('The fundus dimples down as you pull: the uterus is starting to invert!')
+                why('Never pull before separation, and always guard the uterus above the pubis.')
+              })
+            else if (event === 'snap')
+              once('snap', () => {
+                buzz([60, 40, 60])
+                physical('Too hard: the cord snaps.')
+                why('Steady, gentle traction in the green only.')
+              })
+            else if (event === 'unguarded') once('unguarded', () => (physical('It comes, but nothing is holding the uterus up.'), why('Guard the uterus above the pubis with your other hand all through the traction.')))
+            else if (event === 'descend') once('descend', () => feel('Steady and gentle, down along the birth canal: the cord gives and the placenta comes down.'))
+            else if (event === 'at-introitus') once('at', () => feel('The placenta is at the introitus. Lift it out in both hands and twist the membranes out.'))
+          }}
+        />
+      </div>
+      {run.descent >= 1 && !run.out && (
+        <div className="mt-2 flex items-center justify-center gap-3" data-testid="third-twist">
+          <Dial label="TWIST" spin={spin} />
+          <p className="io-small">
+            Circle the dial clockwise: {Math.min(MEMBRANE_TURNS, Math.floor(run.turns))}/{MEMBRANE_TURNS} turns
+          </p>
+        </div>
+      )}
+    </>
+  )
+}
+
+const VIEWS: { id: View; label: string; text: string }[] = [
+  { id: 'maternal', label: 'MATERNAL SURFACE', text: 'Maternal surface: the cotyledons all there, fitting together, no gap, no ragged area.' },
+  { id: 'fetal', label: 'FETAL SURFACE, MEMBRANES', text: 'Held up by the cord: a shiny fetal surface, vessels running to the edge and stopping; the membranes whole, one hole.' },
+  { id: 'cord', label: 'CUT END OF THE CORD', text: 'The cut end: two arteries and a vein.' },
+]
+
+function PlacentaStage({ run, runRef, upd, feel }: TS) {
+  const [view, setView] = useState<View | null>(null)
+  return (
+    <>
+      <p className="io-lede">In the dish: check the maternal surface, the fetal surface and membranes, and the cord vessels.</p>
+      <div className="io-figure mx-auto aspect-[200/150] max-w-[320px]">
+        <PlacentaView view={view} />
+      </div>
+      <div className="io-choices mt-2">
+        {VIEWS.map((v) => (
+          <button
+            key={v.id}
+            type="button"
+            className="tap io-mini"
+            data-on={run.seen.includes(v.id) || undefined}
+            data-testid={`third-view-${v.id}`}
+            disabled={!run.out}
+            onClick={() => {
+              setView(v.id)
+              const cur = runRef.current
+              if (!cur.seen.includes(v.id)) upd({ seen: [...cur.seen, v.id] })
+              feel(v.text)
+            }}
+          >
+            {v.label}
+          </button>
+        ))}
+      </div>
+      {!run.out && <p className="io-small mt-1">The placenta is not out yet: back a step.</p>}
+    </>
+  )
+}
+
+function ToneStage({ run, runRef, upd, feel }: TS) {
+  const svg = useRef<SVGSVGElement>(null)
+  const u = uterusShape(run)
+  const rub = useRub({ cx: 100, cy: u.cy, rx: u.rx + 4, ry: u.ry + 4 }, 6)
+  const firmed = useRef(run.rubbed >= 0.6)
+  const [hand, setHand] = useState<{ x: number; y: number } | null>(null)
+  const rubAt = (p: { x: number; y: number }) => {
+    rub.rub(p)
+    setHand(p)
+    upd({ rubbed: Math.max(runRef.current.rubbed, rub.coverage) })
+  }
+  return (
+    <>
+      <p className="io-lede">Rub up the fundus in circles. Then look for tears, and measure the blood loss: the jug and the pads.</p>
+      <TouchPad
+        svg={svg}
+        aspect="200 / 170"
+        className="mx-auto max-w-[300px]"
+        testId="third-fundus"
+        onDown={rubAt}
+        onMove={rubAt}
+        onUp={() => {
+          setHand(null)
+          if (runRef.current.rubbed >= 0.6 && !firmed.current) {
+            firmed.current = true
+            feel('The fundus firms up under your hand, at the umbilicus: well contracted.')
+          }
+        }}
+      >
+        <AbdomenView run={run} palpating={false} inject={0} rubAt={hand} svgRef={svg} />
+      </TouchPad>
+      <div className="io-choices mt-2">
+        <button type="button" className="tap io-mini" data-on={run.looked || undefined} data-testid="third-look" onClick={() => (upd({ looked: true }), feel('Good light, labia parted: a first-degree tear at the fourchette, skin only, not bleeding. Vagina intact.'))}>
+          LIGHT AND LOOK
+        </button>
+        <button type="button" className="tap io-mini" data-on={run.jug || undefined} data-testid="third-jug" onClick={() => (upd({ jug: true }), feel(`The jug reads ${EBL.jug} mL.`))}>
+          MEASURE THE JUG
+        </button>
+        <button type="button" className="tap io-mini" data-on={run.pads || undefined} data-testid="third-pads" onClick={() => (upd({ pads: true }), feel(`The pads weigh ${EBL.pads + 60} g, ${EBL.pads} g over their dry weight: ${EBL.pads} mL.`))}>
+          WEIGH THE PADS
+        </button>
+      </div>
+      {run.looked && (
+        <div className="io-figure mx-auto mt-2 aspect-[200/90] max-w-[320px]">
+          <TearView />
+        </div>
+      )}
+      {(run.jug || run.pads) && (
+        <div className="io-figure mx-auto mt-2 aspect-[200/80] max-w-[320px]">
+          <LossView jug={run.jug} pads={run.pads} />
+        </div>
+      )}
+      {run.jug && run.pads && (
+        <p className="io-small mt-1" data-testid="third-ebl">
+          Measured blood loss: {eblMeasured(run)} mL. Under 500 mL: no PPH.
+        </p>
+      )}
     </>
   )
 }

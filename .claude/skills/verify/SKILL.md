@@ -13,7 +13,7 @@ The benches are where a player does a procedure by hand (the central line, the f
 node scripts/verify/bench.mjs serve 8765
 ```
 
-Ready when it prints `READY http://127.0.0.1:8765/`. Open `http://127.0.0.1:8765/?kind=<kind>`, where `<kind>` is a key of `PROCEDURES` in `src/game/procedures.ts` (`cvc`, `usblock`, `hare`, …). The page is one bench at phone width (400 px), built from the game's own components and stylesheet. The journeys below start and stop the harness themselves; set `VERIFY_URL` to reuse one that is already running, or `VERIFY_PORT` to change the port.
+Ready when it prints `READY http://127.0.0.1:8765/`. Open `http://127.0.0.1:8765/?kind=<kind>` (add `&pose=third` for a bench with a second pose), where `<kind>` is a key of `PROCEDURES` in `src/game/procedures.ts` (`cvc`, `usblock`, `hare`, …). The page is one bench at phone width (400 px), built from the game's own components and stylesheet. The journeys below start and stop the harness themselves; set `VERIFY_URL` to reuse one that is already running, or `VERIFY_PORT` to change the port.
 
 The harness exists because the full app (`npm run dev`, Vite and Tailwind) needs native binaries that some agent sandboxes cannot install. It stands in for Tailwind's utilities only (`scripts/verify/utilities.mjs`); everything else is the real code.
 
@@ -33,6 +33,7 @@ Checks that `node_modules` is installed, esbuild runs on this platform, and Play
 node scripts/verify/journeys/smoke.mjs          # every bench opens with no page error
 node scripts/verify/journeys/central-line.mjs   # the central line done right, start to finish
 node scripts/verify/journeys/exam.mjs           # the focused 3D exams (hip, ankle): every manoeuvre, every item
+node scripts/verify/journeys/delivery.mjs       # the normal delivery and the third stage, both poses, every step
 ```
 
 Each prints `PASS` or `FAIL` and exits 0 or 1. Write a journey for a bench you change: copy `journeys/central-line.mjs`. `scripts/verify/lib.mjs` gives you `tap`, `drag`, `hold`, `swipe`, `twist` in a picture's own viewBox units, so coordinates come straight from the bench's SVG.

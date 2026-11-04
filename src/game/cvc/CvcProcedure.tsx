@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { NextButton, NoteLine, StepStrip, useBench, type BenchApi } from '../bench/core'
-import { Dial, HoldButton, useSpin } from '../bench/controls'
+import { Dial, HoldButton, SlidePad, useSpin } from '../bench/controls'
 import { CheckCard, RubTint, Syringe, TouchPad, benchMarks, useRub, type Pt } from '../bench/kit'
 import type { BenchResult, PerformJob } from '../store'
 import { buzz, sfx } from '../sfx'
@@ -56,7 +56,8 @@ import {
   type Garb,
   type Lumen,
 } from './model'
-import { stepGoals, stepOk, type Goal } from './steps'
+import { stepGoals, stepOk } from './steps'
+import { StepGoals } from '../bench/goals'
 
 const TITLES = ['Position', 'Pre-scan', 'Scrub', 'Prep', 'Kit', 'Needle', 'Wire', 'Confirm', 'Dilate', 'Catheter', 'Secure', 'X-ray']
 
@@ -227,7 +228,7 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
             {index === 10 && <SecureStage {...stage} />}
             {index === 11 && <XrayStage {...stage} />}
             <div ref={goalsRef}>
-              <StepGoals goals={stepGoals(index, r)} review={review} onRedo={redo} onFix={() => setReview(false)} onAnyway={() => next(true)} next={TITLES[index + 1] ?? 'the check'} />
+              <StepGoals prefix="cvc" goals={stepGoals(index, r)} review={review} onRedo={redo} onFix={() => setReview(false)} onAnyway={() => next(true)} next={TITLES[index + 1] ?? 'the check'} />
             </div>
             <div className="io-choices mt-2">
               <button type="button" className="tap io-mini" data-testid="cvc-back" disabled={index === 0} onClick={back}>
@@ -248,102 +249,7 @@ export function CvcProcedure({ job, coach, onDone }: { job: PerformJob; coach: b
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
 const toggle = <T,>(xs: T[], x: T) => (xs.includes(x) ? xs : [...xs, x])
 
-/* ================================================================ goals of the step */
-
-/**
- * The step's goals, ticked as you go: a wrong move shows at once with how to put it right. After a Next that
- * found something missing, every open goal shows its guidance, and you choose: redo the step, fix it here, or
- * carry on anyway.
- */
-function StepGoals({ goals, review, onRedo, onFix, onAnyway, next }: { goals: Goal[]; review: boolean; onRedo: () => void; onFix: () => void; onAnyway: () => void; next: string }) {
-  const [open, setOpen] = useState<number | null>(null)
-  const left = goals.filter((x) => x.state !== 'done')
-  const failed = goals.some((x) => x.state === 'fail')
-  return (
-    <div className="cvc-goals mt-3" data-review={(review && left.length > 0) || undefined} data-testid="cvc-goals">
-      <p className="cvc-goals-head">
-        {review && left.length > 0 ? `NOT YET · ${left.length} TO PUT RIGHT` : `THIS STEP · ${goals.length - left.length}/${goals.length}`}
-      </p>
-      <ul className="hare-rows">
-        {goals.map((x, i) => {
-          const show = x.state === 'fail' || (x.state === 'todo' && (review || open === i))
-          return (
-            <li key={x.label} data-ok={x.state === 'done' || undefined} data-todo={x.state === 'todo' || undefined} onClick={() => setOpen(open === i ? null : i)}>
-              <b>
-                {x.state === 'done' ? '✓' : x.state === 'fail' ? '✗' : '○'} {x.label}
-              </b>
-              {show && x.now && <span>You: {x.now}</span>}
-              {show && <small>{x.how}</small>}
-            </li>
-          )
-        })}
-      </ul>
-      {review && left.length > 0 && (
-        <div className="io-choices mt-2">
-          <button type="button" className="tap io-mini" data-testid="cvc-review-redo" onClick={onRedo}>
-            ↺ REDO THIS STEP
-          </button>
-          <button type="button" className="tap io-mini" data-testid="cvc-review-fix" onClick={onFix}>
-            {failed ? 'TRY TO FIX IT HERE' : 'FIX IT HERE'}
-          </button>
-          <button type="button" className="tap io-mini" data-testid="cvc-review-anyway" onClick={onAnyway}>
-            CARRY ON TO {next.toUpperCase()} ▶
-          </button>
-        </div>
-      )}
-      {!review && left.length > 0 && <p className="io-small">Tap a goal to see how.</p>}
-    </div>
-  )
-}
-
 /* ================================================================ shared controls */
-
-/**
- * A strip to drag along: right pushes toward the patient, left draws back. `cmPerWidth`: how far one full sweep
- * moves it. More reliable on a phone than dragging along a thin wire in the picture.
- */
-function SlidePad({ label, cmPerWidth, onDelta, onEnd, disabled, testId }: { label: string; cmPerWidth: number; onDelta: (cm: number) => void; onEnd?: () => void; disabled?: boolean; testId: string }) {
-  const last = useRef<number | null>(null)
-  const [x, setX] = useState(0.5)
-  return (
-    <div
-      className="io-figure mt-2 aspect-[200/30]"
-      style={{ touchAction: 'none', opacity: disabled ? 0.45 : 1 }}
-      data-testid={testId}
-      onPointerDown={(e) => {
-        if (disabled) return
-        e.currentTarget.setPointerCapture(e.pointerId)
-        last.current = e.clientX
-      }}
-      onPointerMove={(e) => {
-        if (last.current === null) return
-        const rect = e.currentTarget.getBoundingClientRect()
-        const dx = e.clientX - last.current
-        last.current = e.clientX
-        setX(clamp((e.clientX - rect.left) / rect.width, 0.05, 0.95))
-        onDelta((dx / rect.width) * cmPerWidth)
-      }}
-      onPointerUp={() => {
-        last.current = null
-        setX(0.5)
-        onEnd?.()
-      }}
-      onPointerCancel={() => (last.current = null)}
-    >
-      <svg viewBox="0 0 200 30" className="block h-full w-full select-none">
-        <rect width="200" height="30" fill="#e8f0f6" />
-        <rect x="8" y="17" width="184" height="6" rx="3" fill="#b8c8d8" />
-        <g transform={`translate(${8 + x * 184} 20)`}>
-          <rect x="-12" y="-7" width="24" height="14" rx="4" fill="#3a6f92" stroke="#203848" />
-          <path d="M-5 0 L-1 -3 L-1 3 Z M5 0 L1 -3 L1 3 Z" fill="#f8f8f8" />
-        </g>
-        <text x="8" y="11" fontFamily="Press Start 2P, monospace" fontSize="5" fill="#203040">
-          {label}
-        </text>
-      </svg>
-    </div>
-  )
-}
 
 const WIRE_STEP = 6
 

@@ -34,7 +34,7 @@
       "text": "Routine oxytocic. Your notes choose Syntometrine. NICE recommends oxytocin 10 IU IM for the third stage: fewer side effects (vomiting, hypertension). Your point that Syntometrine is contraindicated in pre-eclampsia stands."
     }
   ],
-  "notes": "Checked against NICE NG235 (Intrapartum care, 2023) and RCOG guidance.\n\nPrepare two teams (mother, baby), PPE, warm towels. Controlled delivery of the head: flex it with the palm and guard the perineum; ask her to pant rather than push as the head crowns. Feel for a nuchal cord (slip it over the head if loose; 'somersault' delivery if tight — clamping and cutting before delivery is a last resort). Wait for restitution; deliver the anterior shoulder with gentle downward traction with the next contraction, then the posterior shoulder upwards. Baby dried and placed skin to skin; delayed cord clamping for at least 60 seconds in a well baby (NICE). Routine suctioning is not recommended.\n\nThird stage (NICE): active management — oxytocin 10 IU IM after the birth of the anterior shoulder or after the baby, deferred cord clamping, then controlled cord traction after signs of separation (gush of blood, cord lengthening, fundus rises and becomes globular), guarding the uterus above the pubis to avoid inversion. Check the placenta and membranes are complete, check for tears, and estimate blood loss. Prolonged third stage (NICE NG235): not completed within 30 minutes with active management, or 60 minutes with physiological management. Your notes' 30 minutes is correct for active management.\n\nYour notes choose Syntometrine for routine use; NICE recommends oxytocin 10 IU IM (fewer side effects: vomiting, hypertension). Syntometrine is contraindicated in pre-eclampsia, as your notes say.\n\nPerfect script checked against NICE NG235 intrapartum care, an HKCEM-style scheme and a keyword scheme. The bench loses its clamp-and-cut-now and routine-suction buttons; narrated.",
+  "notes": "Checked against NICE NG235 (Intrapartum care, 2023, which carries on the CG190 recommendations), NICE QS105 statement 6 (delayed cord clamping) and RCOG guidance.\n\nThe birth (NICE): 'hands on' (guarding the perineum and flexing the head) or 'hands poised' may be used; the station teaches hands on. No routine episiotomy. As the head crowns she pants rather than pushes, so it is born slowly between contractions. Feel for a nuchal cord: slip a loose loop over the head; a tight one, 'somersault' delivery; clamping and cutting before the birth is a last resort. Wait for restitution (the head turns to face a thigh: left occipito-anterior turns to her right). With the next contraction, gentle downward axial traction for the anterior shoulder, then upward for the posterior; never hard or lateral traction (brachial plexus). Onto the mother's abdomen skin to skin, the time of birth noted, dried, the wet towel swapped for a dry one and a hat, breathing, tone and colour checked. Routine suctioning is not recommended.\n\nThird stage (NICE): active management is a uterotonic, deferred clamping and cutting of the cord, and controlled cord traction after signs of separation. Oxytocin 10 IU IM after the birth of the baby and before the cord is clamped and cut (palpate first to exclude a second twin). Do not clamp the cord earlier than 1 minute after the birth unless there is concern about cord integrity or a heart rate below 60/min that is not getting faster (QS105); clamp before 5 minutes to perform controlled cord traction. Signs of separation: a gush of blood, cord lengthening, the fundus rising and becoming firm and globular. Traction with the other hand guarding the uterus above the pubis (prevents inversion); twist the membranes out. Check the placenta and membranes are complete and the cord has three vessels; rub up the fundus; inspect for tears; measure the blood loss (weighing pads, the jug): a visual estimate underestimates it. Prolonged third stage: not completed within 30 minutes with active management, or 60 minutes with physiological management. Your notes' 30 minutes is correct for active management.\n\nYour notes choose Syntometrine for routine use; NICE recommends oxytocin 10 IU IM (fewer side effects: vomiting, hypertension). Syntometrine is contraindicated in pre-eclampsia, as your notes say.\n\nChanged from the earlier version: cord clamping moved from the birth into the third stage, after the oxytocin, as NICE orders it. The bench has no wrong-move buttons (no clamp-and-cut-now, no routine suction, no blood-loss guess): mistakes come from doing a real action badly (pushing through crowning, pulling hard, pulling before separation, cutting outside the clamps).\n\nPerfect script checked against NICE NG235 intrapartum care, an HKCEM-style scheme and a keyword scheme.",
   "cast": [
     {
       "id": "patient",
@@ -87,19 +87,19 @@
       "lang": "en",
       "to": "patient",
       "label": "Deliver the baby",
-      "hint": "Flex and control the head, check for cord, wait for restitution, anterior then posterior shoulder.",
+      "hint": "Hands on, 'pant' as it crowns, feel for a cord, wait for restitution, anterior then posterior shoulder; dry her skin to skin.",
       "opts": [
         {
           "t": "Deliver the baby",
           "perform": "delivery",
-          "performHint": "Do it with your hands: control, pant, cord, restitution, shoulders, baby.",
+          "performHint": "Do it with your hands: hands on, pant at crowning, cord, restitution, shoulders, baby.",
           "mark": [
             "Controls the head and guards the perineum",
             "Slow controlled crowning",
             "Checks for and manages nuchal cord",
             "Waits for restitution",
             "Delivers shoulders with gentle axial traction",
-            "Dries baby, skin-to-skin, delayed cord clamping"
+            "Time noted; baby dried, skin to skin, kept warm"
           ],
           "pose": "birth"
         }
@@ -111,14 +111,15 @@
       "lang": "en",
       "to": "patient",
       "label": "Third stage",
-      "hint": "Oxytocin IM, wait for separation signs, controlled cord traction guarding the uterus, check placenta and tears.",
+      "hint": "Palpate for a twin, oxytocin IM, clamp after a minute, wait for separation, controlled cord traction guarding the uterus, check the placenta, tone, tears and loss.",
       "opts": [
         {
           "t": "Third stage",
           "perform": "delivery",
-          "performHint": "Do it with your hands: twin, oxytocin, separation, guarded traction, check, tone.",
+          "performHint": "Do it with your hands: twin, oxytocin, deferred clamping, separation, guarded traction, membranes, placenta, tone, tears, loss.",
           "mark": [
             "Excludes a twin and gives oxytocin 10 IU IM",
+            "Clamps and cuts the cord after at least 60 seconds, once the oxytocin is in",
             "Recognises signs of placental separation",
             "Controlled cord traction with uterine guarding",
             "Checks placenta, membranes and cord vessels",
@@ -266,11 +267,11 @@
     },
     {
       "at": "0:40",
-      "say": "Palm on the head to keep it flexed, the other hand guarding the perineum; as it crowns, 'pant, don't push'. Feel for a cord: a loose loop slips over the head. Wait for restitution. With the next contraction, gentle downward axial traction for the anterior shoulder, then upward for the posterior. Baby dried, warm, skin to skin with mum; wait at least 60 seconds before clamping the cord."
+      "say": "Pad guarding the perineum, my palm on the head to keep it flexed; as it crowns, 'pant, don't push'. Feel for a cord: a loose loop slips over the head. Wait for restitution. With the next contraction, gentle downward axial traction for the anterior shoulder, then upward for the posterior. Onto mum's tummy skin to skin; time of birth; dry her, dry towel and hat; check breathing, tone and colour."
     },
     {
       "at": "1:00",
-      "say": "Feel the abdomen: no second twin; oxytocin 10 IU IM. Wait for separation: a gush of blood, the cord lengthening, the fundus rising. Controlled cord traction with my other hand guarding the uterus above the pubis. Check the placenta, membranes and three cord vessels; the fundus firm; tears; blood loss."
+      "say": "Feel the abdomen: no second twin; oxytocin 10 IU IM. After at least 60 seconds, clamp and cut the cord. Wait for separation: a gush of blood, the cord lengthening, the fundus rising. Controlled cord traction with my other hand guarding the uterus above the pubis; twist the membranes out. Check the placenta, membranes and three cord vessels; the fundus firm; tears; measured blood loss."
     }
   ],
   "keywords": [
