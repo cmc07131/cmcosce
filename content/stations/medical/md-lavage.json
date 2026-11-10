@@ -1,0 +1,435 @@
+{
+  "id": "md-lavage",
+  "gym": "medical",
+  "title": "Gastric lavage: colchicine overdose",
+  "type": "skills",
+  "time": 480,
+  "stem": "Resus 3. Ms Chan, 34 (55 kg), swallowed sixty of her mother's colchicine 0.5 mg tablets 30 minutes ago after an argument. She is alert (GCS 15) with an intact gag; HR 104, BP 118/72, SpO2 98%. The Hong Kong Poison Information Centre and your consultant agree to gastric lavage. Explain it to her, then perform it on the manikin.",
+  "phases": [
+    {
+      "title": "Decide",
+      "goal": "Say why lavage, why now, and why it is safe for her. Then explain it to her and get her agreement.",
+      "steps": [
+        "indication",
+        "consent"
+      ]
+    },
+    {
+      "title": "Prepare",
+      "goal": "Monitoring and suction first, then the kit from the trolley.",
+      "steps": [
+        "monitor",
+        "kit"
+      ]
+    },
+    {
+      "title": "Lavage",
+      "goal": "The whole procedure by hand on the manikin.",
+      "steps": [
+        "procedure"
+      ]
+    },
+    {
+      "title": "After",
+      "goal": "What happens to her next.",
+      "steps": [
+        "after"
+      ]
+    }
+  ],
+  "review": [
+    {
+      "tag": "unverified",
+      "text": "No notes of yours for this station yet. It is built from the Hong Kong protocol in Lau FL, HKMJ 2000, and the AACT/EAPCCT 2013 position paper. Send your notes or departmental protocol and I will check the station against them."
+    },
+    {
+      "tag": "unverified",
+      "text": "The colchicine thresholds (over 0.5 mg/kg potentially lethal, over 0.8 mg/kg usually fatal) come from case literature (Finkelstein; the French series), not a guideline. Check them against your toxicology notes or HKPIC."
+    }
+  ],
+  "notes": "Checked against: Lau FL, Emergency management of poisoning in Hong Kong, Hong Kong Medical Journal 2000;6:288–92 (its gastric lavage procedure box: the Hong Kong protocol); Benson BE et al., Position paper update: gastric lavage for gastrointestinal decontamination, Clinical Toxicology 2013;51:140–6 (AACT/EAPCCT); LITFL and WikEM (Gastric lavage) for technique and complications; for colchicine, case literature (PMC3482071: over 0.5 mg/kg high fatality, over 0.8 mg/kg nearly always fatal within 72 h; GI phase under 24 h, multi-organ failure days 2–7).\n\nIndication: lavage is not routine (AACT/EAPCCT). Consider it only for a potentially life-threatening ingestion that can be lavaged within 60 minutes, with a protected airway and an experienced operator; clinical benefit is not proven. Hong Kong: 'limited to life-threatening ingestions that present within 1 hour'. Colchicine 30 mg in 55 kg (0.55 mg/kg) at 30 minutes, no antidote in routine use: the narrow case, with HKPIC and a senior agreeing.\n\nContraindications: an unprotected airway (unless intubated), an uncooperative patient, corrosives, hydrocarbons (petroleum products), risk of GI haemorrhage or perforation.\n\nThe Hong Kong protocol (HKMJ 2000): informed consent; for a conscious patient make sure she understands and will cooperate, with lignocaine spray to the oropharynx; intubate a drowsy patient who has lost her gag; suction ready; pulse oximetry, and cardiac monitoring where arrhythmia is likely; left lateral on a trolley with the foot raised about 20 cm; measure the tube from the mouth to the epigastrium and mark it with tape; lubricate and pass it orally, a mouth gag to stop her biting it; confirm it is in the stomach by aspirating fluid or injecting air with a 50 mL syringe while auscultating the epigastrium; siphon off the contents first and save a specimen for toxicology; small aliquots by gravity from a funnel about 2 feet above her, 200 mL in adults (10 mL/kg in children); stop when 3 L have been used and the return is clear. Tube 36–40 Fr in adults (AACT/EAPCCT, LITFL). Activated charcoal 50 g may go down the tube once lavage is complete (LITFL); colchicine is adsorbed by charcoal. Pinch the tube as it comes out so it does not drain into the pharynx.\n\nComplications: aspiration pneumonia, hypoxia, laryngospasm, oesophageal or gastric injury, bradycardia, water intoxication (children), hypothermia, tablets pushed into the duodenum, and distraction from resuscitation.\n\nAfter: colchicine toxicity is delayed: admit to a monitored bed; serial FBC, renal and liver function, CK, clotting and gas; ECG; update HKPIC; document the volumes; psychiatry once medically fit.\n\nThe bench has no wrong-move buttons: mistakes come from doing a real action badly (pushing against a gag, a tube short of the stomach, fluid before confirming, a full stomach not siphoned, a sample taken late, big aliquots, pulling the tube out open).",
+  "cast": [
+    {
+      "id": "patient",
+      "name": "Ms Chan",
+      "role": "woman",
+      "inBed": true
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Lam",
+      "role": "nurse"
+    }
+  ],
+  "steps": [
+    {
+      "id": "indication",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Why lavage",
+      "hint": "The dose, the time, no antidote; her airway; nothing corrosive; who agreed.",
+      "opts": [
+        {
+          "t": "Colchicine 0.5 mg, sixty tablets: 30 mg, about 0.55 mg/kg, 30 minutes ago. Over 0.5 mg/kg is potentially lethal and there is no antidote: a life-threatening ingestion within 1 hour.",
+          "mark": "States the indication: a life-threatening dose within 1 hour"
+        },
+        {
+          "t": "Her airway is safe: alert, with an intact gag. It is not a corrosive or a hydrocarbon. HKPIC and my consultant agree: gastric lavage, then activated charcoal.",
+          "mark": "Excludes contraindications; HKPIC and a senior agree"
+        }
+      ]
+    },
+    {
+      "id": "consent",
+      "kind": "dialogue",
+      "to": "patient",
+      "label": "Talk to Ms Chan",
+      "hint": "What and why; what it feels like; the risks; a stop signal; her agreement.",
+      "mood": 5,
+      "turns": [
+        {
+          "line": "What are you going to do to me?",
+          "lz": "你哋要對我做咩呀？",
+          "opts": [
+            {
+              "t": "The tablets you took can be very dangerous, and some are still in your stomach. We'd like to wash them out: a tube through your mouth into your stomach, then water in and out until it runs clear.",
+              "tz": "你食嘅藥可以好危險，有啲仲喺個胃度。我哋想幫你洗胃：由個口放一條喉入個胃，然後灌水入去再放出嚟，直至啲水清為止。",
+              "r": "Will it hurt? Is it dangerous?",
+              "rz": "會唔會痛㗎？危唔危險？",
+              "mood": -1,
+              "mark": "Explains what lavage is and why"
+            }
+          ]
+        },
+        {
+          "line": "Will it hurt? Is it dangerous?",
+          "lz": "會唔會痛㗎？危唔危險？",
+          "opts": [
+            {
+              "t": "It's uncomfortable and you'll want to gag; a spray numbs your throat first. The main risk is vomiting into your lungs, and rarely low oxygen or an injury to the gullet. We watch you closely with suction ready the whole time.",
+              "tz": "會唔舒服，你會想作嘔；我哋會先噴啲麻醉藥落喉嚨。最主要嘅風險係嘔吐物入咗肺，少數會血含氧量低，或者整傷食道。我哋會全程密切留意你，抽痰機一直準備好。",
+              "r": "OK… I'll try.",
+              "rz": "好啦……我試下。",
+              "mood": -1,
+              "mark": "Explains the discomfort and the risks: aspiration, hypoxia, oesophageal injury"
+            }
+          ]
+        },
+        {
+          "line": "OK… I'll try.",
+          "lz": "好啦……我試下。",
+          "opts": [
+            {
+              "t": "Thank you. You'll lie on your left side with your head a little down. Raise your hand any time you need us to stop. Shall we start?",
+              "tz": "多謝你。你會向左側瞓，個頭低少少。任何時候想停，就舉手。我哋開始好唔好？",
+              "r": "OK.",
+              "rz": "好。",
+              "mood": -2,
+              "mark": "Agrees a stop signal and obtains consent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monitor",
+      "kind": "say",
+      "to": "nurse",
+      "label": "Monitoring",
+      "hint": "Oximetry and the cardiac monitor; IV access; suction; a helper.",
+      "opts": [
+        {
+          "t": "Pulse oximetry and the cardiac monitor on, please, and a working IV line.",
+          "mark": "Pulse oximetry, cardiac monitoring and IV access"
+        },
+        {
+          "t": "Suction on and ready at her mouth, and please help me hold her on her side.",
+          "mark": "Suction ready and an assistant"
+        }
+      ]
+    },
+    {
+      "id": "kit",
+      "kind": "pick",
+      "to": "trolley",
+      "label": "Kit",
+      "hint": "Tube, spray and gag, syringe, funnel and fluid, bucket, a pot, charcoal.",
+      "confirm": "Take",
+      "opts": [
+        {
+          "t": "Large-bore orogastric lavage tube (36–40 Fr) and lubricant",
+          "need": true,
+          "mark": "Large-bore orogastric tube, 36–40 Fr, and lubricant"
+        },
+        {
+          "t": "Lignocaine spray and a mouth gag",
+          "need": true,
+          "mark": "Lignocaine spray and a mouth gag"
+        },
+        {
+          "t": "50 mL syringe and a stethoscope",
+          "need": true,
+          "mark": "50 mL syringe and stethoscope to confirm placement"
+        },
+        {
+          "t": "Funnel and tubing, a jug of warm water (at least 3 L) and a bucket",
+          "need": true,
+          "mark": "Funnel, warm fluid and a bucket"
+        },
+        {
+          "t": "Specimen pot for toxicology",
+          "need": true,
+          "mark": "Specimen pot"
+        },
+        {
+          "t": "Activated charcoal 50 g",
+          "need": true,
+          "mark": "Activated charcoal ready"
+        }
+      ]
+    },
+    {
+      "id": "procedure",
+      "kind": "say",
+      "lang": "en",
+      "to": "patient",
+      "label": "Gastric lavage",
+      "hint": "Left lateral, foot up; measure; spray, gag, lubricate, pass with her swallows; confirm; siphon and sample; 200 mL aliquots to 3 L and a clear return; charcoal; pinch and withdraw.",
+      "opts": [
+        {
+          "t": "Perform the lavage on the manikin",
+          "perform": "lavage",
+          "performHint": "Every step by hand. Ms Chan gags, swallows and coughs with what you do; the cutaway shows the tube and her stomach.",
+          "mark": [
+            "Left lateral, foot raised about 20 cm, suction ready",
+            "Measures mouth to epigastrium and marks the tube",
+            "Lignocaine spray, mouth gag, passes the tube with her swallows",
+            "Confirms gastric placement before any fluid",
+            "Siphons the contents and saves a specimen",
+            "200 mL aliquots by gravity until 3 L used and the return is clear",
+            "Activated charcoal; pinches and withdraws the tube"
+          ],
+          "scene": "lavaged"
+        }
+      ]
+    },
+    {
+      "id": "after",
+      "kind": "say",
+      "to": "examiner",
+      "ask": "Thank you. What happens to her now?",
+      "label": "Next steps",
+      "hint": "Admit and monitor for delayed toxicity; bloods; HKPIC, documentation, psychiatry.",
+      "opts": [
+        {
+          "t": "She is admitted to a monitored bed: colchicine toxicity is delayed, with multi-organ failure from about day 2.",
+          "mark": "Admits for monitoring: delayed toxicity"
+        },
+        {
+          "t": "Bloods now and repeated: FBC, renal and liver function, CK, clotting and a gas; an ECG.",
+          "mark": "Serial bloods and an ECG"
+        },
+        {
+          "t": "I'll update HKPIC, document the procedure and the volumes, and refer her to psychiatry once she is medically fit.",
+          "mark": "HKPIC, documentation, psychiatry"
+        }
+      ]
+    },
+    {
+      "id": "viva",
+      "kind": "viva",
+      "to": "examiner",
+      "label": "Examiner",
+      "qs": [
+        {
+          "q": "Which ingestion rules gastric lavage out?",
+          "a": "A corrosive or a hydrocarbon",
+          "wrong": [
+            "Any tablet that binds charcoal",
+            "A patient over 60",
+            "A heart rate over 100"
+          ]
+        },
+        {
+          "q": "Why left lateral and head down?",
+          "a": "Contents stay in the fundus, away from the pylorus, and vomit runs out of the mouth",
+          "wrong": [
+            "It speeds emptying into the duodenum",
+            "It makes the tube easier to measure",
+            "It lowers her blood pressure"
+          ]
+        },
+        {
+          "q": "Each aliquot in an adult (Hong Kong protocol)?",
+          "a": "200 mL",
+          "wrong": [
+            "1 L",
+            "50 mL",
+            "500 mL"
+          ]
+        },
+        {
+          "q": "When can lavage stop?",
+          "a": "When 3 L have been used and the return is clear",
+          "wrong": [
+            "After the first litre",
+            "As soon as tablet fragments are seen",
+            "After 30 minutes, whatever the return"
+          ]
+        },
+        {
+          "q": "Each aliquot in a child?",
+          "a": "10 mL/kg",
+          "wrong": [
+            "50 mL/kg",
+            "1 mL/kg",
+            "200 mL whatever the weight"
+          ]
+        },
+        {
+          "q": "Commonest serious complication?",
+          "a": "Aspiration pneumonia",
+          "wrong": [
+            "Pneumothorax",
+            "Gastric bleeding needing transfusion",
+            "Hypoglycaemia"
+          ]
+        }
+      ]
+    }
+  ],
+  "badge": {
+    "name": "Clear Return",
+    "emoji": "🚿",
+    "flavor": "Left side, head down; measure, confirm, siphon; 200 mL at a time until it runs clear."
+  },
+  "cards": [
+    {
+      "q": "Gastric lavage is considered only for…",
+      "options": [
+        "A life-threatening ingestion within 1 hour",
+        "Any overdose within 4 hours",
+        "Every paracetamol overdose",
+        "Corrosive ingestions"
+      ],
+      "why": "Benefit unproven; never routine.",
+      "source": "AACT/EAPCCT 2013; HKMJ 2000"
+    },
+    {
+      "q": "Lavage position (Hong Kong protocol)?",
+      "options": [
+        "Left lateral, foot of the trolley raised about 20 cm",
+        "Right lateral, head up 30°",
+        "Sitting upright",
+        "Supine and flat"
+      ],
+      "why": "Keeps contents in the fundus; protects the airway.",
+      "source": "HKMJ 2000"
+    },
+    {
+      "q": "Tube length is measured from the mouth to…",
+      "options": [
+        "The epigastrium",
+        "The umbilicus",
+        "The ear lobe only",
+        "The xiphisternum plus 20 cm"
+      ],
+      "why": "Mark it with tape at the lips.",
+      "source": "HKMJ 2000"
+    },
+    {
+      "q": "Adult lavage tube size?",
+      "options": [
+        "36–40 Fr",
+        "12–14 Fr",
+        "18–20 Fr",
+        "8 Fr"
+      ],
+      "why": "Tablet fragments must fit through.",
+      "source": "AACT/EAPCCT 2013"
+    },
+    {
+      "q": "Confirming a lavage tube is in the stomach?",
+      "options": [
+        "Aspirate gastric fluid, or air in with a 50 mL syringe while listening at the epigastrium",
+        "Ask her to speak",
+        "Run in 50 mL and watch her cough",
+        "Measure the tube again"
+      ],
+      "why": "Before any fluid goes in.",
+      "source": "HKMJ 2000"
+    },
+    {
+      "q": "Lavage aliquot in a child?",
+      "options": [
+        "10 mL/kg",
+        "200 mL",
+        "50 mL/kg",
+        "1 L"
+      ],
+      "why": "Water intoxication risk in children.",
+      "source": "HKMJ 2000"
+    },
+    {
+      "q": "Before withdrawing the lavage tube…",
+      "options": [
+        "Pinch it",
+        "Flush it with 500 mL",
+        "Sit her upright",
+        "Remove the mouth gag"
+      ],
+      "why": "An open tube drains into the pharynx.",
+      "source": "Procedural texts"
+    }
+  ],
+  "script": [
+    {
+      "at": "0:00",
+      "say": "Colchicine 0.5 mg, sixty tablets: 30 mg, about 0.55 mg/kg, 30 minutes ago. Over 0.5 mg/kg is potentially lethal and there is no antidote: a life-threatening ingestion within 1 hour. Her airway is safe: alert, with an intact gag. It is not a corrosive or a hydrocarbon. HKPIC and my consultant agree: gastric lavage, then activated charcoal."
+    },
+    {
+      "at": "0:30",
+      "say": "Ms Chan, the tablets you took can be very dangerous, and some are still in your stomach. We'd like to wash them out with a tube through your mouth. It's uncomfortable; a spray numbs your throat. The main risk is vomiting into your lungs, so suction is ready. Raise your hand to stop."
+    },
+    {
+      "at": "1:15",
+      "say": "Pulse oximetry and the cardiac monitor on, please, and a working IV line. Suction on and ready at her mouth."
+    },
+    {
+      "at": "1:30",
+      "say": "Kit: a large-bore orogastric tube, 36–40 Fr, lubricant, lignocaine spray, a mouth gag, a 50 mL syringe and stethoscope, funnel, warm water and a bucket, a specimen pot, activated charcoal 50 g."
+    },
+    {
+      "at": "2:00",
+      "do": "Left lateral, the foot of the trolley raised 20 cm. Measure mouth to the epigastrium and tape it. Spray, gag in, lubricate; pass it with her swallows to the tape. Confirm: aspirate gastric fluid, and air in with the 50 mL syringe while I listen. Siphon the contents off and save a specimen. 200 mL aliquots in by gravity from 2 feet up, each drained back, until 3 L are used and the return is clear. Activated charcoal 50 g down the tube; pinch it and withdraw. Gag out, suction her mouth. The danger throughout is aspiration."
+    },
+    {
+      "at": "6:30",
+      "say": "She is admitted to a monitored bed: colchicine toxicity is delayed. Bloods now and repeated: FBC, renal and liver function, CK, clotting and a gas; an ECG. I'll update HKPIC, document the volumes, and refer her to psychiatry once she is medically fit."
+    }
+  ],
+  "keywords": [
+    "within 1 hour",
+    "life-threatening",
+    "no antidote",
+    "intact gag",
+    "corrosive",
+    "HKPIC",
+    "suction",
+    "left lateral",
+    "20 cm",
+    "epigastrium",
+    "lignocaine",
+    "36–40 Fr",
+    "50 mL syringe",
+    "siphon",
+    "specimen",
+    "200 mL",
+    "3 L",
+    "clear",
+    "activated charcoal",
+    "pinch",
+    "aspiration",
+    "psychiatry"
+  ]
+}

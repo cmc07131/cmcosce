@@ -24,6 +24,7 @@ import { KneeProcedure } from './knee/KneeProcedure'
 import { ShoulderProcedure } from './shoulder/ShoulderProcedure'
 import { UsBlockProcedure } from './usblock/UsBlockProcedure'
 import { CvcProcedure } from './cvc/CvcProcedure'
+import { LavageProcedure } from './lavage/LavageProcedure'
 
 export type ProcedureProps = { job: PerformJob; coach: boolean; onDone: (r: BenchResult) => void }
 
@@ -48,6 +49,7 @@ export const PROCEDURES: Partial<Record<PerformKind, ComponentType<ProcedureProp
   dystocia: DystociaProcedure,
   breech: BreechProcedure,
   delivery: DeliveryProcedure,
+  lavage: LavageProcedure,
   elbow: ElbowProcedure,
   valsalva: ValsalvaProcedure,
   newborn: NewbornProcedure,

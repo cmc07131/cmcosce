@@ -19,9 +19,10 @@ A Pokémon Gold–style game for passing the HKCEM OSCE. Stations are JSON (`con
 | Bedside checks are done at the patient, not said to the nurse | `station.test.ts` "bedside checks" |
 | Flashcards: four distinct options, a source | `engine.test.ts` "flashcards" |
 | Every bench opens without a page error | `scripts/verify/journeys/smoke.mjs` |
-| A bench can be finished using only controls the player can see (labelled buttons, strips, dials, pictures); no step needs a hidden gesture | `scripts/verify/journeys/<bench>.mjs` (central line and delivery so far). It fails on the old needle-out drag that stranded players at the wire step |
+| A bench can be finished using only controls the player can see (labelled buttons, strips, dials, pictures); no step needs a hidden gesture | `scripts/verify/journeys/<bench>.mjs` (central line, delivery and gastric lavage so far). It fails on the old needle-out drag that stranded players at the wire step |
 | Each central line step says what it must achieve and how, and a correct step passes its own check | `src/game/cvc/steps.ts`, `cvc.test.ts`, and the central-line journey, which fails if a review opens |
 | Stepped benches share one goals panel, back and redo (`src/game/bench/goals.tsx`); each delivery step says what it must achieve and how, and a correct step passes its own check | `src/game/delivery/steps.ts`, `delivery.test.ts`, and `journeys/delivery.mjs`, which fails if a review opens |
+| Each gastric lavage step says what it must achieve and how; the bench follows the Hong Kong protocol (HKMJ 2000): left lateral with the foot up about 20 cm, confirm before any fluid, siphon and sample first, 200 mL aliquots until 3 L and a clear return | `src/game/lavage/steps.ts`, `lavage.test.ts`, and `journeys/lavage.mjs`, which fails if a review opens |
 | The delivery follows NICE's order: oxytocin after palpating for a twin and before the cord is clamped; the cord clamped no sooner than 1 minute | `delivery.test.ts` |
 | Benches offer no wrong-move buttons: mistakes come from doing a real action badly, never from picking a wrong button | Review only: no check yet |
 | What the bench shows matches what is in the patient (the X-ray shows a retained wire; a carotid line crosses to the left) | `cvc.test.ts` |

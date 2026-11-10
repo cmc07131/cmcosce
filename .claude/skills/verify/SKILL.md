@@ -34,6 +34,7 @@ node scripts/verify/journeys/smoke.mjs          # every bench opens with no page
 node scripts/verify/journeys/central-line.mjs   # the central line done right, start to finish
 node scripts/verify/journeys/exam.mjs           # the focused 3D exams (hip, ankle): every manoeuvre, every item
 node scripts/verify/journeys/delivery.mjs       # the normal delivery and the third stage, both poses, every step
+node scripts/verify/journeys/lavage.mjs         # gastric lavage, the Hong Kong protocol, every step
 ```
 
 Each prints `PASS` or `FAIL` and exits 0 or 1. Write a journey for a bench you change: copy `journeys/central-line.mjs`. `scripts/verify/lib.mjs` gives you `tap`, `drag`, `hold`, `swipe`, `twist` in a picture's own viewBox units, so coordinates come straight from the bench's SVG.

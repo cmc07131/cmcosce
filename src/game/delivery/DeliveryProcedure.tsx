@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { NextButton, NoteLine, StepStrip, useBench, type BenchApi } from '../bench/core'
+import { useEffect, useRef, useState } from 'react'
+import { useBench, type BenchApi } from '../bench/core'
 import { Dial, HoldButton, SlidePad, TractionStrip, useSpin } from '../bench/controls'
-import { StepGoals, useStepper } from '../bench/goals'
+import { StepFrame, useOnce, useStepper, useTicker } from '../bench/goals'
 import { CheckCard, TouchPad, benchMarks, useRub } from '../bench/kit'
 import type { BenchResult, PerformJob } from '../store'
 import { buzz, sfx } from '../sfx'
@@ -44,72 +44,6 @@ export function DeliveryProcedure({ job, coach, onDone }: { job: PerformJob; coa
   return job.pose === 'third' ? <Third job={job} coach={coach} onDone={onDone} /> : <Birth job={job} coach={coach} onDone={onDone} />
 }
 
-/** Calls `cb(dt)` about 20 times a second while `on`. */
-function useTicker(on: boolean, cb: (dt: number) => void) {
-  const ref = useRef(cb)
-  ref.current = cb
-  useEffect(() => {
-    if (!on) return
-    let last = performance.now()
-    const id = window.setInterval(() => {
-      const now = performance.now()
-      ref.current(Math.min(0.1, (now - last) / 1000))
-      last = now
-    }, 50)
-    return () => window.clearInterval(id)
-  }, [on])
-}
-
-/** Say each thing once: a message for an event is shown when the event changes, not on every tick. */
-function useOnce() {
-  const last = useRef('')
-  return (key: string, fn: () => void) => {
-    if (last.current === key) return
-    last.current = key
-    fn()
-  }
-}
-
-/** The frame of a stepped bench: steps, goals, back and redo, the closing check. */
-function Frame<R>({ prefix, titles, stepper, goals, bar, check, children, note }: { prefix: string; titles: string[]; stepper: ReturnType<typeof useStepper<R>>; goals: ReturnType<typeof birthGoals>; bar: ReactNode; check: ReactNode; children: ReactNode; note: ReturnType<typeof useBench<R>>['note'] }) {
-  const { index, checked, epoch, review, setReview, next, back, redo, goalsRef } = stepper
-  return (
-    <>
-      <div className="hare-bar">{bar}</div>
-      <StepStrip titles={titles} index={checked ? titles.length - 1 : index} />
-      {checked ? (
-        <>
-          {check}
-          <div className="io-choices mt-2">
-            <button type="button" className="tap io-mini" data-testid={`${prefix}-back`} onClick={back}>
-              ◀ BACK TO {titles[titles.length - 1].toUpperCase()}
-            </button>
-          </div>
-        </>
-      ) : (
-        <div key={`${index}-${epoch}`} className="contents">
-          {children}
-          <NoteLine note={note} />
-          <NextButton onClick={() => next()} testId={`${prefix}-next`}>
-            {titles[index + 1] ?? 'Finish'}
-          </NextButton>
-          <div ref={goalsRef}>
-            <StepGoals prefix={prefix} goals={goals} review={review} onRedo={redo} onFix={() => setReview(false)} onAnyway={() => next(true)} next={titles[index + 1] ?? 'the check'} />
-          </div>
-          <div className="io-choices mt-2">
-            <button type="button" className="tap io-mini" data-testid={`${prefix}-back`} disabled={index === 0} onClick={back}>
-              ◀ BACK A STEP
-            </button>
-            <button type="button" className="tap io-mini" data-testid={`${prefix}-redo`} onClick={redo}>
-              ↺ REDO THIS STEP
-            </button>
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
-
 /* ================================================================ the birth */
 
 type BS = BenchApi<BirthRun>
@@ -136,7 +70,7 @@ function Birth({ job, coach, onDone }: { job: PerformJob; coach: boolean; onDone
   return (
     <div className="io-bench flex min-h-0 flex-1 flex-col select-none" data-testid="birth-bench">
       <div ref={body} className="min-h-0 flex-1 overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
-        <Frame
+        <StepFrame
           prefix="birth"
           titles={BIRTH_TITLES}
           stepper={stepper}
@@ -157,7 +91,7 @@ function Birth({ job, coach, onDone }: { job: PerformJob; coach: boolean; onDone
           {stepper.index === 3 && <RestitutionStage {...api} />}
           {stepper.index === 4 && <ShouldersStage {...api} />}
           {stepper.index === 5 && <BabyStage {...api} />}
-        </Frame>
+        </StepFrame>
       </div>
     </div>
   )
@@ -472,7 +406,7 @@ function Third({ job, coach, onDone }: { job: PerformJob; coach: boolean; onDone
   return (
     <div className="io-bench flex min-h-0 flex-1 flex-col select-none" data-testid="third-bench">
       <div ref={body} className="min-h-0 flex-1 overflow-auto px-3 pb-3" style={{ scrollbarGutter: 'stable' }}>
-        <Frame
+        <StepFrame
           prefix="third"
           titles={THIRD_TITLES}
           stepper={stepper}
@@ -493,7 +427,7 @@ function Third({ job, coach, onDone }: { job: PerformJob; coach: boolean; onDone
           {stepper.index === 3 && <TractionStage {...api} />}
           {stepper.index === 4 && <PlacentaStage {...api} />}
           {stepper.index === 5 && <ToneStage {...api} />}
-        </Frame>
+        </StepFrame>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
-import { useRef, useState, type RefObject } from 'react'
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react'
 import { sfx } from '../sfx'
-import type { BenchApi } from './core'
+import { NextButton, NoteLine, StepStrip, type BenchApi } from './core'
 
 /**
  * What a step must achieve, checked as you go and again at Next, and the way back when it was not: every bench with
@@ -115,4 +115,70 @@ export function useStepper<R>(api: BenchApi<R>, titles: string[], goalsFor: (ste
     top()
   }
   return { index, checked, epoch, review, setReview, next, back, redo, goalsRef }
+}
+
+/** The frame of a stepped bench: steps, goals, back and redo, the closing check. */
+export function StepFrame<R>({ prefix, titles, stepper, goals, bar, check, children, note }: { prefix: string; titles: string[]; stepper: ReturnType<typeof useStepper<R>>; goals: Goal[]; bar: ReactNode; check: ReactNode; children: ReactNode; note: BenchApi<R>['note'] }) {
+  const { index, checked, epoch, review, setReview, next, back, redo, goalsRef } = stepper
+  return (
+    <>
+      <div className="hare-bar">{bar}</div>
+      <StepStrip titles={titles} index={checked ? titles.length - 1 : index} />
+      {checked ? (
+        <>
+          {check}
+          <div className="io-choices mt-2">
+            <button type="button" className="tap io-mini" data-testid={`${prefix}-back`} onClick={back}>
+              ◀ BACK TO {titles[titles.length - 1].toUpperCase()}
+            </button>
+          </div>
+        </>
+      ) : (
+        <div key={`${index}-${epoch}`} className="contents">
+          {children}
+          <NoteLine note={note} />
+          <NextButton onClick={() => next()} testId={`${prefix}-next`}>
+            {titles[index + 1] ?? 'Finish'}
+          </NextButton>
+          <div ref={goalsRef}>
+            <StepGoals prefix={prefix} goals={goals} review={review} onRedo={redo} onFix={() => setReview(false)} onAnyway={() => next(true)} next={titles[index + 1] ?? 'the check'} />
+          </div>
+          <div className="io-choices mt-2">
+            <button type="button" className="tap io-mini" data-testid={`${prefix}-back`} disabled={index === 0} onClick={back}>
+              ◀ BACK A STEP
+            </button>
+            <button type="button" className="tap io-mini" data-testid={`${prefix}-redo`} onClick={redo}>
+              ↺ REDO THIS STEP
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
+/** Calls `cb(dt)` about 20 times a second while `on`. */
+export function useTicker(on: boolean, cb: (dt: number) => void) {
+  const ref = useRef(cb)
+  ref.current = cb
+  useEffect(() => {
+    if (!on) return
+    let last = performance.now()
+    const id = window.setInterval(() => {
+      const now = performance.now()
+      ref.current(Math.min(0.1, (now - last) / 1000))
+      last = now
+    }, 50)
+    return () => window.clearInterval(id)
+  }, [on])
+}
+
+/** Say each thing once: a message for an event is shown when the event changes, not on every tick. */
+export function useOnce() {
+  const last = useRef('')
+  return (key: string, fn: () => void) => {
+    if (last.current === key) return
+    last.current = key
+    fn()
+  }
 }
